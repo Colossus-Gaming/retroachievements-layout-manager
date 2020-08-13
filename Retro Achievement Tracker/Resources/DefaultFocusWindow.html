@@ -1,0 +1,269 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Focus Window</title>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" type="text/javascript"></script>
+    <script id="focus-achievement-scripts">
+
+        function setFocus(newFocusAchievementName, newFocusAchievementImageLink, newFocusAchievementDescription, newFocusAchievementPoints) {
+            $("#focus-achievement-name").hide();
+            $("#focus-achievement-points").hide();
+            $("#focus-achievement-description").hide();
+            $("#focus-achievement-badge").hide();
+
+            setTimeout(function () {
+                $("#focus-achievement-name").text(newFocusAchievementName);
+                $("#focus-achievement-description").text(newFocusAchievementDescription);
+                $("#focus-achievement-badge").attr('src', newFocusAchievementImageLink);
+                $("#focus-achievement-background").attr('border', '5');
+                $("#focus-achievement-background").attr('src', 'disk://default-background');
+                $("#focus-achievement-background").fadeIn();
+
+                setTimeout(function () {
+                    $("#focus-achievement-name").fadeIn();
+                    $("#focus-achievement-badge").attr('border', '5');
+                    $("#focus-achievement-badge").fadeIn();
+
+                    setTimeout(function () {
+                        document.getElementById("focus-achievement-description").style.zIndex = "-99";
+                        $("#focus-achievement-description").fadeIn();
+                        var height = +document.getElementById("focus-achievement-description").offsetHeight;
+                        $("#focus-achievement-description").hide();
+
+                        if (height > 30 && height < 60) {
+                            document.getElementById("focus-achievement-description").style.animationName = 'focus-achievement-description-animation-small';
+                        } else if (height >= 60 && height <= 125) {
+                            document.getElementById("focus-achievement-description").style.animationName = 'focus-achievement-description-animation-medium';
+                        } else {
+                            document.getElementById("focus-achievement-description").style.animationName = 'focus-achievement-description-animation-large';
+                        }
+                        document.getElementById("focus-achievement-description").style.zIndex = "99";
+                        $("#focus-achievement-description").fadeIn();
+
+                        setTimeout(function () {
+                            $("#focus-achievement-points").text(newFocusAchievementPoints);
+                            $("#focus-achievement-points").fadeIn();
+                        }, 200);
+                    }, 200);
+                }, 200);
+            }, 200);
+
+
+            return "showFocus SUCCESS";
+        }
+
+        function hideFocus() {
+            $("#focus-achievement-name").fadeOut();
+            $("#focus-achievement-points").fadeOut();
+            $("#focus-achievement-description").fadeOut();
+            $("#focus-achievement-badge").fadeOut();
+            return "hideFocus SUCCESS";
+        }
+
+        function setBackgroundColor(color) {
+            document.getElementById("focus-achievement-description").style.backgroundColor = color;
+        }
+
+        function setTextStyle(style) {
+            if (style === 'light') {
+                document.getElementsByClassName("fonts").style.backgroundColor = white;
+                document.getElementsByClassName("fonts").style.webkit.text.stroke = "1px black";
+            } else {
+                document.getElementsByClassName("fonts").style.backgroundColor = black;
+                document.getElementsByClassName("fonts").style.webkit.text.stroke = "1px white";
+            }
+        }
+    </script>
+    <style id="all-styles" type="text/css">
+        html {
+            overflow: hidden;
+        }
+    </style>
+    <style id="focus-achievment-style" type="text/css">
+        @keyframes focus-achievement-name-animation {
+            0% {
+                left: 1922px;
+                top: 45px;
+            }
+
+            50% {
+                left: 70px;
+                top: 45px;
+            }
+
+            100% {
+                left: 70px;
+                top: 45px;
+            }
+        }
+
+        @keyframes focus-achievement-points-animation {
+            0% {
+                left: 1922px;
+                top: 150px;
+            }
+
+            50% {
+                left: 130px;
+                top: 175px;
+            }
+
+            100% {
+                left: 130px;
+                top: 175px;
+            }
+        }
+
+        @keyframes focus-achievement-description-animation-large {
+            0% {
+                left: 1922px;
+                top: 105px;
+            }
+
+            50% {
+                left: 200px;
+                top: 105px;
+            }
+
+            100% {
+                left: 200px;
+                top: 105px;
+            }
+        }
+
+        @keyframes focus-achievement-description-animation-medium {
+            0% {
+                left: 1922px;
+                top: 135px;
+            }
+
+            50% {
+                left: 200px;
+                top: 135px;
+            }
+
+            100% {
+                left: 200px;
+                top: 135px;
+            }
+        }
+
+        @keyframes focus-achievement-description-animation-small {
+            0% {
+                left: 1922px;
+                top: 155px;
+            }
+
+            50% {
+                left: 200px;
+                top: 155px;
+            }
+
+            100% {
+                left: 200px;
+                top: 155px;
+            }
+        }
+
+        @keyframes focus-achievement-badge-animation {
+            0% {
+                left: 1922px;
+                top: 115px;
+            }
+
+            50% {
+                left: 70px;
+                top: 115px;
+            }
+
+            100% {
+                left: 70px;
+                top: 115px;
+            }
+        }
+
+        #focus-achievement-name {
+            width: 920px;
+            font-size: 52px;
+            text-align: left;
+            font-weight: bold;
+            animation-name: focus-achievement-name-animation;
+        }
+
+        #focus-achievement-points {
+            text-align: right;
+            width: 50px;
+            font-size: 52px;
+            font-weight: bold;
+            animation-name: focus-achievement-points-animation;
+        }
+
+        #focus-achievement-description {
+            width: 790px;
+            font-size: 40px;
+            font-weight: bold;
+            text-align: center;
+            animation-name: focus-achievement-description-animation-large;
+        }
+
+        #focus-achievement-badge {
+            width: 120px;
+            animation-name: focus-achievement-badge-animation;
+        }
+
+        #focus-achievement-background {
+            left: 50px;
+            top: 30px;
+            width: 950px;
+            background-color: dodgerblue;
+        }
+
+        .fonts {
+            /*background: black;*/
+            font-family: Calibri;/*
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            -webkit-text-stroke: 1px white;*/
+        }
+
+        #focus-achievement-points {
+            background: black;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            -webkit-text-stroke: 3px white;
+        }
+
+        #focus-achievement-name,
+        #focus-achievement-description,
+        #focus-achievement-points,
+        #focus-achievement-badge {
+            animation-duration: 1s;
+            animation-iteration-count: 1;
+            animation-fill-mode: forwards;
+        }
+
+        #focus-achievement,
+        #focus-achievement-name,
+        #focus-achievement-background,
+        #focus-achievement-description,
+        #focus-achievement-points,
+        #focus-achievement-badge,
+        #focus-achievement-label,
+        #container {
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div id="container" style="background: magenta; width: 1925px; height: 1085px; top: -5px; left: -5px;">
+        <div id="focus-achievement">
+            <img id="focus-achievement-background" />
+            <div id="focus-achievement-name" class="fonts"></div>
+            <img id="focus-achievement-badge" />
+            <div id="focus-achievement-description" class="fonts"></div>
+            <div id="focus-achievement-points" class="fonts"></div>
+        </div>
+    </div>
+</body>
+</html>
