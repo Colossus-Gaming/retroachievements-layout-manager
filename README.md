@@ -1,1 +1,1 @@
-# retroachievements-layout-manager
+# RetroAchievements Layout Manager
