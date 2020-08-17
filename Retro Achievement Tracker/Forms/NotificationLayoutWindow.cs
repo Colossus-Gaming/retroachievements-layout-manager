@@ -1,9 +1,7 @@
 ﻿using CefSharp;
-using CefSharp.Web;
 using Retro_Achievement_Tracker.Properties;
 using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -85,26 +83,38 @@ namespace Retro_Achievement_Tracker.Forms
         {
             if (!this.IsDisposed)
             {
-                Invoke((MethodInvoker)delegate
+                try
+                {
+                    Invoke((MethodInvoker)delegate
                 {
                     this.showRecentAchievementButton.Enabled = false;
                     this.showGameMasteryButton.Enabled = false;
                     this.replayAchievementButton.Enabled = false;
                     this.replayGameMasteryButton.Enabled = false;
                 });
+                }
+                catch
+                {
+                }
             }
         }
 
         private int GetNotificationRequestsCount()
         {
-            int i = 0;
-
-            Invoke((MethodInvoker)delegate
+            try
             {
-                i = NotificationRequests.Count;
-            });
+                int i = 0;
 
-            return i;
+                Invoke((MethodInvoker)delegate
+                {
+                    i = NotificationRequests.Count;
+                });
+
+                return i;
+            } catch
+            {
+                return 0;
+            }
         }
 
         private NotificationRequest NotificationRequestDequeue()

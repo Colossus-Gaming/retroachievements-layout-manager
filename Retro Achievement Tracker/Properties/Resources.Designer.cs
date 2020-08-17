@@ -90,9 +90,9 @@ namespace Retro_Achievement_Tracker.Properties {
         ///    &lt;script id=&quot;focus-achievement-scripts&quot;&gt;
         ///
         ///        function setFocus(newFocusAchievementName, newFocusAchievementImageLink, newFocusAchievementDescription, newFocusAchievementPoints) {
-        ///            var focusAchievement = document.getElementById(&quot;focus-achievement-name&quot;);
-        ///
-        ///            if (focusAchievement.style.disp [rest of string was truncated]&quot;;.
+        ///            $(&quot;#focus-achievement-name&quot;).hide();
+        ///            $(&quot;#focus-achievement-points&quot;).hide();
+        ///            $(&quot;#focus-achievem [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string DefaultFocusWindow {
             get {
@@ -108,11 +108,14 @@ namespace Retro_Achievement_Tracker.Properties {
         ///    &lt;meta charset=&quot;UTF-8&quot;&gt;
         ///    &lt;script src=&quot;https://code.jquery.com/jquery-3.5.1.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
         ///    &lt;script id=&quot;achievement-pop-script&quot;&gt;
-        ///        function achievementNotification(achievementName, achievementBadge, achievementDescription, achievementPoints) {
-        ///            setTimeout(function () {
         ///
-        ///                $(&quot;#achievement-pop-name&quot;).text(achievementName);
-        ///                $(&quot;#achievement-pop-descript [rest of string was truncated]&quot;;.
+        ///        function promptUser() {
+        ///
+        ///        }
+        ///
+        ///        function achievementNotification(achievementName, achievementBadge, achievementDescription, achievementPoints) {
+        ///            $(&quot;#achievement-pop-name&quot;).text(achievementName);
+        ///            $(&quot;#achievement-pop-descri [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string DefaultNotificationWindow {
             get {
@@ -141,16 +144,6 @@ namespace Retro_Achievement_Tracker.Properties {
         internal static string DefaultStatsWindow {
             get {
                 return ResourceManager.GetString("DefaultStatsWindow", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] EightBitDragon_anqx {
-            get {
-                object obj = ResourceManager.GetObject("EightBitDragon_anqx", resourceCulture);
-                return ((byte[])(obj));
             }
         }
         

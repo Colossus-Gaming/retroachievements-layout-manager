@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Text;
+using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace Retro_Achievement_Tracker
@@ -35,6 +38,10 @@ namespace Retro_Achievement_Tracker
         {
             System.Windows.Forms.Label breakerLabel;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainPage));
+            _privateFontCollection = new PrivateFontCollection();
+
+            AddFonts();
+
             this.apiKeyLabel = new System.Windows.Forms.Label();
             this.apiKeyTextBox = new System.Windows.Forms.TextBox();
             this.gameInformationImage = new System.Windows.Forms.PictureBox();
@@ -68,6 +75,7 @@ namespace Retro_Achievement_Tracker
             this.userInfoGroupBox = new System.Windows.Forms.GroupBox();
             this.startButton = new System.Windows.Forms.Button();
             this.raConnectionStatusPictureBox = new System.Windows.Forms.PictureBox();
+            this.raConnectivityLabel = new System.Windows.Forms.Label();
             breakerLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.gameInformationImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.userProfilePictureBox)).BeginInit();
@@ -90,7 +98,7 @@ namespace Retro_Achievement_Tracker
             // apiKeyLabel
             // 
             this.apiKeyLabel.AutoSize = true;
-            this.apiKeyLabel.Font = new System.Drawing.Font("Monofonto", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.apiKeyLabel.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.apiKeyLabel.Location = new System.Drawing.Point(7, 160);
             this.apiKeyLabel.Name = "apiKeyLabel";
             this.apiKeyLabel.Size = new System.Drawing.Size(49, 14);
@@ -99,7 +107,7 @@ namespace Retro_Achievement_Tracker
             // 
             // apiKeyTextBox
             // 
-            this.apiKeyTextBox.Font = new System.Drawing.Font("Monofonto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.apiKeyTextBox.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.apiKeyTextBox.Location = new System.Drawing.Point(6, 137);
             this.apiKeyTextBox.Name = "apiKeyTextBox";
             this.apiKeyTextBox.PasswordChar = '*';
@@ -119,7 +127,7 @@ namespace Retro_Achievement_Tracker
             // 
             // gameInformationTitleLabel
             // 
-            this.gameInformationTitleLabel.Font = new System.Drawing.Font("Monofonto", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInformationTitleLabel.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameInformationTitleLabel.Location = new System.Drawing.Point(6, 110);
             this.gameInformationTitleLabel.Name = "gameInformationTitleLabel";
             this.gameInformationTitleLabel.Size = new System.Drawing.Size(230, 65);
@@ -130,7 +138,7 @@ namespace Retro_Achievement_Tracker
             // usernameLabel
             // 
             this.usernameLabel.AutoSize = true;
-            this.usernameLabel.Font = new System.Drawing.Font("Monofonto", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.usernameLabel.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.usernameLabel.Location = new System.Drawing.Point(7, 123);
             this.usernameLabel.Name = "usernameLabel";
             this.usernameLabel.Size = new System.Drawing.Size(55, 14);
@@ -139,7 +147,7 @@ namespace Retro_Achievement_Tracker
             // 
             // usernameTextBox
             // 
-            this.usernameTextBox.Font = new System.Drawing.Font("Monofonto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.usernameTextBox.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.usernameTextBox.Location = new System.Drawing.Point(5, 98);
             this.usernameTextBox.Name = "usernameTextBox";
             this.usernameTextBox.Size = new System.Drawing.Size(246, 23);
@@ -158,7 +166,7 @@ namespace Retro_Achievement_Tracker
             // autoStartCheckbox
             // 
             this.autoStartCheckbox.AutoSize = true;
-            this.autoStartCheckbox.Font = new System.Drawing.Font("Monofonto", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.autoStartCheckbox.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.autoStartCheckbox.Location = new System.Drawing.Point(82, 78);
             this.autoStartCheckbox.Name = "autoStartCheckbox";
             this.autoStartCheckbox.Size = new System.Drawing.Size(96, 19);
@@ -168,7 +176,7 @@ namespace Retro_Achievement_Tracker
             // 
             // stopButton
             // 
-            this.stopButton.Font = new System.Drawing.Font("Monofonto", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stopButton.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.stopButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.stopButton.Location = new System.Drawing.Point(259, 137);
             this.stopButton.Name = "stopButton";
@@ -180,7 +188,7 @@ namespace Retro_Achievement_Tracker
             // 
             // awardsLabel
             // 
-            this.awardsLabel.Font = new System.Drawing.Font("Monofonto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.awardsLabel.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.awardsLabel.Location = new System.Drawing.Point(81, 57);
             this.awardsLabel.Name = "awardsLabel";
             this.awardsLabel.Size = new System.Drawing.Size(130, 21);
@@ -189,7 +197,7 @@ namespace Retro_Achievement_Tracker
             // 
             // siteRankLabel
             // 
-            this.siteRankLabel.Font = new System.Drawing.Font("Monofonto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.siteRankLabel.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.siteRankLabel.Location = new System.Drawing.Point(81, 22);
             this.siteRankLabel.Name = "siteRankLabel";
             this.siteRankLabel.Size = new System.Drawing.Size(129, 20);
@@ -198,7 +206,7 @@ namespace Retro_Achievement_Tracker
             // 
             // scoreLabel
             // 
-            this.scoreLabel.Font = new System.Drawing.Font("Monofonto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.scoreLabel.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.scoreLabel.Location = new System.Drawing.Point(81, 39);
             this.scoreLabel.Name = "scoreLabel";
             this.scoreLabel.Size = new System.Drawing.Size(130, 20);
@@ -207,7 +215,7 @@ namespace Retro_Achievement_Tracker
             // 
             // gameInformationCheevosCountLabel
             // 
-            this.gameInformationCheevosCountLabel.Font = new System.Drawing.Font("Monofonto", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInformationCheevosCountLabel.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameInformationCheevosCountLabel.Location = new System.Drawing.Point(92, 26);
             this.gameInformationCheevosCountLabel.Name = "gameInformationCheevosCountLabel";
             this.gameInformationCheevosCountLabel.Size = new System.Drawing.Size(145, 16);
@@ -216,7 +224,7 @@ namespace Retro_Achievement_Tracker
             // 
             // gameInformationPointsLabel
             // 
-            this.gameInformationPointsLabel.Font = new System.Drawing.Font("Monofonto", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInformationPointsLabel.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameInformationPointsLabel.Location = new System.Drawing.Point(92, 42);
             this.gameInformationPointsLabel.Name = "gameInformationPointsLabel";
             this.gameInformationPointsLabel.Size = new System.Drawing.Size(145, 16);
@@ -232,7 +240,7 @@ namespace Retro_Achievement_Tracker
             this.gameInformationGroupBox.Controls.Add(this.gameInformationTitleLabel);
             this.gameInformationGroupBox.Controls.Add(this.gameInformationCheevosCountLabel);
             this.gameInformationGroupBox.Controls.Add(this.gameInformationPointsLabel);
-            this.gameInformationGroupBox.Font = new System.Drawing.Font("Monofonto", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInformationGroupBox.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameInformationGroupBox.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.gameInformationGroupBox.Location = new System.Drawing.Point(354, 12);
             this.gameInformationGroupBox.Name = "gameInformationGroupBox";
@@ -243,7 +251,7 @@ namespace Retro_Achievement_Tracker
             // 
             // gameInformationConsoleLabel
             // 
-            this.gameInformationConsoleLabel.Font = new System.Drawing.Font("Monofonto", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInformationConsoleLabel.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameInformationConsoleLabel.Location = new System.Drawing.Point(92, 64);
             this.gameInformationConsoleLabel.Name = "gameInformationConsoleLabel";
             this.gameInformationConsoleLabel.Size = new System.Drawing.Size(143, 14);
@@ -252,7 +260,7 @@ namespace Retro_Achievement_Tracker
             // 
             // gameInformationDeveloperLabel
             // 
-            this.gameInformationDeveloperLabel.Font = new System.Drawing.Font("Monofonto", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInformationDeveloperLabel.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameInformationDeveloperLabel.Location = new System.Drawing.Point(92, 78);
             this.gameInformationDeveloperLabel.Name = "gameInformationDeveloperLabel";
             this.gameInformationDeveloperLabel.Size = new System.Drawing.Size(143, 14);
@@ -261,7 +269,7 @@ namespace Retro_Achievement_Tracker
             // 
             // gameInformationPublisherLabel
             // 
-            this.gameInformationPublisherLabel.Font = new System.Drawing.Font("Monofonto", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInformationPublisherLabel.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameInformationPublisherLabel.Location = new System.Drawing.Point(92, 92);
             this.gameInformationPublisherLabel.Name = "gameInformationPublisherLabel";
             this.gameInformationPublisherLabel.Size = new System.Drawing.Size(143, 14);
@@ -271,7 +279,7 @@ namespace Retro_Achievement_Tracker
             // timerStatusLabel
             // 
             this.timerStatusLabel.AutoSize = true;
-            this.timerStatusLabel.Font = new System.Drawing.Font("Monofonto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.timerStatusLabel.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.timerStatusLabel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.timerStatusLabel.Location = new System.Drawing.Point(14, 377);
             this.timerStatusLabel.Name = "timerStatusLabel";
@@ -281,7 +289,7 @@ namespace Retro_Achievement_Tracker
             // 
             // consoleLogs
             // 
-            this.consoleLogs.Font = new System.Drawing.Font("Monofonto", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.consoleLogs.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.consoleLogs.FormattingEnabled = true;
             this.consoleLogs.ItemHeight = 14;
             this.consoleLogs.Location = new System.Drawing.Point(12, 216);
@@ -294,7 +302,7 @@ namespace Retro_Achievement_Tracker
             // 
             this.groupBox1.Controls.Add(this.autoLaunchStatsWindowCheckbox);
             this.groupBox1.Controls.Add(this.showStatsWindowButton);
-            this.groupBox1.Font = new System.Drawing.Font("Monofonto", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.groupBox1.Location = new System.Drawing.Point(599, 61);
             this.groupBox1.Name = "groupBox1";
@@ -306,7 +314,7 @@ namespace Retro_Achievement_Tracker
             // autoLaunchStatsWindowCheckbox
             // 
             this.autoLaunchStatsWindowCheckbox.AutoSize = true;
-            this.autoLaunchStatsWindowCheckbox.Font = new System.Drawing.Font("Monofonto", 8F);
+            this.autoLaunchStatsWindowCheckbox.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 8F);
             this.autoLaunchStatsWindowCheckbox.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.autoLaunchStatsWindowCheckbox.Location = new System.Drawing.Point(12, 25);
             this.autoLaunchStatsWindowCheckbox.Name = "autoLaunchStatsWindowCheckbox";
@@ -318,7 +326,7 @@ namespace Retro_Achievement_Tracker
             // 
             // showStatsWindowButton
             // 
-            this.showStatsWindowButton.Font = new System.Drawing.Font("Monofonto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.showStatsWindowButton.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.showStatsWindowButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.showStatsWindowButton.Location = new System.Drawing.Point(130, 20);
             this.showStatsWindowButton.Name = "showStatsWindowButton";
@@ -330,7 +338,7 @@ namespace Retro_Achievement_Tracker
             // 
             // supportButton
             // 
-            this.supportButton.Font = new System.Drawing.Font("Monofonto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.supportButton.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.supportButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.supportButton.Location = new System.Drawing.Point(654, 161);
             this.supportButton.Name = "supportButton";
@@ -344,7 +352,7 @@ namespace Retro_Achievement_Tracker
             // 
             this.focusGroupBox.Controls.Add(this.autoLaunchFocusWindowCheckBox);
             this.focusGroupBox.Controls.Add(this.showFocusWindowButton);
-            this.focusGroupBox.Font = new System.Drawing.Font("Monofonto", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.focusGroupBox.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.focusGroupBox.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.focusGroupBox.Location = new System.Drawing.Point(599, 12);
             this.focusGroupBox.Name = "focusGroupBox";
@@ -356,7 +364,7 @@ namespace Retro_Achievement_Tracker
             // autoLaunchFocusWindowCheckBox
             // 
             this.autoLaunchFocusWindowCheckBox.AutoSize = true;
-            this.autoLaunchFocusWindowCheckBox.Font = new System.Drawing.Font("Monofonto", 8F);
+            this.autoLaunchFocusWindowCheckBox.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 8F);
             this.autoLaunchFocusWindowCheckBox.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.autoLaunchFocusWindowCheckBox.Location = new System.Drawing.Point(12, 25);
             this.autoLaunchFocusWindowCheckBox.Name = "autoLaunchFocusWindowCheckBox";
@@ -368,7 +376,7 @@ namespace Retro_Achievement_Tracker
             // 
             // showFocusWindowButton
             // 
-            this.showFocusWindowButton.Font = new System.Drawing.Font("Monofonto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.showFocusWindowButton.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.showFocusWindowButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.showFocusWindowButton.Location = new System.Drawing.Point(131, 20);
             this.showFocusWindowButton.Name = "showFocusWindowButton";
@@ -382,7 +390,7 @@ namespace Retro_Achievement_Tracker
             // 
             this.notificationsGroupBox.Controls.Add(this.autoLaunchNotificationsWindowCheckbox);
             this.notificationsGroupBox.Controls.Add(this.showNotificationsWindowButton);
-            this.notificationsGroupBox.Font = new System.Drawing.Font("Monofonto", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.notificationsGroupBox.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.notificationsGroupBox.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.notificationsGroupBox.Location = new System.Drawing.Point(599, 110);
             this.notificationsGroupBox.Name = "notificationsGroupBox";
@@ -394,7 +402,7 @@ namespace Retro_Achievement_Tracker
             // autoLaunchNotificationsWindowCheckbox
             // 
             this.autoLaunchNotificationsWindowCheckbox.AutoSize = true;
-            this.autoLaunchNotificationsWindowCheckbox.Font = new System.Drawing.Font("Monofonto", 8F);
+            this.autoLaunchNotificationsWindowCheckbox.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 8F);
             this.autoLaunchNotificationsWindowCheckbox.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.autoLaunchNotificationsWindowCheckbox.Location = new System.Drawing.Point(12, 25);
             this.autoLaunchNotificationsWindowCheckbox.Name = "autoLaunchNotificationsWindowCheckbox";
@@ -406,7 +414,7 @@ namespace Retro_Achievement_Tracker
             // 
             // showNotificationsWindowButton
             // 
-            this.showNotificationsWindowButton.Font = new System.Drawing.Font("Monofonto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.showNotificationsWindowButton.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.showNotificationsWindowButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.showNotificationsWindowButton.Location = new System.Drawing.Point(131, 20);
             this.showNotificationsWindowButton.Name = "showNotificationsWindowButton";
@@ -414,7 +422,7 @@ namespace Retro_Achievement_Tracker
             this.showNotificationsWindowButton.TabIndex = 10021;
             this.showNotificationsWindowButton.Text = "Show";
             this.showNotificationsWindowButton.UseVisualStyleBackColor = true;
-            this.showNotificationsWindowButton.Click += this.ShowNotificationsWindowButton_Click;
+            this.showNotificationsWindowButton.Click += new System.EventHandler(this.ShowNotificationsWindowButton_Click);
             // 
             // userInfoGroupBox
             // 
@@ -430,7 +438,7 @@ namespace Retro_Achievement_Tracker
             this.userInfoGroupBox.Controls.Add(this.stopButton);
             this.userInfoGroupBox.Controls.Add(this.awardsLabel);
             this.userInfoGroupBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.userInfoGroupBox.Font = new System.Drawing.Font("Monofonto", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userInfoGroupBox.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userInfoGroupBox.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.userInfoGroupBox.Location = new System.Drawing.Point(12, 12);
             this.userInfoGroupBox.Name = "userInfoGroupBox";
@@ -441,7 +449,7 @@ namespace Retro_Achievement_Tracker
             // 
             // startButton
             // 
-            this.startButton.Font = new System.Drawing.Font("Monofonto", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.startButton.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.startButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.startButton.Location = new System.Drawing.Point(259, 98);
             this.startButton.Name = "startButton";
@@ -461,12 +469,25 @@ namespace Retro_Achievement_Tracker
             this.raConnectionStatusPictureBox.TabIndex = 10025;
             this.raConnectionStatusPictureBox.TabStop = false;
             // 
+            // raConnectivityLabel
+            // 
+            this.raConnectivityLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.raConnectivityLabel.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.raConnectivityLabel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.raConnectivityLabel.Location = new System.Drawing.Point(364, 377);
+            this.raConnectivityLabel.Name = "raConnectivityLabel";
+            this.raConnectivityLabel.Size = new System.Drawing.Size(429, 23);
+            this.raConnectivityLabel.TabIndex = 10026;
+            this.raConnectivityLabel.Text = "RA Connectivity Label";
+            this.raConnectivityLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // MainPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(831, 401);
+            this.Controls.Add(this.raConnectivityLabel);
             this.Controls.Add(this.raConnectionStatusPictureBox);
             this.Controls.Add(this.userInfoGroupBox);
             this.Controls.Add(this.groupBox1);
@@ -497,6 +518,17 @@ namespace Retro_Achievement_Tracker
             this.ResumeLayout(false);
             this.PerformLayout();
 
+        }
+
+        private FontFamily GetFontFamilyByName(string name)
+        {
+            return _privateFontCollection.Families.FirstOrDefault(x => x.Name == name);
+        }
+
+        private void AddFonts()
+        {
+            _privateFontCollection.AddFontFile(@"Resources\monofonto.ttf");
+            _privateFontCollection.AddFontFile(@"Resources\EightBitDragon-anqx.ttf");
         }
 
         #endregion
@@ -533,6 +565,8 @@ namespace Retro_Achievement_Tracker
         private Button showNotificationsWindowButton;
         private Label timerStatusLabel;
         private PictureBox raConnectionStatusPictureBox;
+        private Label raConnectivityLabel;
+        private PrivateFontCollection _privateFontCollection;
     }
 }
 

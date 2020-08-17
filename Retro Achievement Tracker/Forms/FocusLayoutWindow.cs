@@ -16,7 +16,7 @@ namespace Retro_Achievement_Tracker
 
         public FocusLayoutWindow()
         {
-            InitializeComponent();            
+            InitializeComponent();
         }
 
         protected override void OnLoad(EventArgs e)
@@ -35,7 +35,8 @@ namespace Retro_Achievement_Tracker
                     CurrentlyFocusedIndex = 0;
                     FocusedAchievement = null;
                 }
-            } else
+            }
+            else
             {
                 CurrentlyFocusedIndex = 0;
                 FocusedAchievement = null;
@@ -43,10 +44,7 @@ namespace Retro_Achievement_Tracker
 
             LockedAchievements = achievements;
 
-            if (this.Visible)
-            {
-                UpdateFocusAchievement();
-            }
+            UpdateFocusAchievement();
         }
 
         public void UpdateFocusAchievement()
@@ -62,7 +60,8 @@ namespace Retro_Achievement_Tracker
                         if (CurrentlyFocusedIndex >= LockedAchievements.Count)
                         {
                             CurrentlyFocusedIndex = LockedAchievements.Count - 1;
-                        } else if (CurrentlyFocusedIndex < 0)
+                        }
+                        else if (CurrentlyFocusedIndex < 0)
                         {
                             CurrentlyFocusedIndex = 0;
                         }

@@ -1,4 +1,5 @@
-﻿using CefSharp;
+﻿using AutoUpdaterDotNET;
+using CefSharp;
 using HtmlAgilityPack;
 using Retro_Achievement_Tracker.Forms;
 using Retro_Achievement_Tracker.Models;
@@ -6,7 +7,11 @@ using Retro_Achievement_Tracker.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
+using System.Drawing.Text;
+using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Xml.XPath;
 
@@ -30,8 +35,6 @@ namespace Retro_Achievement_Tracker
         private string _gameDeveloper;
         private string _gamePublisher;
 
-        private int oldAchievementCount;
-
         public UserSummary UserSummary
         {
             get
@@ -43,39 +46,15 @@ namespace Retro_Achievement_Tracker
                 if (value == null)
                 {
                     DegradeConnectivity("Got null response getting user summary info.");
+
                     return;
                 }
 
                 RAErrors = 0;
 
                 _userSummary = value;
-
-                Rank = _userSummary.Rank;
-                Points = _userSummary.TotalPoints;
-
-                GameTotalPoints = _userSummary.GameAchievementSummaries[0].PossibleScore;
-                GameTotalAchievements = _userSummary.GameAchievementSummaries[0].NumPossibleAchievements;
-
-                GameEarnedPoints = _userSummary.GameAchievementSummaries[0].ScoreAchieved;
-                GameEarnedAchievements = _userSummary.GameAchievementSummaries[0].NumAchievedHardcore;
-
-                if (oldAchievementCount < GameEarnedAchievements)
-                {
-                    StatsLayoutWindow.SetGameAchievements(GameEarnedAchievements, GameTotalAchievements);
-                    StatsLayoutWindow.SetGamePoints(GameEarnedPoints, GameTotalPoints);
-                }
-
-                if (_userSummary.RecentAchievements != null && _userSummary.RecentAchievements.Count > 0)
-                {
-                    NotificationLayoutWindow.MostRecentAchievement = _userSummary.RecentAchievements[0];
-                }
-                else
-                {
-                    NotificationLayoutWindow.MostRecentAchievement = null;
-                }
             }
         }
-
         private GameProgress CurrentGame
         {
             get
@@ -87,66 +66,83 @@ namespace Retro_Achievement_Tracker
                 if (value == null || value.Id == 0)
                 {
                     DegradeConnectivity("Got null response getting game progress info.");
+
                     return;
                 }
 
                 RAErrors = 0;
 
-                if (_gameProgress == null || value.Id != _gameProgress.Id)
+                bool gameChange = _gameProgress != null && value.Id != _gameProgress.Id;
+
+                _gameProgress = value;
+
+                OldUnlockedAchievements = UnlockedAchievements.ToList();
+
+                Rank = _userSummary.Rank;
+                Points = _userSummary.TotalPoints;
+
+                GameTotalPoints = _userSummary.GameAchievementSummaries[0].PossibleScore;
+                GameTotalAchievements = _userSummary.GameAchievementSummaries[0].NumPossibleAchievements;
+
+                GameEarnedPoints = _userSummary.GameAchievementSummaries[0].ScoreAchieved;
+                GameEarnedAchievements = _userSummary.GameAchievementSummaries[0].NumAchievedHardcore;
+
+                if (_userSummary.RecentAchievements != null && _userSummary.RecentAchievements.Count > 0)
                 {
-                    _gameProgress = value;
-
-                    GameTitle = _gameProgress.Title;
-                    GameImage = _gameProgress.ImageIcon;
-                    ConsoleName = _gameProgress.ConsoleName;
-                    GameDeveloper = _gameProgress.Developer;
-                    GamePublisher = _gameProgress.Publisher;
-
-                    SortAchievements();
-
-                    FocusLayoutWindow.SetFocus();
+                    NotificationLayoutWindow.MostRecentAchievement = _userSummary.RecentAchievements[0];
                 }
-                else
+
+                GameTitle = _gameProgress.Title;
+                GameImage = _gameProgress.ImageIcon;
+                ConsoleName = _gameProgress.ConsoleName;
+                GameDeveloper = _gameProgress.Developer;
+                GamePublisher = _gameProgress.Publisher;
+
+                SortAchievements();
+
+                if (UnlockedAchievements.Count > 0 && gameChange)
                 {
-                    _gameProgress = value;
+                    List<Achievement> achievementNotificationList = UnlockedAchievements
+                    .FindAll(unlockedAchievement => !OldUnlockedAchievements.Contains(unlockedAchievement))
+                    .ToList();
 
-                    SortAchievements();
+                    achievementNotificationList.Sort();
 
-                    if (GameEarnedAchievements > 0 && oldAchievementCount != GameEarnedAchievements)
+                    foreach (Achievement achievement in achievementNotificationList)
+                    {
+                        NotificationLayoutWindow.EnqueueAchievementNotification(achievement);
+                    }
+
+                    if (achievementNotificationList.Count > 0)
                     {
                         FocusLayoutWindow.SetFocus();
+                    }
 
-                        List<Achievement> achievementNotificationList = UnlockedAchievements
-                        .FindAll(unlockedAchievement => !OldUnlockedAchievements.Contains(unlockedAchievement))
-                        .ToList();
-
-                        achievementNotificationList.Sort();
-
-                        foreach (Achievement achievement in achievementNotificationList)
-                        {
-                            NotificationLayoutWindow.EnqueueAchievementNotification(achievement);
-                        }
-
-                        if (UnlockedAchievements.Count == CurrentGame.Achievements.Count && OldUnlockedAchievements.Count < CurrentGame.Achievements.Count)
-                        {
-                            NotificationLayoutWindow.EnqueueMasteryNotification(UserSummary.GameSummaries[0], UserSummary.GameAchievementSummaries[0]);
-                        }
+                    if (UnlockedAchievements.Count == CurrentGame.Achievements.Count && OldUnlockedAchievements.Count < CurrentGame.Achievements.Count)
+                    {
+                        NotificationLayoutWindow.EnqueueMasteryNotification(UserSummary.GameSummaries[0], UserSummary.GameAchievementSummaries[0]);
                     }
                 }
-                StartTimer();
+
+                UserAndGameTimerCounter = 6;
+                UserAndGameUpdateTimer.Start();
             }
         }
 
         private void DegradeConnectivity(string s)
         {
             this.raConnectionStatusPictureBox.Image = Resources.yellow_button;
+
             RAErrors++;
+
             Log(s);
 
             if (RAErrors > 5)
             {
                 this.StopButton_Click(null, null);
+
                 this.raConnectionStatusPictureBox.Image = Resources.red_button;
+
                 Log("Stopping service after too many connectivity problems.");
             }
         }
@@ -181,6 +177,7 @@ namespace Retro_Achievement_Tracker
                     StatsLayoutWindow.SetPoints(value);
                 }
                 _points = value;
+
                 OnPropertyChanged("Points");
             }
         }
@@ -201,7 +198,6 @@ namespace Retro_Achievement_Tracker
                 OnPropertyChanged("Awards");
             }
         }
-
         public string GameTitle
         {
             get
@@ -211,6 +207,7 @@ namespace Retro_Achievement_Tracker
             set
             {
                 _gameTitle = value;
+
                 OnPropertyChanged("GameTitle");
             }
         }
@@ -223,6 +220,7 @@ namespace Retro_Achievement_Tracker
             set
             {
                 _gameImage = value;
+
                 OnPropertyChanged("GameImage");
             }
         }
@@ -235,6 +233,7 @@ namespace Retro_Achievement_Tracker
             set
             {
                 _gameConsole = value;
+
                 OnPropertyChanged("ConsoleName");
             }
         }
@@ -247,6 +246,7 @@ namespace Retro_Achievement_Tracker
             set
             {
                 _gameDeveloper = value;
+
                 OnPropertyChanged("GameDeveloper");
             }
         }
@@ -259,6 +259,7 @@ namespace Retro_Achievement_Tracker
             set
             {
                 _gamePublisher = value;
+
                 OnPropertyChanged("GamePublisher");
             }
         }
@@ -276,6 +277,7 @@ namespace Retro_Achievement_Tracker
                     StatsLayoutWindow.SetGameAchievements(value, GameTotalAchievements);
                 }
                 _gameAchievmentsEarned = value;
+
                 OnPropertyChanged("GameEarnedAchievements");
             }
         }
@@ -292,6 +294,7 @@ namespace Retro_Achievement_Tracker
                     StatsLayoutWindow.SetGamePoints(value, GameTotalPoints);
                 }
                 _gamePointsEarned = value;
+
                 OnPropertyChanged("GameEarnedPoints");
             }
         }
@@ -301,13 +304,14 @@ namespace Retro_Achievement_Tracker
 
         private static List<Achievement> LockedAchievements;
         private static List<Achievement> UnlockedAchievements;
-
         private static List<Achievement> OldUnlockedAchievements;
 
         private static SupportPage supportPage;
 
         private static Timer UserAndGameUpdateTimer;
-        private static int TimerCounter;
+        private static Timer AwardAndConnectivityTimer;
+        private static int UserAndGameTimerCounter;
+        private static int AwardAndConnectivityCounter;
 
         private static StatsLayoutWindow StatsLayoutWindow;
         private static FocusLayoutWindow FocusLayoutWindow;
@@ -321,21 +325,36 @@ namespace Retro_Achievement_Tracker
         private HFC_EssentialsClient hFC_EssentialsClient;
 
         public event PropertyChangedEventHandler PropertyChanged;
-
         public MainPage()
         {
             InitializeComponent();
             LoadProperties();
+            //AutoUpdate();
             SetupInterface();
+        }
+
+        private static void AutoUpdate()
+        {
+            AutoUpdater.ReportErrors = true;
+            AutoUpdater.Mandatory = true;
+            AutoUpdater.UpdateMode = Mode.Forced;
+            AutoUpdater.Synchronous = true;
+            AutoUpdater.Start("http://rbsoft.org/updates/AutoUpdaterTest.xml");
         }
 
         private void SetupInterface()
         {
+
+
             this.consoleLogs.DataSource = ConsoleLogs;
 
             UserAndGameUpdateTimer = new Timer();
             UserAndGameUpdateTimer.Tick += new EventHandler(CheckAchievements);
             UserAndGameUpdateTimer.Interval = 1000;
+
+            AwardAndConnectivityTimer = new Timer();
+            AwardAndConnectivityTimer.Tick += new EventHandler(SetAwardCount);
+            AwardAndConnectivityTimer.Interval = 1000;
 
             UnlockedAchievements = new List<Achievement>();
             LockedAchievements = new List<Achievement>();
@@ -347,6 +366,8 @@ namespace Retro_Achievement_Tracker
 
         protected override void OnLoad(EventArgs e)
         {
+            CreateDataBindings();
+
             if (this.CanStart() && this.autoStartCheckbox.Checked)
             {
                 this.StartButton_Click(null, null);
@@ -377,8 +398,6 @@ namespace Retro_Achievement_Tracker
 
             this.userProfilePictureBox.ImageLocation = "https://retroachievements.org/UserPic/" + this.usernameTextBox.Text + ".png";
 
-            CreateDataBindings();
-
             Log("Game Info [" + CurrentGame.Title + "] loaded.");
 
             if (this.autoLaunchFocusWindowCheckBox.Checked)
@@ -396,6 +415,10 @@ namespace Retro_Achievement_Tracker
                 NotificationLayoutWindow.Show();
             }
 
+            this.showFocusWindowButton.Enabled = true;
+            this.showNotificationsWindowButton.Enabled = true;
+            this.showStatsWindowButton.Enabled = true;
+
             StartTimer();
         }
 
@@ -403,13 +426,20 @@ namespace Retro_Achievement_Tracker
         {
             ShouldRun = false;
 
-            if (UserAndGameUpdateTimer != null)
-            {
-                UserAndGameUpdateTimer.Stop();
-                Log("Stopped timer.");
-            }
+            UserAndGameUpdateTimer.Stop();
+            AwardAndConnectivityTimer.Stop();
+
+            this.raConnectionStatusPictureBox.Image = Resources.red_button;
+
+            Log("Stopped timer.");
+            UpdateTimerLabel("Stopped Updating.");
+            UpdateRAConnectivityLabel("Stopped checking retroachievements.org");
 
             this.stopButton.Enabled = false;
+            this.showFocusWindowButton.Enabled = false;
+            this.showNotificationsWindowButton.Enabled = false;
+            this.showStatsWindowButton.Enabled = false;
+
             this.apiKeyTextBox.Enabled = true;
             this.usernameTextBox.Enabled = true;
 
@@ -451,7 +481,6 @@ namespace Retro_Achievement_Tracker
             });
         }
 
-
         private void CreateNotificationsWindow()
         {
             NotificationLayoutWindow = new NotificationLayoutWindow
@@ -473,13 +502,25 @@ namespace Retro_Achievement_Tracker
             this.timerStatusLabel.Text = s;
         }
 
+        private void UpdateRAConnectivityLabel(string v)
+        {
+            this.raConnectivityLabel.Text = v;
+        }
+
         private async void CheckAchievements(object sender, EventArgs e)
         {
-            TimerCounter--;
+            if (!ShouldRun)
+            {
+                UserAndGameUpdateTimer.Stop();
 
-            UpdateTimerLabel("Updating in " + TimerCounter + "...");
+                return;
+            }
 
-            if (TimerCounter < 0)
+            UserAndGameTimerCounter--;
+
+            UpdateTimerLabel("Updating in " + UserAndGameTimerCounter + "...");
+
+            if (UserAndGameTimerCounter < 0)
             {
                 UpdateTimerLabel("Starting Update.");
 
@@ -489,12 +530,7 @@ namespace Retro_Achievement_Tracker
 
                 UpdateTimerLabel("Calling for user summary...");
 
-                OldUnlockedAchievements = UnlockedAchievements.ToList();
-
-                oldAchievementCount = OldUnlockedAchievements.Count;
-
                 UserSummary = await hFC_EssentialsClient.GetUserSummary();
-                SetAwardCount();
 
                 UpdateTimerLabel("Calling for game progress...");
 
@@ -504,11 +540,13 @@ namespace Retro_Achievement_Tracker
 
         private void StartTimer()
         {
-            TimerCounter = 6;
+            UserAndGameTimerCounter = 6;
+            AwardAndConnectivityCounter = 0;
 
             if (ShouldRun)
             {
                 UserAndGameUpdateTimer.Start();
+                AwardAndConnectivityTimer.Start();
             }
         }
 
@@ -543,19 +581,28 @@ namespace Retro_Achievement_Tracker
                 LockedAchievements.Sort(delegate (Achievement x, Achievement y) { return x.Id.CompareTo(y.Id); });
                 UnlockedAchievements.Sort(delegate (Achievement x, Achievement y) { return y.DateEarned.Value.CompareTo(x.DateEarned.Value); });
             }
-            else
-            {
-                LockedAchievements = new List<Achievement>();
-                UnlockedAchievements = new List<Achievement>();
-            }
 
+            if (FocusLayoutWindow.CurrentlyFocusedIndex > 0 && OldUnlockedAchievements.Count < UnlockedAchievements.Count)
+            {
+                FocusLayoutWindow.CurrentlyFocusedIndex -= UnlockedAchievements.Count - OldUnlockedAchievements.Count;
+            }
             FocusLayoutWindow.SetLockedAchievements(LockedAchievements);
         }
 
         private void MainPage_FormClosed(object sender, FormClosedEventArgs e)
         {
-            FocusLayoutWindow.Dispose();
-            StatsLayoutWindow.Dispose();
+            if (FocusLayoutWindow != null && !FocusLayoutWindow.IsDisposed)
+            {
+                FocusLayoutWindow.Dispose();
+            }
+            if (StatsLayoutWindow != null && !StatsLayoutWindow.IsDisposed)
+            {
+                StatsLayoutWindow.Dispose();
+            }
+            if (NotificationLayoutWindow != null && !NotificationLayoutWindow.IsDisposed)
+            {
+                NotificationLayoutWindow.Dispose();
+            }
             SaveProperties();
         }
 
@@ -596,28 +643,56 @@ namespace Retro_Achievement_Tracker
             }
         }
 
-        private async void SetAwardCount()
+        private async void SetAwardCount(object sender, EventArgs eventArgs)
         {
-            UpdateTimerLabel("Calling retroachievements.org for award count.");
-            try
+            if (!ShouldRun)
             {
-                string url = "http://retroachievements.org/user/" + usernameTextBox.Text;
-                HtmlWeb web = new HtmlWeb();
-                HtmlAgilityPack.HtmlDocument doc = await web.LoadFromWebAsync(url);
+                AwardAndConnectivityTimer.Stop();
 
-                HtmlNode siteAwardsNode = doc.GetElementbyId("siteawards");
-
-                if (siteAwardsNode == null)
-                {
-                    DegradeConnectivity("Encountered problems checking retroarchievements.org for award count.");
-                }
-                this.raConnectionStatusPictureBox.Image = Resources.green_button;
-                RAErrors = 0;
-                Awards = siteAwardsNode.SelectNodes(XPathExpression.Compile("//div[contains(@class,'trophyimage')]")).Count;
+                return;
             }
-            catch (Exception ex)
+
+            AwardAndConnectivityCounter--;
+
+            UpdateRAConnectivityLabel("Calling retroachievements.org in " + AwardAndConnectivityCounter + "...");
+
+            if (AwardAndConnectivityCounter <= 0)
             {
-                DegradeConnectivity("Encountered problems checking retroarchievements.org for award count." + ex.Message);
+                AwardAndConnectivityTimer.Stop();
+
+                AwardAndConnectivityCounter = 11;
+
+                UpdateRAConnectivityLabel("Calling retroachievements.org for award count...");
+
+                try
+                {
+                    string url = "http://retroachievements.org/user/" + usernameTextBox.Text;
+
+                    HtmlWeb web = new HtmlWeb();
+
+                    HtmlAgilityPack.HtmlDocument doc = await web.LoadFromWebAsync(url);
+
+                    HtmlNode siteAwardsNode = doc.GetElementbyId("siteawards");
+
+                    if (siteAwardsNode == null)
+                    {
+                        DegradeConnectivity("Encountered problems checking retroarchievements.org.");
+                        UpdateRAConnectivityLabel("Encountered problems checking retroarchievements.org.");
+
+                        return;
+                    }
+                    this.raConnectionStatusPictureBox.Image = Resources.green_button;
+
+                    RAErrors = 0;
+
+                    Awards = siteAwardsNode.SelectNodes(XPathExpression.Compile("//div[contains(@class,'trophyimage')]")).Count;
+
+                    AwardAndConnectivityTimer.Start();
+                }
+                catch (Exception ex)
+                {
+                    DegradeConnectivity("Encountered problems checking retroarchievements.org for award count: " + ex.Message);
+                }
             }
         }
 
@@ -661,7 +736,6 @@ namespace Retro_Achievement_Tracker
                 StatsLayoutWindow.Show();
             }
         }
-
 
         private void ShowNotificationsWindowButton_Click(object sender, EventArgs e)
         {
@@ -708,14 +782,6 @@ namespace Retro_Achievement_Tracker
 
             this.scoreLabel.DataBindings.Add(scoreBinding);
 
-            Binding awardsBinding = new Binding("Text", this, "Awards");
-            awardsBinding.Format += new ConvertEventHandler((sender, convertEventArgs) =>
-            {
-                convertEventArgs.Value = "Awards: " + convertEventArgs.Value;
-            });
-
-            this.awardsLabel.DataBindings.Add(awardsBinding);
-
             Binding gameImageBinding = new Binding("ImageLocation", this, "GameImage");
             gameImageBinding.Format += new ConvertEventHandler((sender, convertEventArgs) =>
             {
@@ -761,6 +827,14 @@ namespace Retro_Achievement_Tracker
                 convertEventArgs.Value = convertEventArgs.Value;
             });
             this.gameInformationConsoleLabel.DataBindings.Add(gameConsoleBinding);
+
+            Binding awardsBinding = new Binding("Text", this, "Awards");
+            awardsBinding.Format += new ConvertEventHandler((sender, convertEventArgs) =>
+            {
+                convertEventArgs.Value = "Awards: " + convertEventArgs.Value;
+            });
+
+            this.awardsLabel.DataBindings.Add(awardsBinding);
         }
 
         protected virtual void OnPropertyChanged(string property)
