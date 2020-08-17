@@ -127,7 +127,7 @@ namespace Retro_Achievement_Tracker
             // 
             // gameInformationTitleLabel
             // 
-            this.gameInformationTitleLabel.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInformationTitleLabel.Font = new System.Drawing.Font(GetFontFamilyByName("Eight Bit Dragon"), 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameInformationTitleLabel.Location = new System.Drawing.Point(6, 110);
             this.gameInformationTitleLabel.Name = "gameInformationTitleLabel";
             this.gameInformationTitleLabel.Size = new System.Drawing.Size(230, 65);

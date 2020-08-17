@@ -329,7 +329,7 @@ namespace Retro_Achievement_Tracker
         {
             InitializeComponent();
             LoadProperties();
-            //AutoUpdate();
+            AutoUpdate();
             SetupInterface();
         }
 
@@ -339,7 +339,7 @@ namespace Retro_Achievement_Tracker
             AutoUpdater.Mandatory = true;
             AutoUpdater.UpdateMode = Mode.Forced;
             AutoUpdater.Synchronous = true;
-            AutoUpdater.Start("http://rbsoft.org/updates/AutoUpdaterTest.xml");
+            AutoUpdater.Start("https://github.com/Colossus-Gaming/retroachievements-layout-manager/releases/download/release-management/ra-layout-manager-release.xml");
         }
 
         private void SetupInterface()
