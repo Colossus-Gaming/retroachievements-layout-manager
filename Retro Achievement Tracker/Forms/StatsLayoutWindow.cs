@@ -3,6 +3,8 @@ using CefSharp.Web;
 using Retro_Achievement_Tracker.Properties;
 using System;
 using System.ComponentModel;
+using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace Retro_Achievement_Tracker

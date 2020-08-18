@@ -148,6 +148,16 @@ namespace Retro_Achievement_Tracker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] EightBitDragon_anqx {
+            get {
+                object obj = ResourceManager.GetObject("EightBitDragon_anqx", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap game_achievements_image {
@@ -194,6 +204,16 @@ namespace Retro_Achievement_Tracker.Properties {
             get {
                 object obj = ResourceManager.GetObject("hnet_com_image", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] monofonto {
+            get {
+                object obj = ResourceManager.GetObject("monofonto", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         

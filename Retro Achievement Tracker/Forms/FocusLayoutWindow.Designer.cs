@@ -2,6 +2,9 @@
 using CefSharp.Web;
 using CefSharp.WinForms;
 using Retro_Achievement_Tracker.Properties;
+using System.Drawing;
+using System.Drawing.Text;
+using System.Linq;
 
 namespace Retro_Achievement_Tracker
 {
@@ -36,6 +39,11 @@ namespace Retro_Achievement_Tracker
             System.Windows.Forms.Label breakerLabel;
             System.Windows.Forms.Label label1;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FocusLayoutWindow));
+
+            _privateFontCollection = new PrivateFontCollection();
+
+            AddFonts();
+
             this.focusAchievementTitleLabel = new System.Windows.Forms.Label();
             this.focusAchievementDescriptionLabel = new System.Windows.Forms.Label();
             this.focusAchievementButtonLeft = new System.Windows.Forms.Button();
@@ -69,23 +77,25 @@ namespace Retro_Achievement_Tracker
             // 
             // focusAchievementTitleLabel
             // 
-            this.focusAchievementTitleLabel.Font = new System.Drawing.Font("Monofonto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.focusAchievementTitleLabel.Font = new System.Drawing.Font(GetFontFamilyByName("Eight Bit Dragon"), 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.focusAchievementTitleLabel.Location = new System.Drawing.Point(70, 32);
             this.focusAchievementTitleLabel.Name = "focusAchievementTitleLabel";
             this.focusAchievementTitleLabel.Size = new System.Drawing.Size(150, 60);
             this.focusAchievementTitleLabel.TabIndex = 6;
+            this.focusAchievementTitleLabel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             // 
             // focusAchievementDescriptionLabel
             // 
-            this.focusAchievementDescriptionLabel.Font = new System.Drawing.Font("Monofonto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.focusAchievementDescriptionLabel.Font = new System.Drawing.Font(GetFontFamilyByName("Eight Bit Dragon"), 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.focusAchievementDescriptionLabel.Location = new System.Drawing.Point(4, 101);
             this.focusAchievementDescriptionLabel.Name = "focusAchievementDescriptionLabel";
             this.focusAchievementDescriptionLabel.Size = new System.Drawing.Size(216, 139);
             this.focusAchievementDescriptionLabel.TabIndex = 5;
+            this.focusAchievementDescriptionLabel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             // 
             // focusAchievementButtonLeft
             // 
-            this.focusAchievementButtonLeft.Font = new System.Drawing.Font("Monofonto", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.focusAchievementButtonLeft.Font = new System.Drawing.Font(GetFontFamilyByName("Eight Bit Dragon"), 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.focusAchievementButtonLeft.ForeColor = System.Drawing.SystemColors.ControlText;
             this.focusAchievementButtonLeft.Location = new System.Drawing.Point(154, 243);
             this.focusAchievementButtonLeft.Name = "focusAchievementButtonLeft";
@@ -97,7 +107,7 @@ namespace Retro_Achievement_Tracker
             // 
             // focusAchievementButtonRight
             // 
-            this.focusAchievementButtonRight.Font = new System.Drawing.Font("Monofonto", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.focusAchievementButtonRight.Font = new System.Drawing.Font(GetFontFamilyByName("Eight Bit Dragon"), 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.focusAchievementButtonRight.ForeColor = System.Drawing.SystemColors.ControlText;
             this.focusAchievementButtonRight.Location = new System.Drawing.Point(190, 243);
             this.focusAchievementButtonRight.Name = "focusAchievementButtonRight";
@@ -118,7 +128,7 @@ namespace Retro_Achievement_Tracker
             // 
             // setFocusButton
             // 
-            this.setFocusButton.Font = new System.Drawing.Font("Monofonto", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.setFocusButton.Font = new System.Drawing.Font(GetFontFamilyByName("Eight Bit Dragon"), 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.setFocusButton.Location = new System.Drawing.Point(4, 243);
             this.setFocusButton.Name = "setFocusButton";
             this.setFocusButton.Size = new System.Drawing.Size(60, 20);
@@ -129,7 +139,7 @@ namespace Retro_Achievement_Tracker
             // 
             // hideFocusButton
             // 
-            this.hideFocusButton.Font = new System.Drawing.Font("Monofonto", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hideFocusButton.Font = new System.Drawing.Font(GetFontFamilyByName("Eight Bit Dragon"), 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hideFocusButton.Location = new System.Drawing.Point(70, 243);
             this.hideFocusButton.Name = "hideFocusButton";
             this.hideFocusButton.Size = new System.Drawing.Size(60, 20);
@@ -149,7 +159,8 @@ namespace Retro_Achievement_Tracker
             this.groupBox1.Controls.Add(this.focusAchievementTitleLabel);
             this.groupBox1.Controls.Add(this.setFocusButton);
             this.groupBox1.Controls.Add(this.focusAchievementDescriptionLabel);
-            this.groupBox1.Font = new System.Drawing.Font("Monofonto", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Font = new System.Drawing.Font(GetFontFamilyByName("Eight Bit Dragon"), 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(225, 270);
@@ -168,6 +179,10 @@ namespace Retro_Achievement_Tracker
             // 
             // FocusLayoutWindow
             // 
+
+            this.setFocusButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.hideFocusButton.ForeColor = System.Drawing.SystemColors.ControlText;
+
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(1284, 287);
             this.Controls.Add(this.chromiumWebBrowser);
@@ -181,6 +196,16 @@ namespace Retro_Achievement_Tracker
 
         }
         #endregion
+        private FontFamily GetFontFamilyByName(string name)
+        {
+            return _privateFontCollection.Families.FirstOrDefault(x => x.Name == name);
+        }
+
+        private void AddFonts()
+        {
+            _privateFontCollection.AddFontFile(@"Resources\monofonto.ttf");
+            _privateFontCollection.AddFontFile(@"Resources\EightBitDragon-anqx.ttf");
+        }
 
         private System.Windows.Forms.Label focusAchievementTitleLabel;
         private System.Windows.Forms.Label focusAchievementDescriptionLabel;
@@ -191,5 +216,6 @@ namespace Retro_Achievement_Tracker
         private System.Windows.Forms.Button hideFocusButton;
         private System.Windows.Forms.GroupBox groupBox1;
         public ChromiumWebBrowser chromiumWebBrowser;
+        private PrivateFontCollection _privateFontCollection;
     }
 }

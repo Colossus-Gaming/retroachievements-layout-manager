@@ -22,8 +22,6 @@ namespace Retro_Achievement_Tracker.Models
                 case "disk://default-site-awards-image": return ResourceHandler.FromByteArray(GetBitmapAsByteArray(Properties.Resources.site_awards_image));
                 case "disk://default-game-achievements-image": return ResourceHandler.FromByteArray(GetBitmapAsByteArray(Properties.Resources.game_achievements_image));
                 case "disk://default-game-points-image": return ResourceHandler.FromByteArray(GetBitmapAsByteArray(Properties.Resources.game_points_image));
-                //case "disk://default-achievement-notification": return ResourceHandler.FromByteArray(Properties.Resources.default_achievement_pop);
-                //case "disk://default-mastery-notification": return ResourceHandler.FromByteArray(Properties.Resources.default_mastery_pop);
             }
 
             return ResourceHandler.FromFilePath("" + request.Url.Replace("disk://", ""));

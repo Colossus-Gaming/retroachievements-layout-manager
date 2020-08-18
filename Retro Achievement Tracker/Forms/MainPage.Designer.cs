@@ -53,7 +53,7 @@ namespace Retro_Achievement_Tracker
             this.stopButton = new System.Windows.Forms.Button();
             this.awardsLabel = new System.Windows.Forms.Label();
             this.siteRankLabel = new System.Windows.Forms.Label();
-            this.scoreLabel = new System.Windows.Forms.Label();
+            this.pointsLabel = new System.Windows.Forms.Label();
             this.gameInformationCheevosCountLabel = new System.Windows.Forms.Label();
             this.gameInformationPointsLabel = new System.Windows.Forms.Label();
             this.gameInformationGroupBox = new System.Windows.Forms.GroupBox();
@@ -98,7 +98,7 @@ namespace Retro_Achievement_Tracker
             // apiKeyLabel
             // 
             this.apiKeyLabel.AutoSize = true;
-            this.apiKeyLabel.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.apiKeyLabel.Font = new System.Drawing.Font(GetFontFamilyByName("Eight Bit Dragon"), 6.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.apiKeyLabel.Location = new System.Drawing.Point(7, 160);
             this.apiKeyLabel.Name = "apiKeyLabel";
             this.apiKeyLabel.Size = new System.Drawing.Size(49, 14);
@@ -107,7 +107,7 @@ namespace Retro_Achievement_Tracker
             // 
             // apiKeyTextBox
             // 
-            this.apiKeyTextBox.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.apiKeyTextBox.Font = new System.Drawing.Font(GetFontFamilyByName("Eight Bit Dragon"), 7.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.apiKeyTextBox.Location = new System.Drawing.Point(6, 137);
             this.apiKeyTextBox.Name = "apiKeyTextBox";
             this.apiKeyTextBox.PasswordChar = '*';
@@ -127,7 +127,7 @@ namespace Retro_Achievement_Tracker
             // 
             // gameInformationTitleLabel
             // 
-            this.gameInformationTitleLabel.Font = new System.Drawing.Font(GetFontFamilyByName("Eight Bit Dragon"), 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInformationTitleLabel.Font = new System.Drawing.Font(GetFontFamilyByName("Eight Bit Dragon"), 12.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameInformationTitleLabel.Location = new System.Drawing.Point(6, 110);
             this.gameInformationTitleLabel.Name = "gameInformationTitleLabel";
             this.gameInformationTitleLabel.Size = new System.Drawing.Size(230, 65);
@@ -138,7 +138,7 @@ namespace Retro_Achievement_Tracker
             // usernameLabel
             // 
             this.usernameLabel.AutoSize = true;
-            this.usernameLabel.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.usernameLabel.Font = new System.Drawing.Font(GetFontFamilyByName("Eight Bit Dragon"), 6.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.usernameLabel.Location = new System.Drawing.Point(7, 123);
             this.usernameLabel.Name = "usernameLabel";
             this.usernameLabel.Size = new System.Drawing.Size(55, 14);
@@ -147,7 +147,7 @@ namespace Retro_Achievement_Tracker
             // 
             // usernameTextBox
             // 
-            this.usernameTextBox.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.usernameTextBox.Font = new System.Drawing.Font(GetFontFamilyByName("Eight Bit Dragon"), 7.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.usernameTextBox.Location = new System.Drawing.Point(5, 98);
             this.usernameTextBox.Name = "usernameTextBox";
             this.usernameTextBox.Size = new System.Drawing.Size(246, 23);
@@ -166,7 +166,7 @@ namespace Retro_Achievement_Tracker
             // autoStartCheckbox
             // 
             this.autoStartCheckbox.AutoSize = true;
-            this.autoStartCheckbox.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.autoStartCheckbox.Font = new System.Drawing.Font(GetFontFamilyByName("Eight Bit Dragon"), 7.55F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.autoStartCheckbox.Location = new System.Drawing.Point(82, 78);
             this.autoStartCheckbox.Name = "autoStartCheckbox";
             this.autoStartCheckbox.Size = new System.Drawing.Size(96, 19);
@@ -176,7 +176,7 @@ namespace Retro_Achievement_Tracker
             // 
             // stopButton
             // 
-            this.stopButton.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stopButton.Font = new System.Drawing.Font(GetFontFamilyByName("Eight Bit Dragon"), 7.55F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.stopButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.stopButton.Location = new System.Drawing.Point(259, 137);
             this.stopButton.Name = "stopButton";
@@ -188,34 +188,34 @@ namespace Retro_Achievement_Tracker
             // 
             // awardsLabel
             // 
-            this.awardsLabel.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.awardsLabel.Location = new System.Drawing.Point(81, 57);
+            this.awardsLabel.Font = new System.Drawing.Font(GetFontFamilyByName("Eight Bit Dragon"), 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.awardsLabel.Location = new System.Drawing.Point(81, 63);
             this.awardsLabel.Name = "awardsLabel";
-            this.awardsLabel.Size = new System.Drawing.Size(130, 21);
+            this.awardsLabel.Size = new System.Drawing.Size(130, 20);
             this.awardsLabel.TabIndex = 34;
             this.awardsLabel.Text = "Awards: ---";
             // 
             // siteRankLabel
             // 
-            this.siteRankLabel.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.siteRankLabel.Location = new System.Drawing.Point(81, 22);
+            this.siteRankLabel.Font = new System.Drawing.Font(GetFontFamilyByName("Eight Bit Dragon"), 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.siteRankLabel.Location = new System.Drawing.Point(81, 20);
             this.siteRankLabel.Name = "siteRankLabel";
-            this.siteRankLabel.Size = new System.Drawing.Size(129, 20);
+            this.siteRankLabel.Size = new System.Drawing.Size(130, 20);
             this.siteRankLabel.TabIndex = 33;
             this.siteRankLabel.Text = "Rank: -----";
             // 
             // scoreLabel
             // 
-            this.scoreLabel.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.scoreLabel.Location = new System.Drawing.Point(81, 39);
-            this.scoreLabel.Name = "scoreLabel";
-            this.scoreLabel.Size = new System.Drawing.Size(130, 20);
-            this.scoreLabel.TabIndex = 32;
-            this.scoreLabel.Text = "Score: --------";
+            this.pointsLabel.Font = new System.Drawing.Font(GetFontFamilyByName("Eight Bit Dragon"), 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pointsLabel.Location = new System.Drawing.Point(81, 42);
+            this.pointsLabel.Name = "scoreLabel";
+            this.pointsLabel.Size = new System.Drawing.Size(130, 20);
+            this.pointsLabel.TabIndex = 32;
+            this.pointsLabel.Text = "Score: --------";
             // 
             // gameInformationCheevosCountLabel
             // 
-            this.gameInformationCheevosCountLabel.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInformationCheevosCountLabel.Font = new System.Drawing.Font(GetFontFamilyByName("Eight Bit Dragon"), 7.55F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameInformationCheevosCountLabel.Location = new System.Drawing.Point(92, 26);
             this.gameInformationCheevosCountLabel.Name = "gameInformationCheevosCountLabel";
             this.gameInformationCheevosCountLabel.Size = new System.Drawing.Size(145, 16);
@@ -224,7 +224,7 @@ namespace Retro_Achievement_Tracker
             // 
             // gameInformationPointsLabel
             // 
-            this.gameInformationPointsLabel.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInformationPointsLabel.Font = new System.Drawing.Font(GetFontFamilyByName("Eight Bit Dragon"), 7.55F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameInformationPointsLabel.Location = new System.Drawing.Point(92, 42);
             this.gameInformationPointsLabel.Name = "gameInformationPointsLabel";
             this.gameInformationPointsLabel.Size = new System.Drawing.Size(145, 16);
@@ -240,7 +240,7 @@ namespace Retro_Achievement_Tracker
             this.gameInformationGroupBox.Controls.Add(this.gameInformationTitleLabel);
             this.gameInformationGroupBox.Controls.Add(this.gameInformationCheevosCountLabel);
             this.gameInformationGroupBox.Controls.Add(this.gameInformationPointsLabel);
-            this.gameInformationGroupBox.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInformationGroupBox.Font = new System.Drawing.Font(GetFontFamilyByName("Eight Bit Dragon"), 13.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameInformationGroupBox.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.gameInformationGroupBox.Location = new System.Drawing.Point(354, 12);
             this.gameInformationGroupBox.Name = "gameInformationGroupBox";
@@ -251,7 +251,7 @@ namespace Retro_Achievement_Tracker
             // 
             // gameInformationConsoleLabel
             // 
-            this.gameInformationConsoleLabel.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInformationConsoleLabel.Font = new System.Drawing.Font(GetFontFamilyByName("Eight Bit Dragon"), 6.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameInformationConsoleLabel.Location = new System.Drawing.Point(92, 64);
             this.gameInformationConsoleLabel.Name = "gameInformationConsoleLabel";
             this.gameInformationConsoleLabel.Size = new System.Drawing.Size(143, 14);
@@ -260,7 +260,7 @@ namespace Retro_Achievement_Tracker
             // 
             // gameInformationDeveloperLabel
             // 
-            this.gameInformationDeveloperLabel.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInformationDeveloperLabel.Font = new System.Drawing.Font(GetFontFamilyByName("Eight Bit Dragon"), 6.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameInformationDeveloperLabel.Location = new System.Drawing.Point(92, 78);
             this.gameInformationDeveloperLabel.Name = "gameInformationDeveloperLabel";
             this.gameInformationDeveloperLabel.Size = new System.Drawing.Size(143, 14);
@@ -269,7 +269,7 @@ namespace Retro_Achievement_Tracker
             // 
             // gameInformationPublisherLabel
             // 
-            this.gameInformationPublisherLabel.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInformationPublisherLabel.Font = new System.Drawing.Font(GetFontFamilyByName("Eight Bit Dragon"), 6.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameInformationPublisherLabel.Location = new System.Drawing.Point(92, 92);
             this.gameInformationPublisherLabel.Name = "gameInformationPublisherLabel";
             this.gameInformationPublisherLabel.Size = new System.Drawing.Size(143, 14);
@@ -279,7 +279,7 @@ namespace Retro_Achievement_Tracker
             // timerStatusLabel
             // 
             this.timerStatusLabel.AutoSize = true;
-            this.timerStatusLabel.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.timerStatusLabel.Font = new System.Drawing.Font(GetFontFamilyByName("Eight Bit Dragon"), 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.timerStatusLabel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.timerStatusLabel.Location = new System.Drawing.Point(14, 377);
             this.timerStatusLabel.Name = "timerStatusLabel";
@@ -302,7 +302,7 @@ namespace Retro_Achievement_Tracker
             // 
             this.groupBox1.Controls.Add(this.autoLaunchStatsWindowCheckbox);
             this.groupBox1.Controls.Add(this.showStatsWindowButton);
-            this.groupBox1.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Font = new System.Drawing.Font(GetFontFamilyByName("Eight Bit Dragon"), 13.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.groupBox1.Location = new System.Drawing.Point(599, 61);
             this.groupBox1.Name = "groupBox1";
@@ -314,7 +314,7 @@ namespace Retro_Achievement_Tracker
             // autoLaunchStatsWindowCheckbox
             // 
             this.autoLaunchStatsWindowCheckbox.AutoSize = true;
-            this.autoLaunchStatsWindowCheckbox.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 8F);
+            this.autoLaunchStatsWindowCheckbox.Font = new System.Drawing.Font(GetFontFamilyByName("Eight Bit Dragon"), 6F);
             this.autoLaunchStatsWindowCheckbox.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.autoLaunchStatsWindowCheckbox.Location = new System.Drawing.Point(12, 25);
             this.autoLaunchStatsWindowCheckbox.Name = "autoLaunchStatsWindowCheckbox";
@@ -326,7 +326,7 @@ namespace Retro_Achievement_Tracker
             // 
             // showStatsWindowButton
             // 
-            this.showStatsWindowButton.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.showStatsWindowButton.Font = new System.Drawing.Font(GetFontFamilyByName("Eight Bit Dragon"), 7.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.showStatsWindowButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.showStatsWindowButton.Location = new System.Drawing.Point(130, 20);
             this.showStatsWindowButton.Name = "showStatsWindowButton";
@@ -338,7 +338,7 @@ namespace Retro_Achievement_Tracker
             // 
             // supportButton
             // 
-            this.supportButton.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.supportButton.Font = new System.Drawing.Font(GetFontFamilyByName("Eight Bit Dragon"), 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.supportButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.supportButton.Location = new System.Drawing.Point(654, 161);
             this.supportButton.Name = "supportButton";
@@ -352,7 +352,7 @@ namespace Retro_Achievement_Tracker
             // 
             this.focusGroupBox.Controls.Add(this.autoLaunchFocusWindowCheckBox);
             this.focusGroupBox.Controls.Add(this.showFocusWindowButton);
-            this.focusGroupBox.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.focusGroupBox.Font = new System.Drawing.Font(GetFontFamilyByName("Eight Bit Dragon"), 13.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.focusGroupBox.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.focusGroupBox.Location = new System.Drawing.Point(599, 12);
             this.focusGroupBox.Name = "focusGroupBox";
@@ -364,7 +364,7 @@ namespace Retro_Achievement_Tracker
             // autoLaunchFocusWindowCheckBox
             // 
             this.autoLaunchFocusWindowCheckBox.AutoSize = true;
-            this.autoLaunchFocusWindowCheckBox.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 8F);
+            this.autoLaunchFocusWindowCheckBox.Font = new System.Drawing.Font(GetFontFamilyByName("Eight Bit Dragon"), 6F);
             this.autoLaunchFocusWindowCheckBox.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.autoLaunchFocusWindowCheckBox.Location = new System.Drawing.Point(12, 25);
             this.autoLaunchFocusWindowCheckBox.Name = "autoLaunchFocusWindowCheckBox";
@@ -376,7 +376,7 @@ namespace Retro_Achievement_Tracker
             // 
             // showFocusWindowButton
             // 
-            this.showFocusWindowButton.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.showFocusWindowButton.Font = new System.Drawing.Font(GetFontFamilyByName("Eight Bit Dragon"), 7.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.showFocusWindowButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.showFocusWindowButton.Location = new System.Drawing.Point(131, 20);
             this.showFocusWindowButton.Name = "showFocusWindowButton";
@@ -390,7 +390,7 @@ namespace Retro_Achievement_Tracker
             // 
             this.notificationsGroupBox.Controls.Add(this.autoLaunchNotificationsWindowCheckbox);
             this.notificationsGroupBox.Controls.Add(this.showNotificationsWindowButton);
-            this.notificationsGroupBox.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.notificationsGroupBox.Font = new System.Drawing.Font(GetFontFamilyByName("Eight Bit Dragon"), 13.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.notificationsGroupBox.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.notificationsGroupBox.Location = new System.Drawing.Point(599, 110);
             this.notificationsGroupBox.Name = "notificationsGroupBox";
@@ -402,7 +402,7 @@ namespace Retro_Achievement_Tracker
             // autoLaunchNotificationsWindowCheckbox
             // 
             this.autoLaunchNotificationsWindowCheckbox.AutoSize = true;
-            this.autoLaunchNotificationsWindowCheckbox.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 8F);
+            this.autoLaunchNotificationsWindowCheckbox.Font = new System.Drawing.Font(GetFontFamilyByName("Eight Bit Dragon"), 6F);
             this.autoLaunchNotificationsWindowCheckbox.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.autoLaunchNotificationsWindowCheckbox.Location = new System.Drawing.Point(12, 25);
             this.autoLaunchNotificationsWindowCheckbox.Name = "autoLaunchNotificationsWindowCheckbox";
@@ -414,7 +414,7 @@ namespace Retro_Achievement_Tracker
             // 
             // showNotificationsWindowButton
             // 
-            this.showNotificationsWindowButton.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.showNotificationsWindowButton.Font = new System.Drawing.Font(GetFontFamilyByName("Eight Bit Dragon"), 7.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.showNotificationsWindowButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.showNotificationsWindowButton.Location = new System.Drawing.Point(131, 20);
             this.showNotificationsWindowButton.Name = "showNotificationsWindowButton";
@@ -432,13 +432,13 @@ namespace Retro_Achievement_Tracker
             this.userInfoGroupBox.Controls.Add(this.usernameLabel);
             this.userInfoGroupBox.Controls.Add(this.usernameTextBox);
             this.userInfoGroupBox.Controls.Add(this.startButton);
-            this.userInfoGroupBox.Controls.Add(this.scoreLabel);
+            this.userInfoGroupBox.Controls.Add(this.pointsLabel);
             this.userInfoGroupBox.Controls.Add(this.autoStartCheckbox);
             this.userInfoGroupBox.Controls.Add(this.siteRankLabel);
             this.userInfoGroupBox.Controls.Add(this.stopButton);
             this.userInfoGroupBox.Controls.Add(this.awardsLabel);
             this.userInfoGroupBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.userInfoGroupBox.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userInfoGroupBox.Font = new System.Drawing.Font(GetFontFamilyByName("Eight Bit Dragon"), 13.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userInfoGroupBox.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.userInfoGroupBox.Location = new System.Drawing.Point(12, 12);
             this.userInfoGroupBox.Name = "userInfoGroupBox";
@@ -449,7 +449,7 @@ namespace Retro_Achievement_Tracker
             // 
             // startButton
             // 
-            this.startButton.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.startButton.Font = new System.Drawing.Font(GetFontFamilyByName("Eight Bit Dragon"), 7.55F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.startButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.startButton.Location = new System.Drawing.Point(259, 98);
             this.startButton.Name = "startButton";
@@ -472,7 +472,7 @@ namespace Retro_Achievement_Tracker
             // raConnectivityLabel
             // 
             this.raConnectivityLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.raConnectivityLabel.Font = new System.Drawing.Font(GetFontFamilyByName("Monofonto"), 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.raConnectivityLabel.Font = new System.Drawing.Font(GetFontFamilyByName("Eight Bit Dragon"), 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.raConnectivityLabel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.raConnectivityLabel.Location = new System.Drawing.Point(364, 377);
             this.raConnectivityLabel.Name = "raConnectivityLabel";
@@ -535,7 +535,7 @@ namespace Retro_Achievement_Tracker
         private Label usernameLabel;
         private Label apiKeyLabel;
         private Label siteRankLabel;
-        private Label scoreLabel;
+        private Label pointsLabel;
         private Label gameInformationTitleLabel;
         private Label gameInformationCheevosCountLabel;
         private Label gameInformationPointsLabel;

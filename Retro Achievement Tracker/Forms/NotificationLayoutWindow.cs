@@ -1,8 +1,10 @@
 ﻿using CefSharp;
 using Retro_Achievement_Tracker.Properties;
 using System;
-using System.Collections.Concurrent;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Diagnostics;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -14,13 +16,29 @@ namespace Retro_Achievement_Tracker.Forms
         public Achievement MostRecentAchievement { get; set; }
         private bool HasMasteredGame;
         private Task NotificationsTask;
-        private readonly ConcurrentQueue<NotificationRequest> NotificationRequests;
+        private readonly ObservableCollection<NotificationRequest> NotificationRequests;
+        private Stopwatch stopwatch;
+
+        private CancellationTokenSource tokenSource2 = new CancellationTokenSource();
 
         public NotificationLayoutWindow()
         {
             InitializeComponent();
-            NotificationRequests = new ConcurrentQueue<NotificationRequest>();
+
+            NotificationRequests = new ObservableCollection<NotificationRequest>();
+            NotificationRequests.CollectionChanged += NotificationRequests_CollectionChanged;
+
+            stopwatch = new Stopwatch();
+
             SetupNotificationsTask();
+        }
+
+        private void NotificationRequests_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            if (e.Action == NotifyCollectionChangedAction.Add && NotificationRequests.Count > 0 && !stopwatch.IsRunning && NotificationsTask.Status != TaskStatus.Running)
+            {
+                SetupNotificationsTask();
+            }
         }
 
         protected override void OnLoad(EventArgs e)
@@ -30,39 +48,51 @@ namespace Retro_Achievement_Tracker.Forms
             this.chromiumWebBrowser.FrameLoadEnd += PromptUserInput;
         }
 
-        protected override void OnClosed(EventArgs e)
-        {
-            base.OnClosed(e);
-        }
-
         private void SetupNotificationsTask()
         {
-            NotificationsTask = new Task(() =>
+            NotificationsTask = Task.Factory.StartNew(async () =>
             {
-                Stopwatch stopwatch = new Stopwatch();
                 long delayInMilli = 0;
 
-                while (GetNotificationRequestsCount() > 0 || stopwatch.IsRunning)
+                while (NotificationRequests.Count > 0 || stopwatch.IsRunning)
                 {
+                    if (tokenSource2.Token.IsCancellationRequested)
+                    {
+                        EnableUserInput();
+                        tokenSource2.Token.ThrowIfCancellationRequested();
+                    }
+
                     DisableUserInput();
 
                     if (!stopwatch.IsRunning)
                     {
                         if (!this.IsDisposed)
                         {
-                            NotificationRequest notificationRequest = NotificationRequestDequeue();
+                            if (NotificationRequests.Count > 0)
+                            {
+                                NotificationRequest notificationRequest = NotificationRequestDequeue();
 
-                            if (notificationRequest.Achievement != null)
-                            {
-                                SendAchievementNotification(notificationRequest.Achievement);
-                                stopwatch = Stopwatch.StartNew();
-                                delayInMilli = 7000;
-                            }
-                            else if (notificationRequest.GameAchievementSummary != null && notificationRequest.GameSummary != null)
-                            {
-                                SendMasteryNotification(notificationRequest.GameSummary, notificationRequest.GameAchievementSummary);
-                                stopwatch = Stopwatch.StartNew();
-                                delayInMilli = 11000;
+                                if (tokenSource2.Token.IsCancellationRequested)
+                                {
+                                    EnableUserInput();
+                                    tokenSource2.Token.ThrowIfCancellationRequested();
+                                }
+
+                                if (notificationRequest != null)
+                                {
+                                    if (notificationRequest.Achievement != null)
+                                    {
+                                        SendAchievementNotification(notificationRequest.Achievement);
+                                        stopwatch = Stopwatch.StartNew();
+                                        delayInMilli = 7000;
+                                    }
+                                    else if (notificationRequest.GameAchievementSummary != null && notificationRequest.GameSummary != null)
+                                    {
+                                        SendMasteryNotification(notificationRequest.GameSummary, notificationRequest.GameAchievementSummary);
+                                        stopwatch = Stopwatch.StartNew();
+                                        delayInMilli = 11000;
+                                    }
+                                }
                             }
                         }
                     }
@@ -73,74 +103,62 @@ namespace Retro_Achievement_Tracker.Forms
                             stopwatch.Stop();
                             delayInMilli = 0;
                         }
+                        else
+                        {
+                            await Task.Delay(100);
+                        }
                     }
                 }
                 EnableUserInput();
-            });
+            }, tokenSource2.Token);
         }
 
         private void DisableUserInput()
         {
-            if (!this.IsDisposed)
+            try
             {
-                try
-                {
-                    Invoke((MethodInvoker)delegate
+                Invoke((MethodInvoker)delegate
                 {
                     this.showRecentAchievementButton.Enabled = false;
                     this.showGameMasteryButton.Enabled = false;
                     this.replayAchievementButton.Enabled = false;
                     this.replayGameMasteryButton.Enabled = false;
                 });
-                }
-                catch
-                {
-                }
             }
-        }
-
-        private int GetNotificationRequestsCount()
-        {
-            try
+            catch
             {
-                int i = 0;
-
-                Invoke((MethodInvoker)delegate
-                {
-                    i = NotificationRequests.Count;
-                });
-
-                return i;
-            } catch
-            {
-                return 0;
+                tokenSource2.Cancel();
             }
         }
 
         private NotificationRequest NotificationRequestDequeue()
         {
-            NotificationRequest notificationRequest = null;
-
-            Invoke((MethodInvoker)delegate
+            try
             {
-                if (!NotificationRequests.TryDequeue(out notificationRequest))
-                {
-                    LogCallback("Error dequeueing notification!");
-                }
-            });
+                NotificationRequest notificationRequest = NotificationRequests[0];
 
-            return notificationRequest;
+                NotificationRequests.Remove(notificationRequest);
+
+                return notificationRequest;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         private void EnableUserInput()
         {
-            Invoke((MethodInvoker)delegate
+            if (!this.IsDisposed)
             {
-                this.showRecentAchievementButton.Enabled = true;
-                this.showGameMasteryButton.Enabled = true;
-                this.replayAchievementButton.Enabled = true;
-                this.replayGameMasteryButton.Enabled = HasMasteredGame;
-            });
+                Invoke((MethodInvoker)delegate
+                {
+                    this.showRecentAchievementButton.Enabled = true;
+                    this.showGameMasteryButton.Enabled = true;
+                    this.replayAchievementButton.Enabled = true;
+                    this.replayGameMasteryButton.Enabled = HasMasteredGame;
+                });
+            }
         }
 
         public void EnqueueAchievementNotification(Achievement achievement)
@@ -150,7 +168,7 @@ namespace Retro_Achievement_Tracker.Forms
                 Achievement = achievement
             };
 
-            NotificationRequests.Enqueue(notificationRequest);
+            NotificationRequests.Add(notificationRequest);
             StartNotificationTask();
         }
 
@@ -162,7 +180,7 @@ namespace Retro_Achievement_Tracker.Forms
                 GameAchievementSummary = currentAchievementSummary
             };
 
-            NotificationRequests.Enqueue(notificationRequest);
+            NotificationRequests.Add(notificationRequest);
             StartNotificationTask();
         }
 
@@ -171,7 +189,6 @@ namespace Retro_Achievement_Tracker.Forms
             if (NotificationsTask.Status != TaskStatus.Running)
             {
                 SetupNotificationsTask();
-                NotificationsTask.Start();
             }
         }
 

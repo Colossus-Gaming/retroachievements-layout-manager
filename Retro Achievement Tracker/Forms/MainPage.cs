@@ -11,6 +11,7 @@ using System.Drawing;
 using System.Drawing.Text;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Xml.XPath;
@@ -72,7 +73,7 @@ namespace Retro_Achievement_Tracker
 
                 RAErrors = 0;
 
-                bool gameChange = _gameProgress != null && value.Id != _gameProgress.Id;
+                bool gameChange = _gameProgress == null || (_gameProgress != null && value.Id != _gameProgress.Id);
 
                 _gameProgress = value;
 
@@ -99,8 +100,11 @@ namespace Retro_Achievement_Tracker
                 GamePublisher = _gameProgress.Publisher;
 
                 SortAchievements();
-
-                if (UnlockedAchievements.Count > 0 && gameChange)
+                if (gameChange)
+                {
+                    FocusLayoutWindow.SetFocus();
+                }
+                else if (UnlockedAchievements.Count > 0)
                 {
                     List<Achievement> achievementNotificationList = UnlockedAchievements
                     .FindAll(unlockedAchievement => !OldUnlockedAchievements.Contains(unlockedAchievement))
@@ -335,17 +339,14 @@ namespace Retro_Achievement_Tracker
 
         private static void AutoUpdate()
         {
+            Assembly assembly = Assembly.GetExecutingAssembly();
             AutoUpdater.ReportErrors = true;
-            AutoUpdater.Mandatory = true;
-            AutoUpdater.UpdateMode = Mode.Forced;
             AutoUpdater.Synchronous = true;
-            AutoUpdater.Start("https://github.com/Colossus-Gaming/retroachievements-layout-manager/releases/download/release-management/ra-layout-manager-release.xml");
+            AutoUpdater.Start("https://github.com/Colossus-Gaming/retroachievements-layout-manager/releases/download/release-management/ra-layout-manager-release.xml", assembly);
         }
 
         private void SetupInterface()
         {
-
-
             this.consoleLogs.DataSource = ConsoleLogs;
 
             UserAndGameUpdateTimer = new Timer();
@@ -780,7 +781,7 @@ namespace Retro_Achievement_Tracker
                 convertEventArgs.Value = "Points: " + convertEventArgs.Value;
             });
 
-            this.scoreLabel.DataBindings.Add(scoreBinding);
+            this.pointsLabel.DataBindings.Add(scoreBinding);
 
             Binding gameImageBinding = new Binding("ImageLocation", this, "GameImage");
             gameImageBinding.Format += new ConvertEventHandler((sender, convertEventArgs) =>
