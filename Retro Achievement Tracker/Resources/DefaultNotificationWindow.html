@@ -7,7 +7,7 @@
     <script id="achievement-pop-script">
 
         function promptUser() {
-
+            $("#user-prompt").fadeIn();
         }
 
         function achievementNotification(achievementName, achievementBadge, achievementDescription, achievementPoints) {
@@ -402,9 +402,11 @@
         #achievement-pop-points,
         #mastery-pop-name,
         #mastery-pop-achievements,
-        #mastery-pop-points {
+        #mastery-pop-points,
+        #user-prompt,
+        #confirm-button {
             /*background: black;*/
-            font-family: Calibri;/*
+            font-family: Calibri; /*
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             -webkit-text-stroke: 1px white;*/
@@ -441,10 +443,60 @@
         #mastery-pop-video {
             position: absolute;
         }
+
+        @keyframes user-prompt-animation {
+            0% {
+                left: 400px;
+                top: -290px;
+            }
+
+            100% {
+                left: 400px;
+                top: 100px;
+            }
+        }
+
+        @keyframes user-prompt-animation-reverse {
+            0% {
+                left: 400px;
+                top: 100px;
+            }
+
+            100% {
+                left: 400px;
+                top: -290px;
+            }
+        }
+
+        #user-prompt {
+            animation-name: user-prompt-animation;
+            animation-iteration-count: 1;
+            animation-fill-mode: forwards;
+            animation-duration: 1s;
+        }
     </style>
+    <script>
+        function acknowledgePrompt() {
+            document.getElementById("user-prompt").style.animationName = "user-prompt-animation-reverse";
+
+            setTimeout(function () {
+                var element = document.getElementById("user-prompt");
+                element.parentNode.removeChild(element);
+            }, 1000);
+        };
+    </script>
 </head>
 <body>
     <div id="container" style="background: magenta; width: 1925px; height: 1085px; top: -5px; left: -5px;">
+        <div id="user-prompt" style="position: absolute;width: 400px;height: 200px;background-color: lightskyblue;left: 400px;top: 100px;text-align: center;display:none;">
+            <div style="position: relative;top: 50px;text-align: center;font-weight: bold;vertical-align: middle;font-size: 42px;">
+                Are you ready?<br />
+                <button id="confirm-button" style="text-align: center;font-weight: bold;vertical-align: middle;font-size: 24px;"
+                        onclick="acknowledgePrompt()">
+                    Yes
+                </button>
+            </div>
+        </div>
         <img id="background"></img>
         <img id="achievement-pop-badge"></img>
         <div id="achievement-pop-description"></div>
