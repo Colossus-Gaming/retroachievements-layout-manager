@@ -8,8 +8,6 @@ namespace Retro_Achievement_Tracker
     [JsonConverter(typeof(GameProgressConverter))]
     public partial class GameProgress
     {
-        private string _title;
-
         public long Id { get; set; }
 
         public string Title { get; set; }
