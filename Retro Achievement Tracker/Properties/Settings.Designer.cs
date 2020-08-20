@@ -94,5 +94,77 @@ namespace Retro_Achievement_Tracker.Properties {
                 this["auto_notifications"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#000000")]
+        public string font_color_hex_code {
+            get {
+                return ((string)(this["font_color_hex_code"]));
+            }
+            set {
+                this["font_color_hex_code"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Calibri")]
+        public string font_family_name {
+            get {
+                return ((string)(this["font_family_name"]));
+            }
+            set {
+                this["font_family_name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("52")]
+        public float font_size {
+            get {
+                return ((float)(this["font_size"]));
+            }
+            set {
+                this["font_size"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool font_outline_enabled {
+            get {
+                return ((bool)(this["font_outline_enabled"]));
+            }
+            set {
+                this["font_outline_enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FFFFFF")]
+        public string font_outline_color_hex {
+            get {
+                return ((string)(this["font_outline_color_hex"]));
+            }
+            set {
+                this["font_outline_color_hex"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        public int font_outline_size {
+            get {
+                return ((int)(this["font_outline_size"]));
+            }
+            set {
+                this["font_outline_size"] = value;
+            }
+        }
     }
 }

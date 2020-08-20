@@ -339,10 +339,9 @@ namespace Retro_Achievement_Tracker
 
         private static void AutoUpdate()
         {
-            Assembly assembly = Assembly.GetExecutingAssembly();
             AutoUpdater.ReportErrors = true;
             AutoUpdater.Synchronous = true;
-            AutoUpdater.Start("https://github.com/Colossus-Gaming/retroachievements-layout-manager/releases/download/release-management/ra-layout-manager-release.xml", assembly);
+            AutoUpdater.Start("https://github.com/Colossus-Gaming/retroachievements-layout-manager/releases/download/release-management/ra-layout-manager-release.xml");
         }
 
         private void SetupInterface()
