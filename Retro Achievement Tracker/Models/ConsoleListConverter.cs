@@ -3,7 +3,6 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using static Retro_Achievement_Tracker.Models.ConsoleList;
 
 namespace Retro_Achievement_Tracker.Models
 {

@@ -1,10 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Retro_Achievement_Tracker.Models
 {
@@ -62,11 +58,11 @@ namespace Retro_Achievement_Tracker.Models
                 Achievement.Points = Convert.ToInt32(Points);
             }
             
-            if (DateAwarded != null)
+            if (DateAwarded != null && !string.IsNullOrEmpty(DateAwarded.ToString()))
             {
                 Achievement.DateEarned = DateTime.Parse(DateAwarded.ToString());
             }
-            if (DateEarnedHardcore != null)
+            if (DateEarnedHardcore != null && !string.IsNullOrEmpty(DateEarnedHardcore.ToString()))
             {
                 Achievement.DateEarned = DateTime.Parse(DateEarnedHardcore.ToString());
             }

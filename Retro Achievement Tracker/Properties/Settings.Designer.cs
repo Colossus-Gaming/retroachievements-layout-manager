@@ -98,72 +98,144 @@ namespace Retro_Achievement_Tracker.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("#000000")]
-        public string font_color_hex_code {
+        public string stats_font_color_hex_code {
             get {
-                return ((string)(this["font_color_hex_code"]));
+                return ((string)(this["stats_font_color_hex_code"]));
             }
             set {
-                this["font_color_hex_code"] = value;
+                this["stats_font_color_hex_code"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Calibri")]
-        public string font_family_name {
+        public string stats_font_family_name {
             get {
-                return ((string)(this["font_family_name"]));
+                return ((string)(this["stats_font_family_name"]));
             }
             set {
-                this["font_family_name"] = value;
+                this["stats_font_family_name"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("52")]
-        public float font_size {
+        public float stats_font_size {
             get {
-                return ((float)(this["font_size"]));
+                return ((float)(this["stats_font_size"]));
             }
             set {
-                this["font_size"] = value;
+                this["stats_font_size"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool font_outline_enabled {
+        public bool stats_font_outline_enabled {
             get {
-                return ((bool)(this["font_outline_enabled"]));
+                return ((bool)(this["stats_font_outline_enabled"]));
             }
             set {
-                this["font_outline_enabled"] = value;
+                this["stats_font_outline_enabled"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("#FFFFFF")]
-        public string font_outline_color_hex {
+        public string stats_font_outline_color_hex {
             get {
-                return ((string)(this["font_outline_color_hex"]));
+                return ((string)(this["stats_font_outline_color_hex"]));
             }
             set {
-                this["font_outline_color_hex"] = value;
+                this["stats_font_outline_color_hex"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("2")]
-        public int font_outline_size {
+        public int stats_font_outline_size {
             get {
-                return ((int)(this["font_outline_size"]));
+                return ((int)(this["stats_font_outline_size"]));
             }
             set {
-                this["font_outline_size"] = value;
+                this["stats_font_outline_size"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#000000")]
+        public string focus_font_color_hex_code {
+            get {
+                return ((string)(this["focus_font_color_hex_code"]));
+            }
+            set {
+                this["focus_font_color_hex_code"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Calibri")]
+        public string focus_font_family_name {
+            get {
+                return ((string)(this["focus_font_family_name"]));
+            }
+            set {
+                this["focus_font_family_name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool focus_font_outline_enabled {
+            get {
+                return ((bool)(this["focus_font_outline_enabled"]));
+            }
+            set {
+                this["focus_font_outline_enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FFFFFF")]
+        public string focus_font_outline_color_hex {
+            get {
+                return ((string)(this["focus_font_outline_color_hex"]));
+            }
+            set {
+                this["focus_font_outline_color_hex"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        public int focus_font_outline_size {
+            get {
+                return ((int)(this["focus_font_outline_size"]));
+            }
+            set {
+                this["focus_font_outline_size"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#CCCCCC")]
+        public string focus_background_color {
+            get {
+                return ((string)(this["focus_background_color"]));
+            }
+            set {
+                this["focus_background_color"] = value;
             }
         }
     }

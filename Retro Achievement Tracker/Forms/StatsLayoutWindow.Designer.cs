@@ -66,6 +66,7 @@ namespace Retro_Achievement_Tracker
             this.chromiumWebBrowser.Name = "chromiumWebBrowser";
             this.chromiumWebBrowser.Size = new System.Drawing.Size(1920, 1080);
             this.chromiumWebBrowser.TabIndex = 0;
+            this.chromiumWebBrowser.Dock = System.Windows.Forms.DockStyle.None;
             // 
             // statsGroupBox
             // 
@@ -84,7 +85,7 @@ namespace Retro_Achievement_Tracker
             this.statsGroupBox.Controls.Add(this.fontColorLabel);
             this.statsGroupBox.Controls.Add(this.fontSelectionButton);
             this.statsGroupBox.Controls.Add(this.fontFamilyLabel);
-            this.statsGroupBox.Font = new System.Drawing.Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 13.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statsGroupBox.Font = new System.Drawing.Font("Calibri", 13.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statsGroupBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.statsGroupBox.Location = new System.Drawing.Point(12, 12);
             this.statsGroupBox.Name = "statsGroupBox";
@@ -96,7 +97,7 @@ namespace Retro_Achievement_Tracker
             // fontOutlineCheckbox
             // 
             this.fontOutlineCheckbox.AutoSize = true;
-            this.fontOutlineCheckbox.Font = new System.Drawing.Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fontOutlineCheckbox.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fontOutlineCheckbox.Location = new System.Drawing.Point(7, 155);
             this.fontOutlineCheckbox.Name = "fontOutlineCheckbox";
             this.fontOutlineCheckbox.Size = new System.Drawing.Size(74, 22);
@@ -107,7 +108,7 @@ namespace Retro_Achievement_Tracker
             // 
             // fontOutlineColorPickerButton
             // 
-            this.fontOutlineColorPickerButton.Font = new System.Drawing.Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fontOutlineColorPickerButton.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fontOutlineColorPickerButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.fontOutlineColorPickerButton.Location = new System.Drawing.Point(122, 180);
             this.fontOutlineColorPickerButton.Name = "fontOutlineColorPickerButton";
@@ -128,7 +129,7 @@ namespace Retro_Achievement_Tracker
             // 
             // fontOutlineColorHexCodeLabel
             // 
-            this.fontOutlineColorHexCodeLabel.Font = new System.Drawing.Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fontOutlineColorHexCodeLabel.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fontOutlineColorHexCodeLabel.Location = new System.Drawing.Point(10, 180);
             this.fontOutlineColorHexCodeLabel.Name = "fontOutlineColorHexCodeLabel";
             this.fontOutlineColorHexCodeLabel.Size = new System.Drawing.Size(80, 22);
@@ -137,7 +138,7 @@ namespace Retro_Achievement_Tracker
             // fontSizeLabel
             // 
             this.fontSizeLabel.AutoSize = true;
-            this.fontSizeLabel.Font = new System.Drawing.Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fontSizeLabel.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fontSizeLabel.Location = new System.Drawing.Point(10, 59);
             this.fontSizeLabel.Name = "fontSizeLabel";
             this.fontSizeLabel.Size = new System.Drawing.Size(32, 14);
@@ -147,7 +148,7 @@ namespace Retro_Achievement_Tracker
             // fontFamilyNameLabel
             // 
             this.fontFamilyNameLabel.AutoSize = true;
-            this.fontFamilyNameLabel.Font = new System.Drawing.Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fontFamilyNameLabel.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fontFamilyNameLabel.Location = new System.Drawing.Point(10, 41);
             this.fontFamilyNameLabel.Name = "fontFamilyNameLabel";
             this.fontFamilyNameLabel.Size = new System.Drawing.Size(42, 14);
@@ -156,7 +157,7 @@ namespace Retro_Achievement_Tracker
             // 
             // fontColorPicker
             // 
-            this.fontColorPicker.Font = new System.Drawing.Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fontColorPicker.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fontColorPicker.ForeColor = System.Drawing.SystemColors.ControlText;
             this.fontColorPicker.Location = new System.Drawing.Point(122, 129);
             this.fontColorPicker.Name = "fontColorPicker";
@@ -177,7 +178,7 @@ namespace Retro_Achievement_Tracker
             // 
             // fontColorHexCodeLabel
             // 
-            this.fontColorHexCodeLabel.Font = new System.Drawing.Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fontColorHexCodeLabel.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fontColorHexCodeLabel.Location = new System.Drawing.Point(10, 129);
             this.fontColorHexCodeLabel.Name = "fontColorHexCodeLabel";
             this.fontColorHexCodeLabel.Size = new System.Drawing.Size(80, 22);
@@ -186,7 +187,7 @@ namespace Retro_Achievement_Tracker
             // fontColorLabel
             // 
             this.fontColorLabel.AutoSize = true;
-            this.fontColorLabel.Font = new System.Drawing.Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fontColorLabel.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fontColorLabel.Location = new System.Drawing.Point(7, 109);
             this.fontColorLabel.Name = "fontColorLabel";
             this.fontColorLabel.Size = new System.Drawing.Size(64, 15);
@@ -195,7 +196,7 @@ namespace Retro_Achievement_Tracker
             // 
             // fontSelectionButton
             // 
-            this.fontSelectionButton.Font = new System.Drawing.Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fontSelectionButton.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fontSelectionButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.fontSelectionButton.Location = new System.Drawing.Point(10, 82);
             this.fontSelectionButton.Name = "fontSelectionButton";
@@ -208,7 +209,7 @@ namespace Retro_Achievement_Tracker
             // fontFamilyLabel
             // 
             this.fontFamilyLabel.AutoSize = true;
-            this.fontFamilyLabel.Font = new System.Drawing.Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fontFamilyLabel.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fontFamilyLabel.Location = new System.Drawing.Point(7, 22);
             this.fontFamilyLabel.Name = "fontFamilyLabel";
             this.fontFamilyLabel.Size = new System.Drawing.Size(71, 15);
@@ -217,7 +218,7 @@ namespace Retro_Achievement_Tracker
             // 
             // fontOutlineSizeUpDown
             // 
-            this.fontOutlineSizeUpDown.Font = new System.Drawing.Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fontOutlineSizeUpDown.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fontOutlineSizeUpDown.Location = new System.Drawing.Point(48, 205);
             this.fontOutlineSizeUpDown.Maximum = new decimal(new int[] {
             10,
@@ -242,7 +243,7 @@ namespace Retro_Achievement_Tracker
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(100, 210);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(23, 18);
@@ -252,7 +253,7 @@ namespace Retro_Achievement_Tracker
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(10, 210);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(32, 14);

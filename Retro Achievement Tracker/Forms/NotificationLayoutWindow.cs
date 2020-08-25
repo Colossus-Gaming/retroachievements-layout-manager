@@ -12,6 +12,7 @@ namespace Retro_Achievement_Tracker.Forms
 {
     public partial class NotificationLayoutWindow : Form
     {
+        private static readonly string CALLER_ID = "NotificationWindow";
         public Action<string> LogCallback { get; internal set; }
         public Achievement MostRecentAchievement { get; set; }
         private bool HasMasteredGame;
@@ -33,7 +34,7 @@ namespace Retro_Achievement_Tracker.Forms
             SetupNotificationsTask();
         }
 
-        private void NotificationRequests_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private void NotificationRequests_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.Action == NotifyCollectionChangedAction.Add && NotificationRequests.Count > 0 && !stopwatch.IsRunning && NotificationsTask.Status != TaskStatus.Running)
             {
@@ -202,7 +203,7 @@ namespace Retro_Achievement_Tracker.Forms
                                        "\"https://retroachievements.org/Badge/" + achievement.BadgeNumber + ".png\",\"" +
                                        achievement.Description + "\",\"" + achievement.Points + "\");";
 
-                    LogCallback("[achievementNotification] Sending: [" + script + "]");
+                    LogCallback(CALLER_ID +"[achievementNotification] Sending: [" + script + "]");
 
                     try
                     {
@@ -210,7 +211,7 @@ namespace Retro_Achievement_Tracker.Forms
                     }
                     catch (Exception ex)
                     {
-                        LogCallback("[achievementNotification]" + ex.Message);
+                        LogCallback(CALLER_ID +"[achievementNotification]" + ex.Message);
                     }
                 }
             });
@@ -227,7 +228,7 @@ namespace Retro_Achievement_Tracker.Forms
                                                 "\"" + currentAchievementSummary.NumPossibleAchievements + "\"," +
                                                 "\"" + currentAchievementSummary.PossibleScore + "\");";
 
-                    LogCallback("[masteryNotification] Sending: [" + script + "]");
+                    LogCallback(CALLER_ID +"[masteryNotification] Sending: [" + script + "]");
 
                     try
                     {
@@ -235,7 +236,7 @@ namespace Retro_Achievement_Tracker.Forms
                     }
                     catch (Exception ex)
                     {
-                        LogCallback("[masteryNotification]" + ex.Message);
+                        LogCallback(CALLER_ID +"[masteryNotification]" + ex.Message);
                     }
                 }
             });
@@ -278,7 +279,7 @@ namespace Retro_Achievement_Tracker.Forms
             {
                 string script = "promptUser();";
 
-                LogCallback("[promptUser] Sending: [" + script + "]");
+                LogCallback(CALLER_ID +"[promptUser] Sending: [" + script + "]");
 
                 try
                 {
@@ -286,7 +287,7 @@ namespace Retro_Achievement_Tracker.Forms
                 }
                 catch (Exception ex)
                 {
-                    LogCallback("[promptUser]" + ex.Message);
+                    LogCallback(CALLER_ID +"[promptUser]" + ex.Message);
                 }
             }
         }

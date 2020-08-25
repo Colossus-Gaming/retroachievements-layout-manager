@@ -7,12 +7,7 @@ using Retro_Achievement_Tracker.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
-using System.Drawing.Text;
-using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Xml.XPath;
 
@@ -20,6 +15,7 @@ namespace Retro_Achievement_Tracker
 {
     public partial class MainPage : Form, INotifyPropertyChanged
     {
+        private static readonly string CALLER_ID = "ControlWindow";
         private static UserSummary _userSummary;
         private GameProgress _gameProgress;
 
@@ -100,6 +96,7 @@ namespace Retro_Achievement_Tracker
                 GamePublisher = _gameProgress.Publisher;
 
                 SortAchievements();
+
                 if (gameChange)
                 {
                     FocusLayoutWindow.SetFocus();
@@ -119,7 +116,14 @@ namespace Retro_Achievement_Tracker
 
                     if (achievementNotificationList.Count > 0)
                     {
-                        FocusLayoutWindow.SetFocus();
+                        if (LockedAchievements.Contains(FocusLayoutWindow.FocusedAchievement))
+                        {
+                            FocusLayoutWindow.CurrentlyFocusedIndex = LockedAchievements.IndexOf(FocusLayoutWindow.FocusedAchievement);
+                        }
+                        else
+                        {
+                            FocusLayoutWindow.SetFocus();
+                        }
                     }
 
                     if (UnlockedAchievements.Count == CurrentGame.Achievements.Count && OldUnlockedAchievements.Count < CurrentGame.Achievements.Count)
@@ -139,7 +143,7 @@ namespace Retro_Achievement_Tracker
 
             RAErrors++;
 
-            Log(s);
+            Log(CALLER_ID + "[" + s + "]");
 
             if (RAErrors > 5)
             {
@@ -147,7 +151,7 @@ namespace Retro_Achievement_Tracker
 
                 this.raConnectionStatusPictureBox.Image = Resources.red_button;
 
-                Log("Stopping service after too many connectivity problems.");
+                Log(CALLER_ID + "[Stopping service after too many connectivity problems.]");
             }
         }
 
@@ -392,13 +396,13 @@ namespace Retro_Achievement_Tracker
 
             UserSummary = await hFC_EssentialsClient.GetUserSummary();
 
-            Log("User Stats [" + this.usernameTextBox.Text + "] loaded.");
+            Log(CALLER_ID + "[User Stats {" + this.usernameTextBox.Text + "} loaded.]");
 
             CurrentGame = await hFC_EssentialsClient.GetGameProgress(UserSummary.GameSummaries[0].GameID.ToString());
 
             this.userProfilePictureBox.ImageLocation = "https://retroachievements.org/UserPic/" + this.usernameTextBox.Text + ".png";
 
-            Log("Game Info [" + CurrentGame.Title + "] loaded.");
+            Log(CALLER_ID + "[Game Info {" + CurrentGame.Title + "} loaded.]");
 
             if (this.autoLaunchFocusWindowCheckBox.Checked)
             {
@@ -420,6 +424,10 @@ namespace Retro_Achievement_Tracker
             this.showStatsWindowButton.Enabled = true;
 
             StartTimer();
+
+            Settings.Default.ra_username = this.usernameTextBox.Text;
+            Settings.Default.ra_key = this.apiKeyTextBox.Text;
+            Settings.Default.Save();
         }
 
         private void StopButton_Click(object sender, EventArgs e)
@@ -431,7 +439,7 @@ namespace Retro_Achievement_Tracker
 
             this.raConnectionStatusPictureBox.Image = Resources.red_button;
 
-            Log("Stopped timer.");
+            Log(CALLER_ID + "[Stopped timer.]");
             UpdateTimerLabel("Stopped Updating.");
             UpdateRAConnectivityLabel("Stopped checking retroachievements.org");
 
@@ -556,7 +564,7 @@ namespace Retro_Achievement_Tracker
             {
                 Invoke((MethodInvoker)delegate
                 {
-                    ConsoleLogs.Insert(0, "[" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + "] " + s);
+                    ConsoleLogs.Insert(0, "[" + DateTime.Now.ToString("HH:mm:ss:fff") + "] " + s);
 
                     while (ConsoleLogs.Count > 10)
                     {
@@ -616,8 +624,6 @@ namespace Retro_Achievement_Tracker
             Settings.Default.auto_notifications = this.autoLaunchNotificationsWindowCheckbox.Checked;
 
             Settings.Default.Save();
-
-            Log("Saved.");
         }
 
         private void LoadProperties()
@@ -628,19 +634,6 @@ namespace Retro_Achievement_Tracker
             this.autoLaunchFocusWindowCheckBox.Checked = Settings.Default.auto_focus;
             this.autoLaunchStatsWindowCheckbox.Checked = Settings.Default.auto_stats;
             this.autoLaunchNotificationsWindowCheckbox.Checked = Settings.Default.auto_notifications;
-        }
-
-        private void OnBrowserFrameLoadEnd(object sender, FrameLoadEndEventArgs args)
-        {
-            if (args.Frame.IsMain)
-            {
-                args.Browser
-                    .MainFrame
-                    .ExecuteJavaScriptAsync(
-                    "document.body.style.overflow = 'hidden'");
-
-                Focus();
-            }
         }
 
         private async void SetAwardCount(object sender, EventArgs eventArgs)
@@ -761,6 +754,13 @@ namespace Retro_Achievement_Tracker
         private void AutoLaunchNotificationsWindow_CheckedChanged(object sender, EventArgs e)
         {
             Settings.Default.auto_notifications = this.autoLaunchNotificationsWindowCheckbox.Checked;
+            Settings.Default.Save();
+        }
+
+
+        private void AutoStart_CheckedChanged(object sender, EventArgs e)
+        {
+            Settings.Default.auto_start_checked = this.autoStartCheckbox.Checked;
             Settings.Default.Save();
         }
 

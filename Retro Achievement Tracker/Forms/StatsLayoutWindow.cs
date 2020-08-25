@@ -1,4 +1,5 @@
 ﻿using CefSharp;
+using Retro_Achievement_Tracker.Models;
 using Retro_Achievement_Tracker.Properties;
 using System;
 using System.Drawing;
@@ -8,6 +9,7 @@ namespace Retro_Achievement_Tracker
 {
     public partial class StatsLayoutWindow : Form
     {
+        private static readonly string CALLER_ID = "StatsWindow";
         public Action<string> LogCallback { get; internal set; }
         private string FontColorHexCode;
         private string FontOutlineColorHexCode;
@@ -18,22 +20,48 @@ namespace Retro_Achievement_Tracker
         public StatsLayoutWindow()
         {
             InitializeComponent();
+            SetCustomFont();
+            LoadProperties();
+            SetLabels();
+            ToggleOutline();
+        }
 
-            FontColorHexCode = Settings.Default.font_color_hex_code;
-            FontFamilyName = Settings.Default.font_family_name;
-            FontSize = Settings.Default.font_size;
-
-            FontOutlineColorHexCode = Settings.Default.font_outline_color_hex;
-            FontOutlineSize = Settings.Default.font_outline_size;
-
-            this.fontOutlineCheckbox.Checked = Settings.Default.font_outline_enabled;
-
+        private void SetLabels()
+        {
             this.fontColorHexCodeLabel.Text = FontColorHexCode;
             this.fontColorDisplayBox.BackColor = ColorTranslator.FromHtml(FontColorHexCode);
             this.fontFamilyNameLabel.Text = "Name: " + FontFamilyName;
             this.fontSizeLabel.Text = "Size: " + FontSize;
+        }
 
-            ToggleOutline();
+        private void LoadProperties()
+        {
+            FontColorHexCode = Settings.Default.stats_font_color_hex_code;
+            FontFamilyName = Settings.Default.stats_font_family_name;
+            FontSize = Settings.Default.stats_font_size;
+
+            FontOutlineColorHexCode = Settings.Default.stats_font_outline_color_hex;
+            FontOutlineSize = Settings.Default.stats_font_outline_size;
+
+            this.fontOutlineCheckbox.Checked = Settings.Default.stats_font_outline_enabled;
+        }
+
+        private void SetCustomFont()
+        {
+            this.statsGroupBox.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 13.75F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            this.fontOutlineCheckbox.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 11.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            this.fontOutlineColorPickerButton.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9.75F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            this.fontOutlineColorHexCodeLabel.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            this.fontSizeLabel.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            this.fontFamilyNameLabel.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            this.fontColorPicker.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9.75F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            this.fontColorHexCodeLabel.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            this.fontColorLabel.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9.75F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            this.fontSelectionButton.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9.75F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            this.fontFamilyLabel.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9.75F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            this.fontOutlineSizeUpDown.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9.75F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 11.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
         }
 
         private void ChromiumWebBrowser_FrameLoadEnd(object sender, FrameLoadEndEventArgs e)
@@ -57,7 +85,7 @@ namespace Retro_Achievement_Tracker
             {
                 string script = "setAwards(" + awards + ");";
 
-                LogCallback("[setAwards] Sending: [" + script + "]");
+                LogCallback(CALLER_ID +"[setAwards] Sending: [" + script + "]");
 
                 try
                 {
@@ -65,7 +93,7 @@ namespace Retro_Achievement_Tracker
                 }
                 catch (Exception ex)
                 {
-                    LogCallback("[setAwards]" + ex.Message);
+                    LogCallback(CALLER_ID +"[setAwards]" + ex.Message);
                 }
             }
         }
@@ -76,7 +104,7 @@ namespace Retro_Achievement_Tracker
             {
                 string script = "setPoints(" + score + ");";
 
-                LogCallback("[setPoints] Sending: [" + script + "]");
+                LogCallback(CALLER_ID +"[setPoints] Sending: [" + script + "]");
 
                 try
                 {
@@ -84,7 +112,7 @@ namespace Retro_Achievement_Tracker
                 }
                 catch (Exception ex)
                 {
-                    LogCallback("[setPoints]" + ex.Message);
+                    LogCallback(CALLER_ID +"[setPoints]" + ex.Message);
                 }
             }
         }
@@ -95,7 +123,7 @@ namespace Retro_Achievement_Tracker
             {
                 string script = "setRank(" + rank + ");";
 
-                LogCallback("[setRank] Sending: [" + script + "]");
+                LogCallback(CALLER_ID +"[setRank] Sending: [" + script + "]");
 
                 try
                 {
@@ -103,7 +131,7 @@ namespace Retro_Achievement_Tracker
                 }
                 catch (Exception ex)
                 {
-                    LogCallback("[setRank]" + ex.Message);
+                    LogCallback(CALLER_ID +"[setRank]" + ex.Message);
                 }
             }
         }
@@ -114,7 +142,7 @@ namespace Retro_Achievement_Tracker
             {
                 string script = "setGamePoints(" + gameEarnedPoints + ", " + gameTotalPoints + ");";
 
-                LogCallback("[setGamePoints] Sending: [" + script + "]");
+                LogCallback(CALLER_ID +"[setGamePoints] Sending: [" + script + "]");
 
                 try
                 {
@@ -122,7 +150,7 @@ namespace Retro_Achievement_Tracker
                 }
                 catch (Exception ex)
                 {
-                    LogCallback("[setGamePoints]" + ex.Message);
+                    LogCallback(CALLER_ID +"[setGamePoints]" + ex.Message);
                 }
             }
         }
@@ -133,7 +161,7 @@ namespace Retro_Achievement_Tracker
             {
                 string script = "setGameAchievements(" + gameEarnedAchievements + ", " + gameTotalAchievements + ");";
 
-                LogCallback("[setGameAchievements] Sending: [" + script + "]");
+                LogCallback(CALLER_ID +"[setGameAchievements] Sending: [" + script + "]");
 
                 try
                 {
@@ -141,7 +169,7 @@ namespace Retro_Achievement_Tracker
                 }
                 catch (Exception ex)
                 {
-                    LogCallback("[setGameAchievements]" + ex.Message);
+                    LogCallback(CALLER_ID +"[setGameAchievements]" + ex.Message);
                 }
             }
         }
@@ -152,7 +180,7 @@ namespace Retro_Achievement_Tracker
             {
                 string script = "setFontColor('" + FontColorHexCode + "');";
 
-                LogCallback("[setFontColor] Sending: [" + script + "]");
+                LogCallback(CALLER_ID +"[setFontColor] Sending: [" + script + "]");
 
                 try
                 {
@@ -160,7 +188,7 @@ namespace Retro_Achievement_Tracker
                 }
                 catch (Exception ex)
                 {
-                    LogCallback("[setFontColor]" + ex.Message);
+                    LogCallback(CALLER_ID +"[setFontColor]" + ex.Message);
                 }
             }
         }
@@ -171,7 +199,7 @@ namespace Retro_Achievement_Tracker
             {
                 string script = "setFontFamily('" + FontFamilyName + "');";
 
-                LogCallback("[setFontFamily] Sending: [" + script + "]");
+                LogCallback(CALLER_ID +"[setFontFamily] Sending: [" + script + "]");
 
                 try
                 {
@@ -179,7 +207,7 @@ namespace Retro_Achievement_Tracker
                 }
                 catch (Exception ex)
                 {
-                    LogCallback("[setFontFamily]" + ex.Message);
+                    LogCallback(CALLER_ID +"[setFontFamily]" + ex.Message);
                 }
             }
         }
@@ -190,7 +218,7 @@ namespace Retro_Achievement_Tracker
             {
                 string script = "setFontSize('" + FontSize + "px');";
 
-                LogCallback("[setFontSize] Sending: [" + script + "]");
+                LogCallback(CALLER_ID +"[setFontSize] Sending: [" + script + "]");
 
                 try
                 {
@@ -198,7 +226,7 @@ namespace Retro_Achievement_Tracker
                 }
                 catch (Exception ex)
                 {
-                    LogCallback("[setFontSize]" + ex.Message);
+                    LogCallback(CALLER_ID +"[setFontSize]" + ex.Message);
                 }
             }
         }
@@ -209,7 +237,7 @@ namespace Retro_Achievement_Tracker
             {
                 string script = "setFontOutline('" + FontOutlineColorHexCode + " " + FontOutlineSize + "px');";
 
-                LogCallback("[setFontOutline] Sending: [" + script + "]");
+                LogCallback(CALLER_ID +"[setFontOutline] Sending: [" + script + "]");
 
                 try
                 {
@@ -217,7 +245,7 @@ namespace Retro_Achievement_Tracker
                 }
                 catch (Exception ex)
                 {
-                    LogCallback("[setFontOutline]" + ex.Message);
+                    LogCallback(CALLER_ID +"[setFontOutline]" + ex.Message);
                 }
             }
         }
@@ -243,8 +271,8 @@ namespace Retro_Achievement_Tracker
                 this.fontFamilyNameLabel.Text = "Name: " + FontFamilyName;
                 this.fontSizeLabel.Text = "Size: " + FontSize;
 
-                Settings.Default.font_family_name = FontFamilyName;
-                Settings.Default.font_size = FontSize;
+                Settings.Default.stats_font_family_name = FontFamilyName;
+                Settings.Default.stats_font_size = FontSize;
                 Settings.Default.Save();
 
                 SetFontFamily();
@@ -261,7 +289,7 @@ namespace Retro_Achievement_Tracker
                 FontColorHexCode = HexConverter(colorDialog1.Color);
                 fontColorHexCodeLabel.Text = FontColorHexCode;
 
-                Settings.Default.font_color_hex_code = FontColorHexCode;
+                Settings.Default.stats_font_color_hex_code = FontColorHexCode;
                 Settings.Default.Save();
 
                 SetFontColor();
@@ -277,7 +305,7 @@ namespace Retro_Achievement_Tracker
                 FontOutlineColorHexCode = HexConverter(colorDialog1.Color);
                 fontOutlineColorHexCodeLabel.Text = FontOutlineColorHexCode;
 
-                Settings.Default.font_outline_color_hex = FontOutlineColorHexCode;
+                Settings.Default.stats_font_outline_color_hex = FontOutlineColorHexCode;
                 Settings.Default.Save();
 
                 SetFontOutline();
@@ -290,15 +318,15 @@ namespace Retro_Achievement_Tracker
 
             SetFontOutline();
 
-            Settings.Default.font_outline_enabled = ((CheckBox)sender).Checked;
+            Settings.Default.stats_font_outline_enabled = ((CheckBox)sender).Checked;
             Settings.Default.Save();
         }
 
-        private void FontOutlineSizeUpDown_ValueChanged(object sender, System.EventArgs e)
+        private void FontOutlineSizeUpDown_ValueChanged(object sender, EventArgs e)
         {
             FontOutlineSize = Convert.ToInt32(((NumericUpDown)sender).Value.ToString());
 
-            Settings.Default.font_outline_size = FontOutlineSize;
+            Settings.Default.stats_font_outline_size = FontOutlineSize;
             Settings.Default.Save();
 
             SetFontOutline();
@@ -320,16 +348,16 @@ namespace Retro_Achievement_Tracker
             }
             else
             {
-                FontOutlineColorHexCode = Settings.Default.font_outline_color_hex;
-                FontOutlineSize = Settings.Default.font_outline_size;
+                FontOutlineColorHexCode = Settings.Default.stats_font_outline_color_hex;
+                FontOutlineSize = Settings.Default.stats_font_outline_size;
 
-                this.fontOutlineColorHexCodeLabel.Text = Settings.Default.font_outline_color_hex;
+                this.fontOutlineColorHexCodeLabel.Text = Settings.Default.stats_font_outline_color_hex;
                 this.fontOutlineColorDisplayBox.BackColor = ColorTranslator.FromHtml(FontOutlineColorHexCode);
-                this.fontOutlineSizeUpDown.Value = Settings.Default.font_outline_size;
+                this.fontOutlineSizeUpDown.Value = Settings.Default.stats_font_outline_size;
             }
         }
 
-        private String HexConverter(System.Drawing.Color c)
+        private String HexConverter(Color c)
         {
             return "#" + c.R.ToString("X2") + c.G.ToString("X2") + c.B.ToString("X2");
         }

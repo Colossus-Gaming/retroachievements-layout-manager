@@ -172,6 +172,7 @@ namespace Retro_Achievement_Tracker
             this.autoStartCheckbox.TabIndex = 2;
             this.autoStartCheckbox.Text = "Auto-Start";
             this.autoStartCheckbox.UseVisualStyleBackColor = true;
+            this.autoStartCheckbox.CheckedChanged += AutoStart_CheckedChanged;
             // 
             // stopButton
             // 

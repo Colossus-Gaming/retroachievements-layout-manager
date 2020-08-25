@@ -55,7 +55,7 @@
             // 
             this.groupBox1.Controls.Add(this.groupBox3);
             this.groupBox1.Controls.Add(this.groupBox2);
-            this.groupBox1.Font = new System.Drawing.Font("Monofonto", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
@@ -70,7 +70,7 @@
             this.groupBox3.Controls.Add(this.groupBox5);
             this.groupBox3.Controls.Add(this.replayGameMasteryButton);
             this.groupBox3.Controls.Add(this.showGameMasteryButton);
-            this.groupBox3.Font = new System.Drawing.Font("Monofonto", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox3.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.groupBox3.Location = new System.Drawing.Point(7, 186);
             this.groupBox3.Name = "groupBox3";
@@ -82,7 +82,7 @@
             // useCustomMasteryAlertCheckbox
             // 
             this.useCustomMasteryAlertCheckbox.AutoSize = true;
-            this.useCustomMasteryAlertCheckbox.Font = new System.Drawing.Font("Monofonto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.useCustomMasteryAlertCheckbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.useCustomMasteryAlertCheckbox.Location = new System.Drawing.Point(6, 62);
             this.useCustomMasteryAlertCheckbox.Name = "useCustomMasteryAlertCheckbox";
             this.useCustomMasteryAlertCheckbox.Size = new System.Drawing.Size(156, 23);
@@ -96,7 +96,7 @@
             // 
             this.groupBox5.Controls.Add(this.checkBox4);
             this.groupBox5.Controls.Add(this.button2);
-            this.groupBox5.Font = new System.Drawing.Font("Monofonto", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox5.Font = new System.Drawing.Font("Calibri", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox5.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.groupBox5.Location = new System.Drawing.Point(6, 89);
             this.groupBox5.Name = "groupBox5";
@@ -120,7 +120,7 @@
             // 
             // button2
             // 
-            this.button2.Font = new System.Drawing.Font("Monofonto", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.Font = new System.Drawing.Font("Calibri", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.SystemColors.ControlText;
             this.button2.Location = new System.Drawing.Point(6, 22);
             this.button2.Name = "button2";
@@ -133,7 +133,7 @@
             // replayGameMasteryAchievement
             // 
             this.replayGameMasteryButton.BackColor = System.Drawing.SystemColors.Control;
-            this.replayGameMasteryButton.Font = new System.Drawing.Font("Monofonto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.replayGameMasteryButton.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.replayGameMasteryButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.replayGameMasteryButton.Location = new System.Drawing.Point(109, 29);
             this.replayGameMasteryButton.Name = "replayGameMasteryAchievement";
@@ -145,7 +145,7 @@
             // showGameMasteryButton
             // 
             this.showGameMasteryButton.BackColor = System.Drawing.SystemColors.Control;
-            this.showGameMasteryButton.Font = new System.Drawing.Font("Monofonto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.showGameMasteryButton.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.showGameMasteryButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.showGameMasteryButton.Location = new System.Drawing.Point(6, 29);
             this.showGameMasteryButton.Name = "showGameMasteryButton";
@@ -161,7 +161,7 @@
             this.groupBox2.Controls.Add(this.groupBox4);
             this.groupBox2.Controls.Add(this.replayAchievementButton);
             this.groupBox2.Controls.Add(this.showRecentAchievementButton);
-            this.groupBox2.Font = new System.Drawing.Font("Monofonto", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.groupBox2.Location = new System.Drawing.Point(7, 33);
             this.groupBox2.Name = "groupBox2";
@@ -173,7 +173,7 @@
             // useCustomeAchievementCheckbox
             // 
             this.useCustomAchievementCheckbox.AutoSize = true;
-            this.useCustomAchievementCheckbox.Font = new System.Drawing.Font("Monofonto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.useCustomAchievementCheckbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.useCustomAchievementCheckbox.Location = new System.Drawing.Point(6, 62);
             this.useCustomAchievementCheckbox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.useCustomAchievementCheckbox.Name = "useCustomeAchievementCheckbox";
@@ -187,7 +187,7 @@
             // 
             this.groupBox4.Controls.Add(this.checkBox2);
             this.groupBox4.Controls.Add(this.button4);
-            this.groupBox4.Font = new System.Drawing.Font("Monofonto", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox4.Font = new System.Drawing.Font("Calibri", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox4.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.groupBox4.Location = new System.Drawing.Point(6, 89);
             this.groupBox4.Name = "groupBox4";
@@ -211,7 +211,7 @@
             // 
             // button4
             // 
-            this.button4.Font = new System.Drawing.Font("Monofonto", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button4.Font = new System.Drawing.Font("Calibri", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button4.ForeColor = System.Drawing.SystemColors.ControlText;
             this.button4.Location = new System.Drawing.Point(6, 22);
             this.button4.Name = "button4";
@@ -224,7 +224,7 @@
             // achievementReplayButton
             // 
             this.replayAchievementButton.BackColor = System.Drawing.SystemColors.Control;
-            this.replayAchievementButton.Font = new System.Drawing.Font("Monofonto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.replayAchievementButton.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.replayAchievementButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.replayAchievementButton.Location = new System.Drawing.Point(109, 29);
             this.replayAchievementButton.Name = "achievementReplayButton";
@@ -237,7 +237,7 @@
             // showMostRecentAchievementButton
             // 
             this.showRecentAchievementButton.BackColor = System.Drawing.SystemColors.Control;
-            this.showRecentAchievementButton.Font = new System.Drawing.Font("Monofonto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.showRecentAchievementButton.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.showRecentAchievementButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.showRecentAchievementButton.Location = new System.Drawing.Point(6, 29);
             this.showRecentAchievementButton.Name = "showMostRecentAchievementButton";
