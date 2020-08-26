@@ -114,20 +114,14 @@ namespace Retro_Achievement_Tracker
                         NotificationLayoutWindow.EnqueueAchievementNotification(achievement);
                     }
 
-                    if (achievementNotificationList.Count > 0)
+                    if (achievementNotificationList.Contains(FocusLayoutWindow.CurrentlyFocusedAchievement))
                     {
-                        if (LockedAchievements.Contains(FocusLayoutWindow.FocusedAchievement))
-                        {
-                            FocusLayoutWindow.CurrentlyFocusedIndex = LockedAchievements.IndexOf(FocusLayoutWindow.FocusedAchievement);
-                        }
-                        else
-                        {
-                            FocusLayoutWindow.SetFocus();
-                        }
+                        FocusLayoutWindow.SetFocus();
                     }
 
                     if (UnlockedAchievements.Count == CurrentGame.Achievements.Count && OldUnlockedAchievements.Count < CurrentGame.Achievements.Count)
                     {
+                        FocusLayoutWindow.HideFocus();
                         NotificationLayoutWindow.EnqueueMasteryNotification(UserSummary.GameSummaries[0], UserSummary.GameAchievementSummaries[0]);
                     }
                 }

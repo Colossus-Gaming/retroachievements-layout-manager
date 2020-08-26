@@ -12,7 +12,8 @@ namespace Retro_Achievement_Tracker
     {
         private static readonly string CALLER_ID = "FocusWindow";
         private List<Achievement> LockedAchievements;
-        public Achievement FocusedAchievement;
+        public Achievement CurrentlyViewingAchievement;
+        public Achievement CurrentlyFocusedAchievement;
         public int CurrentlyFocusedIndex;
         public Action<string> LogCallback { get; internal set; }
 
@@ -69,7 +70,7 @@ namespace Retro_Achievement_Tracker
             this.customizationGroupBox.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 13.75F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
             this.fontOutlineCheckbox.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 11.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
             this.fontOutlineColorPickerButton.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9.75F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
-           
+
             this.fontOutlineColorHexCodeLabel.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
             this.backgroundColorHexCodeLabel.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
             this.fontColorHexCodeLabel.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
@@ -107,16 +108,17 @@ namespace Retro_Achievement_Tracker
                 if (LockedAchievements == null || (LockedAchievements.Count > 0 && gameId != LockedAchievements[0].GameId))
                 {
                     CurrentlyFocusedIndex = 0;
-                    FocusedAchievement = null;
+                    CurrentlyViewingAchievement = null;
                 }
             }
             else
             {
                 CurrentlyFocusedIndex = 0;
-                FocusedAchievement = null;
+                CurrentlyViewingAchievement = null;
             }
 
             LockedAchievements = achievements;
+
             UpdateFocusAchievement();
         }
 
@@ -139,12 +141,11 @@ namespace Retro_Achievement_Tracker
                             CurrentlyFocusedIndex = 0;
                         }
 
+                        CurrentlyViewingAchievement = LockedAchievements[CurrentlyFocusedIndex];
 
-                        FocusedAchievement = LockedAchievements[CurrentlyFocusedIndex];
-
-                        this.focusAchievementPictureBox.ImageLocation = "https://retroachievements.org/Badge/" + FocusedAchievement.BadgeNumber + ".png";
-                        this.focusAchievementTitleLabel.Text = FocusedAchievement.Title;
-                        this.focusAchievementDescriptionLabel.Text = FocusedAchievement.Description;
+                        this.focusAchievementPictureBox.ImageLocation = "https://retroachievements.org/Badge/" + CurrentlyViewingAchievement.BadgeNumber + ".png";
+                        this.focusAchievementTitleLabel.Text = CurrentlyViewingAchievement.Title;
+                        this.focusAchievementDescriptionLabel.Text = CurrentlyViewingAchievement.Description;
                     }
                     else
                     {
@@ -172,12 +173,14 @@ namespace Retro_Achievement_Tracker
 
         public async void SetFocus()
         {
-            if (this.Visible && LockedAchievements != null && FocusedAchievement != null)
+            if (this.Visible && LockedAchievements != null && CurrentlyViewingAchievement != null)
             {
-                string script = "setFocus(\"" + FocusedAchievement.Title + "\"," +
-                           "\"https://retroachievements.org/Badge/" + FocusedAchievement.BadgeNumber + ".png\"," +
-                           "\"" + FocusedAchievement.Description + "\"," +
-                           "\"" + FocusedAchievement.Points + "\");";
+                CurrentlyFocusedAchievement = CurrentlyViewingAchievement;
+
+                string script = "setFocus(\"" + CurrentlyFocusedAchievement.Title + "\"," +
+                           "\"https://retroachievements.org/Badge/" + CurrentlyFocusedAchievement.BadgeNumber + ".png\"," +
+                           "\"" + CurrentlyFocusedAchievement.Description + "\"," +
+                           "\"" + CurrentlyFocusedAchievement.Points + "\");";
 
                 LogCallback(CALLER_ID + "[setFocus] Sending: [" + script + "]");
 
