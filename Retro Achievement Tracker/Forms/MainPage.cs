@@ -131,24 +131,6 @@ namespace Retro_Achievement_Tracker
             }
         }
 
-        private void DegradeConnectivity(string s)
-        {
-            this.raConnectionStatusPictureBox.Image = Resources.yellow_button;
-
-            RAErrors++;
-
-            Log(CALLER_ID + "[" + s + "]");
-
-            if (RAErrors > 5)
-            {
-                this.StopButton_Click(null, null);
-
-                this.raConnectionStatusPictureBox.Image = Resources.red_button;
-
-                Log(CALLER_ID + "[Stopping service after too many connectivity problems.]");
-            }
-        }
-
         public int Rank
         {
             get
@@ -663,8 +645,8 @@ namespace Retro_Achievement_Tracker
 
                     if (siteAwardsNode == null)
                     {
-                        DegradeConnectivity("Encountered problems checking retroarchievements.org.");
-                        UpdateRAConnectivityLabel("Encountered problems checking retroarchievements.org.");
+                        DegradeConnectivity("Encountered problems checking retroachievements.org.");
+                        UpdateRAConnectivityLabel("Encountered problems checking retroachievements.org.");
 
                         return;
                     }
@@ -672,13 +654,15 @@ namespace Retro_Achievement_Tracker
 
                     RAErrors = 0;
 
-                    Awards = siteAwardsNode.SelectNodes(XPathExpression.Compile("//div[contains(@class,'trophyimage')]")).Count;
+                    HtmlNodeCollection htmlNodeCollections = siteAwardsNode.SelectNodes(XPathExpression.Compile("//div[contains(@class,'trophyimage')]"));
+
+                    Awards = htmlNodeCollections == null ? 0 : htmlNodeCollections.Count;
 
                     AwardAndConnectivityTimer.Start();
                 }
                 catch (Exception ex)
                 {
-                    DegradeConnectivity("Encountered problems checking retroarchievements.org for award count: " + ex.Message);
+                    DegradeConnectivity("Encountered problems checking retroachievements.org for award count: " + ex.Message);
                 }
             }
         }
@@ -834,6 +818,24 @@ namespace Retro_Achievement_Tracker
         protected virtual void OnPropertyChanged(string property)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
+        }
+
+        private void DegradeConnectivity(string s)
+        {
+            this.raConnectionStatusPictureBox.Image = Resources.yellow_button;
+
+            RAErrors++;
+
+            Log(CALLER_ID + "[" + s + "]");
+
+            if (RAErrors > 5)
+            {
+                this.StopButton_Click(null, null);
+
+                this.raConnectionStatusPictureBox.Image = Resources.red_button;
+
+                Log(CALLER_ID + "[Stopping service after too many connectivity problems.]");
+            }
         }
     }
 }

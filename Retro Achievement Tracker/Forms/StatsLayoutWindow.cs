@@ -197,7 +197,7 @@ namespace Retro_Achievement_Tracker
         {
             if (this.Visible)
             {
-                string script = "setFontFamily('" + FontFamilyName + "');";
+                string script = "setFontFamily(\"" + FontFamilyName + "\");";
 
                 LogCallback(CALLER_ID +"[setFontFamily] Sending: [" + script + "]");
 
