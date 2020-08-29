@@ -42,7 +42,6 @@
             this.button4 = new System.Windows.Forms.Button();
             this.replayAchievementButton = new System.Windows.Forms.Button();
             this.showRecentAchievementButton = new System.Windows.Forms.Button();
-            this.chromiumWebBrowser = new CefSharp.WinForms.ChromiumWebBrowser();
             this.customizationGroupBox = new System.Windows.Forms.GroupBox();
             this.backgroundColorHexCodeLabel = new System.Windows.Forms.Label();
             this.backgroundColorPickerButton = new System.Windows.Forms.Button();
@@ -61,6 +60,8 @@
             this.fontColorLabel = new System.Windows.Forms.Label();
             this.fontSelectionButton = new System.Windows.Forms.Button();
             this.fontFamilyLabel = new System.Windows.Forms.Label();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.groupBox3.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -149,7 +150,7 @@
             this.replayGameMasteryButton.TabIndex = 3;
             this.replayGameMasteryButton.Text = "Replay";
             this.replayGameMasteryButton.UseVisualStyleBackColor = false;
-            this.replayGameMasteryButton.Click += ReplayRecentAchievement;
+            this.replayGameMasteryButton.Enabled = false;
             // 
             // showGameMasteryButton
             // 
@@ -162,6 +163,7 @@
             this.showGameMasteryButton.TabIndex = 2;
             this.showGameMasteryButton.Text = "Show";
             this.showGameMasteryButton.UseVisualStyleBackColor = false;
+            this.showGameMasteryButton.Click += ShowGameMasteryNotification;
             // 
             // groupBox2
             // 
@@ -255,14 +257,6 @@
             this.showRecentAchievementButton.UseVisualStyleBackColor = false;
             this.showRecentAchievementButton.Click += ShowAchievementNotification;
             // 
-            // chromiumWebBrowser
-            // 
-            this.chromiumWebBrowser.ActivateBrowserOnCreation = false;
-            this.chromiumWebBrowser.Location = new System.Drawing.Point(240, 0);
-            this.chromiumWebBrowser.Name = "chromiumWebBrowser";
-            this.chromiumWebBrowser.Size = new System.Drawing.Size(1920, 1080);
-            this.chromiumWebBrowser.TabIndex = 1;
-            // 
             // customizationGroupBox
             // 
             this.customizationGroupBox.Controls.Add(this.backgroundColorHexCodeLabel);
@@ -309,6 +303,7 @@
             this.backgroundColorPickerButton.TabIndex = 37;
             this.backgroundColorPickerButton.Text = "Picker";
             this.backgroundColorPickerButton.UseVisualStyleBackColor = true;
+            this.backgroundColorPickerButton.Click += backgroundColorPickerButton_Click;
             // 
             // backgroundColorDisplayBox
             // 
@@ -377,6 +372,7 @@
             0,
             0,
             0});
+            this.fontOutlineSizeUpDown.ValueChanged += FontOutlineSizeUpDown_ValueChanged;
             // 
             // fontOutlineCheckbox
             // 
@@ -388,6 +384,7 @@
             this.fontOutlineCheckbox.TabIndex = 27;
             this.fontOutlineCheckbox.Text = "Outline";
             this.fontOutlineCheckbox.UseVisualStyleBackColor = true;
+            this.fontOutlineCheckbox.CheckedChanged += FontOutlineCheckbox_CheckedChanged;
             // 
             // fontOutlineColorPickerButton
             // 
@@ -399,6 +396,7 @@
             this.fontOutlineColorPickerButton.TabIndex = 26;
             this.fontOutlineColorPickerButton.Text = "Picker";
             this.fontOutlineColorPickerButton.UseVisualStyleBackColor = true;
+            this.fontOutlineColorPickerButton.Click += fontOutlineColorPickerButton_Click;
             // 
             // fontOutlineColorDisplayBox
             // 
@@ -429,6 +427,7 @@
             this.fontColorPicker.TabIndex = 22;
             this.fontColorPicker.Text = "Picker";
             this.fontColorPicker.UseVisualStyleBackColor = true;
+            this.fontColorPicker.Click += colorPickerButton_Click;
             // 
             // fontColorDisplayBox
             // 
@@ -459,6 +458,7 @@
             this.fontSelectionButton.TabIndex = 19;
             this.fontSelectionButton.Text = "Select Font";
             this.fontSelectionButton.UseVisualStyleBackColor = true;
+            this.fontSelectionButton.Click += fontSelectionButton_Click;
             // 
             // fontFamilyLabel
             // 
@@ -475,11 +475,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(1435, 574);
+            this.ClientSize = new System.Drawing.Size(1435, 623);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.customizationGroupBox);
-            this.Controls.Add(this.chromiumWebBrowser);
             this.Name = "NotificationLayoutWindow";
             this.Text = "Retro Achievement - Layout - Notifications";
             this.groupBox3.ResumeLayout(false);
@@ -505,7 +504,6 @@
         private System.Windows.Forms.Button replayAchievementButton;
         private System.Windows.Forms.Button showRecentAchievementButton;
         private System.Windows.Forms.Button button4;
-        public CefSharp.WinForms.ChromiumWebBrowser chromiumWebBrowser;
         private System.Windows.Forms.CheckBox useCustomAchievementCheckbox;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.GroupBox groupBox3;
@@ -534,5 +532,7 @@
         private System.Windows.Forms.Label fontColorLabel;
         private System.Windows.Forms.Button fontSelectionButton;
         private System.Windows.Forms.Label fontFamilyLabel;
+        private System.Windows.Forms.ColorDialog colorDialog1;
+        private System.Windows.Forms.FontDialog fontDialog1;
     }
 }

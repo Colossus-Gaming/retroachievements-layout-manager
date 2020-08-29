@@ -46,7 +46,6 @@ namespace Retro_Achievement_Tracker
             this.setFocusButton = new System.Windows.Forms.Button();
             this.hideFocusButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.chromiumWebBrowser = new CefSharp.WinForms.ChromiumWebBrowser();
             this.customizationGroupBox = new System.Windows.Forms.GroupBox();
             this.fontOutlineColorHexCodeLabel = new System.Windows.Forms.Label();
             this.fontColorHexCodeLabel = new System.Windows.Forms.Label();
@@ -186,14 +185,6 @@ namespace Retro_Achievement_Tracker
             this.groupBox1.TabIndex = 10002;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Focus";
-            // 
-            // chromiumWebBrowser
-            // 
-            this.chromiumWebBrowser.ActivateBrowserOnCreation = false;
-            this.chromiumWebBrowser.Location = new System.Drawing.Point(240, 0);
-            this.chromiumWebBrowser.Name = "chromiumWebBrowser";
-            this.chromiumWebBrowser.Size = new System.Drawing.Size(1920, 1080);
-            this.chromiumWebBrowser.TabIndex = 0;
             // 
             // customizationGroupBox
             // 
@@ -413,7 +404,6 @@ namespace Retro_Achievement_Tracker
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(1720, 541);
             this.Controls.Add(this.customizationGroupBox);
-            this.Controls.Add(this.chromiumWebBrowser);
             this.Controls.Add(this.groupBox1);
             this.Name = "FocusLayoutWindow";
             this.Text = "Retro Achievement - Layout - Focus";
@@ -438,7 +428,6 @@ namespace Retro_Achievement_Tracker
         private System.Windows.Forms.Button setFocusButton;
         private System.Windows.Forms.Button hideFocusButton;
         private System.Windows.Forms.GroupBox groupBox1;
-        public ChromiumWebBrowser chromiumWebBrowser;
         private System.Windows.Forms.GroupBox customizationGroupBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.NumericUpDown fontOutlineSizeUpDown;

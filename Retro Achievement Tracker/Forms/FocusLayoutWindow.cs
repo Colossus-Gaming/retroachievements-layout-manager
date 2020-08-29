@@ -28,6 +28,7 @@ namespace Retro_Achievement_Tracker
         public FocusLayoutWindow()
         {
             InitializeComponent();
+            SetupBrowser();
             SetCustomFont();
             LoadProperties();
             SetLabels();
@@ -67,6 +68,8 @@ namespace Retro_Achievement_Tracker
             this.hideFocusButton.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 8.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 15.75F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
 
+            this.backgroundColorPickerButton.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9.75F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+
             this.customizationGroupBox.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 13.75F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
             this.fontOutlineCheckbox.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 11.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
             this.fontOutlineColorPickerButton.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9.75F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
@@ -98,7 +101,6 @@ namespace Retro_Achievement_Tracker
             SetFontOutline();
             SetBackgroundColor();
         }
-
 
         public void SetLockedAchievements(List<Achievement> achievements)
         {
@@ -460,7 +462,7 @@ namespace Retro_Achievement_Tracker
                 if (CurrentlyFocusedIndex == 0)
                 {
                     this.focusAchievementButtonLeft.Enabled = false;
-                    this.focusAchievementButtonRight.Enabled = true;
+                    this.focusAchievementButtonRight.Enabled = LockedAchievements.Count > 1;
                 }
                 else if (CurrentlyFocusedIndex == LockedAchievements.Count - 1)
                 {
@@ -474,5 +476,24 @@ namespace Retro_Achievement_Tracker
                 }
             }
         }
+
+        private void SetupBrowser()
+        {
+            this.chromiumWebBrowser = new CefSharp.WinForms.ChromiumWebBrowser();
+
+            // 
+            // chromiumWebBrowser
+            // 
+            this.chromiumWebBrowser.ActivateBrowserOnCreation = false;
+            this.chromiumWebBrowser.Location = new Point(240, 0);
+            this.chromiumWebBrowser.Name = "chromiumWebBrowser";
+            this.chromiumWebBrowser.Size = new Size(1920, 1080);
+            this.chromiumWebBrowser.TabIndex = 0;
+            this.chromiumWebBrowser.Dock = DockStyle.None;
+
+            this.Controls.Add(this.chromiumWebBrowser);
+        }
+
+        public CefSharp.WinForms.ChromiumWebBrowser chromiumWebBrowser;
     }
 }

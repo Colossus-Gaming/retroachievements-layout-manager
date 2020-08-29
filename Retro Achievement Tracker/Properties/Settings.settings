@@ -56,5 +56,23 @@
     <Setting Name="focus_background_color" Type="System.String" Scope="User">
       <Value Profile="(Default)">#CCCCCC</Value>
     </Setting>
+    <Setting Name="notification_font_color_hex_code" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#000000</Value>
+    </Setting>
+    <Setting Name="notification_font_family_name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Calibri</Value>
+    </Setting>
+    <Setting Name="notification_font_outline_enabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="notification_font_outline_color_hex" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#FFFFFF</Value>
+    </Setting>
+    <Setting Name="notification_font_outline_size" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="notification_background_color" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#CCCCCC</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

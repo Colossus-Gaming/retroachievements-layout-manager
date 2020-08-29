@@ -20,6 +20,7 @@ namespace Retro_Achievement_Tracker
         public StatsLayoutWindow()
         {
             InitializeComponent();
+            SetupBrowser();
             SetCustomFont();
             LoadProperties();
             SetLabels();
@@ -361,5 +362,24 @@ namespace Retro_Achievement_Tracker
         {
             return "#" + c.R.ToString("X2") + c.G.ToString("X2") + c.B.ToString("X2");
         }
+
+        private void SetupBrowser()
+        {
+            this.chromiumWebBrowser = new CefSharp.WinForms.ChromiumWebBrowser();
+
+            // 
+            // chromiumWebBrowser
+            // 
+            this.chromiumWebBrowser.ActivateBrowserOnCreation = false;
+            this.chromiumWebBrowser.Location = new System.Drawing.Point(240, 0);
+            this.chromiumWebBrowser.Name = "chromiumWebBrowser";
+            this.chromiumWebBrowser.Size = new System.Drawing.Size(1920, 1080);
+            this.chromiumWebBrowser.TabIndex = 0;
+            this.chromiumWebBrowser.Dock = System.Windows.Forms.DockStyle.None;
+
+            this.Controls.Add(this.chromiumWebBrowser);
+        }
+
+        public CefSharp.WinForms.ChromiumWebBrowser chromiumWebBrowser;
     }
 }

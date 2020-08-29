@@ -312,9 +312,54 @@ namespace Retro_Achievement_Tracker
         public MainPage()
         {
             InitializeComponent();
+            SetFont();
             LoadProperties();
             AutoUpdate();
             SetupInterface();
+        }
+
+        private void SetFont()
+        {
+            this.usernameLabel.Font = new System.Drawing.Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 6.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.apiKeyLabel.Font = new System.Drawing.Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 6.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+
+            this.siteRankLabel.Font = new System.Drawing.Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.awardsLabel.Font = new System.Drawing.Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pointsLabel.Font = new System.Drawing.Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+
+            this.apiKeyTextBox.Font = new System.Drawing.Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 7.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.usernameTextBox.Font = new System.Drawing.Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 7.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+
+            this.gameInformationTitleLabel.Font = new System.Drawing.Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 12.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+
+            this.gameInformationCheevosCountLabel.Font = new System.Drawing.Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 7.55F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInformationPointsLabel.Font = new System.Drawing.Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 7.55F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+
+            this.gameInformationPublisherLabel.Font = new System.Drawing.Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 6.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInformationDeveloperLabel.Font = new System.Drawing.Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 6.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInformationConsoleLabel.Font = new System.Drawing.Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 6.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+
+            this.startButton.Font = new System.Drawing.Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 7.55F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stopButton.Font = new System.Drawing.Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 7.55F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.showFocusWindowButton.Font = new System.Drawing.Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 7.55F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.showStatsWindowButton.Font = new System.Drawing.Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 7.55F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.showNotificationsWindowButton.Font = new System.Drawing.Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 7.55F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.supportButton.Font = new System.Drawing.Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 7.55F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+
+            this.timerStatusLabel.Font = new System.Drawing.Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.raConnectivityLabel.Font = new System.Drawing.Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+
+            this.autoStartCheckbox.Font = new System.Drawing.Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 7.55F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.autoLaunchFocusWindowCheckBox.Font = new System.Drawing.Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 7.55F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.autoLaunchNotificationsWindowCheckbox.Font = new System.Drawing.Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 7.55F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.autoLaunchStatsWindowCheckbox.Font = new System.Drawing.Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 7.55F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+
+            this.gameInformationGroupBox.Font = new System.Drawing.Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 13.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.notificationsGroupBox.Font = new System.Drawing.Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 13.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userInfoGroupBox.Font = new System.Drawing.Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 13.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.focusGroupBox.Font = new System.Drawing.Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 13.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+
+            this.consoleLogs.Font = new System.Drawing.Font(FontManager.GetFontFamilyByName("Monofonto"), 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         }
 
         private static void AutoUpdate()

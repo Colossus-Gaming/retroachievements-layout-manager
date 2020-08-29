@@ -34,7 +34,6 @@ namespace Retro_Achievement_Tracker
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StatsLayoutWindow));
-            this.chromiumWebBrowser = new CefSharp.WinForms.ChromiumWebBrowser();
             this.statsGroupBox = new System.Windows.Forms.GroupBox();
             this.fontOutlineCheckbox = new System.Windows.Forms.CheckBox();
             this.fontOutlineColorPickerButton = new System.Windows.Forms.Button();
@@ -58,15 +57,6 @@ namespace Retro_Achievement_Tracker
             ((System.ComponentModel.ISupportInitialize)(this.fontColorDisplayBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontOutlineSizeUpDown)).BeginInit();
             this.SuspendLayout();
-            // 
-            // chromiumWebBrowser
-            // 
-            this.chromiumWebBrowser.ActivateBrowserOnCreation = false;
-            this.chromiumWebBrowser.Location = new System.Drawing.Point(240, 0);
-            this.chromiumWebBrowser.Name = "chromiumWebBrowser";
-            this.chromiumWebBrowser.Size = new System.Drawing.Size(1920, 1080);
-            this.chromiumWebBrowser.TabIndex = 0;
-            this.chromiumWebBrowser.Dock = System.Windows.Forms.DockStyle.None;
             // 
             // statsGroupBox
             // 
@@ -265,7 +255,6 @@ namespace Retro_Achievement_Tracker
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(744, 367);
             this.Controls.Add(this.statsGroupBox);
-            this.Controls.Add(this.chromiumWebBrowser);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "StatsLayoutWindow";
             this.Text = "Retro Achievement - Layout - Stats";
@@ -279,8 +268,6 @@ namespace Retro_Achievement_Tracker
         }
 
         #endregion
-
-        public ChromiumWebBrowser chromiumWebBrowser;
         private System.Windows.Forms.GroupBox statsGroupBox;
         private System.Windows.Forms.Button fontSelectionButton;
         private System.Windows.Forms.Label fontFamilyLabel;

@@ -238,5 +238,77 @@ namespace Retro_Achievement_Tracker.Properties {
                 this["focus_background_color"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#000000")]
+        public string notification_font_color_hex_code {
+            get {
+                return ((string)(this["notification_font_color_hex_code"]));
+            }
+            set {
+                this["notification_font_color_hex_code"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Calibri")]
+        public string notification_font_family_name {
+            get {
+                return ((string)(this["notification_font_family_name"]));
+            }
+            set {
+                this["notification_font_family_name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool notification_font_outline_enabled {
+            get {
+                return ((bool)(this["notification_font_outline_enabled"]));
+            }
+            set {
+                this["notification_font_outline_enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FFFFFF")]
+        public string notification_font_outline_color_hex {
+            get {
+                return ((string)(this["notification_font_outline_color_hex"]));
+            }
+            set {
+                this["notification_font_outline_color_hex"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        public int notification_font_outline_size {
+            get {
+                return ((int)(this["notification_font_outline_size"]));
+            }
+            set {
+                this["notification_font_outline_size"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#CCCCCC")]
+        public string notification_background_color {
+            get {
+                return ((string)(this["notification_background_color"]));
+            }
+            set {
+                this["notification_background_color"] = value;
+            }
+        }
     }
 }
