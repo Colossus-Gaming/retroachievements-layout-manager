@@ -29,17 +29,21 @@
         private void InitializeComponent()
         {
             this.masteryCustomizationGroupbox = new System.Windows.Forms.GroupBox();
+            this.scaleLabel2 = new System.Windows.Forms.Label();
             this.yPositionLabel2 = new System.Windows.Forms.Label();
+            this.scaleMasteryNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.masteryEditOultineCheckbox = new System.Windows.Forms.CheckBox();
             this.xPositionLabel2 = new System.Windows.Forms.Label();
             this.selectCustomMasteryNotificationButton = new System.Windows.Forms.Button();
             this.customMasteryYNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.useCustomMasteryAlertCheckbox = new System.Windows.Forms.CheckBox();
+            this.useCustomMasteryCheckbox = new System.Windows.Forms.CheckBox();
             this.customMasteryXNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.replayGameMasteryButton = new System.Windows.Forms.Button();
             this.showGameMasteryButton = new System.Windows.Forms.Button();
             this.editFileLocationMastery = new System.Windows.Forms.CheckBox();
             this.achievementCustomizationGroupbox = new System.Windows.Forms.GroupBox();
+            this.scaleLabel1 = new System.Windows.Forms.Label();
+            this.scaleAchievementNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.yPositionLabel1 = new System.Windows.Forms.Label();
             this.xPositionLabel1 = new System.Windows.Forms.Label();
             this.acheivementEditOutlineCheckbox = new System.Windows.Forms.CheckBox();
@@ -49,7 +53,6 @@
             this.useCustomAchievementCheckbox = new System.Windows.Forms.CheckBox();
             this.replayAchievementButton = new System.Windows.Forms.Button();
             this.showAchievementButton = new System.Windows.Forms.Button();
-            this.editFileLocationAchievement = new System.Windows.Forms.CheckBox();
             this.fontCustomizationGroupBox = new System.Windows.Forms.GroupBox();
             this.backgroundColorHexCodeLabel = new System.Windows.Forms.Label();
             this.backgroundColorPickerButton = new System.Windows.Forms.Button();
@@ -63,21 +66,20 @@
             this.fontOutlineColorPickerButton = new System.Windows.Forms.Button();
             this.fontOutlineColorDisplayBox = new System.Windows.Forms.PictureBox();
             this.fontFamilyNameLabel = new System.Windows.Forms.Label();
-            this.fontColorPicker = new System.Windows.Forms.Button();
+            this.fontColorPickerButton = new System.Windows.Forms.Button();
             this.fontColorDisplayBox = new System.Windows.Forms.PictureBox();
             this.fontColorLabel = new System.Windows.Forms.Label();
             this.fontSelectionButton = new System.Windows.Forms.Button();
             this.fontFamilyLabel = new System.Windows.Forms.Label();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
-            this.scaleAchievementNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.scaleLabel1 = new System.Windows.Forms.Label();
-            this.scaleLabel2 = new System.Windows.Forms.Label();
-            this.scaleMasteryNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.masteryCustomizationGroupbox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.scaleMasteryNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.customMasteryYNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.customMasteryXNumericUpDown)).BeginInit();
             this.achievementCustomizationGroupbox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.scaleAchievementNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.customAchievementYNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.customAchievementXNumericUpDown)).BeginInit();
             this.fontCustomizationGroupBox.SuspendLayout();
@@ -85,8 +87,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.fontOutlineSizeUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontOutlineColorDisplayBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontColorDisplayBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.scaleAchievementNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.scaleMasteryNumericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // masteryCustomizationGroupbox
@@ -98,7 +98,7 @@
             this.masteryCustomizationGroupbox.Controls.Add(this.xPositionLabel2);
             this.masteryCustomizationGroupbox.Controls.Add(this.selectCustomMasteryNotificationButton);
             this.masteryCustomizationGroupbox.Controls.Add(this.customMasteryYNumericUpDown);
-            this.masteryCustomizationGroupbox.Controls.Add(this.useCustomMasteryAlertCheckbox);
+            this.masteryCustomizationGroupbox.Controls.Add(this.useCustomMasteryCheckbox);
             this.masteryCustomizationGroupbox.Controls.Add(this.customMasteryXNumericUpDown);
             this.masteryCustomizationGroupbox.Controls.Add(this.replayGameMasteryButton);
             this.masteryCustomizationGroupbox.Controls.Add(this.showGameMasteryButton);
@@ -111,6 +111,17 @@
             this.masteryCustomizationGroupbox.TabStop = false;
             this.masteryCustomizationGroupbox.Text = "Mastery";
             // 
+            // scaleLabel2
+            // 
+            this.scaleLabel2.AutoSize = true;
+            this.scaleLabel2.Font = new System.Drawing.Font("Calibri", 12F);
+            this.scaleLabel2.Location = new System.Drawing.Point(109, 170);
+            this.scaleLabel2.Name = "scaleLabel2";
+            this.scaleLabel2.Size = new System.Drawing.Size(43, 19);
+            this.scaleLabel2.TabIndex = 23;
+            this.scaleLabel2.Text = "Scale";
+            this.scaleLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // yPositionLabel2
             // 
             this.yPositionLabel2.AutoSize = true;
@@ -122,6 +133,36 @@
             this.yPositionLabel2.Text = "Y-Position";
             this.yPositionLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // scaleMasteryNumericUpDown
+            // 
+            this.scaleMasteryNumericUpDown.DecimalPlaces = 2;
+            this.scaleMasteryNumericUpDown.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.scaleMasteryNumericUpDown.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.scaleMasteryNumericUpDown.Location = new System.Drawing.Point(6, 170);
+            this.scaleMasteryNumericUpDown.Maximum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.scaleMasteryNumericUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.scaleMasteryNumericUpDown.Name = "scaleMasteryNumericUpDown";
+            this.scaleMasteryNumericUpDown.Size = new System.Drawing.Size(97, 23);
+            this.scaleMasteryNumericUpDown.TabIndex = 22;
+            this.scaleMasteryNumericUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.scaleMasteryNumericUpDown.ValueChanged += MasteryScaleNumericUpDown_Changed;
+            // 
             // masteryEditOultineCheckbox
             // 
             this.masteryEditOultineCheckbox.AutoSize = true;
@@ -132,6 +173,7 @@
             this.masteryEditOultineCheckbox.TabIndex = 20;
             this.masteryEditOultineCheckbox.Text = "Edit Mode";
             this.masteryEditOultineCheckbox.UseVisualStyleBackColor = true;
+            this.masteryEditOultineCheckbox.CheckedChanged += EditCustomMasteryCheckbox_CheckChanged;
             // 
             // xPositionLabel2
             // 
@@ -153,34 +195,58 @@
             this.selectCustomMasteryNotificationButton.TabIndex = 15;
             this.selectCustomMasteryNotificationButton.Text = "Select File";
             this.selectCustomMasteryNotificationButton.UseVisualStyleBackColor = true;
+            this.selectCustomMasteryNotificationButton.Click += SelectMasteryFileButton_Click;
             // 
             // customMasteryYNumericUpDown
             // 
             this.customMasteryYNumericUpDown.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.customMasteryYNumericUpDown.Location = new System.Drawing.Point(6, 140);
+            this.customMasteryYNumericUpDown.Maximum = new decimal(new int[] {
+            2000,
+            0,
+            0,
+            0});
+            this.customMasteryYNumericUpDown.Minimum = new decimal(new int[] {
+            2000,
+            0,
+            0,
+            -2147483648});
             this.customMasteryYNumericUpDown.Name = "customMasteryYNumericUpDown";
             this.customMasteryYNumericUpDown.Size = new System.Drawing.Size(97, 23);
             this.customMasteryYNumericUpDown.TabIndex = 19;
+            this.customMasteryYNumericUpDown.ValueChanged += MasteryYPositionNumericUpDown_Changed;
             // 
             // useCustomMasteryAlertCheckbox
             // 
-            this.useCustomMasteryAlertCheckbox.AutoSize = true;
-            this.useCustomMasteryAlertCheckbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.useCustomMasteryAlertCheckbox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.useCustomMasteryAlertCheckbox.Location = new System.Drawing.Point(6, 62);
-            this.useCustomMasteryAlertCheckbox.Name = "useCustomMasteryAlertCheckbox";
-            this.useCustomMasteryAlertCheckbox.Size = new System.Drawing.Size(138, 23);
-            this.useCustomMasteryAlertCheckbox.TabIndex = 13;
-            this.useCustomMasteryAlertCheckbox.Text = "Use custom alert";
-            this.useCustomMasteryAlertCheckbox.UseVisualStyleBackColor = true;
+            this.useCustomMasteryCheckbox.AutoSize = true;
+            this.useCustomMasteryCheckbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.useCustomMasteryCheckbox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.useCustomMasteryCheckbox.Location = new System.Drawing.Point(6, 62);
+            this.useCustomMasteryCheckbox.Name = "useCustomMasteryAlertCheckbox";
+            this.useCustomMasteryCheckbox.Size = new System.Drawing.Size(138, 23);
+            this.useCustomMasteryCheckbox.TabIndex = 13;
+            this.useCustomMasteryCheckbox.Text = "Use custom alert";
+            this.useCustomMasteryCheckbox.UseVisualStyleBackColor = true;
+            this.useCustomMasteryCheckbox.CheckedChanged += EnableCustomMasteryCheckbox_CheckChanged;
             // 
             // customMasteryXNumericUpDown
             // 
             this.customMasteryXNumericUpDown.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.customMasteryXNumericUpDown.Location = new System.Drawing.Point(6, 111);
+            this.customMasteryXNumericUpDown.Maximum = new decimal(new int[] {
+            2000,
+            0,
+            0,
+            0});
+            this.customMasteryXNumericUpDown.Minimum = new decimal(new int[] {
+            2000,
+            0,
+            0,
+            -2147483648});
             this.customMasteryXNumericUpDown.Name = "customMasteryXNumericUpDown";
             this.customMasteryXNumericUpDown.Size = new System.Drawing.Size(97, 23);
             this.customMasteryXNumericUpDown.TabIndex = 18;
+            this.customMasteryXNumericUpDown.ValueChanged += MasteryXPositionNumericUpDown_Changed;
             // 
             // replayGameMasteryButton
             // 
@@ -193,6 +259,7 @@
             this.replayGameMasteryButton.TabIndex = 3;
             this.replayGameMasteryButton.Text = "Replay";
             this.replayGameMasteryButton.UseVisualStyleBackColor = false;
+            this.replayGameMasteryButton.Click += ReplayGameMasteryNotification;
             // 
             // showGameMasteryButton
             // 
@@ -205,17 +272,7 @@
             this.showGameMasteryButton.TabIndex = 2;
             this.showGameMasteryButton.Text = "Show";
             this.showGameMasteryButton.UseVisualStyleBackColor = false;
-            // 
-            // editFileLocationMastery
-            // 
-            this.editFileLocationMastery.AutoSize = true;
-            this.editFileLocationMastery.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.editFileLocationMastery.Location = new System.Drawing.Point(77, 29);
-            this.editFileLocationMastery.Name = "editFileLocationMastery";
-            this.editFileLocationMastery.Size = new System.Drawing.Size(96, 19);
-            this.editFileLocationMastery.TabIndex = 5;
-            this.editFileLocationMastery.Text = "Edit Location";
-            this.editFileLocationMastery.UseVisualStyleBackColor = true;
+            this.showGameMasteryButton.Click += ShowGameMasteryNotification;
             // 
             // achievementCustomizationGroupbox
             // 
@@ -238,6 +295,47 @@
             this.achievementCustomizationGroupbox.TabIndex = 2;
             this.achievementCustomizationGroupbox.TabStop = false;
             this.achievementCustomizationGroupbox.Text = "Achievement";
+            // 
+            // scaleLabel1
+            // 
+            this.scaleLabel1.AutoSize = true;
+            this.scaleLabel1.Font = new System.Drawing.Font("Calibri", 12F);
+            this.scaleLabel1.Location = new System.Drawing.Point(109, 169);
+            this.scaleLabel1.Name = "scaleLabel1";
+            this.scaleLabel1.Size = new System.Drawing.Size(43, 19);
+            this.scaleLabel1.TabIndex = 21;
+            this.scaleLabel1.Text = "Scale";
+            this.scaleLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // scaleAchievementNumericUpDown
+            // 
+            this.scaleAchievementNumericUpDown.DecimalPlaces = 2;
+            this.scaleAchievementNumericUpDown.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.scaleAchievementNumericUpDown.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.scaleAchievementNumericUpDown.Location = new System.Drawing.Point(9, 169);
+            this.scaleAchievementNumericUpDown.Maximum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.scaleAchievementNumericUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.scaleAchievementNumericUpDown.Name = "scaleAchievementNumericUpDown";
+            this.scaleAchievementNumericUpDown.Size = new System.Drawing.Size(94, 23);
+            this.scaleAchievementNumericUpDown.TabIndex = 20;
+            this.scaleAchievementNumericUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.scaleAchievementNumericUpDown.ValueChanged += AchievementScaleNumericUpDown_Changed;
             // 
             // yPositionLabel1
             // 
@@ -270,22 +368,45 @@
             this.acheivementEditOutlineCheckbox.TabIndex = 17;
             this.acheivementEditOutlineCheckbox.Text = "Edit Mode";
             this.acheivementEditOutlineCheckbox.UseVisualStyleBackColor = true;
+            this.acheivementEditOutlineCheckbox.CheckedChanged += EditCustomAchievementCheckbox_CheckChanged;
             // 
             // customAchievementYNumericUpDown
             // 
             this.customAchievementYNumericUpDown.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.customAchievementYNumericUpDown.Location = new System.Drawing.Point(9, 140);
+            this.customAchievementYNumericUpDown.Maximum = new decimal(new int[] {
+            2000,
+            0,
+            0,
+            0});
+            this.customAchievementYNumericUpDown.Minimum = new decimal(new int[] {
+            2000,
+            0,
+            0,
+            -2147483648});
             this.customAchievementYNumericUpDown.Name = "customAchievementYNumericUpDown";
             this.customAchievementYNumericUpDown.Size = new System.Drawing.Size(94, 23);
             this.customAchievementYNumericUpDown.TabIndex = 16;
+            this.customAchievementYNumericUpDown.ValueChanged += AchievementYPositionNumericUpDown_Changed;
             // 
             // customAchievementXNumericUpDown
             // 
             this.customAchievementXNumericUpDown.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.customAchievementXNumericUpDown.Location = new System.Drawing.Point(9, 111);
+            this.customAchievementXNumericUpDown.Maximum = new decimal(new int[] {
+            2000,
+            0,
+            0,
+            0});
+            this.customAchievementXNumericUpDown.Minimum = new decimal(new int[] {
+            2000,
+            0,
+            0,
+            -2147483648});
             this.customAchievementXNumericUpDown.Name = "customAchievementXNumericUpDown";
             this.customAchievementXNumericUpDown.Size = new System.Drawing.Size(94, 23);
             this.customAchievementXNumericUpDown.TabIndex = 15;
+            this.customAchievementXNumericUpDown.ValueChanged += AchievementXPositionNumericUpDown_Changed;
             // 
             // selectCustomAchievementButton
             // 
@@ -297,6 +418,7 @@
             this.selectCustomAchievementButton.TabIndex = 14;
             this.selectCustomAchievementButton.Text = "Select File";
             this.selectCustomAchievementButton.UseVisualStyleBackColor = true;
+            this.selectCustomAchievementButton.Click += SelectAchievementFileButton_Click;
             // 
             // useCustomAchievementCheckbox
             // 
@@ -309,6 +431,7 @@
             this.useCustomAchievementCheckbox.TabIndex = 13;
             this.useCustomAchievementCheckbox.Text = "Use custom alert";
             this.useCustomAchievementCheckbox.UseVisualStyleBackColor = true;
+            this.useCustomAchievementCheckbox.CheckedChanged += EnableCustomAchievementCheckbox_CheckChanged;
             // 
             // replayAchievementButton
             // 
@@ -321,6 +444,7 @@
             this.replayAchievementButton.TabIndex = 3;
             this.replayAchievementButton.Text = "Replay";
             this.replayAchievementButton.UseVisualStyleBackColor = false;
+            this.replayAchievementButton.Click += ReplayRecentAchievement;
             // 
             // showAchievementButton
             // 
@@ -333,17 +457,7 @@
             this.showAchievementButton.TabIndex = 2;
             this.showAchievementButton.Text = "Show";
             this.showAchievementButton.UseVisualStyleBackColor = false;
-            // 
-            // editFileLocationAchievement
-            // 
-            this.editFileLocationAchievement.AutoSize = true;
-            this.editFileLocationAchievement.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.editFileLocationAchievement.Location = new System.Drawing.Point(77, 29);
-            this.editFileLocationAchievement.Name = "editFileLocationAchievement";
-            this.editFileLocationAchievement.Size = new System.Drawing.Size(96, 19);
-            this.editFileLocationAchievement.TabIndex = 5;
-            this.editFileLocationAchievement.Text = "Edit Location";
-            this.editFileLocationAchievement.UseVisualStyleBackColor = true;
+            this.showAchievementButton.Click += ShowAchievementNotification;
             // 
             // fontCustomizationGroupBox
             // 
@@ -359,7 +473,7 @@
             this.fontCustomizationGroupBox.Controls.Add(this.fontOutlineColorPickerButton);
             this.fontCustomizationGroupBox.Controls.Add(this.fontOutlineColorDisplayBox);
             this.fontCustomizationGroupBox.Controls.Add(this.fontFamilyNameLabel);
-            this.fontCustomizationGroupBox.Controls.Add(this.fontColorPicker);
+            this.fontCustomizationGroupBox.Controls.Add(this.fontColorPickerButton);
             this.fontCustomizationGroupBox.Controls.Add(this.fontColorDisplayBox);
             this.fontCustomizationGroupBox.Controls.Add(this.fontColorLabel);
             this.fontCustomizationGroupBox.Controls.Add(this.fontSelectionButton);
@@ -391,6 +505,7 @@
             this.backgroundColorPickerButton.TabIndex = 37;
             this.backgroundColorPickerButton.Text = "Picker";
             this.backgroundColorPickerButton.UseVisualStyleBackColor = true;
+            this.backgroundColorPickerButton.Click += backgroundColorPickerButton_Click;
             // 
             // backgroundColorDisplayBox
             // 
@@ -459,6 +574,7 @@
             0,
             0,
             0});
+            this.fontOutlineSizeUpDown.ValueChanged += FontOutlineSizeUpDown_ValueChanged;
             // 
             // fontOutlineCheckbox
             // 
@@ -470,6 +586,7 @@
             this.fontOutlineCheckbox.TabIndex = 27;
             this.fontOutlineCheckbox.Text = "Outline";
             this.fontOutlineCheckbox.UseVisualStyleBackColor = true;
+            this.fontOutlineCheckbox.CheckedChanged += FontOutlineCheckbox_CheckedChanged;
             // 
             // fontOutlineColorPickerButton
             // 
@@ -481,6 +598,7 @@
             this.fontOutlineColorPickerButton.TabIndex = 26;
             this.fontOutlineColorPickerButton.Text = "Picker";
             this.fontOutlineColorPickerButton.UseVisualStyleBackColor = true;
+            this.fontOutlineColorPickerButton.Click += fontOutlineColorPickerButton_Click;
             // 
             // fontOutlineColorDisplayBox
             // 
@@ -503,14 +621,15 @@
             // 
             // fontColorPicker
             // 
-            this.fontColorPicker.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fontColorPicker.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.fontColorPicker.Location = new System.Drawing.Point(124, 143);
-            this.fontColorPicker.Name = "fontColorPicker";
-            this.fontColorPicker.Size = new System.Drawing.Size(75, 23);
-            this.fontColorPicker.TabIndex = 22;
-            this.fontColorPicker.Text = "Picker";
-            this.fontColorPicker.UseVisualStyleBackColor = true;
+            this.fontColorPickerButton.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fontColorPickerButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.fontColorPickerButton.Location = new System.Drawing.Point(124, 143);
+            this.fontColorPickerButton.Name = "fontColorPicker";
+            this.fontColorPickerButton.Size = new System.Drawing.Size(75, 23);
+            this.fontColorPickerButton.TabIndex = 22;
+            this.fontColorPickerButton.Text = "Picker";
+            this.fontColorPickerButton.UseVisualStyleBackColor = true;
+            this.fontColorPickerButton.Click += fontColorPickerButton_Click;
             // 
             // fontColorDisplayBox
             // 
@@ -541,6 +660,7 @@
             this.fontSelectionButton.TabIndex = 19;
             this.fontSelectionButton.Text = "Select Font";
             this.fontSelectionButton.UseVisualStyleBackColor = true;
+            this.fontSelectionButton.Click += fontSelectionButton_Click;
             // 
             // fontFamilyLabel
             // 
@@ -552,88 +672,13 @@
             this.fontFamilyLabel.TabIndex = 18;
             this.fontFamilyLabel.Text = "Font Family";
             // 
-            // scaleAchievementNumericUpDown1
-            // 
-            this.scaleAchievementNumericUpDown.DecimalPlaces = 2;
-            this.scaleAchievementNumericUpDown.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.scaleAchievementNumericUpDown.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
-            this.scaleAchievementNumericUpDown.Location = new System.Drawing.Point(9, 169);
-            this.scaleAchievementNumericUpDown.Maximum = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
-            this.scaleAchievementNumericUpDown.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
-            this.scaleAchievementNumericUpDown.Name = "scaleAchievementNumericUpDown1";
-            this.scaleAchievementNumericUpDown.Size = new System.Drawing.Size(94, 23);
-            this.scaleAchievementNumericUpDown.TabIndex = 20;
-            this.scaleAchievementNumericUpDown.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // scaleLabel1
-            // 
-            this.scaleLabel1.AutoSize = true;
-            this.scaleLabel1.Font = new System.Drawing.Font("Calibri", 12F);
-            this.scaleLabel1.Location = new System.Drawing.Point(109, 169);
-            this.scaleLabel1.Name = "scaleLabel1";
-            this.scaleLabel1.Size = new System.Drawing.Size(43, 19);
-            this.scaleLabel1.TabIndex = 21;
-            this.scaleLabel1.Text = "Scale";
-            this.scaleLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // scaleLabel2
-            // 
-            this.scaleLabel2.AutoSize = true;
-            this.scaleLabel2.Font = new System.Drawing.Font("Calibri", 12F);
-            this.scaleLabel2.Location = new System.Drawing.Point(109, 170);
-            this.scaleLabel2.Name = "scaleLabel2";
-            this.scaleLabel2.Size = new System.Drawing.Size(43, 19);
-            this.scaleLabel2.TabIndex = 23;
-            this.scaleLabel2.Text = "Scale";
-            this.scaleLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // scaleAchievementNumericUpDown2
-            // 
-            this.scaleMasteryNumericUpDown.DecimalPlaces = 2;
-            this.scaleMasteryNumericUpDown.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.scaleMasteryNumericUpDown.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
-            this.scaleMasteryNumericUpDown.Location = new System.Drawing.Point(6, 170);
-            this.scaleMasteryNumericUpDown.Maximum = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
-            this.scaleMasteryNumericUpDown.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
-            this.scaleMasteryNumericUpDown.Name = "scaleAchievementNumericUpDown2";
-            this.scaleMasteryNumericUpDown.Size = new System.Drawing.Size(97, 23);
-            this.scaleMasteryNumericUpDown.TabIndex = 22;
-            this.scaleMasteryNumericUpDown.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
             // NotificationLayoutWindow
             // 
+
+            this.openFileDialog1.Filter = "WEBM files (*.webm)|*.webm"; 
+            this.openFileDialog1.CheckFileExists = true;
+            this.openFileDialog1.CheckPathExists = true;
+
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
@@ -645,10 +690,12 @@
             this.Text = "Retro Achievement - Layout - Notifications";
             this.masteryCustomizationGroupbox.ResumeLayout(false);
             this.masteryCustomizationGroupbox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.scaleMasteryNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.customMasteryYNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.customMasteryXNumericUpDown)).EndInit();
             this.achievementCustomizationGroupbox.ResumeLayout(false);
             this.achievementCustomizationGroupbox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.scaleAchievementNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.customAchievementYNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.customAchievementXNumericUpDown)).EndInit();
             this.fontCustomizationGroupBox.ResumeLayout(false);
@@ -657,25 +704,21 @@
             ((System.ComponentModel.ISupportInitialize)(this.fontOutlineSizeUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontOutlineColorDisplayBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontColorDisplayBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.scaleAchievementNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.scaleMasteryNumericUpDown)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
         private System.Windows.Forms.GroupBox achievementCustomizationGroupbox;
+        private System.Windows.Forms.GroupBox masteryCustomizationGroupbox;
+        private System.Windows.Forms.GroupBox fontCustomizationGroupBox;
         private System.Windows.Forms.Button replayAchievementButton;
         private System.Windows.Forms.Button showAchievementButton;
         private System.Windows.Forms.CheckBox useCustomAchievementCheckbox;
-        private System.Windows.Forms.GroupBox achievementCustomizationGroupBox;
-        private System.Windows.Forms.GroupBox masteryCustomizationGroupbox;
-        private System.Windows.Forms.CheckBox useCustomMasteryAlertCheckbox;
+        private System.Windows.Forms.CheckBox useCustomMasteryCheckbox;
         private System.Windows.Forms.CheckBox editFileLocationMastery;
         private System.Windows.Forms.Button replayGameMasteryButton;
         private System.Windows.Forms.Button showGameMasteryButton;
-        private System.Windows.Forms.CheckBox editFileLocationAchievement;
-        private System.Windows.Forms.GroupBox fontCustomizationGroupBox;
         private System.Windows.Forms.Label backgroundColorHexCodeLabel;
         private System.Windows.Forms.Button backgroundColorPickerButton;
         private System.Windows.Forms.PictureBox backgroundColorDisplayBox;
@@ -688,7 +731,7 @@
         private System.Windows.Forms.Button fontOutlineColorPickerButton;
         private System.Windows.Forms.PictureBox fontOutlineColorDisplayBox;
         private System.Windows.Forms.Label fontFamilyNameLabel;
-        private System.Windows.Forms.Button fontColorPicker;
+        private System.Windows.Forms.Button fontColorPickerButton;
         private System.Windows.Forms.PictureBox fontColorDisplayBox;
         private System.Windows.Forms.Label fontColorLabel;
         private System.Windows.Forms.Button fontSelectionButton;
@@ -710,6 +753,7 @@
         private System.Windows.Forms.Label scaleLabel2;
         private System.Windows.Forms.NumericUpDown scaleMasteryNumericUpDown;
         private System.Windows.Forms.Label scaleLabel1;
-        private System.Windows.Forms.NumericUpDown scaleAchievementNumericUpDown;
+        private System.Windows.Forms.NumericUpDown scaleAchievementNumericUpDown; 
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }

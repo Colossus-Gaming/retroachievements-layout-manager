@@ -517,8 +517,6 @@ namespace Retro_Achievement_Tracker
             {
                 LogCallback = Log
             };
-
-            NotificationLayoutWindow.chromiumWebBrowser.RequestHandler = new CustomRequestHandler();
         }
 
         private bool CanStart()

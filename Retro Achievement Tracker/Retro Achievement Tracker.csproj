@@ -245,13 +245,16 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Autoupdater.NET.Official">
-      <Version>1.6.0</Version>
+      <Version>1.6.2</Version>
     </PackageReference>
     <PackageReference Include="CefSharp.WinForms">
-      <Version>83.4.20</Version>
+      <Version>84.4.10</Version>
     </PackageReference>
     <PackageReference Include="HtmlAgilityPack">
       <Version>1.11.24</Version>
+    </PackageReference>
+    <PackageReference Include="MediaToolkit">
+      <Version>1.1.0.1</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>12.0.3</Version>

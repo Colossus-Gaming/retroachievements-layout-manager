@@ -1,8 +1,9 @@
 ﻿using CefSharp;
+using MediaToolkit;
+using MediaToolkit.Model;
 using Retro_Achievement_Tracker.Models;
 using Retro_Achievement_Tracker.Properties;
 using System;
-using System.Collections.Concurrent;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Diagnostics;
@@ -32,7 +33,8 @@ namespace Retro_Achievement_Tracker.Forms
         private GameSummary CurrentGame;
         private GameAchievementSummary CurrentAchievementSummary;
 
-        private string FontColorHexCode { 
+        private string FontColorHexCode
+        {
             set
             {
                 Settings.Default.notification_font_color_hex_code = value;
@@ -122,6 +124,110 @@ namespace Retro_Achievement_Tracker.Forms
             }
         }
 
+        private int CustomAchievementX
+        {
+            set
+            {
+                Settings.Default.notification_custom_achievement_x = value;
+                Settings.Default.Save();
+            }
+            get
+            {
+                return Settings.Default.notification_custom_achievement_x;
+            }
+        }
+
+        private int CustomAchievementY
+        {
+            set
+            {
+                Settings.Default.notification_custom_achievement_y = value;
+                Settings.Default.Save();
+            }
+            get
+            {
+                return Settings.Default.notification_custom_achievement_y;
+            }
+        }
+
+        private int CustomMasteryX
+        {
+            set
+            {
+                Settings.Default.notification_custom_mastery_x = value;
+                Settings.Default.Save();
+            }
+            get
+            {
+                return Settings.Default.notification_custom_mastery_x;
+            }
+        }
+
+        private int CustomMasteryY
+        {
+            set
+            {
+                Settings.Default.notification_custom_mastery_y = value;
+                Settings.Default.Save();
+            }
+            get
+            {
+                return Settings.Default.notification_custom_mastery_y;
+            }
+        }
+
+        private decimal CustomAchievementScale
+        {
+            set
+            {
+                Settings.Default.notification_custom_achievement_scale = value;
+                Settings.Default.Save();
+            }
+            get
+            {
+                return Settings.Default.notification_custom_achievement_scale;
+            }
+        }
+
+        private decimal CustomMasteryScale
+        {
+            set
+            {
+                Settings.Default.notification_custom_mastery_scale = value;
+                Settings.Default.Save();
+            }
+            get
+            {
+                return Settings.Default.notification_custom_mastery_scale;
+            }
+        }
+
+        private string CustomAchievementFile
+        {
+            set
+            {
+                Settings.Default.notification_custom_achievement_file = value;
+                Settings.Default.Save();
+            }
+            get
+            {
+                return Settings.Default.notification_custom_achievement_file;
+            }
+        }
+
+        private string CustomMasteryFile
+        {
+            set
+            {
+                Settings.Default.notification_custom_mastery_file = value;
+                Settings.Default.Save();
+            }
+            get
+            {
+                return Settings.Default.notification_custom_mastery_file;
+            }
+        }
+
         public NotificationLayoutWindow()
         {
             InitializeComponent();
@@ -138,6 +244,7 @@ namespace Retro_Achievement_Tracker.Forms
 
             RunNotificationTask();
         }
+
         private void SetCustomFont()
         {
             this.achievementCustomizationGroupbox.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 13.75F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
@@ -155,7 +262,7 @@ namespace Retro_Achievement_Tracker.Forms
             this.scaleMasteryNumericUpDown.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 8.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
 
             this.useCustomAchievementCheckbox.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 7.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
-            this.useCustomMasteryAlertCheckbox.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 7.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            this.useCustomMasteryCheckbox.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 7.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
             this.acheivementEditOutlineCheckbox.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 7.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
             this.masteryEditOultineCheckbox.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 7.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
 
@@ -181,7 +288,7 @@ namespace Retro_Achievement_Tracker.Forms
             this.fontColorHexCodeLabel.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
 
             this.fontFamilyNameLabel.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
-            this.fontColorPicker.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9.75F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            this.fontColorPickerButton.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9.75F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
             this.fontColorLabel.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9.75F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
             this.fontSelectionButton.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9.75F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
             this.fontFamilyLabel.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9.75F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
@@ -209,6 +316,29 @@ namespace Retro_Achievement_Tracker.Forms
 
         private void LoadProperties()
         {
+            this.useCustomAchievementCheckbox.Checked = CustomAchievementEnabled;
+            this.selectCustomAchievementButton.Enabled = CustomAchievementEnabled;
+            this.customAchievementXNumericUpDown.Enabled = CustomAchievementEnabled;
+            this.customAchievementYNumericUpDown.Enabled = CustomAchievementEnabled;
+            this.scaleAchievementNumericUpDown.Enabled = CustomAchievementEnabled;
+            this.acheivementEditOutlineCheckbox.Enabled = CustomAchievementEnabled;
+
+            this.useCustomMasteryCheckbox.Checked = CustomMasteryEnabled;
+            this.selectCustomMasteryNotificationButton.Enabled = CustomMasteryEnabled;
+            this.customMasteryXNumericUpDown.Enabled = CustomMasteryEnabled;
+            this.customMasteryYNumericUpDown.Enabled = CustomMasteryEnabled;
+            this.scaleMasteryNumericUpDown.Enabled = CustomMasteryEnabled;
+            this.masteryEditOultineCheckbox.Enabled = CustomMasteryEnabled;
+
+            this.customAchievementXNumericUpDown.Value = CustomAchievementX;
+            this.customAchievementYNumericUpDown.Value = CustomAchievementY;
+
+            this.customMasteryXNumericUpDown.Value = CustomMasteryX;
+            this.customMasteryYNumericUpDown.Value = CustomMasteryY;
+
+            this.scaleAchievementNumericUpDown.Value = CustomAchievementScale;
+            this.scaleMasteryNumericUpDown.Value = CustomMasteryScale;
+
             this.fontOutlineCheckbox.Checked = Settings.Default.notification_font_outline_enabled;
         }
 
@@ -218,6 +348,8 @@ namespace Retro_Achievement_Tracker.Forms
             SetFontFamily();
             SetFontOutline();
             SetBackgroundColor();
+
+            PromptUserInput();
         }
 
         private void NotificationRequests_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -228,13 +360,14 @@ namespace Retro_Achievement_Tracker.Forms
             }
         }
 
-        protected override void OnLoad(EventArgs e)
+        public bool UsingCustomAchievement()
         {
-            base.OnLoad(e);
+            return this.useCustomAchievementCheckbox.Checked;
+        }
 
-            this.chromiumWebBrowser.LoadHtml(Resources.NotificationWindow);
-            this.chromiumWebBrowser.FrameLoadEnd += PromptUserInput; 
-            this.chromiumWebBrowser.FrameLoadEnd += ChromiumWebBrowser_FrameLoadEnd;
+        public bool UsingCustomMastery()
+        {
+            return this.useCustomMasteryCheckbox.Checked;
         }
 
         private void RunNotificationTask()
@@ -396,7 +529,7 @@ namespace Retro_Achievement_Tracker.Forms
                                        "\"https://retroachievements.org/Badge/" + achievement.BadgeNumber + ".png\",\"" +
                                        achievement.Description + "\",\"" + achievement.Points + "\");";
 
-                    LogCallback(CALLER_ID +"[achievementNotification] Sending: [" + script + "]");
+                    LogCallback(CALLER_ID + "[achievementNotification] Sending: [" + script + "]");
 
                     try
                     {
@@ -404,7 +537,7 @@ namespace Retro_Achievement_Tracker.Forms
                     }
                     catch (Exception ex)
                     {
-                        LogCallback(CALLER_ID +"[achievementNotification]" + ex.Message);
+                        LogCallback(CALLER_ID + "[achievementNotification]" + ex.Message);
                     }
                 }
             });
@@ -421,7 +554,7 @@ namespace Retro_Achievement_Tracker.Forms
                                                 "\"" + CurrentAchievementSummary.NumPossibleAchievements + "\"," +
                                                 "\"" + CurrentAchievementSummary.PossibleScore + "\");";
 
-                    LogCallback(CALLER_ID +"[masteryNotification] Sending: [" + script + "]");
+                    LogCallback(CALLER_ID + "[masteryNotification] Sending: [" + script + "]");
 
                     try
                     {
@@ -429,7 +562,7 @@ namespace Retro_Achievement_Tracker.Forms
                     }
                     catch (Exception ex)
                     {
-                        LogCallback(CALLER_ID +"[masteryNotification]" + ex.Message);
+                        LogCallback(CALLER_ID + "[masteryNotification]" + ex.Message);
                     }
                 }
             });
@@ -479,13 +612,13 @@ namespace Retro_Achievement_Tracker.Forms
             this.EnqueueMasteryNotification();
         }
 
-        private async void PromptUserInput(object sender, EventArgs eventArgs)
+        private async void PromptUserInput()
         {
             if (this.Visible)
             {
                 string script = "promptUser();";
 
-                LogCallback(CALLER_ID +"[promptUser] Sending: [" + script + "]");
+                LogCallback(CALLER_ID + "[promptUser] Sending: [" + script + "]");
 
                 try
                 {
@@ -493,7 +626,7 @@ namespace Retro_Achievement_Tracker.Forms
                 }
                 catch (Exception ex)
                 {
-                    LogCallback(CALLER_ID +"[promptUser]" + ex.Message);
+                    LogCallback(CALLER_ID + "[promptUser]" + ex.Message);
                 }
             }
         }
@@ -574,6 +707,319 @@ namespace Retro_Achievement_Tracker.Forms
             }
         }
 
+        private async void EnableAchievementEdit()
+        {
+            if (this.Visible)
+            {
+                string script = "enableEditModeAchievement();";
+
+                LogCallback(CALLER_ID + "[enableEditModeAchievement] Sending: [" + script + "]");
+
+                try
+                {
+                    await chromiumWebBrowser.EvaluateScriptAsync(script, TimeSpan.FromSeconds(5));
+                }
+                catch (Exception ex)
+                {
+                    LogCallback(CALLER_ID + "[enableEditModeAchievement]" + ex.Message);
+                }
+            }
+        }
+
+        private async void DisableAchievementEdit()
+        {
+            if (this.Visible)
+            {
+                string script = "disableEditModeAchievement();";
+
+                LogCallback(CALLER_ID + "[disableEditModeAchievement] Sending: [" + script + "]");
+
+                try
+                {
+                    await chromiumWebBrowser.EvaluateScriptAsync(script, TimeSpan.FromSeconds(5));
+                }
+                catch (Exception ex)
+                {
+                    LogCallback(CALLER_ID + "[disableEditModeAchievement]" + ex.Message);
+                }
+            }
+        }
+
+        private async void EnableMasteryEdit()
+        {
+            if (this.Visible)
+            {
+                string script = "enableEditModeMastery();";
+
+                LogCallback(CALLER_ID + "[enableEditModeMastery] Sending: [" + script + "]");
+
+                try
+                {
+                    await chromiumWebBrowser.EvaluateScriptAsync(script, TimeSpan.FromSeconds(5));
+                }
+                catch (Exception ex)
+                {
+                    LogCallback(CALLER_ID + "[enableEditModeMastery]" + ex.Message);
+                }
+            }
+        }
+
+        private async void DisableMasteryEdit()
+        {
+            if (this.Visible)
+            {
+                string script = "disableEditModeMastery();";
+
+                LogCallback(CALLER_ID + "[disableEditModeMastery] Sending: [" + script + "]");
+
+                try
+                {
+                    await chromiumWebBrowser.EvaluateScriptAsync(script, TimeSpan.FromSeconds(5));
+                }
+                catch (Exception ex)
+                {
+                    LogCallback(CALLER_ID + "[disableEditModeMastery]" + ex.Message);
+                }
+            }
+        }
+
+        private async void SetAchievementLeft()
+        {
+            if (this.Visible)
+            {
+                string script = "setAchievementLeft('" + CustomAchievementX + "px');";
+
+                LogCallback(CALLER_ID + "[setAchievementLeft] Sending: [" + script + "]");
+
+                try
+                {
+                    await chromiumWebBrowser.EvaluateScriptAsync(script, TimeSpan.FromSeconds(5));
+                }
+                catch (Exception ex)
+                {
+                    LogCallback(CALLER_ID + "[setAchievementLeft]" + ex.Message);
+                }
+            }
+        }
+
+        private async void SetAchievementTop()
+        {
+            if (this.Visible)
+            {
+                string script = "setAchievementTop('" + CustomAchievementY + "px');";
+
+                LogCallback(CALLER_ID + "[setAchievementTop] Sending: [" + script + "]");
+
+                try
+                {
+                    await chromiumWebBrowser.EvaluateScriptAsync(script, TimeSpan.FromSeconds(5));
+                }
+                catch (Exception ex)
+                {
+                    LogCallback(CALLER_ID + "[setAchievementTop]" + ex.Message);
+                }
+            }
+        }
+
+        private async void SetMasteryLeft()
+        {
+            if (this.Visible)
+            {
+                string script = "setMasteryLeft('" + CustomMasteryX + "px');";
+
+                LogCallback(CALLER_ID + "[setMasteryLeft] Sending: [" + script + "]");
+
+                try
+                {
+                    await chromiumWebBrowser.EvaluateScriptAsync(script, TimeSpan.FromSeconds(5));
+                }
+                catch (Exception ex)
+                {
+                    LogCallback(CALLER_ID + "[setMasteryLeft]" + ex.Message);
+                }
+            }
+        }
+
+        private async void SetMasteryTop()
+        {
+            if (this.Visible)
+            {
+                string script = "setMasteryTop('" + CustomMasteryY + "px');";
+
+                LogCallback(CALLER_ID + "[setMasteryTop] Sending: [" + script + "]");
+
+                try
+                {
+                    await chromiumWebBrowser.EvaluateScriptAsync(script, TimeSpan.FromSeconds(5));
+                }
+                catch (Exception ex)
+                {
+                    LogCallback(CALLER_ID + "[setMasteryTop]" + ex.Message);
+                }
+            }
+        }
+
+        private async void SetAchievementWidth()
+        {
+            var width = this.useCustomAchievementCheckbox.Checked ? GetVideoWidth(CustomAchievementFile) : 1200;
+
+            if (this.useCustomAchievementCheckbox.Checked)
+            {
+                width = Convert.ToInt32(width * CustomAchievementScale);
+            }
+            if (this.Visible)
+            {
+                string script = "setAchievementWidth('" + width + "px');";
+
+                LogCallback(CALLER_ID + "[setAchievementWidth] Sending: [" + script + "]");
+
+                try
+                {
+                    await chromiumWebBrowser.EvaluateScriptAsync(script, TimeSpan.FromSeconds(5));
+                }
+                catch (Exception ex)
+                {
+                    LogCallback(CALLER_ID + "[setAchievementWidth]" + ex.Message);
+                }
+            }
+        }
+
+        private async void SetMasteryWidth()
+        {
+            var width = this.useCustomMasteryCheckbox.Checked ? GetVideoWidth(CustomMasteryFile) : 1200;
+
+            if (this.useCustomMasteryCheckbox.Checked)
+            {
+                width = Convert.ToInt32(width * CustomMasteryScale);
+            }
+
+            if (this.Visible)
+            {
+                string script = "setMasteryWidth('" + width + "px');";
+
+                LogCallback(CALLER_ID + "[setMasteryWidth] Sending: [" + script + "]");
+
+                try
+                {
+                    await chromiumWebBrowser.EvaluateScriptAsync(script, TimeSpan.FromSeconds(5));
+                }
+                catch (Exception ex)
+                {
+                    LogCallback(CALLER_ID + "[setMasteryWidth]" + ex.Message);
+                }
+            }
+        }
+
+        private void EnableCustomAchievementCheckbox_CheckChanged(object sender, EventArgs eventArgs)
+        {
+            CustomAchievementEnabled = ((CheckBox)sender).Checked;
+
+            this.useCustomAchievementCheckbox.Checked = CustomAchievementEnabled;
+            this.selectCustomAchievementButton.Enabled = CustomAchievementEnabled;
+            this.customAchievementXNumericUpDown.Enabled = CustomAchievementEnabled;
+            this.customAchievementYNumericUpDown.Enabled = CustomAchievementEnabled;
+            this.scaleAchievementNumericUpDown.Enabled = CustomAchievementEnabled;
+            this.acheivementEditOutlineCheckbox.Enabled = CustomAchievementEnabled;
+
+            if (!CustomAchievementEnabled)
+            {
+                DisableAchievementEdit();
+
+                this.acheivementEditOutlineCheckbox.Checked = false;
+            }
+            else if (string.IsNullOrEmpty(CustomAchievementFile))
+            {
+                SelectAchievementFileButton_Click(null, null);
+            }
+
+            SetupBrowser();
+        }
+
+        private void EnableCustomMasteryCheckbox_CheckChanged(object sender, EventArgs eventArgs)
+        {
+            CustomMasteryEnabled = ((CheckBox)sender).Checked;
+
+            this.useCustomMasteryCheckbox.Checked = CustomMasteryEnabled;
+            this.selectCustomMasteryNotificationButton.Enabled = CustomMasteryEnabled;
+            this.customMasteryXNumericUpDown.Enabled = CustomMasteryEnabled;
+            this.customMasteryYNumericUpDown.Enabled = CustomMasteryEnabled;
+            this.scaleMasteryNumericUpDown.Enabled = CustomMasteryEnabled;
+            this.masteryEditOultineCheckbox.Enabled = CustomMasteryEnabled;
+
+            if (!CustomMasteryEnabled)
+            {
+                DisableMasteryEdit();
+
+                this.masteryEditOultineCheckbox.Checked = false;
+            }
+            else if (string.IsNullOrEmpty(CustomMasteryFile))
+            {
+                SelectMasteryFileButton_Click(null, null);
+            }
+
+            SetupBrowser();
+        }
+
+        private void EditCustomAchievementCheckbox_CheckChanged(object sender, EventArgs eventArgs)
+        {
+            if (((CheckBox)sender).Checked)
+            {
+                EnableAchievementEdit();
+            }
+            else
+            {
+                DisableAchievementEdit();
+            }
+        }
+
+        private void EditCustomMasteryCheckbox_CheckChanged(object sender, EventArgs eventArgs)
+        {
+            if (((CheckBox)sender).Checked)
+            {
+                EnableMasteryEdit();
+            }
+            else
+            {
+                DisableMasteryEdit();
+            }
+        }
+
+        private void AchievementXPositionNumericUpDown_Changed(object sender, EventArgs eventArgs)
+        {
+            CustomAchievementX = Convert.ToInt32(((NumericUpDown)sender).Value);
+            SetAchievementLeft();
+        }
+
+        private void AchievementYPositionNumericUpDown_Changed(object sender, EventArgs eventArgs)
+        {
+            CustomAchievementY = Convert.ToInt32(((NumericUpDown)sender).Value);
+            SetAchievementTop();
+        }
+
+        private void MasteryXPositionNumericUpDown_Changed(object sender, EventArgs eventArgs)
+        {
+            CustomMasteryX = Convert.ToInt32(((NumericUpDown)sender).Value);
+            SetMasteryLeft();
+        }
+
+        private void MasteryYPositionNumericUpDown_Changed(object sender, EventArgs eventArgs)
+        {
+            CustomMasteryY = Convert.ToInt32(((NumericUpDown)sender).Value);
+            SetMasteryTop();
+        }
+
+        private void AchievementScaleNumericUpDown_Changed(object sender, EventArgs eventArgs)
+        {
+            CustomAchievementScale = this.scaleAchievementNumericUpDown.Value;
+            SetAchievementWidth();
+        }
+
+        private void MasteryScaleNumericUpDown_Changed(object sender, EventArgs eventArgs)
+        {
+            CustomAchievementScale = this.scaleMasteryNumericUpDown.Value;
+            SetMasteryWidth();
+        }
+
         private void fontSelectionButton_Click(object sender, EventArgs e)
         {
             fontDialog1.ShowColor = false;
@@ -595,7 +1041,7 @@ namespace Retro_Achievement_Tracker.Forms
             }
         }
 
-        private void colorPickerButton_Click(object sender, EventArgs e)
+        private void fontColorPickerButton_Click(object sender, EventArgs e)
         {
             if (colorDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -649,10 +1095,10 @@ namespace Retro_Achievement_Tracker.Forms
         {
             FontOutlineSize = Convert.ToInt32(((NumericUpDown)sender).Value.ToString());
 
+            SetFontOutline();
+
             Settings.Default.notification_font_outline_size = FontOutlineSize;
             Settings.Default.Save();
-
-            SetFontOutline();
         }
 
         private void ToggleOutline()
@@ -685,13 +1131,42 @@ namespace Retro_Achievement_Tracker.Forms
             return "#" + c.R.ToString("X2") + c.G.ToString("X2") + c.B.ToString("X2");
         }
 
-        public void SetHasMasteredGame(bool mastered)
+        private void SelectAchievementFileButton_Click(object sender, EventArgs eventArgs)
         {
-            HasMasteredGame = mastered;
+            if (this.openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                CustomAchievementFile = this.openFileDialog1.FileName;
+            }
+        }
+
+        private void SelectMasteryFileButton_Click(object sender, EventArgs eventArgs)
+        {
+            if (this.openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                CustomMasteryFile = this.openFileDialog1.FileName;
+            }
+        }
+
+        public int GetVideoWidth(string input)
+        {
+            var inputFile = new MediaFile { Filename = input };
+
+            using (var engine = new Engine())
+            {
+                engine.GetMetadata(inputFile);
+            }
+
+            var frameSize = inputFile.Metadata.VideoData.FrameSize;
+
+            return Convert.ToInt32(frameSize.Substring(0, frameSize.IndexOf("x")));
         }
 
         private void SetupBrowser()
         {
+            if (this.chromiumWebBrowser != null)
+            {
+                this.Controls.Remove(this.chromiumWebBrowser);
+            }
             this.chromiumWebBrowser = new CefSharp.WinForms.ChromiumWebBrowser();
             // 
             // chromiumWebBrowser
@@ -702,8 +1177,18 @@ namespace Retro_Achievement_Tracker.Forms
             this.chromiumWebBrowser.Size = new System.Drawing.Size(1920, 1080);
             this.chromiumWebBrowser.TabIndex = 1;
             this.chromiumWebBrowser.Dock = DockStyle.None;
+            this.chromiumWebBrowser.FrameLoadEnd += ChromiumWebBrowser_FrameLoadEnd;
+            this.chromiumWebBrowser.LoadHtml(Resources.NotificationWindow);
+            this.chromiumWebBrowser.RequestHandler = new CustomRequestHandler()
+            {
+                customAchievementEnabled = CustomAchievementEnabled,
+                customMasteryEnabled = CustomMasteryEnabled
+            };
 
-            this.Controls.Add(this.chromiumWebBrowser);
+            if (!this.Controls.Contains(this.chromiumWebBrowser))
+            {
+                this.Controls.Add(this.chromiumWebBrowser);
+            }
         }
 
         public class NotificationRequest
