@@ -275,10 +275,10 @@
   <ItemGroup>
     <Content Include="Resources\Adultery.png" />
     <Content Include="Resources\Dancarnate_Logo.png" />
-    <Content Include="video\default-achievement-notification.webm">
+    <Content Include="video\achievement-notification.webm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="video\default-mastery-notification.webm">
+    <Content Include="video\mastery-notification.webm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\game-achievements-image.png" />
@@ -291,10 +291,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <None Include="Resources\yellow-button.png" />
-    <EmbeddedResource Include="Resources\DefaultFocusWindow.html" />
+    <EmbeddedResource Include="Resources\FocusWindow.html" />
     <None Include="Resources\green-button.png" />
-    <EmbeddedResource Include="Resources\DefaultStatsWindow.html" />
-    <EmbeddedResource Include="Resources\DefaultNotificationWindow.html" />
+    <EmbeddedResource Include="Resources\StatsWindow.html" />
+    <EmbeddedResource Include="Resources\NotificationWindow.html" />
     <Content Include="Resources\hnet.com-image.ico" />
     <None Include="Resources\red-button.png" />
     <Content Include="Resources\RSIcon.png" />

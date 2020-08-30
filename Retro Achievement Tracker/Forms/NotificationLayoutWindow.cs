@@ -2,6 +2,7 @@
 using Retro_Achievement_Tracker.Models;
 using Retro_Achievement_Tracker.Properties;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Diagnostics;
@@ -17,20 +18,109 @@ namespace Retro_Achievement_Tracker.Forms
         private static readonly string CALLER_ID = "NotificationWindow";
         public Action<string> LogCallback { get; internal set; }
         public Achievement MostRecentAchievement { get; set; }
+
         private bool HasMasteredGame;
+
         private Task NotificationsTask;
+
         private readonly ObservableCollection<NotificationRequest> NotificationRequests;
+
         private Stopwatch stopwatch;
 
         private CancellationTokenSource tokenSource2 = new CancellationTokenSource();
 
-        private string FontColorHexCode;
-        private string FontOutlineColorHexCode;
-        private string FontFamilyName;
-        private bool FontBolded;
-        private int FontOutlineSize;
+        private GameSummary CurrentGame;
+        private GameAchievementSummary CurrentAchievementSummary;
 
-        private string BackgroundColorHexCode;
+        private string FontColorHexCode { 
+            set
+            {
+                Settings.Default.notification_font_color_hex_code = value;
+                Settings.Default.Save();
+            }
+            get
+            {
+                return Settings.Default.notification_font_color_hex_code;
+            }
+        }
+
+        private string FontOutlineColorHexCode
+        {
+            set
+            {
+                Settings.Default.notification_font_outline_color_hex = value;
+                Settings.Default.Save();
+            }
+            get
+            {
+                return Settings.Default.notification_font_outline_color_hex;
+            }
+        }
+
+        private string FontFamilyName
+        {
+            set
+            {
+                Settings.Default.notification_font_family_name = value;
+                Settings.Default.Save();
+            }
+            get
+            {
+                return Settings.Default.notification_font_family_name;
+            }
+        }
+
+        private int FontOutlineSize
+        {
+            set
+            {
+                Settings.Default.notification_font_outline_size = value;
+                Settings.Default.Save();
+            }
+            get
+            {
+                return Settings.Default.notification_font_outline_size;
+            }
+        }
+
+        private string BackgroundColorHexCode
+        {
+            set
+            {
+                Settings.Default.notification_background_color = value;
+                Settings.Default.Save();
+            }
+            get
+            {
+                return Settings.Default.notification_background_color;
+            }
+        }
+
+        private bool CustomAchievementEnabled
+        {
+            set
+            {
+                Settings.Default.notification_custom_achievement_enable = value;
+                Settings.Default.Save();
+            }
+            get
+            {
+                return Settings.Default.notification_custom_achievement_enable;
+            }
+        }
+
+        private bool CustomMasteryEnabled
+        {
+            set
+            {
+                Settings.Default.notification_custom_mastery_enable = value;
+                Settings.Default.Save();
+            }
+            get
+            {
+                return Settings.Default.notification_custom_mastery_enable;
+            }
+        }
 
         public NotificationLayoutWindow()
         {
@@ -46,13 +136,43 @@ namespace Retro_Achievement_Tracker.Forms
 
             stopwatch = new Stopwatch();
 
-            SetupNotificationsTask();
+            RunNotificationTask();
         }
         private void SetCustomFont()
         {
+            this.achievementCustomizationGroupbox.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 13.75F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            this.masteryCustomizationGroupbox.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 13.75F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            this.fontCustomizationGroupBox.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 13.75F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+
+            this.showAchievementButton.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 8.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            this.showGameMasteryButton.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 8.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            this.replayAchievementButton.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 8.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            this.replayGameMasteryButton.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 8.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+
+            this.selectCustomAchievementButton.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 8.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            this.selectCustomMasteryNotificationButton.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 8.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            this.scaleAchievementNumericUpDown.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 8.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            this.scaleMasteryNumericUpDown.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 8.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+
+            this.useCustomAchievementCheckbox.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 7.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            this.useCustomMasteryAlertCheckbox.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 7.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            this.acheivementEditOutlineCheckbox.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 7.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            this.masteryEditOultineCheckbox.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 7.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+
+            this.customAchievementXNumericUpDown.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            this.customAchievementYNumericUpDown.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            this.customMasteryXNumericUpDown.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            this.customMasteryYNumericUpDown.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+
+            this.scaleLabel1.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            this.scaleLabel2.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            this.xPositionLabel1.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            this.xPositionLabel2.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            this.yPositionLabel1.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            this.yPositionLabel2.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+
             this.backgroundColorPickerButton.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9.75F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
 
-            this.customizationGroupBox.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 13.75F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
             this.fontOutlineCheckbox.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 11.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
             this.fontOutlineColorPickerButton.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9.75F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
 
@@ -80,16 +200,15 @@ namespace Retro_Achievement_Tracker.Forms
             this.fontFamilyNameLabel.Text = "Name: " + FontFamilyName;
         }
 
+        public void SetReplayMasteryButton(bool isEnabled)
+        {
+            HasMasteredGame = isEnabled;
+
+            this.replayGameMasteryButton.Enabled = isEnabled;
+        }
+
         private void LoadProperties()
         {
-            FontColorHexCode = Settings.Default.notification_font_color_hex_code;
-            FontFamilyName = Settings.Default.notification_font_family_name;
-
-            FontOutlineColorHexCode = Settings.Default.notification_font_outline_color_hex;
-            FontOutlineSize = Settings.Default.notification_font_outline_size;
-
-            BackgroundColorHexCode = Settings.Default.notification_background_color;
-
             this.fontOutlineCheckbox.Checked = Settings.Default.notification_font_outline_enabled;
         }
 
@@ -105,7 +224,7 @@ namespace Retro_Achievement_Tracker.Forms
         {
             if (e.Action == NotifyCollectionChangedAction.Add && NotificationRequests.Count > 0 && !stopwatch.IsRunning && NotificationsTask.Status != TaskStatus.Running)
             {
-                SetupNotificationsTask();
+                RunNotificationTask();
             }
         }
 
@@ -113,14 +232,12 @@ namespace Retro_Achievement_Tracker.Forms
         {
             base.OnLoad(e);
 
-            this.chromiumWebBrowser.LoadHtml(Resources.DefaultNotificationWindow);
+            this.chromiumWebBrowser.LoadHtml(Resources.NotificationWindow);
             this.chromiumWebBrowser.FrameLoadEnd += PromptUserInput; 
             this.chromiumWebBrowser.FrameLoadEnd += ChromiumWebBrowser_FrameLoadEnd;
-
-            this.chromiumWebBrowser.LoadHtml(Resources.DefaultNotificationWindow);
         }
 
-        private void SetupNotificationsTask()
+        private void RunNotificationTask()
         {
             NotificationsTask = Task.Factory.StartNew(async () =>
             {
@@ -160,7 +277,7 @@ namespace Retro_Achievement_Tracker.Forms
                                     }
                                     else if (notificationRequest.GameAchievementSummary != null && notificationRequest.GameSummary != null)
                                     {
-                                        SendMasteryNotification(notificationRequest.GameSummary, notificationRequest.GameAchievementSummary);
+                                        SendMasteryNotification();
                                         stopwatch = Stopwatch.StartNew();
                                         delayInMilli = 11000;
                                     }
@@ -191,7 +308,7 @@ namespace Retro_Achievement_Tracker.Forms
             {
                 Invoke((MethodInvoker)delegate
                 {
-                    this.showRecentAchievementButton.Enabled = false;
+                    this.showAchievementButton.Enabled = false;
                     this.showGameMasteryButton.Enabled = false;
                     this.replayAchievementButton.Enabled = false;
                     this.replayGameMasteryButton.Enabled = false;
@@ -203,15 +320,24 @@ namespace Retro_Achievement_Tracker.Forms
             }
         }
 
+        public void SetCurrentGame(GameSummary gameSummary, GameAchievementSummary gameAchievementSummary)
+        {
+            CurrentGame = gameSummary;
+            CurrentAchievementSummary = gameAchievementSummary;
+        }
+
         private NotificationRequest NotificationRequestDequeue()
         {
             try
             {
-                NotificationRequest notificationRequest = NotificationRequests[0];
+                lock (NotificationRequests)
+                {
+                    NotificationRequest notificationRequest = NotificationRequests[0];
 
-                NotificationRequests.Remove(notificationRequest);
+                    NotificationRequests.Remove(notificationRequest);
 
-                return notificationRequest;
+                    return notificationRequest;
+                }
             }
             catch
             {
@@ -225,7 +351,7 @@ namespace Retro_Achievement_Tracker.Forms
             {
                 Invoke((MethodInvoker)delegate
                 {
-                    this.showRecentAchievementButton.Enabled = true;
+                    this.showAchievementButton.Enabled = true;
                     this.showGameMasteryButton.Enabled = true;
                     this.replayAchievementButton.Enabled = true;
                     this.replayGameMasteryButton.Enabled = HasMasteredGame;
@@ -240,27 +366,23 @@ namespace Retro_Achievement_Tracker.Forms
                 Achievement = achievement
             };
 
-            NotificationRequests.Add(notificationRequest);
-            StartNotificationTask();
+            lock (NotificationRequests)
+            {
+                NotificationRequests.Add(notificationRequest);
+            }
         }
 
-        public void EnqueueMasteryNotification(GameSummary currentGame, GameAchievementSummary currentAchievementSummary)
+        public void EnqueueMasteryNotification()
         {
             NotificationRequest notificationRequest = new NotificationRequest
             {
-                GameSummary = currentGame,
-                GameAchievementSummary = currentAchievementSummary
+                GameSummary = CurrentGame,
+                GameAchievementSummary = CurrentAchievementSummary
             };
 
-            NotificationRequests.Add(notificationRequest);
-            StartNotificationTask();
-        }
-
-        private void StartNotificationTask()
-        {
-            if (NotificationsTask.Status != TaskStatus.Running)
+            lock (NotificationRequests)
             {
-                SetupNotificationsTask();
+                NotificationRequests.Add(notificationRequest);
             }
         }
 
@@ -288,16 +410,16 @@ namespace Retro_Achievement_Tracker.Forms
             });
         }
 
-        private void SendMasteryNotification(GameSummary currentGame, GameAchievementSummary currentAchievementSummary)
+        private void SendMasteryNotification()
         {
             Invoke((MethodInvoker)delegate
             {
                 if (this.Visible)
                 {
-                    string script = "masteryNotification(\"" + currentGame.Title + "\"," +
-                                                "\"https://retroachievements.org" + currentGame.ImageIcon + "\"," +
-                                                "\"" + currentAchievementSummary.NumPossibleAchievements + "\"," +
-                                                "\"" + currentAchievementSummary.PossibleScore + "\");";
+                    string script = "masteryNotification(\"" + CurrentGame.Title + "\"," +
+                                                "\"https://retroachievements.org" + CurrentGame.ImageIcon + "\"," +
+                                                "\"" + CurrentAchievementSummary.NumPossibleAchievements + "\"," +
+                                                "\"" + CurrentAchievementSummary.PossibleScore + "\");";
 
                     LogCallback(CALLER_ID +"[masteryNotification] Sending: [" + script + "]");
 
@@ -332,16 +454,29 @@ namespace Retro_Achievement_Tracker.Forms
 
         private void ShowGameMasteryNotification(object sender, EventArgs eventArgs)
         {
-            this.EnqueueMasteryNotification(new GameSummary()
+            Invoke((MethodInvoker)delegate
             {
-                Title = "Color a Dinosaur",
-                ImageIcon = "/Images/011853.png"
-            },
-                new GameAchievementSummary()
+                if (this.Visible)
                 {
-                    NumPossibleAchievements = 19,
-                    PossibleScore = 19
-                });
+                    string script = "masteryNotification(\"Color a Dinosaur\",\"https://retroachievements.org/Images/011853.png\",\"19\",\"19\");";
+
+                    LogCallback(CALLER_ID + "[masteryNotification] Sending: [" + script + "]");
+
+                    try
+                    {
+                        chromiumWebBrowser.ExecuteScriptAsync(script, TimeSpan.FromSeconds(2));
+                    }
+                    catch (Exception ex)
+                    {
+                        LogCallback(CALLER_ID + "[masteryNotification]" + ex.Message);
+                    }
+                }
+            });
+        }
+
+        private void ReplayGameMasteryNotification(object sender, EventArgs eventArgs)
+        {
+            this.EnqueueMasteryNotification();
         }
 
         private async void PromptUserInput(object sender, EventArgs eventArgs)
@@ -405,7 +540,7 @@ namespace Retro_Achievement_Tracker.Forms
         {
             if (this.Visible)
             {
-                string script = "setFontFamily(\"" + FontFamilyName + "\", \"" + FontBolded + "\");";
+                string script = "setFontFamily(\"" + FontFamilyName + "\");";
 
                 LogCallback(CALLER_ID + "[setFontFamily] Sending: [" + script + "]");
 
@@ -453,12 +588,8 @@ namespace Retro_Achievement_Tracker.Forms
                 Font font = fontDialog1.Font;
 
                 FontFamilyName = font.FontFamily.Name;
-                FontBolded = font.Bold;
 
                 this.fontFamilyNameLabel.Text = "Name: " + FontFamilyName;
-
-                Settings.Default.notification_font_family_name = FontFamilyName;
-                Settings.Default.Save();
 
                 SetFontFamily();
             }
@@ -473,9 +604,6 @@ namespace Retro_Achievement_Tracker.Forms
                 FontColorHexCode = HexConverter(colorDialog1.Color);
                 fontColorHexCodeLabel.Text = FontColorHexCode;
 
-                Settings.Default.notification_font_color_hex_code = FontColorHexCode;
-                Settings.Default.Save();
-
                 SetFontColor();
             }
         }
@@ -488,9 +616,6 @@ namespace Retro_Achievement_Tracker.Forms
 
                 FontOutlineColorHexCode = HexConverter(colorDialog1.Color);
                 fontOutlineColorHexCodeLabel.Text = FontOutlineColorHexCode;
-
-                Settings.Default.notification_font_outline_color_hex = FontOutlineColorHexCode;
-                Settings.Default.Save();
 
                 SetFontOutline();
             }
@@ -505,9 +630,6 @@ namespace Retro_Achievement_Tracker.Forms
 
                 BackgroundColorHexCode = HexConverter(colorDialog1.Color);
                 backgroundColorHexCodeLabel.Text = BackgroundColorHexCode;
-
-                Settings.Default.notification_background_color = BackgroundColorHexCode;
-                Settings.Default.Save();
 
                 SetBackgroundColor();
             }
@@ -568,13 +690,6 @@ namespace Retro_Achievement_Tracker.Forms
             HasMasteredGame = mastered;
         }
 
-        public partial class NotificationRequest
-        {
-            public Achievement Achievement { get; set; }
-            public GameSummary GameSummary { get; set; }
-            public GameAchievementSummary GameAchievementSummary { get; set; }
-        }
-
         private void SetupBrowser()
         {
             this.chromiumWebBrowser = new CefSharp.WinForms.ChromiumWebBrowser();
@@ -589,6 +704,13 @@ namespace Retro_Achievement_Tracker.Forms
             this.chromiumWebBrowser.Dock = DockStyle.None;
 
             this.Controls.Add(this.chromiumWebBrowser);
+        }
+
+        public class NotificationRequest
+        {
+            public Achievement Achievement { get; set; }
+            public GameSummary GameSummary { get; set; }
+            public GameAchievementSummary GameAchievementSummary { get; set; }
         }
 
         public CefSharp.WinForms.ChromiumWebBrowser chromiumWebBrowser;

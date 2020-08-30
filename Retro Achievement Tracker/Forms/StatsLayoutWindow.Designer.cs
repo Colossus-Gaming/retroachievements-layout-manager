@@ -253,7 +253,7 @@ namespace Retro_Achievement_Tracker
             // StatsLayoutWindow
             // 
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(744, 367);
+            this.ClientSize = new System.Drawing.Size(1000, 367);
             this.Controls.Add(this.statsGroupBox);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "StatsLayoutWindow";

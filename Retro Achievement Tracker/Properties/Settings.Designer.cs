@@ -310,5 +310,125 @@ namespace Retro_Achievement_Tracker.Properties {
                 this["notification_background_color"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool notification_custom_achievement_enable {
+            get {
+                return ((bool)(this["notification_custom_achievement_enable"]));
+            }
+            set {
+                this["notification_custom_achievement_enable"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool notification_custom_mastery_enable {
+            get {
+                return ((bool)(this["notification_custom_mastery_enable"]));
+            }
+            set {
+                this["notification_custom_mastery_enable"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string notification_custom_achievement_file {
+            get {
+                return ((string)(this["notification_custom_achievement_file"]));
+            }
+            set {
+                this["notification_custom_achievement_file"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string notification_custom_mastery_file {
+            get {
+                return ((string)(this["notification_custom_mastery_file"]));
+            }
+            set {
+                this["notification_custom_mastery_file"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-15")]
+        public int notification_custom_achievement_x {
+            get {
+                return ((int)(this["notification_custom_achievement_x"]));
+            }
+            set {
+                this["notification_custom_achievement_x"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public int notification_custom_achievement_y {
+            get {
+                return ((int)(this["notification_custom_achievement_y"]));
+            }
+            set {
+                this["notification_custom_achievement_y"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-15")]
+        public int notification_custom_mastery_x {
+            get {
+                return ((int)(this["notification_custom_mastery_x"]));
+            }
+            set {
+                this["notification_custom_mastery_x"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public int notification_custom_mastery_y {
+            get {
+                return ((int)(this["notification_custom_mastery_y"]));
+            }
+            set {
+                this["notification_custom_mastery_y"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1.00")]
+        public decimal notification_custom_achievement_scale {
+            get {
+                return ((decimal)(this["notification_custom_achievement_scale"]));
+            }
+            set {
+                this["notification_custom_achievement_scale"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1.00")]
+        public decimal notification_custom_mastery_scale {
+            get {
+                return ((decimal)(this["notification_custom_mastery_scale"]));
+            }
+            set {
+                this["notification_custom_mastery_scale"] = value;
+            }
+        }
     }
 }

@@ -100,6 +100,7 @@ namespace Retro_Achievement_Tracker
                 if (gameChange)
                 {
                     FocusLayoutWindow.SetFocus();
+                    NotificationLayoutWindow.SetCurrentGame(UserSummary.GameSummaries[0], UserSummary.GameAchievementSummaries[0]);
                 }
                 else if (UnlockedAchievements.Count > 0)
                 {
@@ -122,7 +123,7 @@ namespace Retro_Achievement_Tracker
                     if (UnlockedAchievements.Count == CurrentGame.Achievements.Count && OldUnlockedAchievements.Count < CurrentGame.Achievements.Count)
                     {
                         FocusLayoutWindow.HideFocus();
-                        NotificationLayoutWindow.EnqueueMasteryNotification(UserSummary.GameSummaries[0], UserSummary.GameAchievementSummaries[0]);
+                        NotificationLayoutWindow.EnqueueMasteryNotification();
                     }
                 }
 
@@ -615,7 +616,10 @@ namespace Retro_Achievement_Tracker
             {
                 FocusLayoutWindow.CurrentlyFocusedIndex -= UnlockedAchievements.Count - OldUnlockedAchievements.Count;
             }
+
             FocusLayoutWindow.SetLockedAchievements(LockedAchievements);
+
+            NotificationLayoutWindow.SetReplayMasteryButton(LockedAchievements.Count == 0);
         }
 
         private void MainPage_FormClosed(object sender, FormClosedEventArgs e)

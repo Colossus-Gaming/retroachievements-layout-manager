@@ -81,6 +81,16 @@ namespace Retro_Achievement_Tracker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] EightBitDragon_anqx {
+            get {
+                object obj = ResourceManager.GetObject("EightBitDragon_anqx", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
         ///&lt;html&gt;
         ///&lt;head&gt;
@@ -89,71 +99,16 @@ namespace Retro_Achievement_Tracker.Properties {
         ///    &lt;script src=&quot;https://code.jquery.com/jquery-3.5.1.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
         ///    &lt;script id=&quot;focus-achievement-scripts&quot;&gt;
         ///
-        ///        function setFocus(newFocusAchievementName, newFocusAchievementImageLink, newFocusAchievementDescription, newFocusAchievementPoints) {
-        ///            $(&quot;#focus-achievement-name&quot;).hide();
-        ///            $(&quot;#focus-achievement-points&quot;).hide();
-        ///            $(&quot;#focus-achievem [rest of string was truncated]&quot;;.
+        ///        function adjustFont() {
+        ///            var nameValue = 100;
+        ///            var descriptionValue = 100;
+        ///
+        ///            var focusName = document.getElementById(&apos;focus-achievement-name&apos;);
+        ///            var focusDescriptionElement = document.getElementById(&apos;focus-achievement- [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string DefaultFocusWindow {
+        internal static string FocusWindow {
             get {
-                return ResourceManager.GetString("DefaultFocusWindow", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
-        ///&lt;html&gt;
-        ///&lt;head&gt;
-        ///    &lt;title&gt;Notification Window&lt;/title&gt;
-        ///    &lt;meta charset=&quot;UTF-8&quot;&gt;
-        ///    &lt;script src=&quot;https://code.jquery.com/jquery-3.5.1.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
-        ///    &lt;script id=&quot;achievement-pop-script&quot;&gt;
-        ///
-        ///        function promptUser() {
-        ///
-        ///        }
-        ///
-        ///        function achievementNotification(achievementName, achievementBadge, achievementDescription, achievementPoints) {
-        ///            $(&quot;#achievement-pop-name&quot;).text(achievementName);
-        ///            $(&quot;#achievement-pop-descri [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string DefaultNotificationWindow {
-            get {
-                return ResourceManager.GetString("DefaultNotificationWindow", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
-        ///&lt;html&gt;
-        ///&lt;head&gt;
-        ///    &lt;title&gt;Stats Window&lt;/title&gt;
-        ///    &lt;meta charset=&quot;UTF-8&quot;&gt;
-        ///    &lt;script src=&quot;https://code.jquery.com/jquery-3.5.1.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
-        ///    &lt;script id=&quot;ra-stats-scripts&quot;&gt;
-        ///        function setRank(value) {
-        ///            $(&apos;#ra-stats-rank-img&apos;).attr(&apos;src&apos;, &apos;disk://default-rank-image&apos;);
-        ///
-        ///            var difference = value;
-        ///            var originalValue = $(&apos;#ra-stats-rank&apos;)[0].innerHTML;
-        ///
-        ///            $(&apos;#ra-stats-rank&apos;).text(value + &apos;&apos;);
-        ///
-        ///            [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string DefaultStatsWindow {
-            get {
-                return ResourceManager.GetString("DefaultStatsWindow", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] EightBitDragon_anqx {
-            get {
-                object obj = ResourceManager.GetObject("EightBitDragon_anqx", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("FocusWindow", resourceCulture);
             }
         }
         
@@ -228,6 +183,27 @@ namespace Retro_Achievement_Tracker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+        ///&lt;html&gt;
+        ///&lt;head&gt;
+        ///    &lt;title&gt;Notification Window&lt;/title&gt;
+        ///    &lt;meta charset=&quot;UTF-8&quot;&gt;
+        ///    &lt;script src=&quot;https://code.jquery.com/jquery-3.5.1.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+        ///    &lt;script id=&quot;achievement-pop-script&quot;&gt;
+        ///        function adjustFont() {
+        ///            var nameValue = 100;
+        ///            var descriptionValue = 100;
+        ///
+        ///            var focusName = document.getElementById(&apos;achievement-pop-name&apos;);
+        ///            var focusDescriptionElement = document.getElementById(&apos;achievement-pop-de [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string NotificationWindow {
+            get {
+                return ResourceManager.GetString("NotificationWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap points_image {
@@ -274,6 +250,30 @@ namespace Retro_Achievement_Tracker.Properties {
             get {
                 object obj = ResourceManager.GetObject("site_awards_image", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+        ///&lt;html&gt;
+        ///&lt;head&gt;
+        ///    &lt;title&gt;Stats Window&lt;/title&gt;
+        ///    &lt;meta charset=&quot;UTF-8&quot;&gt;
+        ///    &lt;script src=&quot;https://code.jquery.com/jquery-3.5.1.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+        ///    &lt;script id=&quot;ra-stats-scripts&quot;&gt;
+        ///
+        ///        function setFontSize(value) {
+        ///            var all = document.getElementsByClassName(&apos;has-font&apos;);
+        ///
+        ///            for (var i = 0; i &lt; all.length; i++) {
+        ///                all[i].style.fontSize = value;
+        ///            }
+        ///
+        ///            var imageColumn = document.getElementById(&apos;ima [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string StatsWindow {
+            get {
+                return ResourceManager.GetString("StatsWindow", resourceCulture);
             }
         }
         

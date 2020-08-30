@@ -91,7 +91,7 @@ namespace Retro_Achievement_Tracker
         {
             base.OnLoad(e);
             this.chromiumWebBrowser.FrameLoadEnd += ChromiumWebBrowser_FrameLoadEnd;
-            this.chromiumWebBrowser.LoadHtml(Resources.DefaultFocusWindow);
+            this.chromiumWebBrowser.LoadHtml(Resources.FocusWindow);
         }
 
         private void ChromiumWebBrowser_FrameLoadEnd(object sender, FrameLoadEndEventArgs e)

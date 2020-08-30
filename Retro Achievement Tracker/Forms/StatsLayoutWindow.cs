@@ -77,7 +77,7 @@ namespace Retro_Achievement_Tracker
         {
             base.OnLoad(e);
             this.chromiumWebBrowser.FrameLoadEnd += ChromiumWebBrowser_FrameLoadEnd;
-            this.chromiumWebBrowser.LoadHtml(Resources.DefaultStatsWindow);
+            this.chromiumWebBrowser.LoadHtml(Resources.StatsWindow);
         }
 
         public async void SetAwards(int awards)

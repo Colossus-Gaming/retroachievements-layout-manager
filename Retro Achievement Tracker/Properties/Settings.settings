@@ -74,5 +74,35 @@
     <Setting Name="notification_background_color" Type="System.String" Scope="User">
       <Value Profile="(Default)">#CCCCCC</Value>
     </Setting>
+    <Setting Name="notification_custom_achievement_enable" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="notification_custom_mastery_enable" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="notification_custom_achievement_file" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="notification_custom_mastery_file" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="notification_custom_achievement_x" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">-15</Value>
+    </Setting>
+    <Setting Name="notification_custom_achievement_y" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="notification_custom_mastery_x" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">-15</Value>
+    </Setting>
+    <Setting Name="notification_custom_mastery_y" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="notification_custom_achievement_scale" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">1.00</Value>
+    </Setting>
+    <Setting Name="notification_custom_mastery_scale" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">1.00</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

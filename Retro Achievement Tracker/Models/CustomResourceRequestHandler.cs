@@ -16,12 +16,12 @@ namespace Retro_Achievement_Tracker.Models
             // - Uses the Default ResourceHandler implementation
             switch (request.Url)
             {
-                case "disk://default-background": return ResourceHandler.FromByteArray(GetBitmapAsByteArray(Properties.Resources.notification_background));
-                case "disk://default-rank-image": return ResourceHandler.FromByteArray(GetBitmapAsByteArray(Properties.Resources.rank_image));
-                case "disk://default-points-image": return ResourceHandler.FromByteArray(GetBitmapAsByteArray(Properties.Resources.points_image));
-                case "disk://default-site-awards-image": return ResourceHandler.FromByteArray(GetBitmapAsByteArray(Properties.Resources.site_awards_image));
-                case "disk://default-game-achievements-image": return ResourceHandler.FromByteArray(GetBitmapAsByteArray(Properties.Resources.game_achievements_image));
-                case "disk://default-game-points-image": return ResourceHandler.FromByteArray(GetBitmapAsByteArray(Properties.Resources.game_points_image));
+                case "disk://background": return ResourceHandler.FromByteArray(GetBitmapAsByteArray(Properties.Resources.notification_background));
+                case "disk://rank-image": return ResourceHandler.FromByteArray(GetBitmapAsByteArray(Properties.Resources.rank_image));
+                case "disk://points-image": return ResourceHandler.FromByteArray(GetBitmapAsByteArray(Properties.Resources.points_image));
+                case "disk://site-awards-image": return ResourceHandler.FromByteArray(GetBitmapAsByteArray(Properties.Resources.site_awards_image));
+                case "disk://game-achievements-image": return ResourceHandler.FromByteArray(GetBitmapAsByteArray(Properties.Resources.game_achievements_image));
+                case "disk://game-points-image": return ResourceHandler.FromByteArray(GetBitmapAsByteArray(Properties.Resources.game_points_image));
             }
 
             return ResourceHandler.FromFilePath("" + request.Url.Replace("disk://", ""));
