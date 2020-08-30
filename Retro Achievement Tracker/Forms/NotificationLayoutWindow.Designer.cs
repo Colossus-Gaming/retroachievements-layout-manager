@@ -40,7 +40,6 @@
             this.customMasteryXNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.replayGameMasteryButton = new System.Windows.Forms.Button();
             this.showGameMasteryButton = new System.Windows.Forms.Button();
-            this.editFileLocationMastery = new System.Windows.Forms.CheckBox();
             this.achievementCustomizationGroupbox = new System.Windows.Forms.GroupBox();
             this.scaleLabel1 = new System.Windows.Forms.Label();
             this.scaleAchievementNumericUpDown = new System.Windows.Forms.NumericUpDown();
@@ -74,6 +73,10 @@
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.fadeOutLabel1 = new System.Windows.Forms.Label();
+            this.fadeOutLabel2 = new System.Windows.Forms.Label();
+            this.fadeOutAchievementNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.fadeOutMasteryNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.masteryCustomizationGroupbox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scaleMasteryNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.customMasteryYNumericUpDown)).BeginInit();
@@ -87,10 +90,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.fontOutlineSizeUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontOutlineColorDisplayBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontColorDisplayBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fadeOutAchievementNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fadeOutMasteryNumericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // masteryCustomizationGroupbox
             // 
+            this.masteryCustomizationGroupbox.Controls.Add(this.fadeOutMasteryNumericUpDown);
+            this.masteryCustomizationGroupbox.Controls.Add(this.fadeOutLabel2);
             this.masteryCustomizationGroupbox.Controls.Add(this.scaleLabel2);
             this.masteryCustomizationGroupbox.Controls.Add(this.yPositionLabel2);
             this.masteryCustomizationGroupbox.Controls.Add(this.scaleMasteryNumericUpDown);
@@ -161,19 +168,19 @@
             0,
             0,
             0});
-            this.scaleMasteryNumericUpDown.ValueChanged += MasteryScaleNumericUpDown_Changed;
+            this.scaleMasteryNumericUpDown.ValueChanged += ScaleMasteryNumericUpDown_ValueChanged;
             // 
             // masteryEditOultineCheckbox
             // 
             this.masteryEditOultineCheckbox.AutoSize = true;
             this.masteryEditOultineCheckbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.masteryEditOultineCheckbox.Location = new System.Drawing.Point(6, 196);
+            this.masteryEditOultineCheckbox.Location = new System.Drawing.Point(121, 83);
             this.masteryEditOultineCheckbox.Name = "masteryEditOultineCheckbox";
             this.masteryEditOultineCheckbox.Size = new System.Drawing.Size(94, 23);
             this.masteryEditOultineCheckbox.TabIndex = 20;
             this.masteryEditOultineCheckbox.Text = "Edit Mode";
             this.masteryEditOultineCheckbox.UseVisualStyleBackColor = true;
-            this.masteryEditOultineCheckbox.CheckedChanged += EditCustomMasteryCheckbox_CheckChanged;
+            this.masteryEditOultineCheckbox.CheckedChanged += MasteryEditOultineCheckbox_CheckedChanged;
             // 
             // xPositionLabel2
             // 
@@ -195,7 +202,7 @@
             this.selectCustomMasteryNotificationButton.TabIndex = 15;
             this.selectCustomMasteryNotificationButton.Text = "Select File";
             this.selectCustomMasteryNotificationButton.UseVisualStyleBackColor = true;
-            this.selectCustomMasteryNotificationButton.Click += SelectMasteryFileButton_Click;
+            this.selectCustomMasteryNotificationButton.Click += SelectCustomMasteryNotificationButton_Click;
             // 
             // customMasteryYNumericUpDown
             // 
@@ -214,20 +221,20 @@
             this.customMasteryYNumericUpDown.Name = "customMasteryYNumericUpDown";
             this.customMasteryYNumericUpDown.Size = new System.Drawing.Size(97, 23);
             this.customMasteryYNumericUpDown.TabIndex = 19;
-            this.customMasteryYNumericUpDown.ValueChanged += MasteryYPositionNumericUpDown_Changed;
+            this.customMasteryYNumericUpDown.ValueChanged += CustomMasteryYNumericUpDown_ValueChanged;
             // 
-            // useCustomMasteryAlertCheckbox
+            // useCustomMasteryCheckbox
             // 
             this.useCustomMasteryCheckbox.AutoSize = true;
             this.useCustomMasteryCheckbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.useCustomMasteryCheckbox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.useCustomMasteryCheckbox.Location = new System.Drawing.Point(6, 62);
-            this.useCustomMasteryCheckbox.Name = "useCustomMasteryAlertCheckbox";
+            this.useCustomMasteryCheckbox.Name = "useCustomMasteryCheckbox";
             this.useCustomMasteryCheckbox.Size = new System.Drawing.Size(138, 23);
             this.useCustomMasteryCheckbox.TabIndex = 13;
             this.useCustomMasteryCheckbox.Text = "Use custom alert";
             this.useCustomMasteryCheckbox.UseVisualStyleBackColor = true;
-            this.useCustomMasteryCheckbox.CheckedChanged += EnableCustomMasteryCheckbox_CheckChanged;
+            this.useCustomMasteryCheckbox.CheckedChanged += UseCustomMasteryCheckbox_CheckedChanged;
             // 
             // customMasteryXNumericUpDown
             // 
@@ -246,7 +253,7 @@
             this.customMasteryXNumericUpDown.Name = "customMasteryXNumericUpDown";
             this.customMasteryXNumericUpDown.Size = new System.Drawing.Size(97, 23);
             this.customMasteryXNumericUpDown.TabIndex = 18;
-            this.customMasteryXNumericUpDown.ValueChanged += MasteryXPositionNumericUpDown_Changed;
+            this.customMasteryXNumericUpDown.ValueChanged += CustomMasteryXNumericUpDown_ValueChanged;
             // 
             // replayGameMasteryButton
             // 
@@ -259,7 +266,7 @@
             this.replayGameMasteryButton.TabIndex = 3;
             this.replayGameMasteryButton.Text = "Replay";
             this.replayGameMasteryButton.UseVisualStyleBackColor = false;
-            this.replayGameMasteryButton.Click += ReplayGameMasteryNotification;
+            this.replayGameMasteryButton.Click += ReplayGameMasteryButton_Click;
             // 
             // showGameMasteryButton
             // 
@@ -272,10 +279,12 @@
             this.showGameMasteryButton.TabIndex = 2;
             this.showGameMasteryButton.Text = "Show";
             this.showGameMasteryButton.UseVisualStyleBackColor = false;
-            this.showGameMasteryButton.Click += ShowGameMasteryNotification;
+            this.showGameMasteryButton.Click += ShowGameMasteryButton_Click;
             // 
             // achievementCustomizationGroupbox
             // 
+            this.achievementCustomizationGroupbox.Controls.Add(this.fadeOutAchievementNumericUpDown);
+            this.achievementCustomizationGroupbox.Controls.Add(this.fadeOutLabel1);
             this.achievementCustomizationGroupbox.Controls.Add(this.scaleLabel1);
             this.achievementCustomizationGroupbox.Controls.Add(this.scaleAchievementNumericUpDown);
             this.achievementCustomizationGroupbox.Controls.Add(this.yPositionLabel1);
@@ -335,7 +344,7 @@
             0,
             0,
             0});
-            this.scaleAchievementNumericUpDown.ValueChanged += AchievementScaleNumericUpDown_Changed;
+            this.scaleAchievementNumericUpDown.ValueChanged += ScaleAchievementNumericUpDown_ValueChanged;
             // 
             // yPositionLabel1
             // 
@@ -362,13 +371,13 @@
             // 
             this.acheivementEditOutlineCheckbox.AutoSize = true;
             this.acheivementEditOutlineCheckbox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.acheivementEditOutlineCheckbox.Location = new System.Drawing.Point(9, 196);
+            this.acheivementEditOutlineCheckbox.Location = new System.Drawing.Point(121, 83);
             this.acheivementEditOutlineCheckbox.Name = "acheivementEditOutlineCheckbox";
             this.acheivementEditOutlineCheckbox.Size = new System.Drawing.Size(94, 23);
             this.acheivementEditOutlineCheckbox.TabIndex = 17;
             this.acheivementEditOutlineCheckbox.Text = "Edit Mode";
             this.acheivementEditOutlineCheckbox.UseVisualStyleBackColor = true;
-            this.acheivementEditOutlineCheckbox.CheckedChanged += EditCustomAchievementCheckbox_CheckChanged;
+            this.acheivementEditOutlineCheckbox.CheckedChanged += AcheivementEditOutlineCheckbox_CheckedChanged;
             // 
             // customAchievementYNumericUpDown
             // 
@@ -387,7 +396,7 @@
             this.customAchievementYNumericUpDown.Name = "customAchievementYNumericUpDown";
             this.customAchievementYNumericUpDown.Size = new System.Drawing.Size(94, 23);
             this.customAchievementYNumericUpDown.TabIndex = 16;
-            this.customAchievementYNumericUpDown.ValueChanged += AchievementYPositionNumericUpDown_Changed;
+            this.customAchievementYNumericUpDown.ValueChanged += CustomAchievementYNumericUpDown_ValueChanged;
             // 
             // customAchievementXNumericUpDown
             // 
@@ -406,7 +415,7 @@
             this.customAchievementXNumericUpDown.Name = "customAchievementXNumericUpDown";
             this.customAchievementXNumericUpDown.Size = new System.Drawing.Size(94, 23);
             this.customAchievementXNumericUpDown.TabIndex = 15;
-            this.customAchievementXNumericUpDown.ValueChanged += AchievementXPositionNumericUpDown_Changed;
+            this.customAchievementXNumericUpDown.ValueChanged += CustomAchievementXNumericUpDown_ValueChanged;
             // 
             // selectCustomAchievementButton
             // 
@@ -418,7 +427,7 @@
             this.selectCustomAchievementButton.TabIndex = 14;
             this.selectCustomAchievementButton.Text = "Select File";
             this.selectCustomAchievementButton.UseVisualStyleBackColor = true;
-            this.selectCustomAchievementButton.Click += SelectAchievementFileButton_Click;
+            this.selectCustomAchievementButton.Click += SelectCustomAchievementButton_Click;
             // 
             // useCustomAchievementCheckbox
             // 
@@ -431,7 +440,7 @@
             this.useCustomAchievementCheckbox.TabIndex = 13;
             this.useCustomAchievementCheckbox.Text = "Use custom alert";
             this.useCustomAchievementCheckbox.UseVisualStyleBackColor = true;
-            this.useCustomAchievementCheckbox.CheckedChanged += EnableCustomAchievementCheckbox_CheckChanged;
+            this.useCustomAchievementCheckbox.CheckedChanged += UseCustomAchievementCheckbox_CheckedChanged;
             // 
             // replayAchievementButton
             // 
@@ -444,7 +453,7 @@
             this.replayAchievementButton.TabIndex = 3;
             this.replayAchievementButton.Text = "Replay";
             this.replayAchievementButton.UseVisualStyleBackColor = false;
-            this.replayAchievementButton.Click += ReplayRecentAchievement;
+            this.replayAchievementButton.Click += ReplayAchievementButton_Click;
             // 
             // showAchievementButton
             // 
@@ -457,7 +466,7 @@
             this.showAchievementButton.TabIndex = 2;
             this.showAchievementButton.Text = "Show";
             this.showAchievementButton.UseVisualStyleBackColor = false;
-            this.showAchievementButton.Click += ShowAchievementNotification;
+            this.showAchievementButton.Click += ShowAchievementButton_Click;
             // 
             // fontCustomizationGroupBox
             // 
@@ -505,7 +514,6 @@
             this.backgroundColorPickerButton.TabIndex = 37;
             this.backgroundColorPickerButton.Text = "Picker";
             this.backgroundColorPickerButton.UseVisualStyleBackColor = true;
-            this.backgroundColorPickerButton.Click += backgroundColorPickerButton_Click;
             // 
             // backgroundColorDisplayBox
             // 
@@ -574,7 +582,6 @@
             0,
             0,
             0});
-            this.fontOutlineSizeUpDown.ValueChanged += FontOutlineSizeUpDown_ValueChanged;
             // 
             // fontOutlineCheckbox
             // 
@@ -586,7 +593,6 @@
             this.fontOutlineCheckbox.TabIndex = 27;
             this.fontOutlineCheckbox.Text = "Outline";
             this.fontOutlineCheckbox.UseVisualStyleBackColor = true;
-            this.fontOutlineCheckbox.CheckedChanged += FontOutlineCheckbox_CheckedChanged;
             // 
             // fontOutlineColorPickerButton
             // 
@@ -598,7 +604,6 @@
             this.fontOutlineColorPickerButton.TabIndex = 26;
             this.fontOutlineColorPickerButton.Text = "Picker";
             this.fontOutlineColorPickerButton.UseVisualStyleBackColor = true;
-            this.fontOutlineColorPickerButton.Click += fontOutlineColorPickerButton_Click;
             // 
             // fontOutlineColorDisplayBox
             // 
@@ -619,17 +624,16 @@
             this.fontFamilyNameLabel.TabIndex = 23;
             this.fontFamilyNameLabel.Text = "Name:";
             // 
-            // fontColorPicker
+            // fontColorPickerButton
             // 
             this.fontColorPickerButton.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fontColorPickerButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.fontColorPickerButton.Location = new System.Drawing.Point(124, 143);
-            this.fontColorPickerButton.Name = "fontColorPicker";
+            this.fontColorPickerButton.Name = "fontColorPickerButton";
             this.fontColorPickerButton.Size = new System.Drawing.Size(75, 23);
             this.fontColorPickerButton.TabIndex = 22;
             this.fontColorPickerButton.Text = "Picker";
             this.fontColorPickerButton.UseVisualStyleBackColor = true;
-            this.fontColorPickerButton.Click += fontColorPickerButton_Click;
             // 
             // fontColorDisplayBox
             // 
@@ -660,7 +664,6 @@
             this.fontSelectionButton.TabIndex = 19;
             this.fontSelectionButton.Text = "Select Font";
             this.fontSelectionButton.UseVisualStyleBackColor = true;
-            this.fontSelectionButton.Click += fontSelectionButton_Click;
             // 
             // fontFamilyLabel
             // 
@@ -672,13 +675,78 @@
             this.fontFamilyLabel.TabIndex = 18;
             this.fontFamilyLabel.Text = "Font Family";
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.Filter = "WEBM files (*.webm)|*.webm";
+            // 
+            // fadeOutLabel1
+            // 
+            this.fadeOutLabel1.AutoSize = true;
+            this.fadeOutLabel1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fadeOutLabel1.Location = new System.Drawing.Point(112, 198);
+            this.fadeOutLabel1.Name = "fadeOutLabel1";
+            this.fadeOutLabel1.Size = new System.Drawing.Size(103, 15);
+            this.fadeOutLabel1.TabIndex = 23;
+            this.fadeOutLabel1.Text = "(ms) | Fade";
+            // 
+            // fadeOutLabel2
+            // 
+            this.fadeOutLabel2.AutoSize = true;
+            this.fadeOutLabel2.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fadeOutLabel2.Location = new System.Drawing.Point(110, 198);
+            this.fadeOutLabel2.Name = "fadeOutLabel2";
+            this.fadeOutLabel2.Size = new System.Drawing.Size(103, 15);
+            this.fadeOutLabel2.TabIndex = 25;
+            this.fadeOutLabel2.Text = "(ms) | Fade";
+            // 
+            // fadeOutAchievementnumericUpDown
+            // 
+            this.fadeOutAchievementNumericUpDown.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fadeOutAchievementNumericUpDown.Location = new System.Drawing.Point(9, 196);
+            this.fadeOutAchievementNumericUpDown.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.fadeOutAchievementNumericUpDown.Minimum = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+            this.fadeOutAchievementNumericUpDown.Name = "fadeOutAchievementnumericUpDown";
+            this.fadeOutAchievementNumericUpDown.Size = new System.Drawing.Size(94, 23);
+            this.fadeOutAchievementNumericUpDown.TabIndex = 24;
+            this.fadeOutAchievementNumericUpDown.Value = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+            // 
+            // fadeOutMasteryNumericUpDown
+            // 
+            this.fadeOutMasteryNumericUpDown.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fadeOutMasteryNumericUpDown.Location = new System.Drawing.Point(6, 196);
+            this.fadeOutMasteryNumericUpDown.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.fadeOutMasteryNumericUpDown.Minimum = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+            this.fadeOutMasteryNumericUpDown.Name = "fadeOutMasteryNumericUpDown";
+            this.fadeOutMasteryNumericUpDown.Size = new System.Drawing.Size(97, 23);
+            this.fadeOutMasteryNumericUpDown.TabIndex = 25;
+            this.fadeOutMasteryNumericUpDown.Value = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+            // 
             // NotificationLayoutWindow
             // 
-
-            this.openFileDialog1.Filter = "WEBM files (*.webm)|*.webm"; 
-            this.openFileDialog1.CheckFileExists = true;
-            this.openFileDialog1.CheckPathExists = true;
-
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
@@ -704,6 +772,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.fontOutlineSizeUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontOutlineColorDisplayBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontColorDisplayBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fadeOutAchievementNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fadeOutMasteryNumericUpDown)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -716,7 +786,6 @@
         private System.Windows.Forms.Button showAchievementButton;
         private System.Windows.Forms.CheckBox useCustomAchievementCheckbox;
         private System.Windows.Forms.CheckBox useCustomMasteryCheckbox;
-        private System.Windows.Forms.CheckBox editFileLocationMastery;
         private System.Windows.Forms.Button replayGameMasteryButton;
         private System.Windows.Forms.Button showGameMasteryButton;
         private System.Windows.Forms.Label backgroundColorHexCodeLabel;
@@ -755,5 +824,9 @@
         private System.Windows.Forms.Label scaleLabel1;
         private System.Windows.Forms.NumericUpDown scaleAchievementNumericUpDown; 
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.NumericUpDown fadeOutMasteryNumericUpDown;
+        private System.Windows.Forms.Label fadeOutLabel2;
+        private System.Windows.Forms.NumericUpDown fadeOutAchievementNumericUpDown;
+        private System.Windows.Forms.Label fadeOutLabel1;
     }
 }

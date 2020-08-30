@@ -45,7 +45,6 @@ namespace Retro_Achievement_Tracker.Forms
                 return Settings.Default.notification_font_color_hex_code;
             }
         }
-
         private string FontOutlineColorHexCode
         {
             set
@@ -58,7 +57,6 @@ namespace Retro_Achievement_Tracker.Forms
                 return Settings.Default.notification_font_outline_color_hex;
             }
         }
-
         private string FontFamilyName
         {
             set
@@ -71,7 +69,6 @@ namespace Retro_Achievement_Tracker.Forms
                 return Settings.Default.notification_font_family_name;
             }
         }
-
         private int FontOutlineSize
         {
             set
@@ -84,7 +81,6 @@ namespace Retro_Achievement_Tracker.Forms
                 return Settings.Default.notification_font_outline_size;
             }
         }
-
         private string BackgroundColorHexCode
         {
             set
@@ -97,7 +93,6 @@ namespace Retro_Achievement_Tracker.Forms
                 return Settings.Default.notification_background_color;
             }
         }
-
         private bool CustomAchievementEnabled
         {
             set
@@ -110,7 +105,6 @@ namespace Retro_Achievement_Tracker.Forms
                 return Settings.Default.notification_custom_achievement_enable;
             }
         }
-
         private bool CustomMasteryEnabled
         {
             set
@@ -123,7 +117,6 @@ namespace Retro_Achievement_Tracker.Forms
                 return Settings.Default.notification_custom_mastery_enable;
             }
         }
-
         private int CustomAchievementX
         {
             set
@@ -136,7 +129,6 @@ namespace Retro_Achievement_Tracker.Forms
                 return Settings.Default.notification_custom_achievement_x;
             }
         }
-
         private int CustomAchievementY
         {
             set
@@ -149,7 +141,6 @@ namespace Retro_Achievement_Tracker.Forms
                 return Settings.Default.notification_custom_achievement_y;
             }
         }
-
         private int CustomMasteryX
         {
             set
@@ -162,7 +153,6 @@ namespace Retro_Achievement_Tracker.Forms
                 return Settings.Default.notification_custom_mastery_x;
             }
         }
-
         private int CustomMasteryY
         {
             set
@@ -175,7 +165,6 @@ namespace Retro_Achievement_Tracker.Forms
                 return Settings.Default.notification_custom_mastery_y;
             }
         }
-
         private decimal CustomAchievementScale
         {
             set
@@ -188,7 +177,6 @@ namespace Retro_Achievement_Tracker.Forms
                 return Settings.Default.notification_custom_achievement_scale;
             }
         }
-
         private decimal CustomMasteryScale
         {
             set
@@ -201,7 +189,30 @@ namespace Retro_Achievement_Tracker.Forms
                 return Settings.Default.notification_custom_mastery_scale;
             }
         }
-
+        private int CustomAchievementFadeOut
+        {
+            get
+            {
+                return Settings.Default.notification_custom_achievement_fade;
+            }
+            set
+            {
+                Settings.Default.notification_custom_achievement_fade = value;
+                Settings.Default.Save();
+            }
+        }
+        private int CustomMasteryFadeOut
+        {
+            get
+            {
+                return Settings.Default.notification_custom_mastery_fade;
+            }
+            set
+            {
+                Settings.Default.notification_custom_mastery_fade = value;
+                Settings.Default.Save();
+            }
+        }
         private string CustomAchievementFile
         {
             set
@@ -214,7 +225,6 @@ namespace Retro_Achievement_Tracker.Forms
                 return Settings.Default.notification_custom_achievement_file;
             }
         }
-
         private string CustomMasteryFile
         {
             set
@@ -270,6 +280,8 @@ namespace Retro_Achievement_Tracker.Forms
             this.customAchievementYNumericUpDown.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
             this.customMasteryXNumericUpDown.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
             this.customMasteryYNumericUpDown.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            this.fadeOutAchievementNumericUpDown.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            this.fadeOutMasteryNumericUpDown.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
 
             this.scaleLabel1.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
             this.scaleLabel2.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
@@ -277,6 +289,8 @@ namespace Retro_Achievement_Tracker.Forms
             this.xPositionLabel2.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
             this.yPositionLabel1.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
             this.yPositionLabel2.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            this.fadeOutLabel1.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            this.fadeOutLabel2.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
 
             this.backgroundColorPickerButton.Font = new Font(FontManager.GetFontFamilyByName("Eight Bit Dragon"), 9.75F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
 
@@ -322,6 +336,8 @@ namespace Retro_Achievement_Tracker.Forms
             this.customAchievementYNumericUpDown.Enabled = CustomAchievementEnabled;
             this.scaleAchievementNumericUpDown.Enabled = CustomAchievementEnabled;
             this.acheivementEditOutlineCheckbox.Enabled = CustomAchievementEnabled;
+            this.fadeOutAchievementNumericUpDown.Enabled = CustomAchievementEnabled;
+            this.fadeOutLabel1.Enabled = CustomAchievementEnabled;
 
             this.useCustomMasteryCheckbox.Checked = CustomMasteryEnabled;
             this.selectCustomMasteryNotificationButton.Enabled = CustomMasteryEnabled;
@@ -329,6 +345,8 @@ namespace Retro_Achievement_Tracker.Forms
             this.customMasteryYNumericUpDown.Enabled = CustomMasteryEnabled;
             this.scaleMasteryNumericUpDown.Enabled = CustomMasteryEnabled;
             this.masteryEditOultineCheckbox.Enabled = CustomMasteryEnabled;
+            this.fadeOutMasteryNumericUpDown.Enabled = CustomMasteryEnabled;
+            this.fadeOutLabel2.Enabled = CustomMasteryEnabled;
 
             this.customAchievementXNumericUpDown.Value = CustomAchievementX;
             this.customAchievementYNumericUpDown.Value = CustomAchievementY;
@@ -348,6 +366,14 @@ namespace Retro_Achievement_Tracker.Forms
             SetFontFamily();
             SetFontOutline();
             SetBackgroundColor();
+
+            SetAchievementLeft();
+            SetAchievementTop();
+            SetAchievementWidth();
+
+            SetMasteryLeft();
+            SetMasteryTop();
+            SetMasteryWidth();
 
             PromptUserInput();
         }
@@ -406,13 +432,13 @@ namespace Retro_Achievement_Tracker.Forms
                                     {
                                         SendAchievementNotification(notificationRequest.Achievement);
                                         stopwatch = Stopwatch.StartNew();
-                                        delayInMilli = 7000;
+                                        delayInMilli = this.useCustomAchievementCheckbox.Checked ? GetVideoDuration(CustomAchievementFile) : 7000;
                                     }
                                     else if (notificationRequest.GameAchievementSummary != null && notificationRequest.GameSummary != null)
                                     {
                                         SendMasteryNotification();
                                         stopwatch = Stopwatch.StartNew();
-                                        delayInMilli = 11000;
+                                        delayInMilli = this.useCustomMasteryCheckbox.Checked ? GetVideoDuration(CustomMasteryFile) : 11000;
                                     }
                                 }
                             }
@@ -541,6 +567,8 @@ namespace Retro_Achievement_Tracker.Forms
                     }
                 }
             });
+
+            SendAchievementFadeAnimationTimeout();
         }
 
         private void SendMasteryNotification()
@@ -566,9 +594,21 @@ namespace Retro_Achievement_Tracker.Forms
                     }
                 }
             });
+
+            SendMasteryFadeAnimationTimeout();
         }
 
-        private void ShowAchievementNotification(object sender, EventArgs eventArgs)
+        private void SendAchievementFadeAnimationTimeout()
+        {
+            
+        }
+
+        private void SendMasteryFadeAnimationTimeout()
+        {
+            
+        }
+
+        private void ShowAchievementButton_Click(object sender, EventArgs eventArgs)
         {
             this.EnqueueAchievementNotification(
                 new Achievement()
@@ -580,12 +620,12 @@ namespace Retro_Achievement_Tracker.Forms
                 });
         }
 
-        private void ReplayRecentAchievement(object sender, EventArgs eventArgs)
+        private void ReplayAchievementButton_Click(object sender, EventArgs eventArgs)
         {
             this.EnqueueAchievementNotification(MostRecentAchievement);
         }
 
-        private void ShowGameMasteryNotification(object sender, EventArgs eventArgs)
+        private void ShowGameMasteryButton_Click(object sender, EventArgs eventArgs)
         {
             Invoke((MethodInvoker)delegate
             {
@@ -607,7 +647,7 @@ namespace Retro_Achievement_Tracker.Forms
             });
         }
 
-        private void ReplayGameMasteryNotification(object sender, EventArgs eventArgs)
+        private void ReplayGameMasteryButton_Click(object sender, EventArgs eventArgs)
         {
             this.EnqueueMasteryNotification();
         }
@@ -785,9 +825,11 @@ namespace Retro_Achievement_Tracker.Forms
 
         private async void SetAchievementLeft()
         {
+            var left = this.useCustomAchievementCheckbox.Checked ? CustomAchievementX : -15;
+
             if (this.Visible)
             {
-                string script = "setAchievementLeft('" + CustomAchievementX + "px');";
+                string script = "setAchievementLeft('" + left + "px');";
 
                 LogCallback(CALLER_ID + "[setAchievementLeft] Sending: [" + script + "]");
 
@@ -804,9 +846,11 @@ namespace Retro_Achievement_Tracker.Forms
 
         private async void SetAchievementTop()
         {
+            var top = this.useCustomAchievementCheckbox.Checked ? CustomAchievementY : 5;
+
             if (this.Visible)
             {
-                string script = "setAchievementTop('" + CustomAchievementY + "px');";
+                string script = "setAchievementTop('" + top + "px');";
 
                 LogCallback(CALLER_ID + "[setAchievementTop] Sending: [" + script + "]");
 
@@ -823,9 +867,11 @@ namespace Retro_Achievement_Tracker.Forms
 
         private async void SetMasteryLeft()
         {
+            var left = this.useCustomMasteryCheckbox.Checked ? CustomMasteryX : -15;
+
             if (this.Visible)
             {
-                string script = "setMasteryLeft('" + CustomMasteryX + "px');";
+                string script = "setMasteryLeft('" + left + "px');";
 
                 LogCallback(CALLER_ID + "[setMasteryLeft] Sending: [" + script + "]");
 
@@ -842,9 +888,11 @@ namespace Retro_Achievement_Tracker.Forms
 
         private async void SetMasteryTop()
         {
+            var top = this.useCustomMasteryCheckbox.Checked ? CustomMasteryY : 5;
+
             if (this.Visible)
             {
-                string script = "setMasteryTop('" + CustomMasteryY + "px');";
+                string script = "setMasteryTop('" + top + "px');";
 
                 LogCallback(CALLER_ID + "[setMasteryTop] Sending: [" + script + "]");
 
@@ -910,16 +958,24 @@ namespace Retro_Achievement_Tracker.Forms
             }
         }
 
-        private void EnableCustomAchievementCheckbox_CheckChanged(object sender, EventArgs eventArgs)
+        private void UseCustomAchievementCheckbox_CheckedChanged(object sender, EventArgs eventArgs)
         {
             CustomAchievementEnabled = ((CheckBox)sender).Checked;
 
             this.useCustomAchievementCheckbox.Checked = CustomAchievementEnabled;
             this.selectCustomAchievementButton.Enabled = CustomAchievementEnabled;
+
             this.customAchievementXNumericUpDown.Enabled = CustomAchievementEnabled;
             this.customAchievementYNumericUpDown.Enabled = CustomAchievementEnabled;
             this.scaleAchievementNumericUpDown.Enabled = CustomAchievementEnabled;
-            this.acheivementEditOutlineCheckbox.Enabled = CustomAchievementEnabled;
+            this.fadeOutAchievementNumericUpDown.Enabled = CustomAchievementEnabled;
+
+            this.masteryEditOultineCheckbox.Enabled = CustomAchievementEnabled;
+
+            this.xPositionLabel2.Enabled = CustomAchievementEnabled;
+            this.yPositionLabel2.Enabled = CustomAchievementEnabled;
+            this.scaleLabel2.Enabled = CustomAchievementEnabled;
+            this.fadeOutLabel2.Enabled = CustomAchievementEnabled;
 
             if (!CustomAchievementEnabled)
             {
@@ -929,22 +985,30 @@ namespace Retro_Achievement_Tracker.Forms
             }
             else if (string.IsNullOrEmpty(CustomAchievementFile))
             {
-                SelectAchievementFileButton_Click(null, null);
+                SelectCustomAchievementButton_Click(null, null);
             }
 
             SetupBrowser();
         }
 
-        private void EnableCustomMasteryCheckbox_CheckChanged(object sender, EventArgs eventArgs)
+        private void UseCustomMasteryCheckbox_CheckedChanged(object sender, EventArgs eventArgs)
         {
             CustomMasteryEnabled = ((CheckBox)sender).Checked;
 
             this.useCustomMasteryCheckbox.Checked = CustomMasteryEnabled;
             this.selectCustomMasteryNotificationButton.Enabled = CustomMasteryEnabled;
+
             this.customMasteryXNumericUpDown.Enabled = CustomMasteryEnabled;
             this.customMasteryYNumericUpDown.Enabled = CustomMasteryEnabled;
             this.scaleMasteryNumericUpDown.Enabled = CustomMasteryEnabled;
+            this.fadeOutMasteryNumericUpDown.Enabled = CustomMasteryEnabled;
+
             this.masteryEditOultineCheckbox.Enabled = CustomMasteryEnabled;
+
+            this.xPositionLabel2.Enabled = CustomMasteryEnabled;
+            this.yPositionLabel2.Enabled = CustomMasteryEnabled;
+            this.scaleLabel2.Enabled = CustomMasteryEnabled;
+            this.fadeOutLabel2.Enabled = CustomMasteryEnabled;
 
             if (!CustomMasteryEnabled)
             {
@@ -954,13 +1018,13 @@ namespace Retro_Achievement_Tracker.Forms
             }
             else if (string.IsNullOrEmpty(CustomMasteryFile))
             {
-                SelectMasteryFileButton_Click(null, null);
+                SelectCustomMasteryNotificationButton_Click(null, null);
             }
 
             SetupBrowser();
         }
 
-        private void EditCustomAchievementCheckbox_CheckChanged(object sender, EventArgs eventArgs)
+        private void AcheivementEditOutlineCheckbox_CheckedChanged(object sender, EventArgs eventArgs)
         {
             if (((CheckBox)sender).Checked)
             {
@@ -972,7 +1036,7 @@ namespace Retro_Achievement_Tracker.Forms
             }
         }
 
-        private void EditCustomMasteryCheckbox_CheckChanged(object sender, EventArgs eventArgs)
+        private void MasteryEditOultineCheckbox_CheckedChanged(object sender, EventArgs eventArgs)
         {
             if (((CheckBox)sender).Checked)
             {
@@ -984,40 +1048,50 @@ namespace Retro_Achievement_Tracker.Forms
             }
         }
 
-        private void AchievementXPositionNumericUpDown_Changed(object sender, EventArgs eventArgs)
+        private void CustomAchievementXNumericUpDown_ValueChanged(object sender, EventArgs eventArgs)
         {
             CustomAchievementX = Convert.ToInt32(((NumericUpDown)sender).Value);
             SetAchievementLeft();
         }
 
-        private void AchievementYPositionNumericUpDown_Changed(object sender, EventArgs eventArgs)
+        private void CustomAchievementYNumericUpDown_ValueChanged(object sender, EventArgs eventArgs)
         {
             CustomAchievementY = Convert.ToInt32(((NumericUpDown)sender).Value);
             SetAchievementTop();
         }
 
-        private void MasteryXPositionNumericUpDown_Changed(object sender, EventArgs eventArgs)
+        private void CustomMasteryXNumericUpDown_ValueChanged(object sender, EventArgs eventArgs)
         {
             CustomMasteryX = Convert.ToInt32(((NumericUpDown)sender).Value);
             SetMasteryLeft();
         }
 
-        private void MasteryYPositionNumericUpDown_Changed(object sender, EventArgs eventArgs)
+        private void CustomMasteryYNumericUpDown_ValueChanged(object sender, EventArgs eventArgs)
         {
             CustomMasteryY = Convert.ToInt32(((NumericUpDown)sender).Value);
             SetMasteryTop();
         }
 
-        private void AchievementScaleNumericUpDown_Changed(object sender, EventArgs eventArgs)
+        private void ScaleAchievementNumericUpDown_ValueChanged(object sender, EventArgs eventArgs)
         {
             CustomAchievementScale = this.scaleAchievementNumericUpDown.Value;
             SetAchievementWidth();
         }
 
-        private void MasteryScaleNumericUpDown_Changed(object sender, EventArgs eventArgs)
+        private void ScaleMasteryNumericUpDown_ValueChanged(object sender, EventArgs eventArgs)
         {
             CustomAchievementScale = this.scaleMasteryNumericUpDown.Value;
             SetMasteryWidth();
+        }
+
+        private void CustomAchievementFadeOutNumericUpDown_Changed(object sender, EventArgs eventArgs)
+        {
+            CustomAchievementFadeOut = Convert.ToInt32(((NumericUpDown)sender).Value);
+        }
+
+        private void CustomMasteryFadeOutNumericUpDown_Changed(object sender, EventArgs eventArgs)
+        {
+            CustomMasteryFadeOut = Convert.ToInt32(((NumericUpDown)sender).Value);
         }
 
         private void fontSelectionButton_Click(object sender, EventArgs e)
@@ -1066,7 +1140,6 @@ namespace Retro_Achievement_Tracker.Forms
                 SetFontOutline();
             }
         }
-
 
         private void backgroundColorPickerButton_Click(object sender, EventArgs e)
         {
@@ -1131,7 +1204,7 @@ namespace Retro_Achievement_Tracker.Forms
             return "#" + c.R.ToString("X2") + c.G.ToString("X2") + c.B.ToString("X2");
         }
 
-        private void SelectAchievementFileButton_Click(object sender, EventArgs eventArgs)
+        private void SelectCustomAchievementButton_Click(object sender, EventArgs eventArgs)
         {
             if (this.openFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -1139,7 +1212,7 @@ namespace Retro_Achievement_Tracker.Forms
             }
         }
 
-        private void SelectMasteryFileButton_Click(object sender, EventArgs eventArgs)
+        private void SelectCustomMasteryNotificationButton_Click(object sender, EventArgs eventArgs)
         {
             if (this.openFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -1160,6 +1233,19 @@ namespace Retro_Achievement_Tracker.Forms
 
             return Convert.ToInt32(frameSize.Substring(0, frameSize.IndexOf("x")));
         }
+
+        private int GetVideoDuration(string input)
+        {
+            var inputFile = new MediaFile { Filename = input };
+
+            using (var engine = new Engine())
+            {
+                engine.GetMetadata(inputFile);
+            }
+
+            return Convert.ToInt32(inputFile.Metadata.Duration.TotalMilliseconds);
+        }
+
 
         private void SetupBrowser()
         {

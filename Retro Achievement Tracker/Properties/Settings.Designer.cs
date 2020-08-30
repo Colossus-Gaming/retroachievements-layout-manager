@@ -430,5 +430,29 @@ namespace Retro_Achievement_Tracker.Properties {
                 this["notification_custom_mastery_scale"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("300")]
+        public int notification_custom_achievement_fade {
+            get {
+                return ((int)(this["notification_custom_achievement_fade"]));
+            }
+            set {
+                this["notification_custom_achievement_fade"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("300")]
+        public int notification_custom_mastery_fade {
+            get {
+                return ((int)(this["notification_custom_mastery_fade"]));
+            }
+            set {
+                this["notification_custom_mastery_fade"] = value;
+            }
+        }
     }
 }

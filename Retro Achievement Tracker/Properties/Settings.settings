@@ -104,5 +104,11 @@
     <Setting Name="notification_custom_mastery_scale" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">1.00</Value>
     </Setting>
+    <Setting Name="notification_custom_achievement_fade" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">300</Value>
+    </Setting>
+    <Setting Name="notification_custom_mastery_fade" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">300</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
