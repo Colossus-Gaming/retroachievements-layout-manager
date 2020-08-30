@@ -434,24 +434,48 @@ namespace Retro_Achievement_Tracker.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("300")]
-        public int notification_custom_achievement_fade {
+        public int notification_custom_achievement_fade_in {
             get {
-                return ((int)(this["notification_custom_achievement_fade"]));
+                return ((int)(this["notification_custom_achievement_fade_in"]));
             }
             set {
-                this["notification_custom_achievement_fade"] = value;
+                this["notification_custom_achievement_fade_in"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("300")]
-        public int notification_custom_mastery_fade {
+        public int notification_custom_mastery_fade_in {
             get {
-                return ((int)(this["notification_custom_mastery_fade"]));
+                return ((int)(this["notification_custom_mastery_fade_in"]));
             }
             set {
-                this["notification_custom_mastery_fade"] = value;
+                this["notification_custom_mastery_fade_in"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("300")]
+        public int notification_custom_achievement_fade_out {
+            get {
+                return ((int)(this["notification_custom_achievement_fade_out"]));
+            }
+            set {
+                this["notification_custom_achievement_fade_out"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("300")]
+        public int notification_custom_mastery_fade_out {
+            get {
+                return ((int)(this["notification_custom_mastery_fade_out"]));
+            }
+            set {
+                this["notification_custom_mastery_fade_out"] = value;
             }
         }
     }

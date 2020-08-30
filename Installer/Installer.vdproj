@@ -15,6 +15,12 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_01602B32325A4BC998DAA5173B46E7E4"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_0B056976F2D74C4186F6C535C6867ECE"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -47,12 +53,6 @@
         {
         "MsmKey" = "8:_28D66E63E61FE4E52102D59E771C7880"
         "OwnerKey" = "8:_1C0A4706DA324BF887025B7182EF8EEA"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_3B3C3B77E5F14AA7910B38C405187EC6"
-        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -100,7 +100,7 @@
         "Entry"
         {
         "MsmKey" = "8:_5C87531EBA470685AE021E2E369A6A1A"
-        "OwnerKey" = "8:_E8F0C8CDEC544DD09C79C81C7DE01AB8"
+        "OwnerKey" = "8:_56E1801B7EE2449AB985368837B7DF49"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -112,7 +112,7 @@
         "Entry"
         {
         "MsmKey" = "8:_5C87531EBA470685AE021E2E369A6A1A"
-        "OwnerKey" = "8:_56E1801B7EE2449AB985368837B7DF49"
+        "OwnerKey" = "8:_E8F0C8CDEC544DD09C79C81C7DE01AB8"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -131,6 +131,12 @@
         {
         "MsmKey" = "8:_75A1671C88D04C92BE6961E8231A7A78"
         "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_78ECDB5F09BDD7EF53B308D528C4C76A"
+        "OwnerKey" = "8:_1C0A4706DA324BF887025B7182EF8EEA"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -183,7 +189,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_DF882B64D809431C8892B95E24BB5E6C"
+        "MsmKey" = "8:_E0E9B5EBB7484841BF176A3393483C6C"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -215,6 +221,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_1C0A4706DA324BF887025B7182EF8EEA"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_78ECDB5F09BDD7EF53B308D528C4C76A"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -378,6 +390,26 @@
         }
         "File"
         {
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_01602B32325A4BC998DAA5173B46E7E4"
+            {
+            "SourcePath" = "8:..\\Retro Achievement Tracker\\video\\achievement-notification.webm"
+            "TargetName" = "8:achievement-notification.webm"
+            "Tag" = "8:"
+            "Folder" = "8:_998098A8417548BA8ADC79A66EB42A36"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0B056976F2D74C4186F6C535C6867ECE"
             {
             "SourcePath" = "8:..\\Retro Achievement Tracker\\Resources\\monofonto.ttf"
@@ -422,7 +454,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Retro Achievement Tracker, Version=1.0.7.1, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Retro Achievement Tracker, Version=1.0.7.3, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_1C0A4706DA324BF887025B7182EF8EEA"
@@ -504,7 +536,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:AutoUpdater.NET, Version=1.6.0.0, Culture=neutral, PublicKeyToken=501435c91b35f4bc, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:AutoUpdater.NET, Version=1.6.2.0, Culture=neutral, PublicKeyToken=501435c91b35f4bc, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_28D66E63E61FE4E52102D59E771C7880"
@@ -529,26 +561,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3B3C3B77E5F14AA7910B38C405187EC6"
-            {
-            "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\video\\default-achievement-notification.webm"
-            "TargetName" = "8:default-achievement-notification.webm"
-            "Tag" = "8:"
-            "Folder" = "8:_998098A8417548BA8ADC79A66EB42A36"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_3D924F35727CDE3051FEEFC51F8BE5F6"
@@ -666,7 +678,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:CefSharp.WinForms, Version=83.4.20.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:CefSharp.WinForms, Version=84.4.10.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_56E1801B7EE2449AB985368837B7DF49"
@@ -697,7 +709,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:CefSharp, Version=83.4.20.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:CefSharp, Version=84.4.10.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_5C87531EBA470685AE021E2E369A6A1A"
@@ -782,6 +794,37 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_78ECDB5F09BDD7EF53B308D528C4C76A"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:MediaToolkit, Version=1.1.0.1, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_78ECDB5F09BDD7EF53B308D528C4C76A"
+                    {
+                    "Name" = "8:MediaToolkit.DLL"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:MediaToolkit.DLL"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_E62E95669DB5449EB9E2E2A2C610D4B0"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9B3742DFE0674FECB3915D71F678823B"
@@ -950,7 +993,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:CefSharp.BrowserSubprocess.Core, Version=83.4.20.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:CefSharp.BrowserSubprocess.Core, Version=84.4.10.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_DB52AF9E59D25D345BF18AECB2424171"
@@ -977,10 +1020,10 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DF882B64D809431C8892B95E24BB5E6C"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E0E9B5EBB7484841BF176A3393483C6C"
             {
-            "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\video\\default-mastery-notification.webm"
-            "TargetName" = "8:default-mastery-notification.webm"
+            "SourcePath" = "8:..\\Retro Achievement Tracker\\video\\mastery-notification.webm"
+            "TargetName" = "8:mastery-notification.webm"
             "Tag" = "8:"
             "Folder" = "8:_998098A8417548BA8ADC79A66EB42A36"
             "Condition" = "8:"
@@ -1021,7 +1064,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:CefSharp.BrowserSubprocess, Version=83.4.20.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:CefSharp.BrowserSubprocess, Version=84.4.10.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_E8F0C8CDEC544DD09C79C81C7DE01AB8"
@@ -1052,7 +1095,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:CefSharp.Core, Version=83.4.20.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:CefSharp.Core, Version=84.4.10.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_F3FC71C93AA1EA640D579473239E51A0"
@@ -1188,15 +1231,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:RA Layout Manager"
-        "ProductCode" = "8:{8DE239D4-AFA9-43CE-B7A2-0315F35D1EAC}"
-        "PackageCode" = "8:{59685F4C-A83C-4994-B3C7-CAC109561537}"
+        "ProductCode" = "8:{1CC9F6BA-EA7C-4C1D-8751-2D3544CEB5C1}"
+        "PackageCode" = "8:{CDC7F2A4-E9CF-4681-947E-F511365AF119}"
         "UpgradeCode" = "8:{2AED59AC-3EBE-4936-A1A3-3282811ECB5E}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.9"
+        "ProductVersion" = "8:1.0.10"
         "Manufacturer" = "8:Colossus Gaming"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"

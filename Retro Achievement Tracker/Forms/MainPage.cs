@@ -616,8 +616,6 @@ namespace Retro_Achievement_Tracker
             }
 
             FocusLayoutWindow.SetLockedAchievements(LockedAchievements);
-
-            NotificationLayoutWindow.SetReplayMasteryButton(LockedAchievements.Count == 0);
         }
 
         private void MainPage_FormClosed(object sender, FormClosedEventArgs e)

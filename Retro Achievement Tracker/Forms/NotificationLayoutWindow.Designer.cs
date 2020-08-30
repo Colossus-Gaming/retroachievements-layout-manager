@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             this.masteryCustomizationGroupbox = new System.Windows.Forms.GroupBox();
+            this.inLabel2 = new System.Windows.Forms.Label();
+            this.inMasteryNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.outMasteryNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.outLabel2 = new System.Windows.Forms.Label();
             this.scaleLabel2 = new System.Windows.Forms.Label();
             this.yPositionLabel2 = new System.Windows.Forms.Label();
             this.scaleMasteryNumericUpDown = new System.Windows.Forms.NumericUpDown();
@@ -38,9 +42,12 @@
             this.customMasteryYNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.useCustomMasteryCheckbox = new System.Windows.Forms.CheckBox();
             this.customMasteryXNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.replayGameMasteryButton = new System.Windows.Forms.Button();
             this.showGameMasteryButton = new System.Windows.Forms.Button();
             this.achievementCustomizationGroupbox = new System.Windows.Forms.GroupBox();
+            this.inAchievementNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.inLabel1 = new System.Windows.Forms.Label();
+            this.outAchievementNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.outLabel1 = new System.Windows.Forms.Label();
             this.scaleLabel1 = new System.Windows.Forms.Label();
             this.scaleAchievementNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.yPositionLabel1 = new System.Windows.Forms.Label();
@@ -73,15 +80,15 @@
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.fadeOutLabel1 = new System.Windows.Forms.Label();
-            this.fadeOutLabel2 = new System.Windows.Forms.Label();
-            this.fadeOutAchievementNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.fadeOutMasteryNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.masteryCustomizationGroupbox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.inMasteryNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.outMasteryNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.scaleMasteryNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.customMasteryYNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.customMasteryXNumericUpDown)).BeginInit();
             this.achievementCustomizationGroupbox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.inAchievementNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.outAchievementNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.scaleAchievementNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.customAchievementYNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.customAchievementXNumericUpDown)).BeginInit();
@@ -90,14 +97,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.fontOutlineSizeUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontOutlineColorDisplayBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontColorDisplayBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fadeOutAchievementNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fadeOutMasteryNumericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // masteryCustomizationGroupbox
             // 
-            this.masteryCustomizationGroupbox.Controls.Add(this.fadeOutMasteryNumericUpDown);
-            this.masteryCustomizationGroupbox.Controls.Add(this.fadeOutLabel2);
+            this.masteryCustomizationGroupbox.Controls.Add(this.inLabel2);
+            this.masteryCustomizationGroupbox.Controls.Add(this.inMasteryNumericUpDown);
+            this.masteryCustomizationGroupbox.Controls.Add(this.outMasteryNumericUpDown);
+            this.masteryCustomizationGroupbox.Controls.Add(this.outLabel2);
             this.masteryCustomizationGroupbox.Controls.Add(this.scaleLabel2);
             this.masteryCustomizationGroupbox.Controls.Add(this.yPositionLabel2);
             this.masteryCustomizationGroupbox.Controls.Add(this.scaleMasteryNumericUpDown);
@@ -107,22 +114,87 @@
             this.masteryCustomizationGroupbox.Controls.Add(this.customMasteryYNumericUpDown);
             this.masteryCustomizationGroupbox.Controls.Add(this.useCustomMasteryCheckbox);
             this.masteryCustomizationGroupbox.Controls.Add(this.customMasteryXNumericUpDown);
-            this.masteryCustomizationGroupbox.Controls.Add(this.replayGameMasteryButton);
             this.masteryCustomizationGroupbox.Controls.Add(this.showGameMasteryButton);
             this.masteryCustomizationGroupbox.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.masteryCustomizationGroupbox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.masteryCustomizationGroupbox.Location = new System.Drawing.Point(10, 243);
+            this.masteryCustomizationGroupbox.Location = new System.Drawing.Point(10, 248);
             this.masteryCustomizationGroupbox.Name = "masteryCustomizationGroupbox";
-            this.masteryCustomizationGroupbox.Size = new System.Drawing.Size(224, 225);
+            this.masteryCustomizationGroupbox.Size = new System.Drawing.Size(224, 230);
             this.masteryCustomizationGroupbox.TabIndex = 14;
             this.masteryCustomizationGroupbox.TabStop = false;
             this.masteryCustomizationGroupbox.Text = "Mastery";
+            // 
+            // inLabel2
+            // 
+            this.inLabel2.AutoSize = true;
+            this.inLabel2.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.inLabel2.Location = new System.Drawing.Point(88, 174);
+            this.inLabel2.Name = "inLabel2";
+            this.inLabel2.Size = new System.Drawing.Size(54, 15);
+            this.inLabel2.TabIndex = 29;
+            this.inLabel2.Text = "(ms) | In";
+            // 
+            // inMasteryNumericUpDown
+            // 
+            this.inMasteryNumericUpDown.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.inMasteryNumericUpDown.Location = new System.Drawing.Point(9, 166);
+            this.inMasteryNumericUpDown.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.inMasteryNumericUpDown.Minimum = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+            this.inMasteryNumericUpDown.Name = "inMasteryNumericUpDown";
+            this.inMasteryNumericUpDown.Size = new System.Drawing.Size(76, 23);
+            this.inMasteryNumericUpDown.TabIndex = 25;
+            this.inMasteryNumericUpDown.Value = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+            // 
+            // outMasteryNumericUpDown
+            // 
+            this.outMasteryNumericUpDown.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.outMasteryNumericUpDown.Location = new System.Drawing.Point(9, 195);
+            this.outMasteryNumericUpDown.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.outMasteryNumericUpDown.Minimum = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+            this.outMasteryNumericUpDown.Name = "outMasteryNumericUpDown";
+            this.outMasteryNumericUpDown.Size = new System.Drawing.Size(76, 23);
+            this.outMasteryNumericUpDown.TabIndex = 28;
+            this.outMasteryNumericUpDown.Value = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+            // 
+            // outLabel2
+            // 
+            this.outLabel2.AutoSize = true;
+            this.outLabel2.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.outLabel2.Location = new System.Drawing.Point(88, 203);
+            this.outLabel2.Name = "outLabel2";
+            this.outLabel2.Size = new System.Drawing.Size(63, 15);
+            this.outLabel2.TabIndex = 27;
+            this.outLabel2.Text = "(ms) | Out";
             // 
             // scaleLabel2
             // 
             this.scaleLabel2.AutoSize = true;
             this.scaleLabel2.Font = new System.Drawing.Font("Calibri", 12F);
-            this.scaleLabel2.Location = new System.Drawing.Point(109, 170);
+            this.scaleLabel2.Location = new System.Drawing.Point(91, 144);
             this.scaleLabel2.Name = "scaleLabel2";
             this.scaleLabel2.Size = new System.Drawing.Size(43, 19);
             this.scaleLabel2.TabIndex = 23;
@@ -133,11 +205,11 @@
             // 
             this.yPositionLabel2.AutoSize = true;
             this.yPositionLabel2.Font = new System.Drawing.Font("Calibri", 12F);
-            this.yPositionLabel2.Location = new System.Drawing.Point(109, 140);
+            this.yPositionLabel2.Location = new System.Drawing.Point(183, 116);
             this.yPositionLabel2.Name = "yPositionLabel2";
-            this.yPositionLabel2.Size = new System.Drawing.Size(73, 19);
+            this.yPositionLabel2.Size = new System.Drawing.Size(17, 19);
             this.yPositionLabel2.TabIndex = 21;
-            this.yPositionLabel2.Text = "Y-Position";
+            this.yPositionLabel2.Text = "Y";
             this.yPositionLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // scaleMasteryNumericUpDown
@@ -149,7 +221,7 @@
             0,
             0,
             131072});
-            this.scaleMasteryNumericUpDown.Location = new System.Drawing.Point(6, 170);
+            this.scaleMasteryNumericUpDown.Location = new System.Drawing.Point(9, 140);
             this.scaleMasteryNumericUpDown.Maximum = new decimal(new int[] {
             2,
             0,
@@ -161,14 +233,13 @@
             0,
             131072});
             this.scaleMasteryNumericUpDown.Name = "scaleMasteryNumericUpDown";
-            this.scaleMasteryNumericUpDown.Size = new System.Drawing.Size(97, 23);
+            this.scaleMasteryNumericUpDown.Size = new System.Drawing.Size(76, 23);
             this.scaleMasteryNumericUpDown.TabIndex = 22;
             this.scaleMasteryNumericUpDown.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.scaleMasteryNumericUpDown.ValueChanged += ScaleMasteryNumericUpDown_ValueChanged;
             // 
             // masteryEditOultineCheckbox
             // 
@@ -180,34 +251,32 @@
             this.masteryEditOultineCheckbox.TabIndex = 20;
             this.masteryEditOultineCheckbox.Text = "Edit Mode";
             this.masteryEditOultineCheckbox.UseVisualStyleBackColor = true;
-            this.masteryEditOultineCheckbox.CheckedChanged += MasteryEditOultineCheckbox_CheckedChanged;
             // 
             // xPositionLabel2
             // 
             this.xPositionLabel2.AutoSize = true;
             this.xPositionLabel2.Font = new System.Drawing.Font("Calibri", 12F);
-            this.xPositionLabel2.Location = new System.Drawing.Point(109, 113);
+            this.xPositionLabel2.Location = new System.Drawing.Point(86, 115);
             this.xPositionLabel2.Name = "xPositionLabel2";
-            this.xPositionLabel2.Size = new System.Drawing.Size(73, 19);
+            this.xPositionLabel2.Size = new System.Drawing.Size(17, 19);
             this.xPositionLabel2.TabIndex = 20;
-            this.xPositionLabel2.Text = "X-Position";
+            this.xPositionLabel2.Text = "X";
             // 
             // selectCustomMasteryNotificationButton
             // 
             this.selectCustomMasteryNotificationButton.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.selectCustomMasteryNotificationButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.selectCustomMasteryNotificationButton.Location = new System.Drawing.Point(6, 82);
+            this.selectCustomMasteryNotificationButton.Location = new System.Drawing.Point(9, 82);
             this.selectCustomMasteryNotificationButton.Name = "selectCustomMasteryNotificationButton";
-            this.selectCustomMasteryNotificationButton.Size = new System.Drawing.Size(96, 23);
+            this.selectCustomMasteryNotificationButton.Size = new System.Drawing.Size(93, 23);
             this.selectCustomMasteryNotificationButton.TabIndex = 15;
             this.selectCustomMasteryNotificationButton.Text = "Select File";
             this.selectCustomMasteryNotificationButton.UseVisualStyleBackColor = true;
-            this.selectCustomMasteryNotificationButton.Click += SelectCustomMasteryNotificationButton_Click;
             // 
             // customMasteryYNumericUpDown
             // 
             this.customMasteryYNumericUpDown.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.customMasteryYNumericUpDown.Location = new System.Drawing.Point(6, 140);
+            this.customMasteryYNumericUpDown.Location = new System.Drawing.Point(103, 112);
             this.customMasteryYNumericUpDown.Maximum = new decimal(new int[] {
             2000,
             0,
@@ -219,9 +288,8 @@
             0,
             -2147483648});
             this.customMasteryYNumericUpDown.Name = "customMasteryYNumericUpDown";
-            this.customMasteryYNumericUpDown.Size = new System.Drawing.Size(97, 23);
+            this.customMasteryYNumericUpDown.Size = new System.Drawing.Size(79, 23);
             this.customMasteryYNumericUpDown.TabIndex = 19;
-            this.customMasteryYNumericUpDown.ValueChanged += CustomMasteryYNumericUpDown_ValueChanged;
             // 
             // useCustomMasteryCheckbox
             // 
@@ -234,12 +302,11 @@
             this.useCustomMasteryCheckbox.TabIndex = 13;
             this.useCustomMasteryCheckbox.Text = "Use custom alert";
             this.useCustomMasteryCheckbox.UseVisualStyleBackColor = true;
-            this.useCustomMasteryCheckbox.CheckedChanged += UseCustomMasteryCheckbox_CheckedChanged;
             // 
             // customMasteryXNumericUpDown
             // 
             this.customMasteryXNumericUpDown.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.customMasteryXNumericUpDown.Location = new System.Drawing.Point(6, 111);
+            this.customMasteryXNumericUpDown.Location = new System.Drawing.Point(9, 111);
             this.customMasteryXNumericUpDown.Maximum = new decimal(new int[] {
             2000,
             0,
@@ -251,40 +318,27 @@
             0,
             -2147483648});
             this.customMasteryXNumericUpDown.Name = "customMasteryXNumericUpDown";
-            this.customMasteryXNumericUpDown.Size = new System.Drawing.Size(97, 23);
+            this.customMasteryXNumericUpDown.Size = new System.Drawing.Size(76, 23);
             this.customMasteryXNumericUpDown.TabIndex = 18;
-            this.customMasteryXNumericUpDown.ValueChanged += CustomMasteryXNumericUpDown_ValueChanged;
             // 
             // replayGameMasteryButton
-            // 
-            this.replayGameMasteryButton.BackColor = System.Drawing.SystemColors.Control;
-            this.replayGameMasteryButton.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.replayGameMasteryButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.replayGameMasteryButton.Location = new System.Drawing.Point(121, 29);
-            this.replayGameMasteryButton.Name = "replayGameMasteryButton";
-            this.replayGameMasteryButton.Size = new System.Drawing.Size(97, 26);
-            this.replayGameMasteryButton.TabIndex = 3;
-            this.replayGameMasteryButton.Text = "Replay";
-            this.replayGameMasteryButton.UseVisualStyleBackColor = false;
-            this.replayGameMasteryButton.Click += ReplayGameMasteryButton_Click;
-            // 
-            // showGameMasteryButton
             // 
             this.showGameMasteryButton.BackColor = System.Drawing.SystemColors.Control;
             this.showGameMasteryButton.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.showGameMasteryButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.showGameMasteryButton.Location = new System.Drawing.Point(6, 29);
+            this.showGameMasteryButton.Location = new System.Drawing.Point(6, 30);
             this.showGameMasteryButton.Name = "showGameMasteryButton";
             this.showGameMasteryButton.Size = new System.Drawing.Size(97, 26);
-            this.showGameMasteryButton.TabIndex = 2;
+            this.showGameMasteryButton.TabIndex = 3;
             this.showGameMasteryButton.Text = "Show";
             this.showGameMasteryButton.UseVisualStyleBackColor = false;
-            this.showGameMasteryButton.Click += ShowGameMasteryButton_Click;
             // 
             // achievementCustomizationGroupbox
             // 
-            this.achievementCustomizationGroupbox.Controls.Add(this.fadeOutAchievementNumericUpDown);
-            this.achievementCustomizationGroupbox.Controls.Add(this.fadeOutLabel1);
+            this.achievementCustomizationGroupbox.Controls.Add(this.inAchievementNumericUpDown);
+            this.achievementCustomizationGroupbox.Controls.Add(this.inLabel1);
+            this.achievementCustomizationGroupbox.Controls.Add(this.outAchievementNumericUpDown);
+            this.achievementCustomizationGroupbox.Controls.Add(this.outLabel1);
             this.achievementCustomizationGroupbox.Controls.Add(this.scaleLabel1);
             this.achievementCustomizationGroupbox.Controls.Add(this.scaleAchievementNumericUpDown);
             this.achievementCustomizationGroupbox.Controls.Add(this.yPositionLabel1);
@@ -300,16 +354,82 @@
             this.achievementCustomizationGroupbox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.achievementCustomizationGroupbox.Location = new System.Drawing.Point(10, 12);
             this.achievementCustomizationGroupbox.Name = "achievementCustomizationGroupbox";
-            this.achievementCustomizationGroupbox.Size = new System.Drawing.Size(224, 225);
+            this.achievementCustomizationGroupbox.Size = new System.Drawing.Size(224, 230);
             this.achievementCustomizationGroupbox.TabIndex = 2;
             this.achievementCustomizationGroupbox.TabStop = false;
             this.achievementCustomizationGroupbox.Text = "Achievement";
+            // 
+            // inAchievementNumericUpDown
+            // 
+            this.inAchievementNumericUpDown.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.inAchievementNumericUpDown.Location = new System.Drawing.Point(9, 169);
+            this.inAchievementNumericUpDown.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.inAchievementNumericUpDown.Minimum = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+            this.inAchievementNumericUpDown.Name = "inAchievementNumericUpDown";
+            this.inAchievementNumericUpDown.Size = new System.Drawing.Size(75, 23);
+            this.inAchievementNumericUpDown.TabIndex = 26;
+            this.inAchievementNumericUpDown.Value = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+            // 
+            // inLabel1
+            // 
+            this.inLabel1.AutoSize = true;
+            this.inLabel1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.inLabel1.Location = new System.Drawing.Point(87, 177);
+            this.inLabel1.Name = "inLabel1";
+            this.inLabel1.Size = new System.Drawing.Size(54, 15);
+            this.inLabel1.TabIndex = 25;
+            this.inLabel1.Text = "(ms) | In";
+            // 
+            // outAchievementNumericUpDown
+            // 
+            this.outAchievementNumericUpDown.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.outAchievementNumericUpDown.Location = new System.Drawing.Point(9, 198);
+            this.outAchievementNumericUpDown.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.outAchievementNumericUpDown.Minimum = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+            this.outAchievementNumericUpDown.Name = "outAchievementNumericUpDown";
+            this.outAchievementNumericUpDown.Size = new System.Drawing.Size(75, 23);
+            this.outAchievementNumericUpDown.TabIndex = 24;
+            this.outAchievementNumericUpDown.Value = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+            // 
+            // outLabel1
+            // 
+            this.outLabel1.AutoSize = true;
+            this.outLabel1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.outLabel1.Location = new System.Drawing.Point(87, 206);
+            this.outLabel1.Name = "outLabel1";
+            this.outLabel1.Size = new System.Drawing.Size(63, 15);
+            this.outLabel1.TabIndex = 23;
+            this.outLabel1.Text = "(ms) | Out";
             // 
             // scaleLabel1
             // 
             this.scaleLabel1.AutoSize = true;
             this.scaleLabel1.Font = new System.Drawing.Font("Calibri", 12F);
-            this.scaleLabel1.Location = new System.Drawing.Point(109, 169);
+            this.scaleLabel1.Location = new System.Drawing.Point(91, 144);
             this.scaleLabel1.Name = "scaleLabel1";
             this.scaleLabel1.Size = new System.Drawing.Size(43, 19);
             this.scaleLabel1.TabIndex = 21;
@@ -325,7 +445,7 @@
             0,
             0,
             131072});
-            this.scaleAchievementNumericUpDown.Location = new System.Drawing.Point(9, 169);
+            this.scaleAchievementNumericUpDown.Location = new System.Drawing.Point(9, 140);
             this.scaleAchievementNumericUpDown.Maximum = new decimal(new int[] {
             2,
             0,
@@ -337,35 +457,34 @@
             0,
             131072});
             this.scaleAchievementNumericUpDown.Name = "scaleAchievementNumericUpDown";
-            this.scaleAchievementNumericUpDown.Size = new System.Drawing.Size(94, 23);
+            this.scaleAchievementNumericUpDown.Size = new System.Drawing.Size(76, 23);
             this.scaleAchievementNumericUpDown.TabIndex = 20;
             this.scaleAchievementNumericUpDown.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.scaleAchievementNumericUpDown.ValueChanged += ScaleAchievementNumericUpDown_ValueChanged;
             // 
             // yPositionLabel1
             // 
             this.yPositionLabel1.AutoSize = true;
             this.yPositionLabel1.Font = new System.Drawing.Font("Calibri", 12F);
-            this.yPositionLabel1.Location = new System.Drawing.Point(109, 140);
+            this.yPositionLabel1.Location = new System.Drawing.Point(183, 115);
             this.yPositionLabel1.Name = "yPositionLabel1";
-            this.yPositionLabel1.Size = new System.Drawing.Size(73, 19);
+            this.yPositionLabel1.Size = new System.Drawing.Size(17, 19);
             this.yPositionLabel1.TabIndex = 19;
-            this.yPositionLabel1.Text = "Y-Position";
+            this.yPositionLabel1.Text = "Y";
             this.yPositionLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // xPositionLabel1
             // 
             this.xPositionLabel1.AutoSize = true;
             this.xPositionLabel1.Font = new System.Drawing.Font("Calibri", 12F);
-            this.xPositionLabel1.Location = new System.Drawing.Point(109, 113);
+            this.xPositionLabel1.Location = new System.Drawing.Point(86, 115);
             this.xPositionLabel1.Name = "xPositionLabel1";
-            this.xPositionLabel1.Size = new System.Drawing.Size(73, 19);
+            this.xPositionLabel1.Size = new System.Drawing.Size(17, 19);
             this.xPositionLabel1.TabIndex = 18;
-            this.xPositionLabel1.Text = "X-Position";
+            this.xPositionLabel1.Text = "X";
             // 
             // acheivementEditOutlineCheckbox
             // 
@@ -377,12 +496,11 @@
             this.acheivementEditOutlineCheckbox.TabIndex = 17;
             this.acheivementEditOutlineCheckbox.Text = "Edit Mode";
             this.acheivementEditOutlineCheckbox.UseVisualStyleBackColor = true;
-            this.acheivementEditOutlineCheckbox.CheckedChanged += AcheivementEditOutlineCheckbox_CheckedChanged;
             // 
             // customAchievementYNumericUpDown
             // 
             this.customAchievementYNumericUpDown.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.customAchievementYNumericUpDown.Location = new System.Drawing.Point(9, 140);
+            this.customAchievementYNumericUpDown.Location = new System.Drawing.Point(106, 111);
             this.customAchievementYNumericUpDown.Maximum = new decimal(new int[] {
             2000,
             0,
@@ -394,9 +512,8 @@
             0,
             -2147483648});
             this.customAchievementYNumericUpDown.Name = "customAchievementYNumericUpDown";
-            this.customAchievementYNumericUpDown.Size = new System.Drawing.Size(94, 23);
+            this.customAchievementYNumericUpDown.Size = new System.Drawing.Size(76, 23);
             this.customAchievementYNumericUpDown.TabIndex = 16;
-            this.customAchievementYNumericUpDown.ValueChanged += CustomAchievementYNumericUpDown_ValueChanged;
             // 
             // customAchievementXNumericUpDown
             // 
@@ -413,21 +530,19 @@
             0,
             -2147483648});
             this.customAchievementXNumericUpDown.Name = "customAchievementXNumericUpDown";
-            this.customAchievementXNumericUpDown.Size = new System.Drawing.Size(94, 23);
+            this.customAchievementXNumericUpDown.Size = new System.Drawing.Size(76, 23);
             this.customAchievementXNumericUpDown.TabIndex = 15;
-            this.customAchievementXNumericUpDown.ValueChanged += CustomAchievementXNumericUpDown_ValueChanged;
             // 
             // selectCustomAchievementButton
             // 
             this.selectCustomAchievementButton.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.selectCustomAchievementButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.selectCustomAchievementButton.Location = new System.Drawing.Point(7, 82);
+            this.selectCustomAchievementButton.Location = new System.Drawing.Point(9, 82);
             this.selectCustomAchievementButton.Name = "selectCustomAchievementButton";
-            this.selectCustomAchievementButton.Size = new System.Drawing.Size(96, 23);
+            this.selectCustomAchievementButton.Size = new System.Drawing.Size(94, 23);
             this.selectCustomAchievementButton.TabIndex = 14;
             this.selectCustomAchievementButton.Text = "Select File";
             this.selectCustomAchievementButton.UseVisualStyleBackColor = true;
-            this.selectCustomAchievementButton.Click += SelectCustomAchievementButton_Click;
             // 
             // useCustomAchievementCheckbox
             // 
@@ -440,7 +555,6 @@
             this.useCustomAchievementCheckbox.TabIndex = 13;
             this.useCustomAchievementCheckbox.Text = "Use custom alert";
             this.useCustomAchievementCheckbox.UseVisualStyleBackColor = true;
-            this.useCustomAchievementCheckbox.CheckedChanged += UseCustomAchievementCheckbox_CheckedChanged;
             // 
             // replayAchievementButton
             // 
@@ -453,7 +567,6 @@
             this.replayAchievementButton.TabIndex = 3;
             this.replayAchievementButton.Text = "Replay";
             this.replayAchievementButton.UseVisualStyleBackColor = false;
-            this.replayAchievementButton.Click += ReplayAchievementButton_Click;
             // 
             // showAchievementButton
             // 
@@ -466,7 +579,6 @@
             this.showAchievementButton.TabIndex = 2;
             this.showAchievementButton.Text = "Show";
             this.showAchievementButton.UseVisualStyleBackColor = false;
-            this.showAchievementButton.Click += ShowAchievementButton_Click;
             // 
             // fontCustomizationGroupBox
             // 
@@ -489,7 +601,7 @@
             this.fontCustomizationGroupBox.Controls.Add(this.fontFamilyLabel);
             this.fontCustomizationGroupBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fontCustomizationGroupBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.fontCustomizationGroupBox.Location = new System.Drawing.Point(10, 474);
+            this.fontCustomizationGroupBox.Location = new System.Drawing.Point(10, 484);
             this.fontCustomizationGroupBox.Name = "fontCustomizationGroupBox";
             this.fontCustomizationGroupBox.Size = new System.Drawing.Size(224, 250);
             this.fontCustomizationGroupBox.TabIndex = 10004;
@@ -679,78 +791,12 @@
             // 
             this.openFileDialog1.Filter = "WEBM files (*.webm)|*.webm";
             // 
-            // fadeOutLabel1
-            // 
-            this.fadeOutLabel1.AutoSize = true;
-            this.fadeOutLabel1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fadeOutLabel1.Location = new System.Drawing.Point(112, 198);
-            this.fadeOutLabel1.Name = "fadeOutLabel1";
-            this.fadeOutLabel1.Size = new System.Drawing.Size(103, 15);
-            this.fadeOutLabel1.TabIndex = 23;
-            this.fadeOutLabel1.Text = "(ms) | Fade";
-            // 
-            // fadeOutLabel2
-            // 
-            this.fadeOutLabel2.AutoSize = true;
-            this.fadeOutLabel2.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fadeOutLabel2.Location = new System.Drawing.Point(110, 198);
-            this.fadeOutLabel2.Name = "fadeOutLabel2";
-            this.fadeOutLabel2.Size = new System.Drawing.Size(103, 15);
-            this.fadeOutLabel2.TabIndex = 25;
-            this.fadeOutLabel2.Text = "(ms) | Fade";
-            // 
-            // fadeOutAchievementnumericUpDown
-            // 
-            this.fadeOutAchievementNumericUpDown.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fadeOutAchievementNumericUpDown.Location = new System.Drawing.Point(9, 196);
-            this.fadeOutAchievementNumericUpDown.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.fadeOutAchievementNumericUpDown.Minimum = new decimal(new int[] {
-            300,
-            0,
-            0,
-            0});
-            this.fadeOutAchievementNumericUpDown.Name = "fadeOutAchievementnumericUpDown";
-            this.fadeOutAchievementNumericUpDown.Size = new System.Drawing.Size(94, 23);
-            this.fadeOutAchievementNumericUpDown.TabIndex = 24;
-            this.fadeOutAchievementNumericUpDown.Value = new decimal(new int[] {
-            300,
-            0,
-            0,
-            0});
-            // 
-            // fadeOutMasteryNumericUpDown
-            // 
-            this.fadeOutMasteryNumericUpDown.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fadeOutMasteryNumericUpDown.Location = new System.Drawing.Point(6, 196);
-            this.fadeOutMasteryNumericUpDown.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.fadeOutMasteryNumericUpDown.Minimum = new decimal(new int[] {
-            300,
-            0,
-            0,
-            0});
-            this.fadeOutMasteryNumericUpDown.Name = "fadeOutMasteryNumericUpDown";
-            this.fadeOutMasteryNumericUpDown.Size = new System.Drawing.Size(97, 23);
-            this.fadeOutMasteryNumericUpDown.TabIndex = 25;
-            this.fadeOutMasteryNumericUpDown.Value = new decimal(new int[] {
-            300,
-            0,
-            0,
-            0});
-            // 
             // NotificationLayoutWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(1635, 732);
+            this.ClientSize = new System.Drawing.Size(1635, 742);
             this.Controls.Add(this.masteryCustomizationGroupbox);
             this.Controls.Add(this.achievementCustomizationGroupbox);
             this.Controls.Add(this.fontCustomizationGroupBox);
@@ -758,11 +804,15 @@
             this.Text = "Retro Achievement - Layout - Notifications";
             this.masteryCustomizationGroupbox.ResumeLayout(false);
             this.masteryCustomizationGroupbox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.inMasteryNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.outMasteryNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.scaleMasteryNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.customMasteryYNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.customMasteryXNumericUpDown)).EndInit();
             this.achievementCustomizationGroupbox.ResumeLayout(false);
             this.achievementCustomizationGroupbox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.inAchievementNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.outAchievementNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.scaleAchievementNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.customAchievementYNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.customAchievementXNumericUpDown)).EndInit();
@@ -772,8 +822,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.fontOutlineSizeUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontOutlineColorDisplayBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontColorDisplayBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fadeOutAchievementNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fadeOutMasteryNumericUpDown)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -786,7 +834,6 @@
         private System.Windows.Forms.Button showAchievementButton;
         private System.Windows.Forms.CheckBox useCustomAchievementCheckbox;
         private System.Windows.Forms.CheckBox useCustomMasteryCheckbox;
-        private System.Windows.Forms.Button replayGameMasteryButton;
         private System.Windows.Forms.Button showGameMasteryButton;
         private System.Windows.Forms.Label backgroundColorHexCodeLabel;
         private System.Windows.Forms.Button backgroundColorPickerButton;
@@ -824,9 +871,13 @@
         private System.Windows.Forms.Label scaleLabel1;
         private System.Windows.Forms.NumericUpDown scaleAchievementNumericUpDown; 
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.NumericUpDown fadeOutMasteryNumericUpDown;
-        private System.Windows.Forms.Label fadeOutLabel2;
-        private System.Windows.Forms.NumericUpDown fadeOutAchievementNumericUpDown;
-        private System.Windows.Forms.Label fadeOutLabel1;
+        private System.Windows.Forms.NumericUpDown inMasteryNumericUpDown;
+        private System.Windows.Forms.NumericUpDown outAchievementNumericUpDown;
+        private System.Windows.Forms.Label outLabel1;
+        private System.Windows.Forms.NumericUpDown inAchievementNumericUpDown;
+        private System.Windows.Forms.Label inLabel1;
+        private System.Windows.Forms.Label inLabel2;
+        private System.Windows.Forms.NumericUpDown outMasteryNumericUpDown;
+        private System.Windows.Forms.Label outLabel2;
     }
 }
