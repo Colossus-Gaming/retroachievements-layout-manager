@@ -332,21 +332,21 @@ namespace Retro_Achievement_Tracker.Forms
         {
             this.useCustomAchievementCheckbox.Checked = CustomAchievementEnabled;
             this.selectCustomAchievementButton.Enabled = CustomAchievementEnabled;
-            this.customAchievementXNumericUpDown.Enabled = CustomAchievementEnabled;
-            this.customAchievementYNumericUpDown.Enabled = CustomAchievementEnabled;
-            this.scaleAchievementNumericUpDown.Enabled = CustomAchievementEnabled;
+            this.customAchievementXNumericUpDown.Enabled = false;
+            this.customAchievementYNumericUpDown.Enabled = false;
+            this.scaleAchievementNumericUpDown.Enabled = false;
             this.acheivementEditOutlineCheckbox.Enabled = CustomAchievementEnabled;
-            this.fadeOutAchievementNumericUpDown.Enabled = CustomAchievementEnabled;
-            this.fadeOutLabel1.Enabled = CustomAchievementEnabled;
+            this.fadeOutAchievementNumericUpDown.Enabled = false;
+            this.fadeOutLabel1.Enabled = false;
 
             this.useCustomMasteryCheckbox.Checked = CustomMasteryEnabled;
             this.selectCustomMasteryNotificationButton.Enabled = CustomMasteryEnabled;
-            this.customMasteryXNumericUpDown.Enabled = CustomMasteryEnabled;
-            this.customMasteryYNumericUpDown.Enabled = CustomMasteryEnabled;
-            this.scaleMasteryNumericUpDown.Enabled = CustomMasteryEnabled;
+            this.customMasteryXNumericUpDown.Enabled = false;
+            this.customMasteryYNumericUpDown.Enabled = false;
+            this.scaleMasteryNumericUpDown.Enabled = false;
             this.masteryEditOultineCheckbox.Enabled = CustomMasteryEnabled;
-            this.fadeOutMasteryNumericUpDown.Enabled = CustomMasteryEnabled;
-            this.fadeOutLabel2.Enabled = CustomMasteryEnabled;
+            this.fadeOutMasteryNumericUpDown.Enabled = false;
+            this.fadeOutLabel2.Enabled = false;
 
             this.customAchievementXNumericUpDown.Value = CustomAchievementX;
             this.customAchievementYNumericUpDown.Value = CustomAchievementY;
@@ -964,18 +964,19 @@ namespace Retro_Achievement_Tracker.Forms
 
             this.useCustomAchievementCheckbox.Checked = CustomAchievementEnabled;
             this.selectCustomAchievementButton.Enabled = CustomAchievementEnabled;
+            this.acheivementEditOutlineCheckbox.Enabled = CustomAchievementEnabled;
 
-            this.customAchievementXNumericUpDown.Enabled = CustomAchievementEnabled;
-            this.customAchievementYNumericUpDown.Enabled = CustomAchievementEnabled;
-            this.scaleAchievementNumericUpDown.Enabled = CustomAchievementEnabled;
-            this.fadeOutAchievementNumericUpDown.Enabled = CustomAchievementEnabled;
+            this.customAchievementXNumericUpDown.Enabled = false;
+            this.customAchievementYNumericUpDown.Enabled = false;
+            this.scaleAchievementNumericUpDown.Enabled = false;
+            this.fadeOutAchievementNumericUpDown.Enabled = false;
 
-            this.masteryEditOultineCheckbox.Enabled = CustomAchievementEnabled;
+            this.masteryEditOultineCheckbox.Checked = false;
 
-            this.xPositionLabel2.Enabled = CustomAchievementEnabled;
-            this.yPositionLabel2.Enabled = CustomAchievementEnabled;
-            this.scaleLabel2.Enabled = CustomAchievementEnabled;
-            this.fadeOutLabel2.Enabled = CustomAchievementEnabled;
+            this.xPositionLabel1.Enabled = false;
+            this.yPositionLabel1.Enabled = false;
+            this.scaleLabel1.Enabled = false;
+            this.fadeOutLabel1.Enabled = false;
 
             if (!CustomAchievementEnabled)
             {
@@ -997,18 +998,19 @@ namespace Retro_Achievement_Tracker.Forms
 
             this.useCustomMasteryCheckbox.Checked = CustomMasteryEnabled;
             this.selectCustomMasteryNotificationButton.Enabled = CustomMasteryEnabled;
-
-            this.customMasteryXNumericUpDown.Enabled = CustomMasteryEnabled;
-            this.customMasteryYNumericUpDown.Enabled = CustomMasteryEnabled;
-            this.scaleMasteryNumericUpDown.Enabled = CustomMasteryEnabled;
-            this.fadeOutMasteryNumericUpDown.Enabled = CustomMasteryEnabled;
-
             this.masteryEditOultineCheckbox.Enabled = CustomMasteryEnabled;
 
-            this.xPositionLabel2.Enabled = CustomMasteryEnabled;
-            this.yPositionLabel2.Enabled = CustomMasteryEnabled;
-            this.scaleLabel2.Enabled = CustomMasteryEnabled;
-            this.fadeOutLabel2.Enabled = CustomMasteryEnabled;
+            this.customMasteryXNumericUpDown.Enabled = false;
+            this.customMasteryYNumericUpDown.Enabled = false;
+            this.scaleMasteryNumericUpDown.Enabled = false;
+            this.fadeOutMasteryNumericUpDown.Enabled = false;
+
+            this.masteryEditOultineCheckbox.Checked = false;
+
+            this.xPositionLabel2.Enabled = false;
+            this.yPositionLabel2.Enabled = false;
+            this.scaleLabel2.Enabled = false;
+            this.fadeOutLabel2.Enabled = false;
 
             if (!CustomMasteryEnabled)
             {
@@ -1029,10 +1031,30 @@ namespace Retro_Achievement_Tracker.Forms
             if (((CheckBox)sender).Checked)
             {
                 EnableAchievementEdit();
+
+                this.customAchievementXNumericUpDown.Enabled = true;
+                this.customAchievementYNumericUpDown.Enabled = true;
+                this.scaleAchievementNumericUpDown.Enabled = true;
+                this.fadeOutAchievementNumericUpDown.Enabled = true;
+
+                this.xPositionLabel1.Enabled = true;
+                this.yPositionLabel1.Enabled = true;
+                this.scaleLabel1.Enabled = true;
+                this.fadeOutLabel1.Enabled = true;
             }
             else
             {
                 DisableAchievementEdit();
+
+                this.customAchievementXNumericUpDown.Enabled = false;
+                this.customAchievementYNumericUpDown.Enabled = false;
+                this.scaleAchievementNumericUpDown.Enabled = false;
+                this.fadeOutAchievementNumericUpDown.Enabled = false;
+
+                this.xPositionLabel1.Enabled = false;
+                this.yPositionLabel1.Enabled = false;
+                this.scaleLabel1.Enabled = false;
+                this.fadeOutLabel1.Enabled = false;
             }
         }
 
@@ -1041,10 +1063,30 @@ namespace Retro_Achievement_Tracker.Forms
             if (((CheckBox)sender).Checked)
             {
                 EnableMasteryEdit();
+
+                this.customMasteryXNumericUpDown.Enabled = true;
+                this.customMasteryYNumericUpDown.Enabled = true;
+                this.scaleMasteryNumericUpDown.Enabled = true;
+                this.fadeOutMasteryNumericUpDown.Enabled = true;
+
+                this.xPositionLabel2.Enabled = true;
+                this.yPositionLabel2.Enabled = true;
+                this.scaleLabel2.Enabled = true;
+                this.fadeOutLabel2.Enabled = true;
             }
             else
             {
                 DisableMasteryEdit();
+
+                this.customMasteryXNumericUpDown.Enabled = false;
+                this.customMasteryYNumericUpDown.Enabled = false;
+                this.scaleMasteryNumericUpDown.Enabled = false;
+                this.fadeOutMasteryNumericUpDown.Enabled = false;
+
+                this.xPositionLabel2.Enabled = false;
+                this.yPositionLabel2.Enabled = false;
+                this.scaleLabel2.Enabled = false;
+                this.fadeOutLabel2.Enabled = false;
             }
         }
 
