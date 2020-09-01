@@ -245,7 +245,7 @@ namespace Retro_Achievement_Tracker.Forms
             }
             get
             {
-                if (!File.Exists(Settings.Default.notification_custom_achievement_file))
+                if (!string.IsNullOrEmpty(Settings.Default.notification_custom_achievement_file) && !File.Exists(Settings.Default.notification_custom_achievement_file))
                 {
                     Settings.Default.notification_custom_achievement_file = string.Empty;
                     Settings.Default.Save();
@@ -267,7 +267,7 @@ namespace Retro_Achievement_Tracker.Forms
             }
             get
             {
-                if (!File.Exists(Settings.Default.notification_custom_mastery_file))
+                if (!string.IsNullOrEmpty(Settings.Default.notification_custom_mastery_file) && !File.Exists(Settings.Default.notification_custom_mastery_file))
                 {
                     Settings.Default.notification_custom_mastery_file = string.Empty;
                     Settings.Default.Save();
@@ -1176,13 +1176,16 @@ namespace Retro_Achievement_Tracker.Forms
                 DisableMasteryEdit();
 
                 this.masteryEditOultineCheckbox.Checked = false;
+
+                SetupBrowser();
             }
             else if (string.IsNullOrEmpty(CustomMasteryFile))
             {
                 SelectCustomMasteryNotificationButton_Click(null, null);
+            } else
+            {
+                SetupBrowser();
             }
-
-            SetupBrowser();
         }
 
         private void AcheivementEditOutlineCheckbox_CheckedChanged(object sender, EventArgs eventArgs)
@@ -1443,10 +1446,14 @@ namespace Retro_Achievement_Tracker.Forms
             if (this.openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 CustomAchievementFile = this.openFileDialog1.FileName;
+
+                SetupBrowser();
             }
             else
             {
-                this.useCustomAchievementCheckbox.Checked = this.useCustomAchievementCheckbox.Checked && !string.IsNullOrEmpty(CustomAchievementFile);
+                if (this.useCustomAchievementCheckbox.Checked && !string.IsNullOrEmpty(CustomAchievementFile)) {
+                    this.useCustomAchievementCheckbox.Checked = false;
+                }
             }
         }
 
@@ -1455,10 +1462,14 @@ namespace Retro_Achievement_Tracker.Forms
             if (this.openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 CustomMasteryFile = this.openFileDialog1.FileName;
+
+                SetupBrowser();
             }
             else
             {
-                this.useCustomMasteryCheckbox.Checked = this.useCustomMasteryCheckbox.Checked && !string.IsNullOrEmpty(CustomMasteryFile);
+                if (this.useCustomMasteryCheckbox.Checked && !string.IsNullOrEmpty(CustomMasteryFile)) {
+                    this.useCustomMasteryCheckbox.Checked = false;
+                }
             }
         }
 
