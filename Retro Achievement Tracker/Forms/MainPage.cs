@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.XPath;
 
@@ -390,14 +391,20 @@ namespace Retro_Achievement_Tracker
             CreateNotificationsWindow();
         }
 
-        protected override void OnLoad(EventArgs e)
+        protected async override void OnLoad(EventArgs e)
         {
             CreateDataBindings();
 
-            if (this.CanStart() && this.autoStartCheckbox.Checked)
+            if (CanStart())
             {
-                this.StartButton_Click(null, null);
+                await InitializePlayerData();
+
+                if (this.autoStartCheckbox.Checked)
+                {
+                    this.StartButton_Click(null, null);
+                }
             }
+            
             else
             {
                 this.StopButton_Click(null, null);
@@ -414,17 +421,10 @@ namespace Retro_Achievement_Tracker
             this.usernameTextBox.Enabled = false;
             this.apiKeyTextBox.Enabled = false;
 
-            hFC_EssentialsClient = new HFC_EssentialsClient(this.usernameTextBox.Text, this.apiKeyTextBox.Text);
-
-            UserSummary = await hFC_EssentialsClient.GetUserSummary();
-
-            Log(CALLER_ID + "[User Stats {" + this.usernameTextBox.Text + "} loaded.]");
-
-            CurrentGame = await hFC_EssentialsClient.GetGameProgress(UserSummary.GameSummaries[0].GameID.ToString());
-
-            this.userProfilePictureBox.ImageLocation = "https://retroachievements.org/UserPic/" + this.usernameTextBox.Text + ".png";
-
-            Log(CALLER_ID + "[Game Info {" + CurrentGame.Title + "} loaded.]");
+            if (UserSummary == null)
+            {
+                await InitializePlayerData();
+            }
 
             if (this.autoLaunchFocusWindowCheckBox.Checked)
             {
@@ -450,6 +450,21 @@ namespace Retro_Achievement_Tracker
             Settings.Default.ra_username = this.usernameTextBox.Text;
             Settings.Default.ra_key = this.apiKeyTextBox.Text;
             Settings.Default.Save();
+        }
+
+        private async Task InitializePlayerData()
+        {
+            hFC_EssentialsClient = new HFC_EssentialsClient(this.usernameTextBox.Text, this.apiKeyTextBox.Text);
+
+            UserSummary = await hFC_EssentialsClient.GetUserSummary();
+
+            Log(CALLER_ID + "[User Stats {" + this.usernameTextBox.Text + "} loaded.]");
+
+            CurrentGame = await hFC_EssentialsClient.GetGameProgress(UserSummary.GameSummaries[0].GameID.ToString());
+
+            this.userProfilePictureBox.ImageLocation = "https://retroachievements.org/UserPic/" + this.usernameTextBox.Text + ".png";
+
+            Log(CALLER_ID + "[Game Info {" + CurrentGame.Title + "} loaded.]");
         }
 
         private void StopButton_Click(object sender, EventArgs e)

@@ -223,7 +223,7 @@
             131072});
             this.scaleMasteryNumericUpDown.Location = new System.Drawing.Point(9, 140);
             this.scaleMasteryNumericUpDown.Maximum = new decimal(new int[] {
-            2,
+            5,
             0,
             0,
             0});
@@ -447,7 +447,7 @@
             131072});
             this.scaleAchievementNumericUpDown.Location = new System.Drawing.Point(9, 140);
             this.scaleAchievementNumericUpDown.Maximum = new decimal(new int[] {
-            2,
+            5,
             0,
             0,
             0});

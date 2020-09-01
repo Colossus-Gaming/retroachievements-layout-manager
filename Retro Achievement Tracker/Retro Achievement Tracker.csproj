@@ -183,6 +183,7 @@
     <Compile Include="Forms\SupportPage.Designer.cs">
       <DependentUpon>SupportPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\BrowserBase.cs" />
     <Compile Include="Models\ConsoleListConverter.cs" />
     <Compile Include="Models\AchievementConverter.cs" />
     <Compile Include="Models\ConsoleList.cs" />

@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -244,6 +245,16 @@ namespace Retro_Achievement_Tracker.Forms
             }
             get
             {
+                if (!File.Exists(Settings.Default.notification_custom_achievement_file))
+                {
+                    Settings.Default.notification_custom_achievement_file = string.Empty;
+                    Settings.Default.Save();
+                    Invoke((MethodInvoker)delegate
+                    {
+                        this.useCustomAchievementCheckbox.Checked = false;
+                    });
+                }
+
                 return Settings.Default.notification_custom_achievement_file;
             }
         }
@@ -256,6 +267,17 @@ namespace Retro_Achievement_Tracker.Forms
             }
             get
             {
+                if (!File.Exists(Settings.Default.notification_custom_mastery_file))
+                {
+                    Settings.Default.notification_custom_mastery_file = string.Empty;
+                    Settings.Default.Save();
+
+                    Invoke((MethodInvoker)delegate
+                    {
+                        this.useCustomMasteryCheckbox.Checked = false;
+                    });
+                }
+
                 return Settings.Default.notification_custom_mastery_file;
             }
         }
@@ -417,6 +439,16 @@ namespace Retro_Achievement_Tracker.Forms
             this.customMasteryXNumericUpDown.Value = CustomMasteryX;
             this.customMasteryYNumericUpDown.Value = CustomMasteryY;
 
+            if (CustomAchievementScale > this.scaleAchievementNumericUpDown.Maximum)
+            {
+                CustomAchievementScale = this.scaleAchievementNumericUpDown.Maximum;
+            }
+
+            if (CustomMasteryScale > this.scaleMasteryNumericUpDown.Maximum)
+            {
+                CustomMasteryScale = this.scaleMasteryNumericUpDown.Maximum;
+            }
+
             this.scaleAchievementNumericUpDown.Value = CustomAchievementScale;
             this.scaleMasteryNumericUpDown.Value = CustomMasteryScale;
 
@@ -452,16 +484,6 @@ namespace Retro_Achievement_Tracker.Forms
             {
                 RunNotificationTask();
             }
-        }
-
-        public bool UsingCustomAchievement()
-        {
-            return this.useCustomAchievementCheckbox.Checked;
-        }
-
-        public bool UsingCustomMastery()
-        {
-            return this.useCustomMasteryCheckbox.Checked;
         }
 
         private void RunNotificationTask()
@@ -1283,7 +1305,7 @@ namespace Retro_Achievement_Tracker.Forms
 
         private void ScaleMasteryNumericUpDown_ValueChanged(object sender, EventArgs eventArgs)
         {
-            CustomAchievementScale = this.scaleMasteryNumericUpDown.Value;
+            CustomMasteryScale = this.scaleMasteryNumericUpDown.Value;
             SetMasteryWidth();
         }
 
@@ -1424,7 +1446,7 @@ namespace Retro_Achievement_Tracker.Forms
             }
             else
             {
-                this.useCustomAchievementCheckbox.Checked = !string.IsNullOrEmpty(CustomAchievementFile);
+                this.useCustomAchievementCheckbox.Checked = this.useCustomAchievementCheckbox.Checked && !string.IsNullOrEmpty(CustomAchievementFile);
             }
         }
 
@@ -1436,14 +1458,13 @@ namespace Retro_Achievement_Tracker.Forms
             }
             else
             {
-                this.useCustomMasteryCheckbox.Checked = !string.IsNullOrEmpty(CustomMasteryFile);
+                this.useCustomMasteryCheckbox.Checked = this.useCustomMasteryCheckbox.Checked && !string.IsNullOrEmpty(CustomMasteryFile);
             }
         }
 
         public int GetVideoWidth(string input)
         {
             var inputFile = new MediaFile { Filename = input };
-
             using (var engine = new Engine())
             {
                 engine.GetMetadata(inputFile);
