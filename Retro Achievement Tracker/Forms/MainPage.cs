@@ -481,9 +481,9 @@ namespace Retro_Achievement_Tracker
             UpdateRAConnectivityLabel("Stopped checking retroachievements.org");
 
             this.stopButton.Enabled = false;
-            this.showFocusWindowButton.Enabled = false;
-            this.showNotificationsWindowButton.Enabled = false;
-            this.showStatsWindowButton.Enabled = false;
+            this.showFocusWindowButton.Enabled = CanStart();
+            this.showNotificationsWindowButton.Enabled = CanStart();
+            this.showStatsWindowButton.Enabled = CanStart();
 
             this.apiKeyTextBox.Enabled = true;
             this.usernameTextBox.Enabled = true;
@@ -532,6 +532,10 @@ namespace Retro_Achievement_Tracker
             {
                 LogCallback = Log
             };
+            NotificationLayoutWindow.chromiumWebBrowser.FrameLoadEnd += new EventHandler<FrameLoadEndEventArgs>((sender, frameLoadEndEventArgs) =>
+            {
+                NotificationLayoutWindow.SetCurrentGame(UserSummary.GameSummaries[0], UserSummary.GameAchievementSummaries[0]);
+            });
         }
 
         private bool CanStart()
