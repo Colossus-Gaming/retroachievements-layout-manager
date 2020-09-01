@@ -1140,13 +1140,17 @@ namespace Retro_Achievement_Tracker.Forms
                 DisableAchievementEdit();
 
                 this.acheivementEditOutlineCheckbox.Checked = false;
+
+                SetupBrowser();
             }
             else if (string.IsNullOrEmpty(CustomAchievementFile))
             {
                 SelectCustomAchievementButton_Click(null, null);
             }
-
-            SetupBrowser();
+            else
+            {
+                SetupBrowser();
+            }
         }
 
         private void UseCustomMasteryCheckbox_CheckedChanged(object sender, EventArgs eventArgs)
