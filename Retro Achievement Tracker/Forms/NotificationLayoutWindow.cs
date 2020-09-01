@@ -1455,7 +1455,7 @@ namespace Retro_Achievement_Tracker.Forms
             }
             else
             {
-                if (this.useCustomAchievementCheckbox.Checked && !string.IsNullOrEmpty(CustomAchievementFile)) {
+                if (this.useCustomAchievementCheckbox.Checked && string.IsNullOrEmpty(CustomAchievementFile)) {
                     this.useCustomAchievementCheckbox.Checked = false;
                 }
             }
@@ -1471,7 +1471,7 @@ namespace Retro_Achievement_Tracker.Forms
             }
             else
             {
-                if (this.useCustomMasteryCheckbox.Checked && !string.IsNullOrEmpty(CustomMasteryFile)) {
+                if (this.useCustomMasteryCheckbox.Checked && string.IsNullOrEmpty(CustomMasteryFile)) {
                     this.useCustomMasteryCheckbox.Checked = false;
                 }
             }
