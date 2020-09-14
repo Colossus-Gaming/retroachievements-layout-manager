@@ -19,6 +19,7 @@
         public List<Achievement> RecentAchievements { get; set; }
     }
 
+    [JsonConverter(typeof(GameSummaryConverter))]
     public class GameSummary
     {
         public int GameID { get; set; }

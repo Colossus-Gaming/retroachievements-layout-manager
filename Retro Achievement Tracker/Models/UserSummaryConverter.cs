@@ -4,6 +4,7 @@
     using Newtonsoft.Json.Linq;
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     public class UserSummaryConverter : JsonConverter
     {
@@ -74,7 +75,9 @@
             {
                 if (RecentlyPlayed.Type == JTokenType.Array)
                 {
-                    UserSummary.GameSummaries = RecentlyPlayed.ToObject<List<GameSummary>>();
+                    List<GameSummary> gameSummaries = RecentlyPlayed.ToObject<List<GameSummary>>();
+
+                    UserSummary.GameSummaries = gameSummaries.FindAll(gameSummary => gameSummary.ConsoleID != 0);
                 }
             }
 

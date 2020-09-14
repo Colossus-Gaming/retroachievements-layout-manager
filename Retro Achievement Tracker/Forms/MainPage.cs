@@ -315,8 +315,8 @@ namespace Retro_Achievement_Tracker
         {
             InitializeComponent();
             SetFont();
-            LoadProperties();
             AutoUpdate();
+            LoadProperties();
             SetupInterface();
         }
 
@@ -668,6 +668,13 @@ namespace Retro_Achievement_Tracker
 
         private void LoadProperties()
         {
+            if (Settings.Default.UpdateSettings)
+            {
+                Settings.Default.Upgrade();
+                Settings.Default.UpdateSettings = false;
+                Settings.Default.Save();
+            }
+
             this.usernameTextBox.Text = Settings.Default.ra_username;
             this.apiKeyTextBox.Text = Settings.Default.ra_key;
             this.autoStartCheckbox.Checked = Settings.Default.auto_start_checked;

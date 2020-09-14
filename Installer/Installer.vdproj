@@ -220,7 +220,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_28D66E63E61FE4E52102D59E771C7880"
+        "OwnerKey" = "8:_1C0A4706DA324BF887025B7182EF8EEA"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -262,12 +262,6 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_1C0A4706DA324BF887025B7182EF8EEA"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_F75F8444AB84656DF28DF479A524DEF5"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -293,6 +287,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_B48DEC44AA6F869C9B1F0FB2F5AB49A6"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_28D66E63E61FE4E52102D59E771C7880"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -454,7 +454,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Retro Achievement Tracker, Version=1.0.7.6, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Retro Achievement Tracker, Version=1.0.7.7, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_1C0A4706DA324BF887025B7182EF8EEA"
@@ -1231,15 +1231,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:RA Layout Manager"
-        "ProductCode" = "8:{B987A459-80FD-4A70-A506-53E9C69C1832}"
-        "PackageCode" = "8:{84385FA0-A338-455B-9D6F-10E33FC3AC14}"
+        "ProductCode" = "8:{FF84B71F-8B61-4BCA-8E59-7D7B9ED25CD6}"
+        "PackageCode" = "8:{3384F70B-0C35-4768-9EE3-901E1892EA4A}"
         "UpgradeCode" = "8:{2AED59AC-3EBE-4936-A1A3-3282811ECB5E}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.14"
+        "ProductVersion" = "8:1.0.15"
         "Manufacturer" = "8:Colossus Gaming"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
