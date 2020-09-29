@@ -4,6 +4,7 @@ using MediaToolkit.Model;
 using Retro_Achievement_Tracker.Models;
 using Retro_Achievement_Tracker.Properties;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Diagnostics;
@@ -23,7 +24,7 @@ namespace Retro_Achievement_Tracker.Forms
 
         private Task NotificationsTask;
 
-        private readonly ObservableCollection<NotificationRequest> NotificationRequests;
+        private readonly List<NotificationRequest> NotificationRequests;
 
         private Stopwatch stopwatch;
 
@@ -292,8 +293,7 @@ namespace Retro_Achievement_Tracker.Forms
             SetLabels();
             ToggleOutline();
 
-            NotificationRequests = new ObservableCollection<NotificationRequest>();
-            NotificationRequests.CollectionChanged += NotificationRequests_CollectionChanged;
+            NotificationRequests = new List<NotificationRequest>();
 
             stopwatch = new Stopwatch();
 
@@ -478,9 +478,9 @@ namespace Retro_Achievement_Tracker.Forms
             PromptUserInput();
         }
 
-        private void NotificationRequests_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        public void FireNotifications()
         {
-            if (e.Action == NotifyCollectionChangedAction.Add && NotificationRequests.Count > 0 && !stopwatch.IsRunning && NotificationsTask.Status != TaskStatus.Running)
+            if (NotificationRequests.Count > 0 && !stopwatch.IsRunning && NotificationsTask.Status != TaskStatus.Running)
             {
                 RunNotificationTask();
             }
@@ -586,14 +586,11 @@ namespace Retro_Achievement_Tracker.Forms
         {
             try
             {
-                lock (NotificationRequests)
-                {
-                    NotificationRequest notificationRequest = NotificationRequests[0];
+                NotificationRequest notificationRequest = NotificationRequests[0];
 
-                    NotificationRequests.Remove(notificationRequest);
+                NotificationRequests.Remove(notificationRequest);
 
-                    return notificationRequest;
-                }
+                return notificationRequest;
             }
             catch
             {
@@ -621,10 +618,7 @@ namespace Retro_Achievement_Tracker.Forms
                 Achievement = achievement
             };
 
-            lock (NotificationRequests)
-            {
-                NotificationRequests.Add(notificationRequest);
-            }
+            NotificationRequests.Add(notificationRequest);
         }
 
         public void EnqueueMasteryNotification()
@@ -634,11 +628,7 @@ namespace Retro_Achievement_Tracker.Forms
                 GameSummary = CurrentGame,
                 GameAchievementSummary = CurrentAchievementSummary
             };
-
-            lock (NotificationRequests)
-            {
-                NotificationRequests.Add(notificationRequest);
-            }
+            NotificationRequests.Add(notificationRequest);
         }
 
         private void SendAchievementNotification(Achievement achievement)
@@ -647,9 +637,9 @@ namespace Retro_Achievement_Tracker.Forms
             {
                 if (this.Visible && achievement != null)
                 {
-                    string script = "achievementNotification(\"" + achievement.Title + "\"," +
+                    string script = "achievementNotification(\"" + achievement.Title.Replace("\"", "\\\"") + "\"," +
                                        "\"https://retroachievements.org/Badge/" + achievement.BadgeNumber + ".png\",\"" +
-                                       achievement.Description + "\",\"" + achievement.Points + "\");";
+                                       achievement.Description.Replace("\"", "\\\"") + "\",\"" + achievement.Points + "\");";
 
                     LogCallback(CALLER_ID + "[achievementNotification] Sending: [" + script + "]");
 
@@ -671,7 +661,7 @@ namespace Retro_Achievement_Tracker.Forms
             {
                 if (this.Visible)
                 {
-                    string script = "masteryNotification(\"" + CurrentGame.Title + "\"," +
+                    string script = "masteryNotification(\"" + CurrentGame.Title.Replace("\"", "\\\"") + "\"," +
                                                 "\"https://retroachievements.org" + CurrentGame.ImageIcon + "\"," +
                                                 "\"" + CurrentAchievementSummary.NumPossibleAchievements + "\"," +
                                                 "\"" + CurrentAchievementSummary.PossibleScore + "\");";
@@ -700,17 +690,24 @@ namespace Retro_Achievement_Tracker.Forms
                     BadgeNumber = "49987",
                     Points = 1
                 });
+
+
+            FireNotifications();
         }
 
         private void ReplayAchievementButton_Click(object sender, EventArgs eventArgs)
         {
             this.EnqueueAchievementNotification(MostRecentAchievement);
+
+            FireNotifications();
         }
 
 
         private void ShowGameMasteryButton_Click(object sender, EventArgs eventArgs)
         {
             this.EnqueueMasteryNotification();
+
+            FireNotifications();
         }
 
         private async void PromptUserInput()
@@ -736,7 +733,7 @@ namespace Retro_Achievement_Tracker.Forms
         {
             if (this.Visible)
             {
-                string script = "setBackgroundColor('" + BackgroundColorHexCode + "');";
+                string script = "setBackgroundColor(\"" + BackgroundColorHexCode + "\");";
 
                 LogCallback(CALLER_ID + "[setBackgroundColor] Sending: [" + script + "]");
 
@@ -755,7 +752,7 @@ namespace Retro_Achievement_Tracker.Forms
         {
             if (this.Visible)
             {
-                string script = "setFontColor('" + FontColorHexCode + "');";
+                string script = "setFontColor(\"" + FontColorHexCode + "\");";
 
                 LogCallback(CALLER_ID + "[setFontColor] Sending: [" + script + "]");
 
@@ -793,7 +790,7 @@ namespace Retro_Achievement_Tracker.Forms
         {
             if (this.Visible)
             {
-                string script = "setFontOutline('" + FontOutlineColorHexCode + " " + FontOutlineSize + "px');";
+                string script = "setFontOutline(\"" + FontOutlineColorHexCode + " " + FontOutlineSize + "px\");";
 
                 LogCallback(CALLER_ID + "[setFontOutline] Sending: [" + script + "]");
 
@@ -890,7 +887,7 @@ namespace Retro_Achievement_Tracker.Forms
 
             if (this.Visible)
             {
-                string script = "setAchievementLeft('" + left + "px');";
+                string script = "setAchievementLeft(\"" + left + "px\");";
 
                 LogCallback(CALLER_ID + "[setAchievementLeft] Sending: [" + script + "]");
 
@@ -911,7 +908,7 @@ namespace Retro_Achievement_Tracker.Forms
 
             if (this.Visible)
             {
-                string script = "setAchievementTop('" + top + "px');";
+                string script = "setAchievementTop(\"" + top + "px\");";
 
                 LogCallback(CALLER_ID + "[setAchievementTop] Sending: [" + script + "]");
 
@@ -932,7 +929,7 @@ namespace Retro_Achievement_Tracker.Forms
 
             if (this.Visible)
             {
-                string script = "setMasteryLeft('" + left + "px');";
+                string script = "setMasteryLeft(\"" + left + "px\");";
 
                 LogCallback(CALLER_ID + "[setMasteryLeft] Sending: [" + script + "]");
 
@@ -953,7 +950,7 @@ namespace Retro_Achievement_Tracker.Forms
 
             if (this.Visible)
             {
-                string script = "setMasteryTop('" + top + "px');";
+                string script = "setMasteryTop(\"" + top + "px\");";
 
                 LogCallback(CALLER_ID + "[setMasteryTop] Sending: [" + script + "]");
 
@@ -978,7 +975,7 @@ namespace Retro_Achievement_Tracker.Forms
             }
             if (this.Visible)
             {
-                string script = "setAchievementWidth('" + width + "px');";
+                string script = "setAchievementWidth(\"" + width + "px\");";
 
                 LogCallback(CALLER_ID + "[setAchievementWidth] Sending: [" + script + "]");
 
@@ -1004,7 +1001,7 @@ namespace Retro_Achievement_Tracker.Forms
 
             if (this.Visible)
             {
-                string script = "setMasteryWidth('" + width + "px');";
+                string script = "setMasteryWidth(\"" + width + "px\");";
 
                 LogCallback(CALLER_ID + "[setMasteryWidth] Sending: [" + script + "]");
 
@@ -1186,7 +1183,8 @@ namespace Retro_Achievement_Tracker.Forms
             else if (string.IsNullOrEmpty(CustomMasteryFile))
             {
                 SelectCustomMasteryNotificationButton_Click(null, null);
-            } else
+            }
+            else
             {
                 SetupBrowser();
             }
@@ -1455,7 +1453,8 @@ namespace Retro_Achievement_Tracker.Forms
             }
             else
             {
-                if (this.useCustomAchievementCheckbox.Checked && string.IsNullOrEmpty(CustomAchievementFile)) {
+                if (this.useCustomAchievementCheckbox.Checked && string.IsNullOrEmpty(CustomAchievementFile))
+                {
                     this.useCustomAchievementCheckbox.Checked = false;
                 }
             }
@@ -1471,7 +1470,8 @@ namespace Retro_Achievement_Tracker.Forms
             }
             else
             {
-                if (this.useCustomMasteryCheckbox.Checked && string.IsNullOrEmpty(CustomMasteryFile)) {
+                if (this.useCustomMasteryCheckbox.Checked && string.IsNullOrEmpty(CustomMasteryFile))
+                {
                     this.useCustomMasteryCheckbox.Checked = false;
                 }
             }

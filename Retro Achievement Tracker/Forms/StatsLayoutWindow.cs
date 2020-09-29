@@ -179,7 +179,7 @@ namespace Retro_Achievement_Tracker
         {
             if (this.Visible)
             {
-                string script = "setFontColor('" + FontColorHexCode + "');";
+                string script = "setFontColor(\"" + FontColorHexCode + "\");";
 
                 LogCallback(CALLER_ID +"[setFontColor] Sending: [" + script + "]");
 
@@ -217,7 +217,7 @@ namespace Retro_Achievement_Tracker
         {
             if (this.Visible)
             {
-                string script = "setFontSize('" + FontSize + "px');";
+                string script = "setFontSize(\"" + FontSize + "px\");";
 
                 LogCallback(CALLER_ID +"[setFontSize] Sending: [" + script + "]");
 
@@ -236,7 +236,7 @@ namespace Retro_Achievement_Tracker
         {
             if (this.Visible)
             {
-                string script = "setFontOutline('" + FontOutlineColorHexCode + " " + FontOutlineSize + "px');";
+                string script = "setFontOutline(\"" + FontOutlineColorHexCode + " " + FontOutlineSize + "px\");";
 
                 LogCallback(CALLER_ID +"[setFontOutline] Sending: [" + script + "]");
 

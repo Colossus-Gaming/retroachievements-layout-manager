@@ -126,6 +126,8 @@ namespace Retro_Achievement_Tracker
                         FocusLayoutWindow.HideFocus();
                         NotificationLayoutWindow.EnqueueMasteryNotification();
                     }
+
+                    NotificationLayoutWindow.FireNotifications();
                 }
 
                 UserAndGameTimerCounter = 6;
@@ -629,9 +631,15 @@ namespace Retro_Achievement_Tracker
                 UnlockedAchievements.Sort(delegate (Achievement x, Achievement y) { return y.DateEarned.Value.CompareTo(x.DateEarned.Value); });
             }
 
-            if (FocusLayoutWindow.CurrentlyFocusedIndex > 0 && OldUnlockedAchievements.Count < UnlockedAchievements.Count)
+            if (OldUnlockedAchievements.Count < UnlockedAchievements.Count)
             {
-                FocusLayoutWindow.CurrentlyFocusedIndex -= UnlockedAchievements.Count - OldUnlockedAchievements.Count;
+                if (LockedAchievements.Count == 0)
+                {
+                    FocusLayoutWindow.CurrentlyFocusedIndex = 0;
+                } else if (LockedAchievements.IndexOf(FocusLayoutWindow.CurrentlyFocusedAchievement) > 0)
+                {
+                    FocusLayoutWindow.CurrentlyFocusedIndex = LockedAchievements.IndexOf(FocusLayoutWindow.CurrentlyFocusedAchievement);
+                }
             }
 
             FocusLayoutWindow.SetLockedAchievements(LockedAchievements);

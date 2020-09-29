@@ -137,8 +137,7 @@ namespace Retro_Achievement_Tracker
                         if (CurrentlyFocusedIndex >= LockedAchievements.Count)
                         {
                             CurrentlyFocusedIndex = LockedAchievements.Count - 1;
-                        }
-                        else if (CurrentlyFocusedIndex < 0)
+                        }else if (CurrentlyFocusedIndex < 0)
                         {
                             CurrentlyFocusedIndex = 0;
                         }
@@ -179,9 +178,9 @@ namespace Retro_Achievement_Tracker
             {
                 CurrentlyFocusedAchievement = CurrentlyViewingAchievement;
 
-                string script = "setFocus(\"" + CurrentlyFocusedAchievement.Title + "\"," +
+                string script = "setFocus(\"" + CurrentlyFocusedAchievement.Title.Replace("\"", "\\\"") + "\"," +
                            "\"https://retroachievements.org/Badge/" + CurrentlyFocusedAchievement.BadgeNumber + ".png\"," +
-                           "\"" + CurrentlyFocusedAchievement.Description + "\"," +
+                           "\"" + CurrentlyFocusedAchievement.Description.Replace("\"", "\\\"") + "\"," +
                            "\"" + CurrentlyFocusedAchievement.Points + "\");";
 
                 LogCallback(CALLER_ID + "[setFocus] Sending: [" + script + "]");
@@ -225,7 +224,7 @@ namespace Retro_Achievement_Tracker
         {
             if (this.Visible)
             {
-                string script = "setBackgroundColor('" + BackgroundColorHexCode + "');";
+                string script = "setBackgroundColor(\"" + BackgroundColorHexCode + "\");";
 
                 LogCallback(CALLER_ID + "[setBackgroundColor] Sending: [" + script + "]");
 
@@ -244,7 +243,7 @@ namespace Retro_Achievement_Tracker
         {
             if (this.Visible)
             {
-                string script = "setFontColor('" + FontColorHexCode + "');";
+                string script = "setFontColor(\"" + FontColorHexCode + "\");";
 
                 LogCallback(CALLER_ID + "[setFontColor] Sending: [" + script + "]");
 
@@ -282,7 +281,7 @@ namespace Retro_Achievement_Tracker
         {
             if (this.Visible)
             {
-                string script = "setFontOutline('" + FontOutlineColorHexCode + " " + FontOutlineSize + "px');";
+                string script = "setFontOutline(\"" + FontOutlineColorHexCode + " " + FontOutlineSize + "px\");";
 
                 LogCallback(CALLER_ID + "[setFontOutline] Sending: [" + script + "]");
 
@@ -421,7 +420,7 @@ namespace Retro_Achievement_Tracker
             return "#" + c.R.ToString("X2") + c.G.ToString("X2") + c.B.ToString("X2");
         }
 
-        private void MoveHuntIndexLeft(object sender, EventArgs e)
+        private void MoveFocusIndexLeft(object sender, EventArgs e)
         {
             CurrentlyFocusedIndex--;
 
@@ -433,7 +432,7 @@ namespace Retro_Achievement_Tracker
             UpdateFocusAchievement();
         }
 
-        private void MoveHuntIndexRight(object sender, EventArgs e)
+        private void MoveFocusIndexRight(object sender, EventArgs e)
         {
             CurrentlyFocusedIndex++;
 

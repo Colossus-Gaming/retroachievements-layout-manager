@@ -119,7 +119,7 @@ namespace Retro_Achievement_Tracker
             this.focusAchievementButtonLeft.TabIndex = 9;
             this.focusAchievementButtonLeft.Text = "<";
             this.focusAchievementButtonLeft.UseVisualStyleBackColor = true;
-            this.focusAchievementButtonLeft.Click += new System.EventHandler(this.MoveHuntIndexLeft);
+            this.focusAchievementButtonLeft.Click += new System.EventHandler(this.MoveFocusIndexLeft);
             // 
             // focusAchievementButtonRight
             // 
@@ -131,7 +131,7 @@ namespace Retro_Achievement_Tracker
             this.focusAchievementButtonRight.TabIndex = 10;
             this.focusAchievementButtonRight.Text = ">";
             this.focusAchievementButtonRight.UseVisualStyleBackColor = true;
-            this.focusAchievementButtonRight.Click += new System.EventHandler(this.MoveHuntIndexRight);
+            this.focusAchievementButtonRight.Click += new System.EventHandler(this.MoveFocusIndexRight);
             // 
             // focusAchievementPictureBox
             // 
