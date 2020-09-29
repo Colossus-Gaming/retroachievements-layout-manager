@@ -31,6 +31,7 @@ namespace Retro_Achievement_Tracker.Models
             JToken DateAwarded = item["DateAwarded"];
             JToken DateEarnedHardcore = item["DateEarnedHardcore"];
             JToken BadgeName = item["BadgeName"];
+            JToken DisplayOrder = item["DisplayOrder"];
 
             if (ID != null)
             {
@@ -72,6 +73,10 @@ namespace Retro_Achievement_Tracker.Models
             if (BadgeName != null)
             {
                 Achievement.BadgeNumber = Convert.ToString(BadgeName);
+            }
+            if (DisplayOrder != null)
+            {
+                Achievement.DisplayOrder = Convert.ToInt32(DisplayOrder);
             }
 
             Achievement.IsAwarded = Achievement.DateEarned.HasValue || (IsAwarded != null && "1".Equals(IsAwarded.ToString()));

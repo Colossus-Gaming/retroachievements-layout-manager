@@ -120,6 +120,7 @@ namespace Retro_Achievement_Tracker
             }
 
             LockedAchievements = achievements;
+            LockedAchievements.Sort();
 
             UpdateFocusAchievement();
         }

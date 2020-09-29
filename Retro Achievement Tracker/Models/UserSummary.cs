@@ -54,6 +54,7 @@
         public int Points { get; set; }
         public string BadgeNumber { get; set; }
         public bool IsAwarded { get; set; }
+        public int DisplayOrder { get; set; }
         public DateTime? DateEarned { get; set; }
 
         public int CompareTo(Achievement other)
@@ -62,7 +63,7 @@
             {
                 return this.DateEarned.HasValue ? this.DateEarned.Value.CompareTo(other.DateEarned.Value) : 1;
             }
-            return this.DateEarned.HasValue ? -1 : this.Id.CompareTo(other.Id);
+            return this.DisplayOrder.CompareTo(other.DisplayOrder);
         }
 
         public bool Equals(Achievement other)
