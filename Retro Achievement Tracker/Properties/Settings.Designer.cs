@@ -121,18 +121,6 @@ namespace Retro_Achievement_Tracker.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("52")]
-        public float stats_font_size {
-            get {
-                return ((float)(this["stats_font_size"]));
-            }
-            set {
-                this["stats_font_size"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool stats_font_outline_enabled {
             get {

@@ -291,8 +291,9 @@
 
         #achievement-pop-name {
             position: relative;
-            top: 12px;
-            width: 975px;
+            top: 10px;
+            left: 12px;
+            width: 870px;
             height: 60px;
             text-align: center;
             display: none;
@@ -303,15 +304,15 @@
             float: right;
             right: 15px;
             top: 12px;
-            width: 740px;
-            height: 120px;
+            width: 680px;
+            height: 100px;
             text-align: center;
             display: none;
         }
 
         #achievement-pop-badge {
             left: 2px;
-            height: 145px;
+            height: 125px;
             display: none;
         }
 
@@ -320,15 +321,15 @@
             left: 15px;
             top: 15px;
             float: left;
-            height: 200px;
+            height: 180px;
             display: none;
         }
 
         #achievement-pop-description {
             position: relative;
             float: right;
-            width: 805px;
-            height: 140px;
+            width: 740px;
+            height: 120px;
             text-align: center;
             display: none;
         }
@@ -337,17 +338,19 @@
         #mastery-pop-points {
             position: relative;
             float: right;
+            padding-top: 25px;
             padding-right: 25px;
-            width: 350px;
-            height: 90px;
+            width: 310px;
+            height: 80px;
             text-align: left;
             display: none;
         }
 
         #achievement-pop-video,
         #mastery-pop-video {
-            left: -15px;
+            left: -25px;
             top: 5px;
+            width: 900px;
             position: absolute;
             display: none;
         }
@@ -371,10 +374,10 @@
         #achievement-pop,
         #mastery-pop {
             position: relative;
-            top: 250px;
-            left: 250px;
-            width: 1000px;
-            height: 235px;
+            top: 160px;
+            left: 200px;
+            width: 900px;
+            height: 212px;
             background-image: url('disk://background');
             background-repeat: no-repeat;
             background-color: #cccccc;
@@ -383,7 +386,7 @@
         }
 
         #achievement-pop-points {
-            top: 150px;
+            top: 130px;
             left: 20px;
             height: 70px;
         }
@@ -405,7 +408,7 @@
     </script>
 </head>
 <body>
-    <div id="container" style="background: magenta; width: 1925px; height: 1085px; top: -5px; left: -5px;">
+    <div id="container" style="background: magenta; width: 1361px; height: 763px; top: -5px; left: -5px;">
         <div id="user-prompt" style="position: absolute; width: 400px; height: 200px;background-color: lightskyblue; left: 400px; top: 100px; text-align: center; display: none;">
             <div style="position: relative;top: 50px;text-align: center;font-weight: bold;vertical-align: middle; font-size: 42px;">
                 Are you ready?<br />
@@ -417,7 +420,14 @@
 
         <div id="achievement-pop" src="disk://achievement-pop" style="border: 5px solid black;">
             <div id="achievement-pop-name" class="has-font"></div>
-            <span id="description-span" style="display: table-cell; position: relative; vertical-align: top; width: 975px; left: 10px; top: 15px; overflow: hidden;">
+            <span id="description-span" style="        display: table-cell;
+        position: relative;
+        vertical-align: top;
+        width: 875px;
+        left: 10px;
+        top: 10px;
+        overflow: hidden;
+">
                 <img id="achievement-pop-badge" />
                 <a id="achievement-pop-description" class="has-font"></a>
             </span>

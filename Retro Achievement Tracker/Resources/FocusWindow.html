@@ -35,12 +35,11 @@
             }
         }
 
-        function setFontFamily(value, bolded) {
+        function setFontFamily(value) {
             var all = document.getElementsByClassName('has-font');
 
             for (var i = 0; i < all.length; i++) {
-                all[i].style.fontFamily = "\"" + value + "\"";
-                all[i].style.fontWeight = bolded ? "bold" : "normal";
+                all[i].style.fontFamily = value;
             }
 
             adjustFont();
@@ -176,8 +175,8 @@
 
         #focus-achievement {
             position: relative;
-            top: 220px;
-            left: 220px;
+            top: 20px;
+            left: 20px;
             width: 1000px;
             height: 235px;
             background-image: url('disk://background');

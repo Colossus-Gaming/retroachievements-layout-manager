@@ -1,6 +1,5 @@
 ﻿using CefSharp;
 using CefSharp.Handler;
-using Retro_Achievement_Tracker.Forms;
 using Retro_Achievement_Tracker.Properties;
 using System.Drawing;
 using System.IO;
