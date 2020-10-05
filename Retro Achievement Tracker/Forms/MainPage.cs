@@ -129,7 +129,7 @@ namespace Retro_Achievement_Tracker
                             UserSummary.GameAchievementSummaries[0],
                             this.useCustomMasteryCheckbox.Checked ? GetVideoDuration(CustomMasteryFile) : 11000,
                             this.useCustomMasteryCheckbox.Checked ? CustomMasteryIn : 0,
-                            this.useCustomMasteryCheckbox.Checked ? CustomMasteryOut : 5600); 
+                            this.useCustomMasteryCheckbox.Checked ? CustomMasteryOut : 5600);
                         SetAwardCount();
                     }
 
@@ -482,11 +482,6 @@ namespace Retro_Achievement_Tracker
             {
                 Settings.Default.notification_custom_achievement_enable = value;
                 Settings.Default.Save();
-
-                if (!NotificationsWindow.IsDisposed)
-                {
-                    NotificationsWindow.SetAchievementWidth(this.useCustomAchievementCheckbox.Checked ? Convert.ToInt32(CustomAchievementScale * GetVideoWidth(CustomAchievementFile)) : 1200);
-                }
             }
             get
             {
@@ -499,11 +494,6 @@ namespace Retro_Achievement_Tracker
             {
                 Settings.Default.notification_custom_mastery_enable = value;
                 Settings.Default.Save();
-
-                if (!NotificationsWindow.IsDisposed)
-                {
-                    NotificationsWindow.SetMasteryWidth(this.useCustomMasteryCheckbox.Checked ? Convert.ToInt32(CustomMasteryScale * GetVideoWidth(CustomMasteryFile)) : 1200);
-                }
             }
             get
             {
@@ -584,11 +574,6 @@ namespace Retro_Achievement_Tracker
             {
                 Settings.Default.notification_custom_achievement_scale = value;
                 Settings.Default.Save();
-
-                if (!NotificationsWindow.IsDisposed)
-                {
-                    NotificationsWindow.SetAchievementWidth(this.useCustomAchievementCheckbox.Checked ? Convert.ToInt32(CustomAchievementScale * GetVideoWidth(CustomAchievementFile)) : 1200);
-                }
             }
             get
             {
@@ -1028,8 +1013,8 @@ namespace Retro_Achievement_Tracker
 
         private bool CanStart()
         {
-            return !(string.IsNullOrWhiteSpace(this.usernameTextBox.Text)
-                || string.IsNullOrWhiteSpace(this.apiKeyTextBox.Text));
+            return !(string.IsNullOrEmpty(this.usernameTextBox.Text)
+                || string.IsNullOrEmpty(this.apiKeyTextBox.Text));
         }
 
         private void UpdateTimerLabel(string s)
@@ -1165,12 +1150,23 @@ namespace Retro_Achievement_Tracker
             this.notificationsFontOutlineCheckbox.Checked = Settings.Default.notification_font_outline_enabled;
             this.notificationsFontOutlineSizeUpDown.Value = Settings.Default.notification_font_outline_size;
 
+            if (CustomAchievementEnabled && string.IsNullOrEmpty(Settings.Default.notification_custom_achievement_file))
+            {
+                Settings.Default.notification_custom_achievement_enable = false;
+            }
+            if (CustomMasteryEnabled && string.IsNullOrEmpty(Settings.Default.notification_custom_mastery_file))
+            {
+                Settings.Default.notification_custom_achievement_enable = false;
+            }
+
+            Settings.Default.Save();
+
             this.useCustomAchievementCheckbox.Checked = CustomAchievementEnabled;
             this.selectCustomAchievementButton.Enabled = CustomAchievementEnabled;
             this.customAchievementXNumericUpDown.Enabled = false;
             this.customAchievementYNumericUpDown.Enabled = false;
             this.scaleAchievementNumericUpDown.Enabled = false;
-            this.acheivementEditOutlineCheckbox.Enabled = CustomAchievementEnabled;
+            this.acheivementEditOutlineCheckbox.Enabled = false;
             this.inAchievementNumericUpDown.Enabled = false;
             this.outAchievementNumericUpDown.Enabled = false;
             this.xPositionLabel1.Enabled = false;
@@ -1184,7 +1180,7 @@ namespace Retro_Achievement_Tracker
             this.customMasteryXNumericUpDown.Enabled = false;
             this.customMasteryYNumericUpDown.Enabled = false;
             this.scaleMasteryNumericUpDown.Enabled = false;
-            this.masteryEditOultineCheckbox.Enabled = CustomMasteryEnabled;
+            this.masteryEditOultineCheckbox.Enabled = false;
             this.inMasteryNumericUpDown.Enabled = false;
             this.outMasteryNumericUpDown.Enabled = false;
             this.xPositionLabel2.Enabled = false;
@@ -1265,6 +1261,10 @@ namespace Retro_Achievement_Tracker
             this.statsFontOutlineCheckbox.CheckedChanged += StatsFontOutlineCheckbox_CheckedChanged;
             this.statsFontOutlineColorPickerButton.Click += StatsFontOutlineColorPickerButton_Click;
             this.statsFontOutlineSizeUpDown.ValueChanged += StatsFontOutlineSizeUpDown_ValueChanged;
+
+            this.autoStartCheckbox.CheckedChanged += AutoStart_CheckedChanged;
+            this.usernameTextBox.TextChanged += RequiredField_TextChange;
+            this.apiKeyTextBox.TextChanged += RequiredField_TextChange;
         }
 
         private async void SetAwardCount()
@@ -1362,7 +1362,6 @@ namespace Retro_Achievement_Tracker
             Settings.Default.Save();
         }
 
-
         private void AutoStart_CheckedChanged(object sender, EventArgs e)
         {
             Settings.Default.auto_start_checked = this.autoStartCheckbox.Checked;
@@ -1459,7 +1458,15 @@ namespace Retro_Achievement_Tracker
                 SelectCustomAchievementButton_Click(null, null);
             }
 
-            NotificationsWindow.Show();
+            if (!NotificationsWindow.IsDisposed)
+            {
+                NotificationsWindow.SetAchievementWidth(this.useCustomAchievementCheckbox.Checked ? Convert.ToInt32(CustomAchievementScale * GetVideoWidth(CustomAchievementFile)) : 1200);
+            }
+
+            if (this.autoLaunchNotificationsWindowCheckbox.Checked)
+            {
+                NotificationsWindow.Show();
+            }
         }
 
         private void UseCustomMasteryCheckbox_CheckedChanged(object sender, EventArgs eventArgs)
@@ -1499,7 +1506,15 @@ namespace Retro_Achievement_Tracker
                 SelectCustomMasteryNotificationButton_Click(null, null);
             }
 
-            NotificationsWindow.Show();
+            if (!NotificationsWindow.IsDisposed)
+            {
+                NotificationsWindow.SetMasteryWidth(this.useCustomMasteryCheckbox.Checked ? Convert.ToInt32(CustomMasteryScale * GetVideoWidth(CustomMasteryFile)) : 1200);
+            }
+
+            if (this.autoLaunchNotificationsWindowCheckbox.Checked)
+            {
+                NotificationsWindow.Show();
+            }
         }
 
         private void AcheivementEditOutlineCheckbox_CheckedChanged(object sender, EventArgs eventArgs)
@@ -1759,7 +1774,6 @@ namespace Retro_Achievement_Tracker
 
             NotificationsWindow.FireNotifications();
         }
-
 
         private void ShowGameMasteryButton_Click(object sender, EventArgs eventArgs)
         {
