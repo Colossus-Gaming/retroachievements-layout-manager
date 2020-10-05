@@ -99,7 +99,12 @@ namespace Retro_Achievement_Tracker
                 if (gameChange)
                 {
                     CurrentlyFocusedAchievement = CurrentlyViewingAchievement;
-                    FocusWindow.SetFocus(CurrentlyFocusedAchievement);
+                    if (LockedAchievements.Count > 0)
+                    {
+                        CurrentlyFocusedAchievement = LockedAchievements[0];
+                        CurrentlyViewingAchievement = LockedAchievements[0];
+                        SetFocusButton_Click(null, null);
+                    }
                 }
                 else if (UnlockedAchievements.Count > 0)
                 {
@@ -895,16 +900,28 @@ namespace Retro_Achievement_Tracker
 
             if (this.autoLaunchFocusWindowCheckBox.Checked)
             {
+                if (FocusWindow.IsDisposed)
+                {
+                    CreateFocusWindow();
+                }
                 FocusWindow.Show();
             }
 
             if (this.autoLaunchStatsWindowCheckbox.Checked)
             {
+                if (StatsWindow.IsDisposed)
+                {
+                    CreateStatsWindow();
+                }
                 StatsWindow.Show();
             }
 
             if (this.autoLaunchNotificationsWindowCheckbox.Checked)
             {
+                if (NotificationsWindow.IsDisposed)
+                {
+                    CreateNotificationsWindow();
+                }
                 NotificationsWindow.Show();
             }
 
@@ -926,6 +943,8 @@ namespace Retro_Achievement_Tracker
             UserSummary = await hFC_EssentialsClient.GetUserSummary();
 
             CurrentGame = await hFC_EssentialsClient.GetGameProgress(UserSummary.GameSummaries[0].GameID.ToString());
+
+            SetAwardCount();
 
             this.userProfilePictureBox.ImageLocation = "https://retroachievements.org/UserPic/" + this.usernameTextBox.Text + ".png";
         }
@@ -977,7 +996,13 @@ namespace Retro_Achievement_Tracker
             FocusWindow.chromiumWebBrowser.LoadHtml(Resources.FocusWindow);
             FocusWindow.chromiumWebBrowser.FrameLoadEnd += new EventHandler<FrameLoadEndEventArgs>((sender, frameLoadEndEventArgs) =>
             {
-                FocusWindow.SetFocus(CurrentlyFocusedAchievement);
+                if (LockedAchievements.Count > 0)
+                {
+                    FocusWindow.SetFocus(CurrentlyFocusedAchievement);
+                } else
+                {
+                    FocusWindow.HideFocus();
+                }
                 FocusWindow.SetFontFamily(FocusFontFamily.Name);
                 FocusWindow.SetFontColor(FocusFontColor);
                 FocusWindow.SetFontOutline(FocusFontOutlineColor, FocusFontOutlineSize);
@@ -1087,7 +1112,7 @@ namespace Retro_Achievement_Tracker
                 if (LockedAchievements.Count == 0)
                 {
                     CurrentlyFocusedIndex = 0;
-                    SetFocusButton_Click(null, null);
+                    HideFocusButton_Click(null, null);
                 }
                 else if (LockedAchievements.IndexOf(CurrentlyFocusedAchievement) > 0)
                 {
@@ -1095,7 +1120,7 @@ namespace Retro_Achievement_Tracker
                 }
                 else
                 {
-                    CurrentlyFocusedIndex = LockedAchievements.IndexOf(CurrentlyViewingAchievement);
+                    CurrentlyFocusedIndex = LockedAchievements.IndexOf(CurrentlyViewingAchievement) == -1 ? 0 : LockedAchievements.IndexOf(CurrentlyViewingAchievement);
                     SetFocusButton_Click(null, null);
                 }
             }
