@@ -591,11 +591,6 @@ namespace Retro_Achievement_Tracker
             {
                 Settings.Default.notification_custom_mastery_scale = value;
                 Settings.Default.Save();
-
-                if (!NotificationsWindow.IsDisposed)
-                {
-                    NotificationsWindow.SetMasteryWidth(this.useCustomMasteryCheckbox.Checked ? Convert.ToInt32(CustomMasteryScale * GetVideoWidth(CustomMasteryFile)) : 1200);
-                }
             }
             get
             {
@@ -1657,11 +1652,21 @@ namespace Retro_Achievement_Tracker
         private void ScaleAchievementNumericUpDown_ValueChanged(object sender, EventArgs eventArgs)
         {
             CustomAchievementScale = this.scaleAchievementNumericUpDown.Value;
+
+            if (!NotificationsWindow.IsDisposed)
+            {
+                NotificationsWindow.SetAchievementWidth(this.useCustomAchievementCheckbox.Checked ? Convert.ToInt32(CustomAchievementScale * GetVideoWidth(CustomAchievementFile)) : 1200);
+            }
         }
 
         private void ScaleMasteryNumericUpDown_ValueChanged(object sender, EventArgs eventArgs)
         {
             CustomMasteryScale = this.scaleMasteryNumericUpDown.Value;
+
+            if (!NotificationsWindow.IsDisposed)
+            {
+                NotificationsWindow.SetMasteryWidth(this.useCustomMasteryCheckbox.Checked ? Convert.ToInt32(CustomMasteryScale * GetVideoWidth(CustomMasteryFile)) : 1200);
+            }
         }
 
         private void OutAchievementNumericUpDown_ValueChanged(object sender, EventArgs e)
