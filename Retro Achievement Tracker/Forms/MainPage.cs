@@ -356,7 +356,7 @@ namespace Retro_Achievement_Tracker
             }
             set
             {
-                Settings.Default.stats_font_color_hex_code = value;
+                Settings.Default.stats_font_outline_color_hex = value;
                 Settings.Default.Save();
 
                 if (!StatsWindow.IsDisposed)
@@ -428,6 +428,8 @@ namespace Retro_Achievement_Tracker
                 {
                     NotificationsWindow.SetFontColor(value);
                 }
+
+                this.notificationsFontColorDisplayBox.BackColor = ColorTranslator.FromHtml(value);
             }
         }
         public string NotificationsFontOutlineColor
@@ -445,6 +447,8 @@ namespace Retro_Achievement_Tracker
                 {
                     NotificationsWindow.SetFontOutline(value, NotificationsFontOutlineSize);
                 }
+
+                this.notificationsFontOutlineColorDisplayBox.BackColor = ColorTranslator.FromHtml(value);
             }
         }
         public int NotificationsFontOutlineSize
@@ -479,6 +483,8 @@ namespace Retro_Achievement_Tracker
                 {
                     NotificationsWindow.SetBackgroundColor(value);
                 }
+
+                this.notificationsBackgroundColorDisplayBox.BackColor = ColorTranslator.FromHtml(value);
             }
         }
         private bool CustomAchievementEnabled
@@ -736,6 +742,8 @@ namespace Retro_Achievement_Tracker
                 {
                     FocusWindow.SetFontColor(value);
                 }
+
+                this.focusFontColorDisplayBox.BackColor = ColorTranslator.FromHtml(value);
             }
         }
         private string FocusFontOutlineColor
@@ -753,6 +761,8 @@ namespace Retro_Achievement_Tracker
                 {
                     FocusWindow.SetFontOutline(value, FocusFontOutlineSize);
                 }
+
+                this.focusFontOutlineColorDisplayBox.BackColor = ColorTranslator.FromHtml(value);
             }
         }
         private int FocusFontOutlineSize
@@ -787,6 +797,8 @@ namespace Retro_Achievement_Tracker
                 {
                     FocusWindow.SetBackgroundColor(value);
                 }
+
+                this.focusBackgroundColorDisplayBox.BackColor = ColorTranslator.FromHtml(value);
             }
         }
 
@@ -1183,31 +1195,31 @@ namespace Retro_Achievement_Tracker
 
             this.useCustomAchievementCheckbox.Checked = CustomAchievementEnabled;
             this.selectCustomAchievementButton.Enabled = CustomAchievementEnabled;
-            this.customAchievementXNumericUpDown.Enabled = false;
-            this.customAchievementYNumericUpDown.Enabled = false;
-            this.scaleAchievementNumericUpDown.Enabled = false;
-            this.acheivementEditOutlineCheckbox.Enabled = false;
-            this.inAchievementNumericUpDown.Enabled = false;
-            this.outAchievementNumericUpDown.Enabled = false;
-            this.xPositionLabel1.Enabled = false;
-            this.yPositionLabel1.Enabled = false;
-            this.scaleLabel1.Enabled = false;
-            this.inLabel1.Enabled = false;
-            this.outLabel1.Enabled = false;
+            this.customAchievementXNumericUpDown.Enabled = CustomAchievementEnabled;
+            this.customAchievementYNumericUpDown.Enabled = CustomAchievementEnabled;
+            this.scaleAchievementNumericUpDown.Enabled = CustomAchievementEnabled;
+            this.acheivementEditOutlineCheckbox.Enabled = CustomAchievementEnabled;
+            this.inAchievementNumericUpDown.Enabled = CustomAchievementEnabled;
+            this.outAchievementNumericUpDown.Enabled = CustomAchievementEnabled;
+            this.xPositionLabel1.Enabled = CustomAchievementEnabled;
+            this.yPositionLabel1.Enabled = CustomAchievementEnabled;
+            this.scaleLabel1.Enabled = CustomAchievementEnabled;
+            this.inLabel1.Enabled = CustomAchievementEnabled;
+            this.outLabel1.Enabled = CustomAchievementEnabled;
 
             this.useCustomMasteryCheckbox.Checked = CustomMasteryEnabled;
             this.selectCustomMasteryNotificationButton.Enabled = CustomMasteryEnabled;
-            this.customMasteryXNumericUpDown.Enabled = false;
-            this.customMasteryYNumericUpDown.Enabled = false;
-            this.scaleMasteryNumericUpDown.Enabled = false;
-            this.masteryEditOultineCheckbox.Enabled = false;
-            this.inMasteryNumericUpDown.Enabled = false;
-            this.outMasteryNumericUpDown.Enabled = false;
-            this.xPositionLabel2.Enabled = false;
-            this.yPositionLabel2.Enabled = false;
-            this.scaleLabel2.Enabled = false;
-            this.inLabel2.Enabled = false;
-            this.outLabel2.Enabled = false;
+            this.customMasteryXNumericUpDown.Enabled = CustomMasteryEnabled;
+            this.customMasteryYNumericUpDown.Enabled = CustomMasteryEnabled;
+            this.scaleMasteryNumericUpDown.Enabled = CustomMasteryEnabled;
+            this.masteryEditOultineCheckbox.Enabled = CustomMasteryEnabled;
+            this.inMasteryNumericUpDown.Enabled = CustomMasteryEnabled;
+            this.outMasteryNumericUpDown.Enabled = CustomMasteryEnabled;
+            this.xPositionLabel2.Enabled = CustomMasteryEnabled;
+            this.yPositionLabel2.Enabled = CustomMasteryEnabled;
+            this.scaleLabel2.Enabled = CustomMasteryEnabled;
+            this.inLabel2.Enabled = CustomMasteryEnabled;
+            this.outLabel2.Enabled = CustomMasteryEnabled;
 
             this.customAchievementXNumericUpDown.Value = CustomAchievementX;
             this.customAchievementYNumericUpDown.Value = CustomAchievementY;
@@ -1441,6 +1453,7 @@ namespace Retro_Achievement_Tracker
         {
             StatsFontOutlineSize = Convert.ToInt32(((NumericUpDown)sender).Value.ToString());
         }
+
         private void UseCustomAchievementCheckbox_CheckedChanged(object sender, EventArgs eventArgs)
         {
             CustomAchievementEnabled = ((CheckBox)sender).Checked;
@@ -2102,7 +2115,6 @@ namespace Retro_Achievement_Tracker
             {
                 convertEventArgs.Value = "Awards: " + convertEventArgs.Value;
             });
-
             this.awardsLabel.DataBindings.Add(awardsBinding);
         }
 
