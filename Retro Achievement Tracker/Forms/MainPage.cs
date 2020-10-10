@@ -99,6 +99,7 @@ namespace Retro_Achievement_Tracker
                 if (gameChange)
                 {
                     CurrentlyFocusedAchievement = CurrentlyViewingAchievement;
+
                     if (LockedAchievements.Count > 0)
                     {
                         CurrentlyFocusedAchievement = LockedAchievements[0];
@@ -325,7 +326,7 @@ namespace Retro_Achievement_Tracker
                 Settings.Default.stats_font_family_name = value.Name;
                 Settings.Default.Save();
 
-                if (!StatsWindow.IsDisposed)
+                if (StatsWindow != null && !StatsWindow.IsDisposed)
                 {
                     StatsWindow.SetFontFamily(value.Name);
                 }
@@ -407,7 +408,7 @@ namespace Retro_Achievement_Tracker
                 Settings.Default.notification_font_family_name = value.Name;
                 Settings.Default.Save();
 
-                if (!NotificationsWindow.IsDisposed)
+                if (NotificationsWindow != null && !NotificationsWindow.IsDisposed)
                 {
                     NotificationsWindow.SetFontFamily(value.Name);
                 }
@@ -721,7 +722,7 @@ namespace Retro_Achievement_Tracker
                 Settings.Default.focus_font_family_name = value.Name;
                 Settings.Default.Save();
 
-                if (!FocusWindow.IsDisposed)
+                if (FocusWindow != null && !FocusWindow.IsDisposed)
                 {
                     FocusWindow.SetFontFamily(value.Name);
                 }
@@ -1114,6 +1115,11 @@ namespace Retro_Achievement_Tracker
                 UnlockedAchievements = tempUnlockedAchievements.ToList();
             }
 
+            if (UserSummary.RecentAchievements != null && UserSummary.RecentAchievements.Count > 0)
+            {
+                UserSummary.RecentAchievements = UserSummary.RecentAchievements.Where(achievement => achievement.IsAwarded).ToList();
+            }
+
             if (OldUnlockedAchievements.Count < UnlockedAchievements.Count)
             {
                 if (LockedAchievements.Count == 0)
@@ -1195,31 +1201,31 @@ namespace Retro_Achievement_Tracker
 
             this.useCustomAchievementCheckbox.Checked = CustomAchievementEnabled;
             this.selectCustomAchievementButton.Enabled = CustomAchievementEnabled;
-            this.customAchievementXNumericUpDown.Enabled = CustomAchievementEnabled;
-            this.customAchievementYNumericUpDown.Enabled = CustomAchievementEnabled;
-            this.scaleAchievementNumericUpDown.Enabled = CustomAchievementEnabled;
             this.acheivementEditOutlineCheckbox.Enabled = CustomAchievementEnabled;
-            this.inAchievementNumericUpDown.Enabled = CustomAchievementEnabled;
-            this.outAchievementNumericUpDown.Enabled = CustomAchievementEnabled;
-            this.xPositionLabel1.Enabled = CustomAchievementEnabled;
-            this.yPositionLabel1.Enabled = CustomAchievementEnabled;
-            this.scaleLabel1.Enabled = CustomAchievementEnabled;
-            this.inLabel1.Enabled = CustomAchievementEnabled;
-            this.outLabel1.Enabled = CustomAchievementEnabled;
+            this.customAchievementXNumericUpDown.Enabled = false;
+            this.customAchievementYNumericUpDown.Enabled = false;
+            this.scaleAchievementNumericUpDown.Enabled = false;
+            this.inAchievementNumericUpDown.Enabled = false;
+            this.outAchievementNumericUpDown.Enabled = false;
+            this.xPositionLabel1.Enabled = false;
+            this.yPositionLabel1.Enabled = false;
+            this.scaleLabel1.Enabled = false;
+            this.inLabel1.Enabled = false;
+            this.outLabel1.Enabled = false;
 
             this.useCustomMasteryCheckbox.Checked = CustomMasteryEnabled;
             this.selectCustomMasteryNotificationButton.Enabled = CustomMasteryEnabled;
-            this.customMasteryXNumericUpDown.Enabled = CustomMasteryEnabled;
-            this.customMasteryYNumericUpDown.Enabled = CustomMasteryEnabled;
-            this.scaleMasteryNumericUpDown.Enabled = CustomMasteryEnabled;
             this.masteryEditOultineCheckbox.Enabled = CustomMasteryEnabled;
-            this.inMasteryNumericUpDown.Enabled = CustomMasteryEnabled;
-            this.outMasteryNumericUpDown.Enabled = CustomMasteryEnabled;
-            this.xPositionLabel2.Enabled = CustomMasteryEnabled;
-            this.yPositionLabel2.Enabled = CustomMasteryEnabled;
-            this.scaleLabel2.Enabled = CustomMasteryEnabled;
-            this.inLabel2.Enabled = CustomMasteryEnabled;
-            this.outLabel2.Enabled = CustomMasteryEnabled;
+            this.customMasteryXNumericUpDown.Enabled = false;
+            this.customMasteryYNumericUpDown.Enabled = false;
+            this.scaleMasteryNumericUpDown.Enabled = false;
+            this.inMasteryNumericUpDown.Enabled = false;
+            this.outMasteryNumericUpDown.Enabled = false;
+            this.xPositionLabel2.Enabled = false;
+            this.yPositionLabel2.Enabled = false;
+            this.scaleLabel2.Enabled = false;
+            this.inLabel2.Enabled = false;
+            this.outLabel2.Enabled = false;
 
             this.customAchievementXNumericUpDown.Value = CustomAchievementX;
             this.customAchievementYNumericUpDown.Value = CustomAchievementY;
@@ -1297,6 +1303,26 @@ namespace Retro_Achievement_Tracker
             this.autoStartCheckbox.CheckedChanged += AutoStart_CheckedChanged;
             this.usernameTextBox.TextChanged += RequiredField_TextChange;
             this.apiKeyTextBox.TextChanged += RequiredField_TextChange;
+
+            FontFamily[] familyArray = FontFamily.Families.ToArray();
+
+
+            FontFamily[] focusFontFamily = familyArray.Where(fontFamily => fontFamily.Name.Equals(Settings.Default.focus_font_family_name)).ToArray();
+            FontFamily[] statsFontFamily = familyArray.Where(fontFamily => fontFamily.Name.Equals(Settings.Default.stats_font_family_name)).ToArray();
+            FontFamily[] notificationsFontFamily = familyArray.Where(fontFamily => fontFamily.Name.Equals(Settings.Default.notification_font_family_name)).ToArray();
+
+            if (focusFontFamily.Length > 0)
+            {
+                FocusFontFamily = focusFontFamily[0];
+            }
+            if (statsFontFamily.Length > 0)
+            {
+                StatsFontFamily = statsFontFamily[0];
+            }
+            if (notificationsFontFamily.Length > 0)
+            {
+                NotificationsFontFamily = notificationsFontFamily[0];
+            }
         }
 
         private async void SetAwardCount()
