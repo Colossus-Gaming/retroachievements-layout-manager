@@ -34,12 +34,12 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>true</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>true</Prefer32Bit>
@@ -82,7 +82,7 @@
     <OutputPath>bin\x86\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <LangVersion>7.3</LangVersion>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
@@ -159,11 +159,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\LastFiveLayoutWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LastFiveLayoutWindow.Designer.cs">
+      <DependentUpon>LastFiveLayoutWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\NotificationLayoutWindow.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\NotificationLayoutWindow.Designer.cs">
       <DependentUpon>NotificationLayoutWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\GameInfoLayoutWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\GameInfoLayoutWindow.Designer.cs">
+      <DependentUpon>GameInfoLayoutWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\StatsLayoutWindow.cs">
       <SubType>Form</SubType>
@@ -177,12 +189,6 @@
     <Compile Include="Forms\FocusLayoutWindow.Designer.cs">
       <DependentUpon>FocusLayoutWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\SupportPage.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\SupportPage.Designer.cs">
-      <DependentUpon>SupportPage.cs</DependentUpon>
-    </Compile>
     <Compile Include="Models\BrowserBase.cs" />
     <Compile Include="Models\ConsoleListConverter.cs" />
     <Compile Include="Models\AchievementConverter.cs" />
@@ -190,8 +196,8 @@
     <Compile Include="Models\CustomResourceRequestHandler.cs" />
     <Compile Include="Models\FontManager.cs" />
     <Compile Include="Models\GameAchievementSummaryConverter.cs" />
-    <Compile Include="Models\GameProgressConverter.cs" />
     <Compile Include="Models\GameSummaryConverter.cs" />
+    <Compile Include="Models\GameProgressConverter.cs" />
     <Compile Include="Models\UserSummaryConverter.cs" />
     <Compile Include="Models\UserSummary.cs" />
     <Compile Include="Http\HFC_EssentialsClient.cs" />
@@ -204,20 +210,23 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\LastFiveLayoutWindow.resx">
+      <DependentUpon>LastFiveLayoutWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\NotificationLayoutWindow.resx">
       <DependentUpon>NotificationLayoutWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FocusLayoutWindow.resx">
       <DependentUpon>FocusLayoutWindow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\GameInfoLayoutWindow.resx">
+      <DependentUpon>GameInfoLayoutWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\StatsLayoutWindow.resx">
       <DependentUpon>StatsLayoutWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainPage.resx">
       <DependentUpon>MainPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SupportPage.resx">
-      <DependentUpon>SupportPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -238,22 +247,19 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Resources\EightBitDragon-anqx.ttf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Autoupdater.NET.Official">
-      <Version>1.6.2</Version>
+      <Version>1.6.4</Version>
     </PackageReference>
     <PackageReference Include="CefSharp.WinForms">
-      <Version>84.4.10</Version>
+      <Version>86.0.241</Version>
     </PackageReference>
     <PackageReference Include="HtmlAgilityPack">
-      <Version>1.11.24</Version>
+      <Version>1.11.28</Version>
     </PackageReference>
     <PackageReference Include="MediaToolkit">
       <Version>1.1.0.1</Version>
@@ -280,6 +286,8 @@
   <ItemGroup>
     <Content Include="Resources\Adultery.png" />
     <Content Include="Resources\Dancarnate_Logo.png" />
+    <Resource Include="Resources\GameInfo.html" />
+    <Resource Include="Resources\LastFive.html" />
     <Content Include="video\achievement-notification.webm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -292,9 +300,6 @@
     <Content Include="Resources\points-image.png" />
     <Content Include="Resources\rank-image.png" />
     <Content Include="Resources\site-awards-image.png" />
-    <EmbeddedResource Include="Resources\monofonto.ttf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
     <None Include="Resources\yellow-button.png" />
     <EmbeddedResource Include="Resources\FocusWindow.html" />
     <None Include="Resources\green-button.png" />
@@ -318,64 +323,65 @@
   <ItemGroup>
     <PublishFile Include="CefSharp">
       <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="CefSharp.BrowserSubprocess.Core">
       <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="CefSharp.Core">
       <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="CefSharp.WinForms">
       <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="chrome_elf">
       <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="libcef">
       <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

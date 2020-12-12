@@ -27,6 +27,7 @@ namespace Retro_Achievement_Tracker.Models
             JToken Title = item["Title"];
             JToken Description = item["Description"];
             JToken Points = item["Points"];
+            JToken TrueRatio = item["TrueRatio"];
             JToken IsAwarded = item["IsAwarded"];
             JToken DateAwarded = item["DateAwarded"];
             JToken DateEarnedHardcore = item["DateEarnedHardcore"];
@@ -61,7 +62,11 @@ namespace Retro_Achievement_Tracker.Models
             {
                 Achievement.Points = Convert.ToInt32(Points);
             }
-            
+            if (TrueRatio != null)
+            {
+                Achievement.TrueRatio = Convert.ToInt32(TrueRatio);
+            }
+
             if (DateAwarded != null && !string.IsNullOrEmpty(DateAwarded.ToString()))
             {
                 Achievement.DateEarned = DateTime.Parse(DateAwarded.ToString());

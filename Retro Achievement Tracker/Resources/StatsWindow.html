@@ -7,8 +7,19 @@
     <script id="ra-stats-scripts">
         function adjustFont() {
             var value = 100;
+            var all = document.getElementsByClassName('has-font');
+            var nonMods = document.getElementsByClassName('non-mod');
+            var rankElement = nonMods[0];
 
-            var rankElement = document.getElementById('ra-stats-rank');
+            for (var i = 0; i < all.length; i++) {
+                if (nonMods[i].style.visibility !== 'hidden' 
+                    && nonMods[i].style.visibility !== 'none'
+                    && nonMods[i].innerHTML.length > 0) {
+
+                    rankElement = nonMods[i];
+                    break;
+                }
+            }
 
             rankElement.style.fontSize = value + 'px';
 
@@ -17,8 +28,6 @@
                 rankElement.style.fontSize = value + 'px';
             }
 
-            var all = document.getElementsByClassName('has-font');
-
             for (var i = 0; i < all.length; i++) {
                 all[i].style.fontSize = value + 'px';
             }
@@ -26,7 +35,7 @@
 
         function setFontFamily(value) {
             var all = document.getElementsByClassName('has-font');
-            console.log(value);
+
             for (var i = 0; i < all.length; i++) {
                 all[i].style.fontFamily = value;
             }
@@ -51,22 +60,34 @@
             adjustFont();
         }
 
+        function setRankName(value) {
+            $('#ra-stats-rank-name').text(value + '');
+            adjustFont();
+        }
+
+        function showRank() {
+            $('#ra-stats-rank').fadeIn();
+            adjustFont();
+        }
+
+        function hideRank() {
+            $('#ra-stats-rank').fadeOut();
+            adjustFont();
+        }
+
         function setRank(value) {
-            $('#ra-stats-rank-img').attr('src', 'disk://rank-image');
 
             var difference = value;
-            var originalValue = $('#ra-stats-rank')[0].innerHTML;
+            var originalValue = $('#ra-stats-rank-value')[0].innerHTML;
 
-            $('#ra-stats-rank').text(value + '');
-
-            $('#ra-stats-rank').fadeIn();
-            $('#ra-stats-rank-img').fadeIn();
+            $('#ra-stats-rank-value').text(value + '');
+            $('#ra-stats-rank-value').fadeIn();
 
             if (originalValue !== undefined) {
                 var matches = originalValue.match(/(\d+)/);
 
                 if (matches) {
-                    difference = value - +originalValue;
+                    difference = value - +matches[0];
 
                     if (difference < 0) {
                         $('#ra-stats-rank-mod').text(difference);
@@ -83,25 +104,39 @@
             }
 
             setTimeout(function () { $("#ra-stats-rank-mod").fadeOut(); }, 800);
+
             adjustFont();
-            return "setRank: SUCCESS";
+
+            return "SUCCESS";
+        }
+
+        function setAwardsName(value) {
+            $('#ra-stats-awards-name').text(value + '');
+            adjustFont();
+        }
+
+        function showAwards() {
+            $('#ra-stats-awards').fadeIn();
+            adjustFont();
+        }
+
+        function hideAwards() {
+            $('#ra-stats-awards').fadeOut();
+            adjustFont();
         }
 
         function setAwards(value) {
-            $('#ra-stats-awards-img').attr('src', 'disk://site-awards-image');
-
             var difference = value;
-            var originalValue = $('#ra-stats-awards')[0].innerHTML;
+            var originalValue = $('#ra-stats-awards-value')[0].innerHTML;
 
-            $('#ra-stats-awards').text(value + '');
-
-            $('#ra-stats-awards').fadeIn();
+            $('#ra-stats-awards-value').text(value + '');
+            $('#ra-stats-awards-value').fadeIn();
 
             if (originalValue !== undefined) {
                 var matches = originalValue.match(/(\d+)/);
 
                 if (matches) {
-                    difference = value - +originalValue;
+                    difference = value - +matches[0];
 
                     if (difference > 0) {
                         $('#ra-stats-awards-mod').text('+' + difference);
@@ -112,23 +147,39 @@
             }
 
             setTimeout(function () { $("#ra-stats-awards-mod").fadeOut(); }, 800);
+
             adjustFont();
-            return "setAwards: SUCCESS";
+
+            return "SUCCESS";
+        }
+
+        function setPointsName(value) {
+            $('#ra-stats-points-name').text(value + '');
+            adjustFont();
+        }
+
+        function showPoints() {
+            $('#ra-stats-points').fadeIn();
+            adjustFont();
+        }
+
+        function hidePoints() {
+            $('#ra-stats-points').fadeOut();
+            adjustFont();
         }
 
         function setPoints(value) {
             var difference = value;
-            var originalValue = $('#ra-stats-points')[0].innerHTML;
+            var originalValue = $('#ra-stats-points-value')[0].innerHTML;
 
-            $('#ra-stats-points').text(value + '');
-
-            $('#ra-stats-points').fadeIn();
+            $('#ra-stats-points-value').text(value + '');
+            $('#ra-stats-points-value').fadeIn();
 
             if (originalValue !== undefined) {
                 var matches = originalValue.match(/(\d+)/);
 
                 if (matches) {
-                    difference = value - +originalValue;
+                    difference = value - +matches[0];
 
                     if (difference > 0) {
                         $('#ra-stats-points-mod').text('+' + difference);
@@ -146,7 +197,138 @@
 
             setTimeout(function () { $("#ra-stats-points-mod").fadeOut(); }, 800);
             adjustFont();
-            return "setScore: SUCCESS";
+            return "SUCCESS";
+        }
+
+        function setTruePointsName(value) {
+            $('#ra-stats-true-points-name').text(value + '');
+            adjustFont();
+        }
+
+        function showTruePoints() {
+            $('#ra-stats-true-points').fadeIn();
+            adjustFont();
+        }
+
+        function hideTruePoints() {
+            $('#ra-stats-true-points').fadeOut();
+            adjustFont();
+        }
+
+        function setTruePoints(value) {
+            var difference = value;
+            var originalValue = $('#ra-stats-true-points-value')[0].innerHTML;
+
+            $('#ra-stats-true-points-value').text(value + '');
+            $('#ra-stats-true-points-value').fadeIn();
+
+            if (originalValue !== undefined) {
+                var matches = originalValue.match(/(\d+)/);
+
+                if (matches) {
+                    difference = value - +matches[0];
+
+                    if (difference > 0) {
+                        $('#ra-stats-true-points-mod').text('+' + difference);
+                        $('#ra-stats-true-points-mod')[0].style.color = 'green';
+                        $('#ra-stats-true-points-mod')[0].style.animationName = "ra-stats-mod-up-animation";
+                        $('#ra-stats-true-points-mod').fadeIn();
+                    } else if (difference < 0) {
+                        $('#ra-stats-true-points-mod').text(difference);
+                        $('#ra-stats-true-points-mod')[0].style.color = 'red';
+                        $('#ra-stats-true-points-mod')[0].style.animationName = "ra-stats-mod-down-animation";
+                        $('#ra-stats-true-points-mod').fadeIn();
+                    }
+                }
+            }
+
+            setTimeout(function () { $("#ra-stats-true-points-mod").fadeOut(); }, 800);
+            adjustFont();
+            return "SUCCESS";            
+        }
+
+        function setRatioName(value) {
+            $('#ra-stats-ratio-name').text(value + '');
+            adjustFont();
+        }
+
+        function showRatio() {
+            $('#ra-stats-ratio').fadeIn();
+            adjustFont();
+        }
+
+        function hideRatio() {
+            $('#ra-stats-ratio').fadeOut();
+            adjustFont();
+        }
+
+        function setRatio(value) {
+            var originalValue = $('#ra-stats-ratio-value')[0].innerHTML;
+
+            $('#ra-stats-ratio-value').text(value + ' %');
+            $('#ra-stats-ratio-value').fadeIn();
+
+            if (originalValue !== undefined) {
+                var matches = originalValue.match(/(\d+\.\d{2})/);
+
+                if (matches) {
+                    var difference = +value - +matches[0];
+                    difference = difference.toFixed(2);
+                    if (difference > 0) {
+                        $('#ra-stats-ratio-mod').text('+' + difference);
+                        $('#ra-stats-ratio-mod')[0].style.color = 'green';
+                        $('#ra-stats-ratio-mod')[0].style.animationName = "ra-stats-mod-up-animation";
+                        $('#ra-stats-ratio-mod').fadeIn();
+                    } else if (difference < 0) {
+                        $('#ra-stats-ratio-mod').text(difference);
+                        $('#ra-stats-ratio-mod')[0].style.color = 'red';
+                        $('#ra-stats-ratio-mod')[0].style.animationName = "ra-stats-mod-down-animation";
+                        $('#ra-stats-ratio-mod').fadeIn();
+                    }
+                }
+            }
+
+            setTimeout(function () { $("#ra-stats-ratio-mod").fadeOut(); }, 800);
+            adjustFont();
+            return "SUCCESS";
+        }
+
+        function setGameRatioName(value) {
+            $('#ra-stats-game-ratio-name').text(value + '');
+            adjustFont();
+        }
+
+        function showGameRatio() {
+            $('#ra-stats-game-ratio').fadeIn();
+            adjustFont();
+        }
+
+        function hideGameRatio() {
+            $('#ra-stats-game-ratio').fadeOut();
+            adjustFont();
+        }
+
+        function setGameRatio(value) {
+            $('#ra-stats-game-ratio-value').text(value + ' %');
+            $('#ra-stats-game-ratio-value').fadeIn();
+
+            adjustFont();
+            return "SUCCESS";
+        }
+
+        function setGameAchievementsName(value) {
+            $('#ra-stats-game-achievements-name').text(value + '');
+            adjustFont();
+        }
+
+        function showGameAchievements() {
+            $('#ra-stats-game-achievements').fadeIn();
+            adjustFont();
+        }
+
+        function hideGameAchievements() {
+            $('#ra-stats-game-achievements').fadeOut();
+            adjustFont();
         }
 
         function setGameAchievements(earned, total) {
@@ -178,7 +360,22 @@
 
             setTimeout(function () { $("#ra-stats-game-achievements-mod").fadeOut(); }, 800);
             adjustFont();
-            return "setGameAcheivements: SUCCESS";
+            return "SUCCESS";
+        }
+
+        function setGamePointsName(value) {
+            $('#ra-stats-game-points-name').text(value);
+            adjustFont();
+        }
+
+        function showGamePoints() {
+            $('#ra-stats-game-points').fadeIn();
+            adjustFont();
+        }
+
+        function hideGamePoints() {
+            $('#ra-stats-game-points').fadeOut();
+            adjustFont();
         }
 
         function setGamePoints(earned, total) {
@@ -215,7 +412,59 @@
 
             setTimeout(function () { $("#ra-stats-game-points-mod").fadeOut(); }, 800);
             adjustFont();
-            return "setGamePoints: SUCCESS";
+            return "SUCCESS";
+        } 
+
+        function setGameTruePointsName(value) {
+            $('#ra-stats-game-true-points-name').text(value + '');
+            adjustFont();
+        }
+
+        function showGameTruePoints() {
+            $('#ra-stats-game-true-points').fadeIn();
+            adjustFont();
+        }
+
+        function hideGameTruePoints() {
+            $('#ra-stats-game-true-points').fadeOut();
+            adjustFont();
+        }
+        
+        function setGameTruePoints(earned, total) {
+            var difference = earned;
+            var originalValue = $('#ra-stats-game-true-points-earned')[0].innerHTML;
+            var originalTotal = $('#ra-stats-game-true-points-total')[0].innerHTML;
+
+            if (earned === 0) {
+                $('#ra-stats-game-true-points-earned').text('0');
+            } else {
+                $('#ra-stats-game-true-points-earned').text(earned + '');
+            }
+
+            $('#ra-stats-game-true-points-total').text('' + total);
+            $('#ra-stats-game-true-points-divider').text('/');
+
+            $('#ra-stats-game-true-points-earned').fadeIn();
+            $('#ra-stats-game-true-points-total').fadeIn();
+            $('#ra-stats-game-true-points-divider').fadeIn();
+
+            if (originalValue !== undefined && +originalTotal === total) {
+                var matches = originalValue.match(/(\d+)/);
+
+                if (matches) {
+                    difference = earned - +originalValue;
+
+                    if (difference > 0) {
+                        $('#ra-stats-game-true-points-mod').text('+' + difference);
+                        $('#ra-stats-game-true-points-mod')[0].style.color = 'green';
+                        $('#ra-stats-game-true-points-mod').fadeIn();
+                    }
+                }
+            }
+
+            setTimeout(function () { $("#ra-stats-game-true-points-mod").fadeOut(); }, 800);
+            adjustFont();
+            return "SUCCESS";
         }
     </script>
     <style id="ra-stats-style" type="text/css">
@@ -254,8 +503,11 @@
         #ra-stats-rank-mod,
         #ra-stats-points-mod,
         #ra-stats-awards-mod,
+        #ra-stats-true-points-mod,
+        #ra-stats-ratio-mod,
         #ra-stats-game-achievements-mod,
-        #ra-stats-game-points-mod {
+        #ra-stats-game-points-mod,
+        #ra-stats-game-true-points-mod{
             animation-duration: 1200ms;
             animation-iteration-count: 1;
         }
@@ -265,7 +517,7 @@
         }
 
         #mod-column {
-            width: 150px;
+            width: 225px;
         }
 
         #earned-column {
@@ -283,21 +535,38 @@
             padding-right: 10px;
         }
 
-        #ra-stats-rank,
-        #ra-stats-points,
-        #ra-stats-awards,
+        #ra-stats-game-true-points-earned,
         #ra-stats-game-achievements-earned,
-        #ra-stats-game-points-earned {
-            text-align: left;
+        #ra-stats-game-points-earned{
+            text-align: right;
             white-space: nowrap;
         }
 
+        #ra-stats-game-true-points-earned,
+        #ra-stats-game-achievements-earned,
+        #ra-stats-game-points-earned,
         #ra-stats-awards-mod,
-        #ra-stats-game-achievements-mod,
-        #ra-stats-game-points-mod,
         #ra-stats-points-mod,
-        #ra-stats-rank-mod {
+        #ra-stats-rank-mod,
+        #ra-stats-true-points-mod,
+        #ra-stats-ratio-mod,
+        #ra-stats-game-ratio-mod,
+        #ra-stats-game-points-mod,
+        #ra-stats-game-true-points-mod,
+        #ra-stats-game-achievements-mod{
             text-align: right;
+            white-space: nowrap;
+        }
+        #ra-stats-rank-name,
+        #ra-stats-points-name,
+        #ra-stats-awards-name,
+        #ra-stats-true-points-name,
+        #ra-stats-ratio-name,
+        #ra-stats-game-ratio-name,
+        #ra-stats-game-points-name,
+        #ra-stats-game-true-points-name,
+        #ra-stats-game-achievements-name {
+            text-align: left;
         }
 
         #container,
@@ -320,45 +589,85 @@
                 <col id="separater-column">
                 <col id="total-column">
             </colgroup>
-            <tr style="position: relative;">
+            <tr style="position: relative;" id="ra-stats-rank">
                 <td>
                     <div id="ra-stats-rank-mod" class="has-font"></div>
                 </td>
                 <td>
-                    <div id="ra-stats-rank-name" class="has-font">Rank:</div>
+                    <div id="ra-stats-rank-name" class="has-font non-mod">Rank:</div>
                 </td>
                 <td colspan="3">
-                    <div id="ra-stats-rank" class="has-font"></div>
+                    <div id="ra-stats-rank-value" class="has-font"></div>
                 </td>
             </tr>
-            <tr style="position: relative;">
+            <tr style="position: relative;" id="ra-stats-awards">
                 <td>
                     <div id="ra-stats-awards-mod" class="has-font"></div>
                 </td>
                 <td>
-                    <div id="ra-stats-awards-name" class="has-font">Awards:</div>
+                    <div id="ra-stats-awards-name" class="has-font non-mod">Awards:</div>
                 </td>
                 <td colspan="3">
-                    <div id="ra-stats-awards" class="has-font"></div>
+                    <div id="ra-stats-awards-value" class="has-font"></div>
                 </td>
             </tr>
-            <tr style="position: relative;">
+            <tr style="position: relative;" id="ra-stats-ratio">
+                <td>
+                    <div id="ra-stats-ratio-mod" class="has-font"></div>
+                </td>
+                <td>
+                    <div id="ra-stats-ratio-name" class="has-font non-mod">Ratio:</div>
+                </td>
+                <td colspan="3">
+                    <div id="ra-stats-ratio-value" class="has-font"></div>
+                </td>
+            </tr>
+            <tr style="position: relative;" id="ra-stats-points">
                 <td>
                     <div id="ra-stats-points-mod" class="has-font"></div>
                 </td>
                 <td>
-                    <div id="ra-stats-points-name" class="has-font">Score:</div>
+                    <div id="ra-stats-points-name" class="has-font non-mod">Points:</div>
                 </td>
                 <td colspan="3">
-                    <div id="ra-stats-points" class="has-font"></div>
+                    <div id="ra-stats-points-value" class="has-font"></div>
                 </td>
             </tr>
-            <tr style="position: relative;">
+            <tr style="position: relative;" id="ra-stats-true-points">
+                <td>
+                    <div id="ra-stats-true-points-mod" class="has-font"></div>
+                </td>
+                <td>
+                    <div id="ra-stats-true-points-name" class="has-font non-mod">T. Points:</div>
+                </td>
+                <td colspan="3">
+                    <div id="ra-stats-true-points-value" class="has-font"></div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5">
+                    <div>
+                        <br />
+                        <br />
+                        <br />
+                    </div>
+                </td>
+            </tr>
+            <tr style="position: relative;" id="ra-stats-game-ratio">
+                <td></td>
+                <td>
+                    <div id="ra-stats-game-ratio-name" class="has-font non-mod">Ratio:</div>
+                </td>
+                <td colspan="3">
+                    <div id="ra-stats-game-ratio-value" class="has-font"></div>
+                </td>
+            </tr>
+            <tr style="position: relative;" id="ra-stats-game-achievements">
                 <td>
                     <div id="ra-stats-game-achievements-mod" class="has-font"></div>
                 </td>
                 <td>
-                    <div id="ra-stats-game-achievements-name" class="has-font">Cheevos:</div>
+                    <div id="ra-stats-game-achievements-name" class="has-font non-mod">Cheevos:</div>
                 </td>
                 <td>
                     <div id="ra-stats-game-achievements-earned" class="has-font"></div>
@@ -370,12 +679,12 @@
                     <div id="ra-stats-game-achievements-total" class="has-font"></div>
                 </td>
             </tr>
-            <tr style="position: relative;">
+            <tr style="position: relative;" id="ra-stats-game-points">
                 <td>
                     <div id="ra-stats-game-points-mod" class="has-font"></div>
                 </td>
                 <td>
-                    <div id="ra-stats-game-points-name" class="has-font">Points:</div>
+                    <div id="ra-stats-game-points-name" class="has-font non-mod">Points:</div>
                 </td>
                 <td>
                     <div id="ra-stats-game-points-earned" class="has-font"></div>
@@ -385,6 +694,23 @@
                 </td>
                 <td>
                     <div id="ra-stats-game-points-total" class="has-font"></div>
+                </td>
+            </tr>
+            <tr style="position: relative;" id="ra-stats-game-true-points">
+                <td>
+                    <div id="ra-stats-game-true-points-mod" class="has-font"></div>
+                </td>
+                <td>
+                    <div id="ra-stats-game-true-points-name" class="has-font non-mod">T. Points:</div>
+                </td>
+                <td>
+                    <div id="ra-stats-game-true-points-earned" class="has-font"></div>
+                </td>
+                <td>
+                    <div id="ra-stats-game-true-points-divider" class="has-font"></div>
+                </td>
+                <td>
+                    <div id="ra-stats-game-true-points-total" class="has-font"></div>
                 </td>
             </tr>
         </table>

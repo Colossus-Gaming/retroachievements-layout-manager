@@ -81,16 +81,6 @@ namespace Retro_Achievement_Tracker.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] EightBitDragon_anqx {
-            get {
-                object obj = ResourceManager.GetObject("EightBitDragon_anqx", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
         ///&lt;html&gt;
         ///&lt;head&gt;
@@ -102,9 +92,10 @@ namespace Retro_Achievement_Tracker.Properties {
         ///        function adjustFont() {
         ///            var nameValue = 100;
         ///            var descriptionValue = 100;
+        ///            var pointsValue = 100;
         ///
         ///            var focusName = document.getElementById(&apos;focus-achievement-name&apos;);
-        ///            var focusDescriptionElement = document.getElementById(&apos;focus-achievement- [rest of string was truncated]&quot;;.
+        ///            var focusDescriptionElement = documen [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string FocusWindow {
             get {
@@ -129,6 +120,28 @@ namespace Retro_Achievement_Tracker.Properties {
             get {
                 object obj = ResourceManager.GetObject("game_points_image", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+        ///&lt;html&gt;
+        ///&lt;head&gt;
+        ///    &lt;title&gt;Game Info Window&lt;/title&gt;
+        ///    &lt;meta charset=&quot;UTF-8&quot;&gt;
+        ///    &lt;script src=&quot;https://code.jquery.com/jquery-3.5.1.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+        ///    &lt;script id=&quot;ra-stats-scripts&quot;&gt;
+        ///        function adjustFont() {
+        ///            var value = 100;
+        ///            var all = document.getElementsByClassName(&apos;has-font&apos;);
+        ///            var consoleElement = all[0];
+        ///
+        ///            for (var i = 0; i &lt; all.length; i++) {
+        ///                if (all[i].style.visibility !== &apos;hidden [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string GameInfo {
+            get {
+                return ResourceManager.GetString("GameInfo", resourceCulture);
             }
         }
         
@@ -163,12 +176,26 @@ namespace Retro_Achievement_Tracker.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+        ///&lt;html&gt;
+        ///&lt;head&gt;
+        ///    &lt;title&gt;Stats Window&lt;/title&gt;
+        ///    &lt;meta charset=&quot;UTF-8&quot;&gt;
+        ///    &lt;script src=&quot;https://code.jquery.com/jquery-3.5.1.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+        ///    &lt;script id=&quot;ra-stats-scripts&quot;&gt;
+        ///        function adjustFont() {
+        ///            var value = 100;
+        ///
+        ///            var consoleElement = document.getElementById(&apos;console-label&apos;);
+        ///
+        ///            consoleElement.style.fontSize = value + &apos;px&apos;;
+        ///
+        ///            while (consoleElement.scrollHeight &gt; consoleElement.offsetHeight) {
+        ///  [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static byte[] monofonto {
+        internal static string LastFive {
             get {
-                object obj = ResourceManager.GetObject("monofonto", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetString("LastFive", resourceCulture);
             }
         }
         
@@ -190,12 +217,13 @@ namespace Retro_Achievement_Tracker.Properties {
         ///    &lt;meta charset=&quot;UTF-8&quot;&gt;
         ///    &lt;script src=&quot;https://code.jquery.com/jquery-3.5.1.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
         ///    &lt;script id=&quot;achievement-pop-script&quot;&gt;
-        ///        function adjustFont() {
+        ///        function adjustAchievementFont() {
         ///            var nameValue = 100;
         ///            var descriptionValue = 100;
+        ///            var pointsValue = 100;
         ///
-        ///            var focusName = document.getElementById(&apos;achievement-pop-name&apos;);
-        ///            var focusDescriptionElement = document.getElementById(&apos;achievement-pop-de [rest of string was truncated]&quot;;.
+        ///            var achievementName = document.getElementById(&apos;achievement-pop-name&apos;);
+        ///            var achievementDescr [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string NotificationWindow {
             get {
@@ -261,15 +289,13 @@ namespace Retro_Achievement_Tracker.Properties {
         ///    &lt;meta charset=&quot;UTF-8&quot;&gt;
         ///    &lt;script src=&quot;https://code.jquery.com/jquery-3.5.1.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
         ///    &lt;script id=&quot;ra-stats-scripts&quot;&gt;
-        ///
-        ///        function setFontSize(value) {
+        ///        function adjustFont() {
+        ///            var value = 100;
         ///            var all = document.getElementsByClassName(&apos;has-font&apos;);
+        ///            var nonMods = document.getElementsByClassName(&apos;non-mod&apos;);
+        ///            var rankElement = nonMods[0];
         ///
-        ///            for (var i = 0; i &lt; all.length; i++) {
-        ///                all[i].style.fontSize = value;
-        ///            }
-        ///
-        ///            var imageColumn = document.getElementById(&apos;ima [rest of string was truncated]&quot;;.
+        ///            for (var i = 0; i &lt; all.len [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string StatsWindow {
             get {

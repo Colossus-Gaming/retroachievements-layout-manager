@@ -1,4 +1,6 @@
-﻿using System.Windows.Forms;
+﻿using CefSharp.Web;
+using Retro_Achievement_Tracker.Properties;
+using System.Windows.Forms;
 
 namespace Retro_Achievement_Tracker.Models
 {
@@ -14,7 +16,7 @@ namespace Retro_Achievement_Tracker.Models
 
         private void SetupBrowser()
         {
-            this._chromiumWebBrowser = new CefSharp.WinForms.ChromiumWebBrowser();
+            this._chromiumWebBrowser = new CefSharp.WinForms.ChromiumWebBrowser(new HtmlString("<html></html>"));
             // 
             // chromiumWebBrowser
             // 

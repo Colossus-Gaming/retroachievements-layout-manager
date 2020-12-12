@@ -119,5 +119,170 @@
     <Setting Name="UpdateSettings" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="auto_game_info" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="auto_last_five" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="game_info_font_color_hex_code" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#000000</Value>
+    </Setting>
+    <Setting Name="game_info_font_family_name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Calibri</Value>
+    </Setting>
+    <Setting Name="game_info_font_outline_enabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="game_info_font_outline_color_hex" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#FFFFFF</Value>
+    </Setting>
+    <Setting Name="game_info_font_outline_size" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="last_five_font_color_hex_code" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#000000</Value>
+    </Setting>
+    <Setting Name="last_five_font_family_name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Calibri</Value>
+    </Setting>
+    <Setting Name="last_five_font_outline_enabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="last_five_font_outline_color_hex" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#FFFFFF</Value>
+    </Setting>
+    <Setting Name="last_five_font_outline_size" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="last_five_background_color" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#CCCCCC</Value>
+    </Setting>
+    <Setting Name="stats_rank_enable" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="stats_points_enable" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="stats_awards_enable" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="stats_true_points_enable" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="stats_ratio_enable" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="stats_game_ratio_enable" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="stats_game_points_enable" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="stats_game_true_points_enable" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="stats_game_achievements_enable" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="game_info_console_enable" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="game_info_developer_enable" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="game_info_publisher_enable" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="game_info_genre_enable" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="game_info_release_date_enable" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="stats_rank_name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Rank</Value>
+    </Setting>
+    <Setting Name="stats_awards_name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Awards</Value>
+    </Setting>
+    <Setting Name="stats_points_name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Points</Value>
+    </Setting>
+    <Setting Name="stats_true_points_name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">True Points</Value>
+    </Setting>
+    <Setting Name="stats_ratio_name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Ratio</Value>
+    </Setting>
+    <Setting Name="stats_game_ratio_name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Ratio</Value>
+    </Setting>
+    <Setting Name="stats_game_points_name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Points</Value>
+    </Setting>
+    <Setting Name="stats_game_true_points_name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">True Points</Value>
+    </Setting>
+    <Setting Name="stats_game_achievements_name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Cheevos</Value>
+    </Setting>
+    <Setting Name="notifications_achievement_in_animation" Type="System.String" Scope="User">
+      <Value Profile="(Default)">STATIC</Value>
+    </Setting>
+    <Setting Name="notifications_achievement_out_animation" Type="System.String" Scope="User">
+      <Value Profile="(Default)">UP</Value>
+    </Setting>
+    <Setting Name="notifications_mastery_in_animation" Type="System.String" Scope="User">
+      <Value Profile="(Default)">STATIC</Value>
+    </Setting>
+    <Setting Name="notifications_mastery_out_animation" Type="System.String" Scope="User">
+      <Value Profile="(Default)">UP</Value>
+    </Setting>
+    <Setting Name="stream_labels_stats" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="stream_labels_game_info" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="stream_labels_notifications" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="stream_labels_last_five" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="stream_labels_focus" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="last_five_to_display" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="last_five_verbose_enable" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="game_info_console_name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Console</Value>
+    </Setting>
+    <Setting Name="game_info_developer_name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Developer</Value>
+    </Setting>
+    <Setting Name="game_info_publisher_name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Publisher</Value>
+    </Setting>
+    <Setting Name="game_info_genre_name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Genre</Value>
+    </Setting>
+    <Setting Name="game_info_release_date_name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Released</Value>
+    </Setting>
+    <Setting Name="game_info_box_art_enable" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="game_info_title_name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Title</Value>
+    </Setting>
+    <Setting Name="game_info_title_enable" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

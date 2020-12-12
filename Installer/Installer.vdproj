@@ -21,7 +21,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_0B056976F2D74C4186F6C535C6867ECE"
+        "MsmKey" = "8:_01BAF2E4A2934E96A29047B89E8BC5C8"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_07842A610EBC4EC1AEF1C8AC8B53E80C"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -33,7 +39,19 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_1B0427F9D26F4409A8643FD9D5F561F1"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_1C0A4706DA324BF887025B7182EF8EEA"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_1EBAC7ED3D98425D9A4E37E79940998B"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -45,20 +63,50 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_27142D271D8645CF974760E8D8A0A602"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_28D66E63E61FE4E52102D59E771C7880"
         "OwnerKey" = "8:_1C0A4706DA324BF887025B7182EF8EEA"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
+        "MsmKey" = "8:_292735EC57564864911E0C7A9FD88499"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_3C6A845FD9E6499FB08AF9BDEEC865F8"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_3CA49475809648B3B5AE07AB5846C5FE"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_3D924F35727CDE3051FEEFC51F8BE5F6"
         "OwnerKey" = "8:_1C0A4706DA324BF887025B7182EF8EEA"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_411F5F8574DF4CC597374801C51A6C27"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_44BB4265430B494BAF59AE3D1FD7235F"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_4639279C2AD54C25BECA1E259EB3E637"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -75,6 +123,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_4D96DF6516184E1586624D2AB3D47A86"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_4F352A11F2AC42399A76CD847A8DBA40"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -82,6 +136,12 @@
         "Entry"
         {
         "MsmKey" = "8:_513EF6FCAFA74730A2D3E5982094AF25"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_51AB8BB34BE44679A73FBE9F8B4FF214"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -129,7 +189,31 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_71E38A30610749B8A0EFFF1C6F931274"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_75A1671C88D04C92BE6961E8231A7A78"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_764787C873624F11983AB49D4294EB82"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_7652B723FD974E798FD89A0FC5FF0CD9"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_7813C1CAE92143E089D71A20AC4A4BC3"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -141,7 +225,43 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_7B8C612EB2FC491B8B425DEABDF466F3"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_7E23982CEF3343F1B1B7856BD0A7BB9E"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_8E7864B1D8444C87B158B55E2A2FD810"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_902FE61D318B48CEA166CA4604F6348F"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_9A82875010CA45C18926AF67F39CC759"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_9B3742DFE0674FECB3915D71F678823B"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_A56875F4352C482691063D00B7DE11C7"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -159,7 +279,19 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_A91D85BC1AA34E57B0C4AF46611E915B"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_AFC2E237010C49969A06F8706D490A93"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_B132AD035A194A53B3462CED58E7827F"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -177,6 +309,30 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_CCD86936C2C74194AF464EAE82192F96"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_CFD4617F8A7E4147A13CF2E99C39B599"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_D028E8D0682F4D4A95952970443B23AC"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_D1AF3D3DF03D40719539BD59158D6795"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_D7791F60B4B94164B643AB2FEEE33339"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -185,6 +341,12 @@
         {
         "MsmKey" = "8:_DB52AF9E59D25D345BF18AECB2424171"
         "OwnerKey" = "8:_E8F0C8CDEC544DD09C79C81C7DE01AB8"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_DBFC80DAD8EB4F21A33C3162EB232602"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -201,7 +363,31 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_E7FE3DBF812142BC8722F1E2E4BCB335"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_E868FD13356C44C587A79A0AD5870EE4"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_E8F0C8CDEC544DD09C79C81C7DE01AB8"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F1F5E1CE74F9415F911742494515A65C"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F26C473BB5FB4410B959D312999D8287"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -215,6 +401,24 @@
         {
         "MsmKey" = "8:_F75F8444AB84656DF28DF479A524DEF5"
         "OwnerKey" = "8:_1C0A4706DA324BF887025B7182EF8EEA"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F85B7EC09E814DD98B735DF07C4BEF4E"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_FB2108D584F54ABDB8C9F5122C8D07DE"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_FD3E7CA7CC974DF0B6861C151282A6D3"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -410,12 +614,32 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0B056976F2D74C4186F6C535C6867ECE"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_01BAF2E4A2934E96A29047B89E8BC5C8"
             {
-            "SourcePath" = "8:..\\Retro Achievement Tracker\\Resources\\monofonto.ttf"
-            "TargetName" = "8:monofonto.ttf"
+            "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\stream-labels\\alerts\\description.txt"
+            "TargetName" = "8:description.txt"
             "Tag" = "8:"
-            "Folder" = "8:_711641C91B8B4C949457F2EEA2F7409A"
+            "Folder" = "8:_8D8382A3CB6F4F97B378200BDDC22BD7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_07842A610EBC4EC1AEF1C8AC8B53E80C"
+            {
+            "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\stream-labels\\focus\\title.txt"
+            "TargetName" = "8:title.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_CDC84DDB47B940C38A5058C26DE4A97A"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -450,11 +674,31 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1B0427F9D26F4409A8643FD9D5F561F1"
+            {
+            "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\stream-labels\\game-info\\developer.txt"
+            "TargetName" = "8:developer.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_5234DEBB443D4DEDA3D3BD1754CF57E7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_1C0A4706DA324BF887025B7182EF8EEA"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Retro Achievement Tracker, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Retro Achievement Tracker, Version=1.2.0.0, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_1C0A4706DA324BF887025B7182EF8EEA"
@@ -481,11 +725,31 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1EBAC7ED3D98425D9A4E37E79940998B"
+            {
+            "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\stream-labels\\game-info\\genre.txt"
+            "TargetName" = "8:genre.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_5234DEBB443D4DEDA3D3BD1754CF57E7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_21D6CB3DB0FE541B8D0B741136B73759"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:HtmlAgilityPack, Version=1.11.24.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:HtmlAgilityPack, Version=1.11.28.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_21D6CB3DB0FE541B8D0B741136B73759"
@@ -512,31 +776,11 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_27142D271D8645CF974760E8D8A0A602"
-            {
-            "SourcePath" = "8:..\\Retro Achievement Tracker\\Resources\\EightBitDragon-anqx.ttf"
-            "TargetName" = "8:EightBitDragon-anqx.ttf"
-            "Tag" = "8:"
-            "Folder" = "8:_711641C91B8B4C949457F2EEA2F7409A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_28D66E63E61FE4E52102D59E771C7880"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:AutoUpdater.NET, Version=1.6.2.0, Culture=neutral, PublicKeyToken=501435c91b35f4bc, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:AutoUpdater.NET, Version=1.6.4.0, Culture=neutral, PublicKeyToken=501435c91b35f4bc, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_28D66E63E61FE4E52102D59E771C7880"
@@ -561,6 +805,66 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_292735EC57564864911E0C7A9FD88499"
+            {
+            "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\stream-labels\\stats\\awards.txt"
+            "TargetName" = "8:awards.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_C927EB334EFC467CB49765494BB0DBA6"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3C6A845FD9E6499FB08AF9BDEEC865F8"
+            {
+            "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\stream-labels\\last-five\\last-5-points.txt"
+            "TargetName" = "8:last-5-points.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_7AA7915935A8441E8EA662C78A2FCA2B"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3CA49475809648B3B5AE07AB5846C5FE"
+            {
+            "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\stream-labels\\stats\\rank.txt"
+            "TargetName" = "8:rank.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_C927EB334EFC467CB49765494BB0DBA6"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_3D924F35727CDE3051FEEFC51F8BE5F6"
@@ -594,6 +898,66 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_411F5F8574DF4CC597374801C51A6C27"
+            {
+            "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\stream-labels\\last-five\\last-1-points.txt"
+            "TargetName" = "8:last-1-points.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_7AA7915935A8441E8EA662C78A2FCA2B"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_44BB4265430B494BAF59AE3D1FD7235F"
+            {
+            "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\stream-labels\\last-five\\last-5-description.txt"
+            "TargetName" = "8:last-5-description.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_7AA7915935A8441E8EA662C78A2FCA2B"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4639279C2AD54C25BECA1E259EB3E637"
+            {
+            "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\stream-labels\\focus\\description.txt"
+            "TargetName" = "8:description.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_CDC84DDB47B940C38A5058C26DE4A97A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4B39E04DB41C4D2FB0E20CD85B3A6CE6"
             {
             "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\x86\\cef.pak"
@@ -620,6 +984,26 @@
             "TargetName" = "8:chrome_elf.dll"
             "Tag" = "8:"
             "Folder" = "8:_E62E95669DB5449EB9E2E2A2C610D4B0"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4D96DF6516184E1586624D2AB3D47A86"
+            {
+            "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\stream-labels\\stats\\ratio.txt"
+            "TargetName" = "8:ratio.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_C927EB334EFC467CB49765494BB0DBA6"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -674,11 +1058,31 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_51AB8BB34BE44679A73FBE9F8B4FF214"
+            {
+            "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\stream-labels\\last-five\\last-1-description.txt"
+            "TargetName" = "8:last-1-description.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_7AA7915935A8441E8EA662C78A2FCA2B"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_56E1801B7EE2449AB985368837B7DF49"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:CefSharp.WinForms, Version=84.4.10.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:CefSharp.WinForms, Version=86.0.241.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_56E1801B7EE2449AB985368837B7DF49"
@@ -709,7 +1113,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:CefSharp, Version=84.4.10.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:CefSharp, Version=86.0.241.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_5C87531EBA470685AE021E2E369A6A1A"
@@ -776,12 +1180,92 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_71E38A30610749B8A0EFFF1C6F931274"
+            {
+            "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\stream-labels\\game-info\\release-date.txt"
+            "TargetName" = "8:release-date.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_5234DEBB443D4DEDA3D3BD1754CF57E7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_75A1671C88D04C92BE6961E8231A7A78"
             {
             "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\x86\\cef_100_percent.pak"
             "TargetName" = "8:cef_100_percent.pak"
             "Tag" = "8:"
             "Folder" = "8:_E62E95669DB5449EB9E2E2A2C610D4B0"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_764787C873624F11983AB49D4294EB82"
+            {
+            "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\stream-labels\\focus\\points.txt"
+            "TargetName" = "8:points.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_CDC84DDB47B940C38A5058C26DE4A97A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7652B723FD974E798FD89A0FC5FF0CD9"
+            {
+            "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\stream-labels\\last-five\\last-2-points.txt"
+            "TargetName" = "8:last-2-points.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_7AA7915935A8441E8EA662C78A2FCA2B"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7813C1CAE92143E089D71A20AC4A4BC3"
+            {
+            "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\stream-labels\\stats\\points.txt"
+            "TargetName" = "8:points.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_C927EB334EFC467CB49765494BB0DBA6"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -827,12 +1311,132 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7B8C612EB2FC491B8B425DEABDF466F3"
+            {
+            "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\stream-labels\\last-five\\last-4-description.txt"
+            "TargetName" = "8:last-4-description.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_7AA7915935A8441E8EA662C78A2FCA2B"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7E23982CEF3343F1B1B7856BD0A7BB9E"
+            {
+            "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\stream-labels\\last-five\\last-3-description.txt"
+            "TargetName" = "8:last-3-description.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_7AA7915935A8441E8EA662C78A2FCA2B"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8E7864B1D8444C87B158B55E2A2FD810"
+            {
+            "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\stream-labels\\game-info\\title.txt"
+            "TargetName" = "8:title.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_5234DEBB443D4DEDA3D3BD1754CF57E7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_902FE61D318B48CEA166CA4604F6348F"
+            {
+            "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\stream-labels\\alerts\\title.txt"
+            "TargetName" = "8:title.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_8D8382A3CB6F4F97B378200BDDC22BD7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9A82875010CA45C18926AF67F39CC759"
+            {
+            "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\stream-labels\\last-five\\last-2-title.txt"
+            "TargetName" = "8:last-2-title.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_7AA7915935A8441E8EA662C78A2FCA2B"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9B3742DFE0674FECB3915D71F678823B"
             {
             "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\x86\\libcef.dll"
             "TargetName" = "8:libcef.dll"
             "Tag" = "8:"
             "Folder" = "8:_E62E95669DB5449EB9E2E2A2C610D4B0"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A56875F4352C482691063D00B7DE11C7"
+            {
+            "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\stream-labels\\stats\\game-true-points.txt"
+            "TargetName" = "8:game-true-points.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_C927EB334EFC467CB49765494BB0DBA6"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -887,6 +1491,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A91D85BC1AA34E57B0C4AF46611E915B"
+            {
+            "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\stream-labels\\stats\\game-points.txt"
+            "TargetName" = "8:game-points.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_C927EB334EFC467CB49765494BB0DBA6"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_AFC2E237010C49969A06F8706D490A93"
             {
             "AssemblyRegister" = "3:1"
@@ -904,6 +1528,26 @@
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_E62E95669DB5449EB9E2E2A2C610D4B0"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B132AD035A194A53B3462CED58E7827F"
+            {
+            "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\stream-labels\\stats\\true-points.txt"
+            "TargetName" = "8:true-points.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_C927EB334EFC467CB49765494BB0DBA6"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -969,6 +1613,86 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CCD86936C2C74194AF464EAE82192F96"
+            {
+            "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\stream-labels\\last-five\\last-5-title.txt"
+            "TargetName" = "8:last-5-title.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_7AA7915935A8441E8EA662C78A2FCA2B"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CFD4617F8A7E4147A13CF2E99C39B599"
+            {
+            "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\stream-labels\\last-five\\last-3-title.txt"
+            "TargetName" = "8:last-3-title.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_7AA7915935A8441E8EA662C78A2FCA2B"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D028E8D0682F4D4A95952970443B23AC"
+            {
+            "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\stream-labels\\game-info\\console.txt"
+            "TargetName" = "8:console.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_5234DEBB443D4DEDA3D3BD1754CF57E7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D1AF3D3DF03D40719539BD59158D6795"
+            {
+            "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\stream-labels\\stats\\game-ratio.txt"
+            "TargetName" = "8:game-ratio.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_C927EB334EFC467CB49765494BB0DBA6"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D7791F60B4B94164B643AB2FEEE33339"
             {
             "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\x86\\libGLESv2.dll"
@@ -993,7 +1717,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:CefSharp.BrowserSubprocess.Core, Version=84.4.10.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:CefSharp.BrowserSubprocess.Core, Version=86.0.241.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_DB52AF9E59D25D345BF18AECB2424171"
@@ -1018,6 +1742,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DBFC80DAD8EB4F21A33C3162EB232602"
+            {
+            "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\stream-labels\\stats\\game-achievements.txt"
+            "TargetName" = "8:game-achievements.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_C927EB334EFC467CB49765494BB0DBA6"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E0E9B5EBB7484841BF176A3393483C6C"
@@ -1060,11 +1804,51 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E7FE3DBF812142BC8722F1E2E4BCB335"
+            {
+            "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\stream-labels\\alerts\\points.txt"
+            "TargetName" = "8:points.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_8D8382A3CB6F4F97B378200BDDC22BD7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E868FD13356C44C587A79A0AD5870EE4"
+            {
+            "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\stream-labels\\last-five\\last-2-description.txt"
+            "TargetName" = "8:last-2-description.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_7AA7915935A8441E8EA662C78A2FCA2B"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_E8F0C8CDEC544DD09C79C81C7DE01AB8"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:CefSharp.BrowserSubprocess, Version=84.4.10.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:CefSharp.BrowserSubprocess, Version=86.0.241.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_E8F0C8CDEC544DD09C79C81C7DE01AB8"
@@ -1091,11 +1875,51 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F1F5E1CE74F9415F911742494515A65C"
+            {
+            "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\stream-labels\\last-five\\last-3-points.txt"
+            "TargetName" = "8:last-3-points.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_7AA7915935A8441E8EA662C78A2FCA2B"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F26C473BB5FB4410B959D312999D8287"
+            {
+            "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\stream-labels\\game-info\\publisher.txt"
+            "TargetName" = "8:publisher.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_5234DEBB443D4DEDA3D3BD1754CF57E7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_F3FC71C93AA1EA640D579473239E51A0"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:CefSharp.Core, Version=84.4.10.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:CefSharp.Core, Version=86.0.241.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_F3FC71C93AA1EA640D579473239E51A0"
@@ -1153,6 +1977,66 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F85B7EC09E814DD98B735DF07C4BEF4E"
+            {
+            "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\stream-labels\\last-five\\last-4-title.txt"
+            "TargetName" = "8:last-4-title.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_7AA7915935A8441E8EA662C78A2FCA2B"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FB2108D584F54ABDB8C9F5122C8D07DE"
+            {
+            "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\stream-labels\\last-five\\last-1-title.txt"
+            "TargetName" = "8:last-1-title.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_7AA7915935A8441E8EA662C78A2FCA2B"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FD3E7CA7CC974DF0B6861C151282A6D3"
+            {
+            "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\stream-labels\\last-five\\last-4-points.txt"
+            "TargetName" = "8:last-4-points.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_7AA7915935A8441E8EA662C78A2FCA2B"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
         }
         "FileType"
         {
@@ -1191,15 +2075,70 @@
             "Property" = "8:TARGETDIR"
                 "Folders"
                 {
-                    "{9EF0B969-E518-4E46-987F-47570745A589}:_711641C91B8B4C949457F2EEA2F7409A"
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_657B7E549FA648AF982C90DF4A301C31"
                     {
-                    "Name" = "8:Resources"
+                    "Name" = "8:stream-labels"
                     "AlwaysCreate" = "11:FALSE"
                     "Condition" = "8:"
                     "Transitive" = "11:FALSE"
-                    "Property" = "8:_5AD1116C400A49998E5F65798F9EF845"
+                    "Property" = "8:_5EB9C730C9824A58AE80735972A5A164"
                         "Folders"
                         {
+                            "{9EF0B969-E518-4E46-987F-47570745A589}:_5234DEBB443D4DEDA3D3BD1754CF57E7"
+                            {
+                            "Name" = "8:game-info"
+                            "AlwaysCreate" = "11:FALSE"
+                            "Condition" = "8:"
+                            "Transitive" = "11:FALSE"
+                            "Property" = "8:_2975F33CC0A44087BF0F702C52027AF2"
+                                "Folders"
+                                {
+                                }
+                            }
+                            "{9EF0B969-E518-4E46-987F-47570745A589}:_7AA7915935A8441E8EA662C78A2FCA2B"
+                            {
+                            "Name" = "8:last-five"
+                            "AlwaysCreate" = "11:FALSE"
+                            "Condition" = "8:"
+                            "Transitive" = "11:FALSE"
+                            "Property" = "8:_FC5D7E6880274624A6373A2941D3D0D1"
+                                "Folders"
+                                {
+                                }
+                            }
+                            "{9EF0B969-E518-4E46-987F-47570745A589}:_8D8382A3CB6F4F97B378200BDDC22BD7"
+                            {
+                            "Name" = "8:alerts"
+                            "AlwaysCreate" = "11:FALSE"
+                            "Condition" = "8:"
+                            "Transitive" = "11:FALSE"
+                            "Property" = "8:_E3C37261E67B4FA5A64FD6DA9992D31B"
+                                "Folders"
+                                {
+                                }
+                            }
+                            "{9EF0B969-E518-4E46-987F-47570745A589}:_C927EB334EFC467CB49765494BB0DBA6"
+                            {
+                            "Name" = "8:stats"
+                            "AlwaysCreate" = "11:FALSE"
+                            "Condition" = "8:"
+                            "Transitive" = "11:FALSE"
+                            "Property" = "8:_5A8ADEB7F550470C936E6DC4DDBC4043"
+                                "Folders"
+                                {
+                                }
+                            }
+                            "{9EF0B969-E518-4E46-987F-47570745A589}:_CDC84DDB47B940C38A5058C26DE4A97A"
+                            {
+                            "Name" = "8:focus"
+                            "AlwaysCreate" = "11:FALSE"
+                            "Condition" = "8:"
+                            "Transitive" = "11:FALSE"
+                            "Property" = "8:_D98F0C108B8E42EA9412A74032AA6575"
+                                "Folders"
+                                {
+                                }
+                            }
                         }
                     }
                     "{9EF0B969-E518-4E46-987F-47570745A589}:_998098A8417548BA8ADC79A66EB42A36"

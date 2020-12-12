@@ -12,7 +12,7 @@ namespace Retro_Achievement_Tracker.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.7.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.8.1.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -116,6 +116,18 @@ namespace Retro_Achievement_Tracker.Properties {
             }
             set {
                 this["stats_font_family_name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("52")]
+        public float stats_font_size {
+            get {
+                return ((float)(this["stats_font_size"]));
+            }
+            set {
+                this["stats_font_size"] = value;
             }
         }
         
@@ -476,6 +488,666 @@ namespace Retro_Achievement_Tracker.Properties {
             }
             set {
                 this["UpdateSettings"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool auto_game_info {
+            get {
+                return ((bool)(this["auto_game_info"]));
+            }
+            set {
+                this["auto_game_info"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool auto_last_five {
+            get {
+                return ((bool)(this["auto_last_five"]));
+            }
+            set {
+                this["auto_last_five"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#000000")]
+        public string game_info_font_color_hex_code {
+            get {
+                return ((string)(this["game_info_font_color_hex_code"]));
+            }
+            set {
+                this["game_info_font_color_hex_code"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Calibri")]
+        public string game_info_font_family_name {
+            get {
+                return ((string)(this["game_info_font_family_name"]));
+            }
+            set {
+                this["game_info_font_family_name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool game_info_font_outline_enabled {
+            get {
+                return ((bool)(this["game_info_font_outline_enabled"]));
+            }
+            set {
+                this["game_info_font_outline_enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FFFFFF")]
+        public string game_info_font_outline_color_hex {
+            get {
+                return ((string)(this["game_info_font_outline_color_hex"]));
+            }
+            set {
+                this["game_info_font_outline_color_hex"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        public int game_info_font_outline_size {
+            get {
+                return ((int)(this["game_info_font_outline_size"]));
+            }
+            set {
+                this["game_info_font_outline_size"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#000000")]
+        public string last_five_font_color_hex_code {
+            get {
+                return ((string)(this["last_five_font_color_hex_code"]));
+            }
+            set {
+                this["last_five_font_color_hex_code"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Calibri")]
+        public string last_five_font_family_name {
+            get {
+                return ((string)(this["last_five_font_family_name"]));
+            }
+            set {
+                this["last_five_font_family_name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool last_five_font_outline_enabled {
+            get {
+                return ((bool)(this["last_five_font_outline_enabled"]));
+            }
+            set {
+                this["last_five_font_outline_enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FFFFFF")]
+        public string last_five_font_outline_color_hex {
+            get {
+                return ((string)(this["last_five_font_outline_color_hex"]));
+            }
+            set {
+                this["last_five_font_outline_color_hex"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        public int last_five_font_outline_size {
+            get {
+                return ((int)(this["last_five_font_outline_size"]));
+            }
+            set {
+                this["last_five_font_outline_size"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#CCCCCC")]
+        public string last_five_background_color {
+            get {
+                return ((string)(this["last_five_background_color"]));
+            }
+            set {
+                this["last_five_background_color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool stats_rank_enable {
+            get {
+                return ((bool)(this["stats_rank_enable"]));
+            }
+            set {
+                this["stats_rank_enable"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool stats_points_enable {
+            get {
+                return ((bool)(this["stats_points_enable"]));
+            }
+            set {
+                this["stats_points_enable"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool stats_awards_enable {
+            get {
+                return ((bool)(this["stats_awards_enable"]));
+            }
+            set {
+                this["stats_awards_enable"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool stats_true_points_enable {
+            get {
+                return ((bool)(this["stats_true_points_enable"]));
+            }
+            set {
+                this["stats_true_points_enable"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool stats_ratio_enable {
+            get {
+                return ((bool)(this["stats_ratio_enable"]));
+            }
+            set {
+                this["stats_ratio_enable"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool stats_game_ratio_enable {
+            get {
+                return ((bool)(this["stats_game_ratio_enable"]));
+            }
+            set {
+                this["stats_game_ratio_enable"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool stats_game_points_enable {
+            get {
+                return ((bool)(this["stats_game_points_enable"]));
+            }
+            set {
+                this["stats_game_points_enable"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool stats_game_true_points_enable {
+            get {
+                return ((bool)(this["stats_game_true_points_enable"]));
+            }
+            set {
+                this["stats_game_true_points_enable"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool stats_game_achievements_enable {
+            get {
+                return ((bool)(this["stats_game_achievements_enable"]));
+            }
+            set {
+                this["stats_game_achievements_enable"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool game_info_console_enable {
+            get {
+                return ((bool)(this["game_info_console_enable"]));
+            }
+            set {
+                this["game_info_console_enable"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool game_info_developer_enable {
+            get {
+                return ((bool)(this["game_info_developer_enable"]));
+            }
+            set {
+                this["game_info_developer_enable"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool game_info_publisher_enable {
+            get {
+                return ((bool)(this["game_info_publisher_enable"]));
+            }
+            set {
+                this["game_info_publisher_enable"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool game_info_genre_enable {
+            get {
+                return ((bool)(this["game_info_genre_enable"]));
+            }
+            set {
+                this["game_info_genre_enable"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool game_info_release_date_enable {
+            get {
+                return ((bool)(this["game_info_release_date_enable"]));
+            }
+            set {
+                this["game_info_release_date_enable"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Rank")]
+        public string stats_rank_name {
+            get {
+                return ((string)(this["stats_rank_name"]));
+            }
+            set {
+                this["stats_rank_name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Awards")]
+        public string stats_awards_name {
+            get {
+                return ((string)(this["stats_awards_name"]));
+            }
+            set {
+                this["stats_awards_name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Points")]
+        public string stats_points_name {
+            get {
+                return ((string)(this["stats_points_name"]));
+            }
+            set {
+                this["stats_points_name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True Points")]
+        public string stats_true_points_name {
+            get {
+                return ((string)(this["stats_true_points_name"]));
+            }
+            set {
+                this["stats_true_points_name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Ratio")]
+        public string stats_ratio_name {
+            get {
+                return ((string)(this["stats_ratio_name"]));
+            }
+            set {
+                this["stats_ratio_name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Ratio")]
+        public string stats_game_ratio_name {
+            get {
+                return ((string)(this["stats_game_ratio_name"]));
+            }
+            set {
+                this["stats_game_ratio_name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Points")]
+        public string stats_game_points_name {
+            get {
+                return ((string)(this["stats_game_points_name"]));
+            }
+            set {
+                this["stats_game_points_name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True Points")]
+        public string stats_game_true_points_name {
+            get {
+                return ((string)(this["stats_game_true_points_name"]));
+            }
+            set {
+                this["stats_game_true_points_name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Cheevos")]
+        public string stats_game_achievements_name {
+            get {
+                return ((string)(this["stats_game_achievements_name"]));
+            }
+            set {
+                this["stats_game_achievements_name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("STATIC")]
+        public string notifications_achievement_in_animation {
+            get {
+                return ((string)(this["notifications_achievement_in_animation"]));
+            }
+            set {
+                this["notifications_achievement_in_animation"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("UP")]
+        public string notifications_achievement_out_animation {
+            get {
+                return ((string)(this["notifications_achievement_out_animation"]));
+            }
+            set {
+                this["notifications_achievement_out_animation"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("STATIC")]
+        public string notifications_mastery_in_animation {
+            get {
+                return ((string)(this["notifications_mastery_in_animation"]));
+            }
+            set {
+                this["notifications_mastery_in_animation"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("UP")]
+        public string notifications_mastery_out_animation {
+            get {
+                return ((string)(this["notifications_mastery_out_animation"]));
+            }
+            set {
+                this["notifications_mastery_out_animation"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool stream_labels_stats {
+            get {
+                return ((bool)(this["stream_labels_stats"]));
+            }
+            set {
+                this["stream_labels_stats"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool stream_labels_game_info {
+            get {
+                return ((bool)(this["stream_labels_game_info"]));
+            }
+            set {
+                this["stream_labels_game_info"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool stream_labels_notifications {
+            get {
+                return ((bool)(this["stream_labels_notifications"]));
+            }
+            set {
+                this["stream_labels_notifications"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool stream_labels_last_five {
+            get {
+                return ((bool)(this["stream_labels_last_five"]));
+            }
+            set {
+                this["stream_labels_last_five"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool stream_labels_focus {
+            get {
+                return ((bool)(this["stream_labels_focus"]));
+            }
+            set {
+                this["stream_labels_focus"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public int last_five_to_display {
+            get {
+                return ((int)(this["last_five_to_display"]));
+            }
+            set {
+                this["last_five_to_display"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool last_five_verbose_enable {
+            get {
+                return ((bool)(this["last_five_verbose_enable"]));
+            }
+            set {
+                this["last_five_verbose_enable"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Console")]
+        public string game_info_console_name {
+            get {
+                return ((string)(this["game_info_console_name"]));
+            }
+            set {
+                this["game_info_console_name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Developer")]
+        public string game_info_developer_name {
+            get {
+                return ((string)(this["game_info_developer_name"]));
+            }
+            set {
+                this["game_info_developer_name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Publisher")]
+        public string game_info_publisher_name {
+            get {
+                return ((string)(this["game_info_publisher_name"]));
+            }
+            set {
+                this["game_info_publisher_name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Genre")]
+        public string game_info_genre_name {
+            get {
+                return ((string)(this["game_info_genre_name"]));
+            }
+            set {
+                this["game_info_genre_name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Released")]
+        public string game_info_release_date_name {
+            get {
+                return ((string)(this["game_info_release_date_name"]));
+            }
+            set {
+                this["game_info_release_date_name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool game_info_box_art_enable {
+            get {
+                return ((bool)(this["game_info_box_art_enable"]));
+            }
+            set {
+                this["game_info_box_art_enable"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Title")]
+        public string game_info_title_name {
+            get {
+                return ((string)(this["game_info_title_name"]));
+            }
+            set {
+                this["game_info_title_name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool game_info_title_enable {
+            get {
+                return ((bool)(this["game_info_title_enable"]));
+            }
+            set {
+                this["game_info_title_enable"] = value;
             }
         }
     }

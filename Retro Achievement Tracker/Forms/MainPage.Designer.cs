@@ -40,8 +40,6 @@ namespace Retro_Achievement_Tracker
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainPage));
             this.apiKeyLabel = new System.Windows.Forms.Label();
             this.apiKeyTextBox = new System.Windows.Forms.TextBox();
-            this.gameInformationImage = new System.Windows.Forms.PictureBox();
-            this.gameInformationTitleLabel = new System.Windows.Forms.Label();
             this.usernameLabel = new System.Windows.Forms.Label();
             this.usernameTextBox = new System.Windows.Forms.TextBox();
             this.userProfilePictureBox = new System.Windows.Forms.PictureBox();
@@ -50,70 +48,84 @@ namespace Retro_Achievement_Tracker
             this.awardsLabel = new System.Windows.Forms.Label();
             this.siteRankLabel = new System.Windows.Forms.Label();
             this.pointsLabel = new System.Windows.Forms.Label();
-            this.gameInformationCheevosCountLabel = new System.Windows.Forms.Label();
-            this.gameInformationPointsLabel = new System.Windows.Forms.Label();
-            this.gameInformationGroupBox = new System.Windows.Forms.GroupBox();
-            this.gameInformationConsoleLabel = new System.Windows.Forms.Label();
-            this.gameInformationDeveloperLabel = new System.Windows.Forms.Label();
-            this.gameInformationPublisherLabel = new System.Windows.Forms.Label();
             this.timerStatusLabel = new System.Windows.Forms.Label();
             this.statsGroupBox = new System.Windows.Forms.GroupBox();
-            this.statsFontGroupBox = new System.Windows.Forms.GroupBox();
-            this.button9 = new System.Windows.Forms.Button();
-            this.statsBackgroundColorDisplayBox = new System.Windows.Forms.PictureBox();
-            this.label19 = new System.Windows.Forms.Label();
-            this.statsFontOutlineSizeUpDown = new System.Windows.Forms.NumericUpDown();
-            this.statsFontOutlineCheckbox = new System.Windows.Forms.CheckBox();
-            this.statsFontOutlineColorPickerButton = new System.Windows.Forms.Button();
-            this.statsFontOutlineColorDisplayBox = new System.Windows.Forms.PictureBox();
-            this.statsFontColorPickerButton = new System.Windows.Forms.Button();
-            this.statsFontColorDisplayBox = new System.Windows.Forms.PictureBox();
-            this.statsFontColorLabel = new System.Windows.Forms.Label();
             this.autoLaunchStatsWindowCheckbox = new System.Windows.Forms.CheckBox();
-            this.showStatsWindowButton = new System.Windows.Forms.Button();
-            this.supportButton = new System.Windows.Forms.Button();
+            this.customizeStatsButton = new System.Windows.Forms.Button();
+            this.openStatsWindowButton = new System.Windows.Forms.Button();
             this.focusGroupBox = new System.Windows.Forms.GroupBox();
-            this.focusFontGroupBox = new System.Windows.Forms.GroupBox();
-            this.focusBackgroundColorPickerButton = new System.Windows.Forms.Button();
-            this.focusBackgroundColorDisplayBox = new System.Windows.Forms.PictureBox();
-            this.label26 = new System.Windows.Forms.Label();
-            this.focusFontOutlineSizeUpDown = new System.Windows.Forms.NumericUpDown();
-            this.focusFontOutlineCheckbox = new System.Windows.Forms.CheckBox();
-            this.focusFontOutlineColorPickerButton = new System.Windows.Forms.Button();
-            this.focusFontOutlineColorDisplayBox = new System.Windows.Forms.PictureBox();
-            this.focusFontColorPickerButton = new System.Windows.Forms.Button();
-            this.focusFontColorDisplayBox = new System.Windows.Forms.PictureBox();
-            this.label30 = new System.Windows.Forms.Label();
-            this.lockedAchievementsGroupBox = new System.Windows.Forms.GroupBox();
-            this.label33 = new System.Windows.Forms.Label();
             this.focusAchievementDescriptionLabel = new System.Windows.Forms.Label();
-            this.focusAchievementPictureBox = new System.Windows.Forms.PictureBox();
+            this.setFocusButton = new System.Windows.Forms.Button();
+            this.label33 = new System.Windows.Forms.Label();
             this.focusAchievementButtonRight = new System.Windows.Forms.Button();
             this.hideFocusButton = new System.Windows.Forms.Button();
-            this.setFocusButton = new System.Windows.Forms.Button();
+            this.customizeFocusButton = new System.Windows.Forms.Button();
             this.focusAchievementButtonLeft = new System.Windows.Forms.Button();
-            this.focusAchievementTitleLabel = new System.Windows.Forms.Label();
             this.autoLaunchFocusWindowCheckBox = new System.Windows.Forms.CheckBox();
+            this.focusAchievementPictureBox = new System.Windows.Forms.PictureBox();
             this.showFocusWindowButton = new System.Windows.Forms.Button();
+            this.focusAchievementTitleLabel = new System.Windows.Forms.Label();
             this.notificationsGroupBox = new System.Windows.Forms.GroupBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.inMasteryNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.inLabel2 = new System.Windows.Forms.Label();
-            this.outMasteryNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.selectCustomMasteryNotificationButton = new System.Windows.Forms.Button();
-            this.outLabel2 = new System.Windows.Forms.Label();
-            this.scaleLabel2 = new System.Windows.Forms.Label();
-            this.scaleMasteryNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.yPositionLabel2 = new System.Windows.Forms.Label();
-            this.xPositionLabel2 = new System.Windows.Forms.Label();
-            this.masteryEditOultineCheckbox = new System.Windows.Forms.CheckBox();
-            this.customMasteryYNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.customMasteryXNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.useCustomMasteryCheckbox = new System.Windows.Forms.CheckBox();
-            this.showGameMasteryButton = new System.Windows.Forms.Button();
+            this.customizeAlertsButton = new System.Windows.Forms.Button();
             this.autoLaunchNotificationsWindowCheckbox = new System.Windows.Forms.CheckBox();
-            this.showNotificationsWindowButton = new System.Windows.Forms.Button();
+            this.openAlertsWindowButton = new System.Windows.Forms.Button();
+            this.userInfoGroupBox = new System.Windows.Forms.GroupBox();
+            this.truePointsLabel = new System.Windows.Forms.Label();
+            this.ratioLabel = new System.Windows.Forms.Label();
+            this.hideButton = new System.Windows.Forms.Button();
+            this.startButton = new System.Windows.Forms.Button();
+            this.raConnectionStatusPictureBox = new System.Windows.Forms.PictureBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.customizeGameButton = new System.Windows.Forms.Button();
+            this.autoLaunchGameInfoWindowCheckbox = new System.Windows.Forms.CheckBox();
+            this.openGameInfoWindowButton = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.customizeLastFiveButton = new System.Windows.Forms.Button();
+            this.autoLaunchLastFiveWindowCheckbox = new System.Windows.Forms.CheckBox();
+            this.openLastFiveWindowButton = new System.Windows.Forms.Button();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.focusStreamLabelsCheckBox = new System.Windows.Forms.CheckBox();
+            this.alertsStreamLabelsCheckBox = new System.Windows.Forms.CheckBox();
+            this.lastFiveStreamLabelsCheckBox = new System.Windows.Forms.CheckBox();
+            this.gameInfoStreamLabelsCheckBox = new System.Windows.Forms.CheckBox();
+            this.statsStreamLabelsCheckBox = new System.Windows.Forms.CheckBox();
+            this.statsGameRatioOverrideTextBox = new System.Windows.Forms.TextBox();
+            this.statsTruePointsOverrideTextBox = new System.Windows.Forms.TextBox();
+            this.statsPointsOverrideTextBox = new System.Windows.Forms.TextBox();
+            this.statsRatioOverrideTextBox = new System.Windows.Forms.TextBox();
+            this.statsAwardsOverrideTextBox = new System.Windows.Forms.TextBox();
+            this.statsRankOverrideTextBox = new System.Windows.Forms.TextBox();
+            this.statsOverrideGroupBox = new System.Windows.Forms.GroupBox();
+            this.statsGameAchievementsCheckBox = new System.Windows.Forms.CheckBox();
+            this.statsGameTruePointsCheckBox = new System.Windows.Forms.CheckBox();
+            this.statsGamePointsCheckBox = new System.Windows.Forms.CheckBox();
+            this.statsGameRatioCheckBox = new System.Windows.Forms.CheckBox();
+            this.statsRatioCheckBox = new System.Windows.Forms.CheckBox();
+            this.statsTruePointsCheckBox = new System.Windows.Forms.CheckBox();
+            this.statsPointsCheckBox = new System.Windows.Forms.CheckBox();
+            this.statsAwardsCheckBox = new System.Windows.Forms.CheckBox();
+            this.statsRankCheckBox = new System.Windows.Forms.CheckBox();
+            this.statsDefaultButton = new System.Windows.Forms.Button();
+            this.statsGameTruePointsOverrideTextBox = new System.Windows.Forms.TextBox();
+            this.statsGamePointsOverrideTextBox = new System.Windows.Forms.TextBox();
+            this.statsGameAchievementsOverrideTextBox = new System.Windows.Forms.TextBox();
+            this.fontFamilyComboBox = new System.Windows.Forms.ComboBox();
+            this.setBackgroundColorButton = new System.Windows.Forms.Button();
+            this.backgroundColorPictureBox = new System.Windows.Forms.PictureBox();
+            this.backgroundColorLabel = new System.Windows.Forms.Label();
+            this.fontOutlineNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.fontOutlineCheckBox = new System.Windows.Forms.CheckBox();
+            this.fontOutlineColorButton = new System.Windows.Forms.Button();
+            this.fontOutlineColorPictureBox = new System.Windows.Forms.PictureBox();
+            this.setFontColorButton = new System.Windows.Forms.Button();
+            this.fontColorPictureBox = new System.Windows.Forms.PictureBox();
+            this.fontColorLabel = new System.Windows.Forms.Label();
+            this.fontSettingsGroupBox = new System.Windows.Forms.GroupBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.inAchievementNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.inLabel1 = new System.Windows.Forms.Label();
             this.outAchievementNumericUpDown = new System.Windows.Forms.NumericUpDown();
@@ -123,132 +135,128 @@ namespace Retro_Achievement_Tracker
             this.scaleAchievementNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.yPositionLabel1 = new System.Windows.Forms.Label();
             this.xPositionLabel1 = new System.Windows.Forms.Label();
-            this.acheivementEditOutlineCheckbox = new System.Windows.Forms.CheckBox();
             this.customAchievementYNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.customAchievementXNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.useCustomAchievementCheckbox = new System.Windows.Forms.CheckBox();
             this.showAchievementButton = new System.Windows.Forms.Button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.notificationsBackgroundColorPickerButton = new System.Windows.Forms.Button();
-            this.notificationsBackgroundColorDisplayBox = new System.Windows.Forms.PictureBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.notificationsFontOutlineSizeUpDown = new System.Windows.Forms.NumericUpDown();
-            this.notificationsFontOutlineCheckbox = new System.Windows.Forms.CheckBox();
-            this.notificationsFontOutlineColorPickerButton = new System.Windows.Forms.Button();
-            this.notificationsFontOutlineColorDisplayBox = new System.Windows.Forms.PictureBox();
-            this.notificationsFontColorPickerButton = new System.Windows.Forms.Button();
-            this.notificationsFontColorDisplayBox = new System.Windows.Forms.PictureBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.userInfoGroupBox = new System.Windows.Forms.GroupBox();
-            this.startButton = new System.Windows.Forms.Button();
-            this.raConnectionStatusPictureBox = new System.Windows.Forms.PictureBox();
-            this.raConnectivityLabel = new System.Windows.Forms.Label();
-            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.customAchievementSettingsGroupBox = new System.Windows.Forms.GroupBox();
+            this.acheivementEditOutlineCheckbox = new System.Windows.Forms.CheckBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.comboBox4 = new System.Windows.Forms.ComboBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.inMasteryNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.comboBox5 = new System.Windows.Forms.ComboBox();
+            this.inLabel2 = new System.Windows.Forms.Label();
+            this.outMasteryNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.selectCustomMasteryNotificationButton = new System.Windows.Forms.Button();
+            this.outLabel2 = new System.Windows.Forms.Label();
+            this.scaleLabel2 = new System.Windows.Forms.Label();
+            this.scaleMasteryNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.yPositionLabel2 = new System.Windows.Forms.Label();
+            this.xPositionLabel2 = new System.Windows.Forms.Label();
+            this.customMasteryYNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.customMasteryXNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.useCustomMasteryCheckbox = new System.Windows.Forms.CheckBox();
+            this.showGameMasteryButton = new System.Windows.Forms.Button();
+            this.customMasterySettingsGroupBox = new System.Windows.Forms.GroupBox();
+            this.masteryEditOultineCheckbox = new System.Windows.Forms.CheckBox();
+            this.gameInfoOverrideSettingsGroupBox = new System.Windows.Forms.GroupBox();
+            this.gameInfoTitleCheckBox = new System.Windows.Forms.CheckBox();
+            this.gameInfoTitleOverrideTextBox = new System.Windows.Forms.TextBox();
+            this.gameInfoBoxArtCheckbox = new System.Windows.Forms.CheckBox();
+            this.gameInfoReleaseDateCheckBox = new System.Windows.Forms.CheckBox();
+            this.gameInfoGenreCheckBox = new System.Windows.Forms.CheckBox();
+            this.gameInfoPublisherCheckBox = new System.Windows.Forms.CheckBox();
+            this.gameInfoDeveloperCheckBox = new System.Windows.Forms.CheckBox();
+            this.gameInfoConsoleCheckBox = new System.Windows.Forms.CheckBox();
+            this.gameInfoDefaultButton = new System.Windows.Forms.Button();
+            this.gameInfoGenreOverrideTextBox = new System.Windows.Forms.TextBox();
+            this.gameInfoConsoleOverrideTextBox = new System.Windows.Forms.TextBox();
+            this.gameInfoPublisherOverrideTextBox = new System.Windows.Forms.TextBox();
+            this.gameInfoReleaseDateOverrideTextBox = new System.Windows.Forms.TextBox();
+            this.gameInfoDeveloperOverrideTextBox = new System.Windows.Forms.TextBox();
+            this.lastFiveOverridesGroupBox = new System.Windows.Forms.GroupBox();
+            this.lastFiveVerboseCheckbox = new System.Windows.Forms.CheckBox();
+            this.lastFiveSimpleCheckbox = new System.Windows.Forms.CheckBox();
+            this.label27 = new System.Windows.Forms.Label();
+            this.comboBox6 = new System.Windows.Forms.ComboBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.statsFontComboBox = new System.Windows.Forms.ComboBox();
-            this.focusFontComboBox = new System.Windows.Forms.ComboBox();
-            this.notificationsFontComboBox = new System.Windows.Forms.ComboBox();
-            ((System.ComponentModel.ISupportInitialize)(this.gameInformationImage)).BeginInit();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             ((System.ComponentModel.ISupportInitialize)(this.userProfilePictureBox)).BeginInit();
-            this.gameInformationGroupBox.SuspendLayout();
             this.statsGroupBox.SuspendLayout();
-            this.statsFontGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.statsBackgroundColorDisplayBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.statsFontOutlineSizeUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.statsFontOutlineColorDisplayBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.statsFontColorDisplayBox)).BeginInit();
             this.focusGroupBox.SuspendLayout();
-            this.focusFontGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.focusBackgroundColorDisplayBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.focusFontOutlineSizeUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.focusFontOutlineColorDisplayBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.focusFontColorDisplayBox)).BeginInit();
-            this.lockedAchievementsGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.focusAchievementPictureBox)).BeginInit();
             this.notificationsGroupBox.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.inMasteryNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.outMasteryNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.scaleMasteryNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.customMasteryYNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.customMasteryXNumericUpDown)).BeginInit();
+            this.userInfoGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.raConnectionStatusPictureBox)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.statsOverrideGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.backgroundColorPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fontOutlineNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fontOutlineColorPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fontColorPictureBox)).BeginInit();
+            this.fontSettingsGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.inAchievementNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.outAchievementNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.scaleAchievementNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.customAchievementYNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.customAchievementXNumericUpDown)).BeginInit();
-            this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.notificationsBackgroundColorDisplayBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.notificationsFontOutlineSizeUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.notificationsFontOutlineColorDisplayBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.notificationsFontColorDisplayBox)).BeginInit();
-            this.userInfoGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.raConnectionStatusPictureBox)).BeginInit();
+            this.customAchievementSettingsGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.inMasteryNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.outMasteryNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.scaleMasteryNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.customMasteryYNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.customMasteryXNumericUpDown)).BeginInit();
+            this.customMasterySettingsGroupBox.SuspendLayout();
+            this.gameInfoOverrideSettingsGroupBox.SuspendLayout();
+            this.lastFiveOverridesGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // apiKeyLabel
             // 
             this.apiKeyLabel.AutoSize = true;
-            this.apiKeyLabel.Font = new System.Drawing.Font("Calibri", 6.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.apiKeyLabel.Location = new System.Drawing.Point(7, 159);
+            this.apiKeyLabel.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.apiKeyLabel.Location = new System.Drawing.Point(3, 145);
             this.apiKeyLabel.Name = "apiKeyLabel";
-            this.apiKeyLabel.Size = new System.Drawing.Size(32, 11);
+            this.apiKeyLabel.Size = new System.Drawing.Size(70, 13);
             this.apiKeyLabel.TabIndex = 31;
             this.apiKeyLabel.Text = "API Key";
             // 
             // apiKeyTextBox
             // 
             this.apiKeyTextBox.Font = new System.Drawing.Font("Calibri", 7.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.apiKeyTextBox.Location = new System.Drawing.Point(6, 137);
+            this.apiKeyTextBox.Location = new System.Drawing.Point(4, 161);
             this.apiKeyTextBox.Name = "apiKeyTextBox";
             this.apiKeyTextBox.PasswordChar = '*';
-            this.apiKeyTextBox.Size = new System.Drawing.Size(155, 19);
+            this.apiKeyTextBox.Size = new System.Drawing.Size(199, 19);
             this.apiKeyTextBox.TabIndex = 1;
-            // 
-            // gameInformationImage
-            // 
-            this.gameInformationImage.ImageLocation = "";
-            this.gameInformationImage.Location = new System.Drawing.Point(6, 26);
-            this.gameInformationImage.Name = "gameInformationImage";
-            this.gameInformationImage.Size = new System.Drawing.Size(80, 80);
-            this.gameInformationImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.gameInformationImage.TabIndex = 30;
-            this.gameInformationImage.TabStop = false;
-            // 
-            // gameInformationTitleLabel
-            // 
-            this.gameInformationTitleLabel.Font = new System.Drawing.Font("Calibri", 12.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameInformationTitleLabel.Location = new System.Drawing.Point(6, 110);
-            this.gameInformationTitleLabel.Name = "gameInformationTitleLabel";
-            this.gameInformationTitleLabel.Size = new System.Drawing.Size(230, 65);
-            this.gameInformationTitleLabel.TabIndex = 29;
-            this.gameInformationTitleLabel.Text = "--";
-            this.gameInformationTitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // usernameLabel
             // 
             this.usernameLabel.AutoSize = true;
-            this.usernameLabel.Font = new System.Drawing.Font("Calibri", 6.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.usernameLabel.Location = new System.Drawing.Point(7, 117);
+            this.usernameLabel.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.usernameLabel.Location = new System.Drawing.Point(3, 107);
             this.usernameLabel.Name = "usernameLabel";
-            this.usernameLabel.Size = new System.Drawing.Size(42, 11);
+            this.usernameLabel.Size = new System.Drawing.Size(79, 13);
             this.usernameLabel.TabIndex = 26;
             this.usernameLabel.Text = "Username";
             // 
             // usernameTextBox
             // 
             this.usernameTextBox.Font = new System.Drawing.Font("Calibri", 7.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.usernameTextBox.Location = new System.Drawing.Point(5, 98);
+            this.usernameTextBox.Location = new System.Drawing.Point(5, 123);
             this.usernameTextBox.Name = "usernameTextBox";
-            this.usernameTextBox.Size = new System.Drawing.Size(156, 19);
+            this.usernameTextBox.Size = new System.Drawing.Size(199, 19);
             this.usernameTextBox.TabIndex = 0;
             // 
             // userProfilePictureBox
             // 
             this.userProfilePictureBox.Location = new System.Drawing.Point(6, 22);
             this.userProfilePictureBox.Name = "userProfilePictureBox";
-            this.userProfilePictureBox.Size = new System.Drawing.Size(70, 70);
+            this.userProfilePictureBox.Size = new System.Drawing.Size(80, 80);
             this.userProfilePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.userProfilePictureBox.TabIndex = 20;
             this.userProfilePictureBox.TabStop = false;
@@ -256,897 +264,994 @@ namespace Retro_Achievement_Tracker
             // autoStartCheckbox
             // 
             this.autoStartCheckbox.AutoSize = true;
-            this.autoStartCheckbox.Font = new System.Drawing.Font("Calibri", 7.55F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.autoStartCheckbox.Location = new System.Drawing.Point(82, 78);
+            this.autoStartCheckbox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.autoStartCheckbox.Location = new System.Drawing.Point(107, 102);
             this.autoStartCheckbox.Name = "autoStartCheckbox";
-            this.autoStartCheckbox.Size = new System.Drawing.Size(74, 17);
+            this.autoStartCheckbox.Size = new System.Drawing.Size(96, 18);
             this.autoStartCheckbox.TabIndex = 2;
             this.autoStartCheckbox.Text = "Auto-Start";
             this.autoStartCheckbox.UseVisualStyleBackColor = true;
             // 
             // stopButton
             // 
-            this.stopButton.Font = new System.Drawing.Font("Calibri", 7.55F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stopButton.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.stopButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.stopButton.Location = new System.Drawing.Point(165, 135);
+            this.stopButton.Location = new System.Drawing.Point(212, 157);
             this.stopButton.Name = "stopButton";
-            this.stopButton.Size = new System.Drawing.Size(70, 23);
+            this.stopButton.Size = new System.Drawing.Size(69, 23);
             this.stopButton.TabIndex = 4;
             this.stopButton.Text = "Stop";
             this.stopButton.UseVisualStyleBackColor = true;
-            this.stopButton.Click += new System.EventHandler(this.StopButton_Click);
             // 
             // awardsLabel
             // 
-            this.awardsLabel.Font = new System.Drawing.Font("Calibri", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.awardsLabel.Location = new System.Drawing.Point(81, 63);
+            this.awardsLabel.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.awardsLabel.Location = new System.Drawing.Point(86, 33);
             this.awardsLabel.Name = "awardsLabel";
-            this.awardsLabel.Size = new System.Drawing.Size(130, 20);
+            this.awardsLabel.Size = new System.Drawing.Size(195, 10);
             this.awardsLabel.TabIndex = 34;
             this.awardsLabel.Text = "Awards: ---";
             // 
             // siteRankLabel
             // 
-            this.siteRankLabel.Font = new System.Drawing.Font("Calibri", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.siteRankLabel.Location = new System.Drawing.Point(81, 20);
+            this.siteRankLabel.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.siteRankLabel.Location = new System.Drawing.Point(86, 22);
             this.siteRankLabel.Name = "siteRankLabel";
-            this.siteRankLabel.Size = new System.Drawing.Size(130, 20);
+            this.siteRankLabel.Size = new System.Drawing.Size(195, 11);
             this.siteRankLabel.TabIndex = 33;
             this.siteRankLabel.Text = "Rank: -----";
             // 
             // pointsLabel
             // 
-            this.pointsLabel.Font = new System.Drawing.Font("Calibri", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pointsLabel.Location = new System.Drawing.Point(81, 42);
+            this.pointsLabel.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pointsLabel.Location = new System.Drawing.Point(86, 43);
             this.pointsLabel.Name = "pointsLabel";
-            this.pointsLabel.Size = new System.Drawing.Size(130, 20);
+            this.pointsLabel.Size = new System.Drawing.Size(195, 10);
             this.pointsLabel.TabIndex = 32;
-            this.pointsLabel.Text = "Score: --------";
-            // 
-            // gameInformationCheevosCountLabel
-            // 
-            this.gameInformationCheevosCountLabel.Font = new System.Drawing.Font("Calibri", 7.55F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameInformationCheevosCountLabel.Location = new System.Drawing.Point(92, 26);
-            this.gameInformationCheevosCountLabel.Name = "gameInformationCheevosCountLabel";
-            this.gameInformationCheevosCountLabel.Size = new System.Drawing.Size(145, 16);
-            this.gameInformationCheevosCountLabel.TabIndex = 2;
-            this.gameInformationCheevosCountLabel.Text = "---------";
-            // 
-            // gameInformationPointsLabel
-            // 
-            this.gameInformationPointsLabel.Font = new System.Drawing.Font("Calibri", 7.55F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameInformationPointsLabel.Location = new System.Drawing.Point(92, 42);
-            this.gameInformationPointsLabel.Name = "gameInformationPointsLabel";
-            this.gameInformationPointsLabel.Size = new System.Drawing.Size(145, 16);
-            this.gameInformationPointsLabel.TabIndex = 33;
-            this.gameInformationPointsLabel.Text = "---------";
-            // 
-            // gameInformationGroupBox
-            // 
-            this.gameInformationGroupBox.Controls.Add(this.gameInformationConsoleLabel);
-            this.gameInformationGroupBox.Controls.Add(this.gameInformationDeveloperLabel);
-            this.gameInformationGroupBox.Controls.Add(this.gameInformationPublisherLabel);
-            this.gameInformationGroupBox.Controls.Add(this.gameInformationImage);
-            this.gameInformationGroupBox.Controls.Add(this.gameInformationTitleLabel);
-            this.gameInformationGroupBox.Controls.Add(this.gameInformationCheevosCountLabel);
-            this.gameInformationGroupBox.Controls.Add(this.gameInformationPointsLabel);
-            this.gameInformationGroupBox.Font = new System.Drawing.Font("Calibri", 13.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameInformationGroupBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.gameInformationGroupBox.Location = new System.Drawing.Point(12, 252);
-            this.gameInformationGroupBox.Name = "gameInformationGroupBox";
-            this.gameInformationGroupBox.Size = new System.Drawing.Size(242, 180);
-            this.gameInformationGroupBox.TabIndex = 10004;
-            this.gameInformationGroupBox.TabStop = false;
-            this.gameInformationGroupBox.Text = "Game Info";
-            // 
-            // gameInformationConsoleLabel
-            // 
-            this.gameInformationConsoleLabel.Font = new System.Drawing.Font("Calibri", 6.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameInformationConsoleLabel.Location = new System.Drawing.Point(92, 64);
-            this.gameInformationConsoleLabel.Name = "gameInformationConsoleLabel";
-            this.gameInformationConsoleLabel.Size = new System.Drawing.Size(143, 14);
-            this.gameInformationConsoleLabel.TabIndex = 36;
-            this.gameInformationConsoleLabel.Text = "---------";
-            // 
-            // gameInformationDeveloperLabel
-            // 
-            this.gameInformationDeveloperLabel.Font = new System.Drawing.Font("Calibri", 6.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameInformationDeveloperLabel.Location = new System.Drawing.Point(92, 78);
-            this.gameInformationDeveloperLabel.Name = "gameInformationDeveloperLabel";
-            this.gameInformationDeveloperLabel.Size = new System.Drawing.Size(143, 14);
-            this.gameInformationDeveloperLabel.TabIndex = 35;
-            this.gameInformationDeveloperLabel.Text = "---------";
-            // 
-            // gameInformationPublisherLabel
-            // 
-            this.gameInformationPublisherLabel.Font = new System.Drawing.Font("Calibri", 6.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameInformationPublisherLabel.Location = new System.Drawing.Point(92, 92);
-            this.gameInformationPublisherLabel.Name = "gameInformationPublisherLabel";
-            this.gameInformationPublisherLabel.Size = new System.Drawing.Size(143, 14);
-            this.gameInformationPublisherLabel.TabIndex = 34;
-            this.gameInformationPublisherLabel.Text = "---------";
+            this.pointsLabel.Text = "Points: --------";
             // 
             // timerStatusLabel
             // 
-            this.timerStatusLabel.AutoSize = true;
-            this.timerStatusLabel.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.timerStatusLabel.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.timerStatusLabel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.timerStatusLabel.Location = new System.Drawing.Point(38, 198);
+            this.timerStatusLabel.Location = new System.Drawing.Point(4, 26);
             this.timerStatusLabel.Name = "timerStatusLabel";
-            this.timerStatusLabel.Size = new System.Drawing.Size(45, 17);
+            this.timerStatusLabel.Size = new System.Drawing.Size(285, 39);
             this.timerStatusLabel.TabIndex = 10024;
             this.timerStatusLabel.Text = "Offline";
             // 
             // statsGroupBox
             // 
-            this.statsGroupBox.Controls.Add(this.statsFontGroupBox);
             this.statsGroupBox.Controls.Add(this.autoLaunchStatsWindowCheckbox);
-            this.statsGroupBox.Controls.Add(this.showStatsWindowButton);
-            this.statsGroupBox.Font = new System.Drawing.Font("Calibri", 13.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statsGroupBox.Controls.Add(this.customizeStatsButton);
+            this.statsGroupBox.Controls.Add(this.openStatsWindowButton);
+            this.statsGroupBox.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statsGroupBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.statsGroupBox.Location = new System.Drawing.Point(260, 12);
+            this.statsGroupBox.Location = new System.Drawing.Point(76, 194);
             this.statsGroupBox.Name = "statsGroupBox";
-            this.statsGroupBox.Size = new System.Drawing.Size(179, 214);
+            this.statsGroupBox.Size = new System.Drawing.Size(72, 116);
             this.statsGroupBox.TabIndex = 10023;
             this.statsGroupBox.TabStop = false;
             this.statsGroupBox.Text = "Stats";
             // 
-            // statsFontGroupBox
-            // 
-            this.statsFontGroupBox.Controls.Add(this.statsFontComboBox);
-            this.statsFontGroupBox.Controls.Add(this.button9);
-            this.statsFontGroupBox.Controls.Add(this.statsBackgroundColorDisplayBox);
-            this.statsFontGroupBox.Controls.Add(this.label19);
-            this.statsFontGroupBox.Controls.Add(this.statsFontOutlineSizeUpDown);
-            this.statsFontGroupBox.Controls.Add(this.statsFontOutlineCheckbox);
-            this.statsFontGroupBox.Controls.Add(this.statsFontOutlineColorPickerButton);
-            this.statsFontGroupBox.Controls.Add(this.statsFontOutlineColorDisplayBox);
-            this.statsFontGroupBox.Controls.Add(this.statsFontColorPickerButton);
-            this.statsFontGroupBox.Controls.Add(this.statsFontColorDisplayBox);
-            this.statsFontGroupBox.Controls.Add(this.statsFontColorLabel);
-            this.statsFontGroupBox.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.statsFontGroupBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.statsFontGroupBox.Location = new System.Drawing.Point(6, 44);
-            this.statsFontGroupBox.Name = "statsFontGroupBox";
-            this.statsFontGroupBox.Size = new System.Drawing.Size(166, 163);
-            this.statsFontGroupBox.TabIndex = 10005;
-            this.statsFontGroupBox.TabStop = false;
-            this.statsFontGroupBox.Text = "Font";
-            // 
-            // button9
-            // 
-            this.button9.Enabled = false;
-            this.button9.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button9.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.button9.Location = new System.Drawing.Point(110, 58);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(49, 23);
-            this.button9.TabIndex = 37;
-            this.button9.Text = "Set";
-            this.button9.UseVisualStyleBackColor = true;
-            // 
-            // statsBackgroundColorDisplayBox
-            // 
-            this.statsBackgroundColorDisplayBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.statsBackgroundColorDisplayBox.Enabled = false;
-            this.statsBackgroundColorDisplayBox.Location = new System.Drawing.Point(84, 59);
-            this.statsBackgroundColorDisplayBox.Name = "statsBackgroundColorDisplayBox";
-            this.statsBackgroundColorDisplayBox.Size = new System.Drawing.Size(22, 22);
-            this.statsBackgroundColorDisplayBox.TabIndex = 36;
-            this.statsBackgroundColorDisplayBox.TabStop = false;
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Enabled = false;
-            this.label19.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.Location = new System.Drawing.Point(6, 58);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(72, 15);
-            this.label19.TabIndex = 35;
-            this.label19.Text = "Background";
-            // 
-            // statsFontOutlineSizeUpDown
-            // 
-            this.statsFontOutlineSizeUpDown.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.statsFontOutlineSizeUpDown.Location = new System.Drawing.Point(110, 134);
-            this.statsFontOutlineSizeUpDown.Maximum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.statsFontOutlineSizeUpDown.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.statsFontOutlineSizeUpDown.Name = "statsFontOutlineSizeUpDown";
-            this.statsFontOutlineSizeUpDown.Size = new System.Drawing.Size(49, 23);
-            this.statsFontOutlineSizeUpDown.TabIndex = 28;
-            this.statsFontOutlineSizeUpDown.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // statsFontOutlineCheckbox
-            // 
-            this.statsFontOutlineCheckbox.AutoSize = true;
-            this.statsFontOutlineCheckbox.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.statsFontOutlineCheckbox.Location = new System.Drawing.Point(9, 109);
-            this.statsFontOutlineCheckbox.Name = "statsFontOutlineCheckbox";
-            this.statsFontOutlineCheckbox.Size = new System.Drawing.Size(61, 17);
-            this.statsFontOutlineCheckbox.TabIndex = 27;
-            this.statsFontOutlineCheckbox.Text = "Outline";
-            this.statsFontOutlineCheckbox.UseVisualStyleBackColor = true;
-            // 
-            // statsFontOutlineColorPickerButton
-            // 
-            this.statsFontOutlineColorPickerButton.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.statsFontOutlineColorPickerButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.statsFontOutlineColorPickerButton.Location = new System.Drawing.Point(110, 106);
-            this.statsFontOutlineColorPickerButton.Name = "statsFontOutlineColorPickerButton";
-            this.statsFontOutlineColorPickerButton.Size = new System.Drawing.Size(49, 23);
-            this.statsFontOutlineColorPickerButton.TabIndex = 26;
-            this.statsFontOutlineColorPickerButton.Text = "Set";
-            this.statsFontOutlineColorPickerButton.UseVisualStyleBackColor = true;
-            // 
-            // statsFontOutlineColorDisplayBox
-            // 
-            this.statsFontOutlineColorDisplayBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.statsFontOutlineColorDisplayBox.Location = new System.Drawing.Point(84, 106);
-            this.statsFontOutlineColorDisplayBox.Name = "statsFontOutlineColorDisplayBox";
-            this.statsFontOutlineColorDisplayBox.Size = new System.Drawing.Size(22, 22);
-            this.statsFontOutlineColorDisplayBox.TabIndex = 25;
-            this.statsFontOutlineColorDisplayBox.TabStop = false;
-            // 
-            // statsFontColorPickerButton
-            // 
-            this.statsFontColorPickerButton.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.statsFontColorPickerButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.statsFontColorPickerButton.Location = new System.Drawing.Point(110, 83);
-            this.statsFontColorPickerButton.Name = "statsFontColorPickerButton";
-            this.statsFontColorPickerButton.Size = new System.Drawing.Size(49, 23);
-            this.statsFontColorPickerButton.TabIndex = 22;
-            this.statsFontColorPickerButton.Text = "Set";
-            this.statsFontColorPickerButton.UseVisualStyleBackColor = true;
-            // 
-            // statsFontColorDisplayBox
-            // 
-            this.statsFontColorDisplayBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.statsFontColorDisplayBox.Location = new System.Drawing.Point(84, 83);
-            this.statsFontColorDisplayBox.Name = "statsFontColorDisplayBox";
-            this.statsFontColorDisplayBox.Size = new System.Drawing.Size(22, 22);
-            this.statsFontColorDisplayBox.TabIndex = 21;
-            this.statsFontColorDisplayBox.TabStop = false;
-            // 
-            // statsFontColorLabel
-            // 
-            this.statsFontColorLabel.AutoSize = true;
-            this.statsFontColorLabel.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.statsFontColorLabel.Location = new System.Drawing.Point(6, 84);
-            this.statsFontColorLabel.Name = "statsFontColorLabel";
-            this.statsFontColorLabel.Size = new System.Drawing.Size(64, 15);
-            this.statsFontColorLabel.TabIndex = 20;
-            this.statsFontColorLabel.Text = "Font Color";
-            // 
             // autoLaunchStatsWindowCheckbox
             // 
             this.autoLaunchStatsWindowCheckbox.AutoSize = true;
-            this.autoLaunchStatsWindowCheckbox.Font = new System.Drawing.Font("Calibri", 6F);
+            this.autoLaunchStatsWindowCheckbox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.autoLaunchStatsWindowCheckbox.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.autoLaunchStatsWindowCheckbox.Location = new System.Drawing.Point(9, 28);
+            this.autoLaunchStatsWindowCheckbox.Location = new System.Drawing.Point(5, 95);
             this.autoLaunchStatsWindowCheckbox.Name = "autoLaunchStatsWindowCheckbox";
-            this.autoLaunchStatsWindowCheckbox.Size = new System.Drawing.Size(64, 14);
+            this.autoLaunchStatsWindowCheckbox.Size = new System.Drawing.Size(54, 18);
             this.autoLaunchStatsWindowCheckbox.TabIndex = 10022;
-            this.autoLaunchStatsWindowCheckbox.Text = "Auto-Launch";
+            this.autoLaunchStatsWindowCheckbox.Text = "Auto";
             this.autoLaunchStatsWindowCheckbox.UseVisualStyleBackColor = true;
-            this.autoLaunchStatsWindowCheckbox.CheckedChanged += new System.EventHandler(this.AutoLaunchStatsWindowCheckbox_CheckedChanged);
             // 
-            // showStatsWindowButton
+            // customizeStatsButton
             // 
-            this.showStatsWindowButton.Font = new System.Drawing.Font("Calibri", 7.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.showStatsWindowButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.showStatsWindowButton.Location = new System.Drawing.Point(75, 24);
-            this.showStatsWindowButton.Name = "showStatsWindowButton";
-            this.showStatsWindowButton.Size = new System.Drawing.Size(48, 20);
-            this.showStatsWindowButton.TabIndex = 10021;
-            this.showStatsWindowButton.Text = "Show";
-            this.showStatsWindowButton.UseVisualStyleBackColor = true;
-            this.showStatsWindowButton.Click += new System.EventHandler(this.ShowStatsWindowButton_Click);
+            this.customizeStatsButton.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customizeStatsButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.customizeStatsButton.Location = new System.Drawing.Point(4, 57);
+            this.customizeStatsButton.Name = "customizeStatsButton";
+            this.customizeStatsButton.Size = new System.Drawing.Size(61, 28);
+            this.customizeStatsButton.TabIndex = 10024;
+            this.customizeStatsButton.Text = "Custom";
+            this.customizeStatsButton.UseVisualStyleBackColor = true;
             // 
-            // supportButton
+            // openStatsWindowButton
             // 
-            this.supportButton.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.supportButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.supportButton.Location = new System.Drawing.Point(180, 19);
-            this.supportButton.Name = "supportButton";
-            this.supportButton.Size = new System.Drawing.Size(55, 20);
-            this.supportButton.TabIndex = 10007;
-            this.supportButton.Text = "Donate";
-            this.supportButton.UseVisualStyleBackColor = true;
-            this.supportButton.Click += new System.EventHandler(this.SupportButton_Click);
+            this.openStatsWindowButton.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.openStatsWindowButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.openStatsWindowButton.Location = new System.Drawing.Point(5, 23);
+            this.openStatsWindowButton.Name = "openStatsWindowButton";
+            this.openStatsWindowButton.Size = new System.Drawing.Size(61, 28);
+            this.openStatsWindowButton.TabIndex = 10021;
+            this.openStatsWindowButton.Text = "Open";
+            this.openStatsWindowButton.UseVisualStyleBackColor = true;
             // 
             // focusGroupBox
             // 
-            this.focusGroupBox.Controls.Add(this.focusFontGroupBox);
-            this.focusGroupBox.Controls.Add(this.lockedAchievementsGroupBox);
+            this.focusGroupBox.Controls.Add(this.focusAchievementDescriptionLabel);
+            this.focusGroupBox.Controls.Add(this.setFocusButton);
+            this.focusGroupBox.Controls.Add(this.label33);
+            this.focusGroupBox.Controls.Add(this.focusAchievementButtonRight);
+            this.focusGroupBox.Controls.Add(this.hideFocusButton);
+            this.focusGroupBox.Controls.Add(this.customizeFocusButton);
+            this.focusGroupBox.Controls.Add(this.focusAchievementButtonLeft);
             this.focusGroupBox.Controls.Add(this.autoLaunchFocusWindowCheckBox);
+            this.focusGroupBox.Controls.Add(this.focusAchievementPictureBox);
             this.focusGroupBox.Controls.Add(this.showFocusWindowButton);
-            this.focusGroupBox.Font = new System.Drawing.Font("Calibri", 13.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.focusGroupBox.Controls.Add(this.focusAchievementTitleLabel);
+            this.focusGroupBox.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.focusGroupBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.focusGroupBox.Location = new System.Drawing.Point(445, 12);
+            this.focusGroupBox.Location = new System.Drawing.Point(294, 138);
             this.focusGroupBox.Name = "focusGroupBox";
-            this.focusGroupBox.Size = new System.Drawing.Size(451, 214);
+            this.focusGroupBox.Size = new System.Drawing.Size(291, 172);
             this.focusGroupBox.TabIndex = 10001;
             this.focusGroupBox.TabStop = false;
             this.focusGroupBox.Text = "Focus";
             // 
-            // focusFontGroupBox
+            // focusAchievementDescriptionLabel
             // 
-            this.focusFontGroupBox.Controls.Add(this.focusFontComboBox);
-            this.focusFontGroupBox.Controls.Add(this.focusBackgroundColorPickerButton);
-            this.focusFontGroupBox.Controls.Add(this.focusBackgroundColorDisplayBox);
-            this.focusFontGroupBox.Controls.Add(this.label26);
-            this.focusFontGroupBox.Controls.Add(this.focusFontOutlineSizeUpDown);
-            this.focusFontGroupBox.Controls.Add(this.focusFontOutlineCheckbox);
-            this.focusFontGroupBox.Controls.Add(this.focusFontOutlineColorPickerButton);
-            this.focusFontGroupBox.Controls.Add(this.focusFontOutlineColorDisplayBox);
-            this.focusFontGroupBox.Controls.Add(this.focusFontColorPickerButton);
-            this.focusFontGroupBox.Controls.Add(this.focusFontColorDisplayBox);
-            this.focusFontGroupBox.Controls.Add(this.label30);
-            this.focusFontGroupBox.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.focusFontGroupBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.focusFontGroupBox.Location = new System.Drawing.Point(6, 44);
-            this.focusFontGroupBox.Name = "focusFontGroupBox";
-            this.focusFontGroupBox.Size = new System.Drawing.Size(164, 163);
-            this.focusFontGroupBox.TabIndex = 10021;
-            this.focusFontGroupBox.TabStop = false;
-            this.focusFontGroupBox.Text = "Font";
+            this.focusAchievementDescriptionLabel.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.focusAchievementDescriptionLabel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.focusAchievementDescriptionLabel.Location = new System.Drawing.Point(71, 79);
+            this.focusAchievementDescriptionLabel.Name = "focusAchievementDescriptionLabel";
+            this.focusAchievementDescriptionLabel.Size = new System.Drawing.Size(214, 62);
+            this.focusAchievementDescriptionLabel.TabIndex = 5;
+            this.focusAchievementDescriptionLabel.Text = "Defeat 1 of every enemy on The Island Closest to Hell in 1 session without magic " +
+    "junctioned, leveling up or lowering the enemy\'";
             // 
-            // focusBackgroundColorPickerButton
+            // setFocusButton
             // 
-            this.focusBackgroundColorPickerButton.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.focusBackgroundColorPickerButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.focusBackgroundColorPickerButton.Location = new System.Drawing.Point(110, 59);
-            this.focusBackgroundColorPickerButton.Name = "focusBackgroundColorPickerButton";
-            this.focusBackgroundColorPickerButton.Size = new System.Drawing.Size(49, 23);
-            this.focusBackgroundColorPickerButton.TabIndex = 37;
-            this.focusBackgroundColorPickerButton.Text = "Set";
-            this.focusBackgroundColorPickerButton.UseVisualStyleBackColor = true;
-            // 
-            // focusBackgroundColorDisplayBox
-            // 
-            this.focusBackgroundColorDisplayBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.focusBackgroundColorDisplayBox.Location = new System.Drawing.Point(84, 59);
-            this.focusBackgroundColorDisplayBox.Name = "focusBackgroundColorDisplayBox";
-            this.focusBackgroundColorDisplayBox.Size = new System.Drawing.Size(22, 22);
-            this.focusBackgroundColorDisplayBox.TabIndex = 36;
-            this.focusBackgroundColorDisplayBox.TabStop = false;
-            // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label26.Location = new System.Drawing.Point(6, 58);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(72, 15);
-            this.label26.TabIndex = 35;
-            this.label26.Text = "Background";
-            // 
-            // focusFontOutlineSizeUpDown
-            // 
-            this.focusFontOutlineSizeUpDown.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.focusFontOutlineSizeUpDown.Location = new System.Drawing.Point(110, 134);
-            this.focusFontOutlineSizeUpDown.Maximum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.focusFontOutlineSizeUpDown.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.focusFontOutlineSizeUpDown.Name = "focusFontOutlineSizeUpDown";
-            this.focusFontOutlineSizeUpDown.Size = new System.Drawing.Size(49, 23);
-            this.focusFontOutlineSizeUpDown.TabIndex = 28;
-            this.focusFontOutlineSizeUpDown.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // focusFontOutlineCheckbox
-            // 
-            this.focusFontOutlineCheckbox.AutoSize = true;
-            this.focusFontOutlineCheckbox.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.focusFontOutlineCheckbox.Location = new System.Drawing.Point(9, 106);
-            this.focusFontOutlineCheckbox.Name = "focusFontOutlineCheckbox";
-            this.focusFontOutlineCheckbox.Size = new System.Drawing.Size(61, 17);
-            this.focusFontOutlineCheckbox.TabIndex = 27;
-            this.focusFontOutlineCheckbox.Text = "Outline";
-            this.focusFontOutlineCheckbox.UseVisualStyleBackColor = true;
-            // 
-            // focusFontOutlineColorPickerButton
-            // 
-            this.focusFontOutlineColorPickerButton.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.focusFontOutlineColorPickerButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.focusFontOutlineColorPickerButton.Location = new System.Drawing.Point(110, 107);
-            this.focusFontOutlineColorPickerButton.Name = "focusFontOutlineColorPickerButton";
-            this.focusFontOutlineColorPickerButton.Size = new System.Drawing.Size(49, 23);
-            this.focusFontOutlineColorPickerButton.TabIndex = 26;
-            this.focusFontOutlineColorPickerButton.Text = "Set";
-            this.focusFontOutlineColorPickerButton.UseVisualStyleBackColor = true;
-            // 
-            // focusFontOutlineColorDisplayBox
-            // 
-            this.focusFontOutlineColorDisplayBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.focusFontOutlineColorDisplayBox.Location = new System.Drawing.Point(84, 108);
-            this.focusFontOutlineColorDisplayBox.Name = "focusFontOutlineColorDisplayBox";
-            this.focusFontOutlineColorDisplayBox.Size = new System.Drawing.Size(22, 22);
-            this.focusFontOutlineColorDisplayBox.TabIndex = 25;
-            this.focusFontOutlineColorDisplayBox.TabStop = false;
-            // 
-            // focusFontColorPickerButton
-            // 
-            this.focusFontColorPickerButton.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.focusFontColorPickerButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.focusFontColorPickerButton.Location = new System.Drawing.Point(110, 84);
-            this.focusFontColorPickerButton.Name = "focusFontColorPickerButton";
-            this.focusFontColorPickerButton.Size = new System.Drawing.Size(49, 23);
-            this.focusFontColorPickerButton.TabIndex = 22;
-            this.focusFontColorPickerButton.Text = "Set";
-            this.focusFontColorPickerButton.UseVisualStyleBackColor = true;
-            // 
-            // focusFontColorDisplayBox
-            // 
-            this.focusFontColorDisplayBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.focusFontColorDisplayBox.Location = new System.Drawing.Point(84, 84);
-            this.focusFontColorDisplayBox.Name = "focusFontColorDisplayBox";
-            this.focusFontColorDisplayBox.Size = new System.Drawing.Size(22, 22);
-            this.focusFontColorDisplayBox.TabIndex = 21;
-            this.focusFontColorDisplayBox.TabStop = false;
-            // 
-            // label30
-            // 
-            this.label30.AutoSize = true;
-            this.label30.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label30.Location = new System.Drawing.Point(7, 84);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(64, 15);
-            this.label30.TabIndex = 20;
-            this.label30.Text = "Font Color";
-            // 
-            // lockedAchievementsGroupBox
-            // 
-            this.lockedAchievementsGroupBox.Controls.Add(this.label33);
-            this.lockedAchievementsGroupBox.Controls.Add(this.focusAchievementDescriptionLabel);
-            this.lockedAchievementsGroupBox.Controls.Add(this.focusAchievementPictureBox);
-            this.lockedAchievementsGroupBox.Controls.Add(this.focusAchievementButtonRight);
-            this.lockedAchievementsGroupBox.Controls.Add(this.hideFocusButton);
-            this.lockedAchievementsGroupBox.Controls.Add(this.setFocusButton);
-            this.lockedAchievementsGroupBox.Controls.Add(this.focusAchievementButtonLeft);
-            this.lockedAchievementsGroupBox.Controls.Add(this.focusAchievementTitleLabel);
-            this.lockedAchievementsGroupBox.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lockedAchievementsGroupBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.lockedAchievementsGroupBox.Location = new System.Drawing.Point(176, 44);
-            this.lockedAchievementsGroupBox.Name = "lockedAchievementsGroupBox";
-            this.lockedAchievementsGroupBox.Size = new System.Drawing.Size(266, 162);
-            this.lockedAchievementsGroupBox.TabIndex = 10002;
-            this.lockedAchievementsGroupBox.TabStop = false;
-            this.lockedAchievementsGroupBox.Text = "Locked Achievements";
+            this.setFocusButton.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.setFocusButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.setFocusButton.Location = new System.Drawing.Point(71, 144);
+            this.setFocusButton.Name = "setFocusButton";
+            this.setFocusButton.Size = new System.Drawing.Size(46, 22);
+            this.setFocusButton.TabIndex = 10001;
+            this.setFocusButton.Text = "Set";
+            this.setFocusButton.UseVisualStyleBackColor = true;
             // 
             // label33
             // 
             this.label33.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label33.Location = new System.Drawing.Point(4, 95);
+            this.label33.Location = new System.Drawing.Point(4, 69);
             this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(325, 2);
+            this.label33.Size = new System.Drawing.Size(282, 2);
             this.label33.TabIndex = 10002;
-            // 
-            // focusAchievementDescriptionLabel
-            // 
-            this.focusAchievementDescriptionLabel.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.focusAchievementDescriptionLabel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.focusAchievementDescriptionLabel.Location = new System.Drawing.Point(5, 99);
-            this.focusAchievementDescriptionLabel.Name = "focusAchievementDescriptionLabel";
-            this.focusAchievementDescriptionLabel.Size = new System.Drawing.Size(261, 60);
-            this.focusAchievementDescriptionLabel.TabIndex = 5;
-            // 
-            // focusAchievementPictureBox
-            // 
-            this.focusAchievementPictureBox.Location = new System.Drawing.Point(4, 32);
-            this.focusAchievementPictureBox.Name = "focusAchievementPictureBox";
-            this.focusAchievementPictureBox.Size = new System.Drawing.Size(60, 60);
-            this.focusAchievementPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.focusAchievementPictureBox.TabIndex = 21;
-            this.focusAchievementPictureBox.TabStop = false;
             // 
             // focusAchievementButtonRight
             // 
-            this.focusAchievementButtonRight.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.focusAchievementButtonRight.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.focusAchievementButtonRight.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.focusAchievementButtonRight.Location = new System.Drawing.Point(222, 73);
+            this.focusAchievementButtonRight.Location = new System.Drawing.Point(244, 144);
             this.focusAchievementButtonRight.Name = "focusAchievementButtonRight";
-            this.focusAchievementButtonRight.Size = new System.Drawing.Size(38, 20);
+            this.focusAchievementButtonRight.Size = new System.Drawing.Size(42, 22);
             this.focusAchievementButtonRight.TabIndex = 10;
             this.focusAchievementButtonRight.Text = ">";
             this.focusAchievementButtonRight.UseVisualStyleBackColor = true;
             // 
             // hideFocusButton
             // 
-            this.hideFocusButton.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hideFocusButton.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hideFocusButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.hideFocusButton.Location = new System.Drawing.Point(222, 29);
+            this.hideFocusButton.Location = new System.Drawing.Point(123, 144);
             this.hideFocusButton.Name = "hideFocusButton";
-            this.hideFocusButton.Size = new System.Drawing.Size(38, 20);
+            this.hideFocusButton.Size = new System.Drawing.Size(46, 22);
             this.hideFocusButton.TabIndex = 10001;
             this.hideFocusButton.Text = "Hide";
             this.hideFocusButton.UseVisualStyleBackColor = true;
             // 
-            // setFocusButton
+            // customizeFocusButton
             // 
-            this.setFocusButton.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.setFocusButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.setFocusButton.Location = new System.Drawing.Point(184, 29);
-            this.setFocusButton.Name = "setFocusButton";
-            this.setFocusButton.Size = new System.Drawing.Size(38, 20);
-            this.setFocusButton.TabIndex = 10001;
-            this.setFocusButton.Text = "Set";
-            this.setFocusButton.UseVisualStyleBackColor = true;
+            this.customizeFocusButton.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customizeFocusButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.customizeFocusButton.Location = new System.Drawing.Point(6, 113);
+            this.customizeFocusButton.Name = "customizeFocusButton";
+            this.customizeFocusButton.Size = new System.Drawing.Size(62, 28);
+            this.customizeFocusButton.TabIndex = 10025;
+            this.customizeFocusButton.Text = "Custom";
+            this.customizeFocusButton.UseVisualStyleBackColor = true;
             // 
             // focusAchievementButtonLeft
             // 
-            this.focusAchievementButtonLeft.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.focusAchievementButtonLeft.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.focusAchievementButtonLeft.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.focusAchievementButtonLeft.Location = new System.Drawing.Point(184, 73);
+            this.focusAchievementButtonLeft.Location = new System.Drawing.Point(196, 144);
             this.focusAchievementButtonLeft.Name = "focusAchievementButtonLeft";
-            this.focusAchievementButtonLeft.Size = new System.Drawing.Size(38, 20);
+            this.focusAchievementButtonLeft.Size = new System.Drawing.Size(42, 22);
             this.focusAchievementButtonLeft.TabIndex = 9;
             this.focusAchievementButtonLeft.Text = "<";
             this.focusAchievementButtonLeft.UseVisualStyleBackColor = true;
             // 
-            // focusAchievementTitleLabel
-            // 
-            this.focusAchievementTitleLabel.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.focusAchievementTitleLabel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.focusAchievementTitleLabel.Location = new System.Drawing.Point(70, 32);
-            this.focusAchievementTitleLabel.Name = "focusAchievementTitleLabel";
-            this.focusAchievementTitleLabel.Size = new System.Drawing.Size(108, 60);
-            this.focusAchievementTitleLabel.TabIndex = 6;
-            // 
             // autoLaunchFocusWindowCheckBox
             // 
             this.autoLaunchFocusWindowCheckBox.AutoSize = true;
-            this.autoLaunchFocusWindowCheckBox.Font = new System.Drawing.Font("Calibri", 6F);
+            this.autoLaunchFocusWindowCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.autoLaunchFocusWindowCheckBox.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.autoLaunchFocusWindowCheckBox.Location = new System.Drawing.Point(12, 29);
+            this.autoLaunchFocusWindowCheckBox.Location = new System.Drawing.Point(10, 151);
             this.autoLaunchFocusWindowCheckBox.Name = "autoLaunchFocusWindowCheckBox";
-            this.autoLaunchFocusWindowCheckBox.Size = new System.Drawing.Size(64, 14);
+            this.autoLaunchFocusWindowCheckBox.Size = new System.Drawing.Size(54, 18);
             this.autoLaunchFocusWindowCheckBox.TabIndex = 10020;
-            this.autoLaunchFocusWindowCheckBox.Text = "Auto-Launch";
+            this.autoLaunchFocusWindowCheckBox.Text = "Auto";
             this.autoLaunchFocusWindowCheckBox.UseVisualStyleBackColor = true;
-            this.autoLaunchFocusWindowCheckBox.CheckedChanged += new System.EventHandler(this.AutoLaunchFocusWindowCheckBox_CheckedChanged);
+            // 
+            // focusAchievementPictureBox
+            // 
+            this.focusAchievementPictureBox.Location = new System.Drawing.Point(7, 11);
+            this.focusAchievementPictureBox.Name = "focusAchievementPictureBox";
+            this.focusAchievementPictureBox.Size = new System.Drawing.Size(55, 55);
+            this.focusAchievementPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.focusAchievementPictureBox.TabIndex = 21;
+            this.focusAchievementPictureBox.TabStop = false;
             // 
             // showFocusWindowButton
             // 
-            this.showFocusWindowButton.Font = new System.Drawing.Font("Calibri", 7.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.showFocusWindowButton.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.showFocusWindowButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.showFocusWindowButton.Location = new System.Drawing.Point(82, 24);
+            this.showFocusWindowButton.Location = new System.Drawing.Point(6, 79);
             this.showFocusWindowButton.Name = "showFocusWindowButton";
-            this.showFocusWindowButton.Size = new System.Drawing.Size(48, 20);
+            this.showFocusWindowButton.Size = new System.Drawing.Size(62, 28);
             this.showFocusWindowButton.TabIndex = 10014;
-            this.showFocusWindowButton.Text = "Show";
+            this.showFocusWindowButton.Text = "Open";
             this.showFocusWindowButton.UseVisualStyleBackColor = true;
-            this.showFocusWindowButton.Click += new System.EventHandler(this.ShowFocusLayoutWindowButton_Click);
+            // 
+            // focusAchievementTitleLabel
+            // 
+            this.focusAchievementTitleLabel.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.focusAchievementTitleLabel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.focusAchievementTitleLabel.Location = new System.Drawing.Point(68, 11);
+            this.focusAchievementTitleLabel.Name = "focusAchievementTitleLabel";
+            this.focusAchievementTitleLabel.Size = new System.Drawing.Size(218, 55);
+            this.focusAchievementTitleLabel.TabIndex = 6;
+            this.focusAchievementTitleLabel.Text = "Phantasy Explorer X (Laconian Shield Cave)";
             // 
             // notificationsGroupBox
             // 
-            this.notificationsGroupBox.Controls.Add(this.groupBox4);
+            this.notificationsGroupBox.Controls.Add(this.customizeAlertsButton);
             this.notificationsGroupBox.Controls.Add(this.autoLaunchNotificationsWindowCheckbox);
-            this.notificationsGroupBox.Controls.Add(this.showNotificationsWindowButton);
-            this.notificationsGroupBox.Controls.Add(this.groupBox3);
-            this.notificationsGroupBox.Controls.Add(this.groupBox2);
-            this.notificationsGroupBox.Font = new System.Drawing.Font("Calibri", 13.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.notificationsGroupBox.Controls.Add(this.openAlertsWindowButton);
+            this.notificationsGroupBox.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.notificationsGroupBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.notificationsGroupBox.Location = new System.Drawing.Point(260, 227);
+            this.notificationsGroupBox.Location = new System.Drawing.Point(4, 194);
             this.notificationsGroupBox.Name = "notificationsGroupBox";
-            this.notificationsGroupBox.Size = new System.Drawing.Size(636, 207);
+            this.notificationsGroupBox.Size = new System.Drawing.Size(72, 116);
             this.notificationsGroupBox.TabIndex = 10006;
             this.notificationsGroupBox.TabStop = false;
-            this.notificationsGroupBox.Text = "Notifications";
+            this.notificationsGroupBox.Text = "Alerts";
             // 
-            // groupBox4
+            // customizeAlertsButton
             // 
-            this.groupBox4.Controls.Add(this.inMasteryNumericUpDown);
-            this.groupBox4.Controls.Add(this.inLabel2);
-            this.groupBox4.Controls.Add(this.outMasteryNumericUpDown);
-            this.groupBox4.Controls.Add(this.selectCustomMasteryNotificationButton);
-            this.groupBox4.Controls.Add(this.outLabel2);
-            this.groupBox4.Controls.Add(this.scaleLabel2);
-            this.groupBox4.Controls.Add(this.scaleMasteryNumericUpDown);
-            this.groupBox4.Controls.Add(this.yPositionLabel2);
-            this.groupBox4.Controls.Add(this.xPositionLabel2);
-            this.groupBox4.Controls.Add(this.masteryEditOultineCheckbox);
-            this.groupBox4.Controls.Add(this.customMasteryYNumericUpDown);
-            this.groupBox4.Controls.Add(this.customMasteryXNumericUpDown);
-            this.groupBox4.Controls.Add(this.useCustomMasteryCheckbox);
-            this.groupBox4.Controls.Add(this.showGameMasteryButton);
-            this.groupBox4.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox4.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.groupBox4.Location = new System.Drawing.Point(402, 45);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(225, 157);
-            this.groupBox4.TabIndex = 27;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Mastery";
-            // 
-            // inMasteryNumericUpDown
-            // 
-            this.inMasteryNumericUpDown.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.inMasteryNumericUpDown.Location = new System.Drawing.Point(151, 83);
-            this.inMasteryNumericUpDown.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.inMasteryNumericUpDown.Minimum = new decimal(new int[] {
-            300,
-            0,
-            0,
-            0});
-            this.inMasteryNumericUpDown.Name = "inMasteryNumericUpDown";
-            this.inMasteryNumericUpDown.Size = new System.Drawing.Size(59, 21);
-            this.inMasteryNumericUpDown.TabIndex = 26;
-            this.inMasteryNumericUpDown.Value = new decimal(new int[] {
-            300,
-            0,
-            0,
-            0});
-            // 
-            // inLabel2
-            // 
-            this.inLabel2.AutoSize = true;
-            this.inLabel2.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.inLabel2.Location = new System.Drawing.Point(99, 89);
-            this.inLabel2.Name = "inLabel2";
-            this.inLabel2.Size = new System.Drawing.Size(38, 13);
-            this.inLabel2.TabIndex = 25;
-            this.inLabel2.Text = "In (ms)";
-            // 
-            // outMasteryNumericUpDown
-            // 
-            this.outMasteryNumericUpDown.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.outMasteryNumericUpDown.Location = new System.Drawing.Point(151, 106);
-            this.outMasteryNumericUpDown.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.outMasteryNumericUpDown.Minimum = new decimal(new int[] {
-            300,
-            0,
-            0,
-            0});
-            this.outMasteryNumericUpDown.Name = "outMasteryNumericUpDown";
-            this.outMasteryNumericUpDown.Size = new System.Drawing.Size(59, 21);
-            this.outMasteryNumericUpDown.TabIndex = 24;
-            this.outMasteryNumericUpDown.Value = new decimal(new int[] {
-            300,
-            0,
-            0,
-            0});
-            // 
-            // selectCustomMasteryNotificationButton
-            // 
-            this.selectCustomMasteryNotificationButton.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.selectCustomMasteryNotificationButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.selectCustomMasteryNotificationButton.Location = new System.Drawing.Point(7, 57);
-            this.selectCustomMasteryNotificationButton.Name = "selectCustomMasteryNotificationButton";
-            this.selectCustomMasteryNotificationButton.Size = new System.Drawing.Size(48, 23);
-            this.selectCustomMasteryNotificationButton.TabIndex = 14;
-            this.selectCustomMasteryNotificationButton.Text = "Select";
-            this.selectCustomMasteryNotificationButton.UseVisualStyleBackColor = true;
-            // 
-            // outLabel2
-            // 
-            this.outLabel2.AutoSize = true;
-            this.outLabel2.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.outLabel2.Location = new System.Drawing.Point(99, 110);
-            this.outLabel2.Name = "outLabel2";
-            this.outLabel2.Size = new System.Drawing.Size(46, 13);
-            this.outLabel2.TabIndex = 23;
-            this.outLabel2.Text = "Out (ms)";
-            // 
-            // scaleLabel2
-            // 
-            this.scaleLabel2.AutoSize = true;
-            this.scaleLabel2.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.scaleLabel2.Location = new System.Drawing.Point(8, 136);
-            this.scaleLabel2.Name = "scaleLabel2";
-            this.scaleLabel2.Size = new System.Drawing.Size(32, 13);
-            this.scaleLabel2.TabIndex = 21;
-            this.scaleLabel2.Text = "Scale";
-            this.scaleLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // scaleMasteryNumericUpDown
-            // 
-            this.scaleMasteryNumericUpDown.DecimalPlaces = 2;
-            this.scaleMasteryNumericUpDown.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.scaleMasteryNumericUpDown.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
-            this.scaleMasteryNumericUpDown.Location = new System.Drawing.Point(46, 131);
-            this.scaleMasteryNumericUpDown.Maximum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.scaleMasteryNumericUpDown.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
-            this.scaleMasteryNumericUpDown.Name = "scaleMasteryNumericUpDown";
-            this.scaleMasteryNumericUpDown.Size = new System.Drawing.Size(47, 21);
-            this.scaleMasteryNumericUpDown.TabIndex = 20;
-            this.scaleMasteryNumericUpDown.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // yPositionLabel2
-            // 
-            this.yPositionLabel2.AutoSize = true;
-            this.yPositionLabel2.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.yPositionLabel2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.yPositionLabel2.Location = new System.Drawing.Point(8, 110);
-            this.yPositionLabel2.Name = "yPositionLabel2";
-            this.yPositionLabel2.Size = new System.Drawing.Size(13, 15);
-            this.yPositionLabel2.TabIndex = 19;
-            this.yPositionLabel2.Text = "Y";
-            this.yPositionLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // xPositionLabel2
-            // 
-            this.xPositionLabel2.AutoSize = true;
-            this.xPositionLabel2.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.xPositionLabel2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.xPositionLabel2.Location = new System.Drawing.Point(8, 86);
-            this.xPositionLabel2.Name = "xPositionLabel2";
-            this.xPositionLabel2.Size = new System.Drawing.Size(14, 15);
-            this.xPositionLabel2.TabIndex = 18;
-            this.xPositionLabel2.Text = "X";
-            // 
-            // masteryEditOultineCheckbox
-            // 
-            this.masteryEditOultineCheckbox.AutoSize = true;
-            this.masteryEditOultineCheckbox.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.masteryEditOultineCheckbox.Location = new System.Drawing.Point(63, 63);
-            this.masteryEditOultineCheckbox.Name = "masteryEditOultineCheckbox";
-            this.masteryEditOultineCheckbox.Size = new System.Drawing.Size(44, 17);
-            this.masteryEditOultineCheckbox.TabIndex = 17;
-            this.masteryEditOultineCheckbox.Text = "Edit";
-            this.masteryEditOultineCheckbox.UseVisualStyleBackColor = true;
-            // 
-            // customMasteryYNumericUpDown
-            // 
-            this.customMasteryYNumericUpDown.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.customMasteryYNumericUpDown.Location = new System.Drawing.Point(23, 106);
-            this.customMasteryYNumericUpDown.Maximum = new decimal(new int[] {
-            2000,
-            0,
-            0,
-            0});
-            this.customMasteryYNumericUpDown.Minimum = new decimal(new int[] {
-            2000,
-            0,
-            0,
-            -2147483648});
-            this.customMasteryYNumericUpDown.Name = "customMasteryYNumericUpDown";
-            this.customMasteryYNumericUpDown.Size = new System.Drawing.Size(70, 21);
-            this.customMasteryYNumericUpDown.TabIndex = 16;
-            // 
-            // customMasteryXNumericUpDown
-            // 
-            this.customMasteryXNumericUpDown.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.customMasteryXNumericUpDown.Location = new System.Drawing.Point(23, 83);
-            this.customMasteryXNumericUpDown.Maximum = new decimal(new int[] {
-            2000,
-            0,
-            0,
-            0});
-            this.customMasteryXNumericUpDown.Minimum = new decimal(new int[] {
-            2000,
-            0,
-            0,
-            -2147483648});
-            this.customMasteryXNumericUpDown.Name = "customMasteryXNumericUpDown";
-            this.customMasteryXNumericUpDown.Size = new System.Drawing.Size(70, 21);
-            this.customMasteryXNumericUpDown.TabIndex = 15;
-            // 
-            // useCustomMasteryCheckbox
-            // 
-            this.useCustomMasteryCheckbox.AutoSize = true;
-            this.useCustomMasteryCheckbox.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.useCustomMasteryCheckbox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.useCustomMasteryCheckbox.Location = new System.Drawing.Point(63, 36);
-            this.useCustomMasteryCheckbox.Name = "useCustomMasteryCheckbox";
-            this.useCustomMasteryCheckbox.Size = new System.Drawing.Size(87, 17);
-            this.useCustomMasteryCheckbox.TabIndex = 13;
-            this.useCustomMasteryCheckbox.Text = "Custom Alert";
-            this.useCustomMasteryCheckbox.UseVisualStyleBackColor = true;
-            // 
-            // showGameMasteryButton
-            // 
-            this.showGameMasteryButton.BackColor = System.Drawing.SystemColors.Control;
-            this.showGameMasteryButton.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.showGameMasteryButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.showGameMasteryButton.Location = new System.Drawing.Point(6, 30);
-            this.showGameMasteryButton.Name = "showGameMasteryButton";
-            this.showGameMasteryButton.Size = new System.Drawing.Size(49, 23);
-            this.showGameMasteryButton.TabIndex = 2;
-            this.showGameMasteryButton.Text = "Show";
-            this.showGameMasteryButton.UseVisualStyleBackColor = false;
+            this.customizeAlertsButton.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customizeAlertsButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.customizeAlertsButton.Location = new System.Drawing.Point(6, 57);
+            this.customizeAlertsButton.Name = "customizeAlertsButton";
+            this.customizeAlertsButton.Size = new System.Drawing.Size(61, 28);
+            this.customizeAlertsButton.TabIndex = 10025;
+            this.customizeAlertsButton.Text = "Custom";
+            this.customizeAlertsButton.UseVisualStyleBackColor = true;
             // 
             // autoLaunchNotificationsWindowCheckbox
             // 
             this.autoLaunchNotificationsWindowCheckbox.AutoSize = true;
-            this.autoLaunchNotificationsWindowCheckbox.Font = new System.Drawing.Font("Calibri", 6F);
+            this.autoLaunchNotificationsWindowCheckbox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.autoLaunchNotificationsWindowCheckbox.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.autoLaunchNotificationsWindowCheckbox.Location = new System.Drawing.Point(9, 30);
+            this.autoLaunchNotificationsWindowCheckbox.Location = new System.Drawing.Point(6, 95);
             this.autoLaunchNotificationsWindowCheckbox.Name = "autoLaunchNotificationsWindowCheckbox";
-            this.autoLaunchNotificationsWindowCheckbox.Size = new System.Drawing.Size(64, 14);
+            this.autoLaunchNotificationsWindowCheckbox.Size = new System.Drawing.Size(54, 18);
             this.autoLaunchNotificationsWindowCheckbox.TabIndex = 10022;
-            this.autoLaunchNotificationsWindowCheckbox.Text = "Auto-Launch";
+            this.autoLaunchNotificationsWindowCheckbox.Text = "Auto";
             this.autoLaunchNotificationsWindowCheckbox.UseVisualStyleBackColor = true;
-            this.autoLaunchNotificationsWindowCheckbox.CheckedChanged += new System.EventHandler(this.AutoLaunchNotificationsWindow_CheckedChanged);
             // 
-            // showNotificationsWindowButton
+            // openAlertsWindowButton
             // 
-            this.showNotificationsWindowButton.Font = new System.Drawing.Font("Calibri", 7.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.showNotificationsWindowButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.showNotificationsWindowButton.Location = new System.Drawing.Point(82, 25);
-            this.showNotificationsWindowButton.Name = "showNotificationsWindowButton";
-            this.showNotificationsWindowButton.Size = new System.Drawing.Size(48, 20);
-            this.showNotificationsWindowButton.TabIndex = 10021;
-            this.showNotificationsWindowButton.Text = "Show";
-            this.showNotificationsWindowButton.UseVisualStyleBackColor = true;
-            this.showNotificationsWindowButton.Click += new System.EventHandler(this.ShowNotificationsWindowButton_Click);
+            this.openAlertsWindowButton.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.openAlertsWindowButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.openAlertsWindowButton.Location = new System.Drawing.Point(5, 23);
+            this.openAlertsWindowButton.Name = "openAlertsWindowButton";
+            this.openAlertsWindowButton.Size = new System.Drawing.Size(61, 28);
+            this.openAlertsWindowButton.TabIndex = 10021;
+            this.openAlertsWindowButton.Text = "Open";
+            this.openAlertsWindowButton.UseVisualStyleBackColor = true;
+            // 
+            // userInfoGroupBox
+            // 
+            this.userInfoGroupBox.Controls.Add(this.truePointsLabel);
+            this.userInfoGroupBox.Controls.Add(this.ratioLabel);
+            this.userInfoGroupBox.Controls.Add(this.hideButton);
+            this.userInfoGroupBox.Controls.Add(this.userProfilePictureBox);
+            this.userInfoGroupBox.Controls.Add(this.apiKeyLabel);
+            this.userInfoGroupBox.Controls.Add(this.apiKeyTextBox);
+            this.userInfoGroupBox.Controls.Add(this.usernameLabel);
+            this.userInfoGroupBox.Controls.Add(this.usernameTextBox);
+            this.userInfoGroupBox.Controls.Add(this.startButton);
+            this.userInfoGroupBox.Controls.Add(this.pointsLabel);
+            this.userInfoGroupBox.Controls.Add(this.autoStartCheckbox);
+            this.userInfoGroupBox.Controls.Add(this.siteRankLabel);
+            this.userInfoGroupBox.Controls.Add(this.stopButton);
+            this.userInfoGroupBox.Controls.Add(this.awardsLabel);
+            this.userInfoGroupBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.userInfoGroupBox.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userInfoGroupBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.userInfoGroupBox.Location = new System.Drawing.Point(4, 1);
+            this.userInfoGroupBox.Name = "userInfoGroupBox";
+            this.userInfoGroupBox.Size = new System.Drawing.Size(287, 187);
+            this.userInfoGroupBox.TabIndex = 10008;
+            this.userInfoGroupBox.TabStop = false;
+            this.userInfoGroupBox.Text = "User Info";
+            // 
+            // truePointsLabel
+            // 
+            this.truePointsLabel.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.truePointsLabel.Location = new System.Drawing.Point(86, 53);
+            this.truePointsLabel.Name = "truePointsLabel";
+            this.truePointsLabel.Size = new System.Drawing.Size(195, 11);
+            this.truePointsLabel.TabIndex = 38;
+            this.truePointsLabel.Text = "True Points: --------";
+            // 
+            // ratioLabel
+            // 
+            this.ratioLabel.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ratioLabel.Location = new System.Drawing.Point(86, 64);
+            this.ratioLabel.Name = "ratioLabel";
+            this.ratioLabel.Size = new System.Drawing.Size(195, 11);
+            this.ratioLabel.TabIndex = 36;
+            this.ratioLabel.Text = "Ratio: ---";
+            // 
+            // hideButton
+            // 
+            this.hideButton.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hideButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.hideButton.Location = new System.Drawing.Point(212, 92);
+            this.hideButton.Name = "hideButton";
+            this.hideButton.Size = new System.Drawing.Size(69, 23);
+            this.hideButton.TabIndex = 35;
+            this.hideButton.Text = "Hide";
+            this.hideButton.UseVisualStyleBackColor = true;
+            // 
+            // startButton
+            // 
+            this.startButton.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.startButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.startButton.Location = new System.Drawing.Point(212, 121);
+            this.startButton.Name = "startButton";
+            this.startButton.Size = new System.Drawing.Size(69, 23);
+            this.startButton.TabIndex = 3;
+            this.startButton.Text = "Start";
+            this.startButton.UseVisualStyleBackColor = true;
+            // 
+            // raConnectionStatusPictureBox
+            // 
+            this.raConnectionStatusPictureBox.Image = global::Retro_Achievement_Tracker.Properties.Resources.red_button;
+            this.raConnectionStatusPictureBox.Location = new System.Drawing.Point(71, 0);
+            this.raConnectionStatusPictureBox.Name = "raConnectionStatusPictureBox";
+            this.raConnectionStatusPictureBox.Size = new System.Drawing.Size(23, 23);
+            this.raConnectionStatusPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.raConnectionStatusPictureBox.TabIndex = 10025;
+            this.raConnectionStatusPictureBox.TabStop = false;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.customizeGameButton);
+            this.groupBox1.Controls.Add(this.autoLaunchGameInfoWindowCheckbox);
+            this.groupBox1.Controls.Add(this.openGameInfoWindowButton);
+            this.groupBox1.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.groupBox1.Location = new System.Drawing.Point(148, 194);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(72, 116);
+            this.groupBox1.TabIndex = 10025;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Game";
+            // 
+            // customizeGameButton
+            // 
+            this.customizeGameButton.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customizeGameButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.customizeGameButton.Location = new System.Drawing.Point(6, 57);
+            this.customizeGameButton.Name = "customizeGameButton";
+            this.customizeGameButton.Size = new System.Drawing.Size(61, 28);
+            this.customizeGameButton.TabIndex = 10024;
+            this.customizeGameButton.Text = "Custom";
+            this.customizeGameButton.UseVisualStyleBackColor = true;
+            // 
+            // autoLaunchGameInfoWindowCheckbox
+            // 
+            this.autoLaunchGameInfoWindowCheckbox.AutoSize = true;
+            this.autoLaunchGameInfoWindowCheckbox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.autoLaunchGameInfoWindowCheckbox.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.autoLaunchGameInfoWindowCheckbox.Location = new System.Drawing.Point(6, 95);
+            this.autoLaunchGameInfoWindowCheckbox.Name = "autoLaunchGameInfoWindowCheckbox";
+            this.autoLaunchGameInfoWindowCheckbox.Size = new System.Drawing.Size(54, 18);
+            this.autoLaunchGameInfoWindowCheckbox.TabIndex = 10022;
+            this.autoLaunchGameInfoWindowCheckbox.Text = "Auto";
+            this.autoLaunchGameInfoWindowCheckbox.UseVisualStyleBackColor = true;
+            // 
+            // openGameInfoWindowButton
+            // 
+            this.openGameInfoWindowButton.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.openGameInfoWindowButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.openGameInfoWindowButton.Location = new System.Drawing.Point(5, 23);
+            this.openGameInfoWindowButton.Name = "openGameInfoWindowButton";
+            this.openGameInfoWindowButton.Size = new System.Drawing.Size(60, 28);
+            this.openGameInfoWindowButton.TabIndex = 10021;
+            this.openGameInfoWindowButton.Text = "Open";
+            this.openGameInfoWindowButton.UseVisualStyleBackColor = true;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.raConnectionStatusPictureBox);
+            this.groupBox2.Controls.Add(this.timerStatusLabel);
+            this.groupBox2.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.groupBox2.Location = new System.Drawing.Point(294, 1);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(291, 70);
+            this.groupBox2.TabIndex = 10027;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Status";
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.inAchievementNumericUpDown);
-            this.groupBox3.Controls.Add(this.inLabel1);
-            this.groupBox3.Controls.Add(this.outAchievementNumericUpDown);
-            this.groupBox3.Controls.Add(this.selectCustomAchievementButton);
-            this.groupBox3.Controls.Add(this.outLabel1);
-            this.groupBox3.Controls.Add(this.scaleLabel1);
-            this.groupBox3.Controls.Add(this.scaleAchievementNumericUpDown);
-            this.groupBox3.Controls.Add(this.yPositionLabel1);
-            this.groupBox3.Controls.Add(this.xPositionLabel1);
-            this.groupBox3.Controls.Add(this.acheivementEditOutlineCheckbox);
-            this.groupBox3.Controls.Add(this.customAchievementYNumericUpDown);
-            this.groupBox3.Controls.Add(this.customAchievementXNumericUpDown);
-            this.groupBox3.Controls.Add(this.useCustomAchievementCheckbox);
-            this.groupBox3.Controls.Add(this.showAchievementButton);
-            this.groupBox3.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox3.Controls.Add(this.customizeLastFiveButton);
+            this.groupBox3.Controls.Add(this.autoLaunchLastFiveWindowCheckbox);
+            this.groupBox3.Controls.Add(this.openLastFiveWindowButton);
+            this.groupBox3.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.groupBox3.Location = new System.Drawing.Point(185, 45);
+            this.groupBox3.Location = new System.Drawing.Point(219, 194);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(209, 157);
-            this.groupBox3.TabIndex = 2;
+            this.groupBox3.Size = new System.Drawing.Size(72, 116);
+            this.groupBox3.TabIndex = 10026;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Achievement";
+            this.groupBox3.Text = "Last 5";
+            // 
+            // customizeLastFiveButton
+            // 
+            this.customizeLastFiveButton.Enabled = false;
+            this.customizeLastFiveButton.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customizeLastFiveButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.customizeLastFiveButton.Location = new System.Drawing.Point(5, 56);
+            this.customizeLastFiveButton.Name = "customizeLastFiveButton";
+            this.customizeLastFiveButton.Size = new System.Drawing.Size(61, 29);
+            this.customizeLastFiveButton.TabIndex = 10024;
+            this.customizeLastFiveButton.Text = "Custom";
+            this.customizeLastFiveButton.UseVisualStyleBackColor = true;
+            // 
+            // autoLaunchLastFiveWindowCheckbox
+            // 
+            this.autoLaunchLastFiveWindowCheckbox.AutoSize = true;
+            this.autoLaunchLastFiveWindowCheckbox.Enabled = false;
+            this.autoLaunchLastFiveWindowCheckbox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.autoLaunchLastFiveWindowCheckbox.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.autoLaunchLastFiveWindowCheckbox.Location = new System.Drawing.Point(5, 95);
+            this.autoLaunchLastFiveWindowCheckbox.Name = "autoLaunchLastFiveWindowCheckbox";
+            this.autoLaunchLastFiveWindowCheckbox.Size = new System.Drawing.Size(54, 18);
+            this.autoLaunchLastFiveWindowCheckbox.TabIndex = 10022;
+            this.autoLaunchLastFiveWindowCheckbox.Text = "Auto";
+            this.autoLaunchLastFiveWindowCheckbox.UseVisualStyleBackColor = true;
+            // 
+            // openLastFiveWindowButton
+            // 
+            this.openLastFiveWindowButton.Enabled = false;
+            this.openLastFiveWindowButton.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.openLastFiveWindowButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.openLastFiveWindowButton.Location = new System.Drawing.Point(5, 23);
+            this.openLastFiveWindowButton.Name = "openLastFiveWindowButton";
+            this.openLastFiveWindowButton.Size = new System.Drawing.Size(61, 28);
+            this.openLastFiveWindowButton.TabIndex = 10021;
+            this.openLastFiveWindowButton.Text = "Open";
+            this.openLastFiveWindowButton.UseVisualStyleBackColor = true;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.focusStreamLabelsCheckBox);
+            this.groupBox4.Controls.Add(this.alertsStreamLabelsCheckBox);
+            this.groupBox4.Controls.Add(this.lastFiveStreamLabelsCheckBox);
+            this.groupBox4.Controls.Add(this.gameInfoStreamLabelsCheckBox);
+            this.groupBox4.Controls.Add(this.statsStreamLabelsCheckBox);
+            this.groupBox4.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox4.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.groupBox4.Location = new System.Drawing.Point(294, 77);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(291, 55);
+            this.groupBox4.TabIndex = 10028;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Stream Labels";
+            // 
+            // focusStreamLabelsCheckBox
+            // 
+            this.focusStreamLabelsCheckBox.AutoSize = true;
+            this.focusStreamLabelsCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.focusStreamLabelsCheckBox.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.focusStreamLabelsCheckBox.Location = new System.Drawing.Point(203, 16);
+            this.focusStreamLabelsCheckBox.Name = "focusStreamLabelsCheckBox";
+            this.focusStreamLabelsCheckBox.Size = new System.Drawing.Size(61, 18);
+            this.focusStreamLabelsCheckBox.TabIndex = 10029;
+            this.focusStreamLabelsCheckBox.Text = "Focus";
+            this.focusStreamLabelsCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // alertsStreamLabelsCheckBox
+            // 
+            this.alertsStreamLabelsCheckBox.AutoSize = true;
+            this.alertsStreamLabelsCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.alertsStreamLabelsCheckBox.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.alertsStreamLabelsCheckBox.Location = new System.Drawing.Point(105, 16);
+            this.alertsStreamLabelsCheckBox.Name = "alertsStreamLabelsCheckBox";
+            this.alertsStreamLabelsCheckBox.Size = new System.Drawing.Size(68, 18);
+            this.alertsStreamLabelsCheckBox.TabIndex = 10028;
+            this.alertsStreamLabelsCheckBox.Text = "Alerts";
+            this.alertsStreamLabelsCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // lastFiveStreamLabelsCheckBox
+            // 
+            this.lastFiveStreamLabelsCheckBox.AutoSize = true;
+            this.lastFiveStreamLabelsCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lastFiveStreamLabelsCheckBox.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.lastFiveStreamLabelsCheckBox.Location = new System.Drawing.Point(105, 31);
+            this.lastFiveStreamLabelsCheckBox.Name = "lastFiveStreamLabelsCheckBox";
+            this.lastFiveStreamLabelsCheckBox.Size = new System.Drawing.Size(68, 18);
+            this.lastFiveStreamLabelsCheckBox.TabIndex = 10027;
+            this.lastFiveStreamLabelsCheckBox.Text = "Last 5";
+            this.lastFiveStreamLabelsCheckBox.UseVisualStyleBackColor = true;
+            this.lastFiveStreamLabelsCheckBox.CheckedChanged += new System.EventHandler(this.lastFiveStreamLabelsCheckBox_CheckedChanged);
+            // 
+            // gameInfoStreamLabelsCheckBox
+            // 
+            this.gameInfoStreamLabelsCheckBox.AutoSize = true;
+            this.gameInfoStreamLabelsCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInfoStreamLabelsCheckBox.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.gameInfoStreamLabelsCheckBox.Location = new System.Drawing.Point(10, 31);
+            this.gameInfoStreamLabelsCheckBox.Name = "gameInfoStreamLabelsCheckBox";
+            this.gameInfoStreamLabelsCheckBox.Size = new System.Drawing.Size(89, 18);
+            this.gameInfoStreamLabelsCheckBox.TabIndex = 10026;
+            this.gameInfoStreamLabelsCheckBox.Text = "Game Info";
+            this.gameInfoStreamLabelsCheckBox.UseVisualStyleBackColor = true;
+            this.gameInfoStreamLabelsCheckBox.CheckedChanged += new System.EventHandler(this.gameInfoStreamLabelsCheckBox_CheckedChanged);
+            // 
+            // statsStreamLabelsCheckBox
+            // 
+            this.statsStreamLabelsCheckBox.AutoSize = true;
+            this.statsStreamLabelsCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statsStreamLabelsCheckBox.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.statsStreamLabelsCheckBox.Location = new System.Drawing.Point(10, 16);
+            this.statsStreamLabelsCheckBox.Name = "statsStreamLabelsCheckBox";
+            this.statsStreamLabelsCheckBox.Size = new System.Drawing.Size(61, 18);
+            this.statsStreamLabelsCheckBox.TabIndex = 10025;
+            this.statsStreamLabelsCheckBox.Text = "Stats";
+            this.statsStreamLabelsCheckBox.UseVisualStyleBackColor = true;
+            this.statsStreamLabelsCheckBox.CheckedChanged += new System.EventHandler(this.statsStreamLabelsCheckBox_CheckedChanged);
+            // 
+            // statsGameRatioOverrideTextBox
+            // 
+            this.statsGameRatioOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statsGameRatioOverrideTextBox.Location = new System.Drawing.Point(145, 118);
+            this.statsGameRatioOverrideTextBox.Name = "statsGameRatioOverrideTextBox";
+            this.statsGameRatioOverrideTextBox.Size = new System.Drawing.Size(133, 20);
+            this.statsGameRatioOverrideTextBox.TabIndex = 8;
+            this.statsGameRatioOverrideTextBox.Text = "Ratio";
+            this.statsGameRatioOverrideTextBox.TextChanged += new System.EventHandler(this.statsGameRatioOverrideTextBox_TextChanged);
+            // 
+            // statsTruePointsOverrideTextBox
+            // 
+            this.statsTruePointsOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statsTruePointsOverrideTextBox.Location = new System.Drawing.Point(144, 74);
+            this.statsTruePointsOverrideTextBox.Name = "statsTruePointsOverrideTextBox";
+            this.statsTruePointsOverrideTextBox.Size = new System.Drawing.Size(133, 20);
+            this.statsTruePointsOverrideTextBox.TabIndex = 7;
+            this.statsTruePointsOverrideTextBox.Text = "T. Points";
+            this.statsTruePointsOverrideTextBox.TextChanged += new System.EventHandler(this.statsTruePointsOverrideTextBox_TextChanged);
+            // 
+            // statsPointsOverrideTextBox
+            // 
+            this.statsPointsOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statsPointsOverrideTextBox.Location = new System.Drawing.Point(144, 32);
+            this.statsPointsOverrideTextBox.Name = "statsPointsOverrideTextBox";
+            this.statsPointsOverrideTextBox.Size = new System.Drawing.Size(133, 20);
+            this.statsPointsOverrideTextBox.TabIndex = 6;
+            this.statsPointsOverrideTextBox.Text = "Points";
+            this.statsPointsOverrideTextBox.TextChanged += new System.EventHandler(this.statsPointsOverrideTextBox_TextChanged);
+            // 
+            // statsRatioOverrideTextBox
+            // 
+            this.statsRatioOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statsRatioOverrideTextBox.Location = new System.Drawing.Point(6, 118);
+            this.statsRatioOverrideTextBox.Name = "statsRatioOverrideTextBox";
+            this.statsRatioOverrideTextBox.Size = new System.Drawing.Size(133, 20);
+            this.statsRatioOverrideTextBox.TabIndex = 5;
+            this.statsRatioOverrideTextBox.Text = "Ratio";
+            this.statsRatioOverrideTextBox.TextChanged += new System.EventHandler(this.statsRatioOverrideTextBox_TextChanged);
+            // 
+            // statsAwardsOverrideTextBox
+            // 
+            this.statsAwardsOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statsAwardsOverrideTextBox.Location = new System.Drawing.Point(6, 74);
+            this.statsAwardsOverrideTextBox.Name = "statsAwardsOverrideTextBox";
+            this.statsAwardsOverrideTextBox.Size = new System.Drawing.Size(133, 20);
+            this.statsAwardsOverrideTextBox.TabIndex = 3;
+            this.statsAwardsOverrideTextBox.Text = "Awards";
+            this.statsAwardsOverrideTextBox.TextChanged += new System.EventHandler(this.statsAwardsOverrideTextBox_TextChanged);
+            // 
+            // statsRankOverrideTextBox
+            // 
+            this.statsRankOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statsRankOverrideTextBox.Location = new System.Drawing.Point(5, 31);
+            this.statsRankOverrideTextBox.Name = "statsRankOverrideTextBox";
+            this.statsRankOverrideTextBox.Size = new System.Drawing.Size(133, 20);
+            this.statsRankOverrideTextBox.TabIndex = 1;
+            this.statsRankOverrideTextBox.Text = "Rank";
+            this.statsRankOverrideTextBox.TextChanged += new System.EventHandler(this.statsRankOverrideTextBox_TextChanged);
+            // 
+            // statsOverrideGroupBox
+            // 
+            this.statsOverrideGroupBox.Controls.Add(this.statsGameAchievementsCheckBox);
+            this.statsOverrideGroupBox.Controls.Add(this.statsGameTruePointsCheckBox);
+            this.statsOverrideGroupBox.Controls.Add(this.statsGamePointsCheckBox);
+            this.statsOverrideGroupBox.Controls.Add(this.statsGameRatioCheckBox);
+            this.statsOverrideGroupBox.Controls.Add(this.statsRatioCheckBox);
+            this.statsOverrideGroupBox.Controls.Add(this.statsTruePointsCheckBox);
+            this.statsOverrideGroupBox.Controls.Add(this.statsPointsCheckBox);
+            this.statsOverrideGroupBox.Controls.Add(this.statsAwardsCheckBox);
+            this.statsOverrideGroupBox.Controls.Add(this.statsRankCheckBox);
+            this.statsOverrideGroupBox.Controls.Add(this.statsDefaultButton);
+            this.statsOverrideGroupBox.Controls.Add(this.statsGameTruePointsOverrideTextBox);
+            this.statsOverrideGroupBox.Controls.Add(this.statsGamePointsOverrideTextBox);
+            this.statsOverrideGroupBox.Controls.Add(this.statsGameAchievementsOverrideTextBox);
+            this.statsOverrideGroupBox.Controls.Add(this.statsGameRatioOverrideTextBox);
+            this.statsOverrideGroupBox.Controls.Add(this.statsTruePointsOverrideTextBox);
+            this.statsOverrideGroupBox.Controls.Add(this.statsPointsOverrideTextBox);
+            this.statsOverrideGroupBox.Controls.Add(this.statsRatioOverrideTextBox);
+            this.statsOverrideGroupBox.Controls.Add(this.statsAwardsOverrideTextBox);
+            this.statsOverrideGroupBox.Controls.Add(this.statsRankOverrideTextBox);
+            this.statsOverrideGroupBox.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statsOverrideGroupBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.statsOverrideGroupBox.Location = new System.Drawing.Point(593, 313);
+            this.statsOverrideGroupBox.Name = "statsOverrideGroupBox";
+            this.statsOverrideGroupBox.Size = new System.Drawing.Size(287, 305);
+            this.statsOverrideGroupBox.TabIndex = 10007;
+            this.statsOverrideGroupBox.TabStop = false;
+            this.statsOverrideGroupBox.Text = "Stats Overrides";
+            // 
+            // statsGameAchievementsCheckBox
+            // 
+            this.statsGameAchievementsCheckBox.AutoSize = true;
+            this.statsGameAchievementsCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statsGameAchievementsCheckBox.Location = new System.Drawing.Point(5, 256);
+            this.statsGameAchievementsCheckBox.Name = "statsGameAchievementsCheckBox";
+            this.statsGameAchievementsCheckBox.Size = new System.Drawing.Size(145, 18);
+            this.statsGameAchievementsCheckBox.TabIndex = 47;
+            this.statsGameAchievementsCheckBox.Text = "Game Achievements";
+            this.statsGameAchievementsCheckBox.UseVisualStyleBackColor = true;
+            this.statsGameAchievementsCheckBox.CheckedChanged += new System.EventHandler(this.statsGameAchievementsCheckBox_CheckedChanged);
+            // 
+            // statsGameTruePointsCheckBox
+            // 
+            this.statsGameTruePointsCheckBox.AutoSize = true;
+            this.statsGameTruePointsCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statsGameTruePointsCheckBox.Location = new System.Drawing.Point(6, 212);
+            this.statsGameTruePointsCheckBox.Name = "statsGameTruePointsCheckBox";
+            this.statsGameTruePointsCheckBox.Size = new System.Drawing.Size(138, 18);
+            this.statsGameTruePointsCheckBox.TabIndex = 46;
+            this.statsGameTruePointsCheckBox.Text = "Game True Points";
+            this.statsGameTruePointsCheckBox.UseVisualStyleBackColor = true;
+            this.statsGameTruePointsCheckBox.CheckedChanged += new System.EventHandler(this.statsGameTruePointsCheckBox_CheckedChanged);
+            // 
+            // statsGamePointsCheckBox
+            // 
+            this.statsGamePointsCheckBox.AutoSize = true;
+            this.statsGamePointsCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statsGamePointsCheckBox.Location = new System.Drawing.Point(6, 168);
+            this.statsGamePointsCheckBox.Name = "statsGamePointsCheckBox";
+            this.statsGamePointsCheckBox.Size = new System.Drawing.Size(103, 18);
+            this.statsGamePointsCheckBox.TabIndex = 45;
+            this.statsGamePointsCheckBox.Text = "Game Points";
+            this.statsGamePointsCheckBox.UseVisualStyleBackColor = true;
+            this.statsGamePointsCheckBox.CheckedChanged += new System.EventHandler(this.statsGamePointsCheckBox_CheckedChanged);
+            // 
+            // statsGameRatioCheckBox
+            // 
+            this.statsGameRatioCheckBox.AutoSize = true;
+            this.statsGameRatioCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statsGameRatioCheckBox.Location = new System.Drawing.Point(145, 98);
+            this.statsGameRatioCheckBox.Name = "statsGameRatioCheckBox";
+            this.statsGameRatioCheckBox.Size = new System.Drawing.Size(96, 18);
+            this.statsGameRatioCheckBox.TabIndex = 44;
+            this.statsGameRatioCheckBox.Text = "Game Ratio";
+            this.statsGameRatioCheckBox.UseVisualStyleBackColor = true;
+            this.statsGameRatioCheckBox.CheckedChanged += new System.EventHandler(this.statsGameRatioCheckBox_CheckedChanged);
+            // 
+            // statsRatioCheckBox
+            // 
+            this.statsRatioCheckBox.AutoSize = true;
+            this.statsRatioCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statsRatioCheckBox.Location = new System.Drawing.Point(6, 100);
+            this.statsRatioCheckBox.Name = "statsRatioCheckBox";
+            this.statsRatioCheckBox.Size = new System.Drawing.Size(61, 18);
+            this.statsRatioCheckBox.TabIndex = 43;
+            this.statsRatioCheckBox.Text = "Ratio";
+            this.statsRatioCheckBox.UseVisualStyleBackColor = true;
+            this.statsRatioCheckBox.CheckedChanged += new System.EventHandler(this.statsRatioCheckBox_CheckedChanged);
+            // 
+            // statsTruePointsCheckBox
+            // 
+            this.statsTruePointsCheckBox.AutoSize = true;
+            this.statsTruePointsCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statsTruePointsCheckBox.Location = new System.Drawing.Point(144, 55);
+            this.statsTruePointsCheckBox.Name = "statsTruePointsCheckBox";
+            this.statsTruePointsCheckBox.Size = new System.Drawing.Size(103, 18);
+            this.statsTruePointsCheckBox.TabIndex = 42;
+            this.statsTruePointsCheckBox.Text = "True Points";
+            this.statsTruePointsCheckBox.UseVisualStyleBackColor = true;
+            this.statsTruePointsCheckBox.CheckedChanged += new System.EventHandler(this.statsTruePointsCheckBox_CheckedChanged);
+            // 
+            // statsPointsCheckBox
+            // 
+            this.statsPointsCheckBox.AutoSize = true;
+            this.statsPointsCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statsPointsCheckBox.Location = new System.Drawing.Point(144, 14);
+            this.statsPointsCheckBox.Name = "statsPointsCheckBox";
+            this.statsPointsCheckBox.Size = new System.Drawing.Size(68, 18);
+            this.statsPointsCheckBox.TabIndex = 41;
+            this.statsPointsCheckBox.Text = "Points";
+            this.statsPointsCheckBox.UseVisualStyleBackColor = true;
+            this.statsPointsCheckBox.CheckedChanged += new System.EventHandler(this.statsPointsCheckBox_CheckedChanged);
+            // 
+            // statsAwardsCheckBox
+            // 
+            this.statsAwardsCheckBox.AutoSize = true;
+            this.statsAwardsCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statsAwardsCheckBox.Location = new System.Drawing.Point(6, 57);
+            this.statsAwardsCheckBox.Name = "statsAwardsCheckBox";
+            this.statsAwardsCheckBox.Size = new System.Drawing.Size(68, 18);
+            this.statsAwardsCheckBox.TabIndex = 40;
+            this.statsAwardsCheckBox.Text = "Awards";
+            this.statsAwardsCheckBox.UseVisualStyleBackColor = true;
+            this.statsAwardsCheckBox.CheckedChanged += new System.EventHandler(this.statsAwardsCheckBox_CheckedChanged);
+            // 
+            // statsRankCheckBox
+            // 
+            this.statsRankCheckBox.AutoSize = true;
+            this.statsRankCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statsRankCheckBox.Location = new System.Drawing.Point(6, 12);
+            this.statsRankCheckBox.Name = "statsRankCheckBox";
+            this.statsRankCheckBox.Size = new System.Drawing.Size(54, 18);
+            this.statsRankCheckBox.TabIndex = 39;
+            this.statsRankCheckBox.Text = "Rank";
+            this.statsRankCheckBox.UseVisualStyleBackColor = true;
+            this.statsRankCheckBox.CheckedChanged += new System.EventHandler(this.StatsRankCheckBox_CheckedChanged);
+            // 
+            // statsDefaultButton
+            // 
+            this.statsDefaultButton.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statsDefaultButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.statsDefaultButton.Location = new System.Drawing.Point(209, 276);
+            this.statsDefaultButton.Name = "statsDefaultButton";
+            this.statsDefaultButton.Size = new System.Drawing.Size(72, 23);
+            this.statsDefaultButton.TabIndex = 39;
+            this.statsDefaultButton.Text = "Default";
+            this.statsDefaultButton.UseVisualStyleBackColor = true;
+            this.statsDefaultButton.Click += new System.EventHandler(this.StatsDefaultButton_Click);
+            // 
+            // statsGameTruePointsOverrideTextBox
+            // 
+            this.statsGameTruePointsOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statsGameTruePointsOverrideTextBox.Location = new System.Drawing.Point(6, 230);
+            this.statsGameTruePointsOverrideTextBox.Name = "statsGameTruePointsOverrideTextBox";
+            this.statsGameTruePointsOverrideTextBox.Size = new System.Drawing.Size(166, 20);
+            this.statsGameTruePointsOverrideTextBox.TabIndex = 16;
+            this.statsGameTruePointsOverrideTextBox.Text = "T. Points";
+            this.statsGameTruePointsOverrideTextBox.TextChanged += new System.EventHandler(this.statsGameTruePointsOverrideTextBox_TextChanged);
+            // 
+            // statsGamePointsOverrideTextBox
+            // 
+            this.statsGamePointsOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statsGamePointsOverrideTextBox.Location = new System.Drawing.Point(6, 186);
+            this.statsGamePointsOverrideTextBox.Name = "statsGamePointsOverrideTextBox";
+            this.statsGamePointsOverrideTextBox.Size = new System.Drawing.Size(166, 20);
+            this.statsGamePointsOverrideTextBox.TabIndex = 15;
+            this.statsGamePointsOverrideTextBox.Text = "Points";
+            this.statsGamePointsOverrideTextBox.TextChanged += new System.EventHandler(this.statsGamePointsOverrideTextBox_TextChanged);
+            // 
+            // statsGameAchievementsOverrideTextBox
+            // 
+            this.statsGameAchievementsOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statsGameAchievementsOverrideTextBox.Location = new System.Drawing.Point(5, 277);
+            this.statsGameAchievementsOverrideTextBox.Name = "statsGameAchievementsOverrideTextBox";
+            this.statsGameAchievementsOverrideTextBox.Size = new System.Drawing.Size(167, 20);
+            this.statsGameAchievementsOverrideTextBox.TabIndex = 13;
+            this.statsGameAchievementsOverrideTextBox.Text = "Cheevos";
+            this.statsGameAchievementsOverrideTextBox.TextChanged += new System.EventHandler(this.statsGameAchievementsOverrideTextBox_TextChanged);
+            // 
+            // fontFamilyComboBox
+            // 
+            this.fontFamilyComboBox.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fontFamilyComboBox.FormattingEnabled = true;
+            this.fontFamilyComboBox.Location = new System.Drawing.Point(4, 19);
+            this.fontFamilyComboBox.Name = "fontFamilyComboBox";
+            this.fontFamilyComboBox.Size = new System.Drawing.Size(276, 23);
+            this.fontFamilyComboBox.TabIndex = 38;
+            // 
+            // setBackgroundColorButton
+            // 
+            this.setBackgroundColorButton.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.setBackgroundColorButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.setBackgroundColorButton.Location = new System.Drawing.Point(231, 48);
+            this.setBackgroundColorButton.Name = "setBackgroundColorButton";
+            this.setBackgroundColorButton.Size = new System.Drawing.Size(49, 23);
+            this.setBackgroundColorButton.TabIndex = 37;
+            this.setBackgroundColorButton.Text = "Set";
+            this.setBackgroundColorButton.UseVisualStyleBackColor = true;
+            // 
+            // backgroundColorPictureBox
+            // 
+            this.backgroundColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.backgroundColorPictureBox.Location = new System.Drawing.Point(175, 49);
+            this.backgroundColorPictureBox.Name = "backgroundColorPictureBox";
+            this.backgroundColorPictureBox.Size = new System.Drawing.Size(50, 22);
+            this.backgroundColorPictureBox.TabIndex = 36;
+            this.backgroundColorPictureBox.TabStop = false;
+            // 
+            // backgroundColorLabel
+            // 
+            this.backgroundColorLabel.AutoSize = true;
+            this.backgroundColorLabel.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.backgroundColorLabel.Location = new System.Drawing.Point(2, 57);
+            this.backgroundColorLabel.Name = "backgroundColorLabel";
+            this.backgroundColorLabel.Size = new System.Drawing.Size(85, 12);
+            this.backgroundColorLabel.TabIndex = 35;
+            this.backgroundColorLabel.Text = "Background";
+            // 
+            // fontOutlineNumericUpDown
+            // 
+            this.fontOutlineNumericUpDown.Font = new System.Drawing.Font("Lucida Console", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fontOutlineNumericUpDown.Location = new System.Drawing.Point(121, 105);
+            this.fontOutlineNumericUpDown.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.fontOutlineNumericUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.fontOutlineNumericUpDown.Name = "fontOutlineNumericUpDown";
+            this.fontOutlineNumericUpDown.Size = new System.Drawing.Size(48, 22);
+            this.fontOutlineNumericUpDown.TabIndex = 28;
+            this.fontOutlineNumericUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // fontOutlineCheckBox
+            // 
+            this.fontOutlineCheckBox.AutoSize = true;
+            this.fontOutlineCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fontOutlineCheckBox.Location = new System.Drawing.Point(7, 109);
+            this.fontOutlineCheckBox.Name = "fontOutlineCheckBox";
+            this.fontOutlineCheckBox.Size = new System.Drawing.Size(75, 18);
+            this.fontOutlineCheckBox.TabIndex = 27;
+            this.fontOutlineCheckBox.Text = "Outline";
+            this.fontOutlineCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // fontOutlineColorButton
+            // 
+            this.fontOutlineColorButton.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fontOutlineColorButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.fontOutlineColorButton.Location = new System.Drawing.Point(231, 104);
+            this.fontOutlineColorButton.Name = "fontOutlineColorButton";
+            this.fontOutlineColorButton.Size = new System.Drawing.Size(49, 23);
+            this.fontOutlineColorButton.TabIndex = 26;
+            this.fontOutlineColorButton.Text = "Set";
+            this.fontOutlineColorButton.UseVisualStyleBackColor = true;
+            // 
+            // fontOutlineColorPictureBox
+            // 
+            this.fontOutlineColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.fontOutlineColorPictureBox.Location = new System.Drawing.Point(175, 104);
+            this.fontOutlineColorPictureBox.Name = "fontOutlineColorPictureBox";
+            this.fontOutlineColorPictureBox.Size = new System.Drawing.Size(50, 22);
+            this.fontOutlineColorPictureBox.TabIndex = 25;
+            this.fontOutlineColorPictureBox.TabStop = false;
+            // 
+            // setFontColorButton
+            // 
+            this.setFontColorButton.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.setFontColorButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.setFontColorButton.Location = new System.Drawing.Point(231, 76);
+            this.setFontColorButton.Name = "setFontColorButton";
+            this.setFontColorButton.Size = new System.Drawing.Size(49, 23);
+            this.setFontColorButton.TabIndex = 22;
+            this.setFontColorButton.Text = "Set";
+            this.setFontColorButton.UseVisualStyleBackColor = true;
+            // 
+            // fontColorPictureBox
+            // 
+            this.fontColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.fontColorPictureBox.Location = new System.Drawing.Point(175, 77);
+            this.fontColorPictureBox.Name = "fontColorPictureBox";
+            this.fontColorPictureBox.Size = new System.Drawing.Size(50, 22);
+            this.fontColorPictureBox.TabIndex = 21;
+            this.fontColorPictureBox.TabStop = false;
+            // 
+            // fontColorLabel
+            // 
+            this.fontColorLabel.AutoSize = true;
+            this.fontColorLabel.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fontColorLabel.Location = new System.Drawing.Point(4, 83);
+            this.fontColorLabel.Name = "fontColorLabel";
+            this.fontColorLabel.Size = new System.Drawing.Size(85, 12);
+            this.fontColorLabel.TabIndex = 20;
+            this.fontColorLabel.Text = "Font Color";
+            // 
+            // fontSettingsGroupBox
+            // 
+            this.fontSettingsGroupBox.Controls.Add(this.fontFamilyComboBox);
+            this.fontSettingsGroupBox.Controls.Add(this.setBackgroundColorButton);
+            this.fontSettingsGroupBox.Controls.Add(this.backgroundColorPictureBox);
+            this.fontSettingsGroupBox.Controls.Add(this.backgroundColorLabel);
+            this.fontSettingsGroupBox.Controls.Add(this.fontOutlineNumericUpDown);
+            this.fontSettingsGroupBox.Controls.Add(this.fontOutlineCheckBox);
+            this.fontSettingsGroupBox.Controls.Add(this.fontOutlineColorButton);
+            this.fontSettingsGroupBox.Controls.Add(this.fontOutlineColorPictureBox);
+            this.fontSettingsGroupBox.Controls.Add(this.setFontColorButton);
+            this.fontSettingsGroupBox.Controls.Add(this.fontColorPictureBox);
+            this.fontSettingsGroupBox.Controls.Add(this.fontColorLabel);
+            this.fontSettingsGroupBox.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fontSettingsGroupBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.fontSettingsGroupBox.Location = new System.Drawing.Point(294, 313);
+            this.fontSettingsGroupBox.Name = "fontSettingsGroupBox";
+            this.fontSettingsGroupBox.Size = new System.Drawing.Size(291, 133);
+            this.fontSettingsGroupBox.TabIndex = 10006;
+            this.fontSettingsGroupBox.TabStop = false;
+            this.fontSettingsGroupBox.Text = "Font Settings";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Enabled = false;
+            this.label9.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(3, 261);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(109, 12);
+            this.label9.TabIndex = 46;
+            this.label9.Text = "Out-Animation";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Enabled = false;
+            this.label10.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(2, 210);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(101, 12);
+            this.label10.TabIndex = 40;
+            this.label10.Text = "In-Animation";
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.Enabled = false;
+            this.comboBox2.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(5, 276);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(134, 23);
+            this.comboBox2.TabIndex = 45;
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.Enabled = false;
+            this.comboBox3.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Location = new System.Drawing.Point(4, 225);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(136, 23);
+            this.comboBox3.TabIndex = 39;
             // 
             // inAchievementNumericUpDown
             // 
-            this.inAchievementNumericUpDown.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.inAchievementNumericUpDown.Location = new System.Drawing.Point(142, 83);
+            this.inAchievementNumericUpDown.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.inAchievementNumericUpDown.Location = new System.Drawing.Point(83, 154);
             this.inAchievementNumericUpDown.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -1158,7 +1263,7 @@ namespace Retro_Achievement_Tracker
             0,
             0});
             this.inAchievementNumericUpDown.Name = "inAchievementNumericUpDown";
-            this.inAchievementNumericUpDown.Size = new System.Drawing.Size(59, 21);
+            this.inAchievementNumericUpDown.Size = new System.Drawing.Size(59, 20);
             this.inAchievementNumericUpDown.TabIndex = 26;
             this.inAchievementNumericUpDown.Value = new decimal(new int[] {
             300,
@@ -1169,17 +1274,17 @@ namespace Retro_Achievement_Tracker
             // inLabel1
             // 
             this.inLabel1.AutoSize = true;
-            this.inLabel1.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.inLabel1.Location = new System.Drawing.Point(92, 89);
+            this.inLabel1.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.inLabel1.Location = new System.Drawing.Point(3, 159);
             this.inLabel1.Name = "inLabel1";
-            this.inLabel1.Size = new System.Drawing.Size(38, 13);
+            this.inLabel1.Size = new System.Drawing.Size(61, 12);
             this.inLabel1.TabIndex = 25;
             this.inLabel1.Text = "In (ms)";
             // 
             // outAchievementNumericUpDown
             // 
-            this.outAchievementNumericUpDown.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.outAchievementNumericUpDown.Location = new System.Drawing.Point(142, 108);
+            this.outAchievementNumericUpDown.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.outAchievementNumericUpDown.Location = new System.Drawing.Point(83, 180);
             this.outAchievementNumericUpDown.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -1191,7 +1296,7 @@ namespace Retro_Achievement_Tracker
             0,
             0});
             this.outAchievementNumericUpDown.Name = "outAchievementNumericUpDown";
-            this.outAchievementNumericUpDown.Size = new System.Drawing.Size(59, 21);
+            this.outAchievementNumericUpDown.Size = new System.Drawing.Size(59, 20);
             this.outAchievementNumericUpDown.TabIndex = 24;
             this.outAchievementNumericUpDown.Value = new decimal(new int[] {
             300,
@@ -1201,32 +1306,32 @@ namespace Retro_Achievement_Tracker
             // 
             // selectCustomAchievementButton
             // 
-            this.selectCustomAchievementButton.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.selectCustomAchievementButton.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.selectCustomAchievementButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.selectCustomAchievementButton.Location = new System.Drawing.Point(6, 57);
+            this.selectCustomAchievementButton.Location = new System.Drawing.Point(76, 16);
             this.selectCustomAchievementButton.Name = "selectCustomAchievementButton";
-            this.selectCustomAchievementButton.Size = new System.Drawing.Size(48, 23);
+            this.selectCustomAchievementButton.Size = new System.Drawing.Size(66, 23);
             this.selectCustomAchievementButton.TabIndex = 14;
-            this.selectCustomAchievementButton.Text = "Select";
+            this.selectCustomAchievementButton.Text = "File";
             this.selectCustomAchievementButton.UseVisualStyleBackColor = true;
             // 
             // outLabel1
             // 
             this.outLabel1.AutoSize = true;
-            this.outLabel1.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.outLabel1.Location = new System.Drawing.Point(92, 110);
+            this.outLabel1.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.outLabel1.Location = new System.Drawing.Point(3, 183);
             this.outLabel1.Name = "outLabel1";
-            this.outLabel1.Size = new System.Drawing.Size(46, 13);
+            this.outLabel1.Size = new System.Drawing.Size(69, 12);
             this.outLabel1.TabIndex = 23;
             this.outLabel1.Text = "Out (ms)";
             // 
             // scaleLabel1
             // 
             this.scaleLabel1.AutoSize = true;
-            this.scaleLabel1.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.scaleLabel1.Location = new System.Drawing.Point(7, 136);
+            this.scaleLabel1.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.scaleLabel1.Location = new System.Drawing.Point(4, 131);
             this.scaleLabel1.Name = "scaleLabel1";
-            this.scaleLabel1.Size = new System.Drawing.Size(32, 13);
+            this.scaleLabel1.Size = new System.Drawing.Size(45, 12);
             this.scaleLabel1.TabIndex = 21;
             this.scaleLabel1.Text = "Scale";
             this.scaleLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1234,13 +1339,13 @@ namespace Retro_Achievement_Tracker
             // scaleAchievementNumericUpDown
             // 
             this.scaleAchievementNumericUpDown.DecimalPlaces = 2;
-            this.scaleAchievementNumericUpDown.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.scaleAchievementNumericUpDown.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.scaleAchievementNumericUpDown.Increment = new decimal(new int[] {
             1,
             0,
             0,
             131072});
-            this.scaleAchievementNumericUpDown.Location = new System.Drawing.Point(45, 131);
+            this.scaleAchievementNumericUpDown.Location = new System.Drawing.Point(83, 128);
             this.scaleAchievementNumericUpDown.Maximum = new decimal(new int[] {
             5,
             0,
@@ -1252,7 +1357,7 @@ namespace Retro_Achievement_Tracker
             0,
             131072});
             this.scaleAchievementNumericUpDown.Name = "scaleAchievementNumericUpDown";
-            this.scaleAchievementNumericUpDown.Size = new System.Drawing.Size(43, 21);
+            this.scaleAchievementNumericUpDown.Size = new System.Drawing.Size(59, 20);
             this.scaleAchievementNumericUpDown.TabIndex = 20;
             this.scaleAchievementNumericUpDown.Value = new decimal(new int[] {
             1,
@@ -1263,41 +1368,30 @@ namespace Retro_Achievement_Tracker
             // yPositionLabel1
             // 
             this.yPositionLabel1.AutoSize = true;
-            this.yPositionLabel1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.yPositionLabel1.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.yPositionLabel1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.yPositionLabel1.Location = new System.Drawing.Point(4, 107);
+            this.yPositionLabel1.Location = new System.Drawing.Point(3, 105);
             this.yPositionLabel1.Name = "yPositionLabel1";
-            this.yPositionLabel1.Size = new System.Drawing.Size(13, 15);
+            this.yPositionLabel1.Size = new System.Drawing.Size(61, 12);
             this.yPositionLabel1.TabIndex = 19;
-            this.yPositionLabel1.Text = "Y";
+            this.yPositionLabel1.Text = "Y Coor.";
             this.yPositionLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // xPositionLabel1
             // 
             this.xPositionLabel1.AutoSize = true;
-            this.xPositionLabel1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.xPositionLabel1.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.xPositionLabel1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.xPositionLabel1.Location = new System.Drawing.Point(3, 86);
+            this.xPositionLabel1.Location = new System.Drawing.Point(2, 81);
             this.xPositionLabel1.Name = "xPositionLabel1";
-            this.xPositionLabel1.Size = new System.Drawing.Size(14, 15);
+            this.xPositionLabel1.Size = new System.Drawing.Size(61, 12);
             this.xPositionLabel1.TabIndex = 18;
-            this.xPositionLabel1.Text = "X";
-            // 
-            // acheivementEditOutlineCheckbox
-            // 
-            this.acheivementEditOutlineCheckbox.AutoSize = true;
-            this.acheivementEditOutlineCheckbox.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.acheivementEditOutlineCheckbox.Location = new System.Drawing.Point(61, 61);
-            this.acheivementEditOutlineCheckbox.Name = "acheivementEditOutlineCheckbox";
-            this.acheivementEditOutlineCheckbox.Size = new System.Drawing.Size(44, 17);
-            this.acheivementEditOutlineCheckbox.TabIndex = 17;
-            this.acheivementEditOutlineCheckbox.Text = "Edit";
-            this.acheivementEditOutlineCheckbox.UseVisualStyleBackColor = true;
+            this.xPositionLabel1.Text = "X Coor.";
             // 
             // customAchievementYNumericUpDown
             // 
-            this.customAchievementYNumericUpDown.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.customAchievementYNumericUpDown.Location = new System.Drawing.Point(18, 106);
+            this.customAchievementYNumericUpDown.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customAchievementYNumericUpDown.Location = new System.Drawing.Point(83, 102);
             this.customAchievementYNumericUpDown.Maximum = new decimal(new int[] {
             2000,
             0,
@@ -1309,13 +1403,13 @@ namespace Retro_Achievement_Tracker
             0,
             -2147483648});
             this.customAchievementYNumericUpDown.Name = "customAchievementYNumericUpDown";
-            this.customAchievementYNumericUpDown.Size = new System.Drawing.Size(70, 21);
+            this.customAchievementYNumericUpDown.Size = new System.Drawing.Size(59, 20);
             this.customAchievementYNumericUpDown.TabIndex = 16;
             // 
             // customAchievementXNumericUpDown
             // 
-            this.customAchievementXNumericUpDown.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.customAchievementXNumericUpDown.Location = new System.Drawing.Point(18, 83);
+            this.customAchievementXNumericUpDown.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customAchievementXNumericUpDown.Location = new System.Drawing.Point(83, 75);
             this.customAchievementXNumericUpDown.Maximum = new decimal(new int[] {
             2000,
             0,
@@ -1327,323 +1421,672 @@ namespace Retro_Achievement_Tracker
             0,
             -2147483648});
             this.customAchievementXNumericUpDown.Name = "customAchievementXNumericUpDown";
-            this.customAchievementXNumericUpDown.Size = new System.Drawing.Size(70, 21);
+            this.customAchievementXNumericUpDown.Size = new System.Drawing.Size(59, 20);
             this.customAchievementXNumericUpDown.TabIndex = 15;
             // 
             // useCustomAchievementCheckbox
             // 
             this.useCustomAchievementCheckbox.AutoSize = true;
-            this.useCustomAchievementCheckbox.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.useCustomAchievementCheckbox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.useCustomAchievementCheckbox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.useCustomAchievementCheckbox.Location = new System.Drawing.Point(61, 36);
+            this.useCustomAchievementCheckbox.Location = new System.Drawing.Point(6, 19);
             this.useCustomAchievementCheckbox.Name = "useCustomAchievementCheckbox";
-            this.useCustomAchievementCheckbox.Size = new System.Drawing.Size(87, 17);
+            this.useCustomAchievementCheckbox.Size = new System.Drawing.Size(68, 18);
             this.useCustomAchievementCheckbox.TabIndex = 13;
-            this.useCustomAchievementCheckbox.Text = "Custom Alert";
+            this.useCustomAchievementCheckbox.Text = "Enable";
             this.useCustomAchievementCheckbox.UseVisualStyleBackColor = true;
             // 
             // showAchievementButton
             // 
             this.showAchievementButton.BackColor = System.Drawing.SystemColors.Control;
-            this.showAchievementButton.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.showAchievementButton.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.showAchievementButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.showAchievementButton.Location = new System.Drawing.Point(6, 30);
+            this.showAchievementButton.Location = new System.Drawing.Point(76, 48);
             this.showAchievementButton.Name = "showAchievementButton";
-            this.showAchievementButton.Size = new System.Drawing.Size(49, 23);
+            this.showAchievementButton.Size = new System.Drawing.Size(66, 23);
             this.showAchievementButton.TabIndex = 2;
-            this.showAchievementButton.Text = "Show";
+            this.showAchievementButton.Text = "Recent";
             this.showAchievementButton.UseVisualStyleBackColor = false;
             // 
-            // groupBox2
+            // customAchievementSettingsGroupBox
             // 
-            this.groupBox2.Controls.Add(this.notificationsFontComboBox);
-            this.groupBox2.Controls.Add(this.notificationsBackgroundColorPickerButton);
-            this.groupBox2.Controls.Add(this.notificationsBackgroundColorDisplayBox);
-            this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.notificationsFontOutlineSizeUpDown);
-            this.groupBox2.Controls.Add(this.notificationsFontOutlineCheckbox);
-            this.groupBox2.Controls.Add(this.notificationsFontOutlineColorPickerButton);
-            this.groupBox2.Controls.Add(this.notificationsFontOutlineColorDisplayBox);
-            this.groupBox2.Controls.Add(this.notificationsFontColorPickerButton);
-            this.groupBox2.Controls.Add(this.notificationsFontColorDisplayBox);
-            this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.groupBox2.Location = new System.Drawing.Point(6, 45);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(166, 157);
-            this.groupBox2.TabIndex = 10004;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Font";
+            this.customAchievementSettingsGroupBox.Controls.Add(this.acheivementEditOutlineCheckbox);
+            this.customAchievementSettingsGroupBox.Controls.Add(this.label9);
+            this.customAchievementSettingsGroupBox.Controls.Add(this.label10);
+            this.customAchievementSettingsGroupBox.Controls.Add(this.comboBox2);
+            this.customAchievementSettingsGroupBox.Controls.Add(this.comboBox3);
+            this.customAchievementSettingsGroupBox.Controls.Add(this.inAchievementNumericUpDown);
+            this.customAchievementSettingsGroupBox.Controls.Add(this.inLabel1);
+            this.customAchievementSettingsGroupBox.Controls.Add(this.outAchievementNumericUpDown);
+            this.customAchievementSettingsGroupBox.Controls.Add(this.selectCustomAchievementButton);
+            this.customAchievementSettingsGroupBox.Controls.Add(this.outLabel1);
+            this.customAchievementSettingsGroupBox.Controls.Add(this.scaleLabel1);
+            this.customAchievementSettingsGroupBox.Controls.Add(this.scaleAchievementNumericUpDown);
+            this.customAchievementSettingsGroupBox.Controls.Add(this.yPositionLabel1);
+            this.customAchievementSettingsGroupBox.Controls.Add(this.xPositionLabel1);
+            this.customAchievementSettingsGroupBox.Controls.Add(this.customAchievementYNumericUpDown);
+            this.customAchievementSettingsGroupBox.Controls.Add(this.customAchievementXNumericUpDown);
+            this.customAchievementSettingsGroupBox.Controls.Add(this.useCustomAchievementCheckbox);
+            this.customAchievementSettingsGroupBox.Controls.Add(this.showAchievementButton);
+            this.customAchievementSettingsGroupBox.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customAchievementSettingsGroupBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.customAchievementSettingsGroupBox.Location = new System.Drawing.Point(4, 313);
+            this.customAchievementSettingsGroupBox.Name = "customAchievementSettingsGroupBox";
+            this.customAchievementSettingsGroupBox.Size = new System.Drawing.Size(146, 305);
+            this.customAchievementSettingsGroupBox.TabIndex = 10008;
+            this.customAchievementSettingsGroupBox.TabStop = false;
+            this.customAchievementSettingsGroupBox.Text = "Achievement";
             // 
-            // notificationsBackgroundColorPickerButton
+            // acheivementEditOutlineCheckbox
             // 
-            this.notificationsBackgroundColorPickerButton.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.notificationsBackgroundColorPickerButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.notificationsBackgroundColorPickerButton.Location = new System.Drawing.Point(110, 51);
-            this.notificationsBackgroundColorPickerButton.Name = "notificationsBackgroundColorPickerButton";
-            this.notificationsBackgroundColorPickerButton.Size = new System.Drawing.Size(49, 23);
-            this.notificationsBackgroundColorPickerButton.TabIndex = 37;
-            this.notificationsBackgroundColorPickerButton.Text = "Set";
-            this.notificationsBackgroundColorPickerButton.UseVisualStyleBackColor = true;
+            this.acheivementEditOutlineCheckbox.AutoSize = true;
+            this.acheivementEditOutlineCheckbox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.acheivementEditOutlineCheckbox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.acheivementEditOutlineCheckbox.Location = new System.Drawing.Point(6, 51);
+            this.acheivementEditOutlineCheckbox.Name = "acheivementEditOutlineCheckbox";
+            this.acheivementEditOutlineCheckbox.Size = new System.Drawing.Size(54, 18);
+            this.acheivementEditOutlineCheckbox.TabIndex = 47;
+            this.acheivementEditOutlineCheckbox.Text = "Edit";
+            this.acheivementEditOutlineCheckbox.UseVisualStyleBackColor = true;
             // 
-            // notificationsBackgroundColorDisplayBox
+            // label16
             // 
-            this.notificationsBackgroundColorDisplayBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.notificationsBackgroundColorDisplayBox.Location = new System.Drawing.Point(84, 52);
-            this.notificationsBackgroundColorDisplayBox.Name = "notificationsBackgroundColorDisplayBox";
-            this.notificationsBackgroundColorDisplayBox.Size = new System.Drawing.Size(22, 22);
-            this.notificationsBackgroundColorDisplayBox.TabIndex = 36;
-            this.notificationsBackgroundColorDisplayBox.TabStop = false;
+            this.label16.AutoSize = true;
+            this.label16.Enabled = false;
+            this.label16.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(2, 261);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(109, 12);
+            this.label16.TabIndex = 44;
+            this.label16.Text = "Out-Animation";
             // 
-            // label2
+            // comboBox4
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(6, 53);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(72, 15);
-            this.label2.TabIndex = 35;
-            this.label2.Text = "Background";
+            this.comboBox4.Enabled = false;
+            this.comboBox4.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox4.FormattingEnabled = true;
+            this.comboBox4.Location = new System.Drawing.Point(4, 276);
+            this.comboBox4.Name = "comboBox4";
+            this.comboBox4.Size = new System.Drawing.Size(136, 23);
+            this.comboBox4.TabIndex = 43;
             // 
-            // notificationsFontOutlineSizeUpDown
+            // label17
             // 
-            this.notificationsFontOutlineSizeUpDown.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.notificationsFontOutlineSizeUpDown.Location = new System.Drawing.Point(110, 126);
-            this.notificationsFontOutlineSizeUpDown.Maximum = new decimal(new int[] {
-            10,
+            this.label17.AutoSize = true;
+            this.label17.Enabled = false;
+            this.label17.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(2, 210);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(101, 12);
+            this.label17.TabIndex = 42;
+            this.label17.Text = "In-Animation";
+            // 
+            // inMasteryNumericUpDown
+            // 
+            this.inMasteryNumericUpDown.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.inMasteryNumericUpDown.Location = new System.Drawing.Point(81, 154);
+            this.inMasteryNumericUpDown.Maximum = new decimal(new int[] {
+            10000,
             0,
             0,
             0});
-            this.notificationsFontOutlineSizeUpDown.Minimum = new decimal(new int[] {
+            this.inMasteryNumericUpDown.Minimum = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+            this.inMasteryNumericUpDown.Name = "inMasteryNumericUpDown";
+            this.inMasteryNumericUpDown.Size = new System.Drawing.Size(59, 20);
+            this.inMasteryNumericUpDown.TabIndex = 26;
+            this.inMasteryNumericUpDown.Value = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+            // 
+            // comboBox5
+            // 
+            this.comboBox5.Enabled = false;
+            this.comboBox5.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox5.FormattingEnabled = true;
+            this.comboBox5.Location = new System.Drawing.Point(4, 225);
+            this.comboBox5.Name = "comboBox5";
+            this.comboBox5.Size = new System.Drawing.Size(136, 23);
+            this.comboBox5.TabIndex = 41;
+            // 
+            // inLabel2
+            // 
+            this.inLabel2.AutoSize = true;
+            this.inLabel2.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.inLabel2.Location = new System.Drawing.Point(3, 159);
+            this.inLabel2.Name = "inLabel2";
+            this.inLabel2.Size = new System.Drawing.Size(61, 12);
+            this.inLabel2.TabIndex = 25;
+            this.inLabel2.Text = "In (ms)";
+            // 
+            // outMasteryNumericUpDown
+            // 
+            this.outMasteryNumericUpDown.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.outMasteryNumericUpDown.Location = new System.Drawing.Point(81, 180);
+            this.outMasteryNumericUpDown.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.outMasteryNumericUpDown.Minimum = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+            this.outMasteryNumericUpDown.Name = "outMasteryNumericUpDown";
+            this.outMasteryNumericUpDown.Size = new System.Drawing.Size(59, 20);
+            this.outMasteryNumericUpDown.TabIndex = 24;
+            this.outMasteryNumericUpDown.Value = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+            // 
+            // selectCustomMasteryNotificationButton
+            // 
+            this.selectCustomMasteryNotificationButton.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.selectCustomMasteryNotificationButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.selectCustomMasteryNotificationButton.Location = new System.Drawing.Point(74, 16);
+            this.selectCustomMasteryNotificationButton.Name = "selectCustomMasteryNotificationButton";
+            this.selectCustomMasteryNotificationButton.Size = new System.Drawing.Size(66, 23);
+            this.selectCustomMasteryNotificationButton.TabIndex = 14;
+            this.selectCustomMasteryNotificationButton.Text = "File";
+            this.selectCustomMasteryNotificationButton.UseVisualStyleBackColor = true;
+            this.selectCustomMasteryNotificationButton.Click += new System.EventHandler(this.SelectCustomMasteryNotificationButton_Click);
+            // 
+            // outLabel2
+            // 
+            this.outLabel2.AutoSize = true;
+            this.outLabel2.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.outLabel2.Location = new System.Drawing.Point(2, 183);
+            this.outLabel2.Name = "outLabel2";
+            this.outLabel2.Size = new System.Drawing.Size(69, 12);
+            this.outLabel2.TabIndex = 23;
+            this.outLabel2.Text = "Out (ms)";
+            // 
+            // scaleLabel2
+            // 
+            this.scaleLabel2.AutoSize = true;
+            this.scaleLabel2.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.scaleLabel2.Location = new System.Drawing.Point(6, 131);
+            this.scaleLabel2.Name = "scaleLabel2";
+            this.scaleLabel2.Size = new System.Drawing.Size(45, 12);
+            this.scaleLabel2.TabIndex = 21;
+            this.scaleLabel2.Text = "Scale";
+            this.scaleLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // scaleMasteryNumericUpDown
+            // 
+            this.scaleMasteryNumericUpDown.DecimalPlaces = 2;
+            this.scaleMasteryNumericUpDown.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.scaleMasteryNumericUpDown.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.scaleMasteryNumericUpDown.Location = new System.Drawing.Point(81, 128);
+            this.scaleMasteryNumericUpDown.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.scaleMasteryNumericUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.scaleMasteryNumericUpDown.Name = "scaleMasteryNumericUpDown";
+            this.scaleMasteryNumericUpDown.Size = new System.Drawing.Size(59, 20);
+            this.scaleMasteryNumericUpDown.TabIndex = 20;
+            this.scaleMasteryNumericUpDown.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.notificationsFontOutlineSizeUpDown.Name = "notificationsFontOutlineSizeUpDown";
-            this.notificationsFontOutlineSizeUpDown.Size = new System.Drawing.Size(49, 23);
-            this.notificationsFontOutlineSizeUpDown.TabIndex = 28;
-            this.notificationsFontOutlineSizeUpDown.Value = new decimal(new int[] {
-            1,
+            // 
+            // yPositionLabel2
+            // 
+            this.yPositionLabel2.AutoSize = true;
+            this.yPositionLabel2.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.yPositionLabel2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.yPositionLabel2.Location = new System.Drawing.Point(3, 105);
+            this.yPositionLabel2.Name = "yPositionLabel2";
+            this.yPositionLabel2.Size = new System.Drawing.Size(61, 12);
+            this.yPositionLabel2.TabIndex = 19;
+            this.yPositionLabel2.Text = "Y Coor.";
+            this.yPositionLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // xPositionLabel2
+            // 
+            this.xPositionLabel2.AutoSize = true;
+            this.xPositionLabel2.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.xPositionLabel2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.xPositionLabel2.Location = new System.Drawing.Point(3, 81);
+            this.xPositionLabel2.Name = "xPositionLabel2";
+            this.xPositionLabel2.Size = new System.Drawing.Size(61, 12);
+            this.xPositionLabel2.TabIndex = 18;
+            this.xPositionLabel2.Text = "X Coor.";
+            // 
+            // customMasteryYNumericUpDown
+            // 
+            this.customMasteryYNumericUpDown.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customMasteryYNumericUpDown.Location = new System.Drawing.Point(81, 102);
+            this.customMasteryYNumericUpDown.Maximum = new decimal(new int[] {
+            2000,
             0,
             0,
             0});
+            this.customMasteryYNumericUpDown.Minimum = new decimal(new int[] {
+            2000,
+            0,
+            0,
+            -2147483648});
+            this.customMasteryYNumericUpDown.Name = "customMasteryYNumericUpDown";
+            this.customMasteryYNumericUpDown.Size = new System.Drawing.Size(59, 20);
+            this.customMasteryYNumericUpDown.TabIndex = 16;
             // 
-            // notificationsFontOutlineCheckbox
+            // customMasteryXNumericUpDown
             // 
-            this.notificationsFontOutlineCheckbox.AutoSize = true;
-            this.notificationsFontOutlineCheckbox.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.notificationsFontOutlineCheckbox.Location = new System.Drawing.Point(9, 104);
-            this.notificationsFontOutlineCheckbox.Name = "notificationsFontOutlineCheckbox";
-            this.notificationsFontOutlineCheckbox.Size = new System.Drawing.Size(61, 17);
-            this.notificationsFontOutlineCheckbox.TabIndex = 27;
-            this.notificationsFontOutlineCheckbox.Text = "Outline";
-            this.notificationsFontOutlineCheckbox.UseVisualStyleBackColor = true;
+            this.customMasteryXNumericUpDown.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customMasteryXNumericUpDown.Location = new System.Drawing.Point(81, 78);
+            this.customMasteryXNumericUpDown.Maximum = new decimal(new int[] {
+            2000,
+            0,
+            0,
+            0});
+            this.customMasteryXNumericUpDown.Minimum = new decimal(new int[] {
+            2000,
+            0,
+            0,
+            -2147483648});
+            this.customMasteryXNumericUpDown.Name = "customMasteryXNumericUpDown";
+            this.customMasteryXNumericUpDown.Size = new System.Drawing.Size(59, 20);
+            this.customMasteryXNumericUpDown.TabIndex = 15;
             // 
-            // notificationsFontOutlineColorPickerButton
+            // useCustomMasteryCheckbox
             // 
-            this.notificationsFontOutlineColorPickerButton.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.notificationsFontOutlineColorPickerButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.notificationsFontOutlineColorPickerButton.Location = new System.Drawing.Point(110, 99);
-            this.notificationsFontOutlineColorPickerButton.Name = "notificationsFontOutlineColorPickerButton";
-            this.notificationsFontOutlineColorPickerButton.Size = new System.Drawing.Size(49, 23);
-            this.notificationsFontOutlineColorPickerButton.TabIndex = 26;
-            this.notificationsFontOutlineColorPickerButton.Text = "Set";
-            this.notificationsFontOutlineColorPickerButton.UseVisualStyleBackColor = true;
+            this.useCustomMasteryCheckbox.AutoSize = true;
+            this.useCustomMasteryCheckbox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.useCustomMasteryCheckbox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.useCustomMasteryCheckbox.Location = new System.Drawing.Point(5, 19);
+            this.useCustomMasteryCheckbox.Name = "useCustomMasteryCheckbox";
+            this.useCustomMasteryCheckbox.Size = new System.Drawing.Size(68, 18);
+            this.useCustomMasteryCheckbox.TabIndex = 13;
+            this.useCustomMasteryCheckbox.Text = "Enable";
+            this.useCustomMasteryCheckbox.UseVisualStyleBackColor = true;
             // 
-            // notificationsFontOutlineColorDisplayBox
+            // showGameMasteryButton
             // 
-            this.notificationsFontOutlineColorDisplayBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.notificationsFontOutlineColorDisplayBox.Location = new System.Drawing.Point(84, 99);
-            this.notificationsFontOutlineColorDisplayBox.Name = "notificationsFontOutlineColorDisplayBox";
-            this.notificationsFontOutlineColorDisplayBox.Size = new System.Drawing.Size(22, 22);
-            this.notificationsFontOutlineColorDisplayBox.TabIndex = 25;
-            this.notificationsFontOutlineColorDisplayBox.TabStop = false;
+            this.showGameMasteryButton.BackColor = System.Drawing.SystemColors.Control;
+            this.showGameMasteryButton.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.showGameMasteryButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.showGameMasteryButton.Location = new System.Drawing.Point(74, 48);
+            this.showGameMasteryButton.Name = "showGameMasteryButton";
+            this.showGameMasteryButton.Size = new System.Drawing.Size(66, 23);
+            this.showGameMasteryButton.TabIndex = 2;
+            this.showGameMasteryButton.Text = "Recent";
+            this.showGameMasteryButton.UseVisualStyleBackColor = false;
             // 
-            // notificationsFontColorPickerButton
+            // customMasterySettingsGroupBox
             // 
-            this.notificationsFontColorPickerButton.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.notificationsFontColorPickerButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.notificationsFontColorPickerButton.Location = new System.Drawing.Point(110, 75);
-            this.notificationsFontColorPickerButton.Name = "notificationsFontColorPickerButton";
-            this.notificationsFontColorPickerButton.Size = new System.Drawing.Size(49, 23);
-            this.notificationsFontColorPickerButton.TabIndex = 22;
-            this.notificationsFontColorPickerButton.Text = "Set";
-            this.notificationsFontColorPickerButton.UseVisualStyleBackColor = true;
+            this.customMasterySettingsGroupBox.Controls.Add(this.masteryEditOultineCheckbox);
+            this.customMasterySettingsGroupBox.Controls.Add(this.label16);
+            this.customMasterySettingsGroupBox.Controls.Add(this.comboBox4);
+            this.customMasterySettingsGroupBox.Controls.Add(this.label17);
+            this.customMasterySettingsGroupBox.Controls.Add(this.inMasteryNumericUpDown);
+            this.customMasterySettingsGroupBox.Controls.Add(this.comboBox5);
+            this.customMasterySettingsGroupBox.Controls.Add(this.inLabel2);
+            this.customMasterySettingsGroupBox.Controls.Add(this.outMasteryNumericUpDown);
+            this.customMasterySettingsGroupBox.Controls.Add(this.selectCustomMasteryNotificationButton);
+            this.customMasterySettingsGroupBox.Controls.Add(this.outLabel2);
+            this.customMasterySettingsGroupBox.Controls.Add(this.scaleLabel2);
+            this.customMasterySettingsGroupBox.Controls.Add(this.scaleMasteryNumericUpDown);
+            this.customMasterySettingsGroupBox.Controls.Add(this.yPositionLabel2);
+            this.customMasterySettingsGroupBox.Controls.Add(this.xPositionLabel2);
+            this.customMasterySettingsGroupBox.Controls.Add(this.customMasteryYNumericUpDown);
+            this.customMasterySettingsGroupBox.Controls.Add(this.customMasteryXNumericUpDown);
+            this.customMasterySettingsGroupBox.Controls.Add(this.useCustomMasteryCheckbox);
+            this.customMasterySettingsGroupBox.Controls.Add(this.showGameMasteryButton);
+            this.customMasterySettingsGroupBox.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customMasterySettingsGroupBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.customMasterySettingsGroupBox.Location = new System.Drawing.Point(148, 313);
+            this.customMasterySettingsGroupBox.Name = "customMasterySettingsGroupBox";
+            this.customMasterySettingsGroupBox.Size = new System.Drawing.Size(143, 305);
+            this.customMasterySettingsGroupBox.TabIndex = 10009;
+            this.customMasterySettingsGroupBox.TabStop = false;
+            this.customMasterySettingsGroupBox.Text = "Mastery";
             // 
-            // notificationsFontColorDisplayBox
+            // masteryEditOultineCheckbox
             // 
-            this.notificationsFontColorDisplayBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.notificationsFontColorDisplayBox.Location = new System.Drawing.Point(84, 75);
-            this.notificationsFontColorDisplayBox.Name = "notificationsFontColorDisplayBox";
-            this.notificationsFontColorDisplayBox.Size = new System.Drawing.Size(22, 22);
-            this.notificationsFontColorDisplayBox.TabIndex = 21;
-            this.notificationsFontColorDisplayBox.TabStop = false;
+            this.masteryEditOultineCheckbox.AutoSize = true;
+            this.masteryEditOultineCheckbox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.masteryEditOultineCheckbox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.masteryEditOultineCheckbox.Location = new System.Drawing.Point(6, 51);
+            this.masteryEditOultineCheckbox.Name = "masteryEditOultineCheckbox";
+            this.masteryEditOultineCheckbox.Size = new System.Drawing.Size(54, 18);
+            this.masteryEditOultineCheckbox.TabIndex = 48;
+            this.masteryEditOultineCheckbox.Text = "Edit";
+            this.masteryEditOultineCheckbox.UseVisualStyleBackColor = true;
             // 
-            // label6
+            // gameInfoOverrideSettingsGroupBox
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(6, 79);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(64, 15);
-            this.label6.TabIndex = 20;
-            this.label6.Text = "Font Color";
+            this.gameInfoOverrideSettingsGroupBox.Controls.Add(this.gameInfoTitleCheckBox);
+            this.gameInfoOverrideSettingsGroupBox.Controls.Add(this.gameInfoTitleOverrideTextBox);
+            this.gameInfoOverrideSettingsGroupBox.Controls.Add(this.gameInfoBoxArtCheckbox);
+            this.gameInfoOverrideSettingsGroupBox.Controls.Add(this.gameInfoReleaseDateCheckBox);
+            this.gameInfoOverrideSettingsGroupBox.Controls.Add(this.gameInfoGenreCheckBox);
+            this.gameInfoOverrideSettingsGroupBox.Controls.Add(this.gameInfoPublisherCheckBox);
+            this.gameInfoOverrideSettingsGroupBox.Controls.Add(this.gameInfoDeveloperCheckBox);
+            this.gameInfoOverrideSettingsGroupBox.Controls.Add(this.gameInfoConsoleCheckBox);
+            this.gameInfoOverrideSettingsGroupBox.Controls.Add(this.gameInfoDefaultButton);
+            this.gameInfoOverrideSettingsGroupBox.Controls.Add(this.gameInfoGenreOverrideTextBox);
+            this.gameInfoOverrideSettingsGroupBox.Controls.Add(this.gameInfoConsoleOverrideTextBox);
+            this.gameInfoOverrideSettingsGroupBox.Controls.Add(this.gameInfoPublisherOverrideTextBox);
+            this.gameInfoOverrideSettingsGroupBox.Controls.Add(this.gameInfoReleaseDateOverrideTextBox);
+            this.gameInfoOverrideSettingsGroupBox.Controls.Add(this.gameInfoDeveloperOverrideTextBox);
+            this.gameInfoOverrideSettingsGroupBox.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInfoOverrideSettingsGroupBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.gameInfoOverrideSettingsGroupBox.Location = new System.Drawing.Point(886, 313);
+            this.gameInfoOverrideSettingsGroupBox.Name = "gameInfoOverrideSettingsGroupBox";
+            this.gameInfoOverrideSettingsGroupBox.Size = new System.Drawing.Size(287, 171);
+            this.gameInfoOverrideSettingsGroupBox.TabIndex = 10008;
+            this.gameInfoOverrideSettingsGroupBox.TabStop = false;
+            this.gameInfoOverrideSettingsGroupBox.Text = "Game Info Overrides";
             // 
-            // userInfoGroupBox
+            // gameInfoTitleCheckBox
             // 
-            this.userInfoGroupBox.Controls.Add(this.userProfilePictureBox);
-            this.userInfoGroupBox.Controls.Add(this.apiKeyLabel);
-            this.userInfoGroupBox.Controls.Add(this.apiKeyTextBox);
-            this.userInfoGroupBox.Controls.Add(this.usernameLabel);
-            this.userInfoGroupBox.Controls.Add(this.supportButton);
-            this.userInfoGroupBox.Controls.Add(this.usernameTextBox);
-            this.userInfoGroupBox.Controls.Add(this.startButton);
-            this.userInfoGroupBox.Controls.Add(this.pointsLabel);
-            this.userInfoGroupBox.Controls.Add(this.autoStartCheckbox);
-            this.userInfoGroupBox.Controls.Add(this.siteRankLabel);
-            this.userInfoGroupBox.Controls.Add(this.stopButton);
-            this.userInfoGroupBox.Controls.Add(this.awardsLabel);
-            this.userInfoGroupBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.userInfoGroupBox.Font = new System.Drawing.Font("Calibri", 13.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userInfoGroupBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.userInfoGroupBox.Location = new System.Drawing.Point(12, 12);
-            this.userInfoGroupBox.Name = "userInfoGroupBox";
-            this.userInfoGroupBox.Size = new System.Drawing.Size(242, 180);
-            this.userInfoGroupBox.TabIndex = 10008;
-            this.userInfoGroupBox.TabStop = false;
-            this.userInfoGroupBox.Text = "User Info";
+            this.gameInfoTitleCheckBox.AutoSize = true;
+            this.gameInfoTitleCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInfoTitleCheckBox.Location = new System.Drawing.Point(8, 12);
+            this.gameInfoTitleCheckBox.Name = "gameInfoTitleCheckBox";
+            this.gameInfoTitleCheckBox.Size = new System.Drawing.Size(61, 18);
+            this.gameInfoTitleCheckBox.TabIndex = 54;
+            this.gameInfoTitleCheckBox.Text = "Title";
+            this.gameInfoTitleCheckBox.UseVisualStyleBackColor = true;
+            this.gameInfoTitleCheckBox.CheckedChanged += new System.EventHandler(this.gameInfoTitleCheckBox_CheckedChanged);
             // 
-            // startButton
+            // gameInfoTitleOverrideTextBox
             // 
-            this.startButton.Font = new System.Drawing.Font("Calibri", 7.55F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.startButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.startButton.Location = new System.Drawing.Point(165, 96);
-            this.startButton.Name = "startButton";
-            this.startButton.Size = new System.Drawing.Size(69, 23);
-            this.startButton.TabIndex = 3;
-            this.startButton.Text = "Start";
-            this.startButton.UseVisualStyleBackColor = true;
-            this.startButton.Click += new System.EventHandler(this.StartButton_Click);
+            this.gameInfoTitleOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInfoTitleOverrideTextBox.Location = new System.Drawing.Point(7, 30);
+            this.gameInfoTitleOverrideTextBox.Name = "gameInfoTitleOverrideTextBox";
+            this.gameInfoTitleOverrideTextBox.Size = new System.Drawing.Size(133, 20);
+            this.gameInfoTitleOverrideTextBox.TabIndex = 53;
+            this.gameInfoTitleOverrideTextBox.Text = "Title";
+            this.gameInfoTitleOverrideTextBox.TextChanged += new System.EventHandler(this.gameInfoTitleOverrideTextBox_TextChanged);
             // 
-            // raConnectionStatusPictureBox
+            // gameInfoBoxArtCheckbox
             // 
-            this.raConnectionStatusPictureBox.Image = global::Retro_Achievement_Tracker.Properties.Resources.red_button;
-            this.raConnectionStatusPictureBox.Location = new System.Drawing.Point(12, 195);
-            this.raConnectionStatusPictureBox.Name = "raConnectionStatusPictureBox";
-            this.raConnectionStatusPictureBox.Size = new System.Drawing.Size(20, 20);
-            this.raConnectionStatusPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.raConnectionStatusPictureBox.TabIndex = 10025;
-            this.raConnectionStatusPictureBox.TabStop = false;
+            this.gameInfoBoxArtCheckbox.AutoSize = true;
+            this.gameInfoBoxArtCheckbox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInfoBoxArtCheckbox.Location = new System.Drawing.Point(6, 144);
+            this.gameInfoBoxArtCheckbox.Name = "gameInfoBoxArtCheckbox";
+            this.gameInfoBoxArtCheckbox.Size = new System.Drawing.Size(68, 18);
+            this.gameInfoBoxArtCheckbox.TabIndex = 39;
+            this.gameInfoBoxArtCheckbox.Text = "Boxart";
+            this.gameInfoBoxArtCheckbox.UseVisualStyleBackColor = true;
+            this.gameInfoBoxArtCheckbox.CheckedChanged += new System.EventHandler(this.gameInfoBoxArtCheckbox_CheckedChanged);
             // 
-            // raConnectivityLabel
+            // gameInfoReleaseDateCheckBox
             // 
-            this.raConnectivityLabel.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.raConnectivityLabel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.raConnectivityLabel.Location = new System.Drawing.Point(9, 215);
-            this.raConnectivityLabel.Name = "raConnectivityLabel";
-            this.raConnectivityLabel.Size = new System.Drawing.Size(248, 41);
-            this.raConnectivityLabel.TabIndex = 10026;
-            this.raConnectivityLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.gameInfoReleaseDateCheckBox.AutoSize = true;
+            this.gameInfoReleaseDateCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInfoReleaseDateCheckBox.Location = new System.Drawing.Point(148, 95);
+            this.gameInfoReleaseDateCheckBox.Name = "gameInfoReleaseDateCheckBox";
+            this.gameInfoReleaseDateCheckBox.Size = new System.Drawing.Size(110, 18);
+            this.gameInfoReleaseDateCheckBox.TabIndex = 52;
+            this.gameInfoReleaseDateCheckBox.Text = "Release Date";
+            this.gameInfoReleaseDateCheckBox.UseVisualStyleBackColor = true;
+            this.gameInfoReleaseDateCheckBox.CheckedChanged += new System.EventHandler(this.gameInfoReleaseDateCheckBox_CheckedChanged);
+            // 
+            // gameInfoGenreCheckBox
+            // 
+            this.gameInfoGenreCheckBox.AutoSize = true;
+            this.gameInfoGenreCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInfoGenreCheckBox.Location = new System.Drawing.Point(7, 95);
+            this.gameInfoGenreCheckBox.Name = "gameInfoGenreCheckBox";
+            this.gameInfoGenreCheckBox.Size = new System.Drawing.Size(61, 18);
+            this.gameInfoGenreCheckBox.TabIndex = 51;
+            this.gameInfoGenreCheckBox.Text = "Genre";
+            this.gameInfoGenreCheckBox.UseVisualStyleBackColor = true;
+            this.gameInfoGenreCheckBox.CheckedChanged += new System.EventHandler(this.gameInfoGenreCheckBox_CheckedChanged);
+            // 
+            // gameInfoPublisherCheckBox
+            // 
+            this.gameInfoPublisherCheckBox.AutoSize = true;
+            this.gameInfoPublisherCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInfoPublisherCheckBox.Location = new System.Drawing.Point(148, 51);
+            this.gameInfoPublisherCheckBox.Name = "gameInfoPublisherCheckBox";
+            this.gameInfoPublisherCheckBox.Size = new System.Drawing.Size(89, 18);
+            this.gameInfoPublisherCheckBox.TabIndex = 50;
+            this.gameInfoPublisherCheckBox.Text = "Publisher";
+            this.gameInfoPublisherCheckBox.UseVisualStyleBackColor = true;
+            this.gameInfoPublisherCheckBox.CheckedChanged += new System.EventHandler(this.gameInfoPublisherCheckBox_CheckedChanged);
+            // 
+            // gameInfoDeveloperCheckBox
+            // 
+            this.gameInfoDeveloperCheckBox.AutoSize = true;
+            this.gameInfoDeveloperCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInfoDeveloperCheckBox.Location = new System.Drawing.Point(6, 49);
+            this.gameInfoDeveloperCheckBox.Name = "gameInfoDeveloperCheckBox";
+            this.gameInfoDeveloperCheckBox.Size = new System.Drawing.Size(89, 18);
+            this.gameInfoDeveloperCheckBox.TabIndex = 49;
+            this.gameInfoDeveloperCheckBox.Text = "Developer";
+            this.gameInfoDeveloperCheckBox.UseVisualStyleBackColor = true;
+            this.gameInfoDeveloperCheckBox.CheckedChanged += new System.EventHandler(this.gameInfoDeveloperCheckBox_CheckedChanged);
+            // 
+            // gameInfoConsoleCheckBox
+            // 
+            this.gameInfoConsoleCheckBox.AutoSize = true;
+            this.gameInfoConsoleCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInfoConsoleCheckBox.Location = new System.Drawing.Point(149, 14);
+            this.gameInfoConsoleCheckBox.Name = "gameInfoConsoleCheckBox";
+            this.gameInfoConsoleCheckBox.Size = new System.Drawing.Size(75, 18);
+            this.gameInfoConsoleCheckBox.TabIndex = 48;
+            this.gameInfoConsoleCheckBox.Text = "Console";
+            this.gameInfoConsoleCheckBox.UseVisualStyleBackColor = true;
+            this.gameInfoConsoleCheckBox.CheckedChanged += new System.EventHandler(this.gameInfoConsoleCheckBox_CheckedChanged);
+            // 
+            // gameInfoDefaultButton
+            // 
+            this.gameInfoDefaultButton.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInfoDefaultButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.gameInfoDefaultButton.Location = new System.Drawing.Point(209, 139);
+            this.gameInfoDefaultButton.Name = "gameInfoDefaultButton";
+            this.gameInfoDefaultButton.Size = new System.Drawing.Size(72, 23);
+            this.gameInfoDefaultButton.TabIndex = 40;
+            this.gameInfoDefaultButton.Text = "Default";
+            this.gameInfoDefaultButton.UseVisualStyleBackColor = true;
+            this.gameInfoDefaultButton.Click += new System.EventHandler(this.GameInfoDefaultButton_Click);
+            // 
+            // gameInfoGenreOverrideTextBox
+            // 
+            this.gameInfoGenreOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInfoGenreOverrideTextBox.Location = new System.Drawing.Point(6, 113);
+            this.gameInfoGenreOverrideTextBox.Name = "gameInfoGenreOverrideTextBox";
+            this.gameInfoGenreOverrideTextBox.Size = new System.Drawing.Size(133, 20);
+            this.gameInfoGenreOverrideTextBox.TabIndex = 25;
+            this.gameInfoGenreOverrideTextBox.Text = "Genre";
+            this.gameInfoGenreOverrideTextBox.TextChanged += new System.EventHandler(this.gameInfoGenreOverrideTextBox_TextChanged);
+            // 
+            // gameInfoConsoleOverrideTextBox
+            // 
+            this.gameInfoConsoleOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInfoConsoleOverrideTextBox.Location = new System.Drawing.Point(148, 32);
+            this.gameInfoConsoleOverrideTextBox.Name = "gameInfoConsoleOverrideTextBox";
+            this.gameInfoConsoleOverrideTextBox.Size = new System.Drawing.Size(133, 20);
+            this.gameInfoConsoleOverrideTextBox.TabIndex = 19;
+            this.gameInfoConsoleOverrideTextBox.Text = "Console";
+            this.gameInfoConsoleOverrideTextBox.TextChanged += new System.EventHandler(this.gameInfoConsoleOverrideTextBox_TextChanged);
+            // 
+            // gameInfoPublisherOverrideTextBox
+            // 
+            this.gameInfoPublisherOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInfoPublisherOverrideTextBox.Location = new System.Drawing.Point(148, 69);
+            this.gameInfoPublisherOverrideTextBox.Name = "gameInfoPublisherOverrideTextBox";
+            this.gameInfoPublisherOverrideTextBox.Size = new System.Drawing.Size(133, 20);
+            this.gameInfoPublisherOverrideTextBox.TabIndex = 24;
+            this.gameInfoPublisherOverrideTextBox.Text = "Publisher";
+            this.gameInfoPublisherOverrideTextBox.TextChanged += new System.EventHandler(this.gameInfoPublisherOverrideTextBox_TextChanged);
+            // 
+            // gameInfoReleaseDateOverrideTextBox
+            // 
+            this.gameInfoReleaseDateOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInfoReleaseDateOverrideTextBox.Location = new System.Drawing.Point(148, 113);
+            this.gameInfoReleaseDateOverrideTextBox.Name = "gameInfoReleaseDateOverrideTextBox";
+            this.gameInfoReleaseDateOverrideTextBox.Size = new System.Drawing.Size(133, 20);
+            this.gameInfoReleaseDateOverrideTextBox.TabIndex = 23;
+            this.gameInfoReleaseDateOverrideTextBox.Text = "Released";
+            this.gameInfoReleaseDateOverrideTextBox.TextChanged += new System.EventHandler(this.gameInfoReleaseDateOverrideTextBox_TextChanged);
+            // 
+            // gameInfoDeveloperOverrideTextBox
+            // 
+            this.gameInfoDeveloperOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInfoDeveloperOverrideTextBox.Location = new System.Drawing.Point(6, 69);
+            this.gameInfoDeveloperOverrideTextBox.Name = "gameInfoDeveloperOverrideTextBox";
+            this.gameInfoDeveloperOverrideTextBox.Size = new System.Drawing.Size(133, 20);
+            this.gameInfoDeveloperOverrideTextBox.TabIndex = 21;
+            this.gameInfoDeveloperOverrideTextBox.Text = "Developer";
+            this.gameInfoDeveloperOverrideTextBox.TextChanged += new System.EventHandler(this.gameInfoDeveloperOverrideTextBox_TextChanged);
+            // 
+            // lastFiveOverridesGroupBox
+            // 
+            this.lastFiveOverridesGroupBox.Controls.Add(this.lastFiveVerboseCheckbox);
+            this.lastFiveOverridesGroupBox.Controls.Add(this.lastFiveSimpleCheckbox);
+            this.lastFiveOverridesGroupBox.Controls.Add(this.label27);
+            this.lastFiveOverridesGroupBox.Controls.Add(this.comboBox6);
+            this.lastFiveOverridesGroupBox.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lastFiveOverridesGroupBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lastFiveOverridesGroupBox.Location = new System.Drawing.Point(1179, 313);
+            this.lastFiveOverridesGroupBox.Name = "lastFiveOverridesGroupBox";
+            this.lastFiveOverridesGroupBox.Size = new System.Drawing.Size(287, 52);
+            this.lastFiveOverridesGroupBox.TabIndex = 10030;
+            this.lastFiveOverridesGroupBox.TabStop = false;
+            this.lastFiveOverridesGroupBox.Text = "Last 5 Overrides";
+            // 
+            // lastFiveVerboseCheckbox
+            // 
+            this.lastFiveVerboseCheckbox.AutoSize = true;
+            this.lastFiveVerboseCheckbox.Enabled = false;
+            this.lastFiveVerboseCheckbox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lastFiveVerboseCheckbox.Location = new System.Drawing.Point(80, 32);
+            this.lastFiveVerboseCheckbox.Name = "lastFiveVerboseCheckbox";
+            this.lastFiveVerboseCheckbox.Size = new System.Drawing.Size(75, 18);
+            this.lastFiveVerboseCheckbox.TabIndex = 40;
+            this.lastFiveVerboseCheckbox.Text = "Verbose";
+            this.lastFiveVerboseCheckbox.UseVisualStyleBackColor = true;
+            // 
+            // lastFiveSimpleCheckbox
+            // 
+            this.lastFiveSimpleCheckbox.AutoSize = true;
+            this.lastFiveSimpleCheckbox.Enabled = false;
+            this.lastFiveSimpleCheckbox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lastFiveSimpleCheckbox.Location = new System.Drawing.Point(6, 32);
+            this.lastFiveSimpleCheckbox.Name = "lastFiveSimpleCheckbox";
+            this.lastFiveSimpleCheckbox.Size = new System.Drawing.Size(68, 18);
+            this.lastFiveSimpleCheckbox.TabIndex = 39;
+            this.lastFiveSimpleCheckbox.Text = "Simple";
+            this.lastFiveSimpleCheckbox.UseVisualStyleBackColor = true;
+            // 
+            // label27
+            // 
+            this.label27.Enabled = false;
+            this.label27.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label27.Location = new System.Drawing.Point(6, 20);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(212, 19);
+            this.label27.TabIndex = 39;
+            this.label27.Text = "Achievements to display";
+            // 
+            // comboBox6
+            // 
+            this.comboBox6.Enabled = false;
+            this.comboBox6.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox6.FormattingEnabled = true;
+            this.comboBox6.Location = new System.Drawing.Point(223, 14);
+            this.comboBox6.Name = "comboBox6";
+            this.comboBox6.Size = new System.Drawing.Size(58, 23);
+            this.comboBox6.TabIndex = 39;
             // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // statsFontComboBox
-            // 
-            this.statsFontComboBox.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.statsFontComboBox.FormattingEnabled = true;
-            this.statsFontComboBox.Location = new System.Drawing.Point(9, 28);
-            this.statsFontComboBox.Name = "statsFontComboBox";
-            this.statsFontComboBox.Size = new System.Drawing.Size(150, 23);
-            this.statsFontComboBox.TabIndex = 38;
-            // 
-            // focusFontComboBox
-            // 
-            this.focusFontComboBox.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.focusFontComboBox.FormattingEnabled = true;
-            this.focusFontComboBox.Location = new System.Drawing.Point(6, 28);
-            this.focusFontComboBox.Name = "focusFontComboBox";
-            this.focusFontComboBox.Size = new System.Drawing.Size(152, 23);
-            this.focusFontComboBox.TabIndex = 38;
-            // 
-            // notificationsFontComboBox
-            // 
-            this.notificationsFontComboBox.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.notificationsFontComboBox.FormattingEnabled = true;
-            this.notificationsFontComboBox.Location = new System.Drawing.Point(9, 22);
-            this.notificationsFontComboBox.Name = "notificationsFontComboBox";
-            this.notificationsFontComboBox.Size = new System.Drawing.Size(150, 23);
-            this.notificationsFontComboBox.TabIndex = 38;
             // 
             // MainPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SteelBlue;
-            this.ClientSize = new System.Drawing.Size(900, 440);
-            this.Controls.Add(this.raConnectivityLabel);
-            this.Controls.Add(this.raConnectionStatusPictureBox);
+            this.ClientSize = new System.Drawing.Size(1745, 721);
+            this.Controls.Add(this.lastFiveOverridesGroupBox);
+            this.Controls.Add(this.gameInfoOverrideSettingsGroupBox);
+            this.Controls.Add(this.customMasterySettingsGroupBox);
+            this.Controls.Add(this.groupBox4);
+            this.Controls.Add(this.customAchievementSettingsGroupBox);
+            this.Controls.Add(this.fontSettingsGroupBox);
+            this.Controls.Add(this.statsOverrideGroupBox);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.userInfoGroupBox);
-            this.Controls.Add(this.statsGroupBox);
-            this.Controls.Add(this.timerStatusLabel);
-            this.Controls.Add(this.gameInformationGroupBox);
-            this.Controls.Add(this.focusGroupBox);
             this.Controls.Add(this.notificationsGroupBox);
+            this.Controls.Add(this.statsGroupBox);
+            this.Controls.Add(this.focusGroupBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainPage";
             this.Text = "Retro Achievements Tracker";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainPage_FormClosed);
-            ((System.ComponentModel.ISupportInitialize)(this.gameInformationImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.userProfilePictureBox)).EndInit();
-            this.gameInformationGroupBox.ResumeLayout(false);
             this.statsGroupBox.ResumeLayout(false);
             this.statsGroupBox.PerformLayout();
-            this.statsFontGroupBox.ResumeLayout(false);
-            this.statsFontGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.statsBackgroundColorDisplayBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.statsFontOutlineSizeUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.statsFontOutlineColorDisplayBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.statsFontColorDisplayBox)).EndInit();
             this.focusGroupBox.ResumeLayout(false);
             this.focusGroupBox.PerformLayout();
-            this.focusFontGroupBox.ResumeLayout(false);
-            this.focusFontGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.focusBackgroundColorDisplayBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.focusFontOutlineSizeUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.focusFontOutlineColorDisplayBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.focusFontColorDisplayBox)).EndInit();
-            this.lockedAchievementsGroupBox.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.focusAchievementPictureBox)).EndInit();
             this.notificationsGroupBox.ResumeLayout(false);
             this.notificationsGroupBox.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.inMasteryNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.outMasteryNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.scaleMasteryNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.customMasteryYNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.customMasteryXNumericUpDown)).EndInit();
+            this.userInfoGroupBox.ResumeLayout(false);
+            this.userInfoGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.raConnectionStatusPictureBox)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            this.statsOverrideGroupBox.ResumeLayout(false);
+            this.statsOverrideGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.backgroundColorPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fontOutlineNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fontOutlineColorPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fontColorPictureBox)).EndInit();
+            this.fontSettingsGroupBox.ResumeLayout(false);
+            this.fontSettingsGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.inAchievementNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.outAchievementNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.scaleAchievementNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.customAchievementYNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.customAchievementXNumericUpDown)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.notificationsBackgroundColorDisplayBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.notificationsFontOutlineSizeUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.notificationsFontOutlineColorDisplayBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.notificationsFontColorDisplayBox)).EndInit();
-            this.userInfoGroupBox.ResumeLayout(false);
-            this.userInfoGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.raConnectionStatusPictureBox)).EndInit();
+            this.customAchievementSettingsGroupBox.ResumeLayout(false);
+            this.customAchievementSettingsGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.inMasteryNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.outMasteryNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.scaleMasteryNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.customMasteryYNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.customMasteryXNumericUpDown)).EndInit();
+            this.customMasterySettingsGroupBox.ResumeLayout(false);
+            this.customMasterySettingsGroupBox.PerformLayout();
+            this.gameInfoOverrideSettingsGroupBox.ResumeLayout(false);
+            this.gameInfoOverrideSettingsGroupBox.PerformLayout();
+            this.lastFiveOverridesGroupBox.ResumeLayout(false);
+            this.lastFiveOverridesGroupBox.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -1654,46 +2097,68 @@ namespace Retro_Achievement_Tracker
         private Label apiKeyLabel;
         private Label siteRankLabel;
         private Label pointsLabel;
-        private Label gameInformationTitleLabel;
-        private Label gameInformationCheevosCountLabel;
-        private Label gameInformationPointsLabel;
-        private Label gameInformationPublisherLabel;
-        private Label gameInformationDeveloperLabel;
-        private Label gameInformationConsoleLabel;
         private Label awardsLabel;
         private TextBox apiKeyTextBox;
         private TextBox usernameTextBox;
-        private PictureBox gameInformationImage;
         private PictureBox userProfilePictureBox;
         private Button startButton;
         private Button stopButton;
-        private Button supportButton;
         private Button showFocusWindowButton;
         private CheckBox autoStartCheckbox;
         private CheckBox autoLaunchFocusWindowCheckBox;
-        private GroupBox gameInformationGroupBox;
         private GroupBox notificationsGroupBox;
         private GroupBox userInfoGroupBox;
         private GroupBox focusGroupBox;
         private GroupBox statsGroupBox;
         private CheckBox autoLaunchStatsWindowCheckbox;
-        private Button showStatsWindowButton;
+        private Button openStatsWindowButton;
         private CheckBox autoLaunchNotificationsWindowCheckbox;
-        private Button showNotificationsWindowButton;
+        private Button openAlertsWindowButton;
         private Label timerStatusLabel;
         private PictureBox raConnectionStatusPictureBox;
-        private Label raConnectivityLabel;
-        private Button notificationsBackgroundColorPickerButton;
-        private PictureBox notificationsBackgroundColorDisplayBox;
-        private Label label2;
-        private NumericUpDown notificationsFontOutlineSizeUpDown;
-        private CheckBox notificationsFontOutlineCheckbox;
-        private Button notificationsFontOutlineColorPickerButton;
-        private PictureBox notificationsFontOutlineColorDisplayBox;
-        private Button notificationsFontColorPickerButton;
-        private PictureBox notificationsFontColorDisplayBox;
-        private Label label6;
+        private Label label33;
+        private Label focusAchievementDescriptionLabel;
+        private PictureBox focusAchievementPictureBox;
+        private Label focusAchievementTitleLabel;
+        private Button customizeFocusButton;
+        private Button customizeStatsButton;
+        private Button customizeAlertsButton;
+        private GroupBox groupBox1;
+        private Button customizeGameButton;
+        private CheckBox autoLaunchGameInfoWindowCheckbox;
+        private Button openGameInfoWindowButton;
         private GroupBox groupBox2;
+        private GroupBox groupBox3;
+        private Button customizeLastFiveButton;
+        private CheckBox autoLaunchLastFiveWindowCheckbox;
+        private Button openLastFiveWindowButton;
+        private GroupBox groupBox4;
+        private CheckBox lastFiveStreamLabelsCheckBox;
+        private CheckBox gameInfoStreamLabelsCheckBox;
+        private CheckBox statsStreamLabelsCheckBox;
+        private TextBox statsGameRatioOverrideTextBox;
+        private TextBox statsTruePointsOverrideTextBox;
+        private TextBox statsPointsOverrideTextBox;
+        private TextBox statsRatioOverrideTextBox;
+        private TextBox statsAwardsOverrideTextBox;
+        private TextBox statsRankOverrideTextBox;
+        private GroupBox statsOverrideGroupBox;
+        private ComboBox fontFamilyComboBox;
+        private Button setBackgroundColorButton;
+        private PictureBox backgroundColorPictureBox;
+        private Label backgroundColorLabel;
+        private NumericUpDown fontOutlineNumericUpDown;
+        private CheckBox fontOutlineCheckBox;
+        private Button fontOutlineColorButton;
+        private PictureBox fontOutlineColorPictureBox;
+        private Button setFontColorButton;
+        private PictureBox fontColorPictureBox;
+        private Label fontColorLabel;
+        private GroupBox fontSettingsGroupBox;
+        private Label label9;
+        private Label label10;
+        private ComboBox comboBox2;
+        private ComboBox comboBox3;
         private NumericUpDown inAchievementNumericUpDown;
         private Label inLabel1;
         private NumericUpDown outAchievementNumericUpDown;
@@ -1703,36 +2168,16 @@ namespace Retro_Achievement_Tracker
         private NumericUpDown scaleAchievementNumericUpDown;
         private Label yPositionLabel1;
         private Label xPositionLabel1;
-        private CheckBox acheivementEditOutlineCheckbox;
         private NumericUpDown customAchievementYNumericUpDown;
         private NumericUpDown customAchievementXNumericUpDown;
         private CheckBox useCustomAchievementCheckbox;
         private Button showAchievementButton;
-        private GroupBox groupBox3;
-        private GroupBox statsFontGroupBox;
-        private Button button9;
-        private PictureBox statsBackgroundColorDisplayBox;
-        private Label label19;
-        private NumericUpDown statsFontOutlineSizeUpDown;
-        private CheckBox statsFontOutlineCheckbox;
-        private Button statsFontOutlineColorPickerButton;
-        private PictureBox statsFontOutlineColorDisplayBox;
-        private Button statsFontColorPickerButton;
-        private PictureBox statsFontColorDisplayBox;
-        private Label statsFontColorLabel;
-        private GroupBox focusFontGroupBox;
-        private Button focusBackgroundColorPickerButton;
-        private PictureBox focusBackgroundColorDisplayBox;
-        private Label label26;
-        private NumericUpDown focusFontOutlineSizeUpDown;
-        private CheckBox focusFontOutlineCheckbox;
-        private Button focusFontOutlineColorPickerButton;
-        private PictureBox focusFontOutlineColorDisplayBox;
-        private Button focusFontColorPickerButton;
-        private PictureBox focusFontColorDisplayBox;
-        private Label label30;
-        private GroupBox groupBox4;
+        private GroupBox customAchievementSettingsGroupBox;
+        private Label label16;
+        private ComboBox comboBox4;
+        private Label label17;
         private NumericUpDown inMasteryNumericUpDown;
+        private ComboBox comboBox5;
         private Label inLabel2;
         private NumericUpDown outMasteryNumericUpDown;
         private Button selectCustomMasteryNotificationButton;
@@ -1741,25 +2186,57 @@ namespace Retro_Achievement_Tracker
         private NumericUpDown scaleMasteryNumericUpDown;
         private Label yPositionLabel2;
         private Label xPositionLabel2;
-        private CheckBox masteryEditOultineCheckbox;
         private NumericUpDown customMasteryYNumericUpDown;
         private NumericUpDown customMasteryXNumericUpDown;
         private CheckBox useCustomMasteryCheckbox;
         private Button showGameMasteryButton;
-        private GroupBox lockedAchievementsGroupBox;
-        private Label label33;
-        private Label focusAchievementDescriptionLabel;
-        private PictureBox focusAchievementPictureBox;
+        private GroupBox customMasterySettingsGroupBox;
+        private Button hideButton;
+        private GroupBox gameInfoOverrideSettingsGroupBox;
+        private TextBox statsGameTruePointsOverrideTextBox;
+        private TextBox statsGamePointsOverrideTextBox;
+        private TextBox statsGameAchievementsOverrideTextBox;
+        private GroupBox lastFiveOverridesGroupBox;
+        private Button setFocusButton;
         private Button focusAchievementButtonRight;
         private Button hideFocusButton;
         private Button focusAchievementButtonLeft;
-        private Label focusAchievementTitleLabel;
-        private Button setFocusButton;
-        private ColorDialog colorDialog1;
+        private Label ratioLabel;
+        private CheckBox focusStreamLabelsCheckBox;
+        private CheckBox alertsStreamLabelsCheckBox;
+        private Label truePointsLabel;
+        private Label label27;
+        private ComboBox comboBox6;
         private OpenFileDialog openFileDialog1;
-        private ComboBox statsFontComboBox;
-        private ComboBox focusFontComboBox;
-        private ComboBox notificationsFontComboBox;
+        private ColorDialog colorDialog1;
+        private CheckBox acheivementEditOutlineCheckbox;
+        private CheckBox masteryEditOultineCheckbox;
+        private TextBox gameInfoGenreOverrideTextBox;
+        private TextBox gameInfoConsoleOverrideTextBox;
+        private TextBox gameInfoPublisherOverrideTextBox;
+        private TextBox gameInfoReleaseDateOverrideTextBox;
+        private TextBox gameInfoDeveloperOverrideTextBox;
+        private Button statsDefaultButton;
+        private Button gameInfoDefaultButton;
+        private CheckBox lastFiveVerboseCheckbox;
+        private CheckBox lastFiveSimpleCheckbox;
+        private CheckBox statsGameAchievementsCheckBox;
+        private CheckBox statsGameTruePointsCheckBox;
+        private CheckBox statsGamePointsCheckBox;
+        private CheckBox statsGameRatioCheckBox;
+        private CheckBox statsRatioCheckBox;
+        private CheckBox statsTruePointsCheckBox;
+        private CheckBox statsPointsCheckBox;
+        private CheckBox statsAwardsCheckBox;
+        private CheckBox statsRankCheckBox;
+        private CheckBox gameInfoReleaseDateCheckBox;
+        private CheckBox gameInfoGenreCheckBox;
+        private CheckBox gameInfoPublisherCheckBox;
+        private CheckBox gameInfoDeveloperCheckBox;
+        private CheckBox gameInfoConsoleCheckBox;
+        private CheckBox gameInfoBoxArtCheckbox;
+        private CheckBox gameInfoTitleCheckBox;
+        private TextBox gameInfoTitleOverrideTextBox;
     }
 }
 

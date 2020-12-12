@@ -10,6 +10,7 @@
     {
         public int LastGameID { get; set; }
         public int TotalPoints { get; set; }
+        public int TotalTruePoints { get; set; }
         public int Rank { get; set; }
         public string Motto { get; set; }
         public string UserPic { get; set; }
@@ -52,6 +53,7 @@
         public string Title { get; set; }
         public string Description { get; set; }
         public int Points { get; set; }
+        public int TrueRatio { get; set; }
         public string BadgeNumber { get; set; }
         public bool IsAwarded { get; set; }
         public int DisplayOrder { get; set; }

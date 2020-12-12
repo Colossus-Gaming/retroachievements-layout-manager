@@ -9,36 +9,22 @@ using System.Windows.Forms;
 
 namespace Retro_Achievement_Tracker
 {
-    public partial class FocusLayoutWindow : Form
+    public partial class LastFiveLayoutWindow : Form
     {
-        public FocusLayoutWindow()
+        public LastFiveLayoutWindow()
         {
-            this.ClientSize = new Size(1040, 260);
+            this.ClientSize = new System.Drawing.Size(1000, 300);
             SetupBrowser();
-            this.Name = "RA Tracker - Focus";
-            this.Text = "RA Tracker - Focus";
-        }
-
-        public async void SetFocus(Achievement achievement)
-        { 
-            await ExecuteScript("setFocus(\"" + achievement.Title.Replace("\"", "\\\"") + "\"," +
-                           "\"https://retroachievements.org/Badge/" + achievement.BadgeNumber + ".png\"," +
-                           "\"" + achievement.Description.Replace("\"", "\\\"") + "\"," +
-                           "\"" + achievement.Points + "\");");
-        }
-
-        public async void HideFocus()
-        {
-            await ExecuteScript("hideFocus();");
+            this.Name = "RA Tracker - Last Five Achievements";
+            this.Text = "RA Tracker - Last Five Achievements";
         }
         public async void SetFontColor(string hexCode)
         {
             await ExecuteScript("setFontColor(\"" + hexCode + "\");");
         }
-
         public async void SetFontFamily(string fontName)
         {
-            await ExecuteScript("setFontFamily(\"" + fontName + "\");");
+            await ExecuteScript("setFontFamily(\"" + fontName.Replace("'", "\\'") + "\");");
         }
 
         public async void SetFontOutline(string hexCode, int size)
@@ -67,7 +53,7 @@ namespace Retro_Achievement_Tracker
 
         protected void SetupBrowser()
         {
-            this.chromiumWebBrowser = new CefSharp.WinForms.ChromiumWebBrowser(new HtmlString(Resources.FocusWindow))
+            this.chromiumWebBrowser = new CefSharp.WinForms.ChromiumWebBrowser(new HtmlString(Resources.StatsWindow))
             {
                 ActivateBrowserOnCreation = false,
                 Location = new Point(0, 0),
@@ -85,15 +71,15 @@ namespace Retro_Achievement_Tracker
 
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FocusLayoutWindow));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LastFiveLayoutWindow));
             this.SuspendLayout();
             // 
-            // FocusLayoutWindow
+            // LastFiveLayoutWindow
             // 
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "FocusLayoutWindow";
+            this.Name = "LastFiveLayoutWindow";
             this.ResumeLayout(false);
 
         }

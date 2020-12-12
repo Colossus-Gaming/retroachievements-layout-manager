@@ -1,5 +1,7 @@
 ﻿using CefSharp;
+using CefSharp.Web;
 using Retro_Achievement_Tracker.Models;
+using Retro_Achievement_Tracker.Properties;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -17,7 +19,7 @@ namespace Retro_Achievement_Tracker.Forms
         private Stopwatch stopwatch;
         private CancellationTokenSource tokenSource2 = new CancellationTokenSource();
 
-        public NotificationLayoutWindow()
+        public NotificationLayoutWindow(Action<string, string, int> writeAlertStreamLabels)
         {
             this.ClientSize = new Size(1200, 600);
             SetupBrowser();
@@ -29,6 +31,7 @@ namespace Retro_Achievement_Tracker.Forms
             stopwatch = new Stopwatch();
 
             RunNotificationTask();
+            this.writeAlertStreamLabels = writeAlertStreamLabels;
         }
 
         public void FireNotifications()
@@ -71,8 +74,13 @@ namespace Retro_Achievement_Tracker.Forms
                                     {
                                         SendAchievementNotification(notificationRequest.Achievement);
 
+                                        if (Settings.Default.stream_labels_notifications)
+                                        {
+                                            this.writeAlertStreamLabels(notificationRequest.Achievement.Title, notificationRequest.Achievement.Description, notificationRequest.Achievement.Points);
+                                        }
+
                                         stopwatch = Stopwatch.StartNew();
-                                        
+
                                         SetAchievementIn(notificationRequest.CustomIn);
                                         SetAchievementOut(notificationRequest.CustomOut);
 
@@ -81,7 +89,12 @@ namespace Retro_Achievement_Tracker.Forms
                                     else if (notificationRequest.GameSummary != null && notificationRequest.GameAchievementSummary != null)
                                     {
                                         SendMasteryNotification(notificationRequest.GameSummary, notificationRequest.GameAchievementSummary);
-                                        
+
+                                        if (Settings.Default.stream_labels_notifications)
+                                        {
+                                            this.writeAlertStreamLabels(notificationRequest.GameSummary.Title, MakeMasteryDescription(notificationRequest.GameAchievementSummary), 0);
+                                        }
+
                                         stopwatch = Stopwatch.StartNew();
 
                                         SetMasteryIn(notificationRequest.CustomIn);
@@ -98,6 +111,10 @@ namespace Retro_Achievement_Tracker.Forms
                         if (stopwatch.ElapsedMilliseconds > delayInMilli)
                         {
                             HideNotifications();
+                            if (Settings.Default.stream_labels_notifications)
+                            {
+                                this.writeAlertStreamLabels("", "", 0);
+                            }
                             stopwatch.Stop();
                             delayInMilli = 0;
                         }
@@ -108,6 +125,13 @@ namespace Retro_Achievement_Tracker.Forms
                     }
                 }
             }, tokenSource2.Token);
+        }
+
+        private string MakeMasteryDescription(GameAchievementSummary gameAchievementSummary)
+        {
+            return "Cheevos: " + gameAchievementSummary.NumPossibleAchievements + "/" + gameAchievementSummary.NumPossibleAchievements
+                + Environment.NewLine
+                + "Points: " + gameAchievementSummary.PossibleScore + "/" + gameAchievementSummary.PossibleScore;
         }
 
         private NotificationRequest NotificationRequestDequeue()
@@ -274,7 +298,7 @@ namespace Retro_Achievement_Tracker.Forms
 
         public void SetupBrowser()
         {
-            this.chromiumWebBrowser = new CefSharp.WinForms.ChromiumWebBrowser()
+            this.chromiumWebBrowser = new CefSharp.WinForms.ChromiumWebBrowser(new HtmlString(Resources.NotificationWindow))
             {
                 ActivateBrowserOnCreation = false,
                 Location = new Point(0, 0),
@@ -289,6 +313,8 @@ namespace Retro_Achievement_Tracker.Forms
         }
 
         public CefSharp.WinForms.ChromiumWebBrowser chromiumWebBrowser;
+        private Action<string, string, int> writeAlertStreamLabels;
+
         public class NotificationRequest
         {
             public Achievement Achievement { get; set; }
@@ -297,6 +323,21 @@ namespace Retro_Achievement_Tracker.Forms
             public int Duration { get; set; }
             public int CustomIn { get; set; }
             public int CustomOut { get; set; }
+        }
+
+        private void InitializeComponent()
+        {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NotificationLayoutWindow));
+            this.SuspendLayout();
+            // 
+            // NotificationLayoutWindow
+            // 
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "NotificationLayoutWindow";
+            this.ResumeLayout(false);
+
         }
     }
 }

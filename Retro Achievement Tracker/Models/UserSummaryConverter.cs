@@ -29,6 +29,7 @@
             JToken UserPic = item["UserPic"];
             JToken Motto = item["Motto"];
             JToken TotalPoints = item["TotalPoints"];
+            JToken TotalTruePoints = item["TotalTruePoints"];
             JToken Rank = item["Rank"];
             JToken RecentlyPlayed = item["RecentlyPlayed"];
 
@@ -117,6 +118,14 @@
                 if (TotalPoints.Type == JTokenType.String)
                 {
                     UserSummary.TotalPoints = Convert.ToInt32(TotalPoints);
+                }
+            }
+
+            if (TotalTruePoints != null)
+            {
+                if (TotalTruePoints.Type == JTokenType.String)
+                {
+                    UserSummary.TotalTruePoints = Convert.ToInt32(TotalTruePoints);
                 }
             }
 
