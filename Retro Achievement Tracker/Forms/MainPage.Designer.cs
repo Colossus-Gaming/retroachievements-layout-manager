@@ -111,9 +111,6 @@ namespace Retro_Achievement_Tracker
             this.statsGamePointsOverrideTextBox = new System.Windows.Forms.TextBox();
             this.statsGameAchievementsOverrideTextBox = new System.Windows.Forms.TextBox();
             this.fontFamilyComboBox = new System.Windows.Forms.ComboBox();
-            this.setBackgroundColorButton = new System.Windows.Forms.Button();
-            this.backgroundColorPictureBox = new System.Windows.Forms.PictureBox();
-            this.backgroundColorLabel = new System.Windows.Forms.Label();
             this.fontOutlineNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.fontOutlineCheckBox = new System.Windows.Forms.CheckBox();
             this.fontOutlineColorButton = new System.Windows.Forms.Button();
@@ -194,7 +191,6 @@ namespace Retro_Achievement_Tracker
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.statsOverrideGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.backgroundColorPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontOutlineNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontOutlineColorPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontColorPictureBox)).BeginInit();
@@ -398,8 +394,6 @@ namespace Retro_Achievement_Tracker
             this.focusAchievementDescriptionLabel.Name = "focusAchievementDescriptionLabel";
             this.focusAchievementDescriptionLabel.Size = new System.Drawing.Size(214, 62);
             this.focusAchievementDescriptionLabel.TabIndex = 5;
-            this.focusAchievementDescriptionLabel.Text = "Defeat 1 of every enemy on The Island Closest to Hell in 1 session without magic " +
-    "junctioned, leveling up or lowering the enemy\'";
             // 
             // setFocusButton
             // 
@@ -504,7 +498,6 @@ namespace Retro_Achievement_Tracker
             this.focusAchievementTitleLabel.Name = "focusAchievementTitleLabel";
             this.focusAchievementTitleLabel.Size = new System.Drawing.Size(218, 55);
             this.focusAchievementTitleLabel.TabIndex = 6;
-            this.focusAchievementTitleLabel.Text = "Phantasy Explorer X (Laconian Shield Cave)";
             // 
             // notificationsGroupBox
             // 
@@ -669,6 +662,7 @@ namespace Retro_Achievement_Tracker
             // 
             // openGameInfoWindowButton
             // 
+            this.openGameInfoWindowButton.Enabled = false;
             this.openGameInfoWindowButton.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.openGameInfoWindowButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.openGameInfoWindowButton.Location = new System.Drawing.Point(5, 23);
@@ -761,6 +755,7 @@ namespace Retro_Achievement_Tracker
             // focusStreamLabelsCheckBox
             // 
             this.focusStreamLabelsCheckBox.AutoSize = true;
+            this.focusStreamLabelsCheckBox.Enabled = false;
             this.focusStreamLabelsCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.focusStreamLabelsCheckBox.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.focusStreamLabelsCheckBox.Location = new System.Drawing.Point(203, 16);
@@ -773,6 +768,7 @@ namespace Retro_Achievement_Tracker
             // alertsStreamLabelsCheckBox
             // 
             this.alertsStreamLabelsCheckBox.AutoSize = true;
+            this.alertsStreamLabelsCheckBox.Enabled = false;
             this.alertsStreamLabelsCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.alertsStreamLabelsCheckBox.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.alertsStreamLabelsCheckBox.Location = new System.Drawing.Point(105, 16);
@@ -785,6 +781,7 @@ namespace Retro_Achievement_Tracker
             // lastFiveStreamLabelsCheckBox
             // 
             this.lastFiveStreamLabelsCheckBox.AutoSize = true;
+            this.lastFiveStreamLabelsCheckBox.Enabled = false;
             this.lastFiveStreamLabelsCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lastFiveStreamLabelsCheckBox.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.lastFiveStreamLabelsCheckBox.Location = new System.Drawing.Point(105, 31);
@@ -798,6 +795,7 @@ namespace Retro_Achievement_Tracker
             // gameInfoStreamLabelsCheckBox
             // 
             this.gameInfoStreamLabelsCheckBox.AutoSize = true;
+            this.gameInfoStreamLabelsCheckBox.Enabled = false;
             this.gameInfoStreamLabelsCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameInfoStreamLabelsCheckBox.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.gameInfoStreamLabelsCheckBox.Location = new System.Drawing.Point(10, 31);
@@ -811,6 +809,7 @@ namespace Retro_Achievement_Tracker
             // statsStreamLabelsCheckBox
             // 
             this.statsStreamLabelsCheckBox.AutoSize = true;
+            this.statsStreamLabelsCheckBox.Enabled = false;
             this.statsStreamLabelsCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statsStreamLabelsCheckBox.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.statsStreamLabelsCheckBox.Location = new System.Drawing.Point(10, 16);
@@ -1070,40 +1069,10 @@ namespace Retro_Achievement_Tracker
             this.fontFamilyComboBox.Size = new System.Drawing.Size(276, 23);
             this.fontFamilyComboBox.TabIndex = 38;
             // 
-            // setBackgroundColorButton
-            // 
-            this.setBackgroundColorButton.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.setBackgroundColorButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.setBackgroundColorButton.Location = new System.Drawing.Point(231, 48);
-            this.setBackgroundColorButton.Name = "setBackgroundColorButton";
-            this.setBackgroundColorButton.Size = new System.Drawing.Size(49, 23);
-            this.setBackgroundColorButton.TabIndex = 37;
-            this.setBackgroundColorButton.Text = "Set";
-            this.setBackgroundColorButton.UseVisualStyleBackColor = true;
-            // 
-            // backgroundColorPictureBox
-            // 
-            this.backgroundColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.backgroundColorPictureBox.Location = new System.Drawing.Point(175, 49);
-            this.backgroundColorPictureBox.Name = "backgroundColorPictureBox";
-            this.backgroundColorPictureBox.Size = new System.Drawing.Size(50, 22);
-            this.backgroundColorPictureBox.TabIndex = 36;
-            this.backgroundColorPictureBox.TabStop = false;
-            // 
-            // backgroundColorLabel
-            // 
-            this.backgroundColorLabel.AutoSize = true;
-            this.backgroundColorLabel.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.backgroundColorLabel.Location = new System.Drawing.Point(2, 57);
-            this.backgroundColorLabel.Name = "backgroundColorLabel";
-            this.backgroundColorLabel.Size = new System.Drawing.Size(85, 12);
-            this.backgroundColorLabel.TabIndex = 35;
-            this.backgroundColorLabel.Text = "Background";
-            // 
             // fontOutlineNumericUpDown
             // 
             this.fontOutlineNumericUpDown.Font = new System.Drawing.Font("Lucida Console", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fontOutlineNumericUpDown.Location = new System.Drawing.Point(121, 105);
+            this.fontOutlineNumericUpDown.Location = new System.Drawing.Point(121, 75);
             this.fontOutlineNumericUpDown.Maximum = new decimal(new int[] {
             10,
             0,
@@ -1127,7 +1096,7 @@ namespace Retro_Achievement_Tracker
             // 
             this.fontOutlineCheckBox.AutoSize = true;
             this.fontOutlineCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fontOutlineCheckBox.Location = new System.Drawing.Point(7, 109);
+            this.fontOutlineCheckBox.Location = new System.Drawing.Point(7, 80);
             this.fontOutlineCheckBox.Name = "fontOutlineCheckBox";
             this.fontOutlineCheckBox.Size = new System.Drawing.Size(75, 18);
             this.fontOutlineCheckBox.TabIndex = 27;
@@ -1138,7 +1107,7 @@ namespace Retro_Achievement_Tracker
             // 
             this.fontOutlineColorButton.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fontOutlineColorButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.fontOutlineColorButton.Location = new System.Drawing.Point(231, 104);
+            this.fontOutlineColorButton.Location = new System.Drawing.Point(231, 75);
             this.fontOutlineColorButton.Name = "fontOutlineColorButton";
             this.fontOutlineColorButton.Size = new System.Drawing.Size(49, 23);
             this.fontOutlineColorButton.TabIndex = 26;
@@ -1148,7 +1117,7 @@ namespace Retro_Achievement_Tracker
             // fontOutlineColorPictureBox
             // 
             this.fontOutlineColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.fontOutlineColorPictureBox.Location = new System.Drawing.Point(175, 104);
+            this.fontOutlineColorPictureBox.Location = new System.Drawing.Point(175, 75);
             this.fontOutlineColorPictureBox.Name = "fontOutlineColorPictureBox";
             this.fontOutlineColorPictureBox.Size = new System.Drawing.Size(50, 22);
             this.fontOutlineColorPictureBox.TabIndex = 25;
@@ -1158,7 +1127,7 @@ namespace Retro_Achievement_Tracker
             // 
             this.setFontColorButton.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.setFontColorButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.setFontColorButton.Location = new System.Drawing.Point(231, 76);
+            this.setFontColorButton.Location = new System.Drawing.Point(231, 46);
             this.setFontColorButton.Name = "setFontColorButton";
             this.setFontColorButton.Size = new System.Drawing.Size(49, 23);
             this.setFontColorButton.TabIndex = 22;
@@ -1168,7 +1137,7 @@ namespace Retro_Achievement_Tracker
             // fontColorPictureBox
             // 
             this.fontColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.fontColorPictureBox.Location = new System.Drawing.Point(175, 77);
+            this.fontColorPictureBox.Location = new System.Drawing.Point(175, 47);
             this.fontColorPictureBox.Name = "fontColorPictureBox";
             this.fontColorPictureBox.Size = new System.Drawing.Size(50, 22);
             this.fontColorPictureBox.TabIndex = 21;
@@ -1178,7 +1147,7 @@ namespace Retro_Achievement_Tracker
             // 
             this.fontColorLabel.AutoSize = true;
             this.fontColorLabel.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fontColorLabel.Location = new System.Drawing.Point(4, 83);
+            this.fontColorLabel.Location = new System.Drawing.Point(5, 49);
             this.fontColorLabel.Name = "fontColorLabel";
             this.fontColorLabel.Size = new System.Drawing.Size(85, 12);
             this.fontColorLabel.TabIndex = 20;
@@ -1187,9 +1156,6 @@ namespace Retro_Achievement_Tracker
             // fontSettingsGroupBox
             // 
             this.fontSettingsGroupBox.Controls.Add(this.fontFamilyComboBox);
-            this.fontSettingsGroupBox.Controls.Add(this.setBackgroundColorButton);
-            this.fontSettingsGroupBox.Controls.Add(this.backgroundColorPictureBox);
-            this.fontSettingsGroupBox.Controls.Add(this.backgroundColorLabel);
             this.fontSettingsGroupBox.Controls.Add(this.fontOutlineNumericUpDown);
             this.fontSettingsGroupBox.Controls.Add(this.fontOutlineCheckBox);
             this.fontSettingsGroupBox.Controls.Add(this.fontOutlineColorButton);
@@ -1201,7 +1167,7 @@ namespace Retro_Achievement_Tracker
             this.fontSettingsGroupBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.fontSettingsGroupBox.Location = new System.Drawing.Point(294, 313);
             this.fontSettingsGroupBox.Name = "fontSettingsGroupBox";
-            this.fontSettingsGroupBox.Size = new System.Drawing.Size(291, 133);
+            this.fontSettingsGroupBox.Size = new System.Drawing.Size(291, 105);
             this.fontSettingsGroupBox.TabIndex = 10006;
             this.fontSettingsGroupBox.TabStop = false;
             this.fontSettingsGroupBox.Text = "Font Settings";
@@ -2062,7 +2028,6 @@ namespace Retro_Achievement_Tracker
             this.groupBox4.PerformLayout();
             this.statsOverrideGroupBox.ResumeLayout(false);
             this.statsOverrideGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.backgroundColorPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontOutlineNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontOutlineColorPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontColorPictureBox)).EndInit();
@@ -2144,9 +2109,6 @@ namespace Retro_Achievement_Tracker
         private TextBox statsRankOverrideTextBox;
         private GroupBox statsOverrideGroupBox;
         private ComboBox fontFamilyComboBox;
-        private Button setBackgroundColorButton;
-        private PictureBox backgroundColorPictureBox;
-        private Label backgroundColorLabel;
         private NumericUpDown fontOutlineNumericUpDown;
         private CheckBox fontOutlineCheckBox;
         private Button fontOutlineColorButton;

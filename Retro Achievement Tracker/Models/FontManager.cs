@@ -9,7 +9,7 @@ namespace Retro_Achievement_Tracker.Models
         private static PrivateFontCollection _privateFontCollection;
         private FontManager()
         {
-            
+
         }
 
         public static FontFamily GetFontFamilyByName(string name)

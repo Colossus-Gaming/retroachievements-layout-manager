@@ -94,11 +94,11 @@ namespace Retro_Achievement_Tracker
         public async void SetGenreName(string genreName)
         {
             await ExecuteScript("setGenreName('" + genreName.Replace("'", "\\'") + ":');");
-        }        
+        }
         public async void SetGenreValue(string genreValue)
         {
             await ExecuteScript("setGenreValue('" + genreValue.Replace("'", "\\'") + "');");
-        }        
+        }
         public async void ShowGenre()
         {
             await ExecuteScript("showGenre();");

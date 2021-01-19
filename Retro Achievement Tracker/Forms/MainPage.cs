@@ -276,7 +276,7 @@ namespace Retro_Achievement_Tracker
             {
                 if (_awards != value)
                 {
-                    
+
                     if (StatsWindow != null && !StatsWindow.IsDisposed && !StatsWindow.chromiumWebBrowser.IsLoading)
                     {
                         StatsWindow.SetAwards(value);
@@ -299,7 +299,7 @@ namespace Retro_Achievement_Tracker
             }
             set
             {
-                _gameTitle = value; 
+                _gameTitle = value;
                 if (GameInfoWindow != null && !GameInfoWindow.IsDisposed)
                 {
                     GameInfoWindow.SetTitleValue(value);
@@ -362,7 +362,7 @@ namespace Retro_Achievement_Tracker
                 _gameDeveloper = value;
                 if (GameInfoWindow != null && !GameInfoWindow.IsDisposed)
                 {
-                    GameInfoWindow.SetDeveloperValue(value); 
+                    GameInfoWindow.SetDeveloperValue(value);
                     if (StreamLabelsGameInfoEnable)
                     {
                         WriteGameInfoStreamLabels();
@@ -540,7 +540,7 @@ namespace Retro_Achievement_Tracker
 
                 if (!NotificationsWindow.IsDisposed)
                 {
-                    //NotificationsWindow.SetAchievementLeft(this.useCustomAchievementCheckbox.Checked ? value : -15);
+                    NotificationsWindow.SetAchievementLeft(this.useCustomAchievementCheckbox.Checked ? value : -15);
                 }
             }
             get
@@ -557,7 +557,7 @@ namespace Retro_Achievement_Tracker
 
                 if (!NotificationsWindow.IsDisposed)
                 {
-                    //NotificationsWindow.SetAchievementTop(this.useCustomAchievementCheckbox.Checked ? value : 5);
+                    NotificationsWindow.SetAchievementTop(this.useCustomAchievementCheckbox.Checked ? value : 5);
                 }
             }
             get
@@ -574,7 +574,7 @@ namespace Retro_Achievement_Tracker
 
                 if (!NotificationsWindow.IsDisposed)
                 {
-                    //NotificationsWindow.SetMasteryLeft(this.useCustomMasteryCheckbox.Checked ? value : -15);
+                    NotificationsWindow.SetMasteryLeft(this.useCustomMasteryCheckbox.Checked ? value : -15);
                 }
             }
             get
@@ -591,7 +591,7 @@ namespace Retro_Achievement_Tracker
 
                 if (!NotificationsWindow.IsDisposed)
                 {
-                    //NotificationsWindow.SetMasteryTop(this.useCustomMasteryCheckbox.Checked ? value : 5);
+                    NotificationsWindow.SetMasteryTop(this.useCustomMasteryCheckbox.Checked ? value : 5);
                 }
             }
             get
@@ -696,7 +696,7 @@ namespace Retro_Achievement_Tracker
                     Settings.Default.Save();
                     Invoke((MethodInvoker)delegate
                     {
-                        //this.useCustomAchievementCheckbox.Checked = false;
+                        this.useCustomAchievementCheckbox.Checked = false;
                     });
                 }
 
@@ -719,7 +719,7 @@ namespace Retro_Achievement_Tracker
 
                     Invoke((MethodInvoker)delegate
                     {
-                        //this.useCustomMasteryCheckbox.Checked = false;
+                        this.useCustomMasteryCheckbox.Checked = false;
                     });
                 }
 
@@ -1486,23 +1486,6 @@ namespace Retro_Achievement_Tracker
                 }
             }
         }
-        private string FocusBackgroundColor
-        {
-            get
-            {
-                return Settings.Default.focus_background_color;
-            }
-            set
-            {
-                Settings.Default.focus_background_color = value;
-                Settings.Default.Save();
-
-                if (!FocusWindow.IsDisposed)
-                {
-                    FocusWindow.SetBackgroundColor(value);
-                }
-            }
-        }
 
         private FontFamily GameInfoFontFamily
         {
@@ -1667,24 +1650,6 @@ namespace Retro_Achievement_Tracker
                 }
             }
         }
-        private string LastFiveBackgroundColor
-        {
-            get
-            {
-                return Settings.Default.last_five_background_color;
-            }
-            set
-            {
-                Settings.Default.last_five_background_color = value;
-                Settings.Default.Save();
-
-                if (!LastFiveWindow.IsDisposed)
-                {
-                    LastFiveWindow.SetBackgroundColor(value);
-                }
-            }
-        }
-
         public FontFamily StatsFontFamily
         {
             get
@@ -1812,8 +1777,6 @@ namespace Retro_Achievement_Tracker
                 {
                     NotificationsWindow.SetFontColor(value);
                 }
-
-                //this.notificationsFontColorDisplayBox.BackColor = ColorTranslator.FromHtml(value);
             }
         }
         public string NotificationsFontOutlineColor
@@ -1831,8 +1794,6 @@ namespace Retro_Achievement_Tracker
                 {
                     NotificationsWindow.SetFontOutline(value, NotificationsFontOutlineSize);
                 }
-
-                //this.notificationsFontOutlineColorDisplayBox.BackColor = ColorTranslator.FromHtml(value);
             }
         }
         public int NotificationsFontOutlineSize
@@ -1850,25 +1811,6 @@ namespace Retro_Achievement_Tracker
                 {
                     NotificationsWindow.SetFontOutline(NotificationsFontOutlineColor, value);
                 }
-            }
-        }
-        public string NotificationsBackgroundColor
-        {
-            get
-            {
-                return Settings.Default.notification_background_color;
-            }
-            set
-            {
-                Settings.Default.notification_background_color = value;
-                Settings.Default.Save();
-
-                if (!NotificationsWindow.IsDisposed)
-                {
-                    NotificationsWindow.SetBackgroundColor(value);
-                }
-
-                //this.notificationsBackgroundColorDisplayBox.BackColor = ColorTranslator.FromHtml(value);
             }
         }
 
@@ -1934,6 +1876,7 @@ namespace Retro_Achievement_Tracker
         protected async override void OnLoad(EventArgs e)
         {
             CreateDataBindings();
+            CreateFolders();
 
             if (CanStart())
             {
@@ -1990,6 +1933,34 @@ namespace Retro_Achievement_Tracker
 
             NotificationsWindow.BringToFront();
             this.BringToFront();
+        }
+
+        private void CreateFolders()
+        {
+            if (!Directory.Exists(@"stream-labels"))
+            {
+                Directory.CreateDirectory(@"stream-labels");
+            }
+            if (!Directory.Exists(@"stream-labels\stats"))
+            {
+                Directory.CreateDirectory(@"stream-labels\stats");
+            }
+            if (!Directory.Exists(@"stream-labels\game-info"))
+            {
+                Directory.CreateDirectory(@"stream-labels\game-info");
+            }
+            if (!Directory.Exists(@"stream-labels\alerts"))
+            {
+                Directory.CreateDirectory(@"stream-labels\alerts");
+            }
+            if (!Directory.Exists(@"stream-labels\last-five"))
+            {
+                Directory.CreateDirectory(@"stream-labels\last-five");
+            }
+            if (!Directory.Exists(@"stream-labels\focus"))
+            {
+                Directory.CreateDirectory(@"stream-labels\focus");
+            }
         }
 
         private async void StartButton_Click(object sender, EventArgs e)
@@ -2057,6 +2028,13 @@ namespace Retro_Achievement_Tracker
             this.showFocusWindowButton.Enabled = true;
             this.openAlertsWindowButton.Enabled = true;
             this.openStatsWindowButton.Enabled = true;
+            this.openGameInfoWindowButton.Enabled = true;
+
+            this.alertsStreamLabelsCheckBox.Enabled = true;
+            this.statsStreamLabelsCheckBox.Enabled = true;
+            this.lastFiveStreamLabelsCheckBox.Enabled = true;
+            this.focusStreamLabelsCheckBox.Enabled = true;
+            this.gameInfoStreamLabelsCheckBox.Enabled = true;
 
             StartTimer();
 
@@ -2108,15 +2086,18 @@ namespace Retro_Achievement_Tracker
         }
         private void WriteStatsStreamLabels()
         {
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/rank.txt", Rank.ToString());
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/awards.txt", Awards.ToString());
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/ratio.txt", Ratio.ToString("0.00") + " %");
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/points.txt", Points.ToString());
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/true-points.txt", TruePoints.ToString());
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/game-ratio.txt", GameRatio.ToString("0.00") + " %");
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/game-points.txt", GameEarnedPoints.ToString() + "/" + GameTotalPoints.ToString());
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/game-true-points.txt", GameEarnedTruePoints.ToString() + "/" + GameTotalTruePoints.ToString());
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/game-achievements.txt", GameEarnedAchievements.ToString() + "/" + GameTotalAchievements.ToString());
+            if (Rank != 0)
+            {
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/rank.txt", Rank.ToString());
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/awards.txt", Awards.ToString());
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/ratio.txt", Ratio.ToString("0.00") + " %");
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/points.txt", Points.ToString());
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/true-points.txt", TruePoints.ToString());
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/game-ratio.txt", GameRatio.ToString("0.00") + " %");
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/game-points.txt", GameEarnedPoints.ToString() + "/" + GameTotalPoints.ToString());
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/game-true-points.txt", GameEarnedTruePoints.ToString() + "/" + GameTotalTruePoints.ToString());
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/game-achievements.txt", GameEarnedAchievements.ToString() + "/" + GameTotalAchievements.ToString());
+            }
         }
         private void ClearStatsStreamLabels()
         {
@@ -2132,9 +2113,12 @@ namespace Retro_Achievement_Tracker
         }
         private void WriteAlertStreamLabels(string title, string description, int points)
         {
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/alerts/title.txt", title);
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/alerts/description.txt", description);
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/alerts/points.txt", points.ToString());
+            if (title.Length > 0)
+            {
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/alerts/title.txt", title);
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/alerts/description.txt", description);
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/alerts/points.txt", points.ToString());
+            }
         }
         private void ClearAlertStreamLabels()
         {
@@ -2144,12 +2128,15 @@ namespace Retro_Achievement_Tracker
         }
         private void WriteGameInfoStreamLabels()
         {
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/title.txt", CurrentGame.Title);
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/console.txt", CurrentGame.ConsoleName);
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/developer.txt", CurrentGame.Developer);
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/publisher.txt", CurrentGame.Publisher);
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/genre.txt", CurrentGame.Genre);
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/release-date.txt", CurrentGame.Released);
+            if (CurrentGame != null)
+            {
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/title.txt", CurrentGame.Title);
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/console.txt", CurrentGame.ConsoleName);
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/developer.txt", CurrentGame.Developer);
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/publisher.txt", CurrentGame.Publisher);
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/genre.txt", CurrentGame.Genre);
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/release-date.txt", CurrentGame.Released);
+            }
         }
         private void ClearGameInfoStreamLabels()
         {
@@ -2163,110 +2150,29 @@ namespace Retro_Achievement_Tracker
         {
             if (MostRecentAchievements != null && MostRecentAchievements.Count > 0)
             {
-                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-1-title.txt", MostRecentAchievements[0].Title);
-                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-1-description.txt", MostRecentAchievements[0].Description);
-                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-1-points.txt", MostRecentAchievements[0].Points.ToString());
-
-                if (MostRecentAchievements.Count > 1)
+                for (int i = 0; i < MostRecentAchievements.Count; i++)
                 {
-                    File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-2-title.txt", MostRecentAchievements[1].Title);
-                    File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-2-description.txt", MostRecentAchievements[1].Description);
-                    File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-2-points.txt", MostRecentAchievements[1].Points.ToString());
-
-                    if (MostRecentAchievements.Count > 2)
-                    {
-                        File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-3-title.txt", MostRecentAchievements[2].Title);
-                        File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-3-description.txt", MostRecentAchievements[2].Description);
-                        File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-3-points.txt", MostRecentAchievements[2].Points.ToString());
-                        if (MostRecentAchievements.Count > 3)
-                        {
-                            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-4-title.txt", MostRecentAchievements[3].Title);
-                            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-4-description.txt", MostRecentAchievements[3].Description);
-                            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-4-points.txt", MostRecentAchievements[3].Points.ToString());
-                            if (MostRecentAchievements.Count > 4)
-                            {
-                                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-5-title.txt", MostRecentAchievements[4].Title);
-                                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-5-description.txt", MostRecentAchievements[4].Description);
-                                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-5-points.txt", MostRecentAchievements[4].Points.ToString());
-                            }
-                            else
-                            {
-                                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-5-title.txt", string.Empty);
-                                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-5-description.txt", string.Empty);
-                                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-5-points.txt", string.Empty);
-                            }
-                        }
-                        else
-                        {
-                            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-4-title.txt", string.Empty);
-                            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-4-description.txt", string.Empty);
-                            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-4-points.txt", string.Empty);
-
-                            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-5-title.txt", string.Empty);
-                            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-5-description.txt", string.Empty);
-                            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-5-points.txt", string.Empty);
-                        }
-                    }
-                    else
-                    {
-                        File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-3-title.txt", string.Empty);
-                        File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-3-description.txt", string.Empty);
-                        File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-3-points.txt", string.Empty);
-
-                        File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-4-title.txt", string.Empty);
-                        File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-4-description.txt", string.Empty);
-                        File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-4-points.txt", string.Empty);
-
-                        File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-5-title.txt", string.Empty);
-                        File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-5-description.txt", string.Empty);
-                        File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-5-points.txt", string.Empty);
-                    }
+                    File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-" + i + "-title.txt", MostRecentAchievements[0].Title);
+                    File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-" + i + "-description.txt", MostRecentAchievements[0].Description);
+                    File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-" + i + "-points.txt", MostRecentAchievements[0].Points.ToString());
                 }
-                else
+
+                for (int i = 5; i > MostRecentAchievements.Count; i--)
                 {
-                    File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-2-title.txt", string.Empty);
-                    File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-2-description.txt", string.Empty);
-                    File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-2-points.txt", string.Empty);
-
-                    File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-3-title.txt", string.Empty);
-                    File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-3-description.txt", string.Empty);
-                    File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-3-points.txt", string.Empty);
-
-                    File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-4-title.txt", string.Empty);
-                    File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-4-description.txt", string.Empty);
-                    File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-4-points.txt", string.Empty);
-
-                    File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-5-title.txt", string.Empty);
-                    File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-5-description.txt", string.Empty);
-                    File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-5-points.txt", string.Empty);
+                    File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-" + i + "-title.txt", MostRecentAchievements[1].Title);
+                    File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-" + i + "-description.txt", MostRecentAchievements[1].Description);
+                    File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-" + i + "-points.txt", MostRecentAchievements[1].Points.ToString());
                 }
-            }
-            else
-            {
-                ClearLastFiveStreamLabels();
             }
         }
         private void ClearLastFiveStreamLabels()
         {
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-1-title.txt", string.Empty);
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-1-description.txt", string.Empty);
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-1-points.txt", string.Empty);
-
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-2-title.txt", string.Empty);
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-2-description.txt", string.Empty);
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-2-points.txt", string.Empty);
-
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-3-title.txt", string.Empty);
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-3-description.txt", string.Empty);
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-3-points.txt", string.Empty);
-
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-4-title.txt", string.Empty);
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-4-description.txt", string.Empty);
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-4-points.txt", string.Empty);
-
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-5-title.txt", string.Empty);
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-5-description.txt", string.Empty);
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-5-points.txt", string.Empty);
+            for (int i = 0; i < 5; i++)
+            {
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-" + i + "-title.txt", string.Empty);
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-" + i + "-description.txt", string.Empty);
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-" + i + "-points.txt", string.Empty);
+            }
         }
         private void WriteFocusStreamLabels()
         {
@@ -2422,7 +2328,6 @@ namespace Retro_Achievement_Tracker
                 FocusWindow.SetFontFamily(FocusFontFamily.Name);
                 FocusWindow.SetFontColor(FocusFontColor);
                 FocusWindow.SetFontOutline(FocusFontOutlineColor, FocusFontOutlineSize);
-                FocusWindow.SetBackgroundColor(FocusBackgroundColor);
             });
         }
 
@@ -2441,7 +2346,6 @@ namespace Retro_Achievement_Tracker
                 NotificationsWindow.SetFontFamily(NotificationsFontFamily.Name);
                 NotificationsWindow.SetFontColor(NotificationsFontColor);
                 NotificationsWindow.SetFontOutline(NotificationsFontOutlineColor, NotificationsFontOutlineSize);
-                NotificationsWindow.SetBackgroundColor(NotificationsBackgroundColor);
 
                 NotificationsWindow.PromptUserInput();
 
@@ -2464,7 +2368,7 @@ namespace Retro_Achievement_Tracker
                 GameInfoWindow.SetFontFamily(GameInfoFontFamily.Name);
                 GameInfoWindow.SetFontColor(GameInfoFontColor);
                 GameInfoWindow.SetFontOutline(GameInfoFontOutlineColor, GameInfoFontOutlineSize);
-                
+
                 GameInfoWindow.SetTitleName(GameInfoTitleName);
                 GameInfoWindow.SetTitleValue(GameInfoTitle);
                 if (GameInfoTitleEnable)
@@ -2551,7 +2455,6 @@ namespace Retro_Achievement_Tracker
                 LastFiveWindow.SetFontFamily(LastFiveFontFamily.Name);
                 LastFiveWindow.SetFontColor(LastFiveFontColor);
                 LastFiveWindow.SetFontOutline(LastFiveFontOutlineColor, LastFiveFontOutlineSize);
-                LastFiveWindow.SetBackgroundColor(LastFiveBackgroundColor);
             });
         }
 
@@ -2590,11 +2493,23 @@ namespace Retro_Achievement_Tracker
 
                 UpdateTimerLabel("Calling for user summary...");
 
-                UserSummary = await hFC_EssentialsClient.GetUserSummary();
-
+                try
+                {
+                    UserSummary = await hFC_EssentialsClient.GetUserSummary();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
                 UpdateTimerLabel("Calling for game progress...");
-
-                CurrentGame = await hFC_EssentialsClient.GetGameProgress(UserSummary.GameSummaries[0].GameID.ToString());
+                try
+                {
+                    CurrentGame = await hFC_EssentialsClient.GetGameProgress(UserSummary.GameSummaries[0].GameID.ToString());
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
             }
         }
 
@@ -2798,7 +2713,6 @@ namespace Retro_Achievement_Tracker
             this.fontOutlineColorButton.Click += FontOutlineColorButton_Click;
             this.fontOutlineCheckBox.CheckedChanged += FontOutlineCheckBox_CheckedChanged;
             this.fontOutlineNumericUpDown.ValueChanged += FontOutlineNumericUpDown_ValueChanged;
-            this.setBackgroundColorButton.Click += SetBackgroundColorButton_Click;
             this.fontFamilyComboBox.SelectedIndexChanged += FontFamilyComboBox_SelectedIndexChanged;
             this.alertsStreamLabelsCheckBox.CheckedChanged += AlertsStreamLabelsCheckBox_CheckedChanged;
             this.focusStreamLabelsCheckBox.CheckedChanged += FocusStreamLabelsCheckBox_CheckedChanged;
@@ -2884,23 +2798,30 @@ namespace Retro_Achievement_Tracker
 
         private async void SetAwardCount()
         {
-            string url = "http://retroachievements.org/user/" + usernameTextBox.Text;
-
-            HtmlWeb web = new HtmlWeb();
-
-            HtmlAgilityPack.HtmlDocument doc = await web.LoadFromWebAsync(url);
-
-            HtmlNode siteAwardsNode = doc.GetElementbyId("siteawards");
-
-            if (siteAwardsNode == null)
+            try
             {
-                return;
+                string url = "http://retroachievements.org/user/" + usernameTextBox.Text;
+
+                HtmlWeb web = new HtmlWeb();
+
+                HtmlAgilityPack.HtmlDocument doc = await web.LoadFromWebAsync(url);
+
+                HtmlNode siteAwardsNode = doc.GetElementbyId("siteawards");
+
+                if (siteAwardsNode == null)
+                {
+                    return;
+                }
+                this.raConnectionStatusPictureBox.Image = Resources.green_button;
+
+                HtmlNodeCollection htmlNodeCollections = siteAwardsNode.SelectNodes(XPathExpression.Compile("//div[contains(@class,'trophyimage')]"));
+
+                Awards = htmlNodeCollections == null ? 0 : htmlNodeCollections.Count;
             }
-            this.raConnectionStatusPictureBox.Image = Resources.green_button;
+            catch
+            {
 
-            HtmlNodeCollection htmlNodeCollections = siteAwardsNode.SelectNodes(XPathExpression.Compile("//div[contains(@class,'trophyimage')]"));
-
-            Awards = htmlNodeCollections == null ? 0 : htmlNodeCollections.Count;
+            }
         }
 
         private void RequiredField_TextChange(object sender, EventArgs e)
@@ -3316,7 +3237,7 @@ namespace Retro_Achievement_Tracker
         private void SetFocusButton_Click(object sender, EventArgs e)
         {
             CurrentlyFocusedAchievement = CurrentlyViewingAchievement;
-            
+
             FocusWindow.SetFocus(CurrentlyFocusedAchievement);
             if (StreamLabelsFocusEnable)
             {
@@ -3529,11 +3450,6 @@ namespace Retro_Achievement_Tracker
 
                 MenuState = CustomMenuState.CLOSED;
 
-                this.backgroundColorLabel.Enabled = false;
-                this.backgroundColorPictureBox.Enabled = false;
-                this.setBackgroundColorButton.Enabled = false;
-
-                this.backgroundColorPictureBox.BackColor = Color.DarkGray;
                 this.fontColorPictureBox.BackColor = ColorTranslator.FromHtml(Settings.Default.stats_font_color_hex_code);
                 this.fontOutlineCheckBox.Checked = Settings.Default.stats_font_outline_enabled;
 
@@ -3589,11 +3505,6 @@ namespace Retro_Achievement_Tracker
 
                 MenuState = CustomMenuState.CLOSED;
 
-                this.backgroundColorLabel.Enabled = true;
-                this.backgroundColorPictureBox.Enabled = true;
-                this.setBackgroundColorButton.Enabled = true;
-
-                this.backgroundColorPictureBox.BackColor = ColorTranslator.FromHtml(Settings.Default.notification_background_color);
                 this.fontColorPictureBox.BackColor = ColorTranslator.FromHtml(Settings.Default.notification_font_color_hex_code);
                 this.fontOutlineCheckBox.Checked = Settings.Default.notification_font_outline_enabled;
 
@@ -3652,11 +3563,6 @@ namespace Retro_Achievement_Tracker
 
                 MenuState = CustomMenuState.CLOSED;
 
-                this.backgroundColorLabel.Enabled = false;
-                this.backgroundColorPictureBox.Enabled = true;
-                this.setBackgroundColorButton.Enabled = false;
-
-                this.backgroundColorPictureBox.BackColor = Color.DarkGray;
                 this.fontColorPictureBox.BackColor = ColorTranslator.FromHtml(Settings.Default.game_info_font_color_hex_code);
                 this.fontOutlineCheckBox.Checked = Settings.Default.game_info_font_outline_enabled;
 
@@ -3692,7 +3598,7 @@ namespace Retro_Achievement_Tracker
                 MenuState = CustomMenuState.GAME_INFO;
 
                 this.fontSettingsGroupBox.Show();
-                this.ClientSize = new Size(592, 449);
+                this.ClientSize = new Size(592, 490);
                 this.gameInfoOverrideSettingsGroupBox.Location = new Point(4, 313);
                 this.gameInfoOverrideSettingsGroupBox.Show();
             }
@@ -3713,11 +3619,6 @@ namespace Retro_Achievement_Tracker
 
                 MenuState = CustomMenuState.CLOSED;
 
-                this.backgroundColorLabel.Enabled = true;
-                this.backgroundColorPictureBox.Enabled = true;
-                this.setBackgroundColorButton.Enabled = true;
-
-                this.backgroundColorPictureBox.BackColor = ColorTranslator.FromHtml(Settings.Default.last_five_background_color);
                 this.fontColorPictureBox.BackColor = ColorTranslator.FromHtml(Settings.Default.last_five_font_color_hex_code);
                 this.fontOutlineCheckBox.Checked = Settings.Default.last_five_font_outline_enabled;
 
@@ -3775,11 +3676,6 @@ namespace Retro_Achievement_Tracker
 
                 MenuState = CustomMenuState.CLOSED;
 
-                this.backgroundColorLabel.Enabled = true;
-                this.backgroundColorPictureBox.Enabled = true;
-                this.setBackgroundColorButton.Enabled = true;
-
-                this.backgroundColorPictureBox.BackColor = ColorTranslator.FromHtml(Settings.Default.focus_background_color);
                 this.fontColorPictureBox.BackColor = ColorTranslator.FromHtml(Settings.Default.focus_font_color_hex_code);
                 this.fontOutlineCheckBox.Checked = Settings.Default.focus_font_outline_enabled;
 
@@ -3815,7 +3711,7 @@ namespace Retro_Achievement_Tracker
                 MenuState = CustomMenuState.FOCUS;
 
                 this.fontSettingsGroupBox.Show();
-                this.ClientSize = new Size(592, 449);
+                this.ClientSize = new Size(592, 424);
             }
             else
             {
@@ -3874,26 +3770,6 @@ namespace Retro_Achievement_Tracker
                 LastFiveWindow.BringToFront();
                 LastFiveWindow.Location = new Point(0, 0);
                 LastFiveWindow.SendToBack();
-            }
-        }
-
-        private void SetBackgroundColorButton_Click(object sender, EventArgs e)
-        {
-            if (this.colorDialog1.ShowDialog() == DialogResult.OK)
-            {
-                this.backgroundColorPictureBox.BackColor = this.colorDialog1.Color;
-                switch (MenuState)
-                {
-                    case CustomMenuState.ALERTS:
-                        NotificationsBackgroundColor = HexConverter(this.colorDialog1.Color);
-                        break;
-                    case CustomMenuState.LAST_FIVE:
-                        LastFiveBackgroundColor = HexConverter(this.colorDialog1.Color);
-                        break;
-                    case CustomMenuState.FOCUS:
-                        FocusBackgroundColor = HexConverter(this.colorDialog1.Color);
-                        break;
-                }
             }
         }
 

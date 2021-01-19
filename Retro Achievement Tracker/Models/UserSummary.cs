@@ -70,7 +70,7 @@
 
         public bool Equals(Achievement other)
         {
-            return other !=null && this.Id == other.Id;
+            return other != null && this.Id == other.Id;
         }
     }
 }

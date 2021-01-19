@@ -229,18 +229,6 @@ namespace Retro_Achievement_Tracker.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#CCCCCC")]
-        public string focus_background_color {
-            get {
-                return ((string)(this["focus_background_color"]));
-            }
-            set {
-                this["focus_background_color"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("#000000")]
         public string notification_font_color_hex_code {
             get {
@@ -296,18 +284,6 @@ namespace Retro_Achievement_Tracker.Properties {
             }
             set {
                 this["notification_font_outline_size"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#CCCCCC")]
-        public string notification_background_color {
-            get {
-                return ((string)(this["notification_background_color"]));
-            }
-            set {
-                this["notification_background_color"] = value;
             }
         }
         
@@ -632,18 +608,6 @@ namespace Retro_Achievement_Tracker.Properties {
             }
             set {
                 this["last_five_font_outline_size"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#CCCCCC")]
-        public string last_five_background_color {
-            get {
-                return ((string)(this["last_five_background_color"]));
-            }
-            set {
-                this["last_five_background_color"] = value;
             }
         }
         

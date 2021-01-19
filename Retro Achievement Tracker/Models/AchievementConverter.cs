@@ -52,11 +52,7 @@ namespace Retro_Achievement_Tracker.Models
             }
             if (Title != null)
             {
-                string s = Title.ToString();
-                s = s.Contains("[m") ? s.Substring(0, s.IndexOf("[m") - 1) : s;
-                s = s.Contains("(m") ? s.Substring(0, s.IndexOf("(m") - 1) : s;
-
-                Achievement.Title = s;
+                Achievement.Title = Title.ToString();
             }
             if (Points != null)
             {

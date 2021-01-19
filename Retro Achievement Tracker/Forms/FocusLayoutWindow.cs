@@ -20,7 +20,7 @@ namespace Retro_Achievement_Tracker
         }
 
         public async void SetFocus(Achievement achievement)
-        { 
+        {
             await ExecuteScript("setFocus(\"" + achievement.Title.Replace("\"", "\\\"") + "\"," +
                            "\"https://retroachievements.org/Badge/" + achievement.BadgeNumber + ".png\"," +
                            "\"" + achievement.Description.Replace("\"", "\\\"") + "\"," +
@@ -44,11 +44,6 @@ namespace Retro_Achievement_Tracker
         public async void SetFontOutline(string hexCode, int size)
         {
             await ExecuteScript("setFontOutline(\"" + hexCode + " " + size + "px\");");
-        }
-
-        public async void SetBackgroundColor(string hexCode)
-        {
-            await ExecuteScript("setBackgroundColor(\"" + hexCode + "\");");
         }
 
         protected async Task ExecuteScript(string script)

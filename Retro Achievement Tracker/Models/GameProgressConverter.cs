@@ -165,7 +165,7 @@
                 }
             }
 
-            if (GameProgress.Id != 0  && GameProgress.Achievements != null)
+            if (GameProgress.Id != 0 && GameProgress.Achievements != null)
             {
                 GameProgress.Achievements.ForEach(achievement =>
                 {

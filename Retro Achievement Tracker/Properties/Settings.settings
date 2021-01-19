@@ -53,9 +53,6 @@
     <Setting Name="focus_font_outline_size" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">2</Value>
     </Setting>
-    <Setting Name="focus_background_color" Type="System.String" Scope="User">
-      <Value Profile="(Default)">#CCCCCC</Value>
-    </Setting>
     <Setting Name="notification_font_color_hex_code" Type="System.String" Scope="User">
       <Value Profile="(Default)">#000000</Value>
     </Setting>
@@ -70,9 +67,6 @@
     </Setting>
     <Setting Name="notification_font_outline_size" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">2</Value>
-    </Setting>
-    <Setting Name="notification_background_color" Type="System.String" Scope="User">
-      <Value Profile="(Default)">#CCCCCC</Value>
     </Setting>
     <Setting Name="notification_custom_achievement_enable" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -154,9 +148,6 @@
     </Setting>
     <Setting Name="last_five_font_outline_size" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">2</Value>
-    </Setting>
-    <Setting Name="last_five_background_color" Type="System.String" Scope="User">
-      <Value Profile="(Default)">#CCCCCC</Value>
     </Setting>
     <Setting Name="stats_rank_enable" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>

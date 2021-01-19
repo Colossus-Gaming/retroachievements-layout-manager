@@ -20,7 +20,7 @@ namespace Retro_Achievement_Tracker.Models
 
             if (existingValue != null)
             {
-                ConsoleList = (ConsoleList) existingValue;
+                ConsoleList = (ConsoleList)existingValue;
             }
 
             JToken Console = item["console"];
