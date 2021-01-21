@@ -122,9 +122,9 @@ namespace Retro_Achievement_Tracker.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("52")]
-        public float stats_font_size {
+        public int stats_font_size {
             get {
-                return ((float)(this["stats_font_size"]));
+                return ((int)(this["stats_font_size"]));
             }
             set {
                 this["stats_font_size"] = value;
@@ -1112,6 +1112,54 @@ namespace Retro_Achievement_Tracker.Properties {
             }
             set {
                 this["game_info_title_enable"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("52")]
+        public int game_info_font_size {
+            get {
+                return ((int)(this["game_info_font_size"]));
+            }
+            set {
+                this["game_info_font_size"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Completed")]
+        public string stats_completed_name {
+            get {
+                return ((string)(this["stats_completed_name"]));
+            }
+            set {
+                this["stats_completed_name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool stats_completed_enable {
+            get {
+                return ((bool)(this["stats_completed_enable"]));
+            }
+            set {
+                this["stats_completed_enable"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool focus_points_enable {
+            get {
+                return ((bool)(this["focus_points_enable"]));
+            }
+            set {
+                this["focus_points_enable"] = value;
             }
         }
     }

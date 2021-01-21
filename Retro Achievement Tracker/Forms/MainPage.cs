@@ -37,7 +37,6 @@ namespace Retro_Achievement_Tracker
         private float _gameRatio = 0.0f;
 
         private string _gameTitle;
-        private string _gameImage;
         private string _gameConsole;
         private string _gameDeveloper;
         private string _gamePublisher;
@@ -104,7 +103,6 @@ namespace Retro_Achievement_Tracker
                 GameRatio = (float)GameTotalTruePoints / (float)GameTotalPoints;
 
                 GameInfoTitle = _gameProgress.Title;
-                GameImage = _gameProgress.ImageIcon;
                 GameInfoConsoleValue = _gameProgress.ConsoleName;
                 GameInfoDeveloperValue = _gameProgress.Developer;
                 GameInfoPublisherValue = _gameProgress.Publisher;
@@ -131,6 +129,15 @@ namespace Retro_Achievement_Tracker
                     if (StreamLabelsLastFiveEnable)
                     {
                         WriteLastFiveStreamLabels();
+                    }
+                    if (StreamLabelsStatsEnable)
+                    {
+                        WriteStatsStreamLabels();
+                    }
+
+                    if (StatsWindow != null && !StatsWindow.IsDisposed)
+                    {
+                        StatsWindow.SetCompletedValue(GameTotalAchievements == 0 ? 0 : Convert.ToInt32((Convert.ToDecimal(GameEarnedAchievements) / Convert.ToDecimal(GameTotalAchievements)) * 200));
                     }
                 }
                 else if (UnlockedAchievements.Count > 0)
@@ -310,23 +317,6 @@ namespace Retro_Achievement_Tracker
                 }
 
                 OnPropertyChanged("GameTitle");
-            }
-        }
-        public string GameImage
-        {
-            get
-            {
-                return _gameImage;
-            }
-            set
-            {
-                _gameImage = value;
-                if (GameInfoWindow != null && !GameInfoWindow.IsDisposed && GameInfoBoxArtEnable)
-                {
-                    GameInfoWindow.SetBoxArt("http://retroachievements.org/" + value);
-                }
-
-                OnPropertyChanged("GameImage");
             }
         }
         public string GameInfoConsoleValue
@@ -880,6 +870,23 @@ namespace Retro_Achievement_Tracker
                 Settings.Default.Save();
             }
         }
+        private int StatsFontSize
+        {
+            get
+            {
+                return Settings.Default.stats_font_size;
+            }
+            set
+            {
+                if (StatsWindow != null && !StatsWindow.IsDisposed)
+                {
+                    StatsWindow.SetFontSize(value);
+                }
+
+                Settings.Default.stats_font_size = value;
+                Settings.Default.Save();
+            }
+        }
         private string GameInfoTitleName
         {
             get
@@ -982,6 +989,40 @@ namespace Retro_Achievement_Tracker
                 Settings.Default.Save();
             }
         }
+        private string StatsCompletedName
+        {
+            get
+            {
+                return Settings.Default.stats_completed_name;
+            }
+            set
+            {
+                if (StatsWindow != null && !StatsWindow.IsDisposed)
+                {
+                    StatsWindow.SetCompletedName(value);
+                }
+
+                Settings.Default.stats_completed_name = value;
+                Settings.Default.Save();
+            }
+        }
+        private int GameInfoFontSize
+        {
+            get
+            {
+                return Settings.Default.game_info_font_size;
+            }
+            set
+            {
+                if (GameInfoWindow != null && !GameInfoWindow.IsDisposed)
+                {
+                    GameInfoWindow.SetFontSize(value);
+                }
+
+                Settings.Default.game_info_font_size = value;
+                Settings.Default.Save();
+            }
+        }
         private bool StatsRankEnable
         {
             get
@@ -1072,6 +1113,29 @@ namespace Retro_Achievement_Tracker
                 }
                 Settings.Default.stats_true_points_enable = value;
                 Settings.Default.Save();
+            }
+        }
+        private bool StatsCompletedEnable
+        {
+            get
+            {
+                return Settings.Default.stats_completed_enable;
+            }
+            set
+            {
+                if (StatsWindow != null && !StatsWindow.IsDisposed)
+                {
+                    if (value)
+                    {
+                        StatsWindow.ShowCompleted();
+                    }
+                    else
+                    {
+                        StatsWindow.HideCompleted();
+                    }
+                    Settings.Default.stats_completed_enable = value;
+                    Settings.Default.Save();
+                }
             }
         }
         private bool StatsRatioEnable
@@ -1321,29 +1385,6 @@ namespace Retro_Achievement_Tracker
                 Settings.Default.Save();
             }
         }
-        private bool GameInfoBoxArtEnable
-        {
-            get
-            {
-                return Settings.Default.game_info_box_art_enable;
-            }
-            set
-            {
-                if (GameInfoWindow != null && !GameInfoWindow.IsDisposed)
-                {
-                    if (value)
-                    {
-                        GameInfoWindow.ShowBoxArt();
-                    }
-                    else
-                    {
-                        GameInfoWindow.HideBoxArt();
-                    }
-                }
-                Settings.Default.game_info_box_art_enable = value;
-                Settings.Default.Save();
-            }
-        }
         private bool StreamLabelsFocusEnable
         {
             get
@@ -1486,6 +1527,53 @@ namespace Retro_Achievement_Tracker
                 }
             }
         }
+        private bool FocusFontOutlineEnable
+        {
+            get
+            {
+                return Settings.Default.focus_font_outline_enabled;
+            }
+            set
+            {
+                Settings.Default.focus_font_outline_enabled = value;
+                Settings.Default.Save();
+
+                if (!FocusWindow.IsDisposed)
+                {
+                    if (value)
+                    {
+                        FocusWindow.SetFontOutline(FocusFontOutlineColor, FocusFontOutlineSize);
+                    }
+                    else
+                    {
+                        FocusWindow.SetFontOutline("", 0);
+                    }
+                }
+            }
+        }
+        private bool FocusPointsEnable
+        {
+            get
+            {
+                return Settings.Default.focus_points_enable;
+            }
+            set
+            {
+                if (FocusWindow != null && !FocusWindow.IsDisposed)
+                {
+                    if (value)
+                    {
+                        FocusWindow.ShowPoints();
+                    }
+                    else
+                    {
+                        FocusWindow.HidePoints();
+                    }
+                    Settings.Default.focus_points_enable = value;
+                    Settings.Default.Save();
+                }
+            }
+        }
 
         private FontFamily GameInfoFontFamily
         {
@@ -1565,6 +1653,30 @@ namespace Retro_Achievement_Tracker
                 if (!GameInfoWindow.IsDisposed)
                 {
                     GameInfoWindow.SetFontOutline(GameInfoFontOutlineColor, value);
+                }
+            }
+        }
+        private bool GameInfoFontOutlineEnable
+        {
+            get
+            {
+                return Settings.Default.game_info_font_outline_enabled;
+            }
+            set
+            {
+                Settings.Default.game_info_font_outline_enabled = value;
+                Settings.Default.Save();
+
+                if (!GameInfoWindow.IsDisposed)
+                {
+                    if (value)
+                    {
+                        GameInfoWindow.SetFontOutline(GameInfoFontOutlineColor, GameInfoFontOutlineSize);
+                    }
+                    else
+                    {
+                        GameInfoWindow.SetFontOutline("", 0);
+                    }
                 }
             }
         }
@@ -1650,6 +1762,30 @@ namespace Retro_Achievement_Tracker
                 }
             }
         }
+        private bool LastFiveFontOutlineEnable
+        {
+            get
+            {
+                return Settings.Default.last_five_font_outline_enabled;
+            }
+            set
+            {
+                Settings.Default.last_five_font_outline_enabled = value;
+                Settings.Default.Save();
+
+                if (!LastFiveWindow.IsDisposed)
+                {
+                    if (value)
+                    {
+                        LastFiveWindow.SetFontOutline(LastFiveFontOutlineColor, LastFiveFontOutlineSize);
+                    }
+                    else
+                    {
+                        LastFiveWindow.SetFontOutline("", 0);
+                    }
+                }
+            }
+        }
         public FontFamily StatsFontFamily
         {
             get
@@ -1731,7 +1867,30 @@ namespace Retro_Achievement_Tracker
                 }
             }
         }
+        private bool StatsFontOutlineEnable
+        {
+            get
+            {
+                return Settings.Default.stats_font_outline_enabled;
+            }
+            set
+            {
+                Settings.Default.stats_font_outline_enabled = value;
+                Settings.Default.Save();
 
+                if (!StatsWindow.IsDisposed)
+                {
+                    if (value)
+                    {
+                        StatsWindow.SetFontOutline(StatsFontOutlineColor, StatsFontOutlineSize);
+                    }
+                    else
+                    {
+                        StatsWindow.SetFontOutline("", 0);
+                    }
+                }
+            }
+        }
         public FontFamily NotificationsFontFamily
         {
             get
@@ -1810,6 +1969,30 @@ namespace Retro_Achievement_Tracker
                 if (!NotificationsWindow.IsDisposed)
                 {
                     NotificationsWindow.SetFontOutline(NotificationsFontOutlineColor, value);
+                }
+            }
+        }
+        private bool NotificationsFontOutlineEnable
+        {
+            get
+            {
+                return Settings.Default.notification_font_outline_enabled;
+            }
+            set
+            {
+                Settings.Default.notification_font_outline_enabled = value;
+                Settings.Default.Save();
+
+                if (!NotificationsWindow.IsDisposed)
+                {
+                    if (value)
+                    {
+                        NotificationsWindow.SetFontOutline(NotificationsFontOutlineColor, NotificationsFontOutlineSize);
+                    }
+                    else
+                    {
+                        NotificationsWindow.SetFontOutline("", 0);
+                    }
                 }
             }
         }
@@ -2097,6 +2280,7 @@ namespace Retro_Achievement_Tracker
                 File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/game-points.txt", GameEarnedPoints.ToString() + "/" + GameTotalPoints.ToString());
                 File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/game-true-points.txt", GameEarnedTruePoints.ToString() + "/" + GameTotalTruePoints.ToString());
                 File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/game-achievements.txt", GameEarnedAchievements.ToString() + "/" + GameTotalAchievements.ToString());
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/completed.txt", (GameTotalAchievements == 0 ? 0 : Convert.ToInt32(Convert.ToDecimal(GameEarnedAchievements) / Convert.ToDecimal(GameTotalAchievements) * 200)) + " %");
             }
         }
         private void ClearStatsStreamLabels()
@@ -2110,6 +2294,7 @@ namespace Retro_Achievement_Tracker
             File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/game-points.txt", string.Empty);
             File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/game-true-points.txt", string.Empty);
             File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/game-achievements.txt", string.Empty);
+            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/completed.txt", string.Empty);
         }
         private void WriteAlertStreamLabels(string title, string description, int points)
         {
@@ -2140,6 +2325,7 @@ namespace Retro_Achievement_Tracker
         }
         private void ClearGameInfoStreamLabels()
         {
+            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/title.txt", string.Empty);
             File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/console.txt", string.Empty);
             File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/developer.txt", string.Empty);
             File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/publisher.txt", string.Empty);
@@ -2202,8 +2388,14 @@ namespace Retro_Achievement_Tracker
             {
                 StatsWindow.SetFontFamily(StatsFontFamily.Name);
                 StatsWindow.SetFontColor(StatsFontColor);
-                StatsWindow.SetFontOutline(StatsFontOutlineColor, StatsFontOutlineSize);
-
+                if (StatsFontOutlineEnable)
+                {
+                    StatsWindow.SetFontOutline(StatsFontOutlineColor, StatsFontOutlineSize);
+                }
+                else
+                {
+                    StatsWindow.SetFontOutline("", 0);
+                }
                 StatsWindow.SetRankName(StatsRankName);
                 StatsWindow.SetRank(UserSummary.Rank);
                 if (StatsRankEnable)
@@ -2302,6 +2494,10 @@ namespace Retro_Achievement_Tracker
                 {
                     StatsWindow.HideGameTruePoints();
                 }
+
+                StatsWindow.SetCompletedName(StatsCompletedName);
+                StatsWindow.SetCompletedValue(GameTotalAchievements == 0 ? 0 : Convert.ToInt32(Convert.ToDecimal(GameEarnedAchievements) / Convert.ToDecimal(GameTotalAchievements) * 200));
+                StatsWindow.SetFontSize(StatsFontSize);
             });
         }
 
@@ -2312,9 +2508,28 @@ namespace Retro_Achievement_Tracker
             FocusWindow.chromiumWebBrowser.LoadHtml(Resources.FocusWindow);
             FocusWindow.chromiumWebBrowser.FrameLoadEnd += new EventHandler<FrameLoadEndEventArgs>((sender, frameLoadEndEventArgs) =>
             {
+                FocusWindow.SetFontFamily(FocusFontFamily.Name);
+                FocusWindow.SetFontColor(FocusFontColor);
+
+                if (FocusFontOutlineEnable)
+                {
+                    FocusWindow.SetFontOutline(FocusFontOutlineColor, FocusFontOutlineSize);
+                }
+                else
+                {
+                    FocusWindow.SetFontOutline("", 0);
+                }
                 if (LockedAchievements.Count > 0)
                 {
                     FocusWindow.SetFocus(CurrentlyFocusedAchievement);
+                    if (FocusPointsEnable)
+                    {
+                        FocusWindow.ShowPoints();
+                    }
+                    else
+                    {
+                        FocusWindow.HidePoints();
+                    }
                     if (StreamLabelsFocusEnable)
                     {
                         WriteFocusStreamLabels();
@@ -2324,10 +2539,14 @@ namespace Retro_Achievement_Tracker
                 {
                     FocusWindow.HideFocus();
                 }
-
-                FocusWindow.SetFontFamily(FocusFontFamily.Name);
-                FocusWindow.SetFontColor(FocusFontColor);
-                FocusWindow.SetFontOutline(FocusFontOutlineColor, FocusFontOutlineSize);
+                if (FocusPointsEnable)
+                {
+                    FocusWindow.ShowPoints();
+                }
+                else
+                {
+                    FocusWindow.HidePoints();
+                }
             });
         }
 
@@ -2345,8 +2564,15 @@ namespace Retro_Achievement_Tracker
             {
                 NotificationsWindow.SetFontFamily(NotificationsFontFamily.Name);
                 NotificationsWindow.SetFontColor(NotificationsFontColor);
-                NotificationsWindow.SetFontOutline(NotificationsFontOutlineColor, NotificationsFontOutlineSize);
 
+                if (NotificationsFontOutlineEnable)
+                {
+                    NotificationsWindow.SetFontOutline(NotificationsFontOutlineColor, NotificationsFontOutlineSize);
+                }
+                else
+                {
+                    NotificationsWindow.SetFontOutline("", 0);
+                }
                 NotificationsWindow.PromptUserInput();
 
                 NotificationsWindow.SetAchievementWidth(Settings.Default.notification_custom_achievement_enable ? Convert.ToInt32(CustomAchievementScale * GetVideoWidth(CustomAchievementFile)) : 1000);
@@ -2367,7 +2593,16 @@ namespace Retro_Achievement_Tracker
             {
                 GameInfoWindow.SetFontFamily(GameInfoFontFamily.Name);
                 GameInfoWindow.SetFontColor(GameInfoFontColor);
-                GameInfoWindow.SetFontOutline(GameInfoFontOutlineColor, GameInfoFontOutlineSize);
+
+                if (GameInfoFontOutlineEnable)
+                {
+                    GameInfoWindow.SetFontOutline(GameInfoFontOutlineColor, GameInfoFontOutlineSize);
+                }
+                else
+                {
+                    GameInfoWindow.SetFontOutline("", 0);
+                }
+
 
                 GameInfoWindow.SetTitleName(GameInfoTitleName);
                 GameInfoWindow.SetTitleValue(GameInfoTitle);
@@ -2434,14 +2669,7 @@ namespace Retro_Achievement_Tracker
                 {
                     GameInfoWindow.HideReleaseDate();
                 }
-                if (GameInfoBoxArtEnable)
-                {
-                    GameInfoWindow.ShowBoxArt();
-                }
-                else
-                {
-                    GameInfoWindow.HideBoxArt();
-                }
+                GameInfoWindow.SetFontSize(GameInfoFontSize);
             });
         }
 
@@ -2454,7 +2682,14 @@ namespace Retro_Achievement_Tracker
             {
                 LastFiveWindow.SetFontFamily(LastFiveFontFamily.Name);
                 LastFiveWindow.SetFontColor(LastFiveFontColor);
-                LastFiveWindow.SetFontOutline(LastFiveFontOutlineColor, LastFiveFontOutlineSize);
+                if (LastFiveFontOutlineEnable)
+                {
+                    LastFiveWindow.SetFontOutline(LastFiveFontOutlineColor, LastFiveFontOutlineSize);
+                }
+                else
+                {
+                    LastFiveWindow.SetFontOutline("", 0);
+                }
             });
         }
 
@@ -2562,7 +2797,7 @@ namespace Retro_Achievement_Tracker
             }
         }
 
-        private void MainPage_FormClosed(object sender, FormClosedEventArgs e)
+        protected override void OnClosed(EventArgs e)
         {
             if (FocusWindow != null && !FocusWindow.IsDisposed)
             {
@@ -2639,12 +2874,14 @@ namespace Retro_Achievement_Tracker
             this.statsGameTruePointsCheckBox.Checked = Settings.Default.stats_game_true_points_enable;
             this.statsGameAchievementsCheckBox.Checked = Settings.Default.stats_game_achievements_enable;
 
+            this.gameInfoTitleCheckBox.Checked = Settings.Default.game_info_title_enable;
             this.gameInfoConsoleCheckBox.Checked = Settings.Default.game_info_console_enable;
             this.gameInfoDeveloperCheckBox.Checked = Settings.Default.game_info_developer_enable;
             this.gameInfoPublisherCheckBox.Checked = Settings.Default.game_info_publisher_enable;
             this.gameInfoGenreCheckBox.Checked = Settings.Default.game_info_genre_enable;
             this.gameInfoReleaseDateCheckBox.Checked = Settings.Default.game_info_release_date_enable;
-            this.gameInfoBoxArtCheckbox.Checked = Settings.Default.game_info_box_art_enable;
+
+            this.focusPointsEnable.Checked = Settings.Default.focus_points_enable;
 
             if (CustomAchievementEnabled && string.IsNullOrEmpty(Settings.Default.notification_custom_achievement_file))
             {
@@ -2713,6 +2950,7 @@ namespace Retro_Achievement_Tracker
             this.fontOutlineColorButton.Click += FontOutlineColorButton_Click;
             this.fontOutlineCheckBox.CheckedChanged += FontOutlineCheckBox_CheckedChanged;
             this.fontOutlineNumericUpDown.ValueChanged += FontOutlineNumericUpDown_ValueChanged;
+            this.fontSizeNumericUpDown.ValueChanged += FontSizeNumericUpDown_ValueChanged;
             this.fontFamilyComboBox.SelectedIndexChanged += FontFamilyComboBox_SelectedIndexChanged;
             this.alertsStreamLabelsCheckBox.CheckedChanged += AlertsStreamLabelsCheckBox_CheckedChanged;
             this.focusStreamLabelsCheckBox.CheckedChanged += FocusStreamLabelsCheckBox_CheckedChanged;
@@ -3447,8 +3685,12 @@ namespace Retro_Achievement_Tracker
                 this.gameInfoOverrideSettingsGroupBox.Hide();
                 this.customAchievementSettingsGroupBox.Hide();
                 this.customMasterySettingsGroupBox.Hide();
+                this.focusOverridesGroupBox.Hide();
 
                 MenuState = CustomMenuState.CLOSED;
+
+                this.fontSizeNumericUpDown.Enabled = true;
+                this.fontSizeNumericUpDown.Value = Convert.ToDecimal(StatsFontSize);
 
                 this.fontColorPictureBox.BackColor = ColorTranslator.FromHtml(Settings.Default.stats_font_color_hex_code);
                 this.fontOutlineCheckBox.Checked = Settings.Default.stats_font_outline_enabled;
@@ -3486,7 +3728,7 @@ namespace Retro_Achievement_Tracker
 
                 this.fontSettingsGroupBox.Show();
                 this.statsOverrideGroupBox.Show();
-                this.ClientSize = new Size(592, 620);
+                this.ClientSize = new Size(592, 645);
                 this.statsOverrideGroupBox.Location = new Point(4, 313);
             }
             else
@@ -3502,8 +3744,12 @@ namespace Retro_Achievement_Tracker
                 this.lastFiveOverridesGroupBox.Hide();
                 this.gameInfoOverrideSettingsGroupBox.Hide();
                 this.statsOverrideGroupBox.Hide();
+                this.focusOverridesGroupBox.Hide();
 
                 MenuState = CustomMenuState.CLOSED;
+
+                this.fontSizeNumericUpDown.Enabled = false;
+                this.fontSizeNumericUpDown.Value = Convert.ToDecimal(1);
 
                 this.fontColorPictureBox.BackColor = ColorTranslator.FromHtml(Settings.Default.notification_font_color_hex_code);
                 this.fontOutlineCheckBox.Checked = Settings.Default.notification_font_outline_enabled;
@@ -3560,8 +3806,12 @@ namespace Retro_Achievement_Tracker
                 this.customAchievementSettingsGroupBox.Hide();
                 this.customMasterySettingsGroupBox.Hide();
                 this.statsOverrideGroupBox.Hide();
+                this.focusOverridesGroupBox.Hide();
 
                 MenuState = CustomMenuState.CLOSED;
+
+                this.fontSizeNumericUpDown.Enabled = true;
+                this.fontSizeNumericUpDown.Value = Convert.ToDecimal(GameInfoFontSize);
 
                 this.fontColorPictureBox.BackColor = ColorTranslator.FromHtml(Settings.Default.game_info_font_color_hex_code);
                 this.fontOutlineCheckBox.Checked = Settings.Default.game_info_font_outline_enabled;
@@ -3616,8 +3866,12 @@ namespace Retro_Achievement_Tracker
                 this.customAchievementSettingsGroupBox.Hide();
                 this.customMasterySettingsGroupBox.Hide();
                 this.statsOverrideGroupBox.Hide();
+                this.focusOverridesGroupBox.Hide();
 
                 MenuState = CustomMenuState.CLOSED;
+
+                this.fontSizeNumericUpDown.Enabled = false;
+                this.fontSizeNumericUpDown.Value = Convert.ToDecimal(1);
 
                 this.fontColorPictureBox.BackColor = ColorTranslator.FromHtml(Settings.Default.last_five_font_color_hex_code);
                 this.fontOutlineCheckBox.Checked = Settings.Default.last_five_font_outline_enabled;
@@ -3673,8 +3927,12 @@ namespace Retro_Achievement_Tracker
                 this.customAchievementSettingsGroupBox.Hide();
                 this.customMasterySettingsGroupBox.Hide();
                 this.statsOverrideGroupBox.Hide();
+                this.focusOverridesGroupBox.Hide();
 
                 MenuState = CustomMenuState.CLOSED;
+
+                this.fontSizeNumericUpDown.Enabled = false;
+                this.fontSizeNumericUpDown.Value = Convert.ToDecimal(1);
 
                 this.fontColorPictureBox.BackColor = ColorTranslator.FromHtml(Settings.Default.focus_font_color_hex_code);
                 this.fontOutlineCheckBox.Checked = Settings.Default.focus_font_outline_enabled;
@@ -3711,7 +3969,9 @@ namespace Retro_Achievement_Tracker
                 MenuState = CustomMenuState.FOCUS;
 
                 this.fontSettingsGroupBox.Show();
-                this.ClientSize = new Size(592, 424);
+                this.ClientSize = new Size(592, 454);
+                this.focusOverridesGroupBox.Location = new Point(4, 313);
+                this.focusOverridesGroupBox.Show();
             }
             else
             {
@@ -3781,19 +4041,29 @@ namespace Retro_Achievement_Tracker
                 switch (MenuState)
                 {
                     case CustomMenuState.STATS:
+                        MenuState = CustomMenuState.CLOSED;
                         StatsFontColor = HexConverter(this.colorDialog1.Color);
+                        MenuState = CustomMenuState.STATS;
                         break;
                     case CustomMenuState.ALERTS:
+                        MenuState = CustomMenuState.CLOSED;
                         NotificationsFontColor = HexConverter(this.colorDialog1.Color);
+                        MenuState = CustomMenuState.ALERTS;
                         break;
                     case CustomMenuState.GAME_INFO:
+                        MenuState = CustomMenuState.CLOSED;
                         GameInfoFontColor = HexConverter(this.colorDialog1.Color);
+                        MenuState = CustomMenuState.GAME_INFO;
                         break;
                     case CustomMenuState.LAST_FIVE:
+                        MenuState = CustomMenuState.CLOSED;
                         LastFiveFontColor = HexConverter(this.colorDialog1.Color);
+                        MenuState = CustomMenuState.LAST_FIVE;
                         break;
                     case CustomMenuState.FOCUS:
+                        MenuState = CustomMenuState.CLOSED;
                         FocusFontColor = HexConverter(this.colorDialog1.Color);
+                        MenuState = CustomMenuState.FOCUS;
                         break;
                 }
             }
@@ -3807,19 +4077,29 @@ namespace Retro_Achievement_Tracker
                 switch (MenuState)
                 {
                     case CustomMenuState.STATS:
+                        MenuState = CustomMenuState.CLOSED;
                         StatsFontOutlineColor = HexConverter(this.colorDialog1.Color);
+                        MenuState = CustomMenuState.STATS;
                         break;
                     case CustomMenuState.ALERTS:
+                        MenuState = CustomMenuState.CLOSED;
                         NotificationsFontOutlineColor = HexConverter(this.colorDialog1.Color);
+                        MenuState = CustomMenuState.ALERTS;
                         break;
                     case CustomMenuState.GAME_INFO:
+                        MenuState = CustomMenuState.CLOSED;
                         GameInfoFontOutlineColor = HexConverter(this.colorDialog1.Color);
+                        MenuState = CustomMenuState.GAME_INFO;
                         break;
                     case CustomMenuState.LAST_FIVE:
+                        MenuState = CustomMenuState.CLOSED;
                         LastFiveFontOutlineColor = HexConverter(this.colorDialog1.Color);
+                        MenuState = CustomMenuState.LAST_FIVE;
                         break;
                     case CustomMenuState.FOCUS:
+                        MenuState = CustomMenuState.CLOSED;
                         FocusFontOutlineColor = HexConverter(this.colorDialog1.Color);
+                        MenuState = CustomMenuState.FOCUS;
                         break;
                 }
             }
@@ -3832,19 +4112,29 @@ namespace Retro_Achievement_Tracker
             switch (MenuState)
             {
                 case CustomMenuState.STATS:
+                    MenuState = CustomMenuState.CLOSED;
                     StatsFontFamily = familyArray[Array.FindIndex(familyArray, row => row.Name == (string)this.fontFamilyComboBox.SelectedItem)];
+                    MenuState = CustomMenuState.STATS;
                     break;
                 case CustomMenuState.ALERTS:
+                    MenuState = CustomMenuState.CLOSED;
                     NotificationsFontFamily = familyArray[Array.FindIndex(familyArray, row => row.Name == (string)this.fontFamilyComboBox.SelectedItem)];
+                    MenuState = CustomMenuState.ALERTS;
                     break;
                 case CustomMenuState.GAME_INFO:
+                    MenuState = CustomMenuState.CLOSED;
                     GameInfoFontFamily = familyArray[Array.FindIndex(familyArray, row => row.Name == (string)this.fontFamilyComboBox.SelectedItem)];
+                    MenuState = CustomMenuState.GAME_INFO;
                     break;
                 case CustomMenuState.LAST_FIVE:
+                    MenuState = CustomMenuState.CLOSED;
                     LastFiveFontFamily = familyArray[Array.FindIndex(familyArray, row => row.Name == (string)this.fontFamilyComboBox.SelectedItem)];
+                    MenuState = CustomMenuState.LAST_FIVE;
                     break;
                 case CustomMenuState.FOCUS:
+                    MenuState = CustomMenuState.CLOSED;
                     FocusFontFamily = familyArray[Array.FindIndex(familyArray, row => row.Name == (string)this.fontFamilyComboBox.SelectedItem)];
+                    MenuState = CustomMenuState.FOCUS;
                     break;
             }
         }
@@ -3870,6 +4160,18 @@ namespace Retro_Achievement_Tracker
                     break;
             }
         }
+        private void FontSizeNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            switch (MenuState)
+            {
+                case CustomMenuState.STATS:
+                    StatsFontSize = (int)this.fontSizeNumericUpDown.Value;
+                    break;
+                case CustomMenuState.GAME_INFO:
+                    GameInfoFontSize = (int)this.fontSizeNumericUpDown.Value;
+                    break;
+            }
+        }
 
         private void FontOutlineCheckBox_CheckedChanged(object sender, EventArgs e)
         {
@@ -3884,77 +4186,57 @@ namespace Retro_Achievement_Tracker
                 case CustomMenuState.STATS:
                     if (isEnabled)
                     {
+                        MenuState = CustomMenuState.CLOSED;
                         this.fontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(StatsFontOutlineColor);
                         this.fontOutlineNumericUpDown.Value = StatsFontOutlineSize;
-
-                        StatsWindow.SetFontOutline(StatsFontOutlineColor, StatsFontOutlineSize);
-                    }
-                    else
-                    {
-                        StatsWindow.SetFontOutline("", 0);
+                        MenuState = CustomMenuState.STATS;
                     }
 
-                    Settings.Default.stats_font_outline_enabled = isEnabled;
+                    StatsFontOutlineEnable = isEnabled;
                     break;
                 case CustomMenuState.ALERTS:
                     if (isEnabled)
                     {
+                        MenuState = CustomMenuState.CLOSED;
                         this.fontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(NotificationsFontOutlineColor);
                         this.fontOutlineNumericUpDown.Value = NotificationsFontOutlineSize;
-
-                        NotificationsWindow.SetFontOutline(NotificationsFontOutlineColor, NotificationsFontOutlineSize);
-                    }
-                    else
-                    {
-                        NotificationsWindow.SetFontOutline("", 0);
+                        MenuState = CustomMenuState.ALERTS;
                     }
 
-                    Settings.Default.notification_font_outline_enabled = isEnabled;
+                    NotificationsFontOutlineEnable = isEnabled;
                     break;
                 case CustomMenuState.GAME_INFO:
                     if (isEnabled)
                     {
+                        MenuState = CustomMenuState.CLOSED;
                         this.fontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(GameInfoFontOutlineColor);
                         this.fontOutlineNumericUpDown.Value = GameInfoFontOutlineSize;
-
-                        GameInfoWindow.SetFontOutline(GameInfoFontOutlineColor, GameInfoFontOutlineSize);
-                    }
-                    else
-                    {
-                        GameInfoWindow.SetFontOutline("", 0);
+                        MenuState = CustomMenuState.GAME_INFO;
                     }
 
-                    Settings.Default.game_info_font_outline_enabled = isEnabled;
+                    GameInfoFontOutlineEnable = isEnabled;
                     break;
                 case CustomMenuState.LAST_FIVE:
                     if (isEnabled)
                     {
+                        MenuState = CustomMenuState.CLOSED;
                         this.fontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(LastFiveFontOutlineColor);
                         this.fontOutlineNumericUpDown.Value = LastFiveFontOutlineSize;
-
-                        LastFiveWindow.SetFontOutline(LastFiveFontOutlineColor, LastFiveFontOutlineSize);
-                    }
-                    else
-                    {
-                        LastFiveWindow.SetFontOutline("", 0);
+                        MenuState = CustomMenuState.LAST_FIVE;
                     }
 
-                    Settings.Default.last_five_font_outline_enabled = isEnabled;
+                    LastFiveFontOutlineEnable = isEnabled;
                     break;
                 case CustomMenuState.FOCUS:
                     if (isEnabled)
                     {
+                        MenuState = CustomMenuState.CLOSED;
                         this.fontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(FocusFontOutlineColor);
                         this.fontOutlineNumericUpDown.Value = FocusFontOutlineSize;
-
-                        FocusWindow.SetFontOutline(FocusFontOutlineColor, FocusFontOutlineSize);
-                    }
-                    else
-                    {
-                        FocusWindow.SetFontOutline("", 0);
+                        MenuState = CustomMenuState.FOCUS;
                     }
 
-                    Settings.Default.focus_font_outline_enabled = isEnabled;
+                    FocusFontOutlineEnable = isEnabled;
                     break;
             }
 
@@ -4023,7 +4305,6 @@ namespace Retro_Achievement_Tracker
             this.gameInfoPublisherCheckBox.Checked = true;
             this.gameInfoGenreCheckBox.Checked = true;
             this.gameInfoReleaseDateCheckBox.Checked = true;
-            this.gameInfoBoxArtCheckbox.Checked = true;
 
             this.gameInfoConsoleOverrideTextBox.Text = "Console";
             this.gameInfoDeveloperOverrideTextBox.Text = "Developer";
@@ -4127,11 +4408,26 @@ namespace Retro_Achievement_Tracker
             }
         }
 
+        private void statsCompletedCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (NotBooting)
+            {
+                StatsCompletedEnable = this.statsCompletedCheckBox.Checked;
+            }
+        }
+
         private void statsRankOverrideTextBox_TextChanged(object sender, EventArgs e)
         {
             if (NotBooting)
             {
                 StatsRankName = this.statsRankOverrideTextBox.Text;
+            }
+        }
+        private void statsCompletedTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (NotBooting)
+            {
+                StatsCompletedName = this.statsCompletedOverrideTextBox.Text;
             }
         }
 
@@ -4198,7 +4494,13 @@ namespace Retro_Achievement_Tracker
                 StatsGameAchievementsName = this.statsGameAchievementsOverrideTextBox.Text;
             }
         }
-
+        private void gameInfoTitleCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (NotBooting)
+            {
+                GameInfoTitleEnable = this.gameInfoTitleCheckBox.Checked;
+            }
+        }
         private void gameInfoConsoleCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (NotBooting)
@@ -4238,11 +4540,11 @@ namespace Retro_Achievement_Tracker
                 GameInfoReleaseDateEnable = this.gameInfoReleaseDateCheckBox.Checked;
             }
         }
-        private void gameInfoBoxArtCheckbox_CheckedChanged(object sender, EventArgs e)
+        private void focusPointsEnableCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (NotBooting)
             {
-                GameInfoBoxArtEnable = this.gameInfoBoxArtCheckbox.Checked;
+                FocusPointsEnable = this.focusPointsEnable.Checked;
             }
         }
 
@@ -4283,14 +4585,6 @@ namespace Retro_Achievement_Tracker
             if (NotBooting)
             {
                 GameInfoReleaseDateName = this.gameInfoReleaseDateOverrideTextBox.Text;
-            }
-        }
-
-        private void gameInfoTitleCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (NotBooting)
-            {
-                GameInfoTitleEnable = this.gameInfoReleaseDateCheckBox.Checked;
             }
         }
 

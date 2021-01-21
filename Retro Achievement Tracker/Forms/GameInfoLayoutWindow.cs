@@ -13,7 +13,7 @@ namespace Retro_Achievement_Tracker
     {
         public GameInfoLayoutWindow()
         {
-            this.ClientSize = new Size(1366, 700);
+            this.ClientSize = new Size(1235, 650);
             SetupBrowser();
             this.Name = "RA Tracker - Game Info";
             this.Text = "RA Tracker - Game Info";
@@ -125,21 +125,7 @@ namespace Retro_Achievement_Tracker
         {
             await ExecuteScript("hideReleaseDate();");
         }
-
-        //Box Art
-        public async void SetBoxArt(string boxArtLink)
-        {
-            await ExecuteScript("setBoxArt('" + boxArtLink + "');");
-        }
-        public async void ShowBoxArt()
-        {
-            await ExecuteScript("showBoxArt();");
-        }
-        public async void HideBoxArt()
-        {
-            await ExecuteScript("hideBoxArt();");
-        }
-
+        
         //Fonts
         public async void SetFontFamily(string fontName)
         {
@@ -152,6 +138,10 @@ namespace Retro_Achievement_Tracker
         public async void SetFontOutline(string hexCode, int size)
         {
             await ExecuteScript("setFontOutline(\"" + hexCode + " " + size + "px\");");
+        }
+        public async void SetFontSize(int size)
+        {
+            await ExecuteScript("setFontSize(" + size + ");");
         }
         protected async Task ExecuteScript(string script)
         {
@@ -192,9 +182,9 @@ namespace Retro_Achievement_Tracker
             // 
             // GameInfoLayoutWindow
             // 
-            this.ClientSize = new System.Drawing.Size(284, 261);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.ClientSize = new Size(284, 261);
+            this.FormBorderStyle = FormBorderStyle.FixedToolWindow;
+            this.Icon = ((Icon)(resources.GetObject("$this.Icon")));
             this.Name = "GameInfoLayoutWindow";
             this.ResumeLayout(false);
 

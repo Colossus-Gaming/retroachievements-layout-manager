@@ -277,11 +277,6 @@ namespace Retro_Achievement_Tracker.Forms
             await ExecuteScript("setFontOutline(\"" + hexCode + " " + size + "px\");");
         }
 
-        public async void SetBackgroundColor(string hexCode)
-        {
-            await ExecuteScript("setBackgroundColor(\"" + hexCode + "\");");
-        }
-
         protected async Task ExecuteScript(string script)
         {
             if (this.Visible)
@@ -332,9 +327,9 @@ namespace Retro_Achievement_Tracker.Forms
             // 
             // NotificationLayoutWindow
             // 
-            this.ClientSize = new System.Drawing.Size(284, 261);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.ClientSize = new Size(284, 261);
+            this.FormBorderStyle = FormBorderStyle.FixedToolWindow;
+            this.Icon = ((Icon)(resources.GetObject("$this.Icon")));
             this.Name = "NotificationLayoutWindow";
             this.ResumeLayout(false);
 

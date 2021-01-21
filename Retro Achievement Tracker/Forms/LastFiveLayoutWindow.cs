@@ -13,7 +13,7 @@ namespace Retro_Achievement_Tracker
     {
         public LastFiveLayoutWindow()
         {
-            this.ClientSize = new System.Drawing.Size(1000, 300);
+            this.ClientSize = new Size(1000, 300);
             SetupBrowser();
             this.Name = "RA Tracker - Last Five Achievements";
             this.Text = "RA Tracker - Last Five Achievements";
@@ -53,7 +53,7 @@ namespace Retro_Achievement_Tracker
 
         protected void SetupBrowser()
         {
-            this.chromiumWebBrowser = new CefSharp.WinForms.ChromiumWebBrowser(new HtmlString(Resources.StatsWindow))
+            this.chromiumWebBrowser = new CefSharp.WinForms.ChromiumWebBrowser(new HtmlString(Resources.LastFive))
             {
                 ActivateBrowserOnCreation = false,
                 Location = new Point(0, 0),
@@ -76,9 +76,9 @@ namespace Retro_Achievement_Tracker
             // 
             // LastFiveLayoutWindow
             // 
-            this.ClientSize = new System.Drawing.Size(284, 261);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.ClientSize = new Size(284, 261);
+            this.FormBorderStyle = FormBorderStyle.FixedToolWindow;
+            this.Icon = ((Icon)(resources.GetObject("$this.Icon")));
             this.Name = "LastFiveLayoutWindow";
             this.ResumeLayout(false);
 

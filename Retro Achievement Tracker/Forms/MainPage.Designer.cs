@@ -97,6 +97,8 @@ namespace Retro_Achievement_Tracker
             this.statsAwardsOverrideTextBox = new System.Windows.Forms.TextBox();
             this.statsRankOverrideTextBox = new System.Windows.Forms.TextBox();
             this.statsOverrideGroupBox = new System.Windows.Forms.GroupBox();
+            this.statsCompletedCheckBox = new System.Windows.Forms.CheckBox();
+            this.statsCompletedOverrideTextBox = new System.Windows.Forms.TextBox();
             this.statsGameAchievementsCheckBox = new System.Windows.Forms.CheckBox();
             this.statsGameTruePointsCheckBox = new System.Windows.Forms.CheckBox();
             this.statsGamePointsCheckBox = new System.Windows.Forms.CheckBox();
@@ -119,6 +121,8 @@ namespace Retro_Achievement_Tracker
             this.fontColorPictureBox = new System.Windows.Forms.PictureBox();
             this.fontColorLabel = new System.Windows.Forms.Label();
             this.fontSettingsGroupBox = new System.Windows.Forms.GroupBox();
+            this.fontSizeLabel = new System.Windows.Forms.Label();
+            this.fontSizeNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
@@ -160,7 +164,6 @@ namespace Retro_Achievement_Tracker
             this.gameInfoOverrideSettingsGroupBox = new System.Windows.Forms.GroupBox();
             this.gameInfoTitleCheckBox = new System.Windows.Forms.CheckBox();
             this.gameInfoTitleOverrideTextBox = new System.Windows.Forms.TextBox();
-            this.gameInfoBoxArtCheckbox = new System.Windows.Forms.CheckBox();
             this.gameInfoReleaseDateCheckBox = new System.Windows.Forms.CheckBox();
             this.gameInfoGenreCheckBox = new System.Windows.Forms.CheckBox();
             this.gameInfoPublisherCheckBox = new System.Windows.Forms.CheckBox();
@@ -179,6 +182,8 @@ namespace Retro_Achievement_Tracker
             this.comboBox6 = new System.Windows.Forms.ComboBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.focusOverridesGroupBox = new System.Windows.Forms.GroupBox();
+            this.focusPointsEnable = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.userProfilePictureBox)).BeginInit();
             this.statsGroupBox.SuspendLayout();
             this.focusGroupBox.SuspendLayout();
@@ -195,6 +200,7 @@ namespace Retro_Achievement_Tracker
             ((System.ComponentModel.ISupportInitialize)(this.fontOutlineColorPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontColorPictureBox)).BeginInit();
             this.fontSettingsGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fontSizeNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.inAchievementNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.outAchievementNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.scaleAchievementNumericUpDown)).BeginInit();
@@ -209,6 +215,7 @@ namespace Retro_Achievement_Tracker
             this.customMasterySettingsGroupBox.SuspendLayout();
             this.gameInfoOverrideSettingsGroupBox.SuspendLayout();
             this.lastFiveOverridesGroupBox.SuspendLayout();
+            this.focusOverridesGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // apiKeyLabel
@@ -882,6 +889,8 @@ namespace Retro_Achievement_Tracker
             // 
             // statsOverrideGroupBox
             // 
+            this.statsOverrideGroupBox.Controls.Add(this.statsCompletedCheckBox);
+            this.statsOverrideGroupBox.Controls.Add(this.statsCompletedOverrideTextBox);
             this.statsOverrideGroupBox.Controls.Add(this.statsGameAchievementsCheckBox);
             this.statsOverrideGroupBox.Controls.Add(this.statsGameTruePointsCheckBox);
             this.statsOverrideGroupBox.Controls.Add(this.statsGamePointsCheckBox);
@@ -905,16 +914,36 @@ namespace Retro_Achievement_Tracker
             this.statsOverrideGroupBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.statsOverrideGroupBox.Location = new System.Drawing.Point(593, 313);
             this.statsOverrideGroupBox.Name = "statsOverrideGroupBox";
-            this.statsOverrideGroupBox.Size = new System.Drawing.Size(287, 305);
+            this.statsOverrideGroupBox.Size = new System.Drawing.Size(287, 290);
             this.statsOverrideGroupBox.TabIndex = 10007;
             this.statsOverrideGroupBox.TabStop = false;
             this.statsOverrideGroupBox.Text = "Stats Overrides";
+            // 
+            // statsCompletedCheckBox
+            // 
+            this.statsCompletedCheckBox.AutoSize = true;
+            this.statsCompletedCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statsCompletedCheckBox.Location = new System.Drawing.Point(145, 212);
+            this.statsCompletedCheckBox.Name = "statsCompletedCheckBox";
+            this.statsCompletedCheckBox.Size = new System.Drawing.Size(89, 18);
+            this.statsCompletedCheckBox.TabIndex = 49;
+            this.statsCompletedCheckBox.Text = "Completed";
+            this.statsCompletedCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // statsCompletedOverrideTextBox
+            // 
+            this.statsCompletedOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statsCompletedOverrideTextBox.Location = new System.Drawing.Point(145, 233);
+            this.statsCompletedOverrideTextBox.Name = "statsCompletedOverrideTextBox";
+            this.statsCompletedOverrideTextBox.Size = new System.Drawing.Size(133, 20);
+            this.statsCompletedOverrideTextBox.TabIndex = 48;
+            this.statsCompletedOverrideTextBox.Text = "Completed";
             // 
             // statsGameAchievementsCheckBox
             // 
             this.statsGameAchievementsCheckBox.AutoSize = true;
             this.statsGameAchievementsCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.statsGameAchievementsCheckBox.Location = new System.Drawing.Point(5, 256);
+            this.statsGameAchievementsCheckBox.Location = new System.Drawing.Point(6, 212);
             this.statsGameAchievementsCheckBox.Name = "statsGameAchievementsCheckBox";
             this.statsGameAchievementsCheckBox.Size = new System.Drawing.Size(145, 18);
             this.statsGameAchievementsCheckBox.TabIndex = 47;
@@ -926,7 +955,7 @@ namespace Retro_Achievement_Tracker
             // 
             this.statsGameTruePointsCheckBox.AutoSize = true;
             this.statsGameTruePointsCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.statsGameTruePointsCheckBox.Location = new System.Drawing.Point(6, 212);
+            this.statsGameTruePointsCheckBox.Location = new System.Drawing.Point(143, 168);
             this.statsGameTruePointsCheckBox.Name = "statsGameTruePointsCheckBox";
             this.statsGameTruePointsCheckBox.Size = new System.Drawing.Size(138, 18);
             this.statsGameTruePointsCheckBox.TabIndex = 46;
@@ -1022,7 +1051,7 @@ namespace Retro_Achievement_Tracker
             // 
             this.statsDefaultButton.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statsDefaultButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.statsDefaultButton.Location = new System.Drawing.Point(209, 276);
+            this.statsDefaultButton.Location = new System.Drawing.Point(209, 261);
             this.statsDefaultButton.Name = "statsDefaultButton";
             this.statsDefaultButton.Size = new System.Drawing.Size(72, 23);
             this.statsDefaultButton.TabIndex = 39;
@@ -1033,9 +1062,9 @@ namespace Retro_Achievement_Tracker
             // statsGameTruePointsOverrideTextBox
             // 
             this.statsGameTruePointsOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.statsGameTruePointsOverrideTextBox.Location = new System.Drawing.Point(6, 230);
+            this.statsGameTruePointsOverrideTextBox.Location = new System.Drawing.Point(144, 186);
             this.statsGameTruePointsOverrideTextBox.Name = "statsGameTruePointsOverrideTextBox";
-            this.statsGameTruePointsOverrideTextBox.Size = new System.Drawing.Size(166, 20);
+            this.statsGameTruePointsOverrideTextBox.Size = new System.Drawing.Size(134, 20);
             this.statsGameTruePointsOverrideTextBox.TabIndex = 16;
             this.statsGameTruePointsOverrideTextBox.Text = "T. Points";
             this.statsGameTruePointsOverrideTextBox.TextChanged += new System.EventHandler(this.statsGameTruePointsOverrideTextBox_TextChanged);
@@ -1045,7 +1074,7 @@ namespace Retro_Achievement_Tracker
             this.statsGamePointsOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statsGamePointsOverrideTextBox.Location = new System.Drawing.Point(6, 186);
             this.statsGamePointsOverrideTextBox.Name = "statsGamePointsOverrideTextBox";
-            this.statsGamePointsOverrideTextBox.Size = new System.Drawing.Size(166, 20);
+            this.statsGamePointsOverrideTextBox.Size = new System.Drawing.Size(133, 20);
             this.statsGamePointsOverrideTextBox.TabIndex = 15;
             this.statsGamePointsOverrideTextBox.Text = "Points";
             this.statsGamePointsOverrideTextBox.TextChanged += new System.EventHandler(this.statsGamePointsOverrideTextBox_TextChanged);
@@ -1053,9 +1082,9 @@ namespace Retro_Achievement_Tracker
             // statsGameAchievementsOverrideTextBox
             // 
             this.statsGameAchievementsOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.statsGameAchievementsOverrideTextBox.Location = new System.Drawing.Point(5, 277);
+            this.statsGameAchievementsOverrideTextBox.Location = new System.Drawing.Point(6, 233);
             this.statsGameAchievementsOverrideTextBox.Name = "statsGameAchievementsOverrideTextBox";
-            this.statsGameAchievementsOverrideTextBox.Size = new System.Drawing.Size(167, 20);
+            this.statsGameAchievementsOverrideTextBox.Size = new System.Drawing.Size(133, 20);
             this.statsGameAchievementsOverrideTextBox.TabIndex = 13;
             this.statsGameAchievementsOverrideTextBox.Text = "Cheevos";
             this.statsGameAchievementsOverrideTextBox.TextChanged += new System.EventHandler(this.statsGameAchievementsOverrideTextBox_TextChanged);
@@ -1064,7 +1093,7 @@ namespace Retro_Achievement_Tracker
             // 
             this.fontFamilyComboBox.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fontFamilyComboBox.FormattingEnabled = true;
-            this.fontFamilyComboBox.Location = new System.Drawing.Point(4, 19);
+            this.fontFamilyComboBox.Location = new System.Drawing.Point(6, 40);
             this.fontFamilyComboBox.Name = "fontFamilyComboBox";
             this.fontFamilyComboBox.Size = new System.Drawing.Size(276, 23);
             this.fontFamilyComboBox.TabIndex = 38;
@@ -1072,7 +1101,7 @@ namespace Retro_Achievement_Tracker
             // fontOutlineNumericUpDown
             // 
             this.fontOutlineNumericUpDown.Font = new System.Drawing.Font("Lucida Console", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fontOutlineNumericUpDown.Location = new System.Drawing.Point(121, 75);
+            this.fontOutlineNumericUpDown.Location = new System.Drawing.Point(90, 73);
             this.fontOutlineNumericUpDown.Maximum = new decimal(new int[] {
             10,
             0,
@@ -1096,7 +1125,7 @@ namespace Retro_Achievement_Tracker
             // 
             this.fontOutlineCheckBox.AutoSize = true;
             this.fontOutlineCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fontOutlineCheckBox.Location = new System.Drawing.Point(7, 80);
+            this.fontOutlineCheckBox.Location = new System.Drawing.Point(9, 74);
             this.fontOutlineCheckBox.Name = "fontOutlineCheckBox";
             this.fontOutlineCheckBox.Size = new System.Drawing.Size(75, 18);
             this.fontOutlineCheckBox.TabIndex = 27;
@@ -1107,7 +1136,7 @@ namespace Retro_Achievement_Tracker
             // 
             this.fontOutlineColorButton.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fontOutlineColorButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.fontOutlineColorButton.Location = new System.Drawing.Point(231, 75);
+            this.fontOutlineColorButton.Location = new System.Drawing.Point(233, 69);
             this.fontOutlineColorButton.Name = "fontOutlineColorButton";
             this.fontOutlineColorButton.Size = new System.Drawing.Size(49, 23);
             this.fontOutlineColorButton.TabIndex = 26;
@@ -1117,7 +1146,7 @@ namespace Retro_Achievement_Tracker
             // fontOutlineColorPictureBox
             // 
             this.fontOutlineColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.fontOutlineColorPictureBox.Location = new System.Drawing.Point(175, 75);
+            this.fontOutlineColorPictureBox.Location = new System.Drawing.Point(177, 69);
             this.fontOutlineColorPictureBox.Name = "fontOutlineColorPictureBox";
             this.fontOutlineColorPictureBox.Size = new System.Drawing.Size(50, 22);
             this.fontOutlineColorPictureBox.TabIndex = 25;
@@ -1127,7 +1156,7 @@ namespace Retro_Achievement_Tracker
             // 
             this.setFontColorButton.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.setFontColorButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.setFontColorButton.Location = new System.Drawing.Point(231, 46);
+            this.setFontColorButton.Location = new System.Drawing.Point(233, 98);
             this.setFontColorButton.Name = "setFontColorButton";
             this.setFontColorButton.Size = new System.Drawing.Size(49, 23);
             this.setFontColorButton.TabIndex = 22;
@@ -1137,7 +1166,7 @@ namespace Retro_Achievement_Tracker
             // fontColorPictureBox
             // 
             this.fontColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.fontColorPictureBox.Location = new System.Drawing.Point(175, 47);
+            this.fontColorPictureBox.Location = new System.Drawing.Point(177, 99);
             this.fontColorPictureBox.Name = "fontColorPictureBox";
             this.fontColorPictureBox.Size = new System.Drawing.Size(50, 22);
             this.fontColorPictureBox.TabIndex = 21;
@@ -1147,7 +1176,7 @@ namespace Retro_Achievement_Tracker
             // 
             this.fontColorLabel.AutoSize = true;
             this.fontColorLabel.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fontColorLabel.Location = new System.Drawing.Point(5, 49);
+            this.fontColorLabel.Location = new System.Drawing.Point(8, 106);
             this.fontColorLabel.Name = "fontColorLabel";
             this.fontColorLabel.Size = new System.Drawing.Size(85, 12);
             this.fontColorLabel.TabIndex = 20;
@@ -1155,6 +1184,8 @@ namespace Retro_Achievement_Tracker
             // 
             // fontSettingsGroupBox
             // 
+            this.fontSettingsGroupBox.Controls.Add(this.fontSizeLabel);
+            this.fontSettingsGroupBox.Controls.Add(this.fontSizeNumericUpDown);
             this.fontSettingsGroupBox.Controls.Add(this.fontFamilyComboBox);
             this.fontSettingsGroupBox.Controls.Add(this.fontOutlineNumericUpDown);
             this.fontSettingsGroupBox.Controls.Add(this.fontOutlineCheckBox);
@@ -1167,10 +1198,43 @@ namespace Retro_Achievement_Tracker
             this.fontSettingsGroupBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.fontSettingsGroupBox.Location = new System.Drawing.Point(294, 313);
             this.fontSettingsGroupBox.Name = "fontSettingsGroupBox";
-            this.fontSettingsGroupBox.Size = new System.Drawing.Size(291, 105);
+            this.fontSettingsGroupBox.Size = new System.Drawing.Size(291, 129);
             this.fontSettingsGroupBox.TabIndex = 10006;
             this.fontSettingsGroupBox.TabStop = false;
             this.fontSettingsGroupBox.Text = "Font Settings";
+            // 
+            // fontSizeLabel
+            // 
+            this.fontSizeLabel.AutoSize = true;
+            this.fontSizeLabel.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fontSizeLabel.Location = new System.Drawing.Point(7, 20);
+            this.fontSizeLabel.Name = "fontSizeLabel";
+            this.fontSizeLabel.Size = new System.Drawing.Size(77, 12);
+            this.fontSizeLabel.TabIndex = 40;
+            this.fontSizeLabel.Text = "Font Size";
+            // 
+            // fontSizeNumericUpDown
+            // 
+            this.fontSizeNumericUpDown.Font = new System.Drawing.Font("Lucida Console", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fontSizeNumericUpDown.Location = new System.Drawing.Point(234, 12);
+            this.fontSizeNumericUpDown.Maximum = new decimal(new int[] {
+            72,
+            0,
+            0,
+            0});
+            this.fontSizeNumericUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.fontSizeNumericUpDown.Name = "fontSizeNumericUpDown";
+            this.fontSizeNumericUpDown.Size = new System.Drawing.Size(48, 22);
+            this.fontSizeNumericUpDown.TabIndex = 39;
+            this.fontSizeNumericUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // label9
             // 
@@ -1743,7 +1807,6 @@ namespace Retro_Achievement_Tracker
             // 
             this.gameInfoOverrideSettingsGroupBox.Controls.Add(this.gameInfoTitleCheckBox);
             this.gameInfoOverrideSettingsGroupBox.Controls.Add(this.gameInfoTitleOverrideTextBox);
-            this.gameInfoOverrideSettingsGroupBox.Controls.Add(this.gameInfoBoxArtCheckbox);
             this.gameInfoOverrideSettingsGroupBox.Controls.Add(this.gameInfoReleaseDateCheckBox);
             this.gameInfoOverrideSettingsGroupBox.Controls.Add(this.gameInfoGenreCheckBox);
             this.gameInfoOverrideSettingsGroupBox.Controls.Add(this.gameInfoPublisherCheckBox);
@@ -1785,18 +1848,6 @@ namespace Retro_Achievement_Tracker
             this.gameInfoTitleOverrideTextBox.TabIndex = 53;
             this.gameInfoTitleOverrideTextBox.Text = "Title";
             this.gameInfoTitleOverrideTextBox.TextChanged += new System.EventHandler(this.gameInfoTitleOverrideTextBox_TextChanged);
-            // 
-            // gameInfoBoxArtCheckbox
-            // 
-            this.gameInfoBoxArtCheckbox.AutoSize = true;
-            this.gameInfoBoxArtCheckbox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameInfoBoxArtCheckbox.Location = new System.Drawing.Point(6, 144);
-            this.gameInfoBoxArtCheckbox.Name = "gameInfoBoxArtCheckbox";
-            this.gameInfoBoxArtCheckbox.Size = new System.Drawing.Size(68, 18);
-            this.gameInfoBoxArtCheckbox.TabIndex = 39;
-            this.gameInfoBoxArtCheckbox.Text = "Boxart";
-            this.gameInfoBoxArtCheckbox.UseVisualStyleBackColor = true;
-            this.gameInfoBoxArtCheckbox.CheckedChanged += new System.EventHandler(this.gameInfoBoxArtCheckbox_CheckedChanged);
             // 
             // gameInfoReleaseDateCheckBox
             // 
@@ -1983,12 +2034,37 @@ namespace Retro_Achievement_Tracker
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // focusOverridesGroupBox
+            // 
+            this.focusOverridesGroupBox.Controls.Add(this.focusPointsEnable);
+            this.focusOverridesGroupBox.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.focusOverridesGroupBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.focusOverridesGroupBox.Location = new System.Drawing.Point(1472, 313);
+            this.focusOverridesGroupBox.Name = "focusOverridesGroupBox";
+            this.focusOverridesGroupBox.Size = new System.Drawing.Size(287, 52);
+            this.focusOverridesGroupBox.TabIndex = 10031;
+            this.focusOverridesGroupBox.TabStop = false;
+            this.focusOverridesGroupBox.Text = "Focus Overrides";
+            // 
+            // focusPointsEnable
+            // 
+            this.focusPointsEnable.AutoSize = true;
+            this.focusPointsEnable.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.focusPointsEnable.Location = new System.Drawing.Point(6, 20);
+            this.focusPointsEnable.Name = "focusPointsEnable";
+            this.focusPointsEnable.Size = new System.Drawing.Size(124, 18);
+            this.focusPointsEnable.TabIndex = 39;
+            this.focusPointsEnable.Text = "Display Points";
+            this.focusPointsEnable.UseVisualStyleBackColor = true;
+            this.focusPointsEnable.CheckedChanged += focusPointsEnableCheckBox_CheckedChanged;
+            // 
             // MainPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SteelBlue;
-            this.ClientSize = new System.Drawing.Size(1745, 721);
+            this.ClientSize = new System.Drawing.Size(1803, 721);
+            this.Controls.Add(this.focusOverridesGroupBox);
             this.Controls.Add(this.lastFiveOverridesGroupBox);
             this.Controls.Add(this.gameInfoOverrideSettingsGroupBox);
             this.Controls.Add(this.customMasterySettingsGroupBox);
@@ -2007,7 +2083,6 @@ namespace Retro_Achievement_Tracker
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainPage";
             this.Text = "Retro Achievements Tracker";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainPage_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.userProfilePictureBox)).EndInit();
             this.statsGroupBox.ResumeLayout(false);
             this.statsGroupBox.PerformLayout();
@@ -2033,6 +2108,7 @@ namespace Retro_Achievement_Tracker
             ((System.ComponentModel.ISupportInitialize)(this.fontColorPictureBox)).EndInit();
             this.fontSettingsGroupBox.ResumeLayout(false);
             this.fontSettingsGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fontSizeNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.inAchievementNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.outAchievementNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.scaleAchievementNumericUpDown)).EndInit();
@@ -2051,11 +2127,11 @@ namespace Retro_Achievement_Tracker
             this.gameInfoOverrideSettingsGroupBox.PerformLayout();
             this.lastFiveOverridesGroupBox.ResumeLayout(false);
             this.lastFiveOverridesGroupBox.PerformLayout();
+            this.focusOverridesGroupBox.ResumeLayout(false);
+            this.focusOverridesGroupBox.PerformLayout();
             this.ResumeLayout(false);
 
         }
-
-        
 
         #endregion
         private Label usernameLabel;
@@ -2196,9 +2272,14 @@ namespace Retro_Achievement_Tracker
         private CheckBox gameInfoPublisherCheckBox;
         private CheckBox gameInfoDeveloperCheckBox;
         private CheckBox gameInfoConsoleCheckBox;
-        private CheckBox gameInfoBoxArtCheckbox;
         private CheckBox gameInfoTitleCheckBox;
         private TextBox gameInfoTitleOverrideTextBox;
+        private Label fontSizeLabel;
+        private NumericUpDown fontSizeNumericUpDown;
+        private CheckBox statsCompletedCheckBox;
+        private TextBox statsCompletedOverrideTextBox;
+        private GroupBox focusOverridesGroupBox;
+        private CheckBox focusPointsEnable;
     }
 }
 

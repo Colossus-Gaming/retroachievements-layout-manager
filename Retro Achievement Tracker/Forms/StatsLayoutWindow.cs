@@ -13,7 +13,7 @@ namespace Retro_Achievement_Tracker
     {
         public StatsLayoutWindow()
         {
-            this.ClientSize = new Size(1000, 600);
+            this.ClientSize = new Size(1000, 700);
             SetupBrowser();
             this.Name = "RA Tracker - Stats";
             this.Text = "RA Tracker - Stats";
@@ -171,6 +171,23 @@ namespace Retro_Achievement_Tracker
         {
             await ExecuteScript("showGameTruePoints();");
         }
+        //Completed
+        public async void SetCompletedName(string completedName)
+        {
+            await ExecuteScript("setCompletedName('" + completedName.Replace("'", "\\'") + ":');");
+        }
+        public async void SetCompletedValue(int completed)
+        {
+            await ExecuteScript("setCompletedValue(" + completed + ");");
+        }
+        public async void ShowCompleted()
+        {
+            await ExecuteScript("showCompleted();");
+        }
+        public async void HideCompleted()
+        {
+            await ExecuteScript("hideCompleted();");
+        }
         //Fonts
         public async void SetFontColor(string hexCode)
         {
@@ -184,9 +201,9 @@ namespace Retro_Achievement_Tracker
         {
             await ExecuteScript("setFontOutline(\"" + hexCode + " " + size + "px\");");
         }
-        public async void SetBackgroundColor(string hexCode)
+        public async void SetFontSize(int size)
         {
-            await ExecuteScript("setBackgroundColor(\"" + hexCode + "\");");
+            await ExecuteScript("setFontSize(" + size + ");");
         }
         protected async Task ExecuteScript(string script)
         {
@@ -226,9 +243,9 @@ namespace Retro_Achievement_Tracker
             // 
             // StatsLayoutWindow
             // 
-            this.ClientSize = new System.Drawing.Size(284, 261);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.ClientSize = new Size(284, 261);
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.Icon = ((Icon)(resources.GetObject("$this.Icon")));
             this.Name = "StatsLayoutWindow";
             this.ResumeLayout(false);
 

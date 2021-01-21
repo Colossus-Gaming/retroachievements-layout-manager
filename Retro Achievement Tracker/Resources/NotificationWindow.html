@@ -103,11 +103,6 @@
             adjustAchievementFont();
         }
 
-        function setBackgroundColor(color) {
-            document.getElementById("achievement-pop").style.backgroundColor = color;
-            document.getElementById("mastery-pop").style.backgroundColor = color;
-        }
-
         function promptUser() {
             $("#achievement-pop-video").fadeOut();
             $("#mastery-pop-video").fadeOut();
@@ -248,12 +243,12 @@
 
         @keyframes notification-out-animation {
             0% {
-                left: 230px;
+                left: 200px;
                 top: 215px;
             }
 
             100% {
-                left: 230px;
+                left: 200px;
                 top: -310px;
             }
         }
@@ -376,10 +371,7 @@
             left: 200px;
             width: 900px;
             height: 212px;
-            background-image: url('disk://background');
-            background-repeat: no-repeat;
-            background-color: #cccccc;
-            background-size: cover;
+            background: rgba(0, 0, 0, 0.0);
             display: none;
         }
 
@@ -406,8 +398,8 @@
     </script>
 </head>
 <body>
-    <div id="container" style="background: magenta; width: 1361px; height: 763px; top: -5px; left: -5px;">
-        <div id="user-prompt" style="position: absolute; width: 400px; height: 200px;background-color: lightskyblue; left: 400px; top: 100px; text-align: center; display: none;">
+    <div id="container" style="width: 1361px; height: 763px; top: -5px; left: -5px;background-color: magenta;">
+        <div id="user-prompt" class="has-font" style="position: absolute; width: 400px; height: 200px; left: 400px; top: 100px; text-align: center; display: none;">
             <div style="position: relative;top: 50px;text-align: center;font-weight: bold;vertical-align: middle; font-size: 42px;">
                 Are you ready?<br />
                 <button id="confirm-button" style="text-align: center;font-weight: bold;vertical-align: middle;font-size: 24px;" onclick="acknowledgePrompt()">
@@ -416,23 +408,23 @@
             </div>
         </div>
 
-        <div id="achievement-pop" src="disk://achievement-pop" style="border: 5px solid black;">
+        <div id="achievement-pop">
             <div id="achievement-pop-name" class="has-font"></div>
-            <span id="description-span" style="        display: table-cell;
-        position: relative;
-        vertical-align: top;
-        width: 875px;
-        left: 10px;
-        top: 10px;
-        overflow: hidden;
-">
+            <span id="description-span" style="display: table-cell;
+                    position: relative;
+                    vertical-align: top;
+                    width: 875px;
+                    left: 10px;
+                    top: 10px;
+                    overflow: hidden;
+            ">
                 <img id="achievement-pop-badge" />
                 <a id="achievement-pop-description" class="has-font"></a>
             </span>
             <div id="achievement-pop-points" class="has-font"></div>
         </div>
 
-        <div id="mastery-pop" src="disk://achievement-pop" style="border: 5px solid black;">
+        <div id="mastery-pop">
             <img id="mastery-pop-badge" />
             <div id="mastery-pop-name" class="has-font"></div>
             <div id="mastery-pop-achievements" class="has-font"></div>
