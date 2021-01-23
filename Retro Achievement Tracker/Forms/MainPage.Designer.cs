@@ -125,8 +125,8 @@ namespace Retro_Achievement_Tracker
             this.fontSizeNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.notificationsAchievementAnimationOutComboBox = new System.Windows.Forms.ComboBox();
+            this.notificationsAchievementAnimationInComboBox = new System.Windows.Forms.ComboBox();
             this.inAchievementNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.inLabel1 = new System.Windows.Forms.Label();
             this.outAchievementNumericUpDown = new System.Windows.Forms.NumericUpDown();
@@ -143,10 +143,10 @@ namespace Retro_Achievement_Tracker
             this.customAchievementSettingsGroupBox = new System.Windows.Forms.GroupBox();
             this.acheivementEditOutlineCheckbox = new System.Windows.Forms.CheckBox();
             this.label16 = new System.Windows.Forms.Label();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
+            this.notificationsMasteryAnimationOutComboBox = new System.Windows.Forms.ComboBox();
             this.label17 = new System.Windows.Forms.Label();
             this.inMasteryNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.comboBox5 = new System.Windows.Forms.ComboBox();
+            this.notificationsMasteryAnimationInComboBox = new System.Windows.Forms.ComboBox();
             this.inLabel2 = new System.Windows.Forms.Label();
             this.outMasteryNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.selectCustomMasteryNotificationButton = new System.Windows.Forms.Button();
@@ -184,6 +184,9 @@ namespace Retro_Achievement_Tracker
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.focusOverridesGroupBox = new System.Windows.Forms.GroupBox();
             this.focusPointsEnable = new System.Windows.Forms.CheckBox();
+            this.setBackgroundColorButton = new System.Windows.Forms.Button();
+            this.backgroundColorPictureBox = new System.Windows.Forms.PictureBox();
+            this.backgroundColorLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.userProfilePictureBox)).BeginInit();
             this.statsGroupBox.SuspendLayout();
             this.focusGroupBox.SuspendLayout();
@@ -216,6 +219,7 @@ namespace Retro_Achievement_Tracker
             this.gameInfoOverrideSettingsGroupBox.SuspendLayout();
             this.lastFiveOverridesGroupBox.SuspendLayout();
             this.focusOverridesGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.backgroundColorPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // apiKeyLabel
@@ -1184,6 +1188,9 @@ namespace Retro_Achievement_Tracker
             // 
             // fontSettingsGroupBox
             // 
+            this.fontSettingsGroupBox.Controls.Add(this.setBackgroundColorButton);
+            this.fontSettingsGroupBox.Controls.Add(this.backgroundColorPictureBox);
+            this.fontSettingsGroupBox.Controls.Add(this.backgroundColorLabel);
             this.fontSettingsGroupBox.Controls.Add(this.fontSizeLabel);
             this.fontSettingsGroupBox.Controls.Add(this.fontSizeNumericUpDown);
             this.fontSettingsGroupBox.Controls.Add(this.fontFamilyComboBox);
@@ -1198,7 +1205,7 @@ namespace Retro_Achievement_Tracker
             this.fontSettingsGroupBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.fontSettingsGroupBox.Location = new System.Drawing.Point(294, 313);
             this.fontSettingsGroupBox.Name = "fontSettingsGroupBox";
-            this.fontSettingsGroupBox.Size = new System.Drawing.Size(291, 129);
+            this.fontSettingsGroupBox.Size = new System.Drawing.Size(291, 155);
             this.fontSettingsGroupBox.TabIndex = 10006;
             this.fontSettingsGroupBox.TabStop = false;
             this.fontSettingsGroupBox.Text = "Font Settings";
@@ -1258,25 +1265,25 @@ namespace Retro_Achievement_Tracker
             this.label10.TabIndex = 40;
             this.label10.Text = "In-Animation";
             // 
-            // comboBox2
+            // notificationsAchievementAnimationOutComboBox
             // 
-            this.comboBox2.Enabled = false;
-            this.comboBox2.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(5, 276);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(134, 23);
-            this.comboBox2.TabIndex = 45;
+            this.notificationsAchievementAnimationOutComboBox.Enabled = false;
+            this.notificationsAchievementAnimationOutComboBox.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.notificationsAchievementAnimationOutComboBox.FormattingEnabled = true;
+            this.notificationsAchievementAnimationOutComboBox.Location = new System.Drawing.Point(5, 276);
+            this.notificationsAchievementAnimationOutComboBox.Name = "notificationsAchievementAnimationOutComboBox";
+            this.notificationsAchievementAnimationOutComboBox.Size = new System.Drawing.Size(134, 23);
+            this.notificationsAchievementAnimationOutComboBox.TabIndex = 45;
             // 
-            // comboBox3
+            // notificationsAchievementAnimationInComboBox
             // 
-            this.comboBox3.Enabled = false;
-            this.comboBox3.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(4, 225);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(136, 23);
-            this.comboBox3.TabIndex = 39;
+            this.notificationsAchievementAnimationInComboBox.Enabled = false;
+            this.notificationsAchievementAnimationInComboBox.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.notificationsAchievementAnimationInComboBox.FormattingEnabled = true;
+            this.notificationsAchievementAnimationInComboBox.Location = new System.Drawing.Point(4, 225);
+            this.notificationsAchievementAnimationInComboBox.Name = "notificationsAchievementAnimationInComboBox";
+            this.notificationsAchievementAnimationInComboBox.Size = new System.Drawing.Size(136, 23);
+            this.notificationsAchievementAnimationInComboBox.TabIndex = 39;
             // 
             // inAchievementNumericUpDown
             // 
@@ -1483,8 +1490,8 @@ namespace Retro_Achievement_Tracker
             this.customAchievementSettingsGroupBox.Controls.Add(this.acheivementEditOutlineCheckbox);
             this.customAchievementSettingsGroupBox.Controls.Add(this.label9);
             this.customAchievementSettingsGroupBox.Controls.Add(this.label10);
-            this.customAchievementSettingsGroupBox.Controls.Add(this.comboBox2);
-            this.customAchievementSettingsGroupBox.Controls.Add(this.comboBox3);
+            this.customAchievementSettingsGroupBox.Controls.Add(this.notificationsAchievementAnimationOutComboBox);
+            this.customAchievementSettingsGroupBox.Controls.Add(this.notificationsAchievementAnimationInComboBox);
             this.customAchievementSettingsGroupBox.Controls.Add(this.inAchievementNumericUpDown);
             this.customAchievementSettingsGroupBox.Controls.Add(this.inLabel1);
             this.customAchievementSettingsGroupBox.Controls.Add(this.outAchievementNumericUpDown);
@@ -1530,15 +1537,15 @@ namespace Retro_Achievement_Tracker
             this.label16.TabIndex = 44;
             this.label16.Text = "Out-Animation";
             // 
-            // comboBox4
+            // notificationsMasteryAnimationOutComboBox
             // 
-            this.comboBox4.Enabled = false;
-            this.comboBox4.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(4, 276);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(136, 23);
-            this.comboBox4.TabIndex = 43;
+            this.notificationsMasteryAnimationOutComboBox.Enabled = false;
+            this.notificationsMasteryAnimationOutComboBox.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.notificationsMasteryAnimationOutComboBox.FormattingEnabled = true;
+            this.notificationsMasteryAnimationOutComboBox.Location = new System.Drawing.Point(4, 276);
+            this.notificationsMasteryAnimationOutComboBox.Name = "notificationsMasteryAnimationOutComboBox";
+            this.notificationsMasteryAnimationOutComboBox.Size = new System.Drawing.Size(136, 23);
+            this.notificationsMasteryAnimationOutComboBox.TabIndex = 43;
             // 
             // label17
             // 
@@ -1574,15 +1581,15 @@ namespace Retro_Achievement_Tracker
             0,
             0});
             // 
-            // comboBox5
+            // notificationsMasteryAnimationInComboBox
             // 
-            this.comboBox5.Enabled = false;
-            this.comboBox5.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.Location = new System.Drawing.Point(4, 225);
-            this.comboBox5.Name = "comboBox5";
-            this.comboBox5.Size = new System.Drawing.Size(136, 23);
-            this.comboBox5.TabIndex = 41;
+            this.notificationsMasteryAnimationInComboBox.Enabled = false;
+            this.notificationsMasteryAnimationInComboBox.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.notificationsMasteryAnimationInComboBox.FormattingEnabled = true;
+            this.notificationsMasteryAnimationInComboBox.Location = new System.Drawing.Point(4, 225);
+            this.notificationsMasteryAnimationInComboBox.Name = "notificationsMasteryAnimationInComboBox";
+            this.notificationsMasteryAnimationInComboBox.Size = new System.Drawing.Size(136, 23);
+            this.notificationsMasteryAnimationInComboBox.TabIndex = 41;
             // 
             // inLabel2
             // 
@@ -1627,7 +1634,6 @@ namespace Retro_Achievement_Tracker
             this.selectCustomMasteryNotificationButton.TabIndex = 14;
             this.selectCustomMasteryNotificationButton.Text = "File";
             this.selectCustomMasteryNotificationButton.UseVisualStyleBackColor = true;
-            this.selectCustomMasteryNotificationButton.Click += new System.EventHandler(this.SelectCustomMasteryNotificationButton_Click);
             // 
             // outLabel2
             // 
@@ -1766,10 +1772,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.customMasterySettingsGroupBox.Controls.Add(this.masteryEditOultineCheckbox);
             this.customMasterySettingsGroupBox.Controls.Add(this.label16);
-            this.customMasterySettingsGroupBox.Controls.Add(this.comboBox4);
+            this.customMasterySettingsGroupBox.Controls.Add(this.notificationsMasteryAnimationOutComboBox);
             this.customMasterySettingsGroupBox.Controls.Add(this.label17);
             this.customMasterySettingsGroupBox.Controls.Add(this.inMasteryNumericUpDown);
-            this.customMasterySettingsGroupBox.Controls.Add(this.comboBox5);
+            this.customMasterySettingsGroupBox.Controls.Add(this.notificationsMasteryAnimationInComboBox);
             this.customMasterySettingsGroupBox.Controls.Add(this.inLabel2);
             this.customMasterySettingsGroupBox.Controls.Add(this.outMasteryNumericUpDown);
             this.customMasterySettingsGroupBox.Controls.Add(this.selectCustomMasteryNotificationButton);
@@ -2056,7 +2062,36 @@ namespace Retro_Achievement_Tracker
             this.focusPointsEnable.TabIndex = 39;
             this.focusPointsEnable.Text = "Display Points";
             this.focusPointsEnable.UseVisualStyleBackColor = true;
-            this.focusPointsEnable.CheckedChanged += focusPointsEnableCheckBox_CheckedChanged;
+            // 
+            // setBackgroundColorButton
+            // 
+            this.setBackgroundColorButton.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.setBackgroundColorButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.setBackgroundColorButton.Location = new System.Drawing.Point(233, 126);
+            this.setBackgroundColorButton.Name = "setBackgroundColorButton";
+            this.setBackgroundColorButton.Size = new System.Drawing.Size(49, 23);
+            this.setBackgroundColorButton.TabIndex = 43;
+            this.setBackgroundColorButton.Text = "Set";
+            this.setBackgroundColorButton.UseVisualStyleBackColor = true;
+            // 
+            // backgroundColorPictureBox
+            // 
+            this.backgroundColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.backgroundColorPictureBox.Location = new System.Drawing.Point(177, 127);
+            this.backgroundColorPictureBox.Name = "backgroundColorPictureBox";
+            this.backgroundColorPictureBox.Size = new System.Drawing.Size(50, 22);
+            this.backgroundColorPictureBox.TabIndex = 42;
+            this.backgroundColorPictureBox.TabStop = false;
+            // 
+            // backgroundColorLabel
+            // 
+            this.backgroundColorLabel.AutoSize = true;
+            this.backgroundColorLabel.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.backgroundColorLabel.Location = new System.Drawing.Point(8, 134);
+            this.backgroundColorLabel.Name = "backgroundColorLabel";
+            this.backgroundColorLabel.Size = new System.Drawing.Size(133, 12);
+            this.backgroundColorLabel.TabIndex = 41;
+            this.backgroundColorLabel.Text = "Background Color";
             // 
             // MainPage
             // 
@@ -2129,10 +2164,10 @@ namespace Retro_Achievement_Tracker
             this.lastFiveOverridesGroupBox.PerformLayout();
             this.focusOverridesGroupBox.ResumeLayout(false);
             this.focusOverridesGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.backgroundColorPictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }
-
         #endregion
         private Label usernameLabel;
         private Label apiKeyLabel;
@@ -2195,8 +2230,8 @@ namespace Retro_Achievement_Tracker
         private GroupBox fontSettingsGroupBox;
         private Label label9;
         private Label label10;
-        private ComboBox comboBox2;
-        private ComboBox comboBox3;
+        private ComboBox notificationsAchievementAnimationOutComboBox;
+        private ComboBox notificationsAchievementAnimationInComboBox;
         private NumericUpDown inAchievementNumericUpDown;
         private Label inLabel1;
         private NumericUpDown outAchievementNumericUpDown;
@@ -2212,10 +2247,10 @@ namespace Retro_Achievement_Tracker
         private Button showAchievementButton;
         private GroupBox customAchievementSettingsGroupBox;
         private Label label16;
-        private ComboBox comboBox4;
+        private ComboBox notificationsMasteryAnimationOutComboBox;
         private Label label17;
         private NumericUpDown inMasteryNumericUpDown;
-        private ComboBox comboBox5;
+        private ComboBox notificationsMasteryAnimationInComboBox;
         private Label inLabel2;
         private NumericUpDown outMasteryNumericUpDown;
         private Button selectCustomMasteryNotificationButton;
@@ -2280,6 +2315,9 @@ namespace Retro_Achievement_Tracker
         private TextBox statsCompletedOverrideTextBox;
         private GroupBox focusOverridesGroupBox;
         private CheckBox focusPointsEnable;
+        private Button setBackgroundColorButton;
+        private PictureBox backgroundColorPictureBox;
+        private Label backgroundColorLabel;
     }
 }
 

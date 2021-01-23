@@ -69,6 +69,10 @@
             adjustFont();
         }
 
+        function setBackgroundColor(value) {
+            document.getElementById("container").style.background = value;
+        }
+
         function showPoints() {
             showPointsBool = true;
             $("#focus-achievement-points").fadeIn();
@@ -78,10 +82,6 @@
         function hidePoints() {
             showPointsBool = false;
             $("#focus-achievement-points").hide();
-        }
-
-        function setBackgroundColor(color) {
-            document.getElementById("focus-achievement").style.backgroundColor = color;
         }
 
         function setFocus(newFocusAchievementName, newFocusAchievementImageLink, newFocusAchievementDescription, newFocusAchievementPoints) {

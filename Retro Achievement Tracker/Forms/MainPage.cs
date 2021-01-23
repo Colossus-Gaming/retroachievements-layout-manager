@@ -155,12 +155,13 @@ namespace Retro_Achievement_Tracker
                             NotificationsWindow.EnqueueAchievementNotification(achievement,
                                 Settings.Default.notification_custom_achievement_enable ? GetVideoDuration(CustomAchievementFile) : 7000,
                                 Settings.Default.notification_custom_achievement_enable ? CustomAchievementIn : 0,
-                                Settings.Default.notification_custom_achievement_enable ? CustomAchievementOut : 5600);
+                                Settings.Default.notification_custom_achievement_enable ? CustomAchievementOut : 5200);
                         }
 
                         if (achievementNotificationList.Contains(CurrentlyFocusedAchievement))
                         {
                             FocusWindow.SetFocus(CurrentlyFocusedAchievement);
+
                             if (StreamLabelsFocusEnable)
                             {
                                 WriteFocusStreamLabels();
@@ -170,16 +171,28 @@ namespace Retro_Achievement_Tracker
                         if (UnlockedAchievements.Count == CurrentGame.Achievements.Count && OldUnlockedAchievements.Count < CurrentGame.Achievements.Count)
                         {
                             FocusWindow.HideFocus();
+
                             ClearFocusStreamLabels();
+
                             NotificationsWindow.EnqueueMasteryNotification(UserSummary.GameSummaries[0],
                                 UserSummary.GameAchievementSummaries[0],
                                 Settings.Default.notification_custom_mastery_enable ? GetVideoDuration(CustomMasteryFile) : 11000,
                                 Settings.Default.notification_custom_mastery_enable ? CustomMasteryIn : 0,
-                                Settings.Default.notification_custom_mastery_enable ? CustomMasteryOut : 5600);
+                                Settings.Default.notification_custom_mastery_enable ? CustomMasteryOut : 5200);
                             SetAwardCount();
                         }
 
+                        if (StatsWindow != null && !StatsWindow.IsDisposed)
+                        {
+                            StatsWindow.SetCompletedValue(GameTotalAchievements == 0 ? 0 : Convert.ToInt32((Convert.ToDecimal(GameEarnedAchievements) / Convert.ToDecimal(GameTotalAchievements)) * 200)); 
+                        }
+                        if (StreamLabelsStatsEnable)
+                        {
+                            WriteStatsStreamLabels();
+                        }
+
                         NotificationsWindow.FireNotifications();
+
                     }
 
                 }
@@ -547,7 +560,7 @@ namespace Retro_Achievement_Tracker
 
                 if (!NotificationsWindow.IsDisposed)
                 {
-                    NotificationsWindow.SetAchievementTop(this.useCustomAchievementCheckbox.Checked ? value : 5);
+                    NotificationsWindow.SetAchievementTop(this.useCustomAchievementCheckbox.Checked ? value :  35);
                 }
             }
             get
@@ -581,7 +594,7 @@ namespace Retro_Achievement_Tracker
 
                 if (!NotificationsWindow.IsDisposed)
                 {
-                    NotificationsWindow.SetMasteryTop(this.useCustomMasteryCheckbox.Checked ? value : 5);
+                    NotificationsWindow.SetMasteryTop(this.useCustomMasteryCheckbox.Checked ? value :  35);
                 }
             }
             get
@@ -668,6 +681,118 @@ namespace Retro_Achievement_Tracker
             set
             {
                 Settings.Default.notification_custom_mastery_fade_out = value;
+                Settings.Default.Save();
+            }
+        }
+        private AnimationDirection NotificationAchievementAnimationIn
+        {
+            get
+            {
+                switch (Settings.Default.notifications_achievement_in_animation)
+                {
+                    case "DOWN":
+                        return AnimationDirection.DOWN;
+                    case "LEFT":
+                        return AnimationDirection.LEFT;
+                    case "RIGHT":
+                        return AnimationDirection.RIGHT;
+                    case "UP":
+                        return AnimationDirection.UP;
+                }
+                return AnimationDirection.STATIC;
+            }
+            set
+            {
+                if (NotificationsWindow != null && !NotificationsWindow.IsDisposed)
+                {
+                    NotificationsWindow.SetAchievementInAnimation(value.ToString());
+                }
+
+                Settings.Default.notifications_achievement_in_animation = value.ToString();
+                Settings.Default.Save();
+            }
+        }
+        private AnimationDirection NotificationAchievementAnimationOut
+        {
+            get
+            {
+                switch (Settings.Default.notifications_achievement_out_animation)
+                {
+                    case "DOWN":
+                        return AnimationDirection.DOWN;
+                    case "LEFT":
+                        return AnimationDirection.LEFT;
+                    case "RIGHT":
+                        return AnimationDirection.RIGHT;
+                    case "UP":
+                        return AnimationDirection.UP;
+                }
+                return AnimationDirection.STATIC;
+            }
+            set
+            {
+                if (NotificationsWindow != null && !NotificationsWindow.IsDisposed)
+                {
+                    NotificationsWindow.SetAchievementOutAnimation(value.ToString());
+                }
+
+                Settings.Default.notifications_achievement_out_animation = value.ToString();
+                Settings.Default.Save();
+            }
+        }
+        private AnimationDirection NotificationMasteryAnimationIn
+        {
+            get
+            {
+                switch (Settings.Default.notifications_mastery_in_animation)
+                {
+                    case "DOWN":
+                        return AnimationDirection.DOWN;
+                    case "LEFT":
+                        return AnimationDirection.LEFT;
+                    case "RIGHT":
+                        return AnimationDirection.RIGHT;
+                    case "UP":
+                        return AnimationDirection.UP;
+                }
+                return AnimationDirection.STATIC;
+            }
+            set
+            {
+                if (NotificationsWindow != null && !NotificationsWindow.IsDisposed)
+                {
+                    NotificationsWindow.SetMasteryInAnimation(value.ToString());
+                }
+
+                Settings.Default.notifications_mastery_in_animation = value.ToString();
+                Settings.Default.Save();
+            }
+        }
+        private AnimationDirection NotificationMasteryAnimationOut
+        {
+            get
+            {
+                switch (Settings.Default.notifications_mastery_out_animation)
+                {
+                    case "DOWN":
+                        return AnimationDirection.DOWN;
+                    case "LEFT":
+                        return AnimationDirection.LEFT;
+                    case "RIGHT":
+                        return AnimationDirection.RIGHT;
+                    case "UP":
+                        return AnimationDirection.UP;
+                }
+                return AnimationDirection.STATIC;
+            }
+            set
+            {
+                if (NotificationsWindow != null && !NotificationsWindow.IsDisposed)
+                {
+                    NotificationsWindow.SetMasteryOutAnimation(value.ToString());
+                }
+
+                Settings.Default.notifications_mastery_out_animation = value.ToString();
                 Settings.Default.Save();
             }
         }
@@ -884,6 +1009,91 @@ namespace Retro_Achievement_Tracker
                 }
 
                 Settings.Default.stats_font_size = value;
+                Settings.Default.Save();
+            }
+        }
+        private string StatsBackgroundColor
+        {
+            get
+            {
+                return Settings.Default.stats_background_color;
+            }
+            set
+            {
+                if (StatsWindow != null && !StatsWindow.IsDisposed)
+                {
+                    StatsWindow.SetBackgroundColor(value);
+                }
+
+                Settings.Default.stats_background_color = value;
+                Settings.Default.Save();
+            }
+        }
+        private string GameInfoBackgroundColor
+        {
+            get
+            {
+                return Settings.Default.game_info_background_color;
+            }
+            set
+            {
+                if (GameInfoWindow != null && !GameInfoWindow.IsDisposed)
+                {
+                    GameInfoWindow.SetBackgroundColor(value);
+                }
+
+                Settings.Default.game_info_background_color = value;
+                Settings.Default.Save();
+            }
+        }
+        private string NotificationsBackgroundColor
+        {
+            get
+            {
+                return Settings.Default.notifications_background_color;
+            }
+            set
+            {
+                if (NotificationsWindow != null && !NotificationsWindow.IsDisposed)
+                {
+                    NotificationsWindow.SetBackgroundColor(value);
+                }
+
+                Settings.Default.notifications_background_color = value;
+                Settings.Default.Save();
+            }
+        }
+        private string LastFiveBackgroundColor
+        {
+            get
+            {
+                return Settings.Default.last_five_background_color;
+            }
+            set
+            {
+                if (LastFiveWindow != null && !LastFiveWindow.IsDisposed)
+                {
+                    LastFiveWindow.SetBackgroundColor(value);
+                }
+
+                Settings.Default.last_five_background_color = value;
+                Settings.Default.Save();
+            }
+        }
+        private string FocusBackgroundColor
+        {
+            get
+            {
+                return Settings.Default.focus_background_color;
+            }
+            set
+            {
+                if (FocusWindow != null && !FocusWindow.IsDisposed)
+                {
+                    FocusWindow.SetBackgroundColor(value);
+                }
+
+                Settings.Default.focus_background_color = value;
                 Settings.Default.Save();
             }
         }
@@ -2498,6 +2708,7 @@ namespace Retro_Achievement_Tracker
                 StatsWindow.SetCompletedName(StatsCompletedName);
                 StatsWindow.SetCompletedValue(GameTotalAchievements == 0 ? 0 : Convert.ToInt32(Convert.ToDecimal(GameEarnedAchievements) / Convert.ToDecimal(GameTotalAchievements) * 200));
                 StatsWindow.SetFontSize(StatsFontSize);
+                StatsWindow.SetBackgroundColor(StatsBackgroundColor);
             });
         }
 
@@ -2547,6 +2758,7 @@ namespace Retro_Achievement_Tracker
                 {
                     FocusWindow.HidePoints();
                 }
+                FocusWindow.SetBackgroundColor(FocusBackgroundColor);
             });
         }
 
@@ -2577,10 +2789,18 @@ namespace Retro_Achievement_Tracker
 
                 NotificationsWindow.SetAchievementWidth(Settings.Default.notification_custom_achievement_enable ? Convert.ToInt32(CustomAchievementScale * GetVideoWidth(CustomAchievementFile)) : 1000);
                 NotificationsWindow.SetMasteryWidth(Settings.Default.notification_custom_mastery_enable ? Convert.ToInt32(CustomMasteryScale * GetVideoWidth(CustomMasteryFile)) : 1000);
-                NotificationsWindow.SetAchievementTop(Settings.Default.notification_custom_achievement_enable ? CustomAchievementY : 5);
-                NotificationsWindow.SetMasteryTop(Settings.Default.notification_custom_mastery_enable ? CustomMasteryY : 5);
+                NotificationsWindow.SetAchievementTop(Settings.Default.notification_custom_achievement_enable ? CustomAchievementY :  35);
+                NotificationsWindow.SetMasteryTop(Settings.Default.notification_custom_mastery_enable ? CustomMasteryY :  35);
                 NotificationsWindow.SetAchievementLeft(Settings.Default.notification_custom_achievement_enable ? CustomAchievementX : -15);
                 NotificationsWindow.SetMasteryLeft(Settings.Default.notification_custom_mastery_enable ? CustomMasteryX : -15);
+
+                NotificationsWindow.SetAchievementInAnimation(CustomAchievementEnabled ? NotificationAchievementAnimationIn.ToString() : "STATIC");
+                NotificationsWindow.SetAchievementOutAnimation(CustomAchievementEnabled ? NotificationAchievementAnimationOut.ToString() : "UP");
+
+                NotificationsWindow.SetMasteryInAnimation(CustomMasteryEnabled ? NotificationMasteryAnimationIn.ToString() : "STATIC");
+                NotificationsWindow.SetMasteryOutAnimation(CustomMasteryEnabled ? NotificationMasteryAnimationOut.ToString() : "UP");
+                NotificationsWindow.SetBackgroundColor(NotificationsBackgroundColor);
+
             });
         }
 
@@ -2670,6 +2890,7 @@ namespace Retro_Achievement_Tracker
                     GameInfoWindow.HideReleaseDate();
                 }
                 GameInfoWindow.SetFontSize(GameInfoFontSize);
+                GameInfoWindow.SetBackgroundColor(GameInfoBackgroundColor);
             });
         }
 
@@ -2682,6 +2903,7 @@ namespace Retro_Achievement_Tracker
             {
                 LastFiveWindow.SetFontFamily(LastFiveFontFamily.Name);
                 LastFiveWindow.SetFontColor(LastFiveFontColor);
+                LastFiveWindow.SetBackgroundColor(LastFiveBackgroundColor);
                 if (LastFiveFontOutlineEnable)
                 {
                     LastFiveWindow.SetFontOutline(LastFiveFontOutlineColor, LastFiveFontOutlineSize);
@@ -2886,13 +3108,33 @@ namespace Retro_Achievement_Tracker
             if (CustomAchievementEnabled && string.IsNullOrEmpty(Settings.Default.notification_custom_achievement_file))
             {
                 Settings.Default.notification_custom_achievement_enable = false;
+                Settings.Default.Save();
             }
             if (CustomMasteryEnabled && string.IsNullOrEmpty(Settings.Default.notification_custom_mastery_file))
             {
                 Settings.Default.notification_custom_achievement_enable = false;
+                Settings.Default.Save();
             }
 
-            Settings.Default.Save();
+
+            List<AnimationDirection> animationDirections = new List<AnimationDirection>();
+            animationDirections.Add(AnimationDirection.DOWN);
+            animationDirections.Add(AnimationDirection.LEFT);
+            animationDirections.Add(AnimationDirection.RIGHT);
+            animationDirections.Add(AnimationDirection.STATIC);
+            animationDirections.Add(AnimationDirection.UP);
+
+            animationDirections.ForEach(animationDirection => {
+                this.notificationsAchievementAnimationInComboBox.Items.Add(animationDirection.ToString());
+                this.notificationsAchievementAnimationOutComboBox.Items.Add(animationDirection.ToString());
+                this.notificationsMasteryAnimationInComboBox.Items.Add(animationDirection.ToString());
+                this.notificationsMasteryAnimationOutComboBox.Items.Add(animationDirection.ToString());
+            });
+
+            this.notificationsAchievementAnimationInComboBox.SelectedIndex = this.notificationsAchievementAnimationInComboBox.Items.IndexOf(Settings.Default.notifications_achievement_in_animation);
+            this.notificationsAchievementAnimationOutComboBox.SelectedIndex = this.notificationsAchievementAnimationOutComboBox.Items.IndexOf(Settings.Default.notifications_achievement_out_animation);
+            this.notificationsMasteryAnimationInComboBox.SelectedIndex = this.notificationsMasteryAnimationInComboBox.Items.IndexOf(Settings.Default.notifications_mastery_in_animation);
+            this.notificationsMasteryAnimationOutComboBox.SelectedIndex = this.notificationsMasteryAnimationOutComboBox.Items.IndexOf(Settings.Default.notifications_mastery_out_animation);
 
             this.useCustomAchievementCheckbox.Checked = CustomAchievementEnabled;
             this.selectCustomAchievementButton.Enabled = CustomAchievementEnabled;
@@ -2952,6 +3194,7 @@ namespace Retro_Achievement_Tracker
             this.fontOutlineNumericUpDown.ValueChanged += FontOutlineNumericUpDown_ValueChanged;
             this.fontSizeNumericUpDown.ValueChanged += FontSizeNumericUpDown_ValueChanged;
             this.fontFamilyComboBox.SelectedIndexChanged += FontFamilyComboBox_SelectedIndexChanged;
+            this.setBackgroundColorButton.Click += SetBackgroundColorButton_Click;
             this.alertsStreamLabelsCheckBox.CheckedChanged += AlertsStreamLabelsCheckBox_CheckedChanged;
             this.focusStreamLabelsCheckBox.CheckedChanged += FocusStreamLabelsCheckBox_CheckedChanged;
             this.openLastFiveWindowButton.Click += OpenLastFiveWindowButton_Click;
@@ -2995,6 +3238,12 @@ namespace Retro_Achievement_Tracker
             this.outMasteryNumericUpDown.ValueChanged += OutMasteryNumericUpDown_ValueChanged;
             this.inMasteryNumericUpDown.ValueChanged += InMasteryNumericUpDown_ValueChanged;
 
+            this.notificationsAchievementAnimationInComboBox.SelectedIndexChanged += AchievementAnimationInComboBox_SelectedIndexChanged;
+            this.notificationsAchievementAnimationOutComboBox.SelectedIndexChanged += AchievementAnimationOutComboBox_SelectedIndexChanged;
+            this.notificationsMasteryAnimationInComboBox.SelectedIndexChanged += MasteryAnimationInComboBox_SelectedIndexChanged;
+            this.notificationsMasteryAnimationOutComboBox.SelectedIndexChanged += MasteryAnimationOutComboBox_SelectedIndexChanged;
+            this.focusPointsEnable.CheckedChanged += focusPointsEnableCheckBox_CheckedChanged;
+
             this.setFocusButton.Click += SetFocusButton_Click;
             this.hideFocusButton.Click += HideFocusButton_Click;
             this.focusAchievementButtonLeft.Click += MoveFocusIndexLeft;
@@ -3031,7 +3280,7 @@ namespace Retro_Achievement_Tracker
             if (lastFiveFontFamily.Length > 0)
             {
                 LastFiveFontFamily = lastFiveFontFamily[0];
-            }
+            }                        
         }
 
         private async void SetAwardCount()
@@ -3123,6 +3372,8 @@ namespace Retro_Achievement_Tracker
             this.scaleLabel1.Enabled = false;
             this.inLabel1.Enabled = false;
             this.outLabel1.Enabled = false;
+            this.notificationsAchievementAnimationInComboBox.Enabled = false;
+            this.notificationsAchievementAnimationOutComboBox.Enabled = false;
 
             NotificationsWindow.Dispose();
 
@@ -3135,6 +3386,11 @@ namespace Retro_Achievement_Tracker
                 NotificationsWindow.DisableAchievementEdit();
 
                 this.acheivementEditOutlineCheckbox.Checked = false;
+
+                NotificationsWindow.SetAchievementInAnimation(AnimationDirection.STATIC.ToString());
+                NotificationsWindow.SetAchievementOutAnimation(AnimationDirection.UP.ToString());
+
+
             }
             else if (string.IsNullOrEmpty(CustomAchievementFile))
             {
@@ -3143,7 +3399,9 @@ namespace Retro_Achievement_Tracker
 
             if (!NotificationsWindow.IsDisposed)
             {
-                NotificationsWindow.SetAchievementWidth(this.useCustomAchievementCheckbox.Checked ? Convert.ToInt32(CustomAchievementScale * GetVideoWidth(CustomAchievementFile)) : 1200);
+                NotificationsWindow.SetAchievementWidth(CustomAchievementEnabled ? Convert.ToInt32(CustomAchievementScale * GetVideoWidth(CustomAchievementFile)) : 1200); 
+                NotificationsWindow.SetAchievementInAnimation(NotificationAchievementAnimationIn.ToString());
+                NotificationsWindow.SetAchievementOutAnimation(NotificationAchievementAnimationOut.ToString());
             }
 
             if (this.autoLaunchNotificationsWindowCheckbox.Checked)
@@ -3184,7 +3442,8 @@ namespace Retro_Achievement_Tracker
             {
                 NotificationsWindow.DisableMasteryEdit();
 
-                this.masteryEditOultineCheckbox.Checked = false;
+                NotificationsWindow.SetMasteryInAnimation(AnimationDirection.STATIC.ToString());
+                NotificationsWindow.SetMasteryOutAnimation(AnimationDirection.UP.ToString());
             }
             else if (string.IsNullOrEmpty(CustomMasteryFile))
             {
@@ -3194,6 +3453,8 @@ namespace Retro_Achievement_Tracker
             if (!NotificationsWindow.IsDisposed)
             {
                 NotificationsWindow.SetMasteryWidth(this.useCustomMasteryCheckbox.Checked ? Convert.ToInt32(CustomMasteryScale * GetVideoWidth(CustomMasteryFile)) : 1200);
+                NotificationsWindow.SetMasteryInAnimation(NotificationMasteryAnimationIn.ToString());
+                NotificationsWindow.SetMasteryOutAnimation(NotificationMasteryAnimationOut.ToString());
             }
 
             if (this.autoLaunchNotificationsWindowCheckbox.Checked)
@@ -3226,6 +3487,9 @@ namespace Retro_Achievement_Tracker
                 this.scaleLabel1.Enabled = true;
                 this.inLabel1.Enabled = true;
                 this.outLabel1.Enabled = true;
+
+                this.notificationsAchievementAnimationInComboBox.Enabled = true;
+                this.notificationsAchievementAnimationOutComboBox.Enabled = true;
             }
             else
             {
@@ -3242,10 +3506,13 @@ namespace Retro_Achievement_Tracker
                 this.scaleLabel1.Enabled = false;
                 this.inLabel1.Enabled = false;
                 this.outLabel1.Enabled = false;
+
+                this.notificationsAchievementAnimationInComboBox.Enabled = false;
+                this.notificationsAchievementAnimationOutComboBox.Enabled = false;
             }
 
             NotificationsWindow.SetAchievementLeft(this.useCustomAchievementCheckbox.Checked ? CustomAchievementX : -15);
-            NotificationsWindow.SetAchievementTop(this.useCustomAchievementCheckbox.Checked ? CustomAchievementY : 50);
+            NotificationsWindow.SetAchievementTop(this.useCustomAchievementCheckbox.Checked ? CustomAchievementY :  35);
 
             var width = this.useCustomAchievementCheckbox.Checked ? GetVideoWidth(CustomAchievementFile) : 1200;
             NotificationsWindow.SetAchievementWidth(this.useCustomAchievementCheckbox.Checked ? Convert.ToInt32(width * CustomAchievementScale) : width);
@@ -3269,6 +3536,9 @@ namespace Retro_Achievement_Tracker
                 this.scaleLabel2.Enabled = true;
                 this.inLabel2.Enabled = true;
                 this.outLabel2.Enabled = true;
+
+                this.notificationsMasteryAnimationInComboBox.Enabled = true;
+                this.notificationsMasteryAnimationOutComboBox.Enabled = true;
             }
             else
             {
@@ -3285,10 +3555,13 @@ namespace Retro_Achievement_Tracker
                 this.scaleLabel2.Enabled = false;
                 this.inLabel2.Enabled = false;
                 this.outLabel2.Enabled = false;
+
+                this.notificationsMasteryAnimationInComboBox.Enabled = false;
+                this.notificationsMasteryAnimationOutComboBox.Enabled = false;
             }
 
             NotificationsWindow.SetMasteryLeft(this.useCustomMasteryCheckbox.Checked ? CustomMasteryX : -15);
-            NotificationsWindow.SetMasteryTop(this.useCustomMasteryCheckbox.Checked ? CustomMasteryY : 50);
+            NotificationsWindow.SetMasteryTop(this.useCustomMasteryCheckbox.Checked ? CustomMasteryY :  35);
 
             var width = this.useCustomMasteryCheckbox.Checked ? GetVideoWidth(CustomMasteryFile) : 1200;
             NotificationsWindow.SetMasteryWidth(this.useCustomMasteryCheckbox.Checked ? Convert.ToInt32(width * CustomMasteryScale) : width);
@@ -3382,7 +3655,7 @@ namespace Retro_Achievement_Tracker
                 NotificationsWindow.EnqueueAchievementNotification(UserSummary.RecentAchievements[0],
                     this.useCustomAchievementCheckbox.Checked ? GetVideoDuration(CustomAchievementFile) : 7000,
                             this.useCustomAchievementCheckbox.Checked ? CustomAchievementIn : 0,
-                            this.useCustomAchievementCheckbox.Checked ? CustomAchievementOut : 5600);
+                            this.useCustomAchievementCheckbox.Checked ? CustomAchievementOut : 5400);
             }
             else
             {
@@ -3395,7 +3668,7 @@ namespace Retro_Achievement_Tracker
                          Points = 1
                      }, this.useCustomAchievementCheckbox.Checked ? GetVideoDuration(CustomAchievementFile) : 7000,
                             this.useCustomAchievementCheckbox.Checked ? CustomAchievementIn : 0,
-                            this.useCustomAchievementCheckbox.Checked ? CustomAchievementOut : 5600);
+                            this.useCustomAchievementCheckbox.Checked ? CustomAchievementOut : 5200);
             }
 
             NotificationsWindow.FireNotifications();
@@ -3407,7 +3680,7 @@ namespace Retro_Achievement_Tracker
                 UserSummary.GameAchievementSummaries[0],
                 this.useCustomMasteryCheckbox.Checked ? GetVideoDuration(CustomMasteryFile) : 11000,
                             this.useCustomMasteryCheckbox.Checked ? CustomMasteryIn : 0,
-                            this.useCustomMasteryCheckbox.Checked ? CustomMasteryOut : 5600);
+                            this.useCustomMasteryCheckbox.Checked ? CustomMasteryOut : 5200);
 
             NotificationsWindow.FireNotifications();
         }
@@ -3694,6 +3967,7 @@ namespace Retro_Achievement_Tracker
 
                 this.fontColorPictureBox.BackColor = ColorTranslator.FromHtml(Settings.Default.stats_font_color_hex_code);
                 this.fontOutlineCheckBox.Checked = Settings.Default.stats_font_outline_enabled;
+                this.backgroundColorPictureBox.BackColor = ColorTranslator.FromHtml(Settings.Default.stats_background_color);
 
                 if (this.fontOutlineCheckBox.Checked)
                 {
@@ -3728,7 +4002,7 @@ namespace Retro_Achievement_Tracker
 
                 this.fontSettingsGroupBox.Show();
                 this.statsOverrideGroupBox.Show();
-                this.ClientSize = new Size(592, 645);
+                this.ClientSize = new Size(592, 610);
                 this.statsOverrideGroupBox.Location = new Point(4, 313);
             }
             else
@@ -3753,6 +4027,7 @@ namespace Retro_Achievement_Tracker
 
                 this.fontColorPictureBox.BackColor = ColorTranslator.FromHtml(Settings.Default.notification_font_color_hex_code);
                 this.fontOutlineCheckBox.Checked = Settings.Default.notification_font_outline_enabled;
+                this.backgroundColorPictureBox.BackColor = ColorTranslator.FromHtml(Settings.Default.notifications_background_color);
 
                 if (this.fontOutlineCheckBox.Checked)
                 {
@@ -3815,6 +4090,7 @@ namespace Retro_Achievement_Tracker
 
                 this.fontColorPictureBox.BackColor = ColorTranslator.FromHtml(Settings.Default.game_info_font_color_hex_code);
                 this.fontOutlineCheckBox.Checked = Settings.Default.game_info_font_outline_enabled;
+                this.backgroundColorPictureBox.BackColor = ColorTranslator.FromHtml(Settings.Default.game_info_background_color);
 
                 if (this.fontOutlineCheckBox.Checked)
                 {
@@ -3875,6 +4151,7 @@ namespace Retro_Achievement_Tracker
 
                 this.fontColorPictureBox.BackColor = ColorTranslator.FromHtml(Settings.Default.last_five_font_color_hex_code);
                 this.fontOutlineCheckBox.Checked = Settings.Default.last_five_font_outline_enabled;
+                this.backgroundColorPictureBox.BackColor = ColorTranslator.FromHtml(Settings.Default.last_five_background_color);
 
                 if (this.fontOutlineCheckBox.Checked)
                 {
@@ -3936,6 +4213,7 @@ namespace Retro_Achievement_Tracker
 
                 this.fontColorPictureBox.BackColor = ColorTranslator.FromHtml(Settings.Default.focus_font_color_hex_code);
                 this.fontOutlineCheckBox.Checked = Settings.Default.focus_font_outline_enabled;
+                this.backgroundColorPictureBox.BackColor = ColorTranslator.FromHtml(Settings.Default.focus_background_color);
 
                 if (this.fontOutlineCheckBox.Checked)
                 {
@@ -3969,7 +4247,7 @@ namespace Retro_Achievement_Tracker
                 MenuState = CustomMenuState.FOCUS;
 
                 this.fontSettingsGroupBox.Show();
-                this.ClientSize = new Size(592, 454);
+                this.ClientSize = new Size(592, 475);
                 this.focusOverridesGroupBox.Location = new Point(4, 313);
                 this.focusOverridesGroupBox.Show();
             }
@@ -4138,7 +4416,90 @@ namespace Retro_Achievement_Tracker
                     break;
             }
         }
-
+        private void AchievementAnimationInComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch ((string) this.notificationsAchievementAnimationInComboBox.SelectedItem)
+            {
+                case "DOWN":
+                    NotificationAchievementAnimationIn = AnimationDirection.DOWN;
+                    break;
+                case "LEFT":
+                    NotificationAchievementAnimationIn = AnimationDirection.LEFT;
+                    break;
+                case "RIGHT":
+                    NotificationAchievementAnimationIn = AnimationDirection.RIGHT;
+                    break;
+                case "UP":
+                    NotificationAchievementAnimationIn = AnimationDirection.UP;
+                    break;
+                default:
+                    NotificationAchievementAnimationIn = AnimationDirection.STATIC;
+                    break;
+            }
+        }
+        private void AchievementAnimationOutComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch ((string)this.notificationsAchievementAnimationOutComboBox.SelectedItem)
+            {
+                case "DOWN":
+                    NotificationAchievementAnimationOut = AnimationDirection.DOWN;
+                    break;
+                case "LEFT":
+                    NotificationAchievementAnimationOut = AnimationDirection.LEFT;
+                    break;
+                case "RIGHT":
+                    NotificationAchievementAnimationOut = AnimationDirection.RIGHT;
+                    break;
+                case "UP":
+                    NotificationAchievementAnimationOut = AnimationDirection.UP;
+                    break;
+                default:
+                    NotificationAchievementAnimationOut = AnimationDirection.STATIC;
+                    break;
+            }
+        }
+        private void MasteryAnimationInComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch ((string)this.notificationsMasteryAnimationInComboBox.SelectedItem)
+            {
+                case "DOWN":
+                    NotificationMasteryAnimationIn = AnimationDirection.DOWN;
+                    break;
+                case "LEFT":
+                    NotificationMasteryAnimationIn = AnimationDirection.LEFT;
+                    break;
+                case "RIGHT":
+                    NotificationMasteryAnimationIn = AnimationDirection.RIGHT;
+                    break;
+                case "UP":
+                    NotificationMasteryAnimationIn = AnimationDirection.UP;
+                    break;
+                default:
+                    NotificationMasteryAnimationIn = AnimationDirection.STATIC;
+                    break;
+            }
+        }
+        private void MasteryAnimationOutComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch ((string)this.notificationsMasteryAnimationOutComboBox.SelectedItem)
+            {
+                case "DOWN":
+                    NotificationMasteryAnimationOut = AnimationDirection.DOWN;
+                    break;
+                case "LEFT":
+                    NotificationMasteryAnimationOut = AnimationDirection.LEFT;
+                    break;
+                case "RIGHT":
+                    NotificationMasteryAnimationOut = AnimationDirection.RIGHT;
+                    break;
+                case "UP":
+                    NotificationMasteryAnimationOut = AnimationDirection.UP;
+                    break;
+                default:
+                    NotificationMasteryAnimationOut = AnimationDirection.STATIC;
+                    break;
+            }
+        }
         private void FontOutlineNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
             switch (MenuState)
@@ -4242,7 +4603,41 @@ namespace Retro_Achievement_Tracker
 
             Settings.Default.Save();
         }
-
+        private void SetBackgroundColorButton_Click(object sender, EventArgs e)
+        {
+            if (this.colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                this.backgroundColorPictureBox.BackColor = this.colorDialog1.Color;
+                switch (MenuState)
+                {
+                    case CustomMenuState.STATS:
+                        MenuState = CustomMenuState.CLOSED;
+                        StatsBackgroundColor = HexConverter(this.colorDialog1.Color);
+                        MenuState = CustomMenuState.STATS;
+                        break;
+                    case CustomMenuState.ALERTS:
+                        MenuState = CustomMenuState.CLOSED;
+                        NotificationsBackgroundColor = HexConverter(this.colorDialog1.Color);
+                        MenuState = CustomMenuState.ALERTS;
+                        break;
+                    case CustomMenuState.GAME_INFO:
+                        MenuState = CustomMenuState.CLOSED;
+                        GameInfoBackgroundColor = HexConverter(this.colorDialog1.Color);
+                        MenuState = CustomMenuState.GAME_INFO;
+                        break;
+                    case CustomMenuState.LAST_FIVE:
+                        MenuState = CustomMenuState.CLOSED;
+                        LastFiveBackgroundColor = HexConverter(this.colorDialog1.Color);
+                        MenuState = CustomMenuState.LAST_FIVE;
+                        break;
+                    case CustomMenuState.FOCUS:
+                        MenuState = CustomMenuState.CLOSED;
+                        FocusBackgroundColor = HexConverter(this.colorDialog1.Color);
+                        MenuState = CustomMenuState.FOCUS;
+                        break;
+                }
+            }
+        }
         private void AlertsStreamLabelsCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (NotBooting)
@@ -4305,12 +4700,14 @@ namespace Retro_Achievement_Tracker
             this.gameInfoPublisherCheckBox.Checked = true;
             this.gameInfoGenreCheckBox.Checked = true;
             this.gameInfoReleaseDateCheckBox.Checked = true;
+            this.gameInfoTitleCheckBox.Checked = true;
 
             this.gameInfoConsoleOverrideTextBox.Text = "Console";
             this.gameInfoDeveloperOverrideTextBox.Text = "Developer";
             this.gameInfoPublisherOverrideTextBox.Text = "Publisher";
             this.gameInfoGenreOverrideTextBox.Text = "Genre";
             this.gameInfoReleaseDateOverrideTextBox.Text = "Released";
+            this.gameInfoTitleOverrideTextBox.Text = "Title";
         }
 
         private void StatsDefaultButton_Click(object sender, EventArgs e)
@@ -4324,6 +4721,7 @@ namespace Retro_Achievement_Tracker
             this.statsGamePointsCheckBox.Checked = true;
             this.statsGameTruePointsCheckBox.Checked = true;
             this.statsGameAchievementsCheckBox.Checked = true;
+            this.statsCompletedCheckBox.Checked = true;
 
             this.statsRankOverrideTextBox.Text = "Rank";
             this.statsAwardsOverrideTextBox.Text = "Awards";
@@ -4334,6 +4732,7 @@ namespace Retro_Achievement_Tracker
             this.statsGamePointsOverrideTextBox.Text = "Points";
             this.statsGameTruePointsOverrideTextBox.Text = "True Points";
             this.statsGameAchievementsOverrideTextBox.Text = "Cheevos";
+            this.statsCompletedOverrideTextBox.Text = "Compeleted";
         }
 
         private void StatsRankCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -4609,7 +5008,7 @@ namespace Retro_Achievement_Tracker
 
     public enum AnimationDirection
     {
-        NONE,
+        STATIC,
         LEFT,
         RIGHT,
         UP,

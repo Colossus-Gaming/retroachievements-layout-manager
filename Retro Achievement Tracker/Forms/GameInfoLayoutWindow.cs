@@ -135,6 +135,10 @@ namespace Retro_Achievement_Tracker
         {
             await ExecuteScript("setFontColor(\"" + hexCode + "\");");
         }
+        public async void SetBackgroundColor(string hexCode)
+        {
+            await ExecuteScript("setBackgroundColor(\"" + hexCode + "\");");
+        }
         public async void SetFontOutline(string hexCode, int size)
         {
             await ExecuteScript("setFontOutline(\"" + hexCode + " " + size + "px\");");

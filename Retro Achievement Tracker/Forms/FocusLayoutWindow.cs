@@ -53,7 +53,10 @@ namespace Retro_Achievement_Tracker
         {
             await ExecuteScript("setFontOutline(\"" + hexCode + " " + size + "px\");");
         }
-
+        public async void SetBackgroundColor(string hexCode)
+        {
+            await ExecuteScript("setBackgroundColor(\"" + hexCode + "\");");
+        }
         protected async Task ExecuteScript(string script)
         {
             if (this.Visible)

@@ -1162,5 +1162,65 @@ namespace Retro_Achievement_Tracker.Properties {
                 this["focus_points_enable"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FF00FF")]
+        public string stats_background_color {
+            get {
+                return ((string)(this["stats_background_color"]));
+            }
+            set {
+                this["stats_background_color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FF00FF")]
+        public string notifications_background_color {
+            get {
+                return ((string)(this["notifications_background_color"]));
+            }
+            set {
+                this["notifications_background_color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FF00FF")]
+        public string game_info_background_color {
+            get {
+                return ((string)(this["game_info_background_color"]));
+            }
+            set {
+                this["game_info_background_color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FF00FF")]
+        public string last_five_background_color {
+            get {
+                return ((string)(this["last_five_background_color"]));
+            }
+            set {
+                this["last_five_background_color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FF00FF")]
+        public string focus_background_color {
+            get {
+                return ((string)(this["focus_background_color"]));
+            }
+            set {
+                this["focus_background_color"] = value;
+            }
+        }
     }
 }

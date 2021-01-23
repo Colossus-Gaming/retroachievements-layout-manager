@@ -257,7 +257,22 @@ namespace Retro_Achievement_Tracker.Forms
         {
             await ExecuteScript("setMasteryOut(" + outro + ");");
         }
-
+        public async void SetAchievementInAnimation(string animation)
+        {
+            await ExecuteScript("setAnimationAchievementIn(\"" + animation + "\");");
+        }
+        public async void SetAchievementOutAnimation(string animation)
+        {
+            await ExecuteScript("setAnimationAchievementOut(\"" + animation + "\");");
+        }
+        public async void SetMasteryInAnimation(string animation)
+        {
+            await ExecuteScript("setAnimationMasteryIn(\"" + animation + "\");");
+        }
+        public async void SetMasteryOutAnimation(string animation)
+        {
+            await ExecuteScript("setAnimationMasteryOut(\"" + animation + "\");");
+        }
         public async void HideNotifications()
         {
             await ExecuteScript("hideNotifications();");
@@ -276,7 +291,10 @@ namespace Retro_Achievement_Tracker.Forms
         {
             await ExecuteScript("setFontOutline(\"" + hexCode + " " + size + "px\");");
         }
-
+        public async void SetBackgroundColor(string hexCode)
+        {
+            await ExecuteScript("setBackgroundColor(\"" + hexCode + "\");");
+        }
         protected async Task ExecuteScript(string script)
         {
             if (this.Visible)
