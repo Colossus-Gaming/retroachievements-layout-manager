@@ -21,7 +21,7 @@
             for (var i = 0; i < all.length; i++) {
                 all[i].style.fontFamily = value;
             }
-            
+
         }
 
         function setFontColor(value) {
@@ -30,7 +30,7 @@
             for (var i = 0; i < all.length; i++) {
                 all[i].style.color = value;
             }
-            
+
         }
 
         function setFontOutline(value) {
@@ -39,11 +39,7 @@
             for (var i = 0; i < all.length; i++) {
                 all[i].style.webkitTextStroke = value;
             }
-            
-        }
 
-        function setBackgroundColor(value) {
-            document.getElementById("container").style.background = value;
         }
 
         function setRankName(value) {
@@ -88,24 +84,24 @@
 
             setTimeout(function () { $("#ra-stats-rank-mod").fadeOut(); }, 800);
 
-            
+
 
             return "SUCCESS";
         }
 
         function setAwardsName(value) {
             $('#ra-stats-awards-name').text(value + '');
-            
+
         }
 
         function showAwards() {
             $('#ra-stats-awards').fadeIn();
-            
+
         }
 
         function hideAwards() {
             $('#ra-stats-awards').fadeOut();
-            
+
         }
 
         function setAwards(value) {
@@ -174,7 +170,7 @@
             }
 
             setTimeout(function () { $("#ra-stats-points-mod").fadeOut(); }, 800);
-            
+
             return "SUCCESS";
         }
 
@@ -234,8 +230,8 @@
             }
 
             setTimeout(function () { $("#ra-stats-true-points-mod").fadeOut(); }, 800);
-            
-            return "SUCCESS";            
+
+            return "SUCCESS";
         }
 
         function setRatioName(value) {
@@ -277,7 +273,7 @@
             }
 
             setTimeout(function () { $("#ra-stats-ratio-mod").fadeOut(); }, 800);
-            
+
             return "SUCCESS";
         }
 
@@ -297,7 +293,7 @@
             $('#ra-stats-game-ratio-value').text(value + ' %');
             $('#ra-stats-game-ratio-value').fadeIn();
 
-            
+
             return "SUCCESS";
         }
 
@@ -341,7 +337,7 @@
             }
 
             setTimeout(function () { $("#ra-stats-game-achievements-mod").fadeOut(); }, 800);
-            
+
             return "SUCCESS";
         }
 
@@ -390,9 +386,9 @@
             }
 
             setTimeout(function () { $("#ra-stats-game-points-mod").fadeOut(); }, 800);
-            
+
             return "SUCCESS";
-        } 
+        }
 
         function setGameTruePointsName(value) {
             $('#ra-stats-game-true-points-name').text(value + '');
@@ -405,7 +401,7 @@
         function hideGameTruePoints() {
             $('#ra-stats-game-true-points').fadeOut();
         }
-        
+
         function setGameTruePoints(earned, total) {
             var difference = earned;
             var originalValue = $('#ra-stats-game-true-points-earned')[0].innerHTML;
@@ -439,7 +435,7 @@
             }
 
             setTimeout(function () { $("#ra-stats-game-true-points-mod").fadeOut(); }, 800);
-            
+
             return "SUCCESS";
         }
     </script>
@@ -483,7 +479,7 @@
         #ra-stats-ratio-mod,
         #ra-stats-game-achievements-mod,
         #ra-stats-game-points-mod,
-        #ra-stats-game-true-points-mod{
+        #ra-stats-game-true-points-mod {
             animation-duration: 1200ms;
             animation-iteration-count: 1;
         }
@@ -513,7 +509,7 @@
 
         #ra-stats-game-true-points-earned,
         #ra-stats-game-achievements-earned,
-        #ra-stats-game-points-earned{
+        #ra-stats-game-points-earned {
             text-align: right;
             white-space: nowrap;
         }
@@ -529,15 +525,16 @@
         #ra-stats-game-ratio-mod,
         #ra-stats-game-points-mod,
         #ra-stats-game-true-points-mod,
-        #ra-stats-game-achievements-mod{
+        #ra-stats-game-achievements-mod {
             text-align: right;
             white-space: nowrap;
         }
+
         #ra-stats-rank-name,
         #ra-stats-points-name,
         #ra-stats-awards-name,
         #ra-stats-true-points-name,
-        #ra-stats-ratio-name, 
+        #ra-stats-ratio-name,
         #ra-stats-game-completion-rate-name
         #ra-stats-game-ratio-name,
         #ra-stats-game-points-name,

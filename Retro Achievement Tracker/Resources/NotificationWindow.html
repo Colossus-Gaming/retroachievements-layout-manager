@@ -114,12 +114,11 @@
         }
 
         function setBackgroundColor(value) {
-            document.getElementById("container").style.background = value;
+            document.getElementById("achievement-pop").style.backgroundColor = value;
+            document.getElementById("mastery-pop").style.backgroundColor = value;
         }
 
         function promptUser() {
-            var element = document.getElementById("user-prompt");
-
             $("#achievement-pop-video").fadeOut();
             $("#mastery-pop-video").fadeOut();
             $("#user-prompt").fadeIn();
@@ -175,7 +174,6 @@
         }
 
         function setAnimationAchievementIn(animation) {
-            console.log(animation);
             switch (animation) {
                 case "DOWN":
                     achievementAnimationIn = "animation-in-down";
@@ -369,7 +367,7 @@
         @keyframes animation-up {
             0% {
                 left: 200px;
-                top: 215px;
+                top: 200px;
             }
 
             100% {
@@ -381,7 +379,7 @@
         @keyframes animation-down {
             0% {
                 left: 200px;
-                top: 215px;
+                top: 200px;
             }
 
             100% {
@@ -393,24 +391,24 @@
         @keyframes animation-right {
             0% {
                 left: 200px;
-                top: 215px;
+                top: 200px;
             }
 
             100% {
                 left: 1200px;
-                top: 215px;
+                top: 200px;
             }
         }
 
         @keyframes animation-left {
             0% {
                 left: 200px;
-                top: 215px;
+                top: 200px;
             }
 
             100% {
                 left: -1000px;
-                top: 215px;
+                top: 200px;
             }
         }
 
@@ -501,7 +499,7 @@
         #mastery-pop-name {
             position: relative;
             float: right;
-            right: 15px;
+            right: 12px;
             top: 12px;
             width: 680px;
             height: 100px;
@@ -571,11 +569,14 @@
         #achievement-pop,
         #mastery-pop {
             position: relative;
-            top: 215px;
+            top: 160px;
             left: 200px;
             width: 900px;
             height: 212px;
-            background: rgba(0, 0, 0, 0.0);
+            background-image: url('disk://background');
+            background-repeat: no-repeat;
+            background-color: #cccccc;
+            background-size: cover;
             display: none;
         }
 

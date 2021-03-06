@@ -109,6 +109,11 @@ namespace Retro_Achievement_Tracker
                 GameInfoGenreValue = _gameProgress.Genre;
                 GameInfoReleaseDateValue = _gameProgress.Released;
 
+                if (LastFiveAchievements == null)
+                {
+                    LastFiveAchievements = UserSummary.RecentAchievements;
+                }
+
                 SortAchievements();
 
                 if (gameChange)
@@ -134,7 +139,13 @@ namespace Retro_Achievement_Tracker
                     {
                         WriteStatsStreamLabels();
                     }
-
+                    for (int i = LastFiveAchievements.Count; i != 0; i--)
+                    {
+                        if (LastFiveWindow != null && !LastFiveWindow.IsDisposed)
+                        {
+                            LastFiveWindow.EnqueueAchievement(LastFiveAchievements[i - 1]);
+                        }
+                    }
                     if (StatsWindow != null && !StatsWindow.IsDisposed)
                     {
                         StatsWindow.SetCompletedValue(GameTotalAchievements == 0 ? 0 : Convert.ToInt32((Convert.ToDecimal(GameEarnedAchievements) / Convert.ToDecimal(GameTotalAchievements)) * 200));
@@ -184,7 +195,7 @@ namespace Retro_Achievement_Tracker
 
                         if (StatsWindow != null && !StatsWindow.IsDisposed)
                         {
-                            StatsWindow.SetCompletedValue(GameTotalAchievements == 0 ? 0 : Convert.ToInt32((Convert.ToDecimal(GameEarnedAchievements) / Convert.ToDecimal(GameTotalAchievements)) * 200)); 
+                            StatsWindow.SetCompletedValue(GameTotalAchievements == 0 ? 0 : Convert.ToInt32((Convert.ToDecimal(GameEarnedAchievements) / Convert.ToDecimal(GameTotalAchievements)) * 200));
                         }
                         if (StreamLabelsStatsEnable)
                         {
@@ -560,7 +571,7 @@ namespace Retro_Achievement_Tracker
 
                 if (!NotificationsWindow.IsDisposed)
                 {
-                    NotificationsWindow.SetAchievementTop(this.useCustomAchievementCheckbox.Checked ? value :  35);
+                    NotificationsWindow.SetAchievementTop(this.useCustomAchievementCheckbox.Checked ? value : 5);
                 }
             }
             get
@@ -594,7 +605,7 @@ namespace Retro_Achievement_Tracker
 
                 if (!NotificationsWindow.IsDisposed)
                 {
-                    NotificationsWindow.SetMasteryTop(this.useCustomMasteryCheckbox.Checked ? value :  35);
+                    NotificationsWindow.SetMasteryTop(this.useCustomMasteryCheckbox.Checked ? value : 5);
                 }
             }
             get
@@ -2215,6 +2226,7 @@ namespace Retro_Achievement_Tracker
         private static List<Achievement> UnlockedAchievements;
         private static List<Achievement> OldUnlockedAchievements;
         private static List<Achievement> MostRecentAchievements;
+        private static List<Achievement> LastFiveAchievements;
 
         private static Timer UserAndGameUpdateTimer;
         private static int UserAndGameTimerCounter;
@@ -2266,7 +2278,7 @@ namespace Retro_Achievement_Tracker
             HideAllMenuItems();
         }
 
-        protected async override void OnLoad(EventArgs e)
+        protected async override void OnShown(EventArgs e)
         {
             CreateDataBindings();
             CreateFolders();
@@ -2789,8 +2801,8 @@ namespace Retro_Achievement_Tracker
 
                 NotificationsWindow.SetAchievementWidth(Settings.Default.notification_custom_achievement_enable ? Convert.ToInt32(CustomAchievementScale * GetVideoWidth(CustomAchievementFile)) : 1000);
                 NotificationsWindow.SetMasteryWidth(Settings.Default.notification_custom_mastery_enable ? Convert.ToInt32(CustomMasteryScale * GetVideoWidth(CustomMasteryFile)) : 1000);
-                NotificationsWindow.SetAchievementTop(Settings.Default.notification_custom_achievement_enable ? CustomAchievementY :  35);
-                NotificationsWindow.SetMasteryTop(Settings.Default.notification_custom_mastery_enable ? CustomMasteryY :  35);
+                NotificationsWindow.SetAchievementTop(Settings.Default.notification_custom_achievement_enable ? CustomAchievementY : 5);
+                NotificationsWindow.SetMasteryTop(Settings.Default.notification_custom_mastery_enable ? CustomMasteryY : 5);
                 NotificationsWindow.SetAchievementLeft(Settings.Default.notification_custom_achievement_enable ? CustomAchievementX : -15);
                 NotificationsWindow.SetMasteryLeft(Settings.Default.notification_custom_mastery_enable ? CustomMasteryX : -15);
 
@@ -2912,6 +2924,10 @@ namespace Retro_Achievement_Tracker
                 {
                     LastFiveWindow.SetFontOutline("", 0);
                 }
+                for (int i = LastFiveAchievements.Count; i == 0; i--)
+                {
+                    LastFiveWindow.EnqueueAchievement(LastFiveAchievements[i]);
+                }
             });
         }
 
@@ -2986,12 +3002,30 @@ namespace Retro_Achievement_Tracker
             {
                 List<Achievement> tempLockedAchievements = CurrentGame.Achievements.FindAll(x => !x.DateEarned.HasValue);
                 List<Achievement> tempUnlockedAchievements = CurrentGame.Achievements.FindAll(x => x.DateEarned.HasValue);
+                List<Achievement> lastFiveAchievements = UserSummary.RecentAchievements.FindAll(x => x.DateEarned.HasValue);
+
                 MostRecentAchievements = UserSummary.RecentAchievements.FindAll(x => x.DateEarned.HasValue);
 
                 tempUnlockedAchievements.Sort(delegate (Achievement x, Achievement y) { return y.DateEarned.Value.CompareTo(x.DateEarned.Value); });
                 tempLockedAchievements.Sort();
 
                 SetLockedAchievements(tempLockedAchievements.ToList());
+
+                List<Achievement> neededToQueue = LastFiveAchievements.FindAll(achievement => !lastFiveAchievements.Contains(achievement));
+
+                if (neededToQueue.Count > 0)
+                {
+                    if (LastFiveWindow != null && !LastFiveWindow.IsDisposed)
+                    {
+                        neededToQueue.ForEach(achievement =>
+                        {
+                            LastFiveWindow.EnqueueAchievement(achievement);
+                        });
+                    }
+                }
+
+                LastFiveAchievements = lastFiveAchievements;
+
                 UnlockedAchievements = tempUnlockedAchievements.ToList();
             }
 
@@ -3124,7 +3158,8 @@ namespace Retro_Achievement_Tracker
             animationDirections.Add(AnimationDirection.STATIC);
             animationDirections.Add(AnimationDirection.UP);
 
-            animationDirections.ForEach(animationDirection => {
+            animationDirections.ForEach(animationDirection =>
+            {
                 this.notificationsAchievementAnimationInComboBox.Items.Add(animationDirection.ToString());
                 this.notificationsAchievementAnimationOutComboBox.Items.Add(animationDirection.ToString());
                 this.notificationsMasteryAnimationInComboBox.Items.Add(animationDirection.ToString());
@@ -3280,7 +3315,7 @@ namespace Retro_Achievement_Tracker
             if (lastFiveFontFamily.Length > 0)
             {
                 LastFiveFontFamily = lastFiveFontFamily[0];
-            }                        
+            }
         }
 
         private async void SetAwardCount()
@@ -3399,7 +3434,7 @@ namespace Retro_Achievement_Tracker
 
             if (!NotificationsWindow.IsDisposed)
             {
-                NotificationsWindow.SetAchievementWidth(CustomAchievementEnabled ? Convert.ToInt32(CustomAchievementScale * GetVideoWidth(CustomAchievementFile)) : 1200); 
+                NotificationsWindow.SetAchievementWidth(CustomAchievementEnabled ? Convert.ToInt32(CustomAchievementScale * GetVideoWidth(CustomAchievementFile)) : 1200);
                 NotificationsWindow.SetAchievementInAnimation(NotificationAchievementAnimationIn.ToString());
                 NotificationsWindow.SetAchievementOutAnimation(NotificationAchievementAnimationOut.ToString());
             }
@@ -3512,7 +3547,7 @@ namespace Retro_Achievement_Tracker
             }
 
             NotificationsWindow.SetAchievementLeft(this.useCustomAchievementCheckbox.Checked ? CustomAchievementX : -15);
-            NotificationsWindow.SetAchievementTop(this.useCustomAchievementCheckbox.Checked ? CustomAchievementY :  35);
+            NotificationsWindow.SetAchievementTop(this.useCustomAchievementCheckbox.Checked ? CustomAchievementY : 5);
 
             var width = this.useCustomAchievementCheckbox.Checked ? GetVideoWidth(CustomAchievementFile) : 1200;
             NotificationsWindow.SetAchievementWidth(this.useCustomAchievementCheckbox.Checked ? Convert.ToInt32(width * CustomAchievementScale) : width);
@@ -3561,7 +3596,7 @@ namespace Retro_Achievement_Tracker
             }
 
             NotificationsWindow.SetMasteryLeft(this.useCustomMasteryCheckbox.Checked ? CustomMasteryX : -15);
-            NotificationsWindow.SetMasteryTop(this.useCustomMasteryCheckbox.Checked ? CustomMasteryY :  35);
+            NotificationsWindow.SetMasteryTop(this.useCustomMasteryCheckbox.Checked ? CustomMasteryY : 35);
 
             var width = this.useCustomMasteryCheckbox.Checked ? GetVideoWidth(CustomMasteryFile) : 1200;
             NotificationsWindow.SetMasteryWidth(this.useCustomMasteryCheckbox.Checked ? Convert.ToInt32(width * CustomMasteryScale) : width);
@@ -4418,7 +4453,7 @@ namespace Retro_Achievement_Tracker
         }
         private void AchievementAnimationInComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch ((string) this.notificationsAchievementAnimationInComboBox.SelectedItem)
+            switch ((string)this.notificationsAchievementAnimationInComboBox.SelectedItem)
             {
                 case "DOWN":
                     NotificationAchievementAnimationIn = AnimationDirection.DOWN;

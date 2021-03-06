@@ -121,6 +121,9 @@ namespace Retro_Achievement_Tracker
             this.fontColorPictureBox = new System.Windows.Forms.PictureBox();
             this.fontColorLabel = new System.Windows.Forms.Label();
             this.fontSettingsGroupBox = new System.Windows.Forms.GroupBox();
+            this.setBackgroundColorButton = new System.Windows.Forms.Button();
+            this.backgroundColorPictureBox = new System.Windows.Forms.PictureBox();
+            this.backgroundColorLabel = new System.Windows.Forms.Label();
             this.fontSizeLabel = new System.Windows.Forms.Label();
             this.fontSizeNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
@@ -184,9 +187,6 @@ namespace Retro_Achievement_Tracker
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.focusOverridesGroupBox = new System.Windows.Forms.GroupBox();
             this.focusPointsEnable = new System.Windows.Forms.CheckBox();
-            this.setBackgroundColorButton = new System.Windows.Forms.Button();
-            this.backgroundColorPictureBox = new System.Windows.Forms.PictureBox();
-            this.backgroundColorLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.userProfilePictureBox)).BeginInit();
             this.statsGroupBox.SuspendLayout();
             this.focusGroupBox.SuspendLayout();
@@ -203,6 +203,7 @@ namespace Retro_Achievement_Tracker
             ((System.ComponentModel.ISupportInitialize)(this.fontOutlineColorPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontColorPictureBox)).BeginInit();
             this.fontSettingsGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.backgroundColorPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontSizeNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.inAchievementNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.outAchievementNumericUpDown)).BeginInit();
@@ -219,7 +220,6 @@ namespace Retro_Achievement_Tracker
             this.gameInfoOverrideSettingsGroupBox.SuspendLayout();
             this.lastFiveOverridesGroupBox.SuspendLayout();
             this.focusOverridesGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.backgroundColorPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // apiKeyLabel
@@ -1210,6 +1210,36 @@ namespace Retro_Achievement_Tracker
             this.fontSettingsGroupBox.TabStop = false;
             this.fontSettingsGroupBox.Text = "Font Settings";
             // 
+            // setBackgroundColorButton
+            // 
+            this.setBackgroundColorButton.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.setBackgroundColorButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.setBackgroundColorButton.Location = new System.Drawing.Point(233, 126);
+            this.setBackgroundColorButton.Name = "setBackgroundColorButton";
+            this.setBackgroundColorButton.Size = new System.Drawing.Size(49, 23);
+            this.setBackgroundColorButton.TabIndex = 43;
+            this.setBackgroundColorButton.Text = "Set";
+            this.setBackgroundColorButton.UseVisualStyleBackColor = true;
+            // 
+            // backgroundColorPictureBox
+            // 
+            this.backgroundColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.backgroundColorPictureBox.Location = new System.Drawing.Point(177, 127);
+            this.backgroundColorPictureBox.Name = "backgroundColorPictureBox";
+            this.backgroundColorPictureBox.Size = new System.Drawing.Size(50, 22);
+            this.backgroundColorPictureBox.TabIndex = 42;
+            this.backgroundColorPictureBox.TabStop = false;
+            // 
+            // backgroundColorLabel
+            // 
+            this.backgroundColorLabel.AutoSize = true;
+            this.backgroundColorLabel.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.backgroundColorLabel.Location = new System.Drawing.Point(8, 134);
+            this.backgroundColorLabel.Name = "backgroundColorLabel";
+            this.backgroundColorLabel.Size = new System.Drawing.Size(133, 12);
+            this.backgroundColorLabel.TabIndex = 41;
+            this.backgroundColorLabel.Text = "Background Color";
+            // 
             // fontSizeLabel
             // 
             this.fontSizeLabel.AutoSize = true;
@@ -1995,7 +2025,6 @@ namespace Retro_Achievement_Tracker
             // lastFiveVerboseCheckbox
             // 
             this.lastFiveVerboseCheckbox.AutoSize = true;
-            this.lastFiveVerboseCheckbox.Enabled = false;
             this.lastFiveVerboseCheckbox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lastFiveVerboseCheckbox.Location = new System.Drawing.Point(80, 32);
             this.lastFiveVerboseCheckbox.Name = "lastFiveVerboseCheckbox";
@@ -2007,7 +2036,6 @@ namespace Retro_Achievement_Tracker
             // lastFiveSimpleCheckbox
             // 
             this.lastFiveSimpleCheckbox.AutoSize = true;
-            this.lastFiveSimpleCheckbox.Enabled = false;
             this.lastFiveSimpleCheckbox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lastFiveSimpleCheckbox.Location = new System.Drawing.Point(6, 32);
             this.lastFiveSimpleCheckbox.Name = "lastFiveSimpleCheckbox";
@@ -2063,36 +2091,6 @@ namespace Retro_Achievement_Tracker
             this.focusPointsEnable.Text = "Display Points";
             this.focusPointsEnable.UseVisualStyleBackColor = true;
             // 
-            // setBackgroundColorButton
-            // 
-            this.setBackgroundColorButton.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.setBackgroundColorButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.setBackgroundColorButton.Location = new System.Drawing.Point(233, 126);
-            this.setBackgroundColorButton.Name = "setBackgroundColorButton";
-            this.setBackgroundColorButton.Size = new System.Drawing.Size(49, 23);
-            this.setBackgroundColorButton.TabIndex = 43;
-            this.setBackgroundColorButton.Text = "Set";
-            this.setBackgroundColorButton.UseVisualStyleBackColor = true;
-            // 
-            // backgroundColorPictureBox
-            // 
-            this.backgroundColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.backgroundColorPictureBox.Location = new System.Drawing.Point(177, 127);
-            this.backgroundColorPictureBox.Name = "backgroundColorPictureBox";
-            this.backgroundColorPictureBox.Size = new System.Drawing.Size(50, 22);
-            this.backgroundColorPictureBox.TabIndex = 42;
-            this.backgroundColorPictureBox.TabStop = false;
-            // 
-            // backgroundColorLabel
-            // 
-            this.backgroundColorLabel.AutoSize = true;
-            this.backgroundColorLabel.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.backgroundColorLabel.Location = new System.Drawing.Point(8, 134);
-            this.backgroundColorLabel.Name = "backgroundColorLabel";
-            this.backgroundColorLabel.Size = new System.Drawing.Size(133, 12);
-            this.backgroundColorLabel.TabIndex = 41;
-            this.backgroundColorLabel.Text = "Background Color";
-            // 
             // MainPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2143,6 +2141,7 @@ namespace Retro_Achievement_Tracker
             ((System.ComponentModel.ISupportInitialize)(this.fontColorPictureBox)).EndInit();
             this.fontSettingsGroupBox.ResumeLayout(false);
             this.fontSettingsGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.backgroundColorPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontSizeNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.inAchievementNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.outAchievementNumericUpDown)).EndInit();
@@ -2164,7 +2163,6 @@ namespace Retro_Achievement_Tracker
             this.lastFiveOverridesGroupBox.PerformLayout();
             this.focusOverridesGroupBox.ResumeLayout(false);
             this.focusOverridesGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.backgroundColorPictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }

@@ -17,7 +17,7 @@ namespace Retro_Achievement_Tracker.Forms
         private Task NotificationsTask;
         private readonly List<NotificationRequest> NotificationRequests;
         private Stopwatch stopwatch;
-        private CancellationTokenSource tokenSource2 = new CancellationTokenSource();
+        private readonly CancellationTokenSource tokenSource2 = new CancellationTokenSource();
 
         public NotificationLayoutWindow(Action<string, string, int> writeAlertStreamLabels)
         {
