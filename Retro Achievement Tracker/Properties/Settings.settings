@@ -233,9 +233,6 @@
     <Setting Name="stream_labels_game_info" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="stream_labels_notifications" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
     <Setting Name="stream_labels_last_five" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>

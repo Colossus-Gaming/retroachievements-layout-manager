@@ -1535,19 +1535,6 @@ namespace Retro_Achievement_Tracker
                 Settings.Default.Save();
             }
         }
-        private bool StreamLabelsAlertsEnable
-        {
-            get
-            {
-                return Settings.Default.stream_labels_notifications;
-                ;
-            }
-            set
-            {
-                Settings.Default.stream_labels_notifications = value;
-                Settings.Default.Save();
-            }
-        }
         private bool StreamLabelsGameInfoEnable
         {
             get
@@ -2513,7 +2500,6 @@ namespace Retro_Achievement_Tracker
             this.openStatsWindowButton.Enabled = true;
             this.openGameInfoWindowButton.Enabled = true;
 
-            this.alertsStreamLabelsCheckBox.Enabled = true;
             this.statsStreamLabelsCheckBox.Enabled = true;
             this.lastFiveStreamLabelsCheckBox.Enabled = true;
             this.focusStreamLabelsCheckBox.Enabled = true;
@@ -3172,7 +3158,6 @@ namespace Retro_Achievement_Tracker
             this.autoLaunchGameInfoWindowCheckbox.Checked = Settings.Default.auto_game_info;
             this.autoLaunchLastFiveWindowCheckbox.Checked = Settings.Default.auto_last_five;
 
-            this.alertsStreamLabelsCheckBox.Checked = Settings.Default.stream_labels_notifications;
             this.focusStreamLabelsCheckBox.Checked = Settings.Default.stream_labels_focus;
             this.gameInfoStreamLabelsCheckBox.Checked = Settings.Default.stream_labels_game_info;
             this.lastFiveStreamLabelsCheckBox.Checked = Settings.Default.stream_labels_last_five;
@@ -3319,7 +3304,6 @@ namespace Retro_Achievement_Tracker
 
             this.autoStartCheckbox.CheckedChanged += AutoStart_CheckedChanged;
             this.fontOutlineCheckBox.CheckedChanged += FontOutlineCheckBox_CheckedChanged;
-            this.alertsStreamLabelsCheckBox.CheckedChanged += AlertsStreamLabelsCheckBox_CheckedChanged;
             this.focusStreamLabelsCheckBox.CheckedChanged += FocusStreamLabelsCheckBox_CheckedChanged;
             this.autoLaunchLastFiveWindowCheckbox.CheckedChanged += AutoLaunchLastFiveWindowCheckbox_CheckedChanged;
             this.autoLaunchGameInfoWindowCheckbox.CheckedChanged += AutoLaunchGameInfoWindowCheckbox_CheckedChanged;
@@ -4657,13 +4641,6 @@ namespace Retro_Achievement_Tracker
                         MenuState = CustomMenuState.FOCUS;
                         break;
                 }
-            }
-        }
-        private void AlertsStreamLabelsCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (NotBooting)
-            {
-                StreamLabelsAlertsEnable = this.alertsStreamLabelsCheckBox.Checked;
             }
         }
         private void FocusStreamLabelsCheckBox_CheckedChanged(object sender, EventArgs e)

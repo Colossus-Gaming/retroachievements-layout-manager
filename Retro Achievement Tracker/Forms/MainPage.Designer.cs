@@ -79,7 +79,6 @@ namespace Retro_Achievement_Tracker
             this.openLastFiveWindowButton = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.focusStreamLabelsCheckBox = new System.Windows.Forms.CheckBox();
-            this.alertsStreamLabelsCheckBox = new System.Windows.Forms.CheckBox();
             this.lastFiveStreamLabelsCheckBox = new System.Windows.Forms.CheckBox();
             this.gameInfoStreamLabelsCheckBox = new System.Windows.Forms.CheckBox();
             this.statsStreamLabelsCheckBox = new System.Windows.Forms.CheckBox();
@@ -383,9 +382,9 @@ namespace Retro_Achievement_Tracker
             this.focusGroupBox.Controls.Add(this.focusAchievementTitleLabel);
             this.focusGroupBox.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.focusGroupBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.focusGroupBox.Location = new System.Drawing.Point(294, 138);
+            this.focusGroupBox.Location = new System.Drawing.Point(294, 113);
             this.focusGroupBox.Name = "focusGroupBox";
-            this.focusGroupBox.Size = new System.Drawing.Size(291, 172);
+            this.focusGroupBox.Size = new System.Drawing.Size(291, 197);
             this.focusGroupBox.TabIndex = 10001;
             this.focusGroupBox.TabStop = false;
             this.focusGroupBox.Text = "Focus";
@@ -394,7 +393,7 @@ namespace Retro_Achievement_Tracker
             // 
             this.focusAchievementDescriptionLabel.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.focusAchievementDescriptionLabel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.focusAchievementDescriptionLabel.Location = new System.Drawing.Point(71, 79);
+            this.focusAchievementDescriptionLabel.Location = new System.Drawing.Point(71, 104);
             this.focusAchievementDescriptionLabel.Name = "focusAchievementDescriptionLabel";
             this.focusAchievementDescriptionLabel.Size = new System.Drawing.Size(214, 62);
             this.focusAchievementDescriptionLabel.TabIndex = 5;
@@ -403,7 +402,7 @@ namespace Retro_Achievement_Tracker
             // 
             this.setFocusButton.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.setFocusButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.setFocusButton.Location = new System.Drawing.Point(71, 144);
+            this.setFocusButton.Location = new System.Drawing.Point(71, 169);
             this.setFocusButton.Name = "setFocusButton";
             this.setFocusButton.Size = new System.Drawing.Size(46, 22);
             this.setFocusButton.TabIndex = 10001;
@@ -413,7 +412,7 @@ namespace Retro_Achievement_Tracker
             // label33
             // 
             this.label33.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label33.Location = new System.Drawing.Point(4, 69);
+            this.label33.Location = new System.Drawing.Point(4, 99);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(282, 2);
             this.label33.TabIndex = 10002;
@@ -422,7 +421,7 @@ namespace Retro_Achievement_Tracker
             // 
             this.focusAchievementButtonRight.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.focusAchievementButtonRight.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.focusAchievementButtonRight.Location = new System.Drawing.Point(244, 144);
+            this.focusAchievementButtonRight.Location = new System.Drawing.Point(244, 169);
             this.focusAchievementButtonRight.Name = "focusAchievementButtonRight";
             this.focusAchievementButtonRight.Size = new System.Drawing.Size(42, 22);
             this.focusAchievementButtonRight.TabIndex = 10;
@@ -433,7 +432,7 @@ namespace Retro_Achievement_Tracker
             // 
             this.hideFocusButton.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hideFocusButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.hideFocusButton.Location = new System.Drawing.Point(123, 144);
+            this.hideFocusButton.Location = new System.Drawing.Point(123, 169);
             this.hideFocusButton.Name = "hideFocusButton";
             this.hideFocusButton.Size = new System.Drawing.Size(46, 22);
             this.hideFocusButton.TabIndex = 10001;
@@ -444,7 +443,7 @@ namespace Retro_Achievement_Tracker
             // 
             this.customizeFocusButton.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.customizeFocusButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.customizeFocusButton.Location = new System.Drawing.Point(6, 113);
+            this.customizeFocusButton.Location = new System.Drawing.Point(6, 138);
             this.customizeFocusButton.Name = "customizeFocusButton";
             this.customizeFocusButton.Size = new System.Drawing.Size(62, 28);
             this.customizeFocusButton.TabIndex = 10025;
@@ -455,7 +454,7 @@ namespace Retro_Achievement_Tracker
             // 
             this.focusAchievementButtonLeft.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.focusAchievementButtonLeft.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.focusAchievementButtonLeft.Location = new System.Drawing.Point(196, 144);
+            this.focusAchievementButtonLeft.Location = new System.Drawing.Point(196, 169);
             this.focusAchievementButtonLeft.Name = "focusAchievementButtonLeft";
             this.focusAchievementButtonLeft.Size = new System.Drawing.Size(42, 22);
             this.focusAchievementButtonLeft.TabIndex = 9;
@@ -467,7 +466,7 @@ namespace Retro_Achievement_Tracker
             this.autoLaunchFocusWindowCheckBox.AutoSize = true;
             this.autoLaunchFocusWindowCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.autoLaunchFocusWindowCheckBox.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.autoLaunchFocusWindowCheckBox.Location = new System.Drawing.Point(10, 151);
+            this.autoLaunchFocusWindowCheckBox.Location = new System.Drawing.Point(10, 176);
             this.autoLaunchFocusWindowCheckBox.Name = "autoLaunchFocusWindowCheckBox";
             this.autoLaunchFocusWindowCheckBox.Size = new System.Drawing.Size(54, 18);
             this.autoLaunchFocusWindowCheckBox.TabIndex = 10020;
@@ -478,7 +477,7 @@ namespace Retro_Achievement_Tracker
             // 
             this.focusAchievementPictureBox.Location = new System.Drawing.Point(7, 11);
             this.focusAchievementPictureBox.Name = "focusAchievementPictureBox";
-            this.focusAchievementPictureBox.Size = new System.Drawing.Size(55, 55);
+            this.focusAchievementPictureBox.Size = new System.Drawing.Size(85, 85);
             this.focusAchievementPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.focusAchievementPictureBox.TabIndex = 21;
             this.focusAchievementPictureBox.TabStop = false;
@@ -487,7 +486,7 @@ namespace Retro_Achievement_Tracker
             // 
             this.showFocusWindowButton.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.showFocusWindowButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.showFocusWindowButton.Location = new System.Drawing.Point(6, 79);
+            this.showFocusWindowButton.Location = new System.Drawing.Point(6, 104);
             this.showFocusWindowButton.Name = "showFocusWindowButton";
             this.showFocusWindowButton.Size = new System.Drawing.Size(62, 28);
             this.showFocusWindowButton.TabIndex = 10014;
@@ -498,9 +497,9 @@ namespace Retro_Achievement_Tracker
             // 
             this.focusAchievementTitleLabel.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.focusAchievementTitleLabel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.focusAchievementTitleLabel.Location = new System.Drawing.Point(68, 11);
+            this.focusAchievementTitleLabel.Location = new System.Drawing.Point(98, 15);
             this.focusAchievementTitleLabel.Name = "focusAchievementTitleLabel";
-            this.focusAchievementTitleLabel.Size = new System.Drawing.Size(218, 55);
+            this.focusAchievementTitleLabel.Size = new System.Drawing.Size(188, 81);
             this.focusAchievementTitleLabel.TabIndex = 6;
             // 
             // notificationsGroupBox
@@ -740,7 +739,6 @@ namespace Retro_Achievement_Tracker
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.focusStreamLabelsCheckBox);
-            this.groupBox4.Controls.Add(this.alertsStreamLabelsCheckBox);
             this.groupBox4.Controls.Add(this.lastFiveStreamLabelsCheckBox);
             this.groupBox4.Controls.Add(this.gameInfoStreamLabelsCheckBox);
             this.groupBox4.Controls.Add(this.statsStreamLabelsCheckBox);
@@ -748,7 +746,7 @@ namespace Retro_Achievement_Tracker
             this.groupBox4.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.groupBox4.Location = new System.Drawing.Point(294, 77);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(291, 55);
+            this.groupBox4.Size = new System.Drawing.Size(291, 32);
             this.groupBox4.TabIndex = 10028;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Stream Labels";
@@ -759,25 +757,12 @@ namespace Retro_Achievement_Tracker
             this.focusStreamLabelsCheckBox.Enabled = false;
             this.focusStreamLabelsCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.focusStreamLabelsCheckBox.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.focusStreamLabelsCheckBox.Location = new System.Drawing.Point(203, 16);
+            this.focusStreamLabelsCheckBox.Location = new System.Drawing.Point(222, 12);
             this.focusStreamLabelsCheckBox.Name = "focusStreamLabelsCheckBox";
             this.focusStreamLabelsCheckBox.Size = new System.Drawing.Size(61, 18);
             this.focusStreamLabelsCheckBox.TabIndex = 10029;
             this.focusStreamLabelsCheckBox.Text = "Focus";
             this.focusStreamLabelsCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // alertsStreamLabelsCheckBox
-            // 
-            this.alertsStreamLabelsCheckBox.AutoSize = true;
-            this.alertsStreamLabelsCheckBox.Enabled = false;
-            this.alertsStreamLabelsCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.alertsStreamLabelsCheckBox.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.alertsStreamLabelsCheckBox.Location = new System.Drawing.Point(105, 16);
-            this.alertsStreamLabelsCheckBox.Name = "alertsStreamLabelsCheckBox";
-            this.alertsStreamLabelsCheckBox.Size = new System.Drawing.Size(68, 18);
-            this.alertsStreamLabelsCheckBox.TabIndex = 10028;
-            this.alertsStreamLabelsCheckBox.Text = "Alerts";
-            this.alertsStreamLabelsCheckBox.UseVisualStyleBackColor = true;
             // 
             // lastFiveStreamLabelsCheckBox
             // 
@@ -785,7 +770,7 @@ namespace Retro_Achievement_Tracker
             this.lastFiveStreamLabelsCheckBox.Enabled = false;
             this.lastFiveStreamLabelsCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lastFiveStreamLabelsCheckBox.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.lastFiveStreamLabelsCheckBox.Location = new System.Drawing.Point(105, 31);
+            this.lastFiveStreamLabelsCheckBox.Location = new System.Drawing.Point(148, 12);
             this.lastFiveStreamLabelsCheckBox.Name = "lastFiveStreamLabelsCheckBox";
             this.lastFiveStreamLabelsCheckBox.Size = new System.Drawing.Size(68, 18);
             this.lastFiveStreamLabelsCheckBox.TabIndex = 10027;
@@ -799,11 +784,11 @@ namespace Retro_Achievement_Tracker
             this.gameInfoStreamLabelsCheckBox.Enabled = false;
             this.gameInfoStreamLabelsCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameInfoStreamLabelsCheckBox.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.gameInfoStreamLabelsCheckBox.Location = new System.Drawing.Point(10, 31);
+            this.gameInfoStreamLabelsCheckBox.Location = new System.Drawing.Point(85, 12);
             this.gameInfoStreamLabelsCheckBox.Name = "gameInfoStreamLabelsCheckBox";
-            this.gameInfoStreamLabelsCheckBox.Size = new System.Drawing.Size(89, 18);
+            this.gameInfoStreamLabelsCheckBox.Size = new System.Drawing.Size(54, 18);
             this.gameInfoStreamLabelsCheckBox.TabIndex = 10026;
-            this.gameInfoStreamLabelsCheckBox.Text = "Game Info";
+            this.gameInfoStreamLabelsCheckBox.Text = "Info";
             this.gameInfoStreamLabelsCheckBox.UseVisualStyleBackColor = true;
             this.gameInfoStreamLabelsCheckBox.CheckedChanged += new System.EventHandler(this.gameInfoStreamLabelsCheckBox_CheckedChanged);
             // 
@@ -813,7 +798,7 @@ namespace Retro_Achievement_Tracker
             this.statsStreamLabelsCheckBox.Enabled = false;
             this.statsStreamLabelsCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statsStreamLabelsCheckBox.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.statsStreamLabelsCheckBox.Location = new System.Drawing.Point(10, 16);
+            this.statsStreamLabelsCheckBox.Location = new System.Drawing.Point(11, 12);
             this.statsStreamLabelsCheckBox.Name = "statsStreamLabelsCheckBox";
             this.statsStreamLabelsCheckBox.Size = new System.Drawing.Size(61, 18);
             this.statsStreamLabelsCheckBox.TabIndex = 10025;
@@ -2251,7 +2236,6 @@ namespace Retro_Achievement_Tracker
         private Button focusAchievementButtonLeft;
         private Label ratioLabel;
         private CheckBox focusStreamLabelsCheckBox;
-        private CheckBox alertsStreamLabelsCheckBox;
         private Label truePointsLabel;
         private OpenFileDialog openFileDialog1;
         private ColorDialog colorDialog1;

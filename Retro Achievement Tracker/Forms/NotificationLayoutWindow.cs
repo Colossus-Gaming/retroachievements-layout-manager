@@ -31,7 +31,6 @@ namespace Retro_Achievement_Tracker.Forms
             stopwatch = new Stopwatch();
 
             RunNotificationTask();
-            this.writeAlertStreamLabels = writeAlertStreamLabels;
         }
 
         public void FireNotifications()
@@ -74,11 +73,6 @@ namespace Retro_Achievement_Tracker.Forms
                                     {
                                         SendAchievementNotification(notificationRequest.Achievement);
 
-                                        if (Settings.Default.stream_labels_notifications)
-                                        {
-                                            this.writeAlertStreamLabels(notificationRequest.Achievement.Title, notificationRequest.Achievement.Description, notificationRequest.Achievement.Points);
-                                        }
-
                                         stopwatch = Stopwatch.StartNew();
 
                                         SetAchievementIn(notificationRequest.CustomIn);
@@ -89,11 +83,6 @@ namespace Retro_Achievement_Tracker.Forms
                                     else if (notificationRequest.GameSummary != null && notificationRequest.GameAchievementSummary != null)
                                     {
                                         SendMasteryNotification(notificationRequest.GameSummary, notificationRequest.GameAchievementSummary);
-
-                                        if (Settings.Default.stream_labels_notifications)
-                                        {
-                                            this.writeAlertStreamLabels(notificationRequest.GameSummary.Title, MakeMasteryDescription(notificationRequest.GameAchievementSummary), 0);
-                                        }
 
                                         stopwatch = Stopwatch.StartNew();
 
@@ -111,11 +100,9 @@ namespace Retro_Achievement_Tracker.Forms
                         if (stopwatch.ElapsedMilliseconds > delayInMilli)
                         {
                             HideNotifications();
-                            if (Settings.Default.stream_labels_notifications)
-                            {
-                                this.writeAlertStreamLabels("", "", 0);
-                            }
+
                             stopwatch.Stop();
+
                             delayInMilli = 0;
                         }
                         else
@@ -126,13 +113,6 @@ namespace Retro_Achievement_Tracker.Forms
                 }
             }, tokenSource2.Token);
         }
-        private string MakeMasteryDescription(GameAchievementSummary gameAchievementSummary)
-        {
-            return "Cheevos: " + gameAchievementSummary.NumPossibleAchievements + "/" + gameAchievementSummary.NumPossibleAchievements
-                + Environment.NewLine
-                + "Points: " + gameAchievementSummary.PossibleScore + "/" + gameAchievementSummary.PossibleScore;
-        }
-
         private NotificationRequest NotificationRequestDequeue()
         {
             NotificationRequest notificationRequest = NotificationRequests[0];
@@ -339,7 +319,6 @@ namespace Retro_Achievement_Tracker.Forms
         }
 
         public CefSharp.WinForms.ChromiumWebBrowser chromiumWebBrowser;
-        private Action<string, string, int> writeAlertStreamLabels;
 
         public class NotificationRequest
         {

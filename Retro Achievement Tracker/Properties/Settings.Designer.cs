@@ -950,18 +950,6 @@ namespace Retro_Achievement_Tracker.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool stream_labels_notifications {
-            get {
-                return ((bool)(this["stream_labels_notifications"]));
-            }
-            set {
-                this["stream_labels_notifications"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool stream_labels_last_five {
             get {
                 return ((bool)(this["stream_labels_last_five"]));
