@@ -2310,9 +2310,11 @@ namespace Retro_Achievement_Tracker
                 {
                     try
                     {
-                        //You can use Download Update dialog used by AutoUpdater.NET to download the update.
+                        if (AutoUpdater.DownloadUpdate(args))
+                        {
+                            this.Close();
+                        }
 
-                        AutoUpdater.DownloadUpdate(args);
                     }
                     catch (Exception exception)
                     {
