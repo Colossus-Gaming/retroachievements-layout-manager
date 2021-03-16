@@ -6,98 +6,174 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows.Forms;
 
 namespace Retro_Achievement_Tracker
 {
     public partial class LastFiveLayoutWindow : Form
     {
-        private List<Achievement> achievementsQueue;
-        private Stopwatch stopwatch;
-        private readonly CancellationTokenSource tokenSource2 = new CancellationTokenSource();
+        public List<Achievement> CurrentAchievements;
+        private Stopwatch longActionStopwatch;
+        private System.Timers.Timer timer;
+        private Queue<Action> actions;
         public LastFiveLayoutWindow()
         {
-            this.ClientSize = new Size(1000, 700);
+            this.ClientSize = new Size(585, 700);
+
             SetupBrowser();
+
             this.Name = "RA Tracker - Last Five Achievements";
             this.Text = "RA Tracker - Last Five Achievements";
-            achievementsQueue = new List<Achievement>();
-            this.stopwatch = new Stopwatch();
+
+            CurrentAchievements = new List<Achievement>();
+            actions = new Queue<Action>();
+
+            this.timer = new System.Timers.Timer(300);
+            this.timer.Elapsed += new ElapsedEventHandler(ExecuteActions);
+            this.timer.AutoReset = true;
+            this.timer.Enabled = true;
+
+            this.longActionStopwatch = new Stopwatch();
+            this.longActionStopwatch.Start();
         }
+
         public async void SetFontColor(string hexCode)
         {
             await ExecuteScript("setFontColor(\"" + hexCode + "\");");
         }
+
         public async void SetFontFamily(string fontName)
         {
             await ExecuteScript("setFontFamily(\"" + fontName.Replace("'", "\\'") + "\");");
         }
+
         public async void SetFontOutline(string hexCode, int size)
         {
             await ExecuteScript("setFontOutline(\"" + hexCode + " " + size + "px\");");
         }
+
         public async void SetBackgroundColor(string hexCode)
         {
             await ExecuteScript("setBackgroundColor(\"" + hexCode + "\");");
         }
-        public async void ClearAchievements()
+        public async void PromptUserInput()
         {
-            await ExecuteScript("clearAchievements();");
+            await ExecuteScript("promptUser();");
         }
-        public async void AddAchievement(Achievement achievement)
+        public async void EnableBorder()
         {
-            await ExecuteScript("addAchievement(\"" + achievement.Title.Replace("\"", "\\\"") + "\"," +
-                                       "\"https://retroachievements.org/Badge/" + achievement.BadgeNumber + ".png\",\"" +
-                                       achievement.Description.Replace("\"", "\\\"") + "\",\"" + achievement.Points + "\");");
+            await ExecuteScript("enableBorder();");
         }
-        public void EnqueueAchievement(Achievement achievement)
+        public async void DisableBorder()
         {
-            achievementsQueue.Add(achievement);
+            await ExecuteScript("disableBorder();");
+        }
+        public async void ShowPoints()
+        {
+            await ExecuteScript("showPoints();");
+        }
+        public async void HidePoints()
+        {
+            await ExecuteScript("hidePoints();");
+        }
+        private async void ClearList()
+        {
+            longActionStopwatch.Restart();
 
-            if (!stopwatch.IsRunning)
+            CurrentAchievements = new List<Achievement>();
+
+            await ExecuteScript("clearList();");
+        }
+
+        private async void AddAchievement(Achievement achievement)
+        {
+            await ExecuteScript("addToList(\"" + achievement.Title.Replace("\"", "\\\"") + "\"," +
+                                       "\"https://retroachievements.org/Badge/" + achievement.BadgeNumber + ".png\",\"" +
+                                       achievement.Description.Replace("\"", "\\\"") + "\",\"" + achievement.Points + "\",\"" +
+                                       achievement.DateEarned.ToString() + "\", \"" + achievement.Id + "\");");
+        }
+
+        private async void AnimateAchievement(int id, int position)
+        {
+            await ExecuteScript("setAnimationForAchievement(" + id + "," + position + ");");
+        }
+
+        public void AnimateAchievements()
+        {
+            for (int i = 0; i < CurrentAchievements.Count; i++)
             {
-                AppendAchievements();
+                int id = CurrentAchievements[i].Id;
+                int position = CurrentAchievements.Count - i - 1;
+
+                actions.Enqueue(() =>
+                {
+                    AnimateAchievement(id, position);
+                });
+            }
+            while (CurrentAchievements.Count > 5)
+            {
+                actions.Enqueue(() =>
+                {
+                    RemoveAchievement(CurrentAchievements[0].Id);
+
+                    CurrentAchievements.RemoveAt(0);
+                });
             }
         }
-        private Achievement DequeueAchievement()
+
+        public async void ShowList()
         {
-            Achievement achievement = achievementsQueue[0];
+            longActionStopwatch.Restart();
 
-            achievementsQueue.Remove(achievement);
-
-            return achievement;
+            await ExecuteScript("showList();");
         }
-        private async void AppendAchievements()
+
+        private async void RemoveAchievement(int id)
         {
-            long delayInMilli = 0;
+            await ExecuteScript("removeAchievement(\"" + id + "\");");
+        }
 
-            stopwatch = Stopwatch.StartNew();
-
-            while (achievementsQueue.Count > 0 || stopwatch.IsRunning)
+        public void QueueShowList()
+        {
+            actions.Enqueue(() =>
             {
-                if (tokenSource2.Token.IsCancellationRequested)
-                {
-                    tokenSource2.Token.ThrowIfCancellationRequested();
-                }
+                ShowList();
+            });
+        }
 
-                if (!stopwatch.IsRunning && achievementsQueue.Count > 0 && !this.IsDisposed)
-                {
-                    AddAchievement(DequeueAchievement());
-                }
-                else
-                {
-                    if (stopwatch.ElapsedMilliseconds > delayInMilli)
-                    {
-                        stopwatch.Stop();
+        public void QueueClearList()
+        {
+            actions.Enqueue(() =>
+            {
+                ClearList();
+            });
+        }
 
-                        delayInMilli = 0;
-                    }
-                    else
-                    {
-                        await Task.Delay(400);
-                    }
+
+        public void EnqueueAchievement(Achievement achievement)
+        {
+            if (!CurrentAchievements.Contains(achievement))
+            {
+                CurrentAchievements.Add(achievement);
+
+                actions.Enqueue(() =>
+                {
+                    AddAchievement(achievement);
+                });
+            }
+        }
+
+        private void ExecuteActions(object sender, EventArgs e)
+        {
+            if (longActionStopwatch.ElapsedMilliseconds > 1600)
+            {
+                longActionStopwatch.Stop();
+
+                if (actions.Count > 0)
+                {
+                    actions.Dequeue().Invoke();
                 }
             }
         }

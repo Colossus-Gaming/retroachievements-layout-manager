@@ -73,14 +73,33 @@
             document.getElementById("focus-achievement").style.backgroundColor = value;
         }
 
+        function enableBorder() {
+            showBorderBool = true;
+
+            document.getElementById("focus-achievement").style.backgroundImage = "url('disk://background')";
+
+            adjustFont();
+        }
+
+        function disableBorder() {
+            showBorderBool = false;
+
+            document.getElementById("focus-achievement").style.backgroundImage = "";
+
+            adjustFont();
+        }
+
         function showPoints() {
             showPointsBool = true;
+
             $("#focus-achievement-points").fadeIn();
+
             adjustFont();
         }
 
         function hidePoints() {
             showPointsBool = false;
+
             $("#focus-achievement-points").hide();
         }
 
@@ -193,7 +212,6 @@
             left: 20px;
             width: 1000px;
             height: 235px;
-            background-image: url('disk://background');
             background-repeat: no-repeat;
             background-color: #cccccc;
             background-size: cover;
@@ -229,6 +247,16 @@
             height: 145px;
         }
 
+        #description-span {
+            display: table-cell;
+            position: relative;
+            vertical-align: top;
+            width: 975px;
+            left: 10px;
+            top: 15px;
+            overflow: hidden;
+        }
+
         .has-font {
             font-size: 52px;
             color: black;
@@ -259,7 +287,7 @@
     <div id="container" style="background: magenta; width: 1925px; height: 1085px; top: -5px; left: -5px;">
         <div id="focus-achievement">
             <div id="focus-achievement-name" class="has-font"></div>
-            <span id="description-span" style="display: table-cell; position: relative; vertical-align: top; width: 975px; left: 10px; top: 15px; overflow: hidden;">
+            <span id="description-span">
                 <img id="focus-achievement-badge" />
                 <a id="focus-achievement-description" class="has-font"></a>
             </span>

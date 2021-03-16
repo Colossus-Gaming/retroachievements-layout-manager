@@ -121,18 +121,6 @@ namespace Retro_Achievement_Tracker.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("52")]
-        public int stats_font_size {
-            get {
-                return ((int)(this["stats_font_size"]));
-            }
-            set {
-                this["stats_font_size"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool stats_font_outline_enabled {
             get {
@@ -1220,6 +1208,66 @@ namespace Retro_Achievement_Tracker.Properties {
             }
             set {
                 this["focus_background_color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool focus_border_enable {
+            get {
+                return ((bool)(this["focus_border_enable"]));
+            }
+            set {
+                this["focus_border_enable"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool notifications_border_enable {
+            get {
+                return ((bool)(this["notifications_border_enable"]));
+            }
+            set {
+                this["notifications_border_enable"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool last_five_border_enable {
+            get {
+                return ((bool)(this["last_five_border_enable"]));
+            }
+            set {
+                this["last_five_border_enable"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool notifications_points_enable {
+            get {
+                return ((bool)(this["notifications_points_enable"]));
+            }
+            set {
+                this["notifications_points_enable"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool last_five_points_enable {
+            get {
+                return ((bool)(this["last_five_points_enable"]));
+            }
+            set {
+                this["last_five_points_enable"] = value;
             }
         }
     }

@@ -31,6 +31,14 @@ namespace Retro_Achievement_Tracker
         {
             await ExecuteScript("hideFocus();");
         }
+        public async void EnableBorder()
+        {
+            await ExecuteScript("enableBorder();");
+        }
+        public async void DisableBorder()
+        {
+            await ExecuteScript("disableBorder();");
+        }
         public async void ShowPoints()
         {
             await ExecuteScript("showPoints();");
@@ -43,12 +51,10 @@ namespace Retro_Achievement_Tracker
         {
             await ExecuteScript("setFontColor(\"" + hexCode + "\");");
         }
-
         public async void SetFontFamily(string fontName)
         {
             await ExecuteScript("setFontFamily(\"" + fontName + "\");");
         }
-
         public async void SetFontOutline(string hexCode, int size)
         {
             await ExecuteScript("setFontOutline(\"" + hexCode + " " + size + "px\");");
@@ -56,7 +62,7 @@ namespace Retro_Achievement_Tracker
         public async void SetBackgroundColor(string hexCode)
         {
             await ExecuteScript("setBackgroundColor(\"" + hexCode + "\");");
-        }
+        }        
         protected async Task ExecuteScript(string script)
         {
             if (this.Visible)

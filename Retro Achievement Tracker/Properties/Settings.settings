@@ -26,9 +26,6 @@
     <Setting Name="stats_font_family_name" Type="System.String" Scope="User">
       <Value Profile="(Default)">Calibri</Value>
     </Setting>
-    <Setting Name="stats_font_size" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">52</Value>
-    </Setting>
     <Setting Name="stats_font_outline_enabled" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
@@ -301,6 +298,21 @@
     </Setting>
     <Setting Name="focus_background_color" Type="System.String" Scope="User">
       <Value Profile="(Default)">#FF00FF</Value>
+    </Setting>
+    <Setting Name="focus_border_enable" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="notifications_border_enable" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="last_five_border_enable" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="notifications_points_enable" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="last_five_points_enable" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>

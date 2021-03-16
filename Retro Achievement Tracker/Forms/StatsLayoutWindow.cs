@@ -13,7 +13,7 @@ namespace Retro_Achievement_Tracker
     {
         public StatsLayoutWindow()
         {
-            this.ClientSize = new Size(1000, 700);
+            this.ClientSize = new Size(900, 600);
             SetupBrowser();
             this.Name = "RA Tracker - Stats";
             this.Text = "RA Tracker - Stats";
@@ -201,14 +201,6 @@ namespace Retro_Achievement_Tracker
         {
             await ExecuteScript("setFontOutline(\"" + hexCode + " " + size + "px\");");
         }
-        public async void SetFontSize(int size)
-        {
-            await ExecuteScript("setFontSize(" + size + ");");
-        }
-        public async void SetBackgroundColor(string hexCode)
-        {
-            await ExecuteScript("setBackgroundColor(\"" + hexCode + "\");");
-        }
         protected async Task ExecuteScript(string script)
         {
             if (this.Visible)
@@ -252,7 +244,6 @@ namespace Retro_Achievement_Tracker
             this.Icon = ((Icon)(resources.GetObject("$this.Icon")));
             this.Name = "StatsLayoutWindow";
             this.ResumeLayout(false);
-
         }
     }
 }

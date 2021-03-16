@@ -12,6 +12,8 @@
         var masteryAnimationIn = "";
         var masteryAnimationOut = "";
 
+        var showPointsBool = false;
+
         function adjustAchievementFont() {
             var nameValue = 100;
             var descriptionValue = 100;
@@ -122,6 +124,33 @@
             $("#achievement-pop-video").fadeOut();
             $("#mastery-pop-video").fadeOut();
             $("#user-prompt").fadeIn();
+        }
+
+        function enableBorder() {
+            document.getElementById("achievement-pop").style.backgroundImage = "url('disk://background')";
+            document.getElementById("mastery-pop").style.backgroundImage = "url('disk://background')";
+
+            adjustMasteryFont();
+            adjustAchievementFont();
+        }
+
+        function disableBorder() {
+            document.getElementById("achievement-pop").style.backgroundImage = "";
+            document.getElementById("mastery-pop").style.backgroundImage = "";
+
+            adjustMasteryFont();
+            adjustAchievementFont();
+        }
+
+        function showPoints() {
+            showPointsBool = true;
+            $("#achievement-pop-points").fadeIn();
+            adjustAchievementFont();
+        }
+
+        function hidePoints() {
+            showPointsBool = false;
+            $("#achievement-pop-points").hide();
         }
 
         function enableEditModeAchievement() {
@@ -573,7 +602,6 @@
             left: 200px;
             width: 900px;
             height: 212px;
-            background-image: url('disk://background');
             background-repeat: no-repeat;
             background-color: #cccccc;
             background-size: cover;

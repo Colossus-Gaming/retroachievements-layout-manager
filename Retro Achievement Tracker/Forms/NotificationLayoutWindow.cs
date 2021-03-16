@@ -126,7 +126,6 @@ namespace Retro_Achievement_Tracker.Forms
                 }
             }, tokenSource2.Token);
         }
-
         private string MakeMasteryDescription(GameAchievementSummary gameAchievementSummary)
         {
             return "Cheevos: " + gameAchievementSummary.NumPossibleAchievements + "/" + gameAchievementSummary.NumPossibleAchievements
@@ -183,12 +182,26 @@ namespace Retro_Achievement_Tracker.Forms
                                                 "\"" + gameAchievementSummary.NumPossibleAchievements + "\"," +
                                                 "\"" + gameAchievementSummary.PossibleScore + "\");");
         }
-
         public async void PromptUserInput()
         {
             await ExecuteScript("promptUser();");
         }
-
+        public async void EnableBorder()
+        {
+            await ExecuteScript("enableBorder();");
+        }
+        public async void DisableBorder()
+        {
+            await ExecuteScript("disableBorder();");
+        }
+        public async void ShowPoints()
+        {
+            await ExecuteScript("showPoints();");
+        }
+        public async void HidePoints()
+        {
+            await ExecuteScript("hidePoints();");
+        }
         public async void EnableAchievementEdit()
         {
             await ExecuteScript("enableEditModeAchievement();");

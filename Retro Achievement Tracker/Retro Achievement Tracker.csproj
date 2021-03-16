@@ -288,6 +288,7 @@
     <Content Include="Resources\Dancarnate_Logo.png" />
     <Resource Include="Resources\GameInfo.html" />
     <Resource Include="Resources\LastFive.html" />
+    <None Include="Resources\notification-background1.png" />
     <Content Include="video\achievement-notification.webm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
