@@ -131,7 +131,7 @@
 
             if (Rank != null)
             {
-                if (Rank.Type == JTokenType.String)
+                if (Rank.Type == JTokenType.Integer)
                 {
                     UserSummary.Rank = Convert.ToInt32(Rank);
                 }
