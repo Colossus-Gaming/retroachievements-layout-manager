@@ -1,8 +1,6 @@
 ﻿using AutoUpdaterDotNET;
 using CefSharp;
 using HtmlAgilityPack;
-using MediaToolkit;
-using MediaToolkit.Model;
 using Retro_Achievement_Tracker.Forms;
 using Retro_Achievement_Tracker.Models;
 using Retro_Achievement_Tracker.Properties;
@@ -20,2278 +18,48 @@ namespace Retro_Achievement_Tracker
 {
     public partial class MainPage : Form, INotifyPropertyChanged
     {
-        private static UserSummary _userSummary;
-        private GameProgress _gameProgress;
-        private List<Achievement> _mostRecentAchievements = new List<Achievement>();
+        private StreamLabelManager StreamLabelManager = new StreamLabelManager();
 
         private bool NotBooting;
+        public UserSummary UserSummary { get; set; }
+        private GameProgress GameProgress { get; set; }
 
-        private int _rank = 0;
-        private int _points = 0;
-        private int _awards = 0;
-        private int _truePoints = 0;
-        private float _ratio = 0.0f;
-
-        private int _gameAchievmentsEarned;
-        private int _gamePointsEarned;
-        private int _gameTruePointsEarned;
-        private float _gameRatio = 0.0f;
-
-        private string _gameTitle;
-        private string _gameConsole;
-        private string _gameDeveloper;
-        private string _gamePublisher;
-        private string _gameGenre;
-        private string _gameReleaseDate;
-        public UserSummary UserSummary
-        {
-            get
-            {
-                return _userSummary;
-            }
-            set
-            {
-                if (value == null)
-                {
-                    DegradeConnectivity();
-
-                    return;
-                }
-                RAErrors = 0;
-
-                _userSummary = value;
-            }
-        }
-        private GameProgress CurrentGame
-        {
-            get
-            {
-                return _gameProgress;
-            }
-            set
-            {
-                if (value == null || value.Id == 0)
-                {
-                    DegradeConnectivity();
-
-                    return;
-                }
-                RAErrors = 0;
-
-                bool gameChange = _gameProgress == null || (_gameProgress != null && value.Id != _gameProgress.Id);
-
-                _gameProgress = value;
-
-                OldUnlockedAchievements = UnlockedAchievements.ToList();
-
-                Rank = _userSummary.Rank;
-                Points = _userSummary.TotalPoints;
-                TruePoints = _userSummary.TotalTruePoints;
-                Ratio = (float)TruePoints / (float)Points;
-
-                SetAwardCount();
-
-                GameTotalPoints = _userSummary.GameAchievementSummaries[0].PossibleScore;
-                GameTotalTruePoints = _gameProgress.Achievements.Sum(achievement => achievement.TrueRatio);
-                GameTotalAchievements = _userSummary.GameAchievementSummaries[0].NumPossibleAchievements;
-
-                GameEarnedPoints = _userSummary.GameAchievementSummaries[0].ScoreAchieved;
-                GameEarnedTruePoints = _gameProgress.Achievements.Where(achievement => achievement.DateEarned.HasValue).Sum(achievement => achievement.TrueRatio);
-                GameEarnedAchievements = _userSummary.GameAchievementSummaries[0].NumAchievedHardcore;
-
-                GameRatio = (float)GameTotalTruePoints / (float)GameTotalPoints;
-
-                GameInfoTitle = _gameProgress.Title;
-                GameInfoConsoleValue = _gameProgress.ConsoleName;
-                GameInfoDeveloperValue = _gameProgress.Developer;
-                GameInfoPublisherValue = _gameProgress.Publisher;
-                GameInfoGenreValue = _gameProgress.Genre;
-                GameInfoReleaseDateValue = _gameProgress.Released;
-
-                SortAchievements();
-
-                if (gameChange)
-                {
-                    UpdateTimerLabel("Changing game to [" + CurrentGame.Id + "] " + CurrentGame.Title);
-
-                    CurrentlyFocusedAchievement = CurrentlyViewingAchievement;
-
-                    if (LockedAchievements.Count > 0)
-                    {
-                        CurrentlyFocusedAchievement = LockedAchievements[0];
-                        CurrentlyViewingAchievement = LockedAchievements[0];
-
-                        SetFocusButton_Click(null, null);
-                    }
-                    if (StreamLabelsGameInfoEnable)
-                    {
-                        WriteGameInfoStreamLabels();
-                    }
-                    if (StreamLabelsLastFiveEnable)
-                    {
-                        WriteLastFiveStreamLabels();
-                    }
-                    if (StreamLabelsStatsEnable)
-                    {
-                        WriteStatsStreamLabels();
-                    }
-                    if (StatsWindow != null && !StatsWindow.IsDisposed)
-                    {
-                        StatsWindow.SetCompletedValue(GameTotalAchievements == 0 ? 0 : Convert.ToInt32((Convert.ToDecimal(GameEarnedAchievements) / Convert.ToDecimal(GameTotalAchievements)) * 200));
-                    }
-                }
-                else if (UnlockedAchievements.Count > 0)
-                {
-                    List<Achievement> achievementNotificationList = UnlockedAchievements
-                    .FindAll(unlockedAchievement => !OldUnlockedAchievements.Contains(unlockedAchievement))
-                    .ToList();
-
-                    if (achievementNotificationList.Count > 0)
-                    {
-                        UpdateTimerLabel("CHEEVOS POP!");
-
-                        achievementNotificationList.Sort();
-
-                        foreach (Achievement achievement in achievementNotificationList)
-                        {
-                            NotificationsWindow.EnqueueAchievementNotification(achievement,
-                                Settings.Default.notification_custom_achievement_enable ? GetVideoDuration(CustomAchievementFile) : 7000,
-                                Settings.Default.notification_custom_achievement_enable ? CustomAchievementIn : 0,
-                                Settings.Default.notification_custom_achievement_enable ? CustomAchievementOut : 5200);
-
-                            LastFiveWindow.EnqueueAchievement(achievement);
-                        }
-                        LastFiveWindow.AnimateAchievements();
-
-                        if (achievementNotificationList.Contains(CurrentlyFocusedAchievement))
-                        {
-                            FocusWindow.SetFocus(CurrentlyFocusedAchievement);
-
-                            if (StreamLabelsFocusEnable)
-                            {
-                                WriteFocusStreamLabels();
-                            }
-                        }
-                        if (UnlockedAchievements.Count == CurrentGame.Achievements.Count && OldUnlockedAchievements.Count < CurrentGame.Achievements.Count)
-                        {
-                            FocusWindow.HideFocus();
-
-                            ClearFocusStreamLabels();
-
-                            NotificationsWindow.EnqueueMasteryNotification(UserSummary.GameSummaries[0],
-                                UserSummary.GameAchievementSummaries[0],
-                                Settings.Default.notification_custom_mastery_enable ? GetVideoDuration(CustomMasteryFile) : 11000,
-                                Settings.Default.notification_custom_mastery_enable ? CustomMasteryIn : 0,
-                                Settings.Default.notification_custom_mastery_enable ? CustomMasteryOut : 5200);
-                            SetAwardCount();
-                        }
-                        if (StatsWindow != null && !StatsWindow.IsDisposed)
-                        {
-                            StatsWindow.SetCompletedValue(GameTotalAchievements == 0 ? 0 : Convert.ToInt32((Convert.ToDecimal(GameEarnedAchievements) / Convert.ToDecimal(GameTotalAchievements)) * 200));
-                        }
-                        if (StreamLabelsStatsEnable)
-                        {
-                            WriteStatsStreamLabels();
-                        }
-                        NotificationsWindow.FireNotifications();
-
-                    }
-                }
-                UserAndGameTimerCounter = 6;
-                UserAndGameUpdateTimer.Start();
-            }
-        }
-        public int Rank
-        {
-            get
-            {
-                return _rank;
-            }
-            set
-            {
-                if (_rank != value)
-                {
-                    StatsWindow.SetRank(value);
-                    if (StreamLabelsStatsEnable)
-                    {
-                        WriteStatsStreamLabels();
-                    }
-                }
-                _rank = value;
-
-                OnPropertyChanged("Rank");
-            }
-        }
-        public int Points
-        {
-            get
-            {
-                return _points;
-            }
-            set
-            {
-                if (_points != value)
-                {
-                    StatsWindow.SetPoints(value);
-                    if (StreamLabelsStatsEnable)
-                    {
-                        WriteStatsStreamLabels();
-                    }
-                }
-                _points = value;
-
-                OnPropertyChanged("Points");
-            }
-        }
-        public int TruePoints
-        {
-            get
-            {
-                return _truePoints;
-            }
-            set
-            {
-                if (_truePoints != value)
-                {
-                    StatsWindow.SetTruePoints(value);
-                    if (StreamLabelsStatsEnable)
-                    {
-                        WriteStatsStreamLabels();
-                    }
-                }
-                _truePoints = value;
-
-                OnPropertyChanged("TruePoints");
-            }
-        }
-        public float Ratio
-        {
-            get
-            {
-                return _ratio;
-            }
-            set
-            {
-                if (_ratio != value)
-                {
-                    StatsWindow.SetRatio(value);
-                    if (StreamLabelsStatsEnable)
-                    {
-                        WriteStatsStreamLabels();
-                    }
-                }
-                _ratio = value;
-
-                OnPropertyChanged("Ratio");
-            }
-        }
-        public int Awards
-        {
-            get
-            {
-                return _awards;
-            }
-            set
-            {
-                if (_awards != value)
-                {
-
-                    if (StatsWindow != null && !StatsWindow.IsDisposed && !StatsWindow.chromiumWebBrowser.IsLoading)
-                    {
-                        StatsWindow.SetAwards(value);
-                    }
-                }
-                if (StreamLabelsStatsEnable)
-                {
-                    WriteStatsStreamLabels();
-                }
-                _awards = value;
-
-                OnPropertyChanged("Awards");
-            }
-        }
-        public string GameInfoTitle
-        {
-            get
-            {
-                return _gameTitle;
-            }
-            set
-            {
-                _gameTitle = value;
-                if (GameInfoWindow != null && !GameInfoWindow.IsDisposed)
-                {
-                    GameInfoWindow.SetTitleValue(value);
-                    if (StreamLabelsGameInfoEnable)
-                    {
-                        WriteGameInfoStreamLabels();
-                    }
-                }
-                OnPropertyChanged("GameTitle");
-            }
-        }
-        public string GameInfoConsoleValue
-        {
-            get
-            {
-                return _gameConsole;
-            }
-            set
-            {
-                _gameConsole = value;
-
-                if (GameInfoWindow != null && !GameInfoWindow.IsDisposed)
-                {
-                    GameInfoWindow.SetConsoleValue(value);
-                    if (StreamLabelsGameInfoEnable)
-                    {
-                        WriteGameInfoStreamLabels();
-                    }
-                }
-                OnPropertyChanged("ConsoleName");
-            }
-        }
-        public string GameInfoDeveloperValue
-        {
-            get
-            {
-                return _gameDeveloper;
-            }
-            set
-            {
-                _gameDeveloper = value;
-                if (GameInfoWindow != null && !GameInfoWindow.IsDisposed)
-                {
-                    GameInfoWindow.SetDeveloperValue(value);
-                    if (StreamLabelsGameInfoEnable)
-                    {
-                        WriteGameInfoStreamLabels();
-                    }
-                }
-                OnPropertyChanged("GameDeveloper");
-            }
-        }
-        public string GameInfoPublisherValue
-        {
-            get
-            {
-                return _gamePublisher;
-            }
-            set
-            {
-                _gamePublisher = value;
-                if (GameInfoWindow != null && !GameInfoWindow.IsDisposed)
-                {
-                    GameInfoWindow.SetPublisherValue(value);
-                }
-                OnPropertyChanged("GamePublisher");
-            }
-        }
-        public string GameInfoGenreValue
-        {
-            get
-            {
-                return _gameGenre;
-            }
-            set
-            {
-                _gameGenre = value;
-                if (GameInfoWindow != null && !GameInfoWindow.IsDisposed)
-                {
-                    GameInfoWindow.SetGenreValue(value);
-                    if (StreamLabelsGameInfoEnable)
-                    {
-                        WriteGameInfoStreamLabels();
-                    }
-                }
-                OnPropertyChanged("GameGenre");
-            }
-        }
-        public string GameInfoReleaseDateValue
-        {
-            get
-            {
-                return _gameReleaseDate;
-            }
-            set
-            {
-                _gameReleaseDate = value;
-                if (GameInfoWindow != null && !GameInfoWindow.IsDisposed)
-                {
-                    GameInfoWindow.SetReleaseDateValue(value);
-                }
-                OnPropertyChanged("GameReleaseDate");
-            }
-        }
-        public int GameEarnedAchievements
-        {
-            get
-            {
-                return _gameAchievmentsEarned;
-            }
-            set
-            {
-                if (_gameAchievmentsEarned != value)
-                {
-                    StatsWindow.SetGameAchievements(value, GameTotalAchievements);
-                    if (StreamLabelsStatsEnable)
-                    {
-                        WriteStatsStreamLabels();
-                    }
-                }
-                _gameAchievmentsEarned = value;
-
-                OnPropertyChanged("GameEarnedAchievements");
-            }
-        }
-        public int GameEarnedPoints
-        {
-            get
-            {
-                return _gamePointsEarned;
-            }
-            set
-            {
-                if (_gamePointsEarned != value)
-                {
-                    StatsWindow.SetGamePoints(value, GameTotalPoints);
-                    if (StreamLabelsStatsEnable)
-                    {
-                        WriteStatsStreamLabels();
-                    }
-                }
-                _gamePointsEarned = value;
-
-                OnPropertyChanged("GameEarnedPoints");
-            }
-        }
-        private int GameEarnedTruePoints
-        {
-            get
-            {
-                return _gameTruePointsEarned;
-            }
-            set
-            {
-                if (_gameTruePointsEarned != value)
-                {
-                    StatsWindow.SetGameTruePoints(value, GameTotalTruePoints);
-                    if (StreamLabelsStatsEnable)
-                    {
-                        WriteStatsStreamLabels();
-                    }
-                }
-                _gameTruePointsEarned = value;
-
-                OnPropertyChanged("GameEarnedPoints");
-            }
-        }
-        private int GameTotalAchievements { get; set; }
-        private int GameTotalPoints { get; set; }
-        private int GameTotalTruePoints { get; set; }
-        public float GameRatio
-        {
-            get
-            {
-                return _gameRatio;
-            }
-            set
-            {
-                _gameRatio = value;
-
-                if (StatsWindow != null && !StatsWindow.IsDisposed)
-                {
-                    StatsWindow.SetGameRatio(value);
-                }
-                OnPropertyChanged("GameRatio");
-            }
-        }
-        private bool CustomAchievementEnabled
-        {
-            set
-            {
-                Settings.Default.notification_custom_achievement_enable = value;
-                Settings.Default.Save();
-            }
-            get
-            {
-                return Settings.Default.notification_custom_achievement_enable;
-            }
-        }
-        private bool CustomMasteryEnabled
-        {
-            set
-            {
-                Settings.Default.notification_custom_mastery_enable = value;
-                Settings.Default.Save();
-            }
-            get
-            {
-                return Settings.Default.notification_custom_mastery_enable;
-            }
-        }
-        private int CustomAchievementX
-        {
-            set
-            {
-                Settings.Default.notification_custom_achievement_x = value;
-                Settings.Default.Save();
-
-                if (!NotificationsWindow.IsDisposed)
-                {
-                    NotificationsWindow.SetAchievementLeft(this.useCustomAchievementCheckbox.Checked ? value : -15);
-                }
-            }
-            get
-            {
-                return Settings.Default.notification_custom_achievement_x;
-            }
-        }
-        private int CustomAchievementY
-        {
-            set
-            {
-                Settings.Default.notification_custom_achievement_y = value;
-                Settings.Default.Save();
-
-                if (!NotificationsWindow.IsDisposed)
-                {
-                    NotificationsWindow.SetAchievementTop(this.useCustomAchievementCheckbox.Checked ? value : 5);
-                }
-            }
-            get
-            {
-                return Settings.Default.notification_custom_achievement_y;
-            }
-        }
-        private int CustomMasteryX
-        {
-            set
-            {
-                Settings.Default.notification_custom_mastery_x = value;
-                Settings.Default.Save();
-
-                if (!NotificationsWindow.IsDisposed)
-                {
-                    NotificationsWindow.SetMasteryLeft(this.useCustomMasteryCheckbox.Checked ? value : -15);
-                }
-            }
-            get
-            {
-                return Settings.Default.notification_custom_mastery_x;
-            }
-        }
-        private int CustomMasteryY
-        {
-            set
-            {
-                Settings.Default.notification_custom_mastery_y = value;
-                Settings.Default.Save();
-
-                if (!NotificationsWindow.IsDisposed)
-                {
-                    NotificationsWindow.SetMasteryTop(this.useCustomMasteryCheckbox.Checked ? value : 5);
-                }
-            }
-            get
-            {
-                return Settings.Default.notification_custom_mastery_y;
-            }
-        }
-        private decimal CustomAchievementScale
-        {
-            set
-            {
-                if (!NotificationsWindow.IsDisposed)
-                {
-                    NotificationsWindow.SetAchievementWidth(this.useCustomAchievementCheckbox.Checked ? Convert.ToInt32(CustomAchievementScale * GetVideoWidth(CustomAchievementFile)) : 1200);
-                }
-                Settings.Default.notification_custom_achievement_scale = value;
-                Settings.Default.Save();
-            }
-            get
-            {
-                return Settings.Default.notification_custom_achievement_scale;
-            }
-        }
-        private decimal CustomMasteryScale
-        {
-            set
-            {
-                if (!NotificationsWindow.IsDisposed)
-                {
-                    NotificationsWindow.SetMasteryWidth(this.useCustomMasteryCheckbox.Checked ? Convert.ToInt32(CustomMasteryScale * GetVideoWidth(CustomMasteryFile)) : 1200);
-                }
-                Settings.Default.notification_custom_mastery_scale = value;
-                Settings.Default.Save();
-            }
-            get
-            {
-                return Settings.Default.notification_custom_mastery_scale;
-            }
-        }
-        private int CustomAchievementIn
-        {
-            get
-            {
-                return Settings.Default.notification_custom_achievement_fade_in;
-            }
-            set
-            {
-                Settings.Default.notification_custom_achievement_fade_in = value;
-                Settings.Default.Save();
-            }
-        }
-        private int CustomAchievementOut
-        {
-            get
-            {
-                return Settings.Default.notification_custom_achievement_fade_out;
-            }
-            set
-            {
-                Settings.Default.notification_custom_achievement_fade_out = value;
-                Settings.Default.Save();
-            }
-        }
-        private int CustomMasteryIn
-        {
-            get
-            {
-                return Settings.Default.notification_custom_mastery_fade_in;
-            }
-            set
-            {
-                Settings.Default.notification_custom_mastery_fade_in = value;
-                Settings.Default.Save();
-            }
-        }
-        private int CustomMasteryOut
-        {
-            get
-            {
-                return Settings.Default.notification_custom_mastery_fade_out;
-            }
-            set
-            {
-                Settings.Default.notification_custom_mastery_fade_out = value;
-                Settings.Default.Save();
-            }
-        }
-        private AnimationDirection NotificationAchievementAnimationIn
-        {
-            get
-            {
-                switch (Settings.Default.notifications_achievement_in_animation)
-                {
-                    case "DOWN":
-                        return AnimationDirection.DOWN;
-                    case "LEFT":
-                        return AnimationDirection.LEFT;
-                    case "RIGHT":
-                        return AnimationDirection.RIGHT;
-                    case "UP":
-                        return AnimationDirection.UP;
-                }
-                return AnimationDirection.STATIC;
-            }
-            set
-            {
-                if (NotificationsWindow != null && !NotificationsWindow.IsDisposed)
-                {
-                    NotificationsWindow.SetAchievementInAnimation(value.ToString());
-                }
-                Settings.Default.notifications_achievement_in_animation = value.ToString();
-                Settings.Default.Save();
-            }
-        }
-        private AnimationDirection NotificationAchievementAnimationOut
-        {
-            get
-            {
-                switch (Settings.Default.notifications_achievement_out_animation)
-                {
-                    case "DOWN":
-                        return AnimationDirection.DOWN;
-                    case "LEFT":
-                        return AnimationDirection.LEFT;
-                    case "RIGHT":
-                        return AnimationDirection.RIGHT;
-                    case "UP":
-                        return AnimationDirection.UP;
-                }
-                return AnimationDirection.STATIC;
-            }
-            set
-            {
-                if (NotificationsWindow != null && !NotificationsWindow.IsDisposed)
-                {
-                    NotificationsWindow.SetAchievementOutAnimation(value.ToString());
-                }
-                Settings.Default.notifications_achievement_out_animation = value.ToString();
-                Settings.Default.Save();
-            }
-        }
-        private AnimationDirection NotificationMasteryAnimationIn
-        {
-            get
-            {
-                switch (Settings.Default.notifications_mastery_in_animation)
-                {
-                    case "DOWN":
-                        return AnimationDirection.DOWN;
-                    case "LEFT":
-                        return AnimationDirection.LEFT;
-                    case "RIGHT":
-                        return AnimationDirection.RIGHT;
-                    case "UP":
-                        return AnimationDirection.UP;
-                }
-                return AnimationDirection.STATIC;
-            }
-            set
-            {
-                if (NotificationsWindow != null && !NotificationsWindow.IsDisposed)
-                {
-                    NotificationsWindow.SetMasteryInAnimation(value.ToString());
-                }
-                Settings.Default.notifications_mastery_in_animation = value.ToString();
-                Settings.Default.Save();
-            }
-        }
-        private AnimationDirection NotificationMasteryAnimationOut
-        {
-            get
-            {
-                switch (Settings.Default.notifications_mastery_out_animation)
-                {
-                    case "DOWN":
-                        return AnimationDirection.DOWN;
-                    case "LEFT":
-                        return AnimationDirection.LEFT;
-                    case "RIGHT":
-                        return AnimationDirection.RIGHT;
-                    case "UP":
-                        return AnimationDirection.UP;
-                }
-                return AnimationDirection.STATIC;
-            }
-            set
-            {
-                if (NotificationsWindow != null && !NotificationsWindow.IsDisposed)
-                {
-                    NotificationsWindow.SetMasteryOutAnimation(value.ToString());
-                }
-                Settings.Default.notifications_mastery_out_animation = value.ToString();
-                Settings.Default.Save();
-            }
-        }
-        private string CustomAchievementFile
-        {
-            set
-            {
-                Settings.Default.notification_custom_achievement_file = value;
-                Settings.Default.Save();
-            }
-            get
-            {
-                if (!string.IsNullOrEmpty(Settings.Default.notification_custom_achievement_file) && !File.Exists(Settings.Default.notification_custom_achievement_file))
-                {
-                    Settings.Default.notification_custom_achievement_file = string.Empty;
-                    Settings.Default.Save();
-                    Invoke((MethodInvoker)delegate
-                    {
-                        this.useCustomAchievementCheckbox.Checked = false;
-                    });
-                }
-                return Settings.Default.notification_custom_achievement_file;
-            }
-        }
-        private string CustomMasteryFile
-        {
-            set
-            {
-                Settings.Default.notification_custom_mastery_file = value;
-                Settings.Default.Save();
-            }
-            get
-            {
-                if (!string.IsNullOrEmpty(Settings.Default.notification_custom_mastery_file) && !File.Exists(Settings.Default.notification_custom_mastery_file))
-                {
-                    Settings.Default.notification_custom_mastery_file = string.Empty;
-                    Settings.Default.Save();
-
-                    Invoke((MethodInvoker)delegate
-                    {
-                        this.useCustomMasteryCheckbox.Checked = false;
-                    });
-                }
-                return Settings.Default.notification_custom_mastery_file;
-            }
-        }
-        private string StatsRankName
-        {
-            get
-            {
-                return Settings.Default.stats_rank_name;
-            }
-            set
-            {
-                if (StatsWindow != null && !StatsWindow.IsDisposed)
-                {
-                    StatsWindow.SetRankName(value);
-                }
-                Settings.Default.stats_rank_name = value;
-                Settings.Default.Save();
-            }
-        }
-        private string StatsAwardsName
-        {
-            get
-            {
-                return Settings.Default.stats_awards_name;
-            }
-            set
-            {
-                if (StatsWindow != null && !StatsWindow.IsDisposed)
-                {
-                    StatsWindow.SetAwardsName(value);
-                }
-                Settings.Default.stats_awards_name = value;
-                Settings.Default.Save();
-            }
-        }
-        private string StatsPointsName
-        {
-            get
-            {
-                return Settings.Default.stats_points_name;
-            }
-            set
-            {
-                if (StatsWindow != null && !StatsWindow.IsDisposed)
-                {
-                    StatsWindow.SetPointsName(value);
-                }
-                Settings.Default.stats_points_name = value;
-                Settings.Default.Save();
-            }
-        }
-        private string StatsTruePointsName
-        {
-            get
-            {
-                return Settings.Default.stats_true_points_name;
-            }
-            set
-            {
-                if (StatsWindow != null && !StatsWindow.IsDisposed)
-                {
-                    StatsWindow.SetTruePointsName(value);
-                }
-                Settings.Default.stats_true_points_name = value;
-                Settings.Default.Save();
-            }
-        }
-        private string StatsRatioName
-        {
-            get
-            {
-                return Settings.Default.stats_ratio_name;
-            }
-            set
-            {
-                if (StatsWindow != null && !StatsWindow.IsDisposed)
-                {
-                    StatsWindow.SetRatioName(value);
-                }
-                Settings.Default.stats_ratio_name = value;
-                Settings.Default.Save();
-            }
-        }
-        private string StatsGameRatioName
-        {
-            get
-            {
-                return Settings.Default.stats_game_ratio_name;
-            }
-            set
-            {
-                if (StatsWindow != null && !StatsWindow.IsDisposed)
-                {
-                    StatsWindow.SetGameRatioName(value);
-                }
-                Settings.Default.stats_game_ratio_name = value;
-                Settings.Default.Save();
-            }
-        }
-        private string StatsGamePointsName
-        {
-            get
-            {
-                return Settings.Default.stats_game_points_name;
-            }
-            set
-            {
-                if (StatsWindow != null && !StatsWindow.IsDisposed)
-                {
-                    StatsWindow.SetGamePointsName(value);
-                }
-                Settings.Default.stats_game_points_name = value;
-                Settings.Default.Save();
-            }
-        }
-        private string StatsGameTruePointsName
-        {
-            get
-            {
-                return Settings.Default.stats_game_true_points_name;
-            }
-            set
-            {
-                if (StatsWindow != null && !StatsWindow.IsDisposed)
-                {
-                    StatsWindow.SetGameTruePointsName(value);
-                }
-                Settings.Default.stats_game_true_points_name = value;
-                Settings.Default.Save();
-            }
-        }
-        private string StatsGameAchievementsName
-        {
-            get
-            {
-                return Settings.Default.stats_game_achievements_name;
-            }
-            set
-            {
-                if (StatsWindow != null && !StatsWindow.IsDisposed)
-                {
-                    StatsWindow.SetGameAchievementsName(value);
-                }
-                Settings.Default.stats_game_achievements_name = value;
-                Settings.Default.Save();
-            }
-        }
-        private string GameInfoBackgroundColor
-        {
-            get
-            {
-                return Settings.Default.game_info_background_color;
-            }
-            set
-            {
-                if (GameInfoWindow != null && !GameInfoWindow.IsDisposed)
-                {
-                    GameInfoWindow.SetBackgroundColor(value);
-                }
-                Settings.Default.game_info_background_color = value;
-                Settings.Default.Save();
-            }
-        }
-        private string NotificationsBackgroundColor
-        {
-            get
-            {
-                return Settings.Default.notifications_background_color;
-            }
-            set
-            {
-                if (NotificationsWindow != null && !NotificationsWindow.IsDisposed)
-                {
-                    NotificationsWindow.SetBackgroundColor(value);
-                }
-                Settings.Default.notifications_background_color = value;
-                Settings.Default.Save();
-            }
-        }
-        private string LastFiveBackgroundColor
-        {
-            get
-            {
-                return Settings.Default.last_five_background_color;
-            }
-            set
-            {
-                if (LastFiveWindow != null && !LastFiveWindow.IsDisposed)
-                {
-                    LastFiveWindow.SetBackgroundColor(value);
-                }
-                Settings.Default.last_five_background_color = value;
-                Settings.Default.Save();
-            }
-        }
-        private string FocusBackgroundColor
-        {
-            get
-            {
-                return Settings.Default.focus_background_color;
-            }
-            set
-            {
-                if (FocusWindow != null && !FocusWindow.IsDisposed)
-                {
-                    FocusWindow.SetBackgroundColor(value);
-                }
-                Settings.Default.focus_background_color = value;
-                Settings.Default.Save();
-            }
-        }
-        private string GameInfoTitleName
-        {
-            get
-            {
-                return Settings.Default.game_info_title_name;
-            }
-            set
-            {
-                if (GameInfoWindow != null && !GameInfoWindow.IsDisposed)
-                {
-                    GameInfoWindow.SetTitleName(value);
-                }
-                Settings.Default.game_info_title_name = value;
-                Settings.Default.Save();
-            }
-        }
-        private string GameInfoConsoleName
-        {
-            get
-            {
-                return Settings.Default.game_info_console_name;
-            }
-            set
-            {
-                if (GameInfoWindow != null && !GameInfoWindow.IsDisposed)
-                {
-                    GameInfoWindow.SetConsoleName(value);
-                }
-                Settings.Default.game_info_console_name = value;
-                Settings.Default.Save();
-            }
-        }
-        private string GameInfoDeveloperName
-        {
-            get
-            {
-                return Settings.Default.game_info_developer_name;
-            }
-            set
-            {
-                if (GameInfoWindow != null && !GameInfoWindow.IsDisposed)
-                {
-                    GameInfoWindow.SetDeveloperName(value);
-                }
-                Settings.Default.game_info_developer_name = value;
-                Settings.Default.Save();
-            }
-        }
-        private string GameInfoPublisherName
-        {
-            get
-            {
-                return Settings.Default.game_info_publisher_name;
-            }
-            set
-            {
-                if (GameInfoWindow != null && !GameInfoWindow.IsDisposed)
-                {
-                    GameInfoWindow.SetPublisherName(value);
-                }
-                Settings.Default.game_info_publisher_name = value;
-                Settings.Default.Save();
-            }
-        }
-        private string GameInfoGenreName
-        {
-            get
-            {
-                return Settings.Default.game_info_genre_name;
-            }
-            set
-            {
-                if (GameInfoWindow != null && !GameInfoWindow.IsDisposed)
-                {
-                    GameInfoWindow.SetGenreName(value);
-                }
-                Settings.Default.game_info_genre_name = value;
-                Settings.Default.Save();
-            }
-        }
-        private string GameInfoReleaseDateName
-        {
-            get
-            {
-                return Settings.Default.game_info_release_date_name;
-            }
-            set
-            {
-                if (GameInfoWindow != null && !GameInfoWindow.IsDisposed)
-                {
-                    GameInfoWindow.SetReleaseDateName(value);
-                }
-                Settings.Default.game_info_release_date_name = value;
-                Settings.Default.Save();
-            }
-        }
-        private string StatsCompletedName
-        {
-            get
-            {
-                return Settings.Default.stats_completed_name;
-            }
-            set
-            {
-                if (StatsWindow != null && !StatsWindow.IsDisposed)
-                {
-                    StatsWindow.SetCompletedName(value);
-                }
-                Settings.Default.stats_completed_name = value;
-                Settings.Default.Save();
-            }
-        }
-        private bool StatsRankEnable
-        {
-            get
-            {
-                return Settings.Default.stats_rank_enable;
-            }
-            set
-            {
-                if (StatsWindow != null && !StatsWindow.IsDisposed)
-                {
-                    if (value)
-                    {
-                        StatsWindow.ShowRank();
-                    }
-                    else
-                    {
-                        StatsWindow.HideRank();
-                    }
-                    Settings.Default.stats_rank_enable = value;
-                    Settings.Default.Save();
-                }
-            }
-        }
-        private bool StatsAwardsEnable
-        {
-            get
-            {
-                return Settings.Default.stats_awards_enable;
-            }
-            set
-            {
-                if (StatsWindow != null && !StatsWindow.IsDisposed)
-                {
-                    if (value)
-                    {
-                        StatsWindow.ShowAwards();
-                    }
-                    else
-                    {
-                        StatsWindow.HideAwards();
-                    }
-                }
-                Settings.Default.stats_awards_enable = value;
-                Settings.Default.Save();
-            }
-        }
-        private bool StatsPointsEnable
-        {
-            get
-            {
-                return Settings.Default.stats_points_enable;
-            }
-            set
-            {
-                if (StatsWindow != null && !StatsWindow.IsDisposed)
-                {
-                    if (value)
-                    {
-                        StatsWindow.ShowPoints();
-                    }
-                    else
-                    {
-                        StatsWindow.HidePoints();
-                    }
-                }
-                Settings.Default.stats_points_enable = value;
-                Settings.Default.Save();
-            }
-        }
-        private bool StatsTruePointsEnable
-        {
-            get
-            {
-                return Settings.Default.stats_true_points_enable;
-            }
-            set
-            {
-                if (StatsWindow != null && !StatsWindow.IsDisposed)
-                {
-                    if (value)
-                    {
-                        StatsWindow.ShowTruePoints();
-                    }
-                    else
-                    {
-                        StatsWindow.HideTruePoints();
-                    }
-                }
-                Settings.Default.stats_true_points_enable = value;
-                Settings.Default.Save();
-            }
-        }
-        private bool StatsCompletedEnable
-        {
-            get
-            {
-                return Settings.Default.stats_completed_enable;
-            }
-            set
-            {
-                if (StatsWindow != null && !StatsWindow.IsDisposed)
-                {
-                    if (value)
-                    {
-                        StatsWindow.ShowCompleted();
-                    }
-                    else
-                    {
-                        StatsWindow.HideCompleted();
-                    }
-                    Settings.Default.stats_completed_enable = value;
-                    Settings.Default.Save();
-                }
-            }
-        }
-        private bool StatsRatioEnable
-        {
-            get
-            {
-                return Settings.Default.stats_ratio_enable;
-            }
-            set
-            {
-                if (StatsWindow != null && !StatsWindow.IsDisposed)
-                {
-                    if (value)
-                    {
-                        StatsWindow.ShowRatio();
-                    }
-                    else
-                    {
-                        StatsWindow.HideRatio();
-                    }
-                    Settings.Default.stats_ratio_enable = value;
-                    Settings.Default.Save();
-                }
-            }
-        }
-        private bool StatsGameRatioEnable
-        {
-            get
-            {
-                return Settings.Default.stats_game_ratio_enable;
-            }
-            set
-            {
-                if (StatsWindow != null && !StatsWindow.IsDisposed)
-                {
-                    if (value)
-                    {
-                        StatsWindow.ShowGameRatio();
-                    }
-                    else
-                    {
-                        StatsWindow.HideGameRatio();
-                    }
-                }
-                Settings.Default.stats_game_ratio_enable = value;
-                Settings.Default.Save();
-            }
-        }
-        private bool StatsGamePointsEnable
-        {
-            get
-            {
-                return Settings.Default.stats_game_points_enable;
-            }
-            set
-            {
-                if (StatsWindow != null && !StatsWindow.IsDisposed)
-                {
-                    if (value)
-                    {
-                        StatsWindow.ShowGamePoints();
-                    }
-                    else
-                    {
-                        StatsWindow.HideGamePoints();
-                    }
-                }
-                Settings.Default.stats_game_points_enable = value;
-                Settings.Default.Save();
-            }
-        }
-        private bool StatsGameTruePointsEnable
-        {
-            get
-            {
-                return Settings.Default.stats_game_true_points_enable;
-            }
-            set
-            {
-                if (value)
-                {
-                    StatsWindow.ShowGameTruePoints();
-                }
-                else
-                {
-                    StatsWindow.HideGameTruePoints();
-                }
-                Settings.Default.stats_game_true_points_enable = value;
-                Settings.Default.Save();
-            }
-        }
-        private bool StatsGameAchievementsEnable
-        {
-            get
-            {
-                return Settings.Default.stats_game_achievements_enable;
-            }
-            set
-            {
-                if (value)
-                {
-                    StatsWindow.ShowGameAchievements();
-                }
-                else
-                {
-                    StatsWindow.HideGameAchievements();
-                }
-                Settings.Default.stats_game_achievements_enable = value;
-                Settings.Default.Save();
-            }
-        }
-        private bool GameInfoTitleEnable
-        {
-            get
-            {
-                return Settings.Default.game_info_title_enable;
-            }
-            set
-            {
-                if (GameInfoWindow != null && !GameInfoWindow.IsDisposed)
-                {
-                    if (value)
-                    {
-                        GameInfoWindow.ShowTitle();
-                    }
-                    else
-                    {
-                        GameInfoWindow.HideTitle();
-                    }
-                }
-                Settings.Default.game_info_title_enable = value;
-                Settings.Default.Save();
-            }
-        }
-        private bool GameInfoConsoleEnable
-        {
-            get
-            {
-                return Settings.Default.game_info_console_enable;
-            }
-            set
-            {
-                if (GameInfoWindow != null && !GameInfoWindow.IsDisposed)
-                {
-                    if (value)
-                    {
-                        GameInfoWindow.ShowConsole();
-                    }
-                    else
-                    {
-                        GameInfoWindow.HideConsole();
-                    }
-                }
-                Settings.Default.game_info_console_enable = value;
-                Settings.Default.Save();
-            }
-        }
-        private bool GameInfoDeveloperEnable
-        {
-            get
-            {
-                return Settings.Default.game_info_developer_enable;
-            }
-            set
-            {
-                if (GameInfoWindow != null && !GameInfoWindow.IsDisposed)
-                {
-                    if (value)
-                    {
-                        GameInfoWindow.ShowDeveloper();
-                    }
-                    else
-                    {
-                        GameInfoWindow.HideDeveloper();
-                    }
-                }
-                Settings.Default.game_info_developer_enable = value;
-                Settings.Default.Save();
-            }
-        }
-        private bool GameInfoPublisherEnable
-        {
-            get
-            {
-                return Settings.Default.game_info_publisher_enable;
-            }
-            set
-            {
-                if (GameInfoWindow != null && !GameInfoWindow.IsDisposed)
-                {
-                    if (value)
-                    {
-                        GameInfoWindow.ShowPublisher();
-                    }
-                    else
-                    {
-                        GameInfoWindow.HidePublisher();
-                    }
-                }
-                Settings.Default.game_info_publisher_enable = value;
-                Settings.Default.Save();
-            }
-        }
-        private bool GameInfoGenreEnable
-        {
-            get
-            {
-                return Settings.Default.game_info_genre_enable;
-            }
-            set
-            {
-                if (GameInfoWindow != null && !GameInfoWindow.IsDisposed)
-                {
-                    if (value)
-                    {
-                        GameInfoWindow.ShowGenre();
-                    }
-                    else
-                    {
-                        GameInfoWindow.HideGenre();
-                    }
-                }
-                Settings.Default.game_info_genre_enable = value;
-                Settings.Default.Save();
-            }
-        }
-        private bool GameInfoReleaseDateEnable
-        {
-            get
-            {
-                return Settings.Default.game_info_release_date_enable;
-            }
-            set
-            {
-                if (GameInfoWindow != null && !GameInfoWindow.IsDisposed)
-                {
-                    if (value)
-                    {
-                        GameInfoWindow.ShowReleaseDate();
-                    }
-                    else
-                    {
-                        GameInfoWindow.HideReleaseDate();
-                    }
-                }
-                Settings.Default.game_info_release_date_enable = value;
-                Settings.Default.Save();
-            }
-        }
-        private bool StreamLabelsFocusEnable
-        {
-            get
-            {
-                return Settings.Default.stream_labels_focus;
-            }
-            set
-            {
-                Settings.Default.stream_labels_focus = value;
-                Settings.Default.Save();
-            }
-        }
-        private bool StreamLabelsStatsEnable
-        {
-            get
-            {
-                return Settings.Default.stream_labels_stats;
-            }
-            set
-            {
-                Settings.Default.stream_labels_stats = value;
-                Settings.Default.Save();
-            }
-        }
-        private bool StreamLabelsGameInfoEnable
-        {
-            get
-            {
-                return Settings.Default.stream_labels_game_info;
-            }
-            set
-            {
-                Settings.Default.stream_labels_game_info = value;
-                Settings.Default.Save();
-            }
-        }
-        private bool StreamLabelsLastFiveEnable
-        {
-            get
-            {
-                return Settings.Default.stream_labels_last_five;
-            }
-            set
-            {
-                Settings.Default.stream_labels_last_five = value;
-                Settings.Default.Save();
-            }
-        }
-        private FontFamily FocusFontFamily
-        {
-            get
-            {
-                FontFamily[] familyArray = FontFamily.Families.ToArray();
-
-                foreach (FontFamily font in familyArray)
-                {
-                    if (font.Name.Equals(Settings.Default.focus_font_family_name))
-                    {
-                        return font;
-                    }
-                }
-                Settings.Default.focus_font_family_name = familyArray[0].Name;
-                Settings.Default.Save();
-
-                return familyArray[0];
-            }
-            set
-            {
-                Settings.Default.focus_font_family_name = value.Name;
-                Settings.Default.Save();
-
-                if (FocusWindow != null && !FocusWindow.IsDisposed)
-                {
-                    FocusWindow.SetFontFamily(value.Name);
-                }
-            }
-        }
-        private string FocusFontColor
-        {
-            get
-            {
-                return Settings.Default.focus_font_color_hex_code;
-            }
-            set
-            {
-                Settings.Default.focus_font_color_hex_code = value;
-                Settings.Default.Save();
-
-                if (!FocusWindow.IsDisposed)
-                {
-                    FocusWindow.SetFontColor(value);
-                }
-            }
-        }
-        private string FocusFontOutlineColor
-        {
-            get
-            {
-                return Settings.Default.focus_font_outline_color_hex;
-            }
-            set
-            {
-                Settings.Default.focus_font_outline_color_hex = value;
-                Settings.Default.Save();
-
-                if (!FocusWindow.IsDisposed)
-                {
-                    FocusWindow.SetFontOutline(value, FocusFontOutlineSize);
-                }
-            }
-        }
-        private int FocusFontOutlineSize
-        {
-            get
-            {
-                return Settings.Default.focus_font_outline_size;
-            }
-            set
-            {
-                Settings.Default.focus_font_outline_size = value;
-                Settings.Default.Save();
-
-                if (!FocusWindow.IsDisposed)
-                {
-                    FocusWindow.SetFontOutline(FocusFontOutlineColor, value);
-                }
-            }
-        }
-        private bool FocusFontOutlineEnable
-        {
-            get
-            {
-                return Settings.Default.focus_font_outline_enabled;
-            }
-            set
-            {
-                Settings.Default.focus_font_outline_enabled = value;
-                Settings.Default.Save();
-
-                if (!FocusWindow.IsDisposed)
-                {
-                    if (value)
-                    {
-                        FocusWindow.SetFontOutline(FocusFontOutlineColor, FocusFontOutlineSize);
-                    }
-                    else
-                    {
-                        FocusWindow.SetFontOutline("", 0);
-                    }
-                }
-            }
-        }
-        private bool FocusPointsEnable
-        {
-            get
-            {
-                return Settings.Default.focus_points_enable;
-            }
-            set
-            {
-                if (FocusWindow != null && !FocusWindow.IsDisposed)
-                {
-                    if (value)
-                    {
-                        FocusWindow.ShowPoints();
-                    }
-                    else
-                    {
-                        FocusWindow.HidePoints();
-                    }
-                    Settings.Default.focus_points_enable = value;
-                    Settings.Default.Save();
-                }
-            }
-        }
-        private bool FocusBorderEnable
-        {
-            get
-            {
-                return Settings.Default.focus_border_enable;
-            }
-            set
-            {
-                if (FocusWindow != null && !FocusWindow.IsDisposed)
-                {
-                    if (value)
-                    {
-                        FocusWindow.EnableBorder();
-                    }
-                    else
-                    {
-                        FocusWindow.DisableBorder();
-                    }
-                    Settings.Default.focus_border_enable = value;
-                    Settings.Default.Save();
-                }
-            }
-        }
-        private FontFamily GameInfoFontFamily
-        {
-            get
-            {
-                FontFamily[] familyArray = FontFamily.Families.ToArray();
-
-                foreach (FontFamily font in familyArray)
-                {
-                    if (font.Name.Equals(Settings.Default.game_info_font_family_name))
-                    {
-                        return font;
-                    }
-                }
-                Settings.Default.game_info_font_family_name = familyArray[0].Name;
-                Settings.Default.Save();
-
-                return familyArray[0];
-            }
-            set
-            {
-                Settings.Default.game_info_font_family_name = value.Name;
-                Settings.Default.Save();
-
-                if (GameInfoWindow != null && !GameInfoWindow.IsDisposed)
-                {
-                    GameInfoWindow.SetFontFamily(value.Name);
-                }
-            }
-        }
-        private string GameInfoFontColor
-        {
-            get
-            {
-                return Settings.Default.game_info_font_color_hex_code;
-            }
-            set
-            {
-                Settings.Default.game_info_font_color_hex_code = value;
-                Settings.Default.Save();
-
-                if (!GameInfoWindow.IsDisposed)
-                {
-                    GameInfoWindow.SetFontColor(value);
-                }
-            }
-        }
-        private string GameInfoFontOutlineColor
-        {
-            get
-            {
-                return Settings.Default.game_info_font_outline_color_hex;
-            }
-            set
-            {
-                Settings.Default.game_info_font_outline_color_hex = value;
-                Settings.Default.Save();
-
-                if (!GameInfoWindow.IsDisposed)
-                {
-                    GameInfoWindow.SetFontOutline(value, GameInfoFontOutlineSize);
-                }
-            }
-        }
-        private int GameInfoFontOutlineSize
-        {
-            get
-            {
-                return Settings.Default.game_info_font_outline_size;
-            }
-            set
-            {
-                Settings.Default.game_info_font_outline_size = value;
-                Settings.Default.Save();
-
-                if (!GameInfoWindow.IsDisposed)
-                {
-                    GameInfoWindow.SetFontOutline(GameInfoFontOutlineColor, value);
-                }
-            }
-        }
-        private bool GameInfoFontOutlineEnable
-        {
-            get
-            {
-                return Settings.Default.game_info_font_outline_enabled;
-            }
-            set
-            {
-                Settings.Default.game_info_font_outline_enabled = value;
-                Settings.Default.Save();
-
-                if (!GameInfoWindow.IsDisposed)
-                {
-                    if (value)
-                    {
-                        GameInfoWindow.SetFontOutline(GameInfoFontOutlineColor, GameInfoFontOutlineSize);
-                    }
-                    else
-                    {
-                        GameInfoWindow.SetFontOutline("", 0);
-                    }
-                }
-            }
-        }
-        private FontFamily LastFiveFontFamily
-        {
-            get
-            {
-                FontFamily[] familyArray = FontFamily.Families.ToArray();
-
-                foreach (FontFamily font in familyArray)
-                {
-                    if (font.Name.Equals(Settings.Default.last_five_font_family_name))
-                    {
-                        return font;
-                    }
-                }
-                Settings.Default.last_five_font_family_name = familyArray[0].Name;
-                Settings.Default.Save();
-
-                return familyArray[0];
-            }
-            set
-            {
-                Settings.Default.last_five_font_family_name = value.Name;
-                Settings.Default.Save();
-
-                if (LastFiveWindow != null && !LastFiveWindow.IsDisposed)
-                {
-                    LastFiveWindow.SetFontFamily(value.Name);
-                }
-            }
-        }
-        private string LastFiveFontColor
-        {
-            get
-            {
-                return Settings.Default.last_five_font_color_hex_code;
-            }
-            set
-            {
-                Settings.Default.last_five_font_color_hex_code = value;
-                Settings.Default.Save();
-
-                if (!LastFiveWindow.IsDisposed)
-                {
-                    LastFiveWindow.SetFontColor(value);
-                }
-            }
-        }
-        private string LastFiveFontOutlineColor
-        {
-            get
-            {
-                return Settings.Default.last_five_font_outline_color_hex;
-            }
-            set
-            {
-                Settings.Default.last_five_font_outline_color_hex = value;
-                Settings.Default.Save();
-
-                if (!LastFiveWindow.IsDisposed)
-                {
-                    LastFiveWindow.SetFontOutline(value, LastFiveFontOutlineSize);
-                }
-            }
-        }
-        private int LastFiveFontOutlineSize
-        {
-            get
-            {
-                return Settings.Default.last_five_font_outline_size;
-            }
-            set
-            {
-                Settings.Default.last_five_font_outline_size = value;
-                Settings.Default.Save();
-
-                if (!LastFiveWindow.IsDisposed)
-                {
-                    LastFiveWindow.SetFontOutline(LastFiveFontOutlineColor, value);
-                }
-            }
-        }
-        private bool LastFiveFontOutlineEnable
-        {
-            get
-            {
-                return Settings.Default.last_five_font_outline_enabled;
-            }
-            set
-            {
-                Settings.Default.last_five_font_outline_enabled = value;
-                Settings.Default.Save();
-
-                if (!LastFiveWindow.IsDisposed)
-                {
-                    if (value)
-                    {
-                        LastFiveWindow.SetFontOutline(LastFiveFontOutlineColor, LastFiveFontOutlineSize);
-                    }
-                    else
-                    {
-                        LastFiveWindow.SetFontOutline("", 0);
-                    }
-                }
-            }
-        }
-        private bool LastFivePointsEnable
-        {
-            get
-            {
-                return Settings.Default.last_five_points_enable;
-            }
-            set
-            {
-                if (LastFiveWindow != null && !LastFiveWindow.IsDisposed)
-                {
-                    if (value)
-                    {
-                        LastFiveWindow.ShowPoints();
-                    }
-                    else
-                    {
-                        LastFiveWindow.HidePoints();
-                    }
-                    Settings.Default.last_five_points_enable = value;
-                    Settings.Default.Save();
-                }
-            }
-        }
-        private bool LastFiveBorderEnable
-        {
-            get
-            {
-                return Settings.Default.last_five_border_enable;
-            }
-            set
-            {
-                if (LastFiveWindow != null && !LastFiveWindow.IsDisposed)
-                {
-                    if (value)
-                    {
-                        LastFiveWindow.EnableBorder();
-                    }
-                    else
-                    {
-                        LastFiveWindow.DisableBorder();
-                    }
-                    Settings.Default.last_five_border_enable = value;
-                    Settings.Default.Save();
-                }
-            }
-        }
-        public FontFamily StatsFontFamily
-        {
-            get
-            {
-                FontFamily[] familyArray = FontFamily.Families.ToArray();
-
-                foreach (FontFamily font in familyArray)
-                {
-                    if (font.Name.Equals(Settings.Default.stats_font_family_name))
-                    {
-                        return font;
-                    }
-                }
-                Settings.Default.stats_font_family_name = familyArray[0].Name;
-                Settings.Default.Save();
-
-                return familyArray[0];
-            }
-            set
-            {
-                Settings.Default.stats_font_family_name = value.Name;
-                Settings.Default.Save();
-
-                if (StatsWindow != null && !StatsWindow.IsDisposed)
-                {
-                    StatsWindow.SetFontFamily(value.Name);
-                }
-            }
-        }
-        public string StatsFontColor
-        {
-            get
-            {
-                return Settings.Default.stats_font_color_hex_code;
-            }
-            set
-            {
-                Settings.Default.stats_font_color_hex_code = value;
-                Settings.Default.Save();
-
-                if (!StatsWindow.IsDisposed)
-                {
-                    StatsWindow.SetFontColor(value);
-                }
-            }
-        }
-        public string StatsFontOutlineColor
-        {
-            get
-            {
-                return Settings.Default.stats_font_outline_color_hex;
-            }
-            set
-            {
-                Settings.Default.stats_font_outline_color_hex = value;
-                Settings.Default.Save();
-
-                if (!StatsWindow.IsDisposed)
-                {
-                    StatsWindow.SetFontOutline(value, StatsFontOutlineSize);
-                }
-            }
-        }
-        public int StatsFontOutlineSize
-        {
-            get
-            {
-                return Settings.Default.stats_font_outline_size;
-            }
-            set
-            {
-                Settings.Default.stats_font_outline_size = value;
-                Settings.Default.Save();
-
-                if (!StatsWindow.IsDisposed)
-                {
-                    StatsWindow.SetFontOutline(StatsFontOutlineColor, value);
-                }
-            }
-        }
-        private bool StatsFontOutlineEnable
-        {
-            get
-            {
-                return Settings.Default.stats_font_outline_enabled;
-            }
-            set
-            {
-                Settings.Default.stats_font_outline_enabled = value;
-                Settings.Default.Save();
-
-                if (!StatsWindow.IsDisposed)
-                {
-                    if (value)
-                    {
-                        StatsWindow.SetFontOutline(StatsFontOutlineColor, StatsFontOutlineSize);
-                    }
-                    else
-                    {
-                        StatsWindow.SetFontOutline("", 0);
-                    }
-                }
-            }
-        }
-        public FontFamily NotificationsFontFamily
-        {
-            get
-            {
-                FontFamily[] familyArray = FontFamily.Families.ToArray();
-
-                foreach (FontFamily font in familyArray)
-                {
-                    if (font.Name.Equals(Settings.Default.notification_font_family_name))
-                    {
-                        return font;
-                    }
-                }
-                Settings.Default.notification_font_family_name = familyArray[0].Name;
-                Settings.Default.Save();
-
-                return familyArray[0];
-            }
-            set
-            {
-                Settings.Default.notification_font_family_name = value.Name;
-                Settings.Default.Save();
-
-                if (NotificationsWindow != null && !NotificationsWindow.IsDisposed)
-                {
-                    NotificationsWindow.SetFontFamily(value.Name);
-                }
-            }
-        }
-        public string NotificationsFontColor
-        {
-            get
-            {
-                return Settings.Default.notification_font_color_hex_code;
-            }
-            set
-            {
-                Settings.Default.notification_font_color_hex_code = value;
-                Settings.Default.Save();
-
-                if (!NotificationsWindow.IsDisposed)
-                {
-                    NotificationsWindow.SetFontColor(value);
-                }
-            }
-        }
-        public string NotificationsFontOutlineColor
-        {
-            get
-            {
-                return Settings.Default.notification_font_outline_color_hex;
-            }
-            set
-            {
-                Settings.Default.notification_font_outline_color_hex = value;
-                Settings.Default.Save();
-
-                if (!NotificationsWindow.IsDisposed)
-                {
-                    NotificationsWindow.SetFontOutline(value, NotificationsFontOutlineSize);
-                }
-            }
-        }
-        public int NotificationsFontOutlineSize
-        {
-            get
-            {
-                return Settings.Default.notification_font_outline_size;
-            }
-            set
-            {
-                Settings.Default.notification_font_outline_size = value;
-                Settings.Default.Save();
-
-                if (!NotificationsWindow.IsDisposed)
-                {
-                    NotificationsWindow.SetFontOutline(NotificationsFontOutlineColor, value);
-                }
-            }
-        }
-        private bool NotificationsFontOutlineEnable
-        {
-            get
-            {
-                return Settings.Default.notification_font_outline_enabled;
-            }
-            set
-            {
-                Settings.Default.notification_font_outline_enabled = value;
-                Settings.Default.Save();
-
-                if (!NotificationsWindow.IsDisposed)
-                {
-                    if (value)
-                    {
-                        NotificationsWindow.SetFontOutline(NotificationsFontOutlineColor, NotificationsFontOutlineSize);
-                    }
-                    else
-                    {
-                        NotificationsWindow.SetFontOutline("", 0);
-                    }
-                }
-            }
-        }
-        private bool NotificationsPointsEnable
-        {
-            get
-            {
-                return Settings.Default.notifications_points_enable;
-            }
-            set
-            {
-                if (NotificationsWindow != null && !NotificationsWindow.IsDisposed)
-                {
-                    if (value)
-                    {
-                        NotificationsWindow.ShowPoints();
-                    }
-                    else
-                    {
-                        NotificationsWindow.HidePoints();
-                    }
-                    Settings.Default.notifications_points_enable = value;
-                    Settings.Default.Save();
-                }
-            }
-        }
-        private bool NotificationsBorderEnable
-        {
-            get
-            {
-                return Settings.Default.notifications_border_enable;
-            }
-            set
-            {
-                if (NotificationsWindow != null && !NotificationsWindow.IsDisposed)
-                {
-                    if (value)
-                    {
-                        NotificationsWindow.EnableBorder();
-                    }
-                    else
-                    {
-                        NotificationsWindow.DisableBorder();
-                    }
-                    Settings.Default.notifications_border_enable = value;
-                    Settings.Default.Save();
-                }
-            }
-        }
         private Achievement CurrentlyViewingAchievement;
-        private Achievement CurrentlyFocusedAchievement;
-        private int CurrentlyFocusedIndex;
+        private int CurrentlyViewingIndex;
 
         private static List<Achievement> LockedAchievements;
         private static List<Achievement> UnlockedAchievements;
         private static List<Achievement> OldUnlockedAchievements;
-        private List<Achievement> MostRecentAchievements
-        {
-            set
-            {
-                if (NotBooting)
-                {
-                    if (value.Count == 0)
-                    {
-                        _mostRecentAchievements = value;
 
-                        if (LastFiveWindow != null && !LastFiveWindow.IsDisposed)
-                        {
-                            LastFiveWindow.QueueClearList();
-                        }
-                    }
-                    else if (value.Count > 0)
-                    {
-                        if (_mostRecentAchievements.Count > 0 && _mostRecentAchievements[0].GameId != value[0].GameId)
-                        {
-                            _mostRecentAchievements = value;
-
-                            if (LastFiveWindow != null && !LastFiveWindow.IsDisposed)
-                            {
-                                LastFiveWindow.QueueClearList();
-
-                                _mostRecentAchievements.ForEach(x =>
-                                {
-                                    LastFiveWindow.EnqueueAchievement(x);
-                                });
-
-                                LastFiveWindow.QueueShowList();
-                            }
-                        }
-                    }
-                }
-                _mostRecentAchievements = value;
-
-                if (StreamLabelsLastFiveEnable)
-                {
-                    WriteLastFiveStreamLabels();
-                }
-            }
-            get
-            {
-                return _mostRecentAchievements;
-            }
-        }
         private static Timer UserAndGameUpdateTimer;
         private static int UserAndGameTimerCounter;
 
-        private static StatsLayoutWindow StatsWindow;
-        private static FocusLayoutWindow FocusWindow;
-        private static NotificationLayoutWindow NotificationsWindow;
-        private static GameInfoLayoutWindow GameInfoWindow;
-        private static LastFiveLayoutWindow LastFiveWindow;
+        private static StatsLayoutWindow statsLayoutWindow;
+        private static FocusLayoutWindow focusLayoutWindow;
+        private static NotificationLayoutWindow notificationLayoutWindow;
+        private static GameInfoLayoutWindow gameInfoLayoutWindow;
+        private static LastFiveLayoutWindow lastFiveLayoutWindow;
 
         private bool ShouldRun;
-        private int RAErrors;
 
         private CustomMenuState MenuState = CustomMenuState.CLOSED;
 
         private HFC_EssentialsClient hFC_EssentialsClient;
 
         public event PropertyChangedEventHandler PropertyChanged;
+        private List<Achievement> MostRecentAchievements;
+
         public MainPage()
         {
             InitializeComponent();
             AutoUpdate();
+
+            statsLayoutWindow = new StatsLayoutWindow();
+            focusLayoutWindow = new FocusLayoutWindow();
+            notificationLayoutWindow = new NotificationLayoutWindow();
+            gameInfoLayoutWindow = new GameInfoLayoutWindow();
+            lastFiveLayoutWindow = new LastFiveLayoutWindow();
+
             LoadProperties();
             SetupInterface();
         }
@@ -2302,6 +70,7 @@ namespace Retro_Achievement_Tracker
             AutoUpdater.Synchronous = true;
             AutoUpdater.Start("https://github.com/Colossus-Gaming/retroachievements-layout-manager/releases/download/release-management/ra-layout-manager-release.xml");
         }
+
         private void AutoUpdaterOnCheckForUpdateEvent(UpdateInfoEventArgs args)
         {
             if (args != null)
@@ -2312,9 +81,8 @@ namespace Retro_Achievement_Tracker
                     {
                         if (AutoUpdater.DownloadUpdate(args))
                         {
-                            this.Close();
+                            Application.Restart();
                         }
-
                     }
                     catch (Exception exception)
                     {
@@ -2324,7 +92,7 @@ namespace Retro_Achievement_Tracker
                 }
                 else
                 {
-                   
+
                 }
             }
             else
@@ -2336,700 +104,126 @@ namespace Retro_Achievement_Tracker
         }
         private void SetupInterface()
         {
-            UserAndGameUpdateTimer = new Timer();
-            UserAndGameUpdateTimer.Tick += new EventHandler(CheckAchievements);
+            UserAndGameUpdateTimer = new Timer
+            {
+                Enabled = false
+            };
+            UserAndGameUpdateTimer.Tick += new EventHandler(UpdateFromSite);
             UserAndGameUpdateTimer.Interval = 1000;
 
             UnlockedAchievements = new List<Achievement>();
             LockedAchievements = new List<Achievement>();
 
-            CreateStatsWindow();
-            CreateFocusWindow();
-            CreateNotificationsWindow();
-            CreateGameInfoWindow();
-            CreateLastFiveWindow();
-
             HideAllMenuItems();
-        }
-        protected async override void OnShown(EventArgs e)
-        {
-            CreateDataBindings();
-            CreateFolders();
 
-            if (CanStart())
+            if (statsLayoutWindow.AutoLaunch)
             {
-                await InitializePlayerData();
-
-                if (this.autoStartCheckbox.Checked)
-                {
-                    this.StartButton_Click(null, null);
-                }
+                statsLayoutWindow.Show();
+                focusLayoutWindow.Location = new Point(0, 0);
             }
-            else
+            if (focusLayoutWindow.AutoLaunch)
             {
-                this.StopButton_Click(null, null);
+                focusLayoutWindow.Show();
+                focusLayoutWindow.Location = new Point(0, 0);
             }
-
-            NotBooting = true;
-
-            this.Location = new Point(0, 0);
-
-            if (StatsWindow != null && !StatsWindow.IsDisposed)
+            if (gameInfoLayoutWindow.AutoLaunch)
             {
-                StatsWindow.Location = new Point(0, 0);
+                gameInfoLayoutWindow.Show();
+                gameInfoLayoutWindow.Location = new Point(0, 0);
             }
-            if (FocusWindow != null && !FocusWindow.IsDisposed)
+            if (lastFiveLayoutWindow.AutoLaunch)
             {
-                FocusWindow.Location = new Point(0, 0);
+                lastFiveLayoutWindow.Show();
+                lastFiveLayoutWindow.Location = new Point(0, 0);
             }
-            if (NotificationsWindow != null && !NotificationsWindow.IsDisposed)
+            if (notificationLayoutWindow.AutoLaunch)
             {
-                NotificationsWindow.Location = new Point(200, 0);
+                notificationLayoutWindow.Show(); 
+                notificationLayoutWindow.BringToFront();
+                notificationLayoutWindow.Location = new Point(0, 0);
             }
-            if (GameInfoWindow != null && !GameInfoWindow.IsDisposed)
-            {
-                GameInfoWindow.Location = new Point(0, 0);
-            }
-            if (LastFiveWindow != null && !LastFiveWindow.IsDisposed)
-            {
-                LastFiveWindow.Location = new Point(0, 0);
-            }
-            if (StreamLabelsStatsEnable)
-            {
-                WriteStatsStreamLabels();
-            }
-            if (StreamLabelsLastFiveEnable)
-            {
-                WriteLastFiveStreamLabels();
-            }
-            if (StreamLabelsGameInfoEnable)
-            {
-                WriteGameInfoStreamLabels();
-            }
-            ClearAlertStreamLabels();
-
-            NotificationsWindow.BringToFront();
 
             this.BringToFront();
+            this.Location = new Point(0, 0);
         }
-        private void CreateFolders()
+
+        private void UpdateGameProgress(bool sameGame)
         {
-            if (!Directory.Exists(@"stream-labels"))
-            {
-                Directory.CreateDirectory(@"stream-labels");
-            }
-            if (!Directory.Exists(@"stream-labels\stats"))
-            {
-                Directory.CreateDirectory(@"stream-labels\stats");
-            }
-            if (!Directory.Exists(@"stream-labels\game-info"))
-            {
-                Directory.CreateDirectory(@"stream-labels\game-info");
-            }
-            if (!Directory.Exists(@"stream-labels\alerts"))
-            {
-                Directory.CreateDirectory(@"stream-labels\alerts");
-            }
-            if (!Directory.Exists(@"stream-labels\last-five"))
-            {
-                Directory.CreateDirectory(@"stream-labels\last-five");
-            }
-            if (!Directory.Exists(@"stream-labels\focus"))
-            {
-                Directory.CreateDirectory(@"stream-labels\focus");
-            }
-        }
-        private async void StartButton_Click(object sender, EventArgs e)
-        {
-            NotBooting = false;
+            OldUnlockedAchievements = UnlockedAchievements.ToList();
 
-            this.startButton.Enabled = false;
-            this.stopButton.Enabled = true;
+            SortAchievements();
+            UpdateStats();
 
-            ShouldRun = true;
-
-            SetAwardCount();
-
-            this.usernameTextBox.Enabled = false;
-            this.apiKeyTextBox.Enabled = false;
-
-            if (UserSummary == null)
+            if (sameGame)
             {
-                await InitializePlayerData();
-            }
-            if (this.autoLaunchFocusWindowCheckBox.Checked)
-            {
-                if (FocusWindow.IsDisposed)
+                List<Achievement> achievementNotificationList = UnlockedAchievements
+                .FindAll(unlockedAchievement => !OldUnlockedAchievements.Contains(unlockedAchievement))
+                .ToList();
+
+                if (achievementNotificationList.Count > 0)
                 {
-                    CreateFocusWindow();
+                    UpdateTimerLabel("CHEEVOS POP!");
+
+                    achievementNotificationList.Sort();
+
+                    foreach (Achievement achievement in achievementNotificationList)
+                    {
+                        notificationLayoutWindow.EnqueueAchievementNotification(achievement);
+                        lastFiveLayoutWindow.EnqueueAchievement(achievement);
+                    }
+
+                    if (achievementNotificationList.Contains(CurrentlyViewingAchievement))
+                    {
+                        UpdateCurrentlyViewingAchievement();
+                    }
+                    if (UnlockedAchievements.Count == GameProgress.Achievements.Count && OldUnlockedAchievements.Count < GameProgress.Achievements.Count)
+                    {
+                        ClearFocusAchievementRenders();
+                        notificationLayoutWindow.EnqueueMasteryNotification(UserSummary.GameSummaries[0], UserSummary.GameAchievementSummaries[0]);
+                    }
+
+                    notificationLayoutWindow.FireNotifications();
+                    lastFiveLayoutWindow.QueueShowList();
                 }
-                FocusWindow.Show();
-            }
-            if (this.autoLaunchStatsWindowCheckbox.Checked)
-            {
-                if (StatsWindow.IsDisposed)
-                {
-                    CreateStatsWindow();
-                }
-                StatsWindow.Show();
-            }
-            if (this.autoLaunchNotificationsWindowCheckbox.Checked)
-            {
-                if (NotificationsWindow.IsDisposed)
-                {
-                    CreateNotificationsWindow();
-                }
-                NotificationsWindow.Show();
-            }
-            if (this.autoLaunchGameInfoWindowCheckbox.Checked)
-            {
-                if (GameInfoWindow.IsDisposed)
-                {
-                    CreateGameInfoWindow();
-                }
-                GameInfoWindow.Show();
-            }
-            if (this.autoLaunchLastFiveWindowCheckbox.Checked)
-            {
-                if (LastFiveWindow.IsDisposed)
-                {
-                    CreateLastFiveWindow();
-                }
-                LastFiveWindow.Show();
-            }
-            this.showFocusWindowButton.Enabled = true;
-            this.openAlertsWindowButton.Enabled = true;
-            this.openStatsWindowButton.Enabled = true;
-            this.openGameInfoWindowButton.Enabled = true;
-
-            this.statsStreamLabelsCheckBox.Enabled = true;
-            this.lastFiveStreamLabelsCheckBox.Enabled = true;
-            this.focusStreamLabelsCheckBox.Enabled = true;
-            this.gameInfoStreamLabelsCheckBox.Enabled = true;
-
-            StartTimer();
-
-            Settings.Default.ra_username = this.usernameTextBox.Text;
-            Settings.Default.ra_key = this.apiKeyTextBox.Text;
-            Settings.Default.Save();
-        }
-        private async Task InitializePlayerData()
-        {
-            hFC_EssentialsClient = new HFC_EssentialsClient(this.usernameTextBox.Text, this.apiKeyTextBox.Text);
-
-            UserSummary = await hFC_EssentialsClient.GetUserSummary();
-
-            CurrentGame = await hFC_EssentialsClient.GetGameProgress(UserSummary.GameSummaries[0].GameID.ToString());
-
-            SetAwardCount();
-
-            this.userProfilePictureBox.ImageLocation = "https://retroachievements.org/UserPic/" + this.usernameTextBox.Text + ".png";
-        }
-        private void StopButton_Click(object sender, EventArgs e)
-        {
-            ShouldRun = false;
-
-            UserAndGameUpdateTimer.Stop();
-
-            this.raConnectionStatusPictureBox.Image = Resources.red_button;
-
-            UpdateTimerLabel("Stopped Updating.");
-
-            this.stopButton.Enabled = false;
-            this.showFocusWindowButton.Enabled = CanStart();
-            this.openAlertsWindowButton.Enabled = CanStart();
-            this.openStatsWindowButton.Enabled = CanStart();
-
-            this.apiKeyTextBox.Enabled = true;
-            this.usernameTextBox.Enabled = true;
-
-            this.startButton.Enabled = CanStart();
-        }
-        private void ClearAllStreamLabels()
-        {
-            ClearStatsStreamLabels();
-            ClearAlertStreamLabels();
-            ClearFocusStreamLabels();
-            ClearLastFiveStreamLabels();
-            ClearGameInfoStreamLabels();
-        }
-        private void WriteStatsStreamLabels()
-        {
-            if (Rank != 0)
-            {
-                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/rank.txt", Rank.ToString());
-                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/awards.txt", Awards.ToString());
-                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/ratio.txt", Ratio.ToString("0.00") + " %");
-                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/points.txt", Points.ToString());
-                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/true-points.txt", TruePoints.ToString());
-                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/game-ratio.txt", GameRatio.ToString("0.00") + " %");
-                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/game-points.txt", GameEarnedPoints.ToString() + "/" + GameTotalPoints.ToString());
-                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/game-true-points.txt", GameEarnedTruePoints.ToString() + "/" + GameTotalTruePoints.ToString());
-                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/game-achievements.txt", GameEarnedAchievements.ToString() + "/" + GameTotalAchievements.ToString());
-                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/completed.txt", (GameTotalAchievements == 0 ? 0 : Convert.ToInt32(Convert.ToDecimal(GameEarnedAchievements) / Convert.ToDecimal(GameTotalAchievements) * 200)) + " %");
-            }
-        }
-        private void ClearStatsStreamLabels()
-        {
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/rank.txt", string.Empty);
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/awards.txt", string.Empty);
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/ratio.txt", string.Empty);
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/points.txt", string.Empty);
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/true-points.txt", string.Empty);
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/game-ratio.txt", string.Empty);
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/game-points.txt", string.Empty);
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/game-true-points.txt", string.Empty);
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/game-achievements.txt", string.Empty);
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/completed.txt", string.Empty);
-        }
-        private void WriteAlertStreamLabels(string title, string description, int points)
-        {
-            if (title.Length > 0)
-            {
-                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/alerts/title.txt", title);
-                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/alerts/description.txt", description);
-                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/alerts/points.txt", points.ToString());
-            }
-        }
-        private void ClearAlertStreamLabels()
-        {
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/alerts/title.txt", string.Empty);
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/alerts/description.txt", string.Empty);
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/alerts/points.txt", string.Empty);
-        }
-        private void WriteGameInfoStreamLabels()
-        {
-            if (CurrentGame != null)
-            {
-                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/title.txt", CurrentGame.Title);
-                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/console.txt", CurrentGame.ConsoleName);
-                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/developer.txt", CurrentGame.Developer);
-                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/publisher.txt", CurrentGame.Publisher);
-                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/genre.txt", CurrentGame.Genre);
-                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/release-date.txt", CurrentGame.Released);
-            }
-        }
-        private void ClearGameInfoStreamLabels()
-        {
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/title.txt", string.Empty);
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/console.txt", string.Empty);
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/developer.txt", string.Empty);
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/publisher.txt", string.Empty);
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/genre.txt", string.Empty);
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/release-date.txt", string.Empty);
-        }
-        private void WriteLastFiveStreamLabels()
-        {
-            if (MostRecentAchievements != null && MostRecentAchievements.Count > 0)
-            {
-                for (int i = 0; i < MostRecentAchievements.Count; i++)
-                {
-                    File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-" + i + "-title.txt", MostRecentAchievements[i].Title);
-                    File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-" + i + "-description.txt", MostRecentAchievements[i].Description);
-                    File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-" + i + "-points.txt", MostRecentAchievements[i].Points.ToString());
-                }
-            }
-        }
-        private void ClearLastFiveStreamLabels()
-        {
-            for (int i = 0; i < 5; i++)
-            {
-                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-" + i + "-title.txt", string.Empty);
-                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-" + i + "-description.txt", string.Empty);
-                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-" + i + "-points.txt", string.Empty);
-            }
-        }
-        private void WriteFocusStreamLabels()
-        {
-            if (CurrentlyFocusedAchievement != null)
-            {
-                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/focus/title.txt", CurrentlyFocusedAchievement.Title);
-                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/focus/description.txt", CurrentlyFocusedAchievement.Description);
-                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/focus/points.txt", CurrentlyFocusedAchievement.Points.ToString());
             }
             else
             {
-                ClearFocusStreamLabels();
-            }
-        }
-        private void ClearFocusStreamLabels()
-        {
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/focus/title.txt", string.Empty);
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/focus/description.txt", string.Empty);
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/focus/points.txt", string.Empty);
-        }
-        private void CreateStatsWindow()
-        {
-            StatsWindow = new StatsLayoutWindow();
+                UpdateTimerLabel("Changing game to [" + GameProgress.Id + "] " + GameProgress.Title);
+                UpdateLastFive();
+                UpdateGameInfo();
 
-            StatsWindow.chromiumWebBrowser.LoadHtml(Resources.StatsWindow);
-            StatsWindow.chromiumWebBrowser.FrameLoadEnd += new EventHandler<FrameLoadEndEventArgs>((sender, frameLoadEndEventArgs) =>
-            {
-                StatsWindow.SetFontFamily(StatsFontFamily.Name);
-                StatsWindow.SetFontColor(StatsFontColor);
-                if (StatsFontOutlineEnable)
-                {
-                    StatsWindow.SetFontOutline(StatsFontOutlineColor, StatsFontOutlineSize);
-                }
-                else
-                {
-                    StatsWindow.SetFontOutline("", 0);
-                }
-                StatsWindow.SetRankName(StatsRankName);
-                StatsWindow.SetRank(UserSummary.Rank);
-                if (StatsRankEnable)
-                {
-                    StatsWindow.ShowRank();
-                }
-                else
-                {
-                    StatsWindow.HideRank();
-                }
-                StatsWindow.SetPointsName(StatsPointsName);
-                StatsWindow.SetPoints(UserSummary.TotalPoints);
-                if (StatsPointsEnable)
-                {
-                    StatsWindow.ShowPoints();
-                }
-                else
-                {
-                    StatsWindow.HidePoints();
-                }
-                StatsWindow.SetAwardsName(StatsAwardsName);
-                StatsWindow.SetAwards(_awards);
-                if (StatsAwardsEnable)
-                {
-                    StatsWindow.ShowAwards();
-                }
-                else
-                {
-                    StatsWindow.HideAwards();
-                }
-                StatsWindow.SetTruePointsName(StatsTruePointsName);
-                StatsWindow.SetTruePoints(_truePoints);
-                if (StatsTruePointsEnable)
-                {
-                    StatsWindow.ShowTruePoints();
-                }
-                else
-                {
-                    StatsWindow.HideTruePoints();
-                }
-                StatsWindow.SetRatioName(StatsRatioName);
-                StatsWindow.SetRatio(Ratio);
-                if (StatsRatioEnable)
-                {
-                    StatsWindow.ShowRatio();
-                }
-                else
-                {
-                    StatsWindow.HideRatio();
-                }
-                StatsWindow.SetGameRatioName(StatsGameRatioName);
-                StatsWindow.SetGameRatio(_gameRatio);
-                if (StatsGameRatioEnable)
-                {
-                    StatsWindow.ShowGameRatio();
-                }
-                else
-                {
-                    StatsWindow.HideGameRatio();
-                }
-                StatsWindow.SetGameAchievementsName(StatsGameAchievementsName);
-                StatsWindow.SetGameAchievements(GameEarnedAchievements, GameTotalAchievements);
-                if (StatsGameAchievementsEnable)
-                {
-                    StatsWindow.ShowGameAchievements();
-                }
-                else
-                {
-                    StatsWindow.HideGameAchievements();
-                }
-                StatsWindow.SetGamePointsName(StatsGamePointsName);
-                StatsWindow.SetGamePoints(GameEarnedPoints, GameTotalPoints);
-                if (StatsGamePointsEnable)
-                {
-                    StatsWindow.ShowGamePoints();
-                }
-                else
-                {
-                    StatsWindow.HideGamePoints();
-                }
-                StatsWindow.SetGameTruePointsName(StatsGameTruePointsName);
-                StatsWindow.SetGameTruePoints(GameEarnedTruePoints, GameTotalTruePoints);
-                if (StatsGameTruePointsEnable)
-                {
-                    StatsWindow.ShowGameTruePoints();
-                }
-                else
-                {
-                    StatsWindow.HideGameTruePoints();
-                }
-                StatsWindow.SetCompletedName(StatsCompletedName);
-                StatsWindow.SetCompletedValue(GameTotalAchievements == 0 ? 0 : Convert.ToInt32(Convert.ToDecimal(GameEarnedAchievements) / Convert.ToDecimal(GameTotalAchievements) * 200));
-                if (StatsCompletedEnable)
-                {
-                    StatsWindow.ShowCompleted();
-                }else
-                {
-                    StatsWindow.HideCompleted();
-                }
-            });
-        }
-        private void CreateFocusWindow()
-        {
-            FocusWindow = new FocusLayoutWindow();
-
-            FocusWindow.chromiumWebBrowser.LoadHtml(Resources.FocusWindow);
-            FocusWindow.chromiumWebBrowser.FrameLoadEnd += new EventHandler<FrameLoadEndEventArgs>((sender, frameLoadEndEventArgs) =>
-            {
-                FocusWindow.SetFontFamily(FocusFontFamily.Name);
-                FocusWindow.SetFontColor(FocusFontColor);
-
-                if (FocusFontOutlineEnable)
-                {
-                    FocusWindow.SetFontOutline(FocusFontOutlineColor, FocusFontOutlineSize);
-                }
-                else
-                {
-                    FocusWindow.SetFontOutline("", 0);
-                }
                 if (LockedAchievements.Count > 0)
                 {
-                    FocusWindow.SetFocus(CurrentlyFocusedAchievement);
-                    if (FocusPointsEnable)
-                    {
-                        FocusWindow.ShowPoints();
-                    }
-                    else
-                    {
-                        FocusWindow.HidePoints();
-                    }
-                    if (StreamLabelsFocusEnable)
-                    {
-                        WriteFocusStreamLabels();
-                    }
+                    CurrentlyViewingIndex = 0;
+                    UpdateCurrentlyViewingAchievement();
                 }
-                else
-                {
-                    FocusWindow.HideFocus();
-                }
-                if (FocusPointsEnable)
-                {
-                    FocusWindow.ShowPoints();
-                }
-                else
-                {
-                    FocusWindow.HidePoints();
-                }
-                if (FocusBorderEnable)
-                {
-                    FocusWindow.EnableBorder();
-                }
-                else
-                {
-                    FocusWindow.DisableBorder();
-                }
-                FocusWindow.SetBackgroundColor(FocusBackgroundColor);
+
+                SetFocus();
+            }
+
+            Invoke((MethodInvoker)delegate
+            {
+                StartTimer();
             });
         }
-        private void CreateNotificationsWindow()
+
+        private void SetFocus()
         {
-            NotificationsWindow = new NotificationLayoutWindow(WriteAlertStreamLabels);
-
-            NotificationsWindow.chromiumWebBrowser.LoadHtml(Resources.NotificationWindow);
-            NotificationsWindow.chromiumWebBrowser.RequestHandler = new CustomRequestHandler()
+            Invoke((MethodInvoker)delegate
             {
-                customAchievementEnabled = CustomAchievementEnabled,
-                customMasteryEnabled = CustomMasteryEnabled
-            };
-            NotificationsWindow.chromiumWebBrowser.FrameLoadEnd += new EventHandler<FrameLoadEndEventArgs>((sender, frameLoadEndEventArgs) =>
-            {
-                NotificationsWindow.SetFontFamily(NotificationsFontFamily.Name);
-                NotificationsWindow.SetFontColor(NotificationsFontColor);
-
-                if (NotificationsFontOutlineEnable)
+                if (CurrentlyViewingAchievement != null)
                 {
-                    NotificationsWindow.SetFontOutline(NotificationsFontOutlineColor, NotificationsFontOutlineSize);
+                    focusLayoutWindow.SetFocus(CurrentlyViewingAchievement);
+                    StreamLabelManager.WriteFocusStreamLabels(CurrentlyViewingAchievement);
                 }
                 else
                 {
-                    NotificationsWindow.SetFontOutline("", 0);
-                }
-                NotificationsWindow.PromptUserInput();
-
-                NotificationsWindow.SetAchievementWidth(Settings.Default.notification_custom_achievement_enable ? Convert.ToInt32(CustomAchievementScale * GetVideoWidth(CustomAchievementFile)) : 1000);
-                NotificationsWindow.SetMasteryWidth(Settings.Default.notification_custom_mastery_enable ? Convert.ToInt32(CustomMasteryScale * GetVideoWidth(CustomMasteryFile)) : 1000);
-                NotificationsWindow.SetAchievementTop(Settings.Default.notification_custom_achievement_enable ? CustomAchievementY : 5);
-                NotificationsWindow.SetMasteryTop(Settings.Default.notification_custom_mastery_enable ? CustomMasteryY : 5);
-                NotificationsWindow.SetAchievementLeft(Settings.Default.notification_custom_achievement_enable ? CustomAchievementX : -15);
-                NotificationsWindow.SetMasteryLeft(Settings.Default.notification_custom_mastery_enable ? CustomMasteryX : -15);
-
-                NotificationsWindow.SetAchievementInAnimation(CustomAchievementEnabled ? NotificationAchievementAnimationIn.ToString() : "STATIC");
-                NotificationsWindow.SetAchievementOutAnimation(CustomAchievementEnabled ? NotificationAchievementAnimationOut.ToString() : "UP");
-
-                NotificationsWindow.SetMasteryInAnimation(CustomMasteryEnabled ? NotificationMasteryAnimationIn.ToString() : "STATIC");
-                NotificationsWindow.SetMasteryOutAnimation(CustomMasteryEnabled ? NotificationMasteryAnimationOut.ToString() : "UP");
-                NotificationsWindow.SetBackgroundColor(NotificationsBackgroundColor);
-
-                if (NotificationsBorderEnable)
-                {
-                    NotificationsWindow.EnableBorder();
-                }
-                else
-                {
-                    NotificationsWindow.DisableBorder();
-                }
-                if (NotificationsPointsEnable)
-                {
-                    NotificationsWindow.ShowPoints();
-                }
-                else
-                {
-                    NotificationsWindow.HidePoints();
+                    StreamLabelManager.ClearFocusStreamLabels();
                 }
             });
         }
-        private void CreateGameInfoWindow()
-        {
-            GameInfoWindow = new GameInfoLayoutWindow();
 
-            GameInfoWindow.chromiumWebBrowser.LoadHtml(Resources.GameInfo);
-            GameInfoWindow.chromiumWebBrowser.FrameLoadEnd += new EventHandler<FrameLoadEndEventArgs>((sender, frameLoadEndEventArgs) =>
-            {
-                GameInfoWindow.SetFontFamily(GameInfoFontFamily.Name);
-                GameInfoWindow.SetFontColor(GameInfoFontColor);
-
-                if (GameInfoFontOutlineEnable)
-                {
-                    GameInfoWindow.SetFontOutline(GameInfoFontOutlineColor, GameInfoFontOutlineSize);
-                }
-                else
-                {
-                    GameInfoWindow.SetFontOutline("", 0);
-                }
-
-                GameInfoWindow.SetTitleName(GameInfoTitleName);
-                GameInfoWindow.SetTitleValue(GameInfoTitle);
-                if (GameInfoTitleEnable)
-                {
-                    GameInfoWindow.ShowTitle();
-                }
-                else
-                {
-                    GameInfoWindow.HideTitle();
-                }
-                GameInfoWindow.SetConsoleName(GameInfoConsoleName);
-                GameInfoWindow.SetConsoleValue(GameInfoConsoleValue);
-                if (GameInfoConsoleEnable)
-                {
-                    GameInfoWindow.ShowConsole();
-                }
-                else
-                {
-                    GameInfoWindow.HideConsole();
-                }
-                GameInfoWindow.SetDeveloperName(GameInfoDeveloperName);
-                GameInfoWindow.SetDeveloperValue(GameInfoDeveloperValue);
-                if (GameInfoDeveloperEnable)
-                {
-                    GameInfoWindow.ShowDeveloper();
-                }
-                else
-                {
-                    GameInfoWindow.HideDeveloper();
-                }
-                GameInfoWindow.SetPublisherName(GameInfoPublisherName);
-                GameInfoWindow.SetPublisherValue(GameInfoPublisherValue);
-                if (GameInfoPublisherEnable)
-                {
-                    GameInfoWindow.ShowPublisher();
-                }
-                else
-                {
-                    GameInfoWindow.HidePublisher();
-                }
-                GameInfoWindow.SetGenreName(GameInfoGenreName);
-                GameInfoWindow.SetGenreValue(GameInfoGenreValue);
-                if (GameInfoGenreEnable)
-                {
-                    GameInfoWindow.ShowGenre();
-                }
-                else
-                {
-                    GameInfoWindow.HideGenre();
-                }
-                GameInfoWindow.SetReleaseDateName(GameInfoReleaseDateName);
-                GameInfoWindow.SetReleaseDateValue(GameInfoReleaseDateValue);
-                if (GameInfoReleaseDateEnable)
-                {
-                    GameInfoWindow.ShowReleaseDate();
-                }
-                else
-                {
-                    GameInfoWindow.HideReleaseDate();
-                }
-                GameInfoWindow.SetBackgroundColor(GameInfoBackgroundColor);
-            });
-        }
-        private void CreateLastFiveWindow()
-        {
-            LastFiveWindow = new LastFiveLayoutWindow();
-
-            LastFiveWindow.chromiumWebBrowser.FrameLoadEnd += new EventHandler<FrameLoadEndEventArgs>((sender, frameLoadEndEventArgs) =>
-            {
-                if (LastFiveFontOutlineEnable)
-                {
-                    LastFiveWindow.SetFontOutline(LastFiveFontOutlineColor, LastFiveFontOutlineSize);
-                }
-                else
-                {
-                    LastFiveWindow.SetFontOutline("", 0);
-                }
-                LastFiveWindow.SetFontFamily(LastFiveFontFamily.Name);
-                LastFiveWindow.SetFontColor(LastFiveFontColor);
-                LastFiveWindow.SetBackgroundColor(LastFiveBackgroundColor);
-
-                if (MostRecentAchievements.Count > 0)
-                {
-                    MostRecentAchievements.ForEach(x =>
-                    {
-                        LastFiveWindow.EnqueueAchievement(x);
-                    });
-
-                    LastFiveWindow.QueueShowList();
-                }
-                if (LastFiveBorderEnable)
-                {
-                    LastFiveWindow.EnableBorder();
-                }
-                else
-                {
-                    LastFiveWindow.DisableBorder();
-                }
-                if (LastFivePointsEnable)
-                {
-                    LastFiveWindow.ShowPoints();
-                }
-                else
-                {
-                    LastFiveWindow.HidePoints();
-                }
-            });
-
-            LastFiveWindow.chromiumWebBrowser.LoadHtml(Resources.LastFive);
-        }
-
-        private bool CanStart()
-        {
-            return !(string.IsNullOrEmpty(this.usernameTextBox.Text)
-                || string.IsNullOrEmpty(this.apiKeyTextBox.Text));
-        }
-        private void UpdateTimerLabel(string s)
-        {
-            this.timerStatusLabel.Text = s;
-        }
-        private async void CheckAchievements(object sender, EventArgs e)
+        private async void UpdateFromSite(object sender, EventArgs e)
         {
             if (!ShouldRun)
             {
@@ -3049,20 +243,40 @@ namespace Retro_Achievement_Tracker
 
                 this.startButton.Enabled = false;
 
-                UpdateTimerLabel("Calling for user summary...");
+                UpdateTimerLabel("Calling for user summary.");
 
                 try
                 {
-                    UserSummary = await hFC_EssentialsClient.GetUserSummary();
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-                UpdateTimerLabel("Calling for game progress...");
-                try
-                {
-                    CurrentGame = await hFC_EssentialsClient.GetGameProgress(UserSummary.GameSummaries[0].GameID.ToString());
+                    await hFC_EssentialsClient.GetUserSummary().ContinueWith(async userSummaryTemp =>
+                    {
+                        UserSummary = userSummaryTemp.Result;
+
+                        UpdateTimerLabel("Getting award count directly from site.");
+
+                        await GetAwardCount().ContinueWith(async awards =>
+                        {
+
+                            try
+                            {
+                                UserSummary.Awards = awards.Result;
+
+                                long previousId = GameProgress != null ? GameProgress.Id : -1;
+
+                                UpdateTimerLabel("Calling for game progress.");
+
+                                await hFC_EssentialsClient.GetGameProgress(UserSummary.GameSummaries[0].GameID.ToString()).ContinueWith(gameProgressTemp =>
+                                {
+                                    GameProgress = gameProgressTemp.Result;
+
+                                    UpdateGameProgress(previousId == GameProgress.Id);
+                                });
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine(ex.Message);
+                            }
+                        });
+                    });
                 }
                 catch (Exception ex)
                 {
@@ -3070,6 +284,254 @@ namespace Retro_Achievement_Tracker
                 }
             }
         }
+        protected async override void OnShown(EventArgs e)
+        {
+            CreateFolders();
+
+            if (CanStart())
+            {
+                if (this.autoStartCheckbox.Checked)
+                {
+                    this.StartButton_Click(null, null);
+                }
+            }
+            else
+            {
+                this.StopButton_Click(null, null);
+            }
+
+            NotBooting = true;
+        }
+        private void CreateFolders()
+        {
+            if (!Directory.Exists(@"stream-labels"))
+            {
+                Directory.CreateDirectory(@"stream-labels");
+            }
+            if (!Directory.Exists(@"stream-labels\stats"))
+            {
+                Directory.CreateDirectory(@"stream-labels\stats");
+            }
+            if (!Directory.Exists(@"stream-labels\game-info"))
+            {
+                Directory.CreateDirectory(@"stream-labels\game-info");
+            }
+            if (!Directory.Exists(@"stream-labels\last-five"))
+            {
+                Directory.CreateDirectory(@"stream-labels\last-five");
+            }
+            if (!Directory.Exists(@"stream-labels\focus"))
+            {
+                Directory.CreateDirectory(@"stream-labels\focus");
+            }
+        }
+        private async void StartButton_Click(object sender, EventArgs e)
+        {
+            NotBooting = false;
+
+            this.startButton.Enabled = false;
+            this.stopButton.Enabled = true;
+
+            ShouldRun = true;
+
+            this.usernameTextBox.Enabled = false;
+            this.apiKeyTextBox.Enabled = false;
+
+            this.showFocusWindowButton.Enabled = true;
+            this.showNotificationWindowButton.Enabled = true;
+            this.showStatsWindowButton.Enabled = true;
+            this.showGameInfoWindowButton.Enabled = true;
+
+            this.statsStreamLabelsCheckBox.Enabled = true;
+            this.lastFiveStreamLabelsCheckBox.Enabled = true;
+            this.focusStreamLabelsCheckBox.Enabled = true;
+            this.gameInfoStreamLabelsCheckBox.Enabled = true;
+
+            await InitializePlayerData();
+
+            Settings.Default.ra_username = this.usernameTextBox.Text;
+            Settings.Default.ra_key = this.apiKeyTextBox.Text;
+            Settings.Default.Save();
+        }
+        private async Task InitializePlayerData()
+        {
+            hFC_EssentialsClient = new HFC_EssentialsClient(this.usernameTextBox.Text, this.apiKeyTextBox.Text);
+
+            await hFC_EssentialsClient.GetUserSummary().ContinueWith(async userSummaryTemp =>
+            {
+                UserSummary = userSummaryTemp.Result;
+
+                await GetAwardCount().ContinueWith(async awards =>
+                {
+                    UserSummary.Awards = awards.Result;
+
+                    await hFC_EssentialsClient.GetGameProgress(UserSummary.GameSummaries[0].GameID.ToString()).ContinueWith(gameProgressTemp =>
+                    {
+                        GameProgress = gameProgressTemp.Result;
+
+                        UpdateGameProgress(false);
+
+                        SetFocus();
+
+                        this.userProfilePictureBox.ImageLocation = "https://retroachievements.org/UserPic/" + this.usernameTextBox.Text + ".png";
+
+                        StartTimer();
+                    });
+                });
+            });
+        }
+        private void StopButton_Click(object sender, EventArgs e)
+        {
+            ShouldRun = false;
+
+            UserAndGameUpdateTimer.Stop();
+
+            this.raConnectionStatusPictureBox.Image = Resources.red_button;
+
+            UpdateTimerLabel("Stopped Updating.");
+
+            this.stopButton.Enabled = false;
+            this.showFocusWindowButton.Enabled = CanStart();
+            this.showNotificationWindowButton.Enabled = CanStart();
+            this.showStatsWindowButton.Enabled = CanStart();
+
+            this.apiKeyTextBox.Enabled = true;
+            this.usernameTextBox.Enabled = true;
+
+            this.startButton.Enabled = CanStart();
+        }
+
+        public void SetLockedAchievements(List<Achievement> achievements)
+        {
+            Invoke((MethodInvoker)delegate
+            {
+                if (achievements != null && achievements.Count > 0)
+                {
+                    int gameId = achievements[0].GameId;
+                    if (LockedAchievements == null || (LockedAchievements.Count > 0 && gameId != LockedAchievements[0].GameId))
+                    {
+                        CurrentlyViewingIndex = 0;
+                        CurrentlyViewingAchievement = null;
+                    }
+                }
+                else
+                {
+                    CurrentlyViewingAchievement = null;
+                }
+                LockedAchievements = achievements.ToList();
+
+                UpdateCurrentlyViewingAchievement();
+            });
+        }
+
+        public void UpdateCurrentlyViewingAchievement()
+        {
+            if (this.Visible)
+            {
+                Invoke((MethodInvoker)delegate
+                {
+                    UpdateFocusButtons();
+
+                    if (LockedAchievements.Count > 0)
+                    {
+                        if (CurrentlyViewingIndex >= LockedAchievements.Count)
+                        {
+                            CurrentlyViewingIndex = LockedAchievements.Count - 1;
+                        }
+                        else if (CurrentlyViewingIndex < 0)
+                        {
+                            CurrentlyViewingIndex = 0;
+                        }
+                        CurrentlyViewingAchievement = LockedAchievements[CurrentlyViewingIndex];
+
+                        this.focusAchievementPictureBox.ImageLocation = "https://retroachievements.org/Badge/" + CurrentlyViewingAchievement.BadgeNumber + ".png";
+                        this.focusAchievementTitleLabel.Text = CurrentlyViewingAchievement.Title;
+                        this.focusAchievementDescriptionLabel.Text = CurrentlyViewingAchievement.Description;
+                    }
+                    else
+                    {
+                        CurrentlyViewingIndex = 0;
+
+                        this.focusAchievementPictureBox.ImageLocation = string.Empty;
+                        this.focusAchievementTitleLabel.Text = string.Empty;
+                        this.focusAchievementDescriptionLabel.Text = string.Empty;
+                    }
+                });
+            }
+        }
+        private void UpdateLastFive()
+        {
+            Invoke((MethodInvoker)delegate
+            {
+                lastFiveLayoutWindow.QueueClearList();
+
+                if (MostRecentAchievements.Count > 0)
+                {
+                    MostRecentAchievements.ForEach(x =>
+                    {
+                        lastFiveLayoutWindow.EnqueueAchievement(x);
+                    });
+
+                    lastFiveLayoutWindow.QueueShowList();
+                }
+                StreamLabelManager.WriteLastFiveStreamLabels(UserSummary);
+            });
+        }
+        private void UpdateStats()
+        {
+            Invoke((MethodInvoker)delegate
+            {
+                UpdateStatLabels();
+
+                statsLayoutWindow.SetRank(UserSummary.Rank.ToString());
+                statsLayoutWindow.SetRatio(UserSummary.RetroRatio);
+                statsLayoutWindow.SetAwards(UserSummary.Awards.ToString());
+                statsLayoutWindow.SetPoints(UserSummary.TotalPoints.ToString());
+                statsLayoutWindow.SetTruePoints(UserSummary.TotalTruePoints.ToString());
+                statsLayoutWindow.SetGamePoints(GameProgress.PointsEarned, GameProgress.PointsPossible);
+                statsLayoutWindow.SetGameAchievements(GameProgress.NumAwardedToUserHardcore.ToString(), GameProgress.NumAchievements.ToString());
+                statsLayoutWindow.SetGameTruePoints(GameProgress.TruePointsEarned, GameProgress.TruePointsPossible);
+                statsLayoutWindow.SetGameRatio();
+                statsLayoutWindow.SetCompleted(GameProgress.UserCompletionHardcore);
+
+                StreamLabelManager.WriteStatsStreamLabels(UserSummary, GameProgress);
+            });
+        }
+        private void UpdateGameInfo()
+        {
+            Invoke((MethodInvoker)delegate
+            {
+                gameInfoLayoutWindow.SetTitleValue(GameProgress.Title);
+                gameInfoLayoutWindow.SetGenreValue(GameProgress.Genre);
+                gameInfoLayoutWindow.SetConsoleValue(GameProgress.ConsoleName);
+                gameInfoLayoutWindow.SetDeveloperValue(GameProgress.Developer);
+                gameInfoLayoutWindow.SetPublisherValue(GameProgress.Publisher);
+                gameInfoLayoutWindow.SetReleaseDateValue(GameProgress.Released);
+
+                StreamLabelManager.WriteGameInfoStreamLabels(GameProgress);
+            });
+        }
+        private void ClearFocusAchievementRenders()
+        {
+            Invoke((MethodInvoker)delegate
+            {
+                focusLayoutWindow.HideFocus();
+                StreamLabelManager.ClearFocusStreamLabels();
+            });
+        }
+        private bool CanStart()
+        {
+            return !(string.IsNullOrEmpty(this.usernameTextBox.Text)
+                || string.IsNullOrEmpty(this.apiKeyTextBox.Text));
+        }
+        private void UpdateTimerLabel(string s)
+        {
+            Invoke((MethodInvoker)delegate
+            {
+                this.timerStatusLabel.Text = s;
+            });
+        }
+
         private void StartTimer()
         {
             UserAndGameTimerCounter = 6;
@@ -3081,11 +543,11 @@ namespace Retro_Achievement_Tracker
         }
         private void SortAchievements()
         {
-            if (CurrentGame.Achievements != null)
+            if (GameProgress.Achievements != null)
             {
-                List<Achievement> tempLockedAchievements = CurrentGame.Achievements.FindAll(x => !x.DateEarned.HasValue);
-                List<Achievement> tempUnlockedAchievements = CurrentGame.Achievements.FindAll(x => x.DateEarned.HasValue);
-                List<Achievement> tempRecentAchievements = UserSummary.RecentAchievements.FindAll(x => x.DateEarned.HasValue);
+                List<Achievement> tempLockedAchievements = GameProgress.Achievements.FindAll(x => !x.DateEarned.HasValue);
+                List<Achievement> tempUnlockedAchievements = GameProgress.Achievements.FindAll(x => x.DateEarned.HasValue);
+                List<Achievement> tempRecentAchievements = UserSummary.RecentAchievements.FindAll(x => x.IsAwarded);
 
                 tempUnlockedAchievements.Sort(delegate (Achievement x, Achievement y) { return y.DateEarned.Value.CompareTo(x.DateEarned.Value); });
                 tempRecentAchievements.Sort(delegate (Achievement x, Achievement y) { return x.DateEarned.Value.CompareTo(y.DateEarned.Value); });
@@ -3095,51 +557,33 @@ namespace Retro_Achievement_Tracker
                 MostRecentAchievements = tempRecentAchievements.ToList();
                 UnlockedAchievements = tempUnlockedAchievements.ToList();
             }
-            if (UserSummary.RecentAchievements != null && UserSummary.RecentAchievements.Count > 0)
-            {
-                UserSummary.RecentAchievements = UserSummary.RecentAchievements.Where(achievement => achievement.IsAwarded).ToList();
-            }
             if (OldUnlockedAchievements.Count < UnlockedAchievements.Count)
             {
                 if (LockedAchievements.Count == 0)
                 {
-                    CurrentlyFocusedIndex = 0;
+                    CurrentlyViewingIndex = 0;
                     HideFocusButton_Click(null, null);
                 }
-                else if (LockedAchievements.IndexOf(CurrentlyFocusedAchievement) > -1)
+                else if (LockedAchievements.IndexOf(focusLayoutWindow.CurrentlyFocusedAchievement) > -1)
                 {
-                    CurrentlyFocusedIndex = LockedAchievements.IndexOf(CurrentlyFocusedAchievement);
+                    CurrentlyViewingIndex = LockedAchievements.IndexOf(focusLayoutWindow.CurrentlyFocusedAchievement);
                 }
                 else
                 {
-                    CurrentlyFocusedIndex = LockedAchievements.IndexOf(CurrentlyViewingAchievement) == -1 ? 0 : LockedAchievements.IndexOf(CurrentlyViewingAchievement);
+                    CurrentlyViewingIndex = LockedAchievements.IndexOf(CurrentlyViewingAchievement) == -1 ? 0 : LockedAchievements.IndexOf(CurrentlyViewingAchievement);
                     SetFocusButton_Click(null, null);
                 }
             }
         }
         protected override void OnClosed(EventArgs e)
         {
-            if (FocusWindow != null && !FocusWindow.IsDisposed)
-            {
-                FocusWindow.Dispose();
-            }
-            if (StatsWindow != null && !StatsWindow.IsDisposed)
-            {
-                StatsWindow.Dispose();
-            }
-            if (NotificationsWindow != null && !NotificationsWindow.IsDisposed)
-            {
-                NotificationsWindow.Dispose();
-            }
-            if (GameInfoWindow != null && !GameInfoWindow.IsDisposed)
-            {
-                GameInfoWindow.Dispose();
-            }
-            if (LastFiveWindow != null && !LastFiveWindow.IsDisposed)
-            {
-                LastFiveWindow.Dispose();
-            }
-            ClearAllStreamLabels();
+            StreamLabelManager.ClearAllStreamLabels();
+         
+            focusLayoutWindow.Close();
+            statsLayoutWindow.Close();
+            notificationLayoutWindow.Close();
+            gameInfoLayoutWindow.Close();
+            lastFiveLayoutWindow.Close();
         }
         private void LoadProperties()
         {
@@ -3151,6 +595,7 @@ namespace Retro_Achievement_Tracker
 
                 Settings.Default.Save();
             }
+
             this.usernameTextBox.Text = Settings.Default.ra_username;
             this.apiKeyTextBox.Text = Settings.Default.ra_key;
             this.autoStartCheckbox.Checked = Settings.Default.auto_start_checked;
@@ -3167,7 +612,7 @@ namespace Retro_Achievement_Tracker
 
             this.statsRankOverrideTextBox.Text = Settings.Default.stats_rank_name;
             this.statsAwardsOverrideTextBox.Text = Settings.Default.stats_awards_name;
-            this.statsPointsOverrideTextBox.Text = Settings.Default.stats_game_points_name;
+            this.statsPointsOverrideTextBox.Text = Settings.Default.stats_points_name;
             this.statsTruePointsOverrideTextBox.Text = Settings.Default.stats_true_points_name;
             this.statsRatioOverrideTextBox.Text = Settings.Default.stats_ratio_name;
             this.statsCompletedOverrideTextBox.Text = Settings.Default.stats_completed_name;
@@ -3201,7 +646,7 @@ namespace Retro_Achievement_Tracker
             this.gameInfoGenreCheckBox.Checked = Settings.Default.game_info_genre_enable;
             this.gameInfoReleaseDateCheckBox.Checked = Settings.Default.game_info_release_date_enable;
 
-            this.focusPointsEnable.Checked = Settings.Default.focus_points_enable;
+            this.focusPointsEnableCheckbox.Checked = Settings.Default.focus_points_enable;
             this.focusBorderEnableCheckbox.Checked = Settings.Default.focus_border_enable;
 
             this.notificationPointsEnableCheckBox.Checked = Settings.Default.notifications_points_enable;
@@ -3210,23 +655,14 @@ namespace Retro_Achievement_Tracker
             this.lastFivePointsEnableCheckbox.Checked = Settings.Default.last_five_points_enable;
             this.lastFiveBorderEnableCheckbox.Checked = Settings.Default.last_five_border_enable;
 
-            if (CustomAchievementEnabled && string.IsNullOrEmpty(Settings.Default.notification_custom_achievement_file))
+            List<AnimationDirection> animationDirections = new List<AnimationDirection>
             {
-                Settings.Default.notification_custom_achievement_enable = false;
-                Settings.Default.Save();
-            }
-            if (CustomMasteryEnabled && string.IsNullOrEmpty(Settings.Default.notification_custom_mastery_file))
-            {
-                Settings.Default.notification_custom_achievement_enable = false;
-                Settings.Default.Save();
-            }
-
-            List<AnimationDirection> animationDirections = new List<AnimationDirection>();
-            animationDirections.Add(AnimationDirection.DOWN);
-            animationDirections.Add(AnimationDirection.LEFT);
-            animationDirections.Add(AnimationDirection.RIGHT);
-            animationDirections.Add(AnimationDirection.STATIC);
-            animationDirections.Add(AnimationDirection.UP);
+                AnimationDirection.DOWN,
+                AnimationDirection.LEFT,
+                AnimationDirection.RIGHT,
+                AnimationDirection.STATIC,
+                AnimationDirection.UP
+            };
 
             animationDirections.ForEach(animationDirection =>
             {
@@ -3241,162 +677,172 @@ namespace Retro_Achievement_Tracker
             this.notificationsMasteryAnimationInComboBox.SelectedIndex = this.notificationsMasteryAnimationInComboBox.Items.IndexOf(Settings.Default.notifications_mastery_in_animation);
             this.notificationsMasteryAnimationOutComboBox.SelectedIndex = this.notificationsMasteryAnimationOutComboBox.Items.IndexOf(Settings.Default.notifications_mastery_out_animation);
 
-            this.useCustomAchievementCheckbox.Checked = CustomAchievementEnabled;
-            this.selectCustomAchievementButton.Enabled = CustomAchievementEnabled;
-            this.acheivementEditOutlineCheckbox.Enabled = CustomAchievementEnabled;
+            this.customAchievementEnableCheckbox.Checked = notificationLayoutWindow.CustomAchievementEnabled;
+            this.selectCustomAchievementButton.Enabled = notificationLayoutWindow.CustomAchievementEnabled;
+            this.acheivementEditOutlineCheckbox.Enabled = notificationLayoutWindow.CustomAchievementEnabled;
             this.customAchievementXNumericUpDown.Enabled = false;
             this.customAchievementYNumericUpDown.Enabled = false;
             this.scaleAchievementNumericUpDown.Enabled = false;
-            this.inAchievementNumericUpDown.Enabled = false;
-            this.outAchievementNumericUpDown.Enabled = false;
+            this.notificationAchievementInNumericUpDown.Enabled = false;
+            this.notificationAchievementOutNumericUpDown.Enabled = false;
             this.xPositionLabel1.Enabled = false;
             this.yPositionLabel1.Enabled = false;
             this.scaleLabel1.Enabled = false;
             this.inLabel1.Enabled = false;
             this.outLabel1.Enabled = false;
 
-            this.useCustomMasteryCheckbox.Checked = CustomMasteryEnabled;
-            this.selectCustomMasteryNotificationButton.Enabled = CustomMasteryEnabled;
-            this.masteryEditOultineCheckbox.Enabled = CustomMasteryEnabled;
+            this.useCustomMasteryCheckbox.Checked = notificationLayoutWindow.CustomMasteryEnabled;
+            this.selectCustomMasteryNotificationButton.Enabled = notificationLayoutWindow.CustomMasteryEnabled;
+            this.masteryEditOultineCheckbox.Enabled = notificationLayoutWindow.CustomMasteryEnabled;
             this.customMasteryXNumericUpDown.Enabled = false;
             this.customMasteryYNumericUpDown.Enabled = false;
             this.scaleMasteryNumericUpDown.Enabled = false;
-            this.inMasteryNumericUpDown.Enabled = false;
-            this.outMasteryNumericUpDown.Enabled = false;
+            this.notificationMasteryInNumericUpDown.Enabled = false;
+            this.notificationMasteryOutNumericUpDown.Enabled = false;
             this.xPositionLabel2.Enabled = false;
             this.yPositionLabel2.Enabled = false;
             this.scaleLabel2.Enabled = false;
             this.inLabel2.Enabled = false;
             this.outLabel2.Enabled = false;
 
-            this.customAchievementXNumericUpDown.Value = CustomAchievementX;
-            this.customAchievementYNumericUpDown.Value = CustomAchievementY;
+            this.customAchievementXNumericUpDown.Value = notificationLayoutWindow.CustomAchievementX;
+            this.customAchievementYNumericUpDown.Value = notificationLayoutWindow.CustomAchievementY;
 
-            this.customMasteryXNumericUpDown.Value = CustomMasteryX;
-            this.customMasteryYNumericUpDown.Value = CustomMasteryY;
+            this.customMasteryXNumericUpDown.Value = notificationLayoutWindow.CustomMasteryX;
+            this.customMasteryYNumericUpDown.Value = notificationLayoutWindow.CustomMasteryY;
 
-            if (CustomAchievementScale > this.scaleAchievementNumericUpDown.Maximum)
+            if (notificationLayoutWindow.CustomAchievementScale > this.scaleAchievementNumericUpDown.Maximum)
             {
-                CustomAchievementScale = this.scaleAchievementNumericUpDown.Maximum;
+                notificationLayoutWindow.CustomAchievementScale = this.scaleAchievementNumericUpDown.Maximum;
             }
-            if (CustomMasteryScale > this.scaleMasteryNumericUpDown.Maximum)
+            if (notificationLayoutWindow.CustomMasteryScale > this.scaleMasteryNumericUpDown.Maximum)
             {
-                CustomMasteryScale = this.scaleMasteryNumericUpDown.Maximum;
+                notificationLayoutWindow.CustomMasteryScale = this.scaleMasteryNumericUpDown.Maximum;
             }
-            this.scaleAchievementNumericUpDown.Value = CustomAchievementScale;
-            this.scaleMasteryNumericUpDown.Value = CustomMasteryScale;
+            this.scaleAchievementNumericUpDown.Value = notificationLayoutWindow.CustomAchievementScale;
+            this.scaleMasteryNumericUpDown.Value = notificationLayoutWindow.CustomMasteryScale;
 
-            this.inAchievementNumericUpDown.Value = CustomAchievementIn;
-            this.outAchievementNumericUpDown.Value = CustomAchievementOut;
-            this.inMasteryNumericUpDown.Value = CustomMasteryIn;
-            this.outMasteryNumericUpDown.Value = CustomMasteryOut;
+            this.notificationAchievementInNumericUpDown.Value = notificationLayoutWindow.CustomAchievementIn;
+            this.notificationAchievementOutNumericUpDown.Value = notificationLayoutWindow.CustomAchievementOut;
+            this.notificationMasteryInNumericUpDown.Value = notificationLayoutWindow.CustomMasteryIn;
+            this.notificationMasteryOutNumericUpDown.Value = notificationLayoutWindow.CustomMasteryOut;
 
             this.usernameTextBox.TextChanged += RequiredField_TextChange;
             this.apiKeyTextBox.TextChanged += RequiredField_TextChange;
-            this.statsGameAchievementsOverrideTextBox.TextChanged += statsGameAchievementsOverrideTextBox_TextChanged;
-            this.statsGamePointsOverrideTextBox.TextChanged += statsGamePointsOverrideTextBox_TextChanged;
-            this.statsGameTruePointsOverrideTextBox.TextChanged += statsGameTruePointsOverrideTextBox_TextChanged;
-            this.statsCompletedOverrideTextBox.TextChanged += statsCompletedTextBox_TextChanged;
 
-            this.setFontColorButton.Click += SetFontColorButton_Click;
-            this.fontOutlineColorButton.Click += FontOutlineColorButton_Click;
-            this.setFocusButton.Click += SetFocusButton_Click;
-            this.hideFocusButton.Click += HideFocusButton_Click;
+            this.statsGameAchievementsOverrideTextBox.TextChanged += OverrideTextBox_TextChanged;
+            this.statsGamePointsOverrideTextBox.TextChanged += OverrideTextBox_TextChanged;
+            this.statsGameTruePointsOverrideTextBox.TextChanged += OverrideTextBox_TextChanged;
+            this.statsCompletedOverrideTextBox.TextChanged += OverrideTextBox_TextChanged;
+            this.statsGameRatioOverrideTextBox.TextChanged += OverrideTextBox_TextChanged;
+            this.statsTruePointsOverrideTextBox.TextChanged += OverrideTextBox_TextChanged;
+            this.statsPointsOverrideTextBox.TextChanged += OverrideTextBox_TextChanged;
+            this.statsRatioOverrideTextBox.TextChanged += OverrideTextBox_TextChanged;
+            this.statsAwardsOverrideTextBox.TextChanged += OverrideTextBox_TextChanged;
+            this.statsRankOverrideTextBox.TextChanged += OverrideTextBox_TextChanged;
+
+            this.gameInfoGenreOverrideTextBox.TextChanged += OverrideTextBox_TextChanged;
+            this.gameInfoConsoleOverrideTextBox.TextChanged += OverrideTextBox_TextChanged;
+            this.gameInfoDeveloperOverrideTextBox.TextChanged += OverrideTextBox_TextChanged;
+            this.gameInfoReleaseDateOverrideTextBox.TextChanged += OverrideTextBox_TextChanged;
+            this.gameInfoPublisherOverrideTextBox.TextChanged += OverrideTextBox_TextChanged;
+            this.gameInfoTitleOverrideTextBox.TextChanged += OverrideTextBox_TextChanged;
+
             this.statsDefaultButton.Click += StatsDefaultButton_Click;
 
-            this.autoStartCheckbox.CheckedChanged += AutoStart_CheckedChanged;
             this.fontOutlineCheckBox.CheckedChanged += FontOutlineCheckBox_CheckedChanged;
-            this.focusStreamLabelsCheckBox.CheckedChanged += FocusStreamLabelsCheckBox_CheckedChanged;
-            this.autoLaunchLastFiveWindowCheckbox.CheckedChanged += AutoLaunchLastFiveWindowCheckbox_CheckedChanged;
-            this.autoLaunchGameInfoWindowCheckbox.CheckedChanged += AutoLaunchGameInfoWindowCheckbox_CheckedChanged;
-            this.autoLaunchNotificationsWindowCheckbox.CheckedChanged += AutoLaunchNotificationsWindow_CheckedChanged;
-            this.autoLaunchFocusWindowCheckBox.CheckedChanged += AutoLaunchFocusWindowCheckBox_CheckedChanged;
-            this.autoLaunchStatsWindowCheckbox.CheckedChanged += AutoLaunchStatsWindowCheckbox_CheckedChanged;
-            this.useCustomAchievementCheckbox.CheckedChanged += UseCustomAchievementCheckbox_CheckedChanged;
-            this.useCustomMasteryCheckbox.CheckedChanged += UseCustomMasteryCheckbox_CheckedChanged;
+            this.fontColorButton.Click += FontColorButton_Click;
+            this.fontOutlineColorButton.Click += FontOutlineColorButton_Click;
+            this.backgroundColorButton.Click += BackgroundColorButton_Click;
+
+            this.autoStartCheckbox.CheckedChanged += AutoLaunchCheckbox_CheckedChanged;
+            this.autoLaunchLastFiveWindowCheckbox.CheckedChanged += AutoLaunchCheckbox_CheckedChanged;
+            this.autoLaunchGameInfoWindowCheckbox.CheckedChanged += AutoLaunchCheckbox_CheckedChanged;
+            this.autoLaunchNotificationsWindowCheckbox.CheckedChanged += AutoLaunchCheckbox_CheckedChanged;
+            this.autoLaunchFocusWindowCheckBox.CheckedChanged += AutoLaunchCheckbox_CheckedChanged;
+            this.autoLaunchStatsWindowCheckbox.CheckedChanged += AutoLaunchCheckbox_CheckedChanged;
+
+            this.customAchievementEnableCheckbox.CheckedChanged += CustomAchievementEnableCheckbox_CheckedChanged;
+            this.useCustomMasteryCheckbox.CheckedChanged += CustomMasteryEnableCheckbox_CheckedChanged;
             this.acheivementEditOutlineCheckbox.CheckedChanged += AcheivementEditOutlineCheckbox_CheckedChanged;
             this.masteryEditOultineCheckbox.CheckedChanged += MasteryEditOultineCheckbox_CheckedChanged;
-            this.focusPointsEnable.CheckedChanged += focusPointsEnableCheckBox_CheckedChanged;
-            this.focusBorderEnableCheckbox.CheckedChanged += focusBorderEnableCheckBox_CheckedChanged;
-            this.statsRankCheckBox.CheckedChanged += StatsRankCheckBox_CheckedChanged;
-            this.statsAwardsCheckBox.CheckedChanged += statsAwardsCheckBox_CheckedChanged;
-            this.statsCompletedCheckBox.CheckedChanged += statsCompletedCheckBox_CheckedChanged;
-            this.notificationPointsEnableCheckBox.CheckedChanged += notificationsPointsEnableCheckBox_CheckedChanged;
-            this.notificationBorderEnableCheckBox.CheckedChanged += notificationsBorderEnableCheckBox_CheckedChanged;
-            this.lastFivePointsEnableCheckbox.CheckedChanged += LastFivePointsEnableCheckBox_CheckedChanged;
-            this.lastFiveBorderEnableCheckbox.CheckedChanged += LastFiveBorderEnableCheckBox_CheckedChanged;
+
+            this.focusPointsEnableCheckbox.CheckedChanged += OverrideEnableCheckBox_CheckedChanged;
+            this.focusBorderEnableCheckbox.CheckedChanged += OverrideEnableCheckBox_CheckedChanged;
+            this.lastFivePointsEnableCheckbox.CheckedChanged += OverrideEnableCheckBox_CheckedChanged;
+            this.lastFiveBorderEnableCheckbox.CheckedChanged += OverrideEnableCheckBox_CheckedChanged;
+            this.notificationPointsEnableCheckBox.CheckedChanged += OverrideEnableCheckBox_CheckedChanged;
+            this.notificationBorderEnableCheckBox.CheckedChanged += OverrideEnableCheckBox_CheckedChanged;
+
+            this.statsRankCheckBox.CheckedChanged += OverrideEnableCheckBox_CheckedChanged;
+            this.statsAwardsCheckBox.CheckedChanged += OverrideEnableCheckBox_CheckedChanged;
+            this.statsCompletedCheckBox.CheckedChanged += OverrideEnableCheckBox_CheckedChanged;
+            this.statsPointsCheckBox.CheckedChanged += OverrideEnableCheckBox_CheckedChanged;
+            this.statsTruePointsCheckBox.CheckedChanged += OverrideEnableCheckBox_CheckedChanged;
+            this.statsRatioCheckBox.CheckedChanged += OverrideEnableCheckBox_CheckedChanged;
+            this.statsGameRatioCheckBox.CheckedChanged += OverrideEnableCheckBox_CheckedChanged;
+            this.statsGamePointsCheckBox.CheckedChanged += OverrideEnableCheckBox_CheckedChanged;
+            this.statsGameTruePointsCheckBox.CheckedChanged += OverrideEnableCheckBox_CheckedChanged;
+            this.statsGameAchievementsCheckBox.CheckedChanged += OverrideEnableCheckBox_CheckedChanged;
+
+            this.gameInfoConsoleCheckBox.CheckedChanged += OverrideEnableCheckBox_CheckedChanged;
+            this.gameInfoDeveloperCheckBox.CheckedChanged += OverrideEnableCheckBox_CheckedChanged;
+            this.gameInfoPublisherCheckBox.CheckedChanged += OverrideEnableCheckBox_CheckedChanged;
+            this.gameInfoGenreCheckBox.CheckedChanged += OverrideEnableCheckBox_CheckedChanged;
+            this.gameInfoReleaseDateCheckBox.CheckedChanged += OverrideEnableCheckBox_CheckedChanged;
+            this.gameInfoTitleCheckBox.CheckedChanged += OverrideEnableCheckBox_CheckedChanged;
+
+            this.focusStreamLabelsCheckBox.CheckedChanged += StreamLabelsCheckBox_CheckedChanged;
+            this.lastFiveStreamLabelsCheckBox.CheckedChanged += StreamLabelsCheckBox_CheckedChanged;
+            this.statsStreamLabelsCheckBox.CheckedChanged += StreamLabelsCheckBox_CheckedChanged;
+            this.gameInfoStreamLabelsCheckBox.CheckedChanged += StreamLabelsCheckBox_CheckedChanged;
 
             this.fontFamilyComboBox.SelectedIndexChanged += FontFamilyComboBox_SelectedIndexChanged;
-            this.notificationsAchievementAnimationInComboBox.SelectedIndexChanged += AchievementAnimationInComboBox_SelectedIndexChanged;
-            this.notificationsAchievementAnimationOutComboBox.SelectedIndexChanged += AchievementAnimationOutComboBox_SelectedIndexChanged;
-            this.notificationsMasteryAnimationInComboBox.SelectedIndexChanged += MasteryAnimationInComboBox_SelectedIndexChanged;
-            this.notificationsMasteryAnimationOutComboBox.SelectedIndexChanged += MasteryAnimationOutComboBox_SelectedIndexChanged;
 
-            this.setBackgroundColorButton.Click += SetBackgroundColorButton_Click;
-            this.openLastFiveWindowButton.Click += OpenLastFiveWindowButton_Click;
-            this.customizeLastFiveButton.Click += CustomizeLastFiveButton_Click;
-            this.openGameInfoWindowButton.Click += OpenGameInfoWindowButton_Click;
-            this.customizeGameButton.Click += CustomizeGameButton_Click;
+            this.notificationsAchievementAnimationInComboBox.SelectedIndexChanged += NotificationAnimationComboBox_SelectedIndexChanged;
+            this.notificationsAchievementAnimationOutComboBox.SelectedIndexChanged += NotificationAnimationComboBox_SelectedIndexChanged;
+            this.notificationsMasteryAnimationInComboBox.SelectedIndexChanged += NotificationAnimationComboBox_SelectedIndexChanged;
+            this.notificationsMasteryAnimationOutComboBox.SelectedIndexChanged += NotificationAnimationComboBox_SelectedIndexChanged;
+
+            this.showLastFiveWindowButton.Click += ShowWindowButton_Click;
+            this.showGameInfoWindowButton.Click += ShowWindowButton_Click;
+            this.showNotificationWindowButton.Click += ShowWindowButton_Click;
+            this.showFocusWindowButton.Click += ShowWindowButton_Click;
+            this.showStatsWindowButton.Click += ShowWindowButton_Click;
+
             this.startButton.Click += StartButton_Click;
-            this.hideButton.Click += HideButton_Click;
-            this.openAlertsWindowButton.Click += ShowNotificationsWindowButton_Click;
-            this.customizeAlertsButton.Click += CustomizeAlertsButton_Click;
-            this.showFocusWindowButton.Click += ShowFocusLayoutWindowButton_Click;
-            this.customizeFocusButton.Click += CustomizeFocusButton_Click;
-            this.openStatsWindowButton.Click += ShowStatsWindowButton_Click;
-            this.customizeStatsButton.Click += CustomizeStatsButton_Click;
             this.stopButton.Click += StopButton_Click;
+            this.hideButton.Click += HideButton_Click;
+
+            this.setFocusButton.Click += SetFocusButton_Click;
+            this.hideFocusButton.Click += HideFocusButton_Click;
+            this.focusAchievementButtonLeft.Click += MoveFocusIndexLeft;
+            this.focusAchievementButtonRight.Click += MoveFocusIndexRight;
+
+            this.customizeLastFiveButton.Click += CustomizeLastFiveButton_Click;
+            this.customizeGameInfoButton.Click += CustomizeGameInfoButton_Click;
+            this.customizeAlertsButton.Click += CustomizeAlertsButton_Click;
+            this.customizeFocusButton.Click += CustomizeFocusButton_Click;
+            this.customizeStatsButton.Click += CustomizeStatsButton_Click;
+
             this.showAchievementButton.Click += ShowAchievementButton_Click;
             this.showGameMasteryButton.Click += ShowGameMasteryButton_Click;
             this.selectCustomAchievementButton.Click += SelectCustomAchievementButton_Click;
             this.selectCustomMasteryNotificationButton.Click += SelectCustomMasteryNotificationButton_Click;
 
-            this.scaleAchievementNumericUpDown.ValueChanged += ScaleAchievementNumericUpDown_ValueChanged;
-            this.scaleMasteryNumericUpDown.ValueChanged += ScaleMasteryNumericUpDown_ValueChanged;
-            this.fontOutlineNumericUpDown.ValueChanged += FontOutlineNumericUpDown_ValueChanged;
-            this.customAchievementXNumericUpDown.ValueChanged += CustomAchievementXNumericUpDown_ValueChanged;
-            this.customAchievementYNumericUpDown.ValueChanged += CustomAchievementYNumericUpDown_ValueChanged;
-            this.customMasteryXNumericUpDown.ValueChanged += CustomMasteryXNumericUpDown_ValueChanged;
-            this.customMasteryYNumericUpDown.ValueChanged += CustomMasteryYNumericUpDown_ValueChanged;
-            this.outAchievementNumericUpDown.ValueChanged += OutAchievementNumericUpDown_ValueChanged;
-            this.inAchievementNumericUpDown.ValueChanged += InAchievementNumericUpDown_ValueChanged;
-            this.outMasteryNumericUpDown.ValueChanged += OutMasteryNumericUpDown_ValueChanged;
-            this.inMasteryNumericUpDown.ValueChanged += InMasteryNumericUpDown_ValueChanged;
-            this.focusAchievementButtonLeft.Click += MoveFocusIndexLeft;
-            this.focusAchievementButtonRight.Click += MoveFocusIndexRight;
-
-            this.autoStartCheckbox.CheckedChanged += AutoStart_CheckedChanged;
-
-            FontFamily[] familyArray = FontFamily.Families.ToArray();
-
-            FontFamily[] focusFontFamily = familyArray.Where(fontFamily => fontFamily.Name.Equals(Settings.Default.focus_font_family_name)).ToArray();
-            FontFamily[] statsFontFamily = familyArray.Where(fontFamily => fontFamily.Name.Equals(Settings.Default.stats_font_family_name)).ToArray();
-            FontFamily[] notificationsFontFamily = familyArray.Where(fontFamily => fontFamily.Name.Equals(Settings.Default.notification_font_family_name)).ToArray();
-            FontFamily[] gameInfoFontFamily = familyArray.Where(fontFamily => fontFamily.Name.Equals(Settings.Default.game_info_font_family_name)).ToArray();
-            FontFamily[] lastFiveFontFamily = familyArray.Where(fontFamily => fontFamily.Name.Equals(Settings.Default.last_five_font_family_name)).ToArray();
-
-            if (focusFontFamily.Length > 0)
-            {
-                FocusFontFamily = focusFontFamily[0];
-            }
-            if (statsFontFamily.Length > 0)
-            {
-                StatsFontFamily = statsFontFamily[0];
-            }
-            if (notificationsFontFamily.Length > 0)
-            {
-                NotificationsFontFamily = notificationsFontFamily[0];
-            }
-            if (gameInfoFontFamily.Length > 0)
-            {
-                GameInfoFontFamily = gameInfoFontFamily[0];
-            }
-            if (lastFiveFontFamily.Length > 0)
-            {
-                LastFiveFontFamily = lastFiveFontFamily[0];
-            }
+            this.scaleAchievementNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
+            this.scaleMasteryNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
+            this.fontOutlineNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
+            this.customAchievementXNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
+            this.customAchievementYNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
+            this.customMasteryXNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
+            this.customMasteryYNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
+            this.notificationAchievementOutNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
+            this.notificationAchievementInNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
+            this.notificationMasteryOutNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
+            this.notificationMasteryInNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
         }
-        private async void SetAwardCount()
+        private async Task<int> GetAwardCount()
         {
             try
             {
@@ -3410,66 +856,65 @@ namespace Retro_Achievement_Tracker
 
                 if (siteAwardsNode == null)
                 {
-                    return;
+                    return 0;
                 }
                 this.raConnectionStatusPictureBox.Image = Resources.green_button;
 
                 HtmlNodeCollection htmlNodeCollections = siteAwardsNode.SelectNodes(XPathExpression.Compile("//div[contains(@class,'trophyimage')]"));
 
-                Awards = htmlNodeCollections == null ? 0 : htmlNodeCollections.Count;
+                return htmlNodeCollections == null ? 0 : htmlNodeCollections.Count;
             }
             catch
             {
-
+                return 0;
             }
         }
         private void RequiredField_TextChange(object sender, EventArgs e)
         {
             this.startButton.Enabled = CanStart();
         }
-        private void AutoLaunchStatsWindowCheckbox_CheckedChanged(object sender, EventArgs e)
-        {
-            Settings.Default.auto_stats = this.autoLaunchStatsWindowCheckbox.Checked;
-            Settings.Default.Save();
-        }
-        private void AutoLaunchFocusWindowCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            Settings.Default.auto_focus = this.autoLaunchFocusWindowCheckBox.Checked;
-            Settings.Default.Save();
-        }
-        private void AutoLaunchNotificationsWindow_CheckedChanged(object sender, EventArgs e)
-        {
-            Settings.Default.auto_notifications = this.autoLaunchNotificationsWindowCheckbox.Checked;
-            Settings.Default.Save();
-        }
-        private void AutoStart_CheckedChanged(object sender, EventArgs e)
-        {
-            Settings.Default.auto_start_checked = this.autoStartCheckbox.Checked;
-            Settings.Default.Save();
-        }
-        private void AutoLaunchGameInfoWindowCheckbox_CheckedChanged(object sender, EventArgs e)
-        {
-            Settings.Default.auto_game_info = this.autoLaunchGameInfoWindowCheckbox.Checked;
-            Settings.Default.Save();
-        }
-        private void AutoLaunchLastFiveWindowCheckbox_CheckedChanged(object sender, EventArgs e)
-        {
-            Settings.Default.auto_last_five = this.autoLaunchLastFiveWindowCheckbox.Checked;
-            Settings.Default.Save();
-        }
-        private void UseCustomAchievementCheckbox_CheckedChanged(object sender, EventArgs eventArgs)
-        {
-            CustomAchievementEnabled = ((CheckBox)sender).Checked;
 
-            this.useCustomAchievementCheckbox.Checked = CustomAchievementEnabled;
-            this.selectCustomAchievementButton.Enabled = CustomAchievementEnabled;
-            this.acheivementEditOutlineCheckbox.Enabled = CustomAchievementEnabled;
+        private void AutoLaunchCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox checkBox = sender as CheckBox;
+
+            switch (checkBox.Name)
+            {
+                case "autoLaunchLastFiveWindowCheckbox":
+                    Settings.Default.auto_last_five = checkBox.Checked;
+                    break;
+                case "autoLaunchGameInfoWindowCheckbox":
+                    Settings.Default.auto_game_info = checkBox.Checked;
+                    break;
+                case "autoStartCheckbox":
+                    Settings.Default.auto_start_checked = checkBox.Checked;
+                    break;
+                case "autoLaunchNotificationsWindowCheckbox":
+                    Settings.Default.auto_notifications = checkBox.Checked;
+                    break;
+                case "autoLaunchFocusWindowCheckBox":
+                    Settings.Default.auto_focus = checkBox.Checked;
+                    break;
+                case "autoLaunchStatsWindowCheckbox":
+                    Settings.Default.auto_stats = checkBox.Checked;
+                    break;
+            }
+
+            Settings.Default.Save();
+        }
+        private void CustomAchievementEnableCheckbox_CheckedChanged(object sender, EventArgs eventArgs)
+        {
+            notificationLayoutWindow.CustomAchievementEnabled = ((CheckBox)sender).Checked;
+
+            this.customAchievementEnableCheckbox.Checked = notificationLayoutWindow.CustomAchievementEnabled;
+            this.selectCustomAchievementButton.Enabled = notificationLayoutWindow.CustomAchievementEnabled;
+            this.acheivementEditOutlineCheckbox.Enabled = notificationLayoutWindow.CustomAchievementEnabled;
 
             this.customAchievementXNumericUpDown.Enabled = false;
             this.customAchievementYNumericUpDown.Enabled = false;
             this.scaleAchievementNumericUpDown.Enabled = false;
-            this.inAchievementNumericUpDown.Enabled = false;
-            this.outAchievementNumericUpDown.Enabled = false;
+            this.notificationAchievementInNumericUpDown.Enabled = false;
+            this.notificationAchievementOutNumericUpDown.Enabled = false;
 
             this.masteryEditOultineCheckbox.Checked = false;
 
@@ -3481,51 +926,42 @@ namespace Retro_Achievement_Tracker
             this.notificationsAchievementAnimationInComboBox.Enabled = false;
             this.notificationsAchievementAnimationOutComboBox.Enabled = false;
 
-            NotificationsWindow.Dispose();
+            notificationLayoutWindow.Dispose();
 
-            CreateNotificationsWindow();
+            notificationLayoutWindow = new NotificationLayoutWindow();
 
-            NotificationsWindow.chromiumWebBrowser.RequestHandler = new CustomRequestHandler() { customAchievementEnabled = CustomAchievementEnabled, customMasteryEnabled = CustomMasteryEnabled };
+            notificationLayoutWindow.chromiumWebBrowser.RequestHandler = new CustomRequestHandler() { customAchievementEnabled = notificationLayoutWindow.CustomAchievementEnabled, customMasteryEnabled = notificationLayoutWindow.CustomMasteryEnabled };
 
-            if (!CustomAchievementEnabled)
+            if (!notificationLayoutWindow.CustomAchievementEnabled)
             {
-                NotificationsWindow.DisableAchievementEdit();
+                notificationLayoutWindow.DisableAchievementEdit();
 
                 this.acheivementEditOutlineCheckbox.Checked = false;
-
-                NotificationsWindow.SetAchievementInAnimation(AnimationDirection.STATIC.ToString());
-                NotificationsWindow.SetAchievementOutAnimation(AnimationDirection.UP.ToString());
-
-
             }
-            else if (string.IsNullOrEmpty(CustomAchievementFile))
+            else if (string.IsNullOrEmpty(notificationLayoutWindow.CustomAchievementFile))
             {
                 SelectCustomAchievementButton_Click(null, null);
             }
-            if (!NotificationsWindow.IsDisposed)
+            if (!notificationLayoutWindow.IsDisposed)
             {
-                NotificationsWindow.SetAchievementWidth(CustomAchievementEnabled ? Convert.ToInt32(CustomAchievementScale * GetVideoWidth(CustomAchievementFile)) : 1200);
-                NotificationsWindow.SetAchievementInAnimation(NotificationAchievementAnimationIn.ToString());
-                NotificationsWindow.SetAchievementOutAnimation(NotificationAchievementAnimationOut.ToString());
-            }
-            if (this.autoLaunchNotificationsWindowCheckbox.Checked)
-            {
-                NotificationsWindow.Show();
+                notificationLayoutWindow.SetAchievementWidth();
+                notificationLayoutWindow.SetAchievementInAnimation();
+                notificationLayoutWindow.SetAchievementOutAnimation();
             }
         }
-        private void UseCustomMasteryCheckbox_CheckedChanged(object sender, EventArgs eventArgs)
+        private void CustomMasteryEnableCheckbox_CheckedChanged(object sender, EventArgs eventArgs)
         {
-            CustomMasteryEnabled = ((CheckBox)sender).Checked;
+            notificationLayoutWindow.CustomMasteryEnabled = ((CheckBox)sender).Checked;
 
-            this.useCustomMasteryCheckbox.Checked = CustomMasteryEnabled;
-            this.selectCustomMasteryNotificationButton.Enabled = CustomMasteryEnabled;
-            this.masteryEditOultineCheckbox.Enabled = CustomMasteryEnabled;
+            this.useCustomMasteryCheckbox.Checked = notificationLayoutWindow.CustomMasteryEnabled;
+            this.selectCustomMasteryNotificationButton.Enabled = notificationLayoutWindow.CustomMasteryEnabled;
+            this.masteryEditOultineCheckbox.Enabled = notificationLayoutWindow.CustomMasteryEnabled;
 
             this.customMasteryXNumericUpDown.Enabled = false;
             this.customMasteryYNumericUpDown.Enabled = false;
             this.scaleMasteryNumericUpDown.Enabled = false;
-            this.inMasteryNumericUpDown.Enabled = false;
-            this.outMasteryNumericUpDown.Enabled = false;
+            this.notificationMasteryInNumericUpDown.Enabled = false;
+            this.notificationMasteryOutNumericUpDown.Enabled = false;
 
             this.masteryEditOultineCheckbox.Checked = false;
 
@@ -3535,40 +971,36 @@ namespace Retro_Achievement_Tracker
             this.inLabel2.Enabled = false;
             this.outLabel2.Enabled = false;
 
-            NotificationsWindow.Dispose();
+            notificationLayoutWindow.Dispose();
 
-            CreateNotificationsWindow();
+            notificationLayoutWindow = new NotificationLayoutWindow();
 
-            NotificationsWindow.chromiumWebBrowser.RequestHandler = new CustomRequestHandler() { customAchievementEnabled = CustomAchievementEnabled, customMasteryEnabled = CustomMasteryEnabled };
+            notificationLayoutWindow.chromiumWebBrowser.RequestHandler = new CustomRequestHandler() { customAchievementEnabled = notificationLayoutWindow.CustomAchievementEnabled, customMasteryEnabled = notificationLayoutWindow.CustomMasteryEnabled };
 
-            if (!CustomMasteryEnabled)
+            if (!notificationLayoutWindow.CustomMasteryEnabled)
             {
-                NotificationsWindow.DisableMasteryEdit();
+                notificationLayoutWindow.DisableMasteryEdit();
 
-                NotificationsWindow.SetMasteryInAnimation(AnimationDirection.STATIC.ToString());
-                NotificationsWindow.SetMasteryOutAnimation(AnimationDirection.UP.ToString());
+                notificationLayoutWindow.SetMasteryInAnimation();
+                notificationLayoutWindow.SetMasteryOutAnimation();
             }
-            else if (string.IsNullOrEmpty(CustomMasteryFile))
+            else if (string.IsNullOrEmpty(notificationLayoutWindow.CustomMasteryFile))
             {
                 SelectCustomMasteryNotificationButton_Click(null, null);
             }
-            if (!NotificationsWindow.IsDisposed)
+            if (!notificationLayoutWindow.IsDisposed)
             {
-                NotificationsWindow.SetMasteryWidth(this.useCustomMasteryCheckbox.Checked ? Convert.ToInt32(CustomMasteryScale * GetVideoWidth(CustomMasteryFile)) : 1200);
-                NotificationsWindow.SetMasteryInAnimation(NotificationMasteryAnimationIn.ToString());
-                NotificationsWindow.SetMasteryOutAnimation(NotificationMasteryAnimationOut.ToString());
-            }
-            if (this.autoLaunchNotificationsWindowCheckbox.Checked)
-            {
-                NotificationsWindow.Show();
+                notificationLayoutWindow.SetMasteryWidth();
+                notificationLayoutWindow.SetMasteryInAnimation();
+                notificationLayoutWindow.SetMasteryOutAnimation();
             }
         }
         private void AcheivementEditOutlineCheckbox_CheckedChanged(object sender, EventArgs eventArgs)
         {
             if (((CheckBox)sender).Checked)
             {
-                NotificationsWindow.EnableAchievementEdit();
-                NotificationsWindow.SendAchievementNotification(new Achievement()
+                notificationLayoutWindow.EnableAchievementEdit();
+                notificationLayoutWindow.SendAchievementNotification(new Achievement()
                 {
                     Title = "Thrilling!!!!",
                     Description = "Color every bit of Dinosaur 2. [Must color white if leaving white]",
@@ -3579,8 +1011,8 @@ namespace Retro_Achievement_Tracker
                 this.customAchievementXNumericUpDown.Enabled = true;
                 this.customAchievementYNumericUpDown.Enabled = true;
                 this.scaleAchievementNumericUpDown.Enabled = true;
-                this.inAchievementNumericUpDown.Enabled = true;
-                this.outAchievementNumericUpDown.Enabled = true;
+                this.notificationAchievementInNumericUpDown.Enabled = true;
+                this.notificationAchievementOutNumericUpDown.Enabled = true;
 
                 this.xPositionLabel1.Enabled = true;
                 this.yPositionLabel1.Enabled = true;
@@ -3593,13 +1025,13 @@ namespace Retro_Achievement_Tracker
             }
             else
             {
-                NotificationsWindow.DisableAchievementEdit();
+                notificationLayoutWindow.DisableAchievementEdit();
 
                 this.customAchievementXNumericUpDown.Enabled = false;
                 this.customAchievementYNumericUpDown.Enabled = false;
                 this.scaleAchievementNumericUpDown.Enabled = false;
-                this.inAchievementNumericUpDown.Enabled = false;
-                this.outAchievementNumericUpDown.Enabled = false;
+                this.notificationAchievementInNumericUpDown.Enabled = false;
+                this.notificationAchievementOutNumericUpDown.Enabled = false;
 
                 this.xPositionLabel1.Enabled = false;
                 this.yPositionLabel1.Enabled = false;
@@ -3610,24 +1042,22 @@ namespace Retro_Achievement_Tracker
                 this.notificationsAchievementAnimationInComboBox.Enabled = false;
                 this.notificationsAchievementAnimationOutComboBox.Enabled = false;
             }
-            NotificationsWindow.SetAchievementLeft(this.useCustomAchievementCheckbox.Checked ? CustomAchievementX : -15);
-            NotificationsWindow.SetAchievementTop(this.useCustomAchievementCheckbox.Checked ? CustomAchievementY : 5);
-
-            var width = this.useCustomAchievementCheckbox.Checked ? GetVideoWidth(CustomAchievementFile) : 1200;
-            NotificationsWindow.SetAchievementWidth(this.useCustomAchievementCheckbox.Checked ? Convert.ToInt32(width * CustomAchievementScale) : width);
+            notificationLayoutWindow.SetAchievementLeft();
+            notificationLayoutWindow.SetAchievementTop();
+            notificationLayoutWindow.SetAchievementWidth();
         }
         private void MasteryEditOultineCheckbox_CheckedChanged(object sender, EventArgs eventArgs)
         {
             if (((CheckBox)sender).Checked)
             {
-                NotificationsWindow.EnableMasteryEdit();
-                NotificationsWindow.SendMasteryNotification(UserSummary.GameSummaries[0], UserSummary.GameAchievementSummaries[0]);
+                notificationLayoutWindow.EnableMasteryEdit();
+                notificationLayoutWindow.SendMasteryNotification(UserSummary.GameSummaries[0], UserSummary.GameAchievementSummaries[0]);
 
                 this.customMasteryXNumericUpDown.Enabled = true;
                 this.customMasteryYNumericUpDown.Enabled = true;
                 this.scaleMasteryNumericUpDown.Enabled = true;
-                this.inMasteryNumericUpDown.Enabled = true;
-                this.outMasteryNumericUpDown.Enabled = true;
+                this.notificationMasteryInNumericUpDown.Enabled = true;
+                this.notificationMasteryOutNumericUpDown.Enabled = true;
 
                 this.xPositionLabel2.Enabled = true;
                 this.yPositionLabel2.Enabled = true;
@@ -3640,13 +1070,13 @@ namespace Retro_Achievement_Tracker
             }
             else
             {
-                NotificationsWindow.DisableMasteryEdit();
+                notificationLayoutWindow.DisableMasteryEdit();
 
                 this.customMasteryXNumericUpDown.Enabled = false;
                 this.customMasteryYNumericUpDown.Enabled = false;
                 this.scaleMasteryNumericUpDown.Enabled = false;
-                this.inMasteryNumericUpDown.Enabled = false;
-                this.outMasteryNumericUpDown.Enabled = false;
+                this.notificationMasteryInNumericUpDown.Enabled = false;
+                this.notificationMasteryOutNumericUpDown.Enabled = false;
 
                 this.xPositionLabel2.Enabled = false;
                 this.yPositionLabel2.Enabled = false;
@@ -3657,63 +1087,79 @@ namespace Retro_Achievement_Tracker
                 this.notificationsMasteryAnimationInComboBox.Enabled = false;
                 this.notificationsMasteryAnimationOutComboBox.Enabled = false;
             }
-            NotificationsWindow.SetMasteryLeft(this.useCustomMasteryCheckbox.Checked ? CustomMasteryX : -15);
-            NotificationsWindow.SetMasteryTop(this.useCustomMasteryCheckbox.Checked ? CustomMasteryY : 35);
+            notificationLayoutWindow.SetMasteryLeft();
+            notificationLayoutWindow.SetMasteryTop();
+            notificationLayoutWindow.SetMasteryWidth();
+        }
+        private void CustomNumericUpDown_ValueChanged(object sender, EventArgs eventArgs)
+        {
+            NumericUpDown numericUpDown = sender as NumericUpDown;
 
-            var width = this.useCustomMasteryCheckbox.Checked ? GetVideoWidth(CustomMasteryFile) : 1200;
-            NotificationsWindow.SetMasteryWidth(this.useCustomMasteryCheckbox.Checked ? Convert.ToInt32(width * CustomMasteryScale) : width);
-        }
-        private void CustomAchievementXNumericUpDown_ValueChanged(object sender, EventArgs eventArgs)
-        {
-            CustomAchievementX = Convert.ToInt32(((NumericUpDown)sender).Value);
-        }
-        private void CustomAchievementYNumericUpDown_ValueChanged(object sender, EventArgs eventArgs)
-        {
-            CustomAchievementY = Convert.ToInt32(((NumericUpDown)sender).Value);
-        }
-        private void CustomMasteryXNumericUpDown_ValueChanged(object sender, EventArgs eventArgs)
-        {
-            CustomMasteryX = Convert.ToInt32(((NumericUpDown)sender).Value);
-        }
-        private void CustomMasteryYNumericUpDown_ValueChanged(object sender, EventArgs eventArgs)
-        {
-            CustomMasteryY = Convert.ToInt32(((NumericUpDown)sender).Value);
-        }
-        private void ScaleAchievementNumericUpDown_ValueChanged(object sender, EventArgs eventArgs)
-        {
-            CustomAchievementScale = this.scaleAchievementNumericUpDown.Value;
-        }
-        private void ScaleMasteryNumericUpDown_ValueChanged(object sender, EventArgs eventArgs)
-        {
-            CustomMasteryScale = this.scaleMasteryNumericUpDown.Value;
-        }
-        private void OutAchievementNumericUpDown_ValueChanged(object sender, EventArgs e)
-        {
-            CustomAchievementOut = Convert.ToInt32(((NumericUpDown)sender).Value);
-        }
-        private void InAchievementNumericUpDown_ValueChanged(object sender, EventArgs e)
-        {
-            CustomAchievementIn = Convert.ToInt32(((NumericUpDown)sender).Value);
-        }
-        private void OutMasteryNumericUpDown_ValueChanged(object sender, EventArgs e)
-        {
-            CustomMasteryOut = Convert.ToInt32(((NumericUpDown)sender).Value);
-        }
-        private void InMasteryNumericUpDown_ValueChanged(object sender, EventArgs e)
-        {
-            CustomMasteryIn = Convert.ToInt32(((NumericUpDown)sender).Value);
+            switch (numericUpDown.Name)
+            {
+                case "customAchievementXNumericUpDown":
+                    notificationLayoutWindow.CustomAchievementX = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "customAchievementYNumericUpDown":
+                    notificationLayoutWindow.CustomAchievementY = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "customMasteryXNumericUpDown":
+                    notificationLayoutWindow.CustomMasteryX = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "customMasteryYNumericUpDown":
+                    notificationLayoutWindow.CustomMasteryY = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "scaleAchievementNumericUpDown":
+                    notificationLayoutWindow.CustomAchievementScale = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "scaleMasteryNumericUpDown":
+                    notificationLayoutWindow.CustomMasteryScale = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "notificationAchievementInNumericUpDown":
+                    notificationLayoutWindow.CustomAchievementIn = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "notificationAchievementOutNumericUpDown":
+                    notificationLayoutWindow.CustomAchievementOut = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "notificationMasteryInNumericUpDown":
+                    notificationLayoutWindow.CustomMasteryIn = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "notificationMasteryOutNumericUpDown":
+                    notificationLayoutWindow.CustomMasteryOut = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "fontOutlineNumericUpDown":
+                    switch (MenuState)
+                    {
+                        case CustomMenuState.STATS:
+                            statsLayoutWindow.FontOutlineSize = Convert.ToInt32(numericUpDown.Value);
+                            break;
+                        case CustomMenuState.ALERTS:
+                            notificationLayoutWindow.FontOutlineSize = Convert.ToInt32(numericUpDown.Value);
+                            break;
+                        case CustomMenuState.GAME_INFO:
+                            gameInfoLayoutWindow.FontOutlineSize = Convert.ToInt32(numericUpDown.Value);
+                            break;
+                        case CustomMenuState.LAST_FIVE:
+                            lastFiveLayoutWindow.FontOutlineSize = Convert.ToInt32(numericUpDown.Value);
+                            break;
+                        case CustomMenuState.FOCUS:
+                            focusLayoutWindow.FontOutlineSize = Convert.ToInt32(numericUpDown.Value);
+                            break;
+                    }
+                    break;
+            }
         }
         private void SelectCustomAchievementButton_Click(object sender, EventArgs eventArgs)
         {
             if (this.openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                CustomAchievementFile = this.openFileDialog1.FileName;
+                notificationLayoutWindow.CustomAchievementFile = this.openFileDialog1.FileName;
             }
             else
             {
-                if (this.useCustomAchievementCheckbox.Checked && string.IsNullOrEmpty(CustomAchievementFile))
+                if (this.customAchievementEnableCheckbox.Checked && string.IsNullOrEmpty(notificationLayoutWindow.CustomAchievementFile))
                 {
-                    this.useCustomAchievementCheckbox.Checked = false;
+                    this.customAchievementEnableCheckbox.Checked = false;
                 }
             }
         }
@@ -3721,11 +1167,11 @@ namespace Retro_Achievement_Tracker
         {
             if (this.openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                CustomMasteryFile = this.openFileDialog1.FileName;
+                notificationLayoutWindow.CustomMasteryFile = this.openFileDialog1.FileName;
             }
             else
             {
-                if (this.useCustomMasteryCheckbox.Checked && string.IsNullOrEmpty(CustomMasteryFile))
+                if (this.useCustomMasteryCheckbox.Checked && string.IsNullOrEmpty(notificationLayoutWindow.CustomMasteryFile))
                 {
                     this.useCustomMasteryCheckbox.Checked = false;
                 }
@@ -3737,126 +1183,54 @@ namespace Retro_Achievement_Tracker
                 && UserSummary.RecentAchievements.Count > 0
                 && UserSummary.RecentAchievements[0] != null)
             {
-                NotificationsWindow.EnqueueAchievementNotification(UserSummary.RecentAchievements[0],
-                    this.useCustomAchievementCheckbox.Checked ? GetVideoDuration(CustomAchievementFile) : 7000,
-                            this.useCustomAchievementCheckbox.Checked ? CustomAchievementIn : 0,
-                            this.useCustomAchievementCheckbox.Checked ? CustomAchievementOut : 5400);
+                notificationLayoutWindow.EnqueueAchievementNotification(UserSummary.RecentAchievements[0]);
             }
             else
             {
-                NotificationsWindow.EnqueueAchievementNotification(
+                notificationLayoutWindow.EnqueueAchievementNotification(
                      new Achievement()
                      {
                          Title = "Thrilling!!!!",
                          Description = "Color every bit of Dinosaur 2. [Must color white if leaving white]",
                          BadgeNumber = "49987",
                          Points = 1
-                     }, this.useCustomAchievementCheckbox.Checked ? GetVideoDuration(CustomAchievementFile) : 7000,
-                            this.useCustomAchievementCheckbox.Checked ? CustomAchievementIn : 0,
-                            this.useCustomAchievementCheckbox.Checked ? CustomAchievementOut : 5200);
+                     });
             }
-            NotificationsWindow.FireNotifications();
+            notificationLayoutWindow.FireNotifications();
         }
         private void ShowGameMasteryButton_Click(object sender, EventArgs eventArgs)
         {
-            NotificationsWindow.EnqueueMasteryNotification(UserSummary.GameSummaries[0],
-                UserSummary.GameAchievementSummaries[0],
-                this.useCustomMasteryCheckbox.Checked ? GetVideoDuration(CustomMasteryFile) : 11000,
-                            this.useCustomMasteryCheckbox.Checked ? CustomMasteryIn : 0,
-                            this.useCustomMasteryCheckbox.Checked ? CustomMasteryOut : 5200);
-
-            NotificationsWindow.FireNotifications();
-        }
-        public void SetLockedAchievements(List<Achievement> achievements)
-        {
-            if (achievements != null && achievements.Count > 0)
-            {
-                int gameId = achievements[0].GameId;
-                if (LockedAchievements == null || (LockedAchievements.Count > 0 && gameId != LockedAchievements[0].GameId))
-                {
-                    CurrentlyFocusedIndex = 0;
-                    CurrentlyViewingAchievement = null;
-                }
-            }
-            else
-            {
-                CurrentlyViewingAchievement = null;
-            }
-            LockedAchievements = achievements.ToList();
-
-            UpdateFocusAchievement();
-        }
-        public void UpdateFocusAchievement()
-        {
-            if (this.Visible)
-            {
-                Invoke((MethodInvoker)delegate
-                {
-                    UpdateFocusButtons();
-
-                    if (LockedAchievements.Count > 0)
-                    {
-                        if (CurrentlyFocusedIndex >= LockedAchievements.Count)
-                        {
-                            CurrentlyFocusedIndex = LockedAchievements.Count - 1;
-                        }
-                        else if (CurrentlyFocusedIndex < 0)
-                        {
-                            CurrentlyFocusedIndex = 0;
-                        }
-                        CurrentlyViewingAchievement = LockedAchievements[CurrentlyFocusedIndex];
-
-                        this.focusAchievementPictureBox.ImageLocation = "https://retroachievements.org/Badge/" + CurrentlyViewingAchievement.BadgeNumber + ".png";
-                        this.focusAchievementTitleLabel.Text = CurrentlyViewingAchievement.Title;
-                        this.focusAchievementDescriptionLabel.Text = CurrentlyViewingAchievement.Description;
-                    }
-                    else
-                    {
-                        CurrentlyFocusedIndex = 0;
-
-                        this.focusAchievementPictureBox.ImageLocation = string.Empty;
-                        this.focusAchievementTitleLabel.Text = string.Empty;
-                        this.focusAchievementDescriptionLabel.Text = string.Empty;
-
-                        FocusWindow.HideFocus();
-                    }
-                });
-            }
+            notificationLayoutWindow.EnqueueMasteryNotification(UserSummary.GameSummaries[0], UserSummary.GameAchievementSummaries[0]);
+            notificationLayoutWindow.FireNotifications();
         }
         private void SetFocusButton_Click(object sender, EventArgs e)
         {
-            CurrentlyFocusedAchievement = CurrentlyViewingAchievement;
-
-            FocusWindow.SetFocus(CurrentlyFocusedAchievement);
-            if (StreamLabelsFocusEnable)
-            {
-                WriteFocusStreamLabels();
-            }
+            focusLayoutWindow.SetFocus(CurrentlyViewingAchievement);
         }
         private void HideFocusButton_Click(object sender, EventArgs e)
         {
-            FocusWindow.HideFocus();
-            ClearFocusStreamLabels();
+            focusLayoutWindow.HideFocus();
+            StreamLabelManager.ClearFocusStreamLabels();
         }
         private void MoveFocusIndexLeft(object sender, EventArgs e)
         {
-            CurrentlyFocusedIndex--;
+            CurrentlyViewingIndex--;
 
-            if (CurrentlyFocusedIndex < 0)
+            if (CurrentlyViewingIndex < 0)
             {
-                CurrentlyFocusedIndex = 0;
+                CurrentlyViewingIndex = 0;
             }
-            UpdateFocusAchievement();
+            UpdateCurrentlyViewingAchievement();
         }
         private void MoveFocusIndexRight(object sender, EventArgs e)
         {
-            CurrentlyFocusedIndex++;
+            CurrentlyViewingIndex++;
 
-            if (CurrentlyFocusedIndex >= LockedAchievements.Count)
+            if (CurrentlyViewingIndex >= LockedAchievements.Count)
             {
-                CurrentlyFocusedIndex = LockedAchievements.Count - 1;
+                CurrentlyViewingIndex = LockedAchievements.Count - 1;
             }
-            UpdateFocusAchievement();
+            UpdateCurrentlyViewingAchievement();
         }
         private void UpdateFocusButtons()
         {
@@ -3872,12 +1246,12 @@ namespace Retro_Achievement_Tracker
                 this.setFocusButton.Enabled = true;
                 this.hideFocusButton.Enabled = true;
 
-                if (CurrentlyFocusedIndex == 0)
+                if (CurrentlyViewingIndex == 0)
                 {
                     this.focusAchievementButtonLeft.Enabled = false;
                     this.focusAchievementButtonRight.Enabled = LockedAchievements.Count > 1;
                 }
-                else if (CurrentlyFocusedIndex == LockedAchievements.Count - 1)
+                else if (CurrentlyViewingIndex == LockedAchievements.Count - 1)
                 {
                     this.focusAchievementButtonLeft.Enabled = true;
                     this.focusAchievementButtonRight.Enabled = false;
@@ -3889,125 +1263,76 @@ namespace Retro_Achievement_Tracker
                 }
             }
         }
-        private String HexConverter(Color c)
+
+        private void UpdateStatLabels()
         {
-            return "#" + c.R.ToString("X2") + c.G.ToString("X2") + c.B.ToString("X2");
-        }
-        public int GetVideoWidth(string input)
-        {
-            var inputFile = new MediaFile { Filename = input };
-            using (var engine = new Engine())
+            Invoke((MethodInvoker)delegate
             {
-                engine.GetMetadata(inputFile);
-            }
-            var frameSize = inputFile.Metadata.VideoData.FrameSize;
-
-            return Convert.ToInt32(frameSize.Substring(0, frameSize.IndexOf("x")));
-        }
-        private int GetVideoDuration(string input)
-        {
-            var inputFile = new MediaFile { Filename = input };
-
-            using (var engine = new Engine())
-            {
-                engine.GetMetadata(inputFile);
-            }
-            return Convert.ToInt32(inputFile.Metadata.Duration.TotalMilliseconds);
-        }
-        private void CreateDataBindings()
-        {
-            Binding rankBinding = new Binding("Text", this, "Rank");
-            rankBinding.Format += new ConvertEventHandler((sender, convertEventArgs) =>
-            {
-                convertEventArgs.Value = "Rank: " + convertEventArgs.Value;
+                this.rankLabel.Text = "Rank: " + UserSummary.Rank;
+                this.pointsLabel.Text = "Points: " + UserSummary.TotalPoints;
+                this.awardsLabel.Text = "Awards: " + UserSummary.Awards;
+                this.truePointsLabel.Text = "True Points: " + UserSummary.TotalTruePoints;
+                this.ratioLabel.Text = "Ratio: " + UserSummary.RetroRatio;
             });
-
-            this.siteRankLabel.DataBindings.Add(rankBinding);
-
-            Binding scoreBinding = new Binding("Text", this, "Points");
-            scoreBinding.Format += new ConvertEventHandler((sender, convertEventArgs) =>
-            {
-                convertEventArgs.Value = "Points: " + convertEventArgs.Value;
-            });
-
-            this.pointsLabel.DataBindings.Add(scoreBinding);
-
-            Binding awardsBinding = new Binding("Text", this, "Awards");
-            awardsBinding.Format += new ConvertEventHandler((sender, convertEventArgs) =>
-            {
-                convertEventArgs.Value = "Awards: " + convertEventArgs.Value;
-            });
-            this.awardsLabel.DataBindings.Add(awardsBinding);
-
-            Binding truePointsBinding = new Binding("Text", this, "TruePoints");
-            truePointsBinding.Format += new ConvertEventHandler((sender, convertEventArgs) =>
-            {
-                convertEventArgs.Value = "True Points: " + convertEventArgs.Value;
-            });
-            this.truePointsLabel.DataBindings.Add(truePointsBinding);
-
-            Binding ratioBinding = new Binding("Text", this, "Ratio");
-            ratioBinding.Format += new ConvertEventHandler((sender, convertEventArgs) =>
-            {
-                convertEventArgs.Value = "Ratio: " + Ratio.ToString("0.00") + " %";
-            });
-            this.ratioLabel.DataBindings.Add(ratioBinding);
         }
         protected virtual void OnPropertyChanged(string property)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
-        private void DegradeConnectivity()
+        private void ShowWindowButton_Click(object sender, EventArgs e)
         {
-            this.raConnectionStatusPictureBox.Image = Resources.yellow_button;
+            Button button = sender as Button;
 
-            RAErrors++;
+            switch (button.Name)
+            {
+                case "showFocusWindowButton":
+                    if (focusLayoutWindow.IsDisposed)
+                    {
+                        focusLayoutWindow = new FocusLayoutWindow();
 
-            if (RAErrors > 5)
-            {
-                this.StopButton_Click(null, null);
+                        if (CurrentlyViewingAchievement != null)
+                        {
+                            focusLayoutWindow.SetFocus(CurrentlyViewingAchievement);
+                        }
+                        else
+                        {
+                            focusLayoutWindow.HideFocus();
+                        }
+                    }
+                    focusLayoutWindow.Show();
+                    break;
+                case "showStatsWindowButton":
+                    if (statsLayoutWindow.IsDisposed)
+                    {
+                        statsLayoutWindow = new StatsLayoutWindow();
+                        UpdateStats();
+                    }
+                    statsLayoutWindow.Show();
+                    break;
+                case "showNotificationWindowButton":
+                    if (notificationLayoutWindow.IsDisposed)
+                    {
+                        notificationLayoutWindow = new NotificationLayoutWindow();
+                    }
+                    notificationLayoutWindow.Show();
+                    break;
+                case "showGameInfoWindowButton":
+                    if (gameInfoLayoutWindow.IsDisposed)
+                    {
+                        gameInfoLayoutWindow = new GameInfoLayoutWindow();
+                        UpdateGameInfo();
+                    }
+                    gameInfoLayoutWindow.Show();
+                    break;
+                case "showLastFiveWindowButton":
+                    if (lastFiveLayoutWindow.IsDisposed)
+                    {
+                        lastFiveLayoutWindow = new LastFiveLayoutWindow();
 
-                this.raConnectionStatusPictureBox.Image = Resources.red_button;
-            }
-        }
-        private void ShowFocusLayoutWindowButton_Click(object sender, EventArgs e)
-        {
-            if (!FocusWindow.Visible)
-            {
-                CreateFocusWindow();
-                FocusWindow.Show();
-            }
-        }
-        private void ShowStatsWindowButton_Click(object sender, EventArgs e)
-        {
-            if (!StatsWindow.Visible)
-            {
-                CreateStatsWindow();
-                StatsWindow.Show();
-            }
-        }
-        private void ShowNotificationsWindowButton_Click(object sender, EventArgs e)
-        {
-            if (!NotificationsWindow.Visible)
-            {
-                CreateNotificationsWindow();
-                NotificationsWindow.Show();
-            }
-        }
-        private void OpenGameInfoWindowButton_Click(object sender, EventArgs e)
-        {
-            if (!GameInfoWindow.Visible)
-            {
-                CreateGameInfoWindow();
-                GameInfoWindow.Show();
-            }
-        }
-        private void OpenLastFiveWindowButton_Click(object sender, EventArgs e)
-        {
-            if (!LastFiveWindow.Visible)
-            {
-                CreateLastFiveWindow();
-                LastFiveWindow.Show();
+                        UpdateLastFive();
+                    }
+                    lastFiveLayoutWindow.Show();
+                    break;
             }
         }
         private void CustomizeStatsButton_Click(object sender, EventArgs e)
@@ -4053,7 +1378,7 @@ namespace Retro_Achievement_Tracker
                 {
                     this.fontFamilyComboBox.Items.Add(fontFamily.Name);
                 }
-                this.fontFamilyComboBox.SelectedIndex = Array.FindIndex(familyArray, row => row.Name == StatsFontFamily.Name);
+                this.fontFamilyComboBox.SelectedIndex = Array.FindIndex(familyArray, row => row.Name == statsLayoutWindow.FontFamily.Name);
 
                 MenuState = CustomMenuState.STATS;
 
@@ -4108,7 +1433,7 @@ namespace Retro_Achievement_Tracker
                 {
                     this.fontFamilyComboBox.Items.Add(fontFamily.Name);
                 }
-                this.fontFamilyComboBox.SelectedIndex = Array.FindIndex(familyArray, row => row.Name == NotificationsFontFamily.Name);
+                this.fontFamilyComboBox.SelectedIndex = Array.FindIndex(familyArray, row => row.Name == notificationLayoutWindow.FontFamily.Name);
 
                 MenuState = CustomMenuState.ALERTS;
 
@@ -4126,7 +1451,7 @@ namespace Retro_Achievement_Tracker
                 HideAllMenuItems();
             }
         }
-        private void CustomizeGameButton_Click(object sender, EventArgs e)
+        private void CustomizeGameInfoButton_Click(object sender, EventArgs e)
         {
             if (!MenuState.Equals(CustomMenuState.GAME_INFO))
             {
@@ -4169,7 +1494,7 @@ namespace Retro_Achievement_Tracker
                 {
                     this.fontFamilyComboBox.Items.Add(fontFamily.Name);
                 }
-                this.fontFamilyComboBox.SelectedIndex = Array.FindIndex(familyArray, row => row.Name == GameInfoFontFamily.Name);
+                this.fontFamilyComboBox.SelectedIndex = Array.FindIndex(familyArray, row => row.Name == gameInfoLayoutWindow.FontFamily.Name);
 
                 MenuState = CustomMenuState.GAME_INFO;
 
@@ -4226,7 +1551,7 @@ namespace Retro_Achievement_Tracker
                 {
                     this.fontFamilyComboBox.Items.Add(fontFamily.Name);
                 }
-                this.fontFamilyComboBox.SelectedIndex = Array.FindIndex(familyArray, row => row.Name == LastFiveFontFamily.Name);
+                this.fontFamilyComboBox.SelectedIndex = Array.FindIndex(familyArray, row => row.Name == lastFiveLayoutWindow.FontFamily.Name);
 
                 MenuState = CustomMenuState.LAST_FIVE;
 
@@ -4282,7 +1607,7 @@ namespace Retro_Achievement_Tracker
                 {
                     this.fontFamilyComboBox.Items.Add(fontFamily.Name);
                 }
-                this.fontFamilyComboBox.SelectedIndex = Array.FindIndex(familyArray, row => row.Name == FocusFontFamily.Name);
+                this.fontFamilyComboBox.SelectedIndex = Array.FindIndex(familyArray, row => row.Name == focusLayoutWindow.FontFamily.Name);
 
                 MenuState = CustomMenuState.FOCUS;
 
@@ -4315,41 +1640,40 @@ namespace Retro_Achievement_Tracker
             HideAllMenuItems();
 
             this.BringToFront();
-            this.Location = new Point(0, 0);
             this.SendToBack();
 
-            if (NotificationsWindow != null && !NotificationsWindow.IsDisposed)
+            if (notificationLayoutWindow != null && !notificationLayoutWindow.IsDisposed)
             {
-                NotificationsWindow.BringToFront();
-                NotificationsWindow.Location = new Point(0, 0);
-                NotificationsWindow.SendToBack();
+                notificationLayoutWindow.BringToFront();
+                notificationLayoutWindow.Location = new Point(0, 0);
+                notificationLayoutWindow.SendToBack();
             }
-            if (FocusWindow != null && !FocusWindow.IsDisposed)
+            if (focusLayoutWindow != null && !focusLayoutWindow.IsDisposed)
             {
-                FocusWindow.BringToFront();
-                FocusWindow.Location = new Point(0, 0);
-                FocusWindow.SendToBack();
+                focusLayoutWindow.BringToFront();
+                focusLayoutWindow.Location = new Point(0, 0);
+                focusLayoutWindow.SendToBack();
             }
-            if (StatsWindow != null && !StatsWindow.IsDisposed)
+            if (statsLayoutWindow != null && !statsLayoutWindow.IsDisposed)
             {
-                StatsWindow.BringToFront();
-                StatsWindow.Location = new Point(0, 0);
-                StatsWindow.SendToBack();
+                statsLayoutWindow.BringToFront();
+                statsLayoutWindow.Location = new Point(0, 0);
+                statsLayoutWindow.SendToBack();
             }
-            if (GameInfoWindow != null && !GameInfoWindow.IsDisposed)
+            if (gameInfoLayoutWindow != null && !gameInfoLayoutWindow.IsDisposed)
             {
-                GameInfoWindow.BringToFront();
-                GameInfoWindow.Location = new Point(0, 0);
-                GameInfoWindow.SendToBack();
+                gameInfoLayoutWindow.BringToFront();
+                gameInfoLayoutWindow.Location = new Point(0, 0);
+                gameInfoLayoutWindow.SendToBack();
             }
-            if (LastFiveWindow != null && !LastFiveWindow.IsDisposed)
+            if (lastFiveLayoutWindow != null && !lastFiveLayoutWindow.IsDisposed)
             {
-                LastFiveWindow.BringToFront();
-                LastFiveWindow.Location = new Point(0, 0);
-                LastFiveWindow.SendToBack();
+                lastFiveLayoutWindow.BringToFront();
+                lastFiveLayoutWindow.Location = new Point(0, 0);
+                lastFiveLayoutWindow.SendToBack();
             }
         }
-        private void SetFontColorButton_Click(object sender, EventArgs e)
+        private void FontColorButton_Click(object sender, EventArgs e)
         {
             if (this.colorDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -4358,27 +1682,27 @@ namespace Retro_Achievement_Tracker
                 {
                     case CustomMenuState.STATS:
                         MenuState = CustomMenuState.CLOSED;
-                        StatsFontColor = HexConverter(this.colorDialog1.Color);
+                        statsLayoutWindow.FontColor = MediaHelper.HexConverter(this.colorDialog1.Color);
                         MenuState = CustomMenuState.STATS;
                         break;
                     case CustomMenuState.ALERTS:
                         MenuState = CustomMenuState.CLOSED;
-                        NotificationsFontColor = HexConverter(this.colorDialog1.Color);
+                        notificationLayoutWindow.FontColor = MediaHelper.HexConverter(this.colorDialog1.Color);
                         MenuState = CustomMenuState.ALERTS;
                         break;
                     case CustomMenuState.GAME_INFO:
                         MenuState = CustomMenuState.CLOSED;
-                        GameInfoFontColor = HexConverter(this.colorDialog1.Color);
+                        gameInfoLayoutWindow.FontColor = MediaHelper.HexConverter(this.colorDialog1.Color);
                         MenuState = CustomMenuState.GAME_INFO;
                         break;
                     case CustomMenuState.LAST_FIVE:
                         MenuState = CustomMenuState.CLOSED;
-                        LastFiveFontColor = HexConverter(this.colorDialog1.Color);
+                        lastFiveLayoutWindow.FontColor = MediaHelper.HexConverter(this.colorDialog1.Color);
                         MenuState = CustomMenuState.LAST_FIVE;
                         break;
                     case CustomMenuState.FOCUS:
                         MenuState = CustomMenuState.CLOSED;
-                        FocusFontColor = HexConverter(this.colorDialog1.Color);
+                        focusLayoutWindow.FontColor = MediaHelper.HexConverter(this.colorDialog1.Color);
                         MenuState = CustomMenuState.FOCUS;
                         break;
                 }
@@ -4393,27 +1717,27 @@ namespace Retro_Achievement_Tracker
                 {
                     case CustomMenuState.STATS:
                         MenuState = CustomMenuState.CLOSED;
-                        StatsFontOutlineColor = HexConverter(this.colorDialog1.Color);
+                        statsLayoutWindow.FontOutlineColor = MediaHelper.HexConverter(this.colorDialog1.Color);
                         MenuState = CustomMenuState.STATS;
                         break;
                     case CustomMenuState.ALERTS:
                         MenuState = CustomMenuState.CLOSED;
-                        NotificationsFontOutlineColor = HexConverter(this.colorDialog1.Color);
+                        notificationLayoutWindow.FontOutlineColor = MediaHelper.HexConverter(this.colorDialog1.Color);
                         MenuState = CustomMenuState.ALERTS;
                         break;
                     case CustomMenuState.GAME_INFO:
                         MenuState = CustomMenuState.CLOSED;
-                        GameInfoFontOutlineColor = HexConverter(this.colorDialog1.Color);
+                        gameInfoLayoutWindow.FontOutlineColor = MediaHelper.HexConverter(this.colorDialog1.Color);
                         MenuState = CustomMenuState.GAME_INFO;
                         break;
                     case CustomMenuState.LAST_FIVE:
                         MenuState = CustomMenuState.CLOSED;
-                        LastFiveFontOutlineColor = HexConverter(this.colorDialog1.Color);
+                        lastFiveLayoutWindow.FontOutlineColor = MediaHelper.HexConverter(this.colorDialog1.Color);
                         MenuState = CustomMenuState.LAST_FIVE;
                         break;
                     case CustomMenuState.FOCUS:
                         MenuState = CustomMenuState.CLOSED;
-                        FocusFontOutlineColor = HexConverter(this.colorDialog1.Color);
+                        focusLayoutWindow.FontOutlineColor = MediaHelper.HexConverter(this.colorDialog1.Color);
                         MenuState = CustomMenuState.FOCUS;
                         break;
                 }
@@ -4421,139 +1745,124 @@ namespace Retro_Achievement_Tracker
         }
         private void FontFamilyComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            FontFamily[] familyArray = FontFamily.Families.ToArray();
+            if ((sender as Control).Name.Equals("fontFamilyComboBox"))
+            {
+                FontFamily[] familyArray = FontFamily.Families.ToArray();
+                switch (MenuState)
+                {
+                    case CustomMenuState.STATS:
+                        MenuState = CustomMenuState.CLOSED;
+                        statsLayoutWindow.FontFamily = familyArray[Array.FindIndex(familyArray, row => row.Name == (string)(sender as ComboBox).SelectedItem)];
+                        MenuState = CustomMenuState.STATS;
+                        break;
+                    case CustomMenuState.ALERTS:
+                        MenuState = CustomMenuState.CLOSED;
+                        notificationLayoutWindow.FontFamily = familyArray[Array.FindIndex(familyArray, row => row.Name == (string)(sender as ComboBox).SelectedItem)];
+                        MenuState = CustomMenuState.ALERTS;
+                        break;
+                    case CustomMenuState.GAME_INFO:
+                        MenuState = CustomMenuState.CLOSED;
+                        gameInfoLayoutWindow.FontFamily = familyArray[Array.FindIndex(familyArray, row => row.Name == (string)(sender as ComboBox).SelectedItem)];
+                        MenuState = CustomMenuState.GAME_INFO;
+                        break;
+                    case CustomMenuState.LAST_FIVE:
+                        MenuState = CustomMenuState.CLOSED;
+                        lastFiveLayoutWindow.FontFamily = familyArray[Array.FindIndex(familyArray, row => row.Name == (string)(sender as ComboBox).SelectedItem)];
+                        MenuState = CustomMenuState.LAST_FIVE;
+                        break;
+                    case CustomMenuState.FOCUS:
+                        MenuState = CustomMenuState.CLOSED;
+                        focusLayoutWindow.FontFamily = familyArray[Array.FindIndex(familyArray, row => row.Name == (string)(sender as ComboBox).SelectedItem)];
+                        MenuState = CustomMenuState.FOCUS;
+                        break;
+                }
+            }
+        }
+        private void NotificationAnimationComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ComboBox comboBox = sender as ComboBox;
 
-            switch (MenuState)
+            switch (comboBox.Name)
             {
-                case CustomMenuState.STATS:
-                    MenuState = CustomMenuState.CLOSED;
-                    StatsFontFamily = familyArray[Array.FindIndex(familyArray, row => row.Name == (string)this.fontFamilyComboBox.SelectedItem)];
-                    MenuState = CustomMenuState.STATS;
+                case "notificationsAchievementAnimationInComboBox":
+                    switch ((string)(sender as ComboBox).SelectedItem)
+                    {
+                        case "DOWN":
+                            notificationLayoutWindow.AchievementAnimationIn = AnimationDirection.DOWN;
+                            break;
+                        case "LEFT":
+                            notificationLayoutWindow.AchievementAnimationIn = AnimationDirection.LEFT;
+                            break;
+                        case "RIGHT":
+                            notificationLayoutWindow.AchievementAnimationIn = AnimationDirection.RIGHT;
+                            break;
+                        case "UP":
+                            notificationLayoutWindow.AchievementAnimationIn = AnimationDirection.UP;
+                            break;
+                        default:
+                            notificationLayoutWindow.AchievementAnimationIn = AnimationDirection.STATIC;
+                            break;
+                    }
                     break;
-                case CustomMenuState.ALERTS:
-                    MenuState = CustomMenuState.CLOSED;
-                    NotificationsFontFamily = familyArray[Array.FindIndex(familyArray, row => row.Name == (string)this.fontFamilyComboBox.SelectedItem)];
-                    MenuState = CustomMenuState.ALERTS;
+                case "notificationsAchievementAnimationOutComboBox":
+                    switch ((string)this.notificationsAchievementAnimationOutComboBox.SelectedItem)
+                    {
+                        case "DOWN":
+                            notificationLayoutWindow.AchievementAnimationOut = AnimationDirection.DOWN;
+                            break;
+                        case "LEFT":
+                            notificationLayoutWindow.AchievementAnimationOut = AnimationDirection.LEFT;
+                            break;
+                        case "RIGHT":
+                            notificationLayoutWindow.AchievementAnimationOut = AnimationDirection.RIGHT;
+                            break;
+                        case "UP":
+                            notificationLayoutWindow.AchievementAnimationOut = AnimationDirection.UP;
+                            break;
+                        default:
+                            notificationLayoutWindow.AchievementAnimationOut = AnimationDirection.STATIC;
+                            break;
+                    }
                     break;
-                case CustomMenuState.GAME_INFO:
-                    MenuState = CustomMenuState.CLOSED;
-                    GameInfoFontFamily = familyArray[Array.FindIndex(familyArray, row => row.Name == (string)this.fontFamilyComboBox.SelectedItem)];
-                    MenuState = CustomMenuState.GAME_INFO;
+                case "notificationsMasteryAnimationInComboBox":
+                    switch ((string)this.notificationsMasteryAnimationInComboBox.SelectedItem)
+                    {
+                        case "DOWN":
+                            notificationLayoutWindow.MasteryAnimationIn = AnimationDirection.DOWN;
+                            break;
+                        case "LEFT":
+                            notificationLayoutWindow.MasteryAnimationIn = AnimationDirection.LEFT;
+                            break;
+                        case "RIGHT":
+                            notificationLayoutWindow.MasteryAnimationIn = AnimationDirection.RIGHT;
+                            break;
+                        case "UP":
+                            notificationLayoutWindow.MasteryAnimationIn = AnimationDirection.UP;
+                            break;
+                        default:
+                            notificationLayoutWindow.MasteryAnimationIn = AnimationDirection.STATIC;
+                            break;
+                    }
                     break;
-                case CustomMenuState.LAST_FIVE:
-                    MenuState = CustomMenuState.CLOSED;
-                    LastFiveFontFamily = familyArray[Array.FindIndex(familyArray, row => row.Name == (string)this.fontFamilyComboBox.SelectedItem)];
-                    MenuState = CustomMenuState.LAST_FIVE;
-                    break;
-                case CustomMenuState.FOCUS:
-                    MenuState = CustomMenuState.CLOSED;
-                    FocusFontFamily = familyArray[Array.FindIndex(familyArray, row => row.Name == (string)this.fontFamilyComboBox.SelectedItem)];
-                    MenuState = CustomMenuState.FOCUS;
-                    break;
-            }
-        }
-        private void AchievementAnimationInComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            switch ((string)this.notificationsAchievementAnimationInComboBox.SelectedItem)
-            {
-                case "DOWN":
-                    NotificationAchievementAnimationIn = AnimationDirection.DOWN;
-                    break;
-                case "LEFT":
-                    NotificationAchievementAnimationIn = AnimationDirection.LEFT;
-                    break;
-                case "RIGHT":
-                    NotificationAchievementAnimationIn = AnimationDirection.RIGHT;
-                    break;
-                case "UP":
-                    NotificationAchievementAnimationIn = AnimationDirection.UP;
-                    break;
-                default:
-                    NotificationAchievementAnimationIn = AnimationDirection.STATIC;
-                    break;
-            }
-        }
-        private void AchievementAnimationOutComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            switch ((string)this.notificationsAchievementAnimationOutComboBox.SelectedItem)
-            {
-                case "DOWN":
-                    NotificationAchievementAnimationOut = AnimationDirection.DOWN;
-                    break;
-                case "LEFT":
-                    NotificationAchievementAnimationOut = AnimationDirection.LEFT;
-                    break;
-                case "RIGHT":
-                    NotificationAchievementAnimationOut = AnimationDirection.RIGHT;
-                    break;
-                case "UP":
-                    NotificationAchievementAnimationOut = AnimationDirection.UP;
-                    break;
-                default:
-                    NotificationAchievementAnimationOut = AnimationDirection.STATIC;
-                    break;
-            }
-        }
-        private void MasteryAnimationInComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            switch ((string)this.notificationsMasteryAnimationInComboBox.SelectedItem)
-            {
-                case "DOWN":
-                    NotificationMasteryAnimationIn = AnimationDirection.DOWN;
-                    break;
-                case "LEFT":
-                    NotificationMasteryAnimationIn = AnimationDirection.LEFT;
-                    break;
-                case "RIGHT":
-                    NotificationMasteryAnimationIn = AnimationDirection.RIGHT;
-                    break;
-                case "UP":
-                    NotificationMasteryAnimationIn = AnimationDirection.UP;
-                    break;
-                default:
-                    NotificationMasteryAnimationIn = AnimationDirection.STATIC;
-                    break;
-            }
-        }
-        private void MasteryAnimationOutComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            switch ((string)this.notificationsMasteryAnimationOutComboBox.SelectedItem)
-            {
-                case "DOWN":
-                    NotificationMasteryAnimationOut = AnimationDirection.DOWN;
-                    break;
-                case "LEFT":
-                    NotificationMasteryAnimationOut = AnimationDirection.LEFT;
-                    break;
-                case "RIGHT":
-                    NotificationMasteryAnimationOut = AnimationDirection.RIGHT;
-                    break;
-                case "UP":
-                    NotificationMasteryAnimationOut = AnimationDirection.UP;
-                    break;
-                default:
-                    NotificationMasteryAnimationOut = AnimationDirection.STATIC;
-                    break;
-            }
-        }
-        private void FontOutlineNumericUpDown_ValueChanged(object sender, EventArgs e)
-        {
-            switch (MenuState)
-            {
-                case CustomMenuState.STATS:
-                    StatsFontOutlineSize = (int)this.fontOutlineNumericUpDown.Value;
-                    break;
-                case CustomMenuState.ALERTS:
-                    NotificationsFontOutlineSize = (int)this.fontOutlineNumericUpDown.Value;
-                    break;
-                case CustomMenuState.GAME_INFO:
-                    GameInfoFontOutlineSize = (int)this.fontOutlineNumericUpDown.Value;
-                    break;
-                case CustomMenuState.LAST_FIVE:
-                    LastFiveFontOutlineSize = (int)this.fontOutlineNumericUpDown.Value;
-                    break;
-                case CustomMenuState.FOCUS:
-                    FocusFontOutlineSize = (int)this.fontOutlineNumericUpDown.Value;
+                case "notificationsMasteryAnimationOutComboBox":
+                    switch ((string)this.notificationsMasteryAnimationOutComboBox.SelectedItem)
+                    {
+                        case "DOWN":
+                            notificationLayoutWindow.MasteryAnimationOut = AnimationDirection.DOWN;
+                            break;
+                        case "LEFT":
+                            notificationLayoutWindow.MasteryAnimationOut = AnimationDirection.LEFT;
+                            break;
+                        case "RIGHT":
+                            notificationLayoutWindow.MasteryAnimationOut = AnimationDirection.RIGHT;
+                            break;
+                        case "UP":
+                            notificationLayoutWindow.MasteryAnimationOut = AnimationDirection.UP;
+                            break;
+                        default:
+                            notificationLayoutWindow.MasteryAnimationOut = AnimationDirection.STATIC;
+                            break;
+                    }
                     break;
             }
         }
@@ -4571,56 +1880,56 @@ namespace Retro_Achievement_Tracker
                     if (isEnabled)
                     {
                         MenuState = CustomMenuState.CLOSED;
-                        this.fontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(StatsFontOutlineColor);
-                        this.fontOutlineNumericUpDown.Value = StatsFontOutlineSize;
+                        this.fontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(statsLayoutWindow.FontOutlineColor);
+                        this.fontOutlineNumericUpDown.Value = statsLayoutWindow.FontOutlineSize;
                         MenuState = CustomMenuState.STATS;
                     }
-                    StatsFontOutlineEnable = isEnabled;
+                    statsLayoutWindow.FontOutlineEnable = isEnabled;
                     break;
                 case CustomMenuState.ALERTS:
                     if (isEnabled)
                     {
                         MenuState = CustomMenuState.CLOSED;
-                        this.fontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(NotificationsFontOutlineColor);
-                        this.fontOutlineNumericUpDown.Value = NotificationsFontOutlineSize;
+                        this.fontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(notificationLayoutWindow.FontOutlineColor);
+                        this.fontOutlineNumericUpDown.Value = notificationLayoutWindow.FontOutlineSize;
                         MenuState = CustomMenuState.ALERTS;
                     }
-                    NotificationsFontOutlineEnable = isEnabled;
+                    notificationLayoutWindow.FontOutlineEnable = isEnabled;
                     break;
                 case CustomMenuState.GAME_INFO:
                     if (isEnabled)
                     {
                         MenuState = CustomMenuState.CLOSED;
-                        this.fontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(GameInfoFontOutlineColor);
-                        this.fontOutlineNumericUpDown.Value = GameInfoFontOutlineSize;
+                        this.fontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(gameInfoLayoutWindow.FontOutlineColor);
+                        this.fontOutlineNumericUpDown.Value = gameInfoLayoutWindow.FontOutlineSize;
                         MenuState = CustomMenuState.GAME_INFO;
                     }
-                    GameInfoFontOutlineEnable = isEnabled;
+                    gameInfoLayoutWindow.FontOutlineEnable = isEnabled;
                     break;
                 case CustomMenuState.LAST_FIVE:
                     if (isEnabled)
                     {
                         MenuState = CustomMenuState.CLOSED;
-                        this.fontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(LastFiveFontOutlineColor);
-                        this.fontOutlineNumericUpDown.Value = LastFiveFontOutlineSize;
+                        this.fontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(lastFiveLayoutWindow.FontOutlineColor);
+                        this.fontOutlineNumericUpDown.Value = lastFiveLayoutWindow.FontOutlineSize;
                         MenuState = CustomMenuState.LAST_FIVE;
                     }
-                    LastFiveFontOutlineEnable = isEnabled;
+                    lastFiveLayoutWindow.FontOutlineEnable = isEnabled;
                     break;
                 case CustomMenuState.FOCUS:
                     if (isEnabled)
                     {
                         MenuState = CustomMenuState.CLOSED;
-                        this.fontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(FocusFontOutlineColor);
-                        this.fontOutlineNumericUpDown.Value = FocusFontOutlineSize;
+                        this.fontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(focusLayoutWindow.FontOutlineColor);
+                        this.fontOutlineNumericUpDown.Value = focusLayoutWindow.FontOutlineSize;
                         MenuState = CustomMenuState.FOCUS;
                     }
-                    FocusFontOutlineEnable = isEnabled;
+                    focusLayoutWindow.FontOutlineEnable = isEnabled;
                     break;
             }
             Settings.Default.Save();
         }
-        private void SetBackgroundColorButton_Click(object sender, EventArgs e)
+        private void BackgroundColorButton_Click(object sender, EventArgs e)
         {
             if (this.colorDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -4629,68 +1938,48 @@ namespace Retro_Achievement_Tracker
                 {
                     case CustomMenuState.ALERTS:
                         MenuState = CustomMenuState.CLOSED;
-                        NotificationsBackgroundColor = HexConverter(this.colorDialog1.Color);
+                        notificationLayoutWindow.BackgroundColor = MediaHelper.HexConverter(this.colorDialog1.Color);
                         MenuState = CustomMenuState.ALERTS;
                         break;
                     case CustomMenuState.LAST_FIVE:
                         MenuState = CustomMenuState.CLOSED;
-                        LastFiveBackgroundColor = HexConverter(this.colorDialog1.Color);
+                        lastFiveLayoutWindow.BackgroundColor = MediaHelper.HexConverter(this.colorDialog1.Color);
                         MenuState = CustomMenuState.LAST_FIVE;
                         break;
                     case CustomMenuState.FOCUS:
                         MenuState = CustomMenuState.CLOSED;
-                        FocusBackgroundColor = HexConverter(this.colorDialog1.Color);
+                        focusLayoutWindow.BackgroundColor = MediaHelper.HexConverter(this.colorDialog1.Color);
                         MenuState = CustomMenuState.FOCUS;
                         break;
                 }
             }
         }
-        private void FocusStreamLabelsCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void StreamLabelsCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (NotBooting)
             {
-                StreamLabelsFocusEnable = this.focusStreamLabelsCheckBox.Checked;
+                CheckBox checkBox = sender as CheckBox;
 
-                if (StreamLabelsFocusEnable)
+                switch (checkBox.Name)
                 {
-                    WriteFocusStreamLabels();
+                    case "focusStreamLabelsCheckBox":
+                        StreamLabelManager.StreamLabelsFocusEnable = this.focusStreamLabelsCheckBox.Checked;
+                        StreamLabelManager.WriteFocusStreamLabels(focusLayoutWindow.CurrentlyFocusedAchievement);
+                        break;
+                    case "statsStreamLabelsCheckBox":
+                        StreamLabelManager.StreamLabelsStatsEnable = this.statsStreamLabelsCheckBox.Checked;
+                        StreamLabelManager.WriteStatsStreamLabels(UserSummary, GameProgress);
+                        break;
+                    case "gameInfoStreamLabelsCheckBox":
+                        StreamLabelManager.StreamLabelsGameInfoEnable = this.gameInfoStreamLabelsCheckBox.Checked;
+                        StreamLabelManager.WriteGameInfoStreamLabels(GameProgress);
+                        break;
+                    case "lastFiveStreamLabelsCheckBox":
+                        StreamLabelManager.StreamLabelsLastFiveEnable = this.lastFiveStreamLabelsCheckBox.Checked;
+                        StreamLabelManager.WriteLastFiveStreamLabels(UserSummary);
+                        break;
                 }
-            }
-        }
-        private void statsStreamLabelsCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (NotBooting)
-            {
-                StreamLabelsStatsEnable = this.statsStreamLabelsCheckBox.Checked;
 
-                if (StreamLabelsStatsEnable)
-                {
-                    WriteStatsStreamLabels();
-                }
-            }
-        }
-        private void gameInfoStreamLabelsCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (NotBooting)
-            {
-                StreamLabelsGameInfoEnable = this.gameInfoStreamLabelsCheckBox.Checked;
-
-                if (StreamLabelsGameInfoEnable)
-                {
-                    WriteGameInfoStreamLabels();
-                }
-            }
-        }
-        private void lastFiveStreamLabelsCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (NotBooting)
-            {
-                StreamLabelsLastFiveEnable = this.lastFiveStreamLabelsCheckBox.Checked;
-
-                if (StreamLabelsLastFiveEnable)
-                {
-                    WriteLastFiveStreamLabels();
-                }
             }
         }
         private void GameInfoDefaultButton_Click(object sender, EventArgs e)
@@ -4733,277 +2022,141 @@ namespace Retro_Achievement_Tracker
             this.statsGameAchievementsOverrideTextBox.Text = "Cheevos";
             this.statsCompletedOverrideTextBox.Text = "Compeleted";
         }
-        private void StatsRankCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void OverrideEnableCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (NotBooting)
             {
-                StatsRankEnable = this.statsRankCheckBox.Checked;
+                CheckBox checkBox = sender as CheckBox;
+
+                switch (checkBox.Name)
+                {
+                    case "statsRankCheckBox":
+                        statsLayoutWindow.RankEnable = checkBox.Checked;
+                        break;
+                    case "statsPointsCheckBox":
+                        statsLayoutWindow.PointsEnable = checkBox.Checked;
+                        break;
+                    case "statsAwardsCheckBox":
+                        statsLayoutWindow.AwardsEnable = checkBox.Checked;
+                        break;
+                    case "statsTruePointsCheckBox":
+                        statsLayoutWindow.TruePointsEnable = checkBox.Checked;
+                        break;
+                    case "statsRatioCheckBox":
+                        statsLayoutWindow.RatioEnable = checkBox.Checked;
+                        break;
+                    case "statsGameRatioCheckBox":
+                        statsLayoutWindow.GameRatioEnable = checkBox.Checked;
+                        break;
+                    case "statsGamePointsCheckBox":
+                        statsLayoutWindow.GamePointsEnable = checkBox.Checked;
+                        break;
+                    case "statsGameTruePointsCheckBox":
+                        statsLayoutWindow.GameTruePointsEnable = checkBox.Checked;
+                        break;
+                    case "statsGameAchievementsCheckBox":
+                        statsLayoutWindow.GameAchievementsEnable = checkBox.Checked;
+                        break;
+                    case "statsCompletedCheckBox":
+                        statsLayoutWindow.CompletedEnable = checkBox.Checked;
+                        break;
+                    case "gameInfoTitleCheckBox":
+                        gameInfoLayoutWindow.TitleEnable = checkBox.Checked;
+                        break;
+                    case "gameInfoConsoleCheckBox":
+                        gameInfoLayoutWindow.ConsoleEnable = checkBox.Checked;
+                        break;
+                    case "gameInfoDeveloperCheckBox":
+                        gameInfoLayoutWindow.DeveloperEnable = checkBox.Checked;
+                        break;
+                    case "gameInfoPublisherCheckBox":
+                        gameInfoLayoutWindow.PublisherEnable = checkBox.Checked;
+                        break;
+                    case "gameInfoGenreCheckBox":
+                        gameInfoLayoutWindow.GenreEnable = checkBox.Checked;
+                        break;
+                    case "gameInfoReleaseDateCheckBox":
+                        gameInfoLayoutWindow.ReleaseDateEnable = checkBox.Checked;
+                        break;
+                    case "focusPointsEnableCheckbox":
+                        focusLayoutWindow.PointsEnable = checkBox.Checked;
+                        break;
+                    case "focusBorderEnableCheckbox":
+                        focusLayoutWindow.BorderEnable = checkBox.Checked;
+                        break;
+                    case "notificationPointsEnableCheckBox":
+                        notificationLayoutWindow.PointsEnable = checkBox.Checked;
+                        break;
+                    case "notificationBorderEnableCheckBox":
+                        notificationLayoutWindow.BorderEnable = checkBox.Checked;
+                        break;
+                    case "lastFivePointsEnableCheckbox":
+                        lastFiveLayoutWindow.PointsEnable = checkBox.Checked;
+                        break;
+                    case "lastFiveBorderEnableCheckbox":
+                        lastFiveLayoutWindow.BorderEnable = checkBox.Checked;
+                        break;
+                }
             }
         }
-        private void statsPointsCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void OverrideTextBox_TextChanged(object sender, EventArgs e)
         {
             if (NotBooting)
             {
-                StatsPointsEnable = this.statsPointsCheckBox.Checked;
-            }
-        }
-        private void statsAwardsCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (NotBooting)
-            {
-                StatsAwardsEnable = this.statsAwardsCheckBox.Checked;
-            }
-        }
-        private void statsTruePointsCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (NotBooting)
-            {
-                StatsTruePointsEnable = this.statsTruePointsCheckBox.Checked;
-            }
-        }
-        private void statsRatioCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (NotBooting)
-            {
-                StatsRatioEnable = this.statsRatioCheckBox.Checked;
-            }
-        }
-        private void statsGameRatioCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (NotBooting)
-            {
-                StatsGameRatioEnable = this.statsGameRatioCheckBox.Checked;
-            }
-        }
-        private void statsGamePointsCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (NotBooting)
-            {
-                StatsGamePointsEnable = this.statsGamePointsCheckBox.Checked;
-            }
-        }
-        private void statsGameTruePointsCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (NotBooting)
-            {
-                StatsGameTruePointsEnable = this.statsGameTruePointsCheckBox.Checked;
-            }
-        }
-        private void statsGameAchievementsCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (NotBooting)
-            {
-                StatsGameAchievementsEnable = this.statsGameAchievementsCheckBox.Checked;
-            }
-        }
-        private void statsCompletedCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (NotBooting)
-            {
-                StatsCompletedEnable = this.statsCompletedCheckBox.Checked;
-            }
-        }
-        private void statsRankOverrideTextBox_TextChanged(object sender, EventArgs e)
-        {
-            if (NotBooting)
-            {
-                StatsRankName = this.statsRankOverrideTextBox.Text;
-            }
-        }
-        private void statsCompletedTextBox_TextChanged(object sender, EventArgs e)
-        {
-            if (NotBooting)
-            {
-                StatsCompletedName = this.statsCompletedOverrideTextBox.Text;
-            }
-        }
-        private void statsPointsOverrideTextBox_TextChanged(object sender, EventArgs e)
-        {
-            if (NotBooting)
-            {
-                StatsPointsName = this.statsPointsOverrideTextBox.Text;
-            }
-        }
-        private void statsAwardsOverrideTextBox_TextChanged(object sender, EventArgs e)
-        {
-            if (NotBooting)
-            {
-                StatsAwardsName = this.statsAwardsOverrideTextBox.Text;
-            }
-        }
-        private void statsTruePointsOverrideTextBox_TextChanged(object sender, EventArgs e)
-        {
-            if (NotBooting)
-            {
-                StatsTruePointsName = this.statsTruePointsOverrideTextBox.Text;
-            }
-        }
-        private void statsRatioOverrideTextBox_TextChanged(object sender, EventArgs e)
-        {
-            if (NotBooting)
-            {
-                StatsRatioName = this.statsRatioOverrideTextBox.Text;
-            }
-        }
-        private void statsGameRatioOverrideTextBox_TextChanged(object sender, EventArgs e)
-        {
-            if (NotBooting)
-            {
-                StatsGameRatioName = this.statsGameRatioOverrideTextBox.Text;
-            }
-        }
-        private void statsGamePointsOverrideTextBox_TextChanged(object sender, EventArgs e)
-        {
-            if (NotBooting)
-            {
-                StatsGamePointsName = this.statsGamePointsOverrideTextBox.Text;
-            }
-        }
-        private void statsGameTruePointsOverrideTextBox_TextChanged(object sender, EventArgs e)
-        {
-            if (NotBooting)
-            {
-                StatsGameTruePointsName = this.statsGameTruePointsOverrideTextBox.Text;
-            }
-        }
-        private void statsGameAchievementsOverrideTextBox_TextChanged(object sender, EventArgs e)
-        {
-            if (NotBooting)
-            {
-                StatsGameAchievementsName = this.statsGameAchievementsOverrideTextBox.Text;
-            }
-        }
-        private void StatsCompletedCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (NotBooting)
-            {
-                StatsCompletedEnable = this.statsCompletedCheckBox.Checked;
-            }
-        }
-        private void gameInfoConsoleOverrideTextBox_TextChanged(object sender, EventArgs e)
-        {
-            if (NotBooting)
-            {
-                GameInfoConsoleName = this.gameInfoConsoleOverrideTextBox.Text;
-            }
-        }
-        private void gameInfoDeveloperOverrideTextBox_TextChanged(object sender, EventArgs e)
-        {
-            if (NotBooting)
-            {
-                GameInfoDeveloperName = this.gameInfoDeveloperOverrideTextBox.Text;
-            }
-        }
-        private void gameInfoPublisherOverrideTextBox_TextChanged(object sender, EventArgs e)
-        {
-            if (NotBooting)
-            {
-                GameInfoPublisherName = this.gameInfoPublisherOverrideTextBox.Text;
-            }
-        }
-        private void gameInfoGenreOverrideTextBox_TextChanged(object sender, EventArgs e)
-        {
-            if (NotBooting)
-            {
-                GameInfoGenreName = this.gameInfoGenreOverrideTextBox.Text;
-            }
-        }
-        private void gameInfoReleaseDateOverrideTextBox_TextChanged(object sender, EventArgs e)
-        {
-            if (NotBooting)
-            {
-                GameInfoReleaseDateName = this.gameInfoReleaseDateOverrideTextBox.Text;
-            }
-        }
-        private void gameInfoTitleOverrideTextBox_TextChanged(object sender, EventArgs e)
-        {
-            if (NotBooting)
-            {
-                GameInfoTitleName = this.gameInfoTitleOverrideTextBox.Text;
-            }
-        }
-        private void gameInfoTitleCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (NotBooting)
-            {
-                GameInfoTitleEnable = this.gameInfoTitleCheckBox.Checked;
-            }
-        }
-        private void gameInfoConsoleCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (NotBooting)
-            {
-                GameInfoConsoleEnable = this.gameInfoConsoleCheckBox.Checked;
-            }
-        }
-        private void gameInfoDeveloperCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (NotBooting)
-            {
-                GameInfoDeveloperEnable = this.gameInfoDeveloperCheckBox.Checked;
-            }
-        }
-        private void gameInfoPublisherCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (NotBooting)
-            {
-                GameInfoPublisherEnable = this.gameInfoPublisherCheckBox.Checked;
-            }
-        }
-        private void gameInfoGenreCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (NotBooting)
-            {
-                GameInfoGenreEnable = this.gameInfoGenreCheckBox.Checked;
-            }
-        }
-        private void gameInfoReleaseDateCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (NotBooting)
-            {
-                GameInfoReleaseDateEnable = this.gameInfoReleaseDateCheckBox.Checked;
-            }
-        }
-        private void focusPointsEnableCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (NotBooting)
-            {
-                FocusPointsEnable = this.focusPointsEnable.Checked;
-            }
-        }
-        private void focusBorderEnableCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (NotBooting)
-            {
-                FocusBorderEnable = this.focusBorderEnableCheckbox.Checked;
-            }
-        }
-        private void notificationsPointsEnableCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (NotBooting)
-            {
-                NotificationsPointsEnable = this.notificationPointsEnableCheckBox.Checked;
-            }
-        }
-        private void notificationsBorderEnableCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (NotBooting)
-            {
-                NotificationsBorderEnable = this.notificationBorderEnableCheckBox.Checked;
-            }
-        }
-        private void LastFivePointsEnableCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (NotBooting)
-            {
-                LastFivePointsEnable = this.lastFivePointsEnableCheckbox.Checked;
-            }
-        }
-        private void LastFiveBorderEnableCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (NotBooting)
-            {
-                LastFiveBorderEnable = this.lastFiveBorderEnableCheckbox.Checked;
+                TextBox textBox = sender as TextBox;
+
+                switch (textBox.Name)
+                {
+                    case "statsRankOverrideTextBox":
+                        statsLayoutWindow.RankName = textBox.Text;
+                        break;
+                    case "statsCompletedOverrideTextBox":
+                        statsLayoutWindow.CompletedName = textBox.Text;
+                        break;
+                    case "statsPointsOverrideTextBox":
+                        statsLayoutWindow.PointsName = textBox.Text;
+                        break;
+                    case "statsAwardsOverrideTextBox":
+                        statsLayoutWindow.AwardsName = textBox.Text;
+                        break;
+                    case "statsTruePointsOverrideTextBox":
+                        statsLayoutWindow.TruePointsName = textBox.Text;
+                        break;
+                    case "statsRatioOverrideTextBox":
+                        statsLayoutWindow.RatioName = textBox.Text;
+                        break;
+                    case "statsGameRatioOverrideTextBox":
+                        statsLayoutWindow.GameRatioName = textBox.Text;
+                        break;
+                    case "statsGamePointsOverrideTextBox":
+                        statsLayoutWindow.GamePointsName = textBox.Text;
+                        break;
+                    case "statsGameTruePointsOverrideTextBox":
+                        statsLayoutWindow.GameTruePointsName = textBox.Text;
+                        break;
+                    case "statsGameAchievementsOverrideTextBox":
+                        statsLayoutWindow.GameAchievementsName = textBox.Text;
+                        break;
+
+                    case "gameInfoConsoleOverrideTextBox":
+                        gameInfoLayoutWindow.ConsoleName = textBox.Text;
+                        break;
+                    case "gameInfoDeveloperOverrideTextBox":
+                        gameInfoLayoutWindow.DeveloperName = textBox.Text;
+                        break;
+                    case "gameInfoPublisherOverrideTextBox":
+                        gameInfoLayoutWindow.PublisherName = textBox.Text;
+                        break;
+                    case "gameInfoGenreOverrideTextBox":
+                        gameInfoLayoutWindow.GenreName = textBox.Text;
+                        break;
+                    case "gameInfoReleaseDateOverrideTextBox":
+                        gameInfoLayoutWindow.ReleaseDateName = textBox.Text;
+                        break;
+                    case "gameInfoTitleOverrideTextBox":
+                        gameInfoLayoutWindow.TitleName = textBox.Text;
+                        break;
+                }
             }
         }
     }

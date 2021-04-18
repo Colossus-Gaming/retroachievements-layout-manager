@@ -4,7 +4,7 @@
     <title>Notification Window</title>
     <meta charset="UTF-8">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" type="text/javascript"></script>
-    <script id="achievement-pop-script">
+    <script id="achievement-script">
 
         var achievementAnimationIn = "";
         var achievementAnimationOut = "";
@@ -19,9 +19,9 @@
             var descriptionValue = 100;
             var pointsValue = 100;
 
-            var achievementName = document.getElementById('achievement-pop-name');
-            var achievementDescriptionElement = document.getElementById('achievement-pop-description');
-            var achievementPointsElement = document.getElementById('achievement-pop-points');
+            var achievementName = document.getElementById('achievement-name');
+            var achievementDescriptionElement = document.getElementById('achievement-description');
+            var achievementPointsElement = document.getElementById('achievement-points');
 
             achievementName.style.fontSize = nameValue + 'px';
             achievementDescriptionElement.style.fontSize = descriptionValue + 'px';
@@ -47,9 +47,9 @@
             var nameValue = 100;
             var pointsValue = 100;
 
-            var masteryName = document.getElementById('mastery-pop-name');
-            var masteryPointsElement = document.getElementById('mastery-pop-points');
-            var masteryAchievementsElement = document.getElementById('mastery-pop-achievements');
+            var masteryName = document.getElementById('mastery-name');
+            var masteryPointsElement = document.getElementById('mastery-points');
+            var masteryAchievementsElement = document.getElementById('mastery-achievements');
 
             masteryName.style.fontSize = nameValue + 'px';
             masteryAchievementsElement.style.fontSize = pointsValue + 'px';
@@ -78,10 +78,10 @@
         }
 
         function setFontFamily(value) {
-            var all = document.getElementsByClassName('has-font');
+            var all = document.getElementsByClassName("has-font");
 
             for (var i = 0; i < all.length; i++) {
-                all[i].style.fontFamily = "\"" + value + "\"";
+                all[i].style.fontFamily = value;
             }
 
             adjustMasteryFont();
@@ -89,7 +89,7 @@
         }
 
         function setFontColor(value) {
-            var all = document.getElementsByClassName('has-font');
+            var all = document.getElementsByClassName("has-font");
 
             for (var i = 0; i < all.length; i++) {
                 all[i].style.color = value;
@@ -97,46 +97,58 @@
 
             document.getElementById("ready-message").style.color = "#0000ff";
             document.getElementById("confirm-button").style.color = "#0000ff";
+
+            var achievementLine = document.getElementById("achievement-line");
+            var masteryLine = document.getElementById("mastery-line");
+
+            achievementLine.style.color = value;
+            masteryLine.style.color = value;
+
+            achievementLine.style.backgroundColor = value;
+            masteryLine.style.backgroundColor = value;
+        }
+
+        function setBorderOutline(value) {
+            var achievementLine = document.getElementById("achievement-line");
+            var masteryLine = document.getElementById("mastery-line");
+
+            achievementLine.style.border = value;
+            masteryLine.style.border = value;
         }
 
         function setFontOutline(value) {
-            var all = document.getElementsByClassName('has-font');
+            var all = document.getElementsByClassName("has-font");
 
             for (var i = 0; i < all.length; i++) {
                 all[i].style.webkitTextStroke = value;
             }
-            var achievmentBadge = document.getElementById("achievement-pop-badge");
-            var masteryBadge = document.getElementById("mastery-pop-badge");
-
-            achievmentBadge.style.border = value + ' solid';
-            masteryBadge.style.border = value + ' solid';
 
             adjustMasteryFont();
             adjustAchievementFont();
         }
 
         function setBackgroundColor(value) {
-            document.getElementById("achievement-pop").style.backgroundColor = value;
-            document.getElementById("mastery-pop").style.backgroundColor = value;
+            document.getElementById("achievement").style.backgroundColor = value;
+            document.getElementById("mastery").style.backgroundColor = value;
         }
 
         function promptUser() {
-            $("#achievement-pop-video").fadeOut();
-            $("#mastery-pop-video").fadeOut();
+            $("#achievement-video").fadeOut();
+            $("#mastery-video").fadeOut();
             $("#user-prompt").fadeIn();
         }
 
         function enableBorder() {
-            document.getElementById("achievement-pop").style.backgroundImage = "url('disk://background')";
-            document.getElementById("mastery-pop").style.backgroundImage = "url('disk://background')";
+            document.getElementById("achievement").style.backgroundImage = "url('disk://background')";
+            document.getElementById("mastery").style.backgroundImage = "url('disk://background')";
 
             adjustMasteryFont();
             adjustAchievementFont();
         }
 
         function disableBorder() {
-            document.getElementById("achievement-pop").style.backgroundImage = "";
-            document.getElementById("mastery-pop").style.backgroundImage = "";
+            document.getElementById("achievement").style.backgroundImage = "";
+            document.getElementById("mastery").style.backgroundImage = "";
 
             adjustMasteryFont();
             adjustAchievementFont();
@@ -144,62 +156,65 @@
 
         function showPoints() {
             showPointsBool = true;
-            $("#achievement-pop-points").fadeIn();
+
+            $("#achievement-points").fadeIn();
+
             adjustAchievementFont();
         }
 
         function hidePoints() {
             showPointsBool = false;
-            $("#achievement-pop-points").hide();
+
+            $("#achievement-points").hide();
         }
 
         function enableEditModeAchievement() {
-            document.getElementById("achievement-pop-video").controls = true;
+            document.getElementById("achievement-video").controls = true;
             setAchievementIn(0);
         }
 
         function disableEditModeAchievement() {
-            document.getElementById("achievement-pop-video").controls = false;
-            document.getElementById("achievement-pop-video").style.border = "";
-            $("#achievement-pop-video").fadeOut();
+            document.getElementById("achievement-video").controls = false;
+            document.getElementById("achievement-video").style.border = "";
+            $("#achievement-video").fadeOut();
             setAchievementOut(0);
         }
 
         function enableEditModeMastery() {
-            document.getElementById("mastery-pop-video").controls = true;
+            document.getElementById("mastery-video").controls = true;
 
             setMasteryIn(0);
         }
 
         function disableEditModeMastery() {
-            document.getElementById("mastery-pop-video").controls = false;
-            document.getElementById("mastery-pop-video").style.border = "";
-            $("#mastery-pop-video").fadeOut();
+            document.getElementById("mastery-video").controls = false;
+            document.getElementById("mastery-video").style.border = "";
+            $("#mastery-video").fadeOut();
             setMasteryOut(0);
         }
 
         function setAchievementLeft(value) {
-            document.getElementById("achievement-pop-video").style.left = value;
+            document.getElementById("achievement-video").style.left = value;
         }
 
         function setAchievementTop(value) {
-            document.getElementById("achievement-pop-video").style.top = value;
+            document.getElementById("achievement-video").style.top = value;
         }
 
         function setAchievementWidth(value) {
-            document.getElementById("achievement-pop-video").style.width = value;
+            document.getElementById("achievement-video").style.width = value;
         }
 
         function setMasteryLeft(value) {
-            document.getElementById("mastery-pop-video").style.left = value;
+            document.getElementById("mastery-video").style.left = value;
         }
 
         function setMasteryTop(value) {
-            document.getElementById("mastery-pop-video").style.top = value;
+            document.getElementById("mastery-video").style.top = value;
         }
 
         function setMasteryWidth(value) {
-            document.getElementById("mastery-pop-video").style.width = value;
+            document.getElementById("mastery-video").style.width = value;
         }
 
         function setAnimationAchievementIn(animation) {
@@ -283,29 +298,29 @@
         }
 
         function achievementNotification(achievementName, achievementBadge, achievementDescription, achievementPoints) {
-            $("#achievement-pop-name").text(achievementName);
-            $("#achievement-pop-description").text(achievementDescription);
-            $("#achievement-pop-points").text(achievementPoints);
-            $("#achievement-pop-badge").attr("src", achievementBadge);
-            $("#achievement-pop-video").attr("src", "disk://achievement-notification");
+            $("#achievement-name").text(achievementName);
+            $("#achievement-description").text(achievementDescription);
+            $("#achievement-points").text(achievementPoints);
+            $("#achievement-badge").attr("src", achievementBadge);
+            $("#achievement-video").attr("src", "disk://achievement-notification");
 
             adjustAchievementFont();
 
-            $("#achievement-pop-video").fadeIn();
+            $("#achievement-video").fadeIn();
         }
 
         function masteryNotification(gameName, gameImageLoc, gameAchievementCount, gamePoints) {
-            $("#mastery-pop-name").text(gameName);
-            $("#mastery-pop-achievements").text('Cheevos: ' + gameAchievementCount);
-            $("#mastery-pop-points").text('Points: ' + gamePoints);
-            $("#mastery-pop-badge").attr("src", gameImageLoc);
-            $("#mastery-pop-video").attr("src", "disk://mastery-notification");
+            $("#mastery-name").text(gameName);
+            $("#mastery-achievements").text('Cheevos: ' + gameAchievementCount);
+            $("#mastery-points").text('Points: ' + gamePoints);
+            $("#mastery-badge").attr("src", gameImageLoc);
+            $("#mastery-video").attr("src", "disk://mastery-notification");
 
-            $("#mastery-pop-video").fadeIn();
+            $("#mastery-video").fadeIn();
         }
 
         function setAchievementIn(value) {
-            var element = document.getElementById("achievement-pop");
+            var element = document.getElementById("achievement");
 
             element.classList.remove(achievementAnimationOut);
             element.classList.remove(achievementAnimationIn);
@@ -313,18 +328,14 @@
             setTimeout(function () {
                 element.classList.add(achievementAnimationIn);
 
-                $("#achievement-pop").fadeIn();
-                $("#achievement-pop-badge").fadeIn();
-                $("#achievement-pop-name").fadeIn();
-                $("#achievement-pop-points").fadeIn();
-                $("#achievement-pop-description").fadeIn();
+                $("#achievement").fadeIn();
 
                 adjustAchievementFont();
             }, +value);
         }
 
         function setAchievementOut(value) {
-            var element = document.getElementById("achievement-pop");
+            var element = document.getElementById("achievement");
 
             setTimeout(function () {
                 element.classList.remove(achievementAnimationOut);
@@ -334,17 +345,13 @@
 
                 setTimeout(function () {
 
-                    $("#achievement-pop").fadeOut();
-                    $("#achievement-pop-badge").fadeOut();
-                    $("#achievement-pop-name").fadeOut();
-                    $("#achievement-pop-points").fadeOut();
-                    $("#achievement-pop-description").fadeOut();
+                    $("#achievement").fadeOut();
                 }, 500);
             }, +value);
         }
 
         function setMasteryIn(value) {
-            var element = document.getElementById("mastery-pop");
+            var element = document.getElementById("mastery");
             
             element.classList.remove(masteryAnimationOut);
             element.classList.remove(masteryAnimationIn);
@@ -352,18 +359,14 @@
             setTimeout(function () {
                 element.classList.add(masteryAnimationIn);
 
-                $("#mastery-pop").fadeIn();
-                $("#mastery-pop-badge").fadeIn();
-                $("#mastery-pop-name").fadeIn();
-                $("#mastery-pop-achievements").fadeIn();
-                $("#mastery-pop-points").fadeIn();
+                $("#mastery").fadeIn();
 
                 adjustMasteryFont();
             }, +value);
         }
 
         function setMasteryOut(value) {
-            var element = document.getElementById("mastery-pop");
+            var element = document.getElementById("mastery");
 
             setTimeout(function () {
 
@@ -374,70 +377,66 @@
 
                     element.classList.add(masteryAnimationOut);
 
-                    $("#mastery-pop").fadeOut();
-                    $("#mastery-pop-badge").fadeOut();
-                    $("#mastery-pop-name").fadeOut();
-                    $("#mastery-pop-achievements").fadeOut();
-                    $("#mastery-pop-points").fadeOut();
+                    $("#mastery").fadeOut();
                 }, 400);
             }, +value);
         }
 
         function hideNotifications() {
-            document.getElementById("achievement-pop").classList.remove(achievementAnimationOut);
-            document.getElementById("mastery-pop").classList.remove(masteryAnimationOut);
+            document.getElementById("achievement").classList.remove(achievementAnimationOut);
+            document.getElementById("mastery").classList.remove(masteryAnimationOut);
 
-            $("#achievement-pop-video").fadeOut();
-            $("#mastery-pop-video").fadeOut();
+            $("#achievement-video").fadeOut();
+            $("#mastery-video").fadeOut();
         }
     </script>
-    <style id="achievement-pop-style" type="text/css">
+    <style id="achievement-style" type="text/css">
 
         @keyframes animation-up {
             0% {
-                left: 200px;
-                top: 200px;
+                left: 165px;
+                top: 220px;
             }
 
             100% {
-                left: 200px;
-                top: -1310px;
+                left: 165px;
+                top: -610px;
             }
         }
 
         @keyframes animation-down {
             0% {
-                left: 200px;
-                top: 200px;
+                left: 165px;
+                top: 220px;
             }
 
             100% {
-                left: 200px;
-                top: 1110px;
+                left: 165px;
+                top: 800px;
             }
         }
 
         @keyframes animation-right {
             0% {
-                left: 200px;
-                top: 200px;
+                left: 165px;
+                top: 220px;
             }
 
             100% {
                 left: 1200px;
-                top: 200px;
+                top: 220px;
             }
         }
 
         @keyframes animation-left {
             0% {
-                left: 200px;
-                top: 200px;
+                left: 165px;
+                top: 220px;
             }
 
             100% {
-                left: -1000px;
-                top: 200px;
+                left: -300px;
+                top: 220px;
             }
         }
 
@@ -465,8 +464,8 @@
             }
         }
 
-        #achievement-pop,
-        #mastery-pop {
+        #achievement,
+        #mastery {
             animation-fill-mode: forwards;
             animation-duration: 500ms;
         }
@@ -515,108 +514,144 @@
             animation-name: none;
         }
 
-        #achievement-pop-name {
+        #achievement-name,
+        #mastery-name {
+            position: relative;
+            right: 10px;
+            top: 0px;
+            width: 515px;
+            height: 40px;
+            text-align: center;
+            float: right;
+            margin-top: 10px;
+        }
+
+        #achievement-badge,
+        #mastery-badge {
             position: relative;
             top: 10px;
-            left: 12px;
-            width: 870px;
-            height: 60px;
-            text-align: center;
-            display: none;
-        }
-
-        #mastery-pop-name {
-            position: relative;
-            float: right;
-            right: 12px;
-            top: 12px;
-            width: 680px;
-            height: 100px;
-            text-align: center;
-            display: none;
-        }
-
-        #achievement-pop-badge {
-            left: 2px;
-            height: 125px;
-            display: none;
-        }
-
-        #mastery-pop-badge {
-            position: relative;
-            left: 15px;
-            top: 15px;
+            left: 10px;
+            height: 140px;
             float: left;
-            height: 180px;
-            display: none;
+            border: 2px solid gold;
         }
 
-        #achievement-pop-description {
+        #achievement-description {
             position: relative;
-            float: right;
-            width: 740px;
-            height: 120px;
+            right: 10px;
+            top: 10px;
+            width: 515px;
+            height: 70px;
             text-align: center;
-            display: none;
+            float: right;
         }
 
-        #mastery-pop-achievements,
-        #mastery-pop-points {
+        #mastery-achievements,
+        #mastery-points {
             position: relative;
             float: right;
-            padding-top: 25px;
-            padding-right: 25px;
-            width: 310px;
-            height: 80px;
+            right: 10px;
+            top: 30px;
+            width: 250px;
+            height: 60px;
             text-align: left;
-            display: none;
         }
 
-        #achievement-pop-video,
-        #mastery-pop-video {
-            width: 900px;
+        #achievement-video,
+        #mastery-video {
             position: absolute;
             display: none;
         }
 
         .has-font {
-            font-size: 48px;
             color: black;
-            background: rgba(0, 0, 0, 0.0);
+            background: rgba(0, 0, 0, 0);
+            font-size: 32px;
             font-family: Calibri;
+            font-weight: bold;
             -webkit-text-stroke: 2px white;
-            overflow-wrap: normal;
+            padding-right: 10px;
+            padding-top: 10px;
+            -webkit-backface-visibility: hidden;
         }
 
         #user-prompt {
+            position: absolute;
+            width: 600px;
+            height: 200px;
+            left: 400px;
+            top: 100px;
+            text-align: center;
+            display: none;
             animation-name: user-prompt-animation;
             animation-iteration-count: 1;
             animation-fill-mode: forwards;
             animation-duration: 1s;
         }
 
-        #achievement-pop,
-        #mastery-pop {
+        #achievement,
+        #mastery {
             position: relative;
-            top: 160px;
-            left: 200px;
-            width: 900px;
-            height: 212px;
+            top: 220px;
+            left: 165px;
+            width: 700px;
+            height: 165px;
             background-repeat: no-repeat;
             background-color: #cccccc;
             background-size: cover;
             display: none;
         }
 
-        #achievement-pop-points {
-            top: 130px;
-            left: 20px;
-            height: 70px;
+        #achievement-points {
+            position: absolute;
+            left: 15px;
+            top: 105px;
+            width: 15%;
+            height: 40px;
+            text-align: left;
         }
 
-        #container,
-        #achievement-pop-points {
+        #container {
             position: absolute;
+            width: 1922px;
+            height: 1085px;
+            top: -5px;
+            left: -5px;
+            background-color: magenta;
+        }
+
+        #achievement-line,
+        #mastery-line {
+            position: relative;
+            top: 10px;
+            right: 10px;
+            width: 525px;
+            height: 5px;
+            float: right;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            -webkit-backface-visibility: hidden;
+        }
+
+        #ready-message {
+            position: relative;
+            top: 50px;
+            text-align: center;
+            font-weight: bold;
+            vertical-align: middle;
+            font-size: 42px;
+        }
+
+        #confirm-button {
+            text-align: center;
+            font-weight: bold;
+            vertical-align: middle;
+            font-size: 32px;
+            background-color: yellow;
+        }
+
+        html {
+            overflow: hidden;
         }
     </style>
     <script>
@@ -624,54 +659,40 @@
             document.getElementById("user-prompt").style.animationName = "user-prompt-animation-reverse";
 
             setTimeout(function () {
-                var element = document.getElementById("user-prompt");
-                element.parentNode.removeChild(element);
+                $("#user-prompt").hide();
             }, 1000);
         };
     </script>
 </head>
 <body>
-    <div id="container" style="width: 1361px; height: 763px; top: -5px; left: -5px;background-color: magenta;">
-        <div id="user-prompt" class="has-font" style="position: absolute; width: 600px; height: 200px; left: 400px; top: 100px; text-align: center; display: none;">
-            <div id="ready-message" class="has-font" style="        position: relative;
-                    top: 50px;
-                    text-align: center;
-                    font-weight: bold;
-                    vertical-align: middle;
-                    font-size: 42px;
-            ">
+    <div id="container">
+        <div id="user-prompt" class="has-font">
+            <div id="ready-message" class="has-font">
                 Ready for some cheevos hunting?<br />
-                <button id="confirm-button" style="text-align: center;font-weight: bold;vertical-align: middle;font-size: 32px; background-color: yellow;" onclick="acknowledgePrompt()" class="has-font">
+                <button id="confirm-button" onclick="acknowledgePrompt()" class="has-font">
                     Absolutely!
                 </button>
             </div>
         </div>
 
-        <div id="achievement-pop">
-            <div id="achievement-pop-name" class="has-font"></div>
-            <span id="description-span" style="display: table-cell;
-                    position: relative;
-                    vertical-align: top;
-                    width: 875px;
-                    left: 10px;
-                    top: 10px;
-                    overflow: hidden;
-            ">
-                <img id="achievement-pop-badge" />
-                <a id="achievement-pop-description" class="has-font"></a>
-            </span>
-            <div id="achievement-pop-points" class="has-font"></div>
+        <div id="achievement">
+            <img id="achievement-badge" />
+            <div id="achievement-name" class="has-font">Achievement</div>
+            <hr id="achievement-line"/>
+            <div id="achievement-description" class="has-font">Description</div>
+            <div id="achievement-points" class="has-font">25</div>
         </div>
 
-        <div id="mastery-pop">
-            <img id="mastery-pop-badge" />
-            <div id="mastery-pop-name" class="has-font"></div>
-            <div id="mastery-pop-achievements" class="has-font"></div>
-            <div id="mastery-pop-points" class="has-font"></div>
+        <div id="mastery">
+            <img id="mastery-badge" />
+            <div id="mastery-name" class="has-font">Game Name</div>
+            <hr id="mastery-line"/>
+            <div id="mastery-achievements" class="has-font">100</div>
+            <div id="mastery-points" class="has-font">1500</div>
         </div>
 
-        <video id="achievement-pop-video" autoplay></video>
-        <video id="mastery-pop-video" autoplay></video>
+        <video id="achievement-video" autoplay></video>
+        <video id="mastery-video" autoplay></video>
     </div>
 </body>
 </html>

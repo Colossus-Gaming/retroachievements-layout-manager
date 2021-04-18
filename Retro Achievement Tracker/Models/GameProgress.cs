@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Retro_Achievement_Tracker
 {
@@ -32,5 +33,59 @@ namespace Retro_Achievement_Tracker
         public long NumAwardedToUserHardcore { get; set; }
         public string UserCompletion { get; set; }
         public string UserCompletionHardcore { get; set; }
+        public string PointsPossible
+        {
+            set
+            {
+
+            }
+            get
+            {
+                return Achievements
+                    .Sum(achievement => achievement.Points)
+                    .ToString();
+            }
+        }
+        public string TruePointsPossible
+        {
+            set
+            {
+
+            }
+            get
+            {
+                return Achievements
+                    .Sum(achievement => achievement.TrueRatio)
+                    .ToString();
+            }
+        }
+        public string PointsEarned
+        {
+            set
+            {
+
+            }
+            get
+            {
+                return Achievements
+                    .Where(achievement => achievement.DateEarned.HasValue)
+                    .Sum(achievement => achievement.Points)
+                    .ToString();
+            }
+        }
+        public string TruePointsEarned
+        {
+            set
+            {
+
+            }
+            get
+            {
+                return Achievements
+                    .Where(achievement => achievement.DateEarned.HasValue)
+                    .Sum(achievement => achievement.TrueRatio)
+                    .ToString();
+            }
+        }
     }
 }

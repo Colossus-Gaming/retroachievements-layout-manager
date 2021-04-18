@@ -12,12 +12,24 @@
         public int TotalPoints { get; set; }
         public int TotalTruePoints { get; set; }
         public int Rank { get; set; }
+        public int Awards { get; set; }
         public string Motto { get; set; }
         public string UserPic { get; set; }
         public string Status { get; set; }
         public List<GameAchievementSummary> GameAchievementSummaries { get; set; }
         public List<GameSummary> GameSummaries { get; set; }
         public List<Achievement> RecentAchievements { get; set; }
+        public string RetroRatio
+        {
+            set
+            {
+
+            }
+            get
+            {
+                return ((float)TotalTruePoints / (float)TotalPoints).ToString("0.00") + "%";
+            }
+        }
     }
 
     [JsonConverter(typeof(GameSummaryConverter))]
@@ -63,7 +75,13 @@
         {
             if (other.DateEarned.HasValue)
             {
-                return this.DateEarned.HasValue ? this.DateEarned.Value.CompareTo(other.DateEarned.Value) : 1;
+                int comparison = this.DateEarned.Value.CompareTo(other.DateEarned.Value);
+
+                if (comparison == 0)
+                {
+                    return this.DisplayOrder.CompareTo(other.DisplayOrder);
+                }
+                return this.DateEarned.HasValue ? comparison : 1;
             }
             return this.DisplayOrder.CompareTo(other.DisplayOrder);
         }
@@ -71,6 +89,6 @@
         public bool Equals(Achievement other)
         {
             return other != null && this.Id == other.Id;
-        }
+        }        
     }
 }

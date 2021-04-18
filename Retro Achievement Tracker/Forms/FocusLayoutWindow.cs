@@ -4,6 +4,7 @@ using Retro_Achievement_Tracker.Models;
 using Retro_Achievement_Tracker.Properties;
 using System;
 using System.Drawing;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -11,24 +12,216 @@ namespace Retro_Achievement_Tracker
 {
     public partial class FocusLayoutWindow : Form
     {
+        private bool isReady = false;
+
+        public bool FocusDisplayed = false;
+        public Achievement CurrentlyFocusedAchievement;
         public FocusLayoutWindow()
         {
-            this.ClientSize = new Size(1040, 260);
+            this.ClientSize = new Size(0, 0);
+
+            FontFamily[] familyArray = FontFamily.Families.ToArray();
+
+            FontFamily[] focusFontFamily = familyArray.Where(fontFamily => fontFamily.Name.Equals(Settings.Default.focus_font_family_name)).ToArray();
+
+            FontFamily = focusFontFamily[0];
+
             SetupBrowser();
             this.Name = "RA Tracker - Focus";
             this.Text = "RA Tracker - Focus";
         }
+        public FontFamily FontFamily
+        {
+            get
+            {
+                FontFamily[] familyArray = FontFamily.Families.ToArray();
 
+                foreach (FontFamily font in familyArray)
+                {
+                    if (font.Name.Equals(Settings.Default.focus_font_family_name))
+                    {
+                        return font;
+                    }
+                }
+                Settings.Default.focus_font_family_name = familyArray[0].Name;
+                Settings.Default.Save();
+
+                return familyArray[0];
+            }
+            set
+            {
+                Settings.Default.focus_font_family_name = value.Name;
+                Settings.Default.Save();
+
+                SetFontFamily();
+
+            }
+        }
+        public string FontColor
+        {
+            get
+            {
+                return Settings.Default.focus_font_color_hex_code;
+            }
+            set
+            {
+                Settings.Default.focus_font_color_hex_code = value;
+                Settings.Default.Save();
+
+                SetFontColor();
+
+            }
+        }
+        public string FontOutlineColor
+        {
+            get
+            {
+                return Settings.Default.focus_font_outline_color_hex;
+            }
+            set
+            {
+                Settings.Default.focus_font_outline_color_hex = value;
+                Settings.Default.Save();
+
+                SetFontOutline();
+
+            }
+        }
+        public int FontOutlineSize
+        {
+            get
+            {
+                return Settings.Default.focus_font_outline_size;
+            }
+            set
+            {
+                Settings.Default.focus_font_outline_size = value;
+                Settings.Default.Save();
+
+                SetFontOutline();
+
+            }
+        }
+        public bool FontOutlineEnable
+        {
+            get
+            {
+                return Settings.Default.focus_font_outline_enabled;
+            }
+            set
+            {
+                Settings.Default.focus_font_outline_enabled = value;
+                Settings.Default.Save();
+
+                SetFontOutline();
+            }
+        }
+        public bool PointsEnable
+        {
+            get
+            {
+                return Settings.Default.focus_points_enable;
+            }
+            set
+            {
+                Settings.Default.focus_points_enable = value;
+                Settings.Default.Save();
+
+                if (value)
+                {
+                    ShowPoints();
+                }
+                else
+                {
+                    HidePoints();
+                }
+            }
+        }
+        public bool BorderEnable
+        {
+            get
+            {
+                return Settings.Default.focus_border_enable;
+            }
+            set
+            {
+                Settings.Default.focus_border_enable = value;
+                Settings.Default.Save();
+
+                if (value)
+                {
+                    EnableBorder();
+                }
+                else
+                {
+                    DisableBorder();
+                }
+            }
+        }
+        public string BackgroundColor
+        {
+            get
+            {
+                return Settings.Default.focus_background_color;
+            }
+            set
+            {
+                Settings.Default.focus_background_color = value;
+                Settings.Default.Save();
+
+                SetBackgroundColor();
+            }
+        }
+        public bool AutoLaunch
+        {
+            get
+            {
+                return Settings.Default.auto_focus;
+            }
+            set
+            {
+                Settings.Default.auto_focus = value;
+            }
+        }
         public async void SetFocus(Achievement achievement)
         {
-            await ExecuteScript("setFocus(\"" + achievement.Title.Replace("\"", "\\\"") + "\"," +
-                           "\"https://retroachievements.org/Badge/" + achievement.BadgeNumber + ".png\"," +
-                           "\"" + achievement.Description.Replace("\"", "\\\"") + "\"," +
-                           "\"" + achievement.Points + "\");");
+            CurrentlyFocusedAchievement = achievement;
+
+            if (isReady)
+            {
+                if (achievement != null)
+                {
+                    FocusDisplayed = true;
+
+                    Invoke((MethodInvoker)delegate
+                    {
+                        this.ClientSize = new Size(700, 165);
+                    });
+
+                    await ExecuteScript("setFocus(\"" + achievement.Title.Replace("\"", "\\\"") + "\"," +
+                               "\"https://retroachievements.org/Badge/" + achievement.BadgeNumber + ".png\"," +
+                               "\"" + achievement.Description.Replace("\"", "\\\"") + "\"," +
+                               "\"" + achievement.Points + "\");");
+                }
+                else
+                {
+                    Invoke((MethodInvoker)delegate
+                    {
+                        this.ClientSize = new Size(700, 0);
+                    });
+                }
+            }
         }
 
         public async void HideFocus()
         {
+            FocusDisplayed = false;
+
+            Invoke((MethodInvoker)delegate
+            {
+                this.ClientSize = new Size(0, 0);
+            });
+
             await ExecuteScript("hideFocus();");
         }
         public async void EnableBorder()
@@ -47,25 +240,34 @@ namespace Retro_Achievement_Tracker
         {
             await ExecuteScript("hidePoints();");
         }
-        public async void SetFontColor(string hexCode)
+        public async void SetFontColor()
         {
-            await ExecuteScript("setFontColor(\"" + hexCode + "\");");
+            await ExecuteScript("setFontColor(\"" + FontColor + "\");");
         }
-        public async void SetFontFamily(string fontName)
+        public async void SetFontFamily()
         {
-            await ExecuteScript("setFontFamily(\"" + fontName + "\");");
+            await ExecuteScript("setFontFamily(\"" + FontFamily.Name.Replace("'", "\\'") + "\");");
         }
-        public async void SetFontOutline(string hexCode, int size)
+        public async void SetFontOutline()
         {
-            await ExecuteScript("setFontOutline(\"" + hexCode + " " + size + "px\");");
+            if (FontOutlineEnable)
+            {
+                await ExecuteScript("setFontOutline(\"" + FontOutlineColor + " " + FontOutlineSize + "px\");");
+                await ExecuteScript("setBorderOutline(\"" + FontOutlineSize + "px solid " + FontOutlineColor + "\");");
+            }
+            else
+            {
+                await ExecuteScript("setFontOutline(\"0px\");");
+                await ExecuteScript("setBorderOutline(\"0px\");");
+            }
         }
-        public async void SetBackgroundColor(string hexCode)
+        public async void SetBackgroundColor()
         {
-            await ExecuteScript("setBackgroundColor(\"" + hexCode + "\");");
-        }        
+            await ExecuteScript("setBackgroundColor(\"" + BackgroundColor + "\");");
+        }
         protected async Task ExecuteScript(string script)
         {
-            if (this.Visible)
+            if (this.Visible && this.isReady)
             {
                 try
                 {
@@ -89,6 +291,44 @@ namespace Retro_Achievement_Tracker
                 Dock = DockStyle.None,
                 RequestHandler = new CustomRequestHandler()
             };
+            chromiumWebBrowser.FrameLoadEnd += new EventHandler<FrameLoadEndEventArgs>((sender, frameLoadEndEventArgs) =>
+            {
+                Invoke((MethodInvoker)delegate
+                {
+                    this.ClientSize = new Size(700, 0);
+                    this.isReady = true;
+                });
+
+                SetFontFamily();
+                SetFontColor();
+                SetFontOutline();
+                SetBackgroundColor();
+
+                if (PointsEnable)
+                {
+                    ShowPoints();
+                }
+                else
+                {
+                    HidePoints();
+                }
+                if (BorderEnable)
+                {
+                    EnableBorder();
+                }
+                else
+                {
+                    DisableBorder();
+                }
+                if (CurrentlyFocusedAchievement != null)
+                {
+                    Invoke((MethodInvoker)delegate
+                    {
+                        SetFocus(CurrentlyFocusedAchievement); 
+                    });
+                }                
+            });
+            chromiumWebBrowser.LoadHtml(Resources.FocusWindow);
 
             this.Controls.Add(this.chromiumWebBrowser);
         }
@@ -107,7 +347,6 @@ namespace Retro_Achievement_Tracker
             this.Icon = ((Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FocusLayoutWindow";
             this.ResumeLayout(false);
-
         }
     }
 }

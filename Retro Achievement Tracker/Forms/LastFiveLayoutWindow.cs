@@ -3,9 +3,11 @@ using CefSharp.Web;
 using Retro_Achievement_Tracker.Models;
 using Retro_Achievement_Tracker.Properties;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
@@ -14,23 +16,30 @@ namespace Retro_Achievement_Tracker
 {
     public partial class LastFiveLayoutWindow : Form
     {
-        public List<Achievement> CurrentAchievements;
+        private bool isReady = false;
+
+        private ConcurrentQueue<Achievement> CurrentAchievements;
         private Stopwatch longActionStopwatch;
         private System.Timers.Timer timer;
         private Queue<Action> actions;
+
         public LastFiveLayoutWindow()
         {
-            this.ClientSize = new Size(585, 700);
+            this.ClientSize = new Size(0, 0);
 
-            SetupBrowser();
+            FontFamily[] familyArray = FontFamily.Families.ToArray();
+            FontFamily[] lastFiveFontFamily = familyArray.Where(fontFamily => fontFamily.Name.Equals(Settings.Default.last_five_font_family_name)).ToArray();
+
+            FontFamily = lastFiveFontFamily[0];
 
             this.Name = "RA Tracker - Last Five Achievements";
             this.Text = "RA Tracker - Last Five Achievements";
+            SetupBrowser();
 
-            CurrentAchievements = new List<Achievement>();
+            CurrentAchievements = new ConcurrentQueue<Achievement>();
             actions = new Queue<Action>();
 
-            this.timer = new System.Timers.Timer(300);
+            this.timer = new System.Timers.Timer(200);
             this.timer.Elapsed += new ElapsedEventHandler(ExecuteActions);
             this.timer.AutoReset = true;
             this.timer.Enabled = true;
@@ -38,7 +47,156 @@ namespace Retro_Achievement_Tracker
             this.longActionStopwatch = new Stopwatch();
             this.longActionStopwatch.Start();
         }
+        public FontFamily FontFamily
+        {
+            get
+            {
+                FontFamily[] familyArray = FontFamily.Families.ToArray();
 
+                foreach (FontFamily font in familyArray)
+                {
+                    if (font.Name.Equals(Settings.Default.last_five_font_family_name))
+                    {
+                        return font;
+                    }
+                }
+                Settings.Default.last_five_font_family_name = familyArray[0].Name;
+                Settings.Default.Save();
+
+                return familyArray[0];
+            }
+            set
+            {
+                Settings.Default.last_five_font_family_name = value.Name;
+                Settings.Default.Save();
+
+                SetFontFamily(value.Name);
+            }
+        }
+        public string FontColor
+        {
+            get
+            {
+                return Settings.Default.last_five_font_color_hex_code;
+            }
+            set
+            {
+                Settings.Default.last_five_font_color_hex_code = value;
+                Settings.Default.Save();
+
+                SetFontColor(value);
+            }
+        }
+        public string FontOutlineColor
+        {
+            get
+            {
+                return Settings.Default.last_five_font_outline_color_hex;
+            }
+            set
+            {
+                Settings.Default.last_five_font_outline_color_hex = value;
+                Settings.Default.Save();
+
+                SetFontOutline();
+            }
+        }
+        public int FontOutlineSize
+        {
+            get
+            {
+                return Settings.Default.last_five_font_outline_size;
+            }
+            set
+            {
+                Settings.Default.last_five_font_outline_size = value;
+                Settings.Default.Save();
+
+                SetFontOutline();
+            }
+        }
+        public bool FontOutlineEnable
+        {
+            get
+            {
+                return Settings.Default.last_five_font_outline_enabled;
+            }
+            set
+            {
+                Settings.Default.last_five_font_outline_enabled = value;
+                Settings.Default.Save();
+
+                SetFontOutline();
+            }
+        }
+        public bool PointsEnable
+        {
+            get
+            {
+                return Settings.Default.last_five_points_enable;
+            }
+            set
+            {
+                Settings.Default.last_five_points_enable = value;
+                Settings.Default.Save();
+
+                if (value)
+                {
+                    ShowPoints();
+                }
+                else
+                {
+                    HidePoints();
+                }
+            }
+        }
+        public bool BorderEnable
+        {
+            get
+            {
+                return Settings.Default.last_five_border_enable;
+            }
+            set
+            {
+                Settings.Default.last_five_border_enable = value;
+                Settings.Default.Save();
+
+                if (value)
+                {
+                    DisplayBorder();
+                }
+                else
+                {
+                    RemoveBorder();
+                }
+            }
+        }
+        public string BackgroundColor
+        {
+            get
+            {
+                return Settings.Default.last_five_background_color;
+            }
+            set
+            {
+                Settings.Default.last_five_background_color = value;
+                Settings.Default.Save();
+
+                SetBackgroundColor(value);
+            }
+        }
+        public bool AutoLaunch
+        {
+            get
+            {
+                return Settings.Default.auto_last_five;
+            }
+            set
+            {
+                Settings.Default.auto_last_five = value;
+            }
+        }
+        
         public async void SetFontColor(string hexCode)
         {
             await ExecuteScript("setFontColor(\"" + hexCode + "\");");
@@ -49,9 +207,18 @@ namespace Retro_Achievement_Tracker
             await ExecuteScript("setFontFamily(\"" + fontName.Replace("'", "\\'") + "\");");
         }
 
-        public async void SetFontOutline(string hexCode, int size)
+        public async void SetFontOutline()
         {
-            await ExecuteScript("setFontOutline(\"" + hexCode + " " + size + "px\");");
+            if (FontOutlineEnable)
+            {
+                await ExecuteScript("setFontOutline(\"" + FontOutlineColor + " " + FontOutlineSize + "px\");");
+                await ExecuteScript("setBorderOutline(\"" + FontOutlineSize + "px solid " + FontOutlineColor + "\");");
+            }
+            else
+            {
+                await ExecuteScript("setFontOutline(\"0px\");");
+                await ExecuteScript("setBorderOutline(\"0px\");");
+            }
         }
 
         public async void SetBackgroundColor(string hexCode)
@@ -62,11 +229,14 @@ namespace Retro_Achievement_Tracker
         {
             await ExecuteScript("promptUser();");
         }
-        public async void EnableBorder()
+        public async void DisplayBorder()
         {
-            await ExecuteScript("enableBorder();");
+            if (BorderEnable)
+            {
+                await ExecuteScript("enableBorder();");
+            }
         }
-        public async void DisableBorder()
+        public async void RemoveBorder()
         {
             await ExecuteScript("disableBorder();");
         }
@@ -82,7 +252,7 @@ namespace Retro_Achievement_Tracker
         {
             longActionStopwatch.Restart();
 
-            CurrentAchievements = new List<Achievement>();
+            CurrentAchievements = new ConcurrentQueue<Achievement>();
 
             await ExecuteScript("clearList();");
         }
@@ -95,51 +265,23 @@ namespace Retro_Achievement_Tracker
                                        achievement.DateEarned.ToString() + "\", \"" + achievement.Id + "\");");
         }
 
-        private async void AnimateAchievement(int id, int position)
+        public async void ShowList(int count)
         {
-            await ExecuteScript("setAnimationForAchievement(" + id + "," + position + ");");
-        }
-
-        public void AnimateAchievements()
-        {
-            for (int i = 0; i < CurrentAchievements.Count; i++)
+            if (count > 0)
             {
-                int id = CurrentAchievements[i].Id;
-                int position = CurrentAchievements.Count - i - 1;
+                longActionStopwatch.Restart();
 
-                actions.Enqueue(() =>
-                {
-                    AnimateAchievement(id, position);
-                });
+                await ExecuteScript("showList(\"" + count + "\");");
             }
-            while (CurrentAchievements.Count > 5)
-            {
-                actions.Enqueue(() =>
-                {
-                    RemoveAchievement(CurrentAchievements[0].Id);
-
-                    CurrentAchievements.RemoveAt(0);
-                });
-            }
-        }
-
-        public async void ShowList()
-        {
-            longActionStopwatch.Restart();
-
-            await ExecuteScript("showList();");
-        }
-
-        private async void RemoveAchievement(int id)
-        {
-            await ExecuteScript("removeAchievement(\"" + id + "\");");
         }
 
         public void QueueShowList()
         {
+            int count = CurrentAchievements.Count;
+
             actions.Enqueue(() =>
             {
-                ShowList();
+                ShowList(count);
             });
         }
 
@@ -151,23 +293,27 @@ namespace Retro_Achievement_Tracker
             });
         }
 
-
         public void EnqueueAchievement(Achievement achievement)
         {
             if (!CurrentAchievements.Contains(achievement))
             {
-                CurrentAchievements.Add(achievement);
+                CurrentAchievements.Enqueue(achievement);
 
                 actions.Enqueue(() =>
                 {
                     AddAchievement(achievement);
                 });
             }
+
+            while(CurrentAchievements.Count > 5)
+            {
+                CurrentAchievements.TryDequeue(out Achievement result);
+            }
         }
 
         private void ExecuteActions(object sender, EventArgs e)
         {
-            if (longActionStopwatch.ElapsedMilliseconds > 1600)
+            if (longActionStopwatch.ElapsedMilliseconds > 1500 && isReady)
             {
                 longActionStopwatch.Stop();
 
@@ -180,7 +326,7 @@ namespace Retro_Achievement_Tracker
 
         protected async Task ExecuteScript(string script)
         {
-            if (this.Visible)
+            if (this.Visible && this.isReady)
             {
                 try
                 {
@@ -204,6 +350,40 @@ namespace Retro_Achievement_Tracker
                 Dock = DockStyle.None,
                 RequestHandler = new CustomRequestHandler()
             };
+
+            this.Controls.Add(this.chromiumWebBrowser);
+
+            chromiumWebBrowser.FrameLoadEnd += new EventHandler<FrameLoadEndEventArgs>((sender, frameLoadEndEventArgs) =>
+            {
+                Invoke((MethodInvoker)delegate
+                {
+                    this.isReady = true;
+                    this.ClientSize = new Size(615, 720);
+                });
+
+                SetFontOutline();
+                SetFontFamily(FontFamily.Name);
+                SetFontColor(FontColor);
+                SetBackgroundColor(BackgroundColor);
+
+                if (BorderEnable)
+                {
+                    DisplayBorder();
+                }
+                else
+                {
+                    RemoveBorder();
+                }
+                if (PointsEnable)
+                {
+                    ShowPoints();
+                }
+                else
+                {
+                    HidePoints();
+                }
+            });
+            chromiumWebBrowser.LoadHtml(Resources.LastFive);
 
             this.Controls.Add(this.chromiumWebBrowser);
         }

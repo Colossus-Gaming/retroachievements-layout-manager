@@ -10,6 +10,9 @@
         var fontFamily = "Calibri";
         var fontColor = "black";
         var fontOutline = "";
+        var borderOutline = "";
+
+        var activeRows = 0;
 
         var showPointsBool = false;
         var showBorderBool = false;
@@ -41,44 +44,36 @@
             element.style.backgroundColor = backgroundHex;
         }
 
-        function clearList() {
+        function applyBorderOutline(element) {
+            element.style.border = borderOutline;
+            element.style.backgroundColor = fontColor;
+            element.style.color = fontColor;
+        }
 
+        function clearList() {
             var focusAchievements = document.getElementsByClassName("focus-achievement");
 
-            if (focusAchievements.length > 0) {
-                setTimeout(function () {
-                    focusAchievements[0].style.animationName = "achievement-animation-out-1";
-                }, 200);
+            for (var i = focusAchievements.length - 1; i >= 0; i--) {
 
-                if (focusAchievements.length > 1) {
-                    setTimeout(function () {
-                        focusAchievements[1].style.animationName = "achievement-animation-out-2";
+                var nthChildTop = focusAchievements[i].offsetTop;
 
-                    }, 150);
-
-                    if (focusAchievements.length > 2) {
-                        setTimeout(function () {
-                            focusAchievements[2].style.animationName = "achievement-animation-out-3";
-
-                        }, 100);
-
-                        if (focusAchievements.length > 3) {
-                            setTimeout(function () {
-                                focusAchievements[3].style.animationName = "achievement-animation-out-4";
-                            }, 50);
-
-                            if (focusAchievements.length > 4) {
-                                focusAchievements[4].style.animationName = "achievement-animation-out-5";
-
-                            }
-                        }
+                focusAchievements[i].animate([
+                    {
+                        left: '5px',
+                        top: nthChildTop + 'px'
+                    }, {
+                        left: '5px',
+                        top: ((i * 145) + 800) + 'px'
                     }
-                }
+                ], {
+                    iterations: 1,
+                    duration: 300,
+                    fill: "forwards",
+                    easing: "ease-in"
+                });
             }
 
-            setTimeout(function () {
-                document.getElementById("container").innerHTML = "";
-            }, 600);
+            setTimeout(cleanUp(), 1000);
         }
 
         function setFontFamily(value) {
@@ -96,9 +91,11 @@
             fontColor = value;
 
             var textFields = document.getElementsByClassName("has-font");
+            var lines = document.getElementsByClassName("focus-achievement-line");
 
             for (var i = 0; i < textFields.length; i++) {
                 applyFontColor(textFields[i]);
+                applyFontColor(lines[i]);
                 adjustFont(textFields[i]);
             }
         }
@@ -111,6 +108,16 @@
             for (var i = 0; i < textFields.length; i++) {
                 applyFontOutline(textFields[i]);
                 adjustFont(textFields[i]);
+            }
+        }
+
+        function setBorderOutline(value) {
+            borderOutline = value;
+
+            var lines = document.getElementsByClassName("focus-achievement-line");
+
+            for (var i = 0; i < lines.length; i++) {
+                applyBorderOutline(lines[i]);
             }
         }
 
@@ -164,45 +171,6 @@
             }
         }
 
-        function setAnimationForAchievement(id, currentPosition) {
-            var element = document.getElementById("achievement-" + id);
-
-            element.classList.remove("achievement-animation-in-1");
-            element.classList.remove("achievement-animation-1-2");
-            element.classList.remove("achievement-animation-2-3");
-            element.classList.remove("achievement-animation-3-4");
-            element.classList.remove("achievement-animation-4-5");
-            element.classList.remove("achievement-animation-out-5");
-
-            element.style.animationName = "";
-
-            switch (currentPosition) {
-                case 0:
-                    element.classList.add("achievement-animation-in-1");
-                    break;
-                case 1:
-                    element.classList.add("achievement-animation-1-2");
-                    break;
-                case 2:
-                    element.classList.add("achievement-animation-2-3");
-                    break;
-                case 3:
-                    element.classList.add("achievement-animation-3-4");
-                    break;
-                case 4:
-                    element.classList.add("achievement-animation-4-5");
-                    break;
-                default:
-                    element.classList.add("achievement-animation-out-5");
-            }
-        }
-
-        function removeAchievement(id) {
-            setTimeout(function () {
-                document.getElementById("achievement-" + id).remove();
-            }, 250);
-        }
-
         function addToList(name, imageLink, description, points, date, id) {
             var container = document.getElementById("container");
 
@@ -212,6 +180,8 @@
 
             if (showBorderBool) {
                 focusAchievementBlock.style.backgroundImage = "url('disk://background')";
+            } else {
+                focusAchievementBlock.style.backgroundImage = "";
             }
 
             if (container.childNodes.length > 0) {
@@ -222,7 +192,6 @@
 
             var focusAchievementBadgeBlock = document.createElement('img');
             focusAchievementBadgeBlock.src = imageLink;
-            focusAchievementBadgeBlock.style.height = "100px";
             focusAchievementBadgeBlock.classList.add("focus-achievement-badge");
             focusAchievementBlock.appendChild(focusAchievementBadgeBlock);
 
@@ -232,11 +201,9 @@
             focusAchievementNameBlock.classList.add("has-font");
             focusAchievementBlock.appendChild(focusAchievementNameBlock);
 
-            var focusAchievementDescriptionBlock = document.createElement('div');
-            focusAchievementDescriptionBlock.innerHTML = description;
-            focusAchievementDescriptionBlock.classList.add("focus-achievement-description");
-            focusAchievementDescriptionBlock.classList.add("has-font");
-            focusAchievementBlock.appendChild(focusAchievementDescriptionBlock);
+            var focusAchievementLineBlock = document.createElement('hr');
+            focusAchievementLineBlock.classList.add("focus-achievement-line");
+            focusAchievementBlock.appendChild(focusAchievementLineBlock);
 
             var focusAchievementDateBlock = document.createElement('div');
             focusAchievementDateBlock.innerHTML = date;
@@ -256,9 +223,7 @@
             applyFontColor(focusAchievementNameBlock);
             applyFontOutline(focusAchievementNameBlock);
 
-            applyFontFamily(focusAchievementDescriptionBlock);
-            applyFontColor(focusAchievementDescriptionBlock);
-            applyFontOutline(focusAchievementDescriptionBlock);
+            applyBorderOutline(focusAchievementLineBlock);
 
             applyFontFamily(focusAchievementPointsBlock);
             applyFontColor(focusAchievementPointsBlock);
@@ -269,7 +234,6 @@
             applyFontOutline(focusAchievementDateBlock);
 
             adjustFont(focusAchievementNameBlock);
-            adjustFont(focusAchievementDescriptionBlock);
             adjustFont(focusAchievementDateBlock);
             adjustFont(focusAchievementPointsBlock);
 
@@ -278,315 +242,209 @@
             }
         }
 
-        function showList() {
+        function showList(newActiveRows) {
+            activeRows = parseInt(newActiveRows);
+
+            var focusAchievements = document.getElementsByClassName("focus-achievement");
+            var inAll = focusAchievements.length;
+
+            for (var i = inAll - 1; i >= 0; i--) {
+                if (i == 0 && activeRows > 0) {
+                    var zeroChildTop = focusAchievements[0].offsetTop;
+
+                    setTimeout(function () {
+                        focusAchievements[0].animate([
+                            {
+                                left: '5px',
+                                top: zeroChildTop + 'px'
+                            }, {
+                                left: '5px',
+                                top: '0px'
+                            }
+                        ], {
+                            iterations: 1,
+                            duration: 300,
+                            fill: "forwards",
+                            easing: "ease-out"
+                        });
+                    }, (inAll * 50));
+                } else if (i == 1 && activeRows > 1) {
+                    var firstChildTop = focusAchievements[1].offsetTop;
+
+                    setTimeout(function () {
+                        focusAchievements[1].animate([
+                            {
+                                left: '5px',
+                                top: firstChildTop + 'px'
+                            }, {
+                                left: '5px',
+                                top: '145px'
+                            }
+                        ], {
+                            iterations: 1,
+                            duration: 300,
+                            fill: "forwards",
+                            easing: "ease-out"
+                        });
+                    }, (inAll - 1) * 50);
+                } else if (i == 2 && activeRows > 2) {
+                    var secondChildTop = focusAchievements[2].offsetTop;
+
+                    setTimeout(function () {
+                        focusAchievements[2].animate([
+                            {
+                                left: '5px',
+                                top: secondChildTop + 'px'
+                            }, {
+                                left: '5px',
+                                top: '290px'
+                            }
+                        ], {
+                            iterations: 1,
+                            duration: 300,
+                            fill: "forwards",
+                            easing: "ease-out"
+                        });
+                    }, (inAll - 2) * 50);
+                } else if (i == 3 && activeRows > 3) {
+                    var thirdChildTop = focusAchievements[3].offsetTop;
+
+                    setTimeout(function () {
+                        focusAchievements[3].animate([
+                            {
+                                left: '5px',
+                                top: thirdChildTop + 'px'
+                            }, {
+                                left: '5px',
+                                top: '435px'
+                            }
+                        ], {
+                            iterations: 1,
+                            duration: 300,
+                            fill: "forwards",
+                            easing: "ease-out"
+                        });
+                    }, (inAll - 3) * 50);
+                } else if (i == 4 && activeRows > 4) {
+                    var fourthChildTop = focusAchievements[4].offsetTop;
+
+                    setTimeout(function () {
+                        focusAchievements[4].animate([
+                            {
+                                left: '5px',
+                                top: fourthChildTop + 'px'
+                            }, {
+                                left: '5px',
+                                top: '580px'
+                            }
+                        ], {
+                            iterations: 1,
+                            duration: 300,
+                            fill: "forwards",
+                            easing: "ease-out"
+                        });
+                    }, (inAll - 4) * 50);
+                } else {
+                    var nthChildTop = focusAchievements[i].offsetTop;
+
+                    focusAchievements[i].animate([
+                        {
+                            left: '5px',
+                            top: nthChildTop + 'px'
+                        }, {
+                            left: '5px',
+                            top: (800 + (i * 50)) + 'px'
+                        }
+                    ], {
+                        iterations: 1,
+                        duration: 500,
+                        fill: "forwards",
+                        easing: "ease-in"
+                    });
+                }
+            }
+
+            if (inAll > 5) {
+                setTimeout(cleanUp(), (inAll * 100));
+            }
+        }
+
+        function cleanUp() {
             var focusAchievements = document.getElementsByClassName("focus-achievement");
 
-            if (focusAchievements.length > 0) {
-                setTimeout(function () {
-                    focusAchievements[0].classList.add("achievement-animation-in-1");
-                }, 200);
+            while (focusAchievements.length > 5) {
+                focusAchievements[focusAchievements.length - 1].remove();
 
-                if (focusAchievements.length > 1) {
-                    setTimeout(function () {
-                        focusAchievements[1].classList.add("achievement-animation-in-2");
-                    }, 150);
-
-                    if (focusAchievements.length > 2) {
-                        setTimeout(function () {
-                            focusAchievements[2].classList.add("achievement-animation-in-3");
-                        }, 100);
-
-                        if (focusAchievements.length > 3) {
-                            setTimeout(function () {
-                                focusAchievements[3].classList.add("achievement-animation-in-4");
-                            }, 50);
-
-                            if (focusAchievements.length > 4) {
-                                focusAchievements[4].classList.add("achievement-animation-in-5");
-                            }
-                        }
-                    }
-                }
+                focusAchievements = document.getElementsByClassName("focus-achievement");
             }
         }
     </script>
     <style id="-style" type="text/css">
-        @keyframes achievement-animation-in-5 {
-            0% {
-                left: 35px;
-                top: -300px;
-            }
 
-            100% {
-                left: 35px;
-                top: 555px;
-            }
-        }
-
-        .achievement-animation-in-5 {
-            animation-name: achievement-animation-in-5;
-            animation-duration: 700ms;
-        }
-
-        @keyframes achievement-animation-out-5 {
-            0% {
-                left: 35px;
-                top: 555px;
-            }
-
-            100% {
-                left: 35px;
-                top: 1000px;
-            }
-        }
-
-        .achievement-animation-out-5 {
-            animation-name: achievement-animation-out-5;
-            animation-duration: 700ms;
-        }
-        @keyframes achievement-animation-4-5 {
-            0% {
-                left: 35px;
-                top: 425px;
-            }
-
-            100% {
-                left: 35px;
-                top: 555px;
-            }
-        }
-
-        .achievement-animation-4-5 {
-            animation-name: achievement-animation-4-5;
-            animation-duration: 300ms;
-        }
-        @keyframes achievement-animation-in-4 {
-            0% {
-                left: 35px;
-                top: -300px;
-            }
-
-            100% {
-                left: 35px;
-                top: 425px;
-            }
-        }
-
-        .achievement-animation-in-4 {
-            animation-name: achievement-animation-in-4;
-            animation-duration: 700ms;
-        }
-
-        @keyframes achievement-animation-out-4 {
-            0% {
-                left: 35px;
-                top: 425px;
-            }
-
-            100% {
-                left: 35px;
-                top: 1000px;
-            }
-        }
-
-        .achievement-animation-out-4 {
-            animation-name: achievement-animation-out-4;
-            animation-duration: 700ms;
-        }
-
-        @keyframes achievement-animation-3-4 {
-            0% {
-                left: 35px;
-                top: 295px;
-            }
-
-            100% {
-                left: 35px;
-                top: 425px;
-            }
-        }
-
-        .achievement-animation-3-4 {
-            animation-name: achievement-animation-3-4;
-            animation-duration: 300ms;
-        }
-
-        @keyframes achievement-animation-in-3 {
-            0% {
-                left: 35px;
-                top: -300px;
-            }
-
-            100% {
-                left: 35px;
-                top: 295px;
-            }
-        }
-
-        .achievement-animation-in-3 {
-            animation-name: achievement-animation-in-3;
-            animation-duration: 700ms;
-        }
-
-        @keyframes achievement-animation-out-3 {
-            0% {
-                left: 35px;
-                top: 295px;
-            }
-
-            100% {
-                left: 35px;
-                top: 1000px;
-            }
-        }
-
-        .achievement-animation-out-3 {
-            animation-name: achievement-animation-out-3;
-            animation-duration: 700ms;
-        }
-
-        @keyframes achievement-animation-2-3 {
-            0% {
-                left: 35px;
-                top: 165px;
-            }
-
-            100% {
-                left: 35px;
-                top: 295px;
-            }
-        }
-
-        .achievement-animation-2-3 {
-            animation-name: achievement-animation-2-3;
-            animation-duration: 300ms;
-        }
-
-        @keyframes achievement-animation-in-2 {
-            0% {
-                left: 35px;
-                top: -300px;
-            }
-
-            100% {
-                left: 35px;
-                top: 165px;
-            }
-        }
-
-        .achievement-animation-in-2 {
-            animation-name: achievement-animation-in-2;
-            animation-duration: 700ms;
-        }
-
-        @keyframes achievement-animation-out-2 {
-            0% {
-                left: 35px;
-                top: 165px;
-            }
-
-            100% {
-                left: 35px;
-                top: 1000px;
-            }
-        }
-
-        .achievement-animation-out-2 {
-            animation-name: achievement-animation-out-2;
-            animation-duration: 700ms;
-        }
-
-        @keyframes achievement-animation-in-1 {
-            0% {
-                left: 35px;
-                top: -300px;
-            }
-
-            100% {
-                left: 35px;
-                top: 35px;
-            }
-        }
-
-        .achievement-animation-in-1 {
-            animation-name: achievement-animation-in-1;
-            animation-duration: 700ms;
-        }
-
-        @keyframes achievement-animation-1-2 {
-            0% {
-                left: 35px;
-                top: 35px;
-            }
-
-            100% {
-                left: 35px;
-                top: 165px;
-            }
-        }
-
-        .achievement-animation-1-2 {
-            animation-name: achievement-animation-1-2;
-            animation-duration: 300ms;
-        }
-
-        @keyframes achievement-animation-out-1 {
-            0% {
-                left: 35px;
-                top: 35px;
-            }
-
-            100% {
-                left: 35px;
-                top: 1000px;
-            }
-        }
-
-        .achievement-animation-out-1 {
-            animation-name: achievement-animation-out-1;
-            animation-duration: 700ms;
-        }
-
-        .focus-achievement {
-            position: absolute;
-            top: -300px;
-            width: 510px;
-            height: 120px;
-            margin-bottom: 10px;
-            background-repeat: no-repeat;
-            background-color: #cccccc;
-            background-size: cover;
-            animation-iteration-count: 1;
-            animation-fill-mode: forwards;
-            overflow: hidden;
+        .focus-achievement:nth-child(1) {
+            margin-top: 5px;
         }
 
         .focus-achievement-name {
             position: relative;
             right: 10px;
-            top: 10px;
-            width: 389px;
-            height: 30px;
+            top: 0px;
+            width: 455px;
+            height: 140px;
             text-align: center;
             float: right;
+            margin-top: 10px;
         }
 
-        .focus-achievement-description {
+        .focus-achievement-line {
             position: relative;
             right: 10px;
             top: 10px;
-            width: 389px;
-            height: 50px;
-            text-align: center;
+            width: 455px;
+            height: 5px;
             float: right;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+
+        .focus-achievement-badge {
+            position: relative;
+            top: 10px;
+            left: 10px;
+            height: 120px;
+            float: left;
+            border: 2px solid gold;
+        }
+
+        .focus-achievement {
+            position: absolute;
+            top: -150px;
+            left: 5px;
+            width: 615px;
+            height: 145px;
+            background-repeat: no-repeat;
+            background-color: #cccccc;
+            background-size: cover;
+        }
+
+        .has-font {
+            color: black;
+            background: rgba(0, 0, 0, 0);
+            font-size: 32px;
+            font-family: Calibri;
+            font-weight: bold;
+            -webkit-text-stroke: 2px white;
+            padding-right: 10px;
+            height: 32px;
+            padding-top: 10px;
         }
 
         .focus-achievement-date {
             position: relative;
-            left: 7px;
-            top: 10px;
-            width: 60%;
-            height: 20px;
+            left: 20px;
+            top: 25px;
+            width: 320px;
+            height: 25px;
             text-align: center;
             float: left;
         }
@@ -594,36 +452,27 @@
         .focus-achievement-points {
             position: relative;
             right: 10px;
-            top: 10px;
-            width: 15%;
-            height: 20px;
+            top: 25px;
+            width: 100px;
+            height: 25px;
             text-align: right;
             float: right;
         }
 
-        .focus-achievement-badge {
-            position: relative;
-            left: 8px;
-            top: 8px;
-            height: 100px;
-            float: left;
-            border: 2px solid gold;
-        }
-
-        .has-font {
-            font-size: 52px;
-            color: black;
-            background: rgba(0, 0, 0, 0.0);
-            font-family: Calibri;
-            -webkit-text-stroke: 2px white;
-            overflow-wrap: normal;
+        .focus-achievement,
+        .focus-achievement-name,
+        .focus-achievement-points,
+        .focus-achievement-badge,
+        .focus-achievement-line {
+            overflow: hidden;
+            -webkit-backface-visibility: hidden;
         }
 
         #container {
             position: absolute;
             background: magenta;
             width: 1372px;
-            height: 727px;
+            height: 1080px;
             top: -5px;
             left: -5px;
         }

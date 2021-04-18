@@ -36,7 +36,9 @@
             JToken IsFinal = item["IsFinal"];
             JToken ConsoleName = item["ConsoleName"];
             JToken NumAchievements = item["NumAchievements"];
-            JToken Achievements = item["Achievements"];
+            JToken Achievements = item["Achievements"]; 
+            JToken UserCompletionHardcore = item["UserCompletionHardcore"];
+            JToken NumAwardedToUserHardcore = item["NumAwardedToUserHardcore"];
 
             if (Achievements != null)
             {
@@ -146,6 +148,22 @@
                 if (Title.Type == JTokenType.String)
                 {
                     GameProgress.Title = Title.ToString();
+                }
+            }
+
+            if (UserCompletionHardcore != null)
+            {
+                if (UserCompletionHardcore.Type == JTokenType.String)
+                {
+                    GameProgress.UserCompletionHardcore = UserCompletionHardcore.ToString();
+                }
+            }
+
+            if (NumAwardedToUserHardcore != null)
+            {
+                if (NumAwardedToUserHardcore.Type == JTokenType.Integer)
+                {
+                    GameProgress.NumAwardedToUserHardcore = Convert.ToInt32(NumAwardedToUserHardcore);
                 }
             }
 
