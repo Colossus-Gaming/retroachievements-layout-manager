@@ -574,6 +574,8 @@ namespace Retro_Achievement_Tracker
                 try
                 {
                     await chromiumWebBrowser.EvaluateScriptAsync(script, TimeSpan.FromSeconds(5));
+                    await chromiumWebBrowser.EvaluateScriptAsync("adjustAllFont();", TimeSpan.FromSeconds(5));
+                    
                 }
                 catch (Exception)
                 {
@@ -600,7 +602,7 @@ namespace Retro_Achievement_Tracker
                 Invoke((MethodInvoker)delegate
                 {
                     this.isReady = true;
-                    this.ClientSize = new Size(700, 500);
+                    this.ClientSize = new Size(680, 300);
                 });
 
                 SetFontFamily(FontFamily.Name);

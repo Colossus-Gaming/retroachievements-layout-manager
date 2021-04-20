@@ -422,7 +422,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Retro Achievement Tracker, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Retro Achievement Tracker, Version=1.5.1.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_1C0A4706DA324BF887025B7182EF8EEA"
@@ -1234,15 +1234,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:RA Layout Manager"
-        "ProductCode" = "8:{030CC9CB-2A3D-4B5A-B2F6-6FF8827B6ED0}"
-        "PackageCode" = "8:{4DAF566A-5CF2-4BA7-A573-57E6A97F258E}"
+        "ProductCode" = "8:{858782EC-2D4C-4513-A7B6-9CE01FB1873B}"
+        "PackageCode" = "8:{C2F2AA9C-B64C-4294-8179-ED0DF60F5BE7}"
         "UpgradeCode" = "8:{2AED59AC-3EBE-4936-A1A3-3282811ECB5E}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.1.19"
+        "ProductVersion" = "8:1.1.20"
         "Manufacturer" = "8:Colossus Gaming"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
