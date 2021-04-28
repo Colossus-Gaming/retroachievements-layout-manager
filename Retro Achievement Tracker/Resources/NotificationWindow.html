@@ -92,6 +92,9 @@
             $("#achievement-video").fadeOut();
             $("#mastery-video").fadeOut();
             $("#user-prompt").fadeIn();
+
+            document.getElementById("ready-message").style.fontSize = "42px";
+            document.getElementById("confirm-button").style.fontSize = "42px";
         }
 
         function enableBorder() {
@@ -255,8 +258,6 @@
             $("#achievement-badge").attr("src", achievementBadge);
             $("#achievement-video").attr("src", "disk://achievement-notification");
 
-            adjustAchievementFont();
-
             $("#achievement-video").fadeIn();
         }
 
@@ -302,7 +303,7 @@
                 setTimeout(function () {
 
                     $("#achievement").fadeOut();
-                }, 500);
+                }, 100);
             }, +value);
         }
 
@@ -339,7 +340,7 @@
                     element.classList.add(masteryAnimationOut);
 
                     $("#mastery").fadeOut();
-                }, 400);
+                }, 100);
             }, +value);
         }
 
@@ -427,7 +428,7 @@
 
         #achievement,
         #mastery {
-            animation-fill-mode: forwards;
+            animation-fill-mode: both;
             animation-duration: 500ms;
         }
 
@@ -459,16 +460,19 @@
         .animation-out-right {
             animation-name: animation-right;
             animation-direction: normal;
+            animation-fill-mode: backwards;
         }
 
         .animation-in-down {
             animation-name: animation-down;
             animation-direction: reverse;
+            animation-fill-mode: forwards;
         }
 
         .animation-out-down {
             animation-name: animation-down;
             animation-direction: normal;
+            animation-fill-mode: backwards;
         }
 
         .no-animation {
@@ -497,13 +501,11 @@
             border: 2px solid gold;
         }
 
-        #achievement-description,
         #achievement-description {
             position: relative;
             right: 10px;
-            top: 10px;
             width: 505px;
-            height: 70px;
+            height: 60px;
             text-align: center;
             float: right;
         }
@@ -527,28 +529,12 @@
         .has-font {
             color: black;
             background: rgba(0, 0, 0, 0);
-            font-size: 32px;
             font-family: Calibri;
             font-weight: bold;
             -webkit-text-stroke: 2px white;
             padding-right: 10px;
             padding-top: 10px;
             -webkit-backface-visibility: hidden;
-            border: 1px solid black;
-        }
-
-        #user-prompt {
-            position: absolute;
-            width: 600px;
-            height: 60px;
-            left: 400px;
-            top: 100px;
-            text-align: center;
-            display: none;
-            animation-name: user-prompt-animation;
-            animation-iteration-count: 1;
-            animation-fill-mode: forwards;
-            animation-duration: 1s;
         }
 
         #achievement,
@@ -594,22 +580,33 @@
 
         #ready-message {
             position: relative;
-            top: 50px;
+            top: 10px;
             text-align: center;
             font-weight: bold;
             vertical-align: middle;
-            font-size: 42px;
-            height: 40px;
+            font-size: 16px;
+        }
+
+        #user-prompt {
+            position: absolute;
+            width: 400px;
+            height: 100px;
+            left: 400px;
+            top: 100px;
+            text-align: center;
+            display: none;
+            animation-name: user-prompt-animation;
+            animation-iteration-count: 1;
+            animation-fill-mode: both;
+            animation-duration: 1s;
         }
 
         #confirm-button {
             text-align: center;
             font-weight: bold;
             vertical-align: middle;
-            font-size: 32px;
+            font-size: 16px;
             background-color: yellow;
-            height: 20px;
-            width: 40px;
         }
 
         html {
@@ -618,6 +615,7 @@
     </style>
     <script>
         function acknowledgePrompt() {
+
             document.getElementById("user-prompt").style.animationName = "user-prompt-animation-reverse";
 
             setTimeout(function () {

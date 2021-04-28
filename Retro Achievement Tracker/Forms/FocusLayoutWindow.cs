@@ -342,11 +342,12 @@ namespace Retro_Achievement_Tracker
             // 
             // FocusLayoutWindow
             // 
-            this.ClientSize = new Size(284, 261);
-            this.FormBorderStyle = FormBorderStyle.FixedToolWindow;
-            this.Icon = ((Icon)(resources.GetObject("$this.Icon")));
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FocusLayoutWindow";
             this.ResumeLayout(false);
+
         }
     }
 }

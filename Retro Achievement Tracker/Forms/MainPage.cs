@@ -931,6 +931,7 @@ namespace Retro_Achievement_Tracker
             notificationLayoutWindow = new NotificationLayoutWindow();
 
             notificationLayoutWindow.chromiumWebBrowser.RequestHandler = new CustomRequestHandler() { customAchievementEnabled = notificationLayoutWindow.CustomAchievementEnabled, customMasteryEnabled = notificationLayoutWindow.CustomMasteryEnabled };
+            notificationLayoutWindow.Show();
 
             if (!notificationLayoutWindow.CustomAchievementEnabled)
             {
@@ -976,6 +977,7 @@ namespace Retro_Achievement_Tracker
             notificationLayoutWindow = new NotificationLayoutWindow();
 
             notificationLayoutWindow.chromiumWebBrowser.RequestHandler = new CustomRequestHandler() { customAchievementEnabled = notificationLayoutWindow.CustomAchievementEnabled, customMasteryEnabled = notificationLayoutWindow.CustomMasteryEnabled };
+            notificationLayoutWindow.Show();
 
             if (!notificationLayoutWindow.CustomMasteryEnabled)
             {
