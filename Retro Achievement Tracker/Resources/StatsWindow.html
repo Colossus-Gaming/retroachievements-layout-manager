@@ -6,52 +6,36 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" type="text/javascript"></script>
     <script id="ra-stats-scripts">
 
-        function adjustNameFont(element) {
+        var fontValue = "Calibri";
+        var lineSpacing = "1";
 
-            var value = 44;
+        function adjustFont(element) {
+            var value = 100;
 
             element.style.fontSize = value + 'px';
 
-            while (element.scrollHeight > element.offsetHeight) {
+            while (element.scrollHeight > element.offsetHeight || element.scrollWidth > element.offsetWidth) {
                 value--;
                 element.style.fontSize = value + 'px';
             }
         }
 
-        function adjustValueFont(element) {
-            element.style.height = '33px';
+        function applyFont(element) {
+            element.style.lineHeight = lineSpacing;
+            element.style.font = fontValue;
 
-            var value = 44;
-
-            element.style.fontSize = value + 'px';
-
-            while (element.scrollHeight > element.offsetHeight) {
-                value--;
-                element.style.fontSize = value + 'px';
-            }
-        }
-
-        function adjustAllFont() {
-
-            var allNames = document.getElementsByClassName('name');
-            var allValues = document.getElementsByClassName('value');
-
-            for (var i = 0; i < allNames.length; i++) {
-                if (allNames[i].style.display !== "none") {
-                    adjustNameFont(allNames[i]);
-                }
-            }
-
-            adjustsWidths();
-
-            for (var i = 0; i < allValues.length; i++) {
-                if (allValues[i].style.display !== "none") {
-                    adjustValueFont(allValues[i]);
-                }
-            }
+            adjustFont(element);
         }
 
         function adjustsWidths() {
+            var elements = document.getElementsByClassName('has-font');
+
+            for (var i = 0; i < elements.length; i++) {
+                if (elements[i].style.display !== "none") {
+                    elements[i].style.fontSize = '100px';
+                }
+            }
+
             var allNames = document.getElementsByClassName('name');
             var allValues = document.getElementsByClassName('value');
             var max = 0;
@@ -59,6 +43,7 @@
             for (var i = 0; i < allNames.length; i++) {
                 if (allNames[i].style.display !== "none") {
                     allNames[i].style.width = 'auto';
+                    applyFont(allNames[i]);
                 }
             }
 
@@ -68,24 +53,33 @@
                 }
             }
 
+            if (max > 320) {
+                max = 320;
+            }
+
             for (var i = 0; i < allNames.length; i++) {
                 if (allNames[i].style.display !== "none") {
                     allNames[i].style.width = max + 'px';
+                    adjustFont(allNames[i]);
                 }
             }
 
             for (var i = 0; i < allValues.length; i++) {
                 if (allValues[i].style.display !== "none") {
-                    allValues[i].style.width = (500 - max) + 'px';
+                    allValues[i].style.width = (655 - max) + 'px';
+                    applyFont(allValues[i]);
                 }
             }
         }
 
-        function setFontFamily(value) {
+        function setFont(family, spacing) {
+            fontValue = "100px \"" + family + "\"";
+            lineSpacing = spacing == 0 ? 1 : spacing;
+
             var all = document.getElementsByClassName("has-font");
 
             for (var i = 0; i < all.length; i++) {
-                all[i].style.fontFamily = value;
+                applyFont(all[i]);
             }
         }
 
@@ -104,200 +98,19 @@
                 all[i].style.webkitTextStroke = value;
             }
         }
-
-        function setRankName(value) {
-            $("#ra-stats-rank-name").text(value);
-        }
-
-        function showRank() {
-            $("#ra-stats-rank").fadeIn();
-        }
-
-        function hideRank() {
-            $("#ra-stats-rank").fadeOut();
-        }
-
-        function setRank(value) {
-            $("#ra-stats-rank-value").text(value);
-        }
-
-        function setAwardsName(value) {
-            $("#ra-stats-awards-name").text(value);
-        }
-
-        function showAwards() {
-            $("#ra-stats-awards").fadeIn();
-        }
-
-        function hideAwards() {
-            $("#ra-stats-awards").fadeOut();
-        }
-
-        function setAwards(value) {
-            $("#ra-stats-awards-value").text(value);
-        }
-
-        function setPointsName(value) {
-            $("#ra-stats-points-name").text(value);
-        }
-
-        function showPoints() {
-            $("#ra-stats-points").fadeIn();
-        }
-
-        function hidePoints() {
-            $("#ra-stats-points").fadeOut();
-        }
-
-        function setPoints(value) {
-            $("#ra-stats-points-value").text(value);
-        }
-
-        function setRatioName(value) {
-            $("#ra-stats-ratio-name").text(value);
-        }
-
-        function showRatio() {
-            $("#ra-stats-ratio").fadeIn();
-        }
-
-        function hideRatio() {
-            $("#ra-stats-ratio").fadeOut();
-        }
-
-        function setRatio(value) {
-            $("#ra-stats-ratio-value").text(value);
-        }
-
-        function setCompletedName(value) {
-            $("#ra-stats-game-completed-name").text(value);
-        }
-
-        function setCompletedValue(value) {
-            $("#ra-stats-game-completed-value").text(value);
-        }
-
-        function showCompleted() {
-            $("#ra-stats-game-completed").fadeIn();
-        }
-
-        function hideCompleted() {
-            $("#ra-stats-game-completed").fadeOut();
-        }
-
-        function setTruePointsName(value) {
-            $("#ra-stats-true-points-name").text(value);
-        }
-
-        function showTruePoints() {
-            $("#ra-stats-true-points").fadeIn();
-        }
-
-        function hideTruePoints() {
-            $("#ra-stats-true-points").fadeOut();
-        }
-
-        function setTruePoints(value) {
-            $("#ra-stats-true-points-value").text(value);
-        }
-
-        function setGameRatioName(value) {
-            $("#ra-stats-game-ratio-name").text(value);
-        }
-
-        function showGameRatio() {
-            $("#ra-stats-game-ratio").fadeIn();
-        }
-
-        function hideGameRatio() {
-            $("#ra-stats-game-ratio").fadeOut();
-        }
-
-        function setGameRatio(value) {
-            $("#ra-stats-game-ratio-value").text(value);
-        }
-
-        function setGameAchievementsName(value) {
-            $("#ra-stats-game-achievements-name").text(value);
-        }
-
-        function showGameAchievements() {
-            $("#ra-stats-game-achievements").fadeIn();
-        }
-
-        function hideGameAchievements() {
-            $("#ra-stats-game-achievements").fadeOut();
-        }
-
-        function setGameAchievements(earned, total) {
-            $("#ra-stats-game-achievements-earned").text(earned);
-            $("#ra-stats-game-achievements-total").text(total);
-            $("#ra-stats-game-achievements-divider").text("/");
-
-        }
-
-        function setGamePointsName(value) {
-            $("#ra-stats-game-points-name").text(value);
-
-        }
-
-        function showGamePoints() {
-            $("#ra-stats-game-points").fadeIn();
-
-        }
-
-        function hideGamePoints() {
-            $("#ra-stats-game-points").fadeOut();
-        }
-
-        function setGamePoints(earned, total) {
-
-            $("#ra-stats-game-points-earned").text(earned);
-
-            $("#ra-stats-game-points-total").text(total);
-            $("#ra-stats-game-points-divider").text("/");
-
-        }
-
-        function setGameTruePointsName(value) {
-            $("#ra-stats-game-true-points-name").text(value);
-
-        }
-
-        function showGameTruePoints() {
-            $("#ra-stats-game-true-points").fadeIn();
-
-        }
-
-        function hideGameTruePoints() {
-            $("#ra-stats-game-true-points").fadeOut();
-        }
-
-        function setGameTruePoints(earned, total) {
-            $("#ra-stats-game-true-points-earned").text(earned);
-
-            $("#ra-stats-game-true-points-total").text(total);
-            $("#ra-stats-game-true-points-divider").text("/");
-
-        }
     </script>
     <style id="ra-stats-style" type="text/css">
-
         .has-font {
             color: black;
             background: rgba(0, 0, 0, 0);
-            font-size: 28px;
+            font-size: 36px;
             font-family: Calibri;
-            font-weight: bold;
             -webkit-text-stroke: 2px white;
-            padding-right: 10px;
             display: inline-block;
-            height: 33px;
-        }
-
-        .mod,
-        .earned {
-            text-align: right;
+            height: 38px;
+            vertical-align: middle;
+            margin-top: 12px;
+            padding-right: 5px;
         }
 
         .name {
@@ -332,7 +145,7 @@
         #ra-stats-game-true-points {
             position: relative;
             display: none;
-            margin-top: 10px;
+            -webkit-backface-visibility: hidden;
         }
 
         .name {
@@ -344,73 +157,46 @@
     <div id="container">
         <div id="ra-stats">
             <div id="ra-stats-rank">
-                <span>
-                    <a id="ra-stats-rank-name" class="has-font non-mod name"></a>
-                    <a id="ra-stats-rank-value" class="has-font non-mod value"></a>
-                </span>
+                <div id="ra-stats-rank-name" class="has-font name"></div>
+                <div id="ra-stats-rank-value" class="has-font value"></div>
             </div>
             <div id="ra-stats-awards">
-                <span>
-                    <a id="ra-stats-awards-name" class="has-font non-mod name"></a>
-                    <a id="ra-stats-awards-value" class="has-font non-mod value"></a>
-                </span>
+                <div id="ra-stats-awards-name" class="has-font name"></div>
+                <div id="ra-stats-awards-value" class="has-font value"></div>
             </div>
             <div id="ra-stats-ratio">
-                <span>
-                    <a id="ra-stats-ratio-name" class="has-font non-mod name"></a>
-                    <a id="ra-stats-ratio-value" class="has-font non-mod value"></a>
-                </span>
+                <div id="ra-stats-ratio-name" class="has-font name"></div>
+                <div id="ra-stats-ratio-value" class="has-font value"></div>
             </div>
             <div id="ra-stats-points">
-                <span>
-                    <a id="ra-stats-points-name" class="has-font non-mod name"></a>
-                    <a id="ra-stats-points-value" class="has-font non-mod value"></a>
-                </span>
+                <div id="ra-stats-points-name" class="has-font name"></div>
+                <div id="ra-stats-points-value" class="has-font value"></div>
             </div>
             <div id="ra-stats-true-points">
-                <span>
-                    <a id="ra-stats-true-points-name" class="has-font non-mod name"></a>
-                    <a id="ra-stats-true-points-value" class="has-font non-mod value"></a>
-                </span>
+                <div id="ra-stats-true-points-name" class="has-font name"></div>
+                <div id="ra-stats-true-points-value" class="has-font value"></div>
             </div>
-            <br>
             <br>
             <br>
             <div id="ra-stats-game-ratio">
-                <span>
-                    <a id="ra-stats-game-ratio-name" class="has-font non-mod name"></a>
-                    <a id="ra-stats-game-ratio-value" class="has-font non-mod value"></a>
-                </span>
+                <div id="ra-stats-game-ratio-name" class="has-font name"></div>
+                <div id="ra-stats-game-ratio-value" class="has-font value"></div>
             </div>
             <div id="ra-stats-game-completed">
-                <span>
-                    <a id="ra-stats-game-completed-name" class="has-font non-mod name"></a>
-                    <a id="ra-stats-game-completed-value" class="has-font non-mod value"></a>
-                </span>
+                <div id="ra-stats-game-completed-name" class="has-font name"></div>
+                <div id="ra-stats-game-completed-value" class="has-font value"></div>
             </div>
             <div id="ra-stats-game-achievements">
-                <span>
-                    <a id="ra-stats-game-achievements-name" class="has-font non-mod name"></a>
-                    <a id="ra-stats-game-achievements-earned" class="has-font non-mod earned"></a>
-                    <a id="ra-stats-game-achievements-divider" class="has-font non-mod divider">/</a>
-                    <a id="ra-stats-game-achievements-total" class="has-font non-mod total"></a>
-                </span>
+                <div id="ra-stats-game-achievements-name" class="has-font name"></div>
+                <div id="ra-stats-game-achievements-value" class="has-font value"></div>
             </div>
             <div id="ra-stats-game-points">
-                <span>
-                    <a id="ra-stats-game-points-name" class="has-font non-mod name"></a>
-                    <a id="ra-stats-game-points-earned" class="has-font non-mod earned"></a>
-                    <a id="ra-stats-game-points-divider" class="has-font non-mod divider">/</a>
-                    <a id="ra-stats-game-points-total" class="has-font non-mod total"></a>
-                </span>
+                <div id="ra-stats-game-points-name" class="has-font name"></div>
+                <div id="ra-stats-game-points-value" class="has-font value"></div>
             </div>
             <div id="ra-stats-game-true-points">
-                <span>
-                    <a id="ra-stats-game-true-points-name" class="has-font non-mod name"></a>
-                    <a id="ra-stats-game-true-points-earned" class="has-font non-mod earned"></a>
-                    <a id="ra-stats-game-true-points-divider" class="has-font non-mod divider">/</a>
-                    <a id="ra-stats-game-true-points-total" class="has-font non-mod total"></a>
-                </span>
+                <div id="ra-stats-game-true-points-name" class="has-font name"></div>
+                <div id="ra-stats-game-true-points-value" class="has-font value"></div>
             </div>
         </div>
     </div>

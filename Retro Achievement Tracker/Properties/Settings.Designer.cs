@@ -1166,18 +1166,6 @@ namespace Retro_Achievement_Tracker.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("#FF00FF")]
-        public string game_info_background_color {
-            get {
-                return ((string)(this["game_info_background_color"]));
-            }
-            set {
-                this["game_info_background_color"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#FF00FF")]
         public string last_five_background_color {
             get {
                 return ((string)(this["last_five_background_color"]));

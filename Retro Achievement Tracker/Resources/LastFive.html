@@ -7,7 +7,8 @@
     <script id="last-five-scripts">
 
         var backgroundHex = "#cccccc";
-        var fontFamily = "Calibri";
+        var fontValue = "Calibri";
+        var lineSpacing = 1.0;
         var fontColor = "black";
         var fontOutline = "";
         var borderOutline = "";
@@ -22,14 +23,17 @@
 
             element.style.fontSize = value + 'px';
 
-            while (element.scrollHeight > element.offsetHeight) {
+            while (element.scrollHeight > element.offsetHeight || element.scrollWidth > element.offsetWidth) {
                 value--;
                 element.style.fontSize = value + 'px';
             }
         }
 
-        function applyFontFamily(element) {
-            element.style.fontFamily = fontFamily;
+        function applyFont(element) {
+            element.style.font = fontValue;
+            element.style.lineHeight = lineSpacing;
+
+            adjustFont(element);
         }
 
         function applyFontColor(element) {
@@ -76,14 +80,14 @@
             setTimeout(cleanUp(), 1000);
         }
 
-        function setFontFamily(value) {
-            fontFamily = value;
+        function setFont(family, spacing) {
+            fontValue = "32px \"" + family + "\"";
+            lineSpacing = spacing == 0 ? 1 : spacing;
 
-            var textFields = document.getElementsByClassName("has-font");
+            var all = document.getElementsByClassName("has-font");
 
-            for (var i = 0; i < textFields.length; i++) {
-                applyFontFamily(textFields[i]);
-                adjustFont(textFields[i]);
+            for (var i = 0; i < all.length; i++) {
+                applyFont(all[i]);
             }
         }
 
@@ -219,17 +223,17 @@
 
             applyBackgroundColor(focusAchievementBlock);
 
-            applyFontFamily(focusAchievementNameBlock);
+            applyFont(focusAchievementNameBlock);
             applyFontColor(focusAchievementNameBlock);
             applyFontOutline(focusAchievementNameBlock);
 
             applyBorderOutline(focusAchievementLineBlock);
 
-            applyFontFamily(focusAchievementPointsBlock);
+            applyFont(focusAchievementPointsBlock);
             applyFontColor(focusAchievementPointsBlock);
             applyFontOutline(focusAchievementPointsBlock);
 
-            applyFontFamily(focusAchievementDateBlock);
+            applyFont(focusAchievementDateBlock);
             applyFontColor(focusAchievementDateBlock);
             applyFontOutline(focusAchievementDateBlock);
 

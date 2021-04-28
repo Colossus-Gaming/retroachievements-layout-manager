@@ -62,7 +62,7 @@ namespace Retro_Achievement_Tracker
                 Settings.Default.game_info_font_family_name = value.Name;
                 Settings.Default.Save();
 
-                SetFontFamily(value.Name);
+                SetFontFamily();
             }
         }
         public string FontColor
@@ -76,7 +76,7 @@ namespace Retro_Achievement_Tracker
                 Settings.Default.game_info_font_color_hex_code = value;
                 Settings.Default.Save();
 
-                SetFontColor(value);
+                SetFontColor();
             }
         }
         public string FontOutlineColor
@@ -90,7 +90,7 @@ namespace Retro_Achievement_Tracker
                 Settings.Default.game_info_font_outline_color_hex = value;
                 Settings.Default.Save();
 
-                SetFontOutline(value, FontOutlineSize);
+                SetFontOutline();
             }
         }
         public int FontOutlineSize
@@ -104,7 +104,7 @@ namespace Retro_Achievement_Tracker
                 Settings.Default.game_info_font_outline_size = value;
                 Settings.Default.Save();
 
-                SetFontOutline(FontOutlineColor, value);
+                SetFontOutline();
             }
         }
         public bool FontOutlineEnable
@@ -118,14 +118,7 @@ namespace Retro_Achievement_Tracker
                 Settings.Default.game_info_font_outline_enabled = value;
                 Settings.Default.Save();
 
-                if (value)
-                {
-                    SetFontOutline(FontOutlineColor, FontOutlineSize);
-                }
-                else
-                {
-                    SetFontOutline("", 0);
-                }
+                SetFontOutline();
             }
         }
         public bool TitleEnable
@@ -339,26 +332,13 @@ namespace Retro_Achievement_Tracker
                 SetReleaseDateName();
             }
         }
-        public string BackgroundColor
-        {
-            get
-            {
-                return Settings.Default.game_info_background_color;
-            }
-            set
-            {
-                Settings.Default.game_info_background_color = value;
-                Settings.Default.Save();
-
-                SetBackgroundColor(value);
-            }
-        }
         public bool AutoLaunch
         {
             get
             {
                 return Settings.Default.auto_game_info;
-            } set
+            }
+            set
             {
                 Settings.Default.auto_game_info = value;
             }
@@ -366,7 +346,7 @@ namespace Retro_Achievement_Tracker
         //Title
         public async void SetTitleName()
         {
-            await ExecuteScript("setTitleName('" + TitleName.Replace("'", "\\'") + ":');");
+            await ExecuteScript("$(\"#title-name\").text(\"" + TitleName + ":\");");
         }
         public async void SetTitleValue(string titleValue)
         {
@@ -379,7 +359,7 @@ namespace Retro_Achievement_Tracker
                 }
 
                 title = titleValue;
-                await ExecuteScript("setTitleValue('" + title.Replace("'", "\\'") + "');");
+                await ExecuteScript("$(\"#title-value\").text(\"" + title + "\");");
 
                 if (TitleEnable)
                 {
@@ -393,24 +373,24 @@ namespace Retro_Achievement_Tracker
         }
         public async void ShowTitle()
         {
-            await ExecuteScript("showTitle();");
+            await ExecuteScript("$(\"#title\").fadeIn();");
         }
         public async void HideTitle()
         {
-            await ExecuteScript("hideTitle();");
+            await ExecuteScript("$(\"#title\").fadeOut();");
         }
 
         //Console
         public async void SetConsoleName()
         {
-            await ExecuteScript("setConsoleName('" + ConsoleName.Replace("'", "\\'") + ":');");
+            await ExecuteScript("$(\"#console-name\").text(\"" + ConsoleName + ":\");");
         }
         public async void SetConsoleValue(string consoleValue)
         {
             if (consoleValue != null)
             {
                 console = consoleValue;
-                await ExecuteScript("setConsoleValue('" + console.Replace("'", "\\'") + "');");
+                await ExecuteScript("$(\"#console-value\").text(\"" + console + "\");");
                 if (ConsoleEnable)
                 {
                     ShowConsole();
@@ -423,24 +403,24 @@ namespace Retro_Achievement_Tracker
         }
         public async void ShowConsole()
         {
-            await ExecuteScript("showConsole();");
+            await ExecuteScript("$(\"#console\").fadeIn();");
         }
         public async void HideConsole()
         {
-            await ExecuteScript("hideConsole();");
+            await ExecuteScript("$(\"#console\").fadeOut();");
         }
 
         //Developer
         public async void SetDeveloperName()
         {
-            await ExecuteScript("setDeveloperName('" + DeveloperName.Replace("'", "\\'") + ":');");
+            await ExecuteScript("$(\"#developer-name\").text(\"" + DeveloperName + ":\");");
         }
         public async void SetDeveloperValue(string developerValue)
         {
             if (developerValue != null)
             {
                 developer = developerValue;
-                await ExecuteScript("setDeveloperValue('" + developer.Replace("'", "\\'") + "');");
+                await ExecuteScript("$(\"#developer-value\").text(\"" + developer + "\");");
                 if (DeveloperEnable)
                 {
                     ShowDeveloper();
@@ -453,24 +433,24 @@ namespace Retro_Achievement_Tracker
         }
         public async void ShowDeveloper()
         {
-            await ExecuteScript("showDeveloper();");
+            await ExecuteScript("$(\"#developer\").fadeIn();");
         }
         public async void HideDeveloper()
         {
-            await ExecuteScript("hideDeveloper();");
+            await ExecuteScript("$(\"#developer\").fadeOut();");
         }
 
         //Publisher
         public async void SetPublisherName()
         {
-            await ExecuteScript("setPublisherName('" + PublisherName.Replace("'", "\\'") + ":');");
+            await ExecuteScript("$(\"#publisher-name\").text(\"" + PublisherName + ":\");");
         }
         public async void SetPublisherValue(string publisherValue)
         {
             if (publisherValue != null)
             {
                 publisher = publisherValue;
-                await ExecuteScript("setPublisherValue('" + publisher.Replace("'", "\\'") + "');");
+                await ExecuteScript("$(\"#publisher-value\").text(\"" + publisher + "\");");
                 if (PublisherEnable)
                 {
                     ShowPublisher();
@@ -483,24 +463,24 @@ namespace Retro_Achievement_Tracker
         }
         public async void ShowPublisher()
         {
-            await ExecuteScript("showPublisher();");
+            await ExecuteScript("$(\"#publisher\").fadeIn();");
         }
         public async void HidePublisher()
         {
-            await ExecuteScript("hidePublisher();");
+            await ExecuteScript("$(\"#publisher\").fadeOut();");
         }
 
         //Genre
         public async void SetGenreName()
         {
-            await ExecuteScript("setGenreName('" + GenreName.Replace("'", "\\'") + ":');");
+            await ExecuteScript("$(\"#genre-name\").text(\"" + GenreName + ":\");");
         }
         public async void SetGenreValue(string genreValue)
         {
             if (genreValue != null)
             {
                 genre = genreValue;
-                await ExecuteScript("setGenreValue('" + genreValue.Replace("'", "\\'") + "');");
+                await ExecuteScript("$(\"#genre-value\").text(\"" + genre + "\");");
                 if (GenreEnable)
                 {
                     ShowGenre();
@@ -513,24 +493,24 @@ namespace Retro_Achievement_Tracker
         }
         public async void ShowGenre()
         {
-            await ExecuteScript("showGenre();");
+            await ExecuteScript("$(\"#genre\").fadeIn();");
         }
         public async void HideGenre()
         {
-            await ExecuteScript("hideGenre();");
+            await ExecuteScript("$(\"#genre\").fadeOut();");
         }
 
         //Release Date
         public async void SetReleaseDateName()
         {
-            await ExecuteScript("setReleaseDateName('" + ReleaseDateName.Replace("'", "\\'") + ":');");
+            await ExecuteScript("$(\"#release-date-name\").text(\"" + ReleaseDateName + ":\");");
         }
         public async void SetReleaseDateValue(string releaseDateValue)
         {
             if (releaseDateValue != null)
             {
                 released = releaseDateValue;
-                await ExecuteScript("setReleaseDateValue('" + released.Replace("'", "\\'") + "');");
+                await ExecuteScript("$(\"#release-date-value\").text(\"" + released + "\");");
                 if (ReleaseDateEnable)
                 {
                     ShowReleaseDate();
@@ -543,29 +523,25 @@ namespace Retro_Achievement_Tracker
         }
         public async void ShowReleaseDate()
         {
-            await ExecuteScript("showReleaseDate();");
+            await ExecuteScript("$(\"#release-date\").fadeIn();");
         }
         public async void HideReleaseDate()
         {
-            await ExecuteScript("hideReleaseDate();");
+            await ExecuteScript("$(\"#release-date\").fadeOut();");
         }
 
         //Fonts
-        public async void SetFontFamily(string fontName)
+        public async void SetFontFamily()
         {
-            await ExecuteScript("setFontFamily(\"" + fontName.Replace("'", "\\'") + "\");");
+            await ExecuteScript(string.Format("setFont(\"{0}\", \"{1}px\");", FontFamily.Name.Replace(":", "\\\\:"), FontFamily.GetLineSpacing(FontStyle.Regular) / FontFamily.GetEmHeight(FontStyle.Regular)));
         }
-        public async void SetFontColor(string hexCode)
+        public async void SetFontColor()
         {
-            await ExecuteScript("setFontColor(\"" + hexCode + "\");");
+            await ExecuteScript("setFontColor(\"" + FontColor + "\");");
         }
-        public async void SetBackgroundColor(string hexCode)
+        public async void SetFontOutline()
         {
-            await ExecuteScript("setBackgroundColor(\"" + hexCode + "\");");
-        }
-        public async void SetFontOutline(string hexCode, int size)
-        {
-            await ExecuteScript("setFontOutline(\"" + hexCode + " " + size + "px\");");
+            await ExecuteScript("setFontOutline(\"" + FontOutlineColor + " " + FontOutlineSize + "px\");");
         }
         protected async Task ExecuteScript(string script)
         {
@@ -574,8 +550,8 @@ namespace Retro_Achievement_Tracker
                 try
                 {
                     await chromiumWebBrowser.EvaluateScriptAsync(script, TimeSpan.FromSeconds(5));
-                    await chromiumWebBrowser.EvaluateScriptAsync("adjustAllFont();", TimeSpan.FromSeconds(5));
-                    
+                    await chromiumWebBrowser.EvaluateScriptAsync("adjustsWidths();", TimeSpan.FromSeconds(5));
+
                 }
                 catch (Exception)
                 {
@@ -602,20 +578,12 @@ namespace Retro_Achievement_Tracker
                 Invoke((MethodInvoker)delegate
                 {
                     this.isReady = true;
-                    this.ClientSize = new Size(680, 300);
+                    this.ClientSize = new Size(685, 320);
                 });
 
-                SetFontFamily(FontFamily.Name);
-                SetFontColor(FontColor);
-
-                if (FontOutlineEnable)
-                {
-                    SetFontOutline(FontOutlineColor, FontOutlineSize);
-                }
-                else
-                {
-                    SetFontOutline("", 0);
-                }
+                SetFontFamily();
+                SetFontColor();
+                SetFontOutline();
 
                 SetTitleName();
                 SetTitleValue(title);
@@ -634,8 +602,6 @@ namespace Retro_Achievement_Tracker
 
                 SetReleaseDateName();
                 SetReleaseDateValue(released);
-
-                SetBackgroundColor(BackgroundColor);
             });
             this.Controls.Add(this.chromiumWebBrowser);
         }

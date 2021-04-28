@@ -1060,7 +1060,7 @@ namespace Retro_Achievement_Tracker
             this.fontOutlineNumericUpDown.Font = new System.Drawing.Font("Lucida Console", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fontOutlineNumericUpDown.Location = new System.Drawing.Point(91, 50);
             this.fontOutlineNumericUpDown.Maximum = new decimal(new int[] {
-            3,
+            5,
             0,
             0,
             0});

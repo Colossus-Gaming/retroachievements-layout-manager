@@ -70,7 +70,7 @@ namespace Retro_Achievement_Tracker
                 Settings.Default.last_five_font_family_name = value.Name;
                 Settings.Default.Save();
 
-                SetFontFamily(value.Name);
+                SetFontFamily();
             }
         }
         public string FontColor
@@ -84,7 +84,7 @@ namespace Retro_Achievement_Tracker
                 Settings.Default.last_five_font_color_hex_code = value;
                 Settings.Default.Save();
 
-                SetFontColor(value);
+                SetFontColor();
             }
         }
         public string FontOutlineColor
@@ -182,7 +182,7 @@ namespace Retro_Achievement_Tracker
                 Settings.Default.last_five_background_color = value;
                 Settings.Default.Save();
 
-                SetBackgroundColor(value);
+                SetBackgroundColor();
             }
         }
         public bool AutoLaunch
@@ -197,14 +197,15 @@ namespace Retro_Achievement_Tracker
             }
         }
         
-        public async void SetFontColor(string hexCode)
+        public async void SetFontColor()
         {
-            await ExecuteScript("setFontColor(\"" + hexCode + "\");");
+            await ExecuteScript("setFontColor(\"" + FontColor + "\");");
         }
 
-        public async void SetFontFamily(string fontName)
+        public async void SetFontFamily()
         {
-            await ExecuteScript("setFontFamily(\"" + fontName.Replace("'", "\\'") + "\");");
+            await ExecuteScript(string.Format("setFont(\"{0}\", \"{1}\");", FontFamily.Name.Replace(":", "\\\\:"), 
+                FontFamily.GetLineSpacing(FontStyle.Regular) / FontFamily.GetEmHeight(FontStyle.Regular)));
         }
 
         public async void SetFontOutline()
@@ -221,9 +222,9 @@ namespace Retro_Achievement_Tracker
             }
         }
 
-        public async void SetBackgroundColor(string hexCode)
+        public async void SetBackgroundColor()
         {
-            await ExecuteScript("setBackgroundColor(\"" + hexCode + "\");");
+            await ExecuteScript("setBackgroundColor(\"" + BackgroundColor + "\");");
         }
         public async void PromptUserInput()
         {
@@ -362,9 +363,9 @@ namespace Retro_Achievement_Tracker
                 });
 
                 SetFontOutline();
-                SetFontFamily(FontFamily.Name);
-                SetFontColor(FontColor);
-                SetBackgroundColor(BackgroundColor);
+                SetFontFamily();
+                SetFontColor();
+                SetBackgroundColor();
 
                 if (BorderEnable)
                 {

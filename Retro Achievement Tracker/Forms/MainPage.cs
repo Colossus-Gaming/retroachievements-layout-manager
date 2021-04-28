@@ -81,7 +81,7 @@ namespace Retro_Achievement_Tracker
                     {
                         if (AutoUpdater.DownloadUpdate(args))
                         {
-                            Application.Restart();
+                            this.Close();
                         }
                     }
                     catch (Exception exception)
@@ -1350,7 +1350,8 @@ namespace Retro_Achievement_Tracker
 
                 this.fontColorPictureBox.BackColor = ColorTranslator.FromHtml(Settings.Default.stats_font_color_hex_code);
                 this.fontOutlineCheckBox.Checked = Settings.Default.stats_font_outline_enabled;
-                this.backgroundColorPictureBox.BackColor = ColorTranslator.FromHtml(Settings.Default.stats_background_color);
+                this.backgroundColorPictureBox.BackColor = ColorTranslator.FromHtml("#808080");
+                this.backgroundColorButton.Enabled = false;
 
                 if (this.fontOutlineCheckBox.Checked)
                 {
@@ -1406,6 +1407,7 @@ namespace Retro_Achievement_Tracker
                 this.fontColorPictureBox.BackColor = ColorTranslator.FromHtml(Settings.Default.notification_font_color_hex_code);
                 this.fontOutlineCheckBox.Checked = Settings.Default.notification_font_outline_enabled;
                 this.backgroundColorPictureBox.BackColor = ColorTranslator.FromHtml(Settings.Default.notifications_background_color);
+                this.backgroundColorButton.Enabled = true;
 
                 if (this.fontOutlineCheckBox.Checked)
                 {
@@ -1466,7 +1468,8 @@ namespace Retro_Achievement_Tracker
 
                 this.fontColorPictureBox.BackColor = ColorTranslator.FromHtml(Settings.Default.game_info_font_color_hex_code);
                 this.fontOutlineCheckBox.Checked = Settings.Default.game_info_font_outline_enabled;
-                this.backgroundColorPictureBox.BackColor = ColorTranslator.FromHtml(Settings.Default.game_info_background_color);
+                this.backgroundColorPictureBox.BackColor = ColorTranslator.FromHtml("#808080");
+                this.backgroundColorButton.Enabled = false;
 
                 if (this.fontOutlineCheckBox.Checked)
                 {
@@ -1524,6 +1527,7 @@ namespace Retro_Achievement_Tracker
                 this.fontColorPictureBox.BackColor = ColorTranslator.FromHtml(Settings.Default.last_five_font_color_hex_code);
                 this.fontOutlineCheckBox.Checked = Settings.Default.last_five_font_outline_enabled;
                 this.backgroundColorPictureBox.BackColor = ColorTranslator.FromHtml(Settings.Default.last_five_background_color);
+                this.backgroundColorButton.Enabled = true;
 
                 if (this.fontOutlineCheckBox.Checked)
                 {
@@ -1580,6 +1584,7 @@ namespace Retro_Achievement_Tracker
                 this.fontColorPictureBox.BackColor = ColorTranslator.FromHtml(Settings.Default.focus_font_color_hex_code);
                 this.fontOutlineCheckBox.Checked = Settings.Default.focus_font_outline_enabled;
                 this.backgroundColorPictureBox.BackColor = ColorTranslator.FromHtml(Settings.Default.focus_background_color);
+                this.backgroundColorButton.Enabled = true;
 
                 if (this.fontOutlineCheckBox.Checked)
                 {
@@ -1881,7 +1886,7 @@ namespace Retro_Achievement_Tracker
                     {
                         MenuState = CustomMenuState.CLOSED;
                         this.fontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(statsLayoutWindow.FontOutlineColor);
-                        this.fontOutlineNumericUpDown.Value = statsLayoutWindow.FontOutlineSize;
+                        this.fontOutlineNumericUpDown.Value = statsLayoutWindow.FontOutlineSize > this.fontOutlineNumericUpDown.Maximum ? this.fontOutlineNumericUpDown.Value : statsLayoutWindow.FontOutlineSize;
                         MenuState = CustomMenuState.STATS;
                     }
                     statsLayoutWindow.FontOutlineEnable = isEnabled;
@@ -1891,7 +1896,7 @@ namespace Retro_Achievement_Tracker
                     {
                         MenuState = CustomMenuState.CLOSED;
                         this.fontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(notificationLayoutWindow.FontOutlineColor);
-                        this.fontOutlineNumericUpDown.Value = notificationLayoutWindow.FontOutlineSize;
+                        this.fontOutlineNumericUpDown.Value = notificationLayoutWindow.FontOutlineSize > this.fontOutlineNumericUpDown.Maximum ? this.fontOutlineNumericUpDown.Value : notificationLayoutWindow.FontOutlineSize;
                         MenuState = CustomMenuState.ALERTS;
                     }
                     notificationLayoutWindow.FontOutlineEnable = isEnabled;
@@ -1901,7 +1906,7 @@ namespace Retro_Achievement_Tracker
                     {
                         MenuState = CustomMenuState.CLOSED;
                         this.fontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(gameInfoLayoutWindow.FontOutlineColor);
-                        this.fontOutlineNumericUpDown.Value = gameInfoLayoutWindow.FontOutlineSize;
+                        this.fontOutlineNumericUpDown.Value = gameInfoLayoutWindow.FontOutlineSize > this.fontOutlineNumericUpDown.Maximum ? this.fontOutlineNumericUpDown.Value : gameInfoLayoutWindow.FontOutlineSize;
                         MenuState = CustomMenuState.GAME_INFO;
                     }
                     gameInfoLayoutWindow.FontOutlineEnable = isEnabled;
@@ -1911,7 +1916,7 @@ namespace Retro_Achievement_Tracker
                     {
                         MenuState = CustomMenuState.CLOSED;
                         this.fontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(lastFiveLayoutWindow.FontOutlineColor);
-                        this.fontOutlineNumericUpDown.Value = lastFiveLayoutWindow.FontOutlineSize;
+                        this.fontOutlineNumericUpDown.Value = lastFiveLayoutWindow.FontOutlineSize > this.fontOutlineNumericUpDown.Maximum ? this.fontOutlineNumericUpDown.Value : lastFiveLayoutWindow.FontOutlineSize;
                         MenuState = CustomMenuState.LAST_FIVE;
                     }
                     lastFiveLayoutWindow.FontOutlineEnable = isEnabled;
@@ -1921,7 +1926,7 @@ namespace Retro_Achievement_Tracker
                     {
                         MenuState = CustomMenuState.CLOSED;
                         this.fontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(focusLayoutWindow.FontOutlineColor);
-                        this.fontOutlineNumericUpDown.Value = focusLayoutWindow.FontOutlineSize;
+                        this.fontOutlineNumericUpDown.Value = focusLayoutWindow.FontOutlineSize > this.fontOutlineNumericUpDown.Maximum ? this.fontOutlineNumericUpDown.Value : focusLayoutWindow.FontOutlineSize;
                         MenuState = CustomMenuState.FOCUS;
                     }
                     focusLayoutWindow.FontOutlineEnable = isEnabled;

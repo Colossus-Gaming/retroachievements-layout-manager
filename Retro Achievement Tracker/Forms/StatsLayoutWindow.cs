@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -491,7 +492,7 @@ namespace Retro_Achievement_Tracker
             {
                 rank = newRank;
 
-                await ExecuteScript("setRank('" + rank + "');");
+                await ExecuteScript("$(\"#ra-stats-rank-value\").text(" + rank + ");");
 
                 if (RankEnable)
                 {
@@ -505,15 +506,15 @@ namespace Retro_Achievement_Tracker
         }
         public async void SetRankName()
         {
-            await ExecuteScript("setRankName('" + RankName.Replace("'", "\\'") + ":');");
+            await ExecuteScript("$(\"#ra-stats-rank-name\").text(\"" + RankName + ":\");");
         }
         public async void HideRank()
         {
-            await ExecuteScript("hideRank();");
+            await ExecuteScript("$(\"#ra-stats-rank\").fadeOut();");
         }
         public async void ShowRank()
         {
-            await ExecuteScript("showRank();");
+            await ExecuteScript("$(\"#ra-stats-rank\").fadeIn();");
         }
         //Awards
         public async void SetAwards(string newAwards)
@@ -522,7 +523,7 @@ namespace Retro_Achievement_Tracker
             {
                 awards = newAwards;
 
-                await ExecuteScript("setAwards('" + awards + "');");
+                await ExecuteScript("$(\"#ra-stats-awards-value\").text(" + awards + ");");
 
                 if (AwardsEnable)
                 {
@@ -536,15 +537,15 @@ namespace Retro_Achievement_Tracker
         }
         public async void SetAwardsName()
         {
-            await ExecuteScript("setAwardsName('" + AwardsName.Replace("'", "\\'") + ":');");
+            await ExecuteScript("$(\"#ra-stats-awards-name\").text(\"" + AwardsName + ":\");");
         }
         public async void HideAwards()
         {
-            await ExecuteScript("hideAwards();");
+            await ExecuteScript("$(\"#ra-stats-awards\").fadeOut();");
         }
         public async void ShowAwards()
         {
-            await ExecuteScript("showAwards();");
+            await ExecuteScript("$(\"#ra-stats-awards\").fadeIn();");
         }
         //Points
         public async void SetPoints(string newPoints)
@@ -553,7 +554,7 @@ namespace Retro_Achievement_Tracker
             {
                 points = newPoints;
 
-                await ExecuteScript("setPoints('" + points + "');");
+                await ExecuteScript("$(\"#ra-stats-points-value\").text(\"" + points + "\");");
 
                 if (PointsEnable)
                 {
@@ -567,15 +568,15 @@ namespace Retro_Achievement_Tracker
         }
         public async void SetPointsName()
         {
-            await ExecuteScript("setPointsName('" + PointsName.Replace("'", "\\'") + ":');");
+            await ExecuteScript("$(\"#ra-stats-points-name\").text(\"" + PointsName + ":\");");
         }
         public async void HidePoints()
         {
-            await ExecuteScript("hidePoints();");
+            await ExecuteScript("$(\"#ra-stats-points\").fadeOut();");
         }
         public async void ShowPoints()
         {
-            await ExecuteScript("showPoints();");
+            await ExecuteScript("$(\"#ra-stats-points\").fadeIn();");
         }
         //True Points
         public async void SetTruePoints(string newTruePoints)
@@ -584,7 +585,7 @@ namespace Retro_Achievement_Tracker
             {
                 truePoints = newTruePoints;
 
-                await ExecuteScript("setTruePoints('" + truePoints + "');");
+                await ExecuteScript("$(\"#ra-stats-true-points-value\").text(\"" + truePoints + "\");");
 
                 if (TruePointsEnable)
                 {
@@ -598,24 +599,24 @@ namespace Retro_Achievement_Tracker
         }
         public async void SetTruePointsName()
         {
-            await ExecuteScript("setTruePointsName('" + TruePointsName.Replace("'", "\\'") + ":');");
+            await ExecuteScript("$(\"#ra-stats-true-points-name\").text(\"" + TruePointsName + ":\");");
         }
         public async void HideTruePoints()
         {
-            await ExecuteScript("hideTruePoints();");
+            await ExecuteScript("$(\"#ra-true-points-ratio\").fadeOut();");
         }
         public async void ShowTruePoints()
         {
-            await ExecuteScript("showTruePoints();");
+            await ExecuteScript("$(\"#ra-true-points-ratio\").fadeIn();");
         }
         //Ratio
         public async void SetRatio(string newRatio)
         {
             if (newRatio != null)
             {
-                ratio = newRatio;
+                ratio = newRatio.Contains("%") ? newRatio.Remove(newRatio.IndexOf("%")) : newRatio;
 
-                await ExecuteScript("setRatio('" + ratio + "');");
+                await ExecuteScript("$(\"#ra-stats-ratio-value\").text(\"" + ratio + "\");");
 
                 if (RatioEnable)
                 {
@@ -629,25 +630,25 @@ namespace Retro_Achievement_Tracker
         }
         public async void SetRatioName()
         {
-            await ExecuteScript("setRatioName('" + RatioName.Replace("'", "\\'") + ":');");
+            await ExecuteScript("$(\"#ra-stats-ratio-name\").text(\"" + RatioName + ":\");");
         }
         public async void HideRatio()
         {
-            await ExecuteScript("hideRatio();");
+            await ExecuteScript("$(\"#ra-stats-ratio\").fadeOut();");
         }
         public async void ShowRatio()
         {
-            await ExecuteScript("showRatio();");
+            await ExecuteScript("$(\"#ra-stats-ratio\").fadeIn();");
         }
         //Game Ratio
         public async void SetGameRatio()
         {
             if (gameTruePointsPossible != null && gamePointsPossible != null)
             {
-                await ExecuteScript("setGameRatio('" + (Convert.ToDouble(gameTruePointsPossible) / Convert.ToDouble(gamePointsPossible)).ToString("0.00") + "%');");
-
                 if (GameRatioEnable)
                 {
+                    await ExecuteScript("$(\"#ra-stats-game-ratio-value\").text(\"" + (Convert.ToDouble(gameTruePointsPossible) / Convert.ToDouble(gamePointsPossible)).ToString("0.00") + "\");");
+
                     ShowGameRatio();
                 }
                 else
@@ -658,15 +659,15 @@ namespace Retro_Achievement_Tracker
         }
         public async void SetGameRatioName()
         {
-            await ExecuteScript("setGameRatioName('" + GameRatioName.Replace("'", "\\'") + ":');");
+            await ExecuteScript("$(\"#ra-stats-game-ratio-name\").text(\"" + GameRatioName + ":\");");
         }
         public async void HideGameRatio()
         {
-            await ExecuteScript("hideGameRatio();");
+            await ExecuteScript("$(\"#ra-stats-game-ratio\").fadeOut();");
         }
         public async void ShowGameRatio()
         {
-            await ExecuteScript("showGameRatio();");
+            await ExecuteScript("$(\"#ra-stats-game-ratio\").fadeIn();");
         }
         //Game Points
         public async void SetGamePoints(string newGamePointsEarned, string newGamePointsPossible)
@@ -676,7 +677,7 @@ namespace Retro_Achievement_Tracker
                 gamePointsEarned = newGamePointsEarned;
                 gamePointsPossible = newGamePointsPossible;
 
-                await ExecuteScript("setGamePoints('" + gamePointsEarned + "', '" + gamePointsPossible + "');");
+                await ExecuteScript("$(\"#ra-stats-game-points-value\").text(\"" + gamePointsEarned + " : " + gamePointsPossible + "\");");
 
                 if (GamePointsEnable)
                 {
@@ -690,15 +691,15 @@ namespace Retro_Achievement_Tracker
         }
         public async void SetGamePointsName()
         {
-            await ExecuteScript("setGamePointsName('" + GamePointsName.Replace("'", "\\'") + ":');");
+            await ExecuteScript("$(\"#ra-stats-game-points-name\").text(\"" + GamePointsName + ":\");");
         }
         public async void HideGamePoints()
         {
-            await ExecuteScript("hideGamePoints();");
+            await ExecuteScript("$(\"#ra-stats-game-points\").fadeOut();");
         }
         public async void ShowGamePoints()
         {
-            await ExecuteScript("showGamePoints();");
+            await ExecuteScript("$(\"#ra-stats-game-points\").fadeIn();");
         }
         //Game Achievements
         public async void SetGameAchievements(string newCheevosEarned, string newCheevosPossible)
@@ -708,7 +709,7 @@ namespace Retro_Achievement_Tracker
                 cheevosEarned = newCheevosEarned;
                 cheevosPossible = newCheevosPossible;
 
-                await ExecuteScript("setGameAchievements('" + cheevosEarned + "', '" + cheevosPossible + "');");
+                await ExecuteScript("$(\"#ra-stats-game-achievements-value\").text(\"" + cheevosEarned + " : " + cheevosPossible + "\");");
 
                 if (GameAchievementsEnable)
                 {
@@ -722,15 +723,15 @@ namespace Retro_Achievement_Tracker
         }
         public async void SetGameAchievementsName()
         {
-            await ExecuteScript("setGameAchievementsName('" + GameAchievementsName.Replace("'", "\\'") + ":');");
+            await ExecuteScript("$(\"#ra-stats-game-achievements-name\").text(\"" + GameAchievementsName + ":\");");
         }
         public async void HideGameAchievements()
         {
-            await ExecuteScript("hideGameAchievements();");
+            await ExecuteScript("$(\"#ra-stats-game-achievements\").fadeOut();");
         }
         public async void ShowGameAchievements()
         {
-            await ExecuteScript("showGameAchievements();");
+            await ExecuteScript("$(\"#ra-stats-game-achievements\").fadeIn();");
         }
         //Game True Points
         public async void SetGameTruePoints(string newGameTruePointsEarned, string newGameTruePointsPossible)
@@ -740,7 +741,7 @@ namespace Retro_Achievement_Tracker
                 gameTruePointsEarned = newGameTruePointsEarned;
                 gameTruePointsPossible = newGameTruePointsPossible;
 
-                await ExecuteScript("setGameTruePoints('" + gameTruePointsEarned + "', '" + gameTruePointsPossible + "');");
+                await ExecuteScript("$(\"#ra-stats-game-true-points-value\").text(\"" + gameTruePointsEarned + " : " + gameTruePointsPossible + "\");");
 
                 if (GameTruePointsEnable)
                 {
@@ -754,28 +755,28 @@ namespace Retro_Achievement_Tracker
         }
         public async void SetGameTruePointsName()
         {
-            await ExecuteScript("setGameTruePointsName('" + GameTruePointsName.Replace("'", "\\'") + ":');");
+            await ExecuteScript("$(\"#ra-stats-game-true-points-name\").text(\"" + GameTruePointsName + ":\");");
         }
         public async void HideGameTruePoints()
         {
-            await ExecuteScript("hideGameTruePoints();");
+            await ExecuteScript("$(\"#ra-stats-game-true-points\").fadeOut();");
         }
         public async void ShowGameTruePoints()
         {
-            await ExecuteScript("showGameTruePoints();");
+            await ExecuteScript("$(\"#ra-stats-game-true-points\").fadeIn();");
         }
         //Completed
         public async void SetCompletedName()
         {
-            await ExecuteScript("setCompletedName('" + CompletedName.Replace("'", "\\'") + ":');");
+            await ExecuteScript("$(\"#ra-stats-game-completed-name\").text(\"" + CompletedName + ":\");");
         }
         public async void SetCompleted(string newCompleted)
         {
             if (newCompleted != null)
             {
-                completed = newCompleted;
+                completed = newCompleted.Contains("%") ? newCompleted.Remove(newCompleted.IndexOf("%")) : newCompleted;
 
-                await ExecuteScript("setCompletedValue('" + completed + "');");
+                await ExecuteScript("$(\"#ra-stats-game-completed-value\").text(\"" + completed + "\");");
 
                 if (CompletedEnable)
                 {
@@ -789,11 +790,11 @@ namespace Retro_Achievement_Tracker
         }
         public async void ShowCompleted()
         {
-            await ExecuteScript("showCompleted();");
+            await ExecuteScript("$(\"#ra-stats-game-completed\").fadeIn();");
         }
         public async void HideCompleted()
         {
-            await ExecuteScript("hideCompleted();");
+            await ExecuteScript("$(\"#ra-stats-game-completed\").fadeOut();");
         }
         //Fonts
         public async void SetFontColor()
@@ -802,7 +803,7 @@ namespace Retro_Achievement_Tracker
         }
         public async void SetFontFamily()
         {
-            await ExecuteScript("setFontFamily(\"" + FontFamily.Name.Replace("'", "\\'") + "\");");
+            await ExecuteScript(string.Format("setFont(\"{0}\", \"{1}\");", FontFamily.Name.Replace(":", "\\\\:"), FontFamily.GetLineSpacing(FontStyle.Regular) / FontFamily.GetEmHeight(FontStyle.Regular)));
         }
         public async void SetFontOutline()
         {
@@ -822,7 +823,7 @@ namespace Retro_Achievement_Tracker
                 try
                 {
                     await chromiumWebBrowser.EvaluateScriptAsync(script, TimeSpan.FromSeconds(5));
-                    await chromiumWebBrowser.EvaluateScriptAsync("adjustAllFont();", TimeSpan.FromSeconds(5));
+                    await chromiumWebBrowser.EvaluateScriptAsync("adjustsWidths();", TimeSpan.FromSeconds(5));
                 }
                 catch (Exception)
                 {
@@ -847,7 +848,7 @@ namespace Retro_Achievement_Tracker
                 Invoke((MethodInvoker)delegate
                 {
                     this.isReady = true;
-                    this.ClientSize = new Size(500, 520);
+                    this.ClientSize = new Size(750, 520);
                 });
 
                 SetFontFamily();

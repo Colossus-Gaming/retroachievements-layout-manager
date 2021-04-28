@@ -246,7 +246,7 @@ namespace Retro_Achievement_Tracker
         }
         public async void SetFontFamily()
         {
-            await ExecuteScript("setFontFamily(\"" + FontFamily.Name.Replace("'", "\\'") + "\");");
+            await ExecuteScript(string.Format("setFont(\"{0}\", \"{1}\");", FontFamily.Name.Replace(":", "\\\\:"), FontFamily.GetLineSpacing(FontStyle.Regular) / FontFamily.GetEmHeight(FontStyle.Regular)));
         }
         public async void SetFontOutline()
         {

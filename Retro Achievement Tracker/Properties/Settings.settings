@@ -287,9 +287,6 @@
     <Setting Name="notifications_background_color" Type="System.String" Scope="User">
       <Value Profile="(Default)">#FF00FF</Value>
     </Setting>
-    <Setting Name="game_info_background_color" Type="System.String" Scope="User">
-      <Value Profile="(Default)">#FF00FF</Value>
-    </Setting>
     <Setting Name="last_five_background_color" Type="System.String" Scope="User">
       <Value Profile="(Default)">#FF00FF</Value>
     </Setting>

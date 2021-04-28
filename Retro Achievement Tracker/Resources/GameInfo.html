@@ -4,46 +4,91 @@
     <title>Game Info Window</title>
     <meta charset="UTF-8">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" type="text/javascript"></script>
-    <script id="ra-stats-scripts">
+    <script id="ra-stats-scripts"> 
 
-        function adjustNameFont(element) {
-            var value = 44;
+        var fontValue = "Calibri";
+        var lineSpacing = "1";
 
+        function adjustFont(element) {
+            var value = 100;
+
+            element.style.height = '36px';
             element.style.fontSize = value + 'px';
 
-            while (element.scrollHeight > element.offsetHeight) {
+            while (element.scrollHeight > element.offsetHeight || element.scrollWidth > element.offsetWidth) {
                 value--;
                 element.style.fontSize = value + 'px';
+            }
+
+            if (!hasLineWrap(element) && value < 36) {
+                element.style.height = (value + 1) + 'px';
             }
         }
 
-        function adjustValueFont(element) {
-            element.style.height = '44px';
+        function applyFont(element) {
+            element.style.lineHeight = lineSpacing;
+            element.style.font = fontValue;
 
-            var value = 44;
+            adjustFont(element);
+        }
 
-            element.style.fontSize = value + 'px';
+        function adjustsWidths() {
+            var elements = document.getElementsByClassName('has-font');
 
-            while (element.scrollHeight > element.offsetHeight) {
-                value--;
-                element.style.fontSize = value + 'px';
+            for (var i = 0; i < elements.length; i++) {
+                if (elements[i].style.display !== "none") {
+                    elements[i].style.fontSize = '50px';
+                }
             }
 
-            element.style.height = hasLineWrap(element) ? '44px' : (value + 1) + 'px';
+            var allNames = document.getElementsByClassName('name');
+            var allValues = document.getElementsByClassName('value');
+            var max = 0;
+
+            for (var i = 0; i < allNames.length; i++) {
+                if (allNames[i].style.display !== "none") {
+                    allNames[i].style.width = 'auto';
+                    applyFont(allNames[i]);
+                }
+            }
+
+            for (var i = 0; i < allNames.length; i++) {
+                if (allNames[i].style.display !== "none" && max < allNames[i].offsetWidth) {
+                    max = allNames[i].offsetWidth;
+                }
+            }
+
+            if (max > 280) {
+                max = 280;
+            }
+
+            for (var i = 0; i < allNames.length; i++) {
+                if (allNames[i].style.display !== "none") {
+                    allNames[i].style.width = max + 'px';
+                    adjustFont(allNames[i]);
+                }
+            }
+
+            for (var i = 0; i < allValues.length; i++) {
+                if (allValues[i].style.display !== "none") {
+                    allValues[i].style.width = (655 - max) + 'px';
+                    applyFont(allValues[i]);
+                }
+            }
         }
 
         function hasLineWrap(element) {
-            var lineHeight = getComputedStyle(element).getPropertyValue("line-height");
-            var lineHeightParsed = parseInt(lineHeight.substr(0, lineHeight.indexOf('px')));
-
-            return element.offsetHeight * .75 > lineHeightParsed;
+            return 2 * parseInt(element.style.fontSize.substr(0, element.style.fontSize.indexOf('px'))) < element.offsetHeight;
         }
 
-        function setFontFamily(value) {
-            var all = document.getElementsByClassName('has-font');
+        function setFont(family, spacing) {
+            fontValue = "36px \"" + family + "\"";
+            lineSpacing = spacing == 0 ? 1 : spacing;
+
+            var all = document.getElementsByClassName("has-font");
 
             for (var i = 0; i < all.length; i++) {
-                all[i].style.fontFamily = value;
+                applyFont(all[i]);
             }
         }
 
@@ -62,8 +107,6 @@
             for (var i = 0; i < all.length; i++) {
                 all[i].style.webkitTextStroke = value;
             }
-
-            
         }
 
         function adjustAllFont() {
@@ -71,154 +114,19 @@
             var allNames = document.getElementsByClassName('name');
             var allValues = document.getElementsByClassName('value');
 
+            adjustsWidths();
+
             for (var i = 0; i < allNames.length; i++) {
                 if (allNames[i].style.display !== "none") {
                     adjustNameFont(allNames[i]);
                 }
             }
 
-            adjustsWidths();
-
             for (var i = 0; i < allValues.length; i++) {
                 if (allValues[i].style.display !== "none") {
                     adjustValueFont(allValues[i]);
                 }
             }
-        }
-
-        function adjustsWidths() {
-            var allNames = document.getElementsByClassName('name');
-            var allValues = document.getElementsByClassName('value');
-            var max = 0;
-
-            for (var i = 0; i < allNames.length; i++) {
-                if (allNames[i].style.display !== "none") {
-                    allNames[i].style.width = 'auto';
-                }
-            }
-
-            for (var i = 0; i < allNames.length; i++) {
-                if (allNames[i].style.display !== "none" && max < allNames[i].offsetWidth) {
-                    max = allNames[i].offsetWidth;
-                }
-            }
-
-            for (var i = 0; i < allNames.length; i++) {
-                if (allNames[i].style.display !== "none") {
-                    allNames[i].style.width = max + 'px';
-                }
-            }
-
-            for (var i = 0; i < allValues.length; i++) {
-                if (allValues[i].style.display !== "none") {
-                    allValues[i].style.width = (655 - max) + 'px';
-                }
-            }
-        }
-
-        function setBackgroundColor(value) {
-            document.getElementById("container").style.background = value;
-        }
-        //Title
-        function setTitleName(value) {
-            $('#title-name').text(value);
-        }
-
-        function setTitleValue(value) {
-            $('#title-value').text(value);
-        }
-
-        function showTitle() {
-            $('#title').fadeIn();
-        }
-
-        function hideTitle() {
-            $('#title').fadeOut();
-        }
-
-        //Console
-        function setConsoleName(value) {
-            $('#console-name').text(value);
-        }
-
-        function setConsoleValue(value) {
-            $('#console-value').text(value);
-        }
-
-        function showConsole() {
-            $('#console').fadeIn();
-        }
-
-        function hideConsole() {
-            $('#console').fadeOut();
-        }
-
-        //Developer
-        function setDeveloperName(value) {
-            $('#developer-name').text(value);
-        }
-
-        function setDeveloperValue(value) {
-            $('#developer-value').text(value);
-        }
-
-        function showDeveloper() {
-            $('#developer').fadeIn();
-        }
-
-        function hideDeveloper() {
-            $('#developer').fadeOut();
-        }
-
-        //Publisher
-        function setPublisherName(value) {
-            $('#publisher-name').text(value);
-        }
-
-        function setPublisherValue(value) {
-            $('#publisher-value').text(value);
-        }
-
-        function showPublisher() {
-            $('#publisher').fadeIn();
-        }
-
-        function hidePublisher() {
-            $('#publisher').fadeOut();
-        }
-
-        //Genre
-        function setGenreName(value) {
-            $('#genre-name').text(value);
-        }
-
-        function setGenreValue(value) {
-            $('#genre-value').text(value);
-        }
-
-        function showGenre() {
-            $('#genre').fadeIn();            
-        }
-
-        function hideGenre() {
-            $('#genre').fadeOut();
-        }
-
-        //Release Date
-        function setReleaseDateName(value) {
-            $('#release-date-name').text(value);
-        }
-
-        function setReleaseDateValue(value) {
-            $('#release-date-value').text(value);
-        }
-
-        function showReleaseDate() {
-            $('#release-date').fadeIn();            
-        }
-
-        function hideReleaseDate() {
-            $('#release-date').fadeOut();
         }
     </script>
     <style id="ra-stats-style" type="text/css">
@@ -230,14 +138,14 @@
             font-family: Calibri;
             font-weight: bold;
             -webkit-text-stroke: 2px white;
-            line-height: 1.3;
             vertical-align: middle;
             display: inline-block;
+            margin-top: 12px;
         }
 
         #game-info {
             position: relative;
-            top: 15px;
+            top: 25px;
             left: 15px;
         }
 
@@ -260,13 +168,12 @@
             position: relative;
             display: none;
             vertical-align: middle;
-            width: 665px;
-            height: 44px;
-            margin-top: 5px;
+            width: 690px;
+            -webkit-backface-visibility: hidden;
         }
 
         .name {
-            height: 44px;
+            height: 36px;
             padding-right: 5px;
         }
 
@@ -274,7 +181,6 @@
             text-align: center;
             display: inline-block;
             vertical-align: middle;
-            height: 44px;
         }
     </style>
 </head>
