@@ -541,7 +541,14 @@ namespace Retro_Achievement_Tracker
         }
         public async void SetFontOutline()
         {
-            await ExecuteScript("setFontOutline(\"" + FontOutlineColor + " " + FontOutlineSize + "px\");");
+            if (FontOutlineEnable)
+            {
+                await ExecuteScript("setFontOutline(\"" + FontOutlineColor + " " + FontOutlineSize + "px\");");
+            }
+            else
+            {
+                await ExecuteScript("setFontOutline(\"0px\");");
+            }
         }
         protected async Task ExecuteScript(string script)
         {
