@@ -1246,5 +1246,29 @@ namespace Retro_Achievement_Tracker.Properties {
                 this["last_five_points_enable"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("/")]
+        public string stats_divider_character_selection {
+            get {
+                return ((string)(this["stats_divider_character_selection"]));
+            }
+            set {
+                this["stats_divider_character_selection"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool stats_percentage_char {
+            get {
+                return ((bool)(this["stats_percentage_char"]));
+            }
+            set {
+                this["stats_percentage_char"] = value;
+            }
+        }
     }
 }

@@ -18,14 +18,9 @@ namespace Retro_Achievement_Tracker.Models
             // - If you register a ISchemeHandlerFactory for http/https schemes you should also specify a domain name
             // - Avoid doing lots of processing in this method as it will affect performance.
             // - Uses the Default ResourceHandler implementation
-            switch (request.Url)
+            if (request.Url == "disk://background")
             {
-                case "disk://background": return ResourceHandler.FromByteArray(GetBitmapAsByteArray(Resources.notification_background));
-                case "disk://rank-image": return ResourceHandler.FromByteArray(GetBitmapAsByteArray(Resources.rank_image));
-                case "disk://points-image": return ResourceHandler.FromByteArray(GetBitmapAsByteArray(Resources.points_image));
-                case "disk://site-awards-image": return ResourceHandler.FromByteArray(GetBitmapAsByteArray(Resources.site_awards_image));
-                case "disk://game-achievements-image": return ResourceHandler.FromByteArray(GetBitmapAsByteArray(Resources.game_achievements_image));
-                case "disk://game-points-image": return ResourceHandler.FromByteArray(GetBitmapAsByteArray(Resources.game_points_image));
+                return ResourceHandler.FromByteArray(GetBitmapAsByteArray(Resources.notification_background));
             }
 
             if (request.Url == "disk://achievement-notification")

@@ -61,7 +61,6 @@ namespace Retro_Achievement_Tracker
                     }
                 }
                 Settings.Default.last_five_font_family_name = familyArray[0].Name;
-                Settings.Default.Save();
 
                 return familyArray[0];
             }
@@ -194,6 +193,7 @@ namespace Retro_Achievement_Tracker
             set
             {
                 Settings.Default.auto_last_five = value;
+                Settings.Default.Save();
             }
         }
         

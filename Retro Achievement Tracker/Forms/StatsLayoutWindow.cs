@@ -3,10 +3,8 @@ using CefSharp.Web;
 using Retro_Achievement_Tracker.Models;
 using Retro_Achievement_Tracker.Properties;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -484,6 +482,39 @@ namespace Retro_Achievement_Tracker
             set
             {
                 Settings.Default.auto_stats = value;
+                Settings.Default.Save();
+            }
+        }
+        public string DividerCharacter
+        {
+            get
+            {
+                return Settings.Default.stats_divider_character_selection;
+            }
+            set
+            {
+                Settings.Default.stats_divider_character_selection = value;
+                Settings.Default.Save();
+
+                SetGameAchievements(cheevosEarned, cheevosPossible);
+                SetGamePoints(gamePointsEarned, gamePointsPossible);
+                SetGameTruePoints(gameTruePointsEarned, gameTruePointsPossible);
+            }
+        }
+
+        public bool UsePercentageSymbol
+        {
+            get
+            {
+                return Settings.Default.stats_percentage_char;
+            }set
+            {
+                Settings.Default.stats_percentage_char = value;
+                Settings.Default.Save();
+
+                SetRatio(ratio);
+                SetGameRatio();
+                SetCompleted(completed);
             }
         }
         public async void SetRank(string newRank)
@@ -616,7 +647,7 @@ namespace Retro_Achievement_Tracker
             {
                 ratio = newRatio.Contains("%") ? newRatio.Remove(newRatio.IndexOf("%")) : newRatio;
 
-                await ExecuteScript("$(\"#ra-stats-ratio-value\").text(\"" + ratio + "\");");
+                await ExecuteScript("$(\"#ra-stats-ratio-value\").text(\"" + ratio + (UsePercentageSymbol ? " %" : "") + "\");");
 
                 if (RatioEnable)
                 {
@@ -647,7 +678,7 @@ namespace Retro_Achievement_Tracker
             {
                 if (GameRatioEnable)
                 {
-                    await ExecuteScript("$(\"#ra-stats-game-ratio-value\").text(\"" + (Convert.ToDouble(gameTruePointsPossible) / Convert.ToDouble(gamePointsPossible)).ToString("0.00") + "\");");
+                    await ExecuteScript("$(\"#ra-stats-game-ratio-value\").text(\"" + (Convert.ToDouble(gameTruePointsPossible) / Convert.ToDouble(gamePointsPossible)).ToString("0.00") + (UsePercentageSymbol ? " %" : "") + "\");");
 
                     ShowGameRatio();
                 }
@@ -677,7 +708,7 @@ namespace Retro_Achievement_Tracker
                 gamePointsEarned = newGamePointsEarned;
                 gamePointsPossible = newGamePointsPossible;
 
-                await ExecuteScript("$(\"#ra-stats-game-points-value\").text(\"" + gamePointsEarned + " : " + gamePointsPossible + "\");");
+                await ExecuteScript("$(\"#ra-stats-game-points-value\").text(\"" + gamePointsEarned + " " + DividerCharacter + " " + gamePointsPossible + "\");");
 
                 if (GamePointsEnable)
                 {
@@ -709,7 +740,7 @@ namespace Retro_Achievement_Tracker
                 cheevosEarned = newCheevosEarned;
                 cheevosPossible = newCheevosPossible;
 
-                await ExecuteScript("$(\"#ra-stats-game-achievements-value\").text(\"" + cheevosEarned + " : " + cheevosPossible + "\");");
+                await ExecuteScript("$(\"#ra-stats-game-achievements-value\").text(\"" + cheevosEarned + " " + DividerCharacter + " " + cheevosPossible + "\");");
 
                 if (GameAchievementsEnable)
                 {
@@ -741,7 +772,7 @@ namespace Retro_Achievement_Tracker
                 gameTruePointsEarned = newGameTruePointsEarned;
                 gameTruePointsPossible = newGameTruePointsPossible;
 
-                await ExecuteScript("$(\"#ra-stats-game-true-points-value\").text(\"" + gameTruePointsEarned + " : " + gameTruePointsPossible + "\");");
+                await ExecuteScript("$(\"#ra-stats-game-true-points-value\").text(\"" + gameTruePointsEarned + " " + DividerCharacter + " " + gameTruePointsPossible + "\");");
 
                 if (GameTruePointsEnable)
                 {
@@ -776,7 +807,7 @@ namespace Retro_Achievement_Tracker
             {
                 completed = newCompleted.Contains("%") ? newCompleted.Remove(newCompleted.IndexOf("%")) : newCompleted;
 
-                await ExecuteScript("$(\"#ra-stats-game-completed-value\").text(\"" + completed + "\");");
+                await ExecuteScript("$(\"#ra-stats-game-completed-value\").text(\"" + completed + (UsePercentageSymbol ? " %" : "") + "\");");
 
                 if (CompletedEnable)
                 {

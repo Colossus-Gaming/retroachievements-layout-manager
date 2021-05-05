@@ -33,6 +33,16 @@ namespace Retro_Achievement_Tracker.Forms
 
             SetupBrowser();
 
+            if (CustomAchievementEnabled && !File.Exists(this.CustomAchievementFile))
+            {
+                CustomAchievementEnabled = false;
+            }
+
+            if (CustomMasteryEnabled && !File.Exists(this.CustomMasteryFile))
+            {
+                CustomMasteryEnabled = false;
+            }
+
             this.Name = "RA Tracker - Notifications";
             this.Text = "RA Tracker - Notifications";
 
@@ -257,8 +267,6 @@ namespace Retro_Achievement_Tracker.Forms
             {
                 Settings.Default.notification_custom_achievement_scale = value;
                 Settings.Default.Save();
-
-                SetAchievementWidth();
             }
             get
             {
@@ -271,8 +279,6 @@ namespace Retro_Achievement_Tracker.Forms
             {
                 Settings.Default.notification_custom_mastery_scale = value;
                 Settings.Default.Save();
-
-                SetMasteryWidth();
             }
             get
             {
@@ -475,6 +481,7 @@ namespace Retro_Achievement_Tracker.Forms
             set
             {
                 Settings.Default.auto_notifications = value;
+                Settings.Default.Save();
             }
         }
         

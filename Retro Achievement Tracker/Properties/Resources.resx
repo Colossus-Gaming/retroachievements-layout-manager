@@ -118,12 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Adultery" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Adultery.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Dancarnate_Logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Dancarnate_Logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="FocusWindow" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\FocusWindow.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
@@ -132,12 +126,6 @@
   </data>
   <data name="StatsWindow" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\StatsWindow.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
-  <data name="game_achievements_image" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\game-achievements-image.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="game_points_image" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\game-points-image.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="green_button" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\green-button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -151,20 +139,8 @@
   <data name="notification_background" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\notification-background.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="points_image" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\points-image.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="rank_image" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\rank-image.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="red_button" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\red-button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="RSIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\RSIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="site_awards_image" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\site-awards-image.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="yellow_button" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\yellow-button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

@@ -89,6 +89,11 @@ namespace Retro_Achievement_Tracker
             this.statsAwardsOverrideTextBox = new System.Windows.Forms.TextBox();
             this.statsRankOverrideTextBox = new System.Windows.Forms.TextBox();
             this.statsOverrideGroupBox = new System.Windows.Forms.GroupBox();
+            this.statsUsePercentCheckBox = new System.Windows.Forms.CheckBox();
+            this.statsRadioButtonSemicolon = new System.Windows.Forms.RadioButton();
+            this.statsRadioButtonDot = new System.Windows.Forms.RadioButton();
+            this.label1 = new System.Windows.Forms.Label();
+            this.statsRadioButtonBackslash = new System.Windows.Forms.RadioButton();
             this.statsCompletedCheckBox = new System.Windows.Forms.CheckBox();
             this.statsCompletedOverrideTextBox = new System.Windows.Forms.TextBox();
             this.statsGameAchievementsCheckBox = new System.Windows.Forms.CheckBox();
@@ -859,6 +864,11 @@ namespace Retro_Achievement_Tracker
             // 
             // statsOverrideGroupBox
             // 
+            this.statsOverrideGroupBox.Controls.Add(this.statsUsePercentCheckBox);
+            this.statsOverrideGroupBox.Controls.Add(this.statsRadioButtonSemicolon);
+            this.statsOverrideGroupBox.Controls.Add(this.statsRadioButtonDot);
+            this.statsOverrideGroupBox.Controls.Add(this.label1);
+            this.statsOverrideGroupBox.Controls.Add(this.statsRadioButtonBackslash);
             this.statsOverrideGroupBox.Controls.Add(this.statsCompletedCheckBox);
             this.statsOverrideGroupBox.Controls.Add(this.statsCompletedOverrideTextBox);
             this.statsOverrideGroupBox.Controls.Add(this.statsGameAchievementsCheckBox);
@@ -884,10 +894,62 @@ namespace Retro_Achievement_Tracker
             this.statsOverrideGroupBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.statsOverrideGroupBox.Location = new System.Drawing.Point(593, 313);
             this.statsOverrideGroupBox.Name = "statsOverrideGroupBox";
-            this.statsOverrideGroupBox.Size = new System.Drawing.Size(287, 258);
+            this.statsOverrideGroupBox.Size = new System.Drawing.Size(287, 341);
             this.statsOverrideGroupBox.TabIndex = 10007;
             this.statsOverrideGroupBox.TabStop = false;
             this.statsOverrideGroupBox.Text = "Stats Overrides";
+            // 
+            // statsUsePercentCheckBox
+            // 
+            this.statsUsePercentCheckBox.AutoSize = true;
+            this.statsUsePercentCheckBox.Location = new System.Drawing.Point(194, 316);
+            this.statsUsePercentCheckBox.Name = "statsUsePercentCheckBox";
+            this.statsUsePercentCheckBox.Size = new System.Drawing.Size(89, 17);
+            this.statsUsePercentCheckBox.TabIndex = 54;
+            this.statsUsePercentCheckBox.Text = "Use \'%\'";
+            this.statsUsePercentCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // statsRadioButtonSemicolon
+            // 
+            this.statsRadioButtonSemicolon.AutoSize = true;
+            this.statsRadioButtonSemicolon.Location = new System.Drawing.Point(9, 297);
+            this.statsRadioButtonSemicolon.Name = "statsRadioButtonSemicolon";
+            this.statsRadioButtonSemicolon.Size = new System.Drawing.Size(106, 17);
+            this.statsRadioButtonSemicolon.TabIndex = 53;
+            this.statsRadioButtonSemicolon.TabStop = true;
+            this.statsRadioButtonSemicolon.Text = "Semicolon";
+            this.statsRadioButtonSemicolon.UseVisualStyleBackColor = true;
+            // 
+            // statsRadioButtonDot
+            // 
+            this.statsRadioButtonDot.AutoSize = true;
+            this.statsRadioButtonDot.Location = new System.Drawing.Point(9, 318);
+            this.statsRadioButtonDot.Name = "statsRadioButtonDot";
+            this.statsRadioButtonDot.Size = new System.Drawing.Size(115, 17);
+            this.statsRadioButtonDot.TabIndex = 52;
+            this.statsRadioButtonDot.TabStop = true;
+            this.statsRadioButtonDot.Text = "Period/Dot";
+            this.statsRadioButtonDot.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 258);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(160, 13);
+            this.label1.TabIndex = 51;
+            this.label1.Text = "Divider Character";
+            // 
+            // statsRadioButtonBackslash
+            // 
+            this.statsRadioButtonBackslash.AutoSize = true;
+            this.statsRadioButtonBackslash.Location = new System.Drawing.Point(9, 274);
+            this.statsRadioButtonBackslash.Name = "statsRadioButtonBackslash";
+            this.statsRadioButtonBackslash.Size = new System.Drawing.Size(106, 17);
+            this.statsRadioButtonBackslash.TabIndex = 50;
+            this.statsRadioButtonBackslash.TabStop = true;
+            this.statsRadioButtonBackslash.Text = "Backslash";
+            this.statsRadioButtonBackslash.UseVisualStyleBackColor = true;
             // 
             // statsCompletedCheckBox
             // 
@@ -2249,6 +2311,11 @@ namespace Retro_Achievement_Tracker
         private GroupBox notificationOverridesGroupBox;
         private CheckBox notificationPointsEnableCheckBox;
         private CheckBox notificationBorderEnableCheckBox;
+        private RadioButton statsRadioButtonDot;
+        private Label label1;
+        private RadioButton statsRadioButtonBackslash;
+        private RadioButton statsRadioButtonSemicolon;
+        private CheckBox statsUsePercentCheckBox;
     }
 }
 

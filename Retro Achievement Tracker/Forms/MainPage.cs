@@ -1,5 +1,4 @@
 ﻿using AutoUpdaterDotNET;
-using CefSharp;
 using HtmlAgilityPack;
 using Retro_Achievement_Tracker.Forms;
 using Retro_Achievement_Tracker.Models;
@@ -138,7 +137,7 @@ namespace Retro_Achievement_Tracker
             }
             if (notificationLayoutWindow.AutoLaunch)
             {
-                notificationLayoutWindow.Show(); 
+                notificationLayoutWindow.Show();
                 notificationLayoutWindow.BringToFront();
                 notificationLayoutWindow.Location = new Point(0, 0);
             }
@@ -284,7 +283,7 @@ namespace Retro_Achievement_Tracker
                 }
             }
         }
-        protected async override void OnShown(EventArgs e)
+        protected override void OnShown(EventArgs e)
         {
             CreateFolders();
 
@@ -578,7 +577,7 @@ namespace Retro_Achievement_Tracker
         protected override void OnClosed(EventArgs e)
         {
             StreamLabelManager.ClearAllStreamLabels();
-         
+
             focusLayoutWindow.Close();
             statsLayoutWindow.Close();
             notificationLayoutWindow.Close();
@@ -799,6 +798,11 @@ namespace Retro_Achievement_Tracker
 
             this.fontFamilyComboBox.SelectedIndexChanged += FontFamilyComboBox_SelectedIndexChanged;
 
+            this.statsRadioButtonBackslash.CheckedChanged += RadioButtonBackslash_CheckedChanged;
+            this.statsRadioButtonSemicolon.CheckedChanged += RadioButtonBackslash_CheckedChanged;
+            this.statsRadioButtonDot.CheckedChanged += RadioButtonBackslash_CheckedChanged;
+            this.statsUsePercentCheckBox.CheckedChanged += StatsUsePercentCheckBox_CheckedChanged;
+
             this.notificationsAchievementAnimationInComboBox.SelectedIndexChanged += NotificationAnimationComboBox_SelectedIndexChanged;
             this.notificationsAchievementAnimationOutComboBox.SelectedIndexChanged += NotificationAnimationComboBox_SelectedIndexChanged;
             this.notificationsMasteryAnimationInComboBox.SelectedIndexChanged += NotificationAnimationComboBox_SelectedIndexChanged;
@@ -842,6 +846,7 @@ namespace Retro_Achievement_Tracker
             this.notificationMasteryOutNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
             this.notificationMasteryInNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
         }
+
         private async Task<int> GetAwardCount()
         {
             try
@@ -928,11 +933,6 @@ namespace Retro_Achievement_Tracker
 
             notificationLayoutWindow.Dispose();
 
-            notificationLayoutWindow = new NotificationLayoutWindow();
-
-            notificationLayoutWindow.chromiumWebBrowser.RequestHandler = new CustomRequestHandler() { customAchievementEnabled = notificationLayoutWindow.CustomAchievementEnabled, customMasteryEnabled = notificationLayoutWindow.CustomMasteryEnabled };
-            notificationLayoutWindow.Show();
-
             if (!notificationLayoutWindow.CustomAchievementEnabled)
             {
                 notificationLayoutWindow.DisableAchievementEdit();
@@ -949,6 +949,11 @@ namespace Retro_Achievement_Tracker
                 notificationLayoutWindow.SetAchievementInAnimation();
                 notificationLayoutWindow.SetAchievementOutAnimation();
             }
+
+            notificationLayoutWindow = new NotificationLayoutWindow();
+
+            notificationLayoutWindow.chromiumWebBrowser.RequestHandler = new CustomRequestHandler() { customAchievementEnabled = notificationLayoutWindow.CustomAchievementEnabled, customMasteryEnabled = notificationLayoutWindow.CustomMasteryEnabled };
+            notificationLayoutWindow.Show();
         }
         private void CustomMasteryEnableCheckbox_CheckedChanged(object sender, EventArgs eventArgs)
         {
@@ -974,11 +979,6 @@ namespace Retro_Achievement_Tracker
 
             notificationLayoutWindow.Dispose();
 
-            notificationLayoutWindow = new NotificationLayoutWindow();
-
-            notificationLayoutWindow.chromiumWebBrowser.RequestHandler = new CustomRequestHandler() { customAchievementEnabled = notificationLayoutWindow.CustomAchievementEnabled, customMasteryEnabled = notificationLayoutWindow.CustomMasteryEnabled };
-            notificationLayoutWindow.Show();
-
             if (!notificationLayoutWindow.CustomMasteryEnabled)
             {
                 notificationLayoutWindow.DisableMasteryEdit();
@@ -996,6 +996,11 @@ namespace Retro_Achievement_Tracker
                 notificationLayoutWindow.SetMasteryInAnimation();
                 notificationLayoutWindow.SetMasteryOutAnimation();
             }
+
+            notificationLayoutWindow = new NotificationLayoutWindow();
+
+            notificationLayoutWindow.chromiumWebBrowser.RequestHandler = new CustomRequestHandler() { customAchievementEnabled = notificationLayoutWindow.CustomAchievementEnabled, customMasteryEnabled = notificationLayoutWindow.CustomMasteryEnabled };
+            notificationLayoutWindow.Show();
         }
         private void AcheivementEditOutlineCheckbox_CheckedChanged(object sender, EventArgs eventArgs)
         {
@@ -1093,6 +1098,7 @@ namespace Retro_Achievement_Tracker
             notificationLayoutWindow.SetMasteryTop();
             notificationLayoutWindow.SetMasteryWidth();
         }
+
         private void CustomNumericUpDown_ValueChanged(object sender, EventArgs eventArgs)
         {
             NumericUpDown numericUpDown = sender as NumericUpDown;
@@ -1383,11 +1389,32 @@ namespace Retro_Achievement_Tracker
                 }
                 this.fontFamilyComboBox.SelectedIndex = Array.FindIndex(familyArray, row => row.Name == statsLayoutWindow.FontFamily.Name);
 
+                switch (statsLayoutWindow.DividerCharacter)
+                {
+                    case "/":
+                        this.statsRadioButtonDot.Checked = false;
+                        this.statsRadioButtonSemicolon.Checked = false;
+                        this.statsRadioButtonBackslash.Checked = true;
+                        break;
+                    case ":":
+                        this.statsRadioButtonDot.Checked = false;
+                        this.statsRadioButtonBackslash.Checked = false;
+                        this.statsRadioButtonSemicolon.Checked = true;
+                        break;
+                    case ".":
+                        this.statsRadioButtonSemicolon.Checked = false;
+                        this.statsRadioButtonBackslash.Checked = false;
+                        this.statsRadioButtonDot.Checked = true;
+                        break;
+                }
+
+                this.statsUsePercentCheckBox.Checked = statsLayoutWindow.UsePercentageSymbol;
+
                 MenuState = CustomMenuState.STATS;
 
                 this.fontSettingsGroupBox.Show();
                 this.statsOverrideGroupBox.Show();
-                this.ClientSize = new Size(592, 575);
+                this.ClientSize = new Size(592, 660);
                 this.statsOverrideGroupBox.Location = new Point(4, 313);
             }
             else
@@ -2165,6 +2192,42 @@ namespace Retro_Achievement_Tracker
                         break;
                 }
             }
+        }
+
+        private void RadioButtonBackslash_CheckedChanged(object sender, EventArgs e)
+        {
+            if (NotBooting)
+            {
+                RadioButton radioButton = sender as RadioButton;
+
+                if (radioButton.Checked)
+                {
+                    switch (radioButton.Name)
+                    {
+                        case "statsRadioButtonBackslash":
+                            this.statsRadioButtonDot.Checked = false;
+                            this.statsRadioButtonSemicolon.Checked = false;
+                            statsLayoutWindow.DividerCharacter = "/";
+                            break;
+                        case "statsRadioButtonSemicolon":
+                            this.statsRadioButtonDot.Checked = false;
+                            this.statsRadioButtonBackslash.Checked = false;
+                            statsLayoutWindow.DividerCharacter = ":";
+                            break;
+                        case "statsRadioButtonDot":
+                            this.statsRadioButtonSemicolon.Checked = false;
+                            this.statsRadioButtonBackslash.Checked = false;
+                            statsLayoutWindow.DividerCharacter = ".";
+                            break;
+                    }
+                }
+            }
+        }
+        private void StatsUsePercentCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox checkbox = sender as CheckBox;
+
+            statsLayoutWindow.UsePercentageSymbol = checkbox.Checked;
         }
     }
     public enum CustomMenuState

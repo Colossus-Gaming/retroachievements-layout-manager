@@ -61,67 +61,28 @@ namespace Retro_Achievement_Tracker.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Adultery {
-            get {
-                object obj = ResourceManager.GetObject("Adultery", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Dancarnate_Logo {
-            get {
-                object obj = ResourceManager.GetObject("Dancarnate_Logo", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
         ///&lt;html&gt;
         ///&lt;head&gt;
         ///    &lt;title&gt;Focus Window&lt;/title&gt;
         ///    &lt;meta charset=&quot;UTF-8&quot;&gt;
         ///    &lt;script src=&quot;https://code.jquery.com/jquery-3.5.1.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
-        ///    &lt;script id=&quot;focus-achievement-scripts&quot;&gt;
+        ///    &lt;script id=&quot;focus-scripts&quot;&gt;
         ///
+        ///        var fontValue = &quot;Calibri&quot;;
+        ///        var lineSpacing = &quot;1&quot;;
         ///        var showPointsBool = false;
         ///
-        ///        function adjustFont() {
-        ///            var nameValue = 100;
-        ///            var descriptionValue = 100;
-        ///            var pointsValue = 100;
+        ///        function adjustFont(element) {
+        ///            var value = 100;
         ///
-        ///            var focusName = document.getElementById(&apos;focus-achievement-name&apos;);
-        ///           [rest of string was truncated]&quot;;.
+        ///            element.style.fontSize = value + &apos;px&apos;;
+        ///
+        ///            while (element.scrollHeight &gt; element.offs [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string FocusWindow {
             get {
                 return ResourceManager.GetString("FocusWindow", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap game_achievements_image {
-            get {
-                object obj = ResourceManager.GetObject("game_achievements_image", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap game_points_image {
-            get {
-                object obj = ResourceManager.GetObject("game_points_image", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -132,15 +93,18 @@ namespace Retro_Achievement_Tracker.Properties {
         ///    &lt;title&gt;Game Info Window&lt;/title&gt;
         ///    &lt;meta charset=&quot;UTF-8&quot;&gt;
         ///    &lt;script src=&quot;https://code.jquery.com/jquery-3.5.1.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
-        ///    &lt;script id=&quot;ra-stats-scripts&quot;&gt;
-        ///        function setFontSize(value) {
-        ///            var all = document.getElementsByClassName(&apos;has-font&apos;);
+        ///    &lt;script id=&quot;ra-stats-scripts&quot;&gt; 
         ///
-        ///            setTimeout(function () {
-        ///                for (var i = 0; i &lt; all.length; i++) {
-        ///                    all[i].style.fontSize = value + &apos;px&apos;;
-        ///                }
-        ///  [rest of string was truncated]&quot;;.
+        ///        var fontValue = &quot;Calibri&quot;;
+        ///        var lineSpacing = &quot;1&quot;;
+        ///
+        ///        function adjustFont(element) {
+        ///            var value = 100;
+        ///
+        ///            element.style.height = &apos;36px&apos;;
+        ///            element.style.fontSize = value + &apos;px&apos;;
+        ///
+        ///            while (element.scrollHeight [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string GameInfo {
             get {
@@ -187,16 +151,17 @@ namespace Retro_Achievement_Tracker.Properties {
         ///    &lt;script src=&quot;https://code.jquery.com/jquery-3.5.1.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
         ///    &lt;script id=&quot;last-five-scripts&quot;&gt;
         ///
-        ///        var cycling = false;
+        ///        var backgroundHex = &quot;#cccccc&quot;;
+        ///        var fontValue = &quot;Calibri&quot;;
+        ///        var lineSpacing = 1.0;
+        ///        var fontColor = &quot;black&quot;;
+        ///        var fontOutline = &quot;&quot;;
+        ///        var borderOutline = &quot;&quot;;
         ///
-        ///        function adjustFont() {
-        ///            var value = 100;
+        ///        var activeRows = 0;
         ///
-        ///            var consoleElement = document.getElementById(&quot;focus-achievement-name&quot;);
-        ///
-        ///            consoleElement.style.fontSize = value + &apos;px&apos;;
-        ///
-        ///            while (consoleElement. [rest of string was truncated]&quot;;.
+        ///        var showPointsBool = false;
+        ///    [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string LastFive {
             get {
@@ -221,7 +186,10 @@ namespace Retro_Achievement_Tracker.Properties {
         ///    &lt;title&gt;Notification Window&lt;/title&gt;
         ///    &lt;meta charset=&quot;UTF-8&quot;&gt;
         ///    &lt;script src=&quot;https://code.jquery.com/jquery-3.5.1.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
-        ///    &lt;script id=&quot;achievement-pop-script&quot;&gt;
+        ///    &lt;script id=&quot;achievement-script&quot;&gt;
+        ///
+        ///        var fontValue = &quot;Calibri&quot;;
+        ///        var lineSpacing = &quot;1&quot;;
         ///
         ///        var achievementAnimationIn = &quot;&quot;;
         ///        var achievementAnimationOut = &quot;&quot;;
@@ -229,33 +197,13 @@ namespace Retro_Achievement_Tracker.Properties {
         ///        var masteryAnimationIn = &quot;&quot;;
         ///        var masteryAnimationOut = &quot;&quot;;
         ///
-        ///        function adjustAchievementFont() {
-        ///            var nameValue = 100;
-        ///            var description [rest of string was truncated]&quot;;.
+        ///        var showPointsBool = false;
+        ///
+        /// [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string NotificationWindow {
             get {
                 return ResourceManager.GetString("NotificationWindow", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap points_image {
-            get {
-                object obj = ResourceManager.GetObject("points_image", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap rank_image {
-            get {
-                object obj = ResourceManager.GetObject("rank_image", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -270,41 +218,23 @@ namespace Retro_Achievement_Tracker.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap RSIcon {
-            get {
-                object obj = ResourceManager.GetObject("RSIcon", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap site_awards_image {
-            get {
-                object obj = ResourceManager.GetObject("site_awards_image", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
         ///&lt;html&gt;
         ///&lt;head&gt;
-        ///    &lt;title&gt;Stats Window&lt;/title&gt;
+        ///    &lt;title&gt;&lt;/title&gt;
         ///    &lt;meta charset=&quot;UTF-8&quot;&gt;
         ///    &lt;script src=&quot;https://code.jquery.com/jquery-3.5.1.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
         ///    &lt;script id=&quot;ra-stats-scripts&quot;&gt;
-        ///        function setFontSize(value) {
-        ///            var all = document.getElementsByClassName(&apos;has-font&apos;);
         ///
-        ///            setTimeout(function () {
-        ///                for (var i = 0; i &lt; all.length; i++) {
-        ///                    all[i].style.fontSize = value + &apos;px&apos;;
-        ///                }
-        ///      [rest of string was truncated]&quot;;.
+        ///        var fontValue = &quot;Calibri&quot;;
+        ///        var lineSpacing = &quot;1&quot;;
+        ///
+        ///        function adjustFont(element) {
+        ///            var value = 100;
+        ///
+        ///            element.style.fontSize = value + &apos;px&apos;;
+        ///
+        ///            while (element.scrollHeight &gt; element.offsetHeight || element.scrollWidth &gt; element.offs [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string StatsWindow {
             get {

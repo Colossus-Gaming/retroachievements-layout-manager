@@ -108,6 +108,12 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore">
       <Private>True</Private>
@@ -190,6 +196,7 @@
       <DependentUpon>FocusLayoutWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\BrowserBase.cs" />
+    <Compile Include="Models\MediaHelper.cs" />
     <Compile Include="Models\ConsoleListConverter.cs" />
     <Compile Include="Models\AchievementConverter.cs" />
     <Compile Include="Models\ConsoleList.cs" />
@@ -198,7 +205,6 @@
     <Compile Include="Models\GameAchievementSummaryConverter.cs" />
     <Compile Include="Models\GameSummaryConverter.cs" />
     <Compile Include="Models\GameProgressConverter.cs" />
-    <Compile Include="Models\MediaHelper.cs" />
     <Compile Include="Models\StreamLabelManager.cs" />
     <Compile Include="Models\UserSummaryConverter.cs" />
     <Compile Include="Models\UserSummary.cs" />
@@ -240,6 +246,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -258,16 +265,16 @@
       <Version>1.6.4</Version>
     </PackageReference>
     <PackageReference Include="CefSharp.WinForms">
-      <Version>86.0.241</Version>
+      <Version>89.0.170</Version>
     </PackageReference>
     <PackageReference Include="HtmlAgilityPack">
-      <Version>1.11.29</Version>
+      <Version>1.11.33</Version>
     </PackageReference>
     <PackageReference Include="MediaToolkit">
       <Version>1.1.0.1</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
-      <Version>12.0.3</Version>
+      <Version>13.0.1</Version>
     </PackageReference>
     <PackageReference Include="WindowsAPICodePack-Shell">
       <Version>1.1.1</Version>

@@ -44,7 +44,6 @@ namespace Retro_Achievement_Tracker
                     }
                 }
                 Settings.Default.focus_font_family_name = familyArray[0].Name;
-                Settings.Default.Save();
 
                 return familyArray[0];
             }
@@ -181,6 +180,7 @@ namespace Retro_Achievement_Tracker
             set
             {
                 Settings.Default.auto_focus = value;
+                Settings.Default.Save();
             }
         }
         public async void SetFocus(Achievement achievement)
@@ -215,14 +215,17 @@ namespace Retro_Achievement_Tracker
 
         public async void HideFocus()
         {
-            FocusDisplayed = false;
-
-            Invoke((MethodInvoker)delegate
+            if (isReady)
             {
-                this.ClientSize = new Size(0, 0);
-            });
+                FocusDisplayed = false;
 
-            await ExecuteScript("hideFocus();");
+                Invoke((MethodInvoker)delegate
+                {
+                    this.ClientSize = new Size(0, 0);
+                });
+
+                await ExecuteScript("hideFocus();");
+            }
         }
         public async void EnableBorder()
         {

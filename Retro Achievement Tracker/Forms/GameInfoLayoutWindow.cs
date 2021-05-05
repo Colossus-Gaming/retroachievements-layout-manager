@@ -5,7 +5,6 @@ using Retro_Achievement_Tracker.Properties;
 using System;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -341,6 +340,7 @@ namespace Retro_Achievement_Tracker
             set
             {
                 Settings.Default.auto_game_info = value;
+                Settings.Default.Save();
             }
         }
         //Title
