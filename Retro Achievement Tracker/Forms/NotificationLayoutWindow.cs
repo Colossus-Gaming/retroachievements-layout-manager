@@ -267,6 +267,8 @@ namespace Retro_Achievement_Tracker.Forms
             {
                 Settings.Default.notification_custom_achievement_scale = value;
                 Settings.Default.Save();
+
+                SetAchievementWidth();
             }
             get
             {
@@ -279,6 +281,8 @@ namespace Retro_Achievement_Tracker.Forms
             {
                 Settings.Default.notification_custom_mastery_scale = value;
                 Settings.Default.Save();
+
+                SetMasteryWidth();
             }
             get
             {
