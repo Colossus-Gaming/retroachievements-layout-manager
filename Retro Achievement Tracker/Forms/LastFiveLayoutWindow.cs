@@ -108,8 +108,18 @@ namespace Retro_Achievement_Tracker
         }
         public async Task<int> GetAchievementPosition(int id)
         {
-            JavascriptResponse javascriptResponse = await chromiumWebBrowser.EvaluateScriptAsync("document.getElementById(\"achievement-" + id + "\").offsetTop");
-            return int.Parse(javascriptResponse.Result.ToString());
+            if (this.Visible && this.isReady)
+            {
+                try
+                {
+                    JavascriptResponse javascriptResponse = await chromiumWebBrowser.EvaluateScriptAsync("document.getElementById(\"achievement-" + id + "\").offsetTop");
+                    return int.Parse(javascriptResponse.Result.ToString());
+                }
+                catch (Exception)
+                {
+                }
+            }
+            return 0;
         }
 
         public async Task SetAchievementPosition(int id, int position)
@@ -138,7 +148,7 @@ namespace Retro_Achievement_Tracker
                     break;
             }
 
-            await chromiumWebBrowser.EvaluateScriptAsync("document.getElementById(\"achievement-" + id + "\")" +
+            await ExecuteScript("document.getElementById(\"achievement-" + id + "\")" +
                 ".animate([ { left: '5px', top: '" + oldOffset + "px' }, { left: '5px', top: '" + newOffset + "px' } ], { interations: 1, duration: 200, fill: \"forwards\", easing: \"ease-out\" });");
         }
 
