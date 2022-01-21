@@ -457,10 +457,7 @@ namespace Retro_Achievement_Tracker
         {
             Invoke((MethodInvoker)delegate
             {
-                if (MostRecentAchievements.Count > 0)
-                {
-                    LastFiveController.Instance.SetAchievement(MostRecentAchievements);
-                }
+                LastFiveController.Instance.SetAchievement(MostRecentAchievements);
                 StreamLabelManager.WriteLastFiveStreamLabels(UserSummary);
             });
         }
@@ -544,7 +541,7 @@ namespace Retro_Achievement_Tracker
                 MostRecentAchievements = tempRecentAchievements.ToList();
                 UnlockedAchievements = tempUnlockedAchievements.ToList();
 
-                foreach(Achievement recentAchievement in MostRecentAchievements)
+                foreach (Achievement recentAchievement in MostRecentAchievements)
                 {
                     Achievement achievement1 = GameProgress.Achievements.Find(achievement => achievement.Id == recentAchievement.Id);
                     recentAchievement.DisplayOrder = achievement1.DisplayOrder;
