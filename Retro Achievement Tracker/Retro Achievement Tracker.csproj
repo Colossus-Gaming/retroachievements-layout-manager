@@ -165,6 +165,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AlertController.cs" />
+    <Compile Include="Controllers\LastFiveController.cs" />
     <Compile Include="Forms\LastFiveLayoutWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -262,13 +264,13 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Autoupdater.NET.Official">
-      <Version>1.6.4</Version>
+      <Version>1.7.0</Version>
     </PackageReference>
     <PackageReference Include="CefSharp.WinForms">
-      <Version>89.0.170</Version>
+      <Version>97.1.11</Version>
     </PackageReference>
     <PackageReference Include="HtmlAgilityPack">
-      <Version>1.11.33</Version>
+      <Version>1.11.40</Version>
     </PackageReference>
     <PackageReference Include="MediaToolkit">
       <Version>1.1.0.1</Version>
@@ -293,23 +295,15 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\Adultery.png" />
-    <Content Include="Resources\Dancarnate_Logo.png" />
     <Resource Include="Resources\GameInfo.html" />
     <Resource Include="Resources\LastFive.html" />
-    <None Include="Resources\notification-background1.png" />
     <Content Include="video\achievement-notification.webm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="video\mastery-notification.webm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\game-achievements-image.png" />
-    <Content Include="Resources\game-points-image.png" />
     <Content Include="Resources\notification-background.png" />
-    <Content Include="Resources\points-image.png" />
-    <Content Include="Resources\rank-image.png" />
-    <Content Include="Resources\site-awards-image.png" />
     <None Include="Resources\yellow-button.png" />
     <EmbeddedResource Include="Resources\FocusWindow.html" />
     <None Include="Resources\green-button.png" />
@@ -317,7 +311,6 @@
     <EmbeddedResource Include="Resources\NotificationWindow.html" />
     <Content Include="Resources\hnet.com-image.ico" />
     <None Include="Resources\red-button.png" />
-    <Content Include="Resources\RSIcon.png" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="WMPLib">
@@ -331,37 +324,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <PublishFile Include="CefSharp">
-      <Visible>False</Visible>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <FileType>Assembly</FileType>
-    </PublishFile>
     <PublishFile Include="CefSharp.BrowserSubprocess.Core">
-      <Visible>False</Visible>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <FileType>Assembly</FileType>
-    </PublishFile>
-    <PublishFile Include="CefSharp.Core">
-      <Visible>False</Visible>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <FileType>Assembly</FileType>
-    </PublishFile>
-    <PublishFile Include="CefSharp.WinForms">
       <Visible>False</Visible>
       <Group>
       </Group>

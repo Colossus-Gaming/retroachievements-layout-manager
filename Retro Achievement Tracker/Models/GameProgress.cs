@@ -26,8 +26,8 @@ namespace Retro_Achievement_Tracker
         public string ConsoleName { get; set; }
         public string RichPresencePatch { get; set; }
         public long NumAchievements { get; set; }
-        public String NumDistinctPlayersCasual { get; set; }
-        public String NumDistinctPlayersHardcore { get; set; }
+        public string NumDistinctPlayersCasual { get; set; }
+        public string NumDistinctPlayersHardcore { get; set; }
         public List<Achievement> Achievements { get; set; }
         public long NumAwardedToUser { get; set; }
         public long NumAwardedToUserHardcore { get; set; }

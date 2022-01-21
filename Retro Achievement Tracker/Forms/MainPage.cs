@@ -1,5 +1,6 @@
 ﻿using AutoUpdaterDotNET;
 using HtmlAgilityPack;
+using Retro_Achievement_Tracker.Controllers;
 using Retro_Achievement_Tracker.Forms;
 using Retro_Achievement_Tracker.Models;
 using Retro_Achievement_Tracker.Properties;
@@ -35,9 +36,7 @@ namespace Retro_Achievement_Tracker
 
         private static StatsLayoutWindow statsLayoutWindow;
         private static FocusLayoutWindow focusLayoutWindow;
-        private static NotificationLayoutWindow notificationLayoutWindow;
         private static GameInfoLayoutWindow gameInfoLayoutWindow;
-        private static LastFiveLayoutWindow lastFiveLayoutWindow;
 
         private bool ShouldRun;
 
@@ -55,9 +54,7 @@ namespace Retro_Achievement_Tracker
 
             statsLayoutWindow = new StatsLayoutWindow();
             focusLayoutWindow = new FocusLayoutWindow();
-            notificationLayoutWindow = new NotificationLayoutWindow();
             gameInfoLayoutWindow = new GameInfoLayoutWindow();
-            lastFiveLayoutWindow = new LastFiveLayoutWindow();
 
             LoadProperties();
             SetupInterface();
@@ -130,28 +127,27 @@ namespace Retro_Achievement_Tracker
                 gameInfoLayoutWindow.Show();
                 gameInfoLayoutWindow.Location = new Point(0, 0);
             }
-            if (lastFiveLayoutWindow.AutoLaunch)
+            if (LastFiveController.Instance.AutoLaunch)
             {
-                lastFiveLayoutWindow.Show();
-                lastFiveLayoutWindow.Location = new Point(0, 0);
+                LastFiveController.Instance.Show();
             }
-            if (notificationLayoutWindow.AutoLaunch)
+            if (AlertController.Instance.AutoLaunch)
             {
-                notificationLayoutWindow.Show();
-                notificationLayoutWindow.BringToFront();
-                notificationLayoutWindow.Location = new Point(0, 0);
+                AlertController.Instance.Show();
             }
 
-            this.BringToFront();
             this.Location = new Point(0, 0);
         }
 
-        private void UpdateGameProgress(bool sameGame)
+        private bool UpdateGameProgress(bool sameGame)
         {
+            bool UpdateAwards = false;
+
             OldUnlockedAchievements = UnlockedAchievements.ToList();
 
             SortAchievements();
-            UpdateStats();
+
+            UpdateLastFive();
 
             if (sameGame)
             {
@@ -165,11 +161,7 @@ namespace Retro_Achievement_Tracker
 
                     achievementNotificationList.Sort();
 
-                    foreach (Achievement achievement in achievementNotificationList)
-                    {
-                        notificationLayoutWindow.EnqueueAchievementNotification(achievement);
-                        lastFiveLayoutWindow.EnqueueAchievement(achievement);
-                    }
+                    AlertController.Instance.EnqueueAchievementNotifications(achievementNotificationList);
 
                     if (achievementNotificationList.Contains(CurrentlyViewingAchievement))
                     {
@@ -178,17 +170,15 @@ namespace Retro_Achievement_Tracker
                     if (UnlockedAchievements.Count == GameProgress.Achievements.Count && OldUnlockedAchievements.Count < GameProgress.Achievements.Count)
                     {
                         ClearFocusAchievementRenders();
-                        notificationLayoutWindow.EnqueueMasteryNotification(UserSummary.GameSummaries[0], UserSummary.GameAchievementSummaries[0]);
+                        AlertController.Instance.EnqueueMasteryNotification(UserSummary.GameSummaries[0], UserSummary.GameAchievementSummaries[0]);
                     }
 
-                    notificationLayoutWindow.FireNotifications();
-                    lastFiveLayoutWindow.QueueShowList();
+                    UpdateAwards = true;
                 }
             }
             else
             {
                 UpdateTimerLabel("Changing game to [" + GameProgress.Id + "] " + GameProgress.Title);
-                UpdateLastFive();
                 UpdateGameInfo();
 
                 if (LockedAchievements.Count > 0)
@@ -200,10 +190,7 @@ namespace Retro_Achievement_Tracker
                 SetFocus();
             }
 
-            Invoke((MethodInvoker)delegate
-            {
-                StartTimer();
-            });
+            return UpdateAwards;
         }
 
         private void SetFocus()
@@ -240,8 +227,6 @@ namespace Retro_Achievement_Tracker
 
                 UserAndGameUpdateTimer.Stop();
 
-                this.startButton.Enabled = false;
-
                 UpdateTimerLabel("Calling for user summary.");
 
                 try
@@ -250,29 +235,35 @@ namespace Retro_Achievement_Tracker
                     {
                         UserSummary = userSummaryTemp.Result;
 
-                        UpdateTimerLabel("Getting award count directly from site.");
+                        UpdateTimerLabel("Calling for game progress.");
 
-                        await GetAwardCount().ContinueWith(async awards =>
+                        await hFC_EssentialsClient.GetGameProgress(UserSummary.GameSummaries[0].GameID.ToString()).ContinueWith(async gameProgressTemp =>
                         {
+                            long previousId = GameProgress != null ? GameProgress.Id : -1;
 
-                            try
+                            GameProgress = gameProgressTemp.Result;
+
+                            if (UpdateGameProgress(previousId == GameProgress.Id))
                             {
-                                UserSummary.Awards = awards.Result;
-
-                                long previousId = GameProgress != null ? GameProgress.Id : -1;
-
-                                UpdateTimerLabel("Calling for game progress.");
-
-                                await hFC_EssentialsClient.GetGameProgress(UserSummary.GameSummaries[0].GameID.ToString()).ContinueWith(gameProgressTemp =>
+                                await GetAwardCount().ContinueWith(awards =>
                                 {
-                                    GameProgress = gameProgressTemp.Result;
-
-                                    UpdateGameProgress(previousId == GameProgress.Id);
+                                    UserSummary.Awards = awards.Result;
+                                    Invoke((MethodInvoker)delegate
+                                    {
+                                        UpdateStats();
+                                        StartTimer();
+                                    });
                                 });
                             }
-                            catch (Exception ex)
+                            else
                             {
-                                Console.WriteLine(ex.Message);
+                                await Task.Run(() =>
+                                {
+                                    Invoke((MethodInvoker)delegate
+                                    {
+                                        StartTimer();
+                                    });
+                                });
                             }
                         });
                     });
@@ -282,6 +273,37 @@ namespace Retro_Achievement_Tracker
                     Console.WriteLine(ex.Message);
                 }
             }
+        }
+        private async Task InitializePlayerData()
+        {
+            hFC_EssentialsClient = new HFC_EssentialsClient(this.usernameTextBox.Text, this.apiKeyTextBox.Text);
+
+            await hFC_EssentialsClient.GetUserSummary().ContinueWith(async userSummaryTemp =>
+            {
+                UserSummary = userSummaryTemp.Result;
+
+                await hFC_EssentialsClient.GetGameProgress(UserSummary.GameSummaries[0].GameID.ToString()).ContinueWith(async gameProgressTemp =>
+                {
+                    GameProgress = gameProgressTemp.Result;
+
+                    UpdateGameProgress(false);
+
+                    SetFocus();
+
+                    this.userProfilePictureBox.ImageLocation = "https://retroachievements.org/UserPic/" + this.usernameTextBox.Text + ".png";
+
+                    await GetAwardCount().ContinueWith(awards =>
+                    {
+                        UserSummary.Awards = awards.Result;
+
+                        Invoke((MethodInvoker)delegate
+                        {
+                            UpdateStats();
+                            StartTimer();
+                        });
+                    });
+                });
+            });
         }
         protected override void OnShown(EventArgs e)
         {
@@ -351,33 +373,6 @@ namespace Retro_Achievement_Tracker
             Settings.Default.ra_username = this.usernameTextBox.Text;
             Settings.Default.ra_key = this.apiKeyTextBox.Text;
             Settings.Default.Save();
-        }
-        private async Task InitializePlayerData()
-        {
-            hFC_EssentialsClient = new HFC_EssentialsClient(this.usernameTextBox.Text, this.apiKeyTextBox.Text);
-
-            await hFC_EssentialsClient.GetUserSummary().ContinueWith(async userSummaryTemp =>
-            {
-                UserSummary = userSummaryTemp.Result;
-
-                await GetAwardCount().ContinueWith(async awards =>
-                {
-                    UserSummary.Awards = awards.Result;
-
-                    await hFC_EssentialsClient.GetGameProgress(UserSummary.GameSummaries[0].GameID.ToString()).ContinueWith(gameProgressTemp =>
-                    {
-                        GameProgress = gameProgressTemp.Result;
-
-                        UpdateGameProgress(false);
-
-                        SetFocus();
-
-                        this.userProfilePictureBox.ImageLocation = "https://retroachievements.org/UserPic/" + this.usernameTextBox.Text + ".png";
-
-                        StartTimer();
-                    });
-                });
-            });
         }
         private void StopButton_Click(object sender, EventArgs e)
         {
@@ -462,16 +457,9 @@ namespace Retro_Achievement_Tracker
         {
             Invoke((MethodInvoker)delegate
             {
-                lastFiveLayoutWindow.QueueClearList();
-
                 if (MostRecentAchievements.Count > 0)
                 {
-                    MostRecentAchievements.ForEach(x =>
-                    {
-                        lastFiveLayoutWindow.EnqueueAchievement(x);
-                    });
-
-                    lastFiveLayoutWindow.QueueShowList();
+                    LastFiveController.Instance.SetAchievement(MostRecentAchievements);
                 }
                 StreamLabelManager.WriteLastFiveStreamLabels(UserSummary);
             });
@@ -555,6 +543,12 @@ namespace Retro_Achievement_Tracker
                 SetLockedAchievements(tempLockedAchievements.ToList());
                 MostRecentAchievements = tempRecentAchievements.ToList();
                 UnlockedAchievements = tempUnlockedAchievements.ToList();
+
+                foreach(Achievement recentAchievement in MostRecentAchievements)
+                {
+                    Achievement achievement1 = GameProgress.Achievements.Find(achievement => achievement.Id == recentAchievement.Id);
+                    recentAchievement.DisplayOrder = achievement1.DisplayOrder;
+                }
             }
             if (OldUnlockedAchievements.Count < UnlockedAchievements.Count)
             {
@@ -580,9 +574,9 @@ namespace Retro_Achievement_Tracker
 
             focusLayoutWindow.Close();
             statsLayoutWindow.Close();
-            notificationLayoutWindow.Close();
+            AlertController.Instance.Close();
             gameInfoLayoutWindow.Close();
-            lastFiveLayoutWindow.Close();
+            LastFiveController.Instance.Close();
         }
         private void LoadProperties()
         {
@@ -676,55 +670,39 @@ namespace Retro_Achievement_Tracker
             this.notificationsMasteryAnimationInComboBox.SelectedIndex = this.notificationsMasteryAnimationInComboBox.Items.IndexOf(Settings.Default.notifications_mastery_in_animation);
             this.notificationsMasteryAnimationOutComboBox.SelectedIndex = this.notificationsMasteryAnimationOutComboBox.Items.IndexOf(Settings.Default.notifications_mastery_out_animation);
 
-            this.customAchievementEnableCheckbox.Checked = notificationLayoutWindow.CustomAchievementEnabled;
-            this.selectCustomAchievementButton.Enabled = notificationLayoutWindow.CustomAchievementEnabled;
-            this.acheivementEditOutlineCheckbox.Enabled = notificationLayoutWindow.CustomAchievementEnabled;
-            this.customAchievementXNumericUpDown.Enabled = false;
-            this.customAchievementYNumericUpDown.Enabled = false;
-            this.scaleAchievementNumericUpDown.Enabled = false;
-            this.notificationAchievementInNumericUpDown.Enabled = false;
-            this.notificationAchievementOutNumericUpDown.Enabled = false;
-            this.xPositionLabel1.Enabled = false;
-            this.yPositionLabel1.Enabled = false;
-            this.scaleLabel1.Enabled = false;
-            this.inLabel1.Enabled = false;
-            this.outLabel1.Enabled = false;
+            this.customAchievementEnableCheckbox.Checked = AlertController.Instance.CustomAchievementEnabled;
+            this.selectCustomAchievementButton.Enabled = AlertController.Instance.CustomAchievementEnabled;
+            this.acheivementEditOutlineCheckbox.Enabled = AlertController.Instance.CustomAchievementEnabled;
 
-            this.useCustomMasteryCheckbox.Checked = notificationLayoutWindow.CustomMasteryEnabled;
-            this.selectCustomMasteryNotificationButton.Enabled = notificationLayoutWindow.CustomMasteryEnabled;
-            this.masteryEditOultineCheckbox.Enabled = notificationLayoutWindow.CustomMasteryEnabled;
-            this.customMasteryXNumericUpDown.Enabled = false;
-            this.customMasteryYNumericUpDown.Enabled = false;
-            this.scaleMasteryNumericUpDown.Enabled = false;
-            this.notificationMasteryInNumericUpDown.Enabled = false;
-            this.notificationMasteryOutNumericUpDown.Enabled = false;
-            this.xPositionLabel2.Enabled = false;
-            this.yPositionLabel2.Enabled = false;
-            this.scaleLabel2.Enabled = false;
-            this.inLabel2.Enabled = false;
-            this.outLabel2.Enabled = false;
+            this.useCustomMasteryCheckbox.Checked = AlertController.Instance.CustomMasteryEnabled;
+            this.selectCustomMasteryNotificationButton.Enabled = AlertController.Instance.CustomMasteryEnabled;
+            this.masteryEditOultineCheckbox.Enabled = AlertController.Instance.CustomMasteryEnabled;
 
-            this.customAchievementXNumericUpDown.Value = notificationLayoutWindow.CustomAchievementX;
-            this.customAchievementYNumericUpDown.Value = notificationLayoutWindow.CustomAchievementY;
+            this.customAchievementXNumericUpDown.Value = AlertController.Instance.CustomAchievementX;
+            this.customAchievementYNumericUpDown.Value = AlertController.Instance.CustomAchievementY;
 
-            this.customMasteryXNumericUpDown.Value = notificationLayoutWindow.CustomMasteryX;
-            this.customMasteryYNumericUpDown.Value = notificationLayoutWindow.CustomMasteryY;
+            this.customMasteryXNumericUpDown.Value = AlertController.Instance.CustomMasteryX;
+            this.customMasteryYNumericUpDown.Value = AlertController.Instance.CustomMasteryY;
 
-            if (notificationLayoutWindow.CustomAchievementScale > this.scaleAchievementNumericUpDown.Maximum)
+            if (AlertController.Instance.CustomAchievementScale > this.scaleAchievementNumericUpDown.Maximum)
             {
-                notificationLayoutWindow.CustomAchievementScale = this.scaleAchievementNumericUpDown.Maximum;
+                AlertController.Instance.CustomAchievementScale = this.scaleAchievementNumericUpDown.Maximum;
             }
-            if (notificationLayoutWindow.CustomMasteryScale > this.scaleMasteryNumericUpDown.Maximum)
+            if (AlertController.Instance.CustomMasteryScale > this.scaleMasteryNumericUpDown.Maximum)
             {
-                notificationLayoutWindow.CustomMasteryScale = this.scaleMasteryNumericUpDown.Maximum;
+                AlertController.Instance.CustomMasteryScale = this.scaleMasteryNumericUpDown.Maximum;
             }
-            this.scaleAchievementNumericUpDown.Value = notificationLayoutWindow.CustomAchievementScale;
-            this.scaleMasteryNumericUpDown.Value = notificationLayoutWindow.CustomMasteryScale;
+            this.scaleAchievementNumericUpDown.Value = AlertController.Instance.CustomAchievementScale;
+            this.scaleMasteryNumericUpDown.Value = AlertController.Instance.CustomMasteryScale;
 
-            this.notificationAchievementInNumericUpDown.Value = notificationLayoutWindow.CustomAchievementIn;
-            this.notificationAchievementOutNumericUpDown.Value = notificationLayoutWindow.CustomAchievementOut;
-            this.notificationMasteryInNumericUpDown.Value = notificationLayoutWindow.CustomMasteryIn;
-            this.notificationMasteryOutNumericUpDown.Value = notificationLayoutWindow.CustomMasteryOut;
+            this.notificationAchievementInNumericUpDown.Value = AlertController.Instance.CustomAchievementIn;
+            this.notificationAchievementOutNumericUpDown.Value = AlertController.Instance.CustomAchievementOut;
+            this.notificationMasteryInNumericUpDown.Value = AlertController.Instance.CustomMasteryIn;
+            this.notificationMasteryOutNumericUpDown.Value = AlertController.Instance.CustomMasteryOut;
+            this.customAchievementInSpeedUpDown.Value = AlertController.Instance.CustomAchievementInSpeed;
+            this.customAchievementOutSpeedUpDown.Value = AlertController.Instance.CustomAchievementOutSpeed;
+            this.customMasteryInSpeedUpDown.Value = AlertController.Instance.CustomMasteryInSpeed;
+            this.customMasteryOutSpeedUpDown.Value = AlertController.Instance.CustomMasteryOutSpeed;
 
             this.usernameTextBox.TextChanged += RequiredField_TextChange;
             this.apiKeyTextBox.TextChanged += RequiredField_TextChange;
@@ -839,8 +817,12 @@ namespace Retro_Achievement_Tracker
             this.fontOutlineNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
             this.customAchievementXNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
             this.customAchievementYNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
+            this.customAchievementInSpeedUpDown.ValueChanged += CustomeAnimationSpeedUpDown_ValueChanged;
+            this.customAchievementOutSpeedUpDown.ValueChanged += CustomeAnimationSpeedUpDown_ValueChanged;
             this.customMasteryXNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
             this.customMasteryYNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
+            this.customMasteryInSpeedUpDown.ValueChanged += CustomeAnimationSpeedUpDown_ValueChanged;
+            this.customMasteryOutSpeedUpDown.ValueChanged += CustomeAnimationSpeedUpDown_ValueChanged;
             this.notificationAchievementOutNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
             this.notificationAchievementInNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
             this.notificationMasteryOutNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
@@ -849,6 +831,7 @@ namespace Retro_Achievement_Tracker
 
         private async Task<int> GetAwardCount()
         {
+            UpdateTimerLabel("Getting award count directly from site.");
             try
             {
                 string url = "http://retroachievements.org/user/" + usernameTextBox.Text;
@@ -909,194 +892,54 @@ namespace Retro_Achievement_Tracker
         }
         private void CustomAchievementEnableCheckbox_CheckedChanged(object sender, EventArgs eventArgs)
         {
-            notificationLayoutWindow.CustomAchievementEnabled = ((CheckBox)sender).Checked;
+            AlertController.Instance.CustomAchievementEnabled = ((CheckBox)sender).Checked;
 
-            this.customAchievementEnableCheckbox.Checked = notificationLayoutWindow.CustomAchievementEnabled;
-            this.selectCustomAchievementButton.Enabled = notificationLayoutWindow.CustomAchievementEnabled;
-            this.acheivementEditOutlineCheckbox.Enabled = notificationLayoutWindow.CustomAchievementEnabled;
+            this.customAchievementEnableCheckbox.Checked = AlertController.Instance.CustomAchievementEnabled;
+            this.selectCustomAchievementButton.Enabled = AlertController.Instance.CustomAchievementEnabled;
+            this.acheivementEditOutlineCheckbox.Enabled = AlertController.Instance.CustomAchievementEnabled;
 
-            this.customAchievementXNumericUpDown.Enabled = false;
-            this.customAchievementYNumericUpDown.Enabled = false;
-            this.scaleAchievementNumericUpDown.Enabled = false;
-            this.notificationAchievementInNumericUpDown.Enabled = false;
-            this.notificationAchievementOutNumericUpDown.Enabled = false;
+            AlertController.Instance.Reset();
 
-            this.masteryEditOultineCheckbox.Checked = false;
 
-            this.xPositionLabel1.Enabled = false;
-            this.yPositionLabel1.Enabled = false;
-            this.scaleLabel1.Enabled = false;
-            this.inLabel1.Enabled = false;
-            this.outLabel1.Enabled = false;
-            this.notificationsAchievementAnimationInComboBox.Enabled = false;
-            this.notificationsAchievementAnimationOutComboBox.Enabled = false;
-
-            notificationLayoutWindow.Dispose();
-
-            if (!notificationLayoutWindow.CustomAchievementEnabled)
-            {
-                notificationLayoutWindow.DisableAchievementEdit();
-
-                this.acheivementEditOutlineCheckbox.Checked = false;
-            }
-            else if (string.IsNullOrEmpty(notificationLayoutWindow.CustomAchievementFile))
-            {
-                SelectCustomAchievementButton_Click(null, null);
-            }
-            if (!notificationLayoutWindow.IsDisposed)
-            {
-                notificationLayoutWindow.SetAchievementWidth();
-                notificationLayoutWindow.SetAchievementInAnimation();
-                notificationLayoutWindow.SetAchievementOutAnimation();
-            }
-
-            notificationLayoutWindow = new NotificationLayoutWindow();
-
-            notificationLayoutWindow.chromiumWebBrowser.RequestHandler = new CustomRequestHandler() { customAchievementEnabled = notificationLayoutWindow.CustomAchievementEnabled, customMasteryEnabled = notificationLayoutWindow.CustomMasteryEnabled };
-            notificationLayoutWindow.Show();
         }
         private void CustomMasteryEnableCheckbox_CheckedChanged(object sender, EventArgs eventArgs)
         {
-            notificationLayoutWindow.CustomMasteryEnabled = ((CheckBox)sender).Checked;
+            AlertController.Instance.CustomMasteryEnabled = ((CheckBox)sender).Checked;
 
-            this.useCustomMasteryCheckbox.Checked = notificationLayoutWindow.CustomMasteryEnabled;
-            this.selectCustomMasteryNotificationButton.Enabled = notificationLayoutWindow.CustomMasteryEnabled;
-            this.masteryEditOultineCheckbox.Enabled = notificationLayoutWindow.CustomMasteryEnabled;
+            this.useCustomMasteryCheckbox.Checked = AlertController.Instance.CustomMasteryEnabled;
+            this.selectCustomMasteryNotificationButton.Enabled = AlertController.Instance.CustomMasteryEnabled;
+            this.masteryEditOultineCheckbox.Enabled = AlertController.Instance.CustomMasteryEnabled;
 
-            this.customMasteryXNumericUpDown.Enabled = false;
-            this.customMasteryYNumericUpDown.Enabled = false;
-            this.scaleMasteryNumericUpDown.Enabled = false;
-            this.notificationMasteryInNumericUpDown.Enabled = false;
-            this.notificationMasteryOutNumericUpDown.Enabled = false;
-
-            this.masteryEditOultineCheckbox.Checked = false;
-
-            this.xPositionLabel2.Enabled = false;
-            this.yPositionLabel2.Enabled = false;
-            this.scaleLabel2.Enabled = false;
-            this.inLabel2.Enabled = false;
-            this.outLabel2.Enabled = false;
-
-            notificationLayoutWindow.Dispose();
-
-            if (!notificationLayoutWindow.CustomMasteryEnabled)
-            {
-                notificationLayoutWindow.DisableMasteryEdit();
-
-                notificationLayoutWindow.SetMasteryInAnimation();
-                notificationLayoutWindow.SetMasteryOutAnimation();
-            }
-            else if (string.IsNullOrEmpty(notificationLayoutWindow.CustomMasteryFile))
-            {
-                SelectCustomMasteryNotificationButton_Click(null, null);
-            }
-            if (!notificationLayoutWindow.IsDisposed)
-            {
-                notificationLayoutWindow.SetMasteryWidth();
-                notificationLayoutWindow.SetMasteryInAnimation();
-                notificationLayoutWindow.SetMasteryOutAnimation();
-            }
-
-            notificationLayoutWindow = new NotificationLayoutWindow();
-
-            notificationLayoutWindow.chromiumWebBrowser.RequestHandler = new CustomRequestHandler() { customAchievementEnabled = notificationLayoutWindow.CustomAchievementEnabled, customMasteryEnabled = notificationLayoutWindow.CustomMasteryEnabled };
-            notificationLayoutWindow.Show();
+            AlertController.Instance.Reset();
         }
         private void AcheivementEditOutlineCheckbox_CheckedChanged(object sender, EventArgs eventArgs)
         {
             if (((CheckBox)sender).Checked)
             {
-                notificationLayoutWindow.EnableAchievementEdit();
-                notificationLayoutWindow.SendAchievementNotification(new Achievement()
+                AlertController.Instance.EnableAchievementEdit();
+                AlertController.Instance.SendAchievementNotification(new Achievement()
                 {
                     Title = "Thrilling!!!!",
                     Description = "Color every bit of Dinosaur 2. [Must color white if leaving white]",
                     BadgeNumber = "49987",
                     Points = 1
                 });
-
-                this.customAchievementXNumericUpDown.Enabled = true;
-                this.customAchievementYNumericUpDown.Enabled = true;
-                this.scaleAchievementNumericUpDown.Enabled = true;
-                this.notificationAchievementInNumericUpDown.Enabled = true;
-                this.notificationAchievementOutNumericUpDown.Enabled = true;
-
-                this.xPositionLabel1.Enabled = true;
-                this.yPositionLabel1.Enabled = true;
-                this.scaleLabel1.Enabled = true;
-                this.inLabel1.Enabled = true;
-                this.outLabel1.Enabled = true;
-
-                this.notificationsAchievementAnimationInComboBox.Enabled = true;
-                this.notificationsAchievementAnimationOutComboBox.Enabled = true;
             }
             else
             {
-                notificationLayoutWindow.DisableAchievementEdit();
-
-                this.customAchievementXNumericUpDown.Enabled = false;
-                this.customAchievementYNumericUpDown.Enabled = false;
-                this.scaleAchievementNumericUpDown.Enabled = false;
-                this.notificationAchievementInNumericUpDown.Enabled = false;
-                this.notificationAchievementOutNumericUpDown.Enabled = false;
-
-                this.xPositionLabel1.Enabled = false;
-                this.yPositionLabel1.Enabled = false;
-                this.scaleLabel1.Enabled = false;
-                this.inLabel1.Enabled = false;
-                this.outLabel1.Enabled = false;
-
-                this.notificationsAchievementAnimationInComboBox.Enabled = false;
-                this.notificationsAchievementAnimationOutComboBox.Enabled = false;
+                AlertController.Instance.DisableAchievementEdit();
             }
-            notificationLayoutWindow.SetAchievementLeft();
-            notificationLayoutWindow.SetAchievementTop();
-            notificationLayoutWindow.SetAchievementWidth();
         }
         private void MasteryEditOultineCheckbox_CheckedChanged(object sender, EventArgs eventArgs)
         {
             if (((CheckBox)sender).Checked)
             {
-                notificationLayoutWindow.EnableMasteryEdit();
-                notificationLayoutWindow.SendMasteryNotification(UserSummary.GameSummaries[0], UserSummary.GameAchievementSummaries[0]);
-
-                this.customMasteryXNumericUpDown.Enabled = true;
-                this.customMasteryYNumericUpDown.Enabled = true;
-                this.scaleMasteryNumericUpDown.Enabled = true;
-                this.notificationMasteryInNumericUpDown.Enabled = true;
-                this.notificationMasteryOutNumericUpDown.Enabled = true;
-
-                this.xPositionLabel2.Enabled = true;
-                this.yPositionLabel2.Enabled = true;
-                this.scaleLabel2.Enabled = true;
-                this.inLabel2.Enabled = true;
-                this.outLabel2.Enabled = true;
-
-                this.notificationsMasteryAnimationInComboBox.Enabled = true;
-                this.notificationsMasteryAnimationOutComboBox.Enabled = true;
+                AlertController.Instance.EnableMasteryEdit();
             }
             else
             {
-                notificationLayoutWindow.DisableMasteryEdit();
-
-                this.customMasteryXNumericUpDown.Enabled = false;
-                this.customMasteryYNumericUpDown.Enabled = false;
-                this.scaleMasteryNumericUpDown.Enabled = false;
-                this.notificationMasteryInNumericUpDown.Enabled = false;
-                this.notificationMasteryOutNumericUpDown.Enabled = false;
-
-                this.xPositionLabel2.Enabled = false;
-                this.yPositionLabel2.Enabled = false;
-                this.scaleLabel2.Enabled = false;
-                this.inLabel2.Enabled = false;
-                this.outLabel2.Enabled = false;
-
-                this.notificationsMasteryAnimationInComboBox.Enabled = false;
-                this.notificationsMasteryAnimationOutComboBox.Enabled = false;
+                AlertController.Instance.DisableMasteryEdit();
             }
-            notificationLayoutWindow.SetMasteryLeft();
-            notificationLayoutWindow.SetMasteryTop();
-            notificationLayoutWindow.SetMasteryWidth();
         }
 
         private void CustomNumericUpDown_ValueChanged(object sender, EventArgs eventArgs)
@@ -1106,34 +949,34 @@ namespace Retro_Achievement_Tracker
             switch (numericUpDown.Name)
             {
                 case "customAchievementXNumericUpDown":
-                    notificationLayoutWindow.CustomAchievementX = Convert.ToInt32(numericUpDown.Value);
+                    AlertController.Instance.CustomAchievementX = Convert.ToInt32(numericUpDown.Value);
                     break;
                 case "customAchievementYNumericUpDown":
-                    notificationLayoutWindow.CustomAchievementY = Convert.ToInt32(numericUpDown.Value);
+                    AlertController.Instance.CustomAchievementY = Convert.ToInt32(numericUpDown.Value);
                     break;
                 case "customMasteryXNumericUpDown":
-                    notificationLayoutWindow.CustomMasteryX = Convert.ToInt32(numericUpDown.Value);
+                    AlertController.Instance.CustomMasteryX = Convert.ToInt32(numericUpDown.Value);
                     break;
                 case "customMasteryYNumericUpDown":
-                    notificationLayoutWindow.CustomMasteryY = Convert.ToInt32(numericUpDown.Value);
+                    AlertController.Instance.CustomMasteryY = Convert.ToInt32(numericUpDown.Value);
                     break;
                 case "scaleAchievementNumericUpDown":
-                    notificationLayoutWindow.CustomAchievementScale = Convert.ToInt32(numericUpDown.Value);
+                    AlertController.Instance.CustomAchievementScale = Convert.ToInt32(numericUpDown.Value);
                     break;
                 case "scaleMasteryNumericUpDown":
-                    notificationLayoutWindow.CustomMasteryScale = Convert.ToInt32(numericUpDown.Value);
+                    AlertController.Instance.CustomMasteryScale = Convert.ToInt32(numericUpDown.Value);
                     break;
                 case "notificationAchievementInNumericUpDown":
-                    notificationLayoutWindow.CustomAchievementIn = Convert.ToInt32(numericUpDown.Value);
+                    AlertController.Instance.CustomAchievementIn = Convert.ToInt32(numericUpDown.Value);
                     break;
                 case "notificationAchievementOutNumericUpDown":
-                    notificationLayoutWindow.CustomAchievementOut = Convert.ToInt32(numericUpDown.Value);
+                    AlertController.Instance.CustomAchievementOut = Convert.ToInt32(numericUpDown.Value);
                     break;
                 case "notificationMasteryInNumericUpDown":
-                    notificationLayoutWindow.CustomMasteryIn = Convert.ToInt32(numericUpDown.Value);
+                    AlertController.Instance.CustomMasteryIn = Convert.ToInt32(numericUpDown.Value);
                     break;
                 case "notificationMasteryOutNumericUpDown":
-                    notificationLayoutWindow.CustomMasteryOut = Convert.ToInt32(numericUpDown.Value);
+                    AlertController.Instance.CustomMasteryOut = Convert.ToInt32(numericUpDown.Value);
                     break;
                 case "fontOutlineNumericUpDown":
                     switch (MenuState)
@@ -1142,13 +985,13 @@ namespace Retro_Achievement_Tracker
                             statsLayoutWindow.FontOutlineSize = Convert.ToInt32(numericUpDown.Value);
                             break;
                         case CustomMenuState.ALERTS:
-                            notificationLayoutWindow.FontOutlineSize = Convert.ToInt32(numericUpDown.Value);
+                            AlertController.Instance.FontOutlineSize = Convert.ToInt32(numericUpDown.Value);
                             break;
                         case CustomMenuState.GAME_INFO:
                             gameInfoLayoutWindow.FontOutlineSize = Convert.ToInt32(numericUpDown.Value);
                             break;
                         case CustomMenuState.LAST_FIVE:
-                            lastFiveLayoutWindow.FontOutlineSize = Convert.ToInt32(numericUpDown.Value);
+                            LastFiveController.Instance.FontOutlineSize = Convert.ToInt32(numericUpDown.Value);
                             break;
                         case CustomMenuState.FOCUS:
                             focusLayoutWindow.FontOutlineSize = Convert.ToInt32(numericUpDown.Value);
@@ -1161,11 +1004,11 @@ namespace Retro_Achievement_Tracker
         {
             if (this.openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                notificationLayoutWindow.CustomAchievementFile = this.openFileDialog1.FileName;
+                AlertController.Instance.CustomAchievementFile = this.openFileDialog1.FileName;
             }
             else
             {
-                if (this.customAchievementEnableCheckbox.Checked && string.IsNullOrEmpty(notificationLayoutWindow.CustomAchievementFile))
+                if (this.customAchievementEnableCheckbox.Checked && string.IsNullOrEmpty(AlertController.Instance.CustomAchievementFile))
                 {
                     this.customAchievementEnableCheckbox.Checked = false;
                 }
@@ -1175,14 +1018,35 @@ namespace Retro_Achievement_Tracker
         {
             if (this.openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                notificationLayoutWindow.CustomMasteryFile = this.openFileDialog1.FileName;
+                AlertController.Instance.CustomMasteryFile = this.openFileDialog1.FileName;
             }
             else
             {
-                if (this.useCustomMasteryCheckbox.Checked && string.IsNullOrEmpty(notificationLayoutWindow.CustomMasteryFile))
+                if (this.useCustomMasteryCheckbox.Checked && string.IsNullOrEmpty(AlertController.Instance.CustomMasteryFile))
                 {
                     this.useCustomMasteryCheckbox.Checked = false;
                 }
+            }
+        }
+
+        private void CustomeAnimationSpeedUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            NumericUpDown numericUpDown = sender as NumericUpDown;
+
+            switch (numericUpDown.Name)
+            {
+                case "customAchievementInSpeedUpDown":
+                    AlertController.Instance.CustomAchievementInSpeed = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "customAchievementOutSpeedUpDown":
+                    AlertController.Instance.CustomAchievementOutSpeed = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "customMasteryInSpeedUpDown":
+                    AlertController.Instance.CustomMasteryInSpeed = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "customMasteryOutSpeedUpDown":
+                    AlertController.Instance.CustomMasteryOutSpeed = Convert.ToInt32(numericUpDown.Value);
+                    break;
             }
         }
         private void ShowAchievementButton_Click(object sender, EventArgs eventArgs)
@@ -1191,25 +1055,24 @@ namespace Retro_Achievement_Tracker
                 && UserSummary.RecentAchievements.Count > 0
                 && UserSummary.RecentAchievements[0] != null)
             {
-                notificationLayoutWindow.EnqueueAchievementNotification(UserSummary.RecentAchievements[0]);
+                AlertController.Instance.EnqueueAchievementNotifications(new List<Achievement>() { UserSummary.RecentAchievements[0] });
             }
             else
             {
-                notificationLayoutWindow.EnqueueAchievementNotification(
+                AlertController.Instance.EnqueueAchievementNotifications(new List<Achievement>() {
                      new Achievement()
                      {
                          Title = "Thrilling!!!!",
                          Description = "Color every bit of Dinosaur 2. [Must color white if leaving white]",
                          BadgeNumber = "49987",
                          Points = 1
-                     });
+                     }
+                });
             }
-            notificationLayoutWindow.FireNotifications();
         }
         private void ShowGameMasteryButton_Click(object sender, EventArgs eventArgs)
         {
-            notificationLayoutWindow.EnqueueMasteryNotification(UserSummary.GameSummaries[0], UserSummary.GameAchievementSummaries[0]);
-            notificationLayoutWindow.FireNotifications();
+            AlertController.Instance.EnqueueMasteryNotification(UserSummary.GameSummaries[0], UserSummary.GameAchievementSummaries[0]);
         }
         private void SetFocusButton_Click(object sender, EventArgs e)
         {
@@ -1318,11 +1181,7 @@ namespace Retro_Achievement_Tracker
                     statsLayoutWindow.Show();
                     break;
                 case "showNotificationWindowButton":
-                    if (notificationLayoutWindow.IsDisposed)
-                    {
-                        notificationLayoutWindow = new NotificationLayoutWindow();
-                    }
-                    notificationLayoutWindow.Show();
+                    AlertController.Instance.Show();
                     break;
                 case "showGameInfoWindowButton":
                     if (gameInfoLayoutWindow.IsDisposed)
@@ -1333,13 +1192,7 @@ namespace Retro_Achievement_Tracker
                     gameInfoLayoutWindow.Show();
                     break;
                 case "showLastFiveWindowButton":
-                    if (lastFiveLayoutWindow.IsDisposed)
-                    {
-                        lastFiveLayoutWindow = new LastFiveLayoutWindow();
-
-                        UpdateLastFive();
-                    }
-                    lastFiveLayoutWindow.Show();
+                    LastFiveController.Instance.Show();
                     break;
             }
         }
@@ -1464,7 +1317,7 @@ namespace Retro_Achievement_Tracker
                 {
                     this.fontFamilyComboBox.Items.Add(fontFamily.Name);
                 }
-                this.fontFamilyComboBox.SelectedIndex = Array.FindIndex(familyArray, row => row.Name == notificationLayoutWindow.FontFamily.Name);
+                this.fontFamilyComboBox.SelectedIndex = Array.FindIndex(familyArray, row => row.Name == AlertController.Instance.FontFamily.Name);
 
                 MenuState = CustomMenuState.ALERTS;
 
@@ -1584,7 +1437,7 @@ namespace Retro_Achievement_Tracker
                 {
                     this.fontFamilyComboBox.Items.Add(fontFamily.Name);
                 }
-                this.fontFamilyComboBox.SelectedIndex = Array.FindIndex(familyArray, row => row.Name == lastFiveLayoutWindow.FontFamily.Name);
+                this.fontFamilyComboBox.SelectedIndex = Array.FindIndex(familyArray, row => row.Name == LastFiveController.Instance.FontFamily.Name);
 
                 MenuState = CustomMenuState.LAST_FIVE;
 
@@ -1676,12 +1529,10 @@ namespace Retro_Achievement_Tracker
             this.BringToFront();
             this.SendToBack();
 
-            if (notificationLayoutWindow != null && !notificationLayoutWindow.IsDisposed)
-            {
-                notificationLayoutWindow.BringToFront();
-                notificationLayoutWindow.Location = new Point(0, 0);
-                notificationLayoutWindow.SendToBack();
-            }
+            AlertController.Instance.Hide();
+            LastFiveController.Instance.Hide();
+
+
             if (focusLayoutWindow != null && !focusLayoutWindow.IsDisposed)
             {
                 focusLayoutWindow.BringToFront();
@@ -1700,12 +1551,6 @@ namespace Retro_Achievement_Tracker
                 gameInfoLayoutWindow.Location = new Point(0, 0);
                 gameInfoLayoutWindow.SendToBack();
             }
-            if (lastFiveLayoutWindow != null && !lastFiveLayoutWindow.IsDisposed)
-            {
-                lastFiveLayoutWindow.BringToFront();
-                lastFiveLayoutWindow.Location = new Point(0, 0);
-                lastFiveLayoutWindow.SendToBack();
-            }
         }
         private void FontColorButton_Click(object sender, EventArgs e)
         {
@@ -1721,7 +1566,7 @@ namespace Retro_Achievement_Tracker
                         break;
                     case CustomMenuState.ALERTS:
                         MenuState = CustomMenuState.CLOSED;
-                        notificationLayoutWindow.FontColor = MediaHelper.HexConverter(this.colorDialog1.Color);
+                        AlertController.Instance.FontColor = MediaHelper.HexConverter(this.colorDialog1.Color);
                         MenuState = CustomMenuState.ALERTS;
                         break;
                     case CustomMenuState.GAME_INFO:
@@ -1731,7 +1576,7 @@ namespace Retro_Achievement_Tracker
                         break;
                     case CustomMenuState.LAST_FIVE:
                         MenuState = CustomMenuState.CLOSED;
-                        lastFiveLayoutWindow.FontColor = MediaHelper.HexConverter(this.colorDialog1.Color);
+                        LastFiveController.Instance.FontColor = MediaHelper.HexConverter(this.colorDialog1.Color);
                         MenuState = CustomMenuState.LAST_FIVE;
                         break;
                     case CustomMenuState.FOCUS:
@@ -1756,7 +1601,7 @@ namespace Retro_Achievement_Tracker
                         break;
                     case CustomMenuState.ALERTS:
                         MenuState = CustomMenuState.CLOSED;
-                        notificationLayoutWindow.FontOutlineColor = MediaHelper.HexConverter(this.colorDialog1.Color);
+                        AlertController.Instance.FontOutlineColor = MediaHelper.HexConverter(this.colorDialog1.Color);
                         MenuState = CustomMenuState.ALERTS;
                         break;
                     case CustomMenuState.GAME_INFO:
@@ -1766,7 +1611,7 @@ namespace Retro_Achievement_Tracker
                         break;
                     case CustomMenuState.LAST_FIVE:
                         MenuState = CustomMenuState.CLOSED;
-                        lastFiveLayoutWindow.FontOutlineColor = MediaHelper.HexConverter(this.colorDialog1.Color);
+                        LastFiveController.Instance.FontOutlineColor = MediaHelper.HexConverter(this.colorDialog1.Color);
                         MenuState = CustomMenuState.LAST_FIVE;
                         break;
                     case CustomMenuState.FOCUS:
@@ -1791,7 +1636,7 @@ namespace Retro_Achievement_Tracker
                         break;
                     case CustomMenuState.ALERTS:
                         MenuState = CustomMenuState.CLOSED;
-                        notificationLayoutWindow.FontFamily = familyArray[Array.FindIndex(familyArray, row => row.Name == (string)(sender as ComboBox).SelectedItem)];
+                        AlertController.Instance.FontFamily = familyArray[Array.FindIndex(familyArray, row => row.Name == (string)(sender as ComboBox).SelectedItem)];
                         MenuState = CustomMenuState.ALERTS;
                         break;
                     case CustomMenuState.GAME_INFO:
@@ -1801,7 +1646,7 @@ namespace Retro_Achievement_Tracker
                         break;
                     case CustomMenuState.LAST_FIVE:
                         MenuState = CustomMenuState.CLOSED;
-                        lastFiveLayoutWindow.FontFamily = familyArray[Array.FindIndex(familyArray, row => row.Name == (string)(sender as ComboBox).SelectedItem)];
+                        LastFiveController.Instance.FontFamily = familyArray[Array.FindIndex(familyArray, row => row.Name == (string)(sender as ComboBox).SelectedItem)];
                         MenuState = CustomMenuState.LAST_FIVE;
                         break;
                     case CustomMenuState.FOCUS:
@@ -1822,19 +1667,19 @@ namespace Retro_Achievement_Tracker
                     switch ((string)(sender as ComboBox).SelectedItem)
                     {
                         case "DOWN":
-                            notificationLayoutWindow.AchievementAnimationIn = AnimationDirection.DOWN;
+                            AlertController.Instance.AchievementAnimationIn = AnimationDirection.DOWN;
                             break;
                         case "LEFT":
-                            notificationLayoutWindow.AchievementAnimationIn = AnimationDirection.LEFT;
+                            AlertController.Instance.AchievementAnimationIn = AnimationDirection.LEFT;
                             break;
                         case "RIGHT":
-                            notificationLayoutWindow.AchievementAnimationIn = AnimationDirection.RIGHT;
+                            AlertController.Instance.AchievementAnimationIn = AnimationDirection.RIGHT;
                             break;
                         case "UP":
-                            notificationLayoutWindow.AchievementAnimationIn = AnimationDirection.UP;
+                            AlertController.Instance.AchievementAnimationIn = AnimationDirection.UP;
                             break;
                         default:
-                            notificationLayoutWindow.AchievementAnimationIn = AnimationDirection.STATIC;
+                            AlertController.Instance.AchievementAnimationIn = AnimationDirection.STATIC;
                             break;
                     }
                     break;
@@ -1842,19 +1687,19 @@ namespace Retro_Achievement_Tracker
                     switch ((string)this.notificationsAchievementAnimationOutComboBox.SelectedItem)
                     {
                         case "DOWN":
-                            notificationLayoutWindow.AchievementAnimationOut = AnimationDirection.DOWN;
+                            AlertController.Instance.AchievementAnimationOut = AnimationDirection.DOWN;
                             break;
                         case "LEFT":
-                            notificationLayoutWindow.AchievementAnimationOut = AnimationDirection.LEFT;
+                            AlertController.Instance.AchievementAnimationOut = AnimationDirection.LEFT;
                             break;
                         case "RIGHT":
-                            notificationLayoutWindow.AchievementAnimationOut = AnimationDirection.RIGHT;
+                            AlertController.Instance.AchievementAnimationOut = AnimationDirection.RIGHT;
                             break;
                         case "UP":
-                            notificationLayoutWindow.AchievementAnimationOut = AnimationDirection.UP;
+                            AlertController.Instance.AchievementAnimationOut = AnimationDirection.UP;
                             break;
                         default:
-                            notificationLayoutWindow.AchievementAnimationOut = AnimationDirection.STATIC;
+                            AlertController.Instance.AchievementAnimationOut = AnimationDirection.STATIC;
                             break;
                     }
                     break;
@@ -1862,19 +1707,19 @@ namespace Retro_Achievement_Tracker
                     switch ((string)this.notificationsMasteryAnimationInComboBox.SelectedItem)
                     {
                         case "DOWN":
-                            notificationLayoutWindow.MasteryAnimationIn = AnimationDirection.DOWN;
+                            AlertController.Instance.MasteryAnimationIn = AnimationDirection.DOWN;
                             break;
                         case "LEFT":
-                            notificationLayoutWindow.MasteryAnimationIn = AnimationDirection.LEFT;
+                            AlertController.Instance.MasteryAnimationIn = AnimationDirection.LEFT;
                             break;
                         case "RIGHT":
-                            notificationLayoutWindow.MasteryAnimationIn = AnimationDirection.RIGHT;
+                            AlertController.Instance.MasteryAnimationIn = AnimationDirection.RIGHT;
                             break;
                         case "UP":
-                            notificationLayoutWindow.MasteryAnimationIn = AnimationDirection.UP;
+                            AlertController.Instance.MasteryAnimationIn = AnimationDirection.UP;
                             break;
                         default:
-                            notificationLayoutWindow.MasteryAnimationIn = AnimationDirection.STATIC;
+                            AlertController.Instance.MasteryAnimationIn = AnimationDirection.STATIC;
                             break;
                     }
                     break;
@@ -1882,19 +1727,19 @@ namespace Retro_Achievement_Tracker
                     switch ((string)this.notificationsMasteryAnimationOutComboBox.SelectedItem)
                     {
                         case "DOWN":
-                            notificationLayoutWindow.MasteryAnimationOut = AnimationDirection.DOWN;
+                            AlertController.Instance.MasteryAnimationOut = AnimationDirection.DOWN;
                             break;
                         case "LEFT":
-                            notificationLayoutWindow.MasteryAnimationOut = AnimationDirection.LEFT;
+                            AlertController.Instance.MasteryAnimationOut = AnimationDirection.LEFT;
                             break;
                         case "RIGHT":
-                            notificationLayoutWindow.MasteryAnimationOut = AnimationDirection.RIGHT;
+                            AlertController.Instance.MasteryAnimationOut = AnimationDirection.RIGHT;
                             break;
                         case "UP":
-                            notificationLayoutWindow.MasteryAnimationOut = AnimationDirection.UP;
+                            AlertController.Instance.MasteryAnimationOut = AnimationDirection.UP;
                             break;
                         default:
-                            notificationLayoutWindow.MasteryAnimationOut = AnimationDirection.STATIC;
+                            AlertController.Instance.MasteryAnimationOut = AnimationDirection.STATIC;
                             break;
                     }
                     break;
@@ -1924,11 +1769,11 @@ namespace Retro_Achievement_Tracker
                     if (isEnabled)
                     {
                         MenuState = CustomMenuState.CLOSED;
-                        this.fontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(notificationLayoutWindow.FontOutlineColor);
-                        this.fontOutlineNumericUpDown.Value = notificationLayoutWindow.FontOutlineSize > this.fontOutlineNumericUpDown.Maximum ? this.fontOutlineNumericUpDown.Value : notificationLayoutWindow.FontOutlineSize;
+                        this.fontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(AlertController.Instance.FontOutlineColor);
+                        this.fontOutlineNumericUpDown.Value = AlertController.Instance.FontOutlineSize > this.fontOutlineNumericUpDown.Maximum ? this.fontOutlineNumericUpDown.Value : AlertController.Instance.FontOutlineSize;
                         MenuState = CustomMenuState.ALERTS;
                     }
-                    notificationLayoutWindow.FontOutlineEnable = isEnabled;
+                    AlertController.Instance.FontOutlineEnable = isEnabled;
                     break;
                 case CustomMenuState.GAME_INFO:
                     if (isEnabled)
@@ -1944,11 +1789,11 @@ namespace Retro_Achievement_Tracker
                     if (isEnabled)
                     {
                         MenuState = CustomMenuState.CLOSED;
-                        this.fontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(lastFiveLayoutWindow.FontOutlineColor);
-                        this.fontOutlineNumericUpDown.Value = lastFiveLayoutWindow.FontOutlineSize > this.fontOutlineNumericUpDown.Maximum ? this.fontOutlineNumericUpDown.Value : lastFiveLayoutWindow.FontOutlineSize;
+                        this.fontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(LastFiveController.Instance.FontOutlineColor);
+                        this.fontOutlineNumericUpDown.Value = LastFiveController.Instance.FontOutlineSize > this.fontOutlineNumericUpDown.Maximum ? this.fontOutlineNumericUpDown.Value : LastFiveController.Instance.FontOutlineSize;
                         MenuState = CustomMenuState.LAST_FIVE;
                     }
-                    lastFiveLayoutWindow.FontOutlineEnable = isEnabled;
+                    LastFiveController.Instance.FontOutlineEnable = isEnabled;
                     break;
                 case CustomMenuState.FOCUS:
                     if (isEnabled)
@@ -1972,12 +1817,12 @@ namespace Retro_Achievement_Tracker
                 {
                     case CustomMenuState.ALERTS:
                         MenuState = CustomMenuState.CLOSED;
-                        notificationLayoutWindow.BackgroundColor = MediaHelper.HexConverter(this.colorDialog1.Color);
+                        AlertController.Instance.BackgroundColor = MediaHelper.HexConverter(this.colorDialog1.Color);
                         MenuState = CustomMenuState.ALERTS;
                         break;
                     case CustomMenuState.LAST_FIVE:
                         MenuState = CustomMenuState.CLOSED;
-                        lastFiveLayoutWindow.BackgroundColor = MediaHelper.HexConverter(this.colorDialog1.Color);
+                        LastFiveController.Instance.BackgroundColor = MediaHelper.HexConverter(this.colorDialog1.Color);
                         MenuState = CustomMenuState.LAST_FIVE;
                         break;
                     case CustomMenuState.FOCUS:
@@ -2119,16 +1964,16 @@ namespace Retro_Achievement_Tracker
                         focusLayoutWindow.BorderEnable = checkBox.Checked;
                         break;
                     case "notificationPointsEnableCheckBox":
-                        notificationLayoutWindow.PointsEnable = checkBox.Checked;
+                        AlertController.Instance.PointsEnable = checkBox.Checked;
                         break;
                     case "notificationBorderEnableCheckBox":
-                        notificationLayoutWindow.BorderEnable = checkBox.Checked;
+                        AlertController.Instance.BorderEnable = checkBox.Checked;
                         break;
                     case "lastFivePointsEnableCheckbox":
-                        lastFiveLayoutWindow.PointsEnable = checkBox.Checked;
+                        LastFiveController.Instance.PointsEnable = checkBox.Checked;
                         break;
                     case "lastFiveBorderEnableCheckbox":
-                        lastFiveLayoutWindow.BorderEnable = checkBox.Checked;
+                        LastFiveController.Instance.BorderEnable = checkBox.Checked;
                         break;
                 }
             }
@@ -2171,7 +2016,6 @@ namespace Retro_Achievement_Tracker
                     case "statsGameAchievementsOverrideTextBox":
                         statsLayoutWindow.GameAchievementsName = textBox.Text;
                         break;
-
                     case "gameInfoConsoleOverrideTextBox":
                         gameInfoLayoutWindow.ConsoleName = textBox.Text;
                         break;

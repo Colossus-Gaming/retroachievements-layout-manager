@@ -36,11 +36,11 @@ namespace Retro_Achievement_Tracker.Models
 
             if (ID != null)
             {
-                Achievement.Id = Convert.ToInt32(ID);
+                Achievement.Id = int.Parse(ID.ToString());
             }
             if (GameID != null)
             {
-                Achievement.GameId = Convert.ToInt32(GameID);
+                Achievement.GameId = int.Parse(GameID.ToString());
             }
             if (GameTitle != null)
             {
@@ -56,11 +56,11 @@ namespace Retro_Achievement_Tracker.Models
             }
             if (Points != null)
             {
-                Achievement.Points = Convert.ToInt32(Points);
+                Achievement.Points = int.Parse(Points.ToString());
             }
             if (TrueRatio != null)
             {
-                Achievement.TrueRatio = Convert.ToInt32(TrueRatio);
+                Achievement.TrueRatio = int.Parse(TrueRatio.ToString());
             }
 
             if (DateAwarded != null && !string.IsNullOrEmpty(DateAwarded.ToString()))
@@ -77,7 +77,7 @@ namespace Retro_Achievement_Tracker.Models
             }
             if (DisplayOrder != null)
             {
-                Achievement.DisplayOrder = Convert.ToInt32(DisplayOrder);
+                Achievement.DisplayOrder = int.Parse(DisplayOrder.ToString());
             }
 
             Achievement.IsAwarded = Achievement.DateEarned.HasValue || (IsAwarded != null && "1".Equals(IsAwarded.ToString()));

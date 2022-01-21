@@ -139,6 +139,8 @@ namespace Retro_Achievement_Tracker
             this.customAchievementEnableCheckbox = new System.Windows.Forms.CheckBox();
             this.showAchievementButton = new System.Windows.Forms.Button();
             this.customAchievementSettingsGroupBox = new System.Windows.Forms.GroupBox();
+            this.customAchievementOutSpeedUpDown = new System.Windows.Forms.NumericUpDown();
+            this.customAchievementInSpeedUpDown = new System.Windows.Forms.NumericUpDown();
             this.acheivementEditOutlineCheckbox = new System.Windows.Forms.CheckBox();
             this.label16 = new System.Windows.Forms.Label();
             this.notificationsMasteryAnimationOutComboBox = new System.Windows.Forms.ComboBox();
@@ -158,6 +160,8 @@ namespace Retro_Achievement_Tracker
             this.useCustomMasteryCheckbox = new System.Windows.Forms.CheckBox();
             this.showGameMasteryButton = new System.Windows.Forms.Button();
             this.customMasterySettingsGroupBox = new System.Windows.Forms.GroupBox();
+            this.customMasteryOutSpeedUpDown = new System.Windows.Forms.NumericUpDown();
+            this.customMasteryInSpeedUpDown = new System.Windows.Forms.NumericUpDown();
             this.masteryEditOultineCheckbox = new System.Windows.Forms.CheckBox();
             this.gameInfoOverrideSettingsGroupBox = new System.Windows.Forms.GroupBox();
             this.gameInfoTitleCheckBox = new System.Windows.Forms.CheckBox();
@@ -207,12 +211,16 @@ namespace Retro_Achievement_Tracker
             ((System.ComponentModel.ISupportInitialize)(this.customAchievementYNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.customAchievementXNumericUpDown)).BeginInit();
             this.customAchievementSettingsGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.customAchievementOutSpeedUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.customAchievementInSpeedUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.notificationMasteryInNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.notificationMasteryOutNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.scaleMasteryNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.customMasteryYNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.customMasteryXNumericUpDown)).BeginInit();
             this.customMasterySettingsGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.customMasteryOutSpeedUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.customMasteryInSpeedUpDown)).BeginInit();
             this.gameInfoOverrideSettingsGroupBox.SuspendLayout();
             this.lastFiveOverridesGroupBox.SuspendLayout();
             this.focusOverridesGroupBox.SuspendLayout();
@@ -670,7 +678,6 @@ namespace Retro_Achievement_Tracker
             // 
             // showGameInfoWindowButton
             // 
-            this.showGameInfoWindowButton.Enabled = false;
             this.showGameInfoWindowButton.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.showGameInfoWindowButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.showGameInfoWindowButton.Location = new System.Drawing.Point(5, 23);
@@ -759,7 +766,6 @@ namespace Retro_Achievement_Tracker
             // focusStreamLabelsCheckBox
             // 
             this.focusStreamLabelsCheckBox.AutoSize = true;
-            this.focusStreamLabelsCheckBox.Enabled = false;
             this.focusStreamLabelsCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.focusStreamLabelsCheckBox.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.focusStreamLabelsCheckBox.Location = new System.Drawing.Point(222, 12);
@@ -772,7 +778,6 @@ namespace Retro_Achievement_Tracker
             // lastFiveStreamLabelsCheckBox
             // 
             this.lastFiveStreamLabelsCheckBox.AutoSize = true;
-            this.lastFiveStreamLabelsCheckBox.Enabled = false;
             this.lastFiveStreamLabelsCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lastFiveStreamLabelsCheckBox.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.lastFiveStreamLabelsCheckBox.Location = new System.Drawing.Point(148, 12);
@@ -785,7 +790,6 @@ namespace Retro_Achievement_Tracker
             // gameInfoStreamLabelsCheckBox
             // 
             this.gameInfoStreamLabelsCheckBox.AutoSize = true;
-            this.gameInfoStreamLabelsCheckBox.Enabled = false;
             this.gameInfoStreamLabelsCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameInfoStreamLabelsCheckBox.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.gameInfoStreamLabelsCheckBox.Location = new System.Drawing.Point(85, 12);
@@ -798,7 +802,6 @@ namespace Retro_Achievement_Tracker
             // statsStreamLabelsCheckBox
             // 
             this.statsStreamLabelsCheckBox.AutoSize = true;
-            this.statsStreamLabelsCheckBox.Enabled = false;
             this.statsStreamLabelsCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statsStreamLabelsCheckBox.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.statsStreamLabelsCheckBox.Location = new System.Drawing.Point(11, 12);
@@ -1256,7 +1259,6 @@ namespace Retro_Achievement_Tracker
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Enabled = false;
             this.label9.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.Location = new System.Drawing.Point(3, 261);
             this.label9.Name = "label9";
@@ -1267,7 +1269,6 @@ namespace Retro_Achievement_Tracker
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Enabled = false;
             this.label10.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.Location = new System.Drawing.Point(2, 210);
             this.label10.Name = "label10";
@@ -1277,22 +1278,20 @@ namespace Retro_Achievement_Tracker
             // 
             // notificationsAchievementAnimationOutComboBox
             // 
-            this.notificationsAchievementAnimationOutComboBox.Enabled = false;
             this.notificationsAchievementAnimationOutComboBox.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.notificationsAchievementAnimationOutComboBox.FormattingEnabled = true;
             this.notificationsAchievementAnimationOutComboBox.Location = new System.Drawing.Point(5, 276);
             this.notificationsAchievementAnimationOutComboBox.Name = "notificationsAchievementAnimationOutComboBox";
-            this.notificationsAchievementAnimationOutComboBox.Size = new System.Drawing.Size(134, 23);
+            this.notificationsAchievementAnimationOutComboBox.Size = new System.Drawing.Size(70, 23);
             this.notificationsAchievementAnimationOutComboBox.TabIndex = 45;
             // 
             // notificationsAchievementAnimationInComboBox
             // 
-            this.notificationsAchievementAnimationInComboBox.Enabled = false;
             this.notificationsAchievementAnimationInComboBox.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.notificationsAchievementAnimationInComboBox.FormattingEnabled = true;
             this.notificationsAchievementAnimationInComboBox.Location = new System.Drawing.Point(4, 225);
             this.notificationsAchievementAnimationInComboBox.Name = "notificationsAchievementAnimationInComboBox";
-            this.notificationsAchievementAnimationInComboBox.Size = new System.Drawing.Size(136, 23);
+            this.notificationsAchievementAnimationInComboBox.Size = new System.Drawing.Size(70, 23);
             this.notificationsAchievementAnimationInComboBox.TabIndex = 39;
             // 
             // notificationAchievementInNumericUpDown
@@ -1300,7 +1299,7 @@ namespace Retro_Achievement_Tracker
             this.notificationAchievementInNumericUpDown.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.notificationAchievementInNumericUpDown.Location = new System.Drawing.Point(83, 154);
             this.notificationAchievementInNumericUpDown.Maximum = new decimal(new int[] {
-            10000,
+            100000,
             0,
             0,
             0});
@@ -1333,7 +1332,7 @@ namespace Retro_Achievement_Tracker
             this.notificationAchievementOutNumericUpDown.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.notificationAchievementOutNumericUpDown.Location = new System.Drawing.Point(83, 180);
             this.notificationAchievementOutNumericUpDown.Maximum = new decimal(new int[] {
-            10000,
+            100000,
             0,
             0,
             0});
@@ -1497,6 +1496,8 @@ namespace Retro_Achievement_Tracker
             // 
             // customAchievementSettingsGroupBox
             // 
+            this.customAchievementSettingsGroupBox.Controls.Add(this.customAchievementOutSpeedUpDown);
+            this.customAchievementSettingsGroupBox.Controls.Add(this.customAchievementInSpeedUpDown);
             this.customAchievementSettingsGroupBox.Controls.Add(this.acheivementEditOutlineCheckbox);
             this.customAchievementSettingsGroupBox.Controls.Add(this.label9);
             this.customAchievementSettingsGroupBox.Controls.Add(this.label10);
@@ -1524,6 +1525,52 @@ namespace Retro_Achievement_Tracker
             this.customAchievementSettingsGroupBox.TabStop = false;
             this.customAchievementSettingsGroupBox.Text = "Achievement";
             // 
+            // customAchievementOutSpeedUpDown
+            // 
+            this.customAchievementOutSpeedUpDown.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customAchievementOutSpeedUpDown.Location = new System.Drawing.Point(85, 279);
+            this.customAchievementOutSpeedUpDown.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.customAchievementOutSpeedUpDown.Minimum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.customAchievementOutSpeedUpDown.Name = "customAchievementOutSpeedUpDown";
+            this.customAchievementOutSpeedUpDown.Size = new System.Drawing.Size(59, 20);
+            this.customAchievementOutSpeedUpDown.TabIndex = 49;
+            this.customAchievementOutSpeedUpDown.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            // 
+            // customAchievementInSpeedUpDown
+            // 
+            this.customAchievementInSpeedUpDown.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customAchievementInSpeedUpDown.Location = new System.Drawing.Point(83, 228);
+            this.customAchievementInSpeedUpDown.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.customAchievementInSpeedUpDown.Minimum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.customAchievementInSpeedUpDown.Name = "customAchievementInSpeedUpDown";
+            this.customAchievementInSpeedUpDown.Size = new System.Drawing.Size(59, 20);
+            this.customAchievementInSpeedUpDown.TabIndex = 48;
+            this.customAchievementInSpeedUpDown.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            // 
             // acheivementEditOutlineCheckbox
             // 
             this.acheivementEditOutlineCheckbox.AutoSize = true;
@@ -1539,7 +1586,6 @@ namespace Retro_Achievement_Tracker
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Enabled = false;
             this.label16.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label16.Location = new System.Drawing.Point(2, 261);
             this.label16.Name = "label16";
@@ -1549,18 +1595,16 @@ namespace Retro_Achievement_Tracker
             // 
             // notificationsMasteryAnimationOutComboBox
             // 
-            this.notificationsMasteryAnimationOutComboBox.Enabled = false;
             this.notificationsMasteryAnimationOutComboBox.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.notificationsMasteryAnimationOutComboBox.FormattingEnabled = true;
             this.notificationsMasteryAnimationOutComboBox.Location = new System.Drawing.Point(4, 276);
             this.notificationsMasteryAnimationOutComboBox.Name = "notificationsMasteryAnimationOutComboBox";
-            this.notificationsMasteryAnimationOutComboBox.Size = new System.Drawing.Size(136, 23);
+            this.notificationsMasteryAnimationOutComboBox.Size = new System.Drawing.Size(70, 23);
             this.notificationsMasteryAnimationOutComboBox.TabIndex = 43;
             // 
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Enabled = false;
             this.label17.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label17.Location = new System.Drawing.Point(2, 210);
             this.label17.Name = "label17";
@@ -1573,7 +1617,7 @@ namespace Retro_Achievement_Tracker
             this.notificationMasteryInNumericUpDown.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.notificationMasteryInNumericUpDown.Location = new System.Drawing.Point(81, 154);
             this.notificationMasteryInNumericUpDown.Maximum = new decimal(new int[] {
-            10000,
+            300000,
             0,
             0,
             0});
@@ -1593,12 +1637,11 @@ namespace Retro_Achievement_Tracker
             // 
             // notificationsMasteryAnimationInComboBox
             // 
-            this.notificationsMasteryAnimationInComboBox.Enabled = false;
             this.notificationsMasteryAnimationInComboBox.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.notificationsMasteryAnimationInComboBox.FormattingEnabled = true;
             this.notificationsMasteryAnimationInComboBox.Location = new System.Drawing.Point(4, 225);
             this.notificationsMasteryAnimationInComboBox.Name = "notificationsMasteryAnimationInComboBox";
-            this.notificationsMasteryAnimationInComboBox.Size = new System.Drawing.Size(136, 23);
+            this.notificationsMasteryAnimationInComboBox.Size = new System.Drawing.Size(70, 23);
             this.notificationsMasteryAnimationInComboBox.TabIndex = 41;
             // 
             // inLabel2
@@ -1616,7 +1659,7 @@ namespace Retro_Achievement_Tracker
             this.notificationMasteryOutNumericUpDown.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.notificationMasteryOutNumericUpDown.Location = new System.Drawing.Point(81, 180);
             this.notificationMasteryOutNumericUpDown.Maximum = new decimal(new int[] {
-            10000,
+            100000,
             0,
             0,
             0});
@@ -1780,6 +1823,8 @@ namespace Retro_Achievement_Tracker
             // 
             // customMasterySettingsGroupBox
             // 
+            this.customMasterySettingsGroupBox.Controls.Add(this.customMasteryOutSpeedUpDown);
+            this.customMasterySettingsGroupBox.Controls.Add(this.customMasteryInSpeedUpDown);
             this.customMasterySettingsGroupBox.Controls.Add(this.masteryEditOultineCheckbox);
             this.customMasterySettingsGroupBox.Controls.Add(this.label16);
             this.customMasterySettingsGroupBox.Controls.Add(this.notificationsMasteryAnimationOutComboBox);
@@ -1806,6 +1851,52 @@ namespace Retro_Achievement_Tracker
             this.customMasterySettingsGroupBox.TabIndex = 10009;
             this.customMasterySettingsGroupBox.TabStop = false;
             this.customMasterySettingsGroupBox.Text = "Mastery";
+            // 
+            // customMasteryOutSpeedUpDown
+            // 
+            this.customMasteryOutSpeedUpDown.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customMasteryOutSpeedUpDown.Location = new System.Drawing.Point(81, 279);
+            this.customMasteryOutSpeedUpDown.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.customMasteryOutSpeedUpDown.Minimum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.customMasteryOutSpeedUpDown.Name = "customMasteryOutSpeedUpDown";
+            this.customMasteryOutSpeedUpDown.Size = new System.Drawing.Size(59, 20);
+            this.customMasteryOutSpeedUpDown.TabIndex = 51;
+            this.customMasteryOutSpeedUpDown.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            // 
+            // customMasteryInSpeedUpDown
+            // 
+            this.customMasteryInSpeedUpDown.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customMasteryInSpeedUpDown.Location = new System.Drawing.Point(81, 228);
+            this.customMasteryInSpeedUpDown.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.customMasteryInSpeedUpDown.Minimum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.customMasteryInSpeedUpDown.Name = "customMasteryInSpeedUpDown";
+            this.customMasteryInSpeedUpDown.Size = new System.Drawing.Size(59, 20);
+            this.customMasteryInSpeedUpDown.TabIndex = 50;
+            this.customMasteryInSpeedUpDown.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
             // 
             // masteryEditOultineCheckbox
             // 
@@ -2143,6 +2234,8 @@ namespace Retro_Achievement_Tracker
             ((System.ComponentModel.ISupportInitialize)(this.customAchievementXNumericUpDown)).EndInit();
             this.customAchievementSettingsGroupBox.ResumeLayout(false);
             this.customAchievementSettingsGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.customAchievementOutSpeedUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.customAchievementInSpeedUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.notificationMasteryInNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.notificationMasteryOutNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.scaleMasteryNumericUpDown)).EndInit();
@@ -2150,6 +2243,8 @@ namespace Retro_Achievement_Tracker
             ((System.ComponentModel.ISupportInitialize)(this.customMasteryXNumericUpDown)).EndInit();
             this.customMasterySettingsGroupBox.ResumeLayout(false);
             this.customMasterySettingsGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.customMasteryOutSpeedUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.customMasteryInSpeedUpDown)).EndInit();
             this.gameInfoOverrideSettingsGroupBox.ResumeLayout(false);
             this.gameInfoOverrideSettingsGroupBox.PerformLayout();
             this.lastFiveOverridesGroupBox.ResumeLayout(false);
@@ -2316,6 +2411,10 @@ namespace Retro_Achievement_Tracker
         private RadioButton statsRadioButtonBackslash;
         private RadioButton statsRadioButtonSemicolon;
         private CheckBox statsUsePercentCheckBox;
+        private NumericUpDown customAchievementOutSpeedUpDown;
+        private NumericUpDown customAchievementInSpeedUpDown;
+        private NumericUpDown customMasteryOutSpeedUpDown;
+        private NumericUpDown customMasteryInSpeedUpDown;
     }
 }
 
