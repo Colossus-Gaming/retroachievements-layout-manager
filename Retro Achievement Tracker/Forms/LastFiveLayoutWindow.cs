@@ -66,8 +66,7 @@ namespace Retro_Achievement_Tracker
         public async void SetBackgroundColor(string value)
         {
             await ExecuteScript(
-                "achievementElement.style.backgroundColor = \"" + value + "\";" +
-                "masteryElement.style.backgroundColor = \"" + value + "\";");
+                "for (var i = 0; i < allAchievements.length; i++) { allAchievements[i].style.backgroundColor = \"" + value + "\"; }");
         }
         public async void EnableBorder()
         {
@@ -115,11 +114,12 @@ namespace Retro_Achievement_Tracker
                     JavascriptResponse javascriptResponse = await chromiumWebBrowser.EvaluateScriptAsync("document.getElementById(\"achievement-" + id + "\").offsetTop");
                     return int.Parse(javascriptResponse.Result.ToString());
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    Console.WriteLine(ex.Message);
                 }
             }
-            return 0;
+            return 800;
         }
 
         public async Task SetAchievementPosition(int id, int position)

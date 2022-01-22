@@ -531,21 +531,14 @@ namespace Retro_Achievement_Tracker
             {
                 List<Achievement> tempLockedAchievements = GameProgress.Achievements.FindAll(x => !x.DateEarned.HasValue);
                 List<Achievement> tempUnlockedAchievements = GameProgress.Achievements.FindAll(x => x.DateEarned.HasValue);
-                List<Achievement> tempRecentAchievements = UserSummary.RecentAchievements.FindAll(x => x.IsAwarded);
 
                 tempUnlockedAchievements.Sort(delegate (Achievement x, Achievement y) { return y.DateEarned.Value.CompareTo(x.DateEarned.Value); });
-                tempRecentAchievements.Sort(delegate (Achievement x, Achievement y) { return x.DateEarned.Value.CompareTo(y.DateEarned.Value); });
                 tempLockedAchievements.Sort();
 
-                SetLockedAchievements(tempLockedAchievements.ToList());
-                MostRecentAchievements = tempRecentAchievements.ToList();
-                UnlockedAchievements = tempUnlockedAchievements.ToList();
+                SetLockedAchievements(new List<Achievement>(tempLockedAchievements));
+                UnlockedAchievements = new List<Achievement>(tempUnlockedAchievements);
 
-                foreach (Achievement recentAchievement in MostRecentAchievements)
-                {
-                    Achievement achievement1 = GameProgress.Achievements.Find(achievement => achievement.Id == recentAchievement.Id);
-                    recentAchievement.DisplayOrder = achievement1.DisplayOrder;
-                }
+                MostRecentAchievements = new List<Achievement>(tempUnlockedAchievements.GetRange(0, tempUnlockedAchievements.Count > 5 ? 5 : tempUnlockedAchievements.Count));
             }
             if (OldUnlockedAchievements.Count < UnlockedAchievements.Count)
             {

@@ -1491,7 +1491,7 @@ namespace Retro_Achievement_Tracker
             this.showAchievementButton.Name = "showAchievementButton";
             this.showAchievementButton.Size = new System.Drawing.Size(66, 23);
             this.showAchievementButton.TabIndex = 2;
-            this.showAchievementButton.Text = "Recent";
+            this.showAchievementButton.Text = "Play";
             this.showAchievementButton.UseVisualStyleBackColor = false;
             // 
             // customAchievementSettingsGroupBox
@@ -1818,7 +1818,7 @@ namespace Retro_Achievement_Tracker
             this.showGameMasteryButton.Name = "showGameMasteryButton";
             this.showGameMasteryButton.Size = new System.Drawing.Size(66, 23);
             this.showGameMasteryButton.TabIndex = 2;
-            this.showGameMasteryButton.Text = "Recent";
+            this.showGameMasteryButton.Text = "Play";
             this.showGameMasteryButton.UseVisualStyleBackColor = false;
             // 
             // customMasterySettingsGroupBox
