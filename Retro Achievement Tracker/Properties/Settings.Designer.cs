@@ -2110,5 +2110,197 @@ namespace Retro_Achievement_Tracker.Properties {
                 this["stats_advanced_options_enabled"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool stats_rank_enabled {
+            get {
+                return ((bool)(this["stats_rank_enabled"]));
+            }
+            set {
+                this["stats_rank_enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool stats_awards_enabled {
+            get {
+                return ((bool)(this["stats_awards_enabled"]));
+            }
+            set {
+                this["stats_awards_enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool stats_points_enabled {
+            get {
+                return ((bool)(this["stats_points_enabled"]));
+            }
+            set {
+                this["stats_points_enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool stats_game_true_points_enabled {
+            get {
+                return ((bool)(this["stats_game_true_points_enabled"]));
+            }
+            set {
+                this["stats_game_true_points_enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool stats_ratio_enabled {
+            get {
+                return ((bool)(this["stats_ratio_enabled"]));
+            }
+            set {
+                this["stats_ratio_enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool stats_game_ratio_enabled {
+            get {
+                return ((bool)(this["stats_game_ratio_enabled"]));
+            }
+            set {
+                this["stats_game_ratio_enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool stats_game_points_enabled {
+            get {
+                return ((bool)(this["stats_game_points_enabled"]));
+            }
+            set {
+                this["stats_game_points_enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool stats_game_achievements_enabled {
+            get {
+                return ((bool)(this["stats_game_achievements_enabled"]));
+            }
+            set {
+                this["stats_game_achievements_enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool stats_completed_enabled {
+            get {
+                return ((bool)(this["stats_completed_enabled"]));
+            }
+            set {
+                this["stats_completed_enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool game_info_title_enabled {
+            get {
+                return ((bool)(this["game_info_title_enabled"]));
+            }
+            set {
+                this["game_info_title_enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool game_info_console_enabled {
+            get {
+                return ((bool)(this["game_info_console_enabled"]));
+            }
+            set {
+                this["game_info_console_enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool game_info_developer_enabled {
+            get {
+                return ((bool)(this["game_info_developer_enabled"]));
+            }
+            set {
+                this["game_info_developer_enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool game_info_publisher_enabled {
+            get {
+                return ((bool)(this["game_info_publisher_enabled"]));
+            }
+            set {
+                this["game_info_publisher_enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool game_info_genre_enabled {
+            get {
+                return ((bool)(this["game_info_genre_enabled"]));
+            }
+            set {
+                this["game_info_genre_enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool game_info_release_date_enabled {
+            get {
+                return ((bool)(this["game_info_release_date_enabled"]));
+            }
+            set {
+                this["game_info_release_date_enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool stats_true_points_enabled {
+            get {
+                return ((bool)(this["stats_true_points_enabled"]));
+            }
+            set {
+                this["stats_true_points_enabled"] = value;
+            }
+        }
     }
 }

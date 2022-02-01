@@ -7,6 +7,7 @@ namespace Retro_Achievement_Tracker
     [JsonConverter(typeof(GameProgressConverter))]
     public partial class GameProgress
     {
+        private List<Achievement> _achievements;
         public long Id { get; set; }
 
         public string Title { get; set; }
@@ -27,7 +28,21 @@ namespace Retro_Achievement_Tracker
         public long NumAchievements { get; set; }
         public string NumDistinctPlayersCasual { get; set; }
         public string NumDistinctPlayersHardcore { get; set; }
-        public List<Achievement> Achievements { get; set; }
+        public List<Achievement> Achievements
+        {
+            get
+            {
+                if (_achievements == null)
+                {
+                    _achievements = new List<Achievement>();
+                }
+                return _achievements;
+            }
+            set
+            {
+                _achievements = value;
+            }
+        }
         public long NumAwardedToUser { get; set; }
         public long NumAwardedToUserHardcore { get; set; }
         public string UserCompletion { get; set; }
@@ -40,9 +55,15 @@ namespace Retro_Achievement_Tracker
             }
             get
             {
-                return Achievements
+                if (Achievements != null)
+                {
+                    string total = Achievements
                     .Sum(achievement => achievement.Points)
                     .ToString();
+
+                    return total == "0" ? "1" : total;
+                }
+                return "1";
             }
         }
         public string TruePointsPossible
@@ -53,9 +74,15 @@ namespace Retro_Achievement_Tracker
             }
             get
             {
-                return Achievements
+                if (Achievements != null)
+                {
+                    string total = Achievements
                     .Sum(achievement => achievement.TrueRatio)
                     .ToString();
+
+                    return total == "0" ? "1" : total;
+                }
+                return "1";
             }
         }
         public string PointsEarned
@@ -66,10 +93,16 @@ namespace Retro_Achievement_Tracker
             }
             get
             {
-                return Achievements
-                    .Where(achievement => achievement.DateEarned.HasValue)
-                    .Sum(achievement => achievement.Points)
-                    .ToString();
+                if (Achievements != null)
+                {
+                    string total = Achievements
+                        .Where(achievement => achievement.DateEarned.HasValue)
+                        .Sum(achievement => achievement.Points)
+                        .ToString();
+
+                    return total == "0" ? "1" : total;
+                }
+                return "1";
             }
         }
         public string TruePointsEarned
@@ -80,10 +113,16 @@ namespace Retro_Achievement_Tracker
             }
             get
             {
-                return Achievements
+                if (Achievements != null)
+                {
+                    string total = Achievements
                     .Where(achievement => achievement.DateEarned.HasValue)
                     .Sum(achievement => achievement.TrueRatio)
                     .ToString();
+
+                    return total == "0" ? "1" : total;
+                }
+                return "1";
             }
         }
     }
