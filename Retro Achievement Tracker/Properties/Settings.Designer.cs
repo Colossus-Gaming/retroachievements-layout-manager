@@ -325,7 +325,7 @@ namespace Retro_Achievement_Tracker.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-15")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public int notification_custom_achievement_x {
             get {
                 return ((int)(this["notification_custom_achievement_x"]));
@@ -337,7 +337,7 @@ namespace Retro_Achievement_Tracker.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public int notification_custom_achievement_y {
             get {
                 return ((int)(this["notification_custom_achievement_y"]));
@@ -349,7 +349,7 @@ namespace Retro_Achievement_Tracker.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-15")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public int notification_custom_mastery_x {
             get {
                 return ((int)(this["notification_custom_mastery_x"]));
@@ -361,7 +361,7 @@ namespace Retro_Achievement_Tracker.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public int notification_custom_mastery_y {
             get {
                 return ((int)(this["notification_custom_mastery_y"]));
@@ -596,174 +596,6 @@ namespace Retro_Achievement_Tracker.Properties {
             }
             set {
                 this["last_five_font_outline_size"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool stats_rank_enable {
-            get {
-                return ((bool)(this["stats_rank_enable"]));
-            }
-            set {
-                this["stats_rank_enable"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool stats_points_enable {
-            get {
-                return ((bool)(this["stats_points_enable"]));
-            }
-            set {
-                this["stats_points_enable"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool stats_awards_enable {
-            get {
-                return ((bool)(this["stats_awards_enable"]));
-            }
-            set {
-                this["stats_awards_enable"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool stats_true_points_enable {
-            get {
-                return ((bool)(this["stats_true_points_enable"]));
-            }
-            set {
-                this["stats_true_points_enable"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool stats_ratio_enable {
-            get {
-                return ((bool)(this["stats_ratio_enable"]));
-            }
-            set {
-                this["stats_ratio_enable"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool stats_game_ratio_enable {
-            get {
-                return ((bool)(this["stats_game_ratio_enable"]));
-            }
-            set {
-                this["stats_game_ratio_enable"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool stats_game_points_enable {
-            get {
-                return ((bool)(this["stats_game_points_enable"]));
-            }
-            set {
-                this["stats_game_points_enable"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool stats_game_true_points_enable {
-            get {
-                return ((bool)(this["stats_game_true_points_enable"]));
-            }
-            set {
-                this["stats_game_true_points_enable"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool stats_game_achievements_enable {
-            get {
-                return ((bool)(this["stats_game_achievements_enable"]));
-            }
-            set {
-                this["stats_game_achievements_enable"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool game_info_console_enable {
-            get {
-                return ((bool)(this["game_info_console_enable"]));
-            }
-            set {
-                this["game_info_console_enable"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool game_info_developer_enable {
-            get {
-                return ((bool)(this["game_info_developer_enable"]));
-            }
-            set {
-                this["game_info_developer_enable"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool game_info_publisher_enable {
-            get {
-                return ((bool)(this["game_info_publisher_enable"]));
-            }
-            set {
-                this["game_info_publisher_enable"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool game_info_genre_enable {
-            get {
-                return ((bool)(this["game_info_genre_enable"]));
-            }
-            set {
-                this["game_info_genre_enable"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool game_info_release_date_enable {
-            get {
-                return ((bool)(this["game_info_release_date_enable"]));
-            }
-            set {
-                this["game_info_release_date_enable"] = value;
             }
         }
         
@@ -1225,30 +1057,6 @@ namespace Retro_Achievement_Tracker.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool notifications_points_enable {
-            get {
-                return ((bool)(this["notifications_points_enable"]));
-            }
-            set {
-                this["notifications_points_enable"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool last_five_points_enable {
-            get {
-                return ((bool)(this["last_five_points_enable"]));
-            }
-            set {
-                this["last_five_points_enable"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("/")]
         public string stats_divider_character_selection {
             get {
@@ -1274,48 +1082,1032 @@ namespace Retro_Achievement_Tracker.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("500")]
-        public int notifications_custom_achievement_in_speed {
+        public int alerts_custom_achievement_in_speed {
             get {
-                return ((int)(this["notifications_custom_achievement_in_speed"]));
+                return ((int)(this["alerts_custom_achievement_in_speed"]));
             }
             set {
-                this["notifications_custom_achievement_in_speed"] = value;
+                this["alerts_custom_achievement_in_speed"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("500")]
-        public int notifications_custom_achievement_out_speed {
+        public int alerts_custom_achievement_out_speed {
             get {
-                return ((int)(this["notifications_custom_achievement_out_speed"]));
+                return ((int)(this["alerts_custom_achievement_out_speed"]));
             }
             set {
-                this["notifications_custom_achievement_out_speed"] = value;
+                this["alerts_custom_achievement_out_speed"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("500")]
-        public int notifications_custom_mastery_in_speed {
+        public int alerts_custom_mastery_in_speed {
             get {
-                return ((int)(this["notifications_custom_mastery_in_speed"]));
+                return ((int)(this["alerts_custom_mastery_in_speed"]));
             }
             set {
-                this["notifications_custom_mastery_in_speed"] = value;
+                this["alerts_custom_mastery_in_speed"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("500")]
-        public int notifications_custom_mastery_out_speed {
+        public int alerts_custom_mastery_out_speed {
             get {
-                return ((int)(this["notifications_custom_mastery_out_speed"]));
+                return ((int)(this["alerts_custom_mastery_out_speed"]));
             }
             set {
-                this["notifications_custom_mastery_out_speed"] = value;
+                this["alerts_custom_mastery_out_speed"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Calibri")]
+        public string alerts_title_font_family {
+            get {
+                return ((string)(this["alerts_title_font_family"]));
+            }
+            set {
+                this["alerts_title_font_family"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FF00FF")]
+        public string alerts_title_color {
+            get {
+                return ((string)(this["alerts_title_color"]));
+            }
+            set {
+                this["alerts_title_color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FF00FF")]
+        public string alerts_title_outline_color {
+            get {
+                return ((string)(this["alerts_title_outline_color"]));
+            }
+            set {
+                this["alerts_title_outline_color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int alerts_title_outline_size {
+            get {
+                return ((int)(this["alerts_title_outline_size"]));
+            }
+            set {
+                this["alerts_title_outline_size"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool alerts_title_outline_enabled {
+            get {
+                return ((bool)(this["alerts_title_outline_enabled"]));
+            }
+            set {
+                this["alerts_title_outline_enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Calibri")]
+        public string alerts_description_font_family {
+            get {
+                return ((string)(this["alerts_description_font_family"]));
+            }
+            set {
+                this["alerts_description_font_family"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FF00FF")]
+        public string alerts_description_color {
+            get {
+                return ((string)(this["alerts_description_color"]));
+            }
+            set {
+                this["alerts_description_color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FF00FF")]
+        public string alerts_description_outline_color {
+            get {
+                return ((string)(this["alerts_description_outline_color"]));
+            }
+            set {
+                this["alerts_description_outline_color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int alerts_description_outline_size {
+            get {
+                return ((int)(this["alerts_description_outline_size"]));
+            }
+            set {
+                this["alerts_description_outline_size"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool alerts_description_outline_enabled {
+            get {
+                return ((bool)(this["alerts_description_outline_enabled"]));
+            }
+            set {
+                this["alerts_description_outline_enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Calibri")]
+        public string alerts_points_font_family {
+            get {
+                return ((string)(this["alerts_points_font_family"]));
+            }
+            set {
+                this["alerts_points_font_family"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FF00FF")]
+        public string alerts_points_color {
+            get {
+                return ((string)(this["alerts_points_color"]));
+            }
+            set {
+                this["alerts_points_color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FF00FF")]
+        public string alerts_points_outline_color {
+            get {
+                return ((string)(this["alerts_points_outline_color"]));
+            }
+            set {
+                this["alerts_points_outline_color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int alerts_points_outline_size {
+            get {
+                return ((int)(this["alerts_points_outline_size"]));
+            }
+            set {
+                this["alerts_points_outline_size"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool alerts_points_outline_enabled {
+            get {
+                return ((bool)(this["alerts_points_outline_enabled"]));
+            }
+            set {
+                this["alerts_points_outline_enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FF00FF")]
+        public string alerts_line_color {
+            get {
+                return ((string)(this["alerts_line_color"]));
+            }
+            set {
+                this["alerts_line_color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FF00FF")]
+        public string alerts_line_outline_color {
+            get {
+                return ((string)(this["alerts_line_outline_color"]));
+            }
+            set {
+                this["alerts_line_outline_color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int alerts_line_outline_size {
+            get {
+                return ((int)(this["alerts_line_outline_size"]));
+            }
+            set {
+                this["alerts_line_outline_size"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool alerts_line_outline_enabled {
+            get {
+                return ((bool)(this["alerts_line_outline_enabled"]));
+            }
+            set {
+                this["alerts_line_outline_enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool alerts_advanced_options_enabled {
+            get {
+                return ((bool)(this["alerts_advanced_options_enabled"]));
+            }
+            set {
+                this["alerts_advanced_options_enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Calibri")]
+        public string focus_title_font_family {
+            get {
+                return ((string)(this["focus_title_font_family"]));
+            }
+            set {
+                this["focus_title_font_family"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FFFFFF")]
+        public string focus_title_color {
+            get {
+                return ((string)(this["focus_title_color"]));
+            }
+            set {
+                this["focus_title_color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FFFFFF")]
+        public string focus_title_outline_color {
+            get {
+                return ((string)(this["focus_title_outline_color"]));
+            }
+            set {
+                this["focus_title_outline_color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int focus_title_outline_size {
+            get {
+                return ((int)(this["focus_title_outline_size"]));
+            }
+            set {
+                this["focus_title_outline_size"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool focus_title_outline_enabled {
+            get {
+                return ((bool)(this["focus_title_outline_enabled"]));
+            }
+            set {
+                this["focus_title_outline_enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Calibri")]
+        public string focus_description_font_family {
+            get {
+                return ((string)(this["focus_description_font_family"]));
+            }
+            set {
+                this["focus_description_font_family"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FFFFFF")]
+        public string focus_description_color {
+            get {
+                return ((string)(this["focus_description_color"]));
+            }
+            set {
+                this["focus_description_color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int focus_description_outline_size {
+            get {
+                return ((int)(this["focus_description_outline_size"]));
+            }
+            set {
+                this["focus_description_outline_size"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool focus_description_outline_enabled {
+            get {
+                return ((bool)(this["focus_description_outline_enabled"]));
+            }
+            set {
+                this["focus_description_outline_enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FF00FF")]
+        public string focus_description_outline_color {
+            get {
+                return ((string)(this["focus_description_outline_color"]));
+            }
+            set {
+                this["focus_description_outline_color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FFFFFF")]
+        public string focus_line_color {
+            get {
+                return ((string)(this["focus_line_color"]));
+            }
+            set {
+                this["focus_line_color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FFFFFF")]
+        public string focus_points_color {
+            get {
+                return ((string)(this["focus_points_color"]));
+            }
+            set {
+                this["focus_points_color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Calibri")]
+        public string focus_points_font_family {
+            get {
+                return ((string)(this["focus_points_font_family"]));
+            }
+            set {
+                this["focus_points_font_family"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool focus_points_outline_enabled {
+            get {
+                return ((bool)(this["focus_points_outline_enabled"]));
+            }
+            set {
+                this["focus_points_outline_enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#000000")]
+        public string focus_points_outline_color {
+            get {
+                return ((string)(this["focus_points_outline_color"]));
+            }
+            set {
+                this["focus_points_outline_color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int focus_points_outline_size {
+            get {
+                return ((int)(this["focus_points_outline_size"]));
+            }
+            set {
+                this["focus_points_outline_size"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool focus_line_outline_enabled {
+            get {
+                return ((bool)(this["focus_line_outline_enabled"]));
+            }
+            set {
+                this["focus_line_outline_enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FF00FF")]
+        public string focus_line_outline_color {
+            get {
+                return ((string)(this["focus_line_outline_color"]));
+            }
+            set {
+                this["focus_line_outline_color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int focus_line_outline_size {
+            get {
+                return ((int)(this["focus_line_outline_size"]));
+            }
+            set {
+                this["focus_line_outline_size"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Calibri")]
+        public string last_five_title_font_family {
+            get {
+                return ((string)(this["last_five_title_font_family"]));
+            }
+            set {
+                this["last_five_title_font_family"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FFFFFF")]
+        public string last_five_title_color {
+            get {
+                return ((string)(this["last_five_title_color"]));
+            }
+            set {
+                this["last_five_title_color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int last_five_title_outline_size {
+            get {
+                return ((int)(this["last_five_title_outline_size"]));
+            }
+            set {
+                this["last_five_title_outline_size"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool last_five_title_outline_enabled {
+            get {
+                return ((bool)(this["last_five_title_outline_enabled"]));
+            }
+            set {
+                this["last_five_title_outline_enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#000000")]
+        public string last_five_title_outline_color {
+            get {
+                return ((string)(this["last_five_title_outline_color"]));
+            }
+            set {
+                this["last_five_title_outline_color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Calibri")]
+        public string last_five_date_font_family {
+            get {
+                return ((string)(this["last_five_date_font_family"]));
+            }
+            set {
+                this["last_five_date_font_family"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FFFFFF")]
+        public string last_five_date_color {
+            get {
+                return ((string)(this["last_five_date_color"]));
+            }
+            set {
+                this["last_five_date_color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool last_five_date_outline_enabled {
+            get {
+                return ((bool)(this["last_five_date_outline_enabled"]));
+            }
+            set {
+                this["last_five_date_outline_enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int last_five_date_outline_size {
+            get {
+                return ((int)(this["last_five_date_outline_size"]));
+            }
+            set {
+                this["last_five_date_outline_size"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#000000")]
+        public string last_five_date_outline_color {
+            get {
+                return ((string)(this["last_five_date_outline_color"]));
+            }
+            set {
+                this["last_five_date_outline_color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Calibri")]
+        public string last_five_points_font_family {
+            get {
+                return ((string)(this["last_five_points_font_family"]));
+            }
+            set {
+                this["last_five_points_font_family"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FFFFFF")]
+        public string last_five_points_color {
+            get {
+                return ((string)(this["last_five_points_color"]));
+            }
+            set {
+                this["last_five_points_color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int last_five_points_outline_size {
+            get {
+                return ((int)(this["last_five_points_outline_size"]));
+            }
+            set {
+                this["last_five_points_outline_size"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool last_five_points_outline_enabled {
+            get {
+                return ((bool)(this["last_five_points_outline_enabled"]));
+            }
+            set {
+                this["last_five_points_outline_enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#000000")]
+        public string last_five_points_outline_color {
+            get {
+                return ((string)(this["last_five_points_outline_color"]));
+            }
+            set {
+                this["last_five_points_outline_color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool last_five_line_outline_enabled {
+            get {
+                return ((bool)(this["last_five_line_outline_enabled"]));
+            }
+            set {
+                this["last_five_line_outline_enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#000000")]
+        public string last_five_line_outline_color {
+            get {
+                return ((string)(this["last_five_line_outline_color"]));
+            }
+            set {
+                this["last_five_line_outline_color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int last_five_line_outline_size {
+            get {
+                return ((int)(this["last_five_line_outline_size"]));
+            }
+            set {
+                this["last_five_line_outline_size"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FFFFFF")]
+        public string last_five_line_color {
+            get {
+                return ((string)(this["last_five_line_color"]));
+            }
+            set {
+                this["last_five_line_color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool focus_advanced_options_enabled {
+            get {
+                return ((bool)(this["focus_advanced_options_enabled"]));
+            }
+            set {
+                this["focus_advanced_options_enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool last_five_advanced_options_enabled {
+            get {
+                return ((bool)(this["last_five_advanced_options_enabled"]));
+            }
+            set {
+                this["last_five_advanced_options_enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Calibri")]
+        public string game_info_name_font_family {
+            get {
+                return ((string)(this["game_info_name_font_family"]));
+            }
+            set {
+                this["game_info_name_font_family"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Calibri")]
+        public string game_info_value_font_family {
+            get {
+                return ((string)(this["game_info_value_font_family"]));
+            }
+            set {
+                this["game_info_value_font_family"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FFFFFF")]
+        public string game_info_name_color {
+            get {
+                return ((string)(this["game_info_name_color"]));
+            }
+            set {
+                this["game_info_name_color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FFFFFF")]
+        public string game_info_value_color {
+            get {
+                return ((string)(this["game_info_value_color"]));
+            }
+            set {
+                this["game_info_value_color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int game_info_name_outline_size {
+            get {
+                return ((int)(this["game_info_name_outline_size"]));
+            }
+            set {
+                this["game_info_name_outline_size"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int game_info_value_outline_size {
+            get {
+                return ((int)(this["game_info_value_outline_size"]));
+            }
+            set {
+                this["game_info_value_outline_size"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#000000")]
+        public string game_info_name_outline_color {
+            get {
+                return ((string)(this["game_info_name_outline_color"]));
+            }
+            set {
+                this["game_info_name_outline_color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#000000")]
+        public string game_info_value_outline_color {
+            get {
+                return ((string)(this["game_info_value_outline_color"]));
+            }
+            set {
+                this["game_info_value_outline_color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool game_info_name_outline_enabled {
+            get {
+                return ((bool)(this["game_info_name_outline_enabled"]));
+            }
+            set {
+                this["game_info_name_outline_enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool game_info_value_outline_enabled {
+            get {
+                return ((bool)(this["game_info_value_outline_enabled"]));
+            }
+            set {
+                this["game_info_value_outline_enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool game_info_advanced_options_enabled {
+            get {
+                return ((bool)(this["game_info_advanced_options_enabled"]));
+            }
+            set {
+                this["game_info_advanced_options_enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Calibri")]
+        public string stats_name_font_family {
+            get {
+                return ((string)(this["stats_name_font_family"]));
+            }
+            set {
+                this["stats_name_font_family"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Calibri")]
+        public string stats_value_font_family {
+            get {
+                return ((string)(this["stats_value_font_family"]));
+            }
+            set {
+                this["stats_value_font_family"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FFFFFF")]
+        public string stats_name_color {
+            get {
+                return ((string)(this["stats_name_color"]));
+            }
+            set {
+                this["stats_name_color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FFFFFF")]
+        public string stats_value_color {
+            get {
+                return ((string)(this["stats_value_color"]));
+            }
+            set {
+                this["stats_value_color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int stats_name_outline_size {
+            get {
+                return ((int)(this["stats_name_outline_size"]));
+            }
+            set {
+                this["stats_name_outline_size"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int stats_value_outline_size {
+            get {
+                return ((int)(this["stats_value_outline_size"]));
+            }
+            set {
+                this["stats_value_outline_size"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#000000")]
+        public string stats_name_outline_color {
+            get {
+                return ((string)(this["stats_name_outline_color"]));
+            }
+            set {
+                this["stats_name_outline_color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#000000")]
+        public string stats_value_outline_color {
+            get {
+                return ((string)(this["stats_value_outline_color"]));
+            }
+            set {
+                this["stats_value_outline_color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool stats_name_outline_enabled {
+            get {
+                return ((bool)(this["stats_name_outline_enabled"]));
+            }
+            set {
+                this["stats_name_outline_enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool stats_value_outline_enabled {
+            get {
+                return ((bool)(this["stats_value_outline_enabled"]));
+            }
+            set {
+                this["stats_value_outline_enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool stats_advanced_options_enabled {
+            get {
+                return ((bool)(this["stats_advanced_options_enabled"]));
+            }
+            set {
+                this["stats_advanced_options_enabled"] = value;
             }
         }
     }

@@ -75,20 +75,26 @@
         {
             if (other.DateEarned.HasValue)
             {
-                int comparison = this.DateEarned.Value.CompareTo(other.DateEarned.Value);
-
-                if (comparison == 0)
+                if (DateEarned.HasValue)
                 {
-                    return this.DisplayOrder.CompareTo(other.DisplayOrder);
+                    if (DateEarned.Value == other.DateEarned.Value)
+                    {
+                        return DisplayOrder.CompareTo(other.DisplayOrder);
+                    }
+                    return DateEarned.Value < other.DateEarned.Value ? -1 : 1;
                 }
-                return this.DateEarned.HasValue ? comparison : 1;
+                return -1;
             }
-            return this.DisplayOrder.CompareTo(other.DisplayOrder);
+            else if (DateEarned.HasValue)
+            {
+                return 1;
+            }
+            return DisplayOrder.CompareTo(other.DisplayOrder);
         }
 
         public bool Equals(Achievement other)
         {
-            return other != null && this.Id == other.Id;
+            return other != null && Id == other.Id;
         }        
     }
 }

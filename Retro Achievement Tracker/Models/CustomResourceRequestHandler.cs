@@ -1,5 +1,6 @@
 ﻿using CefSharp;
 using CefSharp.Handler;
+using Retro_Achievement_Tracker.Controllers;
 using Retro_Achievement_Tracker.Properties;
 using System.Drawing;
 using System.IO;
@@ -8,9 +9,6 @@ namespace Retro_Achievement_Tracker.Models
 {
     public class CustomResourceRequestHandler : ResourceRequestHandler
     {
-        public bool customAchievementEnabled;
-        public bool customMasteryEnabled;
-
         protected override IResourceHandler GetResourceHandler(IWebBrowser chromiumWebBrowser, IBrowser browser, IFrame frame, IRequest request)
         {
             //Notes:
@@ -25,7 +23,7 @@ namespace Retro_Achievement_Tracker.Models
 
             if (request.Url == "disk://achievement-notification")
             {
-                if (customAchievementEnabled)
+                if (AlertsController.Instance.CustomAchievementEnabled)
                 {
                     return ResourceHandler.FromFilePath(Settings.Default.notification_custom_achievement_file, null, true);
                 }
@@ -37,7 +35,7 @@ namespace Retro_Achievement_Tracker.Models
 
             if (request.Url == "disk://mastery-notification")
             {
-                if (customMasteryEnabled)
+                if (AlertsController.Instance.CustomMasteryEnabled)
                 {
                     return ResourceHandler.FromFilePath(Settings.Default.notification_custom_mastery_file);
                 }
@@ -62,19 +60,12 @@ namespace Retro_Achievement_Tracker.Models
 
     public class CustomRequestHandler : RequestHandler
     {
-        public bool customAchievementEnabled;
-        public bool customMasteryEnabled;
-
         protected override IResourceRequestHandler GetResourceRequestHandler(IWebBrowser chromiumWebBrowser, IBrowser browser, IFrame frame, IRequest request, bool isNavigation, bool isDownload, string requestInitiator, ref bool disableDefaultHandling)
         {
             //Only intercept specific Url's
             if (request.Url.Contains("disk://"))
             {
-                return new CustomResourceRequestHandler()
-                {
-                    customAchievementEnabled = customAchievementEnabled,
-                    customMasteryEnabled = customMasteryEnabled
-                };
+                return new CustomResourceRequestHandler();
             }
 
             //Default behaviour, url will be loaded normally.

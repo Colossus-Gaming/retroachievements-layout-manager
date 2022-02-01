@@ -64,21 +64,45 @@ namespace Retro_Achievement_Tracker.Properties {
         ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
         ///&lt;html&gt;
         ///&lt;head&gt;
+        ///    &lt;title&gt;Notification Window&lt;/title&gt;
+        ///    &lt;meta charset=&quot;UTF-8&quot;&gt;
+        ///    &lt;script src=&quot;https://code.jquery.com/jquery-3.5.1.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+        ///    &lt;script id=&quot;achievement-script&quot;&gt;
+        ///
+        ///        (async function () {
+        ///            await CefSharp.BindObjectAsync(&quot;alertControllerAsync&quot;);
+        ///        })();
+        ///
+        ///        function setPlayingOn() {
+        ///            alertControllerAsync.setIsPlaying(true);
+        ///        }
+        ///
+        ///        function setPlayingOff() {
+        ///            alertCont [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string AlertsWindow {
+            get {
+                return ResourceManager.GetString("AlertsWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+        ///&lt;html&gt;
+        ///&lt;head&gt;
         ///    &lt;title&gt;Focus Window&lt;/title&gt;
         ///    &lt;meta charset=&quot;UTF-8&quot;&gt;
         ///    &lt;script src=&quot;https://code.jquery.com/jquery-3.5.1.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
         ///    &lt;script id=&quot;focus-scripts&quot;&gt;
+        ///        (function (root, factory) {
+        ///            &quot;use strict&quot;;
         ///
-        ///        var fontValue = &quot;Calibri&quot;;
-        ///        var lineSpacing = &quot;1&quot;;
-        ///        var showPointsBool = false;
-        ///
-        ///        function adjustFont(element) {
-        ///            var value = 100;
-        ///
-        ///            element.style.fontSize = value + &apos;px&apos;;
-        ///
-        ///            while (element.scrollHeight &gt; element.offs [rest of string was truncated]&quot;;.
+        ///            // UMD shim
+        ///            if (typeof define === &quot;function&quot; &amp;&amp; define.amd) {
+        ///                // AMD
+        ///                define([], factory);
+        ///            } else if (typeof exports === &quot;object&quot;) {
+        ///                // [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string FocusWindow {
             get {
@@ -93,22 +117,20 @@ namespace Retro_Achievement_Tracker.Properties {
         ///    &lt;title&gt;Game Info Window&lt;/title&gt;
         ///    &lt;meta charset=&quot;UTF-8&quot;&gt;
         ///    &lt;script src=&quot;https://code.jquery.com/jquery-3.5.1.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
-        ///    &lt;script id=&quot;ra-stats-scripts&quot;&gt; 
+        ///    &lt;script id=&quot;scripts&quot;&gt;
+        ///        (function (root, factory) {
+        ///            &quot;use strict&quot;;
         ///
-        ///        var fontValue = &quot;Calibri&quot;;
-        ///        var lineSpacing = &quot;1&quot;;
-        ///
-        ///        function adjustFont(element) {
-        ///            var value = 100;
-        ///
-        ///            element.style.height = &apos;36px&apos;;
-        ///            element.style.fontSize = value + &apos;px&apos;;
-        ///
-        ///            while (element.scrollHeight [rest of string was truncated]&quot;;.
+        ///            // UMD shim
+        ///            if (typeof define === &quot;function&quot; &amp;&amp; define.amd) {
+        ///                // AMD
+        ///                define([], factory);
+        ///            } else if (typeof exports === &quot;object&quot;) {
+        ///                // N [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string GameInfo {
+        internal static string GameInfoWindow {
             get {
-                return ResourceManager.GetString("GameInfo", resourceCulture);
+                return ResourceManager.GetString("GameInfoWindow", resourceCulture);
             }
         }
         
@@ -123,6 +145,26 @@ namespace Retro_Achievement_Tracker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap green_button1 {
+            get {
+                object obj = ResourceManager.GetObject("green_button1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon image {
+            get {
+                object obj = ResourceManager.GetObject("image", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
         ///&lt;html&gt;
         ///&lt;head&gt;
@@ -130,22 +172,15 @@ namespace Retro_Achievement_Tracker.Properties {
         ///    &lt;meta charset=&quot;UTF-8&quot;&gt;
         ///    &lt;script src=&quot;https://code.jquery.com/jquery-3.5.1.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
         ///    &lt;script id=&quot;last-five-scripts&quot;&gt;
+        ///        function addToList(name, imageLink, description, points, date, id) {
         ///
-        ///        var backgroundHex = &quot;#cccccc&quot;;
-        ///        var fontValue = &quot;Calibri&quot;;
-        ///        var lineSpacing = 1.0;
-        ///        var fontColor = &quot;black&quot;;
-        ///        var fontOutline = &quot;&quot;;
-        ///        var borderOutline = &quot;&quot;;
-        ///
-        ///        var activeRows = 0;
-        ///
-        ///        var showPointsBool = false;
-        ///    [rest of string was truncated]&quot;;.
+        ///            var focusAchievementBlock = document.createElement(&apos;div&apos;);
+        ///            focusAchievementBlock.classList.add(&quot;focus-achievement&quot;);
+        ///            focusAchievementBlock.id = &quot;achievement-&quot; + id [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string LastFive {
+        internal static string LastFiveWindow {
             get {
-                return ResourceManager.GetString("LastFive", resourceCulture);
+                return ResourceManager.GetString("LastFiveWindow", resourceCulture);
             }
         }
         
@@ -156,34 +191,6 @@ namespace Retro_Achievement_Tracker.Properties {
             get {
                 object obj = ResourceManager.GetObject("notification_background", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
-        ///&lt;html&gt;
-        ///&lt;head&gt;
-        ///    &lt;title&gt;Notification Window&lt;/title&gt;
-        ///    &lt;meta charset=&quot;UTF-8&quot;&gt;
-        ///    &lt;script src=&quot;https://code.jquery.com/jquery-3.5.1.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
-        ///    &lt;script id=&quot;achievement-script&quot;&gt;
-        ///
-        ///        var fontValue = &quot;Calibri&quot;;
-        ///        var lineSpacing = &quot;1&quot;;
-        ///
-        ///        var achievementAnimationIn = &quot;&quot;;
-        ///        var achievementAnimationOut = &quot;&quot;;
-        ///
-        ///        var masteryAnimationIn = &quot;&quot;;
-        ///        var masteryAnimationOut = &quot;&quot;;
-        ///
-        ///        var showPointsBool = false;
-        ///
-        /// [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string NotificationWindow {
-            get {
-                return ResourceManager.GetString("NotificationWindow", resourceCulture);
             }
         }
         
@@ -204,17 +211,17 @@ namespace Retro_Achievement_Tracker.Properties {
         ///    &lt;title&gt;&lt;/title&gt;
         ///    &lt;meta charset=&quot;UTF-8&quot;&gt;
         ///    &lt;script src=&quot;https://code.jquery.com/jquery-3.5.1.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
-        ///    &lt;script id=&quot;ra-stats-scripts&quot;&gt;
+        ///    &lt;script id=&quot;scripts&quot;&gt;
+        ///        (function (root, factory) {
+        ///            &quot;use strict&quot;;
         ///
-        ///        var fontValue = &quot;Calibri&quot;;
-        ///        var lineSpacing = &quot;1&quot;;
-        ///
-        ///        function adjustFont(element) {
-        ///            var value = 100;
-        ///
-        ///            element.style.fontSize = value + &apos;px&apos;;
-        ///
-        ///            while (element.scrollHeight &gt; element.offsetHeight || element.scrollWidth &gt; element.offs [rest of string was truncated]&quot;;.
+        ///            // UMD shim
+        ///            if (typeof define === &quot;function&quot; &amp;&amp; define.amd) {
+        ///                // AMD
+        ///                define([], factory);
+        ///            } else if (typeof exports === &quot;object&quot;) {
+        ///                // Node/CommonJS
+        ///   [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string StatsWindow {
             get {

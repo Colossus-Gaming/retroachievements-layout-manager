@@ -1,5 +1,4 @@
-﻿using Retro_Achievement_Tracker.Properties;
-using System;
+﻿using System;
 using System.IO;
 using System.Linq;
 
@@ -7,51 +6,6 @@ namespace Retro_Achievement_Tracker.Models
 {
     class StreamLabelManager
     {
-        public bool StreamLabelsFocusEnable
-        {
-            get
-            {
-                return Settings.Default.stream_labels_focus;
-            }
-            set
-            {
-                Settings.Default.stream_labels_focus = value;
-            }
-        }
-        public bool StreamLabelsStatsEnable
-        {
-            get
-            {
-                return Settings.Default.stream_labels_stats;
-            }
-            set
-            {
-                Settings.Default.stream_labels_stats = value;
-            }
-        }
-        public bool StreamLabelsGameInfoEnable
-        {
-            get
-            {
-                return Settings.Default.stream_labels_game_info;
-            }
-            set
-            {
-                Settings.Default.stream_labels_game_info = value;
-            }
-        }
-        public bool StreamLabelsLastFiveEnable
-        {
-            get
-            {
-                return Settings.Default.stream_labels_last_five;
-            }
-            set
-            {
-                Settings.Default.stream_labels_last_five = value;
-            }
-        }
-
         internal void WriteFocusStreamLabels(Achievement currentlyViewingAchievement)
         {
             if (currentlyViewingAchievement != null)
@@ -75,7 +29,7 @@ namespace Retro_Achievement_Tracker.Models
 
         internal void WriteLastFiveStreamLabels(UserSummary userSummary)
         {
-            if (userSummary.RecentAchievements != null && userSummary.RecentAchievements.Count > 0)
+            if (userSummary != null && userSummary.RecentAchievements != null && userSummary.RecentAchievements.Count > 0)
             {
                 for (int i = 0; i < userSummary.RecentAchievements.Count; i++)
                 {
@@ -97,16 +51,19 @@ namespace Retro_Achievement_Tracker.Models
 
         internal void WriteStatsStreamLabels(UserSummary userSummary, GameProgress gameProgress)
         {
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/rank.txt", userSummary.Rank.ToString());
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/awards.txt", userSummary.Awards.ToString());
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/ratio.txt", userSummary.RetroRatio);
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/points.txt", userSummary.TotalPoints.ToString());
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/true-points.txt", userSummary.TotalTruePoints.ToString());
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/game-ratio.txt", (Convert.ToDecimal(gameProgress.TruePointsPossible) / Convert.ToDecimal(gameProgress.PointsPossible)).ToString("0.00"));
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/game-points.txt", gameProgress.PointsEarned.ToString() + "/" + gameProgress.PointsPossible.ToString());
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/game-true-points.txt", gameProgress.TruePointsEarned.ToString() + "/" + gameProgress.TruePointsPossible.ToString());
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/game-achievements.txt", gameProgress.Achievements.Count(achievement => achievement.IsAwarded).ToString() + "/" + gameProgress.Achievements.Count);
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/completed.txt", (gameProgress.Achievements.Count == 0 ? 0 : Convert.ToInt32(Convert.ToDecimal(gameProgress.Achievements.Count(achievement => achievement.IsAwarded)) / Convert.ToDecimal(gameProgress.Achievements.Count) * 200)) + " %");
+            if (userSummary != null && gameProgress != null)
+            {
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/rank.txt", userSummary.Rank.ToString());
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/awards.txt", userSummary.Awards.ToString());
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/ratio.txt", userSummary.RetroRatio);
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/points.txt", userSummary.TotalPoints.ToString());
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/true-points.txt", userSummary.TotalTruePoints.ToString());
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/game-ratio.txt", (Convert.ToDecimal(gameProgress.TruePointsPossible) / Convert.ToDecimal(gameProgress.PointsPossible)).ToString("0.00"));
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/game-points.txt", gameProgress.PointsEarned.ToString() + "/" + gameProgress.PointsPossible.ToString());
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/game-true-points.txt", gameProgress.TruePointsEarned.ToString() + "/" + gameProgress.TruePointsPossible.ToString());
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/game-achievements.txt", gameProgress.Achievements.Count(achievement => achievement.IsAwarded).ToString() + "/" + gameProgress.Achievements.Count);
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/completed.txt", (gameProgress.Achievements.Count == 0 ? 0 : Convert.ToInt32(Convert.ToDecimal(gameProgress.Achievements.Count(achievement => achievement.IsAwarded)) / Convert.ToDecimal(gameProgress.Achievements.Count) * 200)) + " %");
+            }
         }
 
         internal void WriteGameInfoStreamLabels(GameProgress gameProgress)

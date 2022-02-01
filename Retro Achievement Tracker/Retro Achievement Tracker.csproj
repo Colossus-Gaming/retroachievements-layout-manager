@@ -74,7 +74,7 @@
     <StartupObject>Retro_Achievement_Tracker.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Resources\hnet.com-image.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\image.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
@@ -165,37 +165,40 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\AlertController.cs" />
+    <Compile Include="Controllers\AlertsController.cs" />
+    <Compile Include="Controllers\FocusController.cs" />
+    <Compile Include="Controllers\GameInfoController.cs" />
     <Compile Include="Controllers\LastFiveController.cs" />
-    <Compile Include="Forms\LastFiveLayoutWindow.cs">
+    <Compile Include="Controllers\StatsController.cs" />
+    <Compile Include="Forms\LastFiveWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\LastFiveLayoutWindow.Designer.cs">
-      <DependentUpon>LastFiveLayoutWindow.cs</DependentUpon>
+    <Compile Include="Forms\LastFiveWindow.Designer.cs">
+      <DependentUpon>LastFiveWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\NotificationLayoutWindow.cs">
+    <Compile Include="Forms\AlertsWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\NotificationLayoutWindow.Designer.cs">
-      <DependentUpon>NotificationLayoutWindow.cs</DependentUpon>
+    <Compile Include="Forms\AlertsWindow.Designer.cs">
+      <DependentUpon>AlertsWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\GameInfoLayoutWindow.cs">
+    <Compile Include="Forms\GameInfoWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\GameInfoLayoutWindow.Designer.cs">
-      <DependentUpon>GameInfoLayoutWindow.cs</DependentUpon>
+    <Compile Include="Forms\GameInfoWindow.Designer.cs">
+      <DependentUpon>GameInfoWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\StatsLayoutWindow.cs">
+    <Compile Include="Forms\StatsWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\StatsLayoutWindow.Designer.cs">
-      <DependentUpon>StatsLayoutWindow.cs</DependentUpon>
+    <Compile Include="Forms\StatsWindow.Designer.cs">
+      <DependentUpon>StatsWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FocusLayoutWindow.cs">
+    <Compile Include="Forms\FocusWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FocusLayoutWindow.Designer.cs">
-      <DependentUpon>FocusLayoutWindow.cs</DependentUpon>
+    <Compile Include="Forms\FocusWindow.Designer.cs">
+      <DependentUpon>FocusWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\BrowserBase.cs" />
     <Compile Include="Models\MediaHelper.cs" />
@@ -212,47 +215,47 @@
     <Compile Include="Models\UserSummary.cs" />
     <Compile Include="Http\HFC_EssentialsClient.cs" />
     <Compile Include="Models\GameProgress.cs" />
-    <Compile Include="Forms\MainPage.cs">
+    <Compile Include="Forms\MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\MainPage.Designer.cs">
-      <DependentUpon>MainPage.cs</DependentUpon>
+    <Compile Include="Forms\MainWindow.Designer.cs">
+      <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Forms\LastFiveLayoutWindow.resx">
-      <DependentUpon>LastFiveLayoutWindow.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\LastFiveWindow.resx">
+      <DependentUpon>LastFiveWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\NotificationLayoutWindow.resx">
-      <DependentUpon>NotificationLayoutWindow.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\AlertsWindow.resx">
+      <DependentUpon>AlertsWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FocusLayoutWindow.resx">
-      <DependentUpon>FocusLayoutWindow.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FocusWindow.resx">
+      <DependentUpon>FocusWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\GameInfoLayoutWindow.resx">
-      <DependentUpon>GameInfoLayoutWindow.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\GameInfoWindow.resx">
+      <DependentUpon>GameInfoWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\StatsLayoutWindow.resx">
-      <DependentUpon>StatsLayoutWindow.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\StatsWindow.resx">
+      <DependentUpon>StatsWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\MainPage.resx">
-      <DependentUpon>MainPage.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\MainWindow.resx">
+      <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -295,8 +298,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\GameInfo.html" />
-    <Resource Include="Resources\LastFive.html" />
+    <Resource Include="Resources\GameInfoWindow.html" />
+    <Resource Include="Resources\LastFiveWindow.html" />
     <Content Include="video\achievement-notification.webm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -308,8 +311,8 @@
     <EmbeddedResource Include="Resources\FocusWindow.html" />
     <None Include="Resources\green-button.png" />
     <EmbeddedResource Include="Resources\StatsWindow.html" />
-    <EmbeddedResource Include="Resources\NotificationWindow.html" />
-    <Content Include="Resources\hnet.com-image.ico" />
+    <EmbeddedResource Include="Resources\AlertsWindow.html" />
+    <Content Include="Resources\image.ico" />
     <None Include="Resources\red-button.png" />
   </ItemGroup>
   <ItemGroup>

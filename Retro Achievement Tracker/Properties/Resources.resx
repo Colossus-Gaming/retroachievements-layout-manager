@@ -121,9 +121,6 @@
   <data name="FocusWindow" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\FocusWindow.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
-  <data name="NotificationWindow" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\NotificationWindow.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
   <data name="StatsWindow" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\StatsWindow.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
@@ -132,9 +129,6 @@
   </data>
   <data name="green_button1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\green-button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="hnet_com_image" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\hnet.com-image.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="notification_background" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\notification-background.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -145,10 +139,16 @@
   <data name="yellow_button" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\yellow-button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GameInfo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\gameinfo.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  <data name="AlertsWindow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\alertswindow.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
-  <data name="LastFive" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\lastfive.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  <data name="GameInfoWindow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\gameinfowindow.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="image" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\image.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LastFiveWindow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\lastfivewindow.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
 </root>

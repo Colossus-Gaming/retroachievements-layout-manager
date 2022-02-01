@@ -13,8 +13,8 @@ namespace Retro_Achievement_Tracker
 
         public HFC_EssentialsClient(string username, string apiKey)
         {
-            this.UserName = username;
-            this.ApiKey = apiKey;
+            UserName = username;
+            ApiKey = apiKey;
         }
 
         public async Task<GameProgress> GetGameProgress(string gameId)
