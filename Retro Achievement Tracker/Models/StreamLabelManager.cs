@@ -58,9 +58,9 @@ namespace Retro_Achievement_Tracker.Models
                 File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/ratio.txt", userSummary.RetroRatio);
                 File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/points.txt", userSummary.TotalPoints.ToString());
                 File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/true-points.txt", userSummary.TotalTruePoints.ToString());
-                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/game-ratio.txt", (Convert.ToDecimal(gameProgress.TruePointsPossible) / Convert.ToDecimal(gameProgress.PointsPossible)).ToString("0.00"));
-                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/game-points.txt", gameProgress.PointsEarned.ToString() + "/" + gameProgress.PointsPossible.ToString());
-                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/game-true-points.txt", gameProgress.TruePointsEarned.ToString() + "/" + gameProgress.TruePointsPossible.ToString());
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/game-ratio.txt", gameProgress.TruePointsPossible == "0" ? "0" : (Convert.ToDecimal(gameProgress.TruePointsPossible) / Convert.ToDecimal(gameProgress.PointsPossible)).ToString("0.00"));
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/game-points.txt", gameProgress.PointsEarned == "0" ? "0 / 0" : gameProgress.PointsEarned.ToString() + "/" + gameProgress.PointsPossible.ToString());
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/game-true-points.txt", gameProgress.TruePointsEarned == "0" ? "0 / 0" : gameProgress.TruePointsEarned.ToString() + "/" + gameProgress.TruePointsPossible.ToString());
                 File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/game-achievements.txt", gameProgress.Achievements.Count(achievement => achievement.IsAwarded).ToString() + "/" + gameProgress.Achievements.Count);
                 File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/completed.txt", (gameProgress.Achievements.Count == 0 ? 0 : Convert.ToInt32(Convert.ToDecimal(gameProgress.Achievements.Count(achievement => achievement.IsAwarded)) / Convert.ToDecimal(gameProgress.Achievements.Count) * 200)) + " %");
             }

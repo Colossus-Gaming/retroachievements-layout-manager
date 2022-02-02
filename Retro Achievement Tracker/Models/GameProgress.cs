@@ -61,9 +61,9 @@ namespace Retro_Achievement_Tracker
                     .Sum(achievement => achievement.Points)
                     .ToString();
 
-                    return total == "0" ? "1" : total;
+                    return total;
                 }
-                return "1";
+                return "0";
             }
         }
         public string TruePointsPossible
@@ -80,9 +80,9 @@ namespace Retro_Achievement_Tracker
                     .Sum(achievement => achievement.TrueRatio)
                     .ToString();
 
-                    return total == "0" ? "1" : total;
+                    return total;
                 }
-                return "1";
+                return "0";
             }
         }
         public string PointsEarned
@@ -100,9 +100,9 @@ namespace Retro_Achievement_Tracker
                         .Sum(achievement => achievement.Points)
                         .ToString();
 
-                    return total == "0" ? "1" : total;
+                    return total;
                 }
-                return "1";
+                return "0";
             }
         }
         public string TruePointsEarned
@@ -120,9 +120,9 @@ namespace Retro_Achievement_Tracker
                     .Sum(achievement => achievement.TrueRatio)
                     .ToString();
 
-                    return total == "0" ? "1" : total;
+                    return total;
                 }
-                return "1";
+                return "0";
             }
         }
     }
