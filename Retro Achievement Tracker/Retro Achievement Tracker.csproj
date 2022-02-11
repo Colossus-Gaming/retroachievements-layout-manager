@@ -200,21 +200,17 @@
     <Compile Include="Forms\FocusWindow.Designer.cs">
       <DependentUpon>FocusWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\BrowserBase.cs" />
+    <Compile Include="Models\GameCompleted.cs" />
+    <Compile Include="Models\GameCompletedConverter.cs" />
     <Compile Include="Models\MediaHelper.cs" />
-    <Compile Include="Models\ConsoleListConverter.cs" />
     <Compile Include="Models\AchievementConverter.cs" />
-    <Compile Include="Models\ConsoleList.cs" />
     <Compile Include="Models\CustomResourceRequestHandler.cs" />
-    <Compile Include="Models\FontManager.cs" />
-    <Compile Include="Models\GameAchievementSummaryConverter.cs" />
-    <Compile Include="Models\GameSummaryConverter.cs" />
-    <Compile Include="Models\GameProgressConverter.cs" />
+    <Compile Include="Models\GameInfoAndProgress.cs" />
+    <Compile Include="Models\GameInfoAndProgressConverter.cs" />
     <Compile Include="Models\StreamLabelManager.cs" />
     <Compile Include="Models\UserSummaryConverter.cs" />
     <Compile Include="Models\UserSummary.cs" />
-    <Compile Include="Http\HFC_EssentialsClient.cs" />
-    <Compile Include="Models\GameProgress.cs" />
+    <Compile Include="Http\RetroAchievementAPIClient.cs" />
     <Compile Include="Forms\MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>

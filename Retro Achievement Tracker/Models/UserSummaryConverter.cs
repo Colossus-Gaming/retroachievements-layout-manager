@@ -23,21 +23,17 @@
             }
 
             JToken RecentAchievements = item["RecentAchievements"];
-            JToken Awarded = item["Awarded"];
             JToken LastGameID = item["LastGameID"];
-            JToken Status = item["Status"];
             JToken UserPic = item["UserPic"];
-            JToken Motto = item["Motto"];
+            JToken Rank = item["Rank"];
             JToken TotalPoints = item["TotalPoints"];
             JToken TotalTruePoints = item["TotalTruePoints"];
-            JToken Rank = item["Rank"];
-            JToken RecentlyPlayed = item["RecentlyPlayed"];
 
             if (RecentAchievements != null)
             {
                 if (RecentAchievements.Type == JTokenType.Object)
                 {
-                    UserSummary.RecentAchievements = new List<Achievement>();
+                    UserSummary.Achievements = new List<Achievement>();
 
                     foreach (JToken jobject in RecentAchievements.Children<JToken>())
                     {
@@ -47,37 +43,11 @@
                             {
                                 foreach (JToken jobjectIV in jobjectIII.Children<JToken>())
                                 {
-                                    UserSummary.RecentAchievements.Add(jobjectIV.ToObject<Achievement>());
+                                    UserSummary.Achievements.Add(jobjectIV.ToObject<Achievement>());
                                 }
                             }
                         }
                     }
-                }
-            }
-
-            if (Awarded != null)
-            {
-                if (Awarded.Type == JTokenType.Object)
-                {
-                    UserSummary.GameAchievementSummaries = new List<GameAchievementSummary>();
-
-                    foreach (JToken jobject in Awarded.Children<JToken>())
-                    {
-                        foreach (JToken jobjectJr in jobject.Children<JToken>())
-                        {
-                            UserSummary.GameAchievementSummaries.Add(jobjectJr.ToObject<GameAchievementSummary>());
-                        }
-                    }
-                }
-            }
-
-            if (RecentlyPlayed != null)
-            {
-                if (RecentlyPlayed.Type == JTokenType.Array)
-                {
-                    List<GameSummary> gameSummaries = RecentlyPlayed.ToObject<List<GameSummary>>();
-
-                    UserSummary.GameSummaries = gameSummaries.FindAll(gameSummary => gameSummary.ConsoleID != 0);
                 }
             }
 
@@ -89,27 +59,11 @@
                 }
             }
 
-            if (Status != null)
-            {
-                if (Status.Type == JTokenType.String)
-                {
-                    UserSummary.Status = Status.ToString();
-                }
-            }
-
             if (UserPic != null)
             {
                 if (UserPic.Type == JTokenType.String)
                 {
                     UserSummary.UserPic = UserPic.ToString();
-                }
-            }
-
-            if (Motto != null)
-            {
-                if (Motto.Type == JTokenType.String)
-                {
-                    UserSummary.Motto = Motto.ToString();
                 }
             }
 
@@ -136,7 +90,6 @@
                     UserSummary.Rank = Convert.ToInt32(Rank);
                 }
             }
-
             return UserSummary;
         }
 

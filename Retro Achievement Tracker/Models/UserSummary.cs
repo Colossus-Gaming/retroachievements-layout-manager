@@ -3,6 +3,7 @@
     using Newtonsoft.Json;
     using Retro_Achievement_Tracker.Models;
     using System;
+    using System.Linq;
     using System.Collections.Generic;
 
     [JsonConverter(typeof(UserSummaryConverter))]
@@ -13,47 +14,59 @@
         public int TotalTruePoints { get; set; }
         public int Rank { get; set; }
         public int Awards { get; set; }
-        public string Motto { get; set; }
         public string UserPic { get; set; }
-        public string Status { get; set; }
-        public List<GameAchievementSummary> GameAchievementSummaries { get; set; }
-        public List<GameSummary> GameSummaries { get; set; }
-        public List<Achievement> RecentAchievements { get; set; }
+        public List<Achievement> Achievements { get; set; }
+        public int GamePointsPossible
+        {
+            get
+            {
+                if (Achievements != null)
+                {
+                    return Achievements.Sum(x => x.Points);
+                }
+                return 0;
+            }
+        }
+        public int GamePointsEarned
+        {
+            get
+            {
+                if (Achievements != null)
+                {
+                    return Achievements.FindAll(x => x.HardcoreAchieved).Sum(x => x.Points);
+                }
+                return 0;
+            }
+        }
+        public int AchievmentsPossible
+        {
+            get
+            {
+                if (Achievements != null)
+                {
+                    return Achievements.Count;
+                }
+                return 0;
+            }
+        }
+        public int AchievementsEarned
+        {
+            get
+            {
+                if (Achievements != null)
+                {
+                    return Achievements.FindAll(x => x.HardcoreAchieved).Count;
+                }
+                return 0;
+            }
+        }
         public string RetroRatio
         {
-            set
-            {
-
-            }
             get
             {
                 return ((float)TotalTruePoints / (float)TotalPoints).ToString("0.00") + "%";
             }
         }
-    }
-
-    [JsonConverter(typeof(GameSummaryConverter))]
-    public class GameSummary
-    {
-        public int GameID { get; set; }
-        public int ConsoleID { get; set; }
-        public string ConsoleName { get; set; }
-        public string Title { get; set; }
-        public string ImageIcon { get; set; }
-        public DateTime? LastPlayed { get; set; }
-    }
-
-
-    [JsonConverter(typeof(GameAchievementSummaryConverter))]
-    public class GameAchievementSummary
-    {
-        public int GameId { get; set; }
-        public int NumPossibleAchievements { get; set; }
-        public int PossibleScore { get; set; }
-        public int NumAchieved { get; set; }
-        public int ScoreAchieved { get; set; }
-        public int NumAchievedHardcore { get; set; }
-        public int ScoreAchievedHardcore { get; set; }
     }
 
     [JsonConverter(typeof(AchievementConverter))]
@@ -67,7 +80,7 @@
         public int Points { get; set; }
         public int TrueRatio { get; set; }
         public string BadgeNumber { get; set; }
-        public bool IsAwarded { get; set; }
+        public bool HardcoreAchieved { get; set; }
         public int DisplayOrder { get; set; }
         public DateTime? DateEarned { get; set; }
 
@@ -95,6 +108,6 @@
         public bool Equals(Achievement other)
         {
             return other != null && Id == other.Id;
-        }        
+        }
     }
 }
