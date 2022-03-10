@@ -511,6 +511,7 @@ namespace Retro_Achievement_Tracker
                 {
                     CurrentlyViewingIndex = 0;
                     FocusController.Instance.HideFocus();
+                    return;
                 }
                 else if (LockedAchievements.IndexOf(FocusController.Instance.CurrentlyFocusedAchievement) > -1)
                 {
