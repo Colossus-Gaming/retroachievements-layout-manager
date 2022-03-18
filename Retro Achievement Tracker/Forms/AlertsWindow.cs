@@ -20,7 +20,22 @@ namespace Retro_Achievement_Tracker.Forms
 
             Name = "RA Tracker - Alerts";
             Text = "RA Tracker - Alerts";
+            Shown += AlertsWindow_Shown;
+            FormClosed += AlertsWindow_FormClosed; ;
+
+            SetupBrowser();
         }
+
+        private void AlertsWindow_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            AlertsController.IsOpen = false;
+        }
+
+        private void AlertsWindow_Shown(object sender, EventArgs e)
+        {
+            AlertsController.IsOpen = true;
+        }
+
         protected override bool ShowWithoutActivation
         {
             get { return true; }
@@ -421,8 +436,9 @@ namespace Retro_Achievement_Tracker.Forms
                 {
                     await chromiumWebBrowser.EvaluateScriptAsync(script, TimeSpan.FromSeconds(5));
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    Console.WriteLine(ex.StackTrace);
                 }
             }
         }

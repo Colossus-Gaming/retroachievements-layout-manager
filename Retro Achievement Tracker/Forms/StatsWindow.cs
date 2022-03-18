@@ -18,7 +18,23 @@ namespace Retro_Achievement_Tracker
 
             Name = "RA Tracker - Stats";
             Text = "RA Tracker - Stats";
+
+            Shown += StatsWindow_Shown;
+            FormClosed += StatsWindow_FormClosed;
+
+            SetupBrowser();
         }
+
+        private void StatsWindow_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            StatsController.IsOpen = false;
+        }
+
+        private void StatsWindow_Shown(object sender, EventArgs e)
+        {
+            StatsController.IsOpen = true;
+        }
+
         protected override bool ShowWithoutActivation
         {
             get { return true; }
@@ -289,8 +305,9 @@ namespace Retro_Achievement_Tracker
                 {
                     await chromiumWebBrowser.EvaluateScriptAsync(script, TimeSpan.FromSeconds(5));
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    Console.WriteLine(ex.StackTrace);
                 }
             }
         }

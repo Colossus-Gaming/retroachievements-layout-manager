@@ -21,7 +21,23 @@ namespace Retro_Achievement_Tracker
 
             Name = "RA Tracker - Focus";
             Text = "RA Tracker - Focus";
+
+            Shown += FocusWindow_Shown;
+            FormClosed += FocusWindow_FormClosed;
+
+            SetupBrowser();
         }
+
+        private void FocusWindow_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            FocusController.IsOpen = false;
+        }
+
+        private void FocusWindow_Shown(object sender, EventArgs e)
+        {
+            FocusController.IsOpen = true;
+        }
+
         protected override bool ShowWithoutActivation
         {
             get { return true; }
@@ -215,11 +231,6 @@ namespace Retro_Achievement_Tracker
 
         public async void HideFocus()
         {
-            Invoke((MethodInvoker)delegate
-            {
-                ClientSize = new Size(0, 0);
-            });
-
             await ExecuteScript("$(\"#focus\").fadeOut();");
         }
         public async Task EnableBorder()
@@ -260,8 +271,9 @@ namespace Retro_Achievement_Tracker
                 {
                     await chromiumWebBrowser.EvaluateScriptAsync(script, TimeSpan.FromSeconds(5));
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    Console.WriteLine(ex.StackTrace);
                 }
             }
         }
@@ -295,19 +307,5 @@ namespace Retro_Achievement_Tracker
         }
 
         public CefSharp.WinForms.ChromiumWebBrowser chromiumWebBrowser;
-
-        private void InitializeComponent()
-        {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FocusWindow));
-            this.SuspendLayout();
-            // 
-            // FocusWindow
-            // 
-            this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "FocusWindow";
-            this.ResumeLayout(false);
-
-        }
     }
 }

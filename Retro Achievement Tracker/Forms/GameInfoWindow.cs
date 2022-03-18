@@ -18,7 +18,23 @@ namespace Retro_Achievement_Tracker
             Text = "RA Tracker - Game Info";
 
             ClientSize = new Size(0, 0);
+
+            Shown += GameInfoWindow_Shown;
+            FormClosed += GameInfoWindow_FormClosed;
+
+            SetupBrowser();
         }
+
+        private void GameInfoWindow_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            GameInfoController.IsOpen = false;
+        }
+
+        private void GameInfoWindow_Shown(object sender, EventArgs e)
+        {
+            GameInfoController.IsOpen = true;
+        }
+
         protected override bool ShowWithoutActivation
         {
             get { return true; }
@@ -250,8 +266,9 @@ namespace Retro_Achievement_Tracker
                 {
                     await chromiumWebBrowser.EvaluateScriptAsync(script, TimeSpan.FromSeconds(5));
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    Console.WriteLine(ex.StackTrace);
                 }
             }
         }

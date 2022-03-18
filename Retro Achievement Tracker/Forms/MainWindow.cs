@@ -93,10 +93,6 @@ namespace Retro_Achievement_Tracker
                             MessageBoxIcon.Error);
                     }
                 }
-                else
-                {
-
-                }
             }
             else
             {
@@ -172,6 +168,7 @@ namespace Retro_Achievement_Tracker
                             ClearFocusAchievementRenders();
                             AlertsController.Instance.EnqueueMasteryNotification(UserSummary, GameInfoAndProgress);
                         }
+                        AlertsController.Instance.RunNotifications();
                     }
                 }
                 else
@@ -199,18 +196,15 @@ namespace Retro_Achievement_Tracker
         }
         private void SetFocus()
         {
-            Invoke((MethodInvoker)delegate
+            if (CurrentlyViewingAchievement != null)
             {
-                if (CurrentlyViewingAchievement != null)
-                {
-                    FocusController.Instance.SetFocus(CurrentlyViewingAchievement);
-                    StreamLabelManager.Instance.WriteFocusStreamLabels(CurrentlyViewingAchievement);
-                }
-                else
-                {
-                    ClearFocusAchievementRenders();
-                }
-            });
+                FocusController.Instance.SetFocus(CurrentlyViewingAchievement);
+                StreamLabelManager.Instance.WriteFocusStreamLabels(CurrentlyViewingAchievement);
+            }
+            else
+            {
+                ClearFocusAchievementRenders();
+            }
         }
 
         private async void UpdateFromSite(object sender, EventArgs e)
@@ -328,10 +322,10 @@ namespace Retro_Achievement_Tracker
             usernameTextBox.Enabled = false;
             apiKeyTextBox.Enabled = false;
 
-            showFocusWindowButton.Enabled = true;
-            showNotificationWindowButton.Enabled = true;
-            showStatsWindowButton.Enabled = true;
-            showGameInfoWindowButton.Enabled = true;
+            openFocusWindowButton.Enabled = true;
+            openNotificationWindowButton.Enabled = true;
+            openStatsWindowButton.Enabled = true;
+            openGameInfoWindowButton.Enabled = true;
 
             UpdateFromSite(null, null);
 
@@ -350,11 +344,11 @@ namespace Retro_Achievement_Tracker
             UpdateTimerLabel("Stopped Updating.");
 
             stopButton.Enabled = false;
-            showFocusWindowButton.Enabled = CanStart();
-            showNotificationWindowButton.Enabled = CanStart();
-            showStatsWindowButton.Enabled = CanStart();
-            showGameInfoWindowButton.Enabled = CanStart();
-            showLastFiveWindowButton.Enabled = CanStart();
+            openFocusWindowButton.Enabled = CanStart();
+            openNotificationWindowButton.Enabled = CanStart();
+            openStatsWindowButton.Enabled = CanStart();
+            openGameInfoWindowButton.Enabled = CanStart();
+            openLastFiveWindowButton.Enabled = CanStart();
 
             apiKeyTextBox.Enabled = true;
             usernameTextBox.Enabled = true;
@@ -453,7 +447,7 @@ namespace Retro_Achievement_Tracker
                 StatsController.Instance.SetGameAchievements(UserSummary.AchievementsEarned.ToString(), UserSummary.AchievmentsPossible.ToString());
                 StatsController.Instance.SetGameTruePoints(GameInfoAndProgress.GameTruePointsEarned.ToString(), GameInfoAndProgress.GameTruePointsPossible.ToString());
                 StatsController.Instance.SetGameRatio();
-                StatsController.Instance.SetCompleted(UserSummary.AchievementsEarned / (float) UserSummary.AchievmentsPossible * 100f);
+                StatsController.Instance.SetCompleted(UserSummary.AchievementsEarned / (float)UserSummary.AchievmentsPossible * 100f);
 
                 StreamLabelManager.Instance.WriteStatsStreamLabels(UserSummary, GameInfoAndProgress);
             });
@@ -816,6 +810,7 @@ namespace Retro_Achievement_Tracker
                 && UserSummary.Achievements[0] != null)
             {
                 AlertsController.Instance.EnqueueAchievementNotifications(new List<Achievement>() { UserSummary.Achievements[0] });
+                AlertsController.Instance.RunNotifications();
             }
             else
             {
@@ -828,11 +823,13 @@ namespace Retro_Achievement_Tracker
                          Points = 1
                      }
                 });
+                AlertsController.Instance.RunNotifications();
             }
         }
         private void ShowGameMasteryButton_Click(object sender, EventArgs eventArgs)
         {
             AlertsController.Instance.EnqueueMasteryNotification(UserSummary, GameInfoAndProgress);
+            AlertsController.Instance.RunNotifications();
         }
         private void SetFocusButton_Click(object sender, EventArgs e)
         {
@@ -895,20 +892,23 @@ namespace Retro_Achievement_Tracker
 
             switch (button.Name)
             {
-                case "showFocusWindowButton":
+                case "openFocusWindowButton":
                     FocusController.Instance.Show();
                     break;
-                case "showStatsWindowButton":
+                case "openStatsWindowButton":
                     StatsController.Instance.Show();
                     break;
-                case "showNotificationWindowButton":
+                case "openNotificationWindowButton":
                     AlertsController.Instance.Show();
                     break;
-                case "showGameInfoWindowButton":
+                case "openGameInfoWindowButton":
                     GameInfoController.Instance.Show();
                     break;
-                case "showLastFiveWindowButton":
+                case "openLastFiveWindowButton":
                     LastFiveController.Instance.Show();
+                    break;
+                case "openAchievementListWindowButton":
+                    AchievementListController.Instance.Show();
                     break;
             }
         }
@@ -950,7 +950,7 @@ namespace Retro_Achievement_Tracker
                     statsCustomizationsGroupBox.Hide();
                     fontSettingsGroupBox.Hide();
 
-                    ClientSize = new Size(320, 473);
+                    ClientSize = new Size(390, 473);
                     break;
                 case CustomMenuState.FOCUS:
                     fontBorderEnableCheckBox.Show();
@@ -1045,7 +1045,7 @@ namespace Retro_Achievement_Tracker
                     customMasterySettingsGroupBox.Hide();
                     statsCustomizationsGroupBox.Hide();
 
-                    ClientSize = new Size(571, 473);
+                    ClientSize = new Size(640, 473);
                     break;
                 case CustomMenuState.LAST_FIVE:
                     fontBorderEnableCheckBox.Show();
@@ -1140,7 +1140,7 @@ namespace Retro_Achievement_Tracker
                     customAchievementSettingsGroupBox.Hide();
                     customMasterySettingsGroupBox.Hide();
 
-                    ClientSize = new Size(571, 473);
+                    ClientSize = new Size(641, 473);
                     break;
                 case CustomMenuState.GAME_INFO:
                     fontBorderEnableCheckBox.Hide();
@@ -1220,13 +1220,13 @@ namespace Retro_Achievement_Tracker
                     gameInfoReleaseDateOverrideTextBox.Text = GameInfoController.Instance.ReleasedDateName;
 
                     gameInfoOverrideSettingsGroupBox.Show();
-                    gameInfoOverrideSettingsGroupBox.Location = new Point(571, 12);
+                    gameInfoOverrideSettingsGroupBox.Location = new Point(641, 12);
 
                     customAchievementSettingsGroupBox.Hide();
                     customMasterySettingsGroupBox.Hide();
                     statsCustomizationsGroupBox.Hide();
 
-                    ClientSize = new Size(980, 473);
+                    ClientSize = new Size(1043, 473);
                     break;
                 case CustomMenuState.STATS:
                     fontBorderEnableCheckBox.Hide();
@@ -1339,9 +1339,9 @@ namespace Retro_Achievement_Tracker
                     customMasterySettingsGroupBox.Hide();
 
                     statsCustomizationsGroupBox.Show();
-                    statsCustomizationsGroupBox.Location = new Point(571, 12);
+                    statsCustomizationsGroupBox.Location = new Point(641, 12);
 
-                    ClientSize = new Size(980, 473);
+                    ClientSize = new Size(1043, 473);
                     break;
                 case CustomMenuState.ALERTS:
                     fontBorderEnableCheckBox.Show();
@@ -1438,10 +1438,10 @@ namespace Retro_Achievement_Tracker
                     customAchievementSettingsGroupBox.Show();
                     customMasterySettingsGroupBox.Show();
 
-                    customAchievementSettingsGroupBox.Location = new Point(571, 12);
-                    customMasterySettingsGroupBox.Location = new Point(772, 12);
+                    customAchievementSettingsGroupBox.Location = new Point(641, 12);
+                    customMasterySettingsGroupBox.Location = new Point(842, 12);
 
-                    ClientSize = new Size(980, 473);
+                    ClientSize = new Size(1043, 473);
                     break;
             }
         }
@@ -2420,11 +2420,11 @@ namespace Retro_Achievement_Tracker
             notificationsMasteryAnimationInComboBox.SelectedIndexChanged += NotificationAnimationComboBox_SelectedIndexChanged;
             notificationsMasteryAnimationOutComboBox.SelectedIndexChanged += NotificationAnimationComboBox_SelectedIndexChanged;
 
-            showLastFiveWindowButton.Click += ShowWindowButton_Click;
-            showGameInfoWindowButton.Click += ShowWindowButton_Click;
-            showNotificationWindowButton.Click += ShowWindowButton_Click;
-            showFocusWindowButton.Click += ShowWindowButton_Click;
-            showStatsWindowButton.Click += ShowWindowButton_Click;
+            openLastFiveWindowButton.Click += ShowWindowButton_Click;
+            openGameInfoWindowButton.Click += ShowWindowButton_Click;
+            openNotificationWindowButton.Click += ShowWindowButton_Click;
+            openFocusWindowButton.Click += ShowWindowButton_Click;
+            openStatsWindowButton.Click += ShowWindowButton_Click;
 
             startButton.Click += StartButton_Click;
             stopButton.Click += StopButton_Click;
@@ -2467,7 +2467,8 @@ namespace Retro_Achievement_Tracker
         STATS,
         ALERTS,
         GAME_INFO,
-        LAST_FIVE
+        LAST_FIVE,
+        ACHIEVEMENT_LIST
     }
     public enum AnimationDirection
     {

@@ -18,6 +18,7 @@ namespace Retro_Achievement_Tracker.Controllers
     {
         private static AlertsController instance = new AlertsController();
         private static AlertsWindow AlertsLayoutWindow;
+        public static bool IsOpen;
         private Stopwatch Stopwatch;
         private Task NotificationsTask;
         private readonly ConcurrentQueue<NotificationRequest> NotificationRequests;
@@ -49,6 +50,7 @@ namespace Retro_Achievement_Tracker.Controllers
             NotificationsTask = Task.Factory.StartNew(() => { });
 
             CanPlay = false;
+            IsOpen = false;
         }
         public void EnqueueAchievementNotifications(List<Achievement> achievements)
         {
@@ -68,7 +70,6 @@ namespace Retro_Achievement_Tracker.Controllers
 
                     NotificationRequests.Enqueue(notificationRequest);
                 }
-                RunNotifications();
             }
         }
 
@@ -88,7 +89,6 @@ namespace Retro_Achievement_Tracker.Controllers
                 };
 
                 NotificationRequests.Enqueue(notificationRequest);
-                RunNotifications();
             }
         }
         private NotificationRequest NotificationRequestDequeue()
@@ -98,7 +98,7 @@ namespace Retro_Achievement_Tracker.Controllers
             return notificationRequest;
         }
 
-        private async void RunNotifications()
+        public async void RunNotifications()
         {
             if (NotificationRequests.Count > 0 && CanPlay && !IsPlaying && !Stopwatch.IsRunning)
             {
@@ -202,41 +202,51 @@ namespace Retro_Achievement_Tracker.Controllers
         {
             AlertsLayoutWindow.Close();
         }
+        public void Show()
+        {
+            if (!IsOpen)
+            {
+                AlertsLayoutWindow = new AlertsWindow();
+                AlertsLayoutWindow.Show();
+            }
+        }
         public void Reset()
         {
-            if (!AlertsLayoutWindow.IsDisposed)
+            if (IsOpen)
             {
                 AlertsLayoutWindow.SetupBrowser();
             }
         }
         public async void SetAllSettings()
         {
-            await AlertsLayoutWindow.AssignJavaScriptVariables().ContinueWith(async (result) =>
+            if (IsOpen)
             {
-                await AlertsLayoutWindow.SetBorderBackgroundColor(BorderBackgroundColor);
-                await AlertsLayoutWindow.SetWindowBackgroundColor(WindowBackgroundColor);
+                await AlertsLayoutWindow.AssignJavaScriptVariables().ContinueWith(async (result) =>
+                {
+                    await AlertsLayoutWindow.SetBorderBackgroundColor(BorderBackgroundColor);
+                    await AlertsLayoutWindow.SetWindowBackgroundColor(WindowBackgroundColor);
 
-                if (BorderEnabled)
-                {
-                    await AlertsLayoutWindow.EnableBorder();
-                }
-                else
-                {
-                    await AlertsLayoutWindow.DisableBorder();
-                }
-                if (AdvancedSettingsEnabled)
-                {
-                    SetAdvancedSettings();
-                }
-                else
-                {
-                    SetSimpleSettings();
-                }
+                    if (BorderEnabled)
+                    {
+                        await AlertsLayoutWindow.EnableBorder();
+                    }
+                    else
+                    {
+                        await AlertsLayoutWindow.DisableBorder();
+                    }
+                    if (AdvancedSettingsEnabled)
+                    {
+                        SetAdvancedSettings();
+                    }
+                    else
+                    {
+                        SetSimpleSettings();
+                    }
 
-                SetAchievementSettings();
-                SetMasterySettings();
-            });
-
+                    SetAchievementSettings();
+                    SetMasterySettings();
+                });
+            }
         }
         public async void SetSimpleSettings()
         {
@@ -275,37 +285,40 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public async void SendAchievementNotification(Achievement achievement)
         {
-            await AlertsLayoutWindow.StartAchievementAlert(achievement);
+            if (IsOpen)
+            {
+                await AlertsLayoutWindow.StartAchievementAlert(achievement);
+            }
         }
         public async void EnableAchievementEdit()
         {
-            await AlertsLayoutWindow.EnableAchievementEdit();
+            if (IsOpen)
+            {
+                await AlertsLayoutWindow.EnableAchievementEdit();
+            }
         }
         public async void DisableAchievementEdit()
         {
-            await AlertsLayoutWindow.DisableAchievementEdit();
-            IsPlaying = false;
+            if (IsOpen)
+            {
+                await AlertsLayoutWindow.DisableAchievementEdit();
+                IsPlaying = false;
+            }
         }
         public async void EnableMasteryEdit()
         {
-            await AlertsLayoutWindow.EnableMasteryEdit();
+            if (IsOpen)
+            {
+                await AlertsLayoutWindow.EnableMasteryEdit();
+            }
         }
         public async void DisableMasteryEdit()
         {
-            await AlertsLayoutWindow.DisableMasteryEdit();
-            IsPlaying = false;
-        }
-        public void Show()
-        {
-            if (AlertsLayoutWindow.IsDisposed)
+            if (IsOpen)
             {
-                AlertsLayoutWindow = new AlertsWindow();
+                await AlertsLayoutWindow.DisableMasteryEdit();
+                IsPlaying = false;
             }
-            if (AlertsLayoutWindow.chromiumWebBrowser == null)
-            {
-                AlertsLayoutWindow.SetupBrowser();
-            }
-            AlertsLayoutWindow.Show();
         }
         /**
          * Variables
@@ -321,7 +334,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.alerts_advanced_options_enabled = value;
                 Settings.Default.Save();
 
-                SetAllSettings();
+                if (IsOpen)
+                {
+                    SetAllSettings();
+                }
             }
         }
         public FontFamily SimpleFontFamily
@@ -346,11 +362,14 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.notification_font_family_name = value.Name;
                 Settings.Default.Save();
 
-                Task.Run(async () =>
+                if (IsOpen)
                 {
-                    await AlertsLayoutWindow.AssignJavaScriptVariables();
-                    await AlertsLayoutWindow.SetSimpleFontFamily(SimpleFontFamily);
-                });
+                    Task.Run(async () =>
+                    {
+                        await AlertsLayoutWindow.AssignJavaScriptVariables();
+                        await AlertsLayoutWindow.SetSimpleFontFamily(SimpleFontFamily);
+                    });
+                }
             }
         }
         public string SimpleFontColor
@@ -364,11 +383,14 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.notification_font_color_hex_code = value;
                 Settings.Default.Save();
 
-                Task.Run(async () =>
+                if (IsOpen)
                 {
-                    await AlertsLayoutWindow.AssignJavaScriptVariables();
-                    await AlertsLayoutWindow.SetSimpleFontColor(value);
-                });
+                    Task.Run(async () =>
+                    {
+                        await AlertsLayoutWindow.AssignJavaScriptVariables();
+                        await AlertsLayoutWindow.SetSimpleFontColor(value);
+                    });
+                }
             }
         }
         public string SimpleFontOutlineColor
@@ -381,11 +403,14 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.notification_font_outline_color_hex = value;
                 Settings.Default.Save();
-                Task.Run(async () =>
+                if (IsOpen)
                 {
-                    await AlertsLayoutWindow.AssignJavaScriptVariables();
-                    await AlertsLayoutWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px", SimpleFontOutlineEnabled ? SimpleFontOutlineSize + "px solid " + SimpleFontOutlineColor : "0px");
-                });
+                    Task.Run(async () =>
+                    {
+                        await AlertsLayoutWindow.AssignJavaScriptVariables();
+                        await AlertsLayoutWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px", SimpleFontOutlineEnabled ? SimpleFontOutlineSize + "px solid " + SimpleFontOutlineColor : "0px");
+                    });
+                }
             }
         }
         public int SimpleFontOutlineSize
@@ -399,11 +424,14 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.notification_font_outline_size = value;
                 Settings.Default.Save();
 
-                Task.Run(async () =>
+                if (IsOpen)
                 {
-                    await AlertsLayoutWindow.AssignJavaScriptVariables();
-                    await AlertsLayoutWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px", SimpleFontOutlineEnabled ? SimpleFontOutlineSize + "px solid " + SimpleFontOutlineColor : "0px");
-                });
+                    Task.Run(async () =>
+                    {
+                        await AlertsLayoutWindow.AssignJavaScriptVariables();
+                        await AlertsLayoutWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px", SimpleFontOutlineEnabled ? SimpleFontOutlineSize + "px solid " + SimpleFontOutlineColor : "0px");
+                    });
+                }
             }
         }
         public bool SimpleFontOutlineEnabled
@@ -416,11 +444,14 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.notification_font_outline_enabled = value;
                 Settings.Default.Save();
-                Task.Run(async () =>
+                if (IsOpen)
                 {
-                    await AlertsLayoutWindow.AssignJavaScriptVariables();
-                    await AlertsLayoutWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px", SimpleFontOutlineEnabled ? SimpleFontOutlineSize + "px solid " + SimpleFontOutlineColor : "0px");
-                });
+                    Task.Run(async () =>
+                    {
+                        await AlertsLayoutWindow.AssignJavaScriptVariables();
+                        await AlertsLayoutWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px", SimpleFontOutlineEnabled ? SimpleFontOutlineSize + "px solid " + SimpleFontOutlineColor : "0px");
+                    });
+                }
             }
         }
         public FontFamily TitleFontFamily
@@ -444,11 +475,14 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.alerts_title_font_family = value.Name;
                 Settings.Default.Save();
-                Task.Run(async () =>
+                if (IsOpen)
                 {
-                    await AlertsLayoutWindow.AssignJavaScriptVariables();
-                    await AlertsLayoutWindow.SetTitleFontFamily(TitleFontFamily);
-                });
+                    Task.Run(async () =>
+                    {
+                        await AlertsLayoutWindow.AssignJavaScriptVariables();
+                        await AlertsLayoutWindow.SetTitleFontFamily(TitleFontFamily);
+                    });
+                }
             }
         }
         public FontFamily DescriptionFontFamily
@@ -472,11 +506,14 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.alerts_description_font_family = value.Name;
                 Settings.Default.Save();
-                Task.Run(async () =>
+                if (IsOpen)
                 {
-                    await AlertsLayoutWindow.AssignJavaScriptVariables();
-                    await AlertsLayoutWindow.SetDescriptionFontFamily(DescriptionFontFamily);
-                });
+                    Task.Run(async () =>
+                    {
+                        await AlertsLayoutWindow.AssignJavaScriptVariables();
+                        await AlertsLayoutWindow.SetDescriptionFontFamily(DescriptionFontFamily);
+                    });
+                }
             }
         }
 
@@ -502,11 +539,14 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.alerts_points_font_family = value.Name;
                 Settings.Default.Save();
 
-                Task.Run(async () =>
+                if (IsOpen)
                 {
-                    await AlertsLayoutWindow.AssignJavaScriptVariables();
-                    await AlertsLayoutWindow.SetPointsFontFamily(PointsFontFamily);
-                });
+                    Task.Run(async () =>
+                    {
+                        await AlertsLayoutWindow.AssignJavaScriptVariables();
+                        await AlertsLayoutWindow.SetPointsFontFamily(PointsFontFamily);
+                    });
+                }
             }
         }
 
@@ -521,11 +561,14 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.alerts_title_color = value;
                 Settings.Default.Save();
 
-                Task.Run(async () =>
+                if (IsOpen)
                 {
-                    await AlertsLayoutWindow.AssignJavaScriptVariables();
-                    await AlertsLayoutWindow.SetTitleColor(value);
-                });
+                    Task.Run(async () =>
+                    {
+                        await AlertsLayoutWindow.AssignJavaScriptVariables();
+                        await AlertsLayoutWindow.SetTitleColor(value);
+                    });
+                }
             }
         }
         public string DescriptionColor
@@ -539,11 +582,14 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.alerts_description_color = value;
                 Settings.Default.Save();
 
-                Task.Run(async () =>
+                if (IsOpen)
                 {
-                    await AlertsLayoutWindow.AssignJavaScriptVariables();
-                    await AlertsLayoutWindow.SetDescriptionColor(value);
-                });
+                    Task.Run(async () =>
+                    {
+                        await AlertsLayoutWindow.AssignJavaScriptVariables();
+                        await AlertsLayoutWindow.SetDescriptionColor(value);
+                    });
+                }
             }
         }
         public string PointsColor
@@ -557,11 +603,14 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.alerts_points_color = value;
                 Settings.Default.Save();
 
-                Task.Run(async () =>
+                if (IsOpen)
                 {
-                    await AlertsLayoutWindow.AssignJavaScriptVariables();
-                    await AlertsLayoutWindow.SetPointsColor(value);
-                });
+                    Task.Run(async () =>
+                    {
+                        await AlertsLayoutWindow.AssignJavaScriptVariables();
+                        await AlertsLayoutWindow.SetPointsColor(value);
+                    });
+                }
             }
         }
         public string LineColor
@@ -575,11 +624,14 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.alerts_line_color = value;
                 Settings.Default.Save();
 
-                Task.Run(async () =>
+                if (IsOpen)
                 {
-                    await AlertsLayoutWindow.AssignJavaScriptVariables();
-                    await AlertsLayoutWindow.SetLineColor(value);
-                });
+                    Task.Run(async () =>
+                    {
+                        await AlertsLayoutWindow.AssignJavaScriptVariables();
+                        await AlertsLayoutWindow.SetLineColor(value);
+                    });
+                }
             }
         }
         public bool TitleOutlineEnabled
@@ -593,11 +645,14 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.alerts_title_outline_enabled = value;
                 Settings.Default.Save();
 
-                Task.Run(async () =>
+                if (IsOpen)
                 {
-                    await AlertsLayoutWindow.AssignJavaScriptVariables();
-                    await AlertsLayoutWindow.SetTitleOutline(TitleOutlineEnabled ? TitleOutlineColor + " " + TitleOutlineSize + "px" : "0px");
-                });
+                    Task.Run(async () =>
+                    {
+                        await AlertsLayoutWindow.AssignJavaScriptVariables();
+                        await AlertsLayoutWindow.SetTitleOutline(TitleOutlineEnabled ? TitleOutlineColor + " " + TitleOutlineSize + "px" : "0px");
+                    });
+                }
             }
         }
         public bool DescriptionOutlineEnabled
@@ -611,11 +666,14 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.alerts_description_outline_enabled = value;
                 Settings.Default.Save();
 
-                Task.Run(async () =>
+                if (IsOpen)
                 {
-                    await AlertsLayoutWindow.AssignJavaScriptVariables();
-                    await AlertsLayoutWindow.SetDescriptionOutline(DescriptionOutlineEnabled ? DescriptionOutlineColor + " " + DescriptionOutlineSize + "px" : "0px");
-                });
+                    Task.Run(async () =>
+                    {
+                        await AlertsLayoutWindow.AssignJavaScriptVariables();
+                        await AlertsLayoutWindow.SetDescriptionOutline(DescriptionOutlineEnabled ? DescriptionOutlineColor + " " + DescriptionOutlineSize + "px" : "0px");
+                    });
+                }
             }
         }
         public bool PointsOutlineEnabled
@@ -629,11 +687,14 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.alerts_points_outline_enabled = value;
                 Settings.Default.Save();
 
-                Task.Run(async () =>
+                if (IsOpen)
                 {
-                    await AlertsLayoutWindow.AssignJavaScriptVariables();
-                    await AlertsLayoutWindow.SetPointsOutline(PointsOutlineEnabled ? PointsOutlineColor + " " + PointsOutlineSize + "px" : "0px");
-                });
+                    Task.Run(async () =>
+                    {
+                        await AlertsLayoutWindow.AssignJavaScriptVariables();
+                        await AlertsLayoutWindow.SetPointsOutline(PointsOutlineEnabled ? PointsOutlineColor + " " + PointsOutlineSize + "px" : "0px");
+                    });
+                }
             }
         }
         public bool LineOutlineEnabled
@@ -647,11 +708,14 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.alerts_line_outline_enabled = value;
                 Settings.Default.Save();
 
-                Task.Run(async () =>
+                if (IsOpen)
                 {
-                    await AlertsLayoutWindow.AssignJavaScriptVariables();
-                    await AlertsLayoutWindow.SetLineOutline(LineOutlineEnabled ? LineOutlineSize + "px solid " + LineOutlineColor : "0px");
-                });
+                    Task.Run(async () =>
+                    {
+                        await AlertsLayoutWindow.AssignJavaScriptVariables();
+                        await AlertsLayoutWindow.SetLineOutline(LineOutlineEnabled ? LineOutlineSize + "px solid " + LineOutlineColor : "0px");
+                    });
+                }
             }
         }
         public string TitleOutlineColor
@@ -664,11 +728,14 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.alerts_title_outline_color = value;
                 Settings.Default.Save();
-                Task.Run(async () =>
+                if (IsOpen)
                 {
-                    await AlertsLayoutWindow.AssignJavaScriptVariables();
-                    await AlertsLayoutWindow.SetTitleOutline(TitleOutlineEnabled ? TitleOutlineColor + " " + TitleOutlineSize + "px" : "0px");
-                });
+                    Task.Run(async () =>
+                    {
+                        await AlertsLayoutWindow.AssignJavaScriptVariables();
+                        await AlertsLayoutWindow.SetTitleOutline(TitleOutlineEnabled ? TitleOutlineColor + " " + TitleOutlineSize + "px" : "0px");
+                    });
+                }
             }
         }
         public string DescriptionOutlineColor
@@ -681,11 +748,14 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.alerts_description_outline_color = value;
                 Settings.Default.Save();
-                Task.Run(async () =>
+                if (IsOpen)
                 {
-                    await AlertsLayoutWindow.AssignJavaScriptVariables();
-                    await AlertsLayoutWindow.SetDescriptionOutline(DescriptionOutlineEnabled ? DescriptionOutlineColor + " " + DescriptionOutlineSize + "px" : "0px");
-                });
+                    Task.Run(async () =>
+                    {
+                        await AlertsLayoutWindow.AssignJavaScriptVariables();
+                        await AlertsLayoutWindow.SetDescriptionOutline(DescriptionOutlineEnabled ? DescriptionOutlineColor + " " + DescriptionOutlineSize + "px" : "0px");
+                    });
+                }
             }
         }
         public string PointsOutlineColor
@@ -698,11 +768,14 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.alerts_points_outline_color = value;
                 Settings.Default.Save();
-                Task.Run(async () =>
+                if (IsOpen)
                 {
-                    await AlertsLayoutWindow.AssignJavaScriptVariables();
-                    await AlertsLayoutWindow.SetPointsOutline(PointsOutlineEnabled ? PointsOutlineColor + " " + PointsOutlineSize + "px" : "0px");
-                });
+                    Task.Run(async () =>
+                    {
+                        await AlertsLayoutWindow.AssignJavaScriptVariables();
+                        await AlertsLayoutWindow.SetPointsOutline(PointsOutlineEnabled ? PointsOutlineColor + " " + PointsOutlineSize + "px" : "0px");
+                    });
+                }
             }
         }
         public string LineOutlineColor
@@ -715,11 +788,14 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.alerts_line_outline_color = value;
                 Settings.Default.Save();
-                Task.Run(async () =>
+                if (IsOpen)
                 {
-                    await AlertsLayoutWindow.AssignJavaScriptVariables();
-                    await AlertsLayoutWindow.SetLineOutline(LineOutlineEnabled ? LineOutlineSize + "px solid " + LineOutlineColor : "0px");
-                });
+                    Task.Run(async () =>
+                    {
+                        await AlertsLayoutWindow.AssignJavaScriptVariables();
+                        await AlertsLayoutWindow.SetLineOutline(LineOutlineEnabled ? LineOutlineSize + "px solid " + LineOutlineColor : "0px");
+                    });
+                }
             }
         }
         public int TitleOutlineSize
@@ -732,11 +808,14 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.alerts_title_outline_size = value;
                 Settings.Default.Save();
-                Task.Run(async () =>
+                if (IsOpen)
                 {
-                    await AlertsLayoutWindow.AssignJavaScriptVariables();
-                    await AlertsLayoutWindow.SetTitleOutline(TitleOutlineEnabled ? TitleOutlineColor + " " + TitleOutlineSize + "px" : "0px");
-                });
+                    Task.Run(async () =>
+                    {
+                        await AlertsLayoutWindow.AssignJavaScriptVariables();
+                        await AlertsLayoutWindow.SetTitleOutline(TitleOutlineEnabled ? TitleOutlineColor + " " + TitleOutlineSize + "px" : "0px");
+                    });
+                }
             }
         }
         public int DescriptionOutlineSize
@@ -749,11 +828,14 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.alerts_description_outline_size = value;
                 Settings.Default.Save();
-                Task.Run(async () =>
+                if (IsOpen)
                 {
-                    await AlertsLayoutWindow.AssignJavaScriptVariables();
-                    await AlertsLayoutWindow.SetDescriptionOutline(DescriptionOutlineEnabled ? DescriptionOutlineColor + " " + DescriptionOutlineSize + "px" : "0px");
-                });
+                    Task.Run(async () =>
+                    {
+                        await AlertsLayoutWindow.AssignJavaScriptVariables();
+                        await AlertsLayoutWindow.SetDescriptionOutline(DescriptionOutlineEnabled ? DescriptionOutlineColor + " " + DescriptionOutlineSize + "px" : "0px");
+                    });
+                }
             }
         }
         public int PointsOutlineSize
@@ -767,11 +849,14 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.alerts_points_outline_size = value;
                 Settings.Default.Save();
 
-                Task.Run(async () =>
+                if (IsOpen)
                 {
-                    await AlertsLayoutWindow.AssignJavaScriptVariables();
-                    await AlertsLayoutWindow.SetPointsOutline(PointsOutlineEnabled ? PointsOutlineColor + " " + PointsOutlineSize + "px" : "0px");
-                });
+                    Task.Run(async () =>
+                    {
+                        await AlertsLayoutWindow.AssignJavaScriptVariables();
+                        await AlertsLayoutWindow.SetPointsOutline(PointsOutlineEnabled ? PointsOutlineColor + " " + PointsOutlineSize + "px" : "0px");
+                    });
+                }
             }
         }
         public int LineOutlineSize
@@ -785,11 +870,14 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.alerts_line_outline_size = value;
                 Settings.Default.Save();
 
-                Task.Run(async () =>
+                if (IsOpen)
                 {
-                    await AlertsLayoutWindow.AssignJavaScriptVariables();
-                    await AlertsLayoutWindow.SetLineOutline(LineOutlineEnabled ? LineOutlineSize + "px solid " + LineOutlineColor : "0px");
-                });
+                    Task.Run(async () =>
+                    {
+                        await AlertsLayoutWindow.AssignJavaScriptVariables();
+                        await AlertsLayoutWindow.SetLineOutline(LineOutlineEnabled ? LineOutlineSize + "px solid " + LineOutlineColor : "0px");
+                    });
+                }
             }
         }
         public bool BorderEnabled
@@ -802,18 +890,21 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.notifications_border_enable = value;
                 Settings.Default.Save();
-                Task.Run(async () =>
+                if (IsOpen)
                 {
-                    await AlertsLayoutWindow.AssignJavaScriptVariables();
-                    if (value)
+                    Task.Run(async () =>
                     {
-                        await AlertsLayoutWindow.EnableBorder();
-                    }
-                    else
-                    {
-                        await AlertsLayoutWindow.DisableBorder();
-                    }
-                });
+                        await AlertsLayoutWindow.AssignJavaScriptVariables();
+                        if (value)
+                        {
+                            await AlertsLayoutWindow.EnableBorder();
+                        }
+                        else
+                        {
+                            await AlertsLayoutWindow.DisableBorder();
+                        }
+                    });
+                }
             }
         }
         public string BorderBackgroundColor
@@ -826,10 +917,13 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.notifications_background_color = value;
                 Settings.Default.Save();
-                Task.Run(async () =>
+                if (IsOpen)
                 {
-                    await AlertsLayoutWindow.SetBorderBackgroundColor(value);
-                });
+                    Task.Run(async () =>
+                    {
+                        await AlertsLayoutWindow.SetBorderBackgroundColor(value);
+                    });
+                }
             }
         }
         public string WindowBackgroundColor
@@ -842,10 +936,13 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.alerts_window_background_color = value;
                 Settings.Default.Save();
-                Task.Run(async () =>
+                if (IsOpen)
                 {
-                    await AlertsLayoutWindow.SetWindowBackgroundColor(value);
-                });
+                    Task.Run(async () =>
+                    {
+                        await AlertsLayoutWindow.SetWindowBackgroundColor(value);
+                    });
+                }
             }
         }
         public bool CustomAchievementEnabled
@@ -883,7 +980,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.notification_custom_achievement_x = value;
                 Settings.Default.Save();
 
-                AlertsLayoutWindow.SetAchievementLeft(value);
+                if (IsOpen)
+                {
+                    AlertsLayoutWindow.SetAchievementLeft(value);
+                }
             }
         }
         public int CustomAchievementY
@@ -897,7 +997,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.notification_custom_achievement_y = value;
                 Settings.Default.Save();
 
-                AlertsLayoutWindow.SetAchievementTop(value);
+                if (IsOpen)
+                {
+                    AlertsLayoutWindow.SetAchievementTop(value);
+                }
             }
         }
         public int CustomMasteryX
@@ -911,7 +1014,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.notification_custom_mastery_x = value;
                 Settings.Default.Save();
 
-                AlertsLayoutWindow.SetMasteryLeft(value);
+                if (IsOpen)
+                {
+                    AlertsLayoutWindow.SetMasteryLeft(value);
+                }
             }
         }
         public int CustomMasteryY
@@ -925,7 +1031,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.notification_custom_mastery_y = value;
                 Settings.Default.Save();
 
-                AlertsLayoutWindow.SetMasteryTop(value);
+                if (IsOpen)
+                {
+                    AlertsLayoutWindow.SetMasteryTop(value);
+                }
             }
         }
         public decimal CustomAchievementScale
@@ -939,7 +1048,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.notification_custom_achievement_scale = value;
                 Settings.Default.Save();
 
-                AlertsLayoutWindow.SetAchievementWidth(CustomAchievementEnabled ? Convert.ToInt32(CustomAchievementScale * MediaHelper.GetVideoWidth(CustomAchievementFile)) : 1028);
+                if (IsOpen)
+                {
+                    AlertsLayoutWindow.SetAchievementWidth(CustomAchievementEnabled ? Convert.ToInt32(CustomAchievementScale * MediaHelper.GetVideoWidth(CustomAchievementFile)) : 1028);
+                }
             }
         }
         public decimal CustomMasteryScale
@@ -953,7 +1065,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.notification_custom_mastery_scale = value;
                 Settings.Default.Save();
 
-                AlertsLayoutWindow.SetMasteryWidth(CustomMasteryEnabled ? Convert.ToInt32(CustomMasteryScale * MediaHelper.GetVideoWidth(CustomMasteryFile)) : 1028);
+                if (IsOpen)
+                {
+                    AlertsLayoutWindow.SetMasteryWidth(CustomMasteryEnabled ? Convert.ToInt32(CustomMasteryScale * MediaHelper.GetVideoWidth(CustomMasteryFile)) : 1028);
+                }
             }
         }
         public int CustomAchievementIn

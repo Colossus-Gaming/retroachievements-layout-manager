@@ -31,7 +31,7 @@ namespace Retro_Achievement_Tracker.Properties {
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal Resources() {
         }
-        
+
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
@@ -85,7 +85,14 @@ namespace Retro_Achievement_Tracker.Properties {
                 return ResourceManager.GetString("AlertsWindow", resourceCulture);
             }
         }
-        
+        internal static string AchievementListWindow
+        {
+            get
+            {
+                return ResourceManager.GetString("AchievementListWindow", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
         ///&lt;html&gt;

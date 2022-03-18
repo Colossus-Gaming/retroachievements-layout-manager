@@ -9,6 +9,7 @@ namespace Retro_Achievement_Tracker.Controllers
     {
         private static GameInfoController instance = new GameInfoController();
         private static GameInfoWindow GameInfoWindow;
+        public static bool IsOpen;
 
         private string title;
         private string genre;
@@ -20,6 +21,7 @@ namespace Retro_Achievement_Tracker.Controllers
         private GameInfoController()
         {
             GameInfoWindow = new GameInfoWindow();
+            IsOpen = false;
         }
         public static GameInfoController Instance
         {
@@ -29,95 +31,105 @@ namespace Retro_Achievement_Tracker.Controllers
             }
         }
 
-        public void SetConsoleValue(string value)
-        {
-            console = value;
-            GameInfoWindow.SetConsoleValue(value);
-        }
-
-        public void SetTitleValue(string value)
-        {
-            title = value;
-            GameInfoWindow.SetTitleValue(title);
-        }
-
-        public void SetPublisherValue(string value)
-        {
-            publisher = value;
-            GameInfoWindow.SetPublisherValue(value);
-        }
-
-        public void SetDeveloperValue(string value)
-        {
-            developer = value;
-            GameInfoWindow.SetDeveloperValue(value);
-        }
-
-        public void SetGenreValue(string value)
-        {
-            genre = value;
-            GameInfoWindow.SetGenreValue(value);
-        }
-
-        public void SetReleaseDateValue(string value)
-        {
-            released = value;
-            GameInfoWindow.SetReleaseDateValue(value);
-        }
         public void Close()
         {
             GameInfoWindow.Close();
         }
         public void Show()
         {
-            if (GameInfoWindow.IsDisposed)
+            if (!IsOpen)
             {
                 GameInfoWindow = new GameInfoWindow();
+                GameInfoWindow.Show();
             }
-            if (GameInfoWindow.chromiumWebBrowser == null)
-            {
-                GameInfoWindow.SetupBrowser();
-            }
-            GameInfoWindow.Show();
         }
-        public void Reset()
+        public void SetConsoleValue(string value)
         {
-            if (!GameInfoWindow.IsDisposed)
+            console = value;
+            if (IsOpen)
             {
-                GameInfoWindow.SetupBrowser();
+                GameInfoWindow.SetConsoleValue(value);
+            }
+        }
+
+        public void SetTitleValue(string value)
+        {
+            title = value;
+            if (IsOpen)
+            {
+                GameInfoWindow.SetTitleValue(title);
+            }
+        }
+
+        public void SetPublisherValue(string value)
+        {
+            publisher = value;
+            if (IsOpen)
+            {
+                GameInfoWindow.SetPublisherValue(value);
+            }
+        }
+
+        public void SetDeveloperValue(string value)
+        {
+            developer = value;
+            if (IsOpen)
+            {
+                GameInfoWindow.SetDeveloperValue(value);
+            }
+        }
+
+        public void SetGenreValue(string value)
+        {
+            genre = value;
+            if (IsOpen)
+            {
+                GameInfoWindow.SetGenreValue(value);
+            }
+        }
+
+        public void SetReleaseDateValue(string value)
+        {
+            released = value;
+            if (IsOpen)
+            {
+                GameInfoWindow.SetReleaseDateValue(value);
             }
         }
         public async void SetAllSettings()
         {
-            await GameInfoWindow.AssignJavaScriptVariables().ContinueWith((result) =>
+            if (IsOpen)
             {
-                if (AdvancedSettingsEnabled)
+                await GameInfoWindow.AssignJavaScriptVariables().ContinueWith((result) =>
                 {
-                    SetAdvancedSettings();
-                }
-                else
+                    if (AdvancedSettingsEnabled)
+                    {
+                        SetAdvancedSettings();
+                    }
+                    else
+                    {
+                        SetSimpleSettings();
+                    }
+                });
+
+                GameInfoWindow.SetWindowBackgroundColor(WindowBackgroundColor);
+
+                GameInfoWindow.SetTitleName(TitleName);
+                GameInfoWindow.SetDeveloperName(DeveloperName);
+                GameInfoWindow.SetPublisherName(PublisherName);
+                GameInfoWindow.SetGenreName(GenreName);
+                GameInfoWindow.SetConsoleName(ConsoleName);
+                GameInfoWindow.SetReleaseDateName(ReleasedDateName);
+
+                if (!string.IsNullOrEmpty(title))
                 {
-                    SetSimpleSettings();
+                    GameInfoWindow.SetTitleValue(title);
+                    GameInfoWindow.SetDeveloperValue(developer);
+                    GameInfoWindow.SetPublisherValue(publisher);
+                    GameInfoWindow.SetGenreValue(genre);
+                    GameInfoWindow.SetConsoleValue(console);
+                    GameInfoWindow.SetReleaseDateValue(released);
                 }
-            });
-
-            GameInfoWindow.SetWindowBackgroundColor(WindowBackgroundColor);
-
-            GameInfoWindow.SetTitleName(TitleName);
-            GameInfoWindow.SetDeveloperName(DeveloperName);
-            GameInfoWindow.SetPublisherName(PublisherName);
-            GameInfoWindow.SetGenreName(GenreName);
-            GameInfoWindow.SetConsoleName(ConsoleName);
-            GameInfoWindow.SetReleaseDateName(ReleasedDateName);
-
-            if (!string.IsNullOrEmpty(title))
-            {
-                GameInfoWindow.SetTitleValue(title);
-                GameInfoWindow.SetDeveloperValue(developer);
-                GameInfoWindow.SetPublisherValue(publisher);
-                GameInfoWindow.SetGenreValue(genre);
-                GameInfoWindow.SetConsoleValue(console);
-                GameInfoWindow.SetReleaseDateValue(released);
             }
         }
         public async void SetSimpleSettings()
@@ -149,7 +161,11 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.game_info_window_background_color = value;
                 Settings.Default.Save();
-                GameInfoWindow.SetWindowBackgroundColor(value);
+
+                if (IsOpen)
+                {
+                    GameInfoWindow.SetWindowBackgroundColor(value);
+                }
             }
         }
         public bool AdvancedSettingsEnabled
@@ -177,7 +193,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.game_info_title_name = value;
                 Settings.Default.Save();
 
-                GameInfoWindow.SetTitleName(value);
+                if (IsOpen)
+                {
+                    GameInfoWindow.SetTitleName(value);
+                }
             }
         }
         public string ConsoleName
@@ -191,7 +210,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.game_info_console_name = value;
                 Settings.Default.Save();
 
-                GameInfoWindow.SetConsoleName(value);
+                if (IsOpen)
+                {
+                    GameInfoWindow.SetConsoleName(value);
+                }
             }
         }
         public string DeveloperName
@@ -205,7 +227,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.game_info_developer_name = value;
                 Settings.Default.Save();
 
-                GameInfoWindow.SetDeveloperName(value);
+                if (IsOpen)
+                {
+                    GameInfoWindow.SetDeveloperName(value);
+                }
             }
         }
         public string PublisherName
@@ -219,7 +244,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.game_info_publisher_name = value;
                 Settings.Default.Save();
 
-                GameInfoWindow.SetPublisherName(value);
+                if (IsOpen)
+                {
+                    GameInfoWindow.SetPublisherName(value);
+                }
             }
         }
         public string GenreName
@@ -233,7 +261,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.game_info_genre_name = value;
                 Settings.Default.Save();
 
-                GameInfoWindow.SetGenreName(value);
+                if (IsOpen)
+                {
+                    GameInfoWindow.SetGenreName(value);
+                }
             }
         }
         public string ReleasedDateName
@@ -247,7 +278,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.game_info_release_date_name = value;
                 Settings.Default.Save();
 
-                GameInfoWindow.SetReleaseDateName(value);
+                if (IsOpen)
+                {
+                    GameInfoWindow.SetReleaseDateName(value);
+                }
             }
         }
         public bool TitleEnabled
@@ -261,7 +295,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.game_info_title_enabled = value;
                 Settings.Default.Save();
 
-                GameInfoWindow.SetTitleVisibility(value);
+                if (IsOpen)
+                {
+                    GameInfoWindow.SetTitleVisibility(value);
+                }
             }
         }
         public bool ConsoleEnabled
@@ -275,7 +312,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.game_info_console_enabled = value;
                 Settings.Default.Save();
 
-                GameInfoWindow.SetConsoleVisibility(value);
+                if (IsOpen)
+                {
+                    GameInfoWindow.SetConsoleVisibility(value);
+                }
             }
         }
         public bool DeveloperEnabled
@@ -289,7 +329,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.game_info_developer_enabled = value;
                 Settings.Default.Save();
 
-                GameInfoWindow.SetDeveloperVisibility(value);
+                if (IsOpen)
+                {
+                    GameInfoWindow.SetDeveloperVisibility(value);
+                }
             }
         }
         public bool PublisherEnabled
@@ -303,7 +346,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.game_info_publisher_enabled = value;
                 Settings.Default.Save();
 
-                GameInfoWindow.SetPublisherVisibility(value);
+                if (IsOpen)
+                {
+                    GameInfoWindow.SetPublisherVisibility(value);
+                }
             }
         }
         public bool GenreEnabled
@@ -317,7 +363,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.game_info_genre_enabled = value;
                 Settings.Default.Save();
 
-                GameInfoWindow.SetGenreVisibility(value);
+                if (IsOpen)
+                {
+                    GameInfoWindow.SetGenreVisibility(value);
+                }
             }
         }
         public bool ReleasedDateEnabled
@@ -331,7 +380,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.game_info_release_date_enabled = value;
                 Settings.Default.Save();
 
-                GameInfoWindow.SetReleaseDateVisibility(value);
+                if (IsOpen)
+                {
+                    GameInfoWindow.SetReleaseDateVisibility(value);
+                }
             }
         }
         public FontFamily SimpleFontFamily
@@ -356,10 +408,13 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.game_info_font_family_name = value.Name;
                 Settings.Default.Save();
 
-                Task.Run(async () =>
+                if (IsOpen)
                 {
-                    await GameInfoWindow.SetSimpleFontFamily(SimpleFontFamily);
-                });
+                    Task.Run(async () =>
+                    {
+                        await GameInfoWindow.SetSimpleFontFamily(SimpleFontFamily);
+                    });
+                }
             }
         }
         public string SimpleFontColor
@@ -373,10 +428,13 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.game_info_font_color_hex_code = value;
                 Settings.Default.Save();
 
-                Task.Run(async () =>
+                if (IsOpen)
                 {
-                    await GameInfoWindow.SetSimpleFontColor(value);
-                });
+                    Task.Run(async () =>
+                    {
+                        await GameInfoWindow.SetSimpleFontColor(value);
+                    });
+                }
             }
         }
         public string SimpleFontOutlineColor
@@ -389,10 +447,13 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.game_info_font_outline_color_hex = value;
                 Settings.Default.Save();
-                Task.Run(async () =>
+                if (IsOpen)
                 {
-                    await GameInfoWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px");
-                });
+                    Task.Run(async () =>
+                    {
+                        await GameInfoWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px");
+                    });
+                }
             }
         }
         public int SimpleFontOutlineSize
@@ -406,10 +467,13 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.game_info_font_outline_size = value;
                 Settings.Default.Save();
 
-                Task.Run(async () =>
+                if (IsOpen)
                 {
-                    await GameInfoWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px");
-                });
+                    Task.Run(async () =>
+                    {
+                        await GameInfoWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px");
+                    });
+                }
             }
         }
         public bool SimpleFontOutlineEnabled
@@ -422,10 +486,13 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.game_info_font_outline_enabled = value;
                 Settings.Default.Save();
-                Task.Run(async () =>
+                if (IsOpen)
                 {
-                    await GameInfoWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px");
-                });
+                    Task.Run(async () =>
+                    {
+                        await GameInfoWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px");
+                    });
+                }
             }
         }
         public FontFamily NameFontFamily
@@ -449,10 +516,13 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.game_info_name_font_family = value.Name;
                 Settings.Default.Save();
-                Task.Run(async () =>
+                if (IsOpen)
                 {
-                    await GameInfoWindow.SetNameFontFamily(NameFontFamily);
-                });
+                    Task.Run(async () =>
+                    {
+                        await GameInfoWindow.SetNameFontFamily(NameFontFamily);
+                    });
+                }
             }
         }
         public FontFamily ValueFontFamily
@@ -476,10 +546,14 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.game_info_value_font_family = value.Name;
                 Settings.Default.Save();
-                Task.Run(async () =>
+
+                if (IsOpen)
                 {
-                    await GameInfoWindow.SetValueFontFamily(ValueFontFamily);
-                });
+                    Task.Run(async () =>
+                    {
+                        await GameInfoWindow.SetValueFontFamily(ValueFontFamily);
+                    });
+                }
             }
         }
 
@@ -494,10 +568,13 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.game_info_name_color = value;
                 Settings.Default.Save();
 
-                Task.Run(async () =>
+                if (IsOpen)
                 {
-                    await GameInfoWindow.SetNameColor(value);
-                });
+                    Task.Run(async () =>
+                    {
+                        await GameInfoWindow.SetNameColor(value);
+                    });
+                }
             }
         }
         public string ValueColor
@@ -511,10 +588,13 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.game_info_value_color = value;
                 Settings.Default.Save();
 
-                Task.Run(async () =>
+                if (IsOpen)
                 {
-                    await GameInfoWindow.SetValueColor(value);
-                });
+                    Task.Run(async () =>
+                    {
+                        await GameInfoWindow.SetValueColor(value);
+                    });
+                }
             }
         }
         public bool NameOutlineEnabled
@@ -528,10 +608,13 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.game_info_name_outline_enabled = value;
                 Settings.Default.Save();
 
-                Task.Run(async () =>
+                if (IsOpen)
                 {
-                    await GameInfoWindow.SetNameOutline(value ? NameOutlineColor + " " + NameOutlineSize + "px" : "0px");
-                });
+                    Task.Run(async () =>
+                    {
+                        await GameInfoWindow.SetNameOutline(value ? NameOutlineColor + " " + NameOutlineSize + "px" : "0px");
+                    });
+                }
             }
         }
         public bool ValueOutlineEnabled
@@ -545,10 +628,13 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.game_info_value_outline_enabled = value;
                 Settings.Default.Save();
 
-                Task.Run(async () =>
+                if (IsOpen)
                 {
-                    await GameInfoWindow.SetValueOutline(value ? ValueOutlineColor + " " + ValueOutlineSize + "px" : "0px");
-                });
+                    Task.Run(async () =>
+                    {
+                        await GameInfoWindow.SetValueOutline(value ? ValueOutlineColor + " " + ValueOutlineSize + "px" : "0px");
+                    });
+                }
             }
         }
         public string NameOutlineColor
@@ -561,10 +647,15 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.game_info_name_outline_color = value;
                 Settings.Default.Save();
-                Task.Run(async () =>
+
+
+                if (IsOpen)
                 {
-                    await GameInfoWindow.SetNameOutline(NameOutlineEnabled ? NameOutlineColor + " " + NameOutlineSize + "px" : "0px");
-                });
+                    Task.Run(async () =>
+                    {
+                        await GameInfoWindow.SetNameOutline(NameOutlineEnabled ? NameOutlineColor + " " + NameOutlineSize + "px" : "0px");
+                    });
+                }
             }
         }
         public string ValueOutlineColor
@@ -577,10 +668,15 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.game_info_value_outline_color = value;
                 Settings.Default.Save();
-                Task.Run(async () =>
+
+
+                if (IsOpen)
                 {
-                    await GameInfoWindow.SetValueOutline(ValueOutlineEnabled ? ValueOutlineColor + " " + ValueOutlineSize + "px" : "0px");
-                });
+                    Task.Run(async () =>
+                    {
+                        await GameInfoWindow.SetValueOutline(ValueOutlineEnabled ? ValueOutlineColor + " " + ValueOutlineSize + "px" : "0px");
+                    });
+                }
             }
         }
         public int NameOutlineSize
@@ -593,10 +689,15 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.game_info_name_outline_size = value;
                 Settings.Default.Save();
-                Task.Run(async () =>
+
+
+                if (IsOpen)
                 {
-                    await GameInfoWindow.SetNameOutline(NameOutlineColor + " " + NameOutlineSize + "px");
-                });
+                    Task.Run(async () =>
+                    {
+                        await GameInfoWindow.SetNameOutline(NameOutlineColor + " " + NameOutlineSize + "px");
+                    });
+                }
             }
         }
         public int ValueOutlineSize
@@ -610,10 +711,13 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.game_info_value_outline_size = value;
                 Settings.Default.Save();
 
-                Task.Run(async () =>
+                if (IsOpen)
                 {
-                    await GameInfoWindow.SetValueOutline(ValueOutlineColor + " " + ValueOutlineSize + "px");
-                });
+                    Task.Run(async () =>
+                    {
+                        await GameInfoWindow.SetValueOutline(ValueOutlineColor + " " + ValueOutlineSize + "px");
+                    });
+                }
             }
         }
         public bool AutoLaunch

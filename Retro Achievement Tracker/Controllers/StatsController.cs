@@ -9,6 +9,7 @@ namespace Retro_Achievement_Tracker.Controllers
     {
         private static StatsController instance = new StatsController();
         private static StatsWindow StatsWindow;
+        public static bool IsOpen;
 
         private string rank;
         private string awards;
@@ -27,6 +28,7 @@ namespace Retro_Achievement_Tracker.Controllers
         private StatsController()
         {
             StatsWindow = new StatsWindow();
+            IsOpen = false;
         }
         public static StatsController Instance
         {
@@ -41,75 +43,68 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public void Show()
         {
-            if (StatsWindow.IsDisposed)
+            if (!IsOpen)
             {
                 StatsWindow = new StatsWindow();
-            }
-            if (StatsWindow.chromiumWebBrowser == null)
-            {
-                StatsWindow.SetupBrowser();
-            }
-            StatsWindow.Show();
-        }
-        public void Reset()
-        {
-            if (!StatsWindow.IsDisposed)
-            {
-                StatsWindow.SetupBrowser();
+                StatsWindow.Show();
             }
         }
         public async void SetAllSettings()
         {
-            await StatsWindow.AssignJavaScriptVariables().ContinueWith((result) =>
+
+            if (IsOpen)
             {
-                if (AdvancedSettingsEnabled)
+                await StatsWindow.AssignJavaScriptVariables().ContinueWith((result) =>
                 {
-                    SetAdvancedSettings();
-                }
-                else
+                    if (AdvancedSettingsEnabled)
+                    {
+                        SetAdvancedSettings();
+                    }
+                    else
+                    {
+                        SetSimpleSettings();
+                    }
+                });
+
+                StatsWindow.SetWindowBackgroundColor(WindowBackgroundColor);
+                StatsWindow.SetAwardsName(AwardsName);
+                StatsWindow.SetRankName(RankName);
+                StatsWindow.SetPointsName(PointsName);
+                StatsWindow.SetRatioName(RatioName);
+                StatsWindow.SetTruePointsName(TruePointsName);
+
+                StatsWindow.SetGameAchievementsName(GameAchievementsName);
+                StatsWindow.SetGamePointsName(GamePointsName);
+                StatsWindow.SetGameTruePointsName(GameTruePointsName);
+                StatsWindow.SetGameRatioName(GameRatioName);
+                StatsWindow.SetCompletedName(CompletedName);
+
+                if (!string.IsNullOrEmpty(rank))
                 {
-                    SetSimpleSettings();
+                    StatsWindow.SetRankValue(rank);
+                    StatsWindow.SetAwardsValue(awards);
+                    StatsWindow.SetPointsValue(points);
+                    StatsWindow.SetRatioValue(ratio);
+                    StatsWindow.SetTruePointsValue(truePoints);
+
+                    StatsWindow.SetGameAchievementsValue(gameAchievementsEarned + " " + DividerCharacter + " " + gameAchievementsPossible);
+                    StatsWindow.SetGamePointsValue(gamePointsEarned + " " + DividerCharacter + " " + gamePointsPossible);
+                    StatsWindow.SetGameTruePointsValue(gameTruePointsEarned + " " + DividerCharacter + " " + gameTruePointsPossible);
+                    StatsWindow.SetGameRatioValue(GameRatio);
+                    StatsWindow.SetCompletedValue(completed);
                 }
-            });
 
-            StatsWindow.SetWindowBackgroundColor(WindowBackgroundColor);
-            StatsWindow.SetAwardsName(AwardsName);
-            StatsWindow.SetRankName(RankName);
-            StatsWindow.SetPointsName(PointsName);
-            StatsWindow.SetRatioName(RatioName);
-            StatsWindow.SetTruePointsName(TruePointsName);
-
-            StatsWindow.SetGameAchievementsName(GameAchievementsName);
-            StatsWindow.SetGamePointsName(GamePointsName);
-            StatsWindow.SetGameTruePointsName(GameTruePointsName);
-            StatsWindow.SetGameRatioName(GameRatioName);
-            StatsWindow.SetCompletedName(CompletedName);
-
-            if (!string.IsNullOrEmpty(rank))
-            {
-                StatsWindow.SetRankValue(rank);
-                StatsWindow.SetAwardsValue(awards);
-                StatsWindow.SetPointsValue(points);
-                StatsWindow.SetRatioValue(ratio);
-                StatsWindow.SetTruePointsValue(truePoints);
-
-                StatsWindow.SetGameAchievementsValue(gameAchievementsEarned + " " + DividerCharacter + " " + gameAchievementsPossible);
-                StatsWindow.SetGamePointsValue(gamePointsEarned + " " + DividerCharacter + " " + gamePointsPossible);
-                StatsWindow.SetGameTruePointsValue(gameTruePointsEarned + " " + DividerCharacter + " " + gameTruePointsPossible);
-                StatsWindow.SetGameRatioValue(GameRatio);
-                StatsWindow.SetCompletedValue(completed);
+                StatsWindow.SetRankVisibility(RankEnabled);
+                StatsWindow.SetAwardsVisibility(AwardsEnabled);
+                StatsWindow.SetPointsVisibility(PointsEnabled);
+                StatsWindow.SetRatioVisibility(RatioEnabled);
+                StatsWindow.SetTruePointsVisibility(TruePointsEnabled);
+                StatsWindow.SetGameAchievementsVisibility(GameAchievementsEnabled);
+                StatsWindow.SetGamePointsVisibility(GamePointsEnabled);
+                StatsWindow.SetGameTruePointsVisibility(GameTruePointsEnabled);
+                StatsWindow.SetGameRatioVisibility(GameRatioEnabled);
+                StatsWindow.SetCompletedVisibility(CompletedEnabled);
             }
-
-            StatsWindow.SetRankVisibility(RankEnabled);
-            StatsWindow.SetAwardsVisibility(AwardsEnabled);
-            StatsWindow.SetPointsVisibility(PointsEnabled);
-            StatsWindow.SetRatioVisibility(RatioEnabled);
-            StatsWindow.SetTruePointsVisibility(TruePointsEnabled);
-            StatsWindow.SetGameAchievementsVisibility(GameAchievementsEnabled);
-            StatsWindow.SetGamePointsVisibility(GamePointsEnabled);
-            StatsWindow.SetGameTruePointsVisibility(GameTruePointsEnabled);
-            StatsWindow.SetGameRatioVisibility(GameRatioEnabled);
-            StatsWindow.SetCompletedVisibility(CompletedEnabled);
         }
         public async void SetSimpleSettings()
         {
@@ -131,31 +126,51 @@ namespace Retro_Achievement_Tracker.Controllers
         internal void SetRank(string value)
         {
             rank = value;
-            StatsWindow.SetRankValue(value);
+
+            if (IsOpen)
+            {
+                StatsWindow.SetRankValue(value);
+            }
         }
 
         internal void SetRatio(string value)
         {
             ratio = value + (UsePercentageSymbol ? " %" : "");
-            StatsWindow.SetRatioValue(value);
+
+            if (IsOpen)
+            {
+                StatsWindow.SetRatioValue(value);
+            }
         }
 
         internal void SetAwards(string value)
         {
             awards = value;
-            StatsWindow.SetAwardsValue(value);
+
+            if (IsOpen)
+            {
+                StatsWindow.SetAwardsValue(value);
+            }
         }
 
         internal void SetPoints(string value)
         {
             points = value;
-            StatsWindow.SetPointsValue(value);
+
+            if (IsOpen)
+            {
+                StatsWindow.SetPointsValue(value);
+            }
         }
 
         internal void SetTruePoints(string value)
         {
             truePoints = value;
-            StatsWindow.SetTruePointsValue(value);
+
+            if (IsOpen)
+            {
+                StatsWindow.SetTruePointsValue(value);
+            }
         }
 
         internal void SetGamePoints(string pointsEarned, string pointsPossible)
@@ -163,7 +178,11 @@ namespace Retro_Achievement_Tracker.Controllers
             gamePointsEarned = pointsEarned;
             gamePointsPossible = pointsPossible;
 
-            StatsWindow.SetGamePointsValue(pointsEarned + " " + DividerCharacter + " " + pointsPossible);
+
+            if (IsOpen)
+            {
+                StatsWindow.SetGamePointsValue(pointsEarned + " " + DividerCharacter + " " + pointsPossible);
+            }
         }
 
         internal void SetGameAchievements(string achievementsEarned, string achievementsPossible)
@@ -171,7 +190,11 @@ namespace Retro_Achievement_Tracker.Controllers
             gameAchievementsEarned = achievementsEarned;
             gameAchievementsPossible = achievementsPossible;
 
-            StatsWindow.SetGameAchievementsValue(achievementsEarned + " " + DividerCharacter + " " + achievementsPossible);
+
+            if (IsOpen)
+            {
+                StatsWindow.SetGameAchievementsValue(achievementsEarned + " " + DividerCharacter + " " + achievementsPossible);
+            }
         }
 
         internal void SetGameTruePoints(string truePointsEarned, string truePointsPossible)
@@ -179,18 +202,30 @@ namespace Retro_Achievement_Tracker.Controllers
             gameTruePointsEarned = truePointsEarned;
             gameTruePointsPossible = truePointsPossible;
 
-            StatsWindow.SetGameTruePointsValue(truePointsEarned + " " + DividerCharacter + " " + truePointsPossible);
+
+            if (IsOpen)
+            {
+                StatsWindow.SetGameTruePointsValue(truePointsEarned + " " + DividerCharacter + " " + truePointsPossible);
+            }
         }
 
         internal void SetGameRatio()
         {
-            StatsWindow.SetGameRatioValue(GameRatio);
+
+            if (IsOpen)
+            {
+                StatsWindow.SetGameRatioValue(GameRatio);
+            }
         }
 
         internal void SetCompleted(float value)
         {
             completed = value.ToString("0.00") + (UsePercentageSymbol ? " %" : "");
-            StatsWindow.SetCompletedValue(completed);
+
+            if (IsOpen)
+            {
+                StatsWindow.SetCompletedValue(completed);
+            }
         }
         /**
          * Variables
@@ -217,7 +252,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_window_background_color = value;
                 Settings.Default.Save();
 
-                StatsWindow.SetWindowBackgroundColor(value);
+                if (IsOpen)
+                {
+                    StatsWindow.SetWindowBackgroundColor(value);
+                }
             }
         }
         public bool AdvancedSettingsEnabled
@@ -231,7 +269,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_advanced_options_enabled = value;
                 Settings.Default.Save();
 
-                SetAllSettings();
+                if (IsOpen)
+                {
+                    SetAllSettings();
+                }
             }
         }
         public FontFamily SimpleFontFamily
@@ -256,11 +297,14 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_font_family_name = value.Name;
                 Settings.Default.Save();
 
-                Task.Run(async () =>
+                if (IsOpen)
                 {
-                    await StatsWindow.AssignJavaScriptVariables();
-                    await StatsWindow.SetSimpleFontFamily(SimpleFontFamily);
-                });
+                    Task.Run(async () =>
+                    {
+                        await StatsWindow.AssignJavaScriptVariables();
+                        await StatsWindow.SetSimpleFontFamily(SimpleFontFamily);
+                    });
+                }
             }
         }
         public string SimpleFontColor
@@ -274,11 +318,14 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_font_color_hex_code = value;
                 Settings.Default.Save();
 
-                Task.Run(async () =>
+                if (IsOpen)
                 {
-                    await StatsWindow.AssignJavaScriptVariables();
-                    await StatsWindow.SetSimpleFontColor(value);
-                });
+                    Task.Run(async () =>
+                    {
+                        await StatsWindow.AssignJavaScriptVariables();
+                        await StatsWindow.SetSimpleFontColor(value);
+                    });
+                }
             }
         }
         public string SimpleFontOutlineColor
@@ -291,11 +338,16 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.stats_font_outline_color_hex = value;
                 Settings.Default.Save();
-                Task.Run(async () =>
+
+
+                if (IsOpen)
                 {
-                    await StatsWindow.AssignJavaScriptVariables();
-                    await StatsWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px");
-                });
+                    Task.Run(async () =>
+                    {
+                        await StatsWindow.AssignJavaScriptVariables();
+                        await StatsWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px");
+                    });
+                }
             }
         }
         public int SimpleFontOutlineSize
@@ -309,11 +361,14 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_font_outline_size = value;
                 Settings.Default.Save();
 
-                Task.Run(async () =>
+                if (IsOpen)
                 {
-                    await StatsWindow.AssignJavaScriptVariables();
-                    await StatsWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px");
-                });
+                    Task.Run(async () =>
+                    {
+                        await StatsWindow.AssignJavaScriptVariables();
+                        await StatsWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px");
+                    });
+                }
             }
         }
         public bool SimpleFontOutlineEnabled
@@ -326,11 +381,16 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.stats_font_outline_enabled = value;
                 Settings.Default.Save();
-                Task.Run(async () =>
+
+
+                if (IsOpen)
                 {
-                    await StatsWindow.AssignJavaScriptVariables();
-                    await StatsWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px");
-                });
+                    Task.Run(async () =>
+                    {
+                        await StatsWindow.AssignJavaScriptVariables();
+                        await StatsWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px");
+                    });
+                }
             }
         }
         public FontFamily NameFontFamily
@@ -354,11 +414,14 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.stats_name_font_family = value.Name;
                 Settings.Default.Save();
-                Task.Run(async () =>
+                if (IsOpen)
                 {
-                    await StatsWindow.AssignJavaScriptVariables();
-                    await StatsWindow.SetNameFontFamily(NameFontFamily);
-                });
+                    Task.Run(async () =>
+                    {
+                        await StatsWindow.AssignJavaScriptVariables();
+                        await StatsWindow.SetNameFontFamily(NameFontFamily);
+                    });
+                }
             }
         }
         public FontFamily ValueFontFamily
@@ -382,11 +445,14 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.stats_value_font_family = value.Name;
                 Settings.Default.Save();
-                Task.Run(async () =>
+                if (IsOpen)
                 {
-                    await StatsWindow.AssignJavaScriptVariables();
-                    await StatsWindow.SetValueFontFamily(ValueFontFamily);
-                });
+                    Task.Run(async () =>
+                    {
+                        await StatsWindow.AssignJavaScriptVariables();
+                        await StatsWindow.SetValueFontFamily(ValueFontFamily);
+                    });
+                }
             }
         }
 
@@ -401,11 +467,14 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_name_color = value;
                 Settings.Default.Save();
 
-                Task.Run(async () =>
+                if (IsOpen)
                 {
-                    await StatsWindow.AssignJavaScriptVariables();
-                    await StatsWindow.SetNameColor(value);
-                });
+                    Task.Run(async () =>
+                    {
+                        await StatsWindow.AssignJavaScriptVariables();
+                        await StatsWindow.SetNameColor(value);
+                    });
+                }
             }
         }
         public string ValueColor
@@ -419,11 +488,14 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_value_color = value;
                 Settings.Default.Save();
 
-                Task.Run(async () =>
+                if (IsOpen)
                 {
-                    await StatsWindow.AssignJavaScriptVariables();
-                    await StatsWindow.SetValueColor(value);
-                });
+                    Task.Run(async () =>
+                    {
+                        await StatsWindow.AssignJavaScriptVariables();
+                        await StatsWindow.SetValueColor(value);
+                    });
+                }
             }
         }
         public bool NameOutlineEnabled
@@ -437,11 +509,14 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_name_outline_enabled = value;
                 Settings.Default.Save();
 
-                Task.Run(async () =>
+                if (IsOpen)
                 {
-                    await StatsWindow.AssignJavaScriptVariables();
-                    await StatsWindow.SetNameOutline(value ? NameOutlineColor + " " + NameOutlineSize + "px" : "0px");
-                });
+                    Task.Run(async () =>
+                    {
+                        await StatsWindow.AssignJavaScriptVariables();
+                        await StatsWindow.SetNameOutline(value ? NameOutlineColor + " " + NameOutlineSize + "px" : "0px");
+                    });
+                }
             }
         }
         public bool ValueOutlineEnabled
@@ -455,11 +530,14 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_value_outline_enabled = value;
                 Settings.Default.Save();
 
-                Task.Run(async () =>
+                if (IsOpen)
                 {
-                    await StatsWindow.AssignJavaScriptVariables();
-                    await StatsWindow.SetValueOutline(value ? ValueOutlineColor + " " + ValueOutlineSize + "px" : "0px");
-                });
+                    Task.Run(async () =>
+                    {
+                        await StatsWindow.AssignJavaScriptVariables();
+                        await StatsWindow.SetValueOutline(value ? ValueOutlineColor + " " + ValueOutlineSize + "px" : "0px");
+                    });
+                }
             }
         }
         public string NameOutlineColor
@@ -472,11 +550,16 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.stats_name_outline_color = value;
                 Settings.Default.Save();
-                Task.Run(async () =>
+
+
+                if (IsOpen)
                 {
-                    await StatsWindow.AssignJavaScriptVariables();
-                    await StatsWindow.SetNameOutline(NameOutlineEnabled ? NameOutlineColor + " " + NameOutlineSize + "px" : "0px");
-                });
+                    Task.Run(async () =>
+                    {
+                        await StatsWindow.AssignJavaScriptVariables();
+                        await StatsWindow.SetNameOutline(NameOutlineEnabled ? NameOutlineColor + " " + NameOutlineSize + "px" : "0px");
+                    });
+                }
             }
         }
         public string ValueOutlineColor
@@ -489,11 +572,14 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.stats_value_outline_color = value;
                 Settings.Default.Save();
-                Task.Run(async () =>
+                if (IsOpen)
                 {
-                    await StatsWindow.AssignJavaScriptVariables();
-                    await StatsWindow.SetValueOutline(ValueOutlineEnabled ? ValueOutlineColor + " " + ValueOutlineSize + "px" : "0px");
-                });
+                    Task.Run(async () =>
+                    {
+                        await StatsWindow.AssignJavaScriptVariables();
+                        await StatsWindow.SetValueOutline(ValueOutlineEnabled ? ValueOutlineColor + " " + ValueOutlineSize + "px" : "0px");
+                    });
+                }
             }
         }
         public int NameOutlineSize
@@ -506,11 +592,15 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.stats_name_outline_size = value;
                 Settings.Default.Save();
-                Task.Run(async () =>
+
+                if (IsOpen)
                 {
-                    await StatsWindow.AssignJavaScriptVariables();
-                    await StatsWindow.SetNameOutline(NameOutlineColor + " " + NameOutlineSize + "px");
-                });
+                    Task.Run(async () =>
+                    {
+                        await StatsWindow.AssignJavaScriptVariables();
+                        await StatsWindow.SetNameOutline(NameOutlineColor + " " + NameOutlineSize + "px");
+                    });
+                }
             }
         }
         public int ValueOutlineSize
@@ -524,11 +614,14 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_value_outline_size = value;
                 Settings.Default.Save();
 
-                Task.Run(async () =>
+                if (IsOpen)
                 {
-                    await StatsWindow.AssignJavaScriptVariables();
-                    await StatsWindow.SetValueOutline(ValueOutlineColor + " " + ValueOutlineSize + "px");
-                });
+                    Task.Run(async () =>
+                    {
+                        await StatsWindow.AssignJavaScriptVariables();
+                        await StatsWindow.SetValueOutline(ValueOutlineColor + " " + ValueOutlineSize + "px");
+                    });
+                }
             }
         }
         public string RankName
@@ -542,7 +635,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_rank_name = value;
                 Settings.Default.Save();
 
-                StatsWindow.SetRankName(value);
+                if (IsOpen)
+                {
+                    StatsWindow.SetRankName(value);
+                }
             }
         }
         public string AwardsName
@@ -556,7 +652,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_awards_name = value;
                 Settings.Default.Save();
 
-                StatsWindow.SetAwardsName(value);
+                if (IsOpen)
+                {
+                    StatsWindow.SetAwardsName(value);
+                }
             }
         }
         public string PointsName
@@ -570,7 +669,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_points_name = value;
                 Settings.Default.Save();
 
-                StatsWindow.SetPointsName(value);
+                if (IsOpen)
+                {
+                    StatsWindow.SetPointsName(value);
+                }
             }
         }
         public string TruePointsName
@@ -584,7 +686,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_game_true_points_name = value;
                 Settings.Default.Save();
 
-                StatsWindow.SetTruePointsName(value);
+                if (IsOpen)
+                {
+                    StatsWindow.SetTruePointsName(value);
+                }
             }
         }
         public string RatioName
@@ -598,7 +703,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_ratio_name = value;
                 Settings.Default.Save();
 
-                StatsWindow.SetRatioName(value);
+                if (IsOpen)
+                {
+                    StatsWindow.SetRatioName(value);
+                }
             }
         }
         public string GameRatioName
@@ -612,7 +720,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_game_ratio_name = value;
                 Settings.Default.Save();
 
-                StatsWindow.SetGameRatioName(value);
+                if (IsOpen)
+                {
+                    StatsWindow.SetGameRatioName(value);
+                }
             }
         }
         public string GamePointsName
@@ -626,7 +737,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_game_points_name = value;
                 Settings.Default.Save();
 
-                StatsWindow.SetGamePointsName(value);
+                if (IsOpen)
+                {
+                    StatsWindow.SetGamePointsName(value);
+                }
             }
         }
         public string GameTruePointsName
@@ -640,7 +754,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_game_true_points_name = value;
                 Settings.Default.Save();
 
-                StatsWindow.SetGameTruePointsName(value);
+                if (IsOpen)
+                {
+                    StatsWindow.SetGameTruePointsName(value);
+                }
             }
         }
         public string GameAchievementsName
@@ -654,7 +771,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_game_achievements_name = value;
                 Settings.Default.Save();
 
-                StatsWindow.SetGameAchievementsName(value);
+                if (IsOpen)
+                {
+                    StatsWindow.SetGameAchievementsName(value);
+                }
             }
         }
         public string CompletedName
@@ -668,7 +788,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_completed_name = value;
                 Settings.Default.Save();
 
-                StatsWindow.SetCompletedName(value);
+                if (IsOpen)
+                {
+                    StatsWindow.SetCompletedName(value);
+                }
             }
         }
         public bool RankEnabled
@@ -682,7 +805,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_rank_enabled = value;
                 Settings.Default.Save();
 
-                StatsWindow.SetRankVisibility(value);
+                if (IsOpen)
+                {
+                    StatsWindow.SetRankVisibility(value);
+                }
             }
         }
         public bool AwardsEnabled
@@ -696,7 +822,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_awards_enabled = value;
                 Settings.Default.Save();
 
-                StatsWindow.SetAwardsVisibility(value);
+                if (IsOpen)
+                {
+                    StatsWindow.SetAwardsVisibility(value);
+                }
             }
         }
         public bool PointsEnabled
@@ -710,7 +839,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_points_enabled = value;
                 Settings.Default.Save();
 
-                StatsWindow.SetPointsVisibility(value);
+                if (IsOpen)
+                {
+                    StatsWindow.SetPointsVisibility(value);
+                }
             }
         }
         public bool TruePointsEnabled
@@ -724,7 +856,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_true_points_enabled = value;
                 Settings.Default.Save();
 
-                StatsWindow.SetTruePointsVisibility(value);
+                if (IsOpen)
+                {
+                    StatsWindow.SetTruePointsVisibility(value);
+                }
             }
         }
         public bool RatioEnabled
@@ -738,7 +873,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_ratio_enabled = value;
                 Settings.Default.Save();
 
-                StatsWindow.SetRatioVisibility(value);
+                if (IsOpen)
+                {
+                    StatsWindow.SetRatioVisibility(value);
+                }
             }
         }
         public bool GameRatioEnabled
@@ -752,7 +890,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_game_ratio_enabled = value;
                 Settings.Default.Save();
 
-                StatsWindow.SetGameRatioVisibility(value);
+                if (IsOpen)
+                {
+                    StatsWindow.SetGameRatioVisibility(value);
+                }
             }
         }
         public bool GamePointsEnabled
@@ -766,7 +907,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_game_points_enabled = value;
                 Settings.Default.Save();
 
-                StatsWindow.SetGamePointsVisibility(value);
+                if (IsOpen)
+                {
+                    StatsWindow.SetGamePointsVisibility(value);
+                }
             }
         }
         public bool GameTruePointsEnabled
@@ -780,7 +924,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_game_true_points_enabled = value;
                 Settings.Default.Save();
 
-                StatsWindow.SetGameTruePointsVisibility(value);
+                if (IsOpen)
+                {
+                    StatsWindow.SetGameTruePointsVisibility(value);
+                }
             }
         }
         public bool GameAchievementsEnabled
@@ -794,7 +941,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_game_achievements_enabled = value;
                 Settings.Default.Save();
 
-                StatsWindow.SetGameAchievementsVisibility(value);
+                if (IsOpen)
+                {
+                    StatsWindow.SetGameAchievementsVisibility(value);
+                }
             }
         }
         public bool CompletedEnabled
@@ -808,7 +958,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_completed_enabled = value;
                 Settings.Default.Save();
 
-                StatsWindow.SetCompletedVisibility(value);
+                if (IsOpen)
+                {
+                    StatsWindow.SetCompletedVisibility(value);
+                }
             }
         }
         public bool AutoLaunch

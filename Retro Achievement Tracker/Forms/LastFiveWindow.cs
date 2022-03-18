@@ -18,7 +18,23 @@ namespace Retro_Achievement_Tracker
 
             Name = "RA Tracker - Last Five Achievements";
             Text = "RA Tracker - Last Five Achievements";
+
+            Shown += LastFiveWindow_Shown;
+            FormClosed += LastFiveWindow_FormClosed;
+
+            SetupBrowser();
         }
+
+        private void LastFiveWindow_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            LastFiveController.IsOpen = false;
+        }
+
+        private void LastFiveWindow_Shown(object sender, EventArgs e)
+        {
+            LastFiveController.IsOpen = true;
+        }
+
         protected override bool ShowWithoutActivation
         {
             get { return true; }
@@ -193,7 +209,7 @@ namespace Retro_Achievement_Tracker
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
             }
             return 800;
         }
@@ -238,8 +254,9 @@ namespace Retro_Achievement_Tracker
                 {
                     await chromiumWebBrowser.EvaluateScriptAsync(script, TimeSpan.FromSeconds(5));
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    Console.WriteLine(ex.StackTrace);
                 }
             }
         }
@@ -272,19 +289,5 @@ namespace Retro_Achievement_Tracker
         }
 
         public CefSharp.WinForms.ChromiumWebBrowser chromiumWebBrowser;
-
-        private void InitializeComponent()
-        {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LastFiveWindow));
-            this.SuspendLayout();
-            // 
-            // LastFiveWindow
-            // 
-            this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "LastFiveWindow";
-            this.ResumeLayout(false);
-
-        }
     }
 }
