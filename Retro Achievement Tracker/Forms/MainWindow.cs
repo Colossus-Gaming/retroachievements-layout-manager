@@ -2112,6 +2112,10 @@ namespace Retro_Achievement_Tracker
                         StatsController.Instance.WindowBackgroundColor = MediaHelper.HexConverter(colorDialog1.Color);
                         windowBackgroundColorPictureBox.BackColor = colorDialog1.Color;
                         break;
+                    case CustomMenuState.ACHIEVEMENT_LIST:
+                        AchievementListController.Instance.WindowBackgroundColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        windowBackgroundColorPictureBox.BackColor = colorDialog1.Color;
+                        break;
                 }
             }
         }
