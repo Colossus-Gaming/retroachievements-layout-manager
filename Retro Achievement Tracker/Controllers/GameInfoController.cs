@@ -96,21 +96,19 @@ namespace Retro_Achievement_Tracker.Controllers
                 GameInfoWindow.SetReleaseDateValue(value);
             }
         }
-        public async void SetAllSettings()
+        public void SetAllSettings()
         {
             if (IsOpen)
             {
-                await GameInfoWindow.AssignJavaScriptVariables().ContinueWith((result) =>
+                GameInfoWindow.AssignJavaScriptVariables();
+                if (AdvancedSettingsEnabled)
                 {
-                    if (AdvancedSettingsEnabled)
-                    {
-                        SetAdvancedSettings();
-                    }
-                    else
-                    {
-                        SetSimpleSettings();
-                    }
-                });
+                    SetAdvancedSettings();
+                }
+                else
+                {
+                    SetSimpleSettings();
+                }
 
                 GameInfoWindow.SetWindowBackgroundColor(WindowBackgroundColor);
 
@@ -132,21 +130,21 @@ namespace Retro_Achievement_Tracker.Controllers
                 }
             }
         }
-        public async void SetSimpleSettings()
+        public void SetSimpleSettings()
         {
-            await GameInfoWindow.SetSimpleFontFamily(SimpleFontFamily);
-            await GameInfoWindow.SetSimpleFontColor(SimpleFontColor);
-            await GameInfoWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px");
+            GameInfoWindow.SetSimpleFontFamily(SimpleFontFamily);
+            GameInfoWindow.SetSimpleFontColor(SimpleFontColor);
+            GameInfoWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px");
         }
-        public async void SetAdvancedSettings()
+        public void SetAdvancedSettings()
         {
-            await GameInfoWindow.SetNameFontFamily(NameFontFamily);
-            await GameInfoWindow.SetNameColor(NameColor);
-            await GameInfoWindow.SetNameOutline(NameOutlineEnabled ? NameOutlineColor + " " + NameOutlineSize + "px" : "0px");
+            GameInfoWindow.SetNameFontFamily(NameFontFamily);
+            GameInfoWindow.SetNameColor(NameColor);
+            GameInfoWindow.SetNameOutline(NameOutlineEnabled ? NameOutlineColor + " " + NameOutlineSize + "px" : "0px");
 
-            await GameInfoWindow.SetValueFontFamily(ValueFontFamily);
-            await GameInfoWindow.SetValueColor(ValueColor);
-            await GameInfoWindow.SetValueOutline(ValueOutlineEnabled ? ValueOutlineColor + " " + ValueOutlineSize + "px" : "0px");
+            GameInfoWindow.SetValueFontFamily(ValueFontFamily);
+            GameInfoWindow.SetValueColor(ValueColor);
+            GameInfoWindow.SetValueOutline(ValueOutlineEnabled ? ValueOutlineColor + " " + ValueOutlineSize + "px" : "0px");
         }
         /**
          * Variables
@@ -410,10 +408,7 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await GameInfoWindow.SetSimpleFontFamily(SimpleFontFamily);
-                    });
+                    GameInfoWindow.SetSimpleFontFamily(SimpleFontFamily);
                 }
             }
         }
@@ -430,10 +425,7 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await GameInfoWindow.SetSimpleFontColor(value);
-                    });
+                    GameInfoWindow.SetSimpleFontColor(value);
                 }
             }
         }
@@ -449,10 +441,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.Save();
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await GameInfoWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px");
-                    });
+                    GameInfoWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px");
                 }
             }
         }
@@ -469,10 +458,7 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await GameInfoWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px");
-                    });
+                    GameInfoWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px");
                 }
             }
         }
@@ -488,10 +474,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.Save();
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await GameInfoWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px");
-                    });
+                    GameInfoWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px");
                 }
             }
         }
@@ -518,10 +501,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.Save();
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await GameInfoWindow.SetNameFontFamily(NameFontFamily);
-                    });
+                    GameInfoWindow.SetNameFontFamily(NameFontFamily);
                 }
             }
         }
@@ -549,10 +529,7 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await GameInfoWindow.SetValueFontFamily(ValueFontFamily);
-                    });
+                    GameInfoWindow.SetValueFontFamily(ValueFontFamily);
                 }
             }
         }
@@ -570,10 +547,7 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await GameInfoWindow.SetNameColor(value);
-                    });
+                    GameInfoWindow.SetNameColor(value);
                 }
             }
         }
@@ -590,10 +564,7 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await GameInfoWindow.SetValueColor(value);
-                    });
+                    GameInfoWindow.SetValueColor(value);
                 }
             }
         }
@@ -610,10 +581,7 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await GameInfoWindow.SetNameOutline(value ? NameOutlineColor + " " + NameOutlineSize + "px" : "0px");
-                    });
+                    GameInfoWindow.SetNameOutline(value ? NameOutlineColor + " " + NameOutlineSize + "px" : "0px");
                 }
             }
         }
@@ -630,10 +598,7 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await GameInfoWindow.SetValueOutline(value ? ValueOutlineColor + " " + ValueOutlineSize + "px" : "0px");
-                    });
+                    GameInfoWindow.SetValueOutline(value ? ValueOutlineColor + " " + ValueOutlineSize + "px" : "0px");
                 }
             }
         }
@@ -651,10 +616,7 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await GameInfoWindow.SetNameOutline(NameOutlineEnabled ? NameOutlineColor + " " + NameOutlineSize + "px" : "0px");
-                    });
+                    GameInfoWindow.SetNameOutline(NameOutlineEnabled ? NameOutlineColor + " " + NameOutlineSize + "px" : "0px");
                 }
             }
         }
@@ -672,10 +634,7 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await GameInfoWindow.SetValueOutline(ValueOutlineEnabled ? ValueOutlineColor + " " + ValueOutlineSize + "px" : "0px");
-                    });
+                    GameInfoWindow.SetValueOutline(ValueOutlineEnabled ? ValueOutlineColor + " " + ValueOutlineSize + "px" : "0px");
                 }
             }
         }
@@ -693,10 +652,7 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await GameInfoWindow.SetNameOutline(NameOutlineColor + " " + NameOutlineSize + "px");
-                    });
+                    GameInfoWindow.SetNameOutline(NameOutlineColor + " " + NameOutlineSize + "px");
                 }
             }
         }
@@ -713,10 +669,7 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await GameInfoWindow.SetValueOutline(ValueOutlineColor + " " + ValueOutlineSize + "px");
-                    });
+                    GameInfoWindow.SetValueOutline(ValueOutlineColor + " " + ValueOutlineSize + "px");
                 }
             }
         }

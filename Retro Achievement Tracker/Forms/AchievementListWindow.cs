@@ -164,7 +164,6 @@ namespace Retro_Achievement_Tracker.Forms
                     ClientSize = new Size(768, 768);
 
                     AchievementListController.Instance.SetAllSettings();
-                    SetWindowBackgroundColor(AchievementListController.Instance.WindowBackgroundColor);
                 });
             });
 

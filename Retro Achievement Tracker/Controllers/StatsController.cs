@@ -49,22 +49,20 @@ namespace Retro_Achievement_Tracker.Controllers
                 StatsWindow.Show();
             }
         }
-        public async void SetAllSettings()
+        public void SetAllSettings()
         {
 
             if (IsOpen)
             {
-                await StatsWindow.AssignJavaScriptVariables().ContinueWith((result) =>
+                StatsWindow.AssignJavaScriptVariables();
+                if (AdvancedSettingsEnabled)
                 {
-                    if (AdvancedSettingsEnabled)
-                    {
-                        SetAdvancedSettings();
-                    }
-                    else
-                    {
-                        SetSimpleSettings();
-                    }
-                });
+                    SetAdvancedSettings();
+                }
+                else
+                {
+                    SetSimpleSettings();
+                }
 
                 StatsWindow.SetWindowBackgroundColor(WindowBackgroundColor);
                 StatsWindow.SetAwardsName(AwardsName);
@@ -106,21 +104,21 @@ namespace Retro_Achievement_Tracker.Controllers
                 StatsWindow.SetCompletedVisibility(CompletedEnabled);
             }
         }
-        public async void SetSimpleSettings()
+        public void SetSimpleSettings()
         {
-            await StatsWindow.SetSimpleFontFamily(SimpleFontFamily);
-            await StatsWindow.SetSimpleFontColor(SimpleFontColor);
-            await StatsWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px");
+            StatsWindow.SetSimpleFontFamily(SimpleFontFamily);
+            StatsWindow.SetSimpleFontColor(SimpleFontColor);
+            StatsWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px");
         }
-        public async void SetAdvancedSettings()
+        public void SetAdvancedSettings()
         {
-            await StatsWindow.SetNameFontFamily(NameFontFamily);
-            await StatsWindow.SetNameColor(NameColor);
-            await StatsWindow.SetNameOutline(NameOutlineEnabled ? NameOutlineColor + " " + NameOutlineSize + "px" : "0px");
+            StatsWindow.SetNameFontFamily(NameFontFamily);
+            StatsWindow.SetNameColor(NameColor);
+            StatsWindow.SetNameOutline(NameOutlineEnabled ? NameOutlineColor + " " + NameOutlineSize + "px" : "0px");
 
-            await StatsWindow.SetValueFontFamily(ValueFontFamily);
-            await StatsWindow.SetValueColor(ValueColor);
-            await StatsWindow.SetValueOutline(ValueOutlineEnabled ? ValueOutlineColor + " " + ValueOutlineSize + "px" : "0px");
+            StatsWindow.SetValueFontFamily(ValueFontFamily);
+            StatsWindow.SetValueColor(ValueColor);
+            StatsWindow.SetValueOutline(ValueOutlineEnabled ? ValueOutlineColor + " " + ValueOutlineSize + "px" : "0px");
         }
 
         internal void SetRank(string value)
@@ -299,11 +297,8 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await StatsWindow.AssignJavaScriptVariables();
-                        await StatsWindow.SetSimpleFontFamily(SimpleFontFamily);
-                    });
+                    StatsWindow.AssignJavaScriptVariables();
+                    StatsWindow.SetSimpleFontFamily(SimpleFontFamily);
                 }
             }
         }
@@ -320,11 +315,8 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await StatsWindow.AssignJavaScriptVariables();
-                        await StatsWindow.SetSimpleFontColor(value);
-                    });
+                    StatsWindow.AssignJavaScriptVariables();
+                    StatsWindow.SetSimpleFontColor(value);
                 }
             }
         }
@@ -342,11 +334,8 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await StatsWindow.AssignJavaScriptVariables();
-                        await StatsWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px");
-                    });
+                    StatsWindow.AssignJavaScriptVariables();
+                    StatsWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px");
                 }
             }
         }
@@ -363,11 +352,8 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await StatsWindow.AssignJavaScriptVariables();
-                        await StatsWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px");
-                    });
+                    StatsWindow.AssignJavaScriptVariables();
+                    StatsWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px");
                 }
             }
         }
@@ -385,11 +371,8 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await StatsWindow.AssignJavaScriptVariables();
-                        await StatsWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px");
-                    });
+                    StatsWindow.AssignJavaScriptVariables();
+                    StatsWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px");
                 }
             }
         }
@@ -416,11 +399,8 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.Save();
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await StatsWindow.AssignJavaScriptVariables();
-                        await StatsWindow.SetNameFontFamily(NameFontFamily);
-                    });
+                    StatsWindow.AssignJavaScriptVariables();
+                    StatsWindow.SetNameFontFamily(NameFontFamily);
                 }
             }
         }
@@ -447,11 +427,8 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.Save();
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await StatsWindow.AssignJavaScriptVariables();
-                        await StatsWindow.SetValueFontFamily(ValueFontFamily);
-                    });
+                    StatsWindow.AssignJavaScriptVariables();
+                    StatsWindow.SetValueFontFamily(ValueFontFamily);
                 }
             }
         }
@@ -469,11 +446,8 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await StatsWindow.AssignJavaScriptVariables();
-                        await StatsWindow.SetNameColor(value);
-                    });
+                    StatsWindow.AssignJavaScriptVariables();
+                    StatsWindow.SetNameColor(value);
                 }
             }
         }
@@ -490,11 +464,8 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await StatsWindow.AssignJavaScriptVariables();
-                        await StatsWindow.SetValueColor(value);
-                    });
+                    StatsWindow.AssignJavaScriptVariables();
+                    StatsWindow.SetValueColor(value);
                 }
             }
         }
@@ -511,11 +482,8 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await StatsWindow.AssignJavaScriptVariables();
-                        await StatsWindow.SetNameOutline(value ? NameOutlineColor + " " + NameOutlineSize + "px" : "0px");
-                    });
+                    StatsWindow.AssignJavaScriptVariables();
+                    StatsWindow.SetNameOutline(value ? NameOutlineColor + " " + NameOutlineSize + "px" : "0px");
                 }
             }
         }
@@ -532,11 +500,8 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await StatsWindow.AssignJavaScriptVariables();
-                        await StatsWindow.SetValueOutline(value ? ValueOutlineColor + " " + ValueOutlineSize + "px" : "0px");
-                    });
+                    StatsWindow.AssignJavaScriptVariables();
+                    StatsWindow.SetValueOutline(value ? ValueOutlineColor + " " + ValueOutlineSize + "px" : "0px");
                 }
             }
         }
@@ -554,11 +519,8 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await StatsWindow.AssignJavaScriptVariables();
-                        await StatsWindow.SetNameOutline(NameOutlineEnabled ? NameOutlineColor + " " + NameOutlineSize + "px" : "0px");
-                    });
+                    StatsWindow.AssignJavaScriptVariables();
+                    StatsWindow.SetNameOutline(NameOutlineEnabled ? NameOutlineColor + " " + NameOutlineSize + "px" : "0px");
                 }
             }
         }
@@ -574,11 +536,8 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.Save();
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await StatsWindow.AssignJavaScriptVariables();
-                        await StatsWindow.SetValueOutline(ValueOutlineEnabled ? ValueOutlineColor + " " + ValueOutlineSize + "px" : "0px");
-                    });
+                    StatsWindow.AssignJavaScriptVariables();
+                    StatsWindow.SetValueOutline(ValueOutlineEnabled ? ValueOutlineColor + " " + ValueOutlineSize + "px" : "0px");
                 }
             }
         }
@@ -595,11 +554,8 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await StatsWindow.AssignJavaScriptVariables();
-                        await StatsWindow.SetNameOutline(NameOutlineColor + " " + NameOutlineSize + "px");
-                    });
+                    StatsWindow.AssignJavaScriptVariables();
+                    StatsWindow.SetNameOutline(NameOutlineColor + " " + NameOutlineSize + "px");
                 }
             }
         }
@@ -616,11 +572,8 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await StatsWindow.AssignJavaScriptVariables();
-                        await StatsWindow.SetValueOutline(ValueOutlineColor + " " + ValueOutlineSize + "px");
-                    });
+                    StatsWindow.AssignJavaScriptVariables();
+                    StatsWindow.SetValueOutline(ValueOutlineColor + " " + ValueOutlineSize + "px");
                 }
             }
         }

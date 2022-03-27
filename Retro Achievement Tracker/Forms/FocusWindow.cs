@@ -42,9 +42,9 @@ namespace Retro_Achievement_Tracker
         {
             get { return true; }
         }
-        public async Task AssignJavaScriptVariables()
+        public void AssignJavaScriptVariables()
         {
-            await ExecuteScript(
+            ExecuteScript(
                 "container = document.getElementById(\"container\");" +
                 "allElements = document.getElementsByClassName(\"has-font\");" +
                 "focusElement = document.getElementById(\"focus\");" +
@@ -54,10 +54,10 @@ namespace Retro_Achievement_Tracker
                 "focusBadgeElement = document.getElementById(\"badge\");" +
                 "focusLineElement = document.getElementById(\"line\");");
         }
-        public async Task SetSimpleFontFamily(FontFamily value)
+        public void SetSimpleFontFamily(FontFamily value)
         {
             int lineSpacing = value.GetLineSpacing(FontStyle.Regular) / value.GetEmHeight(FontStyle.Regular);
-            await ExecuteScript(
+            ExecuteScript(
                   "focusTitleElement.style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
                   "focusTitleElement.style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
                   "textFit(focusTitleElement, { alignVert: true, alignHoriz: true });" +
@@ -69,70 +69,70 @@ namespace Retro_Achievement_Tracker
                   "textFit(focusPointsElement);");
         }
 
-        public async Task SetSimpleFontOutline(string fontOutline, string borderOutline)
+        public void SetSimpleFontOutline(string fontOutline, string borderOutline)
         {
-            await ExecuteScript(
+            ExecuteScript(
                  "for (var i = 0; i < allElements.length; i++) { allElements[i].style.webkitTextStroke = \"" + fontOutline + "\"; }" +
                  "focusLineElement.style.border = \"" + borderOutline + "\";");
         }
 
-        public async Task SetSimpleFontColor(string value)
+        public void SetSimpleFontColor(string value)
         {
-            await ExecuteScript(
+            ExecuteScript(
                 "for (var i = 0; i < allElements.length; i++) { allElements[i].style.color = \"" + value + "\"; }" +
                 "focusLineElement.style.color = \"" + value + "\";" +
                 "focusLineElement.style.backgroundColor = \"" + value + "\";");
         }
 
-        public async Task SetBorderBackgroundColor(string value)
+        public void SetBorderBackgroundColor(string value)
         {
-            await ExecuteScript(
+            ExecuteScript(
                 "focusElement.style.backgroundColor = \"" + value + "\";");
         }
-        public async Task SetWindowBackgroundColor(string value)
+        public void SetWindowBackgroundColor(string value)
         {
-            await ExecuteScript(
+            ExecuteScript(
                 "container.style.backgroundColor = \"" + value + "\";");
         }
 
-        public async Task SetDescriptionOutline(string value)
+        public void SetDescriptionOutline(string value)
         {
-            await ExecuteScript(
+            ExecuteScript(
                   "focusDescriptionElement.style.webkitTextStroke = \"" + value + "\";" +
                   "textFit(focusDescriptionElement, { alignVert: true, alignHoriz: true });");
         }
 
-        public async Task SetDescriptionColor(string value)
+        public void SetDescriptionColor(string value)
         {
-            await ExecuteScript(
+            ExecuteScript(
                 "focusDescriptionElement.style.color = \"" + value + "\";");
         }
 
-        public async Task SetDescriptionFontFamily(System.Drawing.FontFamily value)
+        public void SetDescriptionFontFamily(System.Drawing.FontFamily value)
         {
             int lineSpacing = value.GetLineSpacing(FontStyle.Regular) / value.GetEmHeight(FontStyle.Regular);
-            await ExecuteScript(
+            ExecuteScript(
                   "focusDescriptionElement.style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
                   "focusDescriptionElement.style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
                   "textFit(focusDescriptionElement, { alignVert: true, alignHoriz: true });");
         }
 
-        public async Task SetTitleOutline(string value)
+        public void SetTitleOutline(string value)
         {
-            await ExecuteScript(
+            ExecuteScript(
                  "focusTitleElement.style.webkitTextStroke = \"" + value + "\";");
         }
 
-        public async Task SetTitleColor(string value)
+        public void SetTitleColor(string value)
         {
-            await ExecuteScript(
+            ExecuteScript(
                 "focusTitleElement.style.color = \"" + value + "\";");
         }
 
-        public async Task SetTitleFontFamily(FontFamily value)
+        public void SetTitleFontFamily(FontFamily value)
         {
             int lineSpacing = value.GetLineSpacing(FontStyle.Regular) / value.GetEmHeight(FontStyle.Regular);
-            await ExecuteScript(
+            ExecuteScript(
                   "focusTitleElement.style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
                   "focusTitleElement.style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
                   "textFit(focusTitleElement, { alignVert: true, alignHoriz: true });");
@@ -148,30 +148,30 @@ namespace Retro_Achievement_Tracker
                 {
                     ClientSize = new Size(700, 165);
                 });
-                await ExecuteScript("$(\"#focus\").fadeOut(\"fast\");");
+                ExecuteScript("$(\"#focus\").fadeOut(\"fast\");");
 
                 await Task.Delay(100);
 
-                await ExecuteScript("focusTitleElement.style.display = \"none\";");
-                await ExecuteScript("focusDescriptionElement.style.display = \"none\";");
-                await ExecuteScript("focusPointsElement.style.display = \"none\";");
-                await ExecuteScript("focusLineElement.style.display = \"none\";");
-                await ExecuteScript("focusBadgeElement.style.display = \"none\";");
+                ExecuteScript("focusTitleElement.style.display = \"none\";");
+                ExecuteScript("focusDescriptionElement.style.display = \"none\";");
+                ExecuteScript("focusPointsElement.style.display = \"none\";");
+                ExecuteScript("focusLineElement.style.display = \"none\";");
+                ExecuteScript("focusBadgeElement.style.display = \"none\";");
 
-                await ExecuteScript("focusTitleElement.innerHTML = \"" + achievement.Title.Replace("\"", "\\\"") + "\";");
-                await ExecuteScript("focusDescriptionElement.innerHTML = \"" + actualDescription.Replace("\"", "\\\"") + "\";");
-                await ExecuteScript("$(\"#badge\").attr('src', \"https://retroachievements.org/Badge/" + achievement.BadgeNumber + ".png\");");
-                await ExecuteScript("focusPointsElement.innerHTML = \"" + achievement.Points + "\";");
+                ExecuteScript("focusTitleElement.innerHTML = \"" + achievement.Title.Replace("\"", "\\\"") + "\";");
+                ExecuteScript("focusDescriptionElement.innerHTML = \"" + actualDescription.Replace("\"", "\\\"") + "\";");
+                ExecuteScript("$(\"#badge\").attr('src', \"https://retroachievements.org/Badge/" + achievement.BadgeNumber + ".png\");");
+                ExecuteScript("focusPointsElement.innerHTML = \"" + achievement.Points + "\";");
 
                 await Task.Delay(100);
 
-                await ExecuteScript("$(\"#focus\").fadeIn();");
+                ExecuteScript("$(\"#focus\").fadeIn();");
 
-                await ExecuteScript("$(\"#badge\").fadeIn(); focusBadgeElement.animate([ { left: '3000px' }, { left: '10px' } ], { interations: 1, duration: 700, fill: \"forwards\", easing: \"ease-out\" });");
-                await ExecuteScript("setTimeout(function() { $(\"#line\").fadeIn(); focusLineElement.animate([ { right: '-1922px', top: '0px' }, { right: '10px', top: '0px' } ], { interations: 1, duration: 700, fill: \"forwards\", easing: \"ease-out\" }); }, 200);");
-                await ExecuteScript("setTimeout(function() { $(\"#points\").fadeIn(); textFit(focusPointsElement); focusPointsElement.animate([ { left: '1922px', top: '90px' }, { left: '15px', top: '90px' } ], { interations: 1, duration: 700, fill: \"forwards\", easing: \"ease-out\" }); }, 400);");
-                await ExecuteScript("setTimeout(function() { $(\"#title\").fadeIn(); textFit(focusTitleElement, { alignVert: true, alignHoriz: true }); focusTitleElement.animate([ { right: '-1922px', top: '0px' }, { right: '0px', top: '0px' } ], { interations: 1, duration: 700, fill: \"forwards\", easing: \"ease-out\" }); }, 600);");
-                await ExecuteScript("setTimeout(function() { $(\"#description\").fadeIn(); textFit(focusDescriptionElement, { alignVert: true, alignHoriz: true }); focusDescriptionElement.animate([ { right: '-1922px', top: '0px' }, { right: '0px', top: '0px' } ], { interations: 1, duration: 700, fill: \"forwards\", easing: \"ease-out\" }); }, 800);");
+                ExecuteScript("$(\"#badge\").fadeIn(); focusBadgeElement.animate([ { left: '3000px' }, { left: '10px' } ], { interations: 1, duration: 700, fill: \"forwards\", easing: \"ease-out\" });");
+                ExecuteScript("setTimeout(function() { $(\"#line\").fadeIn(); focusLineElement.animate([ { right: '-1922px', top: '0px' }, { right: '10px', top: '0px' } ], { interations: 1, duration: 700, fill: \"forwards\", easing: \"ease-out\" }); }, 200);");
+                ExecuteScript("setTimeout(function() { $(\"#points\").fadeIn(); textFit(focusPointsElement); focusPointsElement.animate([ { left: '1922px', top: '90px' }, { left: '15px', top: '90px' } ], { interations: 1, duration: 700, fill: \"forwards\", easing: \"ease-out\" }); }, 400);");
+                ExecuteScript("setTimeout(function() { $(\"#title\").fadeIn(); textFit(focusTitleElement, { alignVert: true, alignHoriz: true }); focusTitleElement.animate([ { right: '-1922px', top: '0px' }, { right: '0px', top: '0px' } ], { interations: 1, duration: 700, fill: \"forwards\", easing: \"ease-out\" }); }, 600);");
+                ExecuteScript("setTimeout(function() { $(\"#description\").fadeIn(); textFit(focusDescriptionElement, { alignVert: true, alignHoriz: true }); focusDescriptionElement.animate([ { right: '-1922px', top: '0px' }, { right: '0px', top: '0px' } ], { interations: 1, duration: 700, fill: \"forwards\", easing: \"ease-out\" }); }, 800);");
             }
             else
             {
@@ -220,10 +220,10 @@ namespace Retro_Achievement_Tracker
             return actualLine;
         }
 
-        public async Task SetPointsFontFamily(FontFamily value)
+        public void SetPointsFontFamily(FontFamily value)
         {
             int lineSpacing = value.GetLineSpacing(FontStyle.Regular) / value.GetEmHeight(FontStyle.Regular);
-            await ExecuteScript(
+            ExecuteScript(
                   "focusPointsElement.style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
                   "focusPointsElement.style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
                   "textFit(focusPointsElement, { alignVert: true, alignHoriz: true });");
@@ -231,39 +231,39 @@ namespace Retro_Achievement_Tracker
 
         public async void HideFocus()
         {
-            await ExecuteScript("$(\"#focus\").fadeOut();");
+            ExecuteScript("$(\"#focus\").fadeOut();");
         }
-        public async Task EnableBorder()
+        public void EnableBorder()
         {
-            await ExecuteScript("focusElement.style.backgroundImage = \"url('disk://background')\";");
+            ExecuteScript("focusElement.style.backgroundImage = \"url('disk://background')\";");
         }
-        public async Task DisableBorder()
+        public void DisableBorder()
         {
-            await ExecuteScript("focusElement.style.backgroundImage = \"\";");
+            ExecuteScript("focusElement.style.backgroundImage = \"\";");
         }
-        public async Task SetPointsColor(string value)
+        public void SetPointsColor(string value)
         {
-            await ExecuteScript(
+            ExecuteScript(
                  "focusPointsElement.style.color = \"" + value + "\";");
         }
-        public async Task SetPointsOutline(string fontOutline)
+        public void SetPointsOutline(string fontOutline)
         {
-            await ExecuteScript(
+            ExecuteScript(
                 "focusPointsElement.style.webkitTextStroke = \"" + fontOutline + "\";");
         }
-        public async Task SetLineColor(string value)
+        public void SetLineColor(string value)
         {
-            await ExecuteScript(
+            ExecuteScript(
                  "focusLineElement.style.color = \"" + value + "\";" +
                  "focusLineElement.style.backgroundColor = \"" + value + "\";");
         }
 
-        public async Task SetLineOutline(string borderOutline)
+        public void SetLineOutline(string borderOutline)
         {
-            await ExecuteScript(
+            ExecuteScript(
                 "focusLineElement.style.border = \"" + borderOutline + "\";");
         }
-        protected async Task ExecuteScript(string script)
+        protected async void ExecuteScript(string script)
         {
             if (chromiumWebBrowser != null)
             {

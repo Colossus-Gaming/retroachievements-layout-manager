@@ -39,9 +39,9 @@ namespace Retro_Achievement_Tracker
         {
             get { return true; }
         }
-        public async Task AssignJavaScriptVariables()
+        public void AssignJavaScriptVariables()
         {
-            await ExecuteScript(
+            ExecuteScript(
                 "container = document.getElementById(\"container\");" +
                 "titleName = document.getElementById(\"title-name\");" +
                 "titleValue = document.getElementById(\"title-value\");" +
@@ -59,18 +59,18 @@ namespace Retro_Achievement_Tracker
                 "allNames = document.getElementsByClassName(\"name\");" +
                 "allValues = document.getElementsByClassName(\"value\");");
         }
-        public async void SetWindowBackgroundColor(string value)
+        public void SetWindowBackgroundColor(string value)
         {
-            await ExecuteScript(
+            ExecuteScript(
                 "container.style.backgroundColor = \"" + value + "\";");
         }
         //Title
-        public async void SetTitleName(string value)
+        public void SetTitleName(string value)
         {
-            await ExecuteScript("titleName.innerHTML = \"" + value + ":\";" +
+            ExecuteScript("titleName.innerHTML = \"" + value + ":\";" +
                 "textFit(titleName, { alignVert: true });");
         }
-        public async void SetTitleValue(string value)
+        public void SetTitleValue(string value)
         {
             if (value != null)
             {
@@ -80,143 +80,143 @@ namespace Retro_Achievement_Tracker
                     value = "The " + value.Substring(0, value.IndexOf(", The")) + value.Substring(value.IndexOf(", The") + 5, value.Length - value.IndexOf(", The") - 5);
                 }
 
-                await ExecuteScript("titleValue.innerHTML = \"" + value + "\";" +
+                ExecuteScript("titleValue.innerHTML = \"" + value + "\";" +
                 "textFit(titleValue, { alignVert: true, alignHoriz: true });");
             }
         }
-        public async void SetTitleVisibility(bool isVisible)
+        public void SetTitleVisibility(bool isVisible)
         {
-            await ExecuteScript(isVisible ? "$(\"#title\").fadeIn();" : "$(\"#title\").fadeOut();");
+            ExecuteScript(isVisible ? "$(\"#title\").fadeIn();" : "$(\"#title\").fadeOut();");
         }
 
         //Console
-        public async void SetConsoleName(string value)
+        public void SetConsoleName(string value)
         {
-            await ExecuteScript("consoleName.innerHTML = \"" + value + ":\";" +
+            ExecuteScript("consoleName.innerHTML = \"" + value + ":\";" +
                 "textFit(consoleName, { alignVert: true });");
         }
-        public async void SetConsoleValue(string value)
+        public void SetConsoleValue(string value)
         {
             if (value != null)
             {
-                await ExecuteScript("consoleValue.innerHTML = \"" + value + "\";" +
+                ExecuteScript("consoleValue.innerHTML = \"" + value + "\";" +
                 "textFit(consoleValue, { alignVert: true, alignHoriz: true });");
             }
         }
-        public async void SetConsoleVisibility(bool isVisible)
+        public void SetConsoleVisibility(bool isVisible)
         {
-            await ExecuteScript(isVisible ? "$(\"#console\").fadeIn();" : "$(\"#console\").fadeOut();");
+            ExecuteScript(isVisible ? "$(\"#console\").fadeIn();" : "$(\"#console\").fadeOut();");
         }
 
         //Developer
-        public async void SetDeveloperName(string value)
+        public void SetDeveloperName(string value)
         {
-            await ExecuteScript("developerName.innerHTML = \"" + value + ":\";" +
+            ExecuteScript("developerName.innerHTML = \"" + value + ":\";" +
                 "textFit(developerName, { alignVert: true });");
         }
-        public async void SetDeveloperValue(string value)
+        public void SetDeveloperValue(string value)
         {
             if (value != null)
             {
-                await ExecuteScript("developerValue.innerHTML = \"" + value + "\";" +
+                ExecuteScript("developerValue.innerHTML = \"" + value + "\";" +
                 "textFit(developerValue, { alignVert: true, alignHoriz: true });");
             }
         }
-        public async void SetDeveloperVisibility(bool isVisible)
+        public void SetDeveloperVisibility(bool isVisible)
         {
-            await ExecuteScript(isVisible ? "$(\"#developer\").fadeIn();" : "$(\"#developer\").fadeOut();");
+            ExecuteScript(isVisible ? "$(\"#developer\").fadeIn();" : "$(\"#developer\").fadeOut();");
         }
 
         //Publisher
-        public async void SetPublisherName(string value)
+        public void SetPublisherName(string value)
         {
-            await ExecuteScript("publisherName.innerHTML = \"" + value + ":\";" +
+            ExecuteScript("publisherName.innerHTML = \"" + value + ":\";" +
                 "textFit(publisherName, { alignVert: true });");
         }
-        public async void SetPublisherValue(string value)
+        public void SetPublisherValue(string value)
         {
             if (value != null)
             {
-                await ExecuteScript("publisherValue.innerHTML = \"" + value + "\";" +
+                ExecuteScript("publisherValue.innerHTML = \"" + value + "\";" +
                 "textFit(publisherValue, { alignVert: true, alignHoriz: true });");
             }
         }
-        public async void SetPublisherVisibility(bool isVisible)
+        public void SetPublisherVisibility(bool isVisible)
         {
-            await ExecuteScript(isVisible ? "$(\"#publisher\").fadeIn();" : "$(\"#publisher\").fadeOut();");
+            ExecuteScript(isVisible ? "$(\"#publisher\").fadeIn();" : "$(\"#publisher\").fadeOut();");
         }
 
         //Genre
-        public async void SetGenreName(string value)
+        public void SetGenreName(string value)
         {
-            await ExecuteScript("genreName.innerHTML = \"" + value + ":\";" +
+            ExecuteScript("genreName.innerHTML = \"" + value + ":\";" +
                 "textFit(genreName, { alignVert: true });");
         }
-        public async void SetGenreValue(string value)
+        public void SetGenreValue(string value)
         {
             if (value != null)
             {
-                await ExecuteScript("genreValue.innerHTML = \"" + value + "\";" +
+                ExecuteScript("genreValue.innerHTML = \"" + value + "\";" +
                 "textFit(genreValue, { alignVert: true, alignHoriz: true });");
             }
         }
-        public async void SetGenreVisibility(bool isVisible)
+        public void SetGenreVisibility(bool isVisible)
         {
-            await ExecuteScript(isVisible ? "$(\"#genre\").fadeIn();" : "$(\"#genre\").fadeOut();");
+            ExecuteScript(isVisible ? "$(\"#genre\").fadeIn();" : "$(\"#genre\").fadeOut();");
         }
 
         //Release Date
-        public async void SetReleaseDateName(string value)
+        public void SetReleaseDateName(string value)
         {
-            await ExecuteScript("releaseDateName.innerHTML = \"" + value + ":\";" +
+            ExecuteScript("releaseDateName.innerHTML = \"" + value + ":\";" +
                 "textFit(releaseDateName, { alignVert: true });");
         }
-        public async void SetReleaseDateValue(string value)
+        public void SetReleaseDateValue(string value)
         {
             if (value != null)
             {
-                await ExecuteScript("releaseDateValue.innerHTML = \"" + value + "\";" +
+                ExecuteScript("releaseDateValue.innerHTML = \"" + value + "\";" +
                 "textFit(releaseDateValue, { alignVert: true, alignHoriz: true });");
             }
         }
-        public async void SetReleaseDateVisibility(bool isVisible)
+        public void SetReleaseDateVisibility(bool isVisible)
         {
-            await ExecuteScript(isVisible ? "$(\"#release-date\").fadeIn();" : "$(\"#release-date\").fadeOut();");
+            ExecuteScript(isVisible ? "$(\"#release-date\").fadeIn();" : "$(\"#release-date\").fadeOut();");
         }
 
-        public async Task SetSimpleFontFamily(FontFamily value)
+        public void SetSimpleFontFamily(FontFamily value)
         {
             int lineSpacing = value.GetLineSpacing(FontStyle.Regular) / value.GetEmHeight(FontStyle.Regular);
-            await ExecuteScript(
+            ExecuteScript(
                 "for (var i = 0; i < allElements.length; i++) { " +
                 "   allElements[i].style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
                 "   allElements[i].style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
                 "}");
-            await ExecuteScript(
+            ExecuteScript(
                 "for (var i = 0; i < allNames.length; i++) { " +
                 "   textFit(allNames[i], { alignVert: true });" +
                 "}");
-            await ExecuteScript(
+            ExecuteScript(
                 "for (var i = 0; i < allValues.length; i++) { " +
                 "   textFit(allValues[i], { alignVert: true, alignHoriz: true });" +
                 "}");
         }
-        public async Task SetSimpleFontColor(string value)
+        public void SetSimpleFontColor(string value)
         {
-            await ExecuteScript(
+            ExecuteScript(
                 "for (var i = 0; i < allElements.length; i++) { allElements[i].style.color = \"" + value + "\"; }");
         }
 
-        public async Task SetSimpleFontOutline(string value)
+        public void SetSimpleFontOutline(string value)
         {
-            await ExecuteScript(
+            ExecuteScript(
                "for (var i = 0; i < allElements.length; i++) { allElements[i].style.webkitTextStroke = \"" + value + "\"; }");
         }
 
-        public async Task SetNameFontFamily(FontFamily value)
+        public void SetNameFontFamily(FontFamily value)
         {
             int lineSpacing = value.GetLineSpacing(FontStyle.Regular) / value.GetEmHeight(FontStyle.Regular);
-            await ExecuteScript(
+            ExecuteScript(
                 "for (var i = 0; i < allNames.length; i++) { " +
                 "   allNames[i].style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
                 "   allNames[i].style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
@@ -224,10 +224,10 @@ namespace Retro_Achievement_Tracker
                 "}");
         }
 
-        public async Task SetValueFontFamily(FontFamily value)
+        public void SetValueFontFamily(FontFamily value)
         {
             int lineSpacing = value.GetLineSpacing(FontStyle.Regular) / value.GetEmHeight(FontStyle.Regular);
-            await ExecuteScript(
+            ExecuteScript(
                 "for (var i = 0; i < allValues.length; i++) { " +
                 "   allValues[i].style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
                 "   allValues[i].style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
@@ -235,30 +235,30 @@ namespace Retro_Achievement_Tracker
                 "}");
         }
 
-        public async Task SetNameColor(string value)
+        public void SetNameColor(string value)
         {
-            await ExecuteScript(
+            ExecuteScript(
                  "for (var i = 0; i < allNames.length; i++) { allNames[i].style.color = \"" + value + "\"; }");
         }
 
-        public async Task SetValueColor(string value)
+        public void SetValueColor(string value)
         {
-            await ExecuteScript(
+            ExecuteScript(
                  "for (var i = 0; i < allValues.length; i++) { allValues[i].style.color = \"" + value + "\"; }");
         }
 
-        public async Task SetNameOutline(string value)
+        public void SetNameOutline(string value)
         {
-            await ExecuteScript(
+            ExecuteScript(
                   "for (var i = 0; i < allNames.length; i++) { allNames[i].style.webkitTextStroke = \"" + value + "\"; }");
         }
 
-        public async Task SetValueOutline(string value)
+        public void SetValueOutline(string value)
         {
-            await ExecuteScript(
+            ExecuteScript(
                   "for (var i = 0; i < allValues.length; i++) { allValues[i].style.webkitTextStroke = \"" + value + "\"; }");
         }
-        protected async Task ExecuteScript(string script)
+        protected async void ExecuteScript(string script)
         {
             if (chromiumWebBrowser != null)
             {

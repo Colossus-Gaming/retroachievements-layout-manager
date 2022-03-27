@@ -53,7 +53,7 @@ namespace Retro_Achievement_Tracker.Controllers
 
         public void SetAllSettings()
         {
-
+            AchievementListWindow.SetWindowBackgroundColor(WindowBackgroundColor);
         }
 
         public async void UpdateAchievementList(List<Achievement> unlockedAchievements, List<Achievement> lockedAchievements, bool newGame)

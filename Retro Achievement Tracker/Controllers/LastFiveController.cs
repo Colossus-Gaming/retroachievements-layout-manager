@@ -38,58 +38,56 @@ namespace Retro_Achievement_Tracker.Controllers
                 LastFiveWindow.Show();
             }
         }
-        public async void SetAllSettings()
+        public void SetAllSettings()
         {
             if (IsOpen)
             {
-                await LastFiveWindow.AssignJavaScriptVariables().ContinueWith(async (result) =>
-                {
-                    await LastFiveWindow.SetBackgroundColor(BorderBackgroundColor);
-                    await LastFiveWindow.SetWindowBackgroundColor(WindowBackgroundColor);
+                LastFiveWindow.AssignJavaScriptVariables();
+                LastFiveWindow.SetBackgroundColor(BorderBackgroundColor);
+                LastFiveWindow.SetWindowBackgroundColor(WindowBackgroundColor);
 
-                    if (BorderEnabled)
-                    {
-                        await LastFiveWindow.EnableBorder();
-                    }
-                    else
-                    {
-                        await LastFiveWindow.DisableBorder();
-                    }
-                    if (AdvancedSettingsEnabled)
-                    {
-                        SetAdvancedSettings();
-                    }
-                    else
-                    {
-                        SetSimpleSettings();
-                    }
-                });
+                if (BorderEnabled)
+                {
+                    LastFiveWindow.EnableBorder();
+                }
+                else
+                {
+                    LastFiveWindow.DisableBorder();
+                }
+                if (AdvancedSettingsEnabled)
+                {
+                    SetAdvancedSettings();
+                }
+                else
+                {
+                    SetSimpleSettings();
+                }
             }
         }
 
-        private async void SetAdvancedSettings()
+        private void SetAdvancedSettings()
         {
-            await LastFiveWindow.SetTitleFontFamily(TitleFontFamily);
-            await LastFiveWindow.SetTitleColor(TitleColor);
-            await LastFiveWindow.SetTitleOutline(TitleOutlineEnabled ? TitleOutlineColor + " " + TitleOutlineSize + "px" : "0px");
+            LastFiveWindow.SetTitleFontFamily(TitleFontFamily);
+            LastFiveWindow.SetTitleColor(TitleColor);
+            LastFiveWindow.SetTitleOutline(TitleOutlineEnabled ? TitleOutlineColor + " " + TitleOutlineSize + "px" : "0px");
 
-            await LastFiveWindow.SetDateFontFamily(DateFontFamily);
-            await LastFiveWindow.SetDateColor(DateColor);
-            await LastFiveWindow.SetDateOutline(DateOutlineEnabled ? DateOutlineColor + " " + DateOutlineSize + "px" : "0px");
+            LastFiveWindow.SetDateFontFamily(DateFontFamily);
+            LastFiveWindow.SetDateColor(DateColor);
+            LastFiveWindow.SetDateOutline(DateOutlineEnabled ? DateOutlineColor + " " + DateOutlineSize + "px" : "0px");
 
-            await LastFiveWindow.SetPointsFontFamily(PointsFontFamily);
-            await LastFiveWindow.SetPointsColor(PointsColor);
-            await LastFiveWindow.SetPointsOutline(PointsOutlineEnabled ? PointsOutlineColor + " " + PointsOutlineSize + "px" : "0px");
+            LastFiveWindow.SetPointsFontFamily(PointsFontFamily);
+            LastFiveWindow.SetPointsColor(PointsColor);
+            LastFiveWindow.SetPointsOutline(PointsOutlineEnabled ? PointsOutlineColor + " " + PointsOutlineSize + "px" : "0px");
 
-            await LastFiveWindow.SetLineColor(LineColor);
-            await LastFiveWindow.SetLineOutline(LineOutlineEnabled ? LineOutlineSize + "px solid " + LineOutlineColor : "0px");
+            LastFiveWindow.SetLineColor(LineColor);
+            LastFiveWindow.SetLineOutline(LineOutlineEnabled ? LineOutlineSize + "px solid " + LineOutlineColor : "0px");
         }
 
-        public async void SetSimpleSettings()
+        public void SetSimpleSettings()
         {
-            await LastFiveWindow.SetSimpleFontFamily(SimpleFontFamily);
-            await LastFiveWindow.SetSimpleFontColor(SimpleFontColor);
-            await LastFiveWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px", SimpleFontOutlineEnabled ? SimpleFontOutlineSize + "px solid " + SimpleFontOutlineColor : "0px");
+            LastFiveWindow.SetSimpleFontFamily(SimpleFontFamily);
+            LastFiveWindow.SetSimpleFontColor(SimpleFontColor);
+            LastFiveWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px", SimpleFontOutlineEnabled ? SimpleFontOutlineSize + "px solid " + SimpleFontOutlineColor : "0px");
         }
 
         public async Task SetAchievements(List<Achievement> achievements)
@@ -102,14 +100,14 @@ namespace Retro_Achievement_Tracker.Controllers
                 }
                 else if (CurrentAchievements.Count == 0)
                 {
-                    await AddAchievementsToWindow(achievements);
-                    await SetAchievementPositions();
+                    AddAchievementsToWindow(achievements);
+                    SetAchievementPositions();
                 }
                 else if (achievements[0].GameId != CurrentAchievements[0].GameId)
                 {
                     await ClearList();
-                    await AddAchievementsToWindow(achievements);
-                    await SetAchievementPositions();
+                    AddAchievementsToWindow(achievements);
+                    SetAchievementPositions();
                 }
                 else
                 {
@@ -123,7 +121,7 @@ namespace Retro_Achievement_Tracker.Controllers
 
                             if (LastFiveWindow.Visible)
                             {
-                                await LastFiveWindow.AddAchievement(achievements[i]);
+                                LastFiveWindow.AddAchievement(achievements[i]);
                             }
                             CurrentAchievements.Insert(0, achievements[i]);
                         }
@@ -133,7 +131,7 @@ namespace Retro_Achievement_Tracker.Controllers
                     {
                         SetAllSettings();
 
-                        await SetAchievementPositions();
+                        SetAchievementPositions();
 
                         while (CurrentAchievements.Count > 5)
                         {
@@ -141,20 +139,20 @@ namespace Retro_Achievement_Tracker.Controllers
                         }
                         if (!LastFiveWindow.IsDisposed)
                         {
-                            await LastFiveWindow.CleanupList();
+                            LastFiveWindow.CleanupList();
                         }
                     }
                 }
             }
         }
 
-        private async Task AddAchievementsToWindow(List<Achievement> achievements)
+        private void AddAchievementsToWindow(List<Achievement> achievements)
         {
             for (int i = 0; i < achievements.Count; i++)
             {
                 if (LastFiveWindow.Visible)
                 {
-                    await LastFiveWindow.AddAchievement(achievements[i]);
+                    LastFiveWindow.AddAchievement(achievements[i]);
                 }
                 CurrentAchievements.Insert(0, achievements[i]);
             }
@@ -162,13 +160,13 @@ namespace Retro_Achievement_Tracker.Controllers
             SetAllSettings();
         }
 
-        private async Task SetAchievementPositions()
+        private async void SetAchievementPositions()
         {
             if (LastFiveWindow.Visible)
             {
                 for (int i = CurrentAchievements.Count - 1; i >= 0; i--)
                 {
-                    await LastFiveWindow.SetAchievementPosition(CurrentAchievements[i].Id, i);
+                    LastFiveWindow.SetAchievementPosition(CurrentAchievements[i].Id, i);
                     await Task.Delay(200);
                 }
             }
@@ -182,10 +180,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 {
                     for (int i = CurrentAchievements.Count - 1; i >= 0; i--)
                     {
-                        await LastFiveWindow.SetAchievementPosition(CurrentAchievements[i].Id, 5);
+                        LastFiveWindow.SetAchievementPosition(CurrentAchievements[i].Id, 5);
                         await Task.Delay(200);
                     }
-                    await LastFiveWindow.ClearList();
+                    LastFiveWindow.ClearList();
                 }
                 CurrentAchievements = new List<Achievement>();
             }
@@ -219,10 +217,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.Save();
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await LastFiveWindow.SetWindowBackgroundColor(value);
-                    });
+                    LastFiveWindow.SetWindowBackgroundColor(value);
                 }
             }
         }
@@ -249,11 +244,8 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.Save();
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await LastFiveWindow.AssignJavaScriptVariables();
-                        await LastFiveWindow.SetSimpleFontFamily(SimpleFontFamily);
-                    });
+                    LastFiveWindow.AssignJavaScriptVariables();
+                    LastFiveWindow.SetSimpleFontFamily(SimpleFontFamily);
                 }
             }
         }
@@ -280,11 +272,8 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.Save();
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await LastFiveWindow.AssignJavaScriptVariables();
-                        await LastFiveWindow.SetTitleFontFamily(SimpleFontFamily);
-                    });
+                    LastFiveWindow.AssignJavaScriptVariables();
+                    LastFiveWindow.SetTitleFontFamily(SimpleFontFamily);
                 }
             }
         }
@@ -311,11 +300,8 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.Save();
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await LastFiveWindow.AssignJavaScriptVariables();
-                        await LastFiveWindow.SetDateFontFamily(SimpleFontFamily);
-                    });
+                    LastFiveWindow.AssignJavaScriptVariables();
+                    LastFiveWindow.SetDateFontFamily(SimpleFontFamily);
                 }
             }
         }
@@ -342,11 +328,8 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.Save();
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await LastFiveWindow.AssignJavaScriptVariables();
-                        await LastFiveWindow.SetPointsFontFamily(SimpleFontFamily);
-                    });
+                    LastFiveWindow.AssignJavaScriptVariables();
+                    LastFiveWindow.SetPointsFontFamily(SimpleFontFamily);
                 }
             }
         }
@@ -362,11 +345,8 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.Save();
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await LastFiveWindow.AssignJavaScriptVariables();
-                        await LastFiveWindow.SetSimpleFontColor(value);
-                    });
+                    LastFiveWindow.AssignJavaScriptVariables();
+                    LastFiveWindow.SetSimpleFontColor(value);
                 }
             }
         }
@@ -382,11 +362,8 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.Save();
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await LastFiveWindow.AssignJavaScriptVariables();
-                        await LastFiveWindow.SetTitleColor(value);
-                    });
+                    LastFiveWindow.AssignJavaScriptVariables();
+                    LastFiveWindow.SetTitleColor(value);
                 }
             }
         }
@@ -402,11 +379,8 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.Save();
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await LastFiveWindow.AssignJavaScriptVariables();
-                        await LastFiveWindow.SetDateColor(value);
-                    });
+                    LastFiveWindow.AssignJavaScriptVariables();
+                    LastFiveWindow.SetDateColor(value);
                 }
             }
         }
@@ -422,11 +396,8 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.Save();
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await LastFiveWindow.AssignJavaScriptVariables();
-                        await LastFiveWindow.SetDateColor(value);
-                    });
+                    LastFiveWindow.AssignJavaScriptVariables();
+                    LastFiveWindow.SetDateColor(value);
                 }
             }
         }
@@ -442,11 +413,8 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.Save();
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await LastFiveWindow.AssignJavaScriptVariables();
-                        await LastFiveWindow.SetPointsColor(value);
-                    });
+                    LastFiveWindow.AssignJavaScriptVariables();
+                    LastFiveWindow.SetPointsColor(value);
                 }
             }
         }
@@ -462,11 +430,8 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.Save();
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await LastFiveWindow.AssignJavaScriptVariables();
-                        await LastFiveWindow.SetTitleOutline(TitleOutlineEnabled ? TitleOutlineColor + " " + TitleOutlineSize + "px" : "0px");
-                    });
+                    LastFiveWindow.AssignJavaScriptVariables();
+                    LastFiveWindow.SetTitleOutline(TitleOutlineEnabled ? TitleOutlineColor + " " + TitleOutlineSize + "px" : "0px");
                 }
             }
         }
@@ -482,11 +447,8 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.Save();
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await LastFiveWindow.AssignJavaScriptVariables();
-                        await LastFiveWindow.SetDateOutline(DateOutlineEnabled ? DateOutlineColor + " " + DateOutlineSize + "px" : "0px");
-                    });
+                    LastFiveWindow.AssignJavaScriptVariables();
+                    LastFiveWindow.SetDateOutline(DateOutlineEnabled ? DateOutlineColor + " " + DateOutlineSize + "px" : "0px");
                 }
             }
         }
@@ -502,11 +464,8 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.Save();
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await LastFiveWindow.AssignJavaScriptVariables();
-                        await LastFiveWindow.SetPointsOutline(PointsOutlineEnabled ? PointsOutlineColor + " " + PointsOutlineSize + "px" : "0px");
-                    });
+                    LastFiveWindow.AssignJavaScriptVariables();
+                    LastFiveWindow.SetPointsOutline(PointsOutlineEnabled ? PointsOutlineColor + " " + PointsOutlineSize + "px" : "0px");
                 }
             }
         }
@@ -522,11 +481,8 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.Save();
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await LastFiveWindow.AssignJavaScriptVariables();
-                        await LastFiveWindow.SetLineOutline(LineOutlineEnabled ? LineOutlineSize + "px solid " + LineOutlineColor : "0px");
-                    });
+                    LastFiveWindow.AssignJavaScriptVariables();
+                    LastFiveWindow.SetLineOutline(LineOutlineEnabled ? LineOutlineSize + "px solid " + LineOutlineColor : "0px");
                 }
             }
         }
@@ -542,11 +498,8 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.Save();
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await LastFiveWindow.AssignJavaScriptVariables();
-                        await LastFiveWindow.SetTitleOutline(TitleOutlineEnabled ? TitleOutlineColor + " " + TitleOutlineSize + "px" : "0px");
-                    });
+                    LastFiveWindow.AssignJavaScriptVariables();
+                    LastFiveWindow.SetTitleOutline(TitleOutlineEnabled ? TitleOutlineColor + " " + TitleOutlineSize + "px" : "0px");
                 }
             }
         }
@@ -562,11 +515,8 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.Save();
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await LastFiveWindow.AssignJavaScriptVariables();
-                        await LastFiveWindow.SetDateOutline(DateOutlineEnabled ? DateOutlineColor + " " + DateOutlineSize + "px" : "0px");
-                    });
+                    LastFiveWindow.AssignJavaScriptVariables();
+                    LastFiveWindow.SetDateOutline(DateOutlineEnabled ? DateOutlineColor + " " + DateOutlineSize + "px" : "0px");
                 }
             }
         }
@@ -583,11 +533,8 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await LastFiveWindow.AssignJavaScriptVariables();
-                        await LastFiveWindow.SetPointsOutline(PointsOutlineEnabled ? PointsOutlineColor + " " + PointsOutlineSize + "px" : "0px");
-                    });
+                    LastFiveWindow.AssignJavaScriptVariables();
+                    LastFiveWindow.SetPointsOutline(PointsOutlineEnabled ? PointsOutlineColor + " " + PointsOutlineSize + "px" : "0px");
                 }
             }
         }
@@ -604,11 +551,8 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await LastFiveWindow.AssignJavaScriptVariables();
-                        await LastFiveWindow.SetLineOutline(LineOutlineEnabled ? LineOutlineSize + "px solid " + LineOutlineColor : "0px");
-                    });
+                    LastFiveWindow.AssignJavaScriptVariables();
+                    LastFiveWindow.SetLineOutline(LineOutlineEnabled ? LineOutlineSize + "px solid " + LineOutlineColor : "0px");
                 }
             }
         }
@@ -625,11 +569,8 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await LastFiveWindow.AssignJavaScriptVariables();
-                        await LastFiveWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px", SimpleFontOutlineEnabled ? SimpleFontOutlineSize + "px solid " + SimpleFontOutlineColor : "0px");
-                    });
+                    LastFiveWindow.AssignJavaScriptVariables();
+                    LastFiveWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px", SimpleFontOutlineEnabled ? SimpleFontOutlineSize + "px solid " + SimpleFontOutlineColor : "0px");
                 }
             }
         }
@@ -646,11 +587,9 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await LastFiveWindow.AssignJavaScriptVariables();
-                        await LastFiveWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px", SimpleFontOutlineEnabled ? SimpleFontOutlineSize + "px solid " + SimpleFontOutlineColor : "0px");
-                    });
+                    LastFiveWindow.AssignJavaScriptVariables();
+                    LastFiveWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px", SimpleFontOutlineEnabled ? SimpleFontOutlineSize + "px solid " + SimpleFontOutlineColor : "0px");
+
                 }
             }
         }
@@ -667,11 +606,8 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await LastFiveWindow.AssignJavaScriptVariables();
-                        await LastFiveWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px", SimpleFontOutlineEnabled ? SimpleFontOutlineSize + "px solid " + SimpleFontOutlineColor : "0px");
-                    });
+                    LastFiveWindow.AssignJavaScriptVariables();
+                    LastFiveWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px", SimpleFontOutlineEnabled ? SimpleFontOutlineSize + "px solid " + SimpleFontOutlineColor : "0px");
                 }
             }
         }
@@ -688,11 +624,8 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await LastFiveWindow.AssignJavaScriptVariables();
-                        await LastFiveWindow.SetTitleOutline(TitleOutlineEnabled ? TitleOutlineColor + " " + TitleOutlineSize + "px" : "0px");
-                    });
+                    LastFiveWindow.AssignJavaScriptVariables();
+                    LastFiveWindow.SetTitleOutline(TitleOutlineEnabled ? TitleOutlineColor + " " + TitleOutlineSize + "px" : "0px");
                 }
             }
         }
@@ -709,11 +642,8 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await LastFiveWindow.AssignJavaScriptVariables();
-                        await LastFiveWindow.SetDateOutline(DateOutlineEnabled ? DateOutlineColor + " " + DateOutlineSize + "px" : "0px");
-                    });
+                    LastFiveWindow.AssignJavaScriptVariables();
+                    LastFiveWindow.SetDateOutline(DateOutlineEnabled ? DateOutlineColor + " " + DateOutlineSize + "px" : "0px");
                 }
             }
         }
@@ -730,11 +660,8 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await LastFiveWindow.AssignJavaScriptVariables();
-                        await LastFiveWindow.SetPointsOutline(PointsOutlineEnabled ? PointsOutlineColor + " " + PointsOutlineSize + "px" : "0px");
-                    });
+                    LastFiveWindow.AssignJavaScriptVariables();
+                    LastFiveWindow.SetPointsOutline(PointsOutlineEnabled ? PointsOutlineColor + " " + PointsOutlineSize + "px" : "0px");
                 }
             }
         }
@@ -751,11 +678,8 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await LastFiveWindow.AssignJavaScriptVariables();
-                        await LastFiveWindow.SetLineOutline(LineOutlineEnabled ? LineOutlineSize + "px solid " + LineOutlineColor : "0px");
-                    });
+                    LastFiveWindow.AssignJavaScriptVariables();
+                    LastFiveWindow.SetLineOutline(LineOutlineEnabled ? LineOutlineSize + "px solid " + LineOutlineColor : "0px");
                 }
             }
         }
@@ -772,18 +696,16 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
+                    LastFiveWindow.AssignJavaScriptVariables();
+
+                    if (value)
                     {
-                        await LastFiveWindow.AssignJavaScriptVariables();
-                        if (value)
-                        {
-                            await LastFiveWindow.EnableBorder();
-                        }
-                        else
-                        {
-                            await LastFiveWindow.DisableBorder();
-                        }
-                    });
+                        LastFiveWindow.EnableBorder();
+                    }
+                    else
+                    {
+                        LastFiveWindow.DisableBorder();
+                    }
                 }
             }
         }
@@ -800,11 +722,8 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-                    Task.Run(async () =>
-                    {
-                        await LastFiveWindow.AssignJavaScriptVariables();
-                        await LastFiveWindow.SetBackgroundColor(value);
-                    });
+                    LastFiveWindow.AssignJavaScriptVariables();
+                    LastFiveWindow.SetBackgroundColor(value);
                 }
             }
         }

@@ -39,10 +39,10 @@ namespace Retro_Achievement_Tracker
         {
             get { return true; }
         }
-        public async Task AssignJavaScriptVariables()
+        public void AssignJavaScriptVariables()
         {
 
-            await ExecuteScript(
+            ExecuteScript(
                 "container = document.getElementById(\"container\");" +
                 "rankName = document.getElementById(\"rank-name\");" +
                 "rankValue = document.getElementById(\"rank-value\");" +
@@ -68,44 +68,44 @@ namespace Retro_Achievement_Tracker
                 "allNames = document.getElementsByClassName(\"name\");" +
                 "allValues = document.getElementsByClassName(\"value\");");
         }
-        public async void SetWindowBackgroundColor(string value)
+        public void SetWindowBackgroundColor(string value)
         {
-            await ExecuteScript(
+            ExecuteScript(
                 "container.style.backgroundColor = \"" + value + "\";");
         }
-        public async Task SetSimpleFontFamily(FontFamily value)
+        public void SetSimpleFontFamily(FontFamily value)
         {
             int lineSpacing = value.GetLineSpacing(FontStyle.Regular) / value.GetEmHeight(FontStyle.Regular);
-            await ExecuteScript(
+            ExecuteScript(
                 "for (var i = 0; i < allElements.length; i++) { " +
                 "   allElements[i].style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
                 "   allElements[i].style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
                 "}");
-            await ExecuteScript(
+            ExecuteScript(
                 "for (var i = 0; i < allNames.length; i++) { " +
                 "   textFit(allNames[i], { alignVert: true });" +
                 "}");
-            await ExecuteScript(
+            ExecuteScript(
                 "for (var i = 0; i < allValues.length; i++) { " +
                 "   textFit(allValues[i], { alignVert: true });" +
                 "}");
         }
-        public async Task SetSimpleFontColor(string value)
+        public void SetSimpleFontColor(string value)
         {
-            await ExecuteScript(
+            ExecuteScript(
                 "for (var i = 0; i < allElements.length; i++) { allElements[i].style.color = \"" + value + "\"; }");
         }
 
-        public async Task SetSimpleFontOutline(string value)
+        public void SetSimpleFontOutline(string value)
         {
-            await ExecuteScript(
+            ExecuteScript(
                "for (var i = 0; i < allElements.length; i++) { allElements[i].style.webkitTextStroke = \"" + value + "\"; }");
         }
 
-        public async Task SetNameFontFamily(FontFamily value)
+        public void SetNameFontFamily(FontFamily value)
         {
             int lineSpacing = value.GetLineSpacing(FontStyle.Regular) / value.GetEmHeight(FontStyle.Regular);
-            await ExecuteScript(
+            ExecuteScript(
                 "for (var i = 0; i < allNames.length; i++) { " +
                 "   allNames[i].style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
                 "   allNames[i].style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
@@ -113,10 +113,10 @@ namespace Retro_Achievement_Tracker
                 "}");
         }
 
-        public async Task SetValueFontFamily(FontFamily value)
+        public void SetValueFontFamily(FontFamily value)
         {
             int lineSpacing = value.GetLineSpacing(FontStyle.Regular) / value.GetEmHeight(FontStyle.Regular);
-            await ExecuteScript(
+            ExecuteScript(
                 "for (var i = 0; i < allValues.length; i++) { " +
                 "   allValues[i].style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
                 "   allValues[i].style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
@@ -124,180 +124,180 @@ namespace Retro_Achievement_Tracker
                 "}");
         }
 
-        public async Task SetNameColor(string value)
+        public void SetNameColor(string value)
         {
-            await ExecuteScript(
+            ExecuteScript(
                  "for (var i = 0; i < allNames.length; i++) { allNames[i].style.color = \"" + value + "\"; }");
         }
 
-        public async Task SetValueColor(string value)
+        public void SetValueColor(string value)
         {
-            await ExecuteScript(
+            ExecuteScript(
                  "for (var i = 0; i < allValues.length; i++) { allValues[i].style.color = \"" + value + "\"; }");
         }
 
-        public async Task SetNameOutline(string value)
+        public void SetNameOutline(string value)
         {
-            await ExecuteScript(
+            ExecuteScript(
                   "for (var i = 0; i < allNames.length; i++) { allNames[i].style.webkitTextStroke = \"" + value + "\"; }");
         }
 
-        public async Task SetValueOutline(string value)
+        public void SetValueOutline(string value)
         {
-            await ExecuteScript(
+            ExecuteScript(
                   "for (var i = 0; i < allValues.length; i++) { allValues[i].style.webkitTextStroke = \"" + value + "\"; }");
         }
-        public async void SetRankName(string value)
+        public void SetRankName(string value)
         {
-            await ExecuteScript("rankName.innerHTML = \"" + value + ":\";" +
+            ExecuteScript("rankName.innerHTML = \"" + value + ":\";" +
                 "textFit(rankName, { alignVert: true });");
         }
-        public async void SetRankValue(string value)
+        public void SetRankValue(string value)
         {
-            await ExecuteScript("rankValue.innerHTML = \"" + value + "\";" +
+            ExecuteScript("rankValue.innerHTML = \"" + value + "\";" +
                 "textFit(rankValue, { alignVert: true });");
         }
-        public async void SetRankVisibility(bool isVisible)
+        public void SetRankVisibility(bool isVisible)
         {
-            await ExecuteScript(isVisible ? "$(\"#rank\").fadeIn();" : "$(\"#rank\").fadeOut();");
+            ExecuteScript(isVisible ? "$(\"#rank\").fadeIn();" : "$(\"#rank\").fadeOut();");
         }
         //Awards
-        public async void SetAwardsName(string value)
+        public void SetAwardsName(string value)
         {
-            await ExecuteScript("awardsName.innerHTML = \"" + value + ":\";" +
+            ExecuteScript("awardsName.innerHTML = \"" + value + ":\";" +
                 "textFit(awardsName, { alignVert: true });");
         }
-        public async void SetAwardsValue(string value)
+        public void SetAwardsValue(string value)
         {
-            await ExecuteScript("awardsValue.innerHTML = " + value + ";" +
+            ExecuteScript("awardsValue.innerHTML = " + value + ";" +
                 "textFit(awardsValue, { alignVert: true });");
         }
-        public async void SetAwardsVisibility(bool isVisible)
+        public void SetAwardsVisibility(bool isVisible)
         {
-            await ExecuteScript(isVisible ? "$(\"#awards\").fadeIn();" : "$(\"#awards\").fadeOut();");
+            ExecuteScript(isVisible ? "$(\"#awards\").fadeIn();" : "$(\"#awards\").fadeOut();");
         }
         //Points
-        public async void SetPointsName(string value)
+        public void SetPointsName(string value)
         {
-            await ExecuteScript("pointsName.innerHTML = \"" + value + ":\";" +
+            ExecuteScript("pointsName.innerHTML = \"" + value + ":\";" +
                 "textFit(pointsName, { alignVert: true });");
         }
-        public async void SetPointsValue(string value)
+        public void SetPointsValue(string value)
         {
-            await ExecuteScript("pointsValue.innerHTML = \"" + value + "\";" +
+            ExecuteScript("pointsValue.innerHTML = \"" + value + "\";" +
                 "textFit(pointsValue, { alignVert: true });");
         }
-        public async void SetPointsVisibility(bool isVisible)
+        public void SetPointsVisibility(bool isVisible)
         {
-            await ExecuteScript(isVisible ? "$(\"#points\").fadeIn();" : "$(\"#points\").fadeOut();");
+            ExecuteScript(isVisible ? "$(\"#points\").fadeIn();" : "$(\"#points\").fadeOut();");
         }
         //True Points
-        public async void SetTruePointsName(string value)
+        public void SetTruePointsName(string value)
         {
-            await ExecuteScript("truePointsName.innerHTML = \"" + value + ":\";" +
+            ExecuteScript("truePointsName.innerHTML = \"" + value + ":\";" +
                 "textFit(truePointsName, { alignVert: true });");
         }
-        public async void SetTruePointsValue(string value)
+        public void SetTruePointsValue(string value)
         {
-            await ExecuteScript("truePointsValue.innerHTML = \"" + value + "\";" +
+            ExecuteScript("truePointsValue.innerHTML = \"" + value + "\";" +
                 "textFit(truePointsValue, { alignVert: true });");
         }
-        public async void SetTruePointsVisibility(bool isVisible)
+        public void SetTruePointsVisibility(bool isVisible)
         {
-            await ExecuteScript(isVisible ? "$(\"#true-points\").fadeIn();" : "$(\"#true-points\").fadeOut();");
+            ExecuteScript(isVisible ? "$(\"#true-points\").fadeIn();" : "$(\"#true-points\").fadeOut();");
         }
         //Ratio
-        public async void SetRatioName(string value)
+        public void SetRatioName(string value)
         {
-            await ExecuteScript("ratioName.innerHTML = \"" + value + ":\";" +
+            ExecuteScript("ratioName.innerHTML = \"" + value + ":\";" +
                 "textFit(ratioName, { alignVert: true });");
         }
-        public async void SetRatioValue(string value)
+        public void SetRatioValue(string value)
         {
-            await ExecuteScript("ratioValue.innerHTML = \"" + value + "\";" +
+            ExecuteScript("ratioValue.innerHTML = \"" + value + "\";" +
                 "textFit(ratioValue, { alignVert: true });");
         }
-        public async void SetRatioVisibility(bool isVisible)
+        public void SetRatioVisibility(bool isVisible)
         {
-            await ExecuteScript(isVisible ? "$(\"#ratio\").fadeIn();" : "$(\"#ratio\").fadeOut();");
+            ExecuteScript(isVisible ? "$(\"#ratio\").fadeIn();" : "$(\"#ratio\").fadeOut();");
         }
         //Game Ratio
-        public async void SetGameRatioName(string value)
+        public void SetGameRatioName(string value)
         {
-            await ExecuteScript("gameRatioName.innerHTML = \"" + value + ":\";" +
+            ExecuteScript("gameRatioName.innerHTML = \"" + value + ":\";" +
                 "textFit(gameRatioName, { alignVert: true });");
         }
-        public async void SetGameRatioValue(string value)
+        public void SetGameRatioValue(string value)
         {
-            await ExecuteScript("gameRatioValue.innerHTML = \"" + value + "\";" +
+            ExecuteScript("gameRatioValue.innerHTML = \"" + value + "\";" +
                 "textFit(gameRatioValue, { alignVert: true });");
         }
-        public async void SetGameRatioVisibility(bool isVisible)
+        public void SetGameRatioVisibility(bool isVisible)
         {
-            await ExecuteScript(isVisible ? "$(\"#game-ratio\").fadeIn();" : "$(\"#game-ratio\").fadeOut();");
+            ExecuteScript(isVisible ? "$(\"#game-ratio\").fadeIn();" : "$(\"#game-ratio\").fadeOut();");
         }
         //Game Points
-        public async void SetGamePointsName(string value)
+        public void SetGamePointsName(string value)
         {
-            await ExecuteScript("gamePointsName.innerHTML = \"" + value + ":\";" +
+            ExecuteScript("gamePointsName.innerHTML = \"" + value + ":\";" +
                 "textFit(gamePointsName, { alignVert: true });");
         }
-        public async void SetGamePointsValue(string value)
+        public void SetGamePointsValue(string value)
         {
-            await ExecuteScript("gamePointsValue.innerHTML = \"" + value + "\";" +
+            ExecuteScript("gamePointsValue.innerHTML = \"" + value + "\";" +
                 "textFit(gamePointsValue, { alignVert: true });");
         }
-        public async void SetGamePointsVisibility(bool isVisible)
+        public void SetGamePointsVisibility(bool isVisible)
         {
-            await ExecuteScript(isVisible ? "$(\"#game-points\").fadeIn();" : "$(\"#game-points\").fadeOut();");
+            ExecuteScript(isVisible ? "$(\"#game-points\").fadeIn();" : "$(\"#game-points\").fadeOut();");
         }
         //Game Achievements
-        public async void SetGameAchievementsName(string value)
+        public void SetGameAchievementsName(string value)
         {
-            await ExecuteScript("gameAchievementsName.innerHTML = \"" + value + ":\";" +
+            ExecuteScript("gameAchievementsName.innerHTML = \"" + value + ":\";" +
                 "textFit(gameAchievementsName, { alignVert: true });");
         }
-        public async void SetGameAchievementsValue(string value)
+        public void SetGameAchievementsValue(string value)
         {
-            await ExecuteScript("gameAchievementsValue.innerHTML = \"" + value + "\";" +
+            ExecuteScript("gameAchievementsValue.innerHTML = \"" + value + "\";" +
                 "textFit(gameAchievementsValue, { alignVert: true });");
         }
-        public async void SetGameAchievementsVisibility(bool isVisible)
+        public void SetGameAchievementsVisibility(bool isVisible)
         {
-            await ExecuteScript(isVisible ? "$(\"#game-achievements\").fadeIn();" : "$(\"#game-achievements\").fadeOut();");
+            ExecuteScript(isVisible ? "$(\"#game-achievements\").fadeIn();" : "$(\"#game-achievements\").fadeOut();");
         }
         //Game True Points
-        public async void SetGameTruePointsName(string value)
+        public void SetGameTruePointsName(string value)
         {
-            await ExecuteScript("gameTruePointsName.innerHTML = \"" + value + ":\";" +
+            ExecuteScript("gameTruePointsName.innerHTML = \"" + value + ":\";" +
                 "textFit(gameTruePointsName, { alignVert: true });");
         }
-        public async void SetGameTruePointsValue(string value)
+        public void SetGameTruePointsValue(string value)
         {
-            await ExecuteScript("gameTruePointsValue.innerHTML = \"" + value + "\";" +
+            ExecuteScript("gameTruePointsValue.innerHTML = \"" + value + "\";" +
                 "textFit(gameTruePointsValue, { alignVert: true });");
         }
-        public async void SetGameTruePointsVisibility(bool isVisible)
+        public void SetGameTruePointsVisibility(bool isVisible)
         {
-            await ExecuteScript(isVisible ? "$(\"#game-true-points\").fadeIn();" : "$(\"#game-true-points\").fadeOut();");
+            ExecuteScript(isVisible ? "$(\"#game-true-points\").fadeIn();" : "$(\"#game-true-points\").fadeOut();");
         }
         //Completed
-        public async void SetCompletedName(string value)
+        public void SetCompletedName(string value)
         {
-            await ExecuteScript("completedName.innerHTML = \"" + value + ":\";" +
+            ExecuteScript("completedName.innerHTML = \"" + value + ":\";" +
                 "textFit(completedName, { alignVert: true });");
         }
-        public async void SetCompletedValue(string value)
+        public void SetCompletedValue(string value)
         {
-            await ExecuteScript("completedValue.innerHTML = \"" + value + "\";" +
+            ExecuteScript("completedValue.innerHTML = \"" + value + "\";" +
                 "textFit(completedValue, { alignVert: true });");
 
         }
-        public async void SetCompletedVisibility(bool isVisible)
+        public void SetCompletedVisibility(bool isVisible)
         {
-            await ExecuteScript(isVisible ? "$(\"#game-completed\").fadeIn();" : "$(\"#game-completed\").fadeOut();");
+            ExecuteScript(isVisible ? "$(\"#game-completed\").fadeIn();" : "$(\"#game-completed\").fadeOut();");
         }
-        protected async Task ExecuteScript(string script)
+        protected async void ExecuteScript(string script)
         {
             if (chromiumWebBrowser != null)
             {

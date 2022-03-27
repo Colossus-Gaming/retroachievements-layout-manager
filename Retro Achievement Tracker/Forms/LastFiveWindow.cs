@@ -39,9 +39,9 @@ namespace Retro_Achievement_Tracker
         {
             get { return true; }
         }
-        public async Task AssignJavaScriptVariables()
+        public void AssignJavaScriptVariables()
         {
-            await ExecuteScript(
+            ExecuteScript(
                 "container = document.getElementById(\"container\");" +
                 "allElements = document.getElementsByClassName(\"has-font\");" +
                 "allTitles = document.getElementsByClassName(\"title\");" +
@@ -50,74 +50,74 @@ namespace Retro_Achievement_Tracker
                 "allPoints = document.getElementsByClassName(\"points\");" +
                 "allAchievements = document.getElementsByClassName(\"focus-achievement\");");
         }
-        public async Task SetSimpleFontColor(string value)
+        public void SetSimpleFontColor(string value)
         {
-            await ExecuteScript(
+            ExecuteScript(
                 "for (var i = 0; i < allElements.length; i++) { allElements[i].style.color = \"" + value + "\"; }" +
                 "for (var i = 0; i < allLines.length; i++) { allLines[i].style.color = \"" + value + "\"; }" +
                 "for (var i = 0; i < allLines.length; i++) { allLines[i].style.backgroundColor = \"" + value + "\"; }");
         }
-        public async Task SetSimpleFontFamily(FontFamily value)
+        public void SetSimpleFontFamily(FontFamily value)
         {
             int lineSpacing = value.GetLineSpacing(FontStyle.Regular) / value.GetEmHeight(FontStyle.Regular);
-            await ExecuteScript(
+            ExecuteScript(
                 "for (var i = 0; i < allElements.length; i++) { " +
                 "   allElements[i].style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
                 "   allElements[i].style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
                 "}");
-            await ExecuteScript(
+            ExecuteScript(
                 "for (var i = 0; i < allTitles.length; i++) { " +
                 "   textFit(allTitles[i], { alignVert: true , alignHoriz: true });" +
                 "}");
-            await ExecuteScript(
+            ExecuteScript(
                 "for (var i = 0; i < allDates.length; i++) { " +
                 "   textFit(allDates[i], { alignVert: true , alignHoriz: true });" +
                 "}");
-            await ExecuteScript(
+            ExecuteScript(
                 "for (var i = 0; i < allPoints.length; i++) { " +
                 "   textFit(allPoints[i], { alignVert: true });" +
                 "}");
         }
 
-        public async Task SetSimpleFontOutline(string fontOutline, string borderOutline)
+        public void SetSimpleFontOutline(string fontOutline, string borderOutline)
         {
-            await ExecuteScript(
+            ExecuteScript(
                  "for (var i = 0; i < allElements.length; i++) { allElements[i].style.webkitTextStroke = \"" + fontOutline + "\"; }" +
                  "for (var i = 0; i < allLines.length; i++) { allLines[i].style.border = \"" + borderOutline + "\"; }");
         }
 
-        public async Task SetBackgroundColor(string value)
+        public void SetBackgroundColor(string value)
         {
-            await ExecuteScript(
+            ExecuteScript(
                 "for (var i = 0; i < allAchievements.length; i++) { allAchievements[i].style.backgroundColor = \"" + value + "\"; }");
         }
-        public async Task SetWindowBackgroundColor(string value)
+        public void SetWindowBackgroundColor(string value)
         {
-            await ExecuteScript(
+            ExecuteScript(
                 "container.style.backgroundColor = \"" + value + "\";");
         }
-        public async Task EnableBorder()
+        public void EnableBorder()
         {
-            await ExecuteScript("for (var i = 0; i < allAchievements.length; i++) { allAchievements[i].style.backgroundImage = \"url('disk://background')\"; }");
+            ExecuteScript("for (var i = 0; i < allAchievements.length; i++) { allAchievements[i].style.backgroundImage = \"url('disk://background')\"; }");
         }
-        public async Task DisableBorder()
+        public void DisableBorder()
         {
-            await ExecuteScript("for (var i = 0; i < allAchievements.length; i++) { allAchievements[i].style.backgroundImage = \"\"; }");
+            ExecuteScript("for (var i = 0; i < allAchievements.length; i++) { allAchievements[i].style.backgroundImage = \"\"; }");
         }
-        public async Task SetTitleFontFamily(FontFamily value)
+        public void SetTitleFontFamily(FontFamily value)
         {
             int lineSpacing = value.GetLineSpacing(FontStyle.Regular) / value.GetEmHeight(FontStyle.Regular);
-            await ExecuteScript(
+            ExecuteScript(
                 "for (var i = 0; i < allTitles.length; i++) { " +
                 "   allTitles[i].style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
                 "   allTitles[i].style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
                 "   textFit(allTitles[i], { alignVert: true, alignHoriz: true });" +
                 "}");
         }
-        public async Task SetDateFontFamily(FontFamily value)
+        public void SetDateFontFamily(FontFamily value)
         {
             int lineSpacing = value.GetLineSpacing(FontStyle.Regular) / value.GetEmHeight(FontStyle.Regular);
-            await ExecuteScript(
+            ExecuteScript(
                 "for (var i = 0; i < allDates.length; i++) { " +
                 "   allDates[i].style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
                 "   allDates[i].style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
@@ -125,10 +125,10 @@ namespace Retro_Achievement_Tracker
                 "}");
         }
 
-        public async Task SetPointsFontFamily(FontFamily value)
+        public void SetPointsFontFamily(FontFamily value)
         {
             int lineSpacing = value.GetLineSpacing(FontStyle.Regular) / value.GetEmHeight(FontStyle.Regular);
-            await ExecuteScript(
+            ExecuteScript(
                 "for (var i = 0; i < allPoints.length; i++) { " +
                 "   allPoints[i].style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
                 "   allPoints[i].style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
@@ -136,62 +136,62 @@ namespace Retro_Achievement_Tracker
                 "}");
         }
 
-        public async Task SetTitleColor(string value)
+        public void SetTitleColor(string value)
         {
-            await ExecuteScript(
+            ExecuteScript(
                 "for (var i = 0; i < allTitles.length; i++) { allTitles[i].style.color = \"" + value + "\"; }");
         }
 
-        public async Task SetDateColor(string value)
+        public void SetDateColor(string value)
         {
-            await ExecuteScript(
+            ExecuteScript(
                  "for (var i = 0; i < allDates.length; i++) { allDates[i].style.color = \"" + value + "\"; }");
         }
 
-        public async Task SetPointsColor(string value)
+        public void SetPointsColor(string value)
         {
-            await ExecuteScript(
+            ExecuteScript(
                  "for (var i = 0; i < allPoints.length; i++) { allPoints[i].style.color = \"" + value + "\"; }");
         }
-        public async Task SetLineColor(string value)
+        public void SetLineColor(string value)
         {
-            await ExecuteScript(
+            ExecuteScript(
                  "for (var i = 0; i < allLines.length; i++) { allLines[i].style.color = \"" + value + "\"; allLines[i].style.backgroundColor = \"" + value + "\"; }");
         }
-        public async Task SetTitleOutline(string value)
+        public void SetTitleOutline(string value)
         {
-            await ExecuteScript(
+            ExecuteScript(
                  "for (var i = 0; i < allTitles.length; i++) { allTitles[i].style.webkitTextStroke = \"" + value + "\"; textFit(allTitles[i], { alignVert: true, alignHoriz: true }); }");
         }
-        public async Task SetDateOutline(string value)
+        public void SetDateOutline(string value)
         {
-            await ExecuteScript(
+            ExecuteScript(
                  "for (var i = 0; i < allDates.length; i++) { allDates[i].style.webkitTextStroke = \"" + value + "\"; textFit(allDates[i], { alignVert: true, alignHoriz: true }); }");
         }
-        public async Task SetPointsOutline(string value)
+        public void SetPointsOutline(string value)
         {
-            await ExecuteScript(
+            ExecuteScript(
                  "for (var i = 0; i < allPoints.length; i++) { allPoints[i].style.webkitTextStroke = \"" + value + "\"; textFit(allPoints[i], { alignVert: true, alignHoriz: true }); }");
         }
-        public async Task SetLineOutline(string value)
+        public void SetLineOutline(string value)
         {
-            await ExecuteScript(
+            ExecuteScript(
                  "for (var i = 0; i < allLines.length; i++) { allLines[i].style.border = \"" + value + "\"; }");
         }
-        public async Task CleanupList()
+        public void CleanupList()
         {
-            await ExecuteScript("allAchievements = document.getElementsByClassName(\"focus-achievement\");" +
+            ExecuteScript("allAchievements = document.getElementsByClassName(\"focus-achievement\");" +
                 "while (allAchievements.length > 5) { allAchievements[allAchievements.length - 1].remove(); allAchievements = document.getElementsByClassName(\"focus-achievement\"); }");
         }
-        public async Task ClearList()
+        public void ClearList()
         {
-            await ExecuteScript("allAchievements = document.getElementsByClassName(\"focus-achievement\");" +
+            ExecuteScript("allAchievements = document.getElementsByClassName(\"focus-achievement\");" +
                 "while (allAchievements.length > 0) { allAchievements[allAchievements.length - 1].remove(); allAchievements = document.getElementsByClassName(\"focus-achievement\"); }");
         }
 
-        public async Task AddAchievement(Achievement achievement)
+        public void AddAchievement(Achievement achievement)
         {
-            await ExecuteScript("addToList(\"" + achievement.Title.Replace("\"", "\\\"") + "\"," +
+            ExecuteScript("addToList(\"" + achievement.Title.Replace("\"", "\\\"") + "\"," +
                                        "\"https://retroachievements.org/Badge/" + achievement.BadgeNumber + ".png\"," +
                                        "\"" + achievement.Description.Replace("\"", "\\\"") + "\"," +
                                        "\"" + achievement.Points + "\"," +
@@ -214,7 +214,7 @@ namespace Retro_Achievement_Tracker
             return 800;
         }
 
-        public async Task SetAchievementPosition(int id, int position)
+        public async void SetAchievementPosition(int id, int position)
         {
             int newOffset;
             switch (position)
@@ -239,14 +239,14 @@ namespace Retro_Achievement_Tracker
                     break;
             }
 
-            await GetAchievementPosition(id).ContinueWith(async (result) =>
+            await GetAchievementPosition(id).ContinueWith((result) =>
             {
-                await ExecuteScript("document.getElementById(\"achievement-" + id + "\")" +
+                ExecuteScript("document.getElementById(\"achievement-" + id + "\")" +
                 ".animate([ { left: '5px', top: '" + result.Result + "px' }, { left: '5px', top: '" + newOffset + "px' } ], { interations: 1, duration: 200, fill: \"forwards\", easing: \"ease-out\" });");
             });
         }
 
-        protected async Task ExecuteScript(string script)
+        protected async void ExecuteScript(string script)
         {
             if (chromiumWebBrowser != null)
             {

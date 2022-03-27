@@ -41,9 +41,9 @@ namespace Retro_Achievement_Tracker.Forms
         {
             get { return true; }
         }
-        public async Task AssignJavaScriptVariables()
+        public void AssignJavaScriptVariables()
         {
-            await ExecuteScript(
+            ExecuteScript(
                 "container = document.getElementById(\"container\");" +
                 "allElements = document.getElementsByClassName(\"has-font\");" +
                 "allAchievements = document.getElementsByClassName(\"achievement\");" +
@@ -61,9 +61,9 @@ namespace Retro_Achievement_Tracker.Forms
                 "achievementVideoElement = document.getElementById(\"achievement-video\");" +
                 "masteryVideoElement = document.getElementById(\"mastery-video\");");
         }
-        public async Task StartAchievementAlert(Achievement achievement)
+        public void StartAchievementAlert(Achievement achievement)
         {
-            await ExecuteScript(
+            ExecuteScript(
                 "achievementTitle.innerHTML = \"" + achievement.Title.Replace("\"", "\\\"") + "\";" +
                 "achievementDescription.innerHTML = \"" + BreakString(achievement.Description.Length, achievement.Description.Split(new string[] { " " }, StringSplitOptions.None)).Replace("\"", "\\\"") + "\";" +
                 "achievementPoints.innerHTML = \"" + achievement.Points + "\";" +
@@ -76,9 +76,9 @@ namespace Retro_Achievement_Tracker.Forms
                 "textFit(achievementPoints);");
         }
 
-        public async Task StartMasteryAlert(UserSummary userSummary, GameInfoAndProgress gameInfo)
+        public void StartMasteryAlert(UserSummary userSummary, GameInfoAndProgress gameInfo)
         {
-            await ExecuteScript(
+            ExecuteScript(
                 "masteryTitle.innerHTML = \"" + gameInfo.Title.Replace("\"", "\\\"") + "\";" +
                 "masteryAchievements.innerHTML = \"Cheevos: " + userSummary.AchievmentsPossible + "\";" +
                 "masteryPoints.innerHTML = \"Points: " + userSummary.GamePointsPossible + "\";" +
@@ -91,91 +91,91 @@ namespace Retro_Achievement_Tracker.Forms
                 "textFit(masteryAchievements, { alignVert: true, alignHoriz: true });");
         }
 
-        public async void PromptUserInput()
+        public void PromptUserInput()
         {
-            await ExecuteScript(
+            ExecuteScript(
                 "$(\"#user-prompt\").fadeIn();" +
                 "document.getElementById(\"ready-message\").style.fontSize = \"42px\"; " +
                 "document.getElementById(\"confirm-button\").style.fontSize = \"42px\";" +
                 "textFit(document.getElementById(\"ready-message\"), { alignVert: true, alignHoriz: true });" +
                 "textFit(document.getElementById(\"confirm-button\"), { alignVert: true, alignHoriz: true });");
         }
-        public async Task EnableBorder()
+        public void EnableBorder()
         {
-            await ExecuteScript(
+            ExecuteScript(
                 "achievementElement.style.backgroundImage = \"url('disk://background')\"; " +
                 "masteryElement.style.backgroundImage = \"url('disk://background')\";");
         }
 
-        public async Task DisableBorder()
+        public void DisableBorder()
         {
-            await ExecuteScript(
+            ExecuteScript(
                 "achievementElement.style.backgroundImage = \"\"; " +
                 "masteryElement.style.backgroundImage = \"\";");
         }
-        public async Task EnableAchievementEdit()
+        public void EnableAchievementEdit()
         {
-            await ExecuteScript(
+            ExecuteScript(
                 "achievementVideoElement.controls = true;");
-            await SetAchievementIn(0, AnimationDirection.STATIC);
+            SetAchievementIn(0, AnimationDirection.STATIC);
         }
 
-        public async Task DisableAchievementEdit()
+        public void DisableAchievementEdit()
         {
-            await ExecuteScript(
+            ExecuteScript(
                 "achievementVideoElement.controls = false; " +
                 "achievementVideoElement.style.border = \"\";  " +
                 "$(\"#achievement-video\").fadeOut();");
-            await SetAchievementOut(0, AnimationDirection.STATIC);
+            SetAchievementOut(0, AnimationDirection.STATIC);
         }
 
-        public async Task EnableMasteryEdit()
+        public void EnableMasteryEdit()
         {
-            await ExecuteScript(
+            ExecuteScript(
                 "masteryVideoElement.controls = true;");
-            await SetMasteryIn(0, AnimationDirection.STATIC);
+            SetMasteryIn(0, AnimationDirection.STATIC);
         }
 
-        public async Task DisableMasteryEdit()
+        public void DisableMasteryEdit()
         {
-            await ExecuteScript(
+            ExecuteScript(
                 "masteryVideoElement.controls = false; " +
                 "masteryVideoElement.style.border = \"\"; " +
                 "$(\"#mastery-video\").fadeOut(); ");
-            await SetMasteryOut(0, AnimationDirection.STATIC);
+            SetMasteryOut(0, AnimationDirection.STATIC);
         }
 
-        public async void SetAchievementLeft(int value)
+        public void SetAchievementLeft(int value)
         {
-            await ExecuteScript("achievementVideoElement.style.left = \"" + value + "px\";");
+            ExecuteScript("achievementVideoElement.style.left = \"" + value + "px\";");
         }
 
-        public async void SetAchievementTop(int value)
+        public void SetAchievementTop(int value)
         {
-            await ExecuteScript("achievementVideoElement.style.top = \"" + value + "px\";");
+            ExecuteScript("achievementVideoElement.style.top = \"" + value + "px\";");
         }
 
-        public async void SetMasteryLeft(int value)
+        public void SetMasteryLeft(int value)
         {
-            await ExecuteScript("masteryVideoElement.style.left = \"" + value + "px\";");
+            ExecuteScript("masteryVideoElement.style.left = \"" + value + "px\";");
         }
 
-        public async void SetMasteryTop(int value)
+        public void SetMasteryTop(int value)
         {
-            await ExecuteScript("masteryVideoElement.style.top = \"" + value + "px\";");
+            ExecuteScript("masteryVideoElement.style.top = \"" + value + "px\";");
         }
 
-        public async void SetAchievementWidth(int value)
+        public void SetAchievementWidth(int value)
         {
-            await ExecuteScript("achievementVideoElement.style.width = \"" + value + "px\";");
+            ExecuteScript("achievementVideoElement.style.width = \"" + value + "px\";");
         }
 
-        public async void SetMasteryWidth(int value)
+        public void SetMasteryWidth(int value)
         {
-            await ExecuteScript("masteryVideoElement.style.width = \"" + value + "px\";");
+            ExecuteScript("masteryVideoElement.style.width = \"" + value + "px\";");
         }
 
-        public async Task SetAchievementIn(int value, AnimationDirection animationDirection)
+        public void SetAchievementIn(int value, AnimationDirection animationDirection)
         {
             string animationScript;
             switch (animationDirection)
@@ -197,10 +197,10 @@ namespace Retro_Achievement_Tracker.Forms
                     break;
             }
 
-            await ExecuteScript(animationScript);
+            ExecuteScript(animationScript);
         }
 
-        public async Task SetAchievementOut(int value, AnimationDirection animationDirection)
+        public void SetAchievementOut(int value, AnimationDirection animationDirection)
         {
             string animationScript;
             switch (animationDirection)
@@ -222,10 +222,10 @@ namespace Retro_Achievement_Tracker.Forms
                     break;
             }
 
-            await ExecuteScript(animationScript);
+            ExecuteScript(animationScript);
         }
 
-        public async Task SetMasteryIn(int value, AnimationDirection animationDirection)
+        public void SetMasteryIn(int value, AnimationDirection animationDirection)
         {
             string animationScript;
             switch (animationDirection)
@@ -247,10 +247,10 @@ namespace Retro_Achievement_Tracker.Forms
                     break;
             }
 
-            await ExecuteScript(animationScript);
+            ExecuteScript(animationScript);
         }
 
-        public async Task SetMasteryOut(int value, AnimationDirection animationDirection)
+        public void SetMasteryOut(int value, AnimationDirection animationDirection)
         {
             string animationScript;
             switch (animationDirection)
@@ -272,21 +272,21 @@ namespace Retro_Achievement_Tracker.Forms
                     break;
             }
 
-            await ExecuteScript(animationScript);
+            ExecuteScript(animationScript);
         }
 
-        public async Task HideNotifications()
+        public void HideNotifications()
         {
-            await ExecuteScript(
+            ExecuteScript(
                 "achievementElement.style.display = \"none\";" +
                 "masteryElement.style.display = \"none\";" +
                 "achievementVideoElement.style.display = \"none\";" +
                 "masteryVideoElement.style.display = \"none\";");
         }
 
-        public async Task SetSimpleFontColor(string value)
+        public void SetSimpleFontColor(string value)
         {
-            await ExecuteScript(
+            ExecuteScript(
                 "achievementLine.style.color = \"" + value + "\";" +
                 "masteryLine.style.color = \"" + value + "\";" +
                 "achievementLine.style.backgroundColor = \"" + value + "\";" +
@@ -296,10 +296,10 @@ namespace Retro_Achievement_Tracker.Forms
                 "document.getElementById(\"confirm-button\").style.color = \"#0000ff\";");
         }
 
-        public async Task SetSimpleFontFamily(FontFamily value)
+        public void SetSimpleFontFamily(FontFamily value)
         {
             int lineSpacing = value.GetLineSpacing(FontStyle.Regular) / value.GetEmHeight(FontStyle.Regular);
-            await ExecuteScript(
+            ExecuteScript(
                 "for (var i = 0; i < allElements.length; i++) { " +
                 "   allElements[i].style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
                 "   allElements[i].style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
@@ -307,45 +307,45 @@ namespace Retro_Achievement_Tracker.Forms
                 "}");
         }
 
-        public async Task SetSimpleFontOutline(string fontOutline, string borderOutline)
+        public void SetSimpleFontOutline(string fontOutline, string borderOutline)
         {
-            await ExecuteScript(
+            ExecuteScript(
                 "achievementLine.style.border = \"" + borderOutline + "\";" +
                 "masteryLine.style.border = \"" + borderOutline + "\";" +
                 "for (var i = 0; i < allElements.length; i++) { allElements[i].style.webkitTextStroke = \"" + fontOutline + "\"; }");
         }
-        public async Task SetBorderBackgroundColor(string value)
+        public void SetBorderBackgroundColor(string value)
         {
-            await ExecuteScript(
+            ExecuteScript(
                 "achievementElement.style.backgroundColor = \"" + value + "\";" +
                 "masteryElement.style.backgroundColor = \"" + value + "\";");
         }
-        public async Task SetWindowBackgroundColor(string value)
+        public void SetWindowBackgroundColor(string value)
         {
-            await ExecuteScript(
+            ExecuteScript(
                 "container.style.backgroundColor = \"" + value + "\";");
         }
 
-        public async Task SetDescriptionOutline(string value)
+        public void SetDescriptionOutline(string value)
         {
-            await ExecuteScript(
+            ExecuteScript(
                 "achievementDescription.style.webkitTextStroke = \"" + value + "\";" +
                 "masteryAchievements.style.webkitTextStroke = \"" + value + "\";" +
                 "masteryPoints.style.webkitTextStroke = \"" + value + "\";");
         }
 
-        public async Task SetDescriptionColor(string value)
+        public void SetDescriptionColor(string value)
         {
-            await ExecuteScript(
+            ExecuteScript(
                 "achievementDescription.style.color = \"" + value + "\";" +
                 "masteryAchievements.style.color = \"" + value + "\";" +
                 "masteryPoints.style.color = \"" + value + "\";");
         }
 
-        public async Task SetDescriptionFontFamily(FontFamily value)
+        public void SetDescriptionFontFamily(FontFamily value)
         {
             int lineSpacing = value.GetLineSpacing(FontStyle.Regular) / value.GetEmHeight(FontStyle.Regular);
-            await ExecuteScript(
+            ExecuteScript(
                  "achievementDescription.style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
                  "achievementDescription.style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
                  "textFit(achievementDescription, { alignVert: true, alignHoriz: true });" +
@@ -357,24 +357,24 @@ namespace Retro_Achievement_Tracker.Forms
                  "textFit(masteryPoints, { alignVert: true, alignHoriz: true });");
         }
 
-        public async Task SetTitleOutline(string value)
+        public void SetTitleOutline(string value)
         {
-            await ExecuteScript(
+            ExecuteScript(
                  "achievementTitle.style.webkitTextStroke = \"" + value + "\";" +
                  "masteryTitle.style.webkitTextStroke = \"" + value + "\";");
         }
 
-        public async Task SetTitleColor(string value)
+        public void SetTitleColor(string value)
         {
-            await ExecuteScript(
+            ExecuteScript(
                 "achievementTitle.style.color = \"" + value + "\";" +
                 "masteryTitle.style.color = \"" + value + "\";");
         }
 
-        public async Task SetTitleFontFamily(FontFamily value)
+        public void SetTitleFontFamily(FontFamily value)
         {
             int lineSpacing = value.GetLineSpacing(FontStyle.Regular) / value.GetEmHeight(FontStyle.Regular);
-            await ExecuteScript(
+            ExecuteScript(
                   "achievementTitle.style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
                   "achievementTitle.style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
                   "textFit(achievementTitle, { alignVert: true, alignHoriz: true });" +
@@ -382,40 +382,40 @@ namespace Retro_Achievement_Tracker.Forms
                   "masteryTitle.style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
                   "textFit(masteryTitle, { alignVert: true, alignHoriz: true });");
         }
-        public async Task SetPointsFontFamily(FontFamily value)
+        public void SetPointsFontFamily(FontFamily value)
         {
             int lineSpacing = value.GetLineSpacing(FontStyle.Regular) / value.GetEmHeight(FontStyle.Regular);
-            await ExecuteScript(
+            ExecuteScript(
                   "achievementPoints.style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
                   "achievementPoints.style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
                   "textFit(achievementPoints, { alignVert: true, alignHoriz: true });");
         }
-        public async Task SetPointsColor(string value)
+        public void SetPointsColor(string value)
         {
-            await ExecuteScript(
+            ExecuteScript(
                  "achievementPoints.style.color = \"" + value + "\";" +
                  "masteryAchievements.style.color = \"" + value + "\";" +
                  "masteryPoints.style.color = \"" + value + "\";");
         }
-        public async Task SetPointsOutline(string fontOutline)
+        public void SetPointsOutline(string fontOutline)
         {
-            await ExecuteScript(
+            ExecuteScript(
                 "achievementPoints.style.webkitTextStroke = \"" + fontOutline + "\";" +
                 "masteryAchievements.style.webkitTextStroke = \"" + fontOutline + "\";" +
                 "masteryPoints.style.webkitTextStroke = \"" + fontOutline + "\";");
         }
-        public async Task SetLineColor(string value)
+        public void SetLineColor(string value)
         {
-            await ExecuteScript(
+            ExecuteScript(
                  "achievementLine.style.color = \"" + value + "\";" +
                  "achievementLine.style.backgroundColor = \"" + value + "\";" +
                  "masteryLine.style.color = \"" + value + "\";" +
                  "masteryLine.style.backgroundColor = \"" + value + "\";");
         }
 
-        public async Task SetLineOutline(string borderOutline)
+        public void SetLineOutline(string borderOutline)
         {
-            await ExecuteScript(
+            ExecuteScript(
                 "achievementLine.style.border = \"" + borderOutline + "\";" +
                 "masteryLine.style.border = \"" + borderOutline + "\";");
         }
@@ -429,7 +429,7 @@ namespace Retro_Achievement_Tracker.Forms
             JavascriptResponse javascriptResponse = await chromiumWebBrowser.EvaluateScriptAsync("masteryVideoElement.currentTime");
             return float.Parse(javascriptResponse.Result.ToString());
         }
-        protected async Task ExecuteScript(string script)
+        protected async void ExecuteScript(string script)
         {
             if (chromiumWebBrowser != null)
             {
