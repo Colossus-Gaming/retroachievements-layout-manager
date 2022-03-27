@@ -150,7 +150,7 @@ namespace Retro_Achievement_Tracker
                 });
                 await ExecuteScript("$(\"#focus\").fadeOut(\"fast\");");
 
-                await Task.Delay(500);
+                await Task.Delay(100);
 
                 await ExecuteScript("focusTitleElement.style.display = \"none\";");
                 await ExecuteScript("focusDescriptionElement.style.display = \"none\";");
@@ -163,7 +163,7 @@ namespace Retro_Achievement_Tracker
                 await ExecuteScript("$(\"#badge\").attr('src', \"https://retroachievements.org/Badge/" + achievement.BadgeNumber + ".png\");");
                 await ExecuteScript("focusPointsElement.innerHTML = \"" + achievement.Points + "\";");
 
-                await Task.Delay(500);
+                await Task.Delay(100);
 
                 await ExecuteScript("$(\"#focus\").fadeIn();");
 

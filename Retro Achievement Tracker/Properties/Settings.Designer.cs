@@ -2362,5 +2362,77 @@ namespace Retro_Achievement_Tracker.Properties {
                 this["game_info_window_background_color"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#CC9900")]
+        public string achievement_list_border_color {
+            get {
+                return ((string)(this["achievement_list_border_color"]));
+            }
+            set {
+                this["achievement_list_border_color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FF00FF")]
+        public string achievement_list_window_background_color {
+            get {
+                return ((string)(this["achievement_list_window_background_color"]));
+            }
+            set {
+                this["achievement_list_window_background_color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool auto_achievement_list {
+            get {
+                return ((bool)(this["auto_achievement_list"]));
+            }
+            set {
+                this["auto_achievement_list"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool achievement_list_column_enabled {
+            get {
+                return ((bool)(this["achievement_list_column_enabled"]));
+            }
+            set {
+                this["achievement_list_column_enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("11")]
+        public int achievement_list_container_count {
+            get {
+                return ((int)(this["achievement_list_container_count"]));
+            }
+            set {
+                this["achievement_list_container_count"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool achievement_list_optimize_enabled {
+            get {
+                return ((bool)(this["achievement_list_optimize_enabled"]));
+            }
+            set {
+                this["achievement_list_optimize_enabled"] = value;
+            }
+        }
     }
 }

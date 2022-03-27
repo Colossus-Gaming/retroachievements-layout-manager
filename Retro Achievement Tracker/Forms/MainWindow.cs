@@ -20,14 +20,15 @@ namespace Retro_Achievement_Tracker
         private GameInfoAndProgress GameInfoAndProgress { get; set; }
         private Achievement CurrentlyViewingAchievement;
         private int CurrentlyViewingIndex;
+        private bool UpdatingVisibility;
 
         private List<Achievement> LockedAchievements
         {
             get
             {
-                if (UserSummary != null)
+                if (GameInfoAndProgress != null)
                 {
-                    return UserSummary.Achievements.FindAll(x => !x.HardcoreAchieved);
+                    return GameInfoAndProgress.Achievements.FindAll(x => !x.HardcoreAchieved);
                 }
                 return new List<Achievement>();
             }
@@ -37,9 +38,9 @@ namespace Retro_Achievement_Tracker
         {
             get
             {
-                if (UserSummary != null)
+                if (GameInfoAndProgress != null)
                 {
-                    return UserSummary.Achievements.FindAll(x => x.HardcoreAchieved);
+                    return GameInfoAndProgress.Achievements.FindAll(x => x.HardcoreAchieved);
                 }
                 return new List<Achievement>();
             }
@@ -132,6 +133,10 @@ namespace Retro_Achievement_Tracker
             {
                 AlertsController.Instance.Show();
             }
+            if (AchievementListController.Instance.AutoLaunch)
+            {
+                AchievementListController.Instance.Show();
+            }
         }
 
         private bool UpdateGameProgress(bool sameGame)
@@ -187,6 +192,8 @@ namespace Retro_Achievement_Tracker
                         ClearFocusAchievementRenders();
                     }
                 }
+
+                UpdateAchievementList(!sameGame);
             }
             catch (Exception e)
             {
@@ -258,7 +265,9 @@ namespace Retro_Achievement_Tracker
                             await retroAchievementsAPIClient.GetCompletedGames().ContinueWith(completed =>
                             {
                                 UserSummary.Awards = completed.Result.FindAll(x => x.HardcoreMode && x.AchievementsEarned == x.AchievementsPossible).Count;
+
                                 UpdateGameProgress(newId == previousId);
+
                                 Invoke((MethodInvoker)delegate
                                 {
                                     StartTimer();
@@ -269,7 +278,7 @@ namespace Retro_Achievement_Tracker
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    Console.WriteLine(ex.StackTrace);
                 }
             }
         }
@@ -349,6 +358,7 @@ namespace Retro_Achievement_Tracker
             openStatsWindowButton.Enabled = CanStart();
             openGameInfoWindowButton.Enabled = CanStart();
             openLastFiveWindowButton.Enabled = CanStart();
+            openAchievementListWindowButton.Enabled = CanStart();
 
             apiKeyTextBox.Enabled = true;
             usernameTextBox.Enabled = true;
@@ -475,6 +485,14 @@ namespace Retro_Achievement_Tracker
                 StreamLabelManager.Instance.ClearFocusStreamLabels();
             });
         }
+
+        private void UpdateAchievementList(bool newGame)
+        {
+            Invoke((MethodInvoker)delegate
+            {
+                AchievementListController.Instance.UpdateAchievementList(UnlockedAchievements, LockedAchievements, newGame);
+            });
+        }
         private bool CanStart()
         {
             return !(string.IsNullOrEmpty(usernameTextBox.Text)
@@ -499,6 +517,17 @@ namespace Retro_Achievement_Tracker
         }
         private void SortAchievements()
         {
+            GameInfoAndProgress.Achievements.ForEach(achievement =>
+            {
+                Achievement otherAchievement = UserSummary.Achievements.Find(achievement1 => achievement.Id == achievement1.Id);
+
+                if (otherAchievement != null)
+                {
+                    achievement.GameId = otherAchievement.GameId;
+                    achievement.GameTitle = otherAchievement.GameTitle;
+                }
+            });
+
             if (OldUnlockedAchievements.Count < UnlockedAchievements.Count)
             {
                 if (LockedAchievements.Count == 0)
@@ -528,6 +557,7 @@ namespace Retro_Achievement_Tracker
             AlertsController.Instance.Close();
             GameInfoController.Instance.Close();
             LastFiveController.Instance.Close();
+            AchievementListController.Instance.Close();
         }
 
         private void RequiredField_TextChange(object sender, EventArgs e)
@@ -542,26 +572,27 @@ namespace Retro_Achievement_Tracker
             switch (checkBox.Name)
             {
                 case "autoLaunchLastFiveWindowCheckbox":
-                    Settings.Default.auto_last_five = checkBox.Checked;
+                    LastFiveController.Instance.AutoLaunch = checkBox.Checked;
                     break;
                 case "autoLaunchGameInfoWindowCheckbox":
-                    Settings.Default.auto_game_info = checkBox.Checked;
+                    GameInfoController.Instance.AutoLaunch = checkBox.Checked;
                     break;
                 case "autoStartCheckbox":
                     Settings.Default.auto_start_checked = checkBox.Checked;
                     break;
-                case "autoLaunchNotificationsWindowCheckbox":
-                    Settings.Default.auto_notifications = checkBox.Checked;
+                case "autoLaunchAlertsWindowCheckbox":
+                    AlertsController.Instance.AutoLaunch = checkBox.Checked;
                     break;
                 case "autoLaunchFocusWindowCheckBox":
-                    Settings.Default.auto_focus = checkBox.Checked;
+                    FocusController.Instance.AutoLaunch = checkBox.Checked;
                     break;
                 case "autoLaunchStatsWindowCheckbox":
-                    Settings.Default.auto_stats = checkBox.Checked;
+                    StatsController.Instance.AutoLaunch = checkBox.Checked;
+                    break;
+                case "autoLaunchAchievementListWindowCheckbox":
+                    AchievementListController.Instance.AutoLaunch = checkBox.Checked;
                     break;
             }
-
-            Settings.Default.Save();
         }
         private void CustomAchievementEnableCheckbox_CheckedChanged(object sender, EventArgs eventArgs)
         {
@@ -752,6 +783,9 @@ namespace Retro_Achievement_Tracker
                             break;
                     }
                     break;
+                case "achievementListCountNumericUpDown":
+                    AchievementListController.Instance.ContainerCount = Convert.ToInt32(numericUpDown.Value);
+                    break;
             }
         }
         private void SelectCustomAchievementButton_Click(object sender, EventArgs eventArgs)
@@ -933,28 +967,36 @@ namespace Retro_Achievement_Tracker
                 case "customizeStatsButton":
                     MenuState = MenuState.Equals(CustomMenuState.STATS) ? CustomMenuState.CLOSED : CustomMenuState.STATS;
                     break;
+                case "customizeAchievementListButton":
+                    MenuState = MenuState.Equals(CustomMenuState.ACHIEVEMENT_LIST) ? CustomMenuState.CLOSED : CustomMenuState.ACHIEVEMENT_LIST;
+                    break;
             }
 
             UpdateGroupBoxVisibility();
         }
         private void UpdateGroupBoxVisibility()
         {
+            UpdatingVisibility = true;
+
             fontSettingsGroupBox.Show();
 
             switch (MenuState)
             {
                 case CustomMenuState.CLOSED:
-                    gameInfoOverrideSettingsGroupBox.Hide();
-                    customAchievementSettingsGroupBox.Hide();
+                    gameInfoCustomizationGroupBox.Hide();
+                    customAchievementCustomizationGroupBox.Hide();
                     customMasterySettingsGroupBox.Hide();
-                    statsCustomizationsGroupBox.Hide();
+                    statsCustomizationGroupBox.Hide();
                     fontSettingsGroupBox.Hide();
 
                     ClientSize = new Size(390, 473);
                     break;
                 case CustomMenuState.FOCUS:
                     fontBorderEnableCheckBox.Show();
+                    fontSimpleCheckbox.Show();
+                    titleFontGroupBox.Show();
                     label9.Show();
+                    label2.Show();
 
                     fontBorderEnableCheckBox.Checked = FocusController.Instance.BorderEnabled;
 
@@ -1040,16 +1082,19 @@ namespace Retro_Achievement_Tracker
                         titleFontOutlineColorPictureBox.BackColor = FocusController.Instance.SimpleFontOutlineEnabled ? ColorTranslator.FromHtml(FocusController.Instance.SimpleFontOutlineColor) : Color.DarkGray;
                     }
 
-                    gameInfoOverrideSettingsGroupBox.Hide();
-                    customAchievementSettingsGroupBox.Hide();
+                    gameInfoCustomizationGroupBox.Hide();
+                    customAchievementCustomizationGroupBox.Hide();
                     customMasterySettingsGroupBox.Hide();
-                    statsCustomizationsGroupBox.Hide();
+                    statsCustomizationGroupBox.Hide();
 
                     ClientSize = new Size(640, 473);
                     break;
                 case CustomMenuState.LAST_FIVE:
                     fontBorderEnableCheckBox.Show();
+                    fontSimpleCheckbox.Show();
+                    titleFontGroupBox.Show();
                     label9.Show();
+                    label2.Show();
 
                     fontBorderEnableCheckBox.Checked = LastFiveController.Instance.BorderEnabled;
 
@@ -1135,16 +1180,19 @@ namespace Retro_Achievement_Tracker
                         titleFontOutlineColorPictureBox.BackColor = LastFiveController.Instance.SimpleFontOutlineEnabled ? ColorTranslator.FromHtml(LastFiveController.Instance.SimpleFontOutlineColor) : Color.DarkGray;
                     }
 
-                    statsCustomizationsGroupBox.Hide();
-                    gameInfoOverrideSettingsGroupBox.Hide();
-                    customAchievementSettingsGroupBox.Hide();
+                    statsCustomizationGroupBox.Hide();
+                    gameInfoCustomizationGroupBox.Hide();
+                    customAchievementCustomizationGroupBox.Hide();
                     customMasterySettingsGroupBox.Hide();
 
                     ClientSize = new Size(641, 473);
                     break;
                 case CustomMenuState.GAME_INFO:
                     fontBorderEnableCheckBox.Hide();
+                    fontSimpleCheckbox.Show();
+                    titleFontGroupBox.Show();
                     label9.Hide();
+                    label2.Show();
 
                     borderBackgroundGroupBox.Hide();
                     windowBackgroundColorPictureBox.BackColor = ColorTranslator.FromHtml(GameInfoController.Instance.WindowBackgroundColor);
@@ -1219,18 +1267,21 @@ namespace Retro_Achievement_Tracker
                     gameInfoConsoleOverrideTextBox.Text = GameInfoController.Instance.ConsoleName;
                     gameInfoReleaseDateOverrideTextBox.Text = GameInfoController.Instance.ReleasedDateName;
 
-                    gameInfoOverrideSettingsGroupBox.Show();
-                    gameInfoOverrideSettingsGroupBox.Location = new Point(641, 12);
+                    gameInfoCustomizationGroupBox.Show();
+                    gameInfoCustomizationGroupBox.Location = new Point(641, 12);
 
-                    customAchievementSettingsGroupBox.Hide();
+                    customAchievementCustomizationGroupBox.Hide();
                     customMasterySettingsGroupBox.Hide();
-                    statsCustomizationsGroupBox.Hide();
+                    statsCustomizationGroupBox.Hide();
 
                     ClientSize = new Size(1043, 473);
                     break;
                 case CustomMenuState.STATS:
                     fontBorderEnableCheckBox.Hide();
+                    fontSimpleCheckbox.Show();
+                    titleFontGroupBox.Show();
                     label9.Hide();
+                    label2.Show();
 
                     borderBackgroundGroupBox.Hide();
                     windowBackgroundColorPictureBox.BackColor = ColorTranslator.FromHtml(StatsController.Instance.WindowBackgroundColor);
@@ -1333,19 +1384,21 @@ namespace Retro_Achievement_Tracker
                     statsCompletedOverrideTextBox.Text = StatsController.Instance.CompletedName;
                     statsGameRatioOverrideTextBox.Text = StatsController.Instance.GameRatioName;
 
-
-                    gameInfoOverrideSettingsGroupBox.Hide();
-                    customAchievementSettingsGroupBox.Hide();
+                    gameInfoCustomizationGroupBox.Hide();
+                    customAchievementCustomizationGroupBox.Hide();
                     customMasterySettingsGroupBox.Hide();
 
-                    statsCustomizationsGroupBox.Show();
-                    statsCustomizationsGroupBox.Location = new Point(641, 12);
+                    statsCustomizationGroupBox.Show();
+                    statsCustomizationGroupBox.Location = new Point(641, 12);
 
                     ClientSize = new Size(1043, 473);
                     break;
                 case CustomMenuState.ALERTS:
                     fontBorderEnableCheckBox.Show();
+                    fontSimpleCheckbox.Show();
+                    titleFontGroupBox.Show();
                     label9.Show();
+                    label2.Show();
 
                     fontBorderEnableCheckBox.Checked = AlertsController.Instance.BorderEnabled;
 
@@ -1430,20 +1483,46 @@ namespace Retro_Achievement_Tracker
                         titleFontOutlineColorPictureBox.BackColor = AlertsController.Instance.SimpleFontOutlineEnabled ? ColorTranslator.FromHtml(AlertsController.Instance.SimpleFontOutlineColor) : Color.DarkGray;
                     }
 
-                    gameInfoOverrideSettingsGroupBox.Hide();
-                    customAchievementSettingsGroupBox.Hide();
+                    gameInfoCustomizationGroupBox.Hide();
+                    customAchievementCustomizationGroupBox.Hide();
                     customMasterySettingsGroupBox.Hide();
-                    statsCustomizationsGroupBox.Hide();
+                    statsCustomizationGroupBox.Hide();
 
-                    customAchievementSettingsGroupBox.Show();
+                    customAchievementCustomizationGroupBox.Show();
                     customMasterySettingsGroupBox.Show();
 
-                    customAchievementSettingsGroupBox.Location = new Point(641, 12);
+                    customAchievementCustomizationGroupBox.Location = new Point(641, 12);
                     customMasterySettingsGroupBox.Location = new Point(842, 12);
 
                     ClientSize = new Size(1043, 473);
                     break;
+                case CustomMenuState.ACHIEVEMENT_LIST:
+                    fontBorderEnableCheckBox.Hide();
+                    fontSimpleCheckbox.Hide();
+                    label9.Hide();
+                    label2.Hide();
+
+                    windowBackgroundColorPictureBox.BackColor = ColorTranslator.FromHtml(AchievementListController.Instance.WindowBackgroundColor);
+                    borderBackgroundGroupBox.Hide();
+                    borderBackgroudColorPictureBox.BackColor = ColorTranslator.FromHtml(AchievementListController.Instance.BorderBackgroundColor);
+
+                    titleFontGroupBox.Hide();
+                    descriptionFontGroupBox.Hide();
+                    lineFontGroupBox.Hide();
+                    pointsFontGroupBox.Hide();
+
+                    gameInfoCustomizationGroupBox.Hide();
+                    customAchievementCustomizationGroupBox.Hide();
+                    customMasterySettingsGroupBox.Hide();
+                    statsCustomizationGroupBox.Hide();
+                    customAchievementCustomizationGroupBox.Hide();
+                    customMasterySettingsGroupBox.Hide();
+
+                    ClientSize = new Size(641, 473);
+                    break;
             }
+
+            UpdatingVisibility = false;
         }
         private void SetFontFamilyBox(ComboBox comboBox, FontFamily fontFamily)
         {
@@ -2062,26 +2141,33 @@ namespace Retro_Achievement_Tracker
         {
             CheckBox checkBox = sender as CheckBox;
 
-            switch (MenuState)
+            switch (checkBox.Name)
             {
-                case CustomMenuState.ALERTS:
-                    AlertsController.Instance.AdvancedSettingsEnabled = !checkBox.Checked;
+                case "achievementListOptimizeCheckBox":
+                    AchievementListController.Instance.OptimizeEnabled = checkBox.Checked;
                     break;
-                case CustomMenuState.LAST_FIVE:
-                    LastFiveController.Instance.AdvancedSettingsEnabled = !checkBox.Checked;
-                    break;
-                case CustomMenuState.FOCUS:
-                    FocusController.Instance.AdvancedSettingsEnabled = !checkBox.Checked;
-                    break;
-                case CustomMenuState.GAME_INFO:
-                    GameInfoController.Instance.AdvancedSettingsEnabled = !checkBox.Checked;
-                    break;
-                case CustomMenuState.STATS:
-                    StatsController.Instance.AdvancedSettingsEnabled = !checkBox.Checked;
+                case "fontSimpleCheckbox":
+                    switch (MenuState)
+                    {
+                        case CustomMenuState.ALERTS:
+                            AlertsController.Instance.AdvancedSettingsEnabled = !checkBox.Checked;
+                            break;
+                        case CustomMenuState.LAST_FIVE:
+                            LastFiveController.Instance.AdvancedSettingsEnabled = !checkBox.Checked;
+                            break;
+                        case CustomMenuState.FOCUS:
+                            FocusController.Instance.AdvancedSettingsEnabled = !checkBox.Checked;
+                            break;
+                        case CustomMenuState.GAME_INFO:
+                            GameInfoController.Instance.AdvancedSettingsEnabled = !checkBox.Checked;
+                            break;
+                        case CustomMenuState.STATS:
+                            StatsController.Instance.AdvancedSettingsEnabled = !checkBox.Checked;
+                            break;
+                    }
+                    UpdateGroupBoxVisibility();
                     break;
             }
-
-            UpdateGroupBoxVisibility();
         }
         private void OverrideEnableCheckBox_Clicked(object sender, EventArgs e)
         {
@@ -2214,11 +2300,11 @@ namespace Retro_Achievement_Tracker
                     break;
             }
         }
-        private void RadioButtonBackslash_CheckedChanged(object sender, EventArgs e)
+        private void RadioButton_CheckedChanged(object sender, EventArgs e)
         {
             RadioButton radioButton = sender as RadioButton;
 
-            if (radioButton.Checked)
+            if (radioButton.Checked && !UpdatingVisibility)
             {
                 switch (radioButton.Name)
                 {
@@ -2240,12 +2326,6 @@ namespace Retro_Achievement_Tracker
                 }
             }
         }
-        private void StatsUsePercentCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            CheckBox checkbox = sender as CheckBox;
-
-            StatsController.Instance.UsePercentageSymbol = checkbox.Checked;
-        }
         private void LoadProperties()
         {
             if (Settings.Default.UpdateSettings)
@@ -2260,11 +2340,12 @@ namespace Retro_Achievement_Tracker
             usernameTextBox.Text = Settings.Default.ra_username;
             apiKeyTextBox.Text = Settings.Default.ra_key;
             autoStartCheckbox.Checked = Settings.Default.auto_start_checked;
-            autoLaunchFocusWindowCheckBox.Checked = Settings.Default.auto_focus;
-            autoLaunchStatsWindowCheckbox.Checked = Settings.Default.auto_stats;
-            autoLaunchNotificationsWindowCheckbox.Checked = Settings.Default.auto_notifications;
-            autoLaunchGameInfoWindowCheckbox.Checked = Settings.Default.auto_game_info;
-            autoLaunchLastFiveWindowCheckbox.Checked = Settings.Default.auto_last_five;
+            autoLaunchFocusWindowCheckBox.Checked = FocusController.Instance.AutoLaunch;
+            autoLaunchStatsWindowCheckbox.Checked = StatsController.Instance.AutoLaunch;
+            autoLaunchAlertsWindowCheckbox.Checked = AlertsController.Instance.AutoLaunch;
+            autoLaunchGameInfoWindowCheckbox.Checked = GameInfoController.Instance.AutoLaunch;
+            autoLaunchLastFiveWindowCheckbox.Checked = LastFiveController.Instance.AutoLaunch;
+            autoLaunchAchievementListWindowCheckbox.Checked = AchievementListController.Instance.AutoLaunch;
 
             fontBorderEnableCheckBox.Checked = Settings.Default.notifications_border_enable;
 
@@ -2377,9 +2458,10 @@ namespace Retro_Achievement_Tracker
             autoStartCheckbox.Click += AutoLaunchCheckbox_CheckedChanged;
             autoLaunchLastFiveWindowCheckbox.Click += AutoLaunchCheckbox_CheckedChanged;
             autoLaunchGameInfoWindowCheckbox.Click += AutoLaunchCheckbox_CheckedChanged;
-            autoLaunchNotificationsWindowCheckbox.Click += AutoLaunchCheckbox_CheckedChanged;
+            autoLaunchAlertsWindowCheckbox.Click += AutoLaunchCheckbox_CheckedChanged;
             autoLaunchFocusWindowCheckBox.Click += AutoLaunchCheckbox_CheckedChanged;
             autoLaunchStatsWindowCheckbox.Click += AutoLaunchCheckbox_CheckedChanged;
+            autoLaunchAchievementListWindowCheckbox.Click += AutoLaunchCheckbox_CheckedChanged;
 
             customAchievementEnableCheckbox.Click += CustomAchievementEnableCheckbox_CheckedChanged;
             customMasteryEnableCheckbox.Click += CustomMasteryEnableCheckbox_CheckedChanged;
@@ -2411,9 +2493,9 @@ namespace Retro_Achievement_Tracker
             descriptionFontFamilyComboBox.SelectedIndexChanged += FontFamilyComboBox_SelectedIndexChanged;
             pointsFontFamilyComboBox.SelectedIndexChanged += FontFamilyComboBox_SelectedIndexChanged;
 
-            statsRadioButtonBackslash.Click += RadioButtonBackslash_CheckedChanged;
-            statsRadioButtonSemicolon.Click += RadioButtonBackslash_CheckedChanged;
-            statsRadioButtonDot.Click += RadioButtonBackslash_CheckedChanged;
+            statsRadioButtonBackslash.Click += RadioButton_CheckedChanged;
+            statsRadioButtonSemicolon.Click += RadioButton_CheckedChanged;
+            statsRadioButtonDot.Click += RadioButton_CheckedChanged;
 
             notificationsAchievementAnimationInComboBox.SelectedIndexChanged += NotificationAnimationComboBox_SelectedIndexChanged;
             notificationsAchievementAnimationOutComboBox.SelectedIndexChanged += NotificationAnimationComboBox_SelectedIndexChanged;
@@ -2425,6 +2507,7 @@ namespace Retro_Achievement_Tracker
             openNotificationWindowButton.Click += ShowWindowButton_Click;
             openFocusWindowButton.Click += ShowWindowButton_Click;
             openStatsWindowButton.Click += ShowWindowButton_Click;
+            openAchievementListWindowButton.Click += ShowWindowButton_Click;
 
             startButton.Click += StartButton_Click;
             stopButton.Click += StopButton_Click;
@@ -2438,6 +2521,7 @@ namespace Retro_Achievement_Tracker
             customizeAlertsButton.Click += CustomizeButton_Click;
             customizeFocusButton.Click += CustomizeButton_Click;
             customizeStatsButton.Click += CustomizeButton_Click;
+            customizeAchievementListButton.Click += CustomizeButton_Click;
 
             playAchievementButton.Click += ShowAchievementButton_Click;
             playMasteryButton.Click += ShowGameMasteryButton_Click;

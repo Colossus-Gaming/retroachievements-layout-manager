@@ -151,4 +151,7 @@
   <data name="LastFiveWindow" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\lastfivewindow.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="AchievementListWindow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\achievementlistwindow.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
 </root>

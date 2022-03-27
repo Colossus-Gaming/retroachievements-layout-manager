@@ -70,7 +70,7 @@
     }
 
     [JsonConverter(typeof(AchievementConverter))]
-    public partial class Achievement : IEquatable<Achievement>, IComparable<Achievement>
+    public partial class Achievement : IEquatable<Achievement>, IComparable<Achievement>, ICloneable
     {
         public int Id { get; set; }
         public int GameId { get; set; }
@@ -102,12 +102,21 @@
             {
                 return 1;
             }
+            if ((DisplayOrder == 0 && other.DisplayOrder == 0) || (DisplayOrder == other.DisplayOrder))
+            {
+                return Id.CompareTo(other.Id);
+            }
             return DisplayOrder.CompareTo(other.DisplayOrder);
         }
 
         public bool Equals(Achievement other)
         {
             return other != null && Id == other.Id;
+        }
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
         }
     }
 }

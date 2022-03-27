@@ -20,6 +20,7 @@ namespace Retro_Achievement_Tracker.Forms
 
             Name = "RA Tracker - Alerts";
             Text = "RA Tracker - Alerts";
+
             Shown += AlertsWindow_Shown;
             FormClosed += AlertsWindow_FormClosed; ;
 

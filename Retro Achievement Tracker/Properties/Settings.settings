@@ -587,5 +587,23 @@
     <Setting Name="game_info_window_background_color" Type="System.String" Scope="User">
       <Value Profile="(Default)">#FF00FF</Value>
     </Setting>
+    <Setting Name="achievement_list_border_color" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#CC9900</Value>
+    </Setting>
+    <Setting Name="achievement_list_window_background_color" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#FF00FF</Value>
+    </Setting>
+    <Setting Name="auto_achievement_list" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="achievement_list_column_enabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="achievement_list_container_count" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">11</Value>
+    </Setting>
+    <Setting Name="achievement_list_optimize_enabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

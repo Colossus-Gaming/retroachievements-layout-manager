@@ -31,7 +31,7 @@ namespace Retro_Achievement_Tracker.Properties {
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal Resources() {
         }
-
+        
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
@@ -64,35 +64,47 @@ namespace Retro_Achievement_Tracker.Properties {
         ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
         ///&lt;html&gt;
         ///&lt;head&gt;
+        ///    &lt;title&gt;Game Info Window&lt;/title&gt;
+        ///    &lt;meta charset=&quot;UTF-8&quot;&gt;
+        ///    &lt;script src=&quot;https://code.jquery.com/jquery-3.5.1.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+        ///    &lt;script id=&quot;scripts&quot;&gt;
+        ///        function addAchievement(name, imageLink, description, points, date, id) {
+        ///
+        ///            var achievementBlock = document.createElement(&apos;div&apos;);
+        ///            achievementBlock.classList.add(&quot;achievement&quot;);
+        ///            achievementBlock.id = &quot;achievement-&quot; + id;
+        ///
+        ///            var toolt [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string AchievementListWindow {
+            get {
+                return ResourceManager.GetString("AchievementListWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+        ///&lt;html&gt;
+        ///&lt;head&gt;
         ///    &lt;title&gt;Notification Window&lt;/title&gt;
         ///    &lt;meta charset=&quot;UTF-8&quot;&gt;
         ///    &lt;script src=&quot;https://code.jquery.com/jquery-3.5.1.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
-        ///    &lt;script id=&quot;achievement-script&quot;&gt;
-        ///
-        ///        (async function () {
-        ///            await CefSharp.BindObjectAsync(&quot;alertControllerAsync&quot;);
-        ///        })();
-        ///
-        ///        function setPlayingOn() {
-        ///            alertControllerAsync.setIsPlaying(true);
-        ///        }
-        ///
-        ///        function setPlayingOff() {
-        ///            alertCont [rest of string was truncated]&quot;;.
+        ///    &lt;script id=&quot;achievement-script&quot;&gt;/**
+        ///         * textFit v2.3.1
+        ///         * Previously known as jQuery.textFit
+        ///         * 11/2014 by STRML (strml.github.com)
+        ///         * MIT License
+        ///         *
+        ///         * To use: textFit(document.getElementById(&apos;target-div&apos;), options);
+        ///         *
+        ///         * Will make the *t [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string AlertsWindow {
             get {
                 return ResourceManager.GetString("AlertsWindow", resourceCulture);
             }
         }
-        internal static string AchievementListWindow
-        {
-            get
-            {
-                return ResourceManager.GetString("AchievementListWindow", resourceCulture);
-            }
-        }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
         ///&lt;html&gt;
@@ -100,16 +112,15 @@ namespace Retro_Achievement_Tracker.Properties {
         ///    &lt;title&gt;Focus Window&lt;/title&gt;
         ///    &lt;meta charset=&quot;UTF-8&quot;&gt;
         ///    &lt;script src=&quot;https://code.jquery.com/jquery-3.5.1.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
-        ///    &lt;script id=&quot;focus-scripts&quot;&gt;
-        ///        (function (root, factory) {
-        ///            &quot;use strict&quot;;
-        ///
-        ///            // UMD shim
-        ///            if (typeof define === &quot;function&quot; &amp;&amp; define.amd) {
-        ///                // AMD
-        ///                define([], factory);
-        ///            } else if (typeof exports === &quot;object&quot;) {
-        ///                // [rest of string was truncated]&quot;;.
+        ///    &lt;script id=&quot;focus-scripts&quot;&gt;/**
+        ///         * textFit v2.3.1
+        ///         * Previously known as jQuery.textFit
+        ///         * 11/2014 by STRML (strml.github.com)
+        ///         * MIT License
+        ///         *
+        ///         * To use: textFit(document.getElementById(&apos;target-div&apos;), options);
+        ///         *
+        ///         * Will make the *text* content [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string FocusWindow {
             get {
@@ -124,16 +135,15 @@ namespace Retro_Achievement_Tracker.Properties {
         ///    &lt;title&gt;Game Info Window&lt;/title&gt;
         ///    &lt;meta charset=&quot;UTF-8&quot;&gt;
         ///    &lt;script src=&quot;https://code.jquery.com/jquery-3.5.1.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
-        ///    &lt;script id=&quot;scripts&quot;&gt;
-        ///        (function (root, factory) {
-        ///            &quot;use strict&quot;;
-        ///
-        ///            // UMD shim
-        ///            if (typeof define === &quot;function&quot; &amp;&amp; define.amd) {
-        ///                // AMD
-        ///                define([], factory);
-        ///            } else if (typeof exports === &quot;object&quot;) {
-        ///                // N [rest of string was truncated]&quot;;.
+        ///    &lt;script id=&quot;scripts&quot;&gt;/**
+        ///         * textFit v2.3.1
+        ///         * Previously known as jQuery.textFit
+        ///         * 11/2014 by STRML (strml.github.com)
+        ///         * MIT License
+        ///         *
+        ///         * To use: textFit(document.getElementById(&apos;target-div&apos;), options);
+        ///         *
+        ///         * Will make the *text* content i [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string GameInfoWindow {
             get {
@@ -218,17 +228,15 @@ namespace Retro_Achievement_Tracker.Properties {
         ///    &lt;title&gt;&lt;/title&gt;
         ///    &lt;meta charset=&quot;UTF-8&quot;&gt;
         ///    &lt;script src=&quot;https://code.jquery.com/jquery-3.5.1.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
-        ///    &lt;script id=&quot;scripts&quot;&gt;
-        ///        (function (root, factory) {
-        ///            &quot;use strict&quot;;
-        ///
-        ///            // UMD shim
-        ///            if (typeof define === &quot;function&quot; &amp;&amp; define.amd) {
-        ///                // AMD
-        ///                define([], factory);
-        ///            } else if (typeof exports === &quot;object&quot;) {
-        ///                // Node/CommonJS
-        ///   [rest of string was truncated]&quot;;.
+        ///    &lt;script id=&quot;scripts&quot;&gt;/**
+        ///         * textFit v2.3.1
+        ///         * Previously known as jQuery.textFit
+        ///         * 11/2014 by STRML (strml.github.com)
+        ///         * MIT License
+        ///         *
+        ///         * To use: textFit(document.getElementById(&apos;target-div&apos;), options);
+        ///         *
+        ///         * Will make the *text* content inside a containe [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string StatsWindow {
             get {
