@@ -92,6 +92,10 @@
                 {
                     if (DateEarned.Value == other.DateEarned.Value)
                     {
+                        if ((DisplayOrder == 0 && other.DisplayOrder == 0) || (DisplayOrder == other.DisplayOrder))
+                        {
+                            return Id.CompareTo(other.Id);
+                        }
                         return DisplayOrder.CompareTo(other.DisplayOrder);
                     }
                     return DateEarned.Value < other.DateEarned.Value ? -1 : 1;
