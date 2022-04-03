@@ -139,10 +139,8 @@ namespace Retro_Achievement_Tracker
             }
         }
 
-        private bool UpdateGameProgress(bool sameGame)
+        private void UpdateGameProgress(bool sameGame)
         {
-            bool UpdateAwards = false;
-
             try
             {
                 SortAchievements();
@@ -185,6 +183,7 @@ namespace Retro_Achievement_Tracker
                         CurrentlyViewingIndex = 0;
 
                         UpdateCurrentlyViewingAchievement();
+                        FocusController.Instance.Show();
                         SetFocus();
                     }
                     else
@@ -199,7 +198,6 @@ namespace Retro_Achievement_Tracker
             {
                 Console.WriteLine(e.StackTrace);
             }
-            return UpdateAwards;
         }
         private void SetFocus()
         {
@@ -439,7 +437,7 @@ namespace Retro_Achievement_Tracker
         {
             Invoke((MethodInvoker)delegate
             {
-                Task.Run(async () => await LastFiveController.Instance.SetAchievements(GetLastFiveAchievements()));
+                Task.Run(() => LastFiveController.Instance.SetAchievements(GetLastFiveAchievements()));
 
                 StreamLabelManager.Instance.WriteLastFiveStreamLabels(UserSummary);
             });
@@ -453,11 +451,11 @@ namespace Retro_Achievement_Tracker
                 StatsController.Instance.SetAwards(UserSummary.Awards.ToString());
                 StatsController.Instance.SetPoints(UserSummary.TotalPoints.ToString());
                 StatsController.Instance.SetTruePoints(UserSummary.TotalTruePoints.ToString());
-                StatsController.Instance.SetGamePoints(UserSummary.GamePointsEarned.ToString(), UserSummary.GamePointsPossible.ToString());
-                StatsController.Instance.SetGameAchievements(UserSummary.AchievementsEarned.ToString(), UserSummary.AchievmentsPossible.ToString());
+                StatsController.Instance.SetGamePoints(GameInfoAndProgress.GamePointsEarned.ToString(), GameInfoAndProgress.GamePointsPossible.ToString());
+                StatsController.Instance.SetGameAchievements(GameInfoAndProgress.AchievementsEarned.ToString(), GameInfoAndProgress.Achievements.Count.ToString());
                 StatsController.Instance.SetGameTruePoints(GameInfoAndProgress.GameTruePointsEarned.ToString(), GameInfoAndProgress.GameTruePointsPossible.ToString());
                 StatsController.Instance.SetGameRatio();
-                StatsController.Instance.SetCompleted(UserSummary.AchievementsEarned / (float)UserSummary.AchievmentsPossible * 100f);
+                StatsController.Instance.SetCompleted(GameInfoAndProgress.AchievementsEarned / (float)GameInfoAndProgress.Achievements.Count * 100f);
 
                 StreamLabelManager.Instance.WriteStatsStreamLabels(UserSummary, GameInfoAndProgress);
             });

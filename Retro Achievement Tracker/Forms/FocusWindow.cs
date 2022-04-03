@@ -229,7 +229,7 @@ namespace Retro_Achievement_Tracker
                   "textFit(focusPointsElement, { alignVert: true, alignHoriz: true });");
         }
 
-        public async void HideFocus()
+        public void HideFocus()
         {
             ExecuteScript("$(\"#focus\").fadeOut();");
         }

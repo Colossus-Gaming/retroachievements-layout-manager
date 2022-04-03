@@ -1,4 +1,5 @@
 ﻿using Retro_Achievement_Tracker.Properties;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -90,13 +91,13 @@ namespace Retro_Achievement_Tracker.Controllers
             LastFiveWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px", SimpleFontOutlineEnabled ? SimpleFontOutlineSize + "px solid " + SimpleFontOutlineColor : "0px");
         }
 
-        public async Task SetAchievements(List<Achievement> achievements)
+        public async void SetAchievements(List<Achievement> achievements)
         {
             if (IsOpen)
             {
                 if (achievements.Count == 0)
                 {
-                    await ClearList();
+                    ClearList();
                 }
                 else if (CurrentAchievements.Count == 0)
                 {
@@ -105,7 +106,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 }
                 else if (achievements[0].GameId != CurrentAchievements[0].GameId)
                 {
-                    await ClearList();
+                    ClearList();
+
+                    await Task.Delay(500);
+
                     AddAchievementsToWindow(achievements);
                     SetAchievementPositions();
                 }
@@ -137,10 +141,6 @@ namespace Retro_Achievement_Tracker.Controllers
                         {
                             CurrentAchievements.RemoveAt(CurrentAchievements.Count - 1);
                         }
-                        if (!LastFiveWindow.IsDisposed)
-                        {
-                            LastFiveWindow.CleanupList();
-                        }
                     }
                 }
             }
@@ -160,30 +160,41 @@ namespace Retro_Achievement_Tracker.Controllers
             SetAllSettings();
         }
 
-        private async void SetAchievementPositions()
+        private void SetAchievementPositions()
         {
             if (LastFiveWindow.Visible)
             {
+                List<ValueTuple<int, int, int>> achievementSpecs = new List<ValueTuple<int, int, int>>();
+                int timeout = 0;
+
                 for (int i = CurrentAchievements.Count - 1; i >= 0; i--)
                 {
-                    LastFiveWindow.SetAchievementPosition(CurrentAchievements[i].Id, i);
-                    await Task.Delay(200);
+                    ValueTuple<int, int, int> tuple = ValueTuple.Create(CurrentAchievements[i].Id, i, timeout);
+                    achievementSpecs.Add(tuple);
+
+                    timeout += 50;
                 }
+                LastFiveWindow.SetAchievementPositions(achievementSpecs);
             }
         }
 
-        private async Task ClearList()
+        private void ClearList()
         {
             if (CurrentAchievements.Count > 0)
             {
                 if (!LastFiveWindow.IsDisposed)
                 {
+                    List<ValueTuple<int, int, int>> achievementSpecs = new List<ValueTuple<int, int, int>>();
+                    int timeout = 0;
+
                     for (int i = CurrentAchievements.Count - 1; i >= 0; i--)
                     {
-                        LastFiveWindow.SetAchievementPosition(CurrentAchievements[i].Id, 5);
-                        await Task.Delay(200);
+                        ValueTuple<int, int, int> tuple = ValueTuple.Create(CurrentAchievements[i].Id, 5, timeout);
+                        achievementSpecs.Add(tuple);
+
+                        timeout += 200;
                     }
-                    LastFiveWindow.ClearList();
+                    LastFiveWindow.SetAchievementPositions(achievementSpecs);
                 }
                 CurrentAchievements = new List<Achievement>();
             }

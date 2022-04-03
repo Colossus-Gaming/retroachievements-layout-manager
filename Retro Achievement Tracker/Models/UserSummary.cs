@@ -16,50 +16,7 @@
         public int Awards { get; set; }
         public string UserPic { get; set; }
         public List<Achievement> Achievements { get; set; }
-        public int GamePointsPossible
-        {
-            get
-            {
-                if (Achievements != null)
-                {
-                    return Achievements.Sum(x => x.Points);
-                }
-                return 0;
-            }
-        }
-        public int GamePointsEarned
-        {
-            get
-            {
-                if (Achievements != null)
-                {
-                    return Achievements.FindAll(x => x.HardcoreAchieved).Sum(x => x.Points);
-                }
-                return 0;
-            }
-        }
-        public int AchievmentsPossible
-        {
-            get
-            {
-                if (Achievements != null)
-                {
-                    return Achievements.Count;
-                }
-                return 0;
-            }
-        }
-        public int AchievementsEarned
-        {
-            get
-            {
-                if (Achievements != null)
-                {
-                    return Achievements.FindAll(x => x.HardcoreAchieved).Count;
-                }
-                return 0;
-            }
-        }
+        
         public string RetroRatio
         {
             get

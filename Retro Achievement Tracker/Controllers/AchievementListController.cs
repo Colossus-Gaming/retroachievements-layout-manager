@@ -16,7 +16,6 @@ namespace Retro_Achievement_Tracker.Controllers
         public static bool IsOpen;
         private List<Achievement> CurrentUnlockedAchievements;
         private List<Achievement> CurrentLockedAchievements;
-        private bool IsAnimating;
 
         private AchievementListController()
         {
@@ -58,9 +57,15 @@ namespace Retro_Achievement_Tracker.Controllers
 
         public async void UpdateAchievementList(List<Achievement> unlockedAchievements, List<Achievement> lockedAchievements, bool newGame)
         {
-
             if (IsOpen)
             {
+                int size = unlockedAchievements.Count + lockedAchievements.Count;
+
+                unlockedAchievements.Sort();
+                unlockedAchievements.Reverse();
+
+                lockedAchievements.Sort();
+
                 if (newGame)
                 {
                     List<Achievement> ToClearList = new List<Achievement>();
@@ -72,19 +77,31 @@ namespace Retro_Achievement_Tracker.Controllers
 
                     Random rand = new Random();
 
+                    int timeoutValue = 0;
+
+                    Dictionary<int, int> idsToTimeouts = new Dictionary<int, int>();
+
+                    while (ToClearList.Count > 0 && timeoutValue <= 1000)
+                    {
+                        Achievement achievement = ToClearList[rand.Next(ToClearList.Count - 1)];
+                        idsToTimeouts.Add(achievement.Id, timeoutValue);
+
+                        timeoutValue += 10;
+
+                        ToClearList.RemoveAt(ToClearList.IndexOf(achievement));
+                    }
+
                     while (ToClearList.Count > 0)
                     {
                         Achievement achievement = ToClearList[rand.Next(ToClearList.Count - 1)];
-                        AchievementListWindow.ClearAchievement(achievement.Id);
 
+                        idsToTimeouts.Add(achievement.Id, 800 + rand.Next(200));
                         ToClearList.RemoveAt(ToClearList.IndexOf(achievement));
-
-                        await Task.Delay(20);
                     }
 
-                    await Task.Delay(500);
+                    AchievementListWindow.ClearAchievements(idsToTimeouts);
 
-                    AchievementListWindow.ClearList();
+                    await Task.Delay(1000);
                 }
 
                 for (int i = 0; i < unlockedAchievements.Count; i++)
@@ -98,17 +115,12 @@ namespace Retro_Achievement_Tracker.Controllers
 
                         if (oldAchievement == null)
                         {
-                            AchievementListWindow.AddAchievement(newAchievement, GetImageSize(unlockedAchievements.Count + lockedAchievements.Count));
+                            AchievementListWindow.AddAchievement(newAchievement, GetImageSize(unlockedAchievements.Count + lockedAchievements.Count), GetAchievementLocationX(i, size), GetAchievementLocationY(i, size) + 1048);
+                        } else
+                        {
+                            AchievementListWindow.UnlockAchievement(oldAchievement);
+                            CurrentLockedAchievements.Remove(oldAchievement);
                         }
-                    }
-                    else
-                    {
-                        AchievementListWindow.UnlockAchievement(newAchievement);
-                    }
-
-                    if (oldAchievement != null)
-                    {
-                        CurrentLockedAchievements.Remove(oldAchievement);
                     }
                 }
 
@@ -120,7 +132,7 @@ namespace Retro_Achievement_Tracker.Controllers
 
                         CurrentLockedAchievements.Add(newAchievement);
 
-                        AchievementListWindow.AddAchievement(newAchievement, GetImageSize(unlockedAchievements.Count + lockedAchievements.Count));
+                        AchievementListWindow.AddAchievement(newAchievement, GetImageSize(unlockedAchievements.Count + lockedAchievements.Count), GetAchievementLocationX(unlockedAchievements.Count + i, size), GetAchievementLocationY(unlockedAchievements.Count + i, size) + 1048);
                     }
                 }
 
@@ -130,40 +142,64 @@ namespace Retro_Achievement_Tracker.Controllers
                 }
             }
         }
-        public async void AnimateAchievementList()
+        public void AnimateAchievementList()
         {
-            if (IsOpen && !IsAnimating)
+            if (IsOpen)
             {
-                IsAnimating = true;
+                int size = CurrentUnlockedAchievements.Count + CurrentLockedAchievements.Count;
+                int interval = 4000 / size;
 
                 CurrentUnlockedAchievements.Sort();
                 CurrentUnlockedAchievements.Reverse();
 
+                Dictionary<Achievement, ValueTuple<int, int, int>> achievementAndCoordinates = new Dictionary<Achievement, (int, int, int)>();
+                int timeoutValue = -20;
+                int lastY = GetAchievementLocationY(0, size);
+
                 for (int i = 0; i < CurrentUnlockedAchievements.Count; i++)
                 {
-                    AchievementListWindow.UnlockAchievement(CurrentUnlockedAchievements[i]);
-                    AchievementListWindow.SetAchievementPosition(CurrentUnlockedAchievements[i].Id, GetAchievementLocationX(i), GetAchievementLocationY(i));
-                    await Task.Delay(30);
+                    timeoutValue += 20;
+
+                    int xCoord = GetAchievementLocationX(i, size);
+                    int yCoord = GetAchievementLocationY(i, size);
+
+                    if (yCoord != lastY)
+                    {
+                        lastY = yCoord;
+                        timeoutValue += 50;
+                    }
+
+                    achievementAndCoordinates.Add(CurrentUnlockedAchievements[i], ValueTuple.Create(xCoord, yCoord, timeoutValue));
                 }
 
                 CurrentLockedAchievements.Sort();
 
                 for (int i = 0; i < CurrentLockedAchievements.Count; i++)
                 {
-                    AchievementListWindow.SetAchievementPosition(CurrentLockedAchievements[i].Id, GetAchievementLocationX(i + CurrentUnlockedAchievements.Count), GetAchievementLocationY(i + CurrentUnlockedAchievements.Count));
-                    await Task.Delay(30);
+                    timeoutValue += 20;
+
+                    int xCoord = GetAchievementLocationX(CurrentUnlockedAchievements.Count + i, size);
+                    int yCoord = GetAchievementLocationY(CurrentUnlockedAchievements.Count + i, size);
+
+                    if (yCoord != lastY)
+                    {
+                        lastY = yCoord;
+                        timeoutValue += 50;
+                    }
+
+                    achievementAndCoordinates.Add(CurrentLockedAchievements[i], ValueTuple.Create(xCoord, yCoord, timeoutValue));
                 }
 
-                IsAnimating = false;
+                AchievementListWindow.SetAchievementPositions(achievementAndCoordinates);
             }
         }
-        private int GetAchievementLocationX(int achievementIndex)
+        private int GetAchievementLocationX(int achievementIndex, int size)
         {
-            return 10 + (achievementIndex % Convert.ToInt32(Math.Sqrt(CurrentUnlockedAchievements.Count + CurrentLockedAchievements.Count))) * GetImageSize(CurrentUnlockedAchievements.Count + CurrentLockedAchievements.Count);
+            return 10 + (achievementIndex % Convert.ToInt32(Math.Sqrt(size))) * GetImageSize(size);
         }
-        private int GetAchievementLocationY(int achievementIndex)
+        private int GetAchievementLocationY(int achievementIndex, int size)
         {
-            return 10 + (achievementIndex / Convert.ToInt32(Math.Sqrt(CurrentUnlockedAchievements.Count + CurrentLockedAchievements.Count))) * GetImageSize(CurrentUnlockedAchievements.Count + CurrentLockedAchievements.Count);
+            return 10 + (achievementIndex / Convert.ToInt32(Math.Sqrt(size))) * GetImageSize(size);
         }
         public bool AutoLaunch
         {

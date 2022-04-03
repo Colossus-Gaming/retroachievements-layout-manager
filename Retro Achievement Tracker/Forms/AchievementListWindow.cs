@@ -44,16 +44,19 @@ namespace Retro_Achievement_Tracker.Forms
             ExecuteScript(
                 "allAchievements = document.getElementsByClassName(\"achievement\");");
         }
-        public void AddAchievement(Achievement achievement, int size)
+        public void AddAchievement(Achievement achievement, int size, int xCoord, int yCoord)
         {
-            string badgeLink = achievement.DateEarned.HasValue ? "\"https://retroachievements.org/Badge/" + achievement.BadgeNumber + ".png\"" : "\"https://s3-eu-west-1.amazonaws.com/i.retroachievements.org/Badge/" + achievement.BadgeNumber + "_lock.png\"";
             ExecuteScript("addAchievement(\"" + achievement.Title.Replace("\"", "\\\"") + "\"," +
-                                       "" + badgeLink + "," +
+                                       "\"https://s3-eu-west-1.amazonaws.com/i.retroachievements.org/Badge/" + achievement.BadgeNumber + "_lock.png\", " +
+                                       "\"https://retroachievements.org/Badge/" + achievement.BadgeNumber + ".png\", " +
                                        "\"" + achievement.Description.Replace("\"", "\\\"") + "\"," +
                                        "\"" + achievement.Points + "\"," +
                                        "\"" + achievement.DateEarned.ToString() + "\", " +
                                        "\"" + achievement.Id + "\"," +
-                                       "\"" + size + "px\");");
+                                       "\"" + size + "px\"," +
+                                       "\"" + xCoord + "px\"," +
+                                       "\"" + yCoord + "px\"," +
+                                       "'" + achievement.DateEarned.HasValue + "');");
 
         }
         public void SetBorderBackgroundColor(string value)
@@ -68,61 +71,52 @@ namespace Retro_Achievement_Tracker.Forms
                 "container.style.backgroundColor = \"" + value + "\";");
         }
 
-        public void UnlockAchievement(Achievement newAchievement)
+        public void UnlockAchievement(Achievement achievement)
         {
-            ExecuteScript("document.getElementById(\"achievement-" + newAchievement.Id + "-image\").src = \"https://retroachievements.org/Badge/" + newAchievement.BadgeNumber + ".png\"");
+            ExecuteScript("$(\"#achievement-" + achievement.Id + "-locked-image\").toggle(\"pulsate\");");
         }
-        public async Task<ValueTuple<int, int>> GetAchievementPosition(int id)
+        public void SetAchievementPositions(Dictionary<Achievement, ValueTuple<int, int, int>> achievementAndCoordinates)
         {
-            int currX = 0;
-            int currY = 0;
+            StringBuilder stringBuilder = new StringBuilder();
 
-            try
+            foreach (Achievement achievement in achievementAndCoordinates.Keys)
             {
-                JavascriptResponse javascriptResponse = await chromiumWebBrowser.EvaluateScriptAsync("document.getElementById(\"achievement-" + id + "\").offsetLeft", TimeSpan.FromSeconds(5));
+                ValueTuple<int, int, int> value;
 
-                currX = int.Parse(javascriptResponse.Result.ToString());
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.StackTrace);
-            }
+                achievementAndCoordinates.TryGetValue(achievement, out value);
 
-            try
-            {
-                JavascriptResponse javascriptResponse = await chromiumWebBrowser.EvaluateScriptAsync("document.getElementById(\"achievement-" + id + "\").offsetTop", TimeSpan.FromSeconds(5));
-
-                currY = int.Parse(javascriptResponse.Result.ToString());
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.StackTrace);
+                stringBuilder.Append("setTimeout(function() { " +
+                    "$(\"#achievement-" + achievement.Id + "\")");
+                stringBuilder.Append("" +
+                    "   .animate(" +
+                    "       {" +
+                    "           left: '" + value.Item1 + "px', " +
+                    "           top: '" + value.Item2 + "px' " +
+                "           }, 1000, 'easeInOutQuint'" +
+                    "   ); " +
+                    "}, " + value.Item3 + ");");
             }
 
-            return (currX, currY);
+            ExecuteScript(stringBuilder.ToString());
         }
-        public async void SetAchievementPosition(int id, int nextX, int nextY)
+        public void ClearAchievements(Dictionary<int, int> idsToTimeouts)
         {
-            await GetAchievementPosition(id).ContinueWith(result =>
+            StringBuilder stringBuilder = new StringBuilder();
+
+            foreach (int id in idsToTimeouts.Keys)
             {
-                ExecuteScript("document.getElementById(\"achievement-" + id + "\")" +
-                ".animate([ { left: '" + result.Result.Item1 + "px', top: '" + result.Result.Item2 + "px' }, { left: '" + nextX + "px', top: '" + nextY + "px' } ], { interations: 1, duration: 300, fill: \"forwards\", easing: \"ease-in\" });");
-            });
-        }
-        public async void ClearAchievement(int id)
-        {
-            await GetAchievementPosition(id).ContinueWith(result =>
-            {
-                ExecuteScript("document.getElementById(\"achievement-" + id + "\")" +
-                ".animate([ { left: '" + result.Result.Item1 + "px', top: '" + result.Result.Item2 + "px' }, { left: '" + result.Result.Item1 + "px', top: '1500px' } ], { interations: 1, duration: 500, fill: \"forwards\", easing: \"ease-in\" });" +
-                "document.getElementById(\"achievement-" + id + "\")" +
-                ".classList.add(\"achievement-delete\");");
-            });
-        }
-        public void ClearList()
-        {
-            ExecuteScript("var allDeleteAchievements = document.getElementsByClassName(\"achievement-delete\");" +
-                "while (allDeleteAchievements.length > 0) {  allDeleteAchievements[allDeleteAchievements.length - 1].remove(); allDeleteAchievements = document.getElementsByClassName(\"achievement-delete\"); }");
+                int value;
+
+                idsToTimeouts.TryGetValue(id, out value);
+
+                stringBuilder.Append("setTimeout(function() { " +
+                    "   var achievement" + id + "OffsetTop = document.getElementById(\"achievement-" + id + "\").offsetTop;" +
+                    "   var achievement" + id + "OffsetTopNew = achievement" + id + "OffsetTop + 1048;" +
+                    "   $(\"#achievement-" + id + "\").animate( { top: `${ achievement" + id + "OffsetTopNew }px` }, 800, 'easeInOutQuint'); " +
+                    "}, " + value + ");");
+            }
+
+            ExecuteScript(stringBuilder.ToString());
         }
         protected async void ExecuteScript(string script)
         {

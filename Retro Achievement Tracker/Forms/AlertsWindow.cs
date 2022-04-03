@@ -76,13 +76,13 @@ namespace Retro_Achievement_Tracker.Forms
                 "textFit(achievementPoints);");
         }
 
-        public void StartMasteryAlert(UserSummary userSummary, GameInfoAndProgress gameInfo)
+        public void StartMasteryAlert(UserSummary userSummary, GameInfoAndProgress gameInfoAndProgress)
         {
             ExecuteScript(
-                "masteryTitle.innerHTML = \"" + gameInfo.Title.Replace("\"", "\\\"") + "\";" +
-                "masteryAchievements.innerHTML = \"Cheevos: " + userSummary.AchievmentsPossible + "\";" +
-                "masteryPoints.innerHTML = \"Points: " + userSummary.GamePointsPossible + "\";" +
-                "$(\"#mastery-badge\").attr(\"src\", \"https:retroachievements.org" + gameInfo.ImageIcon + "\");" +
+                "masteryTitle.innerHTML = \"" + gameInfoAndProgress.Title.Replace("\"", "\\\"") + "\";" +
+                "masteryAchievements.innerHTML = \"Cheevos: " + gameInfoAndProgress.Achievements.Count + "\";" +
+                "masteryPoints.innerHTML = \"Points: " + gameInfoAndProgress.GamePointsPossible + "\";" +
+                "$(\"#mastery-badge\").attr(\"src\", \"https:retroachievements.org" + gameInfoAndProgress.ImageIcon + "\");" +
                 "$(\"#mastery-video\").attr(\"src\", \"disk://mastery-notification\");" +
                 "masteryVideoElement.style.display = \"block\";" +
                 "masteryElement.style.display = \"block\";" +

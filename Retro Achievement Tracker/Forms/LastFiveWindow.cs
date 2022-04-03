@@ -4,7 +4,9 @@ using Retro_Achievement_Tracker.Controllers;
 using Retro_Achievement_Tracker.Models;
 using Retro_Achievement_Tracker.Properties;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -60,23 +62,22 @@ namespace Retro_Achievement_Tracker
         public void SetSimpleFontFamily(FontFamily value)
         {
             int lineSpacing = value.GetLineSpacing(FontStyle.Regular) / value.GetEmHeight(FontStyle.Regular);
-            ExecuteScript(
-                "for (var i = 0; i < allElements.length; i++) { " +
+
+            string script = "for (var i = 0; i < allElements.length; i++) { " +
                 "   allElements[i].style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
                 "   allElements[i].style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
-                "}");
-            ExecuteScript(
+                "}" +
                 "for (var i = 0; i < allTitles.length; i++) { " +
                 "   textFit(allTitles[i], { alignVert: true , alignHoriz: true });" +
-                "}");
-            ExecuteScript(
+                "}" +
                 "for (var i = 0; i < allDates.length; i++) { " +
                 "   textFit(allDates[i], { alignVert: true , alignHoriz: true });" +
-                "}");
-            ExecuteScript(
+                "}" +
                 "for (var i = 0; i < allPoints.length; i++) { " +
                 "   textFit(allPoints[i], { alignVert: true });" +
-                "}");
+                "}";
+
+            ExecuteScript(script);
         }
 
         public void SetSimpleFontOutline(string fontOutline, string borderOutline)
@@ -178,72 +179,53 @@ namespace Retro_Achievement_Tracker
             ExecuteScript(
                  "for (var i = 0; i < allLines.length; i++) { allLines[i].style.border = \"" + value + "\"; }");
         }
-        public void CleanupList()
-        {
-            ExecuteScript("allAchievements = document.getElementsByClassName(\"focus-achievement\");" +
-                "while (allAchievements.length > 5) { allAchievements[allAchievements.length - 1].remove(); allAchievements = document.getElementsByClassName(\"focus-achievement\"); }");
-        }
-        public void ClearList()
-        {
-            ExecuteScript("allAchievements = document.getElementsByClassName(\"focus-achievement\");" +
-                "while (allAchievements.length > 0) { allAchievements[allAchievements.length - 1].remove(); allAchievements = document.getElementsByClassName(\"focus-achievement\"); }");
-        }
-
         public void AddAchievement(Achievement achievement)
         {
             ExecuteScript("addToList(\"" + achievement.Title.Replace("\"", "\\\"") + "\"," +
                                        "\"https://retroachievements.org/Badge/" + achievement.BadgeNumber + ".png\"," +
-                                       "\"" + achievement.Description.Replace("\"", "\\\"") + "\"," +
                                        "\"" + achievement.Points + "\"," +
-                                       "\"" + achievement.DateEarned.ToString() + "\", " +
+                                       "\"" + achievement.DateEarned.Value.ToLocalTime().ToString() + "\", " +
                                        "\"" + achievement.Id + "\");");
-
-        }
-        public async Task<int> GetAchievementPosition(int id)
-        {
-            try
-            {
-                JavascriptResponse javascriptResponse = await chromiumWebBrowser.EvaluateScriptAsync("document.getElementById(\"achievement-" + id + "\").offsetTop", TimeSpan.FromSeconds(5));
-
-                return int.Parse(javascriptResponse.Result.ToString());
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.StackTrace);
-            }
-            return 800;
         }
 
-        public async void SetAchievementPosition(int id, int position)
+        public void SetAchievementPositions(List<ValueTuple<int, int, int>> achievementSpecs)
         {
-            int newOffset;
-            switch (position)
+            StringBuilder stringBuilder = new StringBuilder();
+
+            foreach(ValueTuple<int, int, int> value in achievementSpecs)
             {
-                case 0:
-                    newOffset = 5;
-                    break;
-                case 1:
-                    newOffset = 150;
-                    break;
-                case 2:
-                    newOffset = 295;
-                    break;
-                case 3:
-                    newOffset = 440;
-                    break;
-                case 4:
-                    newOffset = 585;
-                    break;
-                default:
-                    newOffset = 800;
-                    break;
+                string newOffset;
+
+                switch (value.Item2)
+                {
+                    case 0:
+                        newOffset = "'5px'";
+                        break;
+                    case 1:
+                        newOffset = "'150px'";
+                        break;
+                    case 2:
+                        newOffset = "'295px'";
+                        break;
+                    case 3:
+                        newOffset = "'440px'";
+                        break;
+                    case 4:
+                        newOffset = "'585px'";
+                        break;
+                    default:
+                        stringBuilder.Append("var achievement" + value.Item1 + "OffsetTop = document.getElementById(\"achievement-" + value.Item1 + "\").offsetTop;" +
+                            "var achievement" + value.Item1 + "OffsetTopNew = achievement" + value.Item1 + "OffsetTop + 1048;");
+                        newOffset = "`${ achievement" + value.Item1 + "OffsetTopNew }px`";
+                        break;
+                }
+
+                stringBuilder.Append("setTimeout(function() { " +
+                    "   $(\"#achievement-" + value.Item1 + "\").animate( { left: '5px', top: " + newOffset + " }, 500, 'easeInOutQuint'); }" +
+                    "," + value.Item3 + ");");
             }
 
-            await GetAchievementPosition(id).ContinueWith((result) =>
-            {
-                ExecuteScript("document.getElementById(\"achievement-" + id + "\")" +
-                ".animate([ { left: '5px', top: '" + result.Result + "px' }, { left: '5px', top: '" + newOffset + "px' } ], { interations: 1, duration: 200, fill: \"forwards\", easing: \"ease-out\" });");
-            });
+            ExecuteScript(stringBuilder.ToString());
         }
 
         protected async void ExecuteScript(string script)

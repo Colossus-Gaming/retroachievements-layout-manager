@@ -22,12 +22,18 @@ namespace Retro_Achievement_Tracker.Models
         public string Genre { get; set; }
         public string Released { get; set; }
         public string ConsoleName { get; set; }
-        public int AchievementsEarned { get; set; }
-        public int AchievementsPossible { get; set; }
-        public int PointsEarned { get; set; }
-        public int PointsPossible { get; set; }
-        public int RetroRatio { get; set; }
         public List<Achievement> Achievements { get; set; }
+        public int AchievementsEarned
+        {
+            get
+            {
+                if (Achievements != null)
+                {
+                    return Achievements.FindAll(x => x.DateEarned.HasValue).Count;
+                }
+                return 0;
+            }
+        }
         public int GameTruePointsPossible
         {
             get
@@ -45,7 +51,29 @@ namespace Retro_Achievement_Tracker.Models
             {
                 if (Achievements != null)
                 {
-                    return Achievements.FindAll(x => x.HardcoreAchieved).Sum(x => x.TrueRatio);
+                    return Achievements.FindAll(x => x.DateEarned.HasValue).Sum(x => x.TrueRatio);
+                }
+                return 0;
+            }
+        }
+        public int GamePointsPossible
+        {
+            get
+            {
+                if (Achievements != null)
+                {
+                    return Achievements.Sum(x => x.Points);
+                }
+                return 0;
+            }
+        }
+        public int GamePointsEarned
+        {
+            get
+            {
+                if (Achievements != null)
+                {
+                    return Achievements.FindAll(x => x.DateEarned.HasValue).Sum(x => x.Points);
                 }
                 return 0;
             }
