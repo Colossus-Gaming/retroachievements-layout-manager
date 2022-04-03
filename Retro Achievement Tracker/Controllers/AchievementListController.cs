@@ -13,7 +13,7 @@ namespace Retro_Achievement_Tracker.Controllers
     {
         private static AchievementListController instance = new AchievementListController();
         private static AchievementListWindow AchievementListWindow;
-        public static bool IsOpen;
+        public bool IsOpen;
         private List<Achievement> CurrentUnlockedAchievements;
         private List<Achievement> CurrentLockedAchievements;
 

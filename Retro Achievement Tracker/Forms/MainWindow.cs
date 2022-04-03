@@ -183,7 +183,6 @@ namespace Retro_Achievement_Tracker
                         CurrentlyViewingIndex = 0;
 
                         UpdateCurrentlyViewingAchievement();
-                        FocusController.Instance.Show();
                         SetFocus();
                     }
                     else

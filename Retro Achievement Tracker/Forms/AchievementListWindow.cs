@@ -32,12 +32,12 @@ namespace Retro_Achievement_Tracker.Forms
 
         private void AchievementListWindow_FormClosed(object sender, FormClosedEventArgs e)
         {
-            AchievementListController.IsOpen = false;
+            AchievementListController.Instance.IsOpen = false;
         }
 
         private void AchievementListWindow_Shown(object sender, EventArgs e)
         {
-            AchievementListController.IsOpen = true;
+            AchievementListController.Instance.IsOpen = true;
         }
         public void AssignJavaScriptVariables()
         {

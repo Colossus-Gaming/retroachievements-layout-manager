@@ -11,7 +11,7 @@ namespace Retro_Achievement_Tracker.Controllers
     {
         private static LastFiveController instance = new LastFiveController();
         private static LastFiveWindow LastFiveWindow;
-        public static bool IsOpen;
+        public bool IsOpen;
         private List<Achievement> CurrentAchievements;
 
         private LastFiveController()

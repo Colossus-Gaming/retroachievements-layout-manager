@@ -29,12 +29,12 @@ namespace Retro_Achievement_Tracker
 
         private void LastFiveWindow_FormClosed(object sender, FormClosedEventArgs e)
         {
-            LastFiveController.IsOpen = false;
+            LastFiveController.Instance.IsOpen = false;
         }
 
         private void LastFiveWindow_Shown(object sender, EventArgs e)
         {
-            LastFiveController.IsOpen = true;
+            LastFiveController.Instance.IsOpen = true;
         }
 
         protected override bool ShowWithoutActivation

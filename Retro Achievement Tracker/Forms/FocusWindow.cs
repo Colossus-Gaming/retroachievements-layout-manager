@@ -30,12 +30,12 @@ namespace Retro_Achievement_Tracker
 
         private void FocusWindow_FormClosed(object sender, FormClosedEventArgs e)
         {
-            FocusController.IsOpen = false;
+            FocusController.Instance.IsOpen = false;
         }
 
         private void FocusWindow_Shown(object sender, EventArgs e)
         {
-            FocusController.IsOpen = true;
+            FocusController.Instance.IsOpen = true;
         }
 
         protected override bool ShowWithoutActivation
