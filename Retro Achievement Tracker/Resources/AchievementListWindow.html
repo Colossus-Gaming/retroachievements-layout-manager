@@ -8,6 +8,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script id="scripts">
         function addAchievement(name, lockedImageLink, imageLink, description, points, date, id, size, xCoord, yCoord, isUnlocked) {
+            var tooltipString = (name + "<br/><br/>" + points + "pts<br/><br/>" + description);
 
             var achievementBlock = document.createElement('div');
             achievementBlock.classList.add("achievement");
@@ -27,12 +28,20 @@
                 achievementLockedImage.style.width = size;
                 achievementLockedImage.style.height = size;
                 achievementBlock.appendChild(achievementLockedImage);
+            } else {
+                tooltipString += "<br/><br/>" + date;
             }
 
             document.getElementById("container").appendChild(achievementBlock);
 
             document.getElementById("achievement-" + id).style.left = xCoord;
             document.getElementById("achievement-" + id).style.top = yCoord;
+
+            $("#achievement-" + id).tooltip({
+                items: 'div',
+                content: tooltipString,
+                track: true
+            });
         }
     </script>
     <style id="style" type="text/css">

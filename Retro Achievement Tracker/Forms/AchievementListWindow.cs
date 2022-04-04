@@ -51,7 +51,7 @@ namespace Retro_Achievement_Tracker.Forms
                                        "\"https://retroachievements.org/Badge/" + achievement.BadgeNumber + ".png\", " +
                                        "\"" + achievement.Description.Replace("\"", "\\\"") + "\"," +
                                        "\"" + achievement.Points + "\"," +
-                                       "\"" + achievement.DateEarned.ToString() + "\", " +
+                                       "\"" + (achievement.DateEarned.HasValue ? achievement.DateEarned.Value.ToLocalTime().ToString() : "") + "\", " +
                                        "\"" + achievement.Id + "\"," +
                                        "\"" + size + "px\"," +
                                        "\"" + xCoord + "px\"," +
@@ -73,7 +73,8 @@ namespace Retro_Achievement_Tracker.Forms
 
         public void UnlockAchievement(Achievement achievement)
         {
-            ExecuteScript("$(\"#achievement-" + achievement.Id + "-locked-image\").toggle(\"pulsate\");");
+            ExecuteScript("$(\"#achievement-" + achievement.Id + "-locked-image\").toggle(\"pulsate\");" +
+                "$(\"#achievement-" + achievement.Id + "\").tooltip(\"option\", \"content\", \"" + (achievement.Title + "<br/><br/>" + achievement.Points + "pts<br/><br/>" + achievement.Description + "<br/><br/>" + achievement.DateEarned.Value.ToLocalTime().ToString()) + "\");");
         }
         public void SetAchievementPositions(Dictionary<Achievement, ValueTuple<int, int, int>> achievementAndCoordinates)
         {

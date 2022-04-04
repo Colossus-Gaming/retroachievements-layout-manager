@@ -118,7 +118,7 @@ namespace Retro_Achievement_Tracker.Controllers
                             AchievementListWindow.AddAchievement(newAchievement, GetImageSize(unlockedAchievements.Count + lockedAchievements.Count), GetAchievementLocationX(i, size), GetAchievementLocationY(i, size) + 1048);
                         } else
                         {
-                            AchievementListWindow.UnlockAchievement(oldAchievement);
+                            AchievementListWindow.UnlockAchievement(newAchievement);
                             CurrentLockedAchievements.Remove(oldAchievement);
                         }
                     }

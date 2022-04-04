@@ -166,7 +166,7 @@ namespace Retro_Achievement_Tracker
                         {
                             UpdateCurrentlyViewingAchievement();
                         }
-                        if (UnlockedAchievements.Count == UserSummary.Achievements.Count && OldUnlockedAchievements.Count < UserSummary.Achievements.Count)
+                        if (UnlockedAchievements.Count == GameInfoAndProgress.Achievements.Count && OldUnlockedAchievements.Count < GameInfoAndProgress.Achievements.Count)
                         {
                             ClearFocusAchievementRenders();
                             AlertsController.Instance.EnqueueMasteryNotification(UserSummary, GameInfoAndProgress);
@@ -367,9 +367,9 @@ namespace Retro_Achievement_Tracker
         {
             Invoke((MethodInvoker)delegate
             {
-                if (UserSummary.Achievements != null && UserSummary.Achievements.Count > 0)
+                if (GameInfoAndProgress.Achievements != null && GameInfoAndProgress.Achievements.Count > 0)
                 {
-                    int gameId = UserSummary.Achievements[0].GameId;
+                    int gameId = GameInfoAndProgress.Achievements[0].GameId;
 
                     if (LockedAchievements == null || (LockedAchievements.Count > 0 && gameId != LockedAchievements[0].GameId))
                     {
@@ -423,7 +423,7 @@ namespace Retro_Achievement_Tracker
         }
         private List<Achievement> GetLastFiveAchievements()
         {
-            List<Achievement> achievements = UserSummary.Achievements.FindAll(x => x.HardcoreAchieved);
+            List<Achievement> achievements = GameInfoAndProgress.Achievements.FindAll(x => x.HardcoreAchieved);
             achievements.Sort();
             achievements.Reverse();
 
@@ -438,7 +438,7 @@ namespace Retro_Achievement_Tracker
             {
                 Task.Run(() => LastFiveController.Instance.SetAchievements(GetLastFiveAchievements()));
 
-                StreamLabelManager.Instance.WriteLastFiveStreamLabels(UserSummary);
+                StreamLabelManager.Instance.WriteLastFiveStreamLabels(GameInfoAndProgress);
             });
         }
         private void UpdateStats()
@@ -836,11 +836,11 @@ namespace Retro_Achievement_Tracker
         }
         private void ShowAchievementButton_Click(object sender, EventArgs eventArgs)
         {
-            if (UserSummary.Achievements != null
-                && UserSummary.Achievements.Count > 0
-                && UserSummary.Achievements[0] != null)
+            if (GameInfoAndProgress.Achievements != null
+                && GameInfoAndProgress.Achievements.Count > 0
+                && GameInfoAndProgress.Achievements[0] != null)
             {
-                AlertsController.Instance.EnqueueAchievementNotifications(new List<Achievement>() { UserSummary.Achievements[0] });
+                AlertsController.Instance.EnqueueAchievementNotifications(new List<Achievement>() { GameInfoAndProgress.Achievements[0] });
                 AlertsController.Instance.RunNotifications();
             }
             else
