@@ -162,10 +162,13 @@ namespace Retro_Achievement_Tracker
 
                         AlertsController.Instance.EnqueueAchievementNotifications(achievementNotificationList);
 
-                        if (achievementNotificationList.Contains(CurrentlyViewingAchievement))
+                        if (!achievementNotificationList.Contains(CurrentlyViewingAchievement))
                         {
-                            UpdateCurrentlyViewingAchievement();
-                        }
+                            CurrentlyViewingIndex = LockedAchievements.IndexOf(CurrentlyViewingAchievement);
+                        } 
+
+                        UpdateCurrentlyViewingAchievement();
+
                         if (UnlockedAchievements.Count == GameInfoAndProgress.Achievements.Count && OldUnlockedAchievements.Count < GameInfoAndProgress.Achievements.Count)
                         {
                             ClearFocusAchievementRenders();
@@ -392,8 +395,6 @@ namespace Retro_Achievement_Tracker
             {
                 Invoke((MethodInvoker)delegate
                 {
-                    UpdateFocusButtons();
-
                     if (LockedAchievements.Count > 0)
                     {
                         if (CurrentlyViewingIndex >= LockedAchievements.Count)
@@ -404,6 +405,7 @@ namespace Retro_Achievement_Tracker
                         {
                             CurrentlyViewingIndex = 0;
                         }
+
                         CurrentlyViewingAchievement = LockedAchievements[CurrentlyViewingIndex];
 
                         focusAchievementPictureBox.ImageLocation = "https://retroachievements.org/Badge/" + CurrentlyViewingAchievement.BadgeNumber + ".png";
@@ -418,6 +420,8 @@ namespace Retro_Achievement_Tracker
                         focusAchievementTitleLabel.Text = string.Empty;
                         focusAchievementDescriptionLabel.Text = string.Empty;
                     }
+
+                    UpdateFocusButtons();
                 });
             }
         }
