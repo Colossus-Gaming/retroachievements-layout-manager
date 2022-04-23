@@ -47,47 +47,56 @@ namespace Retro_Achievement_Tracker
             ExecuteScript(
                 "container = document.getElementById(\"container\");" +
                 "allElements = document.getElementsByClassName(\"has-font\");" +
-                "focusElement = document.getElementById(\"focus\");" +
-                "focusTitleElement = document.getElementById(\"title\");" +
-                "focusDescriptionElement = document.getElementById(\"description\");" +
-                "focusPointsElement = document.getElementById(\"points\");" +
-                "focusBadgeElement = document.getElementById(\"badge\");" +
-                "focusLineElement = document.getElementById(\"line\");");
+                "focus = document.getElementById(\"focus\");" +
+                "titleElement = document.getElementById(\"title\");" +
+                "descriptionElement = document.getElementById(\"description\");" +
+                "masteryDescriptionElement = document.getElementById(\"mastery-description\");" +
+                "masteryAchievementsElement = document.getElementById(\"mastery-achievements\");" +
+                "masteryPointsElement = document.getElementById(\"mastery-points\");" +
+                "pointsElement = document.getElementById(\"points\");" +
+                "badgeElement = document.getElementById(\"badge\");" +
+                "lineElement = document.getElementById(\"line\");");
         }
         public void SetSimpleFontFamily(FontFamily value)
         {
             int lineSpacing = value.GetLineSpacing(FontStyle.Regular) / value.GetEmHeight(FontStyle.Regular);
             ExecuteScript(
-                  "focusTitleElement.style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
-                  "focusTitleElement.style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
-                  "textFit(focusTitleElement, { alignVert: true, alignHoriz: true });" +
-                  "focusDescriptionElement.style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
-                  "focusDescriptionElement.style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
-                  "textFit(focusDescriptionElement, { alignVert: true, alignHoriz: true });" +
-                  "focusPointsElement.style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
-                  "focusPointsElement.style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
-                  "textFit(focusPointsElement);");
+                  "titleElement.style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
+                  "titleElement.style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
+                  "textFit(titleElement, { alignVert: true, alignHoriz: true, multiLine: true });" +
+                  "descriptionElement.style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
+                  "descriptionElement.style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
+                  "textFit(descriptionElement, { alignVert: true, alignHoriz: true, multiLine: true });" +
+                  "pointsElement.style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
+                  "pointsElement.style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
+                  "textFit(pointsElement);" +
+                  "masteryAchievementsElement.style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
+                  "masteryAchievementsElement.style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
+                  "textFit(masteryAchievementsElement);" +
+                  "masteryPointsElement.style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
+                  "masteryPointsElement.style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
+                  "textFit(masteryPointsElement);");
         }
 
         public void SetSimpleFontOutline(string fontOutline, string borderOutline)
         {
             ExecuteScript(
                  "for (var i = 0; i < allElements.length; i++) { allElements[i].style.webkitTextStroke = \"" + fontOutline + "\"; }" +
-                 "focusLineElement.style.border = \"" + borderOutline + "\";");
+                 "lineElement.style.border = \"" + borderOutline + "\";");
         }
 
         public void SetSimpleFontColor(string value)
         {
             ExecuteScript(
                 "for (var i = 0; i < allElements.length; i++) { allElements[i].style.color = \"" + value + "\"; }" +
-                "focusLineElement.style.color = \"" + value + "\";" +
-                "focusLineElement.style.backgroundColor = \"" + value + "\";");
+                "lineElement.style.color = \"" + value + "\";" +
+                "lineElement.style.backgroundColor = \"" + value + "\";");
         }
 
         public void SetBorderBackgroundColor(string value)
         {
             ExecuteScript(
-                "focusElement.style.backgroundColor = \"" + value + "\";");
+                "focus.style.backgroundColor = \"" + value + "\";");
         }
         public void SetWindowBackgroundColor(string value)
         {
@@ -98,135 +107,125 @@ namespace Retro_Achievement_Tracker
         public void SetDescriptionOutline(string value)
         {
             ExecuteScript(
-                  "focusDescriptionElement.style.webkitTextStroke = \"" + value + "\";" +
-                  "textFit(focusDescriptionElement, { alignVert: true, alignHoriz: true });");
+                  "descriptionElement.style.webkitTextStroke = \"" + value + "\";" +
+                  "masteryAchievementsElement.style.webkitTextStroke = \"" + value + "\";" +
+                  "masteryPointsElement.style.webkitTextStroke = \"" + value + "\";" +
+                  "textFit(descriptionElement, { alignVert: true, alignHoriz: true, multiLine: true });" +
+                  "textFit(masteryAchievementsElement, { alignVert: true, alignHoriz: true });" +
+                  "textFit(masteryPointsElement, { alignVert: true, alignHoriz: true });");
         }
 
         public void SetDescriptionColor(string value)
         {
             ExecuteScript(
-                "focusDescriptionElement.style.color = \"" + value + "\";");
+                "descriptionElement.style.color = \"" + value + "\";" +
+                "masteryAchievementsElement.style.color = \"" + value + "\";" +
+                "masteryPointsElement.style.color = \"" + value + "\";");
         }
 
         public void SetDescriptionFontFamily(System.Drawing.FontFamily value)
         {
             int lineSpacing = value.GetLineSpacing(FontStyle.Regular) / value.GetEmHeight(FontStyle.Regular);
             ExecuteScript(
-                  "focusDescriptionElement.style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
-                  "focusDescriptionElement.style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
-                  "textFit(focusDescriptionElement, { alignVert: true, alignHoriz: true });");
+                  "descriptionElement.style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
+                  "descriptionElement.style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
+                  "masteryAchievementsElement.style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
+                  "masteryAchievementsElement.style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
+                  "masteryPointsElement.style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
+                  "masteryPointsElement.style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
+                  "textFit(descriptionElement, { alignVert: true, alignHoriz: true, multiLine: true });" +
+                  "textFit(masteryAchievementsElement, { alignVert: true, alignHoriz: true });" +
+                  "textFit(masteryPointsElement, { alignVert: true, alignHoriz: true });");
         }
 
         public void SetTitleOutline(string value)
         {
             ExecuteScript(
-                 "focusTitleElement.style.webkitTextStroke = \"" + value + "\";");
+                 "titleElement.style.webkitTextStroke = \"" + value + "\";");
         }
 
         public void SetTitleColor(string value)
         {
             ExecuteScript(
-                "focusTitleElement.style.color = \"" + value + "\";");
+                "titleElement.style.color = \"" + value + "\";");
         }
 
         public void SetTitleFontFamily(FontFamily value)
         {
             int lineSpacing = value.GetLineSpacing(FontStyle.Regular) / value.GetEmHeight(FontStyle.Regular);
             ExecuteScript(
-                  "focusTitleElement.style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
-                  "focusTitleElement.style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
-                  "textFit(focusTitleElement, { alignVert: true, alignHoriz: true });");
+                  "titleElement.style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
+                  "titleElement.style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
+                  "textFit(titleElement, { alignVert: true, alignHoriz: true, multiLine: true });");
         }
 
         public async void SetFocus(Achievement achievement)
         {
             if (achievement != null)
             {
-                StringBuilder actualDescription = BreakString(achievement.Description.Length, achievement.Description.Split(new string[] { " " }, StringSplitOptions.None));
+                ExecuteScript("$(\"#badge\").fadeOut(\"fast\");" +
+                    "$(\"#title\").fadeOut(\"fast\");" +
+                    "$(\"#description\").fadeOut(\"fast\");" +
+                    "$(\"#points\").fadeOut(\"fast\");" +
+                    "$(\"#line\").fadeOut(\"fast\");" +
+                    "$(\"#mastery-description\").fadeOut(\"fast\");");
 
-                Invoke((MethodInvoker)delegate
+                await Task.Delay(200).ContinueWith(async task =>
                 {
-                    ClientSize = new Size(700, 165);
+                    ExecuteScript("titleElement.innerHTML = \"" + achievement.Title.Replace("\"", "\\\"") + "\";");
+                    ExecuteScript("descriptionElement.innerHTML = \"" + achievement.Description.Replace("\"", "\\\"") + "\";");
+                    ExecuteScript("$(\"#badge\").attr('src', \"https://retroachievements.org/Badge/" + achievement.BadgeNumber + ".png\"); badgeElement.style.border = \"\";");
+                    ExecuteScript("pointsElement.innerHTML = \"" + achievement.Points + "\";");
+
+                    await Task.Delay(200).ContinueWith(task1 =>
+                    {
+                        ExecuteScript("$(\"#focus\").fadeIn();");
+                        ExecuteScript("$(\"#badge\").fadeIn(); badgeElement.animate([ { left: '1940px', top: '14px' }, { left: '15px', top: '14px' } ], { interations: 1, duration: 700, fill: \"forwards\", easing: \"ease-out\" });");
+                        ExecuteScript("setTimeout(function() { $(\"#points\").fadeIn(); textFit(pointsElement); pointsElement.animate([ { left: '1922px', bottom: '10px' }, { left: '25px', bottom: '10px' } ], { interations: 1, duration: 700, fill: \"forwards\", easing: \"ease-out\" }); }, 200);");
+                        ExecuteScript("setTimeout(function() { $(\"#title\").fadeIn(); textFit(titleElement, { alignVert: true, alignHoriz: true, multiLine: true }); titleElement.animate([ { right: '-800px', top: '10px' }, { right: '5px', top: '10px' } ], { interations: 1, duration: 700, fill: \"forwards\", easing: \"ease-out\" }); }, 400);");
+                        ExecuteScript("setTimeout(function() { $(\"#line\").fadeIn(); lineElement.animate([ { right: '-800px', top: '65px' }, { right: '10px', top: '65px' } ], { interations: 1, duration: 700, fill: \"forwards\", easing: \"ease-out\" }); }, 600);");
+                        ExecuteScript("setTimeout(function() { $(\"#description\").fadeIn(); textFit(descriptionElement, { alignVert: true, alignHoriz: true, multiLine: true }); descriptionElement.animate([ { right: '-800px', top: '78px' }, { right: '5px', top: '78px' } ], { interations: 1, duration: 700, fill: \"forwards\", easing: \"ease-out\" }); }, 800);");
+                    });
                 });
-                ExecuteScript("$(\"#focus\").fadeOut(\"fast\");");
-
-                await Task.Delay(100);
-
-                ExecuteScript("focusTitleElement.style.display = \"none\";");
-                ExecuteScript("focusDescriptionElement.style.display = \"none\";");
-                ExecuteScript("focusPointsElement.style.display = \"none\";");
-                ExecuteScript("focusLineElement.style.display = \"none\";");
-                ExecuteScript("focusBadgeElement.style.display = \"none\";");
-
-                ExecuteScript("focusTitleElement.innerHTML = \"" + achievement.Title.Replace("\"", "\\\"") + "\";");
-                ExecuteScript("focusDescriptionElement.innerHTML = \"" + actualDescription.Replace("\"", "\\\"") + "\";");
-                ExecuteScript("$(\"#badge\").attr('src', \"https://retroachievements.org/Badge/" + achievement.BadgeNumber + ".png\");");
-                ExecuteScript("focusPointsElement.innerHTML = \"" + achievement.Points + "\";");
-
-                await Task.Delay(100);
-
-                ExecuteScript("$(\"#focus\").fadeIn();");
-
-                ExecuteScript("$(\"#badge\").fadeIn(); focusBadgeElement.animate([ { left: '3000px' }, { left: '10px' } ], { interations: 1, duration: 700, fill: \"forwards\", easing: \"ease-out\" });");
-                ExecuteScript("setTimeout(function() { $(\"#line\").fadeIn(); focusLineElement.animate([ { right: '-1922px', top: '0px' }, { right: '10px', top: '0px' } ], { interations: 1, duration: 700, fill: \"forwards\", easing: \"ease-out\" }); }, 200);");
-                ExecuteScript("setTimeout(function() { $(\"#points\").fadeIn(); textFit(focusPointsElement); focusPointsElement.animate([ { left: '1922px', bottom: '15px' }, { left: '15px', bottom: '15px' } ], { interations: 1, duration: 700, fill: \"forwards\", easing: \"ease-out\" }); }, 400);");
-                ExecuteScript("setTimeout(function() { $(\"#title\").fadeIn(); textFit(focusTitleElement, { alignVert: true, alignHoriz: true }); focusTitleElement.animate([ { right: '-1922px', top: '0px' }, { right: '0px', top: '0px' } ], { interations: 1, duration: 700, fill: \"forwards\", easing: \"ease-out\" }); }, 600);");
-                ExecuteScript("setTimeout(function() { $(\"#description\").fadeIn(); textFit(focusDescriptionElement, { alignVert: true, alignHoriz: true }); focusDescriptionElement.animate([ { right: '-1922px', top: '0px' }, { right: '0px', top: '0px' } ], { interations: 1, duration: 700, fill: \"forwards\", easing: \"ease-out\" }); }, 800);");
             }
             else
             {
                 HideFocus();
             }
         }
-
-        private static StringBuilder BreakString(int originalLength, string[] originalLines)
+        public async void SetFocus(GameInfo gameInfo)
         {
-            int threshold = 48;
+            ExecuteScript("$(\"#badge\").fadeOut(\"fast\");" +
+                    "$(\"#title\").fadeOut(\"fast\");" +
+                    "$(\"#description\").fadeOut(\"fast\");" +
+                    "$(\"#points\").fadeOut(\"fast\");" +
+                    "$(\"#line\").fadeOut(\"fast\");" +
+                    "$(\"#mastery-description\").fadeOut(\"fast\");");
 
-            if (originalLength > 48 && originalLength < 96)
+            await Task.Delay(200).ContinueWith(async task =>
             {
-                threshold = originalLines.Length / 2;
-            }
-            else if (originalLength >= 96)
-            {
-                threshold = originalLines.Length / 3;
-            }
+                ExecuteScript("titleElement.innerHTML = \"" + gameInfo.Title.Replace("\"", "\\\"") + "\";");
+                ExecuteScript("masteryAchievementsElement.innerHTML = \"Cheevos:<br/>" + gameInfo.Achievements.Count + " / " + gameInfo.Achievements.Count + "\";");
+                ExecuteScript("masteryPointsElement.innerHTML = \"Points:<br/>" + gameInfo.GamePointsEarned + " / " + gameInfo.GamePointsPossible + "\";");
+                ExecuteScript("$(\"#badge\").attr('src', \"https://retroachievements.org" + gameInfo.ImageIcon + "\"); badgeElement.style.border = \"4px solid gold\";");
 
-            StringBuilder actualLine = new StringBuilder();
-            StringBuilder tempLine = new StringBuilder();
-
-            double actualWidth = 0;
-
-            foreach (var item in originalLines)
-            {
-                tempLine.Append(item + " ");
-                actualWidth++;
-
-                if (actualWidth > threshold)
+                await Task.Delay(200).ContinueWith(task1 =>
                 {
-                    tempLine.Append("<br>");
-                    actualLine.Append(tempLine);
-                    tempLine.Clear();
-
-                    actualWidth = 0;
-                }
-            }
-
-            if (tempLine.Length > 0)
-            {
-                actualLine.Append(tempLine);
-            }
-
-            return actualLine;
+                    ExecuteScript("focusElement.style.display = \"inline-block\";");
+                    ExecuteScript("$(\"#badge\").fadeIn(); badgeElement.animate([ { left: '1940px', top: '10px' }, { left: '10px', top: '10px' } ], { interations: 1, duration: 700, fill: \"forwards\", easing: \"ease-out\" });");
+                    ExecuteScript("setTimeout(function() { $(\"#title\").fadeIn(); textFit(titleElement, { alignVert: true, alignHoriz: true, multiLine: true }); titleElement.animate([ { right: '-1922px', top: '5px' }, { right: '5px', top: '5px' } ], { interations: 1, duration: 700, fill: \"forwards\", easing: \"ease-out\" }); }, 200);");
+                    ExecuteScript("setTimeout(function() { $(\"#line\").fadeIn(); lineElement.animate([ { right: '-1922px', top: '65px' }, { right: '10px', top: '65px' } ], { interations: 1, duration: 700, fill: \"forwards\", easing: \"ease-out\" }); }, 400);");
+                    ExecuteScript("setTimeout(function() { $(\"#mastery-description\").fadeIn(); textFit(masteryAchievementsElement, { alignVert: true, alignHoriz: true, multiLine: true }); textFit(masteryPointsElement, { alignVert: true, alignHoriz: true, multiLine: true }); masteryDescriptionElement.animate([ { right: '-1922px', top: '78px' }, { right: '5px', top: '78px' } ], { interations: 1, duration: 700, fill: \"forwards\", easing: \"ease-out\" }); }, 600);");
+                });
+            });
         }
-
         public void SetPointsFontFamily(FontFamily value)
         {
             int lineSpacing = value.GetLineSpacing(FontStyle.Regular) / value.GetEmHeight(FontStyle.Regular);
             ExecuteScript(
-                  "focusPointsElement.style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
-                  "focusPointsElement.style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
-                  "textFit(focusPointsElement, { alignVert: true, alignHoriz: true });");
+                  "pointsElement.style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
+                  "pointsElement.style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
+                  "textFit(pointsElement, { alignVert: true, alignHoriz: true });");
         }
 
         public void HideFocus()
@@ -235,33 +234,33 @@ namespace Retro_Achievement_Tracker
         }
         public void EnableBorder()
         {
-            ExecuteScript("focusElement.style.backgroundImage = \"url('disk://background')\";");
+            ExecuteScript("focus.style.backgroundImage = \"url('disk://background')\";");
         }
         public void DisableBorder()
         {
-            ExecuteScript("focusElement.style.backgroundImage = \"\";");
+            ExecuteScript("focus.style.backgroundImage = \"\";");
         }
         public void SetPointsColor(string value)
         {
             ExecuteScript(
-                 "focusPointsElement.style.color = \"" + value + "\";");
+                 "pointsElement.style.color = \"" + value + "\";");
         }
         public void SetPointsOutline(string fontOutline)
         {
             ExecuteScript(
-                "focusPointsElement.style.webkitTextStroke = \"" + fontOutline + "\";");
+                "pointsElement.style.webkitTextStroke = \"" + fontOutline + "\";");
         }
         public void SetLineColor(string value)
         {
             ExecuteScript(
-                 "focusLineElement.style.color = \"" + value + "\";" +
-                 "focusLineElement.style.backgroundColor = \"" + value + "\";");
+                 "lineElement.style.color = \"" + value + "\";" +
+                 "lineElement.style.backgroundColor = \"" + value + "\";");
         }
 
         public void SetLineOutline(string borderOutline)
         {
             ExecuteScript(
-                "focusLineElement.style.border = \"" + borderOutline + "\";");
+                "lineElement.style.border = \"" + borderOutline + "\";");
         }
         protected async void ExecuteScript(string script)
         {
@@ -295,7 +294,7 @@ namespace Retro_Achievement_Tracker
             {
                 Invoke((MethodInvoker)delegate
                 {
-                    ClientSize = new Size(700, 0);
+                    ClientSize = new Size(700, 165);
 
                     FocusController.Instance.SetAllSettings();
                     FocusController.Instance.UpdateFocus();

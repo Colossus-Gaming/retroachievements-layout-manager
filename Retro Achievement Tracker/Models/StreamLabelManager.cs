@@ -39,7 +39,7 @@ namespace Retro_Achievement_Tracker.Models
             File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/focus/points.txt", string.Empty);
         }
 
-        public void WriteLastFiveStreamLabels(GameInfoAndProgress gameInfoAndProgress)
+        public void WriteLastFiveStreamLabels(GameInfo gameInfoAndProgress)
         {
             if (gameInfoAndProgress != null && gameInfoAndProgress.Achievements != null && gameInfoAndProgress.Achievements.Count > 0)
             {
@@ -61,7 +61,7 @@ namespace Retro_Achievement_Tracker.Models
             }
         }
 
-        public void WriteStatsStreamLabels(UserSummary userSummary, GameInfoAndProgress gameInfoAndProgress)
+        public void WriteStatsStreamLabels(UserSummary userSummary, GameInfo gameInfoAndProgress)
         {
             if (userSummary != null)
             {
@@ -73,11 +73,11 @@ namespace Retro_Achievement_Tracker.Models
                 File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/game-ratio.txt", gameInfoAndProgress.GameTruePointsPossible == 0 ? "0" : (Convert.ToDecimal(gameInfoAndProgress.GameTruePointsPossible) / Convert.ToDecimal(gameInfoAndProgress.GamePointsPossible)).ToString("0.00"));
                 File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/game-points.txt", gameInfoAndProgress.GamePointsPossible == 0 ? "0 / 0" : gameInfoAndProgress.GamePointsEarned.ToString() + " / " + gameInfoAndProgress.GamePointsPossible.ToString());
                 File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/game-true-points.txt", gameInfoAndProgress.GameTruePointsPossible == 0 ? "0 / 0" : gameInfoAndProgress.GameTruePointsEarned.ToString() + " / " + gameInfoAndProgress.GameTruePointsPossible.ToString());
-                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/game-achievements.txt", gameInfoAndProgress.AchievementsEarned + " / " + gameInfoAndProgress.Achievements.Count);
-                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/completed.txt", (gameInfoAndProgress.Achievements.Count == 0 ? 0 : Convert.ToInt32(Convert.ToDecimal(gameInfoAndProgress.Achievements.Count(achievement => achievement.HardcoreAchieved)) / Convert.ToDecimal(gameInfoAndProgress.Achievements.Count) * 200)) + " %");
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/game-achievements.txt", gameInfoAndProgress.AchievementsEarned + " / " + (gameInfoAndProgress.Achievements == null ? 0 : gameInfoAndProgress.Achievements.Count));
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/completed.txt", (gameInfoAndProgress.Achievements == null || gameInfoAndProgress.Achievements.Count == 0 ? 0 : Convert.ToInt32(Convert.ToDecimal(gameInfoAndProgress.Achievements.Count(achievement => achievement.HardcoreAchieved)) / Convert.ToDecimal(gameInfoAndProgress.Achievements == null ? 0 :gameInfoAndProgress.Achievements.Count) * 200)) + " %");
             }
         }
-        public void WriteGameInfoStreamLabels(GameInfoAndProgress gameInfo)
+        public void WriteGameInfoStreamLabels(GameInfo gameInfo)
         {
             if (gameInfo != null)
             {

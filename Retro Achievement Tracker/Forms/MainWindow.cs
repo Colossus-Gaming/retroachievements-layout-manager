@@ -17,7 +17,7 @@ namespace Retro_Achievement_Tracker
     public partial class MainPage : Form
     {
         private UserSummary UserSummary { get; set; }
-        private GameInfoAndProgress GameInfoAndProgress { get; set; }
+        private GameInfo GameInfo { get; set; }
         private Achievement CurrentlyViewingAchievement;
         private int CurrentlyViewingIndex;
         private bool UpdatingVisibility;
@@ -26,9 +26,9 @@ namespace Retro_Achievement_Tracker
         {
             get
             {
-                if (GameInfoAndProgress != null)
+                if (GameInfo != null && GameInfo.Achievements != null)
                 {
-                    return GameInfoAndProgress.Achievements.FindAll(x => !x.HardcoreAchieved);
+                    return GameInfo.Achievements.FindAll(x => !x.HardcoreAchieved);
                 }
                 return new List<Achievement>();
             }
@@ -38,9 +38,9 @@ namespace Retro_Achievement_Tracker
         {
             get
             {
-                if (GameInfoAndProgress != null)
+                if (GameInfo != null && GameInfo.Achievements != null)
                 {
-                    return GameInfoAndProgress.Achievements.FindAll(x => x.HardcoreAchieved);
+                    return GameInfo.Achievements.FindAll(x => x.HardcoreAchieved);
                 }
                 return new List<Achievement>();
             }
@@ -145,9 +145,6 @@ namespace Retro_Achievement_Tracker
             {
                 SortAchievements();
 
-                UpdateStats();
-                UpdateLastFive();
-
                 if (sameGame)
                 {
                     List<Achievement> achievementNotificationList = UnlockedAchievements
@@ -165,35 +162,28 @@ namespace Retro_Achievement_Tracker
                         if (!achievementNotificationList.Contains(CurrentlyViewingAchievement))
                         {
                             CurrentlyViewingIndex = LockedAchievements.IndexOf(CurrentlyViewingAchievement);
-                        } 
-
-                        UpdateCurrentlyViewingAchievement();
-
-                        if (UnlockedAchievements.Count == GameInfoAndProgress.Achievements.Count && OldUnlockedAchievements.Count < GameInfoAndProgress.Achievements.Count)
-                        {
-                            ClearFocusAchievementRenders();
-                            AlertsController.Instance.EnqueueMasteryNotification(UserSummary, GameInfoAndProgress);
                         }
-                        AlertsController.Instance.RunNotifications();
-                    }
-                }
-                else
-                {
-                    UpdateTimerLabel("Changing game to [" + GameInfoAndProgress.Title + "]");
 
-                    if (LockedAchievements.Count > 0)
-                    {
-                        CurrentlyViewingIndex = 0;
+                        if (UnlockedAchievements.Count == GameInfo.Achievements.Count && OldUnlockedAchievements.Count < GameInfo.Achievements.Count)
+                        {
+                            AlertsController.Instance.EnqueueMasteryNotification(UserSummary, GameInfo);
+                        }
+
+                        AlertsController.Instance.RunNotifications();
 
                         UpdateCurrentlyViewingAchievement();
                         SetFocus();
                     }
-                    else
-                    {
-                        ClearFocusAchievementRenders();
-                    }
+                } else
+                {
+                    UpdateTimerLabel("Changing game to [" + GameInfo.Title + "]");
+
+                    UpdateCurrentlyViewingAchievement();
+                    SetFocus();
                 }
 
+                UpdateStats();
+                UpdateLastFive();
                 UpdateAchievementList(!sameGame);
             }
             catch (Exception e)
@@ -207,6 +197,10 @@ namespace Retro_Achievement_Tracker
             {
                 FocusController.Instance.SetFocus(CurrentlyViewingAchievement);
                 StreamLabelManager.Instance.WriteFocusStreamLabels(CurrentlyViewingAchievement);
+            }
+            else if (LockedAchievements.Count == 0 && UnlockedAchievements.Count > 0)
+            {
+                FocusController.Instance.SetFocus(GameInfo);
             }
             else
             {
@@ -256,7 +250,7 @@ namespace Retro_Achievement_Tracker
 
                         await retroAchievementsAPIClient.GetUserProgress(UserSummary.LastGameID).ContinueWith(async userProgress =>
                         {
-                            GameInfoAndProgress = userProgress.Result;
+                            GameInfo = userProgress.Result;
 
                             UpdateGameInfo();
 
@@ -366,29 +360,6 @@ namespace Retro_Achievement_Tracker
             startButton.Enabled = CanStart();
         }
 
-        public void SetLockedAchievements()
-        {
-            Invoke((MethodInvoker)delegate
-            {
-                if (GameInfoAndProgress.Achievements != null && GameInfoAndProgress.Achievements.Count > 0)
-                {
-                    int gameId = GameInfoAndProgress.Achievements[0].GameId;
-
-                    if (LockedAchievements == null || (LockedAchievements.Count > 0 && gameId != LockedAchievements[0].GameId))
-                    {
-                        CurrentlyViewingIndex = 0;
-                        CurrentlyViewingAchievement = null;
-                    }
-                }
-                else
-                {
-                    CurrentlyViewingAchievement = null;
-                }
-
-                UpdateCurrentlyViewingAchievement();
-            });
-        }
-
         public void UpdateCurrentlyViewingAchievement()
         {
             if (Visible)
@@ -414,7 +385,8 @@ namespace Retro_Achievement_Tracker
                     }
                     else
                     {
-                        CurrentlyViewingIndex = 0;
+                        CurrentlyViewingIndex = 0; 
+                        CurrentlyViewingAchievement = null;
 
                         focusAchievementPictureBox.ImageLocation = string.Empty;
                         focusAchievementTitleLabel.Text = string.Empty;
@@ -427,22 +399,26 @@ namespace Retro_Achievement_Tracker
         }
         private List<Achievement> GetLastFiveAchievements()
         {
-            List<Achievement> achievements = GameInfoAndProgress.Achievements.FindAll(x => x.HardcoreAchieved);
-            achievements.Sort();
-            achievements.Reverse();
+            if (GameInfo.Achievements != null)
+            {
+                List<Achievement> achievements = GameInfo.Achievements.FindAll(x => x.HardcoreAchieved);
+                achievements.Sort();
+                achievements.Reverse();
 
-            List<Achievement> newAchievements = achievements.GetRange(0, achievements.Count > 5 ? 5 : achievements.Count);
-            newAchievements.Reverse();
+                List<Achievement> newAchievements = achievements.GetRange(0, achievements.Count > 5 ? 5 : achievements.Count);
+                newAchievements.Reverse();
 
-            return newAchievements;
+                return newAchievements;
+            }
+            return new List<Achievement>();
         }
         private void UpdateLastFive()
         {
             Invoke((MethodInvoker)delegate
             {
-                Task.Run(() => LastFiveController.Instance.SetAchievements(GetLastFiveAchievements()));
+                LastFiveController.Instance.SetAchievements(GetLastFiveAchievements());
 
-                StreamLabelManager.Instance.WriteLastFiveStreamLabels(GameInfoAndProgress);
+                StreamLabelManager.Instance.WriteLastFiveStreamLabels(GameInfo);
             });
         }
         private void UpdateStats()
@@ -454,35 +430,33 @@ namespace Retro_Achievement_Tracker
                 StatsController.Instance.SetAwards(UserSummary.Awards.ToString());
                 StatsController.Instance.SetPoints(UserSummary.TotalPoints.ToString());
                 StatsController.Instance.SetTruePoints(UserSummary.TotalTruePoints.ToString());
-                StatsController.Instance.SetGamePoints(GameInfoAndProgress.GamePointsEarned.ToString(), GameInfoAndProgress.GamePointsPossible.ToString());
-                StatsController.Instance.SetGameAchievements(GameInfoAndProgress.AchievementsEarned.ToString(), GameInfoAndProgress.Achievements.Count.ToString());
-                StatsController.Instance.SetGameTruePoints(GameInfoAndProgress.GameTruePointsEarned.ToString(), GameInfoAndProgress.GameTruePointsPossible.ToString());
+                StatsController.Instance.SetGamePoints(GameInfo.GamePointsEarned.ToString(), GameInfo.GamePointsPossible.ToString());
+                StatsController.Instance.SetGameAchievements(GameInfo.AchievementsEarned.ToString(), GameInfo.Achievements == null ? "0" : GameInfo.Achievements.Count.ToString());
+                StatsController.Instance.SetGameTruePoints(GameInfo.GameTruePointsEarned.ToString(), GameInfo.GameTruePointsPossible.ToString());
                 StatsController.Instance.SetGameRatio();
-                StatsController.Instance.SetCompleted(GameInfoAndProgress.AchievementsEarned / (float)GameInfoAndProgress.Achievements.Count * 100f);
+                StatsController.Instance.SetCompleted(GameInfo.Achievements == null ? 0.00f : GameInfo.AchievementsEarned / (float)GameInfo.Achievements.Count * 100f);
 
-                StreamLabelManager.Instance.WriteStatsStreamLabels(UserSummary, GameInfoAndProgress);
+                StreamLabelManager.Instance.WriteStatsStreamLabels(UserSummary, GameInfo);
             });
         }
         private void UpdateGameInfo()
         {
             Invoke((MethodInvoker)delegate
             {
-                GameInfoController.Instance.SetTitleValue(GameInfoAndProgress.Title);
-                GameInfoController.Instance.SetGenreValue(GameInfoAndProgress.Genre);
-                GameInfoController.Instance.SetConsoleValue(GameInfoAndProgress.ConsoleName);
-                GameInfoController.Instance.SetDeveloperValue(GameInfoAndProgress.Developer);
-                GameInfoController.Instance.SetPublisherValue(GameInfoAndProgress.Publisher);
-                GameInfoController.Instance.SetReleaseDateValue(GameInfoAndProgress.Released);
+                GameInfoController.Instance.SetTitleValue(GameInfo.Title);
+                GameInfoController.Instance.SetGenreValue(GameInfo.Genre);
+                GameInfoController.Instance.SetConsoleValue(GameInfo.ConsoleName);
+                GameInfoController.Instance.SetDeveloperValue(GameInfo.Developer);
+                GameInfoController.Instance.SetPublisherValue(GameInfo.Publisher);
+                GameInfoController.Instance.SetReleaseDateValue(GameInfo.Released);
 
-                StreamLabelManager.Instance.WriteGameInfoStreamLabels(GameInfoAndProgress);
+                StreamLabelManager.Instance.WriteGameInfoStreamLabels(GameInfo);
             });
         }
         private void ClearFocusAchievementRenders()
         {
             Invoke((MethodInvoker)delegate
             {
-                FocusController.Instance.HideFocus();
-
                 StreamLabelManager.Instance.ClearFocusStreamLabels();
             });
         }
@@ -518,35 +492,32 @@ namespace Retro_Achievement_Tracker
         }
         private void SortAchievements()
         {
-            GameInfoAndProgress.Achievements.ForEach(achievement =>
+            if (GameInfo.Achievements != null)
             {
-                Achievement otherAchievement = UserSummary.Achievements.Find(achievement1 => achievement.Id == achievement1.Id);
+                GameInfo.Achievements.ForEach(achievement =>
+                {
+                    Achievement otherAchievement = UserSummary.Achievements.Find(achievement1 => achievement.Id == achievement1.Id);
 
-                if (otherAchievement != null)
-                {
-                    achievement.GameId = otherAchievement.GameId;
-                    achievement.GameTitle = otherAchievement.GameTitle;
-                }
-            });
+                    if (otherAchievement != null)
+                    {
+                        achievement.GameId = otherAchievement.GameId;
+                        achievement.GameTitle = otherAchievement.GameTitle;
+                    }
+                });
 
-            if (OldUnlockedAchievements.Count < UnlockedAchievements.Count)
-            {
-                if (LockedAchievements.Count == 0)
+                if (OldUnlockedAchievements.Count < UnlockedAchievements.Count)
                 {
-                    CurrentlyViewingIndex = 0;
-                    FocusController.Instance.HideFocus();
-                    return;
+                    if (LockedAchievements.IndexOf(FocusController.Instance.CurrentlyFocusedAchievement) > -1)
+                    {
+                        CurrentlyViewingIndex = LockedAchievements.IndexOf(FocusController.Instance.CurrentlyFocusedAchievement);
+                    }
+                    else
+                    {
+                        CurrentlyViewingIndex = LockedAchievements.IndexOf(CurrentlyViewingAchievement) == -1 ? 0 : LockedAchievements.IndexOf(CurrentlyViewingAchievement);
+                    }
+                    UpdateCurrentlyViewingAchievement();
+                    SetFocus();
                 }
-                else if (LockedAchievements.IndexOf(FocusController.Instance.CurrentlyFocusedAchievement) > -1)
-                {
-                    CurrentlyViewingIndex = LockedAchievements.IndexOf(FocusController.Instance.CurrentlyFocusedAchievement);
-                }
-                else
-                {
-                    CurrentlyViewingIndex = LockedAchievements.IndexOf(CurrentlyViewingAchievement) == -1 ? 0 : LockedAchievements.IndexOf(CurrentlyViewingAchievement);
-                }
-                UpdateCurrentlyViewingAchievement();
-                SetFocus();
             }
         }
         protected override void OnClosed(EventArgs e)
@@ -840,11 +811,11 @@ namespace Retro_Achievement_Tracker
         }
         private void ShowAchievementButton_Click(object sender, EventArgs eventArgs)
         {
-            if (GameInfoAndProgress.Achievements != null
-                && GameInfoAndProgress.Achievements.Count > 0
-                && GameInfoAndProgress.Achievements[0] != null)
+            if (GameInfo.Achievements != null
+                && GameInfo.Achievements.Count > 0
+                && GameInfo.Achievements[0] != null)
             {
-                AlertsController.Instance.EnqueueAchievementNotifications(new List<Achievement>() { GameInfoAndProgress.Achievements[0] });
+                AlertsController.Instance.EnqueueAchievementNotifications(new List<Achievement>() { GameInfo.Achievements[0] });
                 AlertsController.Instance.RunNotifications();
             }
             else
@@ -863,7 +834,7 @@ namespace Retro_Achievement_Tracker
         }
         private void ShowGameMasteryButton_Click(object sender, EventArgs eventArgs)
         {
-            AlertsController.Instance.EnqueueMasteryNotification(UserSummary, GameInfoAndProgress);
+            AlertsController.Instance.EnqueueMasteryNotification(UserSummary, GameInfo);
             AlertsController.Instance.RunNotifications();
         }
         private void SetFocusButton_Click(object sender, EventArgs e)

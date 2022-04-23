@@ -250,22 +250,21 @@
         }));
     </script>
     <style id="style" type="text/css">
-        .name {
+        .name, .value {
             position: absolute;
+            height: 70px;
+        }
+
+        .name {
             left: 10px;
-            padding-top: 10px;
             width: 300px;
-            height: 65px;
-            text-align: left;
+            text-align: right;
         }
 
         .value {
-            position: absolute;
-            left: 320px;
-            padding-top: 10px;
-            width: 700px;
-            height: 65px;
-            text-align: center;
+            left: 330px;
+            width: 680px;
+            text-align: left;
         }
 
         #container {
@@ -277,13 +276,17 @@
             background-color: magenta;
         }
 
+        #title {
+            padding-top: 10px;
+            top: 10px;
+        }
+
         #title,
         #console,
         #developer,
         #publisher,
         #genre,
         #release-date {
-            top: -10px;
             height: 70px;
         }
 

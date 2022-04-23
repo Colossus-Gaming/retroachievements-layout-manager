@@ -73,7 +73,7 @@ namespace Retro_Achievement_Tracker.Controllers
             }
         }
 
-        public void EnqueueMasteryNotification(UserSummary userSummary, GameInfoAndProgress gameInfoAndProgress)
+        public void EnqueueMasteryNotification(UserSummary userSummary, GameInfo gameInfoAndProgress)
         {
             if (CanPlay && !AlertsLayoutWindow.IsDisposed)
             {
@@ -1203,6 +1203,6 @@ namespace Retro_Achievement_Tracker.Controllers
     {
         public Achievement Achievement { get; set; }
         public UserSummary UserSummary { get; set; }
-        public GameInfoAndProgress GameInfoAndProgress { get; set; }
+        public GameInfo GameInfoAndProgress { get; set; }
     }
 }

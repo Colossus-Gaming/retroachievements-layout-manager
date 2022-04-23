@@ -1,4 +1,5 @@
-﻿using Retro_Achievement_Tracker.Properties;
+﻿using Retro_Achievement_Tracker.Models;
+using Retro_Achievement_Tracker.Properties;
 using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
@@ -104,6 +105,22 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 CurrentlyFocusedAchievement = currentlyViewingAchievement;
                 UpdateFocus();
+            }
+        }
+        public void SetFocus(GameInfo gameInfo)
+        {
+            if (IsOpen)
+            {
+                FocusLayoutWindow.SetFocus(gameInfo);
+
+                if (BorderEnabled)
+                {
+                    FocusLayoutWindow.EnableBorder();
+                }
+                else
+                {
+                    FocusLayoutWindow.DisableBorder();
+                }
             }
         }
         public bool AdvancedSettingsEnabled

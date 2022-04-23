@@ -81,7 +81,7 @@ namespace Retro_Achievement_Tracker
                 }
 
                 ExecuteScript("titleValue.innerHTML = \"" + value + "\";" +
-                "textFit(titleValue, { alignVert: true, alignHoriz: true });");
+                "textFit(titleValue, { alignVert: true });");
             }
         }
         public void SetTitleVisibility(bool isVisible)
@@ -100,7 +100,7 @@ namespace Retro_Achievement_Tracker
             if (value != null)
             {
                 ExecuteScript("consoleValue.innerHTML = \"" + value + "\";" +
-                "textFit(consoleValue, { alignVert: true, alignHoriz: true });");
+                "textFit(consoleValue, { alignVert: true });");
             }
         }
         public void SetConsoleVisibility(bool isVisible)
@@ -119,7 +119,7 @@ namespace Retro_Achievement_Tracker
             if (value != null)
             {
                 ExecuteScript("developerValue.innerHTML = \"" + value + "\";" +
-                "textFit(developerValue, { alignVert: true, alignHoriz: true });");
+                "textFit(developerValue, { alignVert: true });");
             }
         }
         public void SetDeveloperVisibility(bool isVisible)
@@ -138,7 +138,7 @@ namespace Retro_Achievement_Tracker
             if (value != null)
             {
                 ExecuteScript("publisherValue.innerHTML = \"" + value + "\";" +
-                "textFit(publisherValue, { alignVert: true, alignHoriz: true });");
+                "textFit(publisherValue, { alignVert: true });");
             }
         }
         public void SetPublisherVisibility(bool isVisible)
@@ -157,7 +157,7 @@ namespace Retro_Achievement_Tracker
             if (value != null)
             {
                 ExecuteScript("genreValue.innerHTML = \"" + value + "\";" +
-                "textFit(genreValue, { alignVert: true, alignHoriz: true });");
+                "textFit(genreValue, { alignVert: true });");
             }
         }
         public void SetGenreVisibility(bool isVisible)
@@ -176,7 +176,7 @@ namespace Retro_Achievement_Tracker
             if (value != null)
             {
                 ExecuteScript("releaseDateValue.innerHTML = \"" + value + "\";" +
-                "textFit(releaseDateValue, { alignVert: true, alignHoriz: true });");
+                "textFit(releaseDateValue, { alignVert: true });");
             }
         }
         public void SetReleaseDateVisibility(bool isVisible)
@@ -198,7 +198,7 @@ namespace Retro_Achievement_Tracker
                 "}");
             ExecuteScript(
                 "for (var i = 0; i < allValues.length; i++) { " +
-                "   textFit(allValues[i], { alignVert: true, alignHoriz: true });" +
+                "   textFit(allValues[i], { alignVert: true });" +
                 "}");
         }
         public void SetSimpleFontColor(string value)
@@ -231,7 +231,7 @@ namespace Retro_Achievement_Tracker
                 "for (var i = 0; i < allValues.length; i++) { " +
                 "   allValues[i].style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
                 "   allValues[i].style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
-                "   textFit(allValues[i], { alignVert: true, alignHoriz: true });" +
+                "   textFit(allValues[i], { alignVert: true });" +
                 "}");
         }
 
@@ -290,7 +290,7 @@ namespace Retro_Achievement_Tracker
             {
                 Invoke((MethodInvoker)delegate
                 {
-                    ClientSize = new Size(1020, 419);
+                    ClientSize = new Size(1020, 426);
                 });
 
                 GameInfoController.Instance.SetAllSettings();

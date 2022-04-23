@@ -212,8 +212,8 @@
     <Compile Include="Models\MediaHelper.cs" />
     <Compile Include="Models\AchievementConverter.cs" />
     <Compile Include="Models\CustomResourceRequestHandler.cs" />
-    <Compile Include="Models\GameInfoAndProgress.cs" />
-    <Compile Include="Models\GameInfoAndProgressConverter.cs" />
+    <Compile Include="Models\GameInfo.cs" />
+    <Compile Include="Models\GameInfoConverter.cs" />
     <Compile Include="Models\StreamLabelManager.cs" />
     <Compile Include="Models\UserSummaryConverter.cs" />
     <Compile Include="Models\UserSummary.cs" />
