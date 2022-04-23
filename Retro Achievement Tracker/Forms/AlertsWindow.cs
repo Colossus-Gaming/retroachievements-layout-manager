@@ -67,7 +67,7 @@ namespace Retro_Achievement_Tracker.Forms
                 "achievementTitle.innerHTML = \"" + achievement.Title.Replace("\"", "\\\"") + "\";" +
                 "achievementDescription.innerHTML = \"" + achievement.Description.Replace("\"", "\\\"") + "\";" +
                 "achievementPoints.innerHTML = \"" + achievement.Points + "\";" +
-                "$(\"#achievement-badge\").attr(\"src\", \"https:retroachievements.org/Badge/" + achievement.BadgeNumber + ".png\");" +
+                "$(\"#achievement-badge\").attr(\"src\", \"https://retroachievements.org/Badge/" + achievement.BadgeNumber + ".png\");" +
                 "$(\"#achievement-video\").attr(\"src\", \"disk://achievement-notification\");" +
                 "achievementVideoElement.style.display = \"block\";" +
                 "achievementElement.style.display = \"block\";" +
@@ -286,9 +286,7 @@ namespace Retro_Achievement_Tracker.Forms
                 "masteryLine.style.color = \"" + value + "\";" +
                 "achievementLine.style.backgroundColor = \"" + value + "\";" +
                 "masteryLine.style.backgroundColor = \"" + value + "\";" +
-                "for (var i = 0; i < allElements.length; i++) { allElements[i].style.color = \"" + value + "\"; }" +
-                "document.getElementById(\"ready-message\").style.color = \"#0000ff\";" +
-                "document.getElementById(\"confirm-button\").style.color = \"#0000ff\";");
+                "for (var i = 0; i < allElements.length; i++) { allElements[i].style.color = \"" + value + "\"; }");
         }
 
         public void SetSimpleFontFamily(FontFamily value)
