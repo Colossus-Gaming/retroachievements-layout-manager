@@ -294,7 +294,7 @@
         #mastery-title {
             position: absolute;
             top: 10px;
-            right: 5px;
+            right: 10px;
             width: 530px;
             height: 65px;
         }
@@ -310,9 +310,9 @@
 
         #achievement-description,
         #mastery-description {
-            right: 5px;
+            right: 10px;
             position: absolute;
-            top: 78px;
+            top: 85px;
             width: 525px;
             height: 75px;
         }
@@ -431,7 +431,7 @@
 
             setTimeout(function () {
                 $("#user-prompt").hide();
-            }, 1000);
+            }, 500);
         };
     </script>
 </head>
@@ -439,10 +439,10 @@
     <div id="container">
         <div id="user-prompt">
             <img src="https://retroachievements.org/Images/RA_Logo10.png" />
-            <div id="ready-message" class="prompt">
+            <div id="ready-message" class="prompt" style="color: blue;">
                 Are you ready?
             </div>
-            <button id="confirm-button" onclick="acknowledgePrompt()" class="prompt">
+            <button id="confirm-button" onclick="acknowledgePrompt()" class="prompt" style="color: blue;">
                 ACHIEVE
             </button>
         </div>

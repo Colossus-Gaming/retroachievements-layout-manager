@@ -24,6 +24,9 @@ namespace Retro_Achievement_Tracker.Forms
             Name = "RA Tracker - Achievement List";
             Text = "RA Tracker - Achievement List";
 
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainPage));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+
             Shown += AchievementListWindow_Shown;
             FormClosed += AchievementListWindow_FormClosed;
 
@@ -59,12 +62,6 @@ namespace Retro_Achievement_Tracker.Forms
                                        "'" + achievement.DateEarned.HasValue + "');");
 
         }
-        public void SetBorderBackgroundColor(string value)
-        {
-            ExecuteScript(
-                "achievementElement.style.backgroundColor = \"" + value + "\";" +
-                "masteryElement.style.backgroundColor = \"" + value + "\";");
-        }
         public void SetWindowBackgroundColor(string value)
         {
             ExecuteScript(
@@ -74,6 +71,7 @@ namespace Retro_Achievement_Tracker.Forms
         public void UnlockAchievement(Achievement achievement)
         {
             ExecuteScript("$(\"#achievement-" + achievement.Id + "-locked-image\").toggle(\"pulsate\");" +
+                "$(\"#achievement-" + achievement.Id + "-border\").show();" +
                 "$(\"#achievement-" + achievement.Id + "\").tooltip(\"option\", \"content\", \"" + (achievement.Title + "<br/><br/>" + achievement.Points + "pts<br/><br/>" + achievement.Description + "<br/><br/>" + achievement.DateEarned.Value.ToLocalTime().ToString()) + "\");");
         }
         public void SetAchievementPositions(Dictionary<Achievement, ValueTuple<int, int, int>> achievementAndCoordinates)

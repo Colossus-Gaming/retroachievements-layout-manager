@@ -344,23 +344,6 @@ namespace Retro_Achievement_Tracker.Controllers
                 }
             }
         }
-        public string SimpleFontColor
-        {
-            get
-            {
-                return Settings.Default.last_five_font_color_hex_code;
-            }
-            set
-            {
-                Settings.Default.last_five_font_color_hex_code = value;
-                Settings.Default.Save();
-                if (IsOpen)
-                {
-
-                    LastFiveWindow.SetSimpleFontColor(value);
-                }
-            }
-        }
         public string TitleColor
         {
             get
@@ -565,6 +548,23 @@ namespace Retro_Achievement_Tracker.Controllers
                 {
 
                     LastFiveWindow.SetLineOutline(LineOutlineEnabled ? LineOutlineSize + "px solid " + LineOutlineColor : "0px");
+                }
+            }
+        }
+        public string SimpleFontColor
+        {
+            get
+            {
+                return Settings.Default.last_five_font_color_hex_code;
+            }
+            set
+            {
+                Settings.Default.last_five_font_color_hex_code = value;
+                Settings.Default.Save();
+                if (IsOpen)
+                {
+
+                    LastFiveWindow.SetSimpleFontColor(value);
                 }
             }
         }

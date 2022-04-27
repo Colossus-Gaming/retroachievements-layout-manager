@@ -21,6 +21,9 @@ namespace Retro_Achievement_Tracker
             Name = "RA Tracker - Last Five Achievements";
             Text = "RA Tracker - Last Five Achievements";
 
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainPage));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+
             Shown += LastFiveWindow_Shown;
             FormClosed += LastFiveWindow_FormClosed;
 
@@ -68,13 +71,13 @@ namespace Retro_Achievement_Tracker
                 "   allElements[i].style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
                 "}" +
                 "for (var i = 0; i < allTitles.length; i++) { " +
-                "   textFit(allTitles[i], { alignVert: true , alignHoriz: true });" +
+                "   textFit(allTitles[i], { alignVert: true , alignHoriz: true, multiLine: true });" +
                 "}" +
                 "for (var i = 0; i < allDates.length; i++) { " +
-                "   textFit(allDates[i], { alignVert: true , alignHoriz: true });" +
+                "   textFit(allDates[i], { alignVert: true , alignHoriz: true, multiLine: true });" +
                 "}" +
                 "for (var i = 0; i < allPoints.length; i++) { " +
-                "   textFit(allPoints[i], { alignVert: true });" +
+                "   textFit(allPoints[i]);" +
                 "}";
 
             ExecuteScript(script);
@@ -112,7 +115,7 @@ namespace Retro_Achievement_Tracker
                 "for (var i = 0; i < allTitles.length; i++) { " +
                 "   allTitles[i].style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
                 "   allTitles[i].style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
-                "   textFit(allTitles[i], { alignVert: true, alignHoriz: true });" +
+                "   textFit(allTitles[i], { alignVert: true, alignHoriz: true, multiLine: true });" +
                 "}");
         }
         public void SetDateFontFamily(FontFamily value)
@@ -122,7 +125,7 @@ namespace Retro_Achievement_Tracker
                 "for (var i = 0; i < allDates.length; i++) { " +
                 "   allDates[i].style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
                 "   allDates[i].style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
-                "   textFit(allDates[i], { alignVert: true, alignHoriz: true });" +
+                "   textFit(allDates[i], { alignVert: true, alignHoriz: true, multiLine: true });" +
                 "}");
         }
 
@@ -133,7 +136,7 @@ namespace Retro_Achievement_Tracker
                 "for (var i = 0; i < allPoints.length; i++) { " +
                 "   allPoints[i].style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
                 "   allPoints[i].style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
-                "   textFit(allPoints[i], { alignVert: true });" +
+                "   textFit(allPoints[i]);" +
                 "}");
         }
 
@@ -162,17 +165,17 @@ namespace Retro_Achievement_Tracker
         public void SetTitleOutline(string value)
         {
             ExecuteScript(
-                 "for (var i = 0; i < allTitles.length; i++) { allTitles[i].style.webkitTextStroke = \"" + value + "\"; textFit(allTitles[i], { alignVert: true, alignHoriz: true }); }");
+                 "for (var i = 0; i < allTitles.length; i++) { allTitles[i].style.webkitTextStroke = \"" + value + "\"; textFit(allTitles[i], { alignVert: true, alignHoriz: true, multiLine: true }); }");
         }
         public void SetDateOutline(string value)
         {
             ExecuteScript(
-                 "for (var i = 0; i < allDates.length; i++) { allDates[i].style.webkitTextStroke = \"" + value + "\"; textFit(allDates[i], { alignVert: true, alignHoriz: true }); }");
+                 "for (var i = 0; i < allDates.length; i++) { allDates[i].style.webkitTextStroke = \"" + value + "\"; textFit(allDates[i], { alignVert: true, alignHoriz: true, multiLine: true }); }");
         }
         public void SetPointsOutline(string value)
         {
             ExecuteScript(
-                 "for (var i = 0; i < allPoints.length; i++) { allPoints[i].style.webkitTextStroke = \"" + value + "\"; textFit(allPoints[i], { alignVert: true, alignHoriz: true }); }");
+                 "for (var i = 0; i < allPoints.length; i++) { allPoints[i].style.webkitTextStroke = \"" + value + "\"; textFit(allPoints[i], { alignVert: true, alignHoriz: true, multiLine: true }); }");
         }
         public void SetLineOutline(string value)
         {

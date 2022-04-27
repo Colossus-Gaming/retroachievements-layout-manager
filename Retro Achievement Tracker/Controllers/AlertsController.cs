@@ -28,6 +28,7 @@ namespace Retro_Achievement_Tracker.Controllers
         private bool AnimationInPlayed;
         private bool AnimationOutPlayed;
         private bool PlayingAchievement;
+        private bool IsEditingAchievement;
 
         private AlertsController()
         {
@@ -73,7 +74,7 @@ namespace Retro_Achievement_Tracker.Controllers
             }
         }
 
-        public void EnqueueMasteryNotification(UserSummary userSummary, GameInfo gameInfoAndProgress)
+        public void EnqueueMasteryNotification(GameInfo gameInfoAndProgress)
         {
             if (CanPlay && !AlertsLayoutWindow.IsDisposed)
             {
@@ -84,7 +85,6 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 NotificationRequest notificationRequest = new NotificationRequest
                 {
-                    UserSummary = userSummary,
                     GameInfoAndProgress = gameInfoAndProgress
                 };
 
@@ -116,10 +116,10 @@ namespace Retro_Achievement_Tracker.Controllers
                         PlayingAchievement = true;
                         AlertsLayoutWindow.StartAchievementAlert(notificationRequest.Achievement);
                     }
-                    else if (notificationRequest.UserSummary != null && notificationRequest.GameInfoAndProgress != null)
+                    else if (notificationRequest.GameInfoAndProgress != null)
                     {
                         PlayingAchievement = false;
-                        AlertsLayoutWindow.StartMasteryAlert(notificationRequest.UserSummary, notificationRequest.GameInfoAndProgress);
+                        AlertsLayoutWindow.StartMasteryAlert(notificationRequest.GameInfoAndProgress);
                     }
                 }
                 NotificationsTask = Task.Factory.StartNew(RunNotificationTask, tokenSource2.Token);
@@ -176,7 +176,7 @@ namespace Retro_Achievement_Tracker.Controllers
         public void SetIsPlaying(bool isPlaying)
         {
             IsPlaying = isPlaying;
-            if (!IsPlaying)
+            if (!IsPlaying && !IsEditingAchievement)
             {
                 AlertsLayoutWindow.HideNotifications();
 
@@ -288,11 +288,19 @@ namespace Retro_Achievement_Tracker.Controllers
                 AlertsLayoutWindow.StartAchievementAlert(achievement);
             }
         }
+        public void SendMasteryNotification(GameInfo gameInfo)
+        {
+            if (IsOpen)
+            {
+                AlertsLayoutWindow.StartMasteryAlert(gameInfo);
+            }
+        }
         public void EnableAchievementEdit()
         {
             if (IsOpen)
             {
                 AlertsLayoutWindow.EnableAchievementEdit();
+                IsEditingAchievement = true;
             }
         }
         public void DisableAchievementEdit()
@@ -300,6 +308,7 @@ namespace Retro_Achievement_Tracker.Controllers
             if (IsOpen)
             {
                 AlertsLayoutWindow.DisableAchievementEdit();
+                IsEditingAchievement = false;
                 IsPlaying = false;
             }
         }
@@ -307,7 +316,8 @@ namespace Retro_Achievement_Tracker.Controllers
         {
             if (IsOpen)
             {
-                AlertsLayoutWindow.EnableMasteryEdit();
+                AlertsLayoutWindow.EnableMasteryEdit(); 
+                IsEditingAchievement = true;
             }
         }
         public void DisableMasteryEdit()
@@ -315,6 +325,7 @@ namespace Retro_Achievement_Tracker.Controllers
             if (IsOpen)
             {
                 AlertsLayoutWindow.DisableMasteryEdit();
+                IsEditingAchievement = false;
                 IsPlaying = false;
             }
         }
@@ -1202,7 +1213,6 @@ namespace Retro_Achievement_Tracker.Controllers
     public class NotificationRequest
     {
         public Achievement Achievement { get; set; }
-        public UserSummary UserSummary { get; set; }
         public GameInfo GameInfoAndProgress { get; set; }
     }
 }

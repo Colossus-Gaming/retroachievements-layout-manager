@@ -147,27 +147,19 @@ namespace Retro_Achievement_Tracker.Controllers
             if (IsOpen)
             {
                 int size = CurrentUnlockedAchievements.Count + CurrentLockedAchievements.Count;
-                int interval = 4000 / size;
 
                 CurrentUnlockedAchievements.Sort();
                 CurrentUnlockedAchievements.Reverse();
 
                 Dictionary<Achievement, ValueTuple<int, int, int>> achievementAndCoordinates = new Dictionary<Achievement, (int, int, int)>();
-                int timeoutValue = -20;
-                int lastY = GetAchievementLocationY(0, size);
+                int timeoutValue = 1000;
 
                 for (int i = 0; i < CurrentUnlockedAchievements.Count; i++)
                 {
-                    timeoutValue += 20;
+                    timeoutValue += 10;
 
                     int xCoord = GetAchievementLocationX(i, size);
                     int yCoord = GetAchievementLocationY(i, size);
-
-                    if (yCoord != lastY)
-                    {
-                        lastY = yCoord;
-                        timeoutValue += 50;
-                    }
 
                     achievementAndCoordinates.Add(CurrentUnlockedAchievements[i], ValueTuple.Create(xCoord, yCoord, timeoutValue));
                 }
@@ -176,16 +168,10 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 for (int i = 0; i < CurrentLockedAchievements.Count; i++)
                 {
-                    timeoutValue += 20;
+                    timeoutValue += 10;
 
                     int xCoord = GetAchievementLocationX(CurrentUnlockedAchievements.Count + i, size);
                     int yCoord = GetAchievementLocationY(CurrentUnlockedAchievements.Count + i, size);
-
-                    if (yCoord != lastY)
-                    {
-                        lastY = yCoord;
-                        timeoutValue += 50;
-                    }
 
                     achievementAndCoordinates.Add(CurrentLockedAchievements[i], ValueTuple.Create(xCoord, yCoord, timeoutValue));
                 }
@@ -211,23 +197,6 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.auto_achievement_list = value;
                 Settings.Default.Save();
-            }
-        }
-        public string BorderBackgroundColor
-        {
-            get
-            {
-                return Settings.Default.achievement_list_border_color;
-            }
-            set
-            {
-                Settings.Default.achievement_list_border_color = value;
-                Settings.Default.Save();
-
-                if (IsOpen)
-                {
-                    AchievementListWindow.SetBorderBackgroundColor(value);
-                }
             }
         }
         public string WindowBackgroundColor

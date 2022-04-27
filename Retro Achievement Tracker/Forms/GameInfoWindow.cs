@@ -19,6 +19,9 @@ namespace Retro_Achievement_Tracker
 
             ClientSize = new Size(0, 0);
 
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainPage));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+
             Shown += GameInfoWindow_Shown;
             FormClosed += GameInfoWindow_FormClosed;
 

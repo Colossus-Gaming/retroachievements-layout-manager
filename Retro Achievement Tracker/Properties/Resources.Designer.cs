@@ -66,15 +66,11 @@ namespace Retro_Achievement_Tracker.Properties {
         ///&lt;head&gt;
         ///    &lt;title&gt;Game Info Window&lt;/title&gt;
         ///    &lt;meta charset=&quot;UTF-8&quot;&gt;
-        ///    &lt;script src=&quot;https://code.jquery.com/jquery-3.5.1.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+        ///    &lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js&quot;&gt;&lt;/script&gt;
+        ///    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css&quot;&gt;
+        ///    &lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js&quot;&gt;&lt;/script&gt;
         ///    &lt;script id=&quot;scripts&quot;&gt;
-        ///        function addAchievement(name, imageLink, description, points, date, id) {
-        ///
-        ///            var achievementBlock = document.createElement(&apos;div&apos;);
-        ///            achievementBlock.classList.add(&quot;achievement&quot;);
-        ///            achievementBlock.id = &quot;achievement-&quot; + id;
-        ///
-        ///            var toolt [rest of string was truncated]&quot;;.
+        ///        function addAchievement(name, lockedImageLink, imageLink, descr [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string AchievementListWindow {
             get {
@@ -88,16 +84,13 @@ namespace Retro_Achievement_Tracker.Properties {
         ///&lt;head&gt;
         ///    &lt;title&gt;Notification Window&lt;/title&gt;
         ///    &lt;meta charset=&quot;UTF-8&quot;&gt;
+        ///    &lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.googleapis.com&quot;&gt;
+        ///    &lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.gstatic.com&quot; crossorigin&gt;
+        ///    &lt;link href=&quot;https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;
         ///    &lt;script src=&quot;https://code.jquery.com/jquery-3.5.1.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
-        ///    &lt;script id=&quot;achievement-script&quot;&gt;/**
-        ///         * textFit v2.3.1
-        ///         * Previously known as jQuery.textFit
-        ///         * 11/2014 by STRML (strml.github.com)
-        ///         * MIT License
-        ///         *
-        ///         * To use: textFit(document.getElementById(&apos;target-div&apos;), options);
-        ///         *
-        ///         * Will make the *t [rest of string was truncated]&quot;;.
+        ///    &lt;script id=&quot;achievement-script&quot;&gt;
+        ///    /**
+        ///                 * textF [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string AlertsWindow {
             get {
@@ -112,15 +105,14 @@ namespace Retro_Achievement_Tracker.Properties {
         ///    &lt;title&gt;Focus Window&lt;/title&gt;
         ///    &lt;meta charset=&quot;UTF-8&quot;&gt;
         ///    &lt;script src=&quot;https://code.jquery.com/jquery-3.5.1.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
-        ///    &lt;script id=&quot;focus-scripts&quot;&gt;/**
-        ///         * textFit v2.3.1
-        ///         * Previously known as jQuery.textFit
-        ///         * 11/2014 by STRML (strml.github.com)
-        ///         * MIT License
-        ///         *
-        ///         * To use: textFit(document.getElementById(&apos;target-div&apos;), options);
-        ///         *
-        ///         * Will make the *text* content [rest of string was truncated]&quot;;.
+        ///    &lt;script id=&quot;focus-scripts&quot;&gt;
+        ///        /**
+        ///                     * textFit v2.3.1
+        ///                     * Previously known as jQuery.textFit
+        ///                     * 11/2014 by STRML (strml.github.com)
+        ///                     * MIT License
+        ///                     *
+        ///                     * To use: textFit(document.getElement [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string FocusWindow {
             get {
@@ -152,21 +144,30 @@ namespace Retro_Achievement_Tracker.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+        ///
+        ///&lt;html lang=&quot;en&quot; xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
+        ///&lt;head&gt;
+        ///    &lt;meta charset=&quot;utf-8&quot; /&gt;
+        ///    &lt;title&gt;&lt;/title&gt;
+        ///&lt;/head&gt;
+        ///&lt;body&gt;
+        ///
+        ///&lt;/body&gt;
+        ///&lt;/html&gt;.
         /// </summary>
-        internal static System.Drawing.Bitmap green_button {
+        internal static string GameStatsWindow {
             get {
-                object obj = ResourceManager.GetObject("green_button", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ResourceManager.GetString("GameStatsWindow", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap green_button1 {
+        internal static System.Drawing.Bitmap green_button {
             get {
-                object obj = ResourceManager.GetObject("green_button1", resourceCulture);
+                object obj = ResourceManager.GetObject("green_button", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -187,13 +188,11 @@ namespace Retro_Achievement_Tracker.Properties {
         ///&lt;head&gt;
         ///    &lt;title&gt;Last Five Window&lt;/title&gt;
         ///    &lt;meta charset=&quot;UTF-8&quot;&gt;
-        ///    &lt;script src=&quot;https://code.jquery.com/jquery-3.5.1.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+        ///    &lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js&quot;&gt;&lt;/script&gt;
+        ///    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css&quot;&gt;
+        ///    &lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js&quot;&gt;&lt;/script&gt;
         ///    &lt;script id=&quot;last-five-scripts&quot;&gt;
-        ///        function addToList(name, imageLink, description, points, date, id) {
-        ///
-        ///            var focusAchievementBlock = document.createElement(&apos;div&apos;);
-        ///            focusAchievementBlock.classList.add(&quot;focus-achievement&quot;);
-        ///            focusAchievementBlock.id = &quot;achievement-&quot; + id [rest of string was truncated]&quot;;.
+        ///        function addToList(name, imageLink, points, date, id) [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string LastFiveWindow {
             get {
@@ -238,9 +237,9 @@ namespace Retro_Achievement_Tracker.Properties {
         ///         *
         ///         * Will make the *text* content inside a containe [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string StatsWindow {
+        internal static string UserStatsWindow {
             get {
-                return ResourceManager.GetString("StatsWindow", resourceCulture);
+                return ResourceManager.GetString("UserStatsWindow", resourceCulture);
             }
         }
         

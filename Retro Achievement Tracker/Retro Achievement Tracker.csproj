@@ -170,12 +170,19 @@
     <Compile Include="Controllers\FocusController.cs" />
     <Compile Include="Controllers\GameInfoController.cs" />
     <Compile Include="Controllers\LastFiveController.cs" />
-    <Compile Include="Controllers\StatsController.cs" />
+    <Compile Include="Controllers\GameStatsController.cs" />
+    <Compile Include="Controllers\UserStatsController.cs" />
     <Compile Include="Forms\AchievementListWindow.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\AchievementListWindow.Designer.cs">
       <DependentUpon>AchievementListWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\GameStatsWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\GameStatsWindow.Designer.cs">
+      <DependentUpon>GameStatsWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\LastFiveWindow.cs">
       <SubType>Form</SubType>
@@ -195,11 +202,11 @@
     <Compile Include="Forms\GameInfoWindow.Designer.cs">
       <DependentUpon>GameInfoWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\StatsWindow.cs">
+    <Compile Include="Forms\UserStatsWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\StatsWindow.Designer.cs">
-      <DependentUpon>StatsWindow.cs</DependentUpon>
+    <Compile Include="Forms\UserStatsWindow.Designer.cs">
+      <DependentUpon>UserStatsWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FocusWindow.cs">
       <SubType>Form</SubType>
@@ -241,8 +248,8 @@
     <EmbeddedResource Include="Forms\GameInfoWindow.resx">
       <DependentUpon>GameInfoWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\StatsWindow.resx">
-      <DependentUpon>StatsWindow.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\UserStatsWindow.resx">
+      <DependentUpon>UserStatsWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
@@ -307,6 +314,7 @@
     <Resource Include="Resources\GameInfoWindow.html" />
     <Resource Include="Resources\LastFiveWindow.html" />
     <EmbeddedResource Include="Resources\AchievementListWindow.html" />
+    <Content Include="Resources\GameStatsWindow.html" />
     <Content Include="video\achievement-notification.webm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -317,7 +325,7 @@
     <None Include="Resources\yellow-button.png" />
     <EmbeddedResource Include="Resources\FocusWindow.html" />
     <None Include="Resources\green-button.png" />
-    <EmbeddedResource Include="Resources\StatsWindow.html" />
+    <EmbeddedResource Include="Resources\UserStatsWindow.html" />
     <EmbeddedResource Include="Resources\AlertsWindow.html" />
     <Content Include="Resources\image.ico" />
     <None Include="Resources\red-button.png" />

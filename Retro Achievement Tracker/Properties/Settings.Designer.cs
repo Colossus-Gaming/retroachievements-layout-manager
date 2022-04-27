@@ -1058,12 +1058,12 @@ namespace Retro_Achievement_Tracker.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("/")]
-        public string stats_divider_character_selection {
+        public string game_stats_divider_character_selection {
             get {
-                return ((string)(this["stats_divider_character_selection"]));
+                return ((string)(this["game_stats_divider_character_selection"]));
             }
             set {
-                this["stats_divider_character_selection"] = value;
+                this["game_stats_divider_character_selection"] = value;
             }
         }
         
@@ -2432,6 +2432,210 @@ namespace Retro_Achievement_Tracker.Properties {
             }
             set {
                 this["achievement_list_optimize_enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool auto_game_stats {
+            get {
+                return ((bool)(this["auto_game_stats"]));
+            }
+            set {
+                this["auto_game_stats"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int game_stats_name_outline_size {
+            get {
+                return ((int)(this["game_stats_name_outline_size"]));
+            }
+            set {
+                this["game_stats_name_outline_size"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#000000")]
+        public string game_stats_value_outline_color {
+            get {
+                return ((string)(this["game_stats_value_outline_color"]));
+            }
+            set {
+                this["game_stats_value_outline_color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#000000")]
+        public string game_stats_name_outline_color {
+            get {
+                return ((string)(this["game_stats_name_outline_color"]));
+            }
+            set {
+                this["game_stats_name_outline_color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool game_stats_value_outline_enabled {
+            get {
+                return ((bool)(this["game_stats_value_outline_enabled"]));
+            }
+            set {
+                this["game_stats_value_outline_enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool game_stats_name_outline_enabled {
+            get {
+                return ((bool)(this["game_stats_name_outline_enabled"]));
+            }
+            set {
+                this["game_stats_name_outline_enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#000000")]
+        public string game_stats_value_color {
+            get {
+                return ((string)(this["game_stats_value_color"]));
+            }
+            set {
+                this["game_stats_value_color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#000000")]
+        public string game_stats_name_color {
+            get {
+                return ((string)(this["game_stats_name_color"]));
+            }
+            set {
+                this["game_stats_name_color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Calibri")]
+        public string game_stats_value_font_family {
+            get {
+                return ((string)(this["game_stats_value_font_family"]));
+            }
+            set {
+                this["game_stats_value_font_family"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Calibri")]
+        public string game_stats_name_font_family {
+            get {
+                return ((string)(this["game_stats_name_font_family"]));
+            }
+            set {
+                this["game_stats_name_font_family"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool game_stats_font_outline_enabled {
+            get {
+                return ((bool)(this["game_stats_font_outline_enabled"]));
+            }
+            set {
+                this["game_stats_font_outline_enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int game_stats_font_outline_size {
+            get {
+                return ((int)(this["game_stats_font_outline_size"]));
+            }
+            set {
+                this["game_stats_font_outline_size"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#000000")]
+        public string game_stats_font_outline_color_hex {
+            get {
+                return ((string)(this["game_stats_font_outline_color_hex"]));
+            }
+            set {
+                this["game_stats_font_outline_color_hex"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#000000")]
+        public string game_stats_font_color_hex_code {
+            get {
+                return ((string)(this["game_stats_font_color_hex_code"]));
+            }
+            set {
+                this["game_stats_font_color_hex_code"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Calibri")]
+        public string game_stats_font_family_name {
+            get {
+                return ((string)(this["game_stats_font_family_name"]));
+            }
+            set {
+                this["game_stats_font_family_name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool game_stats_advanced_options_enabled {
+            get {
+                return ((bool)(this["game_stats_advanced_options_enabled"]));
+            }
+            set {
+                this["game_stats_advanced_options_enabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FF00FF")]
+        public string game_stats_window_background_color {
+            get {
+                return ((string)(this["game_stats_window_background_color"]));
+            }
+            set {
+                this["game_stats_window_background_color"] = value;
             }
         }
     }

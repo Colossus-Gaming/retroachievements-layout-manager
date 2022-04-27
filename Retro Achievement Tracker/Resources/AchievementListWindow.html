@@ -14,6 +14,15 @@
             achievementBlock.classList.add("achievement");
             achievementBlock.id = "achievement-" + id;
 
+            var achievementUnlockedBorder = document.createElement('div');
+            achievementUnlockedBorder.style.boxShadow = "inset 0px 0px 0px " + (size.split("px")[0] / 48) + "px gold";
+            achievementUnlockedBorder.id = "achievement-" + id + "-border";
+            achievementUnlockedBorder.style.zIndex = "3";
+            achievementUnlockedBorder.style.position = "absolute";
+            achievementUnlockedBorder.style.width = size;
+            achievementUnlockedBorder.style.height = size;
+            achievementBlock.appendChild(achievementUnlockedBorder);
+
             var achievementImage = document.createElement('img');
             achievementImage.id = "achievement-" + id + "-image";
             achievementImage.src = imageLink;
@@ -28,14 +37,16 @@
                 achievementLockedImage.style.width = size;
                 achievementLockedImage.style.height = size;
                 achievementBlock.appendChild(achievementLockedImage);
+
+                achievementUnlockedBorder.style.display = "none";
             } else {
                 tooltipString += "<br/><br/>" + date;
             }
 
             document.getElementById("container").appendChild(achievementBlock);
 
-            document.getElementById("achievement-" + id).style.left = xCoord;
-            document.getElementById("achievement-" + id).style.top = yCoord;
+            achievementBlock.style.left = xCoord;
+            achievementBlock.style.top = yCoord;
 
             $("#achievement-" + id).tooltip({
                 items: 'div',
