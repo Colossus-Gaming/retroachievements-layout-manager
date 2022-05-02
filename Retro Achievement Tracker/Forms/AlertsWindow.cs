@@ -74,9 +74,9 @@ namespace Retro_Achievement_Tracker.Forms
                 "$(\"#achievement-video\").attr(\"src\", \"disk://achievement-notification\");" +
                 "achievementVideoElement.style.display = \"block\";" +
                 "achievementElement.style.display = \"block\";" +
-                "setTimeout(function() { textFit(achievementTitle, { alignVert: true, alignHoriz: true, multiLine: true }); }, 100);" +
-                "setTimeout(function() { textFit(achievementDescription, { alignVert: true, alignHoriz: true, multiLine: true }); }, 200);" +
-                "setTimeout(function() { textFit(achievementPoints); }, 300);");
+                "setTimeout(function() { textFit(achievementTitle, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true }); }, 100);" +
+                "setTimeout(function() { textFit(achievementDescription, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true }); }, 200);" +
+                "setTimeout(function() { textFit(achievementPoints, { reProcess: true }); }, 300);");
         }
 
         public void StartMasteryAlert(GameInfo gameInfoAndProgress)
@@ -89,9 +89,9 @@ namespace Retro_Achievement_Tracker.Forms
                 "$(\"#mastery-video\").attr('src', \"disk://mastery-notification\");" +
                 "masteryVideoElement.style.display = \"block\";" +
                 "masteryElement.style.display = \"block\";" +
-                "setTimeout(function() { textFit(masteryTitle, { alignVert: true, alignHoriz: true, multiLine: true }); }, 100);" +
-                "setTimeout(function() { textFit(masteryPoints, { alignVert: true, alignHoriz: true }); }, 200);" +
-                "setTimeout(function() { textFit(masteryAchievements, { alignVert: true, alignHoriz: true }); }, 300);");
+                "setTimeout(function() { textFit(masteryTitle, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true }); }, 100);" +
+                "setTimeout(function() { textFit(masteryPoints, { alignVert: true, alignHoriz: true, reProcess: true }); }, 200);" +
+                "setTimeout(function() { textFit(masteryAchievements, { alignVert: true, alignHoriz: true, reProcess: true }); }, 300);");
         }
 
         public void PromptUserInput()
@@ -320,12 +320,12 @@ namespace Retro_Achievement_Tracker.Forms
                 "masteryPoints.style.fontFamily = \"" + fontFamily + "\";" +
                 "achievementPoints.style.lineHeight = " + lineSpacing + ";" +
                 "achievementPoints.style.fontFamily = \"" + fontFamily + "\";" +
-                "setTimeout(function() { textFit(achievementDescription, { alignVert: true, alignHoriz: true, multiLine: true }); }, 100);" +
-                "setTimeout(function() { textFit(masteryAchievements, { alignVert: true, alignHoriz: true }); }, 200);" +
-                "setTimeout(function() { textFit(masteryPoints, { alignVert: true, alignHoriz: true }); }, 300);" +
-                "setTimeout(function() { textFit(achievementTitle, { alignVert: true, alignHoriz: true }); }, 400);" +
-                "setTimeout(function() { textFit(masteryTitle, { alignVert: true, alignHoriz: true, multiLine: true }); }, 500);" +
-                "setTimeout(function() { textFit(achievementPoints); }, 600);");
+                "setTimeout(function() { textFit(achievementDescription, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true }); }, 100);" +
+                "setTimeout(function() { textFit(masteryAchievements, { alignVert: true, alignHoriz: true, reProcess: true }); }, 200);" +
+                "setTimeout(function() { textFit(masteryPoints, { alignVert: true, alignHoriz: true, reProcess: true }); }, 300);" +
+                "setTimeout(function() { textFit(achievementTitle, { alignVert: true, alignHoriz: true, reProcess: true }); }, 400);" +
+                "setTimeout(function() { textFit(masteryTitle, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true }); }, 500);" +
+                "setTimeout(function() { textFit(achievementPoints, { reProcess: true }); }, 600);");
         }
 
         public void SetSimpleFontOutline(string fontOutline, string borderOutline)
@@ -380,9 +380,9 @@ namespace Retro_Achievement_Tracker.Forms
                  "masteryAchievements.style.fontFamily = \"" + fontFamily + "\";" +
                  "masteryPoints.style.lineHeight = " + lineSpacing + ";" +
                  "masteryPoints.style.fontFamily = \"" + fontFamily + "\";" +
-                 "setTimeout(function() { textFit(achievementDescription, { alignVert: true, alignHoriz: true, multiLine: true }); }, 100);" +
-                 "setTimeout(function() { textFit(masteryAchievements, { alignVert: true, alignHoriz: true }); }, 200);" +
-                 "setTimeout(function() { textFit(masteryPoints, { alignVert: true, alignHoriz: true }); }, 300);");
+                 "setTimeout(function() { textFit(achievementDescription, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true }); }, 100);" +
+                 "setTimeout(function() { textFit(masteryAchievements, { alignVert: true, alignHoriz: true, reProcess: true }); }, 200);" +
+                 "setTimeout(function() { textFit(masteryPoints, { alignVert: true, alignHoriz: true, reProcess: true }); }, 300);");
         }
 
         public void SetTitleOutline(string value)
@@ -415,8 +415,8 @@ namespace Retro_Achievement_Tracker.Forms
                   "achievementTitle.style.fontFamily = \"" + fontFamily + "\";" +
                   "masteryTitle.style.lineHeight = " + lineSpacing + ";" +
                   "masteryTitle.style.fontFamily = \"" + fontFamily + "\";" +
-                  "setTimeout(function() { textFit(achievementTitle, { alignVert: true, alignHoriz: true }); }, 100);" +
-                  "setTimeout(function() { textFit(masteryTitle, { alignVert: true, alignHoriz: true, multiLine: true }); }, 200);");
+                  "setTimeout(function() { textFit(achievementTitle, { alignVert: true, alignHoriz: true, reProcess: true }); }, 100);" +
+                  "setTimeout(function() { textFit(masteryTitle, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true }); }, 200);");
         }
         public void SetPointsFontFamily(FontFamily value)
         {

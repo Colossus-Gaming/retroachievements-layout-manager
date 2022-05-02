@@ -181,6 +181,7 @@ namespace Retro_Achievement_Tracker
                     CurrentlyViewingAchievement = null;
                     CurrentlyViewingIndex = 0;
 
+                    UpdateGameInfo();
                     UpdateCurrentlyViewingAchievement();
                     SetFocus();
                 }
@@ -259,11 +260,7 @@ namespace Retro_Achievement_Tracker
                         {
                             Invoke((MethodInvoker)delegate
                             {
-
-
-                                GameInfo = userProgress.Result;
-
-                                UpdateGameInfo();
+                                GameInfo = userProgress.Result;                                
                             });
                             int newId = UserSummary.LastGameID;
 

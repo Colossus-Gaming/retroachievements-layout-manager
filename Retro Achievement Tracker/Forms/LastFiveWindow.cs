@@ -71,13 +71,13 @@ namespace Retro_Achievement_Tracker
                 "   allElements[i].style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
                 "}" +
                 "for (var i = 0; i < allTitles.length; i++) { " +
-                "   textFit(allTitles[i], { alignVert: true , alignHoriz: true, multiLine: true });" +
+                "   textFit(allTitles[i], { alignVert: true , alignHoriz: true, multiLine: true, reProcess: true });" +
                 "}" +
                 "for (var i = 0; i < allDates.length; i++) { " +
-                "   textFit(allDates[i], { alignVert: true , alignHoriz: true, multiLine: true });" +
+                "   textFit(allDates[i], { alignVert: true , alignHoriz: true, multiLine: true, reProcess: true });" +
                 "}" +
                 "for (var i = 0; i < allPoints.length; i++) { " +
-                "   textFit(allPoints[i]);" +
+                "   textFit(allPoints[i], { reProcess: true });" +
                 "}";
 
             ExecuteScript(script);
@@ -115,7 +115,7 @@ namespace Retro_Achievement_Tracker
                 "for (var i = 0; i < allTitles.length; i++) { " +
                 "   allTitles[i].style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
                 "   allTitles[i].style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
-                "   textFit(allTitles[i], { alignVert: true, alignHoriz: true, multiLine: true });" +
+                "   textFit(allTitles[i], { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true });" +
                 "}");
         }
         public void SetDateFontFamily(FontFamily value)
@@ -125,7 +125,7 @@ namespace Retro_Achievement_Tracker
                 "for (var i = 0; i < allDates.length; i++) { " +
                 "   allDates[i].style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
                 "   allDates[i].style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
-                "   textFit(allDates[i], { alignVert: true, alignHoriz: true, multiLine: true });" +
+                "   textFit(allDates[i], { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true });" +
                 "}");
         }
 
@@ -136,7 +136,7 @@ namespace Retro_Achievement_Tracker
                 "for (var i = 0; i < allPoints.length; i++) { " +
                 "   allPoints[i].style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
                 "   allPoints[i].style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
-                "   textFit(allPoints[i]);" +
+                "   textFit(allPoints[i], { reProcess: true });" +
                 "}");
         }
 
@@ -165,17 +165,17 @@ namespace Retro_Achievement_Tracker
         public void SetTitleOutline(string value)
         {
             ExecuteScript(
-                 "for (var i = 0; i < allTitles.length; i++) { allTitles[i].style.webkitTextStroke = \"" + value + "\"; textFit(allTitles[i], { alignVert: true, alignHoriz: true, multiLine: true }); }");
+                 "for (var i = 0; i < allTitles.length; i++) { allTitles[i].style.webkitTextStroke = \"" + value + "\"; textFit(allTitles[i], { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true }); }");
         }
         public void SetDateOutline(string value)
         {
             ExecuteScript(
-                 "for (var i = 0; i < allDates.length; i++) { allDates[i].style.webkitTextStroke = \"" + value + "\"; textFit(allDates[i], { alignVert: true, alignHoriz: true, multiLine: true }); }");
+                 "for (var i = 0; i < allDates.length; i++) { allDates[i].style.webkitTextStroke = \"" + value + "\"; textFit(allDates[i], { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true }); }");
         }
         public void SetPointsOutline(string value)
         {
             ExecuteScript(
-                 "for (var i = 0; i < allPoints.length; i++) { allPoints[i].style.webkitTextStroke = \"" + value + "\"; textFit(allPoints[i], { alignVert: true, alignHoriz: true, multiLine: true }); }");
+                 "for (var i = 0; i < allPoints.length; i++) { allPoints[i].style.webkitTextStroke = \"" + value + "\"; textFit(allPoints[i], { reProcess: true }); }");
         }
         public void SetLineOutline(string value)
         {

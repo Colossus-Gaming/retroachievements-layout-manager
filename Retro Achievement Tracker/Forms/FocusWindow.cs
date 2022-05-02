@@ -77,10 +77,10 @@ namespace Retro_Achievement_Tracker
                   "masteryPointsElement.style.fontFamily = \"" + fontFamily + "\";" +
                   "pointsElement.style.lineHeight = " + lineSpacing + ";" +
                   "pointsElement.style.fontFamily = \"" + fontFamily + "\";" +
-                  "setTimeout(function() { textFit(titleElement, { alignVert: true, alignHoriz: true, multiLine: true }); }, 100);" +
-                  "setTimeout(function() { textFit(descriptionElement, { alignVert: true, alignHoriz: true, multiLine: true }); }, 200);" +
-                  "setTimeout(function() { textFit(masteryAchievementsElement, { alignVert: true, alignHoriz: true, multiLine: true }); }, 300);" +
-                  "setTimeout(function() { textFit(masteryPointsElement, { alignVert: true, alignHoriz: true, multiLine: true }); }, 400);" +
+                  "setTimeout(function() { textFit(titleElement, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true }); }, 100);" +
+                  "setTimeout(function() { textFit(descriptionElement, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true }); }, 200);" +
+                  "setTimeout(function() { textFit(masteryAchievementsElement, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true }); }, 300);" +
+                  "setTimeout(function() { textFit(masteryPointsElement, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true }); }, 400);" +
                   "setTimeout(function() { textFit(pointsElement); }, 500);");
         }
 
@@ -116,9 +116,9 @@ namespace Retro_Achievement_Tracker
                   "descriptionElement.style.webkitTextStroke = \"" + value + "\";" +
                   "masteryAchievementsElement.style.webkitTextStroke = \"" + value + "\";" +
                   "masteryPointsElement.style.webkitTextStroke = \"" + value + "\";" +
-                  "textFit(descriptionElement, { alignVert: true, alignHoriz: true, multiLine: true });" +
-                  "textFit(masteryAchievementsElement, { alignVert: true, alignHoriz: true });" +
-                  "textFit(masteryPointsElement, { alignVert: true, alignHoriz: true });");
+                  "textFit(descriptionElement, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true });" +
+                  "textFit(masteryAchievementsElement, { alignVert: true, alignHoriz: true, reProcess: true });" +
+                  "textFit(masteryPointsElement, { alignVert: true, alignHoriz: true, reProcess: true });");
         }
 
         public void SetDescriptionColor(string value)
@@ -146,9 +146,9 @@ namespace Retro_Achievement_Tracker
                   "masteryPointsElement.style.fontFamily = \"" + fontFamily + "\";" +
                   "descriptionElement.style.lineHeight = " + lineSpacing + ";" +
                   "descriptionElement.style.fontFamily = \"" + fontFamily + "\";" +
-                  "textFit(descriptionElement, { alignVert: true, alignHoriz: true, multiLine: true });" +
-                  "textFit(masteryAchievementsElement, { alignVert: true, alignHoriz: true, multiLine: true });" +
-                  "textFit(masteryPointsElement, { alignVert: true, alignHoriz: true, multiLine: true });");
+                  "textFit(descriptionElement, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true });" +
+                  "textFit(masteryAchievementsElement, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true });" +
+                  "textFit(masteryPointsElement, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true });");
         }
 
         public void SetTitleOutline(string value)
@@ -169,13 +169,18 @@ namespace Retro_Achievement_Tracker
             ExecuteScript(
                   "titleElement.style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
                   "titleElement.style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
-                  "textFit(titleElement, { alignVert: true, alignHoriz: true, multiLine: true });");
+                  "textFit(titleElement, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true });");
         }
 
         public async void SetFocus(Achievement achievement)
         {
             if (achievement != null)
             {
+                string value = achievement.Title;
+                if (value.Contains(":"))
+                {
+                    value = value.Substring(0, value.IndexOf(":")) + ":<br>" + value.Substring(value.IndexOf(":") + 1, value.Length - value.IndexOf(":") - 1);
+                }
                 ExecuteScript("$(\"#badge\").fadeOut(\"fast\");" +
                     "$(\"#title\").fadeOut(\"fast\");" +
                     "$(\"#description\").fadeOut(\"fast\");" +
@@ -185,7 +190,7 @@ namespace Retro_Achievement_Tracker
 
                 await Task.Delay(200).ContinueWith(async task =>
                 {
-                    ExecuteScript("titleElement.innerHTML = \"" + achievement.Title.Replace("\"", "\\\"") + "\";" +
+                    ExecuteScript("titleElement.innerHTML = \"" + value.Replace("\"", "\\\"") + "\";" +
                         "descriptionElement.innerHTML = \"" + achievement.Description.Replace("\"", "\\\"") + "\";" +
                         "$(\"#badge\").attr('src', \"https://retroachievements.org/Badge/" + achievement.BadgeNumber + ".png\"); badgeElement.style.border = \"\";" +
                         "pointsElement.innerHTML = \"" + achievement.Points + "\";");
@@ -195,10 +200,10 @@ namespace Retro_Achievement_Tracker
                         ExecuteScript("$(\"#focus\").fadeIn();" +
                             "$(\"#badge\").fadeIn();" +
                             "badgeElement.animate([ { left: '1940px', top: '14px' }, { left: '15px', top: '14px' } ], { interations: 1, duration: 700, fill: \"forwards\", easing: \"ease-out\" });" +
-                            "setTimeout(function() { $(\"#points\").fadeIn(); textFit(pointsElement); pointsElement.style.textAlign = \"left\"; pointsElement.style.alignContent = \"end\"; pointsElement.animate([ { left: '1922px', bottom: '10px' }, { left: '20px', bottom: '10px' } ], { interations: 1, duration: 700, fill: \"forwards\", easing: \"ease-out\" }); }, 200);" +
-                            "setTimeout(function() { $(\"#title\").fadeIn(); textFit(titleElement, { alignVert: true, alignHoriz: true, multiLine: true }); titleElement.animate([ { right: '-800px', top: '10px' }, { right: '5px', top: '10px' } ], { interations: 1, duration: 700, fill: \"forwards\", easing: \"ease-out\" }); }, 400);" +
+                            "setTimeout(function() { $(\"#points\").fadeIn(); textFit(pointsElement, { reProcess: true }); pointsElement.style.textAlign = \"left\"; pointsElement.style.alignContent = \"end\"; pointsElement.animate([ { left: '1922px', bottom: '10px' }, { left: '20px', bottom: '10px' } ], { interations: 1, duration: 700, fill: \"forwards\", easing: \"ease-out\" }); }, 200);" +
+                            "setTimeout(function() { $(\"#title\").fadeIn(); textFit(titleElement, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true }); titleElement.animate([ { right: '-800px', top: '10px' }, { right: '5px', top: '10px' } ], { interations: 1, duration: 700, fill: \"forwards\", easing: \"ease-out\" }); }, 400);" +
                             "setTimeout(function() { $(\"#line\").fadeIn(); lineElement.animate([ { right: '-800px', top: '60px' }, { right: '10px', top: '60px' } ], { interations: 1, duration: 700, fill: \"forwards\", easing: \"ease-out\" }); }, 600);" +
-                            "setTimeout(function() { $(\"#description\").fadeIn(); textFit(descriptionElement, { alignVert: true, alignHoriz: true, multiLine: true }); descriptionElement.animate([ { right: '-800px', bottom: '10px' }, { right: '5px', bottom: '10px' } ], { interations: 1, duration: 700, fill: \"forwards\", easing: \"ease-out\" }); }, 800);");
+                            "setTimeout(function() { $(\"#description\").fadeIn(); textFit(descriptionElement, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true }); descriptionElement.animate([ { right: '-800px', bottom: '10px' }, { right: '5px', bottom: '10px' } ], { interations: 1, duration: 700, fill: \"forwards\", easing: \"ease-out\" }); }, 800);");
                     });
                 });
             }
@@ -209,6 +214,11 @@ namespace Retro_Achievement_Tracker
         }
         public async void SetFocus(GameInfo gameInfo)
         {
+            string value = gameInfo.Title;
+            if (value.Contains(":"))
+            {
+                value = value.Substring(0, value.IndexOf(":")) + ":<br>" + value.Substring(value.IndexOf(":") + 1, value.Length - value.IndexOf(":") - 1);
+            }
             ExecuteScript("$(\"#badge\").fadeOut(\"fast\");" +
                     "$(\"#title\").fadeOut(\"fast\");" +
                     "$(\"#description\").fadeOut(\"fast\");" +
@@ -218,7 +228,7 @@ namespace Retro_Achievement_Tracker
 
             await Task.Delay(200).ContinueWith(async task =>
             {
-                ExecuteScript("titleElement.innerHTML = \"" + gameInfo.Title.Replace("\"", "\\\"") + "\";" +
+                ExecuteScript("titleElement.innerHTML = \"" + value.Replace("\"", "\\\"") + "\";" +
                     "masteryAchievementsElement.innerHTML = \"Cheevos:<br/>" + gameInfo.Achievements.Count + " / " + gameInfo.Achievements.Count + "\";" +
                     "masteryPointsElement.innerHTML = \"Points:<br/>" + gameInfo.GamePointsEarned + " / " + gameInfo.GamePointsPossible + "\";" +
                     "$(\"#badge\").attr('src', \"https://retroachievements.org" + gameInfo.ImageIcon + "\");" +
@@ -229,9 +239,9 @@ namespace Retro_Achievement_Tracker
                     ExecuteScript("$(\"#focus\").fadeIn();" +
                         "$(\"#badge\").fadeIn();" +
                         "badgeElement.animate([ { left: '1940px', top: '10px' }, { left: '10px', top: '10px' } ], { interations: 1, duration: 700, fill: \"forwards\", easing: \"ease-out\" });" +
-                        "setTimeout(function() { $(\"#title\").fadeIn(); textFit(titleElement, { alignVert: true, alignHoriz: true, multiLine: true }); titleElement.animate([ { right: '-1922px', top: '5px' }, { right: '5px', top: '5px' } ], { interations: 1, duration: 700, fill: \"forwards\", easing: \"ease-out\" }); }, 200);" +
+                        "setTimeout(function() { $(\"#title\").fadeIn(); textFit(titleElement, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true }); titleElement.animate([ { right: '-1922px', top: '5px' }, { right: '5px', top: '5px' } ], { interations: 1, duration: 700, fill: \"forwards\", easing: \"ease-out\" }); }, 200);" +
                         "setTimeout(function() { $(\"#line\").fadeIn(); lineElement.animate([ { right: '-1922px', top: '60px' }, { right: '10px', top: '60px' } ], { interations: 1, duration: 700, fill: \"forwards\", easing: \"ease-out\" }); }, 400);" +
-                        "setTimeout(function() { $(\"#mastery-description\").fadeIn(); textFit(masteryAchievementsElement, { alignVert: true, alignHoriz: true, multiLine: true }); textFit(masteryPointsElement, { alignVert: true, alignHoriz: true, multiLine: true }); masteryDescriptionElement.animate([ { right: '-1922px', bottom: '10px' }, { right: '5px', bottom: '10px' } ], { interations: 1, duration: 700, fill: \"forwards\", easing: \"ease-out\" }); }, 600);");
+                        "setTimeout(function() { $(\"#mastery-description\").fadeIn(); textFit(masteryAchievementsElement, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true }); textFit(masteryPointsElement, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true }); masteryDescriptionElement.animate([ { right: '-1922px', bottom: '10px' }, { right: '5px', bottom: '10px' } ], { interations: 1, duration: 700, fill: \"forwards\", easing: \"ease-out\" }); }, 600);");
                 });
             });
         }
@@ -241,7 +251,7 @@ namespace Retro_Achievement_Tracker
             ExecuteScript(
                   "pointsElement.style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
                   "pointsElement.style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
-                  "textFit(pointsElement, { alignVert: true, alignHoriz: true });");
+                  "textFit(pointsElement, { reProcess: true });");
         }
 
         public void HideFocus()

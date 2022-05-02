@@ -71,7 +71,7 @@ namespace Retro_Achievement_Tracker
         public void SetTitleName(string value)
         {
             ExecuteScript("titleName.innerHTML = \"" + value + ":\";" +
-                "textFit(titleName, { alignVert: true });");
+                "textFit(titleName, { alignVert: true, multiLine: true, reProcess: true });");
         }
         public void SetTitleValue(string value)
         {
@@ -82,9 +82,14 @@ namespace Retro_Achievement_Tracker
                 {
                     value = "The " + value.Substring(0, value.IndexOf(", The")) + value.Substring(value.IndexOf(", The") + 5, value.Length - value.IndexOf(", The") - 5);
                 }
+                
+                if (value.Contains(":"))
+                {
+                    value = value.Substring(0, value.IndexOf(":")) + ":<br>" + value.Substring(value.IndexOf(":") + 1, value.Length - value.IndexOf(":") - 1);
+                }
 
                 ExecuteScript("titleValue.innerHTML = \"" + value + "\";" +
-                "textFit(titleValue, { alignVert: true });");
+                "textFit(titleValue, { alignVert: true, multiLine: true, reProcess: true });");
             }
         }
         public void SetTitleVisibility(bool isVisible)
@@ -96,14 +101,14 @@ namespace Retro_Achievement_Tracker
         public void SetConsoleName(string value)
         {
             ExecuteScript("consoleName.innerHTML = \"" + value + ":\";" +
-                "textFit(consoleName, { alignVert: true });");
+                "textFit(consoleName, { alignVert: true, multiLine: true, reProcess: true });");
         }
         public void SetConsoleValue(string value)
         {
             if (value != null)
             {
                 ExecuteScript("consoleValue.innerHTML = \"" + value + "\";" +
-                "textFit(consoleValue, { alignVert: true });");
+                "textFit(consoleValue, { alignVert: true, multiLine: true, reProcess: true });");
             }
         }
         public void SetConsoleVisibility(bool isVisible)
@@ -115,14 +120,14 @@ namespace Retro_Achievement_Tracker
         public void SetDeveloperName(string value)
         {
             ExecuteScript("developerName.innerHTML = \"" + value + ":\";" +
-                "textFit(developerName, { alignVert: true });");
+                "textFit(developerName, { alignVert: true, multiLine: true, reProcess: true });");
         }
         public void SetDeveloperValue(string value)
         {
             if (value != null)
             {
                 ExecuteScript("developerValue.innerHTML = \"" + value + "\";" +
-                "textFit(developerValue, { alignVert: true });");
+                "textFit(developerValue, { alignVert: true, multiLine: true, reProcess: true });");
             }
         }
         public void SetDeveloperVisibility(bool isVisible)
@@ -134,14 +139,14 @@ namespace Retro_Achievement_Tracker
         public void SetPublisherName(string value)
         {
             ExecuteScript("publisherName.innerHTML = \"" + value + ":\";" +
-                "textFit(publisherName, { alignVert: true });");
+                "textFit(publisherName, { alignVert: true, multiLine: true, reProcess: true });");
         }
         public void SetPublisherValue(string value)
         {
             if (value != null)
             {
                 ExecuteScript("publisherValue.innerHTML = \"" + value + "\";" +
-                "textFit(publisherValue, { alignVert: true });");
+                "textFit(publisherValue, { alignVert: true, multiLine: true, reProcess: true });");
             }
         }
         public void SetPublisherVisibility(bool isVisible)
@@ -153,14 +158,14 @@ namespace Retro_Achievement_Tracker
         public void SetGenreName(string value)
         {
             ExecuteScript("genreName.innerHTML = \"" + value + ":\";" +
-                "textFit(genreName, { alignVert: true });");
+                "textFit(genreName, { alignVert: true, multiLine: true, reProcess: true });");
         }
         public void SetGenreValue(string value)
         {
             if (value != null)
             {
                 ExecuteScript("genreValue.innerHTML = \"" + value + "\";" +
-                "textFit(genreValue, { alignVert: true });");
+                "textFit(genreValue, { alignVert: true, multiLine: true, reProcess: true });");
             }
         }
         public void SetGenreVisibility(bool isVisible)
@@ -172,14 +177,14 @@ namespace Retro_Achievement_Tracker
         public void SetReleaseDateName(string value)
         {
             ExecuteScript("releaseDateName.innerHTML = \"" + value + ":\";" +
-                "textFit(releaseDateName, { alignVert: true });");
+                "textFit(releaseDateName, { alignVert: true, multiLine: true, reProcess: true });");
         }
         public void SetReleaseDateValue(string value)
         {
             if (value != null)
             {
                 ExecuteScript("releaseDateValue.innerHTML = \"" + value + "\";" +
-                "textFit(releaseDateValue, { alignVert: true });");
+                "textFit(releaseDateValue, { alignVert: true, multiLine: true, reProcess: true });");
             }
         }
         public void SetReleaseDateVisibility(bool isVisible)
@@ -197,11 +202,11 @@ namespace Retro_Achievement_Tracker
                 "}");
             ExecuteScript(
                 "for (var i = 0; i < allNames.length; i++) { " +
-                "   textFit(allNames[i], { alignVert: true });" +
+                "   textFit(allNames[i], { alignVert: true, multiLine: true, reProcess: true });" +
                 "}");
             ExecuteScript(
                 "for (var i = 0; i < allValues.length; i++) { " +
-                "   textFit(allValues[i], { alignVert: true });" +
+                "   textFit(allValues[i], { alignVert: true, multiLine: true, reProcess: true });" +
                 "}");
         }
         public void SetSimpleFontColor(string value)
@@ -223,7 +228,7 @@ namespace Retro_Achievement_Tracker
                 "for (var i = 0; i < allNames.length; i++) { " +
                 "   allNames[i].style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
                 "   allNames[i].style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
-                "   textFit(allNames[i], { alignVert: true });" +
+                "   textFit(allNames[i], { alignVert: true, multiLine: true, reProcess: true });" +
                 "}");
         }
 
@@ -234,7 +239,7 @@ namespace Retro_Achievement_Tracker
                 "for (var i = 0; i < allValues.length; i++) { " +
                 "   allValues[i].style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
                 "   allValues[i].style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
-                "   textFit(allValues[i], { alignVert: true });" +
+                "   textFit(allValues[i], { alignVert: true, multiLine: true, reProcess: true });" +
                 "}");
         }
 
@@ -283,7 +288,7 @@ namespace Retro_Achievement_Tracker
                 ActivateBrowserOnCreation = false,
                 Location = new Point(0, 0),
                 Name = "chromiumWebBrowser",
-                Size = new Size(1034, 778),
+                Size = new Size(1376, 778),
                 TabIndex = 0,
                 Dock = DockStyle.None,
                 RequestHandler = new CustomRequestHandler()
@@ -293,7 +298,7 @@ namespace Retro_Achievement_Tracker
             {
                 Invoke((MethodInvoker)delegate
                 {
-                    ClientSize = new Size(1020, 426);
+                    ClientSize = new Size(1190, 645);
                 });
 
                 GameInfoController.Instance.SetAllSettings();
@@ -302,19 +307,5 @@ namespace Retro_Achievement_Tracker
         }
 
         public CefSharp.WinForms.ChromiumWebBrowser chromiumWebBrowser;
-
-        private void InitializeComponent()
-        {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GameInfoWindow));
-            this.SuspendLayout();
-            // 
-            // GameInfoWindow
-            // 
-            this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "GameInfoWindow";
-            this.ResumeLayout(false);
-
-        }
     }
 }
