@@ -101,7 +101,11 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public void SetFocus(Achievement currentlyViewingAchievement)
         {
-            if (CurrentlyFocusedAchievement == null || currentlyViewingAchievement.Id != CurrentlyFocusedAchievement.Id)
+            if (currentlyViewingAchievement == null)
+            {
+                CurrentlyFocusedAchievement = null;
+            }
+            else if (CurrentlyFocusedAchievement == null || currentlyViewingAchievement.Id != CurrentlyFocusedAchievement.Id)
             {
                 CurrentlyFocusedAchievement = currentlyViewingAchievement;
                 UpdateFocus();

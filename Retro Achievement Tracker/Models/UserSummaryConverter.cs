@@ -4,6 +4,7 @@
     using Newtonsoft.Json.Linq;
     using System;
     using System.Collections.Generic;
+    using System.Reflection;
 
     public class UserSummaryConverter : JsonConverter
     {
@@ -95,7 +96,21 @@
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
+            JObject jo = new JObject();
+            Type type = value.GetType();
 
+            foreach (PropertyInfo prop in type.GetProperties())
+            {
+                if (prop.CanRead)
+                {
+                    object propVal = prop.GetValue(value, null);
+                    if (propVal != null)
+                    {
+                        jo.Add(prop.Name, JToken.FromObject(propVal, serializer));
+                    }
+                }
+            }
+            jo.WriteTo(writer);
         }
     }
 }

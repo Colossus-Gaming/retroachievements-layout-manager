@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.IO;
 using System.Linq;
 
@@ -25,6 +26,10 @@ namespace Retro_Achievement_Tracker.Models
                 File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/focus/title.txt", currentlyViewingAchievement.Title);
                 File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/focus/description.txt", currentlyViewingAchievement.Description);
                 File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/focus/points.txt", currentlyViewingAchievement.Points.ToString());
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/focus/data.txt", currentlyViewingAchievement.Title + "\n"
+                    + currentlyViewingAchievement.Description + "\n"
+                    + currentlyViewingAchievement.Points + "\n"
+                    + currentlyViewingAchievement.BadgeNumber);
             }
             else
             {
@@ -37,6 +42,7 @@ namespace Retro_Achievement_Tracker.Models
             File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/focus/title.txt", string.Empty);
             File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/focus/description.txt", string.Empty);
             File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/focus/points.txt", string.Empty);
+            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/focus/data.txt", string.Empty);
         }
 
         public void WriteLastFiveStreamLabels(GameInfo gameInfoAndProgress)
@@ -50,12 +56,17 @@ namespace Retro_Achievement_Tracker.Models
                         File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-" + (i + 1) + "-title.txt", gameInfoAndProgress.Achievements[i].Title);
                         File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-" + (i + 1) + "-description.txt", gameInfoAndProgress.Achievements[i].Description);
                         File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-" + (i + 1) + "-points.txt", gameInfoAndProgress.Achievements[i].Points.ToString());
+                        File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-" + (i + 1) + "-data.txt", 
+                            gameInfoAndProgress.Achievements[i].Title + "\n"
+                            + gameInfoAndProgress.Achievements[i].Description + "\n"
+                            + gameInfoAndProgress.Achievements[i].Points);
                     }
                     else
                     {
                         File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-" + (i + 1) + "-title.txt", string.Empty);
                         File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-" + (i + 1) + "-description.txt", string.Empty);
                         File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-" + (i + 1) + "-points.txt", string.Empty);
+                        File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-" + (i + 1) + "-data.txt", string.Empty);
                     }
                 }
             }
@@ -70,11 +81,17 @@ namespace Retro_Achievement_Tracker.Models
                 File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/ratio.txt", userSummary.RetroRatio);
                 File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/points.txt", userSummary.TotalPoints.ToString());
                 File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/true-points.txt", userSummary.TotalTruePoints.ToString());
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/user-data.txt", userSummary.Rank + "\n"
+                    + userSummary.Awards + "\n"
+                    + userSummary.TotalPoints + "\n"
+                    + userSummary.TotalTruePoints + "\n"
+                    + userSummary.RetroRatio);
+
                 File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/game-ratio.txt", gameInfoAndProgress.GameTruePointsPossible == 0 ? "0" : (Convert.ToDecimal(gameInfoAndProgress.GameTruePointsPossible) / Convert.ToDecimal(gameInfoAndProgress.GamePointsPossible)).ToString("0.00"));
                 File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/game-points.txt", gameInfoAndProgress.GamePointsPossible == 0 ? "0 / 0" : gameInfoAndProgress.GamePointsEarned.ToString() + " / " + gameInfoAndProgress.GamePointsPossible.ToString());
                 File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/game-true-points.txt", gameInfoAndProgress.GameTruePointsPossible == 0 ? "0 / 0" : gameInfoAndProgress.GameTruePointsEarned.ToString() + " / " + gameInfoAndProgress.GameTruePointsPossible.ToString());
                 File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/game-achievements.txt", gameInfoAndProgress.AchievementsEarned + " / " + (gameInfoAndProgress.Achievements == null ? 0 : gameInfoAndProgress.Achievements.Count));
-                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/completed.txt", (gameInfoAndProgress.Achievements == null || gameInfoAndProgress.Achievements.Count == 0 ? 0 : Convert.ToInt32(Convert.ToDecimal(gameInfoAndProgress.Achievements.Count(achievement => achievement.HardcoreAchieved)) / Convert.ToDecimal(gameInfoAndProgress.Achievements == null ? 0 :gameInfoAndProgress.Achievements.Count) * 200)) + " %");
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/completed.txt", (gameInfoAndProgress.Achievements == null || gameInfoAndProgress.Achievements.Count == 0 ? 0 : Convert.ToInt32(Convert.ToDecimal(gameInfoAndProgress.Achievements.Count(achievement => achievement.HardcoreAchieved)) / Convert.ToDecimal(gameInfoAndProgress.Achievements == null ? 0 : gameInfoAndProgress.Achievements.Count) * 200)) + " %");
             }
         }
         public void WriteGameInfoStreamLabels(GameInfo gameInfo)
@@ -87,6 +104,30 @@ namespace Retro_Achievement_Tracker.Models
                 File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/publisher.txt", gameInfo.Publisher);
                 File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/genre.txt", gameInfo.Genre);
                 File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/release-date.txt", gameInfo.Released);
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/game-data.txt", gameInfo.Title + "\n"
+                    + gameInfo.ConsoleName + "\n"
+                    + gameInfo.Developer + "\n"
+                    + gameInfo.Publisher + "\n"
+                    + gameInfo.Genre + "\n"
+                    + gameInfo.Released);
+            }
+        }
+        public void WriteAlertsStreamLabels(GameInfo gameInfo)
+        {
+            if (gameInfo != null)
+            {
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/title.txt", gameInfo.Title);
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/console.txt", gameInfo.ConsoleName);
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/developer.txt", gameInfo.Developer);
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/publisher.txt", gameInfo.Publisher);
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/genre.txt", gameInfo.Genre);
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/release-date.txt", gameInfo.Released);
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/game-data.txt", gameInfo.Title + "\n"
+                    + gameInfo.ConsoleName + "\n"
+                    + gameInfo.Developer + "\n"
+                    + gameInfo.Publisher + "\n"
+                    + gameInfo.Genre + "\n"
+                    + gameInfo.Released);
             }
         }
 
@@ -95,6 +136,7 @@ namespace Retro_Achievement_Tracker.Models
             File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/focus/title.txt", string.Empty);
             File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/focus/description.txt", string.Empty);
             File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/focus/points.txt", string.Empty);
+            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/focus/data.txt", string.Empty);
 
             File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/title.txt", string.Empty);
             File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/console.txt", string.Empty);
@@ -102,6 +144,7 @@ namespace Retro_Achievement_Tracker.Models
             File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/publisher.txt", string.Empty);
             File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/genre.txt", string.Empty);
             File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/release-date.txt", string.Empty);
+            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/game-data.txt", string.Empty);
 
             File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/rank.txt", string.Empty);
             File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/awards.txt", string.Empty);
@@ -113,12 +156,14 @@ namespace Retro_Achievement_Tracker.Models
             File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/game-true-points.txt", string.Empty);
             File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/game-achievements.txt", string.Empty);
             File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/completed.txt", string.Empty);
+            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/stats/user-data.txt", string.Empty);
 
             for (int i = 0; i < 5; i++)
             {
-                    File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-" + (i + 1) + "-title.txt", string.Empty);
-                    File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-" + (i + 1) + "-description.txt", string.Empty);
-                    File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-" + (i + 1) + "-points.txt", string.Empty);
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-" + (i + 1) + "-title.txt", string.Empty);
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-" + (i + 1) + "-description.txt", string.Empty);
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-" + (i + 1) + "-points.txt", string.Empty);
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-" + (i + 1) + "-data.txt", string.Empty);
             }
         }
     }

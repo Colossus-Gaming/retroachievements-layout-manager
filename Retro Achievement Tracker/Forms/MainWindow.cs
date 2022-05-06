@@ -142,7 +142,7 @@ namespace Retro_Achievement_Tracker
         {
             try
             {
-                SortAchievements();
+                SortAchievements(sameGame);
 
                 if (sameGame)
                 {
@@ -204,7 +204,10 @@ namespace Retro_Achievement_Tracker
             }
             else if (LockedAchievements.Count == 0 && UnlockedAchievements.Count > 0)
             {
+                FocusController.Instance.SetFocus((Achievement) null);
                 FocusController.Instance.SetFocus(GameInfo);
+
+                ClearFocusAchievementRenders();
             }
             else
             {
@@ -247,6 +250,12 @@ namespace Retro_Achievement_Tracker
 
                     retroAchievementsAPIClient.GetUserSummary().ContinueWith(async userSummaryTemp =>
                     {
+                        if (userSummaryTemp == null)
+                        {
+                            StartTimer();
+                            return;
+                        }
+
                         Invoke((MethodInvoker)delegate
                         {
                             UserSummary = userSummaryTemp.Result;
@@ -486,7 +495,7 @@ namespace Retro_Achievement_Tracker
                 UserAndGameUpdateTimer.Start();
             }
         }
-        private void SortAchievements()
+        private void SortAchievements(bool sameGame)
         {
             if (GameInfo.Achievements != null)
             {
@@ -501,7 +510,7 @@ namespace Retro_Achievement_Tracker
                     }
                 });
 
-                if (OldUnlockedAchievements.Count < UnlockedAchievements.Count)
+                if (sameGame && OldUnlockedAchievements.Count < UnlockedAchievements.Count)
                 {
                     if (LockedAchievements.IndexOf(FocusController.Instance.CurrentlyFocusedAchievement) > -1)
                     {
