@@ -221,6 +221,7 @@
     <Compile Include="Models\CustomResourceRequestHandler.cs" />
     <Compile Include="Models\GameInfo.cs" />
     <Compile Include="Models\GameInfoConverter.cs" />
+    <Compile Include="Models\NotificationRequest.cs" />
     <Compile Include="Models\StreamLabelManager.cs" />
     <Compile Include="Models\UserSummaryConverter.cs" />
     <Compile Include="Models\UserSummary.cs" />

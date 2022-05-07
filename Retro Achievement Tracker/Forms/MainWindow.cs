@@ -150,6 +150,8 @@ namespace Retro_Achievement_Tracker
                     .FindAll(unlockedAchievement => !OldUnlockedAchievements.Contains(unlockedAchievement))
                     .ToList();
 
+                    achievementNotificationList.ForEach((achievement) => StreamLabelManager.Instance.EnqueueAlert(achievement));
+
                     if (achievementNotificationList.Count > 0)
                     {
                         UpdateTimerLabel("CHEEVOS POP!");
@@ -166,6 +168,7 @@ namespace Retro_Achievement_Tracker
                         if (UnlockedAchievements.Count == GameInfo.Achievements.Count && OldUnlockedAchievements.Count < GameInfo.Achievements.Count)
                         {
                             AlertsController.Instance.EnqueueMasteryNotification(GameInfo);
+                            StreamLabelManager.Instance.EnqueueAlert(GameInfo);
                         }
 
                         AlertsController.Instance.RunNotifications();
@@ -186,9 +189,12 @@ namespace Retro_Achievement_Tracker
                     SetFocus();
                 }
 
-                UpdateStats();
+                UpdateGameInfo();
+                UpdateUserInfo();
                 UpdateLastFive();
                 UpdateAchievementList(!sameGame);
+
+                StreamLabelManager.Instance.RunNotifications();
             }
             catch (Exception e)
             {
@@ -200,18 +206,18 @@ namespace Retro_Achievement_Tracker
             if (CurrentlyViewingAchievement != null)
             {
                 FocusController.Instance.SetFocus(CurrentlyViewingAchievement);
-                StreamLabelManager.Instance.WriteFocusStreamLabels(CurrentlyViewingAchievement);
+                StreamLabelManager.Instance.EnqueueFocus(CurrentlyViewingAchievement);
             }
             else if (LockedAchievements.Count == 0 && UnlockedAchievements.Count > 0)
             {
-                FocusController.Instance.SetFocus((Achievement) null);
+                FocusController.Instance.SetFocus((Achievement)null);
                 FocusController.Instance.SetFocus(GameInfo);
 
-                ClearFocusAchievementRenders();
+                StreamLabelManager.Instance.ClearFocus();
             }
             else
             {
-                ClearFocusAchievementRenders();
+                StreamLabelManager.Instance.ClearFocus();
             }
         }
 
@@ -269,7 +275,7 @@ namespace Retro_Achievement_Tracker
                         {
                             Invoke((MethodInvoker)delegate
                             {
-                                GameInfo = userProgress.Result;                                
+                                GameInfo = userProgress.Result;
                             });
                             int newId = UserSummary.LastGameID;
 
@@ -292,93 +298,6 @@ namespace Retro_Achievement_Tracker
                     Console.WriteLine(ex.StackTrace);
                 }
             }
-        }
-        protected override void OnShown(EventArgs e)
-        {
-            retroAchievementsAPIClient = new RetroAchievementAPIClient(Settings.Default.ra_username, Settings.Default.ra_key);
-
-            LoadProperties();
-            SetupInterface();
-            CreateFolders();
-
-            if (CanStart())
-            {
-                if (autoStartCheckbox.Checked)
-                {
-                    StartButton_Click(null, null);
-                }
-            }
-            else
-            {
-                StopButton_Click(null, null);
-            }
-        }
-        private void CreateFolders()
-        {
-            if (!Directory.Exists(@"stream-labels"))
-            {
-                Directory.CreateDirectory(@"stream-labels");
-            }
-            if (!Directory.Exists(@"stream-labels\stats"))
-            {
-                Directory.CreateDirectory(@"stream-labels\stats");
-            }
-            if (!Directory.Exists(@"stream-labels\game-info"))
-            {
-                Directory.CreateDirectory(@"stream-labels\game-info");
-            }
-            if (!Directory.Exists(@"stream-labels\last-five"))
-            {
-                Directory.CreateDirectory(@"stream-labels\last-five");
-            }
-            if (!Directory.Exists(@"stream-labels\focus"))
-            {
-                Directory.CreateDirectory(@"stream-labels\focus");
-            }
-        }
-        private void StartButton_Click(object sender, EventArgs e)
-        {
-            startButton.Enabled = false;
-            stopButton.Enabled = true;
-
-            ShouldRun = true;
-
-            usernameTextBox.Enabled = false;
-            apiKeyTextBox.Enabled = false;
-
-            openFocusWindowButton.Enabled = true;
-            openNotificationWindowButton.Enabled = true;
-            openUserStatsWindowButton.Enabled = true;
-            openGameInfoWindowButton.Enabled = true;
-
-            UpdateFromSite(null, null);
-
-            Settings.Default.ra_username = usernameTextBox.Text;
-            Settings.Default.ra_key = apiKeyTextBox.Text;
-            Settings.Default.Save();
-        }
-        private void StopButton_Click(object sender, EventArgs e)
-        {
-            ShouldRun = false;
-
-            UserAndGameUpdateTimer.Stop();
-
-            raConnectionStatusPictureBox.Image = Resources.red_button;
-
-            UpdateTimerLabel("Stopped Updating.");
-
-            stopButton.Enabled = false;
-            openFocusWindowButton.Enabled = CanStart();
-            openNotificationWindowButton.Enabled = CanStart();
-            openUserStatsWindowButton.Enabled = CanStart();
-            openGameInfoWindowButton.Enabled = CanStart();
-            openLastFiveWindowButton.Enabled = CanStart();
-            openAchievementListWindowButton.Enabled = CanStart();
-
-            apiKeyTextBox.Enabled = true;
-            usernameTextBox.Enabled = true;
-
-            startButton.Enabled = CanStart();
         }
 
         public void UpdateCurrentlyViewingAchievement()
@@ -434,9 +353,9 @@ namespace Retro_Achievement_Tracker
         {
             LastFiveController.Instance.SetAchievements(GetLastFiveAchievements());
 
-            StreamLabelManager.Instance.WriteLastFiveStreamLabels(GameInfo);
+            StreamLabelManager.Instance.EnqueueLastFive(GameInfo);
         }
-        private void UpdateStats()
+        private void UpdateUserInfo()
         {
             UserStatsController.Instance.SetRank(UserSummary.Rank.ToString());
             UserStatsController.Instance.SetRatio(UserSummary.RetroRatio);
@@ -444,13 +363,7 @@ namespace Retro_Achievement_Tracker
             UserStatsController.Instance.SetPoints(UserSummary.TotalPoints.ToString());
             UserStatsController.Instance.SetTruePoints(UserSummary.TotalTruePoints.ToString());
 
-            GameStatsController.Instance.SetGamePoints(GameInfo.GamePointsEarned.ToString(), GameInfo.GamePointsPossible.ToString());
-            GameStatsController.Instance.SetGameAchievements(GameInfo.AchievementsEarned.ToString(), GameInfo.Achievements == null ? "0" : GameInfo.Achievements.Count.ToString());
-            GameStatsController.Instance.SetGameTruePoints(GameInfo.GameTruePointsEarned.ToString(), GameInfo.GameTruePointsPossible.ToString());
-            GameStatsController.Instance.SetGameRatio();
-            GameStatsController.Instance.SetCompleted(GameInfo.Achievements == null ? 0.00f : GameInfo.AchievementsEarned / (float)GameInfo.Achievements.Count * 100f);
-
-            StreamLabelManager.Instance.WriteStatsStreamLabels(UserSummary, GameInfo);
+            StreamLabelManager.Instance.EnqueueUserInfo(UserSummary);
         }
         private void UpdateGameInfo()
         {
@@ -461,39 +374,18 @@ namespace Retro_Achievement_Tracker
             GameInfoController.Instance.SetPublisherValue(GameInfo.Publisher);
             GameInfoController.Instance.SetReleaseDateValue(GameInfo.Released);
 
-            StreamLabelManager.Instance.WriteGameInfoStreamLabels(GameInfo);
-        }
-        private void ClearFocusAchievementRenders()
-        {
-            StreamLabelManager.Instance.ClearFocusStreamLabels();
+            GameStatsController.Instance.SetGamePoints(GameInfo.GamePointsEarned.ToString(), GameInfo.GamePointsPossible.ToString());
+            GameStatsController.Instance.SetGameAchievements(GameInfo.AchievementsEarned.ToString(), GameInfo.Achievements == null ? "0" : GameInfo.Achievements.Count.ToString());
+            GameStatsController.Instance.SetGameTruePoints(GameInfo.GameTruePointsEarned.ToString(), GameInfo.GameTruePointsPossible.ToString());
+            GameStatsController.Instance.SetGameRatio();
+            GameStatsController.Instance.SetCompleted(GameInfo.Achievements == null ? 0.00f : GameInfo.AchievementsEarned / (float)GameInfo.Achievements.Count * 100f);
+
+            StreamLabelManager.Instance.EnqueueGameInfo(GameInfo);
         }
 
         private void UpdateAchievementList(bool newGame)
         {
             AchievementListController.Instance.UpdateAchievementList(UnlockedAchievements, LockedAchievements, newGame);
-        }
-        private bool CanStart()
-        {
-            return !(string.IsNullOrEmpty(usernameTextBox.Text)
-                || string.IsNullOrEmpty(apiKeyTextBox.Text));
-        }
-        private void UpdateTimerLabel(string s)
-        {
-            if (GameInfo != null)
-            {
-                s = "[" + GameInfo.Title + "] - " + UnlockedAchievements.Count + " / " + (GameInfo.Achievements == null ? 0 : GameInfo.Achievements.Count) + "\n" + s;
-            }
-            timerStatusLabel.Text = s;
-        }
-
-        private void StartTimer()
-        {
-            UserAndGameTimerCounter = 6;
-
-            if (ShouldRun)
-            {
-                UserAndGameUpdateTimer.Start();
-            }
         }
         private void SortAchievements(bool sameGame)
         {
@@ -520,9 +412,103 @@ namespace Retro_Achievement_Tracker
                     {
                         CurrentlyViewingIndex = LockedAchievements.IndexOf(CurrentlyViewingAchievement) == -1 ? 0 : LockedAchievements.IndexOf(CurrentlyViewingAchievement);
                     }
-                    UpdateCurrentlyViewingAchievement();
-                    SetFocus();
                 }
+            }
+        }
+        protected override void OnShown(EventArgs e)
+        {
+            retroAchievementsAPIClient = new RetroAchievementAPIClient(Settings.Default.ra_username, Settings.Default.ra_key);
+
+            LoadProperties();
+            SetupInterface();
+            CreateFolders();
+
+            if (CanStart())
+            {
+                if (autoStartCheckbox.Checked)
+                {
+                    StartButton_Click(null, null);
+                }
+            }
+            else
+            {
+                StopButton_Click(null, null);
+            }
+        }
+        private void CreateFolders()
+        {
+            Directory.CreateDirectory(@"stream-labels");
+            Directory.CreateDirectory(@"stream-labels\user-info");
+            Directory.CreateDirectory(@"stream-labels\game-info");
+            Directory.CreateDirectory(@"stream-labels\last-five");
+            Directory.CreateDirectory(@"stream-labels\focus");
+            Directory.CreateDirectory(@"stream-labels\alerts");
+        }
+        private void StartButton_Click(object sender, EventArgs e)
+        {
+            startButton.Enabled = false;
+            stopButton.Enabled = true;
+
+            ShouldRun = true;
+
+            usernameTextBox.Enabled = false;
+            apiKeyTextBox.Enabled = false;
+
+            openFocusWindowButton.Enabled = true;
+            openNotificationWindowButton.Enabled = true;
+            openUserStatsWindowButton.Enabled = true;
+            openGameInfoWindowButton.Enabled = true;
+
+            UpdateFromSite(null, null);
+
+            Settings.Default.ra_username = usernameTextBox.Text;
+            Settings.Default.ra_key = apiKeyTextBox.Text;
+            Settings.Default.Save();
+        }
+        private void StopButton_Click(object sender, EventArgs e)
+        {
+            ShouldRun = false;
+
+            UserAndGameUpdateTimer.Stop();
+
+            raConnectionStatusPictureBox.Image = Resources.red_button;
+
+            UpdateTimerLabel("Stopped Updating.");
+
+            stopButton.Enabled = false;
+            openFocusWindowButton.Enabled = CanStart();
+            openNotificationWindowButton.Enabled = CanStart();
+            openUserStatsWindowButton.Enabled = CanStart();
+            openGameInfoWindowButton.Enabled = CanStart();
+            openLastFiveWindowButton.Enabled = CanStart();
+            openAchievementListWindowButton.Enabled = CanStart();
+
+            apiKeyTextBox.Enabled = true;
+            usernameTextBox.Enabled = true;
+
+            startButton.Enabled = CanStart();
+        }
+        private bool CanStart()
+        {
+            return !(string.IsNullOrEmpty(usernameTextBox.Text)
+                || string.IsNullOrEmpty(apiKeyTextBox.Text));
+        }
+        private void UpdateTimerLabel(string s)
+        {
+            if (GameInfo != null)
+            {
+                s = "[" + GameInfo.Title + "] - " + UnlockedAchievements.Count + " / " + (GameInfo.Achievements == null ? 0 : GameInfo.Achievements.Count) + "\n" + s;
+            }
+            timerStatusLabel.Text = s;
+        }
+
+        private void StartTimer()
+        {
+            UserAndGameTimerCounter = 6;
+
+            if (ShouldRun)
+            {
+                UserAndGameUpdateTimer.Start();
             }
         }
         protected override void OnClosed(EventArgs e)
@@ -838,30 +824,42 @@ namespace Retro_Achievement_Tracker
                 && GameInfo.Achievements[0] != null)
             {
                 AlertsController.Instance.EnqueueAchievementNotifications(new List<Achievement>() { GameInfo.Achievements[0] });
+                StreamLabelManager.Instance.EnqueueAlert(GameInfo.Achievements[0]);
+
                 AlertsController.Instance.RunNotifications();
+                StreamLabelManager.Instance.RunNotifications();
             }
             else
             {
+                Achievement achievement = new Achievement()
+                {
+                    Title = "Thrilling!!!!",
+                    Description = "Color every bit of Dinosaur 2. [Must color white if leaving white]",
+                    BadgeNumber = "49987",
+                    Points = 1
+                };
+
                 AlertsController.Instance.EnqueueAchievementNotifications(new List<Achievement>() {
-                     new Achievement()
-                     {
-                         Title = "Thrilling!!!!",
-                         Description = "Color every bit of Dinosaur 2. [Must color white if leaving white]",
-                         BadgeNumber = "49987",
-                         Points = 1
-                     }
+                     achievement
                 });
+                StreamLabelManager.Instance.EnqueueAlert(achievement);
+
                 AlertsController.Instance.RunNotifications();
+                StreamLabelManager.Instance.RunNotifications();
             }
         }
         private void ShowGameMasteryButton_Click(object sender, EventArgs eventArgs)
         {
             AlertsController.Instance.EnqueueMasteryNotification(GameInfo);
+            StreamLabelManager.Instance.EnqueueAlert(GameInfo);
+
             AlertsController.Instance.RunNotifications();
+            StreamLabelManager.Instance.RunNotifications();
         }
         private void SetFocusButton_Click(object sender, EventArgs e)
         {
             SetFocus();
+            StreamLabelManager.Instance.RunNotifications();
         }
         private void MoveFocusIndexLeft(object sender, EventArgs e)
         {

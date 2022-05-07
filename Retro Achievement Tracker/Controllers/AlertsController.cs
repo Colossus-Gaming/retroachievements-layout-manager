@@ -19,7 +19,7 @@ namespace Retro_Achievement_Tracker.Controllers
         private static AlertsController instance = new AlertsController();
         private static AlertsWindow AlertsLayoutWindow;
         public static bool IsOpen;
-        private Stopwatch Stopwatch;
+        private Stopwatch NotificationsStopwatch;
         private Task NotificationsTask;
         private readonly ConcurrentQueue<NotificationRequest> NotificationRequests;
         private readonly CancellationTokenSource tokenSource2 = new CancellationTokenSource();
@@ -46,7 +46,7 @@ namespace Retro_Achievement_Tracker.Controllers
 
             NotificationRequests = new ConcurrentQueue<NotificationRequest>();
 
-            Stopwatch = new Stopwatch();
+            NotificationsStopwatch = new Stopwatch();
 
             NotificationsTask = Task.Factory.StartNew(() => { });
 
@@ -76,17 +76,18 @@ namespace Retro_Achievement_Tracker.Controllers
 
         public void EnqueueMasteryNotification(GameInfo gameInfoAndProgress)
         {
+
+            NotificationRequest notificationRequest = new NotificationRequest
+            {
+                GameInfoAndProgress = gameInfoAndProgress
+            };
+
             if (CanPlay && !AlertsLayoutWindow.IsDisposed)
             {
                 if (CustomMasteryEnabled && string.IsNullOrEmpty(CustomMasteryFile))
                 {
                     CustomMasteryEnabled = false;
                 }
-
-                NotificationRequest notificationRequest = new NotificationRequest
-                {
-                    GameInfoAndProgress = gameInfoAndProgress
-                };
 
                 NotificationRequests.Enqueue(notificationRequest);
             }
@@ -100,7 +101,7 @@ namespace Retro_Achievement_Tracker.Controllers
 
         public void RunNotifications()
         {
-            if (NotificationRequests.Count > 0 && CanPlay && !IsPlaying && !Stopwatch.IsRunning)
+            if (NotificationRequests.Count > 0 && CanPlay && !IsPlaying && !NotificationsStopwatch.IsRunning)
             {
                 NotificationRequest notificationRequest = NotificationRequestDequeue();
 
@@ -127,12 +128,12 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         private async void RunNotificationTask()
         {
-            Stopwatch = Stopwatch.StartNew();
+            NotificationsStopwatch = Stopwatch.StartNew();
 
             AnimationInPlayed = false;
             AnimationOutPlayed = false;
 
-            while (Stopwatch.IsRunning)
+            while (NotificationsStopwatch.IsRunning)
             {
                 if (tokenSource2.Token.IsCancellationRequested)
                 {
@@ -167,7 +168,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 }
                 if (AnimationInPlayed && AnimationOutPlayed)
                 {
-                    Stopwatch.Stop();
+                    NotificationsStopwatch.Stop();
                 }
                 await Task.Delay(10);
             }
@@ -316,7 +317,7 @@ namespace Retro_Achievement_Tracker.Controllers
         {
             if (IsOpen)
             {
-                AlertsLayoutWindow.EnableMasteryEdit(); 
+                AlertsLayoutWindow.EnableMasteryEdit();
                 IsEditingAchievement = true;
             }
         }
@@ -1209,10 +1210,5 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.Save();
             }
         }
-    }
-    public class NotificationRequest
-    {
-        public Achievement Achievement { get; set; }
-        public GameInfo GameInfoAndProgress { get; set; }
     }
 }

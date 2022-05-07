@@ -258,9 +258,9 @@
                 if (prop.CanRead)
                 {
                     object propVal = prop.GetValue(value, null);
-                    if (propVal != null)
+                    if (propVal != null && !propVal.GetType().Name.Equals("List`1"))
                     {
-                        jo.Add(prop.Name, JToken.FromObject(propVal, serializer));
+                        jo.Add(Char.ToLowerInvariant(prop.Name[0]) + prop.Name.Substring(1), JToken.FromObject(propVal, serializer));
                     }
                 }
             }
