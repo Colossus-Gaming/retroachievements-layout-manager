@@ -34,6 +34,17 @@ namespace Retro_Achievement_Tracker.Models
                 return 0;
             }
         }
+        public int AchievementsPossible
+        {
+            get
+            {
+                if (Achievements != null)
+                {
+                    return Achievements.Count;
+                }
+                return 0;
+            }
+        }
         public int GameTruePointsPossible
         {
             get
