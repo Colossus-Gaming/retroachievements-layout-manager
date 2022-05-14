@@ -72,8 +72,7 @@ namespace Retro_Achievement_Tracker.Forms
                 "achievementPoints.innerHTML = \"" + achievement.Points + "\";" +
                 "$(\"#achievement-badge\").attr(\"src\", \"https://retroachievements.org/Badge/" + achievement.BadgeNumber + ".png\");" +
                 "$(\"#achievement-video\").attr(\"src\", \"disk://achievement-notification\");" +
-                "achievementVideoElement.style.display = \"block\";" +
-                "achievementElement.style.display = \"block\";" +
+                "achievementVideoElement.style.visibility = \"visible\";" +
                 "setTimeout(function() { textFit(achievementTitle, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true }); }, 100);" +
                 "setTimeout(function() { textFit(achievementDescription, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true }); }, 200);" +
                 "setTimeout(function() { textFit(achievementPoints, { reProcess: true }); }, 300);");
@@ -87,8 +86,7 @@ namespace Retro_Achievement_Tracker.Forms
                 "masteryPoints.innerHTML = \"Points:<br/>" + gameInfoAndProgress.GamePointsPossible + "\";" +
                 "$(\"#mastery-badge\").attr('src', \"https://retroachievements.org" + gameInfoAndProgress.ImageIcon + "\");" +
                 "$(\"#mastery-video\").attr('src', \"disk://mastery-notification\");" +
-                "masteryVideoElement.style.display = \"block\";" +
-                "masteryElement.style.display = \"block\";" +
+                "masteryVideoElement.style.visibility = \"visible\";" +
                 "setTimeout(function() { textFit(masteryTitle, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true }); }, 100);" +
                 "setTimeout(function() { textFit(masteryPoints, { alignVert: true, alignHoriz: true, reProcess: true }); }, 200);" +
                 "setTimeout(function() { textFit(masteryAchievements, { alignVert: true, alignHoriz: true, reProcess: true }); }, 300);");
@@ -191,7 +189,7 @@ namespace Retro_Achievement_Tracker.Forms
                     animationScript = "achievementElement.animate([ { left: '1034px', top: '220px' }, { left: '165px', top: '220px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\", easing: \"ease-out\" });";
                     break;
                 default:
-                    animationScript = "achievementElement.animate([ { left: '165px', top: '220px' }, { left: '165px', top: '220px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\", easing: \"ease-out\" });";
+                    animationScript = "achievementElement.animate([ { left: '-300px', top: '-310px' }, { left: '165px', top: '220px' } ], { interations: 1, duration: 10, fill: \"forwards\", easing: \"ease-out\" });";
                     break;
             }
 
@@ -216,7 +214,7 @@ namespace Retro_Achievement_Tracker.Forms
                     animationScript = "achievementElement.animate([ { left: '165px', top: '220px' }, { left: '1034px', top: '220px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\", easing: \"ease-out\" });";
                     break;
                 default:
-                    animationScript = "achievementElement.style.display = \"none\";";
+                    animationScript = "achievementElement.animate([ { left: '-300px', top: '-310px' }, { left: '-300px', top: '-310px' } ], { interations: 1, duration: 10, fill: \"forwards\", easing: \"ease-out\" });";
                     break;
             }
 
@@ -241,7 +239,7 @@ namespace Retro_Achievement_Tracker.Forms
                     animationScript = "masteryElement.animate([ { left: '1034px', top: '220px' }, { left: '165px', top: '220px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\", easing: \"ease-out\" });";
                     break;
                 default:
-                    animationScript = "masteryElement.animate([ { left: '165px', top: '220px' }, { left: '165px', top: '220px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\", easing: \"ease-out\" });";
+                    animationScript = "masteryElement.animate([ { left: '-300px', top: '-310px' }, { left: '165px', top: '220px' } ], { interations: 1, duration: 10, fill: \"forwards\", easing: \"ease-out\" });";
                     break;
             }
 
@@ -254,19 +252,19 @@ namespace Retro_Achievement_Tracker.Forms
             switch (animationDirection)
             {
                 case AnimationDirection.UP:
-                    animationScript = "masteryElement.animate([ { left: '165px', top: '220px' }, { left: '165px', top: '-310px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\", easing: \"ease-out\" }); setTimeout(function() { masteryElement.style.left = '1922px' }, " + (value + 50) + ");";
+                    animationScript = "masteryElement.animate([ { left: '165px', top: '220px' }, { left: '165px', top: '-310px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\", easing: \"ease-out\" });";
                     break;
                 case AnimationDirection.DOWN:
-                    animationScript = "masteryElement.animate([ { left: '165px', top: '220px' }, { left: '165px', top: '600px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\", easing: \"ease-out\" }); setTimeout(function() { masteryElement.style.left = '1922px' }, " + (value + 50) + ");";
+                    animationScript = "masteryElement.animate([ { left: '165px', top: '220px' }, { left: '165px', top: '600px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\", easing: \"ease-out\" });";
                     break;
                 case AnimationDirection.LEFT:
-                    animationScript = "masteryElement.animate([ { left: '165px', top: '220px' }, { left: '-300px', top: '220px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\", easing: \"ease-out\" }); setTimeout(function() { masteryElement.style.left = '1922px' }, " + (value + 50) + ");";
+                    animationScript = "masteryElement.animate([ { left: '165px', top: '220px' }, { left: '-300px', top: '220px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\", easing: \"ease-out\" });";
                     break;
                 case AnimationDirection.RIGHT:
-                    animationScript = "masteryElement.animate([ { left: '165px', top: '220px' }, { left: '1034px', top: '220px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\", easing: \"ease-out\" }); setTimeout(function() { masteryElement.style.left = '1922px' }, " + (value + 50) + ");";
+                    animationScript = "masteryElement.animate([ { left: '165px', top: '220px' }, { left: '1034px', top: '220px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\", easing: \"ease-out\" });";
                     break;
                 default:
-                    animationScript = "masteryElement.style.display = \"none\";";
+                    animationScript = "masteryElement.animate([ { left: '-300px', top: '-310px' }, { left: '-300px', top: '-310px' } ], { interations: 1, duration: 10, fill: \"forwards\", easing: \"ease-out\" });";
                     break;
             }
 
@@ -276,14 +274,8 @@ namespace Retro_Achievement_Tracker.Forms
         public void HideNotifications()
         {
             ExecuteScript(
-                "achievementElement.style.display = \"none\";" +
-                "achievementElement.style.left = \"-300px\";" +
-                "achievementElement.style.top = \"-300px\";" +
-                "masteryElement.style.display = \"none\";" +
-                "masteryElement.style.left = \"-300px\";" +
-                "masteryElement.style.top = \"-300px\";" +
-                "achievementVideoElement.style.display = \"none\";" +
-                "masteryVideoElement.style.display = \"none\";");
+                "achievementVideoElement.style.visibility = \"hidden\";" +
+                "masteryVideoElement.style.visibility = \"hidden\";");
         }
 
         public void SetSimpleFontColor(string value)

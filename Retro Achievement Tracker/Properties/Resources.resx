@@ -142,9 +142,6 @@
   <data name="image" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\image.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="LastFiveWindow" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\lastfivewindow.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
   <data name="AchievementListWindow" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\achievementlistwindow.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
@@ -153,5 +150,29 @@
   </data>
   <data name="UserStatsWindow" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\userstatswindow.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="RecentAchievementsWindow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\recentachievementswindow.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ARCADE_N" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ARCADE_N.TTF;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="chrono_trigger_block" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\chrono-trigger-block.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="chrono_trigger_block1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\chrono-trigger-block1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="chrono_trigger_block2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\chrono-trigger-block2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="chrono_trigger_block3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\chrono-trigger-block3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="chrono_trigger_block4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\chrono-trigger-block4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="chrono_trigger_block5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\chrono-trigger-block5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

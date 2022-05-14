@@ -142,7 +142,7 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (PlayingAchievement)
                 {
-                    if (!AnimationInPlayed && (AlertsLayoutWindow.GetAchievementPlayingTime().Result * 1000) > (CustomAchievementEnabled ? CustomAchievementIn : 25))
+                    if (!AnimationInPlayed && (AlertsLayoutWindow.GetAchievementPlayingTime().Result * 1000) > (CustomAchievementEnabled ? CustomAchievementIn : 100))
                     {
                         AlertsLayoutWindow.SetAchievementIn(CustomAchievementEnabled ? CustomAchievementInSpeed : 500, (CustomAchievementEnabled ? AchievementAnimationIn : AnimationDirection.STATIC));
                         AnimationInPlayed = true;
@@ -155,7 +155,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 }
                 else
                 {
-                    if (!AnimationInPlayed && (AlertsLayoutWindow.GetMasteryPlayingTime().Result * 1000) > (CustomMasteryEnabled ? CustomMasteryIn : 25))
+                    if (!AnimationInPlayed && (AlertsLayoutWindow.GetMasteryPlayingTime().Result * 1000) > (CustomMasteryEnabled ? CustomMasteryIn : 100))
                     {
                         AlertsLayoutWindow.SetMasteryIn(CustomMasteryEnabled ? CustomMasteryInSpeed : 500, CustomMasteryEnabled ? MasteryAnimationIn : AnimationDirection.STATIC);
                         AnimationInPlayed = true;

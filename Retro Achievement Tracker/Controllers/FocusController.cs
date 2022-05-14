@@ -18,6 +18,10 @@ namespace Retro_Achievement_Tracker.Controllers
             FocusLayoutWindow = new FocusWindow();
             IsOpen = false;
         }
+        public Achievement GetCurrentlyFocusedAchievement()
+        {
+            return CurrentlyFocusedAchievement;
+        }
         public static FocusController Instance
         {
             get

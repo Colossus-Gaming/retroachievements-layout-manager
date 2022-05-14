@@ -2638,5 +2638,101 @@ namespace Retro_Achievement_Tracker.Properties {
                 this["game_stats_window_background_color"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool achievement_list_auto_scroll {
+            get {
+                return ((bool)(this["achievement_list_auto_scroll"]));
+            }
+            set {
+                this["achievement_list_auto_scroll"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool recent_achievements_auto_scroll {
+            get {
+                return ((bool)(this["recent_achievements_auto_scroll"]));
+            }
+            set {
+                this["recent_achievements_auto_scroll"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool rss_news_feed {
+            get {
+                return ((bool)(this["rss_news_feed"]));
+            }
+            set {
+                this["rss_news_feed"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool rss_new_achievements_feed {
+            get {
+                return ((bool)(this["rss_new_achievements_feed"]));
+            }
+            set {
+                this["rss_new_achievements_feed"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool rss_forum_feed {
+            get {
+                return ((bool)(this["rss_forum_feed"]));
+            }
+            set {
+                this["rss_forum_feed"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool rss_friend_feed {
+            get {
+                return ((bool)(this["rss_friend_feed"]));
+            }
+            set {
+                this["rss_friend_feed"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool web_browser_auto_launch {
+            get {
+                return ((bool)(this["web_browser_auto_launch"]));
+            }
+            set {
+                this["web_browser_auto_launch"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public int recent_achievements_max_list_size {
+            get {
+                return ((int)(this["recent_achievements_max_list_size"]));
+            }
+            set {
+                this["recent_achievements_max_list_size"] = value;
+            }
+        }
     }
 }

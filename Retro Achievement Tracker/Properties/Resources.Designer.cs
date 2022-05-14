@@ -70,7 +70,9 @@ namespace Retro_Achievement_Tracker.Properties {
         ///    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css&quot;&gt;
         ///    &lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js&quot;&gt;&lt;/script&gt;
         ///    &lt;script id=&quot;scripts&quot;&gt;
-        ///        function addAchievement(name, lockedImageLink, imageLink, descr [rest of string was truncated]&quot;;.
+        ///        function addAchievement(xCoord, yCoord, achievement) {
+        ///
+        ///      [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string AchievementListWindow {
             get {
@@ -95,6 +97,76 @@ namespace Retro_Achievement_Tracker.Properties {
         internal static string AlertsWindow {
             get {
                 return ResourceManager.GetString("AlertsWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] ARCADE_N {
+            get {
+                object obj = ResourceManager.GetObject("ARCADE_N", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap chrono_trigger_block {
+            get {
+                object obj = ResourceManager.GetObject("chrono_trigger_block", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap chrono_trigger_block1 {
+            get {
+                object obj = ResourceManager.GetObject("chrono_trigger_block1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap chrono_trigger_block2 {
+            get {
+                object obj = ResourceManager.GetObject("chrono_trigger_block2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap chrono_trigger_block3 {
+            get {
+                object obj = ResourceManager.GetObject("chrono_trigger_block3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap chrono_trigger_block4 {
+            get {
+                object obj = ResourceManager.GetObject("chrono_trigger_block4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap chrono_trigger_block5 {
+            get {
+                object obj = ResourceManager.GetObject("chrono_trigger_block5", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -145,16 +217,20 @@ namespace Retro_Achievement_Tracker.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
-        ///
-        ///&lt;html lang=&quot;en&quot; xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
+        ///&lt;html&gt;
         ///&lt;head&gt;
-        ///    &lt;meta charset=&quot;utf-8&quot; /&gt;
         ///    &lt;title&gt;&lt;/title&gt;
-        ///&lt;/head&gt;
-        ///&lt;body&gt;
-        ///
-        ///&lt;/body&gt;
-        ///&lt;/html&gt;.
+        ///    &lt;meta charset=&quot;UTF-8&quot;&gt;
+        ///    &lt;script src=&quot;https://code.jquery.com/jquery-3.5.1.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+        ///    &lt;script id=&quot;scripts&quot;&gt;
+        ///        /**
+        ///                 * textFit v2.3.1
+        ///                 * Previously known as jQuery.textFit
+        ///                 * 11/2014 by STRML (strml.github.com)
+        ///                 * MIT License
+        ///                 *
+        ///                 * To use: textFit(document.getElementById(&apos;target-div&apos;), options);
+        ///            [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string GameStatsWindow {
             get {
@@ -183,6 +259,16 @@ namespace Retro_Achievement_Tracker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap notification_background {
+            get {
+                object obj = ResourceManager.GetObject("notification_background", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
         ///&lt;html&gt;
         ///&lt;head&gt;
@@ -192,21 +278,12 @@ namespace Retro_Achievement_Tracker.Properties {
         ///    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css&quot;&gt;
         ///    &lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js&quot;&gt;&lt;/script&gt;
         ///    &lt;script id=&quot;last-five-scripts&quot;&gt;
-        ///        function addToList(name, imageLink, points, date, id) [rest of string was truncated]&quot;;.
+        ///        function addAchievement(achievement) {
+        ///            v [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string LastFiveWindow {
+        internal static string RecentAchievementsWindow {
             get {
-                return ResourceManager.GetString("LastFiveWindow", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap notification_background {
-            get {
-                object obj = ResourceManager.GetObject("notification_background", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ResourceManager.GetString("RecentAchievementsWindow", resourceCulture);
             }
         }
         

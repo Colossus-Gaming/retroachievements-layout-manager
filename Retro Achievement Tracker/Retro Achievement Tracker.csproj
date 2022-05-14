@@ -130,6 +130,7 @@
     <Reference Include="System.Numerics">
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xaml">
       <Private>True</Private>
     </Reference>
@@ -169,7 +170,7 @@
     <Compile Include="Controllers\AlertsController.cs" />
     <Compile Include="Controllers\FocusController.cs" />
     <Compile Include="Controllers\GameInfoController.cs" />
-    <Compile Include="Controllers\LastFiveController.cs" />
+    <Compile Include="Controllers\RecentAchievementsController.cs" />
     <Compile Include="Controllers\GameStatsController.cs" />
     <Compile Include="Controllers\UserStatsController.cs" />
     <Compile Include="Forms\AchievementListWindow.cs">
@@ -184,11 +185,11 @@
     <Compile Include="Forms\GameStatsWindow.Designer.cs">
       <DependentUpon>GameStatsWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\LastFiveWindow.cs">
+    <Compile Include="Forms\RecentsAchievementsWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\LastFiveWindow.Designer.cs">
-      <DependentUpon>LastFiveWindow.cs</DependentUpon>
+    <Compile Include="Forms\RecentsAchievementsWindow.Designer.cs">
+      <DependentUpon>RecentsAchievementsWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\AlertsWindow.cs">
       <SubType>Form</SubType>
@@ -237,8 +238,8 @@
     <EmbeddedResource Include="Forms\AchievementListWindow.resx">
       <DependentUpon>AchievementListWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LastFiveWindow.resx">
-      <DependentUpon>LastFiveWindow.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\RecentsAchievementsWindow.resx">
+      <DependentUpon>RecentsAchievementsWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AlertsWindow.resx">
       <DependentUpon>AlertsWindow.cs</DependentUpon>
@@ -313,8 +314,14 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\GameInfoWindow.html" />
-    <Resource Include="Resources\LastFiveWindow.html" />
+    <Resource Include="Resources\RecentAchievementsWindow.html" />
     <EmbeddedResource Include="Resources\AchievementListWindow.html" />
+    <None Include="Resources\chrono-trigger-block1.png" />
+    <None Include="Resources\chrono-trigger-block.png" />
+    <None Include="Resources\chrono-trigger-block2.png" />
+    <None Include="Resources\chrono-trigger-block3.png" />
+    <None Include="Resources\chrono-trigger-block4.png" />
+    <None Include="Resources\chrono-trigger-block5.png" />
     <Content Include="Resources\GameStatsWindow.html" />
     <Content Include="video\achievement-notification.webm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -323,6 +330,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\notification-background.png" />
+    <None Include="Resources\ARCADE_N.TTF" />
     <None Include="Resources\yellow-button.png" />
     <EmbeddedResource Include="Resources\FocusWindow.html" />
     <None Include="Resources\green-button.png" />

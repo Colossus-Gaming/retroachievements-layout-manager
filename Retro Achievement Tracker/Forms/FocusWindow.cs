@@ -69,14 +69,19 @@ namespace Retro_Achievement_Tracker
             ExecuteScript(
                   "titleElement.style.lineHeight = " + lineSpacing + ";" +
                   "titleElement.style.fontFamily = \"" + fontFamily + "\";" +
+
                   "descriptionElement.style.lineHeight = " + lineSpacing + ";" +
                   "descriptionElement.style.fontFamily = \"" + fontFamily + "\";" +
+
                   "masteryAchievementsElement.style.lineHeight = " + lineSpacing + ";" +
                   "masteryAchievementsElement.style.fontFamily = \"" + fontFamily + "\";" +
+
                   "masteryPointsElement.style.lineHeight = " + lineSpacing + ";" +
                   "masteryPointsElement.style.fontFamily = \"" + fontFamily + "\";" +
+
                   "pointsElement.style.lineHeight = " + lineSpacing + ";" +
                   "pointsElement.style.fontFamily = \"" + fontFamily + "\";" +
+
                   "setTimeout(function() { textFit(titleElement, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true }); }, 100);" +
                   "setTimeout(function() { textFit(descriptionElement, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true }); }, 200);" +
                   "setTimeout(function() { textFit(masteryAchievementsElement, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true }); }, 300);" +
@@ -116,6 +121,7 @@ namespace Retro_Achievement_Tracker
                   "descriptionElement.style.webkitTextStroke = \"" + value + "\";" +
                   "masteryAchievementsElement.style.webkitTextStroke = \"" + value + "\";" +
                   "masteryPointsElement.style.webkitTextStroke = \"" + value + "\";" +
+
                   "textFit(descriptionElement, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true });" +
                   "textFit(masteryAchievementsElement, { alignVert: true, alignHoriz: true, reProcess: true });" +
                   "textFit(masteryPointsElement, { alignVert: true, alignHoriz: true, reProcess: true });");
@@ -142,10 +148,13 @@ namespace Retro_Achievement_Tracker
             ExecuteScript(
                   "masteryAchievementsElement.style.lineHeight = " + lineSpacing + ";" +
                   "masteryAchievementsElement.style.fontFamily = \"" + fontFamily + "\";" +
+
                   "masteryPointsElement.style.lineHeight = " + lineSpacing + ";" +
                   "masteryPointsElement.style.fontFamily = \"" + fontFamily + "\";" +
+
                   "descriptionElement.style.lineHeight = " + lineSpacing + ";" +
                   "descriptionElement.style.fontFamily = \"" + fontFamily + "\";" +
+
                   "textFit(descriptionElement, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true });" +
                   "textFit(masteryAchievementsElement, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true });" +
                   "textFit(masteryPointsElement, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true });");
@@ -169,6 +178,7 @@ namespace Retro_Achievement_Tracker
             ExecuteScript(
                   "titleElement.style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
                   "titleElement.style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
+
                   "textFit(titleElement, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true });");
         }
 

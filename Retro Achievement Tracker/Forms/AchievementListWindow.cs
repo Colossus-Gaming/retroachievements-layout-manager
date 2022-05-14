@@ -1,5 +1,6 @@
 ﻿using CefSharp;
 using CefSharp.Web;
+using Newtonsoft.Json;
 using Retro_Achievement_Tracker.Controllers;
 using Retro_Achievement_Tracker.Models;
 using Retro_Achievement_Tracker.Properties;
@@ -47,19 +48,9 @@ namespace Retro_Achievement_Tracker.Forms
             ExecuteScript(
                 "allAchievements = document.getElementsByClassName(\"achievement\");");
         }
-        public void AddAchievement(Achievement achievement, int size, int xCoord, int yCoord)
+        public void AddAchievement(Achievement achievement, int xCoord, int yCoord)
         {
-            ExecuteScript("addAchievement(\"" + achievement.Title.Replace("\"", "\\\"") + "\"," +
-                                       "\"https://s3-eu-west-1.amazonaws.com/i.retroachievements.org/Badge/" + achievement.BadgeNumber + "_lock.png\", " +
-                                       "\"https://retroachievements.org/Badge/" + achievement.BadgeNumber + ".png\", " +
-                                       "\"" + achievement.Description.Replace("\"", "\\\"") + "\"," +
-                                       "\"" + achievement.Points + "\"," +
-                                       "\"" + (achievement.DateEarned.HasValue ? achievement.DateEarned.Value.ToLocalTime().ToString() : "") + "\", " +
-                                       "\"" + achievement.Id + "\"," +
-                                       "\"" + size + "px\"," +
-                                       "\"" + xCoord + "px\"," +
-                                       "\"" + yCoord + "px\"," +
-                                       "'" + achievement.DateEarned.HasValue + "');");
+            ExecuteScript("addAchievement(\"" + xCoord + "px\"," + "\"" + yCoord + "px\"," + JsonConvert.SerializeObject(achievement) + ");");
 
         }
         public void SetWindowBackgroundColor(string value)
@@ -67,12 +58,14 @@ namespace Retro_Achievement_Tracker.Forms
             ExecuteScript(
                 "container.style.backgroundColor = \"" + value + "\";");
         }
-
         public void UnlockAchievement(Achievement achievement)
         {
             ExecuteScript("$(\"#achievement-" + achievement.Id + "-locked-image\").toggle(\"pulsate\");" +
-                "$(\"#achievement-" + achievement.Id + "-border\").show();" +
                 "$(\"#achievement-" + achievement.Id + "\").tooltip(\"option\", \"content\", \"" + (achievement.Title + "<br/><br/>" + achievement.Points + "pts<br/><br/>" + achievement.Description + "<br/><br/>" + achievement.DateEarned.Value.ToLocalTime().ToString()) + "\");");
+        }
+        public void StartScrolling(int timeout)
+        {
+            ExecuteScript("setTimeout(function() { startScrolling(); }, " + (timeout + 1000) + "); ");
         }
         public void SetAchievementPositions(Dictionary<Achievement, ValueTuple<int, int, int>> achievementAndCoordinates)
         {
@@ -91,7 +84,7 @@ namespace Retro_Achievement_Tracker.Forms
                     "       {" +
                     "           left: '" + value.Item1 + "px', " +
                     "           top: '" + value.Item2 + "px' " +
-                "           }, 1000, 'easeInOutQuint'" +
+                    "       }, 1000, 'easeInOutQuint'" +
                     "   ); " +
                     "}, " + value.Item3 + ");");
             }
@@ -100,13 +93,18 @@ namespace Retro_Achievement_Tracker.Forms
         }
         public void ClearAchievements(Dictionary<int, int> idsToTimeouts)
         {
-            StringBuilder stringBuilder = new StringBuilder();
+            StringBuilder stringBuilder = new StringBuilder("stopScrolling();" +
+                "document.getElementById(\"container\").scrollTo(" +
+                "{" +
+                " top: 0," +
+                " left: 0," +
+                " behavior: 'smooth'" +
+                "});");
 
             foreach (int id in idsToTimeouts.Keys)
             {
-                int value;
 
-                idsToTimeouts.TryGetValue(id, out value);
+                idsToTimeouts.TryGetValue(id, out int value);
 
                 stringBuilder.Append("setTimeout(function() { " +
                     "   var achievement" + id + "OffsetTop = document.getElementById(\"achievement-" + id + "\").offsetTop;" +
@@ -116,6 +114,10 @@ namespace Retro_Achievement_Tracker.Forms
             }
 
             ExecuteScript(stringBuilder.ToString());
+        }
+        public void CleanCanvas()
+        {
+            ExecuteScript("document.getElementById(\"achievement-list\").innerHTML = \"\";");
         }
         protected async void ExecuteScript(string script)
         {
@@ -137,6 +139,7 @@ namespace Retro_Achievement_Tracker.Forms
         }
         public void SetupBrowser()
         {
+            this.BackColor = Color.Magenta;
             Controls.Remove(chromiumWebBrowser);
 
             chromiumWebBrowser = new CefSharp.WinForms.ChromiumWebBrowser(new HtmlString(Resources.AchievementListWindow))
@@ -144,7 +147,7 @@ namespace Retro_Achievement_Tracker.Forms
                 ActivateBrowserOnCreation = false,
                 Location = new Point(0, 0),
                 Name = "chromiumWebBrowser",
-                Size = new Size(778, 778),
+                Size = new Size(748, 614),
                 TabIndex = 0,
                 Dock = DockStyle.None,
                 RequestHandler = new CustomRequestHandler()
@@ -154,7 +157,7 @@ namespace Retro_Achievement_Tracker.Forms
             {
                 Invoke((MethodInvoker)delegate
                 {
-                    ClientSize = new Size(768, 768);
+                    ClientSize = new Size(748, 614);
 
                     AchievementListController.Instance.SetAllSettings();
                 });

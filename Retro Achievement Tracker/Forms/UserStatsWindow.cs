@@ -257,20 +257,5 @@ namespace Retro_Achievement_Tracker
         }
 
         public CefSharp.WinForms.ChromiumWebBrowser chromiumWebBrowser;
-
-        private void InitializeComponent()
-        {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserStatsWindow));
-            this.SuspendLayout();
-            // 
-            // StatsWindow
-            // 
-            this.ClientSize = new System.Drawing.Size(284, 261);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "StatsWindow";
-            this.ResumeLayout(false);
-
-        }
     }
 }

@@ -4,8 +4,10 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing.Text;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
 namespace Retro_Achievement_Tracker.Models
@@ -13,15 +15,24 @@ namespace Retro_Achievement_Tracker.Models
     public sealed class StreamLabelManager
     {
         private static StreamLabelManager instance = new StreamLabelManager();
+        private PrivateFontCollection PrivateFontCollection;
         private Stopwatch StreamLabelsStopwatch;
         private Task StreamLabelsTask;
         private readonly ConcurrentQueue<Tuple<Task, bool>> StreamLabelsRequests;
         private StreamLabelManager()
         {
-
             StreamLabelsRequests = new ConcurrentQueue<Tuple<Task, bool>>();
             StreamLabelsStopwatch = new Stopwatch();
             StreamLabelsTask = Task.Factory.StartNew(() => { });
+
+            PrivateFontCollection = new PrivateFontCollection();
+
+            int fontLength = Properties.Resources.ARCADE_N.Length;
+            byte[] fontdata = Properties.Resources.ARCADE_N;
+            IntPtr data = Marshal.AllocCoTaskMem(fontLength);
+            Marshal.Copy(fontdata, 0, data, fontLength);
+
+            PrivateFontCollection.AddMemoryFont(data, fontLength);
         }
         public static StreamLabelManager Instance
         {
@@ -29,6 +40,10 @@ namespace Retro_Achievement_Tracker.Models
             {
                 return instance;
             }
+        }
+        public PrivateFontCollection GetPrivateFontCollection()
+        {
+            return PrivateFontCollection;
         }
         private Tuple<Task, bool> StreamLabelDequeue()
         {

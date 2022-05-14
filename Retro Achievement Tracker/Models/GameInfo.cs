@@ -89,5 +89,12 @@ namespace Retro_Achievement_Tracker.Models
                 return 0;
             }
         }
+        public string PercentComplete
+        {
+            get
+            {
+                return (AchievementsEarned / (float) AchievementsPossible * 100f).ToString("0.00");
+            }
+        }
     }
 }

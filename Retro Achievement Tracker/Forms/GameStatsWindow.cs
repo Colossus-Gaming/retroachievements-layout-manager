@@ -257,8 +257,6 @@ namespace Retro_Achievement_Tracker.Forms
                 GameStatsController.Instance.SetAllSettings();
             });
 
-            chromiumWebBrowser.LoadHtml(Resources.GameStatsWindow);
-
             Controls.Add(chromiumWebBrowser);
         }
 

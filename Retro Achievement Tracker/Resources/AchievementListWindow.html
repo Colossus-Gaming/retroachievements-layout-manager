@@ -7,82 +7,139 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script id="scripts">
-        function addAchievement(name, lockedImageLink, imageLink, description, points, date, id, size, xCoord, yCoord, isUnlocked) {
-            var tooltipString = (name + "<br/><br/>" + points + "pts<br/><br/>" + description);
+        function addAchievement(xCoord, yCoord, achievement) {
+
+            var tooltipString = (achievement.title + "<br/><br/>" + achievement.points + "pts<br/><br/>" + achievement.description);
 
             var achievementBlock = document.createElement('div');
             achievementBlock.classList.add("achievement");
-            achievementBlock.id = "achievement-" + id;
-
-            var achievementUnlockedBorder = document.createElement('div');
-            achievementUnlockedBorder.style.boxShadow = "inset 0px 0px 0px " + (size.split("px")[0] / 48) + "px gold";
-            achievementUnlockedBorder.id = "achievement-" + id + "-border";
-            achievementUnlockedBorder.style.zIndex = "3";
-            achievementUnlockedBorder.style.position = "absolute";
-            achievementUnlockedBorder.style.width = size;
-            achievementUnlockedBorder.style.height = size;
-            achievementBlock.appendChild(achievementUnlockedBorder);
+            achievementBlock.style.width = 64;
+            achievementBlock.style.height = 64;
+            achievementBlock.style.zIndex = "99";
+            achievementBlock.id = "achievement-" + achievement.id;
 
             var achievementImage = document.createElement('img');
-            achievementImage.id = "achievement-" + id + "-image";
-            achievementImage.src = imageLink;
-            achievementImage.style.width = size;
-            achievementImage.style.height = size;
+            achievementImage.id = "achievement-" + achievement.id + "-image";
+            achievementImage.src = "https://s3-eu-west-1.amazonaws.com/i.retroachievements.org/Badge/" + achievement.badgeNumber + ".png";
+            achievementImage.style.border = "2px solid gold";
             achievementBlock.appendChild(achievementImage);
 
-            if (isUnlocked === 'False') {
+            if (!achievement.hardcoreAchieved) {
                 var achievementLockedImage = document.createElement('img');
-                achievementLockedImage.id = "achievement-" + id + "-locked-image";
-                achievementLockedImage.src = lockedImageLink;
-                achievementLockedImage.style.width = size;
-                achievementLockedImage.style.height = size;
+                achievementLockedImage.id = "achievement-" + achievement.id + "-locked-image";
+                achievementLockedImage.src = "https://s3-eu-west-1.amazonaws.com/i.retroachievements.org/Badge/" + achievement.badgeNumber + "_lock.png";
+                achievementLockedImage.style.width = 64;
+                achievementLockedImage.style.height = 64;
+                achievementLockedImage.style.border = "2px solid #272727";
                 achievementBlock.appendChild(achievementLockedImage);
-
-                achievementUnlockedBorder.style.display = "none";
             } else {
-                tooltipString += "<br/><br/>" + date;
+                tooltipString += "<br/><br/>" + achievement.dateEarned;
             }
 
-            document.getElementById("container").appendChild(achievementBlock);
+            document.getElementById("achievement-list").appendChild(achievementBlock);
 
             achievementBlock.style.left = xCoord;
             achievementBlock.style.top = yCoord;
 
-            $("#achievement-" + id).tooltip({
+            $("#achievement-" + achievement.id).tooltip({
                 items: 'div',
                 content: tooltipString,
-                track: true
+                track: false
             });
+        }
+
+        var scrollingDown = true;
+        var isScrolling = true;
+
+        function scrollList() {
+            if (document.getElementById("container").scrollHeight > 450) {
+                if (scrollingDown) {
+                    document.getElementById("container").scrollTo(0, document.getElementById("container").scrollTop + 1);
+                } else {
+                    document.getElementById("container").scrollTo(0, document.getElementById("container").scrollTop - 1);
+                }
+
+                if (document.getElementById("container").scrollTop >= document.getElementById("container").scrollHeight - document.getElementById("container").offsetHeight) {
+                    scrollingDown = false;
+                } else if (document.getElementById("container").scrollTop <= 0) {
+                    scrollingDown = true;
+                }
+            } else {
+                stopScrolling();
+            }
+        }
+
+        var intervalId = 0;
+
+        function stopScrolling() {
+            isScrolling = false;
+
+            clearInterval(intervalId);
+            intervalId = 0;
+        }
+
+        function startScrolling() {
+            isScrolling = true;
+
+            if (intervalId === 0) {
+                intervalId = setInterval(scrollList, 50);
+            }
+        }
+
+        function toggleScrolling() {
+            if (isScrolling) {
+                stopScrolling();
+            } else {
+                startScrolling();
+            }
         }
     </script>
     <style id="style" type="text/css">
+        .ui-tooltip-content {
+            font-size: 8pt;
+            font-family: Consolas;
+        }
+
         img {
             position: absolute;
         }
 
         .achievement {
-            display: inline;
             position: absolute;
-            top: -100px;
         }
 
         #container {
             position: absolute;
-            width: 1922px;
-            height: 1085px;
-            top: -5px;
-            left: -5px;
-            background-color: magenta;
+            top: 0px;
+            left: 0px;
+            overflow-x: hidden;
+            overflow-y: visible;
+            width: 750px;
+            height: 614px;
+        }
+
+        #container::-webkit-scrollbar {
+            display: none;
+        }
+
+        #achievement-list {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 750px;
+            height: auto;
+            overflow: visible;
         }
 
         html {
+            background-color: magenta;
             overflow: hidden;
         }
     </style>
 </head>
 <body>
     <div id="container">
-
+        <div id="achievement-list" onclick="toggleScrolling()"></div>
     </div>
 </body>
 </html>
