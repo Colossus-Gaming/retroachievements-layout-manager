@@ -68,8 +68,7 @@ namespace Retro_Achievement_Tracker
 
             ListViewItems = new List<ListViewItem>();
 
-            rssFeedListView.ListViewItemSorter = Comparer<ListViewItem>.Create((item1, item2) => DateTime.Parse(item2.SubItems[1].Text).CompareTo(DateTime.Parse(item1.SubItems[1].Text)));
-            this.userInfoGroupBox.Font = new Font(StreamLabelManager.Instance.GetPrivateFontCollection().Families[0], 8);
+            rssFeedListView.ListViewItemSorter = Comparer<ListViewItem>.Create((item1, item2) => DateTime.Parse(item2.SubItems[1].Text).CompareTo(DateTime.Parse(item1.SubItems[1].Text)));            
         }
         private void AutoUpdate()
         {
@@ -1188,7 +1187,7 @@ namespace Retro_Achievement_Tracker
             gameStatsGroupBox.BackgroundImage = Resources.chrono_trigger_block;
             userBrowserGroupBox.BackgroundImage = Resources.chrono_trigger_block;
 
-            toggleUserBrowserButton.Text = "OPEN";
+            toggleUserBrowserButton.Text = "Open";
 
             switch (MenuState)
             {
@@ -1198,7 +1197,7 @@ namespace Retro_Achievement_Tracker
                 case CustomMenuState.WEB_BROWSER:
                     userBrowserGroupBox.BackgroundImage = Resources.chrono_trigger_block5;
 
-                    toggleUserBrowserButton.Text = "CLOSE";
+                    toggleUserBrowserButton.Text = "Close";
                     chromiumWebBrowser.Show();
 
                     ClientSize = new Size(1240, 462);

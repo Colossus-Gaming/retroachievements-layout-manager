@@ -15,7 +15,6 @@ namespace Retro_Achievement_Tracker.Models
     public sealed class StreamLabelManager
     {
         private static StreamLabelManager instance = new StreamLabelManager();
-        private PrivateFontCollection PrivateFontCollection;
         private Stopwatch StreamLabelsStopwatch;
         private Task StreamLabelsTask;
         private readonly ConcurrentQueue<Tuple<Task, bool>> StreamLabelsRequests;
@@ -24,15 +23,6 @@ namespace Retro_Achievement_Tracker.Models
             StreamLabelsRequests = new ConcurrentQueue<Tuple<Task, bool>>();
             StreamLabelsStopwatch = new Stopwatch();
             StreamLabelsTask = Task.Factory.StartNew(() => { });
-
-            PrivateFontCollection = new PrivateFontCollection();
-
-            int fontLength = Properties.Resources.ARCADE_N.Length;
-            byte[] fontdata = Properties.Resources.ARCADE_N;
-            IntPtr data = Marshal.AllocCoTaskMem(fontLength);
-            Marshal.Copy(fontdata, 0, data, fontLength);
-
-            PrivateFontCollection.AddMemoryFont(data, fontLength);
         }
         public static StreamLabelManager Instance
         {
@@ -40,10 +30,6 @@ namespace Retro_Achievement_Tracker.Models
             {
                 return instance;
             }
-        }
-        public PrivateFontCollection GetPrivateFontCollection()
-        {
-            return PrivateFontCollection;
         }
         private Tuple<Task, bool> StreamLabelDequeue()
         {

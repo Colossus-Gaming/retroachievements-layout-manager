@@ -48,17 +48,19 @@ namespace Retro_Achievement_Tracker
             this.autoOpenFocusWindowCheckBox = new System.Windows.Forms.CheckBox();
             this.openFocusWindowButton = new System.Windows.Forms.Button();
             this.userInfoGroupBox = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.focusAchievementPictureBox = new System.Windows.Forms.PictureBox();
+            this.focusAchievementTitleLabel = new System.Windows.Forms.Label();
+            this.focusAchievementDescriptionLabel = new System.Windows.Forms.Label();
             this.setFocusButton = new System.Windows.Forms.Button();
             this.focusAchievementButtonLeft = new System.Windows.Forms.Button();
             this.focusAchievementButtonRight = new System.Windows.Forms.Button();
-            this.focusAchievementDescriptionLabel = new System.Windows.Forms.Label();
-            this.rssFeedFriendCheckBox = new System.Windows.Forms.CheckBox();
-            this.rssFeedCheevoCheckBox = new System.Windows.Forms.CheckBox();
-            this.focusAchievementTitleLabel = new System.Windows.Forms.Label();
-            this.focusAchievementPictureBox = new System.Windows.Forms.PictureBox();
-            this.gameInfoProgressLabel = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.gameInfoPictureBox = new System.Windows.Forms.PictureBox();
             this.gameInfoTitleLabel = new System.Windows.Forms.Label();
+            this.gameInfoProgressLabel = new System.Windows.Forms.Label();
+            this.rssFeedFriendCheckBox = new System.Windows.Forms.CheckBox();
+            this.rssFeedCheevoCheckBox = new System.Windows.Forms.CheckBox();
             this.rssFeedNewsCheckBox = new System.Windows.Forms.CheckBox();
             this.rssFeedForumCheckBox = new System.Windows.Forms.CheckBox();
             this.rssFeedListView = new System.Windows.Forms.ListView();
@@ -232,20 +234,20 @@ namespace Retro_Achievement_Tracker
             this.openGameStatsWindowButton = new System.Windows.Forms.Button();
             this.gameStatsCustomizationGroupBox = new System.Windows.Forms.GroupBox();
             this.settingsAndBrowserGroupBox = new System.Windows.Forms.GroupBox();
+            this.recentAchievementsMaxListLabel = new System.Windows.Forms.Label();
+            this.recentAchievementsMaxListNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.autoSrollLabel = new System.Windows.Forms.Label();
             this.autoScrollCheckBox = new System.Windows.Forms.CheckBox();
             this.userBrowserGroupBox = new System.Windows.Forms.GroupBox();
             this.autoOpenWebBrowserCheckbox = new System.Windows.Forms.CheckBox();
             this.toggleUserBrowserButton = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.recentAchievementsMaxListNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.recentAchievementsMaxListLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.userProfilePictureBox)).BeginInit();
             this.userStatsGroupBox.SuspendLayout();
             this.focusGroupBox.SuspendLayout();
             this.userInfoGroupBox.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.focusAchievementPictureBox)).BeginInit();
+            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gameInfoPictureBox)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.raConnectionStatusPictureBox)).BeginInit();
@@ -301,20 +303,18 @@ namespace Retro_Achievement_Tracker
             this.gameStatsGroupBox.SuspendLayout();
             this.gameStatsCustomizationGroupBox.SuspendLayout();
             this.settingsAndBrowserGroupBox.SuspendLayout();
-            this.userBrowserGroupBox.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.recentAchievementsMaxListNumericUpDown)).BeginInit();
+            this.userBrowserGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // apiKeyLabel
             // 
             this.apiKeyLabel.AutoSize = true;
             this.apiKeyLabel.BackColor = System.Drawing.Color.Transparent;
-            this.apiKeyLabel.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.apiKeyLabel.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.apiKeyLabel.Location = new System.Drawing.Point(88, 59);
             this.apiKeyLabel.Name = "apiKeyLabel";
-            this.apiKeyLabel.Size = new System.Drawing.Size(67, 7);
+            this.apiKeyLabel.Size = new System.Drawing.Size(61, 11);
             this.apiKeyLabel.TabIndex = 31;
             this.apiKeyLabel.Text = "API Key";
             // 
@@ -331,10 +331,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.usernameLabel.AutoSize = true;
             this.usernameLabel.BackColor = System.Drawing.Color.Transparent;
-            this.usernameLabel.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.usernameLabel.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.usernameLabel.Location = new System.Drawing.Point(88, 25);
             this.usernameLabel.Name = "usernameLabel";
-            this.usernameLabel.Size = new System.Drawing.Size(76, 7);
+            this.usernameLabel.Size = new System.Drawing.Size(69, 11);
             this.usernameLabel.TabIndex = 26;
             this.usernameLabel.Text = "Username";
             // 
@@ -360,17 +360,17 @@ namespace Retro_Achievement_Tracker
             // 
             this.autoStartCheckbox.AutoSize = true;
             this.autoStartCheckbox.BackColor = System.Drawing.Color.Transparent;
-            this.autoStartCheckbox.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.autoStartCheckbox.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.autoStartCheckbox.Location = new System.Drawing.Point(232, 17);
             this.autoStartCheckbox.Name = "autoStartCheckbox";
-            this.autoStartCheckbox.Size = new System.Drawing.Size(103, 14);
+            this.autoStartCheckbox.Size = new System.Drawing.Size(94, 15);
             this.autoStartCheckbox.TabIndex = 2;
             this.autoStartCheckbox.Text = "Auto-Start";
             this.autoStartCheckbox.UseVisualStyleBackColor = false;
             // 
             // stopButton
             // 
-            this.stopButton.Font = new System.Drawing.Font("Arcade Normal", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stopButton.Font = new System.Drawing.Font("Lucida Console", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.stopButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.stopButton.Location = new System.Drawing.Point(259, 70);
             this.stopButton.Name = "stopButton";
@@ -382,7 +382,7 @@ namespace Retro_Achievement_Tracker
             // timerStatusLabel
             // 
             this.timerStatusLabel.BackColor = System.Drawing.Color.Transparent;
-            this.timerStatusLabel.Font = new System.Drawing.Font("Arcade Normal", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.timerStatusLabel.Font = new System.Drawing.Font("Lucida Console", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.timerStatusLabel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.timerStatusLabel.Location = new System.Drawing.Point(6, 14);
             this.timerStatusLabel.Name = "timerStatusLabel";
@@ -397,7 +397,7 @@ namespace Retro_Achievement_Tracker
             this.userStatsGroupBox.Controls.Add(this.autoOpenUserStatsWindowCheckbox);
             this.userStatsGroupBox.Controls.Add(this.customizeUserStatsButton);
             this.userStatsGroupBox.Controls.Add(this.openUserStatsWindowButton);
-            this.userStatsGroupBox.Font = new System.Drawing.Font("Arcade Normal", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userStatsGroupBox.Font = new System.Drawing.Font("Lucida Console", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userStatsGroupBox.ForeColor = System.Drawing.Color.White;
             this.userStatsGroupBox.Location = new System.Drawing.Point(353, 210);
             this.userStatsGroupBox.Name = "userStatsGroupBox";
@@ -409,18 +409,18 @@ namespace Retro_Achievement_Tracker
             // autoOpenUserStatsWindowCheckbox
             // 
             this.autoOpenUserStatsWindowCheckbox.AutoSize = true;
-            this.autoOpenUserStatsWindowCheckbox.Font = new System.Drawing.Font("Arcade Normal", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.autoOpenUserStatsWindowCheckbox.Font = new System.Drawing.Font("Lucida Console", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.autoOpenUserStatsWindowCheckbox.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.autoOpenUserStatsWindowCheckbox.Location = new System.Drawing.Point(6, 19);
             this.autoOpenUserStatsWindowCheckbox.Name = "autoOpenUserStatsWindowCheckbox";
-            this.autoOpenUserStatsWindowCheckbox.Size = new System.Drawing.Size(123, 14);
+            this.autoOpenUserStatsWindowCheckbox.Size = new System.Drawing.Size(87, 15);
             this.autoOpenUserStatsWindowCheckbox.TabIndex = 10022;
             this.autoOpenUserStatsWindowCheckbox.Text = "Auto-Open";
             this.autoOpenUserStatsWindowCheckbox.UseVisualStyleBackColor = true;
             // 
             // customizeUserStatsButton
             // 
-            this.customizeUserStatsButton.Font = new System.Drawing.Font("Arcade Normal", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customizeUserStatsButton.Font = new System.Drawing.Font("Lucida Console", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.customizeUserStatsButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.customizeUserStatsButton.Location = new System.Drawing.Point(226, 10);
             this.customizeUserStatsButton.Name = "customizeUserStatsButton";
@@ -431,7 +431,7 @@ namespace Retro_Achievement_Tracker
             // 
             // openUserStatsWindowButton
             // 
-            this.openUserStatsWindowButton.Font = new System.Drawing.Font("Arcade Normal", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.openUserStatsWindowButton.Font = new System.Drawing.Font("Lucida Console", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.openUserStatsWindowButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.openUserStatsWindowButton.Location = new System.Drawing.Point(135, 11);
             this.openUserStatsWindowButton.Name = "openUserStatsWindowButton";
@@ -447,7 +447,7 @@ namespace Retro_Achievement_Tracker
             this.focusGroupBox.Controls.Add(this.customizeFocusButton);
             this.focusGroupBox.Controls.Add(this.autoOpenFocusWindowCheckBox);
             this.focusGroupBox.Controls.Add(this.openFocusWindowButton);
-            this.focusGroupBox.Font = new System.Drawing.Font("Arcade Normal", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.focusGroupBox.Font = new System.Drawing.Font("Lucida Console", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.focusGroupBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.focusGroupBox.Location = new System.Drawing.Point(353, 6);
             this.focusGroupBox.Name = "focusGroupBox";
@@ -458,7 +458,7 @@ namespace Retro_Achievement_Tracker
             // 
             // customizeFocusButton
             // 
-            this.customizeFocusButton.Font = new System.Drawing.Font("Arcade Normal", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customizeFocusButton.Font = new System.Drawing.Font("Lucida Console", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.customizeFocusButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.customizeFocusButton.Location = new System.Drawing.Point(226, 11);
             this.customizeFocusButton.Name = "customizeFocusButton";
@@ -470,18 +470,18 @@ namespace Retro_Achievement_Tracker
             // autoOpenFocusWindowCheckBox
             // 
             this.autoOpenFocusWindowCheckBox.AutoSize = true;
-            this.autoOpenFocusWindowCheckBox.Font = new System.Drawing.Font("Arcade Normal", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.autoOpenFocusWindowCheckBox.Font = new System.Drawing.Font("Lucida Console", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.autoOpenFocusWindowCheckBox.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.autoOpenFocusWindowCheckBox.Location = new System.Drawing.Point(6, 21);
             this.autoOpenFocusWindowCheckBox.Name = "autoOpenFocusWindowCheckBox";
-            this.autoOpenFocusWindowCheckBox.Size = new System.Drawing.Size(123, 14);
+            this.autoOpenFocusWindowCheckBox.Size = new System.Drawing.Size(87, 15);
             this.autoOpenFocusWindowCheckBox.TabIndex = 10020;
             this.autoOpenFocusWindowCheckBox.Text = "Auto-Open";
             this.autoOpenFocusWindowCheckBox.UseVisualStyleBackColor = true;
             // 
             // openFocusWindowButton
             // 
-            this.openFocusWindowButton.Font = new System.Drawing.Font("Arcade Normal", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.openFocusWindowButton.Font = new System.Drawing.Font("Lucida Console", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.openFocusWindowButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.openFocusWindowButton.Location = new System.Drawing.Point(135, 11);
             this.openFocusWindowButton.Name = "openFocusWindowButton";
@@ -509,7 +509,7 @@ namespace Retro_Achievement_Tracker
             this.userInfoGroupBox.Controls.Add(this.startButton);
             this.userInfoGroupBox.Controls.Add(this.autoStartCheckbox);
             this.userInfoGroupBox.Controls.Add(this.stopButton);
-            this.userInfoGroupBox.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userInfoGroupBox.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userInfoGroupBox.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.userInfoGroupBox.Location = new System.Drawing.Point(6, 6);
             this.userInfoGroupBox.Name = "userInfoGroupBox";
@@ -517,10 +517,56 @@ namespace Retro_Achievement_Tracker
             this.userInfoGroupBox.TabIndex = 10026;
             this.userInfoGroupBox.TabStop = false;
             // 
+            // groupBox3
+            // 
+            this.groupBox3.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox3.Controls.Add(this.focusAchievementPictureBox);
+            this.groupBox3.Controls.Add(this.focusAchievementTitleLabel);
+            this.groupBox3.Controls.Add(this.focusAchievementDescriptionLabel);
+            this.groupBox3.Controls.Add(this.setFocusButton);
+            this.groupBox3.Controls.Add(this.focusAchievementButtonLeft);
+            this.groupBox3.Controls.Add(this.focusAchievementButtonRight);
+            this.groupBox3.Location = new System.Drawing.Point(6, 292);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(328, 155);
+            this.groupBox3.TabIndex = 10014;
+            this.groupBox3.TabStop = false;
+            // 
+            // focusAchievementPictureBox
+            // 
+            this.focusAchievementPictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.focusAchievementPictureBox.InitialImage = null;
+            this.focusAchievementPictureBox.Location = new System.Drawing.Point(3, 10);
+            this.focusAchievementPictureBox.Name = "focusAchievementPictureBox";
+            this.focusAchievementPictureBox.Size = new System.Drawing.Size(96, 96);
+            this.focusAchievementPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.focusAchievementPictureBox.TabIndex = 21;
+            this.focusAchievementPictureBox.TabStop = false;
+            // 
+            // focusAchievementTitleLabel
+            // 
+            this.focusAchievementTitleLabel.BackColor = System.Drawing.Color.Transparent;
+            this.focusAchievementTitleLabel.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.focusAchievementTitleLabel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.focusAchievementTitleLabel.Location = new System.Drawing.Point(105, 10);
+            this.focusAchievementTitleLabel.Name = "focusAchievementTitleLabel";
+            this.focusAchievementTitleLabel.Size = new System.Drawing.Size(217, 53);
+            this.focusAchievementTitleLabel.TabIndex = 6;
+            // 
+            // focusAchievementDescriptionLabel
+            // 
+            this.focusAchievementDescriptionLabel.BackColor = System.Drawing.Color.Transparent;
+            this.focusAchievementDescriptionLabel.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.focusAchievementDescriptionLabel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.focusAchievementDescriptionLabel.Location = new System.Drawing.Point(105, 69);
+            this.focusAchievementDescriptionLabel.Name = "focusAchievementDescriptionLabel";
+            this.focusAchievementDescriptionLabel.Size = new System.Drawing.Size(217, 83);
+            this.focusAchievementDescriptionLabel.TabIndex = 5;
+            // 
             // setFocusButton
             // 
             this.setFocusButton.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.setFocusButton.Font = new System.Drawing.Font("Arcade Normal", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.setFocusButton.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.setFocusButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.setFocusButton.Location = new System.Drawing.Point(3, 131);
             this.setFocusButton.Name = "setFocusButton";
@@ -551,73 +597,17 @@ namespace Retro_Achievement_Tracker
             this.focusAchievementButtonRight.Text = ">";
             this.focusAchievementButtonRight.UseVisualStyleBackColor = true;
             // 
-            // focusAchievementDescriptionLabel
+            // groupBox1
             // 
-            this.focusAchievementDescriptionLabel.BackColor = System.Drawing.Color.Transparent;
-            this.focusAchievementDescriptionLabel.Font = new System.Drawing.Font("Arcade Normal", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.focusAchievementDescriptionLabel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.focusAchievementDescriptionLabel.Location = new System.Drawing.Point(105, 69);
-            this.focusAchievementDescriptionLabel.Name = "focusAchievementDescriptionLabel";
-            this.focusAchievementDescriptionLabel.Size = new System.Drawing.Size(217, 83);
-            this.focusAchievementDescriptionLabel.TabIndex = 5;
-            // 
-            // rssFeedFriendCheckBox
-            // 
-            this.rssFeedFriendCheckBox.AutoSize = true;
-            this.rssFeedFriendCheckBox.BackColor = System.Drawing.Color.Transparent;
-            this.rssFeedFriendCheckBox.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rssFeedFriendCheckBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.rssFeedFriendCheckBox.Location = new System.Drawing.Point(252, 95);
-            this.rssFeedFriendCheckBox.Name = "rssFeedFriendCheckBox";
-            this.rssFeedFriendCheckBox.Size = new System.Drawing.Size(79, 14);
-            this.rssFeedFriendCheckBox.TabIndex = 10010;
-            this.rssFeedFriendCheckBox.Text = "Friends";
-            this.rssFeedFriendCheckBox.UseVisualStyleBackColor = false;
-            // 
-            // rssFeedCheevoCheckBox
-            // 
-            this.rssFeedCheevoCheckBox.AutoSize = true;
-            this.rssFeedCheevoCheckBox.BackColor = System.Drawing.Color.Transparent;
-            this.rssFeedCheevoCheckBox.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rssFeedCheevoCheckBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.rssFeedCheevoCheckBox.Location = new System.Drawing.Point(158, 95);
-            this.rssFeedCheevoCheckBox.Name = "rssFeedCheevoCheckBox";
-            this.rssFeedCheevoCheckBox.Size = new System.Drawing.Size(71, 14);
-            this.rssFeedCheevoCheckBox.TabIndex = 10011;
-            this.rssFeedCheevoCheckBox.Text = "CHEEVO";
-            this.rssFeedCheevoCheckBox.UseVisualStyleBackColor = false;
-            // 
-            // focusAchievementTitleLabel
-            // 
-            this.focusAchievementTitleLabel.BackColor = System.Drawing.Color.Transparent;
-            this.focusAchievementTitleLabel.Font = new System.Drawing.Font("Arcade Normal", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.focusAchievementTitleLabel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.focusAchievementTitleLabel.Location = new System.Drawing.Point(105, 10);
-            this.focusAchievementTitleLabel.Name = "focusAchievementTitleLabel";
-            this.focusAchievementTitleLabel.Size = new System.Drawing.Size(217, 53);
-            this.focusAchievementTitleLabel.TabIndex = 6;
-            // 
-            // focusAchievementPictureBox
-            // 
-            this.focusAchievementPictureBox.BackColor = System.Drawing.Color.Transparent;
-            this.focusAchievementPictureBox.InitialImage = null;
-            this.focusAchievementPictureBox.Location = new System.Drawing.Point(3, 10);
-            this.focusAchievementPictureBox.Name = "focusAchievementPictureBox";
-            this.focusAchievementPictureBox.Size = new System.Drawing.Size(96, 96);
-            this.focusAchievementPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.focusAchievementPictureBox.TabIndex = 21;
-            this.focusAchievementPictureBox.TabStop = false;
-            // 
-            // gameInfoProgressLabel
-            // 
-            this.gameInfoProgressLabel.BackColor = System.Drawing.Color.Transparent;
-            this.gameInfoProgressLabel.Font = new System.Drawing.Font("Arcade Normal", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameInfoProgressLabel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.gameInfoProgressLabel.Location = new System.Drawing.Point(97, 66);
-            this.gameInfoProgressLabel.Name = "gameInfoProgressLabel";
-            this.gameInfoProgressLabel.Size = new System.Drawing.Size(225, 26);
-            this.gameInfoProgressLabel.TabIndex = 10008;
-            this.gameInfoProgressLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.groupBox1.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox1.Controls.Add(this.gameInfoPictureBox);
+            this.groupBox1.Controls.Add(this.gameInfoTitleLabel);
+            this.groupBox1.Controls.Add(this.gameInfoProgressLabel);
+            this.groupBox1.Location = new System.Drawing.Point(6, 192);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(328, 101);
+            this.groupBox1.TabIndex = 10013;
+            this.groupBox1.TabStop = false;
             // 
             // gameInfoPictureBox
             // 
@@ -633,7 +623,7 @@ namespace Retro_Achievement_Tracker
             // gameInfoTitleLabel
             // 
             this.gameInfoTitleLabel.BackColor = System.Drawing.Color.Transparent;
-            this.gameInfoTitleLabel.Font = new System.Drawing.Font("Arcade Normal", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInfoTitleLabel.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameInfoTitleLabel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.gameInfoTitleLabel.Location = new System.Drawing.Point(95, 10);
             this.gameInfoTitleLabel.Name = "gameInfoTitleLabel";
@@ -641,28 +631,65 @@ namespace Retro_Achievement_Tracker
             this.gameInfoTitleLabel.TabIndex = 10007;
             this.gameInfoTitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // gameInfoProgressLabel
+            // 
+            this.gameInfoProgressLabel.BackColor = System.Drawing.Color.Transparent;
+            this.gameInfoProgressLabel.Font = new System.Drawing.Font("Lucida Console", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInfoProgressLabel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.gameInfoProgressLabel.Location = new System.Drawing.Point(97, 66);
+            this.gameInfoProgressLabel.Name = "gameInfoProgressLabel";
+            this.gameInfoProgressLabel.Size = new System.Drawing.Size(225, 26);
+            this.gameInfoProgressLabel.TabIndex = 10008;
+            this.gameInfoProgressLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // rssFeedFriendCheckBox
+            // 
+            this.rssFeedFriendCheckBox.AutoSize = true;
+            this.rssFeedFriendCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.rssFeedFriendCheckBox.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rssFeedFriendCheckBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.rssFeedFriendCheckBox.Location = new System.Drawing.Point(252, 95);
+            this.rssFeedFriendCheckBox.Name = "rssFeedFriendCheckBox";
+            this.rssFeedFriendCheckBox.Size = new System.Drawing.Size(73, 15);
+            this.rssFeedFriendCheckBox.TabIndex = 10010;
+            this.rssFeedFriendCheckBox.Text = "FRIENDS";
+            this.rssFeedFriendCheckBox.UseVisualStyleBackColor = false;
+            // 
+            // rssFeedCheevoCheckBox
+            // 
+            this.rssFeedCheevoCheckBox.AutoSize = true;
+            this.rssFeedCheevoCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.rssFeedCheevoCheckBox.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rssFeedCheevoCheckBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.rssFeedCheevoCheckBox.Location = new System.Drawing.Point(158, 95);
+            this.rssFeedCheevoCheckBox.Name = "rssFeedCheevoCheckBox";
+            this.rssFeedCheevoCheckBox.Size = new System.Drawing.Size(66, 15);
+            this.rssFeedCheevoCheckBox.TabIndex = 10011;
+            this.rssFeedCheevoCheckBox.Text = "CHEEVO";
+            this.rssFeedCheevoCheckBox.UseVisualStyleBackColor = false;
+            // 
             // rssFeedNewsCheckBox
             // 
             this.rssFeedNewsCheckBox.AutoSize = true;
             this.rssFeedNewsCheckBox.BackColor = System.Drawing.Color.Transparent;
-            this.rssFeedNewsCheckBox.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rssFeedNewsCheckBox.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rssFeedNewsCheckBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.rssFeedNewsCheckBox.Location = new System.Drawing.Point(6, 95);
             this.rssFeedNewsCheckBox.Name = "rssFeedNewsCheckBox";
-            this.rssFeedNewsCheckBox.Size = new System.Drawing.Size(55, 14);
+            this.rssFeedNewsCheckBox.Size = new System.Drawing.Size(52, 15);
             this.rssFeedNewsCheckBox.TabIndex = 10012;
-            this.rssFeedNewsCheckBox.Text = "News";
+            this.rssFeedNewsCheckBox.Text = "NEWS";
             this.rssFeedNewsCheckBox.UseVisualStyleBackColor = false;
             // 
             // rssFeedForumCheckBox
             // 
             this.rssFeedForumCheckBox.AutoSize = true;
             this.rssFeedForumCheckBox.BackColor = System.Drawing.Color.Transparent;
-            this.rssFeedForumCheckBox.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rssFeedForumCheckBox.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rssFeedForumCheckBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.rssFeedForumCheckBox.Location = new System.Drawing.Point(76, 95);
             this.rssFeedForumCheckBox.Name = "rssFeedForumCheckBox";
-            this.rssFeedForumCheckBox.Size = new System.Drawing.Size(63, 14);
+            this.rssFeedForumCheckBox.Size = new System.Drawing.Size(59, 15);
             this.rssFeedForumCheckBox.TabIndex = 10009;
             this.rssFeedForumCheckBox.Text = "FORUM";
             this.rssFeedForumCheckBox.UseVisualStyleBackColor = false;
@@ -672,7 +699,7 @@ namespace Retro_Achievement_Tracker
             this.rssFeedListView.Activation = System.Windows.Forms.ItemActivation.OneClick;
             this.rssFeedListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1});
-            this.rssFeedListView.Font = new System.Drawing.Font("Arcade Normal", 5.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rssFeedListView.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rssFeedListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.rssFeedListView.HideSelection = false;
             this.rssFeedListView.Location = new System.Drawing.Point(6, 110);
@@ -689,7 +716,7 @@ namespace Retro_Achievement_Tracker
             // 
             // startButton
             // 
-            this.startButton.Font = new System.Drawing.Font("Arcade Normal", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.startButton.Font = new System.Drawing.Font("Lucida Console", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.startButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.startButton.Location = new System.Drawing.Point(259, 37);
             this.startButton.Name = "startButton";
@@ -704,7 +731,7 @@ namespace Retro_Achievement_Tracker
             this.groupBox2.BackgroundImage = global::Retro_Achievement_Tracker.Properties.Resources.chrono_trigger_block;
             this.groupBox2.Controls.Add(this.raConnectionStatusPictureBox);
             this.groupBox2.Controls.Add(this.timerStatusLabel);
-            this.groupBox2.Font = new System.Drawing.Font("Arcade Normal", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.Font = new System.Drawing.Font("Lucida Console", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.groupBox2.Location = new System.Drawing.Point(353, 414);
             this.groupBox2.Name = "groupBox2";
@@ -731,7 +758,7 @@ namespace Retro_Achievement_Tracker
             this.notificationsGroupBox.Controls.Add(this.customizeAlertsButton);
             this.notificationsGroupBox.Controls.Add(this.autoOpenAlertsWindowCheckbox);
             this.notificationsGroupBox.Controls.Add(this.openNotificationWindowButton);
-            this.notificationsGroupBox.Font = new System.Drawing.Font("Arcade Normal", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.notificationsGroupBox.Font = new System.Drawing.Font("Lucida Console", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.notificationsGroupBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.notificationsGroupBox.Location = new System.Drawing.Point(353, 57);
             this.notificationsGroupBox.Name = "notificationsGroupBox";
@@ -742,7 +769,7 @@ namespace Retro_Achievement_Tracker
             // 
             // customizeAlertsButton
             // 
-            this.customizeAlertsButton.Font = new System.Drawing.Font("Arcade Normal", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customizeAlertsButton.Font = new System.Drawing.Font("Lucida Console", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.customizeAlertsButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.customizeAlertsButton.Location = new System.Drawing.Point(226, 11);
             this.customizeAlertsButton.Name = "customizeAlertsButton";
@@ -755,18 +782,18 @@ namespace Retro_Achievement_Tracker
             // 
             this.autoOpenAlertsWindowCheckbox.AutoSize = true;
             this.autoOpenAlertsWindowCheckbox.BackColor = System.Drawing.Color.Transparent;
-            this.autoOpenAlertsWindowCheckbox.Font = new System.Drawing.Font("Arcade Normal", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.autoOpenAlertsWindowCheckbox.Font = new System.Drawing.Font("Lucida Console", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.autoOpenAlertsWindowCheckbox.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.autoOpenAlertsWindowCheckbox.Location = new System.Drawing.Point(6, 21);
             this.autoOpenAlertsWindowCheckbox.Name = "autoOpenAlertsWindowCheckbox";
-            this.autoOpenAlertsWindowCheckbox.Size = new System.Drawing.Size(123, 14);
+            this.autoOpenAlertsWindowCheckbox.Size = new System.Drawing.Size(87, 15);
             this.autoOpenAlertsWindowCheckbox.TabIndex = 10022;
             this.autoOpenAlertsWindowCheckbox.Text = "Auto-Open";
             this.autoOpenAlertsWindowCheckbox.UseVisualStyleBackColor = false;
             // 
             // openNotificationWindowButton
             // 
-            this.openNotificationWindowButton.Font = new System.Drawing.Font("Arcade Normal", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.openNotificationWindowButton.Font = new System.Drawing.Font("Lucida Console", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.openNotificationWindowButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.openNotificationWindowButton.Location = new System.Drawing.Point(135, 11);
             this.openNotificationWindowButton.Name = "openNotificationWindowButton";
@@ -782,7 +809,7 @@ namespace Retro_Achievement_Tracker
             this.gameInfoGroupBox.Controls.Add(this.customizeGameInfoButton);
             this.gameInfoGroupBox.Controls.Add(this.autoOpenGameInfoWindowCheckbox);
             this.gameInfoGroupBox.Controls.Add(this.openGameInfoWindowButton);
-            this.gameInfoGroupBox.Font = new System.Drawing.Font("Arcade Normal", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInfoGroupBox.Font = new System.Drawing.Font("Lucida Console", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameInfoGroupBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.gameInfoGroupBox.Location = new System.Drawing.Point(353, 261);
             this.gameInfoGroupBox.Name = "gameInfoGroupBox";
@@ -793,7 +820,7 @@ namespace Retro_Achievement_Tracker
             // 
             // customizeGameInfoButton
             // 
-            this.customizeGameInfoButton.Font = new System.Drawing.Font("Arcade Normal", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customizeGameInfoButton.Font = new System.Drawing.Font("Lucida Console", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.customizeGameInfoButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.customizeGameInfoButton.Location = new System.Drawing.Point(226, 10);
             this.customizeGameInfoButton.Name = "customizeGameInfoButton";
@@ -806,18 +833,18 @@ namespace Retro_Achievement_Tracker
             // 
             this.autoOpenGameInfoWindowCheckbox.AutoSize = true;
             this.autoOpenGameInfoWindowCheckbox.BackColor = System.Drawing.Color.Transparent;
-            this.autoOpenGameInfoWindowCheckbox.Font = new System.Drawing.Font("Arcade Normal", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.autoOpenGameInfoWindowCheckbox.Font = new System.Drawing.Font("Lucida Console", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.autoOpenGameInfoWindowCheckbox.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.autoOpenGameInfoWindowCheckbox.Location = new System.Drawing.Point(6, 18);
             this.autoOpenGameInfoWindowCheckbox.Name = "autoOpenGameInfoWindowCheckbox";
-            this.autoOpenGameInfoWindowCheckbox.Size = new System.Drawing.Size(123, 14);
+            this.autoOpenGameInfoWindowCheckbox.Size = new System.Drawing.Size(87, 15);
             this.autoOpenGameInfoWindowCheckbox.TabIndex = 10022;
             this.autoOpenGameInfoWindowCheckbox.Text = "Auto-Open";
             this.autoOpenGameInfoWindowCheckbox.UseVisualStyleBackColor = false;
             // 
             // openGameInfoWindowButton
             // 
-            this.openGameInfoWindowButton.Font = new System.Drawing.Font("Arcade Normal", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.openGameInfoWindowButton.Font = new System.Drawing.Font("Lucida Console", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.openGameInfoWindowButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.openGameInfoWindowButton.Location = new System.Drawing.Point(135, 10);
             this.openGameInfoWindowButton.Name = "openGameInfoWindowButton";
@@ -833,7 +860,7 @@ namespace Retro_Achievement_Tracker
             this.recentAchievementsGroupBox.Controls.Add(this.customizeLastFiveButton);
             this.recentAchievementsGroupBox.Controls.Add(this.autoOpenLastFiveWindowCheckbox);
             this.recentAchievementsGroupBox.Controls.Add(this.openLastFiveWindowButton);
-            this.recentAchievementsGroupBox.Font = new System.Drawing.Font("Arcade Normal", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.recentAchievementsGroupBox.Font = new System.Drawing.Font("Lucida Console", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.recentAchievementsGroupBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.recentAchievementsGroupBox.Location = new System.Drawing.Point(353, 108);
             this.recentAchievementsGroupBox.Name = "recentAchievementsGroupBox";
@@ -844,7 +871,7 @@ namespace Retro_Achievement_Tracker
             // 
             // customizeLastFiveButton
             // 
-            this.customizeLastFiveButton.Font = new System.Drawing.Font("Arcade Normal", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customizeLastFiveButton.Font = new System.Drawing.Font("Lucida Console", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.customizeLastFiveButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.customizeLastFiveButton.Location = new System.Drawing.Point(226, 11);
             this.customizeLastFiveButton.Name = "customizeLastFiveButton";
@@ -857,18 +884,18 @@ namespace Retro_Achievement_Tracker
             // 
             this.autoOpenLastFiveWindowCheckbox.AutoSize = true;
             this.autoOpenLastFiveWindowCheckbox.BackColor = System.Drawing.Color.Transparent;
-            this.autoOpenLastFiveWindowCheckbox.Font = new System.Drawing.Font("Arcade Normal", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.autoOpenLastFiveWindowCheckbox.Font = new System.Drawing.Font("Lucida Console", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.autoOpenLastFiveWindowCheckbox.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.autoOpenLastFiveWindowCheckbox.Location = new System.Drawing.Point(6, 21);
             this.autoOpenLastFiveWindowCheckbox.Name = "autoOpenLastFiveWindowCheckbox";
-            this.autoOpenLastFiveWindowCheckbox.Size = new System.Drawing.Size(123, 14);
+            this.autoOpenLastFiveWindowCheckbox.Size = new System.Drawing.Size(87, 15);
             this.autoOpenLastFiveWindowCheckbox.TabIndex = 10022;
             this.autoOpenLastFiveWindowCheckbox.Text = "Auto-Open";
             this.autoOpenLastFiveWindowCheckbox.UseVisualStyleBackColor = false;
             // 
             // openLastFiveWindowButton
             // 
-            this.openLastFiveWindowButton.Font = new System.Drawing.Font("Arcade Normal", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.openLastFiveWindowButton.Font = new System.Drawing.Font("Lucida Console", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.openLastFiveWindowButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.openLastFiveWindowButton.Location = new System.Drawing.Point(135, 11);
             this.openLastFiveWindowButton.Name = "openLastFiveWindowButton";
@@ -879,55 +906,55 @@ namespace Retro_Achievement_Tracker
             // 
             // statsGameRatioOverrideTextBox
             // 
-            this.statsGameRatioOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statsGameRatioOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statsGameRatioOverrideTextBox.Location = new System.Drawing.Point(27, 95);
             this.statsGameRatioOverrideTextBox.Name = "statsGameRatioOverrideTextBox";
-            this.statsGameRatioOverrideTextBox.Size = new System.Drawing.Size(160, 20);
+            this.statsGameRatioOverrideTextBox.Size = new System.Drawing.Size(160, 18);
             this.statsGameRatioOverrideTextBox.TabIndex = 8;
             this.statsGameRatioOverrideTextBox.Text = "Ratio";
             // 
             // statsTruePointsOverrideTextBox
             // 
-            this.statsTruePointsOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statsTruePointsOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statsTruePointsOverrideTextBox.Location = new System.Drawing.Point(27, 75);
             this.statsTruePointsOverrideTextBox.Name = "statsTruePointsOverrideTextBox";
-            this.statsTruePointsOverrideTextBox.Size = new System.Drawing.Size(157, 20);
+            this.statsTruePointsOverrideTextBox.Size = new System.Drawing.Size(157, 18);
             this.statsTruePointsOverrideTextBox.TabIndex = 7;
             this.statsTruePointsOverrideTextBox.Text = "T. Points";
             // 
             // statsPointsOverrideTextBox
             // 
-            this.statsPointsOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statsPointsOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statsPointsOverrideTextBox.Location = new System.Drawing.Point(27, 55);
             this.statsPointsOverrideTextBox.Name = "statsPointsOverrideTextBox";
-            this.statsPointsOverrideTextBox.Size = new System.Drawing.Size(157, 20);
+            this.statsPointsOverrideTextBox.Size = new System.Drawing.Size(157, 18);
             this.statsPointsOverrideTextBox.TabIndex = 6;
             this.statsPointsOverrideTextBox.Text = "Points";
             // 
             // statsRatioOverrideTextBox
             // 
-            this.statsRatioOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statsRatioOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statsRatioOverrideTextBox.Location = new System.Drawing.Point(27, 95);
             this.statsRatioOverrideTextBox.Name = "statsRatioOverrideTextBox";
-            this.statsRatioOverrideTextBox.Size = new System.Drawing.Size(157, 20);
+            this.statsRatioOverrideTextBox.Size = new System.Drawing.Size(157, 18);
             this.statsRatioOverrideTextBox.TabIndex = 5;
             this.statsRatioOverrideTextBox.Text = "Ratio";
             // 
             // statsAwardsOverrideTextBox
             // 
-            this.statsAwardsOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statsAwardsOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statsAwardsOverrideTextBox.Location = new System.Drawing.Point(27, 35);
             this.statsAwardsOverrideTextBox.Name = "statsAwardsOverrideTextBox";
-            this.statsAwardsOverrideTextBox.Size = new System.Drawing.Size(157, 20);
+            this.statsAwardsOverrideTextBox.Size = new System.Drawing.Size(157, 18);
             this.statsAwardsOverrideTextBox.TabIndex = 3;
             this.statsAwardsOverrideTextBox.Text = "Awards";
             // 
             // statsRankOverrideTextBox
             // 
-            this.statsRankOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statsRankOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statsRankOverrideTextBox.Location = new System.Drawing.Point(27, 15);
             this.statsRankOverrideTextBox.Name = "statsRankOverrideTextBox";
-            this.statsRankOverrideTextBox.Size = new System.Drawing.Size(157, 20);
+            this.statsRankOverrideTextBox.Size = new System.Drawing.Size(157, 18);
             this.statsRankOverrideTextBox.TabIndex = 1;
             this.statsRankOverrideTextBox.Text = "Rank";
             // 
@@ -946,7 +973,7 @@ namespace Retro_Achievement_Tracker
             this.userStatsCustomizationGroupBox.Controls.Add(this.rankEnableCheckBox);
             this.userStatsCustomizationGroupBox.Controls.Add(this.statsTruePointsOverrideTextBox);
             this.userStatsCustomizationGroupBox.Controls.Add(this.statsRatioOverrideTextBox);
-            this.userStatsCustomizationGroupBox.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userStatsCustomizationGroupBox.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userStatsCustomizationGroupBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.userStatsCustomizationGroupBox.Location = new System.Drawing.Point(367, 333);
             this.userStatsCustomizationGroupBox.Name = "userStatsCustomizationGroupBox";
@@ -958,7 +985,7 @@ namespace Retro_Achievement_Tracker
             // truePointsEnableCheckBox
             // 
             this.truePointsEnableCheckBox.AutoSize = true;
-            this.truePointsEnableCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.truePointsEnableCheckBox.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.truePointsEnableCheckBox.Location = new System.Drawing.Point(6, 80);
             this.truePointsEnableCheckBox.Name = "truePointsEnableCheckBox";
             this.truePointsEnableCheckBox.Size = new System.Drawing.Size(15, 14);
@@ -968,7 +995,7 @@ namespace Retro_Achievement_Tracker
             // ratioEnableCheckBox
             // 
             this.ratioEnableCheckBox.AutoSize = true;
-            this.ratioEnableCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ratioEnableCheckBox.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ratioEnableCheckBox.Location = new System.Drawing.Point(6, 100);
             this.ratioEnableCheckBox.Name = "ratioEnableCheckBox";
             this.ratioEnableCheckBox.Size = new System.Drawing.Size(15, 14);
@@ -978,7 +1005,7 @@ namespace Retro_Achievement_Tracker
             // pointsEnableCheckBox
             // 
             this.pointsEnableCheckBox.AutoSize = true;
-            this.pointsEnableCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pointsEnableCheckBox.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pointsEnableCheckBox.Location = new System.Drawing.Point(6, 60);
             this.pointsEnableCheckBox.Name = "pointsEnableCheckBox";
             this.pointsEnableCheckBox.Size = new System.Drawing.Size(15, 14);
@@ -988,7 +1015,7 @@ namespace Retro_Achievement_Tracker
             // awardsEnableCheckBox
             // 
             this.awardsEnableCheckBox.AutoSize = true;
-            this.awardsEnableCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.awardsEnableCheckBox.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.awardsEnableCheckBox.Location = new System.Drawing.Point(6, 40);
             this.awardsEnableCheckBox.Name = "awardsEnableCheckBox";
             this.awardsEnableCheckBox.Size = new System.Drawing.Size(15, 14);
@@ -1009,7 +1036,7 @@ namespace Retro_Achievement_Tracker
             // rankEnableCheckBox
             // 
             this.rankEnableCheckBox.AutoSize = true;
-            this.rankEnableCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rankEnableCheckBox.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rankEnableCheckBox.Location = new System.Drawing.Point(6, 20);
             this.rankEnableCheckBox.Name = "rankEnableCheckBox";
             this.rankEnableCheckBox.Size = new System.Drawing.Size(15, 14);
@@ -1022,7 +1049,7 @@ namespace Retro_Achievement_Tracker
             this.groupBox17.Controls.Add(this.statsRadioButtonBackslash);
             this.groupBox17.Controls.Add(this.statsRadioButtonSemicolon);
             this.groupBox17.Controls.Add(this.statsRadioButtonDot);
-            this.groupBox17.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox17.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox17.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.groupBox17.Location = new System.Drawing.Point(4, 152);
             this.groupBox17.Name = "groupBox17";
@@ -1036,7 +1063,7 @@ namespace Retro_Achievement_Tracker
             this.statsRadioButtonBackslash.AutoSize = true;
             this.statsRadioButtonBackslash.Location = new System.Drawing.Point(6, 14);
             this.statsRadioButtonBackslash.Name = "statsRadioButtonBackslash";
-            this.statsRadioButtonBackslash.Size = new System.Drawing.Size(126, 13);
+            this.statsRadioButtonBackslash.Size = new System.Drawing.Size(114, 15);
             this.statsRadioButtonBackslash.TabIndex = 50;
             this.statsRadioButtonBackslash.TabStop = true;
             this.statsRadioButtonBackslash.Text = "[/] Backslash";
@@ -1047,7 +1074,7 @@ namespace Retro_Achievement_Tracker
             this.statsRadioButtonSemicolon.AutoSize = true;
             this.statsRadioButtonSemicolon.Location = new System.Drawing.Point(6, 30);
             this.statsRadioButtonSemicolon.Name = "statsRadioButtonSemicolon";
-            this.statsRadioButtonSemicolon.Size = new System.Drawing.Size(94, 13);
+            this.statsRadioButtonSemicolon.Size = new System.Drawing.Size(86, 15);
             this.statsRadioButtonSemicolon.TabIndex = 53;
             this.statsRadioButtonSemicolon.TabStop = true;
             this.statsRadioButtonSemicolon.Text = "[:] Colon";
@@ -1058,7 +1085,7 @@ namespace Retro_Achievement_Tracker
             this.statsRadioButtonDot.AutoSize = true;
             this.statsRadioButtonDot.Location = new System.Drawing.Point(6, 46);
             this.statsRadioButtonDot.Name = "statsRadioButtonDot";
-            this.statsRadioButtonDot.Size = new System.Drawing.Size(134, 13);
+            this.statsRadioButtonDot.Size = new System.Drawing.Size(121, 15);
             this.statsRadioButtonDot.TabIndex = 52;
             this.statsRadioButtonDot.TabStop = true;
             this.statsRadioButtonDot.Text = "[.] Period/Dot";
@@ -1067,7 +1094,7 @@ namespace Retro_Achievement_Tracker
             // gameRatioEnableCheckBox
             // 
             this.gameRatioEnableCheckBox.AutoSize = true;
-            this.gameRatioEnableCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameRatioEnableCheckBox.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameRatioEnableCheckBox.Location = new System.Drawing.Point(6, 100);
             this.gameRatioEnableCheckBox.Name = "gameRatioEnableCheckBox";
             this.gameRatioEnableCheckBox.Size = new System.Drawing.Size(15, 14);
@@ -1077,7 +1104,7 @@ namespace Retro_Achievement_Tracker
             // gameTruePointsEnableCheckBox
             // 
             this.gameTruePointsEnableCheckBox.AutoSize = true;
-            this.gameTruePointsEnableCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameTruePointsEnableCheckBox.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameTruePointsEnableCheckBox.Location = new System.Drawing.Point(6, 60);
             this.gameTruePointsEnableCheckBox.Name = "gameTruePointsEnableCheckBox";
             this.gameTruePointsEnableCheckBox.Size = new System.Drawing.Size(15, 14);
@@ -1087,7 +1114,7 @@ namespace Retro_Achievement_Tracker
             // gamePointsEnableCheckBox
             // 
             this.gamePointsEnableCheckBox.AutoSize = true;
-            this.gamePointsEnableCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gamePointsEnableCheckBox.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gamePointsEnableCheckBox.Location = new System.Drawing.Point(6, 40);
             this.gamePointsEnableCheckBox.Name = "gamePointsEnableCheckBox";
             this.gamePointsEnableCheckBox.Size = new System.Drawing.Size(15, 14);
@@ -1097,7 +1124,7 @@ namespace Retro_Achievement_Tracker
             // completedEnableCheckBox
             // 
             this.completedEnableCheckBox.AutoSize = true;
-            this.completedEnableCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.completedEnableCheckBox.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.completedEnableCheckBox.Location = new System.Drawing.Point(6, 80);
             this.completedEnableCheckBox.Name = "completedEnableCheckBox";
             this.completedEnableCheckBox.Size = new System.Drawing.Size(15, 14);
@@ -1107,7 +1134,7 @@ namespace Retro_Achievement_Tracker
             // gameAchievementsEnableCheckBox
             // 
             this.gameAchievementsEnableCheckBox.AutoSize = true;
-            this.gameAchievementsEnableCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameAchievementsEnableCheckBox.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameAchievementsEnableCheckBox.Location = new System.Drawing.Point(6, 20);
             this.gameAchievementsEnableCheckBox.Name = "gameAchievementsEnableCheckBox";
             this.gameAchievementsEnableCheckBox.Size = new System.Drawing.Size(15, 14);
@@ -1127,37 +1154,37 @@ namespace Retro_Achievement_Tracker
             // 
             // statsGameAchievementsOverrideTextBox
             // 
-            this.statsGameAchievementsOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statsGameAchievementsOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statsGameAchievementsOverrideTextBox.Location = new System.Drawing.Point(27, 15);
             this.statsGameAchievementsOverrideTextBox.Name = "statsGameAchievementsOverrideTextBox";
-            this.statsGameAchievementsOverrideTextBox.Size = new System.Drawing.Size(160, 20);
+            this.statsGameAchievementsOverrideTextBox.Size = new System.Drawing.Size(160, 18);
             this.statsGameAchievementsOverrideTextBox.TabIndex = 13;
             this.statsGameAchievementsOverrideTextBox.Text = "Cheevos";
             // 
             // statsGamePointsOverrideTextBox
             // 
-            this.statsGamePointsOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statsGamePointsOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statsGamePointsOverrideTextBox.Location = new System.Drawing.Point(27, 35);
             this.statsGamePointsOverrideTextBox.Name = "statsGamePointsOverrideTextBox";
-            this.statsGamePointsOverrideTextBox.Size = new System.Drawing.Size(160, 20);
+            this.statsGamePointsOverrideTextBox.Size = new System.Drawing.Size(160, 18);
             this.statsGamePointsOverrideTextBox.TabIndex = 15;
             this.statsGamePointsOverrideTextBox.Text = "Points";
             // 
             // statsGameTruePointsOverrideTextBox
             // 
-            this.statsGameTruePointsOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statsGameTruePointsOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statsGameTruePointsOverrideTextBox.Location = new System.Drawing.Point(27, 55);
             this.statsGameTruePointsOverrideTextBox.Name = "statsGameTruePointsOverrideTextBox";
-            this.statsGameTruePointsOverrideTextBox.Size = new System.Drawing.Size(160, 20);
+            this.statsGameTruePointsOverrideTextBox.Size = new System.Drawing.Size(160, 18);
             this.statsGameTruePointsOverrideTextBox.TabIndex = 16;
             this.statsGameTruePointsOverrideTextBox.Text = "T. Points";
             // 
             // statsCompletedOverrideTextBox
             // 
-            this.statsCompletedOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statsCompletedOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statsCompletedOverrideTextBox.Location = new System.Drawing.Point(27, 75);
             this.statsCompletedOverrideTextBox.Name = "statsCompletedOverrideTextBox";
-            this.statsCompletedOverrideTextBox.Size = new System.Drawing.Size(160, 20);
+            this.statsCompletedOverrideTextBox.Size = new System.Drawing.Size(160, 18);
             this.statsCompletedOverrideTextBox.TabIndex = 48;
             this.statsCompletedOverrideTextBox.Text = "Completed";
             // 
@@ -1178,9 +1205,9 @@ namespace Retro_Achievement_Tracker
             this.gameInfoCustomizationGroupBox.Controls.Add(this.gameInfoPublisherOverrideTextBox);
             this.gameInfoCustomizationGroupBox.Controls.Add(this.gameInfoReleaseDateOverrideTextBox);
             this.gameInfoCustomizationGroupBox.Controls.Add(this.gameInfoDeveloperOverrideTextBox);
-            this.gameInfoCustomizationGroupBox.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInfoCustomizationGroupBox.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameInfoCustomizationGroupBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.gameInfoCustomizationGroupBox.Location = new System.Drawing.Point(527, 436);
+            this.gameInfoCustomizationGroupBox.Location = new System.Drawing.Point(523, 263);
             this.gameInfoCustomizationGroupBox.Name = "gameInfoCustomizationGroupBox";
             this.gameInfoCustomizationGroupBox.Size = new System.Drawing.Size(195, 169);
             this.gameInfoCustomizationGroupBox.TabIndex = 10008;
@@ -1190,7 +1217,7 @@ namespace Retro_Achievement_Tracker
             // releasedDateEnableCheckBox
             // 
             this.releasedDateEnableCheckBox.AutoSize = true;
-            this.releasedDateEnableCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.releasedDateEnableCheckBox.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.releasedDateEnableCheckBox.Location = new System.Drawing.Point(6, 120);
             this.releasedDateEnableCheckBox.Name = "releasedDateEnableCheckBox";
             this.releasedDateEnableCheckBox.Size = new System.Drawing.Size(15, 14);
@@ -1200,7 +1227,7 @@ namespace Retro_Achievement_Tracker
             // consoleEnableCheckBox
             // 
             this.consoleEnableCheckBox.AutoSize = true;
-            this.consoleEnableCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.consoleEnableCheckBox.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.consoleEnableCheckBox.Location = new System.Drawing.Point(6, 100);
             this.consoleEnableCheckBox.Name = "consoleEnableCheckBox";
             this.consoleEnableCheckBox.Size = new System.Drawing.Size(15, 14);
@@ -1210,7 +1237,7 @@ namespace Retro_Achievement_Tracker
             // publisherEnableCheckBox
             // 
             this.publisherEnableCheckBox.AutoSize = true;
-            this.publisherEnableCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.publisherEnableCheckBox.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.publisherEnableCheckBox.Location = new System.Drawing.Point(6, 60);
             this.publisherEnableCheckBox.Name = "publisherEnableCheckBox";
             this.publisherEnableCheckBox.Size = new System.Drawing.Size(15, 14);
@@ -1220,7 +1247,7 @@ namespace Retro_Achievement_Tracker
             // genreEnableCheckBox
             // 
             this.genreEnableCheckBox.AutoSize = true;
-            this.genreEnableCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.genreEnableCheckBox.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.genreEnableCheckBox.Location = new System.Drawing.Point(6, 80);
             this.genreEnableCheckBox.Name = "genreEnableCheckBox";
             this.genreEnableCheckBox.Size = new System.Drawing.Size(15, 14);
@@ -1230,7 +1257,7 @@ namespace Retro_Achievement_Tracker
             // developerEnableCheckBox
             // 
             this.developerEnableCheckBox.AutoSize = true;
-            this.developerEnableCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.developerEnableCheckBox.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.developerEnableCheckBox.Location = new System.Drawing.Point(6, 40);
             this.developerEnableCheckBox.Name = "developerEnableCheckBox";
             this.developerEnableCheckBox.Size = new System.Drawing.Size(15, 14);
@@ -1240,7 +1267,7 @@ namespace Retro_Achievement_Tracker
             // titleEnableCheckBox
             // 
             this.titleEnableCheckBox.AutoSize = true;
-            this.titleEnableCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.titleEnableCheckBox.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.titleEnableCheckBox.Location = new System.Drawing.Point(6, 20);
             this.titleEnableCheckBox.Name = "titleEnableCheckBox";
             this.titleEnableCheckBox.Size = new System.Drawing.Size(15, 14);
@@ -1249,10 +1276,10 @@ namespace Retro_Achievement_Tracker
             // 
             // gameInfoTitleOverrideTextBox
             // 
-            this.gameInfoTitleOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInfoTitleOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameInfoTitleOverrideTextBox.Location = new System.Drawing.Point(27, 15);
             this.gameInfoTitleOverrideTextBox.Name = "gameInfoTitleOverrideTextBox";
-            this.gameInfoTitleOverrideTextBox.Size = new System.Drawing.Size(160, 20);
+            this.gameInfoTitleOverrideTextBox.Size = new System.Drawing.Size(160, 18);
             this.gameInfoTitleOverrideTextBox.TabIndex = 53;
             this.gameInfoTitleOverrideTextBox.Text = "Title";
             // 
@@ -1269,46 +1296,46 @@ namespace Retro_Achievement_Tracker
             // 
             // gameInfoGenreOverrideTextBox
             // 
-            this.gameInfoGenreOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInfoGenreOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameInfoGenreOverrideTextBox.Location = new System.Drawing.Point(27, 75);
             this.gameInfoGenreOverrideTextBox.Name = "gameInfoGenreOverrideTextBox";
-            this.gameInfoGenreOverrideTextBox.Size = new System.Drawing.Size(160, 20);
+            this.gameInfoGenreOverrideTextBox.Size = new System.Drawing.Size(160, 18);
             this.gameInfoGenreOverrideTextBox.TabIndex = 25;
             this.gameInfoGenreOverrideTextBox.Text = "Genre";
             // 
             // gameInfoConsoleOverrideTextBox
             // 
-            this.gameInfoConsoleOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInfoConsoleOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameInfoConsoleOverrideTextBox.Location = new System.Drawing.Point(27, 95);
             this.gameInfoConsoleOverrideTextBox.Name = "gameInfoConsoleOverrideTextBox";
-            this.gameInfoConsoleOverrideTextBox.Size = new System.Drawing.Size(160, 20);
+            this.gameInfoConsoleOverrideTextBox.Size = new System.Drawing.Size(160, 18);
             this.gameInfoConsoleOverrideTextBox.TabIndex = 19;
             this.gameInfoConsoleOverrideTextBox.Text = "Console";
             // 
             // gameInfoPublisherOverrideTextBox
             // 
-            this.gameInfoPublisherOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInfoPublisherOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameInfoPublisherOverrideTextBox.Location = new System.Drawing.Point(27, 55);
             this.gameInfoPublisherOverrideTextBox.Name = "gameInfoPublisherOverrideTextBox";
-            this.gameInfoPublisherOverrideTextBox.Size = new System.Drawing.Size(160, 20);
+            this.gameInfoPublisherOverrideTextBox.Size = new System.Drawing.Size(160, 18);
             this.gameInfoPublisherOverrideTextBox.TabIndex = 24;
             this.gameInfoPublisherOverrideTextBox.Text = "Publisher";
             // 
             // gameInfoReleaseDateOverrideTextBox
             // 
-            this.gameInfoReleaseDateOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInfoReleaseDateOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameInfoReleaseDateOverrideTextBox.Location = new System.Drawing.Point(27, 115);
             this.gameInfoReleaseDateOverrideTextBox.Name = "gameInfoReleaseDateOverrideTextBox";
-            this.gameInfoReleaseDateOverrideTextBox.Size = new System.Drawing.Size(160, 20);
+            this.gameInfoReleaseDateOverrideTextBox.Size = new System.Drawing.Size(160, 18);
             this.gameInfoReleaseDateOverrideTextBox.TabIndex = 23;
             this.gameInfoReleaseDateOverrideTextBox.Text = "Released";
             // 
             // gameInfoDeveloperOverrideTextBox
             // 
-            this.gameInfoDeveloperOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInfoDeveloperOverrideTextBox.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameInfoDeveloperOverrideTextBox.Location = new System.Drawing.Point(27, 35);
             this.gameInfoDeveloperOverrideTextBox.Name = "gameInfoDeveloperOverrideTextBox";
-            this.gameInfoDeveloperOverrideTextBox.Size = new System.Drawing.Size(160, 20);
+            this.gameInfoDeveloperOverrideTextBox.Size = new System.Drawing.Size(160, 18);
             this.gameInfoDeveloperOverrideTextBox.TabIndex = 21;
             this.gameInfoDeveloperOverrideTextBox.Text = "Developer";
             // 
@@ -1320,7 +1347,7 @@ namespace Retro_Achievement_Tracker
             // 
             this.fontBorderCheckBox.AutoSize = true;
             this.fontBorderCheckBox.BackColor = System.Drawing.Color.Transparent;
-            this.fontBorderCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fontBorderCheckBox.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fontBorderCheckBox.Location = new System.Drawing.Point(8, 74);
             this.fontBorderCheckBox.Name = "fontBorderCheckBox";
             this.fontBorderCheckBox.Size = new System.Drawing.Size(15, 14);
@@ -1333,7 +1360,7 @@ namespace Retro_Achievement_Tracker
             this.windowBackgroundGroupBox.BackgroundImage = global::Retro_Achievement_Tracker.Properties.Resources.chrono_trigger_block5;
             this.windowBackgroundGroupBox.Controls.Add(this.windowBackgroundColorButton);
             this.windowBackgroundGroupBox.Controls.Add(this.windowBackgroundColorPictureBox);
-            this.windowBackgroundGroupBox.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.windowBackgroundGroupBox.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.windowBackgroundGroupBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.windowBackgroundGroupBox.Location = new System.Drawing.Point(6, 11);
             this.windowBackgroundGroupBox.Name = "windowBackgroundGroupBox";
@@ -1344,7 +1371,7 @@ namespace Retro_Achievement_Tracker
             // 
             // windowBackgroundColorButton
             // 
-            this.windowBackgroundColorButton.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.windowBackgroundColorButton.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.windowBackgroundColorButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.windowBackgroundColorButton.Location = new System.Drawing.Point(2, 10);
             this.windowBackgroundColorButton.Name = "windowBackgroundColorButton";
@@ -1366,11 +1393,11 @@ namespace Retro_Achievement_Tracker
             // 
             this.fontBorderLabel.AutoSize = true;
             this.fontBorderLabel.BackColor = System.Drawing.Color.Transparent;
-            this.fontBorderLabel.Font = new System.Drawing.Font("Arcade Normal", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fontBorderLabel.Font = new System.Drawing.Font("Lucida Console", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fontBorderLabel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.fontBorderLabel.Location = new System.Drawing.Point(28, 76);
             this.fontBorderLabel.Name = "fontBorderLabel";
-            this.fontBorderLabel.Size = new System.Drawing.Size(71, 10);
+            this.fontBorderLabel.Size = new System.Drawing.Size(47, 11);
             this.fontBorderLabel.TabIndex = 51;
             this.fontBorderLabel.Text = "Border";
             // 
@@ -1380,7 +1407,7 @@ namespace Retro_Achievement_Tracker
             this.borderBackgroundGroupBox.BackgroundImage = global::Retro_Achievement_Tracker.Properties.Resources.chrono_trigger_block5;
             this.borderBackgroundGroupBox.Controls.Add(this.borderBackgroundColorButton);
             this.borderBackgroundGroupBox.Controls.Add(this.borderBackgroudColorPictureBox);
-            this.borderBackgroundGroupBox.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.borderBackgroundGroupBox.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.borderBackgroundGroupBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.borderBackgroundGroupBox.Location = new System.Drawing.Point(79, 11);
             this.borderBackgroundGroupBox.Name = "borderBackgroundGroupBox";
@@ -1391,7 +1418,7 @@ namespace Retro_Achievement_Tracker
             // 
             // borderBackgroundColorButton
             // 
-            this.borderBackgroundColorButton.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.borderBackgroundColorButton.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.borderBackgroundColorButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.borderBackgroundColorButton.Location = new System.Drawing.Point(2, 10);
             this.borderBackgroundColorButton.Name = "borderBackgroundColorButton";
@@ -1421,7 +1448,7 @@ namespace Retro_Achievement_Tracker
             this.pointsFontGroupBox.Controls.Add(this.pointsFontOutlineNumericUpDown);
             this.pointsFontGroupBox.Controls.Add(this.pointsFontColorPictureBox);
             this.pointsFontGroupBox.Controls.Add(this.pointsFontFamilyComboBox);
-            this.pointsFontGroupBox.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pointsFontGroupBox.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pointsFontGroupBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.pointsFontGroupBox.Location = new System.Drawing.Point(6, 293);
             this.pointsFontGroupBox.Name = "pointsFontGroupBox";
@@ -1435,13 +1462,13 @@ namespace Retro_Achievement_Tracker
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(87, 37);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(60, 7);
+            this.label4.Size = new System.Drawing.Size(54, 11);
             this.label4.TabIndex = 46;
             this.label4.Text = "Outline";
             // 
             // pointsFontOutlineColorButton
             // 
-            this.pointsFontOutlineColorButton.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pointsFontOutlineColorButton.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pointsFontOutlineColorButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.pointsFontOutlineColorButton.Location = new System.Drawing.Point(6, 56);
             this.pointsFontOutlineColorButton.Name = "pointsFontOutlineColorButton";
@@ -1461,7 +1488,7 @@ namespace Retro_Achievement_Tracker
             // 
             // pointsFontColorButton
             // 
-            this.pointsFontColorButton.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pointsFontColorButton.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pointsFontColorButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.pointsFontColorButton.Location = new System.Drawing.Point(6, 34);
             this.pointsFontColorButton.Name = "pointsFontColorButton";
@@ -1473,7 +1500,7 @@ namespace Retro_Achievement_Tracker
             // pointsFontOutlineCheckbox
             // 
             this.pointsFontOutlineCheckbox.AutoSize = true;
-            this.pointsFontOutlineCheckbox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pointsFontOutlineCheckbox.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pointsFontOutlineCheckbox.Location = new System.Drawing.Point(86, 58);
             this.pointsFontOutlineCheckbox.Name = "pointsFontOutlineCheckbox";
             this.pointsFontOutlineCheckbox.Size = new System.Drawing.Size(15, 14);
@@ -1482,7 +1509,7 @@ namespace Retro_Achievement_Tracker
             // 
             // pointsFontOutlineNumericUpDown
             // 
-            this.pointsFontOutlineNumericUpDown.Font = new System.Drawing.Font("Arcade Normal", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pointsFontOutlineNumericUpDown.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pointsFontOutlineNumericUpDown.Location = new System.Drawing.Point(103, 53);
             this.pointsFontOutlineNumericUpDown.Maximum = new decimal(new int[] {
             5,
@@ -1495,7 +1522,7 @@ namespace Retro_Achievement_Tracker
             0,
             0});
             this.pointsFontOutlineNumericUpDown.Name = "pointsFontOutlineNumericUpDown";
-            this.pointsFontOutlineNumericUpDown.Size = new System.Drawing.Size(43, 24);
+            this.pointsFontOutlineNumericUpDown.Size = new System.Drawing.Size(43, 20);
             this.pointsFontOutlineNumericUpDown.TabIndex = 45;
             this.pointsFontOutlineNumericUpDown.Value = new decimal(new int[] {
             1,
@@ -1533,7 +1560,7 @@ namespace Retro_Achievement_Tracker
             this.descriptionFontGroupBox.Controls.Add(this.descriptionFontOutlineNumericUpDown);
             this.descriptionFontGroupBox.Controls.Add(this.descriptionFontColorPictureBox);
             this.descriptionFontGroupBox.Controls.Add(this.descriptionFontFamilyComboBox);
-            this.descriptionFontGroupBox.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.descriptionFontGroupBox.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.descriptionFontGroupBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.descriptionFontGroupBox.Location = new System.Drawing.Point(8, 202);
             this.descriptionFontGroupBox.Name = "descriptionFontGroupBox";
@@ -1547,13 +1574,13 @@ namespace Retro_Achievement_Tracker
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(87, 37);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(60, 7);
+            this.label3.Size = new System.Drawing.Size(54, 11);
             this.label3.TabIndex = 46;
             this.label3.Text = "Outline";
             // 
             // descriptionFontOutlineColorButton
             // 
-            this.descriptionFontOutlineColorButton.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.descriptionFontOutlineColorButton.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.descriptionFontOutlineColorButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.descriptionFontOutlineColorButton.Location = new System.Drawing.Point(6, 56);
             this.descriptionFontOutlineColorButton.Name = "descriptionFontOutlineColorButton";
@@ -1573,7 +1600,7 @@ namespace Retro_Achievement_Tracker
             // 
             // descriptionFontColorButton
             // 
-            this.descriptionFontColorButton.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.descriptionFontColorButton.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.descriptionFontColorButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.descriptionFontColorButton.Location = new System.Drawing.Point(6, 34);
             this.descriptionFontColorButton.Name = "descriptionFontColorButton";
@@ -1585,7 +1612,7 @@ namespace Retro_Achievement_Tracker
             // descriptionFontOutlineCheckbox
             // 
             this.descriptionFontOutlineCheckbox.AutoSize = true;
-            this.descriptionFontOutlineCheckbox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.descriptionFontOutlineCheckbox.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.descriptionFontOutlineCheckbox.Location = new System.Drawing.Point(86, 58);
             this.descriptionFontOutlineCheckbox.Name = "descriptionFontOutlineCheckbox";
             this.descriptionFontOutlineCheckbox.Size = new System.Drawing.Size(15, 14);
@@ -1594,7 +1621,7 @@ namespace Retro_Achievement_Tracker
             // 
             // descriptionFontOutlineNumericUpDown
             // 
-            this.descriptionFontOutlineNumericUpDown.Font = new System.Drawing.Font("Arcade Normal", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.descriptionFontOutlineNumericUpDown.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.descriptionFontOutlineNumericUpDown.Location = new System.Drawing.Point(103, 53);
             this.descriptionFontOutlineNumericUpDown.Maximum = new decimal(new int[] {
             5,
@@ -1607,7 +1634,7 @@ namespace Retro_Achievement_Tracker
             0,
             0});
             this.descriptionFontOutlineNumericUpDown.Name = "descriptionFontOutlineNumericUpDown";
-            this.descriptionFontOutlineNumericUpDown.Size = new System.Drawing.Size(43, 24);
+            this.descriptionFontOutlineNumericUpDown.Size = new System.Drawing.Size(43, 20);
             this.descriptionFontOutlineNumericUpDown.TabIndex = 45;
             this.descriptionFontOutlineNumericUpDown.Value = new decimal(new int[] {
             1,
@@ -1644,7 +1671,7 @@ namespace Retro_Achievement_Tracker
             this.lineFontGroupBox.Controls.Add(this.lineOutlineCheckbox);
             this.lineFontGroupBox.Controls.Add(this.lineOutlineNumericUpDown);
             this.lineFontGroupBox.Controls.Add(this.lineColorPictureBox);
-            this.lineFontGroupBox.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lineFontGroupBox.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lineFontGroupBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.lineFontGroupBox.Location = new System.Drawing.Point(6, 384);
             this.lineFontGroupBox.Name = "lineFontGroupBox";
@@ -1658,13 +1685,13 @@ namespace Retro_Achievement_Tracker
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(87, 12);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(60, 7);
+            this.label5.Size = new System.Drawing.Size(54, 11);
             this.label5.TabIndex = 46;
             this.label5.Text = "Outline";
             // 
             // lineOutlineColorButton
             // 
-            this.lineOutlineColorButton.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lineOutlineColorButton.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lineOutlineColorButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.lineOutlineColorButton.Location = new System.Drawing.Point(4, 34);
             this.lineOutlineColorButton.Name = "lineOutlineColorButton";
@@ -1684,7 +1711,7 @@ namespace Retro_Achievement_Tracker
             // 
             // lineColorButton
             // 
-            this.lineColorButton.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lineColorButton.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lineColorButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.lineColorButton.Location = new System.Drawing.Point(4, 11);
             this.lineColorButton.Name = "lineColorButton";
@@ -1696,7 +1723,7 @@ namespace Retro_Achievement_Tracker
             // lineOutlineCheckbox
             // 
             this.lineOutlineCheckbox.AutoSize = true;
-            this.lineOutlineCheckbox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lineOutlineCheckbox.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lineOutlineCheckbox.Location = new System.Drawing.Point(84, 36);
             this.lineOutlineCheckbox.Name = "lineOutlineCheckbox";
             this.lineOutlineCheckbox.Size = new System.Drawing.Size(15, 14);
@@ -1705,7 +1732,7 @@ namespace Retro_Achievement_Tracker
             // 
             // lineOutlineNumericUpDown
             // 
-            this.lineOutlineNumericUpDown.Font = new System.Drawing.Font("Arcade Normal", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lineOutlineNumericUpDown.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lineOutlineNumericUpDown.Location = new System.Drawing.Point(101, 29);
             this.lineOutlineNumericUpDown.Maximum = new decimal(new int[] {
             5,
@@ -1718,7 +1745,7 @@ namespace Retro_Achievement_Tracker
             0,
             0});
             this.lineOutlineNumericUpDown.Name = "lineOutlineNumericUpDown";
-            this.lineOutlineNumericUpDown.Size = new System.Drawing.Size(43, 24);
+            this.lineOutlineNumericUpDown.Size = new System.Drawing.Size(43, 20);
             this.lineOutlineNumericUpDown.TabIndex = 45;
             this.lineOutlineNumericUpDown.Value = new decimal(new int[] {
             1,
@@ -1739,11 +1766,11 @@ namespace Retro_Achievement_Tracker
             // 
             this.simpleFontLabel.AutoSize = true;
             this.simpleFontLabel.BackColor = System.Drawing.Color.Transparent;
-            this.simpleFontLabel.Font = new System.Drawing.Font("Arcade Normal", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.simpleFontLabel.Font = new System.Drawing.Font("Lucida Console", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.simpleFontLabel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.simpleFontLabel.Location = new System.Drawing.Point(28, 56);
             this.simpleFontLabel.Name = "simpleFontLabel";
-            this.simpleFontLabel.Size = new System.Drawing.Size(71, 10);
+            this.simpleFontLabel.Size = new System.Drawing.Size(47, 11);
             this.simpleFontLabel.TabIndex = 47;
             this.simpleFontLabel.Text = "Simple";
             // 
@@ -1751,7 +1778,7 @@ namespace Retro_Achievement_Tracker
             // 
             this.simpleFontCheckBox.AutoSize = true;
             this.simpleFontCheckBox.BackColor = System.Drawing.Color.Transparent;
-            this.simpleFontCheckBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.simpleFontCheckBox.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.simpleFontCheckBox.Location = new System.Drawing.Point(8, 54);
             this.simpleFontCheckBox.Name = "simpleFontCheckBox";
             this.simpleFontCheckBox.Size = new System.Drawing.Size(15, 14);
@@ -1770,7 +1797,7 @@ namespace Retro_Achievement_Tracker
             this.titleFontGroupBox.Controls.Add(this.titleFontOutlineNumericUpDown);
             this.titleFontGroupBox.Controls.Add(this.titleFontColorPictureBox);
             this.titleFontGroupBox.Controls.Add(this.titleFontFamilyComboBox);
-            this.titleFontGroupBox.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.titleFontGroupBox.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.titleFontGroupBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.titleFontGroupBox.Location = new System.Drawing.Point(6, 111);
             this.titleFontGroupBox.Name = "titleFontGroupBox";
@@ -1785,13 +1812,13 @@ namespace Retro_Achievement_Tracker
             this.titleOutlineLabel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.titleOutlineLabel.Location = new System.Drawing.Point(87, 37);
             this.titleOutlineLabel.Name = "titleOutlineLabel";
-            this.titleOutlineLabel.Size = new System.Drawing.Size(60, 7);
+            this.titleOutlineLabel.Size = new System.Drawing.Size(54, 11);
             this.titleOutlineLabel.TabIndex = 46;
             this.titleOutlineLabel.Text = "Outline";
             // 
             // titleFontOutlineColorButton
             // 
-            this.titleFontOutlineColorButton.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.titleFontOutlineColorButton.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.titleFontOutlineColorButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.titleFontOutlineColorButton.Location = new System.Drawing.Point(6, 56);
             this.titleFontOutlineColorButton.Name = "titleFontOutlineColorButton";
@@ -1811,7 +1838,7 @@ namespace Retro_Achievement_Tracker
             // 
             // titleFontColorButton
             // 
-            this.titleFontColorButton.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.titleFontColorButton.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.titleFontColorButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.titleFontColorButton.Location = new System.Drawing.Point(6, 34);
             this.titleFontColorButton.Name = "titleFontColorButton";
@@ -1823,7 +1850,7 @@ namespace Retro_Achievement_Tracker
             // titleFontOutlineCheckbox
             // 
             this.titleFontOutlineCheckbox.AutoSize = true;
-            this.titleFontOutlineCheckbox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.titleFontOutlineCheckbox.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.titleFontOutlineCheckbox.Location = new System.Drawing.Point(86, 58);
             this.titleFontOutlineCheckbox.Name = "titleFontOutlineCheckbox";
             this.titleFontOutlineCheckbox.Size = new System.Drawing.Size(15, 14);
@@ -1832,7 +1859,7 @@ namespace Retro_Achievement_Tracker
             // 
             // titleFontOutlineNumericUpDown
             // 
-            this.titleFontOutlineNumericUpDown.Font = new System.Drawing.Font("Arcade Normal", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.titleFontOutlineNumericUpDown.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.titleFontOutlineNumericUpDown.Location = new System.Drawing.Point(103, 53);
             this.titleFontOutlineNumericUpDown.Maximum = new decimal(new int[] {
             5,
@@ -1845,7 +1872,7 @@ namespace Retro_Achievement_Tracker
             0,
             0});
             this.titleFontOutlineNumericUpDown.Name = "titleFontOutlineNumericUpDown";
-            this.titleFontOutlineNumericUpDown.Size = new System.Drawing.Size(43, 24);
+            this.titleFontOutlineNumericUpDown.Size = new System.Drawing.Size(43, 20);
             this.titleFontOutlineNumericUpDown.TabIndex = 45;
             this.titleFontOutlineNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.titleFontOutlineNumericUpDown.Value = new decimal(new int[] {
@@ -1885,7 +1912,7 @@ namespace Retro_Achievement_Tracker
             this.customMasterySettingsGroupBox.Controls.Add(this.groupBox14);
             this.customMasterySettingsGroupBox.Controls.Add(this.groupBox19);
             this.customMasterySettingsGroupBox.Controls.Add(this.customMasteryEnableCheckbox);
-            this.customMasterySettingsGroupBox.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customMasterySettingsGroupBox.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.customMasterySettingsGroupBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.customMasterySettingsGroupBox.Location = new System.Drawing.Point(344, 11);
             this.customMasterySettingsGroupBox.Name = "customMasterySettingsGroupBox";
@@ -1897,29 +1924,29 @@ namespace Retro_Achievement_Tracker
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label25.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label25.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.label25.Location = new System.Drawing.Point(96, 17);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(52, 7);
+            this.label25.Size = new System.Drawing.Size(47, 11);
             this.label25.TabIndex = 55;
             this.label25.Text = "Custom";
             // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.label15.Location = new System.Drawing.Point(112, 70);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(36, 7);
+            this.label15.Size = new System.Drawing.Size(33, 11);
             this.label15.TabIndex = 22;
             this.label15.Text = "Edit";
             // 
             // playMasteryButton
             // 
             this.playMasteryButton.BackColor = System.Drawing.SystemColors.Control;
-            this.playMasteryButton.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.playMasteryButton.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.playMasteryButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.playMasteryButton.Location = new System.Drawing.Point(4, 9);
             this.playMasteryButton.Name = "playMasteryButton";
@@ -1959,11 +1986,11 @@ namespace Retro_Achievement_Tracker
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label16.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.label16.Location = new System.Drawing.Point(6, 61);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(44, 7);
+            this.label16.Size = new System.Drawing.Size(40, 11);
             this.label16.TabIndex = 21;
             this.label16.Text = "Scale";
             this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1971,7 +1998,7 @@ namespace Retro_Achievement_Tracker
             // scaleMasteryNumericUpDown
             // 
             this.scaleMasteryNumericUpDown.DecimalPlaces = 2;
-            this.scaleMasteryNumericUpDown.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.scaleMasteryNumericUpDown.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.scaleMasteryNumericUpDown.Increment = new decimal(new int[] {
             1,
             0,
@@ -1989,7 +2016,7 @@ namespace Retro_Achievement_Tracker
             0,
             131072});
             this.scaleMasteryNumericUpDown.Name = "scaleMasteryNumericUpDown";
-            this.scaleMasteryNumericUpDown.Size = new System.Drawing.Size(60, 20);
+            this.scaleMasteryNumericUpDown.Size = new System.Drawing.Size(60, 18);
             this.scaleMasteryNumericUpDown.TabIndex = 20;
             this.scaleMasteryNumericUpDown.Value = new decimal(new int[] {
             1,
@@ -2000,29 +2027,29 @@ namespace Retro_Achievement_Tracker
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label17.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.label17.Location = new System.Drawing.Point(7, 17);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(12, 7);
+            this.label17.Size = new System.Drawing.Size(12, 11);
             this.label17.TabIndex = 18;
             this.label17.Text = "X";
             // 
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label18.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.label18.Location = new System.Drawing.Point(7, 37);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(12, 7);
+            this.label18.Size = new System.Drawing.Size(12, 11);
             this.label18.TabIndex = 19;
             this.label18.Text = "Y";
             this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customMasteryXNumericUpDown
             // 
-            this.customMasteryXNumericUpDown.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customMasteryXNumericUpDown.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.customMasteryXNumericUpDown.Location = new System.Drawing.Point(25, 10);
             this.customMasteryXNumericUpDown.Maximum = new decimal(new int[] {
             2000,
@@ -2035,12 +2062,12 @@ namespace Retro_Achievement_Tracker
             0,
             -2147483648});
             this.customMasteryXNumericUpDown.Name = "customMasteryXNumericUpDown";
-            this.customMasteryXNumericUpDown.Size = new System.Drawing.Size(51, 20);
+            this.customMasteryXNumericUpDown.Size = new System.Drawing.Size(51, 18);
             this.customMasteryXNumericUpDown.TabIndex = 15;
             // 
             // customMasteryYNumericUpDown
             // 
-            this.customMasteryYNumericUpDown.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customMasteryYNumericUpDown.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.customMasteryYNumericUpDown.Location = new System.Drawing.Point(25, 32);
             this.customMasteryYNumericUpDown.Maximum = new decimal(new int[] {
             2000,
@@ -2053,13 +2080,13 @@ namespace Retro_Achievement_Tracker
             0,
             -2147483648});
             this.customMasteryYNumericUpDown.Name = "customMasteryYNumericUpDown";
-            this.customMasteryYNumericUpDown.Size = new System.Drawing.Size(51, 20);
+            this.customMasteryYNumericUpDown.Size = new System.Drawing.Size(51, 18);
             this.customMasteryYNumericUpDown.TabIndex = 16;
             // 
             // masteryEditOultineCheckbox
             // 
             this.masteryEditOultineCheckbox.AutoSize = true;
-            this.masteryEditOultineCheckbox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.masteryEditOultineCheckbox.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.masteryEditOultineCheckbox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.masteryEditOultineCheckbox.Location = new System.Drawing.Point(93, 67);
             this.masteryEditOultineCheckbox.Name = "masteryEditOultineCheckbox";
@@ -2087,39 +2114,39 @@ namespace Retro_Achievement_Tracker
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label19.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.label19.Location = new System.Drawing.Point(6, 43);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(84, 7);
+            this.label19.Size = new System.Drawing.Size(75, 11);
             this.label19.TabIndex = 49;
             this.label19.Text = "Speed (ms)";
             // 
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label20.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.label20.Location = new System.Drawing.Point(6, 63);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(76, 7);
+            this.label20.Size = new System.Drawing.Size(68, 11);
             this.label20.TabIndex = 40;
             this.label20.Text = "Direction";
             // 
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label21.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.label21.Location = new System.Drawing.Point(6, 19);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(84, 7);
+            this.label21.Size = new System.Drawing.Size(75, 11);
             this.label21.TabIndex = 20;
             this.label21.Text = "Mark  (ms)";
             // 
             // notificationMasteryOutNumericUpDown
             // 
-            this.notificationMasteryOutNumericUpDown.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.notificationMasteryOutNumericUpDown.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.notificationMasteryOutNumericUpDown.Location = new System.Drawing.Point(96, 14);
             this.notificationMasteryOutNumericUpDown.Maximum = new decimal(new int[] {
             100000,
@@ -2132,7 +2159,7 @@ namespace Retro_Achievement_Tracker
             0,
             0});
             this.notificationMasteryOutNumericUpDown.Name = "notificationMasteryOutNumericUpDown";
-            this.notificationMasteryOutNumericUpDown.Size = new System.Drawing.Size(63, 20);
+            this.notificationMasteryOutNumericUpDown.Size = new System.Drawing.Size(63, 18);
             this.notificationMasteryOutNumericUpDown.TabIndex = 26;
             this.notificationMasteryOutNumericUpDown.Value = new decimal(new int[] {
             300,
@@ -2151,7 +2178,7 @@ namespace Retro_Achievement_Tracker
             // 
             // customMasteryOutSpeedUpDown
             // 
-            this.customMasteryOutSpeedUpDown.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customMasteryOutSpeedUpDown.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.customMasteryOutSpeedUpDown.Location = new System.Drawing.Point(96, 36);
             this.customMasteryOutSpeedUpDown.Maximum = new decimal(new int[] {
             10000,
@@ -2164,7 +2191,7 @@ namespace Retro_Achievement_Tracker
             0,
             0});
             this.customMasteryOutSpeedUpDown.Name = "customMasteryOutSpeedUpDown";
-            this.customMasteryOutSpeedUpDown.Size = new System.Drawing.Size(63, 20);
+            this.customMasteryOutSpeedUpDown.Size = new System.Drawing.Size(63, 18);
             this.customMasteryOutSpeedUpDown.TabIndex = 48;
             this.customMasteryOutSpeedUpDown.Value = new decimal(new int[] {
             50,
@@ -2192,39 +2219,39 @@ namespace Retro_Achievement_Tracker
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label22.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.label22.Location = new System.Drawing.Point(6, 40);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(84, 7);
+            this.label22.Size = new System.Drawing.Size(75, 11);
             this.label22.TabIndex = 49;
             this.label22.Text = "Speed (ms)";
             // 
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label23.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.label23.Location = new System.Drawing.Point(6, 63);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(76, 7);
+            this.label23.Size = new System.Drawing.Size(68, 11);
             this.label23.TabIndex = 40;
             this.label23.Text = "Direction";
             // 
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label24.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.label24.Location = new System.Drawing.Point(6, 16);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(84, 7);
+            this.label24.Size = new System.Drawing.Size(75, 11);
             this.label24.TabIndex = 20;
             this.label24.Text = "Mark  (ms)";
             // 
             // notificationMasteryInNumericUpDown
             // 
-            this.notificationMasteryInNumericUpDown.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.notificationMasteryInNumericUpDown.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.notificationMasteryInNumericUpDown.Location = new System.Drawing.Point(96, 11);
             this.notificationMasteryInNumericUpDown.Maximum = new decimal(new int[] {
             100000,
@@ -2237,7 +2264,7 @@ namespace Retro_Achievement_Tracker
             0,
             0});
             this.notificationMasteryInNumericUpDown.Name = "notificationMasteryInNumericUpDown";
-            this.notificationMasteryInNumericUpDown.Size = new System.Drawing.Size(63, 20);
+            this.notificationMasteryInNumericUpDown.Size = new System.Drawing.Size(63, 18);
             this.notificationMasteryInNumericUpDown.TabIndex = 26;
             this.notificationMasteryInNumericUpDown.Value = new decimal(new int[] {
             300,
@@ -2256,7 +2283,7 @@ namespace Retro_Achievement_Tracker
             // 
             // customMasteryInSpeedUpDown
             // 
-            this.customMasteryInSpeedUpDown.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customMasteryInSpeedUpDown.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.customMasteryInSpeedUpDown.Location = new System.Drawing.Point(96, 34);
             this.customMasteryInSpeedUpDown.Maximum = new decimal(new int[] {
             10000,
@@ -2269,7 +2296,7 @@ namespace Retro_Achievement_Tracker
             0,
             0});
             this.customMasteryInSpeedUpDown.Name = "customMasteryInSpeedUpDown";
-            this.customMasteryInSpeedUpDown.Size = new System.Drawing.Size(63, 20);
+            this.customMasteryInSpeedUpDown.Size = new System.Drawing.Size(63, 18);
             this.customMasteryInSpeedUpDown.TabIndex = 48;
             this.customMasteryInSpeedUpDown.Value = new decimal(new int[] {
             50,
@@ -2280,7 +2307,7 @@ namespace Retro_Achievement_Tracker
             // customMasteryEnableCheckbox
             // 
             this.customMasteryEnableCheckbox.AutoSize = true;
-            this.customMasteryEnableCheckbox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customMasteryEnableCheckbox.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.customMasteryEnableCheckbox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.customMasteryEnableCheckbox.Location = new System.Drawing.Point(80, 14);
             this.customMasteryEnableCheckbox.Name = "customMasteryEnableCheckbox";
@@ -2301,7 +2328,7 @@ namespace Retro_Achievement_Tracker
             this.customAchievementCustomizationGroupBox.Controls.Add(this.groupBox10);
             this.customAchievementCustomizationGroupBox.Controls.Add(this.groupBox9);
             this.customAchievementCustomizationGroupBox.Controls.Add(this.customAchievementEnableCheckbox);
-            this.customAchievementCustomizationGroupBox.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customAchievementCustomizationGroupBox.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.customAchievementCustomizationGroupBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.customAchievementCustomizationGroupBox.Location = new System.Drawing.Point(165, 11);
             this.customAchievementCustomizationGroupBox.Name = "customAchievementCustomizationGroupBox";
@@ -2313,29 +2340,29 @@ namespace Retro_Achievement_Tracker
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.label10.Location = new System.Drawing.Point(96, 17);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(52, 7);
+            this.label10.Size = new System.Drawing.Size(47, 11);
             this.label10.TabIndex = 54;
             this.label10.Text = "custom";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.label1.Location = new System.Drawing.Point(112, 72);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(36, 7);
+            this.label1.Size = new System.Drawing.Size(33, 11);
             this.label1.TabIndex = 22;
             this.label1.Text = "Edit";
             // 
             // replayAchievementButton
             // 
             this.replayAchievementButton.BackColor = System.Drawing.SystemColors.Control;
-            this.replayAchievementButton.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.replayAchievementButton.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.replayAchievementButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.replayAchievementButton.Location = new System.Drawing.Point(4, 9);
             this.replayAchievementButton.Name = "replayAchievementButton";
@@ -2375,11 +2402,11 @@ namespace Retro_Achievement_Tracker
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label14.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.label14.Location = new System.Drawing.Point(6, 61);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(44, 7);
+            this.label14.Size = new System.Drawing.Size(40, 11);
             this.label14.TabIndex = 21;
             this.label14.Text = "Scale";
             this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -2387,7 +2414,7 @@ namespace Retro_Achievement_Tracker
             // scaleAchievementNumericUpDown
             // 
             this.scaleAchievementNumericUpDown.DecimalPlaces = 2;
-            this.scaleAchievementNumericUpDown.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.scaleAchievementNumericUpDown.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.scaleAchievementNumericUpDown.Increment = new decimal(new int[] {
             1,
             0,
@@ -2405,7 +2432,7 @@ namespace Retro_Achievement_Tracker
             0,
             131072});
             this.scaleAchievementNumericUpDown.Name = "scaleAchievementNumericUpDown";
-            this.scaleAchievementNumericUpDown.Size = new System.Drawing.Size(60, 20);
+            this.scaleAchievementNumericUpDown.Size = new System.Drawing.Size(60, 18);
             this.scaleAchievementNumericUpDown.TabIndex = 20;
             this.scaleAchievementNumericUpDown.Value = new decimal(new int[] {
             1,
@@ -2416,29 +2443,29 @@ namespace Retro_Achievement_Tracker
             // xPositionLabel1
             // 
             this.xPositionLabel1.AutoSize = true;
-            this.xPositionLabel1.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.xPositionLabel1.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.xPositionLabel1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.xPositionLabel1.Location = new System.Drawing.Point(7, 17);
             this.xPositionLabel1.Name = "xPositionLabel1";
-            this.xPositionLabel1.Size = new System.Drawing.Size(12, 7);
+            this.xPositionLabel1.Size = new System.Drawing.Size(12, 11);
             this.xPositionLabel1.TabIndex = 18;
             this.xPositionLabel1.Text = "X";
             // 
             // yPositionLabel1
             // 
             this.yPositionLabel1.AutoSize = true;
-            this.yPositionLabel1.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.yPositionLabel1.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.yPositionLabel1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.yPositionLabel1.Location = new System.Drawing.Point(7, 37);
             this.yPositionLabel1.Name = "yPositionLabel1";
-            this.yPositionLabel1.Size = new System.Drawing.Size(12, 7);
+            this.yPositionLabel1.Size = new System.Drawing.Size(12, 11);
             this.yPositionLabel1.TabIndex = 19;
             this.yPositionLabel1.Text = "Y";
             this.yPositionLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customAchievementXNumericUpDown
             // 
-            this.customAchievementXNumericUpDown.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customAchievementXNumericUpDown.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.customAchievementXNumericUpDown.Location = new System.Drawing.Point(25, 10);
             this.customAchievementXNumericUpDown.Maximum = new decimal(new int[] {
             2000,
@@ -2451,12 +2478,12 @@ namespace Retro_Achievement_Tracker
             0,
             -2147483648});
             this.customAchievementXNumericUpDown.Name = "customAchievementXNumericUpDown";
-            this.customAchievementXNumericUpDown.Size = new System.Drawing.Size(51, 20);
+            this.customAchievementXNumericUpDown.Size = new System.Drawing.Size(51, 18);
             this.customAchievementXNumericUpDown.TabIndex = 15;
             // 
             // customAchievementYNumericUpDown
             // 
-            this.customAchievementYNumericUpDown.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customAchievementYNumericUpDown.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.customAchievementYNumericUpDown.Location = new System.Drawing.Point(25, 32);
             this.customAchievementYNumericUpDown.Maximum = new decimal(new int[] {
             2000,
@@ -2469,13 +2496,13 @@ namespace Retro_Achievement_Tracker
             0,
             -2147483648});
             this.customAchievementYNumericUpDown.Name = "customAchievementYNumericUpDown";
-            this.customAchievementYNumericUpDown.Size = new System.Drawing.Size(51, 20);
+            this.customAchievementYNumericUpDown.Size = new System.Drawing.Size(51, 18);
             this.customAchievementYNumericUpDown.TabIndex = 16;
             // 
             // acheivementEditOutlineCheckbox
             // 
             this.acheivementEditOutlineCheckbox.AutoSize = true;
-            this.acheivementEditOutlineCheckbox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.acheivementEditOutlineCheckbox.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.acheivementEditOutlineCheckbox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.acheivementEditOutlineCheckbox.Location = new System.Drawing.Point(93, 67);
             this.acheivementEditOutlineCheckbox.Name = "acheivementEditOutlineCheckbox";
@@ -2503,39 +2530,39 @@ namespace Retro_Achievement_Tracker
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.label11.Location = new System.Drawing.Point(6, 43);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(84, 7);
+            this.label11.Size = new System.Drawing.Size(75, 11);
             this.label11.TabIndex = 49;
             this.label11.Text = "Speed (ms)";
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.label12.Location = new System.Drawing.Point(6, 63);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(76, 7);
+            this.label12.Size = new System.Drawing.Size(68, 11);
             this.label12.TabIndex = 40;
             this.label12.Text = "Direction";
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.label13.Location = new System.Drawing.Point(6, 19);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(84, 7);
+            this.label13.Size = new System.Drawing.Size(75, 11);
             this.label13.TabIndex = 20;
             this.label13.Text = "Mark  (ms)";
             // 
             // notificationAchievementOutNumericUpDown
             // 
-            this.notificationAchievementOutNumericUpDown.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.notificationAchievementOutNumericUpDown.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.notificationAchievementOutNumericUpDown.Location = new System.Drawing.Point(96, 11);
             this.notificationAchievementOutNumericUpDown.Maximum = new decimal(new int[] {
             100000,
@@ -2548,7 +2575,7 @@ namespace Retro_Achievement_Tracker
             0,
             0});
             this.notificationAchievementOutNumericUpDown.Name = "notificationAchievementOutNumericUpDown";
-            this.notificationAchievementOutNumericUpDown.Size = new System.Drawing.Size(63, 20);
+            this.notificationAchievementOutNumericUpDown.Size = new System.Drawing.Size(63, 18);
             this.notificationAchievementOutNumericUpDown.TabIndex = 26;
             this.notificationAchievementOutNumericUpDown.Value = new decimal(new int[] {
             300,
@@ -2567,7 +2594,7 @@ namespace Retro_Achievement_Tracker
             // 
             // customAchievementOutSpeedUpDown
             // 
-            this.customAchievementOutSpeedUpDown.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customAchievementOutSpeedUpDown.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.customAchievementOutSpeedUpDown.Location = new System.Drawing.Point(96, 34);
             this.customAchievementOutSpeedUpDown.Maximum = new decimal(new int[] {
             10000,
@@ -2580,7 +2607,7 @@ namespace Retro_Achievement_Tracker
             0,
             0});
             this.customAchievementOutSpeedUpDown.Name = "customAchievementOutSpeedUpDown";
-            this.customAchievementOutSpeedUpDown.Size = new System.Drawing.Size(63, 20);
+            this.customAchievementOutSpeedUpDown.Size = new System.Drawing.Size(63, 18);
             this.customAchievementOutSpeedUpDown.TabIndex = 48;
             this.customAchievementOutSpeedUpDown.Value = new decimal(new int[] {
             50,
@@ -2608,39 +2635,39 @@ namespace Retro_Achievement_Tracker
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.label8.Location = new System.Drawing.Point(6, 43);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(84, 7);
+            this.label8.Size = new System.Drawing.Size(75, 11);
             this.label8.TabIndex = 49;
             this.label8.Text = "Speed (ms)";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.label7.Location = new System.Drawing.Point(6, 63);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(76, 7);
+            this.label7.Size = new System.Drawing.Size(68, 11);
             this.label7.TabIndex = 40;
             this.label7.Text = "Direction";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.label6.Location = new System.Drawing.Point(6, 19);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(84, 7);
+            this.label6.Size = new System.Drawing.Size(75, 11);
             this.label6.TabIndex = 20;
             this.label6.Text = "Mark  (ms)";
             // 
             // notificationAchievementInNumericUpDown
             // 
-            this.notificationAchievementInNumericUpDown.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.notificationAchievementInNumericUpDown.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.notificationAchievementInNumericUpDown.Location = new System.Drawing.Point(96, 11);
             this.notificationAchievementInNumericUpDown.Maximum = new decimal(new int[] {
             100000,
@@ -2653,7 +2680,7 @@ namespace Retro_Achievement_Tracker
             0,
             0});
             this.notificationAchievementInNumericUpDown.Name = "notificationAchievementInNumericUpDown";
-            this.notificationAchievementInNumericUpDown.Size = new System.Drawing.Size(63, 20);
+            this.notificationAchievementInNumericUpDown.Size = new System.Drawing.Size(63, 18);
             this.notificationAchievementInNumericUpDown.TabIndex = 26;
             this.notificationAchievementInNumericUpDown.Value = new decimal(new int[] {
             300,
@@ -2672,7 +2699,7 @@ namespace Retro_Achievement_Tracker
             // 
             // customAchievementInSpeedUpDown
             // 
-            this.customAchievementInSpeedUpDown.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customAchievementInSpeedUpDown.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.customAchievementInSpeedUpDown.Location = new System.Drawing.Point(96, 34);
             this.customAchievementInSpeedUpDown.Maximum = new decimal(new int[] {
             10000,
@@ -2685,7 +2712,7 @@ namespace Retro_Achievement_Tracker
             0,
             0});
             this.customAchievementInSpeedUpDown.Name = "customAchievementInSpeedUpDown";
-            this.customAchievementInSpeedUpDown.Size = new System.Drawing.Size(63, 20);
+            this.customAchievementInSpeedUpDown.Size = new System.Drawing.Size(63, 18);
             this.customAchievementInSpeedUpDown.TabIndex = 48;
             this.customAchievementInSpeedUpDown.Value = new decimal(new int[] {
             50,
@@ -2696,7 +2723,7 @@ namespace Retro_Achievement_Tracker
             // customAchievementEnableCheckbox
             // 
             this.customAchievementEnableCheckbox.AutoSize = true;
-            this.customAchievementEnableCheckbox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customAchievementEnableCheckbox.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.customAchievementEnableCheckbox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.customAchievementEnableCheckbox.Location = new System.Drawing.Point(80, 14);
             this.customAchievementEnableCheckbox.Name = "customAchievementEnableCheckbox";
@@ -2711,7 +2738,7 @@ namespace Retro_Achievement_Tracker
             this.achievementListGroupBox.Controls.Add(this.autoOpenAchievementListWindowCheckbox);
             this.achievementListGroupBox.Controls.Add(this.customizeAchievementListButton);
             this.achievementListGroupBox.Controls.Add(this.openAchievementListWindowButton);
-            this.achievementListGroupBox.Font = new System.Drawing.Font("Arcade Normal", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.achievementListGroupBox.Font = new System.Drawing.Font("Lucida Console", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.achievementListGroupBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.achievementListGroupBox.Location = new System.Drawing.Point(353, 159);
             this.achievementListGroupBox.Name = "achievementListGroupBox";
@@ -2724,18 +2751,18 @@ namespace Retro_Achievement_Tracker
             // 
             this.autoOpenAchievementListWindowCheckbox.AutoSize = true;
             this.autoOpenAchievementListWindowCheckbox.BackColor = System.Drawing.Color.Transparent;
-            this.autoOpenAchievementListWindowCheckbox.Font = new System.Drawing.Font("Arcade Normal", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.autoOpenAchievementListWindowCheckbox.Font = new System.Drawing.Font("Lucida Console", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.autoOpenAchievementListWindowCheckbox.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.autoOpenAchievementListWindowCheckbox.Location = new System.Drawing.Point(6, 21);
             this.autoOpenAchievementListWindowCheckbox.Name = "autoOpenAchievementListWindowCheckbox";
-            this.autoOpenAchievementListWindowCheckbox.Size = new System.Drawing.Size(123, 14);
+            this.autoOpenAchievementListWindowCheckbox.Size = new System.Drawing.Size(87, 15);
             this.autoOpenAchievementListWindowCheckbox.TabIndex = 10022;
             this.autoOpenAchievementListWindowCheckbox.Text = "Auto-Open";
             this.autoOpenAchievementListWindowCheckbox.UseVisualStyleBackColor = false;
             // 
             // customizeAchievementListButton
             // 
-            this.customizeAchievementListButton.Font = new System.Drawing.Font("Arcade Normal", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customizeAchievementListButton.Font = new System.Drawing.Font("Lucida Console", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.customizeAchievementListButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.customizeAchievementListButton.Location = new System.Drawing.Point(226, 10);
             this.customizeAchievementListButton.Name = "customizeAchievementListButton";
@@ -2746,7 +2773,7 @@ namespace Retro_Achievement_Tracker
             // 
             // openAchievementListWindowButton
             // 
-            this.openAchievementListWindowButton.Font = new System.Drawing.Font("Arcade Normal", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.openAchievementListWindowButton.Font = new System.Drawing.Font("Lucida Console", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.openAchievementListWindowButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.openAchievementListWindowButton.Location = new System.Drawing.Point(135, 10);
             this.openAchievementListWindowButton.Name = "openAchievementListWindowButton";
@@ -2762,7 +2789,7 @@ namespace Retro_Achievement_Tracker
             this.gameStatsGroupBox.Controls.Add(this.autoOpenGameStatsWindowCheckbox);
             this.gameStatsGroupBox.Controls.Add(this.customizeGameStatsButton);
             this.gameStatsGroupBox.Controls.Add(this.openGameStatsWindowButton);
-            this.gameStatsGroupBox.Font = new System.Drawing.Font("Arcade Normal", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameStatsGroupBox.Font = new System.Drawing.Font("Lucida Console", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameStatsGroupBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.gameStatsGroupBox.Location = new System.Drawing.Point(353, 312);
             this.gameStatsGroupBox.Name = "gameStatsGroupBox";
@@ -2775,18 +2802,18 @@ namespace Retro_Achievement_Tracker
             // 
             this.autoOpenGameStatsWindowCheckbox.AutoSize = true;
             this.autoOpenGameStatsWindowCheckbox.BackColor = System.Drawing.Color.Transparent;
-            this.autoOpenGameStatsWindowCheckbox.Font = new System.Drawing.Font("Arcade Normal", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.autoOpenGameStatsWindowCheckbox.Font = new System.Drawing.Font("Lucida Console", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.autoOpenGameStatsWindowCheckbox.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.autoOpenGameStatsWindowCheckbox.Location = new System.Drawing.Point(6, 21);
             this.autoOpenGameStatsWindowCheckbox.Name = "autoOpenGameStatsWindowCheckbox";
-            this.autoOpenGameStatsWindowCheckbox.Size = new System.Drawing.Size(123, 14);
+            this.autoOpenGameStatsWindowCheckbox.Size = new System.Drawing.Size(87, 15);
             this.autoOpenGameStatsWindowCheckbox.TabIndex = 10022;
             this.autoOpenGameStatsWindowCheckbox.Text = "Auto-Open";
             this.autoOpenGameStatsWindowCheckbox.UseVisualStyleBackColor = false;
             // 
             // customizeGameStatsButton
             // 
-            this.customizeGameStatsButton.Font = new System.Drawing.Font("Arcade Normal", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customizeGameStatsButton.Font = new System.Drawing.Font("Lucida Console", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.customizeGameStatsButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.customizeGameStatsButton.Location = new System.Drawing.Point(226, 10);
             this.customizeGameStatsButton.Name = "customizeGameStatsButton";
@@ -2797,7 +2824,7 @@ namespace Retro_Achievement_Tracker
             // 
             // openGameStatsWindowButton
             // 
-            this.openGameStatsWindowButton.Font = new System.Drawing.Font("Arcade Normal", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.openGameStatsWindowButton.Font = new System.Drawing.Font("Lucida Console", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.openGameStatsWindowButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.openGameStatsWindowButton.Location = new System.Drawing.Point(135, 10);
             this.openGameStatsWindowButton.Name = "openGameStatsWindowButton";
@@ -2822,7 +2849,7 @@ namespace Retro_Achievement_Tracker
             this.gameStatsCustomizationGroupBox.Controls.Add(this.statsCompletedOverrideTextBox);
             this.gameStatsCustomizationGroupBox.Controls.Add(this.statsGamePointsOverrideTextBox);
             this.gameStatsCustomizationGroupBox.Controls.Add(this.statsGameTruePointsOverrideTextBox);
-            this.gameStatsCustomizationGroupBox.Font = new System.Drawing.Font("Arcade Normal", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameStatsCustomizationGroupBox.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameStatsCustomizationGroupBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.gameStatsCustomizationGroupBox.Location = new System.Drawing.Point(166, 333);
             this.gameStatsCustomizationGroupBox.Name = "gameStatsCustomizationGroupBox";
@@ -2859,95 +2886,17 @@ namespace Retro_Achievement_Tracker
             this.settingsAndBrowserGroupBox.TabIndex = 10028;
             this.settingsAndBrowserGroupBox.TabStop = false;
             // 
-            // autoSrollLabel
+            // recentAchievementsMaxListLabel
             // 
-            this.autoSrollLabel.AutoSize = true;
-            this.autoSrollLabel.BackColor = System.Drawing.Color.Transparent;
-            this.autoSrollLabel.Font = new System.Drawing.Font("Arcade Normal", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.autoSrollLabel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.autoSrollLabel.Location = new System.Drawing.Point(28, 95);
-            this.autoSrollLabel.Name = "autoSrollLabel";
-            this.autoSrollLabel.Size = new System.Drawing.Size(126, 10);
-            this.autoSrollLabel.TabIndex = 10014;
-            this.autoSrollLabel.Text = "Auto-scroll";
-            // 
-            // autoScrollCheckBox
-            // 
-            this.autoScrollCheckBox.AutoSize = true;
-            this.autoScrollCheckBox.BackColor = System.Drawing.Color.Transparent;
-            this.autoScrollCheckBox.Font = new System.Drawing.Font("Arcade Normal", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.autoScrollCheckBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.autoScrollCheckBox.Location = new System.Drawing.Point(8, 94);
-            this.autoScrollCheckBox.Name = "autoScrollCheckBox";
-            this.autoScrollCheckBox.Size = new System.Drawing.Size(15, 14);
-            this.autoScrollCheckBox.TabIndex = 10013;
-            this.autoScrollCheckBox.UseVisualStyleBackColor = false;
-            // 
-            // userBrowserGroupBox
-            // 
-            this.userBrowserGroupBox.BackColor = System.Drawing.Color.RoyalBlue;
-            this.userBrowserGroupBox.BackgroundImage = global::Retro_Achievement_Tracker.Properties.Resources.chrono_trigger_block;
-            this.userBrowserGroupBox.Controls.Add(this.autoOpenWebBrowserCheckbox);
-            this.userBrowserGroupBox.Controls.Add(this.toggleUserBrowserButton);
-            this.userBrowserGroupBox.Font = new System.Drawing.Font("Arcade Normal", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userBrowserGroupBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.userBrowserGroupBox.Location = new System.Drawing.Point(353, 363);
-            this.userBrowserGroupBox.Name = "userBrowserGroupBox";
-            this.userBrowserGroupBox.Size = new System.Drawing.Size(315, 45);
-            this.userBrowserGroupBox.TabIndex = 10026;
-            this.userBrowserGroupBox.TabStop = false;
-            this.userBrowserGroupBox.Text = "Browser / RSS";
-            // 
-            // autoOpenWebBrowserCheckbox
-            // 
-            this.autoOpenWebBrowserCheckbox.AutoSize = true;
-            this.autoOpenWebBrowserCheckbox.BackColor = System.Drawing.Color.Transparent;
-            this.autoOpenWebBrowserCheckbox.Font = new System.Drawing.Font("Arcade Normal", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.autoOpenWebBrowserCheckbox.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.autoOpenWebBrowserCheckbox.Location = new System.Drawing.Point(6, 21);
-            this.autoOpenWebBrowserCheckbox.Name = "autoOpenWebBrowserCheckbox";
-            this.autoOpenWebBrowserCheckbox.Size = new System.Drawing.Size(123, 14);
-            this.autoOpenWebBrowserCheckbox.TabIndex = 10022;
-            this.autoOpenWebBrowserCheckbox.Text = "Auto-Open";
-            this.autoOpenWebBrowserCheckbox.UseVisualStyleBackColor = false;
-            // 
-            // toggleUserBrowserButton
-            // 
-            this.toggleUserBrowserButton.Font = new System.Drawing.Font("Arcade Normal", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toggleUserBrowserButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.toggleUserBrowserButton.Location = new System.Drawing.Point(135, 11);
-            this.toggleUserBrowserButton.Name = "toggleUserBrowserButton";
-            this.toggleUserBrowserButton.Size = new System.Drawing.Size(85, 28);
-            this.toggleUserBrowserButton.TabIndex = 10021;
-            this.toggleUserBrowserButton.Text = "Open";
-            this.toggleUserBrowserButton.UseVisualStyleBackColor = true;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox1.Controls.Add(this.gameInfoPictureBox);
-            this.groupBox1.Controls.Add(this.gameInfoTitleLabel);
-            this.groupBox1.Controls.Add(this.gameInfoProgressLabel);
-            this.groupBox1.Location = new System.Drawing.Point(6, 192);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(328, 101);
-            this.groupBox1.TabIndex = 10013;
-            this.groupBox1.TabStop = false;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox3.Controls.Add(this.focusAchievementPictureBox);
-            this.groupBox3.Controls.Add(this.focusAchievementTitleLabel);
-            this.groupBox3.Controls.Add(this.focusAchievementDescriptionLabel);
-            this.groupBox3.Controls.Add(this.setFocusButton);
-            this.groupBox3.Controls.Add(this.focusAchievementButtonLeft);
-            this.groupBox3.Controls.Add(this.focusAchievementButtonRight);
-            this.groupBox3.Location = new System.Drawing.Point(6, 292);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(328, 155);
-            this.groupBox3.TabIndex = 10014;
-            this.groupBox3.TabStop = false;
+            this.recentAchievementsMaxListLabel.AutoSize = true;
+            this.recentAchievementsMaxListLabel.BackColor = System.Drawing.Color.Transparent;
+            this.recentAchievementsMaxListLabel.Font = new System.Drawing.Font("Lucida Console", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.recentAchievementsMaxListLabel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.recentAchievementsMaxListLabel.Location = new System.Drawing.Point(113, 56);
+            this.recentAchievementsMaxListLabel.Name = "recentAchievementsMaxListLabel";
+            this.recentAchievementsMaxListLabel.Size = new System.Drawing.Size(96, 11);
+            this.recentAchievementsMaxListLabel.TabIndex = 10015;
+            this.recentAchievementsMaxListLabel.Text = "Max List Size";
             // 
             // recentAchievementsMaxListNumericUpDown
             // 
@@ -2972,17 +2921,68 @@ namespace Retro_Achievement_Tracker
             0,
             0});
             // 
-            // recentAchievementsMaxListLabel
+            // autoSrollLabel
             // 
-            this.recentAchievementsMaxListLabel.AutoSize = true;
-            this.recentAchievementsMaxListLabel.BackColor = System.Drawing.Color.Transparent;
-            this.recentAchievementsMaxListLabel.Font = new System.Drawing.Font("Arcade Normal", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.recentAchievementsMaxListLabel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.recentAchievementsMaxListLabel.Location = new System.Drawing.Point(113, 56);
-            this.recentAchievementsMaxListLabel.Name = "recentAchievementsMaxListLabel";
-            this.recentAchievementsMaxListLabel.Size = new System.Drawing.Size(148, 10);
-            this.recentAchievementsMaxListLabel.TabIndex = 10015;
-            this.recentAchievementsMaxListLabel.Text = "Max List Size";
+            this.autoSrollLabel.AutoSize = true;
+            this.autoSrollLabel.BackColor = System.Drawing.Color.Transparent;
+            this.autoSrollLabel.Font = new System.Drawing.Font("Lucida Console", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.autoSrollLabel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.autoSrollLabel.Location = new System.Drawing.Point(28, 95);
+            this.autoSrollLabel.Name = "autoSrollLabel";
+            this.autoSrollLabel.Size = new System.Drawing.Size(82, 11);
+            this.autoSrollLabel.TabIndex = 10014;
+            this.autoSrollLabel.Text = "Auto-scroll";
+            // 
+            // autoScrollCheckBox
+            // 
+            this.autoScrollCheckBox.AutoSize = true;
+            this.autoScrollCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.autoScrollCheckBox.Font = new System.Drawing.Font("Lucida Console", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.autoScrollCheckBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.autoScrollCheckBox.Location = new System.Drawing.Point(8, 94);
+            this.autoScrollCheckBox.Name = "autoScrollCheckBox";
+            this.autoScrollCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.autoScrollCheckBox.TabIndex = 10013;
+            this.autoScrollCheckBox.UseVisualStyleBackColor = false;
+            // 
+            // userBrowserGroupBox
+            // 
+            this.userBrowserGroupBox.BackColor = System.Drawing.Color.RoyalBlue;
+            this.userBrowserGroupBox.BackgroundImage = global::Retro_Achievement_Tracker.Properties.Resources.chrono_trigger_block;
+            this.userBrowserGroupBox.Controls.Add(this.autoOpenWebBrowserCheckbox);
+            this.userBrowserGroupBox.Controls.Add(this.toggleUserBrowserButton);
+            this.userBrowserGroupBox.Font = new System.Drawing.Font("Lucida Console", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userBrowserGroupBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.userBrowserGroupBox.Location = new System.Drawing.Point(353, 363);
+            this.userBrowserGroupBox.Name = "userBrowserGroupBox";
+            this.userBrowserGroupBox.Size = new System.Drawing.Size(315, 45);
+            this.userBrowserGroupBox.TabIndex = 10026;
+            this.userBrowserGroupBox.TabStop = false;
+            this.userBrowserGroupBox.Text = "Browser / RSS";
+            // 
+            // autoOpenWebBrowserCheckbox
+            // 
+            this.autoOpenWebBrowserCheckbox.AutoSize = true;
+            this.autoOpenWebBrowserCheckbox.BackColor = System.Drawing.Color.Transparent;
+            this.autoOpenWebBrowserCheckbox.Font = new System.Drawing.Font("Lucida Console", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.autoOpenWebBrowserCheckbox.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.autoOpenWebBrowserCheckbox.Location = new System.Drawing.Point(6, 21);
+            this.autoOpenWebBrowserCheckbox.Name = "autoOpenWebBrowserCheckbox";
+            this.autoOpenWebBrowserCheckbox.Size = new System.Drawing.Size(87, 15);
+            this.autoOpenWebBrowserCheckbox.TabIndex = 10022;
+            this.autoOpenWebBrowserCheckbox.Text = "Auto-Open";
+            this.autoOpenWebBrowserCheckbox.UseVisualStyleBackColor = false;
+            // 
+            // toggleUserBrowserButton
+            // 
+            this.toggleUserBrowserButton.Font = new System.Drawing.Font("Lucida Console", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toggleUserBrowserButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.toggleUserBrowserButton.Location = new System.Drawing.Point(135, 11);
+            this.toggleUserBrowserButton.Name = "toggleUserBrowserButton";
+            this.toggleUserBrowserButton.Size = new System.Drawing.Size(85, 28);
+            this.toggleUserBrowserButton.TabIndex = 10021;
+            this.toggleUserBrowserButton.Text = "Open";
+            this.toggleUserBrowserButton.UseVisualStyleBackColor = true;
             // 
             // MainPage
             // 
@@ -2990,7 +2990,7 @@ namespace Retro_Achievement_Tracker
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.MidnightBlue;
             this.BackgroundImage = global::Retro_Achievement_Tracker.Properties.Resources.chrono_trigger_block1;
-            this.ClientSize = new System.Drawing.Size(1245, 464);
+            this.ClientSize = new System.Drawing.Size(1196, 464);
             this.Controls.Add(this.userBrowserGroupBox);
             this.Controls.Add(this.settingsAndBrowserGroupBox);
             this.Controls.Add(this.userInfoGroupBox);
@@ -3013,7 +3013,9 @@ namespace Retro_Achievement_Tracker
             this.focusGroupBox.PerformLayout();
             this.userInfoGroupBox.ResumeLayout(false);
             this.userInfoGroupBox.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.focusAchievementPictureBox)).EndInit();
+            this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gameInfoPictureBox)).EndInit();
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.raConnectionStatusPictureBox)).EndInit();
@@ -3091,11 +3093,9 @@ namespace Retro_Achievement_Tracker
             this.gameStatsCustomizationGroupBox.PerformLayout();
             this.settingsAndBrowserGroupBox.ResumeLayout(false);
             this.settingsAndBrowserGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.recentAchievementsMaxListNumericUpDown)).EndInit();
             this.userBrowserGroupBox.ResumeLayout(false);
             this.userBrowserGroupBox.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.recentAchievementsMaxListNumericUpDown)).EndInit();
             this.ResumeLayout(false);
 
         }

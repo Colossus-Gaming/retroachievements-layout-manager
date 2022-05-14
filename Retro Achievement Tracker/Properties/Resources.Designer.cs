@@ -89,24 +89,12 @@ namespace Retro_Achievement_Tracker.Properties {
         ///    &lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.googleapis.com&quot;&gt;
         ///    &lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.gstatic.com&quot; crossorigin&gt;
         ///    &lt;link href=&quot;https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;
-        ///    &lt;script src=&quot;https://code.jquery.com/jquery-3.5.1.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
-        ///    &lt;script id=&quot;achievement-script&quot;&gt;
-        ///    /**
-        ///                 * textF [rest of string was truncated]&quot;;.
+        ///    &lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js&quot;&gt;&lt;/script&gt;
+        ///    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://ajax.googleapis.com/ajax/libs/jq [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string AlertsWindow {
             get {
                 return ResourceManager.GetString("AlertsWindow", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] ARCADE_N {
-            get {
-                object obj = ResourceManager.GetObject("ARCADE_N", resourceCulture);
-                return ((byte[])(obj));
             }
         }
         
