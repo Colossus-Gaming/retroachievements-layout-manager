@@ -1,0 +1,439 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Last Five Window</title>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script id="last-five-scripts">
+        function addAchievement(achievement) {
+            var achievementBlock = document.createElement('div');
+            achievementBlock.classList.add("achievement");
+            achievementBlock.id = "achievement-" + achievement.id;
+
+            if (achievementList.childNodes.length > 0) {
+                achievementList.insertBefore(achievementBlock, achievementList.childNodes[0]);
+            } else {
+                achievementList.appendChild(achievementBlock);
+            }
+
+            var achievementImage = document.createElement('img');
+            achievementImage.id = "achievement-" + achievement.id + "-image";
+            achievementImage.classList.add("badge");
+            achievementImage.src = "https://s3-eu-west-1.amazonaws.com/i.retroachievements.org/Badge/" + achievement.badgeNumber + ".png";
+            achievementImage.style.border = "2px solid gold";
+            achievementBlock.appendChild(achievementImage);
+
+            var achievementTitleBlock = document.createElement('div');
+            achievementTitleBlock.innerHTML = achievement.title;
+            achievementTitleBlock.classList.add("title");
+            achievementTitleBlock.classList.add("has-font");
+            achievementTitleBlock.style.zIndex = 1;
+            achievementBlock.appendChild(achievementTitleBlock);
+
+            var achievementLineBlock = document.createElement('hr');
+            achievementLineBlock.classList.add("line");
+            achievementBlock.appendChild(achievementLineBlock);
+
+            var achievementDateBlock = document.createElement('div');
+            achievementDateBlock.innerHTML = achievement.hardcoreAchieved ? achievement.dateEarned.replace("T", " ") : "";
+            achievementDateBlock.classList.add("date");
+            achievementDateBlock.classList.add("has-font");
+            achievementBlock.appendChild(achievementDateBlock);
+
+            var achievementPointsBlock = document.createElement('div');
+            achievementPointsBlock.innerHTML = achievement.points;
+            achievementPointsBlock.classList.add("points");
+            achievementPointsBlock.classList.add("has-font");
+            achievementBlock.appendChild(achievementPointsBlock);
+        }
+
+        var scrollingDown = true;
+        var isScrolling = true;
+
+        function scrollList() {
+            if (document.getElementById("container").scrollHeight > 450) {
+                if (scrollingDown) {
+                    document.getElementById("container").scrollTo(0, document.getElementById("container").scrollTop + 1);
+                } else {
+                    document.getElementById("container").scrollTo(0, document.getElementById("container").scrollTop - 1);
+                }
+
+                if (document.getElementById("container").scrollTop >= document.getElementById("container").scrollHeight - document.getElementById("container").offsetHeight) {
+                    scrollingDown = false;
+                } else if (document.getElementById("container").scrollTop <= 0) {
+                    scrollingDown = true;
+                }
+            } else {
+                stopScrolling();
+            }
+        }
+
+        var intervalId = 0;
+
+        function stopScrolling() {
+            isScrolling = false;
+
+            clearInterval(intervalId);
+            intervalId = 0;
+        }
+
+        function startScrolling() {
+            isScrolling = true;
+
+            if (intervalId === 0) {
+                intervalId = setInterval(scrollList, 50);
+            }
+        }
+
+        function toggleScrolling() {
+            if (isScrolling) {
+                stopScrolling();
+            } else {
+                startScrolling();
+            }
+        }
+        /**
+        * textFit v2.3.1
+        * Previously known as jQuery.textFit
+        * 11/2014 by STRML (strml.github.com)
+        * MIT License
+        *
+        * To use: textFit(document.getElementById('target-div'), options);
+        *
+        * Will make the *text* content inside a container scale to fit the container
+        * The container is required to have a set width and height
+        * Uses binary search to fit text with minimal layout calls.
+        * Version 2.0 does not use jQuery.
+        */
+        /*global define:true, document:true, window:true, HTMLElement:true*/
+
+        (function (root, factory) {
+            "use strict";
+
+            // UMD shim
+            if (typeof define === "function" && define.amd) {
+                // AMD
+                define([], factory);
+            } else if (typeof exports === "object") {
+                // Node/CommonJS
+                module.exports = factory();
+            } else {
+                // Browser
+                root.textFit = factory();
+            }
+
+        }(typeof global === "object" ? global : this, function () {
+            "use strict";
+
+            var defaultSettings = {
+                alignVert: false, // if true, textFit will align vertically using css tables
+                alignHoriz: false, // if true, textFit will set text-align: center
+                multiLine: false, // if true, textFit will not set white-space: no-wrap
+                detectMultiLine: true, // disable to turn off automatic multi-line sensing
+                minFontSize: 6,
+                maxFontSize: 80,
+                reProcess: true, // if true, textFit will re-process already-fit nodes. Set to 'false' for better performance
+                widthOnly: false, // if true, textFit will fit text to element width, regardless of text height
+                alignVertWithFlexbox: false, // if true, textFit will use flexbox for vertical alignment
+            };
+
+            return function textFit(els, options) {
+
+                if (!options) options = {};
+
+                // Extend options.
+                var settings = {};
+                for (var key in defaultSettings) {
+                    if (options.hasOwnProperty(key)) {
+                        settings[key] = options[key];
+                    } else {
+                        settings[key] = defaultSettings[key];
+                    }
+                }
+
+                // Convert jQuery objects into arrays
+                if (typeof els.toArray === "function") {
+                    els = els.toArray();
+                }
+
+                // Support passing a single el
+                var elType = Object.prototype.toString.call(els);
+                if (elType !== '[object Array]' && elType !== '[object NodeList]' &&
+                    elType !== '[object HTMLCollection]') {
+                    els = [els];
+                }
+
+                // Process each el we've passed.
+                for (var i = 0; i < els.length; i++) {
+                    processItem(els[i], settings);
+                }
+            };
+
+            /**
+             * The meat. Given an el, make the text inside it fit its parent.
+             * @param  {DOMElement} el       Child el.
+             * @param  {Object} settings     Options for fit.
+             */
+            function processItem(el, settings) {
+                if (!isElement(el) || (!settings.reProcess && el.getAttribute('textFitted'))) {
+                    return false;
+                }
+
+                // Set textFitted attribute so we know this was processed.
+                if (!settings.reProcess) {
+                    el.setAttribute('textFitted', 1);
+                }
+
+                var innerSpan, originalHeight, originalHTML, originalWidth;
+                var low, mid, high;
+
+                // Get element data.
+                originalHTML = el.innerHTML;
+                originalWidth = innerWidth(el);
+                originalHeight = innerHeight(el);
+
+                // Don't process if we can't find box dimensions
+                if (!originalWidth || (!settings.widthOnly && !originalHeight)) {
+                    if (!settings.widthOnly)
+                        throw new Error('Set a static height and width on the target element ' + el.outerHTML +
+                            ' before using textFit!');
+                    else
+                        throw new Error('Set a static width on the target element ' + el.outerHTML +
+                            ' before using textFit!');
+                }
+
+                // Add textFitted span inside this container.
+                if (originalHTML.indexOf('textFitted') === -1) {
+                    innerSpan = document.createElement('span');
+                    innerSpan.className = 'textFitted';
+                    // Inline block ensure it takes on the size of its contents, even if they are enclosed
+                    // in other tags like <p>
+                    innerSpan.style['display'] = 'inline-block';
+                    innerSpan.innerHTML = originalHTML;
+                    el.innerHTML = '';
+                    el.appendChild(innerSpan);
+                } else {
+                    // Reprocessing.
+                    innerSpan = el.querySelector('span.textFitted');
+                    // Remove vertical align if we're reprocessing.
+                    if (hasClass(innerSpan, 'textFitAlignVert')) {
+                        innerSpan.className = innerSpan.className.replace('textFitAlignVert', '');
+                        innerSpan.style['height'] = '';
+                        el.className.replace('textFitAlignVertFlex', '');
+                    }
+                }
+
+                // Prepare & set alignment
+                if (settings.alignHoriz) {
+                    el.style['text-align'] = 'center';
+                    innerSpan.style['text-align'] = 'center';
+                }
+
+                // Check if this string is multiple lines
+                // Not guaranteed to always work if you use wonky line-heights
+                var multiLine = settings.multiLine;
+                if (settings.detectMultiLine && !multiLine &&
+                    innerSpan.getBoundingClientRect().height >= parseInt(window.getComputedStyle(innerSpan)['font-size'], 10) * 2) {
+                    multiLine = true;
+                }
+
+                // If we're not treating this as a multiline string, don't let it wrap.
+                if (!multiLine) {
+                    el.style['white-space'] = 'nowrap';
+                }
+
+                low = settings.minFontSize;
+                high = settings.maxFontSize;
+
+                // Binary search for highest best fit
+                var size = low;
+                while (low <= high) {
+                    mid = (high + low) >> 1;
+                    innerSpan.style.fontSize = mid + 'px';
+                    var innerSpanBoundingClientRect = innerSpan.getBoundingClientRect();
+                    if (
+                        innerSpanBoundingClientRect.width <= originalWidth
+                        && (settings.widthOnly || innerSpanBoundingClientRect.height <= originalHeight)
+                    ) {
+                        size = mid;
+                        low = mid + 1;
+                    } else {
+                        high = mid - 1;
+                    }
+                    // await injection point
+                }
+                // found, updating font if differs:
+                if (innerSpan.style.fontSize != size + 'px') innerSpan.style.fontSize = size + 'px';
+
+                // Our height is finalized. If we are aligning vertically, set that up.
+                if (settings.alignVert) {
+                    addStyleSheet();
+                    var height = innerSpan.scrollHeight;
+                    if (window.getComputedStyle(el)['position'] === "static") {
+                        el.style['position'] = 'relative';
+                    }
+                    if (!hasClass(innerSpan, "textFitAlignVert")) {
+                        innerSpan.className = innerSpan.className + " textFitAlignVert";
+                    }
+                    innerSpan.style['height'] = height + "px";
+                    if (settings.alignVertWithFlexbox && !hasClass(el, "textFitAlignVertFlex")) {
+                        el.className = el.className + " textFitAlignVertFlex";
+                    }
+                }
+            }
+
+            // Calculate height without padding.
+            function innerHeight(el) {
+                var style = window.getComputedStyle(el, null);
+                return el.getBoundingClientRect().height -
+                    parseInt(style.getPropertyValue('padding-top'), 10) -
+                    parseInt(style.getPropertyValue('padding-bottom'), 10);
+            }
+
+            // Calculate width without padding.
+            function innerWidth(el) {
+                var style = window.getComputedStyle(el, null);
+                return el.getBoundingClientRect().width -
+                    parseInt(style.getPropertyValue('padding-left'), 10) -
+                    parseInt(style.getPropertyValue('padding-right'), 10);
+            }
+
+            //Returns true if it is a DOM element
+            function isElement(o) {
+                return (
+                    typeof HTMLElement === "object" ? o instanceof HTMLElement : //DOM2
+                        o && typeof o === "object" && o !== null && o.nodeType === 1 && typeof o.nodeName === "string"
+                );
+            }
+
+            function hasClass(element, cls) {
+                return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
+            }
+
+            // Better than a stylesheet dependency
+            function addStyleSheet() {
+                if (document.getElementById("textFitStyleSheet")) return;
+                var style = [
+                    ".textFitAlignVert{",
+                    "position: absolute;",
+                    "top: 0; right: 0; bottom: 0; left: 0;",
+                    "margin: auto;",
+                    "display: flex;",
+                    "justify-content: center;",
+                    "flex-direction: column;",
+                    "}",
+                    ".textFitAlignVertFlex{",
+                    "display: flex;",
+                    "}",
+                    ".textFitAlignVertFlex .textFitAlignVert{",
+                    "position: static;",
+                    "}",].join("");
+
+                var css = document.createElement("style");
+                css.type = "text/css";
+                css.id = "textFitStyleSheet";
+                css.innerHTML = style;
+                document.body.appendChild(css);
+            }
+        }));
+    </script>
+    <style id="-style" type="text/css">
+
+        .title {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            height: 55px;
+            width: 385px;
+        }
+
+        .line {
+            position: absolute;
+            right: 10px;
+            top: 57px;
+            width: 385px;
+            height: 5px;
+        }
+
+        .badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            height: 96px;
+        }
+
+        .achievement {
+            position: relative;
+            top: 5px;
+            left: 5px;
+            width: 516px;
+            height: 120px;
+            background-repeat: no-repeat;
+            background-color: #cccccc;
+            background-size: cover;
+        }
+
+        .date {
+            position: absolute;
+            right: 10px;
+            bottom: 5px;
+            width: 385px;
+            height: 40px;
+        }
+
+        .points {
+            position: absolute;
+            width: 100%;
+            left: 15px;
+            bottom: 12px;
+            height: 55px;
+            width: 55px;
+            display: grid;
+            align-content: end;
+        }
+
+        .achievement,
+        .title,
+        .points,
+        .badge,
+        .line {
+            overflow: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+
+        #achievement-list {
+            position: absolute;
+            top: -5px;
+            left: 535px;
+            width: 670px;
+            height: auto;
+            overflow: visible;
+        }
+
+        #container {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            overflow-x: hidden;
+            overflow-y: visible;
+            width: 750px;
+            height: 604px;
+        }
+
+        #container::-webkit-scrollbar {
+            display: none;
+        }
+
+        html {
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="achievement-list" onclick="toggleScrolling()"></div>
+    </div>
+</body>
+</html>
