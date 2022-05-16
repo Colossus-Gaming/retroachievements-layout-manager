@@ -23,8 +23,11 @@ The main window to control the Tracker.
 Window for focusing on a particular achievement.
 
 `Focus Window`
+
 ![Focus Window](https://i.imgur.com/lH4I2iO.png)
+
 `Focus Customization`
+
 ![Focus Customization](https://i.imgur.com/FXzYV1b.png)
 
 - `Back Set` Changes the background color of the window.
@@ -39,9 +42,13 @@ Window for showing animated alerts when a tracker timer update detects new achie
 `Alerts Window Prompt` 
 #### Chromium requires a user interact with a page before video elements will play. The video type should be `.webm` extention for best usage.
 ![Alerts Window](https://i.imgur.com/eZGSB8m.png)
+
 `Alerts Window Achievement Pop`
+
 ![Alerts Window 2](https://i.imgur.com/gT5w6hV.png)
+
 `Alerts Window Customization`
+
 ![Alerts Customization](https://i.imgur.com/1qv26eK.png)
 
 - `Back Set` Changes the background color of the window.
@@ -62,8 +69,11 @@ Window for showing animated alerts when a tracker timer update detects new achie
 Window for displaying the most recent achievements in your current game.
 
 `Recent Achievements Window`
+
 ![Recent Achievements Window](https://i.imgur.com/O6XLUtm.png)
+
 `Recent Achievements Customization`
+
 ![Recent Achievements Window 2](https://i.imgur.com/gf5Sojl.png)
 
 - `Back Set` Changes the background color of the window.
@@ -78,8 +88,11 @@ Window for displaying the most recent achievements in your current game.
 Window for displaying the achievement list of your current game as it appears on the Retro Achievements user profiles. Hovering over an achievement will give a similar tooltip.
 
 `Achievement List Window`
+
 ![Achievement List Window](https://i.imgur.com/TvkIgaz.png)
+
 `Achievement List Customization`
+
 ![Achievement List Window 2](https://i.imgur.com/8EqL7ZQ.png)
 
 - `Back Set` Changes the background color of the window.
@@ -89,53 +102,65 @@ Window for displaying the achievement list of your current game as it appears on
 Window for displaying user information such as rank and total points earned.
 
 `User Info Window`
+
 ![User Info Window](https://i.imgur.com/VdyLBsK.png)
+
 `User Info Customization`
+
 ![User Info Window 2](https://i.imgur.com/Zsa4DGb.png)
 
 - `Back Set` Changes the background color of the window.
 - `Border Set` Toggles the border around the achievement.
 - `Simple` If not checked, will allow for individual font/color selection for `name` and `value`.
 - `Border` Enabled/Disable the achievement border.
-- Font customization are allows for changing `Font Family`, `Font Color`, `Font Outline`, `Font Outline Color`, and `Font Outline Size`.
+- Font customization allows for changing `Font Family`, `Font Color`, `Font Outline`, `Font Outline Color`, and `Font Outline Size`.
 - `Label Text` Allows the user to override label names or disable them completely.
 
 ## Game Info Window
 Window for displaying game information such as the developer, genre, and release date.
 
 `Game Info Window`
+
 ![Game Info Window](https://i.imgur.com/WvY5Orx.png)
+
 `Game Info Customization`
+
 ![Game Info Window 2](https://i.imgur.com/nGAMg95.png)
 
 - `Back Set` Changes the background color of the window.
 - `Border Set` Toggles the border around the achievement.
 - `Simple` If not checked, will allow for individual font/color selection for `name` and `value`.
 - `Border` Enabled/Disable the achievement border.
-- Font customization are allows for changing `Font Family`, `Font Color`, `Font Outline`, `Font Outline Color`, and `Font Outline Size`.
+- Font customization allows for changing `Font Family`, `Font Color`, `Font Outline`, `Font Outline Color`, and `Font Outline Size`.
 - `Label Text` Allows the user to override label names or disable them completely.
 
 ## Game Stats Window
 Window for displaying game stats as it pertains to your progress. This includes the number of achievements or points you've earned for that game.
 
 `Game Stats Window`
+
 ![Game Stats Window](https://i.imgur.com/R8RMDj7.png)
+
 `Game Stats Customization`
+
 ![Game Stats Window 2](https://i.imgur.com/OHYMlLO.png)
 
 - `Back Set` Changes the background color of the window.
 - `Border Set` Toggles the border around the achievement.
 - `Simple` If not checked, will allow for individual font/color selection for `name` and `value`.
 - `Border` Enabled/Disable the achievement border.
-- Font customization are allows for changing `Font Family`, `Font Color`, `Font Outline`, `Font Outline Color`, and `Font Outline Size`.
+- Font customization allows for changing `Font Family`, `Font Color`, `Font Outline`, `Font Outline Color`, and `Font Outline Size`.
 - `Label Text` Allows the user to override label names or disable them completely.
 
 ## Browser/RSS Feed
 Built-In browser and RSS feed reader. The browser can be opened manually by clicking the `Open` button or by clicking on a browser-sensitive icon.
 
 `Built-In Browser`
+
 ![Retro Achievements Site](https://i.imgur.com/JygDq3L.png)
+
 `RSS News Preview`
+
 ![RSS Feed News Preview](https://i.imgur.com/sge3drR.png)
 
 # Browser-Sensitive Icons
@@ -149,7 +174,9 @@ Text files are generated in the `stream-labels` folder. There are individual fil
 
 
 `Text File Generation`
+
 ![Retro Achievements Site](https://i.imgur.com/paXp1BX.png)
+
 ### data.json File Examples
 `alerts`
 ```javascript
