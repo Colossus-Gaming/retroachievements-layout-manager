@@ -25,7 +25,7 @@ namespace Retro_Achievement_Tracker.Forms
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 
             Shown += AlertsWindow_Shown;
-            FormClosed += AlertsWindow_FormClosed; ;
+            FormClosed += AlertsWindow_FormClosed;
 
             SetupBrowser();
         }

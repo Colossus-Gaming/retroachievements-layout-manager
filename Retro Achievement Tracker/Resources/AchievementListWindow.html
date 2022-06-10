@@ -15,7 +15,6 @@
             achievementBlock.classList.add("achievement");
             achievementBlock.style.width = 64;
             achievementBlock.style.height = 64;
-            achievementBlock.style.zIndex = "99";
             achievementBlock.id = "achievement-" + achievement.id;
 
             var achievementImage = document.createElement('img');
@@ -44,7 +43,7 @@
             $("#achievement-" + achievement.id).tooltip({
                 items: 'div',
                 content: tooltipString,
-                track: false
+                track: true
             });
         }
 
@@ -102,6 +101,7 @@
 
         img {
             position: absolute;
+            z-index: 10;
         }
 
         .achievement {
@@ -115,7 +115,7 @@
             overflow-x: hidden;
             overflow-y: visible;
             width: 750px;
-            height: 614px;
+            height: 612px;
         }
 
         #container::-webkit-scrollbar {

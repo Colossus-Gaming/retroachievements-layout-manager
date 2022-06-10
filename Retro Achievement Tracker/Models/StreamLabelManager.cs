@@ -56,7 +56,7 @@ namespace Retro_Achievement_Tracker.Models
 
                 if (notificationRequest.Item2)
                 {
-                    await Task.Delay(500);
+                    await Task.Delay(1000);
                 }
 
                 if (StreamLabelsRequests.Count == 0)
@@ -164,7 +164,6 @@ namespace Retro_Achievement_Tracker.Models
             if (userSummary != null)
             {
                 File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/user-info/rank.txt", userSummary.Rank.ToString());
-                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/user-info/awards.txt", userSummary.Awards.ToString());
                 File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/user-info/ratio.txt", userSummary.RetroRatio);
                 File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/user-info/points.txt", userSummary.TotalPoints.ToString());
                 File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/user-info/true-points.txt", userSummary.TotalTruePoints.ToString());

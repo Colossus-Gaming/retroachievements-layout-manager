@@ -49,8 +49,6 @@ namespace Retro_Achievement_Tracker
                 "container = document.getElementById(\"container\");" +
                 "rankName = document.getElementById(\"rank-name\");" +
                 "rankValue = document.getElementById(\"rank-value\");" +
-                "awardsName = document.getElementById(\"awards-name\");" +
-                "awardsValue = document.getElementById(\"awards-value\");" +
                 "ratioName = document.getElementById(\"ratio-name\");" +
                 "ratioValue = document.getElementById(\"ratio-value\");" +
                 "pointsName = document.getElementById(\"points-name\");" +
@@ -154,21 +152,6 @@ namespace Retro_Achievement_Tracker
         {
             ExecuteScript(isVisible ? "$(\"#rank\").fadeIn();" : "$(\"#rank\").fadeOut();");
         }
-        //Awards
-        public void SetAwardsName(string value)
-        {
-            ExecuteScript("awardsName.innerHTML = \"" + value + ":\";" +
-                "textFit(awardsName, { alignVert: true, reProcess: true });");
-        }
-        public void SetAwardsValue(string value)
-        {
-            ExecuteScript("awardsValue.innerHTML = " + value + ";" +
-                "textFit(awardsValue, { alignVert: true, reProcess: true });");
-        }
-        public void SetAwardsVisibility(bool isVisible)
-        {
-            ExecuteScript(isVisible ? "$(\"#awards\").fadeIn();" : "$(\"#awards\").fadeOut();");
-        }
         //Points
         public void SetPointsName(string value)
         {
@@ -235,7 +218,7 @@ namespace Retro_Achievement_Tracker
                 ActivateBrowserOnCreation = false,
                 Location = new Point(0, 0),
                 Name = "chromiumWebBrowser",
-                Size = new Size(1034, 778),
+                Size = new Size(805, 300),
                 TabIndex = 0,
                 Dock = DockStyle.None,
                 RequestHandler = new CustomRequestHandler()
@@ -245,7 +228,7 @@ namespace Retro_Achievement_Tracker
             {
                 Invoke((MethodInvoker)delegate
                 {
-                    ClientSize = new Size(805, 350);
+                    ClientSize = new Size(805, 290);
                 });
 
                 UserStatsController.Instance.SetAllSettings();

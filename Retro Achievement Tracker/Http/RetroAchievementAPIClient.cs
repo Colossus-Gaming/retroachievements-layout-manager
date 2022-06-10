@@ -30,12 +30,6 @@ namespace Retro_Achievement_Tracker
 
             return JsonConvert.DeserializeObject<GameInfo>(await httpResponseMessage.Content.ReadAsStringAsync(), jsonSerializerSettings);
         }
-        public async Task<List<GameCompleted>> GetCompletedGames()
-        {
-            HttpResponseMessage httpResponseMessage = await client.GetAsync("https://retroachievements.org/API/API_GetUserCompletedGames.php?z=" + UserName + "&y=" + ApiKey + "&u=" + UserName);
-
-            return JsonConvert.DeserializeObject<List<GameCompleted>>(await httpResponseMessage.Content.ReadAsStringAsync(), jsonSerializerSettings);
-        }
         public async Task<string> GetNewsFeed()
         {
             HttpResponseMessage httpResponseMessage = await client.GetAsync("https://retroachievements.org/rss-news");

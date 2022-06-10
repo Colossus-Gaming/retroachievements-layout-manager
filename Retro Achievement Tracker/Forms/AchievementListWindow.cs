@@ -30,7 +30,7 @@ namespace Retro_Achievement_Tracker.Forms
 
             Shown += AchievementListWindow_Shown;
             FormClosed += AchievementListWindow_FormClosed;
-
+            
             SetupBrowser();
         }
 
@@ -139,7 +139,6 @@ namespace Retro_Achievement_Tracker.Forms
         }
         public void SetupBrowser()
         {
-            this.BackColor = Color.Magenta;
             Controls.Remove(chromiumWebBrowser);
 
             chromiumWebBrowser = new CefSharp.WinForms.ChromiumWebBrowser(new HtmlString(Resources.AchievementListWindow))
@@ -147,7 +146,7 @@ namespace Retro_Achievement_Tracker.Forms
                 ActivateBrowserOnCreation = false,
                 Location = new Point(0, 0),
                 Name = "chromiumWebBrowser",
-                Size = new Size(748, 614),
+                Size = new Size(748, 611),
                 TabIndex = 0,
                 Dock = DockStyle.None,
                 RequestHandler = new CustomRequestHandler()
@@ -157,7 +156,7 @@ namespace Retro_Achievement_Tracker.Forms
             {
                 Invoke((MethodInvoker)delegate
                 {
-                    ClientSize = new Size(748, 614);
+                    ClientSize = new Size(748, 611);
 
                     AchievementListController.Instance.SetAllSettings();
                 });

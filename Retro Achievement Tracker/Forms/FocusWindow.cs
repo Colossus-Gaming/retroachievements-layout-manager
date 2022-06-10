@@ -19,7 +19,7 @@ namespace Retro_Achievement_Tracker
             Name = "RA Tracker - Focus";
             Text = "RA Tracker - Focus";
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainPage));
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = ((Icon)(resources.GetObject("$this.Icon")));
 
             Shown += FocusWindow_Shown;
             FormClosed += FocusWindow_FormClosed;
@@ -186,11 +186,6 @@ namespace Retro_Achievement_Tracker
         {
             if (achievement != null)
             {
-                string value = achievement.Title;
-                if (value.Contains(":"))
-                {
-                    value = value.Substring(0, value.IndexOf(":")) + ":<br>" + value.Substring(value.IndexOf(":") + 1, value.Length - value.IndexOf(":") - 1);
-                }
                 ExecuteScript("$(\"#badge\").fadeOut(\"fast\");" +
                     "$(\"#title\").fadeOut(\"fast\");" +
                     "$(\"#description\").fadeOut(\"fast\");" +
@@ -200,7 +195,7 @@ namespace Retro_Achievement_Tracker
 
                 await Task.Delay(200).ContinueWith(async task =>
                 {
-                    ExecuteScript("titleElement.innerHTML = \"" + value.Replace("\"", "\\\"") + "\";" +
+                    ExecuteScript("titleElement.innerHTML = \"" + achievement.Title.Replace("\"", "\\\"") + "\";" +
                         "descriptionElement.innerHTML = \"" + achievement.Description.Replace("\"", "\\\"") + "\";" +
                         "$(\"#badge\").attr('src', \"https://retroachievements.org/Badge/" + achievement.BadgeNumber + ".png\"); badgeElement.style.border = \"\";" +
                         "pointsElement.innerHTML = \"" + achievement.Points + "\";");
@@ -224,11 +219,6 @@ namespace Retro_Achievement_Tracker
         }
         public async void SetFocus(GameInfo gameInfo)
         {
-            string value = gameInfo.Title;
-            if (value.Contains(":"))
-            {
-                value = value.Substring(0, value.IndexOf(":")) + ":<br>" + value.Substring(value.IndexOf(":") + 1, value.Length - value.IndexOf(":") - 1);
-            }
             ExecuteScript("$(\"#badge\").fadeOut(\"fast\");" +
                     "$(\"#title\").fadeOut(\"fast\");" +
                     "$(\"#description\").fadeOut(\"fast\");" +
@@ -238,7 +228,7 @@ namespace Retro_Achievement_Tracker
 
             await Task.Delay(200).ContinueWith(async task =>
             {
-                ExecuteScript("titleElement.innerHTML = \"" + value.Replace("\"", "\\\"") + "\";" +
+                ExecuteScript("titleElement.innerHTML = \"" + gameInfo.Title.Replace("\"", "\\\"") + "\";" +
                     "masteryAchievementsElement.innerHTML = \"Cheevos:<br/>" + gameInfo.Achievements.Count + " / " + gameInfo.Achievements.Count + "\";" +
                     "masteryPointsElement.innerHTML = \"Points:<br/>" + gameInfo.GamePointsEarned + " / " + gameInfo.GamePointsPossible + "\";" +
                     "$(\"#badge\").attr('src', \"https://retroachievements.org" + gameInfo.ImageIcon + "\");" +

@@ -50,6 +50,8 @@ namespace Retro_Achievement_Tracker.Controllers
             if (IsOpen)
             {
                 GameStatsWindow.AssignJavaScriptVariables();
+                GameStatsWindow.SetWindowBackgroundColor(WindowBackgroundColor);
+
                 if (AdvancedSettingsEnabled)
                 {
                     SetAdvancedSettings();

@@ -200,16 +200,16 @@ namespace Retro_Achievement_Tracker
         }
         public void ShowRecentAchievements()
         {
-            ExecuteScript("$(\"#achievement-list\").animate( { left: '-5px', top: '-5px' }, 500, 'easeInOutQuint');");
+            ExecuteScript("$(\"#achievement-list\").animate( { left: '0px', top: '0px' }, 500, 'easeInOutQuint');");
         }
         public void HideRecentAchievements()
         {
             ExecuteScript("stopScrolling();" + 
-                "$(\"#achievement-list\").animate( { left: '535px', top: '-5px' }, 200, 'easeInOutQuint');");
+                "$(\"#achievement-list\").animate( { left: '535px', top: '0px' }, 200, 'easeInOutQuint');");
         }
         public void ClearRecentAchievements()
         {
-            ExecuteScript("setTimeout(function() { document.getElementById(\"achievement-list\").innerHTML = \"\"; }, 200);");
+            ExecuteScript("setTimeout(function() { document.getElementById(\"achievement-list\").innerHTML = \"\"; }, 210);");
         }
         protected async void ExecuteScript(string script)
         {
@@ -235,7 +235,7 @@ namespace Retro_Achievement_Tracker
                 ActivateBrowserOnCreation = false,
                 Location = new Point(0, 0),
                 Name = "chromiumWebBrowser",
-                Size = new Size(516, 604),
+                Size = new Size(516, 608),
                 TabIndex = 0,
                 Dock = DockStyle.None,
                 RequestHandler = new CustomRequestHandler()
@@ -245,7 +245,7 @@ namespace Retro_Achievement_Tracker
             {
                 Invoke((MethodInvoker)delegate
                 {
-                    ClientSize = new Size(516, 604);
+                    ClientSize = new Size(516, 600);
                     RecentAchievementsController.Instance.SetAllSettings();
                 });
             });

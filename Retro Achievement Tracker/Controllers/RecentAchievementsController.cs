@@ -13,13 +13,15 @@ namespace Retro_Achievement_Tracker.Controllers
         private static RecentAchievementsWindow RecentAchievementsWindow;
         public bool IsOpen;
         private List<Achievement> CurrentAchievements;
-        private int CurrentGameId;
+        private List<Achievement> VisibileAchievements;
+        private int GameId;
 
         private RecentAchievementsController()
         {
             RecentAchievementsWindow = new RecentAchievementsWindow();
 
             CurrentAchievements = new List<Achievement>();
+            VisibileAchievements = new List<Achievement>();
 
             IsOpen = false;
         }
@@ -99,32 +101,34 @@ namespace Retro_Achievement_Tracker.Controllers
         public async void SetAchievements(List<Achievement> achievements)
         {
             achievements.Sort();
+            achievements.Reverse();
 
             if (IsOpen)
             {
                 if (achievements.Count == 0)
                 {
-                    CurrentGameId = 0;
-
-
                     RecentAchievementsWindow.HideRecentAchievements();
                     RecentAchievementsWindow.ClearRecentAchievements();
+
+                    VisibileAchievements = new List<Achievement>();
                 }
                 else
                 {
-                    bool needsChanges = false;
-
-                    if (achievements.Count > MaxListSize)
+                    if (CurrentAchievements.Count > 0 && GameId != achievements[0].GameId)
                     {
-                        achievements = achievements.GetRange(achievements.Count - MaxListSize, MaxListSize);
+                        VisibileAchievements = new List<Achievement>();
                     }
 
-                    for (int i = 0; i < achievements.Count; i++)
+                    bool needsChanges = CurrentAchievements.Count > 0 ? VisibileAchievements.Count == 0 : true;
+
+                    int maxAchievementCount = Math.Min(achievements.Count, MaxListSize);
+
+                    for (int i = maxAchievementCount - 1; i >= 0; i--)
                     {
-                        if (!CurrentAchievements.Contains(achievements[i]))
+                        if (!VisibileAchievements.Contains(achievements[i]))
                         {
                             needsChanges = true;
-                            break;
+                            VisibileAchievements.Add(achievements[i]);
                         }
                     }
 
@@ -135,9 +139,7 @@ namespace Retro_Achievement_Tracker.Controllers
 
                         await Task.Delay(200);
 
-                        RecentAchievementsWindow.AddAchievements(achievements);
-
-                        CurrentGameId = achievements[0].GameId;
+                        RecentAchievementsWindow.AddAchievements(VisibileAchievements);
 
                         await Task.Delay(50 * (achievements.Count + 1));
 
@@ -146,7 +148,6 @@ namespace Retro_Achievement_Tracker.Controllers
                         await Task.Delay(500);
 
                         RecentAchievementsWindow.ShowRecentAchievements();
-
 
                         if (AutoScroll)
                         {

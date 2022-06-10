@@ -58,7 +58,6 @@ namespace Retro_Achievement_Tracker.Controllers
                 }
 
                 UserStatsWindow.SetWindowBackgroundColor(WindowBackgroundColor);
-                UserStatsWindow.SetAwardsName(AwardsName);
                 UserStatsWindow.SetRankName(RankName);
                 UserStatsWindow.SetPointsName(PointsName);
                 UserStatsWindow.SetRatioName(RatioName);
@@ -67,14 +66,12 @@ namespace Retro_Achievement_Tracker.Controllers
                 if (!string.IsNullOrEmpty(rank))
                 {
                     UserStatsWindow.SetRankValue(rank);
-                    UserStatsWindow.SetAwardsValue(awards);
                     UserStatsWindow.SetPointsValue(points);
                     UserStatsWindow.SetRatioValue(ratio);
                     UserStatsWindow.SetTruePointsValue(truePoints);
                 }
 
                 UserStatsWindow.SetRankVisibility(RankEnabled);
-                UserStatsWindow.SetAwardsVisibility(AwardsEnabled);
                 UserStatsWindow.SetPointsVisibility(PointsEnabled);
                 UserStatsWindow.SetRatioVisibility(RatioEnabled);
                 UserStatsWindow.SetTruePointsVisibility(TruePointsEnabled);
@@ -114,16 +111,6 @@ namespace Retro_Achievement_Tracker.Controllers
             if (IsOpen)
             {
                 UserStatsWindow.SetRatioValue(value);
-            }
-        }
-
-        internal void SetAwards(string value)
-        {
-            awards = value;
-
-            if (IsOpen)
-            {
-                UserStatsWindow.SetAwardsValue(value);
             }
         }
 
@@ -501,23 +488,6 @@ namespace Retro_Achievement_Tracker.Controllers
                 }
             }
         }
-        public string AwardsName
-        {
-            get
-            {
-                return Settings.Default.stats_awards_name;
-            }
-            set
-            {
-                Settings.Default.stats_awards_name = value;
-                Settings.Default.Save();
-
-                if (IsOpen)
-                {
-                    UserStatsWindow.SetAwardsName(value);
-                }
-            }
-        }
         public string PointsName
         {
             get
@@ -583,23 +553,6 @@ namespace Retro_Achievement_Tracker.Controllers
                 if (IsOpen)
                 {
                     UserStatsWindow.SetRankVisibility(value);
-                }
-            }
-        }
-        public bool AwardsEnabled
-        {
-            get
-            {
-                return Settings.Default.stats_awards_enabled;
-            }
-            set
-            {
-                Settings.Default.stats_awards_enabled = value;
-                Settings.Default.Save();
-
-                if (IsOpen)
-                {
-                    UserStatsWindow.SetAwardsVisibility(value);
                 }
             }
         }
