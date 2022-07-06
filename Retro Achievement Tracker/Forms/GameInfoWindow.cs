@@ -12,6 +12,7 @@ namespace Retro_Achievement_Tracker
 {
     public partial class GameInfoWindow : Form
     {
+        private TaskController TaskController;
         public GameInfoWindow()
         {
             Name = "RA Tracker - Game Info";
@@ -24,6 +25,8 @@ namespace Retro_Achievement_Tracker
 
             Shown += GameInfoWindow_Shown;
             FormClosed += GameInfoWindow_FormClosed;
+
+            TaskController = new TaskController();
 
             SetupBrowser();
         }
@@ -44,7 +47,7 @@ namespace Retro_Achievement_Tracker
         }
         public void AssignJavaScriptVariables()
         {
-            ExecuteScript(
+            TaskController.Enqueue(() => ExecuteScript(
                 "container = document.getElementById(\"container\");" +
                 "titleName = document.getElementById(\"title-name\");" +
                 "titleValue = document.getElementById(\"title-value\");" +
@@ -60,18 +63,17 @@ namespace Retro_Achievement_Tracker
                 "releaseDateValue = document.getElementById(\"release-date-value\");" +
                 "allElements = document.getElementsByClassName(\"has-font\");" +
                 "allNames = document.getElementsByClassName(\"name\");" +
-                "allValues = document.getElementsByClassName(\"value\");");
+                "allValues = document.getElementsByClassName(\"value\");"));
         }
         public void SetWindowBackgroundColor(string value)
         {
-            ExecuteScript(
-                "container.style.backgroundColor = \"" + value + "\";");
+            TaskController.Enqueue(() => ExecuteScript("container.style.backgroundColor = \"" + value + "\";"));
         }
         //Title
         public void SetTitleName(string value)
         {
-            ExecuteScript("titleName.innerHTML = \"" + value + ":\";" +
-                "textFit(titleName, { alignVert: true, multiLine: true, reProcess: true });");
+            TaskController.Enqueue(() => ExecuteScript("titleName.innerHTML = \"" + value + ":\";" +
+                "textFit(titleName, { alignVert: true, multiLine: true, reProcess: true });"));
         }
         public void SetTitleValue(string value)
         {
@@ -82,191 +84,185 @@ namespace Retro_Achievement_Tracker
                 {
                     value = "The " + value.Substring(0, value.IndexOf(", The")) + value.Substring(value.IndexOf(", The") + 5, value.Length - value.IndexOf(", The") - 5);
                 }
-                
+
                 if (value.Contains(":"))
                 {
                     value = value.Substring(0, value.IndexOf(":")) + ":<br>" + value.Substring(value.IndexOf(":") + 1, value.Length - value.IndexOf(":") - 1);
                 }
 
-                ExecuteScript("titleValue.innerHTML = \"" + value + "\";" +
-                "textFit(titleValue, { alignVert: true, multiLine: true, reProcess: true });");
+                TaskController.Enqueue(() => ExecuteScript("titleValue.innerHTML = \"" + value + "\";" +
+                "textFit(titleValue, { alignVert: true, multiLine: true, reProcess: true });"));
             }
         }
         public void SetTitleVisibility(bool isVisible)
         {
-            ExecuteScript(isVisible ? "$(\"#title\").fadeIn();" : "$(\"#title\").fadeOut();");
+            TaskController.Enqueue(() => ExecuteScript(isVisible ? "$(\"#title\").fadeIn();" : "$(\"#title\").fadeOut();"));
         }
 
         //Console
         public void SetConsoleName(string value)
         {
-            ExecuteScript("consoleName.innerHTML = \"" + value + ":\";" +
-                "textFit(consoleName, { alignVert: true, multiLine: true, reProcess: true });");
+            TaskController.Enqueue(() => ExecuteScript("consoleName.innerHTML = \"" + value + ":\";" +
+                "textFit(consoleName, { alignVert: true, multiLine: true, reProcess: true });"));
         }
         public void SetConsoleValue(string value)
         {
             if (value != null)
             {
-                ExecuteScript("consoleValue.innerHTML = \"" + value + "\";" +
-                "textFit(consoleValue, { alignVert: true, multiLine: true, reProcess: true });");
+                TaskController.Enqueue(() => ExecuteScript("consoleValue.innerHTML = \"" + value + "\";" +
+                "textFit(consoleValue, { alignVert: true, multiLine: true, reProcess: true });"));
             }
         }
         public void SetConsoleVisibility(bool isVisible)
         {
-            ExecuteScript(isVisible ? "$(\"#console\").fadeIn();" : "$(\"#console\").fadeOut();");
+            TaskController.Enqueue(() => ExecuteScript(isVisible ? "$(\"#console\").fadeIn();" : "$(\"#console\").fadeOut();"));
         }
 
         //Developer
         public void SetDeveloperName(string value)
         {
-            ExecuteScript("developerName.innerHTML = \"" + value + ":\";" +
-                "textFit(developerName, { alignVert: true, multiLine: true, reProcess: true });");
+            TaskController.Enqueue(() => ExecuteScript("developerName.innerHTML = \"" + value + ":\";" +
+                "textFit(developerName, { alignVert: true, multiLine: true, reProcess: true });"));
         }
         public void SetDeveloperValue(string value)
         {
             if (value != null)
             {
-                ExecuteScript("developerValue.innerHTML = \"" + value + "\";" +
-                "textFit(developerValue, { alignVert: true, multiLine: true, reProcess: true });");
+                TaskController.Enqueue(() => ExecuteScript("developerValue.innerHTML = \"" + value + "\";" +
+                "textFit(developerValue, { alignVert: true, multiLine: true, reProcess: true });"));
             }
         }
         public void SetDeveloperVisibility(bool isVisible)
         {
-            ExecuteScript(isVisible ? "$(\"#developer\").fadeIn();" : "$(\"#developer\").fadeOut();");
+            TaskController.Enqueue(() => ExecuteScript(isVisible ? "$(\"#developer\").fadeIn();" : "$(\"#developer\").fadeOut();"));
         }
 
         //Publisher
         public void SetPublisherName(string value)
         {
-            ExecuteScript("publisherName.innerHTML = \"" + value + ":\";" +
-                "textFit(publisherName, { alignVert: true, multiLine: true, reProcess: true });");
+            TaskController.Enqueue(() => ExecuteScript("publisherName.innerHTML = \"" + value + ":\";" +
+                "textFit(publisherName, { alignVert: true, multiLine: true, reProcess: true });"));
         }
         public void SetPublisherValue(string value)
         {
             if (value != null)
             {
-                ExecuteScript("publisherValue.innerHTML = \"" + value + "\";" +
-                "textFit(publisherValue, { alignVert: true, multiLine: true, reProcess: true });");
+                TaskController.Enqueue(() => ExecuteScript("publisherValue.innerHTML = \"" + value + "\";" +
+                "textFit(publisherValue, { alignVert: true, multiLine: true, reProcess: true });"));
             }
         }
         public void SetPublisherVisibility(bool isVisible)
         {
-            ExecuteScript(isVisible ? "$(\"#publisher\").fadeIn();" : "$(\"#publisher\").fadeOut();");
+            TaskController.Enqueue(() => ExecuteScript(isVisible ? "$(\"#publisher\").fadeIn();" : "$(\"#publisher\").fadeOut();"));
         }
 
         //Genre
         public void SetGenreName(string value)
         {
-            ExecuteScript("genreName.innerHTML = \"" + value + ":\";" +
-                "textFit(genreName, { alignVert: true, multiLine: true, reProcess: true });");
+            TaskController.Enqueue(() => ExecuteScript("genreName.innerHTML = \"" + value + ":\";" +
+                "textFit(genreName, { alignVert: true, multiLine: true, reProcess: true });"));
         }
         public void SetGenreValue(string value)
         {
             if (value != null)
             {
-                ExecuteScript("genreValue.innerHTML = \"" + value + "\";" +
-                "textFit(genreValue, { alignVert: true, multiLine: true, reProcess: true });");
+                TaskController.Enqueue(() => ExecuteScript("genreValue.innerHTML = \"" + value + "\";" +
+                "textFit(genreValue, { alignVert: true, multiLine: true, reProcess: true });"));
             }
         }
         public void SetGenreVisibility(bool isVisible)
         {
-            ExecuteScript(isVisible ? "$(\"#genre\").fadeIn();" : "$(\"#genre\").fadeOut();");
+            TaskController.Enqueue(() => ExecuteScript(isVisible ? "$(\"#genre\").fadeIn();" : "$(\"#genre\").fadeOut();"));
         }
 
         //Release Date
         public void SetReleaseDateName(string value)
         {
-            ExecuteScript("releaseDateName.innerHTML = \"" + value + ":\";" +
-                "textFit(releaseDateName, { alignVert: true, multiLine: true, reProcess: true });");
+            TaskController.Enqueue(() => ExecuteScript("releaseDateName.innerHTML = \"" + value + ":\";" +
+                "textFit(releaseDateName, { alignVert: true, multiLine: true, reProcess: true });"));
         }
         public void SetReleaseDateValue(string value)
         {
             if (value != null)
             {
-                ExecuteScript("releaseDateValue.innerHTML = \"" + value + "\";" +
-                "textFit(releaseDateValue, { alignVert: true, multiLine: true, reProcess: true });");
+                TaskController.Enqueue(() => ExecuteScript("releaseDateValue.innerHTML = \"" + value + "\";" +
+                "textFit(releaseDateValue, { alignVert: true, multiLine: true, reProcess: true });"));
             }
         }
         public void SetReleaseDateVisibility(bool isVisible)
         {
-            ExecuteScript(isVisible ? "$(\"#release-date\").fadeIn();" : "$(\"#release-date\").fadeOut();");
+            TaskController.Enqueue(() => ExecuteScript(isVisible ? "$(\"#release-date\").fadeIn();" : "$(\"#release-date\").fadeOut();"));
         }
 
         public void SetSimpleFontFamily(FontFamily value)
         {
             int lineSpacing = value.GetLineSpacing(FontStyle.Regular) / value.GetEmHeight(FontStyle.Regular);
-            ExecuteScript(
+            TaskController.Enqueue(() => ExecuteScript(
                 "for (var i = 0; i < allElements.length; i++) { " +
                 "   allElements[i].style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
                 "   allElements[i].style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
-                "}");
-            ExecuteScript(
+                "}"));
+            TaskController.Enqueue(() => ExecuteScript(
                 "for (var i = 0; i < allNames.length; i++) { " +
                 "   textFit(allNames[i], { alignVert: true, multiLine: true, reProcess: true });" +
-                "}");
-            ExecuteScript(
+                "}"));
+            TaskController.Enqueue(() => ExecuteScript(
                 "for (var i = 0; i < allValues.length; i++) { " +
                 "   textFit(allValues[i], { alignVert: true, multiLine: true, reProcess: true });" +
-                "}");
+                "}"));
         }
         public void SetSimpleFontColor(string value)
         {
-            ExecuteScript(
-                "for (var i = 0; i < allElements.length; i++) { allElements[i].style.color = \"" + value + "\"; }");
+            TaskController.Enqueue(() => ExecuteScript("for (var i = 0; i < allElements.length; i++) { allElements[i].style.color = \"" + value + "\"; }"));
         }
 
         public void SetSimpleFontOutline(string value)
         {
-            ExecuteScript(
-               "for (var i = 0; i < allElements.length; i++) { allElements[i].style.webkitTextStroke = \"" + value + "\"; }");
+            TaskController.Enqueue(() => ExecuteScript("for (var i = 0; i < allElements.length; i++) { allElements[i].style.webkitTextStroke = \"" + value + "\"; }"));
         }
 
         public void SetNameFontFamily(FontFamily value)
         {
             int lineSpacing = value.GetLineSpacing(FontStyle.Regular) / value.GetEmHeight(FontStyle.Regular);
-            ExecuteScript(
+            TaskController.Enqueue(() => ExecuteScript(
                 "for (var i = 0; i < allNames.length; i++) { " +
                 "   allNames[i].style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
                 "   allNames[i].style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
                 "   textFit(allNames[i], { alignVert: true, multiLine: true, reProcess: true });" +
-                "}");
+                "}"));
         }
 
         public void SetValueFontFamily(FontFamily value)
         {
             int lineSpacing = value.GetLineSpacing(FontStyle.Regular) / value.GetEmHeight(FontStyle.Regular);
-            ExecuteScript(
+            TaskController.Enqueue(() => ExecuteScript(
                 "for (var i = 0; i < allValues.length; i++) { " +
                 "   allValues[i].style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
                 "   allValues[i].style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
                 "   textFit(allValues[i], { alignVert: true, multiLine: true, reProcess: true });" +
-                "}");
+                "}"));
         }
 
         public void SetNameColor(string value)
         {
-            ExecuteScript(
-                 "for (var i = 0; i < allNames.length; i++) { allNames[i].style.color = \"" + value + "\"; }");
+            TaskController.Enqueue(() => ExecuteScript("for (var i = 0; i < allNames.length; i++) { allNames[i].style.color = \"" + value + "\"; }"));
         }
 
         public void SetValueColor(string value)
         {
-            ExecuteScript(
-                 "for (var i = 0; i < allValues.length; i++) { allValues[i].style.color = \"" + value + "\"; }");
+            TaskController.Enqueue(() => ExecuteScript("for (var i = 0; i < allValues.length; i++) { allValues[i].style.color = \"" + value + "\"; }"));
         }
 
         public void SetNameOutline(string value)
         {
-            ExecuteScript(
-                  "for (var i = 0; i < allNames.length; i++) { allNames[i].style.webkitTextStroke = \"" + value + "\"; }");
+            TaskController.Enqueue(() => ExecuteScript("for (var i = 0; i < allNames.length; i++) { allNames[i].style.webkitTextStroke = \"" + value + "\"; }"));
         }
 
         public void SetValueOutline(string value)
         {
-            ExecuteScript(
-                  "for (var i = 0; i < allValues.length; i++) { allValues[i].style.webkitTextStroke = \"" + value + "\"; }");
+            TaskController.Enqueue(() => ExecuteScript("for (var i = 0; i < allValues.length; i++) { allValues[i].style.webkitTextStroke = \"" + value + "\"; }"));
         }
-        protected async void ExecuteScript(string script)
+        protected async Task ExecuteScript(string script)
         {
             if (chromiumWebBrowser != null)
             {

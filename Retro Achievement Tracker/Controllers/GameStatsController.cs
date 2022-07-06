@@ -64,23 +64,23 @@ namespace Retro_Achievement_Tracker.Controllers
                 GameStatsWindow.SetGameAchievementsName(GameAchievementsName);
                 GameStatsWindow.SetGamePointsName(GamePointsName);
                 GameStatsWindow.SetGameTruePointsName(GameTruePointsName);
-                GameStatsWindow.SetGameRatioName(GameRatioName);
                 GameStatsWindow.SetCompletedName(CompletedName);
+                GameStatsWindow.SetGameRatioName(GameRatioName);
 
                 if (!string.IsNullOrEmpty(gameAchievementsEarned))
                 {  
                     GameStatsWindow.SetGameAchievementsValue(gameAchievementsEarned + " " + DividerCharacter + " " + gameAchievementsPossible);
                     GameStatsWindow.SetGamePointsValue(gamePointsEarned + " " + DividerCharacter + " " + gamePointsPossible);
                     GameStatsWindow.SetGameTruePointsValue(gameTruePointsEarned + " " + DividerCharacter + " " + gameTruePointsPossible);
-                    GameStatsWindow.SetGameRatioValue(GameRatio);
                     GameStatsWindow.SetCompletedValue(completed);
+                    GameStatsWindow.SetGameRatioValue(GameRatio);
                 }
 
                 GameStatsWindow.SetGameAchievementsVisibility(GameAchievementsEnabled);
                 GameStatsWindow.SetGamePointsVisibility(GamePointsEnabled);
                 GameStatsWindow.SetGameTruePointsVisibility(GameTruePointsEnabled);
-                GameStatsWindow.SetGameRatioVisibility(GameRatioEnabled);
                 GameStatsWindow.SetCompletedVisibility(CompletedEnabled);
+                GameStatsWindow.SetGameRatioVisibility(GameRatioEnabled);
             }
         }
         public void SetSimpleSettings()
@@ -148,11 +148,11 @@ namespace Retro_Achievement_Tracker.Controllers
 
         internal void SetCompleted(float value)
         {
-            completed = value.ToString("0.00") + "";
+            completed = value.ToString("0.00");
 
             if (IsOpen)
             {
-                GameStatsWindow.SetCompletedValue(completed + " %");
+                GameStatsWindow.SetCompletedValue(completed + "%");
             }
         }
         /**
@@ -164,9 +164,9 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 if (gamePointsPossible == "0")
                 {
-                    return "0 %";
+                    return "0.00%";
                 }
-                return (float.Parse(gameTruePointsPossible) / float.Parse(gamePointsPossible)).ToString("0.00") + " %";
+                return (float.Parse(gameTruePointsPossible) / float.Parse(gamePointsPossible)).ToString("0.00") + "%";
             }
         }
         public string WindowBackgroundColor

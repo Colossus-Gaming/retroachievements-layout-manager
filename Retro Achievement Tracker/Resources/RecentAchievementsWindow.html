@@ -1,54 +1,12 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title>Last Five Window</title>
+    <title>Recent Achievements Window</title>
     <meta charset="UTF-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script id="last-five-scripts">
-        function addAchievement(achievement) {
-            var achievementBlock = document.createElement('div');
-            achievementBlock.classList.add("achievement");
-            achievementBlock.id = "achievement-" + achievement.id;
-
-            if (achievementList.childNodes.length > 0) {
-                achievementList.insertBefore(achievementBlock, achievementList.childNodes[0]);
-            } else {
-                achievementList.appendChild(achievementBlock);
-            }
-
-            var achievementImage = document.createElement('img');
-            achievementImage.id = "achievement-" + achievement.id + "-image";
-            achievementImage.classList.add("badge");
-            achievementImage.src = "https://s3-eu-west-1.amazonaws.com/i.retroachievements.org/Badge/" + achievement.badgeNumber + ".png";
-            achievementImage.style.border = "2px solid gold";
-            achievementBlock.appendChild(achievementImage);
-
-            var achievementTitleBlock = document.createElement('div');
-            achievementTitleBlock.innerHTML = achievement.title;
-            achievementTitleBlock.classList.add("title");
-            achievementTitleBlock.classList.add("has-font");
-            achievementTitleBlock.style.zIndex = 1;
-            achievementBlock.appendChild(achievementTitleBlock);
-
-            var achievementLineBlock = document.createElement('hr');
-            achievementLineBlock.classList.add("line");
-            achievementBlock.appendChild(achievementLineBlock);
-
-            var achievementDateBlock = document.createElement('div');
-            achievementDateBlock.innerHTML = achievement.hardcoreAchieved ? achievement.dateEarned.replace("T", " ") : "";
-            achievementDateBlock.classList.add("date");
-            achievementDateBlock.classList.add("has-font");
-            achievementBlock.appendChild(achievementDateBlock);
-
-            var achievementPointsBlock = document.createElement('div');
-            achievementPointsBlock.innerHTML = achievement.points;
-            achievementPointsBlock.classList.add("points");
-            achievementPointsBlock.classList.add("has-font");
-            achievementBlock.appendChild(achievementPointsBlock);
-        }
-
+    <script id="recent-achievements-scripts">
         var scrollingDown = true;
         var isScrolling = true;
 

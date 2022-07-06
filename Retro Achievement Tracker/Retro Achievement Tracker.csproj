@@ -172,6 +172,7 @@
     <Compile Include="Controllers\GameInfoController.cs" />
     <Compile Include="Controllers\RecentAchievementsController.cs" />
     <Compile Include="Controllers\GameStatsController.cs" />
+    <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Controllers\UserStatsController.cs" />
     <Compile Include="Forms\AchievementListWindow.cs">
       <SubType>Form</SubType>
@@ -185,11 +186,11 @@
     <Compile Include="Forms\GameStatsWindow.Designer.cs">
       <DependentUpon>GameStatsWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\RecentsAchievementsWindow.cs">
+    <Compile Include="Forms\RecentAchievementsWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\RecentsAchievementsWindow.Designer.cs">
-      <DependentUpon>RecentsAchievementsWindow.cs</DependentUpon>
+    <Compile Include="Forms\RecentAchievementsWindow.Designer.cs">
+      <DependentUpon>RecentAchievementsWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\AlertsWindow.cs">
       <SubType>Form</SubType>
@@ -238,8 +239,8 @@
     <EmbeddedResource Include="Forms\AchievementListWindow.resx">
       <DependentUpon>AchievementListWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\RecentsAchievementsWindow.resx">
-      <DependentUpon>RecentsAchievementsWindow.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\RecentAchievementsWindow.resx">
+      <DependentUpon>RecentAchievementsWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AlertsWindow.resx">
       <DependentUpon>AlertsWindow.cs</DependentUpon>

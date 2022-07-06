@@ -12,7 +12,6 @@ namespace Retro_Achievement_Tracker.Controllers
         public static bool IsOpen;
 
         private string rank;
-        private string awards;
         private string ratio;
         private string points;
         private string truePoints;
@@ -60,21 +59,21 @@ namespace Retro_Achievement_Tracker.Controllers
                 UserStatsWindow.SetWindowBackgroundColor(WindowBackgroundColor);
                 UserStatsWindow.SetRankName(RankName);
                 UserStatsWindow.SetPointsName(PointsName);
-                UserStatsWindow.SetRatioName(RatioName);
                 UserStatsWindow.SetTruePointsName(TruePointsName);
+                UserStatsWindow.SetRatioName(RatioName);
 
                 if (!string.IsNullOrEmpty(rank))
                 {
                     UserStatsWindow.SetRankValue(rank);
                     UserStatsWindow.SetPointsValue(points);
-                    UserStatsWindow.SetRatioValue(ratio);
                     UserStatsWindow.SetTruePointsValue(truePoints);
+                    UserStatsWindow.SetRatioValue(ratio);
                 }
 
                 UserStatsWindow.SetRankVisibility(RankEnabled);
                 UserStatsWindow.SetPointsVisibility(PointsEnabled);
-                UserStatsWindow.SetRatioVisibility(RatioEnabled);
                 UserStatsWindow.SetTruePointsVisibility(TruePointsEnabled);
+                UserStatsWindow.SetRatioVisibility(RatioEnabled);
             }
         }
         public void SetSimpleSettings()
@@ -106,7 +105,7 @@ namespace Retro_Achievement_Tracker.Controllers
 
         internal void SetRatio(string value)
         {
-            ratio = value + (UsePercentageSymbol ? " %" : "");
+            ratio = value;
 
             if (IsOpen)
             {

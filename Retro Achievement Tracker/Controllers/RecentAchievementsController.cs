@@ -50,7 +50,6 @@ namespace Retro_Achievement_Tracker.Controllers
         {
             if (IsOpen)
             {
-                RecentAchievementsWindow.AssignJavaScriptVariables();
                 RecentAchievementsWindow.SetBackgroundColor(BorderBackgroundColor);
                 RecentAchievementsWindow.SetWindowBackgroundColor(WindowBackgroundColor);
 
@@ -62,6 +61,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 {
                     RecentAchievementsWindow.DisableBorder();
                 }
+
                 if (AdvancedSettingsEnabled)
                 {
                     SetAdvancedSettings();
@@ -98,66 +98,65 @@ namespace Retro_Achievement_Tracker.Controllers
             RecentAchievementsWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px", SimpleFontOutlineEnabled ? SimpleFontOutlineSize + "px solid " + SimpleFontOutlineColor : "0px");
         }
 
-        public async void SetAchievements(List<Achievement> achievements)
+        public void SetAchievements(List<Achievement> achievements)
         {
             achievements.Sort();
             achievements.Reverse();
 
-            if (IsOpen)
+            if (achievements.Count == 0)
             {
-                if (achievements.Count == 0)
-                {
-                    RecentAchievementsWindow.HideRecentAchievements();
-                    RecentAchievementsWindow.ClearRecentAchievements();
+                RecentAchievementsWindow.HideRecentAchievements();
+                RecentAchievementsWindow.ClearRecentAchievements();
 
+                VisibileAchievements = new List<Achievement>();
+            }
+            else
+            {
+                if (CurrentAchievements.Count > 0 && GameId != achievements[0].GameId)
+                {
                     VisibileAchievements = new List<Achievement>();
                 }
-                else
+
+                bool needsChanges = CurrentAchievements.Count > 0 ? VisibileAchievements.Count == 0 : true;
+
+                int maxAchievementCount = Math.Min(achievements.Count, MaxListSize);
+
+                for (int i = maxAchievementCount - 1; i >= 0; i--)
                 {
-                    if (CurrentAchievements.Count > 0 && GameId != achievements[0].GameId)
+                    if (!VisibileAchievements.Contains(achievements[i]))
                     {
-                        VisibileAchievements = new List<Achievement>();
+                        needsChanges = true;
+                        VisibileAchievements.Add(achievements[i]);
                     }
+                }
 
-                    bool needsChanges = CurrentAchievements.Count > 0 ? VisibileAchievements.Count == 0 : true;
-
-                    int maxAchievementCount = Math.Min(achievements.Count, MaxListSize);
-
-                    for (int i = maxAchievementCount - 1; i >= 0; i--)
-                    {
-                        if (!VisibileAchievements.Contains(achievements[i]))
-                        {
-                            needsChanges = true;
-                            VisibileAchievements.Add(achievements[i]);
-                        }
-                    }
-
-                    if (needsChanges)
-                    {
-                        RecentAchievementsWindow.HideRecentAchievements();
-                        RecentAchievementsWindow.ClearRecentAchievements();
-
-                        await Task.Delay(200);
-
-                        RecentAchievementsWindow.AddAchievements(VisibileAchievements);
-
-                        await Task.Delay(50 * (achievements.Count + 1));
-
-                        SetAllSettings();
-
-                        await Task.Delay(500);
-
-                        RecentAchievementsWindow.ShowRecentAchievements();
-
-                        if (AutoScroll)
-                        {
-                            RecentAchievementsWindow.StartScrolling(500);
-                        }
-                    }
+                if (needsChanges)
+                {
+                    PopulateRecentAchievementsWindow();
                 }
             }
 
             CurrentAchievements = new List<Achievement>(achievements);
+        }
+        public void PopulateRecentAchievementsWindow()
+        {
+            if (IsOpen)
+            {
+                RecentAchievementsWindow.AssignJavaScriptVariables();
+                RecentAchievementsWindow.HideRecentAchievements();
+                RecentAchievementsWindow.ClearRecentAchievements();
+
+                RecentAchievementsWindow.AddAchievements(VisibileAchievements);
+
+                SetAllSettings();
+
+                RecentAchievementsWindow.ShowRecentAchievements();
+
+                if (AutoScroll)
+                {
+                    RecentAchievementsWindow.StartScrolling();
+                }
+            }
         }
         public int MaxListSize
         {
