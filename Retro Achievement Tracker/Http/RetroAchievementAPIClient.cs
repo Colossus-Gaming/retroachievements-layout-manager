@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using Retro_Achievement_Tracker.Models;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 

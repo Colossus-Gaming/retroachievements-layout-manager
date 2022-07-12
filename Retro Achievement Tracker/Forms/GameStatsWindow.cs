@@ -4,12 +4,8 @@ using Retro_Achievement_Tracker.Controllers;
 using Retro_Achievement_Tracker.Models;
 using Retro_Achievement_Tracker.Properties;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -25,8 +21,8 @@ namespace Retro_Achievement_Tracker.Forms
             Name = "RA Tracker - Game Stats";
             Text = "RA Tracker - Game Stats";
 
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainPage));
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            ComponentResourceManager resources = new ComponentResourceManager(typeof(MainPage));
+            this.Icon = ((Icon)(resources.GetObject("$this.Icon")));
 
             Shown += GameStatsWindow_Shown;
             FormClosed += GameStatsWindow_FormClosed;

@@ -21,7 +21,7 @@ namespace Retro_Achievement_Tracker
             Text = "RA Tracker - User Stats";
 
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainPage));
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = ((Icon)(resources.GetObject("$this.Icon")));
 
             Shown += UserStatsWindow_Shown;
             FormClosed += UserStatsWindow_FormClosed;

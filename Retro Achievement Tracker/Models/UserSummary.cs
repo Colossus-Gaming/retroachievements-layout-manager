@@ -3,7 +3,6 @@
     using Newtonsoft.Json;
     using Retro_Achievement_Tracker.Models;
     using System;
-    using System.Linq;
     using System.Collections.Generic;
 
     [JsonConverter(typeof(UserSummaryConverter))]

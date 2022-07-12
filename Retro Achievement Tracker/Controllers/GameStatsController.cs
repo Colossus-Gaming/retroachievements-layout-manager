@@ -2,7 +2,6 @@
 using Retro_Achievement_Tracker.Properties;
 using System.Drawing;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Retro_Achievement_Tracker.Controllers
 {

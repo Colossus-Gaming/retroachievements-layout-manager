@@ -10,7 +10,6 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using static Retro_Achievement_Tracker.Forms.AlertsWindow;
 
 namespace Retro_Achievement_Tracker.Controllers
 {
@@ -142,12 +141,14 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (PlayingAchievement)
                 {
-                    if (!AnimationInPlayed && (AlertsLayoutWindow.GetAchievementPlayingTime().Result * 1000) > (CustomAchievementEnabled ? CustomAchievementIn : 100))
+                    float achievementPlayingTime = AlertsLayoutWindow.GetAchievementPlayingTime().Result;
+
+                    if (!AnimationInPlayed && (achievementPlayingTime * 1000) > (CustomAchievementEnabled ? CustomAchievementIn : 0))
                     {
                         AlertsLayoutWindow.SetAchievementIn(CustomAchievementEnabled ? CustomAchievementInSpeed : 500, (CustomAchievementEnabled ? AchievementAnimationIn : AnimationDirection.STATIC));
                         AnimationInPlayed = true;
                     }
-                    else if (!AnimationOutPlayed && (AlertsLayoutWindow.GetAchievementPlayingTime().Result * 1000) > (CustomAchievementEnabled ? CustomAchievementOut : 5500))
+                    else if (!AnimationOutPlayed && (achievementPlayingTime * 1000) > (CustomAchievementEnabled ? CustomAchievementOut : 5500))
                     {
                         AlertsLayoutWindow.SetAchievementOut(CustomAchievementEnabled ? CustomAchievementOutSpeed : 500, (CustomAchievementEnabled ? AchievementAnimationOut : AnimationDirection.UP));
                         AnimationOutPlayed = true;
@@ -155,18 +156,20 @@ namespace Retro_Achievement_Tracker.Controllers
                 }
                 else
                 {
-                    if (!AnimationInPlayed && (AlertsLayoutWindow.GetMasteryPlayingTime().Result * 1000) > (CustomMasteryEnabled ? CustomMasteryIn : 100))
+                    float masteryPlayingTime = AlertsLayoutWindow.GetMasteryPlayingTime().Result;
+
+                    if (!AnimationInPlayed && (masteryPlayingTime * 1000) > (CustomMasteryEnabled ? CustomMasteryIn : 0))
                     {
                         AlertsLayoutWindow.SetMasteryIn(CustomMasteryEnabled ? CustomMasteryInSpeed : 500, CustomMasteryEnabled ? MasteryAnimationIn : AnimationDirection.STATIC);
                         AnimationInPlayed = true;
                     }
-                    else if (!AnimationOutPlayed && (AlertsLayoutWindow.GetMasteryPlayingTime().Result * 1000) > (CustomMasteryEnabled ? CustomMasteryOut : 5500))
+                    else if (!AnimationOutPlayed && (masteryPlayingTime * 1000) > (CustomMasteryEnabled ? CustomMasteryOut : 5500))
                     {
                         AlertsLayoutWindow.SetMasteryOut(CustomMasteryEnabled ? CustomMasteryOutSpeed : 500, CustomMasteryEnabled ? MasteryAnimationOut : AnimationDirection.UP);
                         AnimationOutPlayed = true;
                     }
                 }
-                if (AnimationInPlayed && AnimationOutPlayed)
+                if ((AnimationInPlayed && AnimationOutPlayed) || NotificationsStopwatch.ElapsedMilliseconds > 30000)
                 {
                     NotificationsStopwatch.Stop();
                 }
@@ -897,7 +900,7 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-                    SetAllSettings();
+                    SetAchievementSettings();
                 }
             }
         }
@@ -914,7 +917,7 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-                    SetAllSettings();
+                    SetAchievementSettings();
                 }
             }
         }
@@ -931,7 +934,7 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-                    SetAllSettings();
+                    SetMasterySettings();
                 }
             }
         }
@@ -948,7 +951,7 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-                    SetAllSettings();
+                    SetMasterySettings();
                 }
             }
         }
@@ -965,7 +968,7 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-                    SetAllSettings();
+                    SetAchievementSettings();
                 }
             }
         }
@@ -982,7 +985,7 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-                    SetAllSettings();
+                    SetMasterySettings();
                 }
             }
         }

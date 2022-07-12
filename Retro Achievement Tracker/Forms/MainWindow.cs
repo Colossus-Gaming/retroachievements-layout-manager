@@ -8,7 +8,6 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using System.ServiceModel;
 using System.Xml;
 using System.ServiceModel.Syndication;
 using CefSharp.Web;
@@ -381,7 +380,7 @@ namespace Retro_Achievement_Tracker
 
                     foreach (SyndicationItem item in feed.Items)
                     {
-                        if (ListViewItems.Find(potentialItem => potentialItem.Text.Equals("[NEWS] " + item.Title.Text)) == null)
+                        if (ListViewItems.Find(potentialItem => potentialItem.Text.Contains("[NEWS] " + item.Title.Text)) == null)
                         {
                             syndicationItems.Add("[NEWS] " + item.Title.Text, item);
                         }
@@ -400,9 +399,10 @@ namespace Retro_Achievement_Tracker
 
                     foreach (SyndicationItem item in feed.Items)
                     {
-                        if (ListViewItems.Find(potentialItem => potentialItem.Text.Equals("[CHEEVO] " + item.Title.Text)) == null)
+                        if (ListViewItems.Find(potentialItem => potentialItem.Text.Equals("[CHEEVO] " + item.Title.Text + " " + item.PublishDate.ToString())) == null 
+                        && !syndicationItems.ContainsKey("[CHEEVO] " + item.Title.Text + " " + item.PublishDate.ToString()))
                         {
-                            syndicationItems.Add("[CHEEVO] " + item.Title.Text, item);
+                            syndicationItems.Add("[CHEEVO] " + item.Title.Text + " " + item.PublishDate.ToString(), item);
                         }
                     }
                 });
@@ -445,9 +445,10 @@ namespace Retro_Achievement_Tracker
 
                     foreach (SyndicationItem item in feed.Items)
                     {
-                        if (ListViewItems.Find(potentialItem => potentialItem.Text.Equals("[FRIEND] " + item.Title.Text + " " + item.PublishDate.ToString())) == null)
+                        if (ListViewItems.Find(potentialItem => potentialItem.Text.Equals("[FRIEND] " + item.Title.Text + " " + item.PublishDate.ToString())) == null
+                        && !syndicationItems.ContainsKey("[FRIEND] " + item.Title.Text + " " + item.PublishDate.ToString()))
                         {
-                            syndicationItems.Add("[FRIEND] " + item.Title.Text, item);
+                            syndicationItems.Add("[FRIEND] " + item.Title.Text + " " + item.PublishDate.ToString(), item);
                         }
                     }
                 });

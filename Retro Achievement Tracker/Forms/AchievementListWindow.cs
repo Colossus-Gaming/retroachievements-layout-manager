@@ -7,9 +7,7 @@ using Retro_Achievement_Tracker.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -18,6 +16,7 @@ namespace Retro_Achievement_Tracker.Forms
 {
     public partial class AchievementListWindow : Form
     {
+        private TaskController TaskController;
         public AchievementListWindow()
         {
             ClientSize = new Size(0, 0);
@@ -25,12 +24,14 @@ namespace Retro_Achievement_Tracker.Forms
             Name = "RA Tracker - Achievement List";
             Text = "RA Tracker - Achievement List";
 
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainPage));
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            ComponentResourceManager resources = new ComponentResourceManager(typeof(MainPage));
+            this.Icon = ((Icon)(resources.GetObject("$this.Icon")));
 
             Shown += AchievementListWindow_Shown;
             FormClosed += AchievementListWindow_FormClosed;
-            
+
+            TaskController = new TaskController();
+
             SetupBrowser();
         }
 
@@ -43,83 +44,72 @@ namespace Retro_Achievement_Tracker.Forms
         {
             AchievementListController.Instance.IsOpen = true;
         }
-        public void AssignJavaScriptVariables()
+        public async void AssignJavaScriptVariables()
         {
-            ExecuteScript(
-                "allAchievements = document.getElementsByClassName(\"achievement\");");
+            await TaskController.Enqueue(() => ExecuteScript("allAchievements = document.getElementsByClassName(\"achievement\");"));
         }
-        public void AddAchievement(Achievement achievement, int xCoord, int yCoord)
+        public async void AddAchievement(Achievement achievement, int xCoord, int yCoord)
         {
-            ExecuteScript("addAchievement(\"" + xCoord + "px\"," + "\"" + yCoord + "px\"," + JsonConvert.SerializeObject(achievement) + ");");
-
+            await TaskController.Enqueue(() => ExecuteScript("addAchievement(\"" + xCoord + "px\"," + "\"" + yCoord + "px\"," + JsonConvert.SerializeObject(achievement) + ");"));
         }
-        public void SetWindowBackgroundColor(string value)
+        public async void SetWindowBackgroundColor(string value)
         {
-            ExecuteScript(
-                "container.style.backgroundColor = \"" + value + "\";");
+            await TaskController.Enqueue(() => ExecuteScript("container.style.backgroundColor = \"" + value + "\";"));
         }
-        public void UnlockAchievement(Achievement achievement)
+        public async void UnlockAchievement(Achievement achievement)
         {
-            ExecuteScript("$(\"#achievement-" + achievement.Id + "-locked-image\").toggle(\"pulsate\");" +
-                "$(\"#achievement-" + achievement.Id + "\").tooltip(\"option\", \"content\", \"" + (achievement.Title + "<br/><br/>" + achievement.Points + "pts<br/><br/>" + achievement.Description + "<br/><br/>" + achievement.DateEarned.Value.ToLocalTime().ToString()) + "\");");
+            await TaskController.Enqueue(() => ExecuteScript("$(\"#achievement-" + achievement.Id + "-locked-image\").toggle(\"pulsate\");" +
+                "$(\"#achievement-" + achievement.Id + "\").tooltip(\"option\", \"content\", \"" + (achievement.Title + "<br/><br/>" + achievement.Points + "pts<br/><br/>" + achievement.Description + "<br/><br/>" + achievement.DateEarned.Value.ToLocalTime().ToString()) + "\");"));
         }
-        public void StartScrolling(int timeout)
+        public async void StartScrolling()
         {
-            ExecuteScript("setTimeout(function() { startScrolling(); }, " + (timeout + 1000) + "); ");
+            await TaskController.Enqueue(() => ExecuteScript("startScrolling();"));
         }
-        public void SetAchievementPositions(Dictionary<Achievement, ValueTuple<int, int, int>> achievementAndCoordinates)
+        public async void SetAchievementPosition(Achievement achievement, int xCoord, int yCoord)
         {
-            StringBuilder stringBuilder = new StringBuilder();
 
-            foreach (Achievement achievement in achievementAndCoordinates.Keys)
-            {
-                ValueTuple<int, int, int> value;
+            await TaskController.Enqueue(() => ExecuteScript("$(\"#achievement-" + achievement.Id + "\")" +
+                ".animate(" +
+                "   {" +
+                "       left: '" + xCoord + "px', " +
+                "       top: '" + yCoord + "px' " +
+                "   }, 1000, 'easeInOutQuint'" +
+                ");"));
+        }
+        public async void AwaitAnimation(int waitTime)
+        {
 
-                achievementAndCoordinates.TryGetValue(achievement, out value);
-
-                stringBuilder.Append("setTimeout(function() { " +
-                    "$(\"#achievement-" + achievement.Id + "\")");
-                stringBuilder.Append("" +
-                    "   .animate(" +
-                    "       {" +
-                    "           left: '" + value.Item1 + "px', " +
-                    "           top: '" + value.Item2 + "px' " +
-                    "       }, 1000, 'easeInOutQuint'" +
-                    "   ); " +
-                    "}, " + value.Item3 + ");");
-            }
-
-            ExecuteScript(stringBuilder.ToString());
+            await TaskController.Enqueue(() => Task.Delay(waitTime));
         }
         public void ClearAchievements(Dictionary<int, int> idsToTimeouts)
         {
             StringBuilder stringBuilder = new StringBuilder("stopScrolling();" +
-                "document.getElementById(\"container\").scrollTo(" +
-                "{" +
-                " top: 0," +
-                " left: 0," +
-                " behavior: 'smooth'" +
-                "});");
+                "document.getElementById(\"container\")" +
+                ".scrollTo(" +
+                "   {" +
+                "       top: 0," +
+                "       left: 0," +
+                "       behavior: 'smooth'" +
+                "   }" +
+                ");");
 
             foreach (int id in idsToTimeouts.Keys)
             {
 
                 idsToTimeouts.TryGetValue(id, out int value);
 
-                stringBuilder.Append("setTimeout(function() { " +
-                    "   var achievement" + id + "OffsetTop = document.getElementById(\"achievement-" + id + "\").offsetTop;" +
-                    "   var achievement" + id + "OffsetTopNew = achievement" + id + "OffsetTop + 1048;" +
-                    "   $(\"#achievement-" + id + "\").animate( { top: `${ achievement" + id + "OffsetTopNew }px` }, 800, 'easeInOutQuint'); " +
-                    "}, " + value + ");");
+                stringBuilder.Append("var achievement" + id + "OffsetTop = document.getElementById(\"achievement-" + id + "\").offsetTop;" +
+                    "var achievement" + id + "OffsetTopNew = achievement" + id + "OffsetTop + 1048;" +
+                    "$(\"#achievement-" + id + "\").animate( { top: `${ achievement" + id + "OffsetTopNew }px` }, 800, 'easeInOutQuint');");
             }
 
-            ExecuteScript(stringBuilder.ToString());
+            TaskController.Enqueue(() => ExecuteScript(stringBuilder.ToString()));
         }
         public void CleanCanvas()
         {
-            ExecuteScript("document.getElementById(\"achievement-list\").innerHTML = \"\";");
+            TaskController.Enqueue(() => ExecuteScript("document.getElementById(\"achievement-list\").innerHTML = \"\";"));
         }
-        protected async void ExecuteScript(string script)
+        protected async Task ExecuteScript(string script)
         {
             if (chromiumWebBrowser != null)
             {

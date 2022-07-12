@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -19,7 +16,7 @@ namespace Retro_Achievement_Tracker.Controllers
             await semaphore.WaitAsync();
             try
             {
-                await Task.Delay(200).ContinueWith(async result => await taskGenerator());
+                await Task.Delay(50).ContinueWith(async result => await taskGenerator());
             }
             finally
             {

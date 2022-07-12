@@ -1,6 +1,5 @@
 ﻿using CefSharp;
 using CefSharp.Web;
-using Newtonsoft.Json;
 using Retro_Achievement_Tracker.Controllers;
 using Retro_Achievement_Tracker.Models;
 using Retro_Achievement_Tracker.Properties;
@@ -24,7 +23,7 @@ namespace Retro_Achievement_Tracker
             Text = "RA Tracker - Recent Achievements";
 
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainPage));
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = ((Icon)(resources.GetObject("$this.Icon")));
 
             Shown += RecentAchievementsWindow_Shown;
             FormClosed += RecentAchievementsWindow_FormClosed;
