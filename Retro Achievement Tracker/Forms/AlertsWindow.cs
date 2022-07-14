@@ -74,10 +74,12 @@ namespace Retro_Achievement_Tracker.Forms
                 "achievementPoints.innerHTML = \"" + achievement.Points + "\";" +
                 "$(\"#achievement-badge\").attr(\"src\", \"https://retroachievements.org/Badge/" + achievement.BadgeNumber + ".png\");" +
                 "$(\"#achievement-video\").attr(\"src\", \"disk://achievement-notification\");" +
-                "achievementVideoElement.style.visibility = \"visible\";" +
-                "setTimeout(function() { textFit(achievementTitle, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true }); }, 100);" +
-                "setTimeout(function() { textFit(achievementDescription, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true }); }, 200);" +
-                "setTimeout(function() { textFit(achievementPoints, { reProcess: true }); }, 300);"));
+                "$(\"#achievement-video\").show();"));
+
+            await TaskController.Enqueue(() => ExecuteScript(
+                "textFit(achievementTitle, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true });" +
+                "textFit(achievementDescription, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true });" +
+                "textFit(achievementPoints, { reProcess: true });"));
         }
         public async void StartMasteryAlert(GameInfo gameInfo)
         {
@@ -87,15 +89,17 @@ namespace Retro_Achievement_Tracker.Forms
                     "masteryPoints.innerHTML = \"Points:<br/>" + gameInfo.GamePointsPossible + "\";" +
                     "$(\"#mastery-badge\").attr('src', \"https://retroachievements.org" + gameInfo.ImageIcon + "\");" +
                     "$(\"#mastery-video\").attr('src', \"disk://mastery-notification\");" +
-                    "masteryVideoElement.style.visibility = \"visible\";" +
-                    "setTimeout(function() { textFit(masteryTitle, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true }); }, 100);" +
-                    "setTimeout(function() { textFit(masteryPoints, { alignVert: true, alignHoriz: true, reProcess: true }); }, 200);" +
-                    "setTimeout(function() { textFit(masteryAchievements, { alignVert: true, alignHoriz: true, reProcess: true }); }, 300);"));
+                    "$(\"#mastery-video\").show();"));
+
+            await TaskController.Enqueue(() => ExecuteScript(
+                    "textFit(masteryTitle, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true });" +
+                    "textFit(masteryPoints, { alignVert: true, alignHoriz: true, reProcess: true });" +
+                    "textFit(masteryAchievements, { alignVert: true, alignHoriz: true, reProcess: true });"));
         }
 
         public async void PromptUserInput()
         {
-            await TaskController.Enqueue(() => ExecuteScript("$(\"#user-prompt\").fadeIn();"));
+            await TaskController.Enqueue(() => ExecuteScript("$(\"#user-prompt\").show();"));
         }
         public async void EnableBorder()
         {
@@ -114,6 +118,7 @@ namespace Retro_Achievement_Tracker.Forms
         {
             await TaskController.Enqueue(() => ExecuteScript(
                 "achievementVideoElement.controls = true;"));
+
             SetAchievementIn(0, AnimationDirection.STATIC);
         }
 
@@ -122,7 +127,8 @@ namespace Retro_Achievement_Tracker.Forms
             await TaskController.Enqueue(() => ExecuteScript(
                 "achievementVideoElement.controls = false; " +
                 "achievementVideoElement.style.border = \"\";  " +
-                "$(\"#achievement-video\").fadeOut();"));
+                "$(\"#achievement-video\").hide();"));
+
             SetAchievementOut(0, AnimationDirection.STATIC);
         }
 
@@ -130,6 +136,7 @@ namespace Retro_Achievement_Tracker.Forms
         {
             await TaskController.Enqueue(() => ExecuteScript(
                 "masteryVideoElement.controls = true;"));
+
             SetMasteryIn(0, AnimationDirection.STATIC);
         }
 
@@ -138,7 +145,8 @@ namespace Retro_Achievement_Tracker.Forms
             await TaskController.Enqueue(() => ExecuteScript(
                 "masteryVideoElement.controls = false; " +
                 "masteryVideoElement.style.border = \"\"; " +
-                "$(\"#mastery-video\").fadeOut(); "));
+                "$(\"#mastery-video\").hide(); "));
+
             SetMasteryOut(0, AnimationDirection.STATIC);
         }
 
@@ -275,8 +283,8 @@ namespace Retro_Achievement_Tracker.Forms
         public async void HideNotifications()
         {
             await TaskController.Enqueue(() => ExecuteScript(
-                "achievementVideoElement.style.visibility = \"hidden\";" +
-                "masteryVideoElement.style.visibility = \"hidden\";" +
+                "$(\"#achievement-video\").hide();" +
+                "$(\"#msatery-video\").hide();" +
                 "achievementVideoElement.currentTime = 0;" +
                 "masteryVideoElement.currentTime = 0;"));
         }
@@ -314,7 +322,9 @@ namespace Retro_Achievement_Tracker.Forms
                 "masteryPoints.style.lineHeight = " + lineSpacing + ";" +
                 "masteryPoints.style.fontFamily = \"" + fontFamily + "\";" +
                 "achievementPoints.style.lineHeight = " + lineSpacing + ";" +
-                "achievementPoints.style.fontFamily = \"" + fontFamily + "\";" +
+                "achievementPoints.style.fontFamily = \"" + fontFamily + "\";")); 
+
+            await TaskController.Enqueue(() => ExecuteScript(
                 "setTimeout(function() { textFit(achievementDescription, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true }); }, 100);" +
                 "setTimeout(function() { textFit(masteryAchievements, { alignVert: true, alignHoriz: true, reProcess: true }); }, 200);" +
                 "setTimeout(function() { textFit(masteryPoints, { alignVert: true, alignHoriz: true, reProcess: true }); }, 300);" +
@@ -374,10 +384,12 @@ namespace Retro_Achievement_Tracker.Forms
                  "masteryAchievements.style.lineHeight = " + lineSpacing + ";" +
                  "masteryAchievements.style.fontFamily = \"" + fontFamily + "\";" +
                  "masteryPoints.style.lineHeight = " + lineSpacing + ";" +
-                 "masteryPoints.style.fontFamily = \"" + fontFamily + "\";" +
-                 "setTimeout(function() { textFit(achievementDescription, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true }); }, 100);" +
-                 "setTimeout(function() { textFit(masteryAchievements, { alignVert: true, alignHoriz: true, reProcess: true }); }, 200);" +
-                 "setTimeout(function() { textFit(masteryPoints, { alignVert: true, alignHoriz: true, reProcess: true }); }, 300);"));
+                 "masteryPoints.style.fontFamily = \"" + fontFamily + "\";"));
+
+            await TaskController.Enqueue(() => ExecuteScript(
+                "textFit(achievementDescription, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true });" +
+                 "textFit(masteryAchievements, { alignVert: true, alignHoriz: true, reProcess: true });" +
+                 "textFit(masteryPoints, { alignVert: true, alignHoriz: true, reProcess: true });"));
         }
 
         public async void SetTitleOutline(string value)
@@ -406,12 +418,14 @@ namespace Retro_Achievement_Tracker.Forms
             string fontFamily = value.Name.Replace(":", "\\:");
 
             await TaskController.Enqueue(() => ExecuteScript(
-                  "achievementTitle.style.lineHeight = " + lineSpacing + ";" +
-                  "achievementTitle.style.fontFamily = \"" + fontFamily + "\";" +
-                  "masteryTitle.style.lineHeight = " + lineSpacing + ";" +
-                  "masteryTitle.style.fontFamily = \"" + fontFamily + "\";" +
-                  "setTimeout(function() { textFit(achievementTitle, { alignVert: true, alignHoriz: true, reProcess: true }); }, 100);" +
-                  "setTimeout(function() { textFit(masteryTitle, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true }); }, 200);"));
+                "achievementTitle.style.lineHeight = " + lineSpacing + ";" +
+                "achievementTitle.style.fontFamily = \"" + fontFamily + "\";" +
+                "masteryTitle.style.lineHeight = " + lineSpacing + ";" +
+                "masteryTitle.style.fontFamily = \"" + fontFamily + "\";")); 
+            
+            await TaskController.Enqueue(() => ExecuteScript(
+                "textFit(achievementTitle, { alignVert: true, alignHoriz: true, reProcess: true });" +
+                "textFit(masteryTitle, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true });"));
         }
         public async void SetPointsFontFamily(FontFamily value)
         {

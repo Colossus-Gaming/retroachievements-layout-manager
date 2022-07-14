@@ -183,7 +183,6 @@ namespace Retro_Achievement_Tracker.Controllers
             if (!IsPlaying && !IsEditingAchievement)
             {
                 AlertsLayoutWindow.HideNotifications();
-
                 if (NotificationRequests.Count > 0)
                 {
                     RunNotifications();

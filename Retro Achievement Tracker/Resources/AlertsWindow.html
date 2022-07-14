@@ -11,18 +11,18 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script id="achievement-script">
         /**
-                     * textFit v2.3.1
-                     * Previously known as jQuery.textFit
-                     * 11/2014 by STRML (strml.github.com)
-                     * MIT License
-                     *
-                     * To use: textFit(document.getElementById('target-div'), options);
-                     *
-                     * Will make the *text* content inside a container scale to fit the container
-                     * The container is required to have a set width and height
-                     * Uses binary search to fit text with minimal layout calls.
-                     * Version 2.0 does not use jQuery.
-                     */
+        * textFit v2.3.1
+        * Previously known as jQuery.textFit
+        * 11/2014 by STRML (strml.github.com)
+        * MIT License
+        *
+        * To use: textFit(document.getElementById('target-div'), options);
+        *
+        * Will make the *text* content inside a container scale to fit the container
+        * The container is required to have a set width and height
+        * Uses binary search to fit text with minimal layout calls.
+        * Version 2.0 does not use jQuery.
+        */
         /*global define:true, document:true, window:true, HTMLElement:true*/
 
         (function (root, factory) {
@@ -339,7 +339,6 @@
             position: absolute;
             padding-left: 5px;
             padding-top: 5px;
-            visibility: hidden;
         }
 
         #achievement,
@@ -427,6 +426,15 @@
     </style>
     <script>
         function acknowledgePrompt() {
+            document.getElementById("achievement-video").addEventListener("ended", function () {
+                document.getElementById("achievement-video").currentTime = 0;
+                $("#achievement-video").hide();
+            });
+
+            document.getElementById("mastery-video").addEventListener("ended", function () {
+                document.getElementById("mastery-video").currentTime = 0;
+                $("#mastery-video").hide();
+            });
 
             document.getElementById("user-prompt").style.animationName = "user-prompt-animation-reverse";
             alertControllerAsync.setCanPlay();
@@ -439,16 +447,6 @@
 </head>
 <body>
     <div id="container">
-        <div id="user-prompt">
-            <img src="https://retroachievements.org/Images/RA_Logo10.png" />
-            <div id="ready-message" class="prompt" style="color: blue;">
-                Are you ready?
-            </div>
-            <button id="confirm-button" onclick="acknowledgePrompt()" class="prompt" style="color: blue;">
-                ACHIEVE
-            </button>
-        </div>
-
         <div id="achievement">
             <img id="achievement-badge" />
             <div id="achievement-title" class="achievement has-font">Achievement</div>
@@ -470,5 +468,14 @@
 
     <video id="achievement-video" onended="setPlayingOff()" onplay="setPlayingOn()" autoplay></video>
     <video id="mastery-video" onended="setPlayingOff()" onplay="setPlayingOn()" autoplay></video>
+    <div id="user-prompt">
+        <img src="https://retroachievements.org/Images/RA_Logo10.png" />
+        <div id="ready-message" class="prompt" style="color: blue;">
+            Are you ready?
+        </div>
+        <button id="confirm-button" onclick="acknowledgePrompt()" class="prompt" style="color: blue;">
+            ACHIEVE
+        </button>
+    </div>
 </body>
 </html>

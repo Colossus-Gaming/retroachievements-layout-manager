@@ -31,7 +31,7 @@ namespace Retro_Achievement_Tracker
             {
                 if (GameInfo != null && GameInfo.Achievements != null)
                 {
-                    return GameInfo.Achievements.FindAll(x => !x.HardcoreAchieved);
+                    return GameInfo.Achievements.FindAll(x => !x.DateEarned.HasValue);
                 }
                 return new List<Achievement>();
             }
@@ -43,7 +43,7 @@ namespace Retro_Achievement_Tracker
             {
                 if (GameInfo != null && GameInfo.Achievements != null)
                 {
-                    return GameInfo.Achievements.FindAll(x => x.HardcoreAchieved);
+                    return GameInfo.Achievements.FindAll(x => x.DateEarned.HasValue);
                 }
                 return new List<Achievement>();
             }
@@ -235,10 +235,7 @@ namespace Retro_Achievement_Tracker
                         previousId = UserSummary.LastGameID;
                     }
 
-                    if (UnlockedAchievements != null)
-                    {
-                        OldUnlockedAchievements = UnlockedAchievements.ToList();
-                    }
+                    OldUnlockedAchievements = UnlockedAchievements.ToList();
 
                     UpdateTimerLabel("Updating user info");
                     UserSummary userSummary = null;
@@ -247,6 +244,7 @@ namespace Retro_Achievement_Tracker
                     {
                         userSummary = (UserSummary)UserSummary.Clone();
                     }
+
                     UserSummary = await retroAchievementsAPIClient.GetUserSummary();
 
                     if (UserSummary == null)
@@ -399,7 +397,7 @@ namespace Retro_Achievement_Tracker
 
                     foreach (SyndicationItem item in feed.Items)
                     {
-                        if (ListViewItems.Find(potentialItem => potentialItem.Text.Equals("[CHEEVO] " + item.Title.Text + " " + item.PublishDate.ToString())) == null 
+                        if (ListViewItems.Find(potentialItem => potentialItem.Text.Equals("[CHEEVO] " + item.Title.Text + " " + item.PublishDate.ToString())) == null
                         && !syndicationItems.ContainsKey("[CHEEVO] " + item.Title.Text + " " + item.PublishDate.ToString()))
                         {
                             syndicationItems.Add("[CHEEVO] " + item.Title.Text + " " + item.PublishDate.ToString(), item);
@@ -603,7 +601,7 @@ namespace Retro_Achievement_Tracker
         }
         private void UpdateRecentAchievements()
         {
-            RecentAchievementsController.Instance.SetAchievements(UnlockedAchievements);
+            RecentAchievementsController.Instance.SetAchievements(UnlockedAchievements.ToList());
 
             StreamLabelManager.Instance.EnqueueLastFive(GameInfo);
         }
@@ -640,7 +638,7 @@ namespace Retro_Achievement_Tracker
 
         private void UpdateAchievementList(bool newGame)
         {
-            AchievementListController.Instance.UpdateAchievementList(UnlockedAchievements, LockedAchievements, newGame);
+            AchievementListController.Instance.UpdateAchievementList(UnlockedAchievements.ToList(), LockedAchievements.ToList(), newGame);
         }
 
         private void RequiredField_TextChange(object sender, EventArgs e)
@@ -1013,14 +1011,15 @@ namespace Retro_Achievement_Tracker
         }
         private void ShowAchievementButton_Click(object sender, EventArgs eventArgs)
         {
-            if (UnlockedAchievements.Count > 0
-                && UnlockedAchievements[0] != null)
-            {
-                AlertsController.Instance.EnqueueAchievementNotifications(new List<Achievement>() { UnlockedAchievements[0] });
-                StreamLabelManager.Instance.EnqueueAlert(UnlockedAchievements[0]);
+            List<Achievement> unlockedAchievements = UnlockedAchievements.ToList();
 
-                AlertsController.Instance.RunNotifications();
-                StreamLabelManager.Instance.RunNotifications();
+            if (unlockedAchievements.Count > 0)
+            {
+                unlockedAchievements.Sort();
+                Achievement achievement = (Achievement)unlockedAchievements[unlockedAchievements.Count - 1].Clone();
+
+                AlertsController.Instance.EnqueueAchievementNotifications(new List<Achievement>() { achievement });
+                StreamLabelManager.Instance.EnqueueAlert(achievement);
             }
             else
             {
@@ -1036,10 +1035,9 @@ namespace Retro_Achievement_Tracker
                      achievement
                 });
                 StreamLabelManager.Instance.EnqueueAlert(achievement);
-
-                AlertsController.Instance.RunNotifications();
-                StreamLabelManager.Instance.RunNotifications();
             }
+            AlertsController.Instance.RunNotifications();
+            StreamLabelManager.Instance.RunNotifications();
         }
         private void ShowGameMasteryButton_Click(object sender, EventArgs eventArgs)
         {
@@ -1052,6 +1050,7 @@ namespace Retro_Achievement_Tracker
         private void SetFocusButton_Click(object sender, EventArgs e)
         {
             SetFocus();
+
             StreamLabelManager.Instance.RunNotifications();
         }
         private void MoveFocusIndexLeft(object sender, EventArgs e)

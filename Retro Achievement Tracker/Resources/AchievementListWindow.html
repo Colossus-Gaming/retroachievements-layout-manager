@@ -21,15 +21,17 @@
             achievementImage.id = "achievement-" + achievement.id + "-image";
             achievementImage.src = "https://s3-eu-west-1.amazonaws.com/i.retroachievements.org/Badge/" + achievement.badgeNumber + ".png";
             achievementImage.style.border = "2px solid gold";
+
             achievementBlock.appendChild(achievementImage);
 
-            if (!achievement.hardcoreAchieved) {
+            if (!achievement.dateEarned) {
                 var achievementLockedImage = document.createElement('img');
                 achievementLockedImage.id = "achievement-" + achievement.id + "-locked-image";
                 achievementLockedImage.src = "https://s3-eu-west-1.amazonaws.com/i.retroachievements.org/Badge/" + achievement.badgeNumber + "_lock.png";
                 achievementLockedImage.style.width = 64;
                 achievementLockedImage.style.height = 64;
                 achievementLockedImage.style.border = "2px solid #272727";
+
                 achievementBlock.appendChild(achievementLockedImage);
             } else {
                 tooltipString += "<br/><br/>" + achievement.dateEarned;

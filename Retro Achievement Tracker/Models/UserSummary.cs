@@ -47,7 +47,6 @@
         public int Points { get; set; }
         public int TrueRatio { get; set; }
         public string BadgeNumber { get; set; }
-        public bool HardcoreAchieved { get; set; }
         public int DisplayOrder { get; set; }
         public DateTime? DateEarned { get; set; }
 
@@ -57,15 +56,15 @@
             {
                 if (DateEarned.HasValue)
                 {
-                    if (DateEarned.Value == other.DateEarned.Value)
+                    if (DateEarned.Value.Equals(other.DateEarned.Value))
                     {
-                        if ((DisplayOrder == 0 && other.DisplayOrder == 0) || (DisplayOrder == other.DisplayOrder))
+                        if (DisplayOrder.Equals(other.DisplayOrder))
                         {
                             return Id.CompareTo(other.Id);
                         }
                         return DisplayOrder.CompareTo(other.DisplayOrder);
                     }
-                    return DateEarned.Value < other.DateEarned.Value ? -1 : 1;
+                    return DateEarned.Value.CompareTo(other.DateEarned.Value);
                 }
                 return -1;
             }
@@ -73,7 +72,7 @@
             {
                 return 1;
             }
-            if ((DisplayOrder == 0 && other.DisplayOrder == 0) || (DisplayOrder == other.DisplayOrder))
+            if (DisplayOrder.Equals(other.DisplayOrder))
             {
                 return Id.CompareTo(other.Id);
             }

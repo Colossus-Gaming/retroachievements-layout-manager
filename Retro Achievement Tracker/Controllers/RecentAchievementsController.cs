@@ -113,6 +113,7 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 if (CurrentAchievements.Count > 0 && GameId != achievements[0].GameId)
                 {
+                    GameId = achievements[0].GameId;
                     VisibileAchievements = new List<Achievement>();
                 }
 

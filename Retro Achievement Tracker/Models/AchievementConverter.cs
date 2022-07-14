@@ -29,9 +29,7 @@ namespace Retro_Achievement_Tracker.Models
             JToken Description = item["Description"];
             JToken Points = item["Points"];
             JToken TrueRatio = item["TrueRatio"];
-            JToken HardcoreAchieved = item["HardcoreAchieved"];
-            JToken DateAwarded = item["DateAwarded"];
-            JToken DateEarnedHardcore = item["DateEarnedHardcore"];
+            JToken DateEarned = item["DateEarnedHardcore"];
             JToken BadgeName = item["BadgeName"];
             JToken DisplayOrder = item["DisplayOrder"];
 
@@ -63,14 +61,9 @@ namespace Retro_Achievement_Tracker.Models
             {
                 Achievement.TrueRatio = int.Parse(TrueRatio.ToString());
             }
-
-            if (DateAwarded != null && !string.IsNullOrEmpty(DateAwarded.ToString()))
+            if (DateEarned != null && !string.IsNullOrEmpty(DateEarned.ToString()))
             {
-                Achievement.DateEarned = DateTime.Parse(DateAwarded.ToString());
-            }
-            if (DateEarnedHardcore != null && !string.IsNullOrEmpty(DateEarnedHardcore.ToString()))
-            {
-                Achievement.DateEarned = DateTime.Parse(DateEarnedHardcore.ToString());
+                Achievement.DateEarned = DateTime.Parse(DateEarned.ToString());
             }
             if (BadgeName != null)
             {
@@ -80,8 +73,6 @@ namespace Retro_Achievement_Tracker.Models
             {
                 Achievement.DisplayOrder = int.Parse(DisplayOrder.ToString());
             }
-
-            Achievement.HardcoreAchieved = Achievement.DateEarned.HasValue || (HardcoreAchieved != null && "1".Equals(HardcoreAchieved.ToString()));
 
             return Achievement;
         }
