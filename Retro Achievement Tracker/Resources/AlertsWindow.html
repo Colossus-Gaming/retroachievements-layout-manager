@@ -426,16 +426,6 @@
     </style>
     <script>
         function acknowledgePrompt() {
-            document.getElementById("achievement-video").addEventListener("ended", function () {
-                document.getElementById("achievement-video").currentTime = 0;
-                $("#achievement-video").hide();
-            });
-
-            document.getElementById("mastery-video").addEventListener("ended", function () {
-                document.getElementById("mastery-video").currentTime = 0;
-                $("#mastery-video").hide();
-            });
-
             document.getElementById("user-prompt").style.animationName = "user-prompt-animation-reverse";
             alertControllerAsync.setCanPlay();
 

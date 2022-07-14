@@ -139,41 +139,44 @@ namespace Retro_Achievement_Tracker.Controllers
                     tokenSource2.Token.ThrowIfCancellationRequested();
                 }
 
-                if (PlayingAchievement)
+                if (IsPlaying)
                 {
-                    float achievementPlayingTime = AlertsLayoutWindow.GetAchievementPlayingTime().Result;
+                    if (PlayingAchievement)
+                    {
+                        float achievementPlayingTime = AlertsLayoutWindow.GetAchievementPlayingTime().Result;
 
-                    if (!AnimationInPlayed && (achievementPlayingTime * 1000) > (CustomAchievementEnabled ? CustomAchievementIn : 0))
-                    {
-                        AlertsLayoutWindow.SetAchievementIn(CustomAchievementEnabled ? CustomAchievementInSpeed : 500, (CustomAchievementEnabled ? AchievementAnimationIn : AnimationDirection.STATIC));
-                        AnimationInPlayed = true;
+                        if (!AnimationInPlayed && (achievementPlayingTime * 1000) > (CustomAchievementEnabled ? CustomAchievementIn : 0))
+                        {
+                            AlertsLayoutWindow.SetAchievementIn(CustomAchievementEnabled ? CustomAchievementInSpeed : 500, (CustomAchievementEnabled ? AchievementAnimationIn : AnimationDirection.STATIC));
+                            AnimationInPlayed = true;
+                        }
+                        else if (!AnimationOutPlayed && (achievementPlayingTime * 1000) > (CustomAchievementEnabled ? CustomAchievementOut : 5500))
+                        {
+                            AlertsLayoutWindow.SetAchievementOut(CustomAchievementEnabled ? CustomAchievementOutSpeed : 500, (CustomAchievementEnabled ? AchievementAnimationOut : AnimationDirection.UP));
+                            AnimationOutPlayed = true;
+                        }
                     }
-                    else if (!AnimationOutPlayed && (achievementPlayingTime * 1000) > (CustomAchievementEnabled ? CustomAchievementOut : 5500))
+                    else
                     {
-                        AlertsLayoutWindow.SetAchievementOut(CustomAchievementEnabled ? CustomAchievementOutSpeed : 500, (CustomAchievementEnabled ? AchievementAnimationOut : AnimationDirection.UP));
-                        AnimationOutPlayed = true;
-                    }
-                }
-                else
-                {
-                    float masteryPlayingTime = AlertsLayoutWindow.GetMasteryPlayingTime().Result;
+                        float masteryPlayingTime = AlertsLayoutWindow.GetMasteryPlayingTime().Result;
 
-                    if (!AnimationInPlayed && (masteryPlayingTime * 1000) > (CustomMasteryEnabled ? CustomMasteryIn : 0))
-                    {
-                        AlertsLayoutWindow.SetMasteryIn(CustomMasteryEnabled ? CustomMasteryInSpeed : 500, CustomMasteryEnabled ? MasteryAnimationIn : AnimationDirection.STATIC);
-                        AnimationInPlayed = true;
+                        if (!AnimationInPlayed && (masteryPlayingTime * 1000) > (CustomMasteryEnabled ? CustomMasteryIn : 0))
+                        {
+                            AlertsLayoutWindow.SetMasteryIn(CustomMasteryEnabled ? CustomMasteryInSpeed : 500, CustomMasteryEnabled ? MasteryAnimationIn : AnimationDirection.STATIC);
+                            AnimationInPlayed = true;
+                        }
+                        else if (!AnimationOutPlayed && (masteryPlayingTime * 1000) > (CustomMasteryEnabled ? CustomMasteryOut : 5500))
+                        {
+                            AlertsLayoutWindow.SetMasteryOut(CustomMasteryEnabled ? CustomMasteryOutSpeed : 500, CustomMasteryEnabled ? MasteryAnimationOut : AnimationDirection.UP);
+                            AnimationOutPlayed = true;
+                        }
                     }
-                    else if (!AnimationOutPlayed && (masteryPlayingTime * 1000) > (CustomMasteryEnabled ? CustomMasteryOut : 5500))
+                    if ((AnimationInPlayed && AnimationOutPlayed) || NotificationsStopwatch.ElapsedMilliseconds > 30000)
                     {
-                        AlertsLayoutWindow.SetMasteryOut(CustomMasteryEnabled ? CustomMasteryOutSpeed : 500, CustomMasteryEnabled ? MasteryAnimationOut : AnimationDirection.UP);
-                        AnimationOutPlayed = true;
+                        NotificationsStopwatch.Stop();
                     }
+                    await Task.Delay(10);
                 }
-                if ((AnimationInPlayed && AnimationOutPlayed) || NotificationsStopwatch.ElapsedMilliseconds > 30000)
-                {
-                    NotificationsStopwatch.Stop();
-                }
-                await Task.Delay(10);
             }
         }
 
