@@ -171,7 +171,7 @@ namespace Retro_Achievement_Tracker.Controllers
                             AnimationOutPlayed = true;
                         }
                     }
-                    if ((AnimationInPlayed && AnimationOutPlayed) || NotificationsStopwatch.ElapsedMilliseconds > 30000)
+                    if ((AnimationInPlayed && AnimationOutPlayed) || NotificationsStopwatch.ElapsedMilliseconds > 60000)
                     {
                         NotificationsStopwatch.Stop();
                     }
