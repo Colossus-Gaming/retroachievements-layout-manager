@@ -2,6 +2,7 @@
 using MediaToolkit.Model;
 using System;
 using System.Drawing;
+using System.IO;
 
 namespace Retro_Achievement_Tracker.Models
 {
@@ -14,25 +15,33 @@ namespace Retro_Achievement_Tracker.Models
 
         internal static decimal GetVideoWidth(string input)
         {
-            var inputFile = new MediaFile { Filename = input };
-            using (var engine = new Engine())
+            if (File.Exists(input))
             {
-                engine.GetMetadata(inputFile);
-            }
-            var frameSize = inputFile.Metadata.VideoData.FrameSize;
+                var inputFile = new MediaFile { Filename = input };
+                using (var engine = new Engine())
+                {
+                    engine.GetMetadata(inputFile);
+                }
+                var frameSize = inputFile.Metadata.VideoData.FrameSize;
 
-            return Convert.ToInt32(frameSize.Substring(0, frameSize.IndexOf("x")));
+                return Convert.ToInt32(frameSize.Substring(0, frameSize.IndexOf("x")));
+            }
+            return 0;
         }
 
         internal static int GetVideoDuration(string input)
         {
-            var inputFile = new MediaFile { Filename = input };
-
-            using (var engine = new Engine())
+            if (File.Exists(input))
             {
-                engine.GetMetadata(inputFile);
+                var inputFile = new MediaFile { Filename = input };
+
+                using (var engine = new Engine())
+                {
+                    engine.GetMetadata(inputFile);
+                }
+                return Convert.ToInt32(inputFile.Metadata.Duration.TotalMilliseconds);
             }
-            return Convert.ToInt32(inputFile.Metadata.Duration.TotalMilliseconds);
+            return 0;
         }
     }
 }
