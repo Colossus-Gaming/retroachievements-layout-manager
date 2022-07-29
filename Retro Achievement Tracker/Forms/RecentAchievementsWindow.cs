@@ -46,9 +46,9 @@ namespace Retro_Achievement_Tracker
         {
             get { return true; }
         }
-        public void AssignJavaScriptVariables()
+        public async void AssignJavaScriptVariables()
         {
-            TaskController.Enqueue(() => ExecuteScript(
+            await TaskController.Enqueue(() => ExecuteScript(
                 "container = document.getElementById(\"container\");" +
                 "achievementList = document.getElementById(\"achievement-list\");" +
                 "allElements = document.getElementsByClassName(\"has-font\");" +
@@ -58,14 +58,14 @@ namespace Retro_Achievement_Tracker
                 "allPoints = document.getElementsByClassName(\"points\");" +
                 "allAchievements = document.getElementsByClassName(\"achievement\");"));
         }
-        public void SetSimpleFontColor(string value)
+        public async void SetSimpleFontColor(string value)
         {
-            TaskController.Enqueue(() => ExecuteScript(
+            await TaskController.Enqueue(() => ExecuteScript(
                 "for (var i = 0; i < allElements.length; i++) { allElements[i].style.color = \"" + value + "\"; }" +
                 "for (var i = 0; i < allLines.length; i++) { allLines[i].style.color = \"" + value + "\"; }" +
                 "for (var i = 0; i < allLines.length; i++) { allLines[i].style.backgroundColor = \"" + value + "\"; }"));
         }
-        public void SetSimpleFontFamily(FontFamily value)
+        public async void SetSimpleFontFamily(FontFamily value)
         {
             int lineSpacing = value.GetLineSpacing(FontStyle.Regular) / value.GetEmHeight(FontStyle.Regular);
 
@@ -83,46 +83,46 @@ namespace Retro_Achievement_Tracker
                 "   textFit(allPoints[i], { reProcess: true });" +
                 "}";
 
-            TaskController.Enqueue(() => ExecuteScript(script));
+            await TaskController.Enqueue(() => ExecuteScript(script));
         }
 
-        public void SetSimpleFontOutline(string fontOutline, string borderOutline)
+        public async void SetSimpleFontOutline(string fontOutline, string borderOutline)
         {
-            TaskController.Enqueue(() => ExecuteScript(
+            await TaskController.Enqueue(() => ExecuteScript(
                  "for (var i = 0; i < allElements.length; i++) { allElements[i].style.webkitTextStroke = \"" + fontOutline + "\"; }" +
                  "for (var i = 0; i < allLines.length; i++) { allLines[i].style.border = \"" + borderOutline + "\"; }"));
         }
 
-        public void SetBackgroundColor(string value)
+        public async void SetBackgroundColor(string value)
         {
-            TaskController.Enqueue(() => ExecuteScript("for (var i = 0; i < allAchievements.length; i++) { allAchievements[i].style.backgroundColor = \"" + value + "\"; }"));
+            await TaskController.Enqueue(() => ExecuteScript("for (var i = 0; i < allAchievements.length; i++) { allAchievements[i].style.backgroundColor = \"" + value + "\"; }"));
         }
-        public void SetWindowBackgroundColor(string value)
+        public async void SetWindowBackgroundColor(string value)
         {
-            TaskController.Enqueue(() => ExecuteScript("container.style.backgroundColor = \"" + value + "\";"));
+            await TaskController.Enqueue(() => ExecuteScript("container.style.backgroundColor = \"" + value + "\";"));
         }
-        public void EnableBorder()
+        public async void EnableBorder()
         {
-            TaskController.Enqueue(() => ExecuteScript("for (var i = 0; i < allAchievements.length; i++) { allAchievements[i].style.backgroundImage = \"url('disk://background')\"; }"));
+            await TaskController.Enqueue(() => ExecuteScript("for (var i = 0; i < allAchievements.length; i++) { allAchievements[i].style.backgroundImage = \"url('disk://background')\"; }"));
         }
-        public void DisableBorder()
+        public async void DisableBorder()
         {
-            TaskController.Enqueue(() => ExecuteScript("for (var i = 0; i < allAchievements.length; i++) { allAchievements[i].style.backgroundImage = \"\"; }"));
+            await TaskController.Enqueue(() => ExecuteScript("for (var i = 0; i < allAchievements.length; i++) { allAchievements[i].style.backgroundImage = \"\"; }"));
         }
-        public void SetTitleFontFamily(FontFamily value)
+        public async void SetTitleFontFamily(FontFamily value)
         {
             int lineSpacing = value.GetLineSpacing(FontStyle.Regular) / value.GetEmHeight(FontStyle.Regular);
-            TaskController.Enqueue(() => ExecuteScript(
+            await TaskController.Enqueue(() => ExecuteScript(
                 "for (var i = 0; i < allTitles.length; i++) { " +
                 "   allTitles[i].style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
                 "   allTitles[i].style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
                 "   textFit(allTitles[i], { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true });" +
                 "}"));
         }
-        public void SetDateFontFamily(FontFamily value)
+        public async void SetDateFontFamily(FontFamily value)
         {
             int lineSpacing = value.GetLineSpacing(FontStyle.Regular) / value.GetEmHeight(FontStyle.Regular);
-            TaskController.Enqueue(() => ExecuteScript(
+            await TaskController.Enqueue(() => ExecuteScript(
                 "for (var i = 0; i < allDates.length; i++) { " +
                 "   allDates[i].style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
                 "   allDates[i].style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
@@ -130,10 +130,10 @@ namespace Retro_Achievement_Tracker
                 "}"));
         }
 
-        public void SetPointsFontFamily(FontFamily value)
+        public async void SetPointsFontFamily(FontFamily value)
         {
             int lineSpacing = value.GetLineSpacing(FontStyle.Regular) / value.GetEmHeight(FontStyle.Regular);
-            TaskController.Enqueue(() => ExecuteScript(
+            await TaskController.Enqueue(() => ExecuteScript(
                 "for (var i = 0; i < allPoints.length; i++) { " +
                 "   allPoints[i].style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
                 "   allPoints[i].style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
@@ -141,45 +141,45 @@ namespace Retro_Achievement_Tracker
                 "}"));
         }
 
-        public void SetTitleColor(string value)
+        public async void SetTitleColor(string value)
         {
-            TaskController.Enqueue(() => ExecuteScript("for (var i = 0; i < allTitles.length; i++) { allTitles[i].style.color = \"" + value + "\"; }"));
+            await TaskController.Enqueue(() => ExecuteScript("for (var i = 0; i < allTitles.length; i++) { allTitles[i].style.color = \"" + value + "\"; }"));
         }
 
-        public void SetDateColor(string value)
+        public async void SetDateColor(string value)
         {
-            TaskController.Enqueue(() => ExecuteScript("for (var i = 0; i < allDates.length; i++) { allDates[i].style.color = \"" + value + "\"; }"));
+            await TaskController.Enqueue(() => ExecuteScript("for (var i = 0; i < allDates.length; i++) { allDates[i].style.color = \"" + value + "\"; }"));
         }
 
-        public void SetPointsColor(string value)
+        public async void SetPointsColor(string value)
         {
-            TaskController.Enqueue(() => ExecuteScript("for (var i = 0; i < allPoints.length; i++) { allPoints[i].style.color = \"" + value + "\"; }"));
+            await TaskController.Enqueue(() => ExecuteScript("for (var i = 0; i < allPoints.length; i++) { allPoints[i].style.color = \"" + value + "\"; }"));
         }
-        public void SetLineColor(string value)
+        public async void SetLineColor(string value)
         {
-            TaskController.Enqueue(() => ExecuteScript("for (var i = 0; i < allLines.length; i++) { allLines[i].style.color = \"" + value + "\"; allLines[i].style.backgroundColor = \"" + value + "\"; }"));
+            await TaskController.Enqueue(() => ExecuteScript("for (var i = 0; i < allLines.length; i++) { allLines[i].style.color = \"" + value + "\"; allLines[i].style.backgroundColor = \"" + value + "\"; }"));
         }
-        public void SetTitleOutline(string value)
+        public async void SetTitleOutline(string value)
         {
-            TaskController.Enqueue(() => ExecuteScript("for (var i = 0; i < allTitles.length; i++) { allTitles[i].style.webkitTextStroke = \"" + value + "\"; textFit(allTitles[i], { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true }); }"));
+            await TaskController.Enqueue(() => ExecuteScript("for (var i = 0; i < allTitles.length; i++) { allTitles[i].style.webkitTextStroke = \"" + value + "\"; textFit(allTitles[i], { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true }); }"));
         }
-        public void SetDateOutline(string value)
+        public async void SetDateOutline(string value)
         {
-            TaskController.Enqueue(() => ExecuteScript("for (var i = 0; i < allDates.length; i++) { allDates[i].style.webkitTextStroke = \"" + value + "\"; textFit(allDates[i], { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true }); }"));
+            await TaskController.Enqueue(() => ExecuteScript("for (var i = 0; i < allDates.length; i++) { allDates[i].style.webkitTextStroke = \"" + value + "\"; textFit(allDates[i], { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true }); }"));
         }
-        public void SetPointsOutline(string value)
+        public async void SetPointsOutline(string value)
         {
-            TaskController.Enqueue(() => ExecuteScript("for (var i = 0; i < allPoints.length; i++) { allPoints[i].style.webkitTextStroke = \"" + value + "\"; textFit(allPoints[i], { reProcess: true }); }"));
+            await TaskController.Enqueue(() => ExecuteScript("for (var i = 0; i < allPoints.length; i++) { allPoints[i].style.webkitTextStroke = \"" + value + "\"; textFit(allPoints[i], { reProcess: true }); }"));
         }
-        public void SetLineOutline(string value)
+        public async void SetLineOutline(string value)
         {
-            TaskController.Enqueue(() => ExecuteScript("for (var i = 0; i < allLines.length; i++) { allLines[i].style.border = \"" + value + "\"; }"));
+            await TaskController.Enqueue(() => ExecuteScript("for (var i = 0; i < allLines.length; i++) { allLines[i].style.border = \"" + value + "\"; }"));
         }
-        public void StartScrolling()
+        public async void StartScrolling()
         {
-            TaskController.Enqueue(() => ExecuteScript("startScrolling();"));
+            await TaskController.Enqueue(() => ExecuteScript("startScrolling();"));
         }
-        public void AddAchievements(List<Achievement> achievements)
+        public async void AddAchievements(List<Achievement> achievements)
         {
             StringBuilder stringBuilder = new StringBuilder();
 
@@ -222,19 +222,19 @@ namespace Retro_Achievement_Tracker
                     "achievementBlock.appendChild(achievementPointsBlock);");
             }
 
-            TaskController.Enqueue(() => ExecuteScript(stringBuilder.ToString()));
+            await TaskController.Enqueue(() => ExecuteScript(stringBuilder.ToString()));
         }
-        public void ShowRecentAchievements()
+        public async void ShowRecentAchievements()
         {
-            TaskController.Enqueue(() => ExecuteScript("$(\"#achievement-list\").animate( { left: '0px', top: '0px' }, 200, 'easeInOutQuint');"));
+            await TaskController.Enqueue(() => ExecuteScript("$(\"#achievement-list\").animate( { left: '0px', top: '0px' }, 500, 'easeInOutQuint');"));
         }
-        public void HideRecentAchievements()
+        public async void HideRecentAchievements()
         {
-            TaskController.Enqueue(() => ExecuteScript("stopScrolling(); $(\"#achievement-list\").animate( { left: '535px', top: '0px' }, 200, 'easeInOutQuint');"));
+            await TaskController.Enqueue(() => ExecuteScript("stopScrolling(); $(\"#achievement-list\").animate( { left: '535px', top: '0px' }, 500, 'easeInOutQuint');"));
         }
-        public void ClearRecentAchievements()
+        public async void ClearRecentAchievements()
         {
-            TaskController.Enqueue(() => ExecuteScript("document.getElementById(\"achievement-list\").innerHTML = \"\";"));
+            await TaskController.Enqueue(() => ExecuteScript("document.getElementById(\"achievement-list\").innerHTML = \"\";"));
         }
         protected async Task ExecuteScript(string script)
         {

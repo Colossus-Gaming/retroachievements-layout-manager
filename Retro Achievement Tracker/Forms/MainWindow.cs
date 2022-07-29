@@ -527,6 +527,10 @@ namespace Retro_Achievement_Tracker
         }
         private void StartButton_Click(object sender, EventArgs e)
         {
+            Settings.Default.ra_username = usernameTextBox.Text;
+            Settings.Default.ra_key = apiKeyTextBox.Text;
+            Settings.Default.Save();
+
             startButton.Enabled = false;
             stopButton.Enabled = true;
 
@@ -541,10 +545,6 @@ namespace Retro_Achievement_Tracker
             openGameInfoWindowButton.Enabled = true;
 
             UpdateFromSite(null, null);
-
-            Settings.Default.ra_username = usernameTextBox.Text;
-            Settings.Default.ra_key = apiKeyTextBox.Text;
-            Settings.Default.Save();
         }
         private void StopButton_Click(object sender, EventArgs e)
         {
@@ -737,6 +737,11 @@ namespace Retro_Achievement_Tracker
             {
                 AlertsController.Instance.CustomAchievementEnabled = ((CheckBox)sender).Checked;
 
+                if (!File.Exists(AlertsController.Instance.CustomAchievementFile))
+                {
+                    SelectCustomAchievementButton_Click(null, null);
+                }
+
                 customAchievementEnableCheckbox.Checked = AlertsController.Instance.CustomAchievementEnabled;
                 selectCustomAchievementButton.Enabled = AlertsController.Instance.CustomAchievementEnabled;
                 acheivementEditOutlineCheckbox.Enabled = AlertsController.Instance.CustomAchievementEnabled;
@@ -749,6 +754,11 @@ namespace Retro_Achievement_Tracker
             if (!UpdatingVisibility)
             {
                 AlertsController.Instance.CustomMasteryEnabled = ((CheckBox)sender).Checked;
+
+                if (!File.Exists(AlertsController.Instance.CustomMasteryFile))
+                {
+                    SelectCustomMasteryNotificationButton_Click(null, null);
+                }
 
                 customMasteryEnableCheckbox.Checked = AlertsController.Instance.CustomMasteryEnabled;
                 selectCustomMasteryNotificationButton.Enabled = AlertsController.Instance.CustomMasteryEnabled;

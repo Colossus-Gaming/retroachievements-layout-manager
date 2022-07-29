@@ -147,12 +147,12 @@ namespace Retro_Achievement_Tracker.Controllers
 
                         if (!AnimationInPlayed && (achievementPlayingTime * 1000) > (CustomAchievementEnabled ? CustomAchievementIn : 0))
                         {
-                            AlertsLayoutWindow.SetAchievementIn(CustomAchievementEnabled ? CustomAchievementInSpeed : 500, (CustomAchievementEnabled ? AchievementAnimationIn : AnimationDirection.STATIC));
+                            AlertsLayoutWindow.SetAchievementIn(CustomAchievementEnabled ? CustomAchievementInSpeed : 0, (CustomAchievementEnabled ? AchievementAnimationIn : AnimationDirection.STATIC));
                             AnimationInPlayed = true;
                         }
-                        else if (!AnimationOutPlayed && (achievementPlayingTime * 1000) > (CustomAchievementEnabled ? CustomAchievementOut : 5500))
+                        else if (!AnimationOutPlayed && (achievementPlayingTime * 1000) > (CustomAchievementEnabled ? CustomAchievementOut : 5400))
                         {
-                            AlertsLayoutWindow.SetAchievementOut(CustomAchievementEnabled ? CustomAchievementOutSpeed : 500, (CustomAchievementEnabled ? AchievementAnimationOut : AnimationDirection.UP));
+                            AlertsLayoutWindow.SetAchievementOut(CustomAchievementEnabled ? CustomAchievementOutSpeed : 700, (CustomAchievementEnabled ? AchievementAnimationOut : AnimationDirection.UP));
                             AnimationOutPlayed = true;
                         }
                     }
@@ -162,16 +162,16 @@ namespace Retro_Achievement_Tracker.Controllers
 
                         if (!AnimationInPlayed && (masteryPlayingTime * 1000) > (CustomMasteryEnabled ? CustomMasteryIn : 0))
                         {
-                            AlertsLayoutWindow.SetMasteryIn(CustomMasteryEnabled ? CustomMasteryInSpeed : 500, CustomMasteryEnabled ? MasteryAnimationIn : AnimationDirection.STATIC);
+                            AlertsLayoutWindow.SetMasteryIn(CustomMasteryEnabled ? CustomMasteryInSpeed : 0, CustomMasteryEnabled ? MasteryAnimationIn : AnimationDirection.STATIC);
                             AnimationInPlayed = true;
                         }
-                        else if (!AnimationOutPlayed && (masteryPlayingTime * 1000) > (CustomMasteryEnabled ? CustomMasteryOut : 5500))
+                        else if (!AnimationOutPlayed && (masteryPlayingTime * 1000) > (CustomMasteryEnabled ? CustomMasteryOut : 5400))
                         {
-                            AlertsLayoutWindow.SetMasteryOut(CustomMasteryEnabled ? CustomMasteryOutSpeed : 500, CustomMasteryEnabled ? MasteryAnimationOut : AnimationDirection.UP);
+                            AlertsLayoutWindow.SetMasteryOut(CustomMasteryEnabled ? CustomMasteryOutSpeed : 700, CustomMasteryEnabled ? MasteryAnimationOut : AnimationDirection.UP);
                             AnimationOutPlayed = true;
                         }
                     }
-                    if ((AnimationInPlayed && AnimationOutPlayed) || NotificationsStopwatch.ElapsedMilliseconds > 60000)
+                    if (AnimationInPlayed && AnimationOutPlayed)
                     {
                         NotificationsStopwatch.Stop();
                     }
@@ -183,12 +183,25 @@ namespace Retro_Achievement_Tracker.Controllers
         public void SetIsPlaying(bool isPlaying)
         {
             IsPlaying = isPlaying;
-            if (!IsPlaying && !IsEditingAchievement)
+
+            if (!IsPlaying)
             {
-                AlertsLayoutWindow.HideNotifications();
-                if (NotificationRequests.Count > 0)
+                NotificationsStopwatch.Stop();
+
+                if (!(AnimationInPlayed && AnimationOutPlayed))
                 {
-                    RunNotifications();
+                    AlertsLayoutWindow.SetAchievementOut(100, AnimationDirection.STATIC);
+                    AlertsLayoutWindow.SetMasteryOut(100, AnimationDirection.STATIC);
+                }
+
+                if (!IsEditingAchievement)
+                {
+                    AlertsLayoutWindow.HideNotifications();
+
+                    if (NotificationRequests.Count > 0)
+                    {
+                        RunNotifications();
+                    }
                 }
             }
         }
@@ -220,6 +233,7 @@ namespace Retro_Achievement_Tracker.Controllers
         {
             if (IsOpen)
             {
+                NotificationsStopwatch.Stop();
                 AlertsLayoutWindow.SetupBrowser();
             }
         }

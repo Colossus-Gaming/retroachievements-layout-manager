@@ -23,7 +23,7 @@ namespace Retro_Achievement_Tracker.Models
 
             if (request.Url == "disk://achievement-notification")
             {
-                if (AlertsController.Instance.CustomAchievementEnabled)
+                if (AlertsController.Instance.CustomAchievementEnabled && File.Exists(Settings.Default.notification_custom_achievement_file))
                 {
                     return ResourceHandler.FromFilePath(Settings.Default.notification_custom_achievement_file, null, true);
                 }
@@ -35,7 +35,7 @@ namespace Retro_Achievement_Tracker.Models
 
             if (request.Url == "disk://mastery-notification")
             {
-                if (AlertsController.Instance.CustomMasteryEnabled)
+                if (AlertsController.Instance.CustomMasteryEnabled && File.Exists(Settings.Default.notification_custom_mastery_file))
                 {
                     return ResourceHandler.FromFilePath(Settings.Default.notification_custom_mastery_file);
                 }

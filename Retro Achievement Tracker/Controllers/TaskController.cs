@@ -16,7 +16,7 @@ namespace Retro_Achievement_Tracker.Controllers
             await semaphore.WaitAsync();
             try
             {
-                await Task.Delay(50).ContinueWith(async result => await taskGenerator());
+                await taskGenerator();
             }
             finally
             {

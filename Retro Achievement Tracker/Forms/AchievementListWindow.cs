@@ -76,11 +76,6 @@ namespace Retro_Achievement_Tracker.Forms
                 "   }, 1000, 'easeInOutQuint'" +
                 ");"));
         }
-        public async void AwaitAnimation(int waitTime)
-        {
-
-            await TaskController.Enqueue(() => Task.Delay(waitTime));
-        }
         public void ClearAchievements(Dictionary<int, int> idsToTimeouts)
         {
             StringBuilder stringBuilder = new StringBuilder("stopScrolling();" +
@@ -93,6 +88,8 @@ namespace Retro_Achievement_Tracker.Forms
                 "   }" +
                 ");");
 
+            int highestValue = 0;
+
             foreach (int id in idsToTimeouts.Keys)
             {
 
@@ -100,13 +97,16 @@ namespace Retro_Achievement_Tracker.Forms
 
                 stringBuilder.Append("var achievement" + id + "OffsetTop = document.getElementById(\"achievement-" + id + "\").offsetTop;" +
                     "var achievement" + id + "OffsetTopNew = achievement" + id + "OffsetTop + 1048;" +
-                    "$(\"#achievement-" + id + "\").animate( { top: `${ achievement" + id + "OffsetTopNew }px` }, 800, 'easeInOutQuint');");
+                    "setTimeout(function() { $(\"#achievement-" + id + "\").animate( { top: `${ achievement" + id + "OffsetTopNew }px` }, 800, 'easeInOutQuint'); }, " + value + ");");
+
+                if (value > highestValue)
+                {
+                    highestValue = value;
+                }
             }
 
             TaskController.Enqueue(() => ExecuteScript(stringBuilder.ToString()));
-        }
-        public void CleanCanvas()
-        {
+            TaskController.Enqueue(() => Task.Delay(2000));
             TaskController.Enqueue(() => ExecuteScript("document.getElementById(\"achievement-list\").innerHTML = \"\";"));
         }
         protected async Task ExecuteScript(string script)

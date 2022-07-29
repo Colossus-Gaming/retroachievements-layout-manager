@@ -188,19 +188,19 @@ namespace Retro_Achievement_Tracker.Forms
             switch (animationDirection)
             {
                 case AnimationDirection.UP:
-                    animationScript = "achievementElement.animate([ { left: '165px', top: '-310px' }, { left: '165px', top: '220px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\", easing: \"ease-out\" });";
+                    animationScript = "achievementElement.animate([ { left: '165px', top: '-310px' }, { left: '165px', top: '220px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\" });";
                     break;
                 case AnimationDirection.DOWN:
-                    animationScript = "achievementElement.animate([ { left: '165px', top: '600px' }, { left: '165px', top: '220px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\", easing: \"ease-out\" });";
+                    animationScript = "achievementElement.animate([ { left: '165px', top: '600px' }, { left: '165px', top: '220px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\" });";
                     break;
                 case AnimationDirection.LEFT:
-                    animationScript = "achievementElement.animate([ { left: '-300px', top: '220px' }, { left: '165px', top: '220px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\", easing: \"ease-out\" });";
+                    animationScript = "achievementElement.animate([ { left: '-300px', top: '220px' }, { left: '165px', top: '220px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\" });";
                     break;
                 case AnimationDirection.RIGHT:
-                    animationScript = "achievementElement.animate([ { left: '1034px', top: '220px' }, { left: '165px', top: '220px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\", easing: \"ease-out\" });";
+                    animationScript = "achievementElement.animate([ { left: '1034px', top: '220px' }, { left: '165px', top: '220px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\" });";
                     break;
                 default:
-                    animationScript = "achievementElement.animate([ { left: '-300px', top: '-310px' }, { left: '165px', top: '220px' } ], { interations: 1, duration: 10, fill: \"forwards\", easing: \"ease-out\" });";
+                    animationScript = "achievementElement.animate([ { left: '-300px', top: '-310px' }, { left: '165px', top: '220px' } ], { interations: 1, duration: 10, fill: \"forwards\" });";
                     break;
             }
 
@@ -213,19 +213,19 @@ namespace Retro_Achievement_Tracker.Forms
             switch (animationDirection)
             {
                 case AnimationDirection.UP:
-                    animationScript = "achievementElement.animate([ { left: '165px', top: '220px' }, { left: '165px', top: '-310px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\", easing: \"ease-out\" });";
+                    animationScript = "achievementElement.animate([ { left: '165px', top: '220px' }, { left: '165px', top: '-310px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\" });";
                     break;
                 case AnimationDirection.DOWN:
-                    animationScript = "achievementElement.animate([ { left: '165px', top: '220px' }, { left: '165px', top: '600px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\", easing: \"ease-out\" });";
+                    animationScript = "achievementElement.animate([ { left: '165px', top: '220px' }, { left: '165px', top: '600px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\" });";
                     break;
                 case AnimationDirection.LEFT:
-                    animationScript = "achievementElement.animate([ { left: '165px', top: '220px' }, { left: '-300px', top: '220px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\", easing: \"ease-out\" });";
+                    animationScript = "achievementElement.animate([ { left: '165px', top: '220px' }, { left: '-300px', top: '220px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\" });";
                     break;
                 case AnimationDirection.RIGHT:
-                    animationScript = "achievementElement.animate([ { left: '165px', top: '220px' }, { left: '1034px', top: '220px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\", easing: \"ease-out\" });";
+                    animationScript = "achievementElement.animate([ { left: '165px', top: '220px' }, { left: '1034px', top: '220px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\" });";
                     break;
                 default:
-                    animationScript = "achievementElement.animate([ { left: '-300px', top: '-310px' }, { left: '-300px', top: '-310px' } ], { interations: 1, duration: 10, fill: \"forwards\", easing: \"ease-out\" });";
+                    animationScript = "achievementElement.animate([ { left: '-300px', top: '-310px' }, { left: '-300px', top: '-310px' } ], { interations: 1, duration: 10, fill: \"forwards\" });";
                     break;
             }
 
@@ -238,19 +238,19 @@ namespace Retro_Achievement_Tracker.Forms
             switch (animationDirection)
             {
                 case AnimationDirection.UP:
-                    animationScript = "masteryElement.animate([ { left: '165px', top: '-310px' }, { left: '165px', top: '220px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\", easing: \"ease-out\" });";
+                    animationScript = "masteryElement.animate([ { left: '165px', top: '-310px' }, { left: '165px', top: '220px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\" });";
                     break;
                 case AnimationDirection.DOWN:
-                    animationScript = "masteryElement.animate([ { left: '165px', top: '600px' }, { left: '165px', top: '220px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\", easing: \"ease-out\" });";
+                    animationScript = "masteryElement.animate([ { left: '165px', top: '600px' }, { left: '165px', top: '220px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\" });";
                     break;
                 case AnimationDirection.LEFT:
-                    animationScript = "masteryElement.animate([ { left: '-300px', top: '220px' }, { left: '165px', top: '220px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\", easing: \"ease-out\" });";
+                    animationScript = "masteryElement.animate([ { left: '-300px', top: '220px' }, { left: '165px', top: '220px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\" });";
                     break;
                 case AnimationDirection.RIGHT:
-                    animationScript = "masteryElement.animate([ { left: '1034px', top: '220px' }, { left: '165px', top: '220px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\", easing: \"ease-out\" });";
+                    animationScript = "masteryElement.animate([ { left: '1034px', top: '220px' }, { left: '165px', top: '220px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\" });";
                     break;
                 default:
-                    animationScript = "masteryElement.animate([ { left: '-300px', top: '-310px' }, { left: '165px', top: '220px' } ], { interations: 1, duration: 10, fill: \"forwards\", easing: \"ease-out\" });";
+                    animationScript = "masteryElement.animate([ { left: '-300px', top: '-310px' }, { left: '165px', top: '220px' } ], { interations: 1, duration: 10, fill: \"forwards\" });";
                     break;
             }
 
@@ -263,19 +263,19 @@ namespace Retro_Achievement_Tracker.Forms
             switch (animationDirection)
             {
                 case AnimationDirection.UP:
-                    animationScript = "masteryElement.animate([ { left: '165px', top: '220px' }, { left: '165px', top: '-310px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\", easing: \"ease-out\" });";
+                    animationScript = "masteryElement.animate([ { left: '165px', top: '220px' }, { left: '165px', top: '-310px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\" });";
                     break;
                 case AnimationDirection.DOWN:
-                    animationScript = "masteryElement.animate([ { left: '165px', top: '220px' }, { left: '165px', top: '600px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\", easing: \"ease-out\" });";
+                    animationScript = "masteryElement.animate([ { left: '165px', top: '220px' }, { left: '165px', top: '600px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\" });";
                     break;
                 case AnimationDirection.LEFT:
-                    animationScript = "masteryElement.animate([ { left: '165px', top: '220px' }, { left: '-300px', top: '220px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\", easing: \"ease-out\" });";
+                    animationScript = "masteryElement.animate([ { left: '165px', top: '220px' }, { left: '-300px', top: '220px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\" });";
                     break;
                 case AnimationDirection.RIGHT:
-                    animationScript = "masteryElement.animate([ { left: '165px', top: '220px' }, { left: '1034px', top: '220px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\", easing: \"ease-out\" });";
+                    animationScript = "masteryElement.animate([ { left: '165px', top: '220px' }, { left: '1034px', top: '220px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\" });";
                     break;
                 default:
-                    animationScript = "masteryElement.animate([ { left: '-300px', top: '-310px' }, { left: '-300px', top: '-310px' } ], { interations: 1, duration: 0, fill: \"forwards\", easing: \"ease-out\" });";
+                    animationScript = "masteryElement.animate([ { left: '-300px', top: '-310px' }, { left: '-300px', top: '-310px' } ], { interations: 1, duration: 0, fill: \"forwards\" });";
                     break;
             }
 

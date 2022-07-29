@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Retro_Achievement_Tracker.Controllers
 {
@@ -97,7 +98,7 @@ namespace Retro_Achievement_Tracker.Controllers
             RecentAchievementsWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px", SimpleFontOutlineEnabled ? SimpleFontOutlineSize + "px solid " + SimpleFontOutlineColor : "0px");
         }
 
-        public void SetAchievements(List<Achievement> achievements)
+        public async void SetAchievements(List<Achievement> achievements)
         {
             achievements.Sort();
             achievements.Reverse();
@@ -132,6 +133,12 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (needsChanges)
                 {
+                    RecentAchievementsWindow.HideRecentAchievements();
+
+                    await Task.Delay(500);
+
+                    RecentAchievementsWindow.ClearRecentAchievements();
+
                     PopulateRecentAchievementsWindow();
                 }
             }
@@ -143,9 +150,6 @@ namespace Retro_Achievement_Tracker.Controllers
             if (IsOpen)
             {
                 RecentAchievementsWindow.AssignJavaScriptVariables();
-                RecentAchievementsWindow.HideRecentAchievements();
-                RecentAchievementsWindow.ClearRecentAchievements();
-
                 RecentAchievementsWindow.AddAchievements(VisibileAchievements);
 
                 SetAllSettings();
@@ -156,6 +160,9 @@ namespace Retro_Achievement_Tracker.Controllers
                 {
                     RecentAchievementsWindow.StartScrolling();
                 }
+            } else
+            {
+                VisibileAchievements = new List<Achievement>();
             }
         }
         public int MaxListSize
