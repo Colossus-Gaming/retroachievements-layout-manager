@@ -179,6 +179,10 @@ namespace Retro_Achievement_Tracker
         {
             await TaskController.Enqueue(() => ExecuteScript("startScrolling();"));
         }
+        public async void StopScrolling()
+        {
+            await TaskController.Enqueue(() => ExecuteScript("stopScrolling();"));
+        }
         public async void AddAchievements(List<Achievement> achievements)
         {
             StringBuilder stringBuilder = new StringBuilder();

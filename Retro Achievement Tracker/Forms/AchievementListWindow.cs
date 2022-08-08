@@ -65,6 +65,10 @@ namespace Retro_Achievement_Tracker.Forms
         {
             await TaskController.Enqueue(() => ExecuteScript("startScrolling();"));
         }
+        public async void StopScrolling()
+        {
+            await TaskController.Enqueue(() => ExecuteScript("stopScrolling();"));
+        }
         public async void SetAchievementPosition(Achievement achievement, int xCoord, int yCoord)
         {
 

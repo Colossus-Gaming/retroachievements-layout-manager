@@ -167,13 +167,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AchievementListController.cs" />
-    <Compile Include="Controllers\AlertsController.cs" />
+    <Compile Include="Controllers\NotificationsController.cs" />
     <Compile Include="Controllers\FocusController.cs" />
     <Compile Include="Controllers\GameInfoController.cs" />
     <Compile Include="Controllers\RecentAchievementsController.cs" />
-    <Compile Include="Controllers\GameStatsController.cs" />
+    <Compile Include="Controllers\GameProgressController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
-    <Compile Include="Controllers\UserStatsController.cs" />
+    <Compile Include="Controllers\UserInfoController.cs" />
     <Compile Include="Forms\AchievementListWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -317,13 +317,8 @@
     <Resource Include="Resources\GameInfoWindow.html" />
     <Resource Include="Resources\RecentAchievementsWindow.html" />
     <EmbeddedResource Include="Resources\AchievementListWindow.html" />
-    <None Include="Resources\chrono-trigger-block1.png" />
-    <None Include="Resources\chrono-trigger-block.png" />
-    <None Include="Resources\chrono-trigger-block2.png" />
-    <None Include="Resources\chrono-trigger-block3.png" />
-    <None Include="Resources\chrono-trigger-block4.png" />
-    <None Include="Resources\chrono-trigger-block5.png" />
     <Content Include="Resources\GameStatsWindow.html" />
+    <Content Include="Resources\ROCK3.png" />
     <Content Include="video\achievement-notification.webm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

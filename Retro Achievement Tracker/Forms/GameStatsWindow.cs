@@ -33,12 +33,12 @@ namespace Retro_Achievement_Tracker.Forms
         }
         private void GameStatsWindow_FormClosed(object sender, FormClosedEventArgs e)
         {
-            GameStatsController.IsOpen = false;
+            GameProgressController.IsOpen = false;
         }
 
         private void GameStatsWindow_Shown(object sender, EventArgs e)
         {
-            GameStatsController.IsOpen = true;
+            GameProgressController.IsOpen = true;
         }
 
         protected override bool ShowWithoutActivation
@@ -246,7 +246,7 @@ namespace Retro_Achievement_Tracker.Forms
                     ClientSize = new Size(805, 350);
                 });
 
-                GameStatsController.Instance.SetAllSettings();
+                GameProgressController.Instance.SetAllSettings();
             });
 
             Controls.Add(chromiumWebBrowser);

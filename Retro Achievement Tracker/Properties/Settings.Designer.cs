@@ -2734,5 +2734,17 @@ namespace Retro_Achievement_Tracker.Properties {
                 this["recent_achievements_max_list_size"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("GO_TO_FIRST")]
+        public string focus_refocus_behavior {
+            get {
+                return ((string)(this["focus_refocus_behavior"]));
+            }
+            set {
+                this["focus_refocus_behavior"] = value;
+            }
+        }
     }
 }

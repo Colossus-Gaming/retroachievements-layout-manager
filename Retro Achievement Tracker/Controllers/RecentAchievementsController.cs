@@ -40,10 +40,12 @@ namespace Retro_Achievement_Tracker.Controllers
         {
             if (!IsOpen)
             {
+                VisibileAchievements = new List<Achievement>();
+
                 RecentAchievementsWindow = new RecentAchievementsWindow();
                 RecentAchievementsWindow.Show();
 
-                CurrentAchievements = new List<Achievement>();
+                SetAchievements(CurrentAchievements);
             }
         }
         public void SetAllSettings()
@@ -81,7 +83,7 @@ namespace Retro_Achievement_Tracker.Controllers
 
             RecentAchievementsWindow.SetDateFontFamily(DateFontFamily);
             RecentAchievementsWindow.SetDateColor(DateColor);
-            RecentAchievementsWindow.SetDateOutline(DateOutlineEnabled ? DateOutlineColor + " " + DateOutlineSize + "px" : "0px");
+            RecentAchievementsWindow.SetDateOutline(DescriptionOutlineEnabled ? DateOutlineColor + " " + DescriptionOutlineSize + "px" : "0px");
 
             RecentAchievementsWindow.SetPointsFontFamily(PointsFontFamily);
             RecentAchievementsWindow.SetPointsColor(PointsColor);
@@ -175,8 +177,6 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.recent_achievements_max_list_size = value;
                 Settings.Default.Save();
-
-                SetAchievements(CurrentAchievements);
             }
         }
         public bool AutoScroll
@@ -189,6 +189,14 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.recent_achievements_auto_scroll = value;
                 Settings.Default.Save();
+
+                if (value)
+                {
+                    RecentAchievementsWindow.StartScrolling();
+                } else
+                {
+                    RecentAchievementsWindow.StopScrolling();
+                }
             }
         }
         public bool AdvancedSettingsEnabled
@@ -435,7 +443,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 if (IsOpen)
                 {
 
-                    RecentAchievementsWindow.SetDateOutline(DateOutlineEnabled ? DateOutlineColor + " " + DateOutlineSize + "px" : "0px");
+                    RecentAchievementsWindow.SetDateOutline(DescriptionOutlineEnabled ? DateOutlineColor + " " + DescriptionOutlineSize + "px" : "0px");
                 }
             }
         }
@@ -490,7 +498,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 }
             }
         }
-        public int DateOutlineSize
+        public int DescriptionOutlineSize
         {
             get
             {
@@ -503,7 +511,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 if (IsOpen)
                 {
 
-                    RecentAchievementsWindow.SetDateOutline(DateOutlineEnabled ? DateOutlineColor + " " + DateOutlineSize + "px" : "0px");
+                    RecentAchievementsWindow.SetDateOutline(DescriptionOutlineEnabled ? DateOutlineColor + " " + DescriptionOutlineSize + "px" : "0px");
                 }
             }
         }
@@ -633,7 +641,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 }
             }
         }
-        public bool DateOutlineEnabled
+        public bool DescriptionOutlineEnabled
         {
             get
             {
@@ -647,7 +655,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 if (IsOpen)
                 {
 
-                    RecentAchievementsWindow.SetDateOutline(DateOutlineEnabled ? DateOutlineColor + " " + DateOutlineSize + "px" : "0px");
+                    RecentAchievementsWindow.SetDateOutline(DescriptionOutlineEnabled ? DateOutlineColor + " " + DescriptionOutlineSize + "px" : "0px");
                 }
             }
         }

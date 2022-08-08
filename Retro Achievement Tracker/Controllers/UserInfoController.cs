@@ -4,9 +4,9 @@ using System.Linq;
 
 namespace Retro_Achievement_Tracker.Controllers
 {
-    public sealed class UserStatsController
+    public sealed class UserInfoController
     {
-        private static UserStatsController instance = new UserStatsController();
+        private static UserInfoController instance = new UserInfoController();
         private static UserStatsWindow UserStatsWindow;
         public static bool IsOpen;
 
@@ -15,12 +15,12 @@ namespace Retro_Achievement_Tracker.Controllers
         private string points;
         private string truePoints;
 
-        private UserStatsController()
+        private UserInfoController()
         {
             UserStatsWindow = new UserStatsWindow();
             IsOpen = false;
         }
-        public static UserStatsController Instance
+        public static UserInfoController Instance
         {
             get
             {

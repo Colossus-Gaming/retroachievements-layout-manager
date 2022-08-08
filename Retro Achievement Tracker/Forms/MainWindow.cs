@@ -21,7 +21,7 @@ namespace Retro_Achievement_Tracker
         private GameInfo GameInfo { get; set; }
         private Achievement CurrentlyViewingAchievement;
         private int CurrentlyViewingIndex;
-        private bool UpdatingVisibility;
+        private int PreviouslyViewingIndex;
         private List<ListViewItem> ListViewItems;
         public CefSharp.WinForms.ChromiumWebBrowser chromiumWebBrowser;
 
@@ -55,8 +55,6 @@ namespace Retro_Achievement_Tracker
         private int UserAndGameTimerCounter;
 
         private bool ShouldRun;
-
-        private CustomMenuState MenuState = CustomMenuState.CLOSED;
 
         private RetroAchievementAPIClient retroAchievementsAPIClient;
 
@@ -115,10 +113,8 @@ namespace Retro_Achievement_Tracker
 
             if (Settings.Default.web_browser_auto_launch)
             {
-                MenuState = CustomMenuState.WEB_BROWSER;
+                tabControl1.SelectedIndex = 7;
             }
-
-            UpdateGroupBoxVisibility();
         }
 
         private void UpdateGameProgress(bool sameGame)
@@ -143,20 +139,39 @@ namespace Retro_Achievement_Tracker
 
                         achievementNotificationList.Sort();
 
-                        AlertsController.Instance.EnqueueAchievementNotifications(achievementNotificationList);
+                        NotificationsController.Instance.EnqueueAchievementNotifications(achievementNotificationList);
+                        PreviouslyViewingIndex = CurrentlyViewingIndex;
 
                         if (!achievementNotificationList.Contains(CurrentlyViewingAchievement))
                         {
                             CurrentlyViewingIndex = LockedAchievements.IndexOf(CurrentlyViewingAchievement);
                         }
+                        else
+                        {
+                            switch (FocusController.Instance.RefocusBehavior)
+                            {
+                                case RefocusBehaviorEnum.GO_TO_FIRST:
+                                    CurrentlyViewingIndex = 0;
+                                    break;
+                                case RefocusBehaviorEnum.GO_TO_PREVIOUS:
+                                    CurrentlyViewingIndex = PreviouslyViewingIndex - 1;
+                                    break;
+                                case RefocusBehaviorEnum.GO_TO_NEXT:
+                                    CurrentlyViewingIndex = PreviouslyViewingIndex;
+                                    break;
+                                case RefocusBehaviorEnum.GO_TO_LAST:
+                                    CurrentlyViewingIndex = LockedAchievements.Count - 1;
+                                    break;
+                            }
+                        }
 
                         if (UnlockedAchievements.Count == GameInfo.Achievements.Count && OldUnlockedAchievements.Count < GameInfo.Achievements.Count)
                         {
-                            AlertsController.Instance.EnqueueMasteryNotification(GameInfo);
+                            NotificationsController.Instance.EnqueueMasteryNotification(GameInfo);
                             StreamLabelManager.Instance.EnqueueAlert(GameInfo);
                         }
 
-                        AlertsController.Instance.RunNotifications();
+                        NotificationsController.Instance.RunNotifications();
 
                         needsUpdate = true;
                     }
@@ -175,6 +190,7 @@ namespace Retro_Achievement_Tracker
                     UpdateRecentAchievements();
                     UpdateGameInfo();
                     UpdateCurrentlyViewingAchievement();
+
                     SetFocus();
                 }
 
@@ -325,6 +341,7 @@ namespace Retro_Achievement_Tracker
 
                     CurrentlyViewingAchievement = LockedAchievements[CurrentlyViewingIndex];
 
+                    focusAchievementIdLabel.Text = "[ " + CurrentlyViewingAchievement.Id.ToString() + " ]";
                     focusAchievementPictureBox.ImageLocation = "https://retroachievements.org/Badge/" + CurrentlyViewingAchievement.BadgeNumber + ".png";
                     focusAchievementTitleLabel.Text = "[" + CurrentlyViewingAchievement.Points + "]\n\n" + CurrentlyViewingAchievement.Title;
                     focusAchievementDescriptionLabel.Text = CurrentlyViewingAchievement.Description;
@@ -334,6 +351,7 @@ namespace Retro_Achievement_Tracker
                     CurrentlyViewingIndex = 0;
                     CurrentlyViewingAchievement = null;
 
+                    focusAchievementIdLabel.Text = "[ None ]";
                     focusAchievementPictureBox.ImageLocation = string.Empty;
                     focusAchievementTitleLabel.Text = string.Empty;
                     focusAchievementDescriptionLabel.Text = string.Empty;
@@ -491,13 +509,13 @@ namespace Retro_Achievement_Tracker
             {
                 GameInfoController.Instance.Show();
             }
-            if (GameStatsController.Instance.AutoLaunch)
+            if (GameProgressController.Instance.AutoLaunch)
             {
-                GameStatsController.Instance.Show();
+                GameProgressController.Instance.Show();
             }
-            if (UserStatsController.Instance.AutoLaunch)
+            if (UserInfoController.Instance.AutoLaunch)
             {
-                UserStatsController.Instance.Show();
+                UserInfoController.Instance.Show();
             }
             if (FocusController.Instance.AutoLaunch)
             {
@@ -511,9 +529,9 @@ namespace Retro_Achievement_Tracker
             {
                 AchievementListController.Instance.Show();
             }
-            if (AlertsController.Instance.AutoLaunch)
+            if (NotificationsController.Instance.AutoLaunch)
             {
-                AlertsController.Instance.Show();
+                NotificationsController.Instance.Show();
             }
         }
         private void CreateFolders()
@@ -539,10 +557,10 @@ namespace Retro_Achievement_Tracker
             usernameTextBox.Enabled = false;
             apiKeyTextBox.Enabled = false;
 
-            openFocusWindowButton.Enabled = true;
-            openNotificationWindowButton.Enabled = true;
-            openUserStatsWindowButton.Enabled = true;
-            openGameInfoWindowButton.Enabled = true;
+            focusOpenWindowButton.Enabled = true;
+            notificationsOpenWindowButton.Enabled = true;
+            userInfoOpenWindowButton.Enabled = true;
+            gameInfoOpenWindowButton.Enabled = true;
 
             UpdateFromSite(null, null);
         }
@@ -557,17 +575,20 @@ namespace Retro_Achievement_Tracker
             UpdateTimerLabel("Stopped updating");
 
             stopButton.Enabled = false;
-            openFocusWindowButton.Enabled = CanStart();
-            openNotificationWindowButton.Enabled = CanStart();
-            openUserStatsWindowButton.Enabled = CanStart();
-            openGameInfoWindowButton.Enabled = CanStart();
-            openLastFiveWindowButton.Enabled = CanStart();
-            openAchievementListWindowButton.Enabled = CanStart();
+
+            bool canStart = CanStart();
+
+            focusOpenWindowButton.Enabled = canStart;
+            notificationsOpenWindowButton.Enabled = canStart;
+            userInfoOpenWindowButton.Enabled = canStart;
+            gameInfoOpenWindowButton.Enabled = canStart;
+            recentAchievementsOpenWindowButton.Enabled = canStart;
+            achievementListOpenWindowButton.Enabled = canStart;
 
             apiKeyTextBox.Enabled = true;
             usernameTextBox.Enabled = true;
 
-            startButton.Enabled = CanStart();
+            startButton.Enabled = canStart;
         }
         private bool CanStart()
         {
@@ -593,8 +614,8 @@ namespace Retro_Achievement_Tracker
             StreamLabelManager.Instance.ClearAllStreamLabels();
 
             FocusController.Instance.Close();
-            UserStatsController.Instance.Close();
-            AlertsController.Instance.Close();
+            UserInfoController.Instance.Close();
+            NotificationsController.Instance.Close();
             GameInfoController.Instance.Close();
             RecentAchievementsController.Instance.Close();
             AchievementListController.Instance.Close();
@@ -607,18 +628,33 @@ namespace Retro_Achievement_Tracker
         }
         private void UpdateUserInfo()
         {
-            UserStatsController.Instance.SetRank(UserSummary.Rank.ToString());
-            UserStatsController.Instance.SetRatio(UserSummary.RetroRatio);
-            UserStatsController.Instance.SetPoints(UserSummary.TotalPoints.ToString());
-            UserStatsController.Instance.SetTruePoints(UserSummary.TotalTruePoints.ToString());
+            userInfoRankLabel.Text = "Rank: " + UserSummary.Rank.ToString();
+            userInfoPointsLabel.Text = "Points: " + UserSummary.TotalPoints.ToString();
+            userInfoTruePointsLabel.Text = "True Points: " + UserSummary.TotalTruePoints.ToString();
+            userInfoRatioLabel.Text = "Ratio: " + UserSummary.RetroRatio;
+
+            UserInfoController.Instance.SetRank(UserSummary.Rank.ToString());
+            UserInfoController.Instance.SetRatio(UserSummary.RetroRatio);
+            UserInfoController.Instance.SetPoints(UserSummary.TotalPoints.ToString());
+            UserInfoController.Instance.SetTruePoints(UserSummary.TotalTruePoints.ToString());
 
             StreamLabelManager.Instance.EnqueueUserInfo(UserSummary);
         }
         private void UpdateGameInfo()
         {
             gameInfoPictureBox.ImageLocation = "https://s3-eu-west-1.amazonaws.com/i.retroachievements.org" + GameInfo.ImageIcon;
-            gameInfoTitleLabel.Text = GameInfo.Title;
-            gameInfoProgressLabel.Text = GameInfo.AchievementsEarned + " / " + GameInfo.AchievementsPossible;
+            gameInfoTitleLabel.Text = "Title: " + GameInfo.Title;
+            gameInfoDeveloperLabel.Text = "Developer: " + GameInfo.Developer;
+            gameInfoConsoleLabel.Text = "Console: " + GameInfo.ConsoleName;
+            gameInfoPublisherLabel.Text = "Publisher: " + GameInfo.Publisher;
+            gameInfoGenreLabel.Text = "Genre: " + GameInfo.Genre;
+            gameInfoReleasedLabel.Text = "Released: " + GameInfo.Released;
+
+            gameProgressAchievementsLabel.Text = "Achievements: " + GameInfo.AchievementsEarned + " / " + GameInfo.AchievementsPossible;
+            gameProgressPointsLabel.Text = "Points: " + GameInfo.GamePointsEarned + " / " + GameInfo.GamePointsPossible;
+            gameProgressTruePointsLabel.Text = "True Points " + GameInfo.GameTruePointsEarned + " / " + GameInfo.GameTruePointsPossible;
+            gameProgressCompletedLabel.Text = "Completed: " + GameInfo.PercentComplete;
+            gameProgressRatioLabel.Text = "Ratio: " + ((float)(GameInfo.GameTruePointsPossible) / GameInfo.GamePointsPossible).ToString("0.00") + "%";
 
             GameInfoController.Instance.SetTitleValue(GameInfo.Title);
             GameInfoController.Instance.SetGenreValue(GameInfo.Genre);
@@ -627,355 +663,297 @@ namespace Retro_Achievement_Tracker
             GameInfoController.Instance.SetPublisherValue(GameInfo.Publisher);
             GameInfoController.Instance.SetReleaseDateValue(GameInfo.Released);
 
-            GameStatsController.Instance.SetGamePoints(GameInfo.GamePointsEarned.ToString(), GameInfo.GamePointsPossible.ToString());
-            GameStatsController.Instance.SetGameAchievements(GameInfo.AchievementsEarned.ToString(), GameInfo.Achievements == null ? "0" : GameInfo.Achievements.Count.ToString());
-            GameStatsController.Instance.SetGameTruePoints(GameInfo.GameTruePointsEarned.ToString(), GameInfo.GameTruePointsPossible.ToString());
-            GameStatsController.Instance.SetGameRatio();
-            GameStatsController.Instance.SetCompleted(GameInfo.Achievements == null ? 0.00f : GameInfo.AchievementsEarned / (float)GameInfo.Achievements.Count * 100f);
+            GameProgressController.Instance.SetGameAchievements(GameInfo.AchievementsEarned.ToString(), GameInfo.Achievements == null ? "0" : GameInfo.Achievements.Count.ToString());
+            GameProgressController.Instance.SetGamePoints(GameInfo.GamePointsEarned.ToString(), GameInfo.GamePointsPossible.ToString());
+            GameProgressController.Instance.SetGameTruePoints(GameInfo.GameTruePointsEarned.ToString(), GameInfo.GameTruePointsPossible.ToString());
+            GameProgressController.Instance.SetGameRatio();
+            GameProgressController.Instance.SetCompleted(GameInfo.Achievements == null ? 0.00f : GameInfo.AchievementsEarned / (float)GameInfo.Achievements.Count * 100f);
 
             StreamLabelManager.Instance.EnqueueGameInfo(GameInfo);
         }
-
         private void UpdateAchievementList(bool newGame)
         {
             AchievementListController.Instance.UpdateAchievementList(UnlockedAchievements.ToList(), LockedAchievements.ToList(), newGame);
         }
-
-        private void RequiredField_TextChange(object sender, EventArgs e)
+        private void RequiredField_TextChanged(object sender, EventArgs e)
         {
             startButton.Enabled = CanStart();
         }
-        private void AutoScroll_CheckChanged(object sender, EventArgs e)
+        private void AutoScroll_Click(object sender, EventArgs e)
         {
-            if (!UpdatingVisibility)
-            {
-                CheckBox checkBox = sender as CheckBox;
+            CheckBox checkBox = sender as CheckBox;
 
-                switch (MenuState)
-                {
-                    case CustomMenuState.ACHIEVEMENT_LIST:
-                        AchievementListController.Instance.AutoScroll = checkBox.Checked;
-                        break;
-                    case CustomMenuState.RECENT_ACHIEVEMENTS:
-                        RecentAchievementsController.Instance.AutoScroll = checkBox.Checked;
-                        break;
-                }
+            switch (checkBox.Name)
+            {
+                case "achievementListScrollCheckBox":
+                    AchievementListController.Instance.AutoScroll = !AchievementListController.Instance.AutoScroll;
+                    checkBox.Checked = AchievementListController.Instance.AutoScroll;
+                    break;
+                case "recentAchievementsScrollCheckBox":
+                    RecentAchievementsController.Instance.AutoScroll = !RecentAchievementsController.Instance.AutoScroll;
+                    checkBox.Checked = RecentAchievementsController.Instance.AutoScroll;
+                    break;
             }
         }
         private void RSSFeedCheckbox_CheckedChanged(object sender, EventArgs e)
         {
-            if (!UpdatingVisibility)
+            CheckBox checkBox = sender as CheckBox;
+
+            switch (checkBox.Name)
             {
-                CheckBox checkBox = sender as CheckBox;
-
-                switch (checkBox.Name)
-                {
-                    case "rssFeedCheevoCheckBox":
-                        Settings.Default.rss_new_achievements_feed = checkBox.Checked;
-                        break;
-                    case "rssFeedForumCheckBox":
-                        Settings.Default.rss_forum_feed = checkBox.Checked;
-                        break;
-                    case "rssFeedFriendCheckBox":
-                        Settings.Default.rss_friend_feed = checkBox.Checked;
-                        break;
-                    case "rssFeedNewsCheckBox":
-                        Settings.Default.rss_news_feed = checkBox.Checked;
-                        break;
-                }
-
-                Settings.Default.Save();
-
-                rssFeedListView.Items.Clear();
-
-                RefreshRSSFeed();
+                case "rssFeedCheevoCheckBox":
+                    Settings.Default.rss_new_achievements_feed = checkBox.Checked;
+                    break;
+                case "rssFeedForumCheckBox":
+                    Settings.Default.rss_forum_feed = checkBox.Checked;
+                    break;
+                case "rssFeedFriendCheckBox":
+                    Settings.Default.rss_friend_feed = checkBox.Checked;
+                    break;
+                case "rssFeedNewsCheckBox":
+                    Settings.Default.rss_news_feed = checkBox.Checked;
+                    break;
             }
-        }
 
-        private void AutoLaunchCheckbox_CheckedChanged(object sender, EventArgs e)
+            Settings.Default.Save();
+
+            rssFeedListView.Items.Clear();
+
+            RefreshRSSFeed();
+        }
+        private void AutoLaunchCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (!UpdatingVisibility)
-            {
-                CheckBox checkBox = sender as CheckBox;
+            CheckBox checkBox = sender as CheckBox;
 
-                switch (checkBox.Name)
-                {
-                    case "autoOpenLastFiveWindowCheckbox":
-                        RecentAchievementsController.Instance.AutoLaunch = checkBox.Checked;
-                        break;
-                    case "autoOpenGameInfoWindowCheckbox":
-                        GameInfoController.Instance.AutoLaunch = checkBox.Checked;
-                        break;
-                    case "autoStartCheckbox":
-                        Settings.Default.auto_start_checked = checkBox.Checked;
-                        break;
-                    case "autoOpenAlertsWindowCheckbox":
-                        AlertsController.Instance.AutoLaunch = checkBox.Checked;
-                        break;
-                    case "autoOpenFocusWindowCheckBox":
-                        FocusController.Instance.AutoLaunch = checkBox.Checked;
-                        break;
-                    case "autoOpenUserStatsWindowCheckbox":
-                        UserStatsController.Instance.AutoLaunch = checkBox.Checked;
-                        break;
-                    case "autoOpenGameStatsWindowCheckbox":
-                        GameStatsController.Instance.AutoLaunch = checkBox.Checked;
-                        break;
-                    case "autoOpenAchievementListWindowCheckbox":
-                        AchievementListController.Instance.AutoLaunch = checkBox.Checked;
-                        break;
-                    case "autoOpenWebBrowserCheckbox":
-                        Settings.Default.web_browser_auto_launch = checkBox.Checked;
-                        Settings.Default.Save();
-                        break;
-                }
+            switch (checkBox.Name)
+            {
+                case "recentAchievementsAutoOpenWindowCheckbox":
+                    RecentAchievementsController.Instance.AutoLaunch = checkBox.Checked;
+                    break;
+                case "gameInfoAutoOpenWindowCheckbox":
+                    GameInfoController.Instance.AutoLaunch = checkBox.Checked;
+                    break;
+                case "notificationsAutoOpenWindowCheckbox":
+                    NotificationsController.Instance.AutoLaunch = checkBox.Checked;
+                    break;
+                case "focusAutoOpenWindowCheckBox":
+                    FocusController.Instance.AutoLaunch = checkBox.Checked;
+                    break;
+                case "userInfoAutoOpenWindowCheckbox":
+                    UserInfoController.Instance.AutoLaunch = checkBox.Checked;
+                    break;
+                case "gameProgressAutoOpenWindowCheckbox":
+                    GameProgressController.Instance.AutoLaunch = checkBox.Checked;
+                    break;
+                case "achievementListAutoOpenWindowCheckbox":
+                    AchievementListController.Instance.AutoLaunch = checkBox.Checked;
+                    break;
+                case "webBrowserAutoOpenCheckbox":
+                    Settings.Default.web_browser_auto_launch = checkBox.Checked;
+                    Settings.Default.Save();
+                    break;
+                case "autoStartCheckbox":
+                    Settings.Default.auto_start_checked = checkBox.Checked;
+                    Settings.Default.Save();
+                    break;
             }
         }
-        private void CustomAchievementEnableCheckbox_CheckedChanged(object sender, EventArgs eventArgs)
+        private void CustomAchievementEnableCheckBox_CheckedChanged(object sender, EventArgs eventArgs)
         {
-            if (!UpdatingVisibility)
+            NotificationsController.Instance.CustomAchievementEnabled = ((CheckBox)sender).Checked;
+
+            if (!File.Exists(NotificationsController.Instance.CustomAchievementFile))
             {
-                AlertsController.Instance.CustomAchievementEnabled = ((CheckBox)sender).Checked;
-
-                if (!File.Exists(AlertsController.Instance.CustomAchievementFile))
-                {
-                    SelectCustomAchievementButton_Click(null, null);
-                }
-
-                customAchievementEnableCheckbox.Checked = AlertsController.Instance.CustomAchievementEnabled;
-                selectCustomAchievementButton.Enabled = AlertsController.Instance.CustomAchievementEnabled;
-                acheivementEditOutlineCheckbox.Enabled = AlertsController.Instance.CustomAchievementEnabled;
-
-                AlertsController.Instance.Reset();
+                SelectCustomAchievementButton_Click(null, null);
             }
+
+            customAchievementEnableCheckbox.Checked = NotificationsController.Instance.CustomAchievementEnabled;
+            selectCustomAchievementFileButton.Enabled = NotificationsController.Instance.CustomAchievementEnabled;
+            acheivementEditOutlineCheckbox.Enabled = NotificationsController.Instance.CustomAchievementEnabled;
+
+            NotificationsController.Instance.Reset();
         }
-        private void CustomMasteryEnableCheckbox_CheckedChanged(object sender, EventArgs eventArgs)
+        private void CustomMasteryEnableCheckBox_CheckedChanged(object sender, EventArgs eventArgs)
         {
-            if (!UpdatingVisibility)
+            NotificationsController.Instance.CustomMasteryEnabled = ((CheckBox)sender).Checked;
+
+            if (!File.Exists(NotificationsController.Instance.CustomMasteryFile))
             {
-                AlertsController.Instance.CustomMasteryEnabled = ((CheckBox)sender).Checked;
-
-                if (!File.Exists(AlertsController.Instance.CustomMasteryFile))
-                {
-                    SelectCustomMasteryNotificationButton_Click(null, null);
-                }
-
-                customMasteryEnableCheckbox.Checked = AlertsController.Instance.CustomMasteryEnabled;
-                selectCustomMasteryNotificationButton.Enabled = AlertsController.Instance.CustomMasteryEnabled;
-                masteryEditOultineCheckbox.Enabled = AlertsController.Instance.CustomMasteryEnabled;
-
-                AlertsController.Instance.Reset();
+                SelectCustomMasteryNotificationButton_Click(null, null);
             }
+
+            customMasteryEnableCheckbox.Checked = NotificationsController.Instance.CustomMasteryEnabled;
+            selectCustomMasteryFileButton.Enabled = NotificationsController.Instance.CustomMasteryEnabled;
+            masteryEditOultineCheckbox.Enabled = NotificationsController.Instance.CustomMasteryEnabled;
+
+            NotificationsController.Instance.Reset();
         }
-        private void AcheivementEditOutlineCheckbox_CheckedChanged(object sender, EventArgs eventArgs)
+        private void AcheivementEditOutlineCheckBox_CheckedChanged(object sender, EventArgs eventArgs)
         {
-            if (!UpdatingVisibility)
+            if (((CheckBox)sender).Checked)
             {
-                if (((CheckBox)sender).Checked)
+                NotificationsController.Instance.EnableAchievementEdit();
+                NotificationsController.Instance.SendAchievementNotification(new Achievement()
                 {
-                    AlertsController.Instance.EnableAchievementEdit();
-                    AlertsController.Instance.SendAchievementNotification(new Achievement()
-                    {
-                        Title = "Thrilling!!!!",
-                        Description = "Color every bit of Dinosaur 2. [Must color white if leaving white]",
-                        BadgeNumber = "49987",
-                        Points = 1
-                    });
-                }
-                else
-                {
-                    AlertsController.Instance.DisableAchievementEdit();
-                }
+                    Title = "Thrilling!!!!",
+                    Description = "Color every bit of Dinosaur 2. [Must color white if leaving white]",
+                    BadgeNumber = "49987",
+                    Points = 1
+                });
+            }
+            else
+            {
+                NotificationsController.Instance.DisableAchievementEdit();
             }
         }
-        private void MasteryEditOultineCheckbox_CheckedChanged(object sender, EventArgs eventArgs)
+        private void MasteryEditOultineCheckBox_CheckedChanged(object sender, EventArgs eventArgs)
         {
-            if (!UpdatingVisibility)
+            if (((CheckBox)sender).Checked)
             {
-                if (((CheckBox)sender).Checked)
-                {
-                    AlertsController.Instance.EnableMasteryEdit();
-                    AlertsController.Instance.SendMasteryNotification(GameInfo);
-                }
-                else
-                {
-                    AlertsController.Instance.DisableMasteryEdit();
-                }
+                NotificationsController.Instance.EnableMasteryEdit();
+                NotificationsController.Instance.SendMasteryNotification(GameInfo);
+            }
+            else
+            {
+                NotificationsController.Instance.DisableMasteryEdit();
             }
         }
-
         private void CustomNumericUpDown_ValueChanged(object sender, EventArgs eventArgs)
         {
-            if (!UpdatingVisibility)
-            {
-                NumericUpDown numericUpDown = sender as NumericUpDown;
+            NumericUpDown numericUpDown = sender as NumericUpDown;
 
-                switch (numericUpDown.Name)
-                {
-                    case "recentAchievementsMaxListNumericUpDown":
-                        RecentAchievementsController.Instance.MaxListSize = Convert.ToInt32(numericUpDown.Value);
-                        break;
-                    case "customAchievementXNumericUpDown":
-                        AlertsController.Instance.CustomAchievementX = Convert.ToInt32(numericUpDown.Value);
-                        break;
-                    case "customAchievementYNumericUpDown":
-                        AlertsController.Instance.CustomAchievementY = Convert.ToInt32(numericUpDown.Value);
-                        break;
-                    case "customMasteryXNumericUpDown":
-                        AlertsController.Instance.CustomMasteryX = Convert.ToInt32(numericUpDown.Value);
-                        break;
-                    case "customMasteryYNumericUpDown":
-                        AlertsController.Instance.CustomMasteryY = Convert.ToInt32(numericUpDown.Value);
-                        break;
-                    case "scaleAchievementNumericUpDown":
-                        AlertsController.Instance.CustomAchievementScale = Convert.ToInt32(numericUpDown.Value);
-                        break;
-                    case "scaleMasteryNumericUpDown":
-                        AlertsController.Instance.CustomMasteryScale = Convert.ToInt32(numericUpDown.Value);
-                        break;
-                    case "notificationAchievementInNumericUpDown":
-                        AlertsController.Instance.CustomAchievementIn = Convert.ToInt32(numericUpDown.Value);
-                        break;
-                    case "notificationAchievementOutNumericUpDown":
-                        AlertsController.Instance.CustomAchievementOut = Convert.ToInt32(numericUpDown.Value);
-                        break;
-                    case "notificationMasteryInNumericUpDown":
-                        AlertsController.Instance.CustomMasteryIn = Convert.ToInt32(numericUpDown.Value);
-                        break;
-                    case "notificationMasteryOutNumericUpDown":
-                        AlertsController.Instance.CustomMasteryOut = Convert.ToInt32(numericUpDown.Value);
-                        break;
-                    case "titleFontOutlineNumericUpDown":
-                        switch (MenuState)
-                        {
-                            case CustomMenuState.USER_STATS:
-                                if (UserStatsController.Instance.AdvancedSettingsEnabled)
-                                {
-                                    UserStatsController.Instance.NameOutlineSize = Convert.ToInt32(numericUpDown.Value);
-                                }
-                                else
-                                {
-                                    UserStatsController.Instance.SimpleFontOutlineSize = Convert.ToInt32(numericUpDown.Value);
-                                }
-                                break;
-                            case CustomMenuState.GAME_STATS:
-                                if (GameStatsController.Instance.AdvancedSettingsEnabled)
-                                {
-                                    GameStatsController.Instance.NameOutlineSize = Convert.ToInt32(numericUpDown.Value);
-                                }
-                                else
-                                {
-                                    GameStatsController.Instance.SimpleFontOutlineSize = Convert.ToInt32(numericUpDown.Value);
-                                }
-                                break;
-                            case CustomMenuState.ALERTS:
-                                if (AlertsController.Instance.AdvancedSettingsEnabled)
-                                {
-                                    AlertsController.Instance.TitleOutlineSize = Convert.ToInt32(numericUpDown.Value);
-                                }
-                                else
-                                {
-                                    AlertsController.Instance.SimpleFontOutlineSize = Convert.ToInt32(numericUpDown.Value);
-                                }
-                                break;
-                            case CustomMenuState.GAME_INFO:
-                                if (GameInfoController.Instance.AdvancedSettingsEnabled)
-                                {
-                                    GameInfoController.Instance.NameOutlineSize = Convert.ToInt32(numericUpDown.Value);
-                                }
-                                else
-                                {
-                                    GameInfoController.Instance.SimpleFontOutlineSize = Convert.ToInt32(numericUpDown.Value);
-                                }
-                                break;
-                            case CustomMenuState.RECENT_ACHIEVEMENTS:
-                                if (RecentAchievementsController.Instance.AdvancedSettingsEnabled)
-                                {
-                                    RecentAchievementsController.Instance.TitleOutlineSize = Convert.ToInt32(numericUpDown.Value);
-                                }
-                                else
-                                {
-                                    RecentAchievementsController.Instance.SimpleFontOutlineSize = Convert.ToInt32(numericUpDown.Value);
-                                }
-                                break;
-                            case CustomMenuState.FOCUS:
-                                if (FocusController.Instance.AdvancedSettingsEnabled)
-                                {
-                                    FocusController.Instance.TitleOutlineSize = Convert.ToInt32(numericUpDown.Value);
-                                }
-                                else
-                                {
-                                    FocusController.Instance.SimpleFontOutlineSize = Convert.ToInt32(numericUpDown.Value);
-                                }
-                                break;
-                        }
-                        break;
-                    case "descriptionFontOutlineNumericUpDown":
-                        switch (MenuState)
-                        {
-                            case CustomMenuState.USER_STATS:
-                                UserStatsController.Instance.ValueOutlineSize = Convert.ToInt32(numericUpDown.Value);
-                                break;
-                            case CustomMenuState.GAME_STATS:
-                                GameStatsController.Instance.ValueOutlineSize = Convert.ToInt32(numericUpDown.Value);
-                                break;
-                            case CustomMenuState.ALERTS:
-                                AlertsController.Instance.DescriptionOutlineSize = Convert.ToInt32(numericUpDown.Value);
-                                break;
-                            case CustomMenuState.GAME_INFO:
-                                GameInfoController.Instance.ValueOutlineSize = Convert.ToInt32(numericUpDown.Value);
-                                break;
-                            case CustomMenuState.RECENT_ACHIEVEMENTS:
-                                RecentAchievementsController.Instance.DateOutlineSize = Convert.ToInt32(numericUpDown.Value);
-                                break;
-                            case CustomMenuState.FOCUS:
-                                FocusController.Instance.DescriptionOutlineSize = Convert.ToInt32(numericUpDown.Value);
-                                break;
-                        }
-                        break;
-                    case "pointsFontOutlineNumericUpDown":
-                        switch (MenuState)
-                        {
-                            case CustomMenuState.ALERTS:
-                                AlertsController.Instance.PointsOutlineSize = Convert.ToInt32(numericUpDown.Value);
-                                break;
-                            case CustomMenuState.RECENT_ACHIEVEMENTS:
-                                RecentAchievementsController.Instance.PointsOutlineSize = Convert.ToInt32(numericUpDown.Value);
-                                break;
-                            case CustomMenuState.FOCUS:
-                                FocusController.Instance.PointsOutlineSize = Convert.ToInt32(numericUpDown.Value);
-                                break;
-                        }
-                        break;
-                    case "lineOutlineNumericUpDown":
-                        switch (MenuState)
-                        {
-                            case CustomMenuState.ALERTS:
-                                AlertsController.Instance.LineOutlineSize = Convert.ToInt32(numericUpDown.Value);
-                                break;
-                            case CustomMenuState.RECENT_ACHIEVEMENTS:
-                                RecentAchievementsController.Instance.LineOutlineSize = Convert.ToInt32(numericUpDown.Value);
-                                break;
-                            case CustomMenuState.FOCUS:
-                                FocusController.Instance.LineOutlineSize = Convert.ToInt32(numericUpDown.Value);
-                                break;
-                        }
-                        break;
-                    case "achievementListCountNumericUpDown":
-                        AchievementListController.Instance.ContainerCount = Convert.ToInt32(numericUpDown.Value);
-                        break;
-                }
+            switch (numericUpDown.Name)
+            {
+                case "userInfoSimpleFontOutlineNumericUpDown":
+                    UserInfoController.Instance.SimpleFontOutlineSize = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "userInfoNamesFontOutlineNumericUpDown":
+                    UserInfoController.Instance.NameOutlineSize = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "userInfoValuesFontOutlineNumericUpDown":
+                    UserInfoController.Instance.ValueOutlineSize = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "focusSimpleFontOutlineNumericUpDown":
+                    FocusController.Instance.SimpleFontOutlineSize = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "focusTitleFontOutlineNumericUpDown":
+                    FocusController.Instance.TitleOutlineSize = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "focusDescriptionFontOutlineNumericUpDown":
+                    FocusController.Instance.DescriptionOutlineSize = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "focusPointsFontOutlineNumericUpDown":
+                    FocusController.Instance.PointsOutlineSize = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "focusLineOutlineNumericUpDown":
+                    FocusController.Instance.LineOutlineSize = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "notificationsSimpleFontOutlineNumericUpDown":
+                    NotificationsController.Instance.SimpleFontOutlineSize = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "notificationsTitleFontOutlineNumericUpDown":
+                    NotificationsController.Instance.TitleOutlineSize = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "notificationsDescriptionFontOutlineNumericUpDown":
+                    NotificationsController.Instance.DescriptionOutlineSize = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "notificationsPointsFontOutlineNumericUpDown":
+                    NotificationsController.Instance.PointsOutlineSize = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "notificationsLineOutlineNumericUpDown":
+                    NotificationsController.Instance.LineOutlineSize = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "notificationsCustomAchievementXNumericUpDown":
+                    NotificationsController.Instance.CustomAchievementX = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "notificationsCustomAchievementYNumericUpDown":
+                    NotificationsController.Instance.CustomAchievementY = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "notificationsCustomAchievementScaleNumericUpDown":
+                    NotificationsController.Instance.CustomAchievementScale = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "notificationsCustomAchievementInNumericUpDown":
+                    NotificationsController.Instance.CustomAchievementIn = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "notificationsCustomAchievementInSpeedUpDown":
+                    NotificationsController.Instance.CustomAchievementInSpeed = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "notificationsCustomAchievementOutNumericUpDown":
+                    NotificationsController.Instance.CustomAchievementOut = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "notificationsCustomAchievementOutSpeedUpDown":
+                    NotificationsController.Instance.CustomAchievementOutSpeed = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "notificationsCustomMasteryXNumericUpDown":
+                    NotificationsController.Instance.CustomMasteryX = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "notificationsCustomMasteryYNumericUpDown":
+                    NotificationsController.Instance.CustomMasteryY = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "notificationsCustomMasteryScaleNumericUpDown":
+                    NotificationsController.Instance.CustomMasteryScale = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "notificationsCustomMasteryInNumericUpDown":
+                    NotificationsController.Instance.CustomMasteryIn = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "notificationsCustomMasteryInSpeedUpDown":
+                    NotificationsController.Instance.CustomMasteryInSpeed = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "notificationsCustomMasteryOutNumericUpDown":
+                    NotificationsController.Instance.CustomMasteryOut = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "notificationsCustomMasteryOutSpeedUpDown":
+                    NotificationsController.Instance.CustomMasteryOutSpeed = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "gameProgressSimpleFontOutlineNumericUpDown":
+                    GameProgressController.Instance.SimpleFontOutlineSize = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "gameProgressNamesFontOutlineNumericUpDown":
+                    GameProgressController.Instance.NameOutlineSize = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "gameProgressValuesFontOutlineNumericUpDown":
+                    GameProgressController.Instance.ValueOutlineSize = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "gameInfoSimpleFontOutlineNumericUpDown":
+                    GameInfoController.Instance.SimpleFontOutlineSize = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "gameInfoNamesFontOutlineNumericUpDown":
+                    GameInfoController.Instance.NameOutlineSize = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "gameInfoValuesFontOutlineNumericUpDown":
+                    GameInfoController.Instance.ValueOutlineSize = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "recentAchievementsSimpleFontOutlineNumericUpDown":
+                    RecentAchievementsController.Instance.SimpleFontOutlineSize = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "recentAchievementsTitleFontOutlineNumericUpDown":
+                    RecentAchievementsController.Instance.TitleOutlineSize = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "recentAchievementsDescriptionFontOutlineNumericUpDown":
+                    RecentAchievementsController.Instance.DescriptionOutlineSize = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "recentAchievementsPointsFontOutlineNumericUpDown":
+                    RecentAchievementsController.Instance.PointsOutlineSize = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "recentAchievementsLineOutlineNumericUpDown":
+                    RecentAchievementsController.Instance.LineOutlineSize = Convert.ToInt32(numericUpDown.Value);
+                    break;
+                case "recentAchievementsMaxListNumericUpDown":
+                    RecentAchievementsController.Instance.MaxListSize = Convert.ToInt32(numericUpDown.Value);
+                    RecentAchievementsController.Instance.SetAchievements(new List<Achievement>());
+                    RecentAchievementsController.Instance.SetAchievements(UnlockedAchievements.ToList());
+                    break;
             }
         }
         private void SelectCustomAchievementButton_Click(object sender, EventArgs eventArgs)
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                AlertsController.Instance.CustomAchievementFile = openFileDialog1.FileName;
+                NotificationsController.Instance.CustomAchievementFile = openFileDialog1.FileName;
             }
             else
             {
-                if (customAchievementEnableCheckbox.Checked && string.IsNullOrEmpty(AlertsController.Instance.CustomAchievementFile))
+                if (customAchievementEnableCheckbox.Checked && string.IsNullOrEmpty(NotificationsController.Instance.CustomAchievementFile))
                 {
                     customAchievementEnableCheckbox.Checked = false;
                 }
@@ -985,37 +963,13 @@ namespace Retro_Achievement_Tracker
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                AlertsController.Instance.CustomMasteryFile = openFileDialog1.FileName;
+                NotificationsController.Instance.CustomMasteryFile = openFileDialog1.FileName;
             }
             else
             {
-                if (customMasteryEnableCheckbox.Checked && string.IsNullOrEmpty(AlertsController.Instance.CustomMasteryFile))
+                if (customMasteryEnableCheckbox.Checked && string.IsNullOrEmpty(NotificationsController.Instance.CustomMasteryFile))
                 {
                     customMasteryEnableCheckbox.Checked = false;
-                }
-            }
-        }
-
-        private void CustomeAnimationSpeedUpDown_ValueChanged(object sender, EventArgs e)
-        {
-            if (!UpdatingVisibility)
-            {
-                NumericUpDown numericUpDown = sender as NumericUpDown;
-
-                switch (numericUpDown.Name)
-                {
-                    case "customAchievementInSpeedUpDown":
-                        AlertsController.Instance.CustomAchievementInSpeed = Convert.ToInt32(numericUpDown.Value);
-                        break;
-                    case "customAchievementOutSpeedUpDown":
-                        AlertsController.Instance.CustomAchievementOutSpeed = Convert.ToInt32(numericUpDown.Value);
-                        break;
-                    case "customMasteryInSpeedUpDown":
-                        AlertsController.Instance.CustomMasteryInSpeed = Convert.ToInt32(numericUpDown.Value);
-                        break;
-                    case "customMasteryOutSpeedUpDown":
-                        AlertsController.Instance.CustomMasteryOutSpeed = Convert.ToInt32(numericUpDown.Value);
-                        break;
                 }
             }
         }
@@ -1028,7 +982,7 @@ namespace Retro_Achievement_Tracker
                 unlockedAchievements.Sort();
                 Achievement achievement = (Achievement)unlockedAchievements[unlockedAchievements.Count - 1].Clone();
 
-                AlertsController.Instance.EnqueueAchievementNotifications(new List<Achievement>() { achievement });
+                NotificationsController.Instance.EnqueueAchievementNotifications(new List<Achievement>() { achievement });
                 StreamLabelManager.Instance.EnqueueAlert(achievement);
             }
             else
@@ -1041,20 +995,20 @@ namespace Retro_Achievement_Tracker
                     Points = 1
                 };
 
-                AlertsController.Instance.EnqueueAchievementNotifications(new List<Achievement>() {
+                NotificationsController.Instance.EnqueueAchievementNotifications(new List<Achievement>() {
                      achievement
                 });
                 StreamLabelManager.Instance.EnqueueAlert(achievement);
             }
-            AlertsController.Instance.RunNotifications();
+            NotificationsController.Instance.RunNotifications();
             StreamLabelManager.Instance.RunNotifications();
         }
         private void ShowGameMasteryButton_Click(object sender, EventArgs eventArgs)
         {
-            AlertsController.Instance.EnqueueMasteryNotification(GameInfo);
+            NotificationsController.Instance.EnqueueMasteryNotification(GameInfo);
             StreamLabelManager.Instance.EnqueueAlert(GameInfo);
 
-            AlertsController.Instance.RunNotifications();
+            NotificationsController.Instance.RunNotifications();
             StreamLabelManager.Instance.RunNotifications();
         }
         private void SetFocusButton_Click(object sender, EventArgs e)
@@ -1063,7 +1017,7 @@ namespace Retro_Achievement_Tracker
 
             StreamLabelManager.Instance.RunNotifications();
         }
-        private void MoveFocusIndexLeft(object sender, EventArgs e)
+        private void MoveFocusIndexPrev_Click(object sender, EventArgs e)
         {
             CurrentlyViewingIndex--;
 
@@ -1074,7 +1028,7 @@ namespace Retro_Achievement_Tracker
 
             UpdateCurrentlyViewingAchievement();
         }
-        private void MoveFocusIndexRight(object sender, EventArgs e)
+        private void MoveFocusIndexNext_Click(object sender, EventArgs e)
         {
             CurrentlyViewingIndex++;
 
@@ -1089,28 +1043,28 @@ namespace Retro_Achievement_Tracker
         {
             if (LockedAchievements.Count == 0)
             {
-                focusAchievementButtonLeft.Enabled = false;
-                focusAchievementButtonRight.Enabled = false;
-                setFocusButton.Enabled = false;
+                focusAchievementButtonPrevious.Enabled = false;
+                focusAchievementButtonNext.Enabled = false;
+                focusSetButton.Enabled = false;
             }
             else
             {
-                setFocusButton.Enabled = true;
+                focusSetButton.Enabled = true;
 
                 if (CurrentlyViewingIndex == 0)
                 {
-                    focusAchievementButtonLeft.Enabled = false;
-                    focusAchievementButtonRight.Enabled = LockedAchievements.Count > 1;
+                    focusAchievementButtonPrevious.Enabled = false;
+                    focusAchievementButtonNext.Enabled = LockedAchievements.Count > 1;
                 }
                 else if (CurrentlyViewingIndex == LockedAchievements.Count - 1)
                 {
-                    focusAchievementButtonLeft.Enabled = true;
-                    focusAchievementButtonRight.Enabled = false;
+                    focusAchievementButtonPrevious.Enabled = true;
+                    focusAchievementButtonNext.Enabled = false;
                 }
                 else
                 {
-                    focusAchievementButtonLeft.Enabled = true;
-                    focusAchievementButtonRight.Enabled = true;
+                    focusAchievementButtonPrevious.Enabled = true;
+                    focusAchievementButtonNext.Enabled = true;
                 }
             }
         }
@@ -1120,687 +1074,31 @@ namespace Retro_Achievement_Tracker
 
             switch (button.Name)
             {
-                case "openFocusWindowButton":
+                case "focusOpenWindowButton":
                     FocusController.Instance.Show();
+                    SetFocus();
+
                     break;
-                case "openUserStatsWindowButton":
-                    UserStatsController.Instance.Show();
+                case "userInfoOpenWindowButton":
+                    UserInfoController.Instance.Show();
                     break;
-                case "openGameStatsWindowButton":
-                    GameStatsController.Instance.Show();
+                case "gameProgressOpenWindowButton":
+                    GameProgressController.Instance.Show();
                     break;
-                case "openNotificationWindowButton":
-                    AlertsController.Instance.Show();
+                case "notificationsOpenWindowButton":
+                    NotificationsController.Instance.Show();
                     break;
-                case "openGameInfoWindowButton":
+                case "gameInfoOpenWindowButton":
                     GameInfoController.Instance.Show();
                     break;
-                case "openLastFiveWindowButton":
+                case "recentAchievementsOpenWindowButton":
                     RecentAchievementsController.Instance.Show();
                     break;
-                case "openAchievementListWindowButton":
+                case "achievementListOpenWindowButton":
                     AchievementListController.Instance.Show();
-                    break;
-                case "toggleUserBrowserButton":
-                    if (MenuState.Equals(CustomMenuState.WEB_BROWSER))
-                    {
-                        MenuState = CustomMenuState.CLOSED;
-                    }
-                    else
-                    {
-                        MenuState = CustomMenuState.WEB_BROWSER;
-                    }
-
-                    UpdateGroupBoxVisibility();
+                    AchievementListController.Instance.UpdateAchievementList(UnlockedAchievements.ToList(), LockedAchievements.ToList(), true);
                     break;
             }
-        }
-        private void CustomizeButton_Click(object sender, EventArgs e)
-        {
-            Button button = sender as Button;
-
-            switch (button.Name)
-            {
-                case "customizeFocusButton":
-                    MenuState = MenuState.Equals(CustomMenuState.FOCUS) ? CustomMenuState.CLOSED : CustomMenuState.FOCUS;
-                    break;
-                case "customizeAlertsButton":
-                    MenuState = MenuState.Equals(CustomMenuState.ALERTS) ? CustomMenuState.CLOSED : CustomMenuState.ALERTS;
-                    break;
-                case "customizeLastFiveButton":
-                    MenuState = MenuState.Equals(CustomMenuState.RECENT_ACHIEVEMENTS) ? CustomMenuState.CLOSED : CustomMenuState.RECENT_ACHIEVEMENTS;
-                    break;
-                case "customizeGameInfoButton":
-                    MenuState = MenuState.Equals(CustomMenuState.GAME_INFO) ? CustomMenuState.CLOSED : CustomMenuState.GAME_INFO;
-                    break;
-                case "customizeUserStatsButton":
-                    MenuState = MenuState.Equals(CustomMenuState.USER_STATS) ? CustomMenuState.CLOSED : CustomMenuState.USER_STATS;
-                    break;
-                case "customizeGameStatsButton":
-                    MenuState = MenuState.Equals(CustomMenuState.GAME_STATS) ? CustomMenuState.CLOSED : CustomMenuState.GAME_STATS;
-                    break;
-                case "customizeAchievementListButton":
-                    MenuState = MenuState.Equals(CustomMenuState.ACHIEVEMENT_LIST) ? CustomMenuState.CLOSED : CustomMenuState.ACHIEVEMENT_LIST;
-                    break;
-            }
-
-            UpdateGroupBoxVisibility();
-        }
-        private void UpdateGroupBoxVisibility()
-        {
-            UpdatingVisibility = true;
-
-            customAchievementCustomizationGroupBox.Hide();
-            customMasterySettingsGroupBox.Hide();
-
-            userStatsCustomizationGroupBox.Hide();
-            gameStatsCustomizationGroupBox.Hide();
-            gameInfoCustomizationGroupBox.Hide();
-
-            simpleFontCheckBox.Hide();
-            simpleFontLabel.Hide();
-
-            fontBorderCheckBox.Hide();
-            fontBorderLabel.Hide();
-            autoSrollLabel.Hide();
-
-            borderBackgroundGroupBox.Hide();
-            windowBackgroundGroupBox.Hide();
-
-            titleFontGroupBox.Hide();
-            descriptionFontGroupBox.Hide();
-            lineFontGroupBox.Hide();
-            pointsFontGroupBox.Hide();
-
-            recentAchievementsMaxListLabel.Hide();
-            recentAchievementsMaxListNumericUpDown.Hide();
-
-            autoScrollCheckBox.Hide();
-
-            chromiumWebBrowser.Hide();
-
-            focusGroupBox.BackgroundImage = Resources.chrono_trigger_block;
-            notificationsGroupBox.BackgroundImage = Resources.chrono_trigger_block;
-            recentAchievementsGroupBox.BackgroundImage = Resources.chrono_trigger_block;
-            achievementListGroupBox.BackgroundImage = Resources.chrono_trigger_block;
-            userStatsGroupBox.BackgroundImage = Resources.chrono_trigger_block;
-            gameInfoGroupBox.BackgroundImage = Resources.chrono_trigger_block;
-            gameStatsGroupBox.BackgroundImage = Resources.chrono_trigger_block;
-            userBrowserGroupBox.BackgroundImage = Resources.chrono_trigger_block;
-
-            toggleUserBrowserButton.Text = "Open";
-
-            switch (MenuState)
-            {
-                case CustomMenuState.CLOSED:
-                    ClientSize = new Size(672, 462);
-                    break;
-                case CustomMenuState.WEB_BROWSER:
-                    userBrowserGroupBox.BackgroundImage = Resources.chrono_trigger_block5;
-
-                    toggleUserBrowserButton.Text = "Close";
-                    chromiumWebBrowser.Show();
-
-                    ClientSize = new Size(1240, 462);
-                    break;
-                case CustomMenuState.FOCUS:
-                    focusGroupBox.BackgroundImage = Resources.chrono_trigger_block5;
-
-                    fontBorderCheckBox.Show();
-                    simpleFontCheckBox.Show();
-                    titleFontGroupBox.Show();
-                    fontBorderLabel.Show();
-                    simpleFontLabel.Show();
-
-                    fontBorderCheckBox.Checked = FocusController.Instance.BorderEnabled;
-
-                    borderBackgroundGroupBox.Show();
-                    windowBackgroundGroupBox.Show();
-
-                    borderBackgroudColorPictureBox.BackColor = ColorTranslator.FromHtml(FocusController.Instance.BorderBackgroundColor);
-                    windowBackgroundColorPictureBox.BackColor = ColorTranslator.FromHtml(FocusController.Instance.WindowBackgroundColor);
-
-                    if (FocusController.Instance.AdvancedSettingsEnabled)
-                    {
-                        simpleFontCheckBox.Checked = false;
-
-                        titleFontGroupBox.Text = "Title";
-                        descriptionFontGroupBox.Text = "Description";
-                        lineFontGroupBox.Text = "Line";
-                        pointsFontGroupBox.Text = "Points";
-
-                        SetFontFamilyBox(titleFontFamilyComboBox, FocusController.Instance.TitleFontFamily);
-                        SetFontFamilyBox(descriptionFontFamilyComboBox, FocusController.Instance.DescriptionFontFamily);
-                        SetFontFamilyBox(pointsFontFamilyComboBox, FocusController.Instance.PointsFontFamily);
-
-                        titleFontColorPictureBox.BackColor = ColorTranslator.FromHtml(FocusController.Instance.TitleColor);
-                        descriptionFontColorPictureBox.BackColor = ColorTranslator.FromHtml(FocusController.Instance.DescriptionColor);
-                        pointsFontColorPictureBox.BackColor = ColorTranslator.FromHtml(FocusController.Instance.PointsColor);
-                        lineColorPictureBox.BackColor = ColorTranslator.FromHtml(FocusController.Instance.LineColor);
-
-                        titleFontOutlineColorButton.Enabled = FocusController.Instance.TitleOutlineEnabled;
-                        titleFontOutlineColorPictureBox.Enabled = FocusController.Instance.TitleOutlineEnabled;
-                        titleFontOutlineNumericUpDown.Enabled = FocusController.Instance.TitleOutlineEnabled;
-                        titleFontOutlineCheckbox.Checked = FocusController.Instance.TitleOutlineEnabled;
-
-                        titleFontOutlineColorPictureBox.BackColor = FocusController.Instance.TitleOutlineEnabled ? ColorTranslator.FromHtml(FocusController.Instance.TitleOutlineColor) : Color.DarkGray;
-                        titleFontOutlineNumericUpDown.Value = FocusController.Instance.TitleOutlineSize;
-
-                        descriptionFontOutlineColorButton.Enabled = FocusController.Instance.DescriptionOutlineEnabled;
-                        descriptionFontOutlineColorPictureBox.Enabled = FocusController.Instance.DescriptionOutlineEnabled;
-                        descriptionFontOutlineNumericUpDown.Enabled = FocusController.Instance.DescriptionOutlineEnabled;
-                        descriptionFontOutlineCheckbox.Checked = FocusController.Instance.DescriptionOutlineEnabled;
-
-                        descriptionFontOutlineColorPictureBox.BackColor = FocusController.Instance.DescriptionOutlineEnabled ? ColorTranslator.FromHtml(FocusController.Instance.DescriptionOutlineColor) : Color.DarkGray;
-                        descriptionFontOutlineNumericUpDown.Value = FocusController.Instance.DescriptionOutlineSize;
-
-                        pointsFontOutlineColorButton.Enabled = FocusController.Instance.PointsOutlineEnabled;
-                        pointsFontOutlineColorPictureBox.Enabled = FocusController.Instance.PointsOutlineEnabled;
-                        pointsFontOutlineNumericUpDown.Enabled = FocusController.Instance.PointsOutlineEnabled;
-                        pointsFontOutlineCheckbox.Checked = FocusController.Instance.PointsOutlineEnabled;
-
-                        pointsFontOutlineColorPictureBox.BackColor = FocusController.Instance.PointsOutlineEnabled ? ColorTranslator.FromHtml(FocusController.Instance.PointsOutlineColor) : Color.DarkGray;
-                        pointsFontOutlineNumericUpDown.Value = FocusController.Instance.PointsOutlineSize;
-
-                        lineOutlineColorButton.Enabled = FocusController.Instance.LineOutlineEnabled;
-                        lineOutlineColorPictureBox.Enabled = FocusController.Instance.LineOutlineEnabled;
-                        lineOutlineNumericUpDown.Enabled = FocusController.Instance.LineOutlineEnabled;
-                        lineOutlineCheckbox.Checked = FocusController.Instance.LineOutlineEnabled;
-
-                        lineOutlineColorPictureBox.BackColor = FocusController.Instance.LineOutlineEnabled ? ColorTranslator.FromHtml(FocusController.Instance.LineOutlineColor) : Color.DarkGray;
-                        lineOutlineNumericUpDown.Value = FocusController.Instance.LineOutlineSize;
-
-                        descriptionFontGroupBox.Show();
-                        lineFontGroupBox.Show();
-                        pointsFontGroupBox.Show();
-                    }
-                    else
-                    {
-                        simpleFontCheckBox.Checked = true;
-
-                        titleFontGroupBox.Text = "All";
-
-                        SetFontFamilyBox(titleFontFamilyComboBox, FocusController.Instance.SimpleFontFamily);
-
-                        titleFontOutlineCheckbox.Checked = FocusController.Instance.SimpleFontOutlineEnabled;
-                        titleFontColorPictureBox.BackColor = ColorTranslator.FromHtml(FocusController.Instance.SimpleFontColor);
-
-                        titleFontOutlineNumericUpDown.Enabled = FocusController.Instance.SimpleFontOutlineEnabled;
-                        titleFontOutlineColorPictureBox.Enabled = FocusController.Instance.SimpleFontOutlineEnabled;
-                        titleFontOutlineColorButton.Enabled = FocusController.Instance.SimpleFontOutlineEnabled;
-
-                        titleFontOutlineNumericUpDown.Value = FocusController.Instance.SimpleFontOutlineSize;
-                        titleFontOutlineColorPictureBox.BackColor = FocusController.Instance.SimpleFontOutlineEnabled ? ColorTranslator.FromHtml(FocusController.Instance.SimpleFontOutlineColor) : Color.DarkGray;
-                    }
-
-                    ClientSize = new Size(1240, 462);
-                    break;
-                case CustomMenuState.RECENT_ACHIEVEMENTS:
-                    recentAchievementsGroupBox.BackgroundImage = Resources.chrono_trigger_block5;
-
-                    fontBorderCheckBox.Show();
-                    simpleFontCheckBox.Show();
-                    titleFontGroupBox.Show();
-                    fontBorderLabel.Show();
-                    simpleFontLabel.Show();
-
-                    fontBorderCheckBox.Checked = RecentAchievementsController.Instance.BorderEnabled;
-
-                    borderBackgroundGroupBox.Show();
-                    windowBackgroundGroupBox.Show();
-
-                    borderBackgroudColorPictureBox.BackColor = ColorTranslator.FromHtml(RecentAchievementsController.Instance.BorderBackgroundColor);
-                    windowBackgroundColorPictureBox.BackColor = ColorTranslator.FromHtml(RecentAchievementsController.Instance.WindowBackgroundColor);
-
-                    recentAchievementsMaxListLabel.Show();
-                    recentAchievementsMaxListNumericUpDown.Show();
-
-                    recentAchievementsMaxListNumericUpDown.Value = RecentAchievementsController.Instance.MaxListSize;
-
-                    if (RecentAchievementsController.Instance.AdvancedSettingsEnabled)
-                    {
-                        simpleFontCheckBox.Checked = false;
-
-                        titleFontGroupBox.Text = "Title";
-                        descriptionFontGroupBox.Text = "Date";
-                        lineFontGroupBox.Text = "Line";
-                        pointsFontGroupBox.Text = "Points";
-
-                        SetFontFamilyBox(titleFontFamilyComboBox, RecentAchievementsController.Instance.TitleFontFamily);
-                        SetFontFamilyBox(descriptionFontFamilyComboBox, RecentAchievementsController.Instance.DateFontFamily);
-                        SetFontFamilyBox(pointsFontFamilyComboBox, RecentAchievementsController.Instance.PointsFontFamily);
-
-                        titleFontColorPictureBox.BackColor = ColorTranslator.FromHtml(RecentAchievementsController.Instance.TitleColor);
-                        descriptionFontColorPictureBox.BackColor = ColorTranslator.FromHtml(RecentAchievementsController.Instance.DateColor);
-                        pointsFontColorPictureBox.BackColor = ColorTranslator.FromHtml(RecentAchievementsController.Instance.PointsColor);
-                        lineColorPictureBox.BackColor = ColorTranslator.FromHtml(RecentAchievementsController.Instance.LineColor);
-
-                        titleFontOutlineColorButton.Enabled = RecentAchievementsController.Instance.TitleOutlineEnabled;
-                        titleFontOutlineColorPictureBox.Enabled = RecentAchievementsController.Instance.TitleOutlineEnabled;
-                        titleFontOutlineNumericUpDown.Enabled = RecentAchievementsController.Instance.TitleOutlineEnabled;
-                        titleFontOutlineCheckbox.Checked = RecentAchievementsController.Instance.TitleOutlineEnabled;
-
-                        titleFontOutlineColorPictureBox.BackColor = RecentAchievementsController.Instance.TitleOutlineEnabled ? ColorTranslator.FromHtml(RecentAchievementsController.Instance.TitleOutlineColor) : Color.DarkGray;
-                        titleFontOutlineNumericUpDown.Value = RecentAchievementsController.Instance.TitleOutlineSize;
-
-                        descriptionFontOutlineColorButton.Enabled = RecentAchievementsController.Instance.DateOutlineEnabled;
-                        descriptionFontOutlineColorPictureBox.Enabled = RecentAchievementsController.Instance.DateOutlineEnabled;
-                        descriptionFontOutlineNumericUpDown.Enabled = RecentAchievementsController.Instance.DateOutlineEnabled;
-                        descriptionFontOutlineCheckbox.Checked = RecentAchievementsController.Instance.DateOutlineEnabled;
-
-                        descriptionFontOutlineColorPictureBox.BackColor = RecentAchievementsController.Instance.DateOutlineEnabled ? ColorTranslator.FromHtml(RecentAchievementsController.Instance.DateOutlineColor) : Color.DarkGray;
-                        descriptionFontOutlineNumericUpDown.Value = RecentAchievementsController.Instance.DateOutlineSize;
-
-                        pointsFontOutlineColorButton.Enabled = RecentAchievementsController.Instance.PointsOutlineEnabled;
-                        pointsFontOutlineColorPictureBox.Enabled = RecentAchievementsController.Instance.PointsOutlineEnabled;
-                        pointsFontOutlineNumericUpDown.Enabled = RecentAchievementsController.Instance.PointsOutlineEnabled;
-                        pointsFontOutlineCheckbox.Checked = RecentAchievementsController.Instance.PointsOutlineEnabled;
-
-                        pointsFontOutlineColorPictureBox.BackColor = RecentAchievementsController.Instance.PointsOutlineEnabled ? ColorTranslator.FromHtml(RecentAchievementsController.Instance.PointsOutlineColor) : Color.DarkGray;
-                        pointsFontOutlineNumericUpDown.Value = RecentAchievementsController.Instance.PointsOutlineSize;
-
-                        lineOutlineColorButton.Enabled = RecentAchievementsController.Instance.LineOutlineEnabled;
-                        lineOutlineColorPictureBox.Enabled = RecentAchievementsController.Instance.LineOutlineEnabled;
-                        lineOutlineNumericUpDown.Enabled = RecentAchievementsController.Instance.LineOutlineEnabled;
-                        lineOutlineCheckbox.Checked = RecentAchievementsController.Instance.LineOutlineEnabled;
-
-                        lineOutlineColorPictureBox.BackColor = RecentAchievementsController.Instance.LineOutlineEnabled ? ColorTranslator.FromHtml(RecentAchievementsController.Instance.LineOutlineColor) : Color.DarkGray;
-                        lineOutlineNumericUpDown.Value = RecentAchievementsController.Instance.LineOutlineSize;
-
-                        descriptionFontGroupBox.Show();
-                        lineFontGroupBox.Show();
-                        pointsFontGroupBox.Show();
-                    }
-                    else
-                    {
-                        simpleFontCheckBox.Checked = true;
-
-                        titleFontGroupBox.Text = "All";
-
-                        SetFontFamilyBox(titleFontFamilyComboBox, RecentAchievementsController.Instance.SimpleFontFamily);
-
-                        titleFontOutlineCheckbox.Checked = RecentAchievementsController.Instance.SimpleFontOutlineEnabled;
-                        titleFontColorPictureBox.BackColor = ColorTranslator.FromHtml(RecentAchievementsController.Instance.SimpleFontColor);
-
-                        titleFontOutlineNumericUpDown.Enabled = RecentAchievementsController.Instance.SimpleFontOutlineEnabled;
-                        titleFontOutlineColorPictureBox.Enabled = RecentAchievementsController.Instance.SimpleFontOutlineEnabled;
-                        titleFontOutlineColorButton.Enabled = RecentAchievementsController.Instance.SimpleFontOutlineEnabled;
-
-                        titleFontOutlineNumericUpDown.Value = RecentAchievementsController.Instance.SimpleFontOutlineSize;
-                        titleFontOutlineColorPictureBox.BackColor = RecentAchievementsController.Instance.SimpleFontOutlineEnabled ? ColorTranslator.FromHtml(RecentAchievementsController.Instance.SimpleFontOutlineColor) : Color.DarkGray;
-                    }
-                    autoSrollLabel.Show();
-                    autoScrollCheckBox.Show();
-                    autoScrollCheckBox.Checked = RecentAchievementsController.Instance.AutoScroll;
-
-                    ClientSize = new Size(1240, 462);
-                    break;
-                case CustomMenuState.GAME_INFO:
-                    gameInfoGroupBox.BackgroundImage = Resources.chrono_trigger_block5;
-
-                    simpleFontCheckBox.Show();
-                    titleFontGroupBox.Show();
-                    simpleFontLabel.Show();
-
-                    windowBackgroundGroupBox.Show();
-                    windowBackgroundColorPictureBox.BackColor = ColorTranslator.FromHtml(GameInfoController.Instance.WindowBackgroundColor);
-
-                    if (GameInfoController.Instance.AdvancedSettingsEnabled)
-                    {
-                        simpleFontCheckBox.Checked = false;
-
-                        titleFontGroupBox.Text = "Name";
-                        descriptionFontGroupBox.Text = "Value";
-
-                        SetFontFamilyBox(titleFontFamilyComboBox, GameInfoController.Instance.NameFontFamily);
-                        SetFontFamilyBox(descriptionFontFamilyComboBox, GameInfoController.Instance.ValueFontFamily);
-
-                        titleFontColorPictureBox.BackColor = ColorTranslator.FromHtml(GameInfoController.Instance.NameColor);
-                        descriptionFontColorPictureBox.BackColor = ColorTranslator.FromHtml(GameInfoController.Instance.ValueColor);
-
-                        titleFontOutlineColorButton.Enabled = GameInfoController.Instance.NameOutlineEnabled;
-                        titleFontOutlineColorPictureBox.Enabled = GameInfoController.Instance.NameOutlineEnabled;
-                        titleFontOutlineNumericUpDown.Enabled = GameInfoController.Instance.NameOutlineEnabled;
-                        titleFontOutlineCheckbox.Checked = GameInfoController.Instance.NameOutlineEnabled;
-
-                        titleFontOutlineColorPictureBox.BackColor = GameInfoController.Instance.NameOutlineEnabled ? ColorTranslator.FromHtml(GameInfoController.Instance.NameOutlineColor) : Color.DarkGray;
-                        titleFontOutlineNumericUpDown.Value = GameInfoController.Instance.NameOutlineSize;
-
-                        descriptionFontOutlineColorButton.Enabled = GameInfoController.Instance.ValueOutlineEnabled;
-                        descriptionFontOutlineColorPictureBox.Enabled = GameInfoController.Instance.ValueOutlineEnabled;
-                        descriptionFontOutlineNumericUpDown.Enabled = GameInfoController.Instance.ValueOutlineEnabled;
-                        descriptionFontOutlineCheckbox.Checked = GameInfoController.Instance.ValueOutlineEnabled;
-
-                        descriptionFontOutlineColorPictureBox.BackColor = GameInfoController.Instance.ValueOutlineEnabled ? ColorTranslator.FromHtml(GameInfoController.Instance.ValueOutlineColor) : Color.DarkGray;
-                        descriptionFontOutlineNumericUpDown.Value = GameInfoController.Instance.ValueOutlineSize;
-
-                        descriptionFontGroupBox.Show();
-                    }
-                    else
-                    {
-                        simpleFontCheckBox.Checked = true;
-
-                        titleFontGroupBox.Text = "All";
-
-                        SetFontFamilyBox(titleFontFamilyComboBox, GameInfoController.Instance.SimpleFontFamily);
-
-                        titleFontOutlineCheckbox.Checked = GameInfoController.Instance.SimpleFontOutlineEnabled;
-                        titleFontColorPictureBox.BackColor = ColorTranslator.FromHtml(GameInfoController.Instance.SimpleFontColor);
-
-                        titleFontOutlineNumericUpDown.Enabled = GameInfoController.Instance.SimpleFontOutlineEnabled;
-                        titleFontOutlineColorPictureBox.Enabled = GameInfoController.Instance.SimpleFontOutlineEnabled;
-                        titleFontOutlineColorButton.Enabled = GameInfoController.Instance.SimpleFontOutlineEnabled;
-
-                        titleFontOutlineNumericUpDown.Value = GameInfoController.Instance.SimpleFontOutlineSize;
-                        titleFontOutlineColorPictureBox.BackColor = GameInfoController.Instance.SimpleFontOutlineEnabled ? ColorTranslator.FromHtml(GameInfoController.Instance.SimpleFontOutlineColor) : Color.DarkGray;
-                    }
-
-                    titleEnableCheckBox.Checked = GameInfoController.Instance.TitleEnabled;
-                    developerEnableCheckBox.Checked = GameInfoController.Instance.DeveloperEnabled;
-                    publisherEnableCheckBox.Checked = GameInfoController.Instance.PublisherEnabled;
-                    genreEnableCheckBox.Checked = GameInfoController.Instance.GenreEnabled;
-                    consoleEnableCheckBox.Checked = GameInfoController.Instance.ConsoleEnabled;
-                    releasedDateEnableCheckBox.Checked = GameInfoController.Instance.ReleasedDateEnabled;
-
-                    gameInfoTitleOverrideTextBox.Text = GameInfoController.Instance.TitleName;
-                    gameInfoDeveloperOverrideTextBox.Text = GameInfoController.Instance.DeveloperName;
-                    gameInfoPublisherOverrideTextBox.Text = GameInfoController.Instance.PublisherName;
-                    gameInfoGenreOverrideTextBox.Text = GameInfoController.Instance.GenreName;
-                    gameInfoConsoleOverrideTextBox.Text = GameInfoController.Instance.ConsoleName;
-                    gameInfoReleaseDateOverrideTextBox.Text = GameInfoController.Instance.ReleasedDateName;
-
-                    gameInfoCustomizationGroupBox.Show();
-                    gameInfoCustomizationGroupBox.Location = new Point(165, 11);
-
-                    ClientSize = new Size(1240, 462);
-                    break;
-                case CustomMenuState.USER_STATS:
-                    userStatsGroupBox.BackgroundImage = Resources.chrono_trigger_block5;
-
-                    simpleFontCheckBox.Show();
-                    titleFontGroupBox.Show();
-                    simpleFontLabel.Show();
-
-                    windowBackgroundGroupBox.Show();
-                    windowBackgroundColorPictureBox.BackColor = ColorTranslator.FromHtml(UserStatsController.Instance.WindowBackgroundColor);
-
-                    if (UserStatsController.Instance.AdvancedSettingsEnabled)
-                    {
-                        simpleFontCheckBox.Checked = false;
-
-                        titleFontGroupBox.Text = "Name";
-                        descriptionFontGroupBox.Text = "Value";
-
-                        SetFontFamilyBox(titleFontFamilyComboBox, UserStatsController.Instance.NameFontFamily);
-                        SetFontFamilyBox(descriptionFontFamilyComboBox, UserStatsController.Instance.ValueFontFamily);
-
-                        titleFontColorPictureBox.BackColor = ColorTranslator.FromHtml(UserStatsController.Instance.NameColor);
-                        descriptionFontColorPictureBox.BackColor = ColorTranslator.FromHtml(UserStatsController.Instance.ValueColor);
-
-                        titleFontOutlineColorButton.Enabled = UserStatsController.Instance.NameOutlineEnabled;
-                        titleFontOutlineColorPictureBox.Enabled = UserStatsController.Instance.NameOutlineEnabled;
-                        titleFontOutlineNumericUpDown.Enabled = UserStatsController.Instance.NameOutlineEnabled;
-                        titleFontOutlineCheckbox.Checked = UserStatsController.Instance.NameOutlineEnabled;
-
-                        titleFontOutlineColorPictureBox.BackColor = UserStatsController.Instance.NameOutlineEnabled ? ColorTranslator.FromHtml(UserStatsController.Instance.NameOutlineColor) : Color.DarkGray;
-                        titleFontOutlineNumericUpDown.Value = UserStatsController.Instance.NameOutlineSize;
-
-                        descriptionFontOutlineColorButton.Enabled = UserStatsController.Instance.ValueOutlineEnabled;
-                        descriptionFontOutlineColorPictureBox.Enabled = UserStatsController.Instance.ValueOutlineEnabled;
-                        descriptionFontOutlineNumericUpDown.Enabled = UserStatsController.Instance.ValueOutlineEnabled;
-                        descriptionFontOutlineCheckbox.Checked = UserStatsController.Instance.ValueOutlineEnabled;
-
-                        descriptionFontOutlineColorPictureBox.BackColor = UserStatsController.Instance.ValueOutlineEnabled ? ColorTranslator.FromHtml(UserStatsController.Instance.ValueOutlineColor) : Color.DarkGray;
-                        descriptionFontOutlineNumericUpDown.Value = UserStatsController.Instance.ValueOutlineSize;
-
-                        descriptionFontGroupBox.Show();
-                    }
-                    else
-                    {
-                        simpleFontCheckBox.Checked = true;
-
-                        titleFontGroupBox.Text = "All";
-
-                        SetFontFamilyBox(titleFontFamilyComboBox, UserStatsController.Instance.SimpleFontFamily);
-
-                        titleFontOutlineCheckbox.Checked = UserStatsController.Instance.SimpleFontOutlineEnabled;
-                        titleFontColorPictureBox.BackColor = ColorTranslator.FromHtml(UserStatsController.Instance.SimpleFontColor);
-
-                        titleFontOutlineNumericUpDown.Enabled = UserStatsController.Instance.SimpleFontOutlineEnabled;
-                        titleFontOutlineColorPictureBox.Enabled = UserStatsController.Instance.SimpleFontOutlineEnabled;
-                        titleFontOutlineColorButton.Enabled = UserStatsController.Instance.SimpleFontOutlineEnabled;
-
-                        titleFontOutlineNumericUpDown.Value = UserStatsController.Instance.SimpleFontOutlineSize;
-                        titleFontOutlineColorPictureBox.BackColor = UserStatsController.Instance.SimpleFontOutlineEnabled ? ColorTranslator.FromHtml(UserStatsController.Instance.SimpleFontOutlineColor) : Color.DarkGray;
-                    }
-
-                    rankEnableCheckBox.Checked = UserStatsController.Instance.RankEnabled;
-                    pointsEnableCheckBox.Checked = UserStatsController.Instance.PointsEnabled;
-                    truePointsEnableCheckBox.Checked = UserStatsController.Instance.TruePointsEnabled;
-                    ratioEnableCheckBox.Checked = UserStatsController.Instance.RatioEnabled;
-                    truePointsEnableCheckBox.Checked = UserStatsController.Instance.TruePointsEnabled;
-
-                    statsRankOverrideTextBox.Text = UserStatsController.Instance.RankName;
-                    statsPointsOverrideTextBox.Text = UserStatsController.Instance.PointsName;
-                    statsTruePointsOverrideTextBox.Text = UserStatsController.Instance.TruePointsName;
-                    statsRatioOverrideTextBox.Text = UserStatsController.Instance.RatioName;
-
-                    userStatsCustomizationGroupBox.Show();
-                    userStatsCustomizationGroupBox.Location = new Point(165, 11);
-
-                    ClientSize = new Size(1240, 462);
-                    break;
-                case CustomMenuState.GAME_STATS:
-                    gameStatsGroupBox.BackgroundImage = Resources.chrono_trigger_block5;
-
-                    fontBorderCheckBox.Hide();
-                    simpleFontCheckBox.Show();
-                    titleFontGroupBox.Show();
-                    fontBorderLabel.Hide();
-                    simpleFontLabel.Show();
-
-                    windowBackgroundGroupBox.Show();
-                    windowBackgroundColorPictureBox.BackColor = ColorTranslator.FromHtml(GameStatsController.Instance.WindowBackgroundColor);
-
-                    if (GameStatsController.Instance.AdvancedSettingsEnabled)
-                    {
-                        simpleFontCheckBox.Checked = false;
-
-                        titleFontGroupBox.Text = "Name";
-                        descriptionFontGroupBox.Text = "Value";
-
-                        SetFontFamilyBox(titleFontFamilyComboBox, GameStatsController.Instance.NameFontFamily);
-                        SetFontFamilyBox(descriptionFontFamilyComboBox, GameStatsController.Instance.ValueFontFamily);
-
-                        titleFontColorPictureBox.BackColor = ColorTranslator.FromHtml(GameStatsController.Instance.NameColor);
-                        descriptionFontColorPictureBox.BackColor = ColorTranslator.FromHtml(GameStatsController.Instance.ValueColor);
-
-                        titleFontOutlineColorButton.Enabled = GameStatsController.Instance.NameOutlineEnabled;
-                        titleFontOutlineColorPictureBox.Enabled = GameStatsController.Instance.NameOutlineEnabled;
-                        titleFontOutlineNumericUpDown.Enabled = GameStatsController.Instance.NameOutlineEnabled;
-                        titleFontOutlineCheckbox.Checked = GameStatsController.Instance.NameOutlineEnabled;
-
-                        titleFontOutlineColorPictureBox.BackColor = GameStatsController.Instance.NameOutlineEnabled ? ColorTranslator.FromHtml(GameStatsController.Instance.NameOutlineColor) : Color.DarkGray;
-                        titleFontOutlineNumericUpDown.Value = GameStatsController.Instance.NameOutlineSize;
-
-                        descriptionFontOutlineColorButton.Enabled = GameStatsController.Instance.ValueOutlineEnabled;
-                        descriptionFontOutlineColorPictureBox.Enabled = GameStatsController.Instance.ValueOutlineEnabled;
-                        descriptionFontOutlineNumericUpDown.Enabled = GameStatsController.Instance.ValueOutlineEnabled;
-                        descriptionFontOutlineCheckbox.Checked = GameStatsController.Instance.ValueOutlineEnabled;
-
-                        descriptionFontOutlineColorPictureBox.BackColor = GameStatsController.Instance.ValueOutlineEnabled ? ColorTranslator.FromHtml(GameStatsController.Instance.ValueOutlineColor) : Color.DarkGray;
-                        descriptionFontOutlineNumericUpDown.Value = GameStatsController.Instance.ValueOutlineSize;
-
-
-                        descriptionFontGroupBox.Show();
-                    }
-                    else
-                    {
-                        simpleFontCheckBox.Checked = true;
-
-                        titleFontGroupBox.Text = "All";
-
-                        SetFontFamilyBox(titleFontFamilyComboBox, GameStatsController.Instance.SimpleFontFamily);
-
-                        titleFontOutlineCheckbox.Checked = GameStatsController.Instance.SimpleFontOutlineEnabled;
-                        titleFontColorPictureBox.BackColor = ColorTranslator.FromHtml(GameStatsController.Instance.SimpleFontColor);
-
-                        titleFontOutlineNumericUpDown.Enabled = GameStatsController.Instance.SimpleFontOutlineEnabled;
-                        titleFontOutlineColorPictureBox.Enabled = GameStatsController.Instance.SimpleFontOutlineEnabled;
-                        titleFontOutlineColorButton.Enabled = GameStatsController.Instance.SimpleFontOutlineEnabled;
-
-                        titleFontOutlineNumericUpDown.Value = GameStatsController.Instance.SimpleFontOutlineSize;
-                        titleFontOutlineColorPictureBox.BackColor = GameStatsController.Instance.SimpleFontOutlineEnabled ? ColorTranslator.FromHtml(GameStatsController.Instance.SimpleFontOutlineColor) : Color.DarkGray;
-                    }
-
-                    switch (GameStatsController.Instance.DividerCharacter)
-                    {
-                        case "/":
-                            statsRadioButtonDot.Checked = false;
-                            statsRadioButtonSemicolon.Checked = false;
-                            statsRadioButtonBackslash.Checked = true;
-                            break;
-                        case ":":
-                            statsRadioButtonDot.Checked = false;
-                            statsRadioButtonBackslash.Checked = false;
-                            statsRadioButtonSemicolon.Checked = true;
-                            break;
-                        case ".":
-                            statsRadioButtonSemicolon.Checked = false;
-                            statsRadioButtonBackslash.Checked = false;
-                            statsRadioButtonDot.Checked = true;
-                            break;
-                    }
-
-                    gameAchievementsEnableCheckBox.Checked = GameStatsController.Instance.GameAchievementsEnabled;
-                    gamePointsEnableCheckBox.Checked = GameStatsController.Instance.GamePointsEnabled;
-                    gameTruePointsEnableCheckBox.Checked = GameStatsController.Instance.GameTruePointsEnabled;
-                    completedEnableCheckBox.Checked = GameStatsController.Instance.CompletedEnabled;
-                    gameRatioEnableCheckBox.Checked = GameStatsController.Instance.GameRatioEnabled;
-
-                    statsGameAchievementsOverrideTextBox.Text = GameStatsController.Instance.GameAchievementsName;
-                    statsGamePointsOverrideTextBox.Text = GameStatsController.Instance.GamePointsName;
-                    statsGameTruePointsOverrideTextBox.Text = GameStatsController.Instance.GameTruePointsName;
-                    statsCompletedOverrideTextBox.Text = GameStatsController.Instance.CompletedName;
-                    statsGameRatioOverrideTextBox.Text = GameStatsController.Instance.GameRatioName;
-
-                    gameStatsCustomizationGroupBox.Show();
-                    gameStatsCustomizationGroupBox.Location = new Point(165, 11);
-
-                    ClientSize = new Size(1240, 462);
-                    break;
-                case CustomMenuState.ALERTS:
-                    notificationsGroupBox.BackgroundImage = Resources.chrono_trigger_block5;
-
-                    fontBorderCheckBox.Show();
-                    simpleFontCheckBox.Show();
-                    titleFontGroupBox.Show();
-                    fontBorderLabel.Show();
-                    simpleFontLabel.Show();
-
-                    fontBorderCheckBox.Checked = AlertsController.Instance.BorderEnabled;
-
-                    borderBackgroundGroupBox.Show();
-                    windowBackgroundGroupBox.Show();
-
-                    borderBackgroudColorPictureBox.BackColor = ColorTranslator.FromHtml(AlertsController.Instance.BorderBackgroundColor);
-                    windowBackgroundColorPictureBox.BackColor = ColorTranslator.FromHtml(AlertsController.Instance.WindowBackgroundColor);
-
-                    if (AlertsController.Instance.AdvancedSettingsEnabled)
-                    {
-                        simpleFontCheckBox.Checked = false;
-
-                        titleFontGroupBox.Text = "Title";
-                        descriptionFontGroupBox.Text = "Description";
-                        lineFontGroupBox.Text = "Line";
-                        pointsFontGroupBox.Text = "Points";
-
-                        SetFontFamilyBox(titleFontFamilyComboBox, AlertsController.Instance.TitleFontFamily);
-                        SetFontFamilyBox(descriptionFontFamilyComboBox, AlertsController.Instance.DescriptionFontFamily);
-                        SetFontFamilyBox(pointsFontFamilyComboBox, AlertsController.Instance.PointsFontFamily);
-
-                        titleFontColorPictureBox.BackColor = ColorTranslator.FromHtml(AlertsController.Instance.TitleColor);
-                        descriptionFontColorPictureBox.BackColor = ColorTranslator.FromHtml(AlertsController.Instance.DescriptionColor);
-                        pointsFontColorPictureBox.BackColor = ColorTranslator.FromHtml(AlertsController.Instance.PointsColor);
-                        lineColorPictureBox.BackColor = ColorTranslator.FromHtml(AlertsController.Instance.LineColor);
-
-                        titleFontOutlineColorButton.Enabled = AlertsController.Instance.TitleOutlineEnabled;
-                        titleFontOutlineColorPictureBox.Enabled = AlertsController.Instance.TitleOutlineEnabled;
-                        titleFontOutlineNumericUpDown.Enabled = AlertsController.Instance.TitleOutlineEnabled;
-                        titleFontOutlineCheckbox.Checked = AlertsController.Instance.TitleOutlineEnabled;
-
-                        titleFontOutlineColorPictureBox.BackColor = AlertsController.Instance.TitleOutlineEnabled ? ColorTranslator.FromHtml(AlertsController.Instance.TitleOutlineColor) : Color.DarkGray;
-                        titleFontOutlineNumericUpDown.Value = AlertsController.Instance.TitleOutlineSize;
-
-                        descriptionFontOutlineColorButton.Enabled = AlertsController.Instance.DescriptionOutlineEnabled;
-                        descriptionFontOutlineColorPictureBox.Enabled = AlertsController.Instance.DescriptionOutlineEnabled;
-                        descriptionFontOutlineNumericUpDown.Enabled = AlertsController.Instance.DescriptionOutlineEnabled;
-                        descriptionFontOutlineCheckbox.Checked = AlertsController.Instance.DescriptionOutlineEnabled;
-
-                        descriptionFontOutlineColorPictureBox.BackColor = AlertsController.Instance.DescriptionOutlineEnabled ? ColorTranslator.FromHtml(AlertsController.Instance.DescriptionOutlineColor) : Color.DarkGray;
-                        descriptionFontOutlineNumericUpDown.Value = AlertsController.Instance.DescriptionOutlineSize;
-
-                        pointsFontOutlineColorButton.Enabled = AlertsController.Instance.PointsOutlineEnabled;
-                        pointsFontOutlineColorPictureBox.Enabled = AlertsController.Instance.PointsOutlineEnabled;
-                        pointsFontOutlineNumericUpDown.Enabled = AlertsController.Instance.PointsOutlineEnabled;
-                        pointsFontOutlineCheckbox.Checked = AlertsController.Instance.PointsOutlineEnabled;
-
-                        pointsFontOutlineColorPictureBox.BackColor = AlertsController.Instance.PointsOutlineEnabled ? ColorTranslator.FromHtml(AlertsController.Instance.PointsOutlineColor) : Color.DarkGray;
-                        pointsFontOutlineNumericUpDown.Value = AlertsController.Instance.PointsOutlineSize;
-
-                        lineOutlineColorButton.Enabled = AlertsController.Instance.LineOutlineEnabled;
-                        lineOutlineColorPictureBox.Enabled = AlertsController.Instance.LineOutlineEnabled;
-                        lineOutlineNumericUpDown.Enabled = AlertsController.Instance.LineOutlineEnabled;
-                        lineOutlineCheckbox.Checked = AlertsController.Instance.LineOutlineEnabled;
-
-                        lineOutlineColorPictureBox.BackColor = AlertsController.Instance.LineOutlineEnabled ? ColorTranslator.FromHtml(AlertsController.Instance.LineOutlineColor) : Color.DarkGray;
-                        lineOutlineNumericUpDown.Value = AlertsController.Instance.LineOutlineSize;
-
-                        descriptionFontGroupBox.Show();
-                        lineFontGroupBox.Show();
-                        pointsFontGroupBox.Show();
-                    }
-                    else
-                    {
-                        simpleFontCheckBox.Checked = true;
-
-                        titleFontGroupBox.Text = "All";
-
-                        SetFontFamilyBox(titleFontFamilyComboBox, AlertsController.Instance.SimpleFontFamily);
-
-                        titleFontOutlineCheckbox.Checked = AlertsController.Instance.SimpleFontOutlineEnabled;
-                        titleFontColorPictureBox.BackColor = ColorTranslator.FromHtml(AlertsController.Instance.SimpleFontColor);
-
-                        titleFontOutlineNumericUpDown.Enabled = AlertsController.Instance.SimpleFontOutlineEnabled;
-                        titleFontOutlineColorPictureBox.Enabled = AlertsController.Instance.SimpleFontOutlineEnabled;
-                        titleFontOutlineColorButton.Enabled = AlertsController.Instance.SimpleFontOutlineEnabled;
-
-                        titleFontOutlineNumericUpDown.Value = AlertsController.Instance.SimpleFontOutlineSize;
-                        titleFontOutlineColorPictureBox.BackColor = AlertsController.Instance.SimpleFontOutlineEnabled ? ColorTranslator.FromHtml(AlertsController.Instance.SimpleFontOutlineColor) : Color.DarkGray;
-                    }
-                    customAchievementCustomizationGroupBox.Show();
-                    customMasterySettingsGroupBox.Show();
-
-                    customAchievementCustomizationGroupBox.Location = new Point(165, 11);
-                    customMasterySettingsGroupBox.Location = new Point(344, 11);
-
-                    ClientSize = new Size(1240, 462);
-                    break;
-                case CustomMenuState.ACHIEVEMENT_LIST:
-                    achievementListGroupBox.BackgroundImage = Resources.chrono_trigger_block5;
-
-                    autoSrollLabel.Show();
-                    autoScrollCheckBox.Show();
-                    autoScrollCheckBox.Checked = AchievementListController.Instance.AutoScroll;
-
-                    windowBackgroundGroupBox.Show();
-                    windowBackgroundColorPictureBox.BackColor = ColorTranslator.FromHtml(AchievementListController.Instance.WindowBackgroundColor);
-
-                    ClientSize = new Size(1240, 462);
-                    break;
-            }
-
-            UpdatingVisibility = false;
         }
         private void SetFontFamilyBox(ComboBox comboBox, FontFamily fontFamily)
         {
@@ -1820,881 +1118,859 @@ namespace Retro_Achievement_Tracker
 
             if (colorDialog1.ShowDialog() == DialogResult.OK)
             {
-                titleFontColorPictureBox.BackColor = colorDialog1.Color;
-
                 switch (button.Name)
                 {
-                    case "titleFontColorButton":
-                        switch (MenuState)
-                        {
-                            case CustomMenuState.USER_STATS:
-                                if (UserStatsController.Instance.AdvancedSettingsEnabled)
-                                {
-                                    UserStatsController.Instance.NameColor = MediaHelper.HexConverter(colorDialog1.Color);
-                                }
-                                else
-                                {
-                                    UserStatsController.Instance.SimpleFontColor = MediaHelper.HexConverter(colorDialog1.Color);
-                                }
-                                break;
-                            case CustomMenuState.GAME_STATS:
-                                if (GameStatsController.Instance.AdvancedSettingsEnabled)
-                                {
-                                    GameStatsController.Instance.NameColor = MediaHelper.HexConverter(colorDialog1.Color);
-                                }
-                                else
-                                {
-                                    GameStatsController.Instance.SimpleFontColor = MediaHelper.HexConverter(colorDialog1.Color);
-                                }
-                                break;
-                            case CustomMenuState.ALERTS:
-                                if (AlertsController.Instance.AdvancedSettingsEnabled)
-                                {
-                                    AlertsController.Instance.TitleColor = MediaHelper.HexConverter(colorDialog1.Color);
-                                }
-                                else
-                                {
-                                    AlertsController.Instance.SimpleFontColor = MediaHelper.HexConverter(colorDialog1.Color);
-                                }
-                                break;
-                            case CustomMenuState.GAME_INFO:
-                                if (GameInfoController.Instance.AdvancedSettingsEnabled)
-                                {
-                                    GameInfoController.Instance.NameColor = MediaHelper.HexConverter(colorDialog1.Color);
-                                }
-                                else
-                                {
-                                    GameInfoController.Instance.SimpleFontColor = MediaHelper.HexConverter(colorDialog1.Color);
-                                }
-                                break;
-                            case CustomMenuState.RECENT_ACHIEVEMENTS:
-                                if (RecentAchievementsController.Instance.AdvancedSettingsEnabled)
-                                {
-                                    RecentAchievementsController.Instance.TitleColor = MediaHelper.HexConverter(colorDialog1.Color);
-                                }
-                                else
-                                {
-                                    RecentAchievementsController.Instance.SimpleFontColor = MediaHelper.HexConverter(colorDialog1.Color);
-                                }
-                                break;
-                            case CustomMenuState.FOCUS:
-                                if (FocusController.Instance.AdvancedSettingsEnabled)
-                                {
-                                    FocusController.Instance.TitleColor = MediaHelper.HexConverter(colorDialog1.Color);
-                                }
-                                else
-                                {
-                                    FocusController.Instance.SimpleFontColor = MediaHelper.HexConverter(colorDialog1.Color);
-                                }
-                                break;
-                        }
+                    case "userInfoSimpleFontColorBoxButton":
+                        UserInfoController.Instance.SimpleFontColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        userInfoSimpleFontColorPictureBox.BackColor = colorDialog1.Color;
                         break;
-                    case "titleFontOutlineColorButton":
-                        switch (MenuState)
-                        {
-                            case CustomMenuState.USER_STATS:
-                                if (UserStatsController.Instance.AdvancedSettingsEnabled)
-                                {
-                                    UserStatsController.Instance.NameOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
-                                }
-                                else
-                                {
-                                    UserStatsController.Instance.SimpleFontOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
-                                }
-                                break;
-                            case CustomMenuState.GAME_STATS:
-                                if (GameStatsController.Instance.AdvancedSettingsEnabled)
-                                {
-                                    GameStatsController.Instance.NameOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
-                                }
-                                else
-                                {
-                                    GameStatsController.Instance.SimpleFontOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
-                                }
-                                break;
-                            case CustomMenuState.ALERTS:
-                                if (AlertsController.Instance.AdvancedSettingsEnabled)
-                                {
-                                    AlertsController.Instance.TitleOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
-                                }
-                                else
-                                {
-                                    AlertsController.Instance.SimpleFontOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
-                                }
-                                break;
-                            case CustomMenuState.GAME_INFO:
-                                if (GameInfoController.Instance.AdvancedSettingsEnabled)
-                                {
-                                    GameInfoController.Instance.NameOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
-                                }
-                                else
-                                {
-                                    GameInfoController.Instance.SimpleFontOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
-                                }
-                                break;
-                            case CustomMenuState.RECENT_ACHIEVEMENTS:
-                                if (RecentAchievementsController.Instance.AdvancedSettingsEnabled)
-                                {
-                                    RecentAchievementsController.Instance.TitleOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
-                                }
-                                else
-                                {
-                                    RecentAchievementsController.Instance.SimpleFontOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
-                                }
-                                break;
-                            case CustomMenuState.FOCUS:
-                                if (FocusController.Instance.AdvancedSettingsEnabled)
-                                {
-                                    FocusController.Instance.TitleOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
-                                }
-                                else
-                                {
-                                    FocusController.Instance.SimpleFontOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
-                                }
-                                break;
-                        }
+                    case "userInfoSimpleFontOutlineColorBoxButton":
+                        UserInfoController.Instance.SimpleFontOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        userInfoSimpleFontOutlineColorPictureBox.BackColor = colorDialog1.Color;
                         break;
-                    case "descriptionFontColorButton":
-                        switch (MenuState)
-                        {
-                            case CustomMenuState.USER_STATS:
-                                UserStatsController.Instance.ValueColor = MediaHelper.HexConverter(colorDialog1.Color);
-                                break;
-                            case CustomMenuState.GAME_STATS:
-                                GameStatsController.Instance.ValueColor = MediaHelper.HexConverter(colorDialog1.Color);
-                                break;
-                            case CustomMenuState.ALERTS:
-                                AlertsController.Instance.DescriptionColor = MediaHelper.HexConverter(colorDialog1.Color);
-                                break;
-                            case CustomMenuState.GAME_INFO:
-                                GameInfoController.Instance.ValueColor = MediaHelper.HexConverter(colorDialog1.Color);
-                                break;
-                            case CustomMenuState.RECENT_ACHIEVEMENTS:
-                                RecentAchievementsController.Instance.DateColor = MediaHelper.HexConverter(colorDialog1.Color);
-                                break;
-                            case CustomMenuState.FOCUS:
-                                FocusController.Instance.DescriptionColor = MediaHelper.HexConverter(colorDialog1.Color);
-                                break;
-                        }
+                    case "userInfoNamesFontColorBoxButton":
+                        UserInfoController.Instance.NameColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        userInfoNamesFontColorPictureBox.BackColor = colorDialog1.Color;
                         break;
-                    case "descriptionFontOutlineColorButton":
-                        switch (MenuState)
-                        {
-                            case CustomMenuState.USER_STATS:
-                                UserStatsController.Instance.ValueOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
-                                break;
-                            case CustomMenuState.GAME_STATS:
-                                GameStatsController.Instance.ValueOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
-                                break;
-                            case CustomMenuState.ALERTS:
-                                AlertsController.Instance.DescriptionOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
-                                break;
-                            case CustomMenuState.GAME_INFO:
-                                GameInfoController.Instance.ValueOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
-                                break;
-                            case CustomMenuState.RECENT_ACHIEVEMENTS:
-                                RecentAchievementsController.Instance.DateOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
-                                break;
-                            case CustomMenuState.FOCUS:
-                                FocusController.Instance.DescriptionOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
-                                break;
-                        }
+                    case "userInfoNamesFontOutlineColorBoxButton":
+                        UserInfoController.Instance.NameOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        userInfoNamesFontOutlineColorPictureBox.BackColor = colorDialog1.Color;
                         break;
-                    case "pointsFontColorButton":
-                        switch (MenuState)
-                        {
-                            case CustomMenuState.ALERTS:
-                                AlertsController.Instance.PointsColor = MediaHelper.HexConverter(colorDialog1.Color);
-                                break;
-                            case CustomMenuState.RECENT_ACHIEVEMENTS:
-                                RecentAchievementsController.Instance.PointsColor = MediaHelper.HexConverter(colorDialog1.Color);
-                                break;
-                            case CustomMenuState.FOCUS:
-                                FocusController.Instance.PointsColor = MediaHelper.HexConverter(colorDialog1.Color);
-                                break;
-                        }
+                    case "userInfoValuesFontColorBoxButton":
+                        UserInfoController.Instance.ValueColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        userInfoValuesFontColorPictureBox.BackColor = colorDialog1.Color;
                         break;
-                    case "pointsFontOutlineColorButton":
-                        switch (MenuState)
-                        {
-                            case CustomMenuState.ALERTS:
-                                AlertsController.Instance.PointsOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
-                                break;
-                            case CustomMenuState.RECENT_ACHIEVEMENTS:
-                                RecentAchievementsController.Instance.PointsOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
-                                break;
-                            case CustomMenuState.FOCUS:
-                                FocusController.Instance.PointsOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
-                                break;
-                        }
+                    case "userInfoValuesFontOutlineColorBoxButton":
+                        UserInfoController.Instance.ValueOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        userInfoValuesFontOutlineColorPictureBox.BackColor = colorDialog1.Color;
                         break;
-                    case "lineColorButton":
-                        switch (MenuState)
-                        {
-                            case CustomMenuState.ALERTS:
-                                AlertsController.Instance.LineColor = MediaHelper.HexConverter(colorDialog1.Color);
-                                break;
-                            case CustomMenuState.RECENT_ACHIEVEMENTS:
-                                RecentAchievementsController.Instance.LineColor = MediaHelper.HexConverter(colorDialog1.Color);
-                                break;
-                            case CustomMenuState.FOCUS:
-                                FocusController.Instance.LineColor = MediaHelper.HexConverter(colorDialog1.Color);
-                                break;
-                        }
+                    case "gameInfoSimpleFontColorBoxButton":
+                        GameInfoController.Instance.SimpleFontColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        gameInfoSimpleFontColorPictureBox.BackColor = colorDialog1.Color;
                         break;
-                    case "lineOutlineColorButton":
-                        switch (MenuState)
-                        {
-                            case CustomMenuState.ALERTS:
-                                AlertsController.Instance.LineOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
-                                break;
-                            case CustomMenuState.RECENT_ACHIEVEMENTS:
-                                RecentAchievementsController.Instance.LineOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
-                                break;
-                            case CustomMenuState.FOCUS:
-                                FocusController.Instance.LineOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
-                                break;
-                        }
+                    case "gameInfoSimpleFontOutlineColorBoxButton":
+                        GameInfoController.Instance.SimpleFontOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        gameInfoSimpleFontOutlineColorPictureBox.BackColor = colorDialog1.Color;
+                        break;
+                    case "gameInfoNamesFontColorBoxButton":
+                        GameInfoController.Instance.NameColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        gameInfoNamesFontColorPictureBox.BackColor = colorDialog1.Color;
+                        break;
+                    case "gameInfoNamesFontOutlineColorBoxButton":
+                        GameInfoController.Instance.NameOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        gameInfoNamesFontOutlineColorPictureBox.BackColor = colorDialog1.Color;
+                        break;
+                    case "gameInfoValuesFontColorBoxButton":
+                        GameInfoController.Instance.ValueColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        gameInfoValuesFontColorPictureBox.BackColor = colorDialog1.Color;
+                        break;
+                    case "gameInfoValuesFontOutlineColorBoxButton":
+                        GameInfoController.Instance.ValueOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        gameInfoValuesFontOutlineColorPictureBox.BackColor = colorDialog1.Color;
+                        break;
+                    case "gameProgressSimpleFontColorBoxButton":
+                        GameProgressController.Instance.SimpleFontColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        gameProgressSimpleFontColorPictureBox.BackColor = colorDialog1.Color;
+                        break;
+                    case "gameProgressSimpleFontOutlineColorBoxButton":
+                        GameProgressController.Instance.SimpleFontOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        gameProgressSimpleFontOutlineColorPictureBox.BackColor = colorDialog1.Color;
+                        break;
+                    case "gameProgressNamesFontColorBoxButton":
+                        GameProgressController.Instance.NameColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        gameProgressNamesFontColorPictureBox.BackColor = colorDialog1.Color;
+                        break;
+                    case "gameProgressNamesFontOutlineColorBoxButton":
+                        GameProgressController.Instance.NameOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        gameProgressNamesFontOutlineColorPictureBox.BackColor = colorDialog1.Color;
+                        break;
+                    case "gameProgressValuesFontColorBoxButton":
+                        GameProgressController.Instance.ValueColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        gameProgressValuesFontColorPictureBox.BackColor = colorDialog1.Color;
+                        break;
+                    case "gameProgressValuesFontOutlineColorBoxButton":
+                        GameProgressController.Instance.ValueOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        gameProgressValuesFontOutlineColorPictureBox.BackColor = colorDialog1.Color;
+                        break;
+                    case "focusSimpleFontSetColorButton":
+                        FocusController.Instance.SimpleFontColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        focusSimpleFontColorPictureBox.BackColor = colorDialog1.Color;
+                        break;
+                    case "focusSimpleFontOutlineSetColorButton":
+                        FocusController.Instance.SimpleFontOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        focusSimpleFontOutlineColorPictureBox.BackColor = colorDialog1.Color;
+                        break;
+                    case "focusTitleFontSetColorButton":
+                        FocusController.Instance.TitleColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        focusTitleFontColorPictureBox.BackColor = colorDialog1.Color;
+                        break;
+                    case "focusTitleFontOutlineSetColorButton":
+                        FocusController.Instance.TitleOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        focusTitleFontOutlineColorPictureBox.BackColor = colorDialog1.Color;
+                        break;
+                    case "focusDescriptionFontColorPictureBox":
+                        FocusController.Instance.DescriptionColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        focusDescriptionFontColorPictureBox.BackColor = colorDialog1.Color;
+                        break;
+                    case "focusDescriptionFontOutlineSetColorButton":
+                        FocusController.Instance.DescriptionOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        focusDescriptionFontOutlineColorPictureBox.BackColor = colorDialog1.Color;
+                        break;
+                    case "focusPointsFontSetColorButton":
+                        FocusController.Instance.PointsColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        focusPointsFontColorPictureBox.BackColor = colorDialog1.Color;
+                        break;
+                    case "focusPointsFontOutlineSetColorButton":
+                        FocusController.Instance.PointsOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        focusPointsFontOutlineColorPictureBox.BackColor = colorDialog1.Color;
+                        break;
+                    case "focusLineSetColorButton":
+                        FocusController.Instance.LineColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        focusLineColorPictureBox.BackColor = colorDialog1.Color;
+                        break;
+                    case "focusLineOutlineSetColorButton":
+                        FocusController.Instance.LineOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        focusLineOutlineColorPictureBox.BackColor = colorDialog1.Color;
+                        break;
+                    case "notificationsSimpleFontSetColorButton":
+                        NotificationsController.Instance.SimpleFontColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        notificationsSimpleFontColorPictureBox.BackColor = colorDialog1.Color;
+                        break;
+                    case "notificationsSimpleFontOutlineSetColorButton":
+                        NotificationsController.Instance.SimpleFontOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        notificationsSimpleFontOutlineColorPictureBox.BackColor = colorDialog1.Color;
+                        break;
+                    case "notificationsTitleFontSetColorButton":
+                        NotificationsController.Instance.TitleColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        notificationsTitleFontColorPictureBox.BackColor = colorDialog1.Color;
+                        break;
+                    case "notificationsTitleFontOutlineSetColorButton":
+                        NotificationsController.Instance.TitleOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        notificationsTitleFontOutlineColorPictureBox.BackColor = colorDialog1.Color;
+                        break;
+                    case "notificationsDescriptionFontColorPictureBox":
+                        NotificationsController.Instance.DescriptionColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        notificationsDescriptionFontColorPictureBox.BackColor = colorDialog1.Color;
+                        break;
+                    case "notificationsDescriptionFontOutlineSetColorButton":
+                        NotificationsController.Instance.DescriptionOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        notificationsDescriptionFontOutlineColorPictureBox.BackColor = colorDialog1.Color;
+                        break;
+                    case "notificationsPointsFontSetColorButton":
+                        NotificationsController.Instance.PointsColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        notificationsPointsFontColorPictureBox.BackColor = colorDialog1.Color;
+                        break;
+                    case "notificationsPointsFontOutlineSetColorButton":
+                        NotificationsController.Instance.PointsOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        notificationsPointsFontOutlineColorPictureBox.BackColor = colorDialog1.Color;
+                        break;
+                    case "notificationsLineSetColorButton":
+                        NotificationsController.Instance.LineColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        notificationsLineColorPictureBox.BackColor = colorDialog1.Color;
+                        break;
+                    case "notificationsLineOutlineSetColorButton":
+                        NotificationsController.Instance.LineOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        notificationsLineOutlineColorPictureBox.BackColor = colorDialog1.Color;
+                        break;
+                    case "recentAchievementsSimpleFontSetColorButton":
+                        RecentAchievementsController.Instance.SimpleFontColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        recentAchievementsSimpleFontColorPictureBox.BackColor = colorDialog1.Color;
+                        break;
+                    case "recentAchievementsSimpleFontOutlineSetColorButton":
+                        RecentAchievementsController.Instance.SimpleFontOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        recentAchievementsSimpleFontOutlineColorPictureBox.BackColor = colorDialog1.Color;
+                        break;
+                    case "recentAchievementsTitleFontSetColorButton":
+                        RecentAchievementsController.Instance.TitleColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        recentAchievementsTitleFontColorPictureBox.BackColor = colorDialog1.Color;
+                        break;
+                    case "recentAchievementsTitleFontOutlineSetColorButton":
+                        RecentAchievementsController.Instance.TitleColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        recentAchievementsTitleFontOutlineColorPictureBox.BackColor = colorDialog1.Color;
+                        break;
+                    case "recentAchievementsDescriptionFontColorPictureBox":
+                        RecentAchievementsController.Instance.DateColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        recentAchievementsDescriptionFontColorPictureBox.BackColor = colorDialog1.Color;
+                        break;
+                    case "recentAchievementsDescriptionFontOutlineSetColorButton":
+                        RecentAchievementsController.Instance.DateOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        recentAchievementsDescriptionFontOutlineColorPictureBox.BackColor = colorDialog1.Color;
+                        break;
+                    case "recentAchievementsPointsFontSetColorButton":
+                        RecentAchievementsController.Instance.PointsColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        recentAchievementsPointsFontColorPictureBox.BackColor = colorDialog1.Color;
+                        break;
+                    case "recentAchievementsPointsFontOutlineSetColorButton":
+                        RecentAchievementsController.Instance.PointsOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        recentAchievementsPointsFontOutlineColorPictureBox.BackColor = colorDialog1.Color;
+                        break;
+                    case "recentAchievementsLineSetColorButton":
+                        RecentAchievementsController.Instance.LineColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        recentAchievementsLineColorPictureBox.BackColor = colorDialog1.Color;
+                        break;
+                    case "recentAchievementsLineOutlineSetColorButton":
+                        RecentAchievementsController.Instance.LineOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        recentAchievementsLineOutlineColorPictureBox.BackColor = colorDialog1.Color;
                         break;
                 }
-                UpdateGroupBoxVisibility();
             }
         }
         private void FontFamilyComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             FontFamily[] familyArray = FontFamily.Families.ToArray();
+            FontFamily fontFamily = null;
             ComboBox comboBox = sender as ComboBox;
 
-            switch (comboBox.Name)
+            foreach (FontFamily fontFamilyEntity in familyArray)
             {
-                case "titleFontFamilyComboBox":
-                    switch (MenuState)
-                    {
-                        case CustomMenuState.USER_STATS:
-                            if (UserStatsController.Instance.AdvancedSettingsEnabled)
-                            {
-                                UserStatsController.Instance.NameFontFamily = familyArray[Array.FindIndex(familyArray, row => row.Name == (string)(sender as ComboBox).SelectedItem)];
-                            }
-                            else
-                            {
-                                UserStatsController.Instance.SimpleFontFamily = familyArray[Array.FindIndex(familyArray, row => row.Name == (string)(sender as ComboBox).SelectedItem)];
-                            }
-                            break;
-                        case CustomMenuState.GAME_STATS:
-                            if (GameStatsController.Instance.AdvancedSettingsEnabled)
-                            {
-                                GameStatsController.Instance.NameFontFamily = familyArray[Array.FindIndex(familyArray, row => row.Name == (string)(sender as ComboBox).SelectedItem)];
-                            }
-                            else
-                            {
-                                GameStatsController.Instance.SimpleFontFamily = familyArray[Array.FindIndex(familyArray, row => row.Name == (string)(sender as ComboBox).SelectedItem)];
-                            }
-                            break;
-                        case CustomMenuState.ALERTS:
-                            if (AlertsController.Instance.AdvancedSettingsEnabled)
-                            {
-                                AlertsController.Instance.TitleFontFamily = familyArray[Array.FindIndex(familyArray, row => row.Name == (string)(sender as ComboBox).SelectedItem)];
-                            }
-                            else
-                            {
-                                AlertsController.Instance.SimpleFontFamily = familyArray[Array.FindIndex(familyArray, row => row.Name == (string)(sender as ComboBox).SelectedItem)];
-                            }
-                            break;
-                        case CustomMenuState.GAME_INFO:
-                            if (GameInfoController.Instance.AdvancedSettingsEnabled)
-                            {
-                                GameInfoController.Instance.NameFontFamily = familyArray[Array.FindIndex(familyArray, row => row.Name == (string)(sender as ComboBox).SelectedItem)];
-                            }
-                            else
-                            {
-                                GameInfoController.Instance.SimpleFontFamily = familyArray[Array.FindIndex(familyArray, row => row.Name == (string)(sender as ComboBox).SelectedItem)];
-                            }
-                            break;
-                        case CustomMenuState.RECENT_ACHIEVEMENTS:
-                            if (RecentAchievementsController.Instance.AdvancedSettingsEnabled)
-                            {
-                                RecentAchievementsController.Instance.TitleFontFamily = familyArray[Array.FindIndex(familyArray, row => row.Name == (string)(sender as ComboBox).SelectedItem)];
-                            }
-                            else
-                            {
-                                RecentAchievementsController.Instance.SimpleFontFamily = familyArray[Array.FindIndex(familyArray, row => row.Name == (string)(sender as ComboBox).SelectedItem)];
-                            }
-                            break;
-                        case CustomMenuState.FOCUS:
-                            if (FocusController.Instance.AdvancedSettingsEnabled)
-                            {
-                                FocusController.Instance.TitleFontFamily = familyArray[Array.FindIndex(familyArray, row => row.Name == (string)(sender as ComboBox).SelectedItem)];
-                            }
-                            else
-                            {
-                                FocusController.Instance.SimpleFontFamily = familyArray[Array.FindIndex(familyArray, row => row.Name == (string)(sender as ComboBox).SelectedItem)];
-                            }
-                            break;
-                    }
+                if (fontFamilyEntity.Name.Equals((string)comboBox.SelectedItem))
+                {
+                    fontFamily = fontFamilyEntity;
                     break;
-                case "descriptionFontFamilyComboBox":
-                    switch (MenuState)
-                    {
-                        case CustomMenuState.USER_STATS:
-                            UserStatsController.Instance.ValueFontFamily = familyArray[Array.FindIndex(familyArray, row => row.Name == (string)(sender as ComboBox).SelectedItem)];
-                            break;
-                        case CustomMenuState.ALERTS:
-                            AlertsController.Instance.DescriptionFontFamily = familyArray[Array.FindIndex(familyArray, row => row.Name == (string)(sender as ComboBox).SelectedItem)];
-                            break;
-                        case CustomMenuState.GAME_INFO:
-                            GameInfoController.Instance.ValueFontFamily = familyArray[Array.FindIndex(familyArray, row => row.Name == (string)(sender as ComboBox).SelectedItem)];
-                            break;
-                        case CustomMenuState.RECENT_ACHIEVEMENTS:
-                            RecentAchievementsController.Instance.DateFontFamily = familyArray[Array.FindIndex(familyArray, row => row.Name == (string)(sender as ComboBox).SelectedItem)];
-                            break;
-                        case CustomMenuState.FOCUS:
-                            FocusController.Instance.DescriptionFontFamily = familyArray[Array.FindIndex(familyArray, row => row.Name == (string)(sender as ComboBox).SelectedItem)];
-                            break;
-                    }
+                }
+            }
+            if (fontFamily != null)
+            {
+                switch (comboBox.Name)
+                {
+                    case "userInfoSimpleFontComboBox":
+                        UserInfoController.Instance.SimpleFontFamily = fontFamily;
+                        break;
+                    case "userInfoNamesFontComboBox":
+                        UserInfoController.Instance.NameFontFamily = fontFamily;
+                        break;
+                    case "userInfoValuesFontComboBox":
+                        UserInfoController.Instance.ValueFontFamily = fontFamily;
+                        break;
+                    case "focusSimpleFontComboBox":
+                        FocusController.Instance.SimpleFontFamily = fontFamily;
+                        break;
+                    case "focusTitleFontComboBox":
+                        FocusController.Instance.TitleFontFamily = fontFamily;
+                        break;
+                    case "focusDescriptionFontComboBox":
+                        FocusController.Instance.DescriptionFontFamily = fontFamily;
+                        break;
+                    case "focusPointsFontComboBox":
+                        FocusController.Instance.PointsFontFamily = fontFamily;
+                        break;
+                    case "notificationsSimpleFontComboBox":
+                        NotificationsController.Instance.SimpleFontFamily = fontFamily;
+                        break;
+                    case "notificationsTitleFontComboBox":
+                        NotificationsController.Instance.TitleFontFamily = fontFamily;
+                        break;
+                    case "notificationsDescriptionFontComboBox":
+                        NotificationsController.Instance.DescriptionFontFamily = fontFamily;
+                        break;
+                    case "notificationsPointsFontComboBox":
+                        NotificationsController.Instance.PointsFontFamily = fontFamily;
+                        break;
+                    case "gameProgressSimpleFontComboBox":
+                        GameProgressController.Instance.SimpleFontFamily = fontFamily;
+                        break;
+                    case "gameProgressNamesFontComboBox":
+                        GameProgressController.Instance.NameFontFamily = fontFamily;
+                        break;
+                    case "gameProgressValuesFontComboBox":
+                        GameProgressController.Instance.ValueFontFamily = fontFamily;
+                        break;
+                    case "gameInfoSimpleFontComboBox":
+                        GameInfoController.Instance.SimpleFontFamily = fontFamily;
+                        break;
+                    case "gameInfoNamesFontComboBox":
+                        GameInfoController.Instance.NameFontFamily = fontFamily;
+                        break;
+                    case "gameInfoValuesFontComboBox":
+                        GameInfoController.Instance.ValueFontFamily = fontFamily;
+                        break;
+                    case "recentAchievementsSimpleFontComboBox":
+                        RecentAchievementsController.Instance.SimpleFontFamily = fontFamily;
+                        break;
+                    case "recentAchievementsTitleFontComboBox":
+                        RecentAchievementsController.Instance.TitleFontFamily = fontFamily;
+                        break;
+                    case "recentAchievementsDescriptionFontComboBox":
+                        RecentAchievementsController.Instance.DateFontFamily = fontFamily;
+                        break;
+                    case "recentAchievementsPointsFontComboBox":
+                        RecentAchievementsController.Instance.PointsFontFamily = fontFamily;
+                        break;
+                }
+            }
+        }
+        private void BorderCheckBox_Click(object sender, EventArgs e)
+        {
+            CheckBox checkBox = (CheckBox)sender;
+            switch(checkBox.Name)
+            {
+                case "focusBorderCheckBox":
+                    FocusController.Instance.BorderEnabled = !FocusController.Instance.BorderEnabled;
+                    checkBox.Checked = FocusController.Instance.BorderEnabled;
                     break;
-                case "pointsFontFamilyComboBox":
-                    switch (MenuState)
-                    {
-                        case CustomMenuState.ALERTS:
-                            AlertsController.Instance.PointsFontFamily = familyArray[Array.FindIndex(familyArray, row => row.Name == (string)(sender as ComboBox).SelectedItem)];
-                            break;
-                        case CustomMenuState.RECENT_ACHIEVEMENTS:
-                            RecentAchievementsController.Instance.PointsFontFamily = familyArray[Array.FindIndex(familyArray, row => row.Name == (string)(sender as ComboBox).SelectedItem)];
-                            break;
-                        case CustomMenuState.FOCUS:
-                            FocusController.Instance.PointsFontFamily = familyArray[Array.FindIndex(familyArray, row => row.Name == (string)(sender as ComboBox).SelectedItem)];
-                            break;
-                    }
+                case "notificationsBorderCheckBox":
+                    NotificationsController.Instance.BorderEnabled = !NotificationsController.Instance.BorderEnabled;
+                    checkBox.Checked = NotificationsController.Instance.BorderEnabled;
+                    break;
+                case "recentAchievementsBorderCheckBox":
+                    RecentAchievementsController.Instance.BorderEnabled = !RecentAchievementsController.Instance.BorderEnabled;
+                    checkBox.Checked = RecentAchievementsController.Instance.BorderEnabled;
                     break;
             }
         }
         private void NotificationAnimationComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!UpdatingVisibility)
-            {
-                ComboBox comboBox = sender as ComboBox;
+            ComboBox comboBox = sender as ComboBox;
 
-                switch (comboBox.Name)
-                {
-                    case "notificationsAchievementAnimationInComboBox":
-                        switch ((string)(sender as ComboBox).SelectedItem)
-                        {
-                            case "DOWN":
-                                AlertsController.Instance.AchievementAnimationIn = AnimationDirection.DOWN;
-                                break;
-                            case "LEFT":
-                                AlertsController.Instance.AchievementAnimationIn = AnimationDirection.LEFT;
-                                break;
-                            case "RIGHT":
-                                AlertsController.Instance.AchievementAnimationIn = AnimationDirection.RIGHT;
-                                break;
-                            case "UP":
-                                AlertsController.Instance.AchievementAnimationIn = AnimationDirection.UP;
-                                break;
-                            default:
-                                AlertsController.Instance.AchievementAnimationIn = AnimationDirection.STATIC;
-                                break;
-                        }
-                        break;
-                    case "notificationsAchievementAnimationOutComboBox":
-                        switch ((string)notificationsAchievementAnimationOutComboBox.SelectedItem)
-                        {
-                            case "DOWN":
-                                AlertsController.Instance.AchievementAnimationOut = AnimationDirection.DOWN;
-                                break;
-                            case "LEFT":
-                                AlertsController.Instance.AchievementAnimationOut = AnimationDirection.LEFT;
-                                break;
-                            case "RIGHT":
-                                AlertsController.Instance.AchievementAnimationOut = AnimationDirection.RIGHT;
-                                break;
-                            case "UP":
-                                AlertsController.Instance.AchievementAnimationOut = AnimationDirection.UP;
-                                break;
-                            default:
-                                AlertsController.Instance.AchievementAnimationOut = AnimationDirection.STATIC;
-                                break;
-                        }
-                        break;
-                    case "notificationsMasteryAnimationInComboBox":
-                        switch ((string)notificationsMasteryAnimationInComboBox.SelectedItem)
-                        {
-                            case "DOWN":
-                                AlertsController.Instance.MasteryAnimationIn = AnimationDirection.DOWN;
-                                break;
-                            case "LEFT":
-                                AlertsController.Instance.MasteryAnimationIn = AnimationDirection.LEFT;
-                                break;
-                            case "RIGHT":
-                                AlertsController.Instance.MasteryAnimationIn = AnimationDirection.RIGHT;
-                                break;
-                            case "UP":
-                                AlertsController.Instance.MasteryAnimationIn = AnimationDirection.UP;
-                                break;
-                            default:
-                                AlertsController.Instance.MasteryAnimationIn = AnimationDirection.STATIC;
-                                break;
-                        }
-                        break;
-                    case "notificationsMasteryAnimationOutComboBox":
-                        switch ((string)notificationsMasteryAnimationOutComboBox.SelectedItem)
-                        {
-                            case "DOWN":
-                                AlertsController.Instance.MasteryAnimationOut = AnimationDirection.DOWN;
-                                break;
-                            case "LEFT":
-                                AlertsController.Instance.MasteryAnimationOut = AnimationDirection.LEFT;
-                                break;
-                            case "RIGHT":
-                                AlertsController.Instance.MasteryAnimationOut = AnimationDirection.RIGHT;
-                                break;
-                            case "UP":
-                                AlertsController.Instance.MasteryAnimationOut = AnimationDirection.UP;
-                                break;
-                            default:
-                                AlertsController.Instance.MasteryAnimationOut = AnimationDirection.STATIC;
-                                break;
-                        }
-                        break;
-                }
+            switch (comboBox.Name)
+            {
+                case "notificationsAchievementAnimationInComboBox":
+                    switch ((string)(sender as ComboBox).SelectedItem)
+                    {
+                        case "DOWN":
+                            NotificationsController.Instance.AchievementAnimationIn = AnimationDirection.DOWN;
+                            break;
+                        case "LEFT":
+                            NotificationsController.Instance.AchievementAnimationIn = AnimationDirection.LEFT;
+                            break;
+                        case "RIGHT":
+                            NotificationsController.Instance.AchievementAnimationIn = AnimationDirection.RIGHT;
+                            break;
+                        case "UP":
+                            NotificationsController.Instance.AchievementAnimationIn = AnimationDirection.UP;
+                            break;
+                        default:
+                            NotificationsController.Instance.AchievementAnimationIn = AnimationDirection.STATIC;
+                            break;
+                    }
+                    break;
+                case "notificationsAchievementAnimationOutComboBox":
+                    switch ((string)notificationsCustomAchievementAnimationOutComboBox.SelectedItem)
+                    {
+                        case "DOWN":
+                            NotificationsController.Instance.AchievementAnimationOut = AnimationDirection.DOWN;
+                            break;
+                        case "LEFT":
+                            NotificationsController.Instance.AchievementAnimationOut = AnimationDirection.LEFT;
+                            break;
+                        case "RIGHT":
+                            NotificationsController.Instance.AchievementAnimationOut = AnimationDirection.RIGHT;
+                            break;
+                        case "UP":
+                            NotificationsController.Instance.AchievementAnimationOut = AnimationDirection.UP;
+                            break;
+                        default:
+                            NotificationsController.Instance.AchievementAnimationOut = AnimationDirection.STATIC;
+                            break;
+                    }
+                    break;
+                case "notificationsMasteryAnimationInComboBox":
+                    switch ((string)notificationsCustomMasteryAnimationInComboBox.SelectedItem)
+                    {
+                        case "DOWN":
+                            NotificationsController.Instance.MasteryAnimationIn = AnimationDirection.DOWN;
+                            break;
+                        case "LEFT":
+                            NotificationsController.Instance.MasteryAnimationIn = AnimationDirection.LEFT;
+                            break;
+                        case "RIGHT":
+                            NotificationsController.Instance.MasteryAnimationIn = AnimationDirection.RIGHT;
+                            break;
+                        case "UP":
+                            NotificationsController.Instance.MasteryAnimationIn = AnimationDirection.UP;
+                            break;
+                        default:
+                            NotificationsController.Instance.MasteryAnimationIn = AnimationDirection.STATIC;
+                            break;
+                    }
+                    break;
+                case "notificationsMasteryAnimationOutComboBox":
+                    switch ((string)notificationsCustomMasteryAnimationOutComboBox.SelectedItem)
+                    {
+                        case "DOWN":
+                            NotificationsController.Instance.MasteryAnimationOut = AnimationDirection.DOWN;
+                            break;
+                        case "LEFT":
+                            NotificationsController.Instance.MasteryAnimationOut = AnimationDirection.LEFT;
+                            break;
+                        case "RIGHT":
+                            NotificationsController.Instance.MasteryAnimationOut = AnimationDirection.RIGHT;
+                            break;
+                        case "UP":
+                            NotificationsController.Instance.MasteryAnimationOut = AnimationDirection.UP;
+                            break;
+                        default:
+                            NotificationsController.Instance.MasteryAnimationOut = AnimationDirection.STATIC;
+                            break;
+                    }
+                    break;
             }
         }
-        private void FontOutlineCheckBoxheckbox_CheckedChanged(object sender, EventArgs e)
+        private void FontOutlineCheckBox_Click(object sender, EventArgs e)
         {
-            if (!UpdatingVisibility)
+            CheckBox checkBox = sender as CheckBox;
+
+            switch (checkBox.Name)
             {
-                CheckBox checkBox = sender as CheckBox;
-                bool isEnabled = checkBox.Checked;
+                case "userInfoSimpleOutlineCheckBox":
+                    UserInfoController.Instance.SimpleFontOutlineEnabled = !UserInfoController.Instance.SimpleFontOutlineEnabled;
+                    checkBox.Checked = UserInfoController.Instance.SimpleFontOutlineEnabled;
+                    break;
+                case "userInfoNamesOutlineCheckBox":
+                    UserInfoController.Instance.NameOutlineEnabled = !UserInfoController.Instance.NameOutlineEnabled;
+                    checkBox.Checked = UserInfoController.Instance.NameOutlineEnabled;
+                    break;
+                case "userInfoValuesOutlineCheckBox":
+                    UserInfoController.Instance.ValueOutlineEnabled = !UserInfoController.Instance.ValueOutlineEnabled;
+                    checkBox.Checked = UserInfoController.Instance.ValueOutlineEnabled;
+                    break;
+                case "focusSimpleOutlineCheckBox":
+                    FocusController.Instance.SimpleFontOutlineEnabled = !FocusController.Instance.SimpleFontOutlineEnabled;
+                    checkBox.Checked = FocusController.Instance.SimpleFontOutlineEnabled;
+                    break;
+                case "focusTitleOutlineCheckBox":
+                    FocusController.Instance.TitleOutlineEnabled = !FocusController.Instance.TitleOutlineEnabled;
+                    checkBox.Checked = FocusController.Instance.TitleOutlineEnabled;
+                    break;
+                case "focusDescriptionOutlineCheckBox":
+                    FocusController.Instance.DescriptionOutlineEnabled = !FocusController.Instance.DescriptionOutlineEnabled;
+                    checkBox.Checked = FocusController.Instance.DescriptionOutlineEnabled;
+                    break;
+                case "focusPointsOutlineCheckBox":
+                    FocusController.Instance.PointsOutlineEnabled = !FocusController.Instance.PointsOutlineEnabled;
+                    checkBox.Checked = FocusController.Instance.PointsOutlineEnabled;
+                    break;
+                case "focusLineOutlineCheckBox":
+                    FocusController.Instance.LineOutlineEnabled = !FocusController.Instance.LineOutlineEnabled;
+                    checkBox.Checked = FocusController.Instance.LineOutlineEnabled;
+                    break;
+                case "notificationsSimpleOutlineCheckBox":
+                    NotificationsController.Instance.SimpleFontOutlineEnabled = !NotificationsController.Instance.SimpleFontOutlineEnabled;
+                    checkBox.Checked = NotificationsController.Instance.SimpleFontOutlineEnabled;
+                    break;
+                case "notificationsTitleOutlineCheckBox":
+                    NotificationsController.Instance.TitleOutlineEnabled = !NotificationsController.Instance.TitleOutlineEnabled;
+                    checkBox.Checked = NotificationsController.Instance.TitleOutlineEnabled;
+                    break;
+                case "notificationsDescriptionOutlineCheckBox":
+                    NotificationsController.Instance.DescriptionOutlineEnabled = !NotificationsController.Instance.DescriptionOutlineEnabled;
+                    checkBox.Checked = NotificationsController.Instance.DescriptionOutlineEnabled;
+                    break;
+                case "notificationsPointsOutlineCheckBox":
+                    NotificationsController.Instance.PointsOutlineEnabled = !NotificationsController.Instance.PointsOutlineEnabled;
+                    checkBox.Checked = NotificationsController.Instance.PointsOutlineEnabled;
+                    break;
+                case "notificationsLineOutlineCheckBox":
+                    NotificationsController.Instance.LineOutlineEnabled = !NotificationsController.Instance.LineOutlineEnabled;
+                    checkBox.Checked = NotificationsController.Instance.LineOutlineEnabled;
+                    break;
+                case "gameProgressSimpleOutlineCheckBox":
+                    GameProgressController.Instance.SimpleFontOutlineEnabled = !GameProgressController.Instance.SimpleFontOutlineEnabled;
+                    checkBox.Checked = GameProgressController.Instance.SimpleFontOutlineEnabled;
+                    break;
+                case "gameProgressNamesOutlineCheckBox":
+                    GameProgressController.Instance.NameOutlineEnabled = !GameProgressController.Instance.NameOutlineEnabled;
+                    checkBox.Checked = GameProgressController.Instance.NameOutlineEnabled;
+                    break;
+                case "gameProgressValuesOutlineCheckBox":
+                    GameProgressController.Instance.ValueOutlineEnabled = !GameProgressController.Instance.ValueOutlineEnabled;
+                    checkBox.Checked = GameProgressController.Instance.ValueOutlineEnabled;
+                    break;
+                case "gameInfoSimpleOutlineCheckBox":
+                    GameInfoController.Instance.SimpleFontOutlineEnabled = !GameInfoController.Instance.SimpleFontOutlineEnabled;
+                    checkBox.Checked = GameInfoController.Instance.SimpleFontOutlineEnabled;
+                    break;
+                case "gameInfoNamesOutlineCheckBox":
+                    GameInfoController.Instance.NameOutlineEnabled = !GameInfoController.Instance.NameOutlineEnabled;
+                    checkBox.Checked = GameInfoController.Instance.NameOutlineEnabled;
+                    break;
+                case "gameInfoValuesOutlineCheckBox":
+                    GameInfoController.Instance.ValueOutlineEnabled = !GameInfoController.Instance.ValueOutlineEnabled;
+                    checkBox.Checked = GameInfoController.Instance.ValueOutlineEnabled;
+                    break;
+                case "recentAchievementsSimpleFontOutlineCheckBox":
+                    RecentAchievementsController.Instance.SimpleFontOutlineEnabled = !RecentAchievementsController.Instance.SimpleFontOutlineEnabled;
+                    checkBox.Checked = RecentAchievementsController.Instance.SimpleFontOutlineEnabled;
+                    break;
+                case "recentAchievementsTitleFontOutlineCheckBox":
+                    RecentAchievementsController.Instance.TitleOutlineEnabled = !RecentAchievementsController.Instance.TitleOutlineEnabled;
+                    checkBox.Checked = RecentAchievementsController.Instance.TitleOutlineEnabled;
+                    break;
+                case "recentAchievementsDescriptionFontOutlineCheckBox":
+                    RecentAchievementsController.Instance.DescriptionOutlineEnabled = !RecentAchievementsController.Instance.DescriptionOutlineEnabled;
+                    checkBox.Checked = RecentAchievementsController.Instance.DescriptionOutlineEnabled;
+                    break;
+                case "recentAchievementsPointsFontOutlineCheckBox":
+                    RecentAchievementsController.Instance.PointsOutlineEnabled = !RecentAchievementsController.Instance.PointsOutlineEnabled;
+                    checkBox.Checked = RecentAchievementsController.Instance.PointsOutlineEnabled;
+                    break;
+                case "recentAchievementsLineOutlineCheckBox":
+                    RecentAchievementsController.Instance.LineOutlineEnabled = !RecentAchievementsController.Instance.LineOutlineEnabled;
+                    checkBox.Checked = RecentAchievementsController.Instance.LineOutlineEnabled;
+                    break;
+            }
+        }
+        private void SimpleCheckBox_Click(object sender, EventArgs e)
+        {
+            CheckBox checkBox = (CheckBox)sender;
 
-                switch (MenuState)
-                {
-                    case CustomMenuState.USER_STATS:
-                        if (UserStatsController.Instance.AdvancedSettingsEnabled)
-                        {
-                            switch (checkBox.Name)
-                            {
-                                case "titleFontOutlineCheckbox":
-                                    UserStatsController.Instance.NameOutlineEnabled = isEnabled;
-                                    break;
-                                case "descriptionFontOutlineCheckbox":
-                                    UserStatsController.Instance.ValueOutlineEnabled = isEnabled;
-                                    break;
-                            }
-                        }
-                        else
-                        {
-                            UserStatsController.Instance.SimpleFontOutlineEnabled = isEnabled;
-                        }
-                        break;
-                    case CustomMenuState.GAME_STATS:
-                        if (GameStatsController.Instance.AdvancedSettingsEnabled)
-                        {
-                            switch (checkBox.Name)
-                            {
-                                case "titleFontOutlineCheckbox":
-                                    GameStatsController.Instance.NameOutlineEnabled = isEnabled;
-                                    break;
-                                case "descriptionFontOutlineCheckbox":
-                                    GameStatsController.Instance.ValueOutlineEnabled = isEnabled;
-                                    break;
-                            }
-                        }
-                        else
-                        {
-                            GameStatsController.Instance.SimpleFontOutlineEnabled = isEnabled;
-                        }
-                        break;
-                    case CustomMenuState.ALERTS:
-                        if (AlertsController.Instance.AdvancedSettingsEnabled)
-                        {
-                            switch (checkBox.Name)
-                            {
-                                case "titleFontOutlineCheckbox":
-                                    AlertsController.Instance.TitleOutlineEnabled = isEnabled;
-                                    break;
-                                case "descriptionFontOutlineCheckbox":
-                                    AlertsController.Instance.DescriptionOutlineEnabled = isEnabled;
-                                    break;
-                                case "pointsFontOutlineCheckbox":
-                                    AlertsController.Instance.PointsOutlineEnabled = isEnabled;
-                                    break;
-                                case "lineOutlineCheckbox":
-                                    AlertsController.Instance.LineOutlineEnabled = isEnabled;
-                                    break;
-                            }
-                        }
-                        else
-                        {
-                            AlertsController.Instance.SimpleFontOutlineEnabled = isEnabled;
-                        }
-                        break;
-                    case CustomMenuState.GAME_INFO:
-                        if (GameInfoController.Instance.AdvancedSettingsEnabled)
-                        {
-                            switch (checkBox.Name)
-                            {
-                                case "titleFontOutlineCheckbox":
-                                    GameInfoController.Instance.NameOutlineEnabled = isEnabled;
-                                    break;
-                                case "descriptionFontOutlineCheckbox":
-                                    GameInfoController.Instance.ValueOutlineEnabled = isEnabled;
-                                    break;
-                            }
-                        }
-                        else
-                        {
-                            GameInfoController.Instance.SimpleFontOutlineEnabled = isEnabled;
-                        }
-                        break;
-                    case CustomMenuState.RECENT_ACHIEVEMENTS:
-                        if (RecentAchievementsController.Instance.AdvancedSettingsEnabled)
-                        {
-                            switch (checkBox.Name)
-                            {
-                                case "titleFontOutlineCheckbox":
-                                    RecentAchievementsController.Instance.TitleOutlineEnabled = isEnabled;
-                                    break;
-                                case "descriptionFontOutlineCheckbox":
-                                    RecentAchievementsController.Instance.DateOutlineEnabled = isEnabled;
-                                    break;
-                                case "pointsFontOutlineCheckbox":
-                                    RecentAchievementsController.Instance.PointsOutlineEnabled = isEnabled;
-                                    break;
-                                case "lineOutlineCheckbox":
-                                    RecentAchievementsController.Instance.LineOutlineEnabled = isEnabled;
-                                    break;
-                            }
-                        }
-                        else
-                        {
-                            RecentAchievementsController.Instance.SimpleFontOutlineEnabled = isEnabled;
-                        }
-                        break;
-                    case CustomMenuState.FOCUS:
-                        if (FocusController.Instance.AdvancedSettingsEnabled)
-                        {
-                            switch (checkBox.Name)
-                            {
-                                case "titleFontOutlineCheckbox":
-                                    FocusController.Instance.TitleOutlineEnabled = isEnabled;
-                                    break;
-                                case "descriptionFontOutlineCheckbox":
-                                    FocusController.Instance.DescriptionOutlineEnabled = isEnabled;
-                                    break;
-                                case "pointsFontOutlineCheckbox":
-                                    FocusController.Instance.PointsOutlineEnabled = isEnabled;
-                                    break;
-                                case "lineOutlineCheckbox":
-                                    FocusController.Instance.LineOutlineEnabled = isEnabled;
-                                    break;
-                            }
-                        }
-                        else
-                        {
-                            FocusController.Instance.SimpleFontOutlineEnabled = isEnabled;
-                        }
-                        break;
-                }
+            switch (checkBox.Name)
+            {
+                case "userInfoSimpleCheckBox":
+                    UserInfoController.Instance.AdvancedSettingsEnabled = !UserInfoController.Instance.AdvancedSettingsEnabled;
+                    checkBox.Checked = !UserInfoController.Instance.AdvancedSettingsEnabled;
 
-                UpdateGroupBoxVisibility();
+                    if (UserInfoController.Instance.AdvancedSettingsEnabled)
+                    {
+                        userInfoNamesGroupBox.Show();
+                        userInfoValuesGroupBox.Show();
+                    }
+                    else
+                    {
+                        userInfoNamesGroupBox.Hide();
+                        userInfoValuesGroupBox.Hide();
+                    }
+                    break;
+                case "gameInfoSimpleCheckBox":
+                    GameInfoController.Instance.AdvancedSettingsEnabled = !GameInfoController.Instance.AdvancedSettingsEnabled;
+                    checkBox.Checked = !GameInfoController.Instance.AdvancedSettingsEnabled;
+
+                    if (GameInfoController.Instance.AdvancedSettingsEnabled)
+                    {
+                        gameInfoNamesGroupBox.Show();
+                        gameInfoValuesGroupBox.Show();
+                    }
+                    else
+                    {
+                        gameInfoNamesGroupBox.Hide();
+                        gameInfoValuesGroupBox.Hide();
+                    }
+                    break;
+                case "gameProgressSimpleCheckBox":
+                    GameProgressController.Instance.AdvancedSettingsEnabled = !GameProgressController.Instance.AdvancedSettingsEnabled;
+                    checkBox.Checked = !GameProgressController.Instance.AdvancedSettingsEnabled;
+
+                    if (GameProgressController.Instance.AdvancedSettingsEnabled)
+                    {
+                        gameProgressNamesGroupBox.Show();
+                        gameProgressValuesGroupBox.Show();
+                    }
+                    else
+                    {
+                        gameProgressNamesGroupBox.Hide();
+                        gameProgressValuesGroupBox.Hide();
+                    }
+                    break;
+                case "focusSimpleCheckBox":
+                    FocusController.Instance.AdvancedSettingsEnabled = !FocusController.Instance.AdvancedSettingsEnabled;
+                    checkBox.Checked = !FocusController.Instance.AdvancedSettingsEnabled;
+
+                    if (FocusController.Instance.AdvancedSettingsEnabled)
+                    {
+                        focusTitleGroupBox.Show();
+                        focusDescriptionGroupBox.Show();
+                        focusPointsGroupBox.Show();
+                        focusLineGroupBox.Show();
+                    }
+                    else
+                    {
+                        focusTitleGroupBox.Hide();
+                        focusDescriptionGroupBox.Hide();
+                        focusPointsGroupBox.Hide();
+                        focusLineGroupBox.Hide();
+                    }
+                    break;
+                case "notificationsSimpleCheckBox":
+                    NotificationsController.Instance.AdvancedSettingsEnabled = !NotificationsController.Instance.AdvancedSettingsEnabled;
+                    checkBox.Checked = !NotificationsController.Instance.AdvancedSettingsEnabled;
+
+                    if (NotificationsController.Instance.AdvancedSettingsEnabled)
+                    {
+                        notificationsTitleGroupBox.Show();
+                        notificationsDescriptionGroupBox.Show();
+                        notificationsPointsGroupBox.Show();
+                        notificationsLineGroupBox.Show();
+                    }
+                    else
+                    {
+                        notificationsTitleGroupBox.Hide();
+                        notificationsDescriptionGroupBox.Hide();
+                        notificationsPointsGroupBox.Hide();
+                        notificationsLineGroupBox.Hide();
+                    }
+                    break;
+                case "recentAchievementsSimpleCheckBox":
+                    RecentAchievementsController.Instance.AdvancedSettingsEnabled = !RecentAchievementsController.Instance.AdvancedSettingsEnabled;
+                    checkBox.Checked = !RecentAchievementsController.Instance.AdvancedSettingsEnabled;
+
+                    if (RecentAchievementsController.Instance.AdvancedSettingsEnabled)
+                    {
+                        recentAchievementsTitleGroupBox.Show();
+                        recentAchievementsDescriptionGroupBox.Show();
+                        recentAchievementsPointsGroupBox.Show();
+                        recentAchievementsLineGroupBox.Show();
+                    }
+                    else
+                    {
+                        recentAchievementsTitleGroupBox.Hide();
+                        recentAchievementsDescriptionGroupBox.Hide();
+                        recentAchievementsPointsGroupBox.Hide();
+                        recentAchievementsLineGroupBox.Hide();
+                    }
+                    break;
             }
         }
         private void BackgroundColorButton_Click(object sender, EventArgs e)
         {
             Button button = sender as Button;
+
             if (colorDialog1.ShowDialog() == DialogResult.OK)
             {
-                switch (MenuState)
+                switch (button.Name)
                 {
-                    case CustomMenuState.ALERTS:
-                        if (button.Name == "windowBackgroundColorButton")
-                        {
-                            AlertsController.Instance.WindowBackgroundColor = MediaHelper.HexConverter(colorDialog1.Color);
-                            windowBackgroundColorPictureBox.BackColor = colorDialog1.Color;
-                        }
-                        else
-                        {
-                            AlertsController.Instance.BorderBackgroundColor = MediaHelper.HexConverter(colorDialog1.Color);
-                            borderBackgroudColorPictureBox.BackColor = colorDialog1.Color;
-                        }
+                    case "userInfoSetBackgroundColorButton":
+                        UserInfoController.Instance.WindowBackgroundColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        userInfoBackgroundColorPictureBox.BackColor = colorDialog1.Color;
                         break;
-                    case CustomMenuState.RECENT_ACHIEVEMENTS:
-                        if (button.Name == "windowBackgroundColorButton")
-                        {
-                            RecentAchievementsController.Instance.WindowBackgroundColor = MediaHelper.HexConverter(colorDialog1.Color);
-                            windowBackgroundColorPictureBox.BackColor = colorDialog1.Color;
-                        }
-                        else
-                        {
-                            RecentAchievementsController.Instance.BorderBackgroundColor = MediaHelper.HexConverter(colorDialog1.Color);
-                            borderBackgroudColorPictureBox.BackColor = colorDialog1.Color;
-                        }
+                    case "gameProgressSetBackgroundColorButton":
+                        GameProgressController.Instance.WindowBackgroundColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        gameProgressBackgroundColorPictureBox.BackColor = colorDialog1.Color;
                         break;
-                    case CustomMenuState.FOCUS:
-                        if (button.Name == "windowBackgroundColorButton")
-                        {
-                            FocusController.Instance.WindowBackgroundColor = MediaHelper.HexConverter(colorDialog1.Color);
-                            windowBackgroundColorPictureBox.BackColor = colorDialog1.Color;
-                        }
-                        else
-                        {
-                            FocusController.Instance.BorderBackgroundColor = MediaHelper.HexConverter(colorDialog1.Color);
-                            borderBackgroudColorPictureBox.BackColor = colorDialog1.Color;
-                        }
-                        break;
-                    case CustomMenuState.GAME_INFO:
+                    case "gameInfoSetBackgroundColorButton":
                         GameInfoController.Instance.WindowBackgroundColor = MediaHelper.HexConverter(colorDialog1.Color);
-                        windowBackgroundColorPictureBox.BackColor = colorDialog1.Color;
+                        gameInfoBackgroundColorPictureBox.BackColor = colorDialog1.Color;
                         break;
-                    case CustomMenuState.USER_STATS:
-                        UserStatsController.Instance.WindowBackgroundColor = MediaHelper.HexConverter(colorDialog1.Color);
-                        windowBackgroundColorPictureBox.BackColor = colorDialog1.Color;
+                    case "focusSetBackgroundColorButton":
+                        FocusController.Instance.WindowBackgroundColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        focusBackgroundColorPictureBox.BackColor = colorDialog1.Color;
                         break;
-                    case CustomMenuState.GAME_STATS:
-                        GameStatsController.Instance.WindowBackgroundColor = MediaHelper.HexConverter(colorDialog1.Color);
-                        windowBackgroundColorPictureBox.BackColor = colorDialog1.Color;
+                    case "notificationsSetBackgroundColorButton":
+                        NotificationsController.Instance.WindowBackgroundColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        notificationsBackgroundColorPictureBox.BackColor = colorDialog1.Color;
                         break;
-                    case CustomMenuState.ACHIEVEMENT_LIST:
+                    case "recentAchievementsSetBackgroundColorButton":
+                        RecentAchievementsController.Instance.WindowBackgroundColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        recentAchievementsBackgroundColorPictureBox.BackColor = colorDialog1.Color;
+                        break;
+                    case "achievementListSetBackgroundColorButton":
                         AchievementListController.Instance.WindowBackgroundColor = MediaHelper.HexConverter(colorDialog1.Color);
-                        windowBackgroundColorPictureBox.BackColor = colorDialog1.Color;
+                        achievementListBackgroundColorPictureBox.BackColor = colorDialog1.Color;
+                        break;
+                    case "focusSetBorderColorButton":
+                        FocusController.Instance.BorderBackgroundColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        focusBorderColorPictureBox.BackColor = colorDialog1.Color;
+                        break;
+                    case "notificationsSetBorderColorButton":
+                        NotificationsController.Instance.BorderBackgroundColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        notificationsBorderColorPictureBox.BackColor = colorDialog1.Color;
+                        break;
+                    case "recentAchievementsSetBorderColorButton":
+                        RecentAchievementsController.Instance.BorderBackgroundColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        recentAchievementsBorderColorPictureBox.BackColor = colorDialog1.Color;
                         break;
                 }
             }
         }
         private void DefaultButton_Click(object sender, EventArgs e)
         {
-            switch (MenuState)
-            {
-                case CustomMenuState.GAME_INFO:
-                    gameInfoConsoleOverrideTextBox.Text = "Console";
-                    gameInfoDeveloperOverrideTextBox.Text = "Developer";
-                    gameInfoPublisherOverrideTextBox.Text = "Publisher";
-                    gameInfoGenreOverrideTextBox.Text = "Genre";
-                    gameInfoReleaseDateOverrideTextBox.Text = "Released";
-                    gameInfoTitleOverrideTextBox.Text = "Title";
-                    break;
-                case CustomMenuState.USER_STATS:
-                    statsRankOverrideTextBox.Text = "Rank";
-                    statsPointsOverrideTextBox.Text = "Points";
-                    statsTruePointsOverrideTextBox.Text = "True Points";
-                    statsRatioOverrideTextBox.Text = "Ratio";
-                    break;
-                case CustomMenuState.GAME_STATS:
-                    statsGameRatioOverrideTextBox.Text = "Ratio";
-                    statsGamePointsOverrideTextBox.Text = "Points";
-                    statsGameTruePointsOverrideTextBox.Text = "True Points";
-                    statsGameAchievementsOverrideTextBox.Text = "Cheevos";
-                    statsCompletedOverrideTextBox.Text = "Compeleted";
-                    break;
-            }
-        }
-        private void SimpleCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (!UpdatingVisibility)
-            {
-                CheckBox checkBox = sender as CheckBox;
+            Button button = sender as Button;
 
-                switch (checkBox.Name)
-                {
-                    case "simpleFontCheckBox":
-                        switch (MenuState)
-                        {
-                            case CustomMenuState.ALERTS:
-                                AlertsController.Instance.AdvancedSettingsEnabled = !checkBox.Checked;
-                                break;
-                            case CustomMenuState.RECENT_ACHIEVEMENTS:
-                                RecentAchievementsController.Instance.AdvancedSettingsEnabled = !checkBox.Checked;
-                                break;
-                            case CustomMenuState.FOCUS:
-                                FocusController.Instance.AdvancedSettingsEnabled = !checkBox.Checked;
-                                break;
-                            case CustomMenuState.GAME_INFO:
-                                GameInfoController.Instance.AdvancedSettingsEnabled = !checkBox.Checked;
-                                break;
-                            case CustomMenuState.USER_STATS:
-                                UserStatsController.Instance.AdvancedSettingsEnabled = !checkBox.Checked;
-                                break;
-                            case CustomMenuState.GAME_STATS:
-                                GameStatsController.Instance.AdvancedSettingsEnabled = !checkBox.Checked;
-                                break;
-                        }
-                        UpdateGroupBoxVisibility();
-                        break;
-                }
+            switch (button.Name)
+            {
+                case "gameInfoDefaultButton":
+                    gameInfoTitleTextBox.Text = "Title";
+                    gameInfoConsoleTextBox.Text = "Console";
+                    gameInfoDeveloperTextBox.Text = "Developer";
+                    gameInfoPublisherTextBox.Text = "Publisher";
+                    gameInfoGenreTextBox.Text = "Genre";
+                    gameInfoReleaseDateTextBox.Text = "Released";
+                    break;
+                case "userInfoDefaultButton":
+                    userInfoRankTextBox.Text = "Rank";
+                    userInfoPointsTextBox.Text = "Points";
+                    userInfoTruePointsTextBox.Text = "True Points";
+                    userInfoRatioTextBox.Text = "Ratio";
+                    break;
+                case "gameProgressDefaultButton":
+                    gameProgressRatioTextBox.Text = "Ratio";
+                    gameProgressPointsTextBox.Text = "Points";
+                    gameProgressTruePointsTextBox.Text = "True Points";
+                    gameProgressAchievementsTextBox.Text = "Cheevos";
+                    gameProgressCompletedTextBox.Text = "Compeleted";
+                    break;
             }
         }
-        private void OverrideEnableCheckBox_Clicked(object sender, EventArgs e)
+        private void StreamLabelEnableCheckBox_Clicked(object sender, EventArgs e)
         {
             CheckBox checkBox = sender as CheckBox;
 
-            switch (MenuState)
+            switch (checkBox.Name)
             {
-                case CustomMenuState.FOCUS:
-                    FocusController.Instance.BorderEnabled = checkBox.Checked;
+                case "userInfoRankCheckBox":
+                    UserInfoController.Instance.RankEnabled = checkBox.Checked;
                     break;
-                case CustomMenuState.ALERTS:
-                    AlertsController.Instance.BorderEnabled = checkBox.Checked;
+                case "userInfoPointsCheckBox":
+                    UserInfoController.Instance.PointsEnabled = checkBox.Checked;
                     break;
-                case CustomMenuState.RECENT_ACHIEVEMENTS:
-                    RecentAchievementsController.Instance.BorderEnabled = checkBox.Checked;
+                case "userInfoTruePointsCheckBox":
+                    UserInfoController.Instance.TruePointsEnabled = checkBox.Checked;
                     break;
-                case CustomMenuState.USER_STATS:
-                    switch (checkBox.Name)
-                    {
-                        case "rankEnableCheckBox":
-                            UserStatsController.Instance.RankEnabled = checkBox.Checked;
-                            break;
-                        case "pointsEnableCheckBox":
-                            UserStatsController.Instance.PointsEnabled = checkBox.Checked;
-                            break;
-                        case "truePointsEnableCheckBox":
-                            UserStatsController.Instance.TruePointsEnabled = checkBox.Checked;
-                            break;
-                        case "ratioEnableCheckBox":
-                            UserStatsController.Instance.RatioEnabled = checkBox.Checked;
-                            break;
-                    }
+                case "userInfoRatioCheckBox":
+                    UserInfoController.Instance.RatioEnabled = checkBox.Checked;
                     break;
-                case CustomMenuState.GAME_STATS:
-                    switch (checkBox.Name)
-                    {
-                        case "gameAchievementsEnableCheckBox":
-                            GameStatsController.Instance.GameAchievementsEnabled = checkBox.Checked;
-                            break;
-                        case "gamePointsEnableCheckBox":
-                            GameStatsController.Instance.GamePointsEnabled = checkBox.Checked;
-                            break;
-                        case "gameTruePointsEnableCheckBox":
-                            GameStatsController.Instance.GameTruePointsEnabled = checkBox.Checked;
-                            break;
-                        case "gameRatioEnableCheckBox":
-                            GameStatsController.Instance.GameRatioEnabled = checkBox.Checked;
-                            break;
-                        case "completedEnableCheckBox":
-                            GameStatsController.Instance.CompletedEnabled = checkBox.Checked;
-                            break;
-                    }
+                case "gameProgressAchievementsCheckBox":
+                    GameProgressController.Instance.GameAchievementsEnabled = checkBox.Checked;
                     break;
-                case CustomMenuState.GAME_INFO:
-                    switch (checkBox.Name)
-                    {
-                        case "titleEnableCheckBox":
-                            GameInfoController.Instance.TitleEnabled = checkBox.Checked;
-                            break;
-                        case "developerEnableCheckBox":
-                            GameInfoController.Instance.DeveloperEnabled = checkBox.Checked;
-                            break;
-                        case "genreEnableCheckBox":
-                            GameInfoController.Instance.GenreEnabled = checkBox.Checked;
-                            break;
-                        case "publisherEnableCheckBox":
-                            GameInfoController.Instance.PublisherEnabled = checkBox.Checked;
-                            break;
-                        case "consoleEnableCheckBox":
-                            GameInfoController.Instance.ConsoleEnabled = checkBox.Checked;
-                            break;
-                        case "releasedDateEnableCheckBox":
-                            GameInfoController.Instance.ReleasedDateEnabled = checkBox.Checked;
-                            break;
-                    }
+                case "gameProgressPointsCheckBox":
+                    GameProgressController.Instance.GamePointsEnabled = checkBox.Checked;
+                    break;
+                case "gameProgressTruePointsCheckBox":
+                    GameProgressController.Instance.GameTruePointsEnabled = checkBox.Checked;
+                    break;
+                case "gameProgressCompletedCheckBox":
+                    GameProgressController.Instance.CompletedEnabled = checkBox.Checked;
+                    break;
+                case "gameProgressRatioCheckBox":
+                    GameProgressController.Instance.GameRatioEnabled = checkBox.Checked;
+                    break;
+                case "gameInfoTitleCheckBox":
+                    GameInfoController.Instance.TitleEnabled = checkBox.Checked;
+                    break;
+                case "gameInfoDeveloperCheckBox":
+                    GameInfoController.Instance.DeveloperEnabled = checkBox.Checked;
+                    break;
+                case "gameInfoPublisherCheckBox":
+                    GameInfoController.Instance.PublisherEnabled = checkBox.Checked;
+                    break;
+                case "gameInfoConsoleCheckBox":
+                    GameInfoController.Instance.ConsoleEnabled = checkBox.Checked;
+                    break;
+                case "gameInfoGenreCheckBox":
+                    GameInfoController.Instance.GenreEnabled = checkBox.Checked;
+                    break;
+                case "gameInfoReleasedCheckBox":
+                    GameInfoController.Instance.ReleasedDateEnabled = checkBox.Checked;
                     break;
             }
         }
         private void OverrideTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (!UpdatingVisibility)
-            {
-                TextBox textBox = sender as TextBox;
+            TextBox textBox = sender as TextBox;
 
-                switch (textBox.Name)
-                {
-                    case "statsRankOverrideTextBox":
-                        UserStatsController.Instance.RankName = textBox.Text;
-                        break;
-                    case "statsPointsOverrideTextBox":
-                        UserStatsController.Instance.PointsName = textBox.Text;
-                        break;
-                    case "statsTruePointsOverrideTextBox":
-                        UserStatsController.Instance.TruePointsName = textBox.Text;
-                        break;
-                    case "statsRatioOverrideTextBox":
-                        UserStatsController.Instance.RatioName = textBox.Text;
-                        break;
-                    case "statsGameRatioOverrideTextBox":
-                        GameStatsController.Instance.GameRatioName = textBox.Text;
-                        break;
-                    case "statsGamePointsOverrideTextBox":
-                        GameStatsController.Instance.GamePointsName = textBox.Text;
-                        break;
-                    case "statsGameTruePointsOverrideTextBox":
-                        GameStatsController.Instance.GameTruePointsName = textBox.Text;
-                        break;
-                    case "statsGameAchievementsOverrideTextBox":
-                        GameStatsController.Instance.GameAchievementsName = textBox.Text;
-                        break;
-                    case "statsCompletedOverrideTextBox":
-                        GameStatsController.Instance.CompletedName = textBox.Text;
-                        break;
-                    case "gameInfoConsoleOverrideTextBox":
-                        GameInfoController.Instance.ConsoleName = textBox.Text;
-                        break;
-                    case "gameInfoDeveloperOverrideTextBox":
-                        GameInfoController.Instance.DeveloperName = textBox.Text;
-                        break;
-                    case "gameInfoPublisherOverrideTextBox":
-                        GameInfoController.Instance.PublisherName = textBox.Text;
-                        break;
-                    case "gameInfoGenreOverrideTextBox":
-                        GameInfoController.Instance.GenreName = textBox.Text;
-                        break;
-                    case "gameInfoReleaseDateOverrideTextBox":
-                        GameInfoController.Instance.ReleasedDateName = textBox.Text;
-                        break;
-                    case "gameInfoTitleOverrideTextBox":
-                        GameInfoController.Instance.TitleName = textBox.Text;
-                        break;
-                }
+            switch (textBox.Name)
+            {
+                case "userInfoRankTextBox":
+                    UserInfoController.Instance.RankName = textBox.Text;
+                    break;
+                case "userInfoPointsTextBox":
+                    UserInfoController.Instance.PointsName = textBox.Text;
+                    break;
+                case "userInfoTruePointsTextBox":
+                    UserInfoController.Instance.TruePointsName = textBox.Text;
+                    break;
+                case "userInfoRatioTextBox":
+                    UserInfoController.Instance.RatioName = textBox.Text;
+                    break;
+                case "gameProgressAchievementsTextBox":
+                    GameProgressController.Instance.GameAchievementsName = textBox.Text;
+                    break;
+                case "gameProgressPointsTextBox":
+                    GameProgressController.Instance.GamePointsName = textBox.Text;
+                    break;
+                case "gameProgressTruePointsTextBox":
+                    GameProgressController.Instance.GameTruePointsName = textBox.Text;
+                    break;
+                case "gameProgressCompletedTextBox":
+                    GameProgressController.Instance.CompletedName = textBox.Text;
+                    break;
+                case "gameProgressRatioTextBox":
+                    GameProgressController.Instance.GameRatioName = textBox.Text;
+                    break;
+                case "gameInfoConsoleTextBox":
+                    GameInfoController.Instance.ConsoleName = textBox.Text;
+                    break;
+                case "gameInfoDeveloperTextBox":
+                    GameInfoController.Instance.DeveloperName = textBox.Text;
+                    break;
+                case "gameInfoPublisherTextBox":
+                    GameInfoController.Instance.PublisherName = textBox.Text;
+                    break;
+                case "gameInfoGenreTextBox":
+                    GameInfoController.Instance.GenreName = textBox.Text;
+                    break;
+                case "gameInfoReleaseDateTextBox":
+                    GameInfoController.Instance.ReleasedDateName = textBox.Text;
+                    break;
+                case "gameInfoTitleTextBox":
+                    GameInfoController.Instance.TitleName = textBox.Text;
+                    break;
             }
         }
-        private void RadioButton_CheckedChanged(object sender, EventArgs e)
+        private void RadioButton_Clicked(object sender, EventArgs e)
         {
-            if (!UpdatingVisibility)
-            {
-                RadioButton radioButton = sender as RadioButton;
+            RadioButton radioButton = sender as RadioButton;
 
-                if (radioButton.Checked && !UpdatingVisibility)
+            if (radioButton.Checked)
+            {
+                switch (radioButton.Name)
                 {
-                    switch (radioButton.Name)
-                    {
-                        case "statsRadioButtonBackslash":
-                            statsRadioButtonDot.Checked = false;
-                            statsRadioButtonSemicolon.Checked = false;
-                            GameStatsController.Instance.DividerCharacter = "/";
-                            break;
-                        case "statsRadioButtonSemicolon":
-                            statsRadioButtonDot.Checked = false;
-                            statsRadioButtonBackslash.Checked = false;
-                            GameStatsController.Instance.DividerCharacter = ":";
-                            break;
-                        case "statsRadioButtonDot":
-                            statsRadioButtonSemicolon.Checked = false;
-                            statsRadioButtonBackslash.Checked = false;
-                            GameStatsController.Instance.DividerCharacter = ".";
-                            break;
-                    }
+                    case "gameProgressRadioButtonBackslash":
+                        gameProgressRadioButtonBackslash.Checked = true;
+                        gameProgressRadioButtonSemicolon.Checked = false;
+                        gameProgressRadioButtonDot.Checked = false;
+                        GameProgressController.Instance.DividerCharacter = "/";
+                        break;
+                    case "gameProgressRadioButtonSemicolon":
+                        gameProgressRadioButtonBackslash.Checked = false;
+                        gameProgressRadioButtonSemicolon.Checked = true;
+                        gameProgressRadioButtonDot.Checked = false;
+                        GameProgressController.Instance.DividerCharacter = ":";
+                        break;
+                    case "gameProgressRadioButtonDot":
+                        gameProgressRadioButtonBackslash.Checked = false;
+                        gameProgressRadioButtonSemicolon.Checked = false;
+                        gameProgressRadioButtonDot.Checked = true;
+                        GameProgressController.Instance.DividerCharacter = ".";
+                        break;
+                    case "focusBehaviorGoToFirstRadioButton":
+                        focusBehaviorGoToFirstRadioButton.Checked = true;
+                        focusBehaviorGoToPreviousRadioButton.Checked = false;
+                        focusBehaviorGoToNextRadioButton.Checked = false;
+                        focusBehaviorGoToLastRadioButton.Checked = false;
+                        FocusController.Instance.RefocusBehavior = RefocusBehaviorEnum.GO_TO_FIRST;
+                        break;
+                    case "focusBehaviorGoToPreviousRadioButton":
+                        focusBehaviorGoToFirstRadioButton.Checked = false;
+                        focusBehaviorGoToPreviousRadioButton.Checked = true;
+                        focusBehaviorGoToNextRadioButton.Checked = false;
+                        focusBehaviorGoToLastRadioButton.Checked = false;
+                        FocusController.Instance.RefocusBehavior = RefocusBehaviorEnum.GO_TO_PREVIOUS;
+                        break;
+                    case "focusBehaviorGoToNextRadioButton":
+                        focusBehaviorGoToFirstRadioButton.Checked = false;
+                        focusBehaviorGoToPreviousRadioButton.Checked = false;
+                        focusBehaviorGoToNextRadioButton.Checked = true;
+                        focusBehaviorGoToLastRadioButton.Checked = false;
+                        FocusController.Instance.RefocusBehavior = RefocusBehaviorEnum.GO_TO_NEXT;
+                        break;
+                    case "focusBehaviorGoToLastRadioButton":
+                        focusBehaviorGoToFirstRadioButton.Checked = false;
+                        focusBehaviorGoToPreviousRadioButton.Checked = false;
+                        focusBehaviorGoToNextRadioButton.Checked = false;
+                        focusBehaviorGoToLastRadioButton.Checked = true;
+                        FocusController.Instance.RefocusBehavior = RefocusBehaviorEnum.GO_TO_LAST;
+                        break;
                 }
             }
         }
-
         private void BrowserSensitiveControl_Click(object sender, EventArgs e)
         {
             Control control = (Control)sender;
 
-            this.settingsAndBrowserGroupBox.Controls.Remove(chromiumWebBrowser);
-
             switch (control.Name)
             {
                 case "userProfilePictureBox":
+                    tabControl1.SelectedIndex = 7;
                     chromiumWebBrowser = new CefSharp.WinForms.ChromiumWebBrowser("https://retroachievements.org/User/" + Settings.Default.ra_username)
                     {
                         Location = new Point(5, 12),
@@ -2702,53 +1978,28 @@ namespace Retro_Achievement_Tracker
                         Name = "chromiumWebBrowser",
                         Size = new Size(552, 436),
                         TabIndex = 0,
-                        Dock = DockStyle.None,
-                        RequestHandler = new CustomRequestHandler()
+                        Dock = DockStyle.None
                     };
                     break;
                 case "gameInfoPictureBox":
-                    chromiumWebBrowser = new CefSharp.WinForms.ChromiumWebBrowser("https://retroachievements.org/game/" + GameInfo.Id)
-                    {
-                        Location = new Point(5, 12),
-                        ActivateBrowserOnCreation = false,
-                        Name = "chromiumWebBrowser",
-                        Size = new Size(552, 436),
-                        TabIndex = 0,
-                        Dock = DockStyle.None,
-                        RequestHandler = new CustomRequestHandler()
-                    };
+                    tabControl1.SelectedIndex = 7;
+                    chromiumWebBrowser.LoadUrl("https://retroachievements.org/game/" + GameInfo.Id);
                     break;
                 case "focusAchievementPictureBox":
-                    chromiumWebBrowser = new CefSharp.WinForms.ChromiumWebBrowser("https://retroachievements.org/achievement/" + CurrentlyViewingAchievement.Id)
+                    if (CurrentlyViewingAchievement != null)
                     {
-                        Location = new Point(5, 12),
-                        ActivateBrowserOnCreation = false,
-                        Name = "chromiumWebBrowser",
-                        Size = new Size(552, 436),
-                        TabIndex = 0,
-                        Dock = DockStyle.None,
-                        RequestHandler = new CustomRequestHandler()
-                    };
+                        tabControl1.SelectedIndex = 7;
+                        chromiumWebBrowser.LoadUrl("https://retroachievements.org/achievement/" + CurrentlyViewingAchievement.Id);
+                    }
                     break;
                 case "rssFeedListView":
                     ListView listView = (ListView)sender;
 
                     if (listView.SelectedItems.Count > 0)
                     {
-                        this.settingsAndBrowserGroupBox.Controls.Remove(chromiumWebBrowser);
-
                         if (listView.SelectedItems[0].SubItems[0].Text.Contains("[FORUM] ") || listView.SelectedItems[0].SubItems[0].Text.Contains("[CHEEVO] "))
                         {
-                            chromiumWebBrowser = new CefSharp.WinForms.ChromiumWebBrowser(listView.SelectedItems[0].SubItems[3].Text)
-                            {
-                                Location = new Point(5, 12),
-                                ActivateBrowserOnCreation = false,
-                                Name = "chromiumWebBrowser",
-                                Size = new Size(552, 436),
-                                TabIndex = 0,
-                                Dock = DockStyle.None,
-                                RequestHandler = new CustomRequestHandler()
-                            };
+                            chromiumWebBrowser.LoadUrl(listView.SelectedItems[0].SubItems[3].Text);
                         }
                         else
                         {
@@ -2769,40 +2020,34 @@ namespace Retro_Achievement_Tracker
                             listView.SelectedItems[0].SubItems[2].Text +
                             "</body>" +
                             "</html>";
-
+                            this.tabPage10.Controls.Remove(chromiumWebBrowser);
                             chromiumWebBrowser = new CefSharp.WinForms.ChromiumWebBrowser(new HtmlString(s))
                             {
-                                Location = new Point(5, 12),
+                                Location = new Point(334, 3),
                                 ActivateBrowserOnCreation = false,
                                 Name = "chromiumWebBrowser",
-                                Size = new Size(552, 436),
+                                Size = new Size(432, 286),
                                 TabIndex = 0,
-                                Dock = DockStyle.None,
-                                RequestHandler = new CustomRequestHandler()
+                                Dock = DockStyle.None
                             };
+                            this.tabPage10.Controls.Add(chromiumWebBrowser);
                         }
                     }
                     break;
             }
-
-            this.settingsAndBrowserGroupBox.Controls.Add(chromiumWebBrowser);
-
-            MenuState = CustomMenuState.WEB_BROWSER;
-            UpdateGroupBoxVisibility();
         }
         private void LoadProperties()
         {
             chromiumWebBrowser = new CefSharp.WinForms.ChromiumWebBrowser("https://retroachievements.org/User/" + Settings.Default.ra_username)
             {
-                Location = new Point(5, 12),
+                Location = new Point(334, 3),
                 ActivateBrowserOnCreation = false,
                 Name = "chromiumWebBrowser",
-                Size = new Size(552, 436),
+                Size = new Size(432, 286),
                 TabIndex = 0,
-                Dock = DockStyle.None,
-                RequestHandler = new CustomRequestHandler()
+                Dock = DockStyle.None
             };
-            this.settingsAndBrowserGroupBox.Controls.Add(chromiumWebBrowser);
+            this.tabPage10.Controls.Add(chromiumWebBrowser);
 
             if (Settings.Default.UpdateSettings)
             {
@@ -2814,22 +2059,558 @@ namespace Retro_Achievement_Tracker
             }
 
             usernameTextBox.Text = Settings.Default.ra_username;
+            usernameTextBox.TextChanged += RequiredField_TextChanged;
+
             apiKeyTextBox.Text = Settings.Default.ra_key;
+            apiKeyTextBox.TextChanged += RequiredField_TextChanged;
 
+            webBrowserAutoOpenCheckbox.Checked = Settings.Default.web_browser_auto_launch;
+            webBrowserAutoOpenCheckbox.Click += AutoLaunchCheckBox_CheckedChanged;
+
+            /*
+             * Start/Stop
+             */
             autoStartCheckbox.Checked = Settings.Default.auto_start_checked;
-            autoOpenFocusWindowCheckBox.Checked = FocusController.Instance.AutoLaunch;
-            autoOpenUserStatsWindowCheckbox.Checked = UserStatsController.Instance.AutoLaunch;
-            autoOpenGameStatsWindowCheckbox.Checked = GameStatsController.Instance.AutoLaunch;
-            autoOpenAlertsWindowCheckbox.Checked = AlertsController.Instance.AutoLaunch;
-            autoOpenGameInfoWindowCheckbox.Checked = GameInfoController.Instance.AutoLaunch;
-            autoOpenLastFiveWindowCheckbox.Checked = RecentAchievementsController.Instance.AutoLaunch;
-            autoOpenAchievementListWindowCheckbox.Checked = AchievementListController.Instance.AutoLaunch;
-            autoOpenWebBrowserCheckbox.Checked = Settings.Default.web_browser_auto_launch;
+            autoStartCheckbox.Click += AutoLaunchCheckBox_CheckedChanged;
 
+            startButton.Click += StartButton_Click;
+            stopButton.Click += StopButton_Click;
+
+            /*
+             * User Info Tab
+             */
+            userInfoAutoOpenWindowCheckbox.Checked = UserInfoController.Instance.AutoLaunch;
+            userInfoAutoOpenWindowCheckbox.Click += AutoLaunchCheckBox_CheckedChanged;
+
+            userInfoBackgroundColorPictureBox.BackColor = ColorTranslator.FromHtml(UserInfoController.Instance.WindowBackgroundColor);
+            userInfoSetBackgroundColorButton.Click += BackgroundColorButton_Click;
+
+            userInfoDefaultButton.Click += DefaultButton_Click;
+
+            SetFontFamilyBox(userInfoSimpleFontComboBox, UserInfoController.Instance.SimpleFontFamily);
+            SetFontFamilyBox(userInfoNamesFontComboBox, UserInfoController.Instance.NameFontFamily);
+            SetFontFamilyBox(userInfoValuesFontComboBox, UserInfoController.Instance.ValueFontFamily);
+
+            userInfoSimpleOutlineCheckBox.Checked = UserInfoController.Instance.SimpleFontOutlineEnabled;
+            userInfoNamesOutlineCheckBox.Checked = UserInfoController.Instance.NameOutlineEnabled;
+            userInfoValuesOutlineCheckBox.Checked = UserInfoController.Instance.ValueOutlineEnabled;
+
+            userInfoSimpleFontColorPictureBox.BackColor = ColorTranslator.FromHtml(UserInfoController.Instance.SimpleFontColor);
+            userInfoSimpleFontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(UserInfoController.Instance.SimpleFontOutlineColor);
+            userInfoNamesFontColorPictureBox.BackColor = ColorTranslator.FromHtml(UserInfoController.Instance.NameColor);
+            userInfoNamesFontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(UserInfoController.Instance.NameOutlineColor);
+            userInfoValuesFontColorPictureBox.BackColor = ColorTranslator.FromHtml(UserInfoController.Instance.ValueColor);
+            userInfoValuesFontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(UserInfoController.Instance.ValueOutlineColor);
+
+            userInfoSimpleCheckBox.Checked = false;
+
+            if (!UserInfoController.Instance.AdvancedSettingsEnabled)
+            {
+                userInfoNamesGroupBox.Hide();
+                userInfoValuesGroupBox.Hide();
+
+                userInfoSimpleCheckBox.Checked = true;
+            }
+
+            userInfoSimpleCheckBox.Click += SimpleCheckBox_Click;
+
+            userInfoSimpleOutlineCheckBox.Click += FontOutlineCheckBox_Click;
+            userInfoNamesOutlineCheckBox.Click += FontOutlineCheckBox_Click;
+            userInfoValuesOutlineCheckBox.Click += FontOutlineCheckBox_Click;
+
+            userInfoSimpleFontComboBox.SelectedIndexChanged += FontFamilyComboBox_SelectedIndexChanged;
+            userInfoNamesFontComboBox.SelectedIndexChanged += FontFamilyComboBox_SelectedIndexChanged;
+            userInfoValuesFontComboBox.SelectedIndexChanged += FontFamilyComboBox_SelectedIndexChanged;
+
+            userInfoRankCheckBox.Checked = UserInfoController.Instance.RankEnabled;
+            userInfoPointsCheckBox.Checked = UserInfoController.Instance.PointsEnabled;
+            userInfoTruePointsCheckBox.Checked = UserInfoController.Instance.TruePointsEnabled;
+            userInfoRatioCheckBox.Checked = UserInfoController.Instance.RatioEnabled;
+            userInfoRankTextBox.TextChanged += OverrideTextBox_TextChanged;
+            userInfoPointsTextBox.TextChanged += OverrideTextBox_TextChanged;
+            userInfoTruePointsTextBox.TextChanged += OverrideTextBox_TextChanged;
+            userInfoRatioTextBox.TextChanged += OverrideTextBox_TextChanged;
+
+            userInfoSimpleFontColorBoxButton.Click += FontColorButton_Click;
+            userInfoSimpleFontOutlineColorBoxButton.Click += FontColorButton_Click;
+            userInfoNamesFontColorBoxButton.Click += FontColorButton_Click;
+            userInfoNamesFontOutlineColorBoxButton.Click += FontColorButton_Click;
+            userInfoValuesFontColorBoxButton.Click += FontColorButton_Click;
+            userInfoValuesFontOutlineColorBoxButton.Click += FontColorButton_Click;
+
+            userInfoSimpleFontOutlineNumericUpDown.Value = UserInfoController.Instance.SimpleFontOutlineSize;
+            userInfoNamesFontOutlineNumericUpDown.Value = UserInfoController.Instance.NameOutlineSize;
+            userInfoValuesFontOutlineNumericUpDown.Value = UserInfoController.Instance.ValueOutlineSize;
+
+            userInfoSimpleFontOutlineNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
+            userInfoNamesFontOutlineNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
+            userInfoValuesFontOutlineNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
+
+            userProfilePictureBox.Click += BrowserSensitiveControl_Click;
+
+            /*
+             * Game Info Tab
+             */
+            gameInfoAutoOpenWindowCheckbox.Checked = GameInfoController.Instance.AutoLaunch;
+            gameInfoAutoOpenWindowCheckbox.Click += AutoLaunchCheckBox_CheckedChanged;
+
+            gameInfoBackgroundColorPictureBox.BackColor = ColorTranslator.FromHtml(GameInfoController.Instance.WindowBackgroundColor);
+            gameInfoSetBackgroundColorButton.Click += BackgroundColorButton_Click;
+
+            gameInfoDefaultButton.Click += DefaultButton_Click;
+
+            SetFontFamilyBox(gameInfoSimpleFontComboBox, GameInfoController.Instance.SimpleFontFamily);
+            SetFontFamilyBox(gameInfoNamesFontComboBox, GameInfoController.Instance.NameFontFamily);
+            SetFontFamilyBox(gameInfoValuesFontComboBox, GameInfoController.Instance.ValueFontFamily);
+            gameInfoSimpleOutlineCheckBox.Checked = GameInfoController.Instance.SimpleFontOutlineEnabled;
+            gameInfoNamesOutlineCheckBox.Checked = GameInfoController.Instance.NameOutlineEnabled;
+            gameInfoValuesOutlineCheckBox.Checked = GameInfoController.Instance.ValueOutlineEnabled;
+
+            gameInfoSimpleFontColorPictureBox.BackColor = ColorTranslator.FromHtml(GameInfoController.Instance.SimpleFontColor);
+            gameInfoSimpleFontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(GameInfoController.Instance.SimpleFontOutlineColor);
+            gameInfoNamesFontColorPictureBox.BackColor = ColorTranslator.FromHtml(GameInfoController.Instance.NameColor);
+            gameInfoNamesFontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(GameInfoController.Instance.NameOutlineColor);
+            gameInfoValuesFontColorPictureBox.BackColor = ColorTranslator.FromHtml(GameInfoController.Instance.ValueColor);
+            gameInfoValuesFontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(GameInfoController.Instance.ValueOutlineColor);
+
+            gameInfoSimpleFontOutlineNumericUpDown.Value = GameInfoController.Instance.SimpleFontOutlineSize;
+            gameInfoNamesFontOutlineNumericUpDown.Value = GameInfoController.Instance.NameOutlineSize;
+            gameInfoValuesFontOutlineNumericUpDown.Value = GameInfoController.Instance.ValueOutlineSize;
+
+            gameInfoSimpleFontOutlineNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
+            gameInfoNamesFontOutlineNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
+            gameInfoValuesFontOutlineNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
+
+            if (!GameProgressController.Instance.AdvancedSettingsEnabled)
+            {
+                gameInfoNamesGroupBox.Hide();
+                gameInfoValuesGroupBox.Hide();
+
+                gameInfoSimpleCheckBox.Checked = true;
+            }
+
+            gameInfoSimpleCheckBox.Click += SimpleCheckBox_Click;
+
+            gameInfoSimpleOutlineCheckBox.Click += FontOutlineCheckBox_Click;
+            gameInfoNamesOutlineCheckBox.Click += FontOutlineCheckBox_Click;
+            gameInfoValuesOutlineCheckBox.Click += FontOutlineCheckBox_Click;
+
+            gameInfoSimpleFontComboBox.SelectedIndexChanged += FontFamilyComboBox_SelectedIndexChanged;
+            gameInfoNamesFontComboBox.SelectedIndexChanged += FontFamilyComboBox_SelectedIndexChanged;
+            gameInfoValuesFontComboBox.SelectedIndexChanged += FontFamilyComboBox_SelectedIndexChanged;
+
+            gameInfoTitleCheckBox.Checked = GameInfoController.Instance.TitleEnabled;
+            gameInfoDeveloperCheckBox.Checked = GameInfoController.Instance.DeveloperEnabled;
+            gameInfoPublisherCheckBox.Checked = GameInfoController.Instance.PublisherEnabled;
+            gameInfoConsoleCheckBox.Checked = GameInfoController.Instance.ConsoleEnabled;
+            gameInfoGenreCheckBox.Checked = GameInfoController.Instance.GenreEnabled;
+            gameInfoReleasedCheckBox.Checked = GameInfoController.Instance.ReleasedDateEnabled;
+
+            gameInfoTitleTextBox.TextChanged += OverrideTextBox_TextChanged;
+            gameInfoDeveloperTextBox.TextChanged += OverrideTextBox_TextChanged;
+            gameInfoPublisherTextBox.TextChanged += OverrideTextBox_TextChanged;
+            gameInfoConsoleTextBox.TextChanged += OverrideTextBox_TextChanged;
+            gameInfoGenreTextBox.TextChanged += OverrideTextBox_TextChanged;
+            gameInfoReleaseDateTextBox.TextChanged += OverrideTextBox_TextChanged;
+
+            gameInfoPictureBox.Click += BrowserSensitiveControl_Click;
+
+            gameInfoSimpleFontColorBoxButton.Click += FontColorButton_Click;
+            gameInfoSimpleFontOutlineColorBoxButton.Click += FontColorButton_Click;
+            gameInfoNamesFontColorBoxButton.Click += FontColorButton_Click;
+            gameInfoNamesFontOutlineColorBoxButton.Click += FontColorButton_Click;
+            gameInfoValuesFontColorBoxButton.Click += FontColorButton_Click;
+            gameInfoValuesFontOutlineColorBoxButton.Click += FontColorButton_Click;
+
+            /*
+             * Game Progress Tab
+             */
+            gameProgressAutoOpenWindowCheckbox.Checked = GameProgressController.Instance.AutoLaunch;
+            gameProgressAutoOpenWindowCheckbox.Click += AutoLaunchCheckBox_CheckedChanged;
+
+            gameProgressBackgroundColorPictureBox.BackColor = ColorTranslator.FromHtml(GameProgressController.Instance.WindowBackgroundColor);
+            gameProgressSetBackgroundColorButton.Click += BackgroundColorButton_Click;
+
+            gameProgressDefaultButton.Click += DefaultButton_Click;
+
+            SetFontFamilyBox(gameProgressSimpleFontComboBox, GameProgressController.Instance.SimpleFontFamily);
+            SetFontFamilyBox(gameProgressNamesFontComboBox, GameProgressController.Instance.NameFontFamily);
+            SetFontFamilyBox(gameProgressValuesFontComboBox, GameProgressController.Instance.ValueFontFamily);
+            gameProgressSimpleOutlineCheckBox.Checked = GameProgressController.Instance.SimpleFontOutlineEnabled;
+            gameProgressNamesOutlineCheckBox.Checked = GameProgressController.Instance.NameOutlineEnabled;
+            gameProgressValuesOutlineCheckBox.Checked = GameProgressController.Instance.ValueOutlineEnabled;
+
+            gameProgressSimpleFontColorPictureBox.BackColor = ColorTranslator.FromHtml(GameProgressController.Instance.SimpleFontColor);
+            gameProgressSimpleFontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(GameProgressController.Instance.SimpleFontOutlineColor);
+            gameProgressNamesFontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(GameProgressController.Instance.NameOutlineColor);
+            gameProgressNamesFontColorPictureBox.BackColor = ColorTranslator.FromHtml(GameProgressController.Instance.NameColor);
+            gameProgressValuesFontColorPictureBox.BackColor = ColorTranslator.FromHtml(GameProgressController.Instance.ValueColor);
+            gameProgressValuesFontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(GameProgressController.Instance.ValueOutlineColor);
+
+            if (!GameProgressController.Instance.AdvancedSettingsEnabled)
+            {
+                gameProgressNamesGroupBox.Hide();
+                gameProgressValuesGroupBox.Hide();
+
+                gameProgressSimpleCheckBox.Checked = true;
+            }
+
+            gameProgressSimpleCheckBox.Click += SimpleCheckBox_Click;
+
+            gameProgressSimpleFontComboBox.SelectedIndexChanged += FontFamilyComboBox_SelectedIndexChanged;
+            gameProgressNamesFontComboBox.SelectedIndexChanged += FontFamilyComboBox_SelectedIndexChanged;
+            gameProgressValuesFontComboBox.SelectedIndexChanged += FontFamilyComboBox_SelectedIndexChanged;
+
+            gameProgressSimpleOutlineCheckBox.Click += FontOutlineCheckBox_Click;
+            gameProgressNamesOutlineCheckBox.Click += FontOutlineCheckBox_Click;
+            gameProgressValuesOutlineCheckBox.Click += FontOutlineCheckBox_Click;
+
+            gameProgressAchievementsCheckBox.Checked = GameProgressController.Instance.GameAchievementsEnabled;
+            gameProgressPointsCheckBox.Checked = GameProgressController.Instance.GamePointsEnabled;
+            gameProgressTruePointsCheckBox.Checked = GameProgressController.Instance.GameTruePointsEnabled;
+            gameProgressCompletedCheckBox.Checked = GameProgressController.Instance.CompletedEnabled;
+            gameProgressRatioCheckBox.Checked = GameProgressController.Instance.GameRatioEnabled;
+
+            gameProgressAchievementsTextBox.TextChanged += OverrideTextBox_TextChanged;
+            gameProgressPointsTextBox.TextChanged += OverrideTextBox_TextChanged;
+            gameProgressTruePointsTextBox.TextChanged += OverrideTextBox_TextChanged;
+            gameProgressCompletedTextBox.TextChanged += OverrideTextBox_TextChanged;
+            gameProgressRatioTextBox.TextChanged += OverrideTextBox_TextChanged;
+
+            gameProgressSimpleFontColorBoxButton.Click += FontColorButton_Click;
+            gameProgressSimpleFontOutlineColorBoxButton.Click += FontColorButton_Click;
+            gameProgressNamesFontColorBoxButton.Click += FontColorButton_Click;
+            gameProgressNamesFontOutlineColorBoxButton.Click += FontColorButton_Click;
+            gameProgressValuesFontColorBoxButton.Click += FontColorButton_Click;
+            gameProgressValuesFontOutlineColorBoxButton.Click += FontColorButton_Click;
+
+            gameProgressSimpleFontOutlineNumericUpDown.Value = GameProgressController.Instance.SimpleFontOutlineSize;
+            gameProgressNamesFontOutlineNumericUpDown.Value = GameProgressController.Instance.NameOutlineSize;
+            gameProgressValuesFontOutlineNumericUpDown.Value = GameProgressController.Instance.ValueOutlineSize;
+
+            gameProgressSimpleFontOutlineNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
+            gameProgressNamesFontOutlineNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
+            gameProgressValuesFontOutlineNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
+
+            gameProgressRadioButtonBackslash.Click += RadioButton_Clicked;
+            gameProgressRadioButtonSemicolon.Click += RadioButton_Clicked;
+            gameProgressRadioButtonDot.Click += RadioButton_Clicked;
+
+            switch (GameProgressController.Instance.DividerCharacter)
+            {
+                case "/":
+                    gameProgressRadioButtonBackslash.Checked = true;
+                    gameProgressRadioButtonSemicolon.Checked = false;
+                    gameProgressRadioButtonDot.Checked = false;
+                    break;
+                case ":":
+                    gameProgressRadioButtonBackslash.Checked = false;
+                    gameProgressRadioButtonSemicolon.Checked = true;
+                    gameProgressRadioButtonDot.Checked = false;
+                    break;
+                case ".":
+                    gameProgressRadioButtonBackslash.Checked = false;
+                    gameProgressRadioButtonSemicolon.Checked = false;
+                    gameProgressRadioButtonDot.Checked = true;
+                    break;
+            }
+
+            /*
+             * Focus Achievement Tab
+             */
+            focusAutoOpenWindowCheckBox.Checked = FocusController.Instance.AutoLaunch;
+            focusAutoOpenWindowCheckBox.Click += AutoLaunchCheckBox_CheckedChanged;
+
+            focusBackgroundColorPictureBox.BackColor = ColorTranslator.FromHtml(FocusController.Instance.WindowBackgroundColor);
+            focusSetBackgroundColorButton.Click += BackgroundColorButton_Click;
+
+            focusBorderColorPictureBox.BackColor = ColorTranslator.FromHtml(FocusController.Instance.BorderBackgroundColor);
+            focusSetBorderColorButton.Click += BackgroundColorButton_Click;
+
+            focusBorderCheckBox.Checked = FocusController.Instance.BorderEnabled;
+            focusBorderCheckBox.Click += BorderCheckBox_Click;
+
+            SetFontFamilyBox(focusSimpleFontComboBox, FocusController.Instance.SimpleFontFamily);
+            SetFontFamilyBox(focusTitleFontComboBox, FocusController.Instance.TitleFontFamily);
+            SetFontFamilyBox(focusDescriptionFontComboBox, FocusController.Instance.DescriptionFontFamily);
+            SetFontFamilyBox(focusPointsFontComboBox, FocusController.Instance.PointsFontFamily);
+            focusSimpleOutlineCheckBox.Checked = FocusController.Instance.SimpleFontOutlineEnabled;
+            focusTitleOutlineCheckBox.Checked = FocusController.Instance.TitleOutlineEnabled;
+            focusDescriptionOutlineCheckBox.Checked = FocusController.Instance.DescriptionOutlineEnabled;
+            focusPointsOutlineCheckBox.Checked = FocusController.Instance.PointsOutlineEnabled;
+            focusLineOutlineCheckBox.Checked = FocusController.Instance.LineOutlineEnabled;
+
+            focusSimpleFontColorPictureBox.BackColor = ColorTranslator.FromHtml(FocusController.Instance.SimpleFontColor);
+            focusSimpleFontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(FocusController.Instance.SimpleFontOutlineColor);
+            focusTitleFontColorPictureBox.BackColor = ColorTranslator.FromHtml(FocusController.Instance.TitleColor);
+            focusTitleFontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(FocusController.Instance.TitleOutlineColor);
+            focusDescriptionFontColorPictureBox.BackColor = ColorTranslator.FromHtml(FocusController.Instance.DescriptionColor);
+            focusDescriptionFontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(FocusController.Instance.DescriptionOutlineColor);
+            focusPointsFontColorPictureBox.BackColor = ColorTranslator.FromHtml(FocusController.Instance.PointsColor);
+            focusPointsFontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(FocusController.Instance.PointsOutlineColor);
+            focusLineColorPictureBox.BackColor = ColorTranslator.FromHtml(FocusController.Instance.LineColor);
+            focusLineOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(FocusController.Instance.LineOutlineColor);
+
+            if (!FocusController.Instance.AdvancedSettingsEnabled)
+            {
+                focusTitleGroupBox.Hide();
+                focusDescriptionGroupBox.Hide();
+                focusPointsGroupBox.Hide();
+                focusLineGroupBox.Hide();
+
+                focusSimpleCheckBox.Checked = true;
+            }
+
+            focusSimpleCheckBox.Click += SimpleCheckBox_Click;
+
+            focusSimpleFontComboBox.SelectedIndexChanged += FontFamilyComboBox_SelectedIndexChanged;
+            focusTitleFontComboBox.SelectedIndexChanged += FontFamilyComboBox_SelectedIndexChanged;
+            focusDescriptionFontComboBox.SelectedIndexChanged += FontFamilyComboBox_SelectedIndexChanged;
+            focusPointsFontComboBox.SelectedIndexChanged += FontFamilyComboBox_SelectedIndexChanged;
+
+            focusSimpleOutlineCheckBox.Click += FontOutlineCheckBox_Click;
+            focusTitleOutlineCheckBox.Click += FontOutlineCheckBox_Click;
+            focusDescriptionOutlineCheckBox.Click += FontOutlineCheckBox_Click;
+            focusPointsOutlineCheckBox.Click += FontOutlineCheckBox_Click;
+            focusLineOutlineCheckBox.Click += FontOutlineCheckBox_Click;
+
+            focusAchievementPictureBox.Click += BrowserSensitiveControl_Click;
+
+            focusSimpleFontSetColorButton.Click += FontColorButton_Click;
+            focusSimpleFontOutlineSetColorButton.Click += FontColorButton_Click;
+            focusTitleFontSetColorButton.Click += FontColorButton_Click;
+            focusTitleFontOutlineSetColorButton.Click += FontColorButton_Click;
+            focusDescriptionFontSetColorButton.Click += FontColorButton_Click;
+            focusDescriptionFontOutlineSetColorButton.Click += FontColorButton_Click;
+            focusPointsFontSetColorButton.Click += FontColorButton_Click;
+            focusPointsFontOutlineSetColorButton.Click += FontColorButton_Click;
+            focusLineSetColorButton.Click += FontColorButton_Click;
+            focusLineOutlineSetColorButton.Click += FontColorButton_Click;
+
+            focusSimpleFontOutlineNumericUpDown.Value = FocusController.Instance.SimpleFontOutlineSize;
+            focusTitleFontOutlineNumericUpDown.Value = FocusController.Instance.TitleOutlineSize;
+            focusDescriptionFontOutlineNumericUpDown.Value = FocusController.Instance.DescriptionOutlineSize;
+            focusPointsFontOutlineNumericUpDown.Value = FocusController.Instance.PointsOutlineSize;
+            focusLineOutlineNumericUpDown.Value = FocusController.Instance.LineOutlineSize;
+
+            focusSimpleFontOutlineNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
+            focusTitleFontOutlineNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
+            focusDescriptionFontOutlineNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
+            focusPointsFontOutlineNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
+            focusLineOutlineNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
+
+            /*
+             * Notifications Tab
+             */
+            notificationsAutoOpenWindowCheckbox.Checked = NotificationsController.Instance.AutoLaunch;
+            notificationsAutoOpenWindowCheckbox.Click += AutoLaunchCheckBox_CheckedChanged;
+
+            notificationsBackgroundColorPictureBox.BackColor = ColorTranslator.FromHtml(NotificationsController.Instance.WindowBackgroundColor);
+            notificationsSetBackgroundColorButton.Click += BackgroundColorButton_Click;
+
+            notificationsBorderColorPictureBox.BackColor = ColorTranslator.FromHtml(NotificationsController.Instance.BorderBackgroundColor);
+            notificationsSetBorderColorButton.Click += BackgroundColorButton_Click;
+
+            notificationsBorderCheckBox.Checked = NotificationsController.Instance.BorderEnabled;
+            notificationsBorderCheckBox.Click += BorderCheckBox_Click;
+
+            SetFontFamilyBox(notificationsSimpleFontComboBox, NotificationsController.Instance.SimpleFontFamily);
+            SetFontFamilyBox(notificationsTitleFontComboBox, NotificationsController.Instance.TitleFontFamily);
+            SetFontFamilyBox(notificationsDescriptionFontComboBox, NotificationsController.Instance.DescriptionFontFamily);
+            SetFontFamilyBox(notificationsPointsFontComboBox, NotificationsController.Instance.PointsFontFamily);
+            notificationsSimpleOutlineCheckBox.Checked = NotificationsController.Instance.SimpleFontOutlineEnabled;
+            notificationsTitleOutlineCheckBox.Checked = NotificationsController.Instance.TitleOutlineEnabled;
+            notificationsDescriptionOutlineCheckBox.Checked = NotificationsController.Instance.DescriptionOutlineEnabled;
+            notificationsPointsOutlineCheckBox.Checked = NotificationsController.Instance.PointsOutlineEnabled;
+            notificationsLineOutlineCheckBox.Checked = NotificationsController.Instance.LineOutlineEnabled;
+
+            notificationsSimpleFontColorPictureBox.BackColor = ColorTranslator.FromHtml(NotificationsController.Instance.SimpleFontColor);
+            notificationsSimpleFontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(NotificationsController.Instance.SimpleFontOutlineColor);
+            notificationsTitleFontColorPictureBox.BackColor = ColorTranslator.FromHtml(NotificationsController.Instance.TitleColor);
+            notificationsTitleFontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(NotificationsController.Instance.TitleOutlineColor);
+            notificationsDescriptionFontColorPictureBox.BackColor = ColorTranslator.FromHtml(NotificationsController.Instance.DescriptionColor);
+            notificationsDescriptionFontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(NotificationsController.Instance.DescriptionOutlineColor);
+            notificationsPointsFontColorPictureBox.BackColor = ColorTranslator.FromHtml(NotificationsController.Instance.PointsColor);
+            notificationsPointsFontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(NotificationsController.Instance.PointsOutlineColor);
+            notificationsLineColorPictureBox.BackColor = ColorTranslator.FromHtml(NotificationsController.Instance.LineColor);
+            notificationsLineOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(NotificationsController.Instance.LineColor);
+
+            if (!NotificationsController.Instance.AdvancedSettingsEnabled)
+            {
+                notificationsTitleGroupBox.Hide();
+                notificationsDescriptionGroupBox.Hide();
+                notificationsPointsGroupBox.Hide();
+                notificationsLineGroupBox.Hide();
+
+                notificationsSimpleCheckBox.Checked = true;
+            }
+
+            notificationsSimpleCheckBox.Click += SimpleCheckBox_Click;
+
+            notificationsSimpleFontComboBox.SelectedIndexChanged += FontFamilyComboBox_SelectedIndexChanged;
+            notificationsTitleFontComboBox.SelectedIndexChanged += FontFamilyComboBox_SelectedIndexChanged;
+            notificationsDescriptionFontComboBox.SelectedIndexChanged += FontFamilyComboBox_SelectedIndexChanged;
+            notificationsPointsFontComboBox.SelectedIndexChanged += FontFamilyComboBox_SelectedIndexChanged;
+
+            notificationsSimpleOutlineCheckBox.Click += FontOutlineCheckBox_Click;
+            notificationsTitleOutlineCheckBox.Click += FontOutlineCheckBox_Click;
+            notificationsDescriptionOutlineCheckBox.Click += FontOutlineCheckBox_Click;
+            notificationsPointsOutlineCheckBox.Click += FontOutlineCheckBox_Click;
+            notificationsLineOutlineCheckBox.Click += FontOutlineCheckBox_Click;
+
+            notificationsSimpleFontSetColorButton.Click += FontColorButton_Click;
+            notificationsSimpleFontOutlineSetColorButton.Click += FontColorButton_Click;
+            notificationsTitleFontSetColorButton.Click += FontColorButton_Click;
+            notificationsTitleFontOutlineSetColorButton.Click += FontColorButton_Click;
+            notificationsDescriptionFontSetColorButton.Click += FontColorButton_Click;
+            notificationsDescriptionFontOutlineSetColorButton.Click += FontColorButton_Click;
+            notificationsPointsFontSetColorButton.Click += FontColorButton_Click;
+            notificationsPointsFontOutlineSetColorButton.Click += FontColorButton_Click;
+            notificationsLineSetColorButton.Click += FontColorButton_Click;
+            notificationsLineOutlineSetColorButton.Click += FontColorButton_Click;
+
+            notificationsSimpleFontOutlineNumericUpDown.Value = NotificationsController.Instance.SimpleFontOutlineSize;
+            notificationsTitleFontOutlineNumericUpDown.Value = NotificationsController.Instance.TitleOutlineSize;
+            notificationsDescriptionFontOutlineNumericUpDown.Value = NotificationsController.Instance.DescriptionOutlineSize;
+            notificationsPointsFontOutlineNumericUpDown.Value = NotificationsController.Instance.PointsOutlineSize;
+            notificationsLineOutlineNumericUpDown.Value = NotificationsController.Instance.LineOutlineSize;
+
+            notificationsSimpleFontOutlineNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
+            notificationsTitleFontOutlineNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
+            notificationsDescriptionFontOutlineNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
+            notificationsPointsFontOutlineNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
+            notificationsLineOutlineNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
+
+            /*
+             * Recent Achievements Tab
+             */
+            recentAchievementsAutoOpenWindowCheckbox.Checked = RecentAchievementsController.Instance.AutoLaunch;
+            recentAchievementsAutoOpenWindowCheckbox.Click += AutoLaunchCheckBox_CheckedChanged;
+
+            recentAchievementsBackgroundColorPictureBox.BackColor = ColorTranslator.FromHtml(RecentAchievementsController.Instance.WindowBackgroundColor);
+            recentAchievementsSetBackgroundColorButton.Click += BackgroundColorButton_Click;
+
+            recentAchievementsBorderColorPictureBox.BackColor = ColorTranslator.FromHtml(RecentAchievementsController.Instance.BorderBackgroundColor);
+            recentAchievementsSetBorderColorButton.Click += BackgroundColorButton_Click;
+
+            recentAchievementsBorderCheckBox.Checked = RecentAchievementsController.Instance.BorderEnabled;
+            recentAchievementsBorderCheckBox.Click += BorderCheckBox_Click;
+
+            SetFontFamilyBox(recentAchievementsSimpleFontComboBox, RecentAchievementsController.Instance.SimpleFontFamily);
+            SetFontFamilyBox(recentAchievementsTitleFontComboBox, RecentAchievementsController.Instance.TitleFontFamily);
+            SetFontFamilyBox(recentAchievementsDescriptionFontComboBox, RecentAchievementsController.Instance.DateFontFamily);
+            SetFontFamilyBox(recentAchievementsPointsFontComboBox, RecentAchievementsController.Instance.PointsFontFamily);
+            recentAchievementsSimpleFontOutlineCheckBox.Checked = RecentAchievementsController.Instance.SimpleFontOutlineEnabled;
+            recentAchievementsTitleFontOutlineCheckBox.Checked = RecentAchievementsController.Instance.TitleOutlineEnabled;
+            recentAchievementsDescriptionFontOutlineCheckBox.Checked = RecentAchievementsController.Instance.DescriptionOutlineEnabled;
+            recentAchievementsPointsFontOutlineCheckBox.Checked = RecentAchievementsController.Instance.PointsOutlineEnabled;
+            recentAchievementsLineOutlineCheckBox.Checked = RecentAchievementsController.Instance.LineOutlineEnabled;
+
+            recentAchievementsSimpleFontColorPictureBox.BackColor = ColorTranslator.FromHtml(RecentAchievementsController.Instance.SimpleFontColor);
+            recentAchievementsSimpleFontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(RecentAchievementsController.Instance.SimpleFontOutlineColor);
+            recentAchievementsTitleFontColorPictureBox.BackColor = ColorTranslator.FromHtml(RecentAchievementsController.Instance.TitleColor);
+            recentAchievementsTitleFontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(RecentAchievementsController.Instance.TitleOutlineColor);
+            recentAchievementsDescriptionFontColorPictureBox.BackColor = ColorTranslator.FromHtml(RecentAchievementsController.Instance.DateColor);
+            recentAchievementsDescriptionFontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(RecentAchievementsController.Instance.DateOutlineColor);
+            recentAchievementsPointsFontColorPictureBox.BackColor = ColorTranslator.FromHtml(RecentAchievementsController.Instance.PointsColor);
+            recentAchievementsPointsFontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(RecentAchievementsController.Instance.PointsOutlineColor);
+            recentAchievementsLineColorPictureBox.BackColor = ColorTranslator.FromHtml(RecentAchievementsController.Instance.LineColor);
+            recentAchievementsLineOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(RecentAchievementsController.Instance.LineColor);
+
+            if (!RecentAchievementsController.Instance.AdvancedSettingsEnabled)
+            {
+                recentAchievementsTitleGroupBox.Hide();
+                recentAchievementsDescriptionGroupBox.Hide();
+                recentAchievementsPointsGroupBox.Hide();
+                recentAchievementsLineGroupBox.Hide();
+
+                recentAchievementsSimpleCheckBox.Checked = true;
+            }
+
+            recentAchievementsSimpleCheckBox.Click += SimpleCheckBox_Click;
+
+            recentAchievementsSimpleFontComboBox.SelectedIndexChanged += FontFamilyComboBox_SelectedIndexChanged;
+            recentAchievementsTitleFontComboBox.SelectedIndexChanged += FontFamilyComboBox_SelectedIndexChanged;
+            recentAchievementsDescriptionFontComboBox.SelectedIndexChanged += FontFamilyComboBox_SelectedIndexChanged;
+            recentAchievementsPointsFontComboBox.SelectedIndexChanged += FontFamilyComboBox_SelectedIndexChanged;
+
+            recentAchievementsSimpleFontOutlineCheckBox.Click += FontOutlineCheckBox_Click;
+            recentAchievementsTitleFontOutlineCheckBox.Click += FontOutlineCheckBox_Click;
+            recentAchievementsDescriptionFontOutlineCheckBox.Click += FontOutlineCheckBox_Click;
+            recentAchievementsPointsFontOutlineCheckBox.Click += FontOutlineCheckBox_Click;
+            recentAchievementsLineOutlineCheckBox.Click += FontOutlineCheckBox_Click;
+
+            recentAchievementsMaxListNumericUpDown.Value = RecentAchievementsController.Instance.MaxListSize;
+            recentAchievementsMaxListNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
+
+            recentAchievementsSimpleFontSetColorButton.Click += FontColorButton_Click;
+            recentAchievementsSimpleFontOutlineSetColorButton.Click += FontColorButton_Click;
+            recentAchievementsTitleFontSetColorButton.Click += FontColorButton_Click;
+            recentAchievementsTitleFontOutlineSetColorButton.Click += FontColorButton_Click;
+            recentAchievementsDescriptionFontSetColorButton.Click += FontColorButton_Click;
+            recentAchievementsDescriptionFontOutlineSetColorButton.Click += FontColorButton_Click;
+            recentAchievementsPointsFontSetColorButton.Click += FontColorButton_Click;
+            recentAchievementsPointsFontOutlineSetColorButton.Click += FontColorButton_Click;
+            recentAchievementsLineSetColorButton.Click += FontColorButton_Click;
+            recentAchievementsLineOutlineSetColorButton.Click += FontColorButton_Click;
+
+            recentAchievementsSimpleFontOutlineNumericUpDown.Value = RecentAchievementsController.Instance.SimpleFontOutlineSize;
+            recentAchievementsTitleFontOutlineNumericUpDown.Value = RecentAchievementsController.Instance.TitleOutlineSize;
+            recentAchievementsDescriptionFontOutlineNumericUpDown.Value = RecentAchievementsController.Instance.DescriptionOutlineSize;
+            recentAchievementsPointsFontOutlineNumericUpDown.Value = RecentAchievementsController.Instance.PointsOutlineSize;
+            recentAchievementsLineOutlineNumericUpDown.Value = RecentAchievementsController.Instance.LineOutlineSize;
+
+            recentAchievementsSimpleFontOutlineNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
+            recentAchievementsTitleFontOutlineNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
+            recentAchievementsDescriptionFontOutlineNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
+            recentAchievementsPointsFontOutlineNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
+            recentAchievementsLineOutlineNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
+
+            /*
+             * Achievement List Tab
+             */
+            achievementListAutoOpenWindowCheckbox.Checked = AchievementListController.Instance.AutoLaunch;
+            achievementListAutoOpenWindowCheckbox.Click += AutoLaunchCheckBox_CheckedChanged;
+
+            achievementListBackgroundColorPictureBox.BackColor = ColorTranslator.FromHtml(AchievementListController.Instance.WindowBackgroundColor);
+            achievementListSetBackgroundColorButton.Click += BackgroundColorButton_Click;
+
+            /*
+             * RSS Feed CheckBoxes
+             */
             rssFeedCheevoCheckBox.Checked = Settings.Default.rss_new_achievements_feed;
             rssFeedForumCheckBox.Checked = Settings.Default.rss_forum_feed;
             rssFeedFriendCheckBox.Checked = Settings.Default.rss_friend_feed;
             rssFeedNewsCheckBox.Checked = Settings.Default.rss_news_feed;
+
+            rssFeedCheevoCheckBox.CheckedChanged += RSSFeedCheckbox_CheckedChanged;
+            rssFeedForumCheckBox.CheckedChanged += RSSFeedCheckbox_CheckedChanged;
+            rssFeedFriendCheckBox.CheckedChanged += RSSFeedCheckbox_CheckedChanged;
+            rssFeedNewsCheckBox.CheckedChanged += RSSFeedCheckbox_CheckedChanged;
+
+            rssFeedListView.SelectedIndexChanged += BrowserSensitiveControl_Click;
+
+            selectCustomAchievementFileButton.Enabled = NotificationsController.Instance.CustomAchievementEnabled;
+            customAchievementEnableCheckbox.Checked = NotificationsController.Instance.CustomAchievementEnabled;
+            acheivementEditOutlineCheckbox.Enabled = NotificationsController.Instance.CustomAchievementEnabled;
+            customAchievementEnableCheckbox.Click += CustomAchievementEnableCheckBox_CheckedChanged;
+            acheivementEditOutlineCheckbox.Click += AcheivementEditOutlineCheckBox_CheckedChanged;
+
+            selectCustomMasteryFileButton.Enabled = NotificationsController.Instance.CustomMasteryEnabled;
+            customMasteryEnableCheckbox.Checked = NotificationsController.Instance.CustomMasteryEnabled;
+            masteryEditOultineCheckbox.Enabled = NotificationsController.Instance.CustomMasteryEnabled;
+            customMasteryEnableCheckbox.Click += CustomMasteryEnableCheckBox_CheckedChanged;
+            masteryEditOultineCheckbox.Click += MasteryEditOultineCheckBox_CheckedChanged;
+
+            if (NotificationsController.Instance.CustomAchievementScale > notificationsCustomAchievementScaleNumericUpDown.Maximum)
+            {
+                NotificationsController.Instance.CustomAchievementScale = notificationsCustomAchievementScaleNumericUpDown.Maximum;
+            }
+
+            if (NotificationsController.Instance.CustomMasteryScale > notificationsCustomMasteryScaleNumericUpDown.Maximum)
+            {
+                NotificationsController.Instance.CustomMasteryScale = notificationsCustomMasteryScaleNumericUpDown.Maximum;
+            }
 
             List<AnimationDirection> animationDirections = new List<AnimationDirection>
             {
@@ -2842,219 +2623,110 @@ namespace Retro_Achievement_Tracker
 
             animationDirections.ForEach(animationDirection =>
             {
-                notificationsAchievementAnimationInComboBox.Items.Add(animationDirection.ToString());
-                notificationsAchievementAnimationOutComboBox.Items.Add(animationDirection.ToString());
-                notificationsMasteryAnimationInComboBox.Items.Add(animationDirection.ToString());
-                notificationsMasteryAnimationOutComboBox.Items.Add(animationDirection.ToString());
+                notificationsCustomAchievementAnimationInComboBox.Items.Add(animationDirection.ToString());
+                notificationsCustomAchievementAnimationOutComboBox.Items.Add(animationDirection.ToString());
+                notificationsCustomMasteryAnimationInComboBox.Items.Add(animationDirection.ToString());
+                notificationsCustomMasteryAnimationOutComboBox.Items.Add(animationDirection.ToString());
             });
 
-            notificationsAchievementAnimationInComboBox.SelectedIndex = notificationsAchievementAnimationInComboBox.Items.IndexOf(Settings.Default.notifications_achievement_in_animation);
-            notificationsAchievementAnimationOutComboBox.SelectedIndex = notificationsAchievementAnimationOutComboBox.Items.IndexOf(Settings.Default.notifications_achievement_out_animation);
-            notificationsMasteryAnimationInComboBox.SelectedIndex = notificationsMasteryAnimationInComboBox.Items.IndexOf(Settings.Default.notifications_mastery_in_animation);
-            notificationsMasteryAnimationOutComboBox.SelectedIndex = notificationsMasteryAnimationOutComboBox.Items.IndexOf(Settings.Default.notifications_mastery_out_animation);
+            notificationsCustomAchievementAnimationInComboBox.SelectedIndex = notificationsCustomAchievementAnimationInComboBox.Items.IndexOf(Settings.Default.notifications_achievement_in_animation);
+            notificationsCustomAchievementAnimationOutComboBox.SelectedIndex = notificationsCustomAchievementAnimationOutComboBox.Items.IndexOf(Settings.Default.notifications_achievement_out_animation);
+            notificationsCustomMasteryAnimationInComboBox.SelectedIndex = notificationsCustomMasteryAnimationInComboBox.Items.IndexOf(Settings.Default.notifications_mastery_in_animation);
+            notificationsCustomMasteryAnimationOutComboBox.SelectedIndex = notificationsCustomMasteryAnimationOutComboBox.Items.IndexOf(Settings.Default.notifications_mastery_out_animation);
+            notificationsCustomAchievementAnimationInComboBox.SelectedIndexChanged += NotificationAnimationComboBox_SelectedIndexChanged;
+            notificationsCustomAchievementAnimationOutComboBox.SelectedIndexChanged += NotificationAnimationComboBox_SelectedIndexChanged;
+            notificationsCustomMasteryAnimationInComboBox.SelectedIndexChanged += NotificationAnimationComboBox_SelectedIndexChanged;
+            notificationsCustomMasteryAnimationOutComboBox.SelectedIndexChanged += NotificationAnimationComboBox_SelectedIndexChanged;
 
-            customAchievementEnableCheckbox.Checked = AlertsController.Instance.CustomAchievementEnabled;
-            selectCustomAchievementButton.Enabled = AlertsController.Instance.CustomAchievementEnabled;
-            acheivementEditOutlineCheckbox.Enabled = AlertsController.Instance.CustomAchievementEnabled;
+            notificationsCustomAchievementScaleNumericUpDown.Value = NotificationsController.Instance.CustomAchievementScale;
+            notificationsCustomMasteryScaleNumericUpDown.Value = NotificationsController.Instance.CustomMasteryScale;
+            notificationsCustomAchievementScaleNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
+            notificationsCustomMasteryScaleNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
 
-            customMasteryEnableCheckbox.Checked = AlertsController.Instance.CustomMasteryEnabled;
-            selectCustomMasteryNotificationButton.Enabled = AlertsController.Instance.CustomMasteryEnabled;
-            masteryEditOultineCheckbox.Enabled = AlertsController.Instance.CustomMasteryEnabled;
+            notificationsCustomAchievementInNumericUpDown.Value = NotificationsController.Instance.CustomAchievementIn;
+            notificationsCustomAchievementOutNumericUpDown.Value = NotificationsController.Instance.CustomAchievementOut;
+            notificationsCustomAchievementInNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
+            notificationsCustomAchievementOutNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
 
-            customAchievementXNumericUpDown.Value = AlertsController.Instance.CustomAchievementX;
-            customAchievementYNumericUpDown.Value = AlertsController.Instance.CustomAchievementY;
+            notificationsCustomMasteryInNumericUpDown.Value = NotificationsController.Instance.CustomMasteryIn;
+            notificationsCustomMasteryOutNumericUpDown.Value = NotificationsController.Instance.CustomMasteryOut;
+            notificationsCustomMasteryOutNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
+            notificationsCustomMasteryInNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
 
-            customMasteryXNumericUpDown.Value = AlertsController.Instance.CustomMasteryX;
-            customMasteryYNumericUpDown.Value = AlertsController.Instance.CustomMasteryY;
+            notificationsCustomAchievementInSpeedUpDown.Value = NotificationsController.Instance.CustomAchievementInSpeed;
+            notificationsCustomAchievementOutSpeedUpDown.Value = NotificationsController.Instance.CustomAchievementOutSpeed;
+            notificationsCustomAchievementInSpeedUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
+            notificationsCustomAchievementOutSpeedUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
 
-            if (AlertsController.Instance.CustomAchievementScale > scaleAchievementNumericUpDown.Maximum)
-            {
-                AlertsController.Instance.CustomAchievementScale = scaleAchievementNumericUpDown.Maximum;
-            }
+            notificationsCustomMasteryInSpeedUpDown.Value = NotificationsController.Instance.CustomMasteryInSpeed;
+            notificationsCustomMasteryOutSpeedUpDown.Value = NotificationsController.Instance.CustomMasteryOutSpeed;
+            notificationsCustomMasteryInSpeedUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
+            notificationsCustomMasteryOutSpeedUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
 
-            if (AlertsController.Instance.CustomMasteryScale > scaleMasteryNumericUpDown.Maximum)
-            {
-                AlertsController.Instance.CustomMasteryScale = scaleMasteryNumericUpDown.Maximum;
-            }
+            notificationsCustomAchievementXNumericUpDown.Value = NotificationsController.Instance.CustomAchievementX;
+            notificationsCustomAchievementYNumericUpDown.Value = NotificationsController.Instance.CustomAchievementY;
+            notificationsCustomAchievementXNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
+            notificationsCustomAchievementYNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
 
-            scaleAchievementNumericUpDown.Value = AlertsController.Instance.CustomAchievementScale;
-            scaleMasteryNumericUpDown.Value = AlertsController.Instance.CustomMasteryScale;
+            notificationsCustomMasteryXNumericUpDown.Value = NotificationsController.Instance.CustomMasteryX;
+            notificationsCustomMasteryYNumericUpDown.Value = NotificationsController.Instance.CustomMasteryY;
+            notificationsCustomMasteryXNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
+            notificationsCustomMasteryYNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
 
-            notificationAchievementInNumericUpDown.Value = AlertsController.Instance.CustomAchievementIn;
-            notificationAchievementOutNumericUpDown.Value = AlertsController.Instance.CustomAchievementOut;
-
-            notificationMasteryInNumericUpDown.Value = AlertsController.Instance.CustomMasteryIn;
-            notificationMasteryOutNumericUpDown.Value = AlertsController.Instance.CustomMasteryOut;
-
-            customAchievementInSpeedUpDown.Value = AlertsController.Instance.CustomAchievementInSpeed;
-            customAchievementOutSpeedUpDown.Value = AlertsController.Instance.CustomAchievementOutSpeed;
-
-            customMasteryInSpeedUpDown.Value = AlertsController.Instance.CustomMasteryInSpeed;
-            customMasteryOutSpeedUpDown.Value = AlertsController.Instance.CustomMasteryOutSpeed;
-
-            usernameTextBox.TextChanged += RequiredField_TextChange;
-            apiKeyTextBox.TextChanged += RequiredField_TextChange;
-
-            userProfilePictureBox.Click += BrowserSensitiveControl_Click;
-            gameInfoPictureBox.Click += BrowserSensitiveControl_Click;
-            focusAchievementPictureBox.Click += BrowserSensitiveControl_Click;
-            rssFeedListView.SelectedIndexChanged += BrowserSensitiveControl_Click;
-
-            statsGameAchievementsOverrideTextBox.TextChanged += OverrideTextBox_TextChanged;
-            statsGamePointsOverrideTextBox.TextChanged += OverrideTextBox_TextChanged;
-            statsGameTruePointsOverrideTextBox.TextChanged += OverrideTextBox_TextChanged;
-            statsCompletedOverrideTextBox.TextChanged += OverrideTextBox_TextChanged;
-            statsGameRatioOverrideTextBox.TextChanged += OverrideTextBox_TextChanged;
-            statsTruePointsOverrideTextBox.TextChanged += OverrideTextBox_TextChanged;
-            statsPointsOverrideTextBox.TextChanged += OverrideTextBox_TextChanged;
-            statsRatioOverrideTextBox.TextChanged += OverrideTextBox_TextChanged;
-            statsRankOverrideTextBox.TextChanged += OverrideTextBox_TextChanged;
-
-            gameInfoGenreOverrideTextBox.TextChanged += OverrideTextBox_TextChanged;
-            gameInfoConsoleOverrideTextBox.TextChanged += OverrideTextBox_TextChanged;
-            gameInfoDeveloperOverrideTextBox.TextChanged += OverrideTextBox_TextChanged;
-            gameInfoReleaseDateOverrideTextBox.TextChanged += OverrideTextBox_TextChanged;
-            gameInfoPublisherOverrideTextBox.TextChanged += OverrideTextBox_TextChanged;
-            gameInfoTitleOverrideTextBox.TextChanged += OverrideTextBox_TextChanged;
-
-            userStatsDefaultButton.Click += DefaultButton_Click;
-            gameStatsDefaultButton.Click += DefaultButton_Click;
-            gameInfoDefaultButton.Click += DefaultButton_Click;
-
-            titleFontOutlineCheckbox.Click += FontOutlineCheckBoxheckbox_CheckedChanged;
-            descriptionFontOutlineCheckbox.Click += FontOutlineCheckBoxheckbox_CheckedChanged;
-            pointsFontOutlineCheckbox.Click += FontOutlineCheckBoxheckbox_CheckedChanged;
-            lineOutlineCheckbox.Click += FontOutlineCheckBoxheckbox_CheckedChanged;
-
-            titleFontColorButton.Click += FontColorButton_Click;
-            descriptionFontColorButton.Click += FontColorButton_Click;
-            pointsFontColorButton.Click += FontColorButton_Click;
-            lineColorButton.Click += FontColorButton_Click;
-            titleFontOutlineColorButton.Click += FontColorButton_Click;
-            descriptionFontOutlineColorButton.Click += FontColorButton_Click;
-            pointsFontOutlineColorButton.Click += FontColorButton_Click;
-            lineOutlineColorButton.Click += FontColorButton_Click;
-
-            titleFontOutlineNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
-            descriptionFontOutlineNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
-            pointsFontOutlineNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
-            lineOutlineNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
-            recentAchievementsMaxListNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
-
-            borderBackgroundColorButton.Click += BackgroundColorButton_Click;
-            windowBackgroundColorButton.Click += BackgroundColorButton_Click;
-
-            autoStartCheckbox.Click += AutoLaunchCheckbox_CheckedChanged;
-            autoOpenLastFiveWindowCheckbox.Click += AutoLaunchCheckbox_CheckedChanged;
-            autoOpenGameInfoWindowCheckbox.Click += AutoLaunchCheckbox_CheckedChanged;
-            autoOpenAlertsWindowCheckbox.Click += AutoLaunchCheckbox_CheckedChanged;
-            autoOpenFocusWindowCheckBox.Click += AutoLaunchCheckbox_CheckedChanged;
-            autoOpenUserStatsWindowCheckbox.Click += AutoLaunchCheckbox_CheckedChanged;
-            autoOpenGameStatsWindowCheckbox.Click += AutoLaunchCheckbox_CheckedChanged;
-            autoOpenAchievementListWindowCheckbox.Click += AutoLaunchCheckbox_CheckedChanged;
-            autoOpenWebBrowserCheckbox.Click += AutoLaunchCheckbox_CheckedChanged;
-
-            rssFeedCheevoCheckBox.CheckedChanged += RSSFeedCheckbox_CheckedChanged;
-            rssFeedForumCheckBox.CheckedChanged += RSSFeedCheckbox_CheckedChanged;
-            rssFeedFriendCheckBox.CheckedChanged += RSSFeedCheckbox_CheckedChanged;
-            rssFeedNewsCheckBox.CheckedChanged += RSSFeedCheckbox_CheckedChanged;
-
-            autoScrollCheckBox.CheckedChanged += AutoScroll_CheckChanged;
-
-            customAchievementEnableCheckbox.Click += CustomAchievementEnableCheckbox_CheckedChanged;
-            customMasteryEnableCheckbox.Click += CustomMasteryEnableCheckbox_CheckedChanged;
-            acheivementEditOutlineCheckbox.Click += AcheivementEditOutlineCheckbox_CheckedChanged;
-            masteryEditOultineCheckbox.Click += MasteryEditOultineCheckbox_CheckedChanged;
-
-            fontBorderCheckBox.Click += OverrideEnableCheckBox_Clicked;
-            rankEnableCheckBox.Click += OverrideEnableCheckBox_Clicked;
-            pointsEnableCheckBox.Click += OverrideEnableCheckBox_Clicked;
-            ratioEnableCheckBox.Click += OverrideEnableCheckBox_Clicked;
-            truePointsEnableCheckBox.Click += OverrideEnableCheckBox_Clicked;
-            gameAchievementsEnableCheckBox.Click += OverrideEnableCheckBox_Clicked;
-            gamePointsEnableCheckBox.Click += OverrideEnableCheckBox_Clicked;
-            gameTruePointsEnableCheckBox.Click += OverrideEnableCheckBox_Clicked;
-            completedEnableCheckBox.Click += OverrideEnableCheckBox_Clicked;
-            gameRatioEnableCheckBox.Click += OverrideEnableCheckBox_Clicked;
-
-            titleEnableCheckBox.Click += OverrideEnableCheckBox_Clicked;
-            developerEnableCheckBox.Click += OverrideEnableCheckBox_Clicked;
-            genreEnableCheckBox.Click += OverrideEnableCheckBox_Clicked;
-            publisherEnableCheckBox.Click += OverrideEnableCheckBox_Clicked;
-            consoleEnableCheckBox.Click += OverrideEnableCheckBox_Clicked;
-            releasedDateEnableCheckBox.Click += OverrideEnableCheckBox_Clicked;
-
-            simpleFontCheckBox.Click += SimpleCheckBox_CheckedChanged;
-
-            titleFontFamilyComboBox.SelectedIndexChanged += FontFamilyComboBox_SelectedIndexChanged;
-            descriptionFontFamilyComboBox.SelectedIndexChanged += FontFamilyComboBox_SelectedIndexChanged;
-            pointsFontFamilyComboBox.SelectedIndexChanged += FontFamilyComboBox_SelectedIndexChanged;
-
-            statsRadioButtonBackslash.Click += RadioButton_CheckedChanged;
-            statsRadioButtonSemicolon.Click += RadioButton_CheckedChanged;
-            statsRadioButtonDot.Click += RadioButton_CheckedChanged;
-
-            notificationsAchievementAnimationInComboBox.SelectedIndexChanged += NotificationAnimationComboBox_SelectedIndexChanged;
-            notificationsAchievementAnimationOutComboBox.SelectedIndexChanged += NotificationAnimationComboBox_SelectedIndexChanged;
-            notificationsMasteryAnimationInComboBox.SelectedIndexChanged += NotificationAnimationComboBox_SelectedIndexChanged;
-            notificationsMasteryAnimationOutComboBox.SelectedIndexChanged += NotificationAnimationComboBox_SelectedIndexChanged;
-
-            openLastFiveWindowButton.Click += ShowWindowButton_Click;
-            openGameInfoWindowButton.Click += ShowWindowButton_Click;
-            openNotificationWindowButton.Click += ShowWindowButton_Click;
-            openFocusWindowButton.Click += ShowWindowButton_Click;
-            openUserStatsWindowButton.Click += ShowWindowButton_Click;
-            openGameStatsWindowButton.Click += ShowWindowButton_Click;
-            openAchievementListWindowButton.Click += ShowWindowButton_Click;
-            toggleUserBrowserButton.Click += ShowWindowButton_Click;
-
-            startButton.Click += StartButton_Click;
-            stopButton.Click += StopButton_Click;
-
-            setFocusButton.Click += SetFocusButton_Click;
-            focusAchievementButtonLeft.Click += MoveFocusIndexLeft;
-            focusAchievementButtonRight.Click += MoveFocusIndexRight;
-
-            customizeLastFiveButton.Click += CustomizeButton_Click;
-            customizeGameInfoButton.Click += CustomizeButton_Click;
-            customizeAlertsButton.Click += CustomizeButton_Click;
-            customizeFocusButton.Click += CustomizeButton_Click;
-            customizeUserStatsButton.Click += CustomizeButton_Click;
-            customizeGameStatsButton.Click += CustomizeButton_Click;
-            customizeAchievementListButton.Click += CustomizeButton_Click;
-
-            replayAchievementButton.Click += ShowAchievementButton_Click;
+            playAchievementButton.Click += ShowAchievementButton_Click;
             playMasteryButton.Click += ShowGameMasteryButton_Click;
-            selectCustomAchievementButton.Click += SelectCustomAchievementButton_Click;
-            selectCustomMasteryNotificationButton.Click += SelectCustomMasteryNotificationButton_Click;
+            selectCustomAchievementFileButton.Click += SelectCustomAchievementButton_Click;
+            selectCustomMasteryFileButton.Click += SelectCustomMasteryNotificationButton_Click;
 
-            scaleAchievementNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
-            scaleMasteryNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
-            customAchievementXNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
-            customAchievementYNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
-            customAchievementInSpeedUpDown.ValueChanged += CustomeAnimationSpeedUpDown_ValueChanged;
-            customAchievementOutSpeedUpDown.ValueChanged += CustomeAnimationSpeedUpDown_ValueChanged;
-            customMasteryXNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
-            customMasteryYNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
-            customMasteryInSpeedUpDown.ValueChanged += CustomeAnimationSpeedUpDown_ValueChanged;
-            customMasteryOutSpeedUpDown.ValueChanged += CustomeAnimationSpeedUpDown_ValueChanged;
-            notificationAchievementOutNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
-            notificationAchievementInNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
-            notificationMasteryOutNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
-            notificationMasteryInNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
+            recentAchievementsScrollCheckBox.Checked = RecentAchievementsController.Instance.AutoScroll;
+            achievementListScrollCheckBox.Checked = AchievementListController.Instance.AutoScroll;
+            recentAchievementsScrollCheckBox.Click += AutoScroll_Click;
+            achievementListScrollCheckBox.Click += AutoScroll_Click;
+
+            /*
+             * Stream Label Enablement CheckBox
+             */
+            gameInfoTitleCheckBox.Click += StreamLabelEnableCheckBox_Clicked;
+            gameInfoDeveloperCheckBox.Click += StreamLabelEnableCheckBox_Clicked;
+            gameInfoGenreCheckBox.Click += StreamLabelEnableCheckBox_Clicked;
+            gameInfoPublisherCheckBox.Click += StreamLabelEnableCheckBox_Clicked;
+            gameInfoConsoleCheckBox.Click += StreamLabelEnableCheckBox_Clicked;
+            gameInfoReleasedCheckBox.Click += StreamLabelEnableCheckBox_Clicked;
+
+            gameProgressAchievementsCheckBox.Click += StreamLabelEnableCheckBox_Clicked;
+            gameProgressPointsCheckBox.Click += StreamLabelEnableCheckBox_Clicked;
+            gameProgressTruePointsCheckBox.Click += StreamLabelEnableCheckBox_Clicked;
+            gameProgressCompletedCheckBox.Click += StreamLabelEnableCheckBox_Clicked;
+            gameProgressRatioCheckBox.Click += StreamLabelEnableCheckBox_Clicked;
+
+            userInfoRankCheckBox.Click += StreamLabelEnableCheckBox_Clicked;
+            userInfoPointsCheckBox.Click += StreamLabelEnableCheckBox_Clicked;
+            userInfoRatioCheckBox.Click += StreamLabelEnableCheckBox_Clicked;
+            userInfoTruePointsCheckBox.Click += StreamLabelEnableCheckBox_Clicked;
+
+            /*
+             * Radio Button Clicked
+             */
+            focusBehaviorGoToFirstRadioButton.Click += RadioButton_Clicked;
+            focusBehaviorGoToPreviousRadioButton.Click += RadioButton_Clicked;
+            focusBehaviorGoToNextRadioButton.Click += RadioButton_Clicked;
+            focusBehaviorGoToLastRadioButton.Click += RadioButton_Clicked;
+
+            focusSetButton.Click += SetFocusButton_Click;
+            focusAchievementButtonPrevious.Click += MoveFocusIndexPrev_Click;
+            focusAchievementButtonNext.Click += MoveFocusIndexNext_Click;
+
+            /*
+             * Render Window Show Button Click
+             */
+            recentAchievementsOpenWindowButton.Click += ShowWindowButton_Click;
+            gameInfoOpenWindowButton.Click += ShowWindowButton_Click;
+            notificationsOpenWindowButton.Click += ShowWindowButton_Click;
+            focusOpenWindowButton.Click += ShowWindowButton_Click;
+            userInfoOpenWindowButton.Click += ShowWindowButton_Click;
+            gameProgressOpenWindowButton.Click += ShowWindowButton_Click;
+            achievementListOpenWindowButton.Click += ShowWindowButton_Click;
         }
-    }
-    public enum CustomMenuState
-    {
-        CLOSED,
-        FOCUS,
-        USER_STATS,
-        GAME_STATS,
-        ALERTS,
-        GAME_INFO,
-        RECENT_ACHIEVEMENTS,
-        ACHIEVEMENT_LIST,
-        WEB_BROWSER
     }
     public enum AnimationDirection
     {

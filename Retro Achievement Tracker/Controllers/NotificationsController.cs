@@ -13,9 +13,9 @@ using System.Threading.Tasks;
 
 namespace Retro_Achievement_Tracker.Controllers
 {
-    public sealed class AlertsController
+    public sealed class NotificationsController
     {
-        private static AlertsController instance = new AlertsController();
+        private static NotificationsController instance = new NotificationsController();
         private static AlertsWindow AlertsLayoutWindow;
         public static bool IsOpen;
         private Stopwatch NotificationsStopwatch;
@@ -29,7 +29,7 @@ namespace Retro_Achievement_Tracker.Controllers
         private bool PlayingAchievement;
         private bool IsEditingAchievement;
 
-        private AlertsController()
+        private NotificationsController()
         {
             AlertsLayoutWindow = new AlertsWindow();
 
@@ -210,7 +210,7 @@ namespace Retro_Achievement_Tracker.Controllers
         {
             CanPlay = true;
         }
-        public static AlertsController Instance
+        public static NotificationsController Instance
         {
             get
             {

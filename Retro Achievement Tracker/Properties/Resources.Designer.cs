@@ -99,66 +99,6 @@ namespace Retro_Achievement_Tracker.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap chrono_trigger_block {
-            get {
-                object obj = ResourceManager.GetObject("chrono_trigger_block", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap chrono_trigger_block1 {
-            get {
-                object obj = ResourceManager.GetObject("chrono_trigger_block1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap chrono_trigger_block2 {
-            get {
-                object obj = ResourceManager.GetObject("chrono_trigger_block2", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap chrono_trigger_block3 {
-            get {
-                object obj = ResourceManager.GetObject("chrono_trigger_block3", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap chrono_trigger_block4 {
-            get {
-                object obj = ResourceManager.GetObject("chrono_trigger_block4", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap chrono_trigger_block5 {
-            get {
-                object obj = ResourceManager.GetObject("chrono_trigger_block5", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
         ///&lt;html&gt;
         ///&lt;head&gt;
@@ -260,14 +200,14 @@ namespace Retro_Achievement_Tracker.Properties {
         ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
         ///&lt;html&gt;
         ///&lt;head&gt;
-        ///    &lt;title&gt;Last Five Window&lt;/title&gt;
+        ///    &lt;title&gt;Recent Achievements Window&lt;/title&gt;
         ///    &lt;meta charset=&quot;UTF-8&quot;&gt;
         ///    &lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js&quot;&gt;&lt;/script&gt;
         ///    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css&quot;&gt;
         ///    &lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js&quot;&gt;&lt;/script&gt;
-        ///    &lt;script id=&quot;last-five-scripts&quot;&gt;
-        ///        function addAchievement(achievement) {
-        ///            v [rest of string was truncated]&quot;;.
+        ///    &lt;script id=&quot;recent-achievements-scripts&quot;&gt;
+        ///        var scrollingDown = true;
+        ///       [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string RecentAchievementsWindow {
             get {
@@ -281,6 +221,16 @@ namespace Retro_Achievement_Tracker.Properties {
         internal static System.Drawing.Bitmap red_button {
             get {
                 object obj = ResourceManager.GetObject("red_button", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ROCK3 {
+            get {
+                object obj = ResourceManager.GetObject("ROCK3", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -67,7 +67,7 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (newGame)
                 {
-                    AchievementListWindow.StartScrolling(); 
+                    AchievementListWindow.StopScrolling();
                     List<Achievement> ToClearList = new List<Achievement>();
                     ToClearList.AddRange(CurrentUnlockedAchievements);
                     ToClearList.AddRange(CurrentLockedAchievements);
@@ -178,6 +178,8 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 CurrentLockedAchievements.Sort();
 
+                await Task.Delay(2000);
+
                 for (int i = 0; i < CurrentUnlockedAchievements.Count; i++)
                 {
                     AchievementListWindow.SetAchievementPosition(CurrentUnlockedAchievements[i], xCoord, yCoord);
@@ -229,6 +231,14 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.achievement_list_auto_scroll = value;
                 Settings.Default.Save();
+
+                if (value)
+                {
+                    AchievementListWindow.StartScrolling();
+                } else
+                {
+                    AchievementListWindow.StopScrolling();
+                }
             }
         }
         public bool AutoLaunch

@@ -680,5 +680,8 @@
     <Setting Name="recent_achievements_max_list_size" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">5</Value>
     </Setting>
+    <Setting Name="focus_refocus_behavior" Type="System.String" Scope="User">
+      <Value Profile="(Default)">GO_TO_FIRST</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

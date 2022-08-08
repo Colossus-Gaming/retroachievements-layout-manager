@@ -34,12 +34,12 @@ namespace Retro_Achievement_Tracker.Forms
 
         private void AlertsWindow_FormClosed(object sender, FormClosedEventArgs e)
         {
-            AlertsController.IsOpen = false;
+            NotificationsController.IsOpen = false;
         }
 
         private void AlertsWindow_Shown(object sender, EventArgs e)
         {
-            AlertsController.IsOpen = true;
+            NotificationsController.IsOpen = true;
         }
 
         protected override bool ShowWithoutActivation
@@ -513,7 +513,7 @@ namespace Retro_Achievement_Tracker.Forms
                 {
                     ClientSize = new Size(1024, 768);
 
-                    AlertsController.Instance.SetAllSettings();
+                    NotificationsController.Instance.SetAllSettings();
                     PromptUserInput();
                 });
             });
@@ -526,7 +526,7 @@ namespace Retro_Achievement_Tracker.Forms
                     BindingOptions bindingOptions = null; //Binding options is an optional param, defaults to null
                     bindingOptions = BindingOptions.DefaultBinder; //Use the default binder to serialize values into complex objects
                     repo.NameConverter = new CamelCaseJavascriptNameConverter();
-                    repo.Register("alertControllerAsync", AlertsController.Instance, isAsync: true, options: bindingOptions);
+                    repo.Register("alertControllerAsync", NotificationsController.Instance, isAsync: true, options: bindingOptions);
                 }
             };
 

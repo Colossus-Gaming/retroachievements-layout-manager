@@ -677,5 +677,35 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.Save();
             }
         }
+
+        public RefocusBehaviorEnum RefocusBehavior
+        {
+            get
+            {
+                switch (Settings.Default.focus_refocus_behavior)
+                {
+                    case "DOWN":
+                        return RefocusBehaviorEnum.GO_TO_PREVIOUS;
+                    case "LEFT":
+                        return RefocusBehaviorEnum.GO_TO_NEXT;
+                    case "RIGHT":
+                        return RefocusBehaviorEnum.GO_TO_LAST;
+                }
+                return RefocusBehaviorEnum.GO_TO_FIRST;
+            }
+            set
+            {
+                Settings.Default.focus_refocus_behavior = value.ToString();
+                Settings.Default.Save();
+            }
+        }
     }
+}
+
+public enum RefocusBehaviorEnum
+{
+    GO_TO_FIRST,
+    GO_TO_PREVIOUS,
+    GO_TO_NEXT,
+    GO_TO_LAST
 }

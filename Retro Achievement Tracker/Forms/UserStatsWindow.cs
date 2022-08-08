@@ -33,12 +33,12 @@ namespace Retro_Achievement_Tracker
 
         private void UserStatsWindow_FormClosed(object sender, FormClosedEventArgs e)
         {
-            UserStatsController.IsOpen = false;
+            UserInfoController.IsOpen = false;
         }
 
         private void UserStatsWindow_Shown(object sender, EventArgs e)
         {
-            UserStatsController.IsOpen = true;
+            UserInfoController.IsOpen = true;
         }
 
         protected override bool ShowWithoutActivation
@@ -231,7 +231,7 @@ namespace Retro_Achievement_Tracker
                     ClientSize = new Size(805, 290);
                 });
 
-                UserStatsController.Instance.SetAllSettings();
+                UserInfoController.Instance.SetAllSettings();
             });
 
             chromiumWebBrowser.LoadHtml(Resources.UserStatsWindow);
