@@ -1248,7 +1248,7 @@ namespace Retro_Achievement_Tracker
                         NotificationsController.Instance.TitleOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
                         notificationsTitleFontOutlineColorPictureBox.BackColor = colorDialog1.Color;
                         break;
-                    case "notificationsDescriptionFontColorPictureBox":
+                    case "notificationsDescriptionFontSetColorButton":
                         NotificationsController.Instance.DescriptionColor = MediaHelper.HexConverter(colorDialog1.Color);
                         notificationsDescriptionFontColorPictureBox.BackColor = colorDialog1.Color;
                         break;
