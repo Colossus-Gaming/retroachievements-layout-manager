@@ -21,8 +21,7 @@ namespace Retro_Achievement_Tracker
         private GameInfo GameInfo { get; set; }
         private Achievement CurrentlyViewingAchievement;
         private int CurrentlyViewingIndex;
-        private int PreviouslyViewingIndex;
-        private List<ListViewItem> ListViewItems;
+        private readonly List<ListViewItem> ListViewItems;
         public CefSharp.WinForms.ChromiumWebBrowser chromiumWebBrowser;
 
         private List<Achievement> LockedAchievements
@@ -60,6 +59,7 @@ namespace Retro_Achievement_Tracker
 
         public MainPage()
         {
+            CurrentlyViewingIndex = -1;
             AutoUpdate();
             InitializeComponent();
 
@@ -73,6 +73,18 @@ namespace Retro_Achievement_Tracker
             AutoUpdater.ReportErrors = false;
             AutoUpdater.Synchronous = true;
             AutoUpdater.Start("https://github.com/Colossus-Gaming/retroachievements-layout-manager/releases/download/release-management/ra-layout-manager-release.xml");
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            StreamLabelManager.Instance.ClearAllStreamLabels();
+
+            FocusController.Instance.Close();
+            UserInfoController.Instance.Close();
+            NotificationsController.Instance.Close();
+            GameInfoController.Instance.Close();
+            RecentAchievementsController.Instance.Close();
+            AchievementListController.Instance.Close();
         }
 
         private void AutoUpdaterOnCheckForUpdateEvent(UpdateInfoEventArgs args)
@@ -123,7 +135,19 @@ namespace Retro_Achievement_Tracker
             {
                 bool needsUpdate = !sameGame;
 
-                SortAchievements(sameGame);
+                if (GameInfo.Achievements != null)
+                {
+                    GameInfo.Achievements.ForEach(achievement =>
+                    {
+                        Achievement otherAchievement = UserSummary.Achievements.Find(achievement1 => achievement.Id == achievement1.Id);
+
+                        if (otherAchievement != null)
+                        {
+                            achievement.GameId = otherAchievement.GameId;
+                            achievement.GameTitle = otherAchievement.GameTitle;
+                        }
+                    });
+                }
 
                 if (sameGame)
                 {
@@ -140,28 +164,40 @@ namespace Retro_Achievement_Tracker
                         achievementNotificationList.Sort();
 
                         NotificationsController.Instance.EnqueueAchievementNotifications(achievementNotificationList);
-                        PreviouslyViewingIndex = CurrentlyViewingIndex;
 
-                        if (!achievementNotificationList.Contains(CurrentlyViewingAchievement))
+                        if (achievementNotificationList.Contains(FocusController.Instance.CurrentlyFocusedAchievement))
                         {
-                            CurrentlyViewingIndex = LockedAchievements.IndexOf(CurrentlyViewingAchievement);
-                        }
-                        else
-                        {
-                            switch (FocusController.Instance.RefocusBehavior)
+                            if (LockedAchievements.Count > 1)
                             {
-                                case RefocusBehaviorEnum.GO_TO_FIRST:
-                                    CurrentlyViewingIndex = 0;
-                                    break;
-                                case RefocusBehaviorEnum.GO_TO_PREVIOUS:
-                                    CurrentlyViewingIndex = PreviouslyViewingIndex - 1;
-                                    break;
-                                case RefocusBehaviorEnum.GO_TO_NEXT:
-                                    CurrentlyViewingIndex = PreviouslyViewingIndex;
-                                    break;
-                                case RefocusBehaviorEnum.GO_TO_LAST:
-                                    CurrentlyViewingIndex = LockedAchievements.Count - 1;
-                                    break;
+                                int currentIndex = GameInfo.Achievements.IndexOf(FocusController.Instance.CurrentlyFocusedAchievement);
+
+                                switch (FocusController.Instance.RefocusBehavior)
+                                {
+                                    case RefocusBehaviorEnum.GO_TO_FIRST:
+                                        currentIndex = -1;
+                                        break;
+                                    case RefocusBehaviorEnum.GO_TO_PREVIOUS:
+                                        Achievement previousAchievement = GameInfo.Achievements[currentIndex];
+
+                                        while (currentIndex >= 0 && !LockedAchievements.Contains(previousAchievement))
+                                        {
+                                            previousAchievement = GameInfo.Achievements[--currentIndex];
+                                        }
+                                        break;
+                                    case RefocusBehaviorEnum.GO_TO_NEXT:
+                                        Achievement nextAchievement = GameInfo.Achievements[currentIndex];
+
+                                        while (currentIndex <= GameInfo.Achievements.Count - 1 && !LockedAchievements.Contains(nextAchievement))
+                                        {
+                                            nextAchievement = GameInfo.Achievements[++currentIndex];
+                                        }
+                                        break;
+                                    case RefocusBehaviorEnum.GO_TO_LAST:
+                                        currentIndex = GameInfo.Achievements.Count;
+                                        break;
+                                }
+
+                                CurrentlyViewingIndex = currentIndex;
                             }
                         }
 
@@ -181,7 +217,7 @@ namespace Retro_Achievement_Tracker
                     UpdateTimerLabel("Changing game to [" + GameInfo.Title + "]");
 
                     CurrentlyViewingAchievement = null;
-                    CurrentlyViewingIndex = 0;
+                    CurrentlyViewingIndex = -1;
                 }
 
                 if (needsUpdate)
@@ -199,29 +235,6 @@ namespace Retro_Achievement_Tracker
             catch (Exception e)
             {
                 Console.WriteLine(e.StackTrace);
-            }
-        }
-        private void SetFocus()
-        {
-            if (CurrentlyViewingAchievement != null)
-            {
-
-                if (FocusController.Instance.GetCurrentlyFocusedAchievement() == null || FocusController.Instance.GetCurrentlyFocusedAchievement().Id != CurrentlyViewingAchievement.Id)
-                {
-                    FocusController.Instance.SetFocus(CurrentlyViewingAchievement);
-                    StreamLabelManager.Instance.EnqueueFocus(CurrentlyViewingAchievement);
-                }
-            }
-            else if (LockedAchievements.Count == 0 && UnlockedAchievements.Count > 0)
-            {
-                FocusController.Instance.SetFocus((Achievement)null);
-                FocusController.Instance.SetFocus(GameInfo);
-
-                StreamLabelManager.Instance.ClearFocus();
-            }
-            else
-            {
-                StreamLabelManager.Instance.ClearFocus();
             }
         }
 
@@ -296,50 +309,33 @@ namespace Retro_Achievement_Tracker
                 }
             }
         }
-        private void SortAchievements(bool sameGame)
-        {
-            if (GameInfo.Achievements != null)
-            {
-                GameInfo.Achievements.ForEach(achievement =>
-                {
-                    Achievement otherAchievement = UserSummary.Achievements.Find(achievement1 => achievement.Id == achievement1.Id);
-
-                    if (otherAchievement != null)
-                    {
-                        achievement.GameId = otherAchievement.GameId;
-                        achievement.GameTitle = otherAchievement.GameTitle;
-                    }
-                });
-
-                if (sameGame && OldUnlockedAchievements.Count < UnlockedAchievements.Count)
-                {
-                    if (LockedAchievements.IndexOf(FocusController.Instance.CurrentlyFocusedAchievement) > -1)
-                    {
-                        CurrentlyViewingIndex = LockedAchievements.IndexOf(FocusController.Instance.CurrentlyFocusedAchievement);
-                    }
-                    else
-                    {
-                        CurrentlyViewingIndex = LockedAchievements.IndexOf(CurrentlyViewingAchievement) == -1 ? 0 : LockedAchievements.IndexOf(CurrentlyViewingAchievement);
-                    }
-                }
-            }
-        }
         public void UpdateCurrentlyViewingAchievement()
         {
             if (Visible)
             {
                 if (LockedAchievements.Count > 0)
                 {
-                    if (CurrentlyViewingIndex >= LockedAchievements.Count)
+                    if (CurrentlyViewingIndex >= GameInfo.Achievements.Count)
                     {
-                        CurrentlyViewingIndex = LockedAchievements.Count - 1;
+                        CurrentlyViewingIndex = GameInfo.Achievements.Count - 1;
+
+                        while (CurrentlyViewingIndex > 0 && !LockedAchievements.Contains(GameInfo.Achievements[CurrentlyViewingIndex]))
+                        {
+                            CurrentlyViewingIndex--;
+                        }
+
                     }
                     else if (CurrentlyViewingIndex < 0)
                     {
                         CurrentlyViewingIndex = 0;
+
+                        while (CurrentlyViewingIndex < GameInfo.Achievements.Count - 1 && !LockedAchievements.Contains(GameInfo.Achievements[CurrentlyViewingIndex]))
+                        {
+                            CurrentlyViewingIndex++;
+                        }
                     }
 
-                    CurrentlyViewingAchievement = LockedAchievements[CurrentlyViewingIndex];
+                    CurrentlyViewingAchievement = GameInfo.Achievements[CurrentlyViewingIndex];
 
                     focusAchievementIdLabel.Text = "[ " + CurrentlyViewingAchievement.Id.ToString() + " ]";
                     focusAchievementPictureBox.ImageLocation = "https://retroachievements.org/Badge/" + CurrentlyViewingAchievement.BadgeNumber + ".png";
@@ -348,7 +344,7 @@ namespace Retro_Achievement_Tracker
                 }
                 else
                 {
-                    CurrentlyViewingIndex = 0;
+                    CurrentlyViewingIndex = -1;
                     CurrentlyViewingAchievement = null;
 
                     focusAchievementIdLabel.Text = "[ None ]";
@@ -360,7 +356,29 @@ namespace Retro_Achievement_Tracker
                 UpdateFocusButtons();
             }
         }
+        private void SetFocus()
+        {
+            if (CurrentlyViewingAchievement != null)
+            {
 
+                if (FocusController.Instance.GetCurrentlyFocusedAchievement() == null || FocusController.Instance.GetCurrentlyFocusedAchievement().Id != CurrentlyViewingAchievement.Id)
+                {
+                    FocusController.Instance.SetFocus(CurrentlyViewingAchievement);
+                    StreamLabelManager.Instance.EnqueueFocus(CurrentlyViewingAchievement);
+                }
+            }
+            else if (LockedAchievements.Count == 0 && UnlockedAchievements.Count > 0)
+            {
+                FocusController.Instance.SetFocus((Achievement)null);
+                FocusController.Instance.SetFocus(GameInfo);
+
+                StreamLabelManager.Instance.ClearFocus();
+            }
+            else
+            {
+                StreamLabelManager.Instance.ClearFocus();
+            }
+        }
         private void RefreshRSSFeed()
         {
             foreach (ListViewItem item in ListViewItems)
@@ -599,7 +617,6 @@ namespace Retro_Achievement_Tracker
         {
             timerStatusLabel.Text = s;
         }
-
         private void StartTimer()
         {
             UserAndGameTimerCounter = 6;
@@ -608,17 +625,6 @@ namespace Retro_Achievement_Tracker
             {
                 UserAndGameUpdateTimer.Start();
             }
-        }
-        protected override void OnClosed(EventArgs e)
-        {
-            StreamLabelManager.Instance.ClearAllStreamLabels();
-
-            FocusController.Instance.Close();
-            UserInfoController.Instance.Close();
-            NotificationsController.Instance.Close();
-            GameInfoController.Instance.Close();
-            RecentAchievementsController.Instance.Close();
-            AchievementListController.Instance.Close();
         }
         private void UpdateRecentAchievements()
         {
@@ -674,6 +680,35 @@ namespace Retro_Achievement_Tracker
         private void UpdateAchievementList(bool newGame)
         {
             AchievementListController.Instance.UpdateAchievementList(UnlockedAchievements.ToList(), LockedAchievements.ToList(), newGame);
+        }
+        private void UpdateFocusButtons()
+        {
+            if (LockedAchievements.Count == 0)
+            {
+                focusAchievementButtonPrevious.Enabled = false;
+                focusAchievementButtonNext.Enabled = false;
+                focusSetButton.Enabled = false;
+            }
+            else
+            {
+                focusSetButton.Enabled = true;
+
+                if (LockedAchievements.IndexOf(CurrentlyViewingAchievement) == 0)
+                {
+                    focusAchievementButtonPrevious.Enabled = false;
+                    focusAchievementButtonNext.Enabled = LockedAchievements.Count > 1;
+                }
+                else if (LockedAchievements.IndexOf(CurrentlyViewingAchievement) == LockedAchievements.Count - 1)
+                {
+                    focusAchievementButtonPrevious.Enabled = true;
+                    focusAchievementButtonNext.Enabled = false;
+                }
+                else
+                {
+                    focusAchievementButtonPrevious.Enabled = true;
+                    focusAchievementButtonNext.Enabled = true;
+                }
+            }
         }
         private void RequiredField_TextChanged(object sender, EventArgs e)
         {
@@ -1021,9 +1056,9 @@ namespace Retro_Achievement_Tracker
         {
             CurrentlyViewingIndex--;
 
-            if (CurrentlyViewingIndex < 0)
+            while (CurrentlyViewingIndex > -1 && !LockedAchievements.Contains(GameInfo.Achievements[CurrentlyViewingIndex]))
             {
-                CurrentlyViewingIndex = 0;
+                CurrentlyViewingIndex--;
             }
 
             UpdateCurrentlyViewingAchievement();
@@ -1032,41 +1067,12 @@ namespace Retro_Achievement_Tracker
         {
             CurrentlyViewingIndex++;
 
-            if (CurrentlyViewingIndex >= LockedAchievements.Count)
+            while (CurrentlyViewingIndex < GameInfo.Achievements.Count - 1 && !LockedAchievements.Contains(GameInfo.Achievements[CurrentlyViewingIndex]))
             {
-                CurrentlyViewingIndex = LockedAchievements.Count - 1;
+                CurrentlyViewingIndex++;
             }
 
             UpdateCurrentlyViewingAchievement();
-        }
-        private void UpdateFocusButtons()
-        {
-            if (LockedAchievements.Count == 0)
-            {
-                focusAchievementButtonPrevious.Enabled = false;
-                focusAchievementButtonNext.Enabled = false;
-                focusSetButton.Enabled = false;
-            }
-            else
-            {
-                focusSetButton.Enabled = true;
-
-                if (CurrentlyViewingIndex == 0)
-                {
-                    focusAchievementButtonPrevious.Enabled = false;
-                    focusAchievementButtonNext.Enabled = LockedAchievements.Count > 1;
-                }
-                else if (CurrentlyViewingIndex == LockedAchievements.Count - 1)
-                {
-                    focusAchievementButtonPrevious.Enabled = true;
-                    focusAchievementButtonNext.Enabled = false;
-                }
-                else
-                {
-                    focusAchievementButtonPrevious.Enabled = true;
-                    focusAchievementButtonNext.Enabled = true;
-                }
-            }
         }
         private void ShowWindowButton_Click(object sender, EventArgs e)
         {
@@ -1402,7 +1408,7 @@ namespace Retro_Achievement_Tracker
         private void BorderCheckBox_Click(object sender, EventArgs e)
         {
             CheckBox checkBox = (CheckBox)sender;
-            switch(checkBox.Name)
+            switch (checkBox.Name)
             {
                 case "focusBorderCheckBox":
                     FocusController.Instance.BorderEnabled = !FocusController.Instance.BorderEnabled;
@@ -2707,6 +2713,33 @@ namespace Retro_Achievement_Tracker
             /*
              * Radio Button Clicked
              */
+            switch (FocusController.Instance.RefocusBehavior)
+            {
+                case RefocusBehaviorEnum.GO_TO_FIRST:
+                    focusBehaviorGoToFirstRadioButton.Checked = true;
+                    focusBehaviorGoToPreviousRadioButton.Checked = false;
+                    focusBehaviorGoToNextRadioButton.Checked = false;
+                    focusBehaviorGoToLastRadioButton.Checked = false;
+                    break;
+                case RefocusBehaviorEnum.GO_TO_PREVIOUS:
+                    focusBehaviorGoToFirstRadioButton.Checked = false;
+                    focusBehaviorGoToPreviousRadioButton.Checked = true;
+                    focusBehaviorGoToNextRadioButton.Checked = false;
+                    focusBehaviorGoToLastRadioButton.Checked = false;
+                    break;
+                case RefocusBehaviorEnum.GO_TO_NEXT:
+                    focusBehaviorGoToFirstRadioButton.Checked = false;
+                    focusBehaviorGoToPreviousRadioButton.Checked = false;
+                    focusBehaviorGoToNextRadioButton.Checked = true;
+                    focusBehaviorGoToLastRadioButton.Checked = false;
+                    break;
+                case RefocusBehaviorEnum.GO_TO_LAST:
+                    focusBehaviorGoToFirstRadioButton.Checked = false;
+                    focusBehaviorGoToPreviousRadioButton.Checked = false;
+                    focusBehaviorGoToNextRadioButton.Checked = false;
+                    focusBehaviorGoToLastRadioButton.Checked = true;
+                    break;
+            }
             focusBehaviorGoToFirstRadioButton.Click += RadioButton_Clicked;
             focusBehaviorGoToPreviousRadioButton.Click += RadioButton_Clicked;
             focusBehaviorGoToNextRadioButton.Click += RadioButton_Clicked;

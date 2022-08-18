@@ -684,11 +684,11 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 switch (Settings.Default.focus_refocus_behavior)
                 {
-                    case "DOWN":
+                    case "GO_TO_PREVIOUS":
                         return RefocusBehaviorEnum.GO_TO_PREVIOUS;
-                    case "LEFT":
+                    case "GO_TO_NEXT":
                         return RefocusBehaviorEnum.GO_TO_NEXT;
-                    case "RIGHT":
+                    case "GO_TO_LAST":
                         return RefocusBehaviorEnum.GO_TO_LAST;
                 }
                 return RefocusBehaviorEnum.GO_TO_FIRST;
