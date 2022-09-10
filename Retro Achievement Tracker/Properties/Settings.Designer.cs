@@ -2746,5 +2746,29 @@ namespace Retro_Achievement_Tracker.Properties {
                 this["focus_refocus_behavior"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool alerts_achievement_enable {
+            get {
+                return ((bool)(this["alerts_achievement_enable"]));
+            }
+            set {
+                this["alerts_achievement_enable"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool alerts_mastery_enable {
+            get {
+                return ((bool)(this["alerts_mastery_enable"]));
+            }
+            set {
+                this["alerts_mastery_enable"] = value;
+            }
+        }
     }
 }

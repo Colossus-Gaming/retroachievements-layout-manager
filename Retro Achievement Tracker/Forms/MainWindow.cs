@@ -163,7 +163,10 @@ namespace Retro_Achievement_Tracker
 
                         achievementNotificationList.Sort();
 
-                        NotificationsController.Instance.EnqueueAchievementNotifications(achievementNotificationList);
+                        if (NotificationsController.Instance.AchievementAlertEnable)
+                        {
+                            NotificationsController.Instance.EnqueueAchievementNotifications(achievementNotificationList);
+                        } 
 
                         if (achievementNotificationList.Contains(FocusController.Instance.CurrentlyFocusedAchievement))
                         {
@@ -201,7 +204,7 @@ namespace Retro_Achievement_Tracker
                             }
                         }
 
-                        if (UnlockedAchievements.Count == GameInfo.Achievements.Count && OldUnlockedAchievements.Count < GameInfo.Achievements.Count)
+                        if (NotificationsController.Instance.MasteryAlertEnable && UnlockedAchievements.Count == GameInfo.Achievements.Count && OldUnlockedAchievements.Count < GameInfo.Achievements.Count)
                         {
                             NotificationsController.Instance.EnqueueMasteryNotification(GameInfo);
                             StreamLabelManager.Instance.EnqueueAlert(GameInfo);
@@ -793,65 +796,104 @@ namespace Retro_Achievement_Tracker
                     break;
             }
         }
-        private void CustomAchievementEnableCheckBox_CheckedChanged(object sender, EventArgs eventArgs)
+        private void CustomAlertsCheckBox_CheckedChanged(object sender, EventArgs eventArgs)
         {
-            NotificationsController.Instance.CustomAchievementEnabled = ((CheckBox)sender).Checked;
+            CheckBox checkBox = sender as CheckBox;
+            bool isChecked = checkBox.Checked;
 
-            if (!File.Exists(NotificationsController.Instance.CustomAchievementFile))
+            switch (checkBox.Name)
             {
-                SelectCustomAchievementButton_Click(null, null);
+                case "achievementEnableCheckbox":
+                    NotificationsController.Instance.AchievementAlertEnable = isChecked;
+                    break;
+                case "masteryEnableCheckbox":
+                    NotificationsController.Instance.MasteryAlertEnable = isChecked;
+                    break;
+                case "customAchievementEnableCheckbox":
+                    NotificationsController.Instance.CustomAchievementEnabled = isChecked;
+
+                    if (isChecked)
+                    {
+                        if (!File.Exists(NotificationsController.Instance.CustomAchievementFile))
+                        {
+                            SelectCustomAchievementButton_Click(null, null);
+                        }
+                    }
+
+                    if (isChecked == NotificationsController.Instance.CustomAchievementEnabled)
+                    {
+                        NotificationsController.Instance.Reset();
+                    }
+                    break;
+                case "customMasteryEnableCheckbox":
+                    NotificationsController.Instance.CustomMasteryEnabled = isChecked;
+
+                    if (isChecked)
+                    {
+                        if (!File.Exists(NotificationsController.Instance.CustomMasteryFile))
+                        {
+                            SelectCustomMasteryNotificationButton_Click(null, null);
+                        }
+                    }
+
+                    if (isChecked == NotificationsController.Instance.CustomMasteryEnabled)
+                    {
+                        NotificationsController.Instance.Reset();
+                    }
+                    break;
+                case "acheivementEditOutlineCheckbox":
+                    if (checkBox.Checked)
+                    {
+                        NotificationsController.Instance.EnableAchievementEdit();
+                        NotificationsController.Instance.SendAchievementNotification(new Achievement()
+                        {
+                            Title = "Thrilling!!!!",
+                            Description = "Color every bit of Dinosaur 2. [Must color white if leaving white]",
+                            BadgeNumber = "49987",
+                            Points = 1
+                        });
+                    }
+                    else
+                    {
+                        NotificationsController.Instance.DisableAchievementEdit();
+                    }
+                    break;
+                case "masteryEditOultineCheckbox":
+                    if (checkBox.Checked)
+                    {
+                        NotificationsController.Instance.EnableMasteryEdit();
+                        NotificationsController.Instance.SendMasteryNotification(GameInfo);
+                    }
+                    else
+                    {
+                        NotificationsController.Instance.DisableMasteryEdit();
+                    }
+                    break;
             }
 
-            customAchievementEnableCheckbox.Checked = NotificationsController.Instance.CustomAchievementEnabled;
-            selectCustomAchievementFileButton.Enabled = NotificationsController.Instance.CustomAchievementEnabled;
-            acheivementEditOutlineCheckbox.Enabled = NotificationsController.Instance.CustomAchievementEnabled;
+            notificationsTitleGroupBox.Enabled = NotificationsController.Instance.AchievementAlertEnable || NotificationsController.Instance.MasteryAlertEnable;
+            notificationsDescriptionGroupBox.Enabled = NotificationsController.Instance.AchievementAlertEnable || NotificationsController.Instance.MasteryAlertEnable;
+            notificationsPointsGroupBox.Enabled = NotificationsController.Instance.AchievementAlertEnable || NotificationsController.Instance.MasteryAlertEnable;
+            notificationsLineGroupBox.Enabled = NotificationsController.Instance.AchievementAlertEnable || NotificationsController.Instance.MasteryAlertEnable;
+            notificationsAllFontGroupBox.Enabled = NotificationsController.Instance.AchievementAlertEnable || NotificationsController.Instance.MasteryAlertEnable;
+            playAchievementButton.Enabled = NotificationsController.Instance.AchievementAlertEnable;
+            customAchievementEnableCheckbox.Enabled = NotificationsController.Instance.AchievementAlertEnable;
+            playMasteryButton.Enabled = NotificationsController.Instance.MasteryAlertEnable;
+            customMasteryEnableCheckbox.Enabled = NotificationsController.Instance.MasteryAlertEnable;
 
-            NotificationsController.Instance.Reset();
-        }
-        private void CustomMasteryEnableCheckBox_CheckedChanged(object sender, EventArgs eventArgs)
-        {
-            NotificationsController.Instance.CustomMasteryEnabled = ((CheckBox)sender).Checked;
+            customAchievementEnableCheckbox.Checked = NotificationsController.Instance.AchievementAlertEnable && NotificationsController.Instance.CustomAchievementEnabled;
+            selectCustomAchievementFileButton.Enabled = NotificationsController.Instance.AchievementAlertEnable && NotificationsController.Instance.CustomAchievementEnabled;
+            acheivementEditOutlineCheckbox.Enabled = NotificationsController.Instance.AchievementAlertEnable && NotificationsController.Instance.CustomAchievementEnabled;
+            achievementPositionGroupBox.Enabled = NotificationsController.Instance.AchievementAlertEnable && NotificationsController.Instance.CustomAchievementEnabled;
+            achievementInAnimationGroupBox.Enabled = NotificationsController.Instance.AchievementAlertEnable && NotificationsController.Instance.CustomAchievementEnabled;
+            achievementOutAnimationGroupBox.Enabled = NotificationsController.Instance.AchievementAlertEnable && NotificationsController.Instance.CustomAchievementEnabled;
 
-            if (!File.Exists(NotificationsController.Instance.CustomMasteryFile))
-            {
-                SelectCustomMasteryNotificationButton_Click(null, null);
-            }
-
-            customMasteryEnableCheckbox.Checked = NotificationsController.Instance.CustomMasteryEnabled;
-            selectCustomMasteryFileButton.Enabled = NotificationsController.Instance.CustomMasteryEnabled;
-            masteryEditOultineCheckbox.Enabled = NotificationsController.Instance.CustomMasteryEnabled;
-
-            NotificationsController.Instance.Reset();
-        }
-        private void AcheivementEditOutlineCheckBox_CheckedChanged(object sender, EventArgs eventArgs)
-        {
-            if (((CheckBox)sender).Checked)
-            {
-                NotificationsController.Instance.EnableAchievementEdit();
-                NotificationsController.Instance.SendAchievementNotification(new Achievement()
-                {
-                    Title = "Thrilling!!!!",
-                    Description = "Color every bit of Dinosaur 2. [Must color white if leaving white]",
-                    BadgeNumber = "49987",
-                    Points = 1
-                });
-            }
-            else
-            {
-                NotificationsController.Instance.DisableAchievementEdit();
-            }
-        }
-        private void MasteryEditOultineCheckBox_CheckedChanged(object sender, EventArgs eventArgs)
-        {
-            if (((CheckBox)sender).Checked)
-            {
-                NotificationsController.Instance.EnableMasteryEdit();
-                NotificationsController.Instance.SendMasteryNotification(GameInfo);
-            }
-            else
-            {
-                NotificationsController.Instance.DisableMasteryEdit();
-            }
+            customMasteryEnableCheckbox.Checked = NotificationsController.Instance.MasteryAlertEnable && NotificationsController.Instance.CustomMasteryEnabled;
+            selectCustomMasteryFileButton.Enabled = NotificationsController.Instance.MasteryAlertEnable && NotificationsController.Instance.CustomMasteryEnabled;
+            masteryEditOultineCheckbox.Enabled = NotificationsController.Instance.MasteryAlertEnable && NotificationsController.Instance.CustomMasteryEnabled;
+            masteryPositionGroupBox.Enabled = NotificationsController.Instance.MasteryAlertEnable && NotificationsController.Instance.CustomMasteryEnabled;
+            masteryInAnimationGroupBox.Enabled = NotificationsController.Instance.MasteryAlertEnable && NotificationsController.Instance.CustomMasteryEnabled;
+            masteryOutAnimationGroupBox.Enabled = NotificationsController.Instance.MasteryAlertEnable && NotificationsController.Instance.CustomMasteryEnabled;
         }
         private void CustomNumericUpDown_ValueChanged(object sender, EventArgs eventArgs)
         {
@@ -988,9 +1030,9 @@ namespace Retro_Achievement_Tracker
             }
             else
             {
-                if (customAchievementEnableCheckbox.Checked && string.IsNullOrEmpty(NotificationsController.Instance.CustomAchievementFile))
+                if (NotificationsController.Instance.CustomAchievementEnabled && (string.IsNullOrEmpty(NotificationsController.Instance.CustomAchievementFile) || !File.Exists(NotificationsController.Instance.CustomAchievementFile)))
                 {
-                    customAchievementEnableCheckbox.Checked = false;
+                    NotificationsController.Instance.CustomAchievementEnabled = false;
                 }
             }
         }
@@ -1002,13 +1044,13 @@ namespace Retro_Achievement_Tracker
             }
             else
             {
-                if (customMasteryEnableCheckbox.Checked && string.IsNullOrEmpty(NotificationsController.Instance.CustomMasteryFile))
+                if (NotificationsController.Instance.CustomMasteryEnabled && (string.IsNullOrEmpty(NotificationsController.Instance.CustomMasteryFile) || !File.Exists(NotificationsController.Instance.CustomMasteryFile)))
                 {
-                    customMasteryEnableCheckbox.Checked = false;
+                    NotificationsController.Instance.CustomMasteryEnabled = false;
                 }
             }
         }
-        private void ShowAchievementButton_Click(object sender, EventArgs eventArgs)
+        private void ShowAlertButton_Click(object sender, EventArgs eventArgs)
         {
             List<Achievement> unlockedAchievements = UnlockedAchievements.ToList();
 
@@ -2430,6 +2472,9 @@ namespace Retro_Achievement_Tracker
             notificationsPointsOutlineCheckBox.Checked = NotificationsController.Instance.PointsOutlineEnabled;
             notificationsLineOutlineCheckBox.Checked = NotificationsController.Instance.LineOutlineEnabled;
 
+            achievementEnableCheckbox.Checked = NotificationsController.Instance.AchievementAlertEnable;
+            masteryEnableCheckbox.Checked = NotificationsController.Instance.MasteryAlertEnable;
+
             notificationsSimpleFontColorPictureBox.BackColor = ColorTranslator.FromHtml(NotificationsController.Instance.SimpleFontColor);
             notificationsSimpleFontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(NotificationsController.Instance.SimpleFontOutlineColor);
             notificationsTitleFontColorPictureBox.BackColor = ColorTranslator.FromHtml(NotificationsController.Instance.TitleColor);
@@ -2597,25 +2642,174 @@ namespace Retro_Achievement_Tracker
             rssFeedListView.SelectedIndexChanged += BrowserSensitiveControl_Click;
 
             selectCustomAchievementFileButton.Enabled = NotificationsController.Instance.CustomAchievementEnabled;
-            customAchievementEnableCheckbox.Checked = NotificationsController.Instance.CustomAchievementEnabled;
             acheivementEditOutlineCheckbox.Enabled = NotificationsController.Instance.CustomAchievementEnabled;
-            customAchievementEnableCheckbox.Click += CustomAchievementEnableCheckBox_CheckedChanged;
-            acheivementEditOutlineCheckbox.Click += AcheivementEditOutlineCheckBox_CheckedChanged;
+            customAchievementEnableCheckbox.Checked = NotificationsController.Instance.CustomAchievementEnabled;
+            customAchievementEnableCheckbox.Click += CustomAlertsCheckBox_CheckedChanged;
+            acheivementEditOutlineCheckbox.Click += CustomAlertsCheckBox_CheckedChanged;
 
             selectCustomMasteryFileButton.Enabled = NotificationsController.Instance.CustomMasteryEnabled;
-            customMasteryEnableCheckbox.Checked = NotificationsController.Instance.CustomMasteryEnabled;
             masteryEditOultineCheckbox.Enabled = NotificationsController.Instance.CustomMasteryEnabled;
-            customMasteryEnableCheckbox.Click += CustomMasteryEnableCheckBox_CheckedChanged;
-            masteryEditOultineCheckbox.Click += MasteryEditOultineCheckBox_CheckedChanged;
+            customMasteryEnableCheckbox.Checked = NotificationsController.Instance.CustomMasteryEnabled;
+            customMasteryEnableCheckbox.Click += CustomAlertsCheckBox_CheckedChanged;
+            masteryEditOultineCheckbox.Click += CustomAlertsCheckBox_CheckedChanged;
+
+            achievementEnableCheckbox.Checked = NotificationsController.Instance.AchievementAlertEnable;
+            masteryEnableCheckbox.Checked = NotificationsController.Instance.MasteryAlertEnable;
+            achievementEnableCheckbox.Click += CustomAlertsCheckBox_CheckedChanged;
+            masteryEnableCheckbox.Click += CustomAlertsCheckBox_CheckedChanged;
+
+            notificationsTitleGroupBox.Enabled = NotificationsController.Instance.AchievementAlertEnable || NotificationsController.Instance.MasteryAlertEnable;
+            notificationsDescriptionGroupBox.Enabled = NotificationsController.Instance.AchievementAlertEnable || NotificationsController.Instance.MasteryAlertEnable;
+            notificationsPointsGroupBox.Enabled = NotificationsController.Instance.AchievementAlertEnable || NotificationsController.Instance.MasteryAlertEnable;
+            notificationsLineGroupBox.Enabled = NotificationsController.Instance.AchievementAlertEnable || NotificationsController.Instance.MasteryAlertEnable;
+            notificationsAllFontGroupBox.Enabled = NotificationsController.Instance.AchievementAlertEnable || NotificationsController.Instance.MasteryAlertEnable;
+            playAchievementButton.Enabled = NotificationsController.Instance.AchievementAlertEnable;
+            customAchievementEnableCheckbox.Enabled = NotificationsController.Instance.AchievementAlertEnable;
+            playMasteryButton.Enabled = NotificationsController.Instance.MasteryAlertEnable;
+            customMasteryEnableCheckbox.Enabled = NotificationsController.Instance.MasteryAlertEnable;
+
+
+            customAchievementEnableCheckbox.Checked = NotificationsController.Instance.AchievementAlertEnable && NotificationsController.Instance.CustomAchievementEnabled;
+            selectCustomAchievementFileButton.Enabled = NotificationsController.Instance.AchievementAlertEnable && NotificationsController.Instance.CustomAchievementEnabled;
+            acheivementEditOutlineCheckbox.Enabled = NotificationsController.Instance.AchievementAlertEnable && NotificationsController.Instance.CustomAchievementEnabled;
+            achievementPositionGroupBox.Enabled = NotificationsController.Instance.AchievementAlertEnable && NotificationsController.Instance.CustomAchievementEnabled;
+            achievementInAnimationGroupBox.Enabled = NotificationsController.Instance.AchievementAlertEnable && NotificationsController.Instance.CustomAchievementEnabled;
+            achievementOutAnimationGroupBox.Enabled = NotificationsController.Instance.AchievementAlertEnable && NotificationsController.Instance.CustomAchievementEnabled;
+
+            customMasteryEnableCheckbox.Checked = NotificationsController.Instance.MasteryAlertEnable && NotificationsController.Instance.CustomMasteryEnabled;
+            selectCustomMasteryFileButton.Enabled = NotificationsController.Instance.MasteryAlertEnable && NotificationsController.Instance.CustomMasteryEnabled;
+            masteryEditOultineCheckbox.Enabled = NotificationsController.Instance.MasteryAlertEnable && NotificationsController.Instance.CustomMasteryEnabled;
+            masteryPositionGroupBox.Enabled = NotificationsController.Instance.MasteryAlertEnable && NotificationsController.Instance.CustomMasteryEnabled;
+            masteryInAnimationGroupBox.Enabled = NotificationsController.Instance.MasteryAlertEnable && NotificationsController.Instance.CustomMasteryEnabled;
+            masteryOutAnimationGroupBox.Enabled = NotificationsController.Instance.MasteryAlertEnable && NotificationsController.Instance.CustomMasteryEnabled;
 
             if (NotificationsController.Instance.CustomAchievementScale > notificationsCustomAchievementScaleNumericUpDown.Maximum)
             {
                 NotificationsController.Instance.CustomAchievementScale = notificationsCustomAchievementScaleNumericUpDown.Maximum;
             }
+            else if (NotificationsController.Instance.CustomAchievementScale < notificationsCustomAchievementScaleNumericUpDown.Minimum)
+            {
+                NotificationsController.Instance.CustomAchievementScale = notificationsCustomAchievementScaleNumericUpDown.Minimum;
+            }
+
+            if (NotificationsController.Instance.CustomAchievementX > notificationsCustomAchievementXNumericUpDown.Maximum)
+            {
+                NotificationsController.Instance.CustomAchievementX = (int)notificationsCustomAchievementXNumericUpDown.Maximum;
+            }
+            else if (NotificationsController.Instance.CustomAchievementX < notificationsCustomAchievementXNumericUpDown.Minimum)
+            {
+                NotificationsController.Instance.CustomAchievementX = (int)notificationsCustomAchievementXNumericUpDown.Minimum;
+            }
+
+            if (NotificationsController.Instance.CustomAchievementY > notificationsCustomAchievementYNumericUpDown.Maximum)
+            {
+                NotificationsController.Instance.CustomAchievementY = (int)notificationsCustomAchievementYNumericUpDown.Maximum;
+            }
+            else if (NotificationsController.Instance.CustomAchievementY < notificationsCustomAchievementYNumericUpDown.Minimum)
+            {
+                NotificationsController.Instance.CustomAchievementY = (int)notificationsCustomAchievementYNumericUpDown.Minimum;
+            }
+
+            if (NotificationsController.Instance.CustomAchievementIn > notificationsCustomAchievementInNumericUpDown.Maximum)
+            {
+                NotificationsController.Instance.CustomAchievementIn = (int)notificationsCustomAchievementInNumericUpDown.Maximum;
+            }
+            else if (NotificationsController.Instance.CustomAchievementIn < notificationsCustomAchievementInNumericUpDown.Minimum)
+            {
+                NotificationsController.Instance.CustomAchievementIn = (int)notificationsCustomAchievementInNumericUpDown.Minimum;
+            }
+
+            if (NotificationsController.Instance.CustomAchievementOut > notificationsCustomAchievementOutNumericUpDown.Maximum)
+            {
+                NotificationsController.Instance.CustomAchievementOut = (int)notificationsCustomAchievementOutNumericUpDown.Maximum;
+            }
+            else if (NotificationsController.Instance.CustomAchievementOut < notificationsCustomAchievementOutNumericUpDown.Minimum)
+            {
+                NotificationsController.Instance.CustomAchievementOut = (int)notificationsCustomAchievementOutNumericUpDown.Minimum;
+            }
+
+
+            if (NotificationsController.Instance.CustomAchievementInSpeed > notificationsCustomAchievementInSpeedUpDown.Maximum)
+            {
+                NotificationsController.Instance.CustomAchievementInSpeed = (int)notificationsCustomAchievementInSpeedUpDown.Maximum;
+            }
+            else if (NotificationsController.Instance.CustomAchievementInSpeed < notificationsCustomAchievementInSpeedUpDown.Minimum)
+            {
+                NotificationsController.Instance.CustomAchievementInSpeed = (int)notificationsCustomAchievementInSpeedUpDown.Minimum;
+            }
+
+            if (NotificationsController.Instance.CustomAchievementOutSpeed > notificationsCustomAchievementOutSpeedUpDown.Maximum)
+            {
+                NotificationsController.Instance.CustomAchievementOutSpeed = (int)notificationsCustomAchievementOutSpeedUpDown.Maximum;
+            }
+            else if (NotificationsController.Instance.CustomAchievementOutSpeed < notificationsCustomAchievementOutSpeedUpDown.Minimum)
+            {
+                NotificationsController.Instance.CustomAchievementOutSpeed = (int)notificationsCustomAchievementOutSpeedUpDown.Minimum;
+            }
+
+
 
             if (NotificationsController.Instance.CustomMasteryScale > notificationsCustomMasteryScaleNumericUpDown.Maximum)
             {
                 NotificationsController.Instance.CustomMasteryScale = notificationsCustomMasteryScaleNumericUpDown.Maximum;
+            }
+            else if (NotificationsController.Instance.CustomMasteryScale < notificationsCustomMasteryScaleNumericUpDown.Minimum)
+            {
+                NotificationsController.Instance.CustomMasteryScale = notificationsCustomMasteryScaleNumericUpDown.Minimum;
+            }
+
+            if (NotificationsController.Instance.CustomMasteryX > notificationsCustomMasteryXNumericUpDown.Maximum)
+            {
+                NotificationsController.Instance.CustomMasteryX = (int)notificationsCustomMasteryXNumericUpDown.Maximum;
+            }
+            else if (NotificationsController.Instance.CustomMasteryX < notificationsCustomMasteryXNumericUpDown.Minimum)
+            {
+                NotificationsController.Instance.CustomMasteryX = (int)notificationsCustomMasteryXNumericUpDown.Minimum;
+            }
+
+            if (NotificationsController.Instance.CustomMasteryY > notificationsCustomMasteryYNumericUpDown.Maximum)
+            {
+                NotificationsController.Instance.CustomMasteryY = (int)notificationsCustomMasteryYNumericUpDown.Maximum;
+            }
+            else if (NotificationsController.Instance.CustomMasteryY < notificationsCustomMasteryYNumericUpDown.Minimum)
+            {
+                NotificationsController.Instance.CustomMasteryY = (int)notificationsCustomMasteryYNumericUpDown.Minimum;
+            }
+            if (NotificationsController.Instance.CustomMasteryIn > notificationsCustomMasteryInNumericUpDown.Maximum)
+            {
+                NotificationsController.Instance.CustomMasteryIn = (int)notificationsCustomMasteryInNumericUpDown.Maximum;
+            }
+            else if (NotificationsController.Instance.CustomMasteryIn < notificationsCustomMasteryInNumericUpDown.Minimum)
+            {
+                NotificationsController.Instance.CustomMasteryIn = (int)notificationsCustomMasteryInNumericUpDown.Minimum;
+            }
+
+            if (NotificationsController.Instance.CustomMasteryOut > notificationsCustomMasteryOutNumericUpDown.Maximum)
+            {
+                NotificationsController.Instance.CustomMasteryOut = (int)notificationsCustomMasteryOutNumericUpDown.Maximum;
+            }
+            else if (NotificationsController.Instance.CustomMasteryOut < notificationsCustomMasteryOutNumericUpDown.Minimum)
+            {
+                NotificationsController.Instance.CustomMasteryOut = (int)notificationsCustomMasteryOutNumericUpDown.Minimum;
+            }
+
+
+            if (NotificationsController.Instance.CustomMasteryInSpeed > notificationsCustomMasteryInSpeedUpDown.Maximum)
+            {
+                NotificationsController.Instance.CustomMasteryInSpeed = (int)notificationsCustomMasteryInSpeedUpDown.Maximum;
+            }
+            else if (NotificationsController.Instance.CustomMasteryInSpeed < notificationsCustomMasteryInSpeedUpDown.Minimum)
+            {
+                NotificationsController.Instance.CustomMasteryInSpeed = (int)notificationsCustomMasteryInSpeedUpDown.Minimum;
+            }
+
+            if (NotificationsController.Instance.CustomMasteryOutSpeed > notificationsCustomMasteryOutSpeedUpDown.Maximum)
+            {
+                NotificationsController.Instance.CustomMasteryOutSpeed = (int)notificationsCustomMasteryOutSpeedUpDown.Maximum;
+            }
+            else if (NotificationsController.Instance.CustomMasteryOutSpeed < notificationsCustomMasteryOutSpeedUpDown.Minimum)
+            {
+                NotificationsController.Instance.CustomMasteryOutSpeed = (int)notificationsCustomMasteryOutSpeedUpDown.Minimum;
             }
 
             List<AnimationDirection> animationDirections = new List<AnimationDirection>
@@ -2679,7 +2873,7 @@ namespace Retro_Achievement_Tracker
             notificationsCustomMasteryXNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
             notificationsCustomMasteryYNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
 
-            playAchievementButton.Click += ShowAchievementButton_Click;
+            playAchievementButton.Click += ShowAlertButton_Click;
             playMasteryButton.Click += ShowGameMasteryButton_Click;
             selectCustomAchievementFileButton.Click += SelectCustomAchievementButton_Click;
             selectCustomMasteryFileButton.Click += SelectCustomMasteryNotificationButton_Click;
@@ -2740,6 +2934,7 @@ namespace Retro_Achievement_Tracker
                     focusBehaviorGoToLastRadioButton.Checked = true;
                     break;
             }
+
             focusBehaviorGoToFirstRadioButton.Click += RadioButton_Clicked;
             focusBehaviorGoToPreviousRadioButton.Click += RadioButton_Clicked;
             focusBehaviorGoToNextRadioButton.Click += RadioButton_Clicked;

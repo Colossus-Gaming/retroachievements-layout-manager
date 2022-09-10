@@ -17,6 +17,9 @@ namespace Retro_Achievement_Tracker.Forms
         public GameStatsWindow()
         {
             ClientSize = new Size(0, 0);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MinimizeBox = false;
 
             Name = "RA Tracker - Game Stats";
             Text = "RA Tracker - Game Stats";

@@ -17,6 +17,9 @@ namespace Retro_Achievement_Tracker.Forms
         public AlertsWindow()
         {
             ClientSize = new Size(0, 0);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MinimizeBox = false;
 
             Name = "RA Tracker - Alerts";
             Text = "RA Tracker - Alerts";

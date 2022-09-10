@@ -19,6 +19,9 @@ namespace Retro_Achievement_Tracker
             Text = "RA Tracker - Game Info";
 
             ClientSize = new Size(0, 0);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MinimizeBox = false;
 
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainPage));
             this.Icon = ((Icon)(resources.GetObject("$this.Icon")));

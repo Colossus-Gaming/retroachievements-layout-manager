@@ -18,6 +18,9 @@ namespace Retro_Achievement_Tracker
         public RecentAchievementsWindow()
         {
             ClientSize = new Size(0, 0);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MinimizeBox = false;
 
             Name = "RA Tracker - Recent Achievements";
             Text = "RA Tracker - Recent Achievements";

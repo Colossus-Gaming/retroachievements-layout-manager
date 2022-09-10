@@ -352,6 +352,30 @@ namespace Retro_Achievement_Tracker.Controllers
         /**
          * Variables
          */
+        public bool AchievementAlertEnable
+        {
+            get
+            {
+                return Settings.Default.alerts_achievement_enable;
+            }
+            set
+            {
+                Settings.Default.alerts_achievement_enable = value;
+                Settings.Default.Save();
+            }
+        }
+        public bool MasteryAlertEnable
+        {
+            get
+            {
+                return Settings.Default.alerts_mastery_enable;
+            }
+            set
+            {
+                Settings.Default.alerts_mastery_enable = value;
+                Settings.Default.Save();
+            }
+        }
         public bool AdvancedSettingsEnabled
         {
             get

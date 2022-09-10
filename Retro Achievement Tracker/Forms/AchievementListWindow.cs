@@ -19,7 +19,10 @@ namespace Retro_Achievement_Tracker.Forms
         private TaskController TaskController;
         public AchievementListWindow()
         {
-            ClientSize = new Size(0, 0);
+            ClientSize = new Size(0, 0); 
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MinimizeBox = false;
 
             Name = "RA Tracker - Achievement List";
             Text = "RA Tracker - Achievement List";

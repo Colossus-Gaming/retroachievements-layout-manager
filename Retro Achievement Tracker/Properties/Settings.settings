@@ -683,5 +683,11 @@
     <Setting Name="focus_refocus_behavior" Type="System.String" Scope="User">
       <Value Profile="(Default)">GO_TO_FIRST</Value>
     </Setting>
+    <Setting Name="alerts_achievement_enable" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="alerts_mastery_enable" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

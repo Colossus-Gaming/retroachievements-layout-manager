@@ -72,14 +72,14 @@ namespace Retro_Achievement_Tracker
             this.notificationsCustomAchievementXNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.notificationsCustomAchievementYNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.acheivementEditOutlineCheckbox = new System.Windows.Forms.CheckBox();
-            this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.achievementOutAnimationGroupBox = new System.Windows.Forms.GroupBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.notificationsCustomAchievementOutNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.notificationsCustomAchievementAnimationOutComboBox = new System.Windows.Forms.ComboBox();
             this.notificationsCustomAchievementOutSpeedUpDown = new System.Windows.Forms.NumericUpDown();
-            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.achievementInAnimationGroupBox = new System.Windows.Forms.GroupBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -89,7 +89,7 @@ namespace Retro_Achievement_Tracker
             this.customAchievementEnableCheckbox = new System.Windows.Forms.CheckBox();
             this.playMasteryButton = new System.Windows.Forms.Button();
             this.selectCustomMasteryFileButton = new System.Windows.Forms.Button();
-            this.groupBox13 = new System.Windows.Forms.GroupBox();
+            this.masteryPositionGroupBox = new System.Windows.Forms.GroupBox();
             this.label16 = new System.Windows.Forms.Label();
             this.notificationsCustomMasteryScaleNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.label17 = new System.Windows.Forms.Label();
@@ -97,14 +97,14 @@ namespace Retro_Achievement_Tracker
             this.notificationsCustomMasteryXNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.notificationsCustomMasteryYNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.masteryEditOultineCheckbox = new System.Windows.Forms.CheckBox();
-            this.groupBox14 = new System.Windows.Forms.GroupBox();
+            this.masteryOutAnimationGroupBox = new System.Windows.Forms.GroupBox();
             this.label19 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
             this.notificationsCustomMasteryOutNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.notificationsCustomMasteryAnimationOutComboBox = new System.Windows.Forms.ComboBox();
             this.notificationsCustomMasteryOutSpeedUpDown = new System.Windows.Forms.NumericUpDown();
-            this.groupBox19 = new System.Windows.Forms.GroupBox();
+            this.masteryInAnimationGroupBox = new System.Windows.Forms.GroupBox();
             this.label22 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
@@ -189,18 +189,14 @@ namespace Retro_Achievement_Tracker
             this.webBrowserAutoOpenCheckbox = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.userInfoRatioLabel = new System.Windows.Forms.Label();
+            this.userInfoTruePointsLabel = new System.Windows.Forms.Label();
+            this.userInfoPointsLabel = new System.Windows.Forms.Label();
+            this.userInfoRankLabel = new System.Windows.Forms.Label();
             this.userInfoSimpleCheckBox = new System.Windows.Forms.CheckBox();
             this.userInfoBackgroundColorGroupBox = new System.Windows.Forms.GroupBox();
             this.userInfoSetBackgroundColorButton = new System.Windows.Forms.Button();
             this.userInfoBackgroundColorPictureBox = new System.Windows.Forms.PictureBox();
-            this.userInfoNamesGroupBox = new System.Windows.Forms.GroupBox();
-            this.userInfoNamesFontOutlineColorBoxButton = new System.Windows.Forms.Button();
-            this.userInfoNamesFontOutlineColorPictureBox = new System.Windows.Forms.PictureBox();
-            this.userInfoNamesFontColorBoxButton = new System.Windows.Forms.Button();
-            this.userInfoNamesOutlineCheckBox = new System.Windows.Forms.CheckBox();
-            this.userInfoNamesFontOutlineNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.userInfoNamesFontColorPictureBox = new System.Windows.Forms.PictureBox();
-            this.userInfoNamesFontComboBox = new System.Windows.Forms.ComboBox();
             this.userInfoValuesGroupBox = new System.Windows.Forms.GroupBox();
             this.userInfoValuesFontOutlineColorBoxButton = new System.Windows.Forms.Button();
             this.userInfoValuesFontOutlineColorPictureBox = new System.Windows.Forms.PictureBox();
@@ -209,7 +205,24 @@ namespace Retro_Achievement_Tracker
             this.userInfoValuesFontOutlineNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.userInfoValuesFontColorPictureBox = new System.Windows.Forms.PictureBox();
             this.userInfoValuesFontComboBox = new System.Windows.Forms.ComboBox();
+            this.userInfoNamesGroupBox = new System.Windows.Forms.GroupBox();
+            this.userInfoNamesFontOutlineColorBoxButton = new System.Windows.Forms.Button();
+            this.userInfoNamesFontOutlineColorPictureBox = new System.Windows.Forms.PictureBox();
+            this.userInfoNamesFontColorBoxButton = new System.Windows.Forms.Button();
+            this.userInfoNamesOutlineCheckBox = new System.Windows.Forms.CheckBox();
+            this.userInfoNamesFontOutlineNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.userInfoNamesFontColorPictureBox = new System.Windows.Forms.PictureBox();
+            this.userInfoNamesFontComboBox = new System.Windows.Forms.ComboBox();
+            this.userInfoSimpleGroupBox = new System.Windows.Forms.GroupBox();
+            this.userInfoSimpleFontOutlineColorBoxButton = new System.Windows.Forms.Button();
+            this.userInfoSimpleFontOutlineColorPictureBox = new System.Windows.Forms.PictureBox();
+            this.userInfoSimpleFontColorBoxButton = new System.Windows.Forms.Button();
+            this.userInfoSimpleOutlineCheckBox = new System.Windows.Forms.CheckBox();
+            this.userInfoSimpleFontOutlineNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.userInfoSimpleFontColorPictureBox = new System.Windows.Forms.PictureBox();
+            this.userInfoSimpleFontComboBox = new System.Windows.Forms.ComboBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.focusAchievementIdLabel = new System.Windows.Forms.Label();
             this.focusSimpleCheckBox = new System.Windows.Forms.CheckBox();
             this.focusBorderCheckBox = new System.Windows.Forms.CheckBox();
             this.focusBackgroundColorGroupBox = new System.Windows.Forms.GroupBox();
@@ -249,12 +262,22 @@ namespace Retro_Achievement_Tracker
             this.focusDescriptionFontOutlineNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.focusDescriptionFontColorPictureBox = new System.Windows.Forms.PictureBox();
             this.focusDescriptionFontComboBox = new System.Windows.Forms.ComboBox();
+            this.focusSimpleGroupBox = new System.Windows.Forms.GroupBox();
+            this.focusSimpleFontOutlineSetColorButton = new System.Windows.Forms.Button();
+            this.focusSimpleFontOutlineColorPictureBox = new System.Windows.Forms.PictureBox();
+            this.focusSimpleFontSetColorButton = new System.Windows.Forms.Button();
+            this.focusSimpleOutlineCheckBox = new System.Windows.Forms.CheckBox();
+            this.focusSimpleFontOutlineNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.focusSimpleFontColorPictureBox = new System.Windows.Forms.PictureBox();
+            this.focusSimpleFontComboBox = new System.Windows.Forms.ComboBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.notificationsSimpleCheckBox = new System.Windows.Forms.CheckBox();
             this.notificationsBorderCheckBox = new System.Windows.Forms.CheckBox();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.achievementEnableCheckbox = new System.Windows.Forms.CheckBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.masteryEnableCheckbox = new System.Windows.Forms.CheckBox();
             this.notificationsBackgroundColorGroupBox = new System.Windows.Forms.GroupBox();
             this.notificationsSetBackgroundColorButton = new System.Windows.Forms.Button();
             this.notificationsBackgroundColorPictureBox = new System.Windows.Forms.PictureBox();
@@ -292,19 +315,24 @@ namespace Retro_Achievement_Tracker
             this.notificationsDescriptionFontOutlineNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.notificationsDescriptionFontColorPictureBox = new System.Windows.Forms.PictureBox();
             this.notificationsDescriptionFontComboBox = new System.Windows.Forms.ComboBox();
+            this.notificationsAllFontGroupBox = new System.Windows.Forms.GroupBox();
+            this.notificationsSimpleFontOutlineSetColorButton = new System.Windows.Forms.Button();
+            this.notificationsSimpleFontOutlineColorPictureBox = new System.Windows.Forms.PictureBox();
+            this.notificationsSimpleFontSetColorButton = new System.Windows.Forms.Button();
+            this.notificationsSimpleOutlineCheckBox = new System.Windows.Forms.CheckBox();
+            this.notificationsSimpleFontOutlineNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.notificationsSimpleFontColorPictureBox = new System.Windows.Forms.PictureBox();
+            this.notificationsSimpleFontComboBox = new System.Windows.Forms.ComboBox();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.gameProgressRatioLabel = new System.Windows.Forms.Label();
+            this.gameProgressCompletedLabel = new System.Windows.Forms.Label();
+            this.gameProgressTruePointsLabel = new System.Windows.Forms.Label();
+            this.gameProgressPointsLabel = new System.Windows.Forms.Label();
+            this.gameProgressAchievementsLabel = new System.Windows.Forms.Label();
             this.gameProgressSimpleCheckBox = new System.Windows.Forms.CheckBox();
             this.gameProgressBackgroundColorGroupBox = new System.Windows.Forms.GroupBox();
             this.gameProgressSetBackgroundColorButton = new System.Windows.Forms.Button();
             this.gameProgressBackgroundColorPictureBox = new System.Windows.Forms.PictureBox();
-            this.gameProgressNamesGroupBox = new System.Windows.Forms.GroupBox();
-            this.gameProgressNamesFontOutlineColorBoxButton = new System.Windows.Forms.Button();
-            this.gameProgressNamesFontOutlineColorPictureBox = new System.Windows.Forms.PictureBox();
-            this.gameProgressNamesFontColorBoxButton = new System.Windows.Forms.Button();
-            this.gameProgressNamesOutlineCheckBox = new System.Windows.Forms.CheckBox();
-            this.gameProgressNamesFontOutlineNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.gameProgressNamesFontColorPictureBox = new System.Windows.Forms.PictureBox();
-            this.gameProgressNamesFontComboBox = new System.Windows.Forms.ComboBox();
             this.gameProgressValuesGroupBox = new System.Windows.Forms.GroupBox();
             this.gameProgressValuesFontOutlineColorBoxButton = new System.Windows.Forms.Button();
             this.gameProgressValuesFontOutlineColorPictureBox = new System.Windows.Forms.PictureBox();
@@ -313,8 +341,37 @@ namespace Retro_Achievement_Tracker
             this.gameProgressValuesFontOutlineNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.gameProgressValuesFontColorPictureBox = new System.Windows.Forms.PictureBox();
             this.gameProgressValuesFontComboBox = new System.Windows.Forms.ComboBox();
+            this.gameProgressNamesGroupBox = new System.Windows.Forms.GroupBox();
+            this.gameProgressNamesFontOutlineColorBoxButton = new System.Windows.Forms.Button();
+            this.gameProgressNamesFontOutlineColorPictureBox = new System.Windows.Forms.PictureBox();
+            this.gameProgressNamesFontColorBoxButton = new System.Windows.Forms.Button();
+            this.gameProgressNamesOutlineCheckBox = new System.Windows.Forms.CheckBox();
+            this.gameProgressNamesFontOutlineNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.gameProgressNamesFontColorPictureBox = new System.Windows.Forms.PictureBox();
+            this.gameProgressNamesFontComboBox = new System.Windows.Forms.ComboBox();
+            this.gameProgressSimpleGroupBox = new System.Windows.Forms.GroupBox();
+            this.gameProgressSimpleFontOutlineColorBoxButton = new System.Windows.Forms.Button();
+            this.gameProgressSimpleFontOutlineColorPictureBox = new System.Windows.Forms.PictureBox();
+            this.gameProgressSimpleFontColorBoxButton = new System.Windows.Forms.Button();
+            this.gameProgressSimpleOutlineCheckBox = new System.Windows.Forms.CheckBox();
+            this.gameProgressSimpleFontOutlineNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.gameProgressSimpleFontColorPictureBox = new System.Windows.Forms.PictureBox();
+            this.gameProgressSimpleFontComboBox = new System.Windows.Forms.ComboBox();
             this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.gameInfoReleasedLabel = new System.Windows.Forms.Label();
+            this.gameInfoGenreLabel = new System.Windows.Forms.Label();
+            this.gameInfoConsoleLabel = new System.Windows.Forms.Label();
+            this.gameInfoPublisherLabel = new System.Windows.Forms.Label();
+            this.gameInfoDeveloperLabel = new System.Windows.Forms.Label();
             this.gameInfoSimpleCheckBox = new System.Windows.Forms.CheckBox();
+            this.gameInfoSimpleGroupBox = new System.Windows.Forms.GroupBox();
+            this.gameInfoSimpleFontOutlineColorBoxButton = new System.Windows.Forms.Button();
+            this.gameInfoSimpleFontOutlineColorPictureBox = new System.Windows.Forms.PictureBox();
+            this.gameInfoSimpleFontColorBoxButton = new System.Windows.Forms.Button();
+            this.gameInfoSimpleOutlineCheckBox = new System.Windows.Forms.CheckBox();
+            this.gameInfoSimpleFontOutlineNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.gameInfoSimpleFontColorPictureBox = new System.Windows.Forms.PictureBox();
+            this.gameInfoSimpleFontComboBox = new System.Windows.Forms.ComboBox();
             this.tabPage8 = new System.Windows.Forms.TabPage();
             this.recentAchievementsScrollCheckBox = new System.Windows.Forms.CheckBox();
             this.recentAchievementsSimpleCheckBox = new System.Windows.Forms.CheckBox();
@@ -356,66 +413,6 @@ namespace Retro_Achievement_Tracker
             this.recentAchievementsDescriptionFontOutlineNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.recentAchievementsDescriptionFontColorPictureBox = new System.Windows.Forms.PictureBox();
             this.recentAchievementsDescriptionFontComboBox = new System.Windows.Forms.ComboBox();
-            this.tabPage9 = new System.Windows.Forms.TabPage();
-            this.achievementListBackgroundGroupBox = new System.Windows.Forms.GroupBox();
-            this.achievementListSetBackgroundColorButton = new System.Windows.Forms.Button();
-            this.achievementListBackgroundColorPictureBox = new System.Windows.Forms.PictureBox();
-            this.tabPage10 = new System.Windows.Forms.TabPage();
-            this.focusAchievementIdLabel = new System.Windows.Forms.Label();
-            this.userInfoRankLabel = new System.Windows.Forms.Label();
-            this.userInfoPointsLabel = new System.Windows.Forms.Label();
-            this.userInfoTruePointsLabel = new System.Windows.Forms.Label();
-            this.userInfoRatioLabel = new System.Windows.Forms.Label();
-            this.gameProgressCompletedLabel = new System.Windows.Forms.Label();
-            this.gameProgressTruePointsLabel = new System.Windows.Forms.Label();
-            this.gameProgressPointsLabel = new System.Windows.Forms.Label();
-            this.gameProgressAchievementsLabel = new System.Windows.Forms.Label();
-            this.gameProgressRatioLabel = new System.Windows.Forms.Label();
-            this.gameInfoReleasedLabel = new System.Windows.Forms.Label();
-            this.gameInfoGenreLabel = new System.Windows.Forms.Label();
-            this.gameInfoConsoleLabel = new System.Windows.Forms.Label();
-            this.gameInfoPublisherLabel = new System.Windows.Forms.Label();
-            this.gameInfoDeveloperLabel = new System.Windows.Forms.Label();
-            this.userInfoSimpleGroupBox = new System.Windows.Forms.GroupBox();
-            this.userInfoSimpleFontOutlineColorBoxButton = new System.Windows.Forms.Button();
-            this.userInfoSimpleFontOutlineColorPictureBox = new System.Windows.Forms.PictureBox();
-            this.userInfoSimpleFontColorBoxButton = new System.Windows.Forms.Button();
-            this.userInfoSimpleOutlineCheckBox = new System.Windows.Forms.CheckBox();
-            this.userInfoSimpleFontOutlineNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.userInfoSimpleFontColorPictureBox = new System.Windows.Forms.PictureBox();
-            this.userInfoSimpleFontComboBox = new System.Windows.Forms.ComboBox();
-            this.focusSimpleGroupBox = new System.Windows.Forms.GroupBox();
-            this.focusSimpleFontOutlineSetColorButton = new System.Windows.Forms.Button();
-            this.focusSimpleFontOutlineColorPictureBox = new System.Windows.Forms.PictureBox();
-            this.focusSimpleFontSetColorButton = new System.Windows.Forms.Button();
-            this.focusSimpleOutlineCheckBox = new System.Windows.Forms.CheckBox();
-            this.focusSimpleFontOutlineNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.focusSimpleFontColorPictureBox = new System.Windows.Forms.PictureBox();
-            this.focusSimpleFontComboBox = new System.Windows.Forms.ComboBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.notificationsSimpleFontOutlineSetColorButton = new System.Windows.Forms.Button();
-            this.notificationsSimpleFontOutlineColorPictureBox = new System.Windows.Forms.PictureBox();
-            this.notificationsSimpleFontSetColorButton = new System.Windows.Forms.Button();
-            this.notificationsSimpleOutlineCheckBox = new System.Windows.Forms.CheckBox();
-            this.notificationsSimpleFontOutlineNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.notificationsSimpleFontColorPictureBox = new System.Windows.Forms.PictureBox();
-            this.notificationsSimpleFontComboBox = new System.Windows.Forms.ComboBox();
-            this.gameProgressSimpleGroupBox = new System.Windows.Forms.GroupBox();
-            this.gameProgressSimpleFontOutlineColorBoxButton = new System.Windows.Forms.Button();
-            this.gameProgressSimpleFontOutlineColorPictureBox = new System.Windows.Forms.PictureBox();
-            this.gameProgressSimpleFontColorBoxButton = new System.Windows.Forms.Button();
-            this.gameProgressSimpleOutlineCheckBox = new System.Windows.Forms.CheckBox();
-            this.gameProgressSimpleFontOutlineNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.gameProgressSimpleFontColorPictureBox = new System.Windows.Forms.PictureBox();
-            this.gameProgressSimpleFontComboBox = new System.Windows.Forms.ComboBox();
-            this.gameInfoSimpleGroupBox = new System.Windows.Forms.GroupBox();
-            this.gameInfoSimpleFontOutlineColorBoxButton = new System.Windows.Forms.Button();
-            this.gameInfoSimpleFontOutlineColorPictureBox = new System.Windows.Forms.PictureBox();
-            this.gameInfoSimpleFontColorBoxButton = new System.Windows.Forms.Button();
-            this.gameInfoSimpleOutlineCheckBox = new System.Windows.Forms.CheckBox();
-            this.gameInfoSimpleFontOutlineNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.gameInfoSimpleFontColorPictureBox = new System.Windows.Forms.PictureBox();
-            this.gameInfoSimpleFontComboBox = new System.Windows.Forms.ComboBox();
             this.recentAchievementsSimpleGroupBox = new System.Windows.Forms.GroupBox();
             this.recentAchievementsSimpleFontOutlineSetColorButton = new System.Windows.Forms.Button();
             this.recentAchievementsSimpleFontOutlineColorPictureBox = new System.Windows.Forms.PictureBox();
@@ -424,6 +421,11 @@ namespace Retro_Achievement_Tracker
             this.recentAchievementsSimpleFontOutlineNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.recentAchievementsSimpleFontColorPictureBox = new System.Windows.Forms.PictureBox();
             this.recentAchievementsSimpleFontComboBox = new System.Windows.Forms.ComboBox();
+            this.tabPage9 = new System.Windows.Forms.TabPage();
+            this.achievementListBackgroundGroupBox = new System.Windows.Forms.GroupBox();
+            this.achievementListSetBackgroundColorButton = new System.Windows.Forms.Button();
+            this.achievementListBackgroundColorPictureBox = new System.Windows.Forms.PictureBox();
+            this.tabPage10 = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.userProfilePictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.focusAchievementPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gameInfoPictureBox)).BeginInit();
@@ -433,20 +435,20 @@ namespace Retro_Achievement_Tracker
             ((System.ComponentModel.ISupportInitialize)(this.notificationsCustomAchievementScaleNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.notificationsCustomAchievementXNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.notificationsCustomAchievementYNumericUpDown)).BeginInit();
-            this.groupBox10.SuspendLayout();
+            this.achievementOutAnimationGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.notificationsCustomAchievementOutNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.notificationsCustomAchievementOutSpeedUpDown)).BeginInit();
-            this.groupBox9.SuspendLayout();
+            this.achievementInAnimationGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.notificationsCustomAchievementInNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.notificationsCustomAchievementInSpeedUpDown)).BeginInit();
-            this.groupBox13.SuspendLayout();
+            this.masteryPositionGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.notificationsCustomMasteryScaleNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.notificationsCustomMasteryXNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.notificationsCustomMasteryYNumericUpDown)).BeginInit();
-            this.groupBox14.SuspendLayout();
+            this.masteryOutAnimationGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.notificationsCustomMasteryOutNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.notificationsCustomMasteryOutSpeedUpDown)).BeginInit();
-            this.groupBox19.SuspendLayout();
+            this.masteryInAnimationGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.notificationsCustomMasteryInNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.notificationsCustomMasteryInSpeedUpDown)).BeginInit();
             this.groupBox17.SuspendLayout();
@@ -466,14 +468,18 @@ namespace Retro_Achievement_Tracker
             this.tabPage1.SuspendLayout();
             this.userInfoBackgroundColorGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userInfoBackgroundColorPictureBox)).BeginInit();
-            this.userInfoNamesGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.userInfoNamesFontOutlineColorPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.userInfoNamesFontOutlineNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.userInfoNamesFontColorPictureBox)).BeginInit();
             this.userInfoValuesGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userInfoValuesFontOutlineColorPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.userInfoValuesFontOutlineNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.userInfoValuesFontColorPictureBox)).BeginInit();
+            this.userInfoNamesGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.userInfoNamesFontOutlineColorPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userInfoNamesFontOutlineNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userInfoNamesFontColorPictureBox)).BeginInit();
+            this.userInfoSimpleGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.userInfoSimpleFontOutlineColorPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userInfoSimpleFontOutlineNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userInfoSimpleFontColorPictureBox)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.focusBackgroundColorGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.focusBackgroundColorPictureBox)).BeginInit();
@@ -495,6 +501,10 @@ namespace Retro_Achievement_Tracker
             ((System.ComponentModel.ISupportInitialize)(this.focusDescriptionFontOutlineColorPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.focusDescriptionFontOutlineNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.focusDescriptionFontColorPictureBox)).BeginInit();
+            this.focusSimpleGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.focusSimpleFontOutlineColorPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.focusSimpleFontOutlineNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.focusSimpleFontColorPictureBox)).BeginInit();
             this.tabPage3.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.tabPage4.SuspendLayout();
@@ -519,18 +529,30 @@ namespace Retro_Achievement_Tracker
             ((System.ComponentModel.ISupportInitialize)(this.notificationsDescriptionFontOutlineColorPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.notificationsDescriptionFontOutlineNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.notificationsDescriptionFontColorPictureBox)).BeginInit();
+            this.notificationsAllFontGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.notificationsSimpleFontOutlineColorPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.notificationsSimpleFontOutlineNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.notificationsSimpleFontColorPictureBox)).BeginInit();
             this.tabPage6.SuspendLayout();
             this.gameProgressBackgroundColorGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gameProgressBackgroundColorPictureBox)).BeginInit();
-            this.gameProgressNamesGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gameProgressNamesFontOutlineColorPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gameProgressNamesFontOutlineNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gameProgressNamesFontColorPictureBox)).BeginInit();
             this.gameProgressValuesGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gameProgressValuesFontOutlineColorPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gameProgressValuesFontOutlineNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gameProgressValuesFontColorPictureBox)).BeginInit();
+            this.gameProgressNamesGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gameProgressNamesFontOutlineColorPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gameProgressNamesFontOutlineNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gameProgressNamesFontColorPictureBox)).BeginInit();
+            this.gameProgressSimpleGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gameProgressSimpleFontOutlineColorPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gameProgressSimpleFontOutlineNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gameProgressSimpleFontColorPictureBox)).BeginInit();
             this.tabPage7.SuspendLayout();
+            this.gameInfoSimpleGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gameInfoSimpleFontOutlineColorPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gameInfoSimpleFontOutlineNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gameInfoSimpleFontColorPictureBox)).BeginInit();
             this.tabPage8.SuspendLayout();
             this.recentAchievementsBackgroundColorGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.recentAchievementsBackgroundColorPictureBox)).BeginInit();
@@ -552,34 +574,14 @@ namespace Retro_Achievement_Tracker
             ((System.ComponentModel.ISupportInitialize)(this.recentAchievementsDescriptionFontOutlineColorPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.recentAchievementsDescriptionFontOutlineNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.recentAchievementsDescriptionFontColorPictureBox)).BeginInit();
-            this.tabPage9.SuspendLayout();
-            this.achievementListBackgroundGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.achievementListBackgroundColorPictureBox)).BeginInit();
-            this.tabPage10.SuspendLayout();
-            this.userInfoSimpleGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.userInfoSimpleFontOutlineColorPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.userInfoSimpleFontOutlineNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.userInfoSimpleFontColorPictureBox)).BeginInit();
-            this.focusSimpleGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.focusSimpleFontOutlineColorPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.focusSimpleFontOutlineNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.focusSimpleFontColorPictureBox)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.notificationsSimpleFontOutlineColorPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.notificationsSimpleFontOutlineNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.notificationsSimpleFontColorPictureBox)).BeginInit();
-            this.gameProgressSimpleGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gameProgressSimpleFontOutlineColorPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gameProgressSimpleFontOutlineNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gameProgressSimpleFontColorPictureBox)).BeginInit();
-            this.gameInfoSimpleGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gameInfoSimpleFontOutlineColorPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gameInfoSimpleFontOutlineNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gameInfoSimpleFontColorPictureBox)).BeginInit();
             this.recentAchievementsSimpleGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.recentAchievementsSimpleFontOutlineColorPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.recentAchievementsSimpleFontOutlineNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.recentAchievementsSimpleFontColorPictureBox)).BeginInit();
+            this.tabPage9.SuspendLayout();
+            this.achievementListBackgroundGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.achievementListBackgroundColorPictureBox)).BeginInit();
+            this.tabPage10.SuspendLayout();
             this.SuspendLayout();
             // 
             // apiKeyLabel
@@ -1077,30 +1079,30 @@ namespace Retro_Achievement_Tracker
             this.acheivementEditOutlineCheckbox.AutoSize = true;
             this.acheivementEditOutlineCheckbox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.acheivementEditOutlineCheckbox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.acheivementEditOutlineCheckbox.Location = new System.Drawing.Point(84, 45);
+            this.acheivementEditOutlineCheckbox.Location = new System.Drawing.Point(6, 77);
             this.acheivementEditOutlineCheckbox.Name = "acheivementEditOutlineCheckbox";
             this.acheivementEditOutlineCheckbox.Size = new System.Drawing.Size(52, 20);
             this.acheivementEditOutlineCheckbox.TabIndex = 47;
             this.acheivementEditOutlineCheckbox.Text = "Edit";
             this.acheivementEditOutlineCheckbox.UseVisualStyleBackColor = true;
             // 
-            // groupBox10
+            // achievementOutAnimationGroupBox
             // 
-            this.groupBox10.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox10.Controls.Add(this.label11);
-            this.groupBox10.Controls.Add(this.label12);
-            this.groupBox10.Controls.Add(this.label13);
-            this.groupBox10.Controls.Add(this.notificationsCustomAchievementOutNumericUpDown);
-            this.groupBox10.Controls.Add(this.notificationsCustomAchievementAnimationOutComboBox);
-            this.groupBox10.Controls.Add(this.notificationsCustomAchievementOutSpeedUpDown);
-            this.groupBox10.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
-            this.groupBox10.Location = new System.Drawing.Point(160, 102);
-            this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(150, 96);
-            this.groupBox10.TabIndex = 53;
-            this.groupBox10.TabStop = false;
-            this.groupBox10.Text = "Out-Animation";
+            this.achievementOutAnimationGroupBox.BackColor = System.Drawing.Color.Transparent;
+            this.achievementOutAnimationGroupBox.Controls.Add(this.label11);
+            this.achievementOutAnimationGroupBox.Controls.Add(this.label12);
+            this.achievementOutAnimationGroupBox.Controls.Add(this.label13);
+            this.achievementOutAnimationGroupBox.Controls.Add(this.notificationsCustomAchievementOutNumericUpDown);
+            this.achievementOutAnimationGroupBox.Controls.Add(this.notificationsCustomAchievementAnimationOutComboBox);
+            this.achievementOutAnimationGroupBox.Controls.Add(this.notificationsCustomAchievementOutSpeedUpDown);
+            this.achievementOutAnimationGroupBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.achievementOutAnimationGroupBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
+            this.achievementOutAnimationGroupBox.Location = new System.Drawing.Point(160, 102);
+            this.achievementOutAnimationGroupBox.Name = "achievementOutAnimationGroupBox";
+            this.achievementOutAnimationGroupBox.Size = new System.Drawing.Size(150, 96);
+            this.achievementOutAnimationGroupBox.TabIndex = 53;
+            this.achievementOutAnimationGroupBox.TabStop = false;
+            this.achievementOutAnimationGroupBox.Text = "Out-Animation";
             // 
             // label11
             // 
@@ -1190,23 +1192,23 @@ namespace Retro_Achievement_Tracker
             0,
             0});
             // 
-            // groupBox9
+            // achievementInAnimationGroupBox
             // 
-            this.groupBox9.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox9.Controls.Add(this.label8);
-            this.groupBox9.Controls.Add(this.label7);
-            this.groupBox9.Controls.Add(this.label6);
-            this.groupBox9.Controls.Add(this.notificationsCustomAchievementInNumericUpDown);
-            this.groupBox9.Controls.Add(this.notificationsCustomAchievementAnimationInComboBox);
-            this.groupBox9.Controls.Add(this.notificationsCustomAchievementInSpeedUpDown);
-            this.groupBox9.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
-            this.groupBox9.Location = new System.Drawing.Point(6, 102);
-            this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(150, 96);
-            this.groupBox9.TabIndex = 52;
-            this.groupBox9.TabStop = false;
-            this.groupBox9.Text = "In-Animation";
+            this.achievementInAnimationGroupBox.BackColor = System.Drawing.Color.Transparent;
+            this.achievementInAnimationGroupBox.Controls.Add(this.label8);
+            this.achievementInAnimationGroupBox.Controls.Add(this.label7);
+            this.achievementInAnimationGroupBox.Controls.Add(this.label6);
+            this.achievementInAnimationGroupBox.Controls.Add(this.notificationsCustomAchievementInNumericUpDown);
+            this.achievementInAnimationGroupBox.Controls.Add(this.notificationsCustomAchievementAnimationInComboBox);
+            this.achievementInAnimationGroupBox.Controls.Add(this.notificationsCustomAchievementInSpeedUpDown);
+            this.achievementInAnimationGroupBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.achievementInAnimationGroupBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
+            this.achievementInAnimationGroupBox.Location = new System.Drawing.Point(6, 102);
+            this.achievementInAnimationGroupBox.Name = "achievementInAnimationGroupBox";
+            this.achievementInAnimationGroupBox.Size = new System.Drawing.Size(150, 96);
+            this.achievementInAnimationGroupBox.TabIndex = 52;
+            this.achievementInAnimationGroupBox.TabStop = false;
+            this.achievementInAnimationGroupBox.Text = "In-Animation";
             // 
             // label8
             // 
@@ -1301,7 +1303,7 @@ namespace Retro_Achievement_Tracker
             this.customAchievementEnableCheckbox.AutoSize = true;
             this.customAchievementEnableCheckbox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.customAchievementEnableCheckbox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.customAchievementEnableCheckbox.Location = new System.Drawing.Point(5, 45);
+            this.customAchievementEnableCheckbox.Location = new System.Drawing.Point(6, 60);
             this.customAchievementEnableCheckbox.Name = "customAchievementEnableCheckbox";
             this.customAchievementEnableCheckbox.Size = new System.Drawing.Size(76, 20);
             this.customAchievementEnableCheckbox.TabIndex = 13;
@@ -1331,23 +1333,23 @@ namespace Retro_Achievement_Tracker
             this.selectCustomMasteryFileButton.Text = "File";
             this.selectCustomMasteryFileButton.UseVisualStyleBackColor = true;
             // 
-            // groupBox13
+            // masteryPositionGroupBox
             // 
-            this.groupBox13.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox13.Controls.Add(this.label16);
-            this.groupBox13.Controls.Add(this.notificationsCustomMasteryScaleNumericUpDown);
-            this.groupBox13.Controls.Add(this.label17);
-            this.groupBox13.Controls.Add(this.label18);
-            this.groupBox13.Controls.Add(this.notificationsCustomMasteryXNumericUpDown);
-            this.groupBox13.Controls.Add(this.notificationsCustomMasteryYNumericUpDown);
-            this.groupBox13.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
-            this.groupBox13.Location = new System.Drawing.Point(160, 3);
-            this.groupBox13.Name = "groupBox13";
-            this.groupBox13.Size = new System.Drawing.Size(150, 96);
-            this.groupBox13.TabIndex = 50;
-            this.groupBox13.TabStop = false;
-            this.groupBox13.Text = "Position";
+            this.masteryPositionGroupBox.BackColor = System.Drawing.Color.Transparent;
+            this.masteryPositionGroupBox.Controls.Add(this.label16);
+            this.masteryPositionGroupBox.Controls.Add(this.notificationsCustomMasteryScaleNumericUpDown);
+            this.masteryPositionGroupBox.Controls.Add(this.label17);
+            this.masteryPositionGroupBox.Controls.Add(this.label18);
+            this.masteryPositionGroupBox.Controls.Add(this.notificationsCustomMasteryXNumericUpDown);
+            this.masteryPositionGroupBox.Controls.Add(this.notificationsCustomMasteryYNumericUpDown);
+            this.masteryPositionGroupBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.masteryPositionGroupBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
+            this.masteryPositionGroupBox.Location = new System.Drawing.Point(160, 3);
+            this.masteryPositionGroupBox.Name = "masteryPositionGroupBox";
+            this.masteryPositionGroupBox.Size = new System.Drawing.Size(150, 96);
+            this.masteryPositionGroupBox.TabIndex = 50;
+            this.masteryPositionGroupBox.TabStop = false;
+            this.masteryPositionGroupBox.Text = "Position";
             // 
             // label16
             // 
@@ -1454,30 +1456,30 @@ namespace Retro_Achievement_Tracker
             this.masteryEditOultineCheckbox.AutoSize = true;
             this.masteryEditOultineCheckbox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.masteryEditOultineCheckbox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.masteryEditOultineCheckbox.Location = new System.Drawing.Point(84, 45);
+            this.masteryEditOultineCheckbox.Location = new System.Drawing.Point(6, 77);
             this.masteryEditOultineCheckbox.Name = "masteryEditOultineCheckbox";
             this.masteryEditOultineCheckbox.Size = new System.Drawing.Size(52, 20);
             this.masteryEditOultineCheckbox.TabIndex = 47;
             this.masteryEditOultineCheckbox.Text = "Edit";
             this.masteryEditOultineCheckbox.UseVisualStyleBackColor = true;
             // 
-            // groupBox14
+            // masteryOutAnimationGroupBox
             // 
-            this.groupBox14.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox14.Controls.Add(this.label19);
-            this.groupBox14.Controls.Add(this.label20);
-            this.groupBox14.Controls.Add(this.label21);
-            this.groupBox14.Controls.Add(this.notificationsCustomMasteryOutNumericUpDown);
-            this.groupBox14.Controls.Add(this.notificationsCustomMasteryAnimationOutComboBox);
-            this.groupBox14.Controls.Add(this.notificationsCustomMasteryOutSpeedUpDown);
-            this.groupBox14.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
-            this.groupBox14.Location = new System.Drawing.Point(160, 102);
-            this.groupBox14.Name = "groupBox14";
-            this.groupBox14.Size = new System.Drawing.Size(150, 96);
-            this.groupBox14.TabIndex = 53;
-            this.groupBox14.TabStop = false;
-            this.groupBox14.Text = "Out-Animation";
+            this.masteryOutAnimationGroupBox.BackColor = System.Drawing.Color.Transparent;
+            this.masteryOutAnimationGroupBox.Controls.Add(this.label19);
+            this.masteryOutAnimationGroupBox.Controls.Add(this.label20);
+            this.masteryOutAnimationGroupBox.Controls.Add(this.label21);
+            this.masteryOutAnimationGroupBox.Controls.Add(this.notificationsCustomMasteryOutNumericUpDown);
+            this.masteryOutAnimationGroupBox.Controls.Add(this.notificationsCustomMasteryAnimationOutComboBox);
+            this.masteryOutAnimationGroupBox.Controls.Add(this.notificationsCustomMasteryOutSpeedUpDown);
+            this.masteryOutAnimationGroupBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.masteryOutAnimationGroupBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
+            this.masteryOutAnimationGroupBox.Location = new System.Drawing.Point(160, 102);
+            this.masteryOutAnimationGroupBox.Name = "masteryOutAnimationGroupBox";
+            this.masteryOutAnimationGroupBox.Size = new System.Drawing.Size(150, 96);
+            this.masteryOutAnimationGroupBox.TabIndex = 53;
+            this.masteryOutAnimationGroupBox.TabStop = false;
+            this.masteryOutAnimationGroupBox.Text = "Out-Animation";
             // 
             // label19
             // 
@@ -1567,23 +1569,23 @@ namespace Retro_Achievement_Tracker
             0,
             0});
             // 
-            // groupBox19
+            // masteryInAnimationGroupBox
             // 
-            this.groupBox19.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox19.Controls.Add(this.label22);
-            this.groupBox19.Controls.Add(this.label23);
-            this.groupBox19.Controls.Add(this.label24);
-            this.groupBox19.Controls.Add(this.notificationsCustomMasteryInNumericUpDown);
-            this.groupBox19.Controls.Add(this.notificationsCustomMasteryAnimationInComboBox);
-            this.groupBox19.Controls.Add(this.notificationsCustomMasteryInSpeedUpDown);
-            this.groupBox19.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox19.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
-            this.groupBox19.Location = new System.Drawing.Point(6, 102);
-            this.groupBox19.Name = "groupBox19";
-            this.groupBox19.Size = new System.Drawing.Size(150, 96);
-            this.groupBox19.TabIndex = 52;
-            this.groupBox19.TabStop = false;
-            this.groupBox19.Text = "In-Animation";
+            this.masteryInAnimationGroupBox.BackColor = System.Drawing.Color.Transparent;
+            this.masteryInAnimationGroupBox.Controls.Add(this.label22);
+            this.masteryInAnimationGroupBox.Controls.Add(this.label23);
+            this.masteryInAnimationGroupBox.Controls.Add(this.label24);
+            this.masteryInAnimationGroupBox.Controls.Add(this.notificationsCustomMasteryInNumericUpDown);
+            this.masteryInAnimationGroupBox.Controls.Add(this.notificationsCustomMasteryAnimationInComboBox);
+            this.masteryInAnimationGroupBox.Controls.Add(this.notificationsCustomMasteryInSpeedUpDown);
+            this.masteryInAnimationGroupBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.masteryInAnimationGroupBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
+            this.masteryInAnimationGroupBox.Location = new System.Drawing.Point(6, 102);
+            this.masteryInAnimationGroupBox.Name = "masteryInAnimationGroupBox";
+            this.masteryInAnimationGroupBox.Size = new System.Drawing.Size(150, 96);
+            this.masteryInAnimationGroupBox.TabIndex = 52;
+            this.masteryInAnimationGroupBox.TabStop = false;
+            this.masteryInAnimationGroupBox.Text = "In-Animation";
             // 
             // label22
             // 
@@ -1678,7 +1680,7 @@ namespace Retro_Achievement_Tracker
             this.customMasteryEnableCheckbox.AutoSize = true;
             this.customMasteryEnableCheckbox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.customMasteryEnableCheckbox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.customMasteryEnableCheckbox.Location = new System.Drawing.Point(5, 45);
+            this.customMasteryEnableCheckbox.Location = new System.Drawing.Point(6, 60);
             this.customMasteryEnableCheckbox.Name = "customMasteryEnableCheckbox";
             this.customMasteryEnableCheckbox.Size = new System.Drawing.Size(76, 20);
             this.customMasteryEnableCheckbox.TabIndex = 13;
@@ -2577,6 +2579,46 @@ namespace Retro_Achievement_Tracker
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "User Info";
             // 
+            // userInfoRatioLabel
+            // 
+            this.userInfoRatioLabel.BackColor = System.Drawing.Color.Transparent;
+            this.userInfoRatioLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userInfoRatioLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
+            this.userInfoRatioLabel.Location = new System.Drawing.Point(422, 213);
+            this.userInfoRatioLabel.Name = "userInfoRatioLabel";
+            this.userInfoRatioLabel.Size = new System.Drawing.Size(339, 26);
+            this.userInfoRatioLabel.TabIndex = 10057;
+            // 
+            // userInfoTruePointsLabel
+            // 
+            this.userInfoTruePointsLabel.BackColor = System.Drawing.Color.Transparent;
+            this.userInfoTruePointsLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userInfoTruePointsLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
+            this.userInfoTruePointsLabel.Location = new System.Drawing.Point(422, 186);
+            this.userInfoTruePointsLabel.Name = "userInfoTruePointsLabel";
+            this.userInfoTruePointsLabel.Size = new System.Drawing.Size(339, 26);
+            this.userInfoTruePointsLabel.TabIndex = 10056;
+            // 
+            // userInfoPointsLabel
+            // 
+            this.userInfoPointsLabel.BackColor = System.Drawing.Color.Transparent;
+            this.userInfoPointsLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userInfoPointsLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
+            this.userInfoPointsLabel.Location = new System.Drawing.Point(422, 160);
+            this.userInfoPointsLabel.Name = "userInfoPointsLabel";
+            this.userInfoPointsLabel.Size = new System.Drawing.Size(339, 26);
+            this.userInfoPointsLabel.TabIndex = 10055;
+            // 
+            // userInfoRankLabel
+            // 
+            this.userInfoRankLabel.BackColor = System.Drawing.Color.Transparent;
+            this.userInfoRankLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userInfoRankLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
+            this.userInfoRankLabel.Location = new System.Drawing.Point(422, 134);
+            this.userInfoRankLabel.Name = "userInfoRankLabel";
+            this.userInfoRankLabel.Size = new System.Drawing.Size(339, 26);
+            this.userInfoRankLabel.TabIndex = 10054;
+            // 
             // userInfoSimpleCheckBox
             // 
             this.userInfoSimpleCheckBox.AutoSize = true;
@@ -2623,6 +2665,109 @@ namespace Retro_Achievement_Tracker
             this.userInfoBackgroundColorPictureBox.Size = new System.Drawing.Size(22, 22);
             this.userInfoBackgroundColorPictureBox.TabIndex = 42;
             this.userInfoBackgroundColorPictureBox.TabStop = false;
+            // 
+            // userInfoValuesGroupBox
+            // 
+            this.userInfoValuesGroupBox.BackColor = System.Drawing.Color.Transparent;
+            this.userInfoValuesGroupBox.Controls.Add(this.userInfoValuesFontOutlineColorBoxButton);
+            this.userInfoValuesGroupBox.Controls.Add(this.userInfoValuesFontOutlineColorPictureBox);
+            this.userInfoValuesGroupBox.Controls.Add(this.userInfoValuesFontColorBoxButton);
+            this.userInfoValuesGroupBox.Controls.Add(this.userInfoValuesOutlineCheckBox);
+            this.userInfoValuesGroupBox.Controls.Add(this.userInfoValuesFontOutlineNumericUpDown);
+            this.userInfoValuesGroupBox.Controls.Add(this.userInfoValuesFontColorPictureBox);
+            this.userInfoValuesGroupBox.Controls.Add(this.userInfoValuesFontComboBox);
+            this.userInfoValuesGroupBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userInfoValuesGroupBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
+            this.userInfoValuesGroupBox.Location = new System.Drawing.Point(596, 6);
+            this.userInfoValuesGroupBox.Name = "userInfoValuesGroupBox";
+            this.userInfoValuesGroupBox.Size = new System.Drawing.Size(165, 125);
+            this.userInfoValuesGroupBox.TabIndex = 10036;
+            this.userInfoValuesGroupBox.TabStop = false;
+            this.userInfoValuesGroupBox.Text = "Values";
+            // 
+            // userInfoValuesFontOutlineColorBoxButton
+            // 
+            this.userInfoValuesFontOutlineColorBoxButton.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userInfoValuesFontOutlineColorBoxButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.userInfoValuesFontOutlineColorBoxButton.Location = new System.Drawing.Point(5, 95);
+            this.userInfoValuesFontOutlineColorBoxButton.Name = "userInfoValuesFontOutlineColorBoxButton";
+            this.userInfoValuesFontOutlineColorBoxButton.Size = new System.Drawing.Size(49, 23);
+            this.userInfoValuesFontOutlineColorBoxButton.TabIndex = 45;
+            this.userInfoValuesFontOutlineColorBoxButton.Text = "Set";
+            this.userInfoValuesFontOutlineColorBoxButton.UseVisualStyleBackColor = true;
+            // 
+            // userInfoValuesFontOutlineColorPictureBox
+            // 
+            this.userInfoValuesFontOutlineColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.userInfoValuesFontOutlineColorPictureBox.Location = new System.Drawing.Point(60, 95);
+            this.userInfoValuesFontOutlineColorPictureBox.Name = "userInfoValuesFontOutlineColorPictureBox";
+            this.userInfoValuesFontOutlineColorPictureBox.Size = new System.Drawing.Size(22, 22);
+            this.userInfoValuesFontOutlineColorPictureBox.TabIndex = 45;
+            this.userInfoValuesFontOutlineColorPictureBox.TabStop = false;
+            // 
+            // userInfoValuesFontColorBoxButton
+            // 
+            this.userInfoValuesFontColorBoxButton.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userInfoValuesFontColorBoxButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.userInfoValuesFontColorBoxButton.Location = new System.Drawing.Point(5, 45);
+            this.userInfoValuesFontColorBoxButton.Name = "userInfoValuesFontColorBoxButton";
+            this.userInfoValuesFontColorBoxButton.Size = new System.Drawing.Size(49, 23);
+            this.userInfoValuesFontColorBoxButton.TabIndex = 45;
+            this.userInfoValuesFontColorBoxButton.Text = "Set";
+            this.userInfoValuesFontColorBoxButton.UseVisualStyleBackColor = true;
+            // 
+            // userInfoValuesOutlineCheckBox
+            // 
+            this.userInfoValuesOutlineCheckBox.AutoSize = true;
+            this.userInfoValuesOutlineCheckBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userInfoValuesOutlineCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
+            this.userInfoValuesOutlineCheckBox.Location = new System.Drawing.Point(5, 75);
+            this.userInfoValuesOutlineCheckBox.Name = "userInfoValuesOutlineCheckBox";
+            this.userInfoValuesOutlineCheckBox.Size = new System.Drawing.Size(73, 20);
+            this.userInfoValuesOutlineCheckBox.TabIndex = 45;
+            this.userInfoValuesOutlineCheckBox.Text = "Outline";
+            this.userInfoValuesOutlineCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // userInfoValuesFontOutlineNumericUpDown
+            // 
+            this.userInfoValuesFontOutlineNumericUpDown.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userInfoValuesFontOutlineNumericUpDown.Location = new System.Drawing.Point(91, 97);
+            this.userInfoValuesFontOutlineNumericUpDown.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.userInfoValuesFontOutlineNumericUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.userInfoValuesFontOutlineNumericUpDown.Name = "userInfoValuesFontOutlineNumericUpDown";
+            this.userInfoValuesFontOutlineNumericUpDown.Size = new System.Drawing.Size(43, 21);
+            this.userInfoValuesFontOutlineNumericUpDown.TabIndex = 45;
+            this.userInfoValuesFontOutlineNumericUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // userInfoValuesFontColorPictureBox
+            // 
+            this.userInfoValuesFontColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.userInfoValuesFontColorPictureBox.Location = new System.Drawing.Point(60, 45);
+            this.userInfoValuesFontColorPictureBox.Name = "userInfoValuesFontColorPictureBox";
+            this.userInfoValuesFontColorPictureBox.Size = new System.Drawing.Size(22, 22);
+            this.userInfoValuesFontColorPictureBox.TabIndex = 45;
+            this.userInfoValuesFontColorPictureBox.TabStop = false;
+            // 
+            // userInfoValuesFontComboBox
+            // 
+            this.userInfoValuesFontComboBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userInfoValuesFontComboBox.FormattingEnabled = true;
+            this.userInfoValuesFontComboBox.Location = new System.Drawing.Point(5, 20);
+            this.userInfoValuesFontComboBox.Name = "userInfoValuesFontComboBox";
+            this.userInfoValuesFontComboBox.Size = new System.Drawing.Size(155, 24);
+            this.userInfoValuesFontComboBox.TabIndex = 45;
             // 
             // userInfoNamesGroupBox
             // 
@@ -2728,108 +2873,109 @@ namespace Retro_Achievement_Tracker
             this.userInfoNamesFontComboBox.Size = new System.Drawing.Size(155, 24);
             this.userInfoNamesFontComboBox.TabIndex = 45;
             // 
-            // userInfoValuesGroupBox
+            // userInfoSimpleGroupBox
             // 
-            this.userInfoValuesGroupBox.BackColor = System.Drawing.Color.Transparent;
-            this.userInfoValuesGroupBox.Controls.Add(this.userInfoValuesFontOutlineColorBoxButton);
-            this.userInfoValuesGroupBox.Controls.Add(this.userInfoValuesFontOutlineColorPictureBox);
-            this.userInfoValuesGroupBox.Controls.Add(this.userInfoValuesFontColorBoxButton);
-            this.userInfoValuesGroupBox.Controls.Add(this.userInfoValuesOutlineCheckBox);
-            this.userInfoValuesGroupBox.Controls.Add(this.userInfoValuesFontOutlineNumericUpDown);
-            this.userInfoValuesGroupBox.Controls.Add(this.userInfoValuesFontColorPictureBox);
-            this.userInfoValuesGroupBox.Controls.Add(this.userInfoValuesFontComboBox);
-            this.userInfoValuesGroupBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userInfoValuesGroupBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
-            this.userInfoValuesGroupBox.Location = new System.Drawing.Point(596, 6);
-            this.userInfoValuesGroupBox.Name = "userInfoValuesGroupBox";
-            this.userInfoValuesGroupBox.Size = new System.Drawing.Size(165, 125);
-            this.userInfoValuesGroupBox.TabIndex = 10036;
-            this.userInfoValuesGroupBox.TabStop = false;
-            this.userInfoValuesGroupBox.Text = "Values";
+            this.userInfoSimpleGroupBox.BackColor = System.Drawing.Color.Transparent;
+            this.userInfoSimpleGroupBox.Controls.Add(this.userInfoSimpleFontOutlineColorBoxButton);
+            this.userInfoSimpleGroupBox.Controls.Add(this.userInfoSimpleFontOutlineColorPictureBox);
+            this.userInfoSimpleGroupBox.Controls.Add(this.userInfoSimpleFontColorBoxButton);
+            this.userInfoSimpleGroupBox.Controls.Add(this.userInfoSimpleOutlineCheckBox);
+            this.userInfoSimpleGroupBox.Controls.Add(this.userInfoSimpleFontOutlineNumericUpDown);
+            this.userInfoSimpleGroupBox.Controls.Add(this.userInfoSimpleFontColorPictureBox);
+            this.userInfoSimpleGroupBox.Controls.Add(this.userInfoSimpleFontComboBox);
+            this.userInfoSimpleGroupBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userInfoSimpleGroupBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
+            this.userInfoSimpleGroupBox.Location = new System.Drawing.Point(425, 6);
+            this.userInfoSimpleGroupBox.Name = "userInfoSimpleGroupBox";
+            this.userInfoSimpleGroupBox.Size = new System.Drawing.Size(165, 125);
+            this.userInfoSimpleGroupBox.TabIndex = 10036;
+            this.userInfoSimpleGroupBox.TabStop = false;
+            this.userInfoSimpleGroupBox.Text = "All";
             // 
-            // userInfoValuesFontOutlineColorBoxButton
+            // userInfoSimpleFontOutlineColorBoxButton
             // 
-            this.userInfoValuesFontOutlineColorBoxButton.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userInfoValuesFontOutlineColorBoxButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.userInfoValuesFontOutlineColorBoxButton.Location = new System.Drawing.Point(5, 95);
-            this.userInfoValuesFontOutlineColorBoxButton.Name = "userInfoValuesFontOutlineColorBoxButton";
-            this.userInfoValuesFontOutlineColorBoxButton.Size = new System.Drawing.Size(49, 23);
-            this.userInfoValuesFontOutlineColorBoxButton.TabIndex = 45;
-            this.userInfoValuesFontOutlineColorBoxButton.Text = "Set";
-            this.userInfoValuesFontOutlineColorBoxButton.UseVisualStyleBackColor = true;
+            this.userInfoSimpleFontOutlineColorBoxButton.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userInfoSimpleFontOutlineColorBoxButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.userInfoSimpleFontOutlineColorBoxButton.Location = new System.Drawing.Point(5, 95);
+            this.userInfoSimpleFontOutlineColorBoxButton.Name = "userInfoSimpleFontOutlineColorBoxButton";
+            this.userInfoSimpleFontOutlineColorBoxButton.Size = new System.Drawing.Size(49, 23);
+            this.userInfoSimpleFontOutlineColorBoxButton.TabIndex = 45;
+            this.userInfoSimpleFontOutlineColorBoxButton.Text = "Set";
+            this.userInfoSimpleFontOutlineColorBoxButton.UseVisualStyleBackColor = true;
             // 
-            // userInfoValuesFontOutlineColorPictureBox
+            // userInfoSimpleFontOutlineColorPictureBox
             // 
-            this.userInfoValuesFontOutlineColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.userInfoValuesFontOutlineColorPictureBox.Location = new System.Drawing.Point(60, 95);
-            this.userInfoValuesFontOutlineColorPictureBox.Name = "userInfoValuesFontOutlineColorPictureBox";
-            this.userInfoValuesFontOutlineColorPictureBox.Size = new System.Drawing.Size(22, 22);
-            this.userInfoValuesFontOutlineColorPictureBox.TabIndex = 45;
-            this.userInfoValuesFontOutlineColorPictureBox.TabStop = false;
+            this.userInfoSimpleFontOutlineColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.userInfoSimpleFontOutlineColorPictureBox.Location = new System.Drawing.Point(60, 95);
+            this.userInfoSimpleFontOutlineColorPictureBox.Name = "userInfoSimpleFontOutlineColorPictureBox";
+            this.userInfoSimpleFontOutlineColorPictureBox.Size = new System.Drawing.Size(22, 22);
+            this.userInfoSimpleFontOutlineColorPictureBox.TabIndex = 45;
+            this.userInfoSimpleFontOutlineColorPictureBox.TabStop = false;
             // 
-            // userInfoValuesFontColorBoxButton
+            // userInfoSimpleFontColorBoxButton
             // 
-            this.userInfoValuesFontColorBoxButton.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userInfoValuesFontColorBoxButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.userInfoValuesFontColorBoxButton.Location = new System.Drawing.Point(5, 45);
-            this.userInfoValuesFontColorBoxButton.Name = "userInfoValuesFontColorBoxButton";
-            this.userInfoValuesFontColorBoxButton.Size = new System.Drawing.Size(49, 23);
-            this.userInfoValuesFontColorBoxButton.TabIndex = 45;
-            this.userInfoValuesFontColorBoxButton.Text = "Set";
-            this.userInfoValuesFontColorBoxButton.UseVisualStyleBackColor = true;
+            this.userInfoSimpleFontColorBoxButton.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userInfoSimpleFontColorBoxButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.userInfoSimpleFontColorBoxButton.Location = new System.Drawing.Point(5, 45);
+            this.userInfoSimpleFontColorBoxButton.Name = "userInfoSimpleFontColorBoxButton";
+            this.userInfoSimpleFontColorBoxButton.Size = new System.Drawing.Size(49, 23);
+            this.userInfoSimpleFontColorBoxButton.TabIndex = 45;
+            this.userInfoSimpleFontColorBoxButton.Text = "Set";
+            this.userInfoSimpleFontColorBoxButton.UseVisualStyleBackColor = true;
             // 
-            // userInfoValuesOutlineCheckBox
+            // userInfoSimpleOutlineCheckBox
             // 
-            this.userInfoValuesOutlineCheckBox.AutoSize = true;
-            this.userInfoValuesOutlineCheckBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userInfoValuesOutlineCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.userInfoValuesOutlineCheckBox.Location = new System.Drawing.Point(5, 75);
-            this.userInfoValuesOutlineCheckBox.Name = "userInfoValuesOutlineCheckBox";
-            this.userInfoValuesOutlineCheckBox.Size = new System.Drawing.Size(73, 20);
-            this.userInfoValuesOutlineCheckBox.TabIndex = 45;
-            this.userInfoValuesOutlineCheckBox.Text = "Outline";
-            this.userInfoValuesOutlineCheckBox.UseVisualStyleBackColor = true;
+            this.userInfoSimpleOutlineCheckBox.AutoSize = true;
+            this.userInfoSimpleOutlineCheckBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userInfoSimpleOutlineCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
+            this.userInfoSimpleOutlineCheckBox.Location = new System.Drawing.Point(5, 75);
+            this.userInfoSimpleOutlineCheckBox.Name = "userInfoSimpleOutlineCheckBox";
+            this.userInfoSimpleOutlineCheckBox.Size = new System.Drawing.Size(73, 20);
+            this.userInfoSimpleOutlineCheckBox.TabIndex = 45;
+            this.userInfoSimpleOutlineCheckBox.Text = "Outline";
+            this.userInfoSimpleOutlineCheckBox.UseVisualStyleBackColor = true;
             // 
-            // userInfoValuesFontOutlineNumericUpDown
+            // userInfoSimpleFontOutlineNumericUpDown
             // 
-            this.userInfoValuesFontOutlineNumericUpDown.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userInfoValuesFontOutlineNumericUpDown.Location = new System.Drawing.Point(91, 97);
-            this.userInfoValuesFontOutlineNumericUpDown.Maximum = new decimal(new int[] {
+            this.userInfoSimpleFontOutlineNumericUpDown.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userInfoSimpleFontOutlineNumericUpDown.Location = new System.Drawing.Point(89, 97);
+            this.userInfoSimpleFontOutlineNumericUpDown.Maximum = new decimal(new int[] {
             5,
             0,
             0,
             0});
-            this.userInfoValuesFontOutlineNumericUpDown.Minimum = new decimal(new int[] {
+            this.userInfoSimpleFontOutlineNumericUpDown.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.userInfoValuesFontOutlineNumericUpDown.Name = "userInfoValuesFontOutlineNumericUpDown";
-            this.userInfoValuesFontOutlineNumericUpDown.Size = new System.Drawing.Size(43, 21);
-            this.userInfoValuesFontOutlineNumericUpDown.TabIndex = 45;
-            this.userInfoValuesFontOutlineNumericUpDown.Value = new decimal(new int[] {
+            this.userInfoSimpleFontOutlineNumericUpDown.Name = "userInfoSimpleFontOutlineNumericUpDown";
+            this.userInfoSimpleFontOutlineNumericUpDown.Size = new System.Drawing.Size(43, 21);
+            this.userInfoSimpleFontOutlineNumericUpDown.TabIndex = 45;
+            this.userInfoSimpleFontOutlineNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.userInfoSimpleFontOutlineNumericUpDown.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
             // 
-            // userInfoValuesFontColorPictureBox
+            // userInfoSimpleFontColorPictureBox
             // 
-            this.userInfoValuesFontColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.userInfoValuesFontColorPictureBox.Location = new System.Drawing.Point(60, 45);
-            this.userInfoValuesFontColorPictureBox.Name = "userInfoValuesFontColorPictureBox";
-            this.userInfoValuesFontColorPictureBox.Size = new System.Drawing.Size(22, 22);
-            this.userInfoValuesFontColorPictureBox.TabIndex = 45;
-            this.userInfoValuesFontColorPictureBox.TabStop = false;
+            this.userInfoSimpleFontColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.userInfoSimpleFontColorPictureBox.Location = new System.Drawing.Point(60, 45);
+            this.userInfoSimpleFontColorPictureBox.Name = "userInfoSimpleFontColorPictureBox";
+            this.userInfoSimpleFontColorPictureBox.Size = new System.Drawing.Size(22, 22);
+            this.userInfoSimpleFontColorPictureBox.TabIndex = 45;
+            this.userInfoSimpleFontColorPictureBox.TabStop = false;
             // 
-            // userInfoValuesFontComboBox
+            // userInfoSimpleFontComboBox
             // 
-            this.userInfoValuesFontComboBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userInfoValuesFontComboBox.FormattingEnabled = true;
-            this.userInfoValuesFontComboBox.Location = new System.Drawing.Point(5, 20);
-            this.userInfoValuesFontComboBox.Name = "userInfoValuesFontComboBox";
-            this.userInfoValuesFontComboBox.Size = new System.Drawing.Size(155, 24);
-            this.userInfoValuesFontComboBox.TabIndex = 45;
+            this.userInfoSimpleFontComboBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userInfoSimpleFontComboBox.FormattingEnabled = true;
+            this.userInfoSimpleFontComboBox.Location = new System.Drawing.Point(5, 20);
+            this.userInfoSimpleFontComboBox.Name = "userInfoSimpleFontComboBox";
+            this.userInfoSimpleFontComboBox.Size = new System.Drawing.Size(155, 24);
+            this.userInfoSimpleFontComboBox.TabIndex = 45;
             // 
             // tabPage2
             // 
@@ -2860,6 +3006,18 @@ namespace Retro_Achievement_Tracker
             this.tabPage2.Size = new System.Drawing.Size(769, 292);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Focus Cheevo";
+            // 
+            // focusAchievementIdLabel
+            // 
+            this.focusAchievementIdLabel.BackColor = System.Drawing.Color.Transparent;
+            this.focusAchievementIdLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.focusAchievementIdLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
+            this.focusAchievementIdLabel.Location = new System.Drawing.Point(6, 8);
+            this.focusAchievementIdLabel.Name = "focusAchievementIdLabel";
+            this.focusAchievementIdLabel.Size = new System.Drawing.Size(123, 18);
+            this.focusAchievementIdLabel.TabIndex = 10053;
+            this.focusAchievementIdLabel.Text = "[  ]";
+            this.focusAchievementIdLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // focusSimpleCheckBox
             // 
@@ -3358,6 +3516,110 @@ namespace Retro_Achievement_Tracker
             this.focusDescriptionFontComboBox.Size = new System.Drawing.Size(155, 24);
             this.focusDescriptionFontComboBox.TabIndex = 45;
             // 
+            // focusSimpleGroupBox
+            // 
+            this.focusSimpleGroupBox.BackColor = System.Drawing.Color.Transparent;
+            this.focusSimpleGroupBox.Controls.Add(this.focusSimpleFontOutlineSetColorButton);
+            this.focusSimpleGroupBox.Controls.Add(this.focusSimpleFontOutlineColorPictureBox);
+            this.focusSimpleGroupBox.Controls.Add(this.focusSimpleFontSetColorButton);
+            this.focusSimpleGroupBox.Controls.Add(this.focusSimpleOutlineCheckBox);
+            this.focusSimpleGroupBox.Controls.Add(this.focusSimpleFontOutlineNumericUpDown);
+            this.focusSimpleGroupBox.Controls.Add(this.focusSimpleFontColorPictureBox);
+            this.focusSimpleGroupBox.Controls.Add(this.focusSimpleFontComboBox);
+            this.focusSimpleGroupBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.focusSimpleGroupBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
+            this.focusSimpleGroupBox.Location = new System.Drawing.Point(425, 6);
+            this.focusSimpleGroupBox.Name = "focusSimpleGroupBox";
+            this.focusSimpleGroupBox.Size = new System.Drawing.Size(165, 125);
+            this.focusSimpleGroupBox.TabIndex = 10042;
+            this.focusSimpleGroupBox.TabStop = false;
+            this.focusSimpleGroupBox.Text = "All";
+            // 
+            // focusSimpleFontOutlineSetColorButton
+            // 
+            this.focusSimpleFontOutlineSetColorButton.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.focusSimpleFontOutlineSetColorButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.focusSimpleFontOutlineSetColorButton.Location = new System.Drawing.Point(5, 95);
+            this.focusSimpleFontOutlineSetColorButton.Name = "focusSimpleFontOutlineSetColorButton";
+            this.focusSimpleFontOutlineSetColorButton.Size = new System.Drawing.Size(49, 23);
+            this.focusSimpleFontOutlineSetColorButton.TabIndex = 45;
+            this.focusSimpleFontOutlineSetColorButton.Text = "Set";
+            this.focusSimpleFontOutlineSetColorButton.UseVisualStyleBackColor = true;
+            // 
+            // focusSimpleFontOutlineColorPictureBox
+            // 
+            this.focusSimpleFontOutlineColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.focusSimpleFontOutlineColorPictureBox.Location = new System.Drawing.Point(60, 95);
+            this.focusSimpleFontOutlineColorPictureBox.Name = "focusSimpleFontOutlineColorPictureBox";
+            this.focusSimpleFontOutlineColorPictureBox.Size = new System.Drawing.Size(22, 22);
+            this.focusSimpleFontOutlineColorPictureBox.TabIndex = 45;
+            this.focusSimpleFontOutlineColorPictureBox.TabStop = false;
+            // 
+            // focusSimpleFontSetColorButton
+            // 
+            this.focusSimpleFontSetColorButton.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.focusSimpleFontSetColorButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.focusSimpleFontSetColorButton.Location = new System.Drawing.Point(5, 45);
+            this.focusSimpleFontSetColorButton.Name = "focusSimpleFontSetColorButton";
+            this.focusSimpleFontSetColorButton.Size = new System.Drawing.Size(49, 23);
+            this.focusSimpleFontSetColorButton.TabIndex = 45;
+            this.focusSimpleFontSetColorButton.Text = "Set";
+            this.focusSimpleFontSetColorButton.UseVisualStyleBackColor = true;
+            // 
+            // focusSimpleOutlineCheckBox
+            // 
+            this.focusSimpleOutlineCheckBox.AutoSize = true;
+            this.focusSimpleOutlineCheckBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.focusSimpleOutlineCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
+            this.focusSimpleOutlineCheckBox.Location = new System.Drawing.Point(5, 75);
+            this.focusSimpleOutlineCheckBox.Name = "focusSimpleOutlineCheckBox";
+            this.focusSimpleOutlineCheckBox.Size = new System.Drawing.Size(73, 20);
+            this.focusSimpleOutlineCheckBox.TabIndex = 45;
+            this.focusSimpleOutlineCheckBox.Text = "Outline";
+            this.focusSimpleOutlineCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // focusSimpleFontOutlineNumericUpDown
+            // 
+            this.focusSimpleFontOutlineNumericUpDown.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.focusSimpleFontOutlineNumericUpDown.Location = new System.Drawing.Point(89, 97);
+            this.focusSimpleFontOutlineNumericUpDown.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.focusSimpleFontOutlineNumericUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.focusSimpleFontOutlineNumericUpDown.Name = "focusSimpleFontOutlineNumericUpDown";
+            this.focusSimpleFontOutlineNumericUpDown.Size = new System.Drawing.Size(43, 21);
+            this.focusSimpleFontOutlineNumericUpDown.TabIndex = 45;
+            this.focusSimpleFontOutlineNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.focusSimpleFontOutlineNumericUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // focusSimpleFontColorPictureBox
+            // 
+            this.focusSimpleFontColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.focusSimpleFontColorPictureBox.Location = new System.Drawing.Point(60, 45);
+            this.focusSimpleFontColorPictureBox.Name = "focusSimpleFontColorPictureBox";
+            this.focusSimpleFontColorPictureBox.Size = new System.Drawing.Size(22, 22);
+            this.focusSimpleFontColorPictureBox.TabIndex = 45;
+            this.focusSimpleFontColorPictureBox.TabStop = false;
+            // 
+            // focusSimpleFontComboBox
+            // 
+            this.focusSimpleFontComboBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.focusSimpleFontComboBox.FormattingEnabled = true;
+            this.focusSimpleFontComboBox.Location = new System.Drawing.Point(5, 20);
+            this.focusSimpleFontComboBox.Name = "focusSimpleFontComboBox";
+            this.focusSimpleFontComboBox.Size = new System.Drawing.Size(155, 24);
+            this.focusSimpleFontComboBox.TabIndex = 45;
+            // 
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
@@ -3368,11 +3630,11 @@ namespace Retro_Achievement_Tracker
             this.tabPage3.Controls.Add(this.groupBox28);
             this.tabPage3.Controls.Add(this.notificationsLineGroupBox);
             this.tabPage3.Controls.Add(this.notificationsPointsGroupBox);
-            this.tabPage3.Controls.Add(this.notificationsTitleGroupBox);
             this.tabPage3.Controls.Add(this.notificationsDescriptionGroupBox);
             this.tabPage3.Controls.Add(this.notificationsAutoOpenWindowCheckbox);
             this.tabPage3.Controls.Add(this.notificationsOpenWindowButton);
-            this.tabPage3.Controls.Add(this.groupBox1);
+            this.tabPage3.Controls.Add(this.notificationsTitleGroupBox);
+            this.tabPage3.Controls.Add(this.notificationsAllFontGroupBox);
             this.tabPage3.Location = new System.Drawing.Point(4, 24);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Size = new System.Drawing.Size(769, 292);
@@ -3418,13 +3680,14 @@ namespace Retro_Achievement_Tracker
             // tabPage4
             // 
             this.tabPage4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
+            this.tabPage4.Controls.Add(this.achievementEnableCheckbox);
             this.tabPage4.Controls.Add(this.playAchievementButton);
             this.tabPage4.Controls.Add(this.selectCustomAchievementFileButton);
             this.tabPage4.Controls.Add(this.customAchievementEnableCheckbox);
             this.tabPage4.Controls.Add(this.achievementPositionGroupBox);
-            this.tabPage4.Controls.Add(this.groupBox9);
+            this.tabPage4.Controls.Add(this.achievementInAnimationGroupBox);
             this.tabPage4.Controls.Add(this.acheivementEditOutlineCheckbox);
-            this.tabPage4.Controls.Add(this.groupBox10);
+            this.tabPage4.Controls.Add(this.achievementOutAnimationGroupBox);
             this.tabPage4.Location = new System.Drawing.Point(4, 24);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
@@ -3432,12 +3695,25 @@ namespace Retro_Achievement_Tracker
             this.tabPage4.TabIndex = 0;
             this.tabPage4.Text = "Achievement";
             // 
+            // achievementEnableCheckbox
+            // 
+            this.achievementEnableCheckbox.AutoSize = true;
+            this.achievementEnableCheckbox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.achievementEnableCheckbox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
+            this.achievementEnableCheckbox.Location = new System.Drawing.Point(6, 43);
+            this.achievementEnableCheckbox.Name = "achievementEnableCheckbox";
+            this.achievementEnableCheckbox.Size = new System.Drawing.Size(70, 20);
+            this.achievementEnableCheckbox.TabIndex = 54;
+            this.achievementEnableCheckbox.Text = "Enable";
+            this.achievementEnableCheckbox.UseVisualStyleBackColor = true;
+            // 
             // tabPage5
             // 
             this.tabPage5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
-            this.tabPage5.Controls.Add(this.groupBox14);
-            this.tabPage5.Controls.Add(this.groupBox13);
-            this.tabPage5.Controls.Add(this.groupBox19);
+            this.tabPage5.Controls.Add(this.masteryEnableCheckbox);
+            this.tabPage5.Controls.Add(this.masteryOutAnimationGroupBox);
+            this.tabPage5.Controls.Add(this.masteryPositionGroupBox);
+            this.tabPage5.Controls.Add(this.masteryInAnimationGroupBox);
             this.tabPage5.Controls.Add(this.playMasteryButton);
             this.tabPage5.Controls.Add(this.selectCustomMasteryFileButton);
             this.tabPage5.Controls.Add(this.customMasteryEnableCheckbox);
@@ -3448,6 +3724,18 @@ namespace Retro_Achievement_Tracker
             this.tabPage5.Size = new System.Drawing.Size(318, 204);
             this.tabPage5.TabIndex = 1;
             this.tabPage5.Text = "Mastery";
+            // 
+            // masteryEnableCheckbox
+            // 
+            this.masteryEnableCheckbox.AutoSize = true;
+            this.masteryEnableCheckbox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.masteryEnableCheckbox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
+            this.masteryEnableCheckbox.Location = new System.Drawing.Point(6, 43);
+            this.masteryEnableCheckbox.Name = "masteryEnableCheckbox";
+            this.masteryEnableCheckbox.Size = new System.Drawing.Size(70, 20);
+            this.masteryEnableCheckbox.TabIndex = 54;
+            this.masteryEnableCheckbox.Text = "Enable";
+            this.masteryEnableCheckbox.UseVisualStyleBackColor = true;
             // 
             // notificationsBackgroundColorGroupBox
             // 
@@ -3920,6 +4208,110 @@ namespace Retro_Achievement_Tracker
             this.notificationsDescriptionFontComboBox.Size = new System.Drawing.Size(155, 24);
             this.notificationsDescriptionFontComboBox.TabIndex = 45;
             // 
+            // notificationsAllFontGroupBox
+            // 
+            this.notificationsAllFontGroupBox.BackColor = System.Drawing.Color.Transparent;
+            this.notificationsAllFontGroupBox.Controls.Add(this.notificationsSimpleFontOutlineSetColorButton);
+            this.notificationsAllFontGroupBox.Controls.Add(this.notificationsSimpleFontOutlineColorPictureBox);
+            this.notificationsAllFontGroupBox.Controls.Add(this.notificationsSimpleFontSetColorButton);
+            this.notificationsAllFontGroupBox.Controls.Add(this.notificationsSimpleOutlineCheckBox);
+            this.notificationsAllFontGroupBox.Controls.Add(this.notificationsSimpleFontOutlineNumericUpDown);
+            this.notificationsAllFontGroupBox.Controls.Add(this.notificationsSimpleFontColorPictureBox);
+            this.notificationsAllFontGroupBox.Controls.Add(this.notificationsSimpleFontComboBox);
+            this.notificationsAllFontGroupBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.notificationsAllFontGroupBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
+            this.notificationsAllFontGroupBox.Location = new System.Drawing.Point(425, 6);
+            this.notificationsAllFontGroupBox.Name = "notificationsAllFontGroupBox";
+            this.notificationsAllFontGroupBox.Size = new System.Drawing.Size(165, 125);
+            this.notificationsAllFontGroupBox.TabIndex = 10042;
+            this.notificationsAllFontGroupBox.TabStop = false;
+            this.notificationsAllFontGroupBox.Text = "All";
+            // 
+            // notificationsSimpleFontOutlineSetColorButton
+            // 
+            this.notificationsSimpleFontOutlineSetColorButton.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.notificationsSimpleFontOutlineSetColorButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.notificationsSimpleFontOutlineSetColorButton.Location = new System.Drawing.Point(5, 95);
+            this.notificationsSimpleFontOutlineSetColorButton.Name = "notificationsSimpleFontOutlineSetColorButton";
+            this.notificationsSimpleFontOutlineSetColorButton.Size = new System.Drawing.Size(49, 23);
+            this.notificationsSimpleFontOutlineSetColorButton.TabIndex = 45;
+            this.notificationsSimpleFontOutlineSetColorButton.Text = "Set";
+            this.notificationsSimpleFontOutlineSetColorButton.UseVisualStyleBackColor = true;
+            // 
+            // notificationsSimpleFontOutlineColorPictureBox
+            // 
+            this.notificationsSimpleFontOutlineColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.notificationsSimpleFontOutlineColorPictureBox.Location = new System.Drawing.Point(60, 95);
+            this.notificationsSimpleFontOutlineColorPictureBox.Name = "notificationsSimpleFontOutlineColorPictureBox";
+            this.notificationsSimpleFontOutlineColorPictureBox.Size = new System.Drawing.Size(22, 22);
+            this.notificationsSimpleFontOutlineColorPictureBox.TabIndex = 45;
+            this.notificationsSimpleFontOutlineColorPictureBox.TabStop = false;
+            // 
+            // notificationsSimpleFontSetColorButton
+            // 
+            this.notificationsSimpleFontSetColorButton.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.notificationsSimpleFontSetColorButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.notificationsSimpleFontSetColorButton.Location = new System.Drawing.Point(5, 45);
+            this.notificationsSimpleFontSetColorButton.Name = "notificationsSimpleFontSetColorButton";
+            this.notificationsSimpleFontSetColorButton.Size = new System.Drawing.Size(49, 23);
+            this.notificationsSimpleFontSetColorButton.TabIndex = 45;
+            this.notificationsSimpleFontSetColorButton.Text = "Set";
+            this.notificationsSimpleFontSetColorButton.UseVisualStyleBackColor = true;
+            // 
+            // notificationsSimpleOutlineCheckBox
+            // 
+            this.notificationsSimpleOutlineCheckBox.AutoSize = true;
+            this.notificationsSimpleOutlineCheckBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.notificationsSimpleOutlineCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
+            this.notificationsSimpleOutlineCheckBox.Location = new System.Drawing.Point(5, 75);
+            this.notificationsSimpleOutlineCheckBox.Name = "notificationsSimpleOutlineCheckBox";
+            this.notificationsSimpleOutlineCheckBox.Size = new System.Drawing.Size(73, 20);
+            this.notificationsSimpleOutlineCheckBox.TabIndex = 45;
+            this.notificationsSimpleOutlineCheckBox.Text = "Outline";
+            this.notificationsSimpleOutlineCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // notificationsSimpleFontOutlineNumericUpDown
+            // 
+            this.notificationsSimpleFontOutlineNumericUpDown.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.notificationsSimpleFontOutlineNumericUpDown.Location = new System.Drawing.Point(89, 97);
+            this.notificationsSimpleFontOutlineNumericUpDown.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.notificationsSimpleFontOutlineNumericUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.notificationsSimpleFontOutlineNumericUpDown.Name = "notificationsSimpleFontOutlineNumericUpDown";
+            this.notificationsSimpleFontOutlineNumericUpDown.Size = new System.Drawing.Size(43, 21);
+            this.notificationsSimpleFontOutlineNumericUpDown.TabIndex = 45;
+            this.notificationsSimpleFontOutlineNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.notificationsSimpleFontOutlineNumericUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // notificationsSimpleFontColorPictureBox
+            // 
+            this.notificationsSimpleFontColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.notificationsSimpleFontColorPictureBox.Location = new System.Drawing.Point(60, 45);
+            this.notificationsSimpleFontColorPictureBox.Name = "notificationsSimpleFontColorPictureBox";
+            this.notificationsSimpleFontColorPictureBox.Size = new System.Drawing.Size(22, 22);
+            this.notificationsSimpleFontColorPictureBox.TabIndex = 45;
+            this.notificationsSimpleFontColorPictureBox.TabStop = false;
+            // 
+            // notificationsSimpleFontComboBox
+            // 
+            this.notificationsSimpleFontComboBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.notificationsSimpleFontComboBox.FormattingEnabled = true;
+            this.notificationsSimpleFontComboBox.Location = new System.Drawing.Point(5, 20);
+            this.notificationsSimpleFontComboBox.Name = "notificationsSimpleFontComboBox";
+            this.notificationsSimpleFontComboBox.Size = new System.Drawing.Size(155, 24);
+            this.notificationsSimpleFontComboBox.TabIndex = 45;
+            // 
             // tabPage6
             // 
             this.tabPage6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
@@ -3952,6 +4344,56 @@ namespace Retro_Achievement_Tracker
             this.tabPage6.Size = new System.Drawing.Size(769, 292);
             this.tabPage6.TabIndex = 3;
             this.tabPage6.Text = "Game Progress";
+            // 
+            // gameProgressRatioLabel
+            // 
+            this.gameProgressRatioLabel.BackColor = System.Drawing.Color.Transparent;
+            this.gameProgressRatioLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameProgressRatioLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
+            this.gameProgressRatioLabel.Location = new System.Drawing.Point(422, 238);
+            this.gameProgressRatioLabel.Name = "gameProgressRatioLabel";
+            this.gameProgressRatioLabel.Size = new System.Drawing.Size(339, 26);
+            this.gameProgressRatioLabel.TabIndex = 10062;
+            // 
+            // gameProgressCompletedLabel
+            // 
+            this.gameProgressCompletedLabel.BackColor = System.Drawing.Color.Transparent;
+            this.gameProgressCompletedLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameProgressCompletedLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
+            this.gameProgressCompletedLabel.Location = new System.Drawing.Point(422, 212);
+            this.gameProgressCompletedLabel.Name = "gameProgressCompletedLabel";
+            this.gameProgressCompletedLabel.Size = new System.Drawing.Size(339, 26);
+            this.gameProgressCompletedLabel.TabIndex = 10061;
+            // 
+            // gameProgressTruePointsLabel
+            // 
+            this.gameProgressTruePointsLabel.BackColor = System.Drawing.Color.Transparent;
+            this.gameProgressTruePointsLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameProgressTruePointsLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
+            this.gameProgressTruePointsLabel.Location = new System.Drawing.Point(422, 186);
+            this.gameProgressTruePointsLabel.Name = "gameProgressTruePointsLabel";
+            this.gameProgressTruePointsLabel.Size = new System.Drawing.Size(339, 26);
+            this.gameProgressTruePointsLabel.TabIndex = 10060;
+            // 
+            // gameProgressPointsLabel
+            // 
+            this.gameProgressPointsLabel.BackColor = System.Drawing.Color.Transparent;
+            this.gameProgressPointsLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameProgressPointsLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
+            this.gameProgressPointsLabel.Location = new System.Drawing.Point(422, 160);
+            this.gameProgressPointsLabel.Name = "gameProgressPointsLabel";
+            this.gameProgressPointsLabel.Size = new System.Drawing.Size(339, 26);
+            this.gameProgressPointsLabel.TabIndex = 10059;
+            // 
+            // gameProgressAchievementsLabel
+            // 
+            this.gameProgressAchievementsLabel.BackColor = System.Drawing.Color.Transparent;
+            this.gameProgressAchievementsLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameProgressAchievementsLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
+            this.gameProgressAchievementsLabel.Location = new System.Drawing.Point(422, 134);
+            this.gameProgressAchievementsLabel.Name = "gameProgressAchievementsLabel";
+            this.gameProgressAchievementsLabel.Size = new System.Drawing.Size(339, 26);
+            this.gameProgressAchievementsLabel.TabIndex = 10058;
             // 
             // gameProgressSimpleCheckBox
             // 
@@ -3999,6 +4441,109 @@ namespace Retro_Achievement_Tracker
             this.gameProgressBackgroundColorPictureBox.Size = new System.Drawing.Size(22, 22);
             this.gameProgressBackgroundColorPictureBox.TabIndex = 42;
             this.gameProgressBackgroundColorPictureBox.TabStop = false;
+            // 
+            // gameProgressValuesGroupBox
+            // 
+            this.gameProgressValuesGroupBox.BackColor = System.Drawing.Color.Transparent;
+            this.gameProgressValuesGroupBox.Controls.Add(this.gameProgressValuesFontOutlineColorBoxButton);
+            this.gameProgressValuesGroupBox.Controls.Add(this.gameProgressValuesFontOutlineColorPictureBox);
+            this.gameProgressValuesGroupBox.Controls.Add(this.gameProgressValuesFontColorBoxButton);
+            this.gameProgressValuesGroupBox.Controls.Add(this.gameProgressValuesOutlineCheckBox);
+            this.gameProgressValuesGroupBox.Controls.Add(this.gameProgressValuesFontOutlineNumericUpDown);
+            this.gameProgressValuesGroupBox.Controls.Add(this.gameProgressValuesFontColorPictureBox);
+            this.gameProgressValuesGroupBox.Controls.Add(this.gameProgressValuesFontComboBox);
+            this.gameProgressValuesGroupBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameProgressValuesGroupBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
+            this.gameProgressValuesGroupBox.Location = new System.Drawing.Point(596, 6);
+            this.gameProgressValuesGroupBox.Name = "gameProgressValuesGroupBox";
+            this.gameProgressValuesGroupBox.Size = new System.Drawing.Size(165, 125);
+            this.gameProgressValuesGroupBox.TabIndex = 10048;
+            this.gameProgressValuesGroupBox.TabStop = false;
+            this.gameProgressValuesGroupBox.Text = "Values";
+            // 
+            // gameProgressValuesFontOutlineColorBoxButton
+            // 
+            this.gameProgressValuesFontOutlineColorBoxButton.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameProgressValuesFontOutlineColorBoxButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.gameProgressValuesFontOutlineColorBoxButton.Location = new System.Drawing.Point(5, 95);
+            this.gameProgressValuesFontOutlineColorBoxButton.Name = "gameProgressValuesFontOutlineColorBoxButton";
+            this.gameProgressValuesFontOutlineColorBoxButton.Size = new System.Drawing.Size(49, 23);
+            this.gameProgressValuesFontOutlineColorBoxButton.TabIndex = 45;
+            this.gameProgressValuesFontOutlineColorBoxButton.Text = "Set";
+            this.gameProgressValuesFontOutlineColorBoxButton.UseVisualStyleBackColor = true;
+            // 
+            // gameProgressValuesFontOutlineColorPictureBox
+            // 
+            this.gameProgressValuesFontOutlineColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.gameProgressValuesFontOutlineColorPictureBox.Location = new System.Drawing.Point(60, 95);
+            this.gameProgressValuesFontOutlineColorPictureBox.Name = "gameProgressValuesFontOutlineColorPictureBox";
+            this.gameProgressValuesFontOutlineColorPictureBox.Size = new System.Drawing.Size(22, 22);
+            this.gameProgressValuesFontOutlineColorPictureBox.TabIndex = 45;
+            this.gameProgressValuesFontOutlineColorPictureBox.TabStop = false;
+            // 
+            // gameProgressValuesFontColorBoxButton
+            // 
+            this.gameProgressValuesFontColorBoxButton.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameProgressValuesFontColorBoxButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.gameProgressValuesFontColorBoxButton.Location = new System.Drawing.Point(5, 45);
+            this.gameProgressValuesFontColorBoxButton.Name = "gameProgressValuesFontColorBoxButton";
+            this.gameProgressValuesFontColorBoxButton.Size = new System.Drawing.Size(49, 23);
+            this.gameProgressValuesFontColorBoxButton.TabIndex = 45;
+            this.gameProgressValuesFontColorBoxButton.Text = "Set";
+            this.gameProgressValuesFontColorBoxButton.UseVisualStyleBackColor = true;
+            // 
+            // gameProgressValuesOutlineCheckBox
+            // 
+            this.gameProgressValuesOutlineCheckBox.AutoSize = true;
+            this.gameProgressValuesOutlineCheckBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameProgressValuesOutlineCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
+            this.gameProgressValuesOutlineCheckBox.Location = new System.Drawing.Point(5, 75);
+            this.gameProgressValuesOutlineCheckBox.Name = "gameProgressValuesOutlineCheckBox";
+            this.gameProgressValuesOutlineCheckBox.Size = new System.Drawing.Size(73, 20);
+            this.gameProgressValuesOutlineCheckBox.TabIndex = 45;
+            this.gameProgressValuesOutlineCheckBox.Text = "Outline";
+            this.gameProgressValuesOutlineCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // gameProgressValuesFontOutlineNumericUpDown
+            // 
+            this.gameProgressValuesFontOutlineNumericUpDown.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameProgressValuesFontOutlineNumericUpDown.Location = new System.Drawing.Point(91, 97);
+            this.gameProgressValuesFontOutlineNumericUpDown.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.gameProgressValuesFontOutlineNumericUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.gameProgressValuesFontOutlineNumericUpDown.Name = "gameProgressValuesFontOutlineNumericUpDown";
+            this.gameProgressValuesFontOutlineNumericUpDown.Size = new System.Drawing.Size(43, 21);
+            this.gameProgressValuesFontOutlineNumericUpDown.TabIndex = 45;
+            this.gameProgressValuesFontOutlineNumericUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // gameProgressValuesFontColorPictureBox
+            // 
+            this.gameProgressValuesFontColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.gameProgressValuesFontColorPictureBox.Location = new System.Drawing.Point(60, 45);
+            this.gameProgressValuesFontColorPictureBox.Name = "gameProgressValuesFontColorPictureBox";
+            this.gameProgressValuesFontColorPictureBox.Size = new System.Drawing.Size(22, 22);
+            this.gameProgressValuesFontColorPictureBox.TabIndex = 45;
+            this.gameProgressValuesFontColorPictureBox.TabStop = false;
+            // 
+            // gameProgressValuesFontComboBox
+            // 
+            this.gameProgressValuesFontComboBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameProgressValuesFontComboBox.FormattingEnabled = true;
+            this.gameProgressValuesFontComboBox.Location = new System.Drawing.Point(5, 20);
+            this.gameProgressValuesFontComboBox.Name = "gameProgressValuesFontComboBox";
+            this.gameProgressValuesFontComboBox.Size = new System.Drawing.Size(155, 24);
+            this.gameProgressValuesFontComboBox.TabIndex = 45;
             // 
             // gameProgressNamesGroupBox
             // 
@@ -4104,108 +4649,109 @@ namespace Retro_Achievement_Tracker
             this.gameProgressNamesFontComboBox.Size = new System.Drawing.Size(155, 24);
             this.gameProgressNamesFontComboBox.TabIndex = 45;
             // 
-            // gameProgressValuesGroupBox
+            // gameProgressSimpleGroupBox
             // 
-            this.gameProgressValuesGroupBox.BackColor = System.Drawing.Color.Transparent;
-            this.gameProgressValuesGroupBox.Controls.Add(this.gameProgressValuesFontOutlineColorBoxButton);
-            this.gameProgressValuesGroupBox.Controls.Add(this.gameProgressValuesFontOutlineColorPictureBox);
-            this.gameProgressValuesGroupBox.Controls.Add(this.gameProgressValuesFontColorBoxButton);
-            this.gameProgressValuesGroupBox.Controls.Add(this.gameProgressValuesOutlineCheckBox);
-            this.gameProgressValuesGroupBox.Controls.Add(this.gameProgressValuesFontOutlineNumericUpDown);
-            this.gameProgressValuesGroupBox.Controls.Add(this.gameProgressValuesFontColorPictureBox);
-            this.gameProgressValuesGroupBox.Controls.Add(this.gameProgressValuesFontComboBox);
-            this.gameProgressValuesGroupBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameProgressValuesGroupBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
-            this.gameProgressValuesGroupBox.Location = new System.Drawing.Point(596, 6);
-            this.gameProgressValuesGroupBox.Name = "gameProgressValuesGroupBox";
-            this.gameProgressValuesGroupBox.Size = new System.Drawing.Size(165, 125);
-            this.gameProgressValuesGroupBox.TabIndex = 10048;
-            this.gameProgressValuesGroupBox.TabStop = false;
-            this.gameProgressValuesGroupBox.Text = "Values";
+            this.gameProgressSimpleGroupBox.BackColor = System.Drawing.Color.Transparent;
+            this.gameProgressSimpleGroupBox.Controls.Add(this.gameProgressSimpleFontOutlineColorBoxButton);
+            this.gameProgressSimpleGroupBox.Controls.Add(this.gameProgressSimpleFontOutlineColorPictureBox);
+            this.gameProgressSimpleGroupBox.Controls.Add(this.gameProgressSimpleFontColorBoxButton);
+            this.gameProgressSimpleGroupBox.Controls.Add(this.gameProgressSimpleOutlineCheckBox);
+            this.gameProgressSimpleGroupBox.Controls.Add(this.gameProgressSimpleFontOutlineNumericUpDown);
+            this.gameProgressSimpleGroupBox.Controls.Add(this.gameProgressSimpleFontColorPictureBox);
+            this.gameProgressSimpleGroupBox.Controls.Add(this.gameProgressSimpleFontComboBox);
+            this.gameProgressSimpleGroupBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameProgressSimpleGroupBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
+            this.gameProgressSimpleGroupBox.Location = new System.Drawing.Point(425, 6);
+            this.gameProgressSimpleGroupBox.Name = "gameProgressSimpleGroupBox";
+            this.gameProgressSimpleGroupBox.Size = new System.Drawing.Size(165, 125);
+            this.gameProgressSimpleGroupBox.TabIndex = 10048;
+            this.gameProgressSimpleGroupBox.TabStop = false;
+            this.gameProgressSimpleGroupBox.Text = "All";
             // 
-            // gameProgressValuesFontOutlineColorBoxButton
+            // gameProgressSimpleFontOutlineColorBoxButton
             // 
-            this.gameProgressValuesFontOutlineColorBoxButton.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameProgressValuesFontOutlineColorBoxButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.gameProgressValuesFontOutlineColorBoxButton.Location = new System.Drawing.Point(5, 95);
-            this.gameProgressValuesFontOutlineColorBoxButton.Name = "gameProgressValuesFontOutlineColorBoxButton";
-            this.gameProgressValuesFontOutlineColorBoxButton.Size = new System.Drawing.Size(49, 23);
-            this.gameProgressValuesFontOutlineColorBoxButton.TabIndex = 45;
-            this.gameProgressValuesFontOutlineColorBoxButton.Text = "Set";
-            this.gameProgressValuesFontOutlineColorBoxButton.UseVisualStyleBackColor = true;
+            this.gameProgressSimpleFontOutlineColorBoxButton.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameProgressSimpleFontOutlineColorBoxButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.gameProgressSimpleFontOutlineColorBoxButton.Location = new System.Drawing.Point(5, 95);
+            this.gameProgressSimpleFontOutlineColorBoxButton.Name = "gameProgressSimpleFontOutlineColorBoxButton";
+            this.gameProgressSimpleFontOutlineColorBoxButton.Size = new System.Drawing.Size(49, 23);
+            this.gameProgressSimpleFontOutlineColorBoxButton.TabIndex = 45;
+            this.gameProgressSimpleFontOutlineColorBoxButton.Text = "Set";
+            this.gameProgressSimpleFontOutlineColorBoxButton.UseVisualStyleBackColor = true;
             // 
-            // gameProgressValuesFontOutlineColorPictureBox
+            // gameProgressSimpleFontOutlineColorPictureBox
             // 
-            this.gameProgressValuesFontOutlineColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.gameProgressValuesFontOutlineColorPictureBox.Location = new System.Drawing.Point(60, 95);
-            this.gameProgressValuesFontOutlineColorPictureBox.Name = "gameProgressValuesFontOutlineColorPictureBox";
-            this.gameProgressValuesFontOutlineColorPictureBox.Size = new System.Drawing.Size(22, 22);
-            this.gameProgressValuesFontOutlineColorPictureBox.TabIndex = 45;
-            this.gameProgressValuesFontOutlineColorPictureBox.TabStop = false;
+            this.gameProgressSimpleFontOutlineColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.gameProgressSimpleFontOutlineColorPictureBox.Location = new System.Drawing.Point(60, 95);
+            this.gameProgressSimpleFontOutlineColorPictureBox.Name = "gameProgressSimpleFontOutlineColorPictureBox";
+            this.gameProgressSimpleFontOutlineColorPictureBox.Size = new System.Drawing.Size(22, 22);
+            this.gameProgressSimpleFontOutlineColorPictureBox.TabIndex = 45;
+            this.gameProgressSimpleFontOutlineColorPictureBox.TabStop = false;
             // 
-            // gameProgressValuesFontColorBoxButton
+            // gameProgressSimpleFontColorBoxButton
             // 
-            this.gameProgressValuesFontColorBoxButton.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameProgressValuesFontColorBoxButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.gameProgressValuesFontColorBoxButton.Location = new System.Drawing.Point(5, 45);
-            this.gameProgressValuesFontColorBoxButton.Name = "gameProgressValuesFontColorBoxButton";
-            this.gameProgressValuesFontColorBoxButton.Size = new System.Drawing.Size(49, 23);
-            this.gameProgressValuesFontColorBoxButton.TabIndex = 45;
-            this.gameProgressValuesFontColorBoxButton.Text = "Set";
-            this.gameProgressValuesFontColorBoxButton.UseVisualStyleBackColor = true;
+            this.gameProgressSimpleFontColorBoxButton.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameProgressSimpleFontColorBoxButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.gameProgressSimpleFontColorBoxButton.Location = new System.Drawing.Point(5, 45);
+            this.gameProgressSimpleFontColorBoxButton.Name = "gameProgressSimpleFontColorBoxButton";
+            this.gameProgressSimpleFontColorBoxButton.Size = new System.Drawing.Size(49, 23);
+            this.gameProgressSimpleFontColorBoxButton.TabIndex = 45;
+            this.gameProgressSimpleFontColorBoxButton.Text = "Set";
+            this.gameProgressSimpleFontColorBoxButton.UseVisualStyleBackColor = true;
             // 
-            // gameProgressValuesOutlineCheckBox
+            // gameProgressSimpleOutlineCheckBox
             // 
-            this.gameProgressValuesOutlineCheckBox.AutoSize = true;
-            this.gameProgressValuesOutlineCheckBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameProgressValuesOutlineCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.gameProgressValuesOutlineCheckBox.Location = new System.Drawing.Point(5, 75);
-            this.gameProgressValuesOutlineCheckBox.Name = "gameProgressValuesOutlineCheckBox";
-            this.gameProgressValuesOutlineCheckBox.Size = new System.Drawing.Size(73, 20);
-            this.gameProgressValuesOutlineCheckBox.TabIndex = 45;
-            this.gameProgressValuesOutlineCheckBox.Text = "Outline";
-            this.gameProgressValuesOutlineCheckBox.UseVisualStyleBackColor = true;
+            this.gameProgressSimpleOutlineCheckBox.AutoSize = true;
+            this.gameProgressSimpleOutlineCheckBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameProgressSimpleOutlineCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
+            this.gameProgressSimpleOutlineCheckBox.Location = new System.Drawing.Point(5, 75);
+            this.gameProgressSimpleOutlineCheckBox.Name = "gameProgressSimpleOutlineCheckBox";
+            this.gameProgressSimpleOutlineCheckBox.Size = new System.Drawing.Size(73, 20);
+            this.gameProgressSimpleOutlineCheckBox.TabIndex = 45;
+            this.gameProgressSimpleOutlineCheckBox.Text = "Outline";
+            this.gameProgressSimpleOutlineCheckBox.UseVisualStyleBackColor = true;
             // 
-            // gameProgressValuesFontOutlineNumericUpDown
+            // gameProgressSimpleFontOutlineNumericUpDown
             // 
-            this.gameProgressValuesFontOutlineNumericUpDown.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameProgressValuesFontOutlineNumericUpDown.Location = new System.Drawing.Point(91, 97);
-            this.gameProgressValuesFontOutlineNumericUpDown.Maximum = new decimal(new int[] {
+            this.gameProgressSimpleFontOutlineNumericUpDown.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameProgressSimpleFontOutlineNumericUpDown.Location = new System.Drawing.Point(89, 97);
+            this.gameProgressSimpleFontOutlineNumericUpDown.Maximum = new decimal(new int[] {
             5,
             0,
             0,
             0});
-            this.gameProgressValuesFontOutlineNumericUpDown.Minimum = new decimal(new int[] {
+            this.gameProgressSimpleFontOutlineNumericUpDown.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.gameProgressValuesFontOutlineNumericUpDown.Name = "gameProgressValuesFontOutlineNumericUpDown";
-            this.gameProgressValuesFontOutlineNumericUpDown.Size = new System.Drawing.Size(43, 21);
-            this.gameProgressValuesFontOutlineNumericUpDown.TabIndex = 45;
-            this.gameProgressValuesFontOutlineNumericUpDown.Value = new decimal(new int[] {
+            this.gameProgressSimpleFontOutlineNumericUpDown.Name = "gameProgressSimpleFontOutlineNumericUpDown";
+            this.gameProgressSimpleFontOutlineNumericUpDown.Size = new System.Drawing.Size(43, 21);
+            this.gameProgressSimpleFontOutlineNumericUpDown.TabIndex = 45;
+            this.gameProgressSimpleFontOutlineNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.gameProgressSimpleFontOutlineNumericUpDown.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
             // 
-            // gameProgressValuesFontColorPictureBox
+            // gameProgressSimpleFontColorPictureBox
             // 
-            this.gameProgressValuesFontColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.gameProgressValuesFontColorPictureBox.Location = new System.Drawing.Point(60, 45);
-            this.gameProgressValuesFontColorPictureBox.Name = "gameProgressValuesFontColorPictureBox";
-            this.gameProgressValuesFontColorPictureBox.Size = new System.Drawing.Size(22, 22);
-            this.gameProgressValuesFontColorPictureBox.TabIndex = 45;
-            this.gameProgressValuesFontColorPictureBox.TabStop = false;
+            this.gameProgressSimpleFontColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.gameProgressSimpleFontColorPictureBox.Location = new System.Drawing.Point(60, 45);
+            this.gameProgressSimpleFontColorPictureBox.Name = "gameProgressSimpleFontColorPictureBox";
+            this.gameProgressSimpleFontColorPictureBox.Size = new System.Drawing.Size(22, 22);
+            this.gameProgressSimpleFontColorPictureBox.TabIndex = 45;
+            this.gameProgressSimpleFontColorPictureBox.TabStop = false;
             // 
-            // gameProgressValuesFontComboBox
+            // gameProgressSimpleFontComboBox
             // 
-            this.gameProgressValuesFontComboBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameProgressValuesFontComboBox.FormattingEnabled = true;
-            this.gameProgressValuesFontComboBox.Location = new System.Drawing.Point(5, 20);
-            this.gameProgressValuesFontComboBox.Name = "gameProgressValuesFontComboBox";
-            this.gameProgressValuesFontComboBox.Size = new System.Drawing.Size(155, 24);
-            this.gameProgressValuesFontComboBox.TabIndex = 45;
+            this.gameProgressSimpleFontComboBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameProgressSimpleFontComboBox.FormattingEnabled = true;
+            this.gameProgressSimpleFontComboBox.Location = new System.Drawing.Point(5, 20);
+            this.gameProgressSimpleFontComboBox.Name = "gameProgressSimpleFontComboBox";
+            this.gameProgressSimpleFontComboBox.Size = new System.Drawing.Size(155, 24);
+            this.gameProgressSimpleFontComboBox.TabIndex = 45;
             // 
             // tabPage7
             // 
@@ -4243,6 +4789,56 @@ namespace Retro_Achievement_Tracker
             this.tabPage7.TabIndex = 4;
             this.tabPage7.Text = "Game Info";
             // 
+            // gameInfoReleasedLabel
+            // 
+            this.gameInfoReleasedLabel.BackColor = System.Drawing.Color.Transparent;
+            this.gameInfoReleasedLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInfoReleasedLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
+            this.gameInfoReleasedLabel.Location = new System.Drawing.Point(422, 263);
+            this.gameInfoReleasedLabel.Name = "gameInfoReleasedLabel";
+            this.gameInfoReleasedLabel.Size = new System.Drawing.Size(339, 16);
+            this.gameInfoReleasedLabel.TabIndex = 10067;
+            // 
+            // gameInfoGenreLabel
+            // 
+            this.gameInfoGenreLabel.BackColor = System.Drawing.Color.Transparent;
+            this.gameInfoGenreLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInfoGenreLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
+            this.gameInfoGenreLabel.Location = new System.Drawing.Point(422, 247);
+            this.gameInfoGenreLabel.Name = "gameInfoGenreLabel";
+            this.gameInfoGenreLabel.Size = new System.Drawing.Size(339, 16);
+            this.gameInfoGenreLabel.TabIndex = 10066;
+            // 
+            // gameInfoConsoleLabel
+            // 
+            this.gameInfoConsoleLabel.BackColor = System.Drawing.Color.Transparent;
+            this.gameInfoConsoleLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInfoConsoleLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
+            this.gameInfoConsoleLabel.Location = new System.Drawing.Point(422, 231);
+            this.gameInfoConsoleLabel.Name = "gameInfoConsoleLabel";
+            this.gameInfoConsoleLabel.Size = new System.Drawing.Size(339, 16);
+            this.gameInfoConsoleLabel.TabIndex = 10065;
+            // 
+            // gameInfoPublisherLabel
+            // 
+            this.gameInfoPublisherLabel.BackColor = System.Drawing.Color.Transparent;
+            this.gameInfoPublisherLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInfoPublisherLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
+            this.gameInfoPublisherLabel.Location = new System.Drawing.Point(422, 199);
+            this.gameInfoPublisherLabel.Name = "gameInfoPublisherLabel";
+            this.gameInfoPublisherLabel.Size = new System.Drawing.Size(339, 32);
+            this.gameInfoPublisherLabel.TabIndex = 10064;
+            // 
+            // gameInfoDeveloperLabel
+            // 
+            this.gameInfoDeveloperLabel.BackColor = System.Drawing.Color.Transparent;
+            this.gameInfoDeveloperLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInfoDeveloperLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
+            this.gameInfoDeveloperLabel.Location = new System.Drawing.Point(422, 167);
+            this.gameInfoDeveloperLabel.Name = "gameInfoDeveloperLabel";
+            this.gameInfoDeveloperLabel.Size = new System.Drawing.Size(339, 32);
+            this.gameInfoDeveloperLabel.TabIndex = 10063;
+            // 
             // gameInfoSimpleCheckBox
             // 
             this.gameInfoSimpleCheckBox.AutoSize = true;
@@ -4255,6 +4851,110 @@ namespace Retro_Achievement_Tracker
             this.gameInfoSimpleCheckBox.TabIndex = 10055;
             this.gameInfoSimpleCheckBox.Text = "Simple";
             this.gameInfoSimpleCheckBox.UseVisualStyleBackColor = false;
+            // 
+            // gameInfoSimpleGroupBox
+            // 
+            this.gameInfoSimpleGroupBox.BackColor = System.Drawing.Color.Transparent;
+            this.gameInfoSimpleGroupBox.Controls.Add(this.gameInfoSimpleFontOutlineColorBoxButton);
+            this.gameInfoSimpleGroupBox.Controls.Add(this.gameInfoSimpleFontOutlineColorPictureBox);
+            this.gameInfoSimpleGroupBox.Controls.Add(this.gameInfoSimpleFontColorBoxButton);
+            this.gameInfoSimpleGroupBox.Controls.Add(this.gameInfoSimpleOutlineCheckBox);
+            this.gameInfoSimpleGroupBox.Controls.Add(this.gameInfoSimpleFontOutlineNumericUpDown);
+            this.gameInfoSimpleGroupBox.Controls.Add(this.gameInfoSimpleFontColorPictureBox);
+            this.gameInfoSimpleGroupBox.Controls.Add(this.gameInfoSimpleFontComboBox);
+            this.gameInfoSimpleGroupBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInfoSimpleGroupBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
+            this.gameInfoSimpleGroupBox.Location = new System.Drawing.Point(425, 6);
+            this.gameInfoSimpleGroupBox.Name = "gameInfoSimpleGroupBox";
+            this.gameInfoSimpleGroupBox.Size = new System.Drawing.Size(165, 125);
+            this.gameInfoSimpleGroupBox.TabIndex = 47;
+            this.gameInfoSimpleGroupBox.TabStop = false;
+            this.gameInfoSimpleGroupBox.Text = "All";
+            // 
+            // gameInfoSimpleFontOutlineColorBoxButton
+            // 
+            this.gameInfoSimpleFontOutlineColorBoxButton.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInfoSimpleFontOutlineColorBoxButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.gameInfoSimpleFontOutlineColorBoxButton.Location = new System.Drawing.Point(5, 95);
+            this.gameInfoSimpleFontOutlineColorBoxButton.Name = "gameInfoSimpleFontOutlineColorBoxButton";
+            this.gameInfoSimpleFontOutlineColorBoxButton.Size = new System.Drawing.Size(49, 23);
+            this.gameInfoSimpleFontOutlineColorBoxButton.TabIndex = 45;
+            this.gameInfoSimpleFontOutlineColorBoxButton.Text = "Set";
+            this.gameInfoSimpleFontOutlineColorBoxButton.UseVisualStyleBackColor = true;
+            // 
+            // gameInfoSimpleFontOutlineColorPictureBox
+            // 
+            this.gameInfoSimpleFontOutlineColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.gameInfoSimpleFontOutlineColorPictureBox.Location = new System.Drawing.Point(60, 95);
+            this.gameInfoSimpleFontOutlineColorPictureBox.Name = "gameInfoSimpleFontOutlineColorPictureBox";
+            this.gameInfoSimpleFontOutlineColorPictureBox.Size = new System.Drawing.Size(22, 22);
+            this.gameInfoSimpleFontOutlineColorPictureBox.TabIndex = 45;
+            this.gameInfoSimpleFontOutlineColorPictureBox.TabStop = false;
+            // 
+            // gameInfoSimpleFontColorBoxButton
+            // 
+            this.gameInfoSimpleFontColorBoxButton.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInfoSimpleFontColorBoxButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.gameInfoSimpleFontColorBoxButton.Location = new System.Drawing.Point(5, 45);
+            this.gameInfoSimpleFontColorBoxButton.Name = "gameInfoSimpleFontColorBoxButton";
+            this.gameInfoSimpleFontColorBoxButton.Size = new System.Drawing.Size(49, 23);
+            this.gameInfoSimpleFontColorBoxButton.TabIndex = 45;
+            this.gameInfoSimpleFontColorBoxButton.Text = "Set";
+            this.gameInfoSimpleFontColorBoxButton.UseVisualStyleBackColor = true;
+            // 
+            // gameInfoSimpleOutlineCheckBox
+            // 
+            this.gameInfoSimpleOutlineCheckBox.AutoSize = true;
+            this.gameInfoSimpleOutlineCheckBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInfoSimpleOutlineCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
+            this.gameInfoSimpleOutlineCheckBox.Location = new System.Drawing.Point(5, 75);
+            this.gameInfoSimpleOutlineCheckBox.Name = "gameInfoSimpleOutlineCheckBox";
+            this.gameInfoSimpleOutlineCheckBox.Size = new System.Drawing.Size(73, 20);
+            this.gameInfoSimpleOutlineCheckBox.TabIndex = 45;
+            this.gameInfoSimpleOutlineCheckBox.Text = "Outline";
+            this.gameInfoSimpleOutlineCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // gameInfoSimpleFontOutlineNumericUpDown
+            // 
+            this.gameInfoSimpleFontOutlineNumericUpDown.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInfoSimpleFontOutlineNumericUpDown.Location = new System.Drawing.Point(89, 97);
+            this.gameInfoSimpleFontOutlineNumericUpDown.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.gameInfoSimpleFontOutlineNumericUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.gameInfoSimpleFontOutlineNumericUpDown.Name = "gameInfoSimpleFontOutlineNumericUpDown";
+            this.gameInfoSimpleFontOutlineNumericUpDown.Size = new System.Drawing.Size(43, 21);
+            this.gameInfoSimpleFontOutlineNumericUpDown.TabIndex = 45;
+            this.gameInfoSimpleFontOutlineNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.gameInfoSimpleFontOutlineNumericUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // gameInfoSimpleFontColorPictureBox
+            // 
+            this.gameInfoSimpleFontColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.gameInfoSimpleFontColorPictureBox.Location = new System.Drawing.Point(60, 45);
+            this.gameInfoSimpleFontColorPictureBox.Name = "gameInfoSimpleFontColorPictureBox";
+            this.gameInfoSimpleFontColorPictureBox.Size = new System.Drawing.Size(22, 22);
+            this.gameInfoSimpleFontColorPictureBox.TabIndex = 45;
+            this.gameInfoSimpleFontColorPictureBox.TabStop = false;
+            // 
+            // gameInfoSimpleFontComboBox
+            // 
+            this.gameInfoSimpleFontComboBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameInfoSimpleFontComboBox.FormattingEnabled = true;
+            this.gameInfoSimpleFontComboBox.Location = new System.Drawing.Point(5, 20);
+            this.gameInfoSimpleFontComboBox.Name = "gameInfoSimpleFontComboBox";
+            this.gameInfoSimpleFontComboBox.Size = new System.Drawing.Size(155, 24);
+            this.gameInfoSimpleFontComboBox.TabIndex = 45;
             // 
             // tabPage8
             // 
@@ -4789,740 +5489,6 @@ namespace Retro_Achievement_Tracker
             this.recentAchievementsDescriptionFontComboBox.Size = new System.Drawing.Size(155, 24);
             this.recentAchievementsDescriptionFontComboBox.TabIndex = 45;
             // 
-            // tabPage9
-            // 
-            this.tabPage9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
-            this.tabPage9.Controls.Add(this.achievementListBackgroundGroupBox);
-            this.tabPage9.Controls.Add(this.achievementListAutoOpenWindowCheckbox);
-            this.tabPage9.Controls.Add(this.achievementListScrollCheckBox);
-            this.tabPage9.Controls.Add(this.achievementListOpenWindowButton);
-            this.tabPage9.Location = new System.Drawing.Point(4, 24);
-            this.tabPage9.Name = "tabPage9";
-            this.tabPage9.Size = new System.Drawing.Size(769, 292);
-            this.tabPage9.TabIndex = 6;
-            this.tabPage9.Text = "Cheevo List";
-            // 
-            // achievementListBackgroundGroupBox
-            // 
-            this.achievementListBackgroundGroupBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
-            this.achievementListBackgroundGroupBox.Controls.Add(this.achievementListSetBackgroundColorButton);
-            this.achievementListBackgroundGroupBox.Controls.Add(this.achievementListBackgroundColorPictureBox);
-            this.achievementListBackgroundGroupBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.achievementListBackgroundGroupBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
-            this.achievementListBackgroundGroupBox.Location = new System.Drawing.Point(339, 6);
-            this.achievementListBackgroundGroupBox.Name = "achievementListBackgroundGroupBox";
-            this.achievementListBackgroundGroupBox.Size = new System.Drawing.Size(80, 49);
-            this.achievementListBackgroundGroupBox.TabIndex = 10052;
-            this.achievementListBackgroundGroupBox.TabStop = false;
-            this.achievementListBackgroundGroupBox.Text = "Back";
-            // 
-            // achievementListSetBackgroundColorButton
-            // 
-            this.achievementListSetBackgroundColorButton.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.achievementListSetBackgroundColorButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.achievementListSetBackgroundColorButton.Location = new System.Drawing.Point(6, 20);
-            this.achievementListSetBackgroundColorButton.Name = "achievementListSetBackgroundColorButton";
-            this.achievementListSetBackgroundColorButton.Size = new System.Drawing.Size(36, 23);
-            this.achievementListSetBackgroundColorButton.TabIndex = 43;
-            this.achievementListSetBackgroundColorButton.Text = "Set";
-            this.achievementListSetBackgroundColorButton.UseVisualStyleBackColor = true;
-            // 
-            // achievementListBackgroundColorPictureBox
-            // 
-            this.achievementListBackgroundColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.achievementListBackgroundColorPictureBox.Location = new System.Drawing.Point(48, 20);
-            this.achievementListBackgroundColorPictureBox.Name = "achievementListBackgroundColorPictureBox";
-            this.achievementListBackgroundColorPictureBox.Size = new System.Drawing.Size(22, 22);
-            this.achievementListBackgroundColorPictureBox.TabIndex = 42;
-            this.achievementListBackgroundColorPictureBox.TabStop = false;
-            // 
-            // tabPage10
-            // 
-            this.tabPage10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
-            this.tabPage10.Controls.Add(this.webBrowserAutoOpenCheckbox);
-            this.tabPage10.Controls.Add(this.rssFeedFriendCheckBox);
-            this.tabPage10.Controls.Add(this.rssFeedForumCheckBox);
-            this.tabPage10.Controls.Add(this.rssFeedListView);
-            this.tabPage10.Controls.Add(this.rssFeedNewsCheckBox);
-            this.tabPage10.Controls.Add(this.rssFeedCheevoCheckBox);
-            this.tabPage10.Location = new System.Drawing.Point(4, 24);
-            this.tabPage10.Name = "tabPage10";
-            this.tabPage10.Size = new System.Drawing.Size(769, 292);
-            this.tabPage10.TabIndex = 7;
-            this.tabPage10.Text = "Browser";
-            // 
-            // focusAchievementIdLabel
-            // 
-            this.focusAchievementIdLabel.BackColor = System.Drawing.Color.Transparent;
-            this.focusAchievementIdLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.focusAchievementIdLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.focusAchievementIdLabel.Location = new System.Drawing.Point(6, 8);
-            this.focusAchievementIdLabel.Name = "focusAchievementIdLabel";
-            this.focusAchievementIdLabel.Size = new System.Drawing.Size(123, 18);
-            this.focusAchievementIdLabel.TabIndex = 10053;
-            this.focusAchievementIdLabel.Text = "[  ]";
-            this.focusAchievementIdLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // userInfoRankLabel
-            // 
-            this.userInfoRankLabel.BackColor = System.Drawing.Color.Transparent;
-            this.userInfoRankLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userInfoRankLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.userInfoRankLabel.Location = new System.Drawing.Point(422, 134);
-            this.userInfoRankLabel.Name = "userInfoRankLabel";
-            this.userInfoRankLabel.Size = new System.Drawing.Size(339, 26);
-            this.userInfoRankLabel.TabIndex = 10054;
-            // 
-            // userInfoPointsLabel
-            // 
-            this.userInfoPointsLabel.BackColor = System.Drawing.Color.Transparent;
-            this.userInfoPointsLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userInfoPointsLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.userInfoPointsLabel.Location = new System.Drawing.Point(422, 160);
-            this.userInfoPointsLabel.Name = "userInfoPointsLabel";
-            this.userInfoPointsLabel.Size = new System.Drawing.Size(339, 26);
-            this.userInfoPointsLabel.TabIndex = 10055;
-            // 
-            // userInfoTruePointsLabel
-            // 
-            this.userInfoTruePointsLabel.BackColor = System.Drawing.Color.Transparent;
-            this.userInfoTruePointsLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userInfoTruePointsLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.userInfoTruePointsLabel.Location = new System.Drawing.Point(422, 186);
-            this.userInfoTruePointsLabel.Name = "userInfoTruePointsLabel";
-            this.userInfoTruePointsLabel.Size = new System.Drawing.Size(339, 26);
-            this.userInfoTruePointsLabel.TabIndex = 10056;
-            // 
-            // userInfoRatioLabel
-            // 
-            this.userInfoRatioLabel.BackColor = System.Drawing.Color.Transparent;
-            this.userInfoRatioLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userInfoRatioLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.userInfoRatioLabel.Location = new System.Drawing.Point(422, 213);
-            this.userInfoRatioLabel.Name = "userInfoRatioLabel";
-            this.userInfoRatioLabel.Size = new System.Drawing.Size(339, 26);
-            this.userInfoRatioLabel.TabIndex = 10057;
-            // 
-            // gameProgressCompletedLabel
-            // 
-            this.gameProgressCompletedLabel.BackColor = System.Drawing.Color.Transparent;
-            this.gameProgressCompletedLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameProgressCompletedLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.gameProgressCompletedLabel.Location = new System.Drawing.Point(422, 212);
-            this.gameProgressCompletedLabel.Name = "gameProgressCompletedLabel";
-            this.gameProgressCompletedLabel.Size = new System.Drawing.Size(339, 26);
-            this.gameProgressCompletedLabel.TabIndex = 10061;
-            // 
-            // gameProgressTruePointsLabel
-            // 
-            this.gameProgressTruePointsLabel.BackColor = System.Drawing.Color.Transparent;
-            this.gameProgressTruePointsLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameProgressTruePointsLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.gameProgressTruePointsLabel.Location = new System.Drawing.Point(422, 186);
-            this.gameProgressTruePointsLabel.Name = "gameProgressTruePointsLabel";
-            this.gameProgressTruePointsLabel.Size = new System.Drawing.Size(339, 26);
-            this.gameProgressTruePointsLabel.TabIndex = 10060;
-            // 
-            // gameProgressPointsLabel
-            // 
-            this.gameProgressPointsLabel.BackColor = System.Drawing.Color.Transparent;
-            this.gameProgressPointsLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameProgressPointsLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.gameProgressPointsLabel.Location = new System.Drawing.Point(422, 160);
-            this.gameProgressPointsLabel.Name = "gameProgressPointsLabel";
-            this.gameProgressPointsLabel.Size = new System.Drawing.Size(339, 26);
-            this.gameProgressPointsLabel.TabIndex = 10059;
-            // 
-            // gameProgressAchievementsLabel
-            // 
-            this.gameProgressAchievementsLabel.BackColor = System.Drawing.Color.Transparent;
-            this.gameProgressAchievementsLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameProgressAchievementsLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.gameProgressAchievementsLabel.Location = new System.Drawing.Point(422, 134);
-            this.gameProgressAchievementsLabel.Name = "gameProgressAchievementsLabel";
-            this.gameProgressAchievementsLabel.Size = new System.Drawing.Size(339, 26);
-            this.gameProgressAchievementsLabel.TabIndex = 10058;
-            // 
-            // gameProgressRatioLabel
-            // 
-            this.gameProgressRatioLabel.BackColor = System.Drawing.Color.Transparent;
-            this.gameProgressRatioLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameProgressRatioLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.gameProgressRatioLabel.Location = new System.Drawing.Point(422, 238);
-            this.gameProgressRatioLabel.Name = "gameProgressRatioLabel";
-            this.gameProgressRatioLabel.Size = new System.Drawing.Size(339, 26);
-            this.gameProgressRatioLabel.TabIndex = 10062;
-            // 
-            // gameInfoReleasedLabel
-            // 
-            this.gameInfoReleasedLabel.BackColor = System.Drawing.Color.Transparent;
-            this.gameInfoReleasedLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameInfoReleasedLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.gameInfoReleasedLabel.Location = new System.Drawing.Point(422, 263);
-            this.gameInfoReleasedLabel.Name = "gameInfoReleasedLabel";
-            this.gameInfoReleasedLabel.Size = new System.Drawing.Size(339, 16);
-            this.gameInfoReleasedLabel.TabIndex = 10067;
-            // 
-            // gameInfoGenreLabel
-            // 
-            this.gameInfoGenreLabel.BackColor = System.Drawing.Color.Transparent;
-            this.gameInfoGenreLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameInfoGenreLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.gameInfoGenreLabel.Location = new System.Drawing.Point(422, 247);
-            this.gameInfoGenreLabel.Name = "gameInfoGenreLabel";
-            this.gameInfoGenreLabel.Size = new System.Drawing.Size(339, 16);
-            this.gameInfoGenreLabel.TabIndex = 10066;
-            // 
-            // gameInfoConsoleLabel
-            // 
-            this.gameInfoConsoleLabel.BackColor = System.Drawing.Color.Transparent;
-            this.gameInfoConsoleLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameInfoConsoleLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.gameInfoConsoleLabel.Location = new System.Drawing.Point(422, 231);
-            this.gameInfoConsoleLabel.Name = "gameInfoConsoleLabel";
-            this.gameInfoConsoleLabel.Size = new System.Drawing.Size(339, 16);
-            this.gameInfoConsoleLabel.TabIndex = 10065;
-            // 
-            // gameInfoPublisherLabel
-            // 
-            this.gameInfoPublisherLabel.BackColor = System.Drawing.Color.Transparent;
-            this.gameInfoPublisherLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameInfoPublisherLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.gameInfoPublisherLabel.Location = new System.Drawing.Point(422, 199);
-            this.gameInfoPublisherLabel.Name = "gameInfoPublisherLabel";
-            this.gameInfoPublisherLabel.Size = new System.Drawing.Size(339, 32);
-            this.gameInfoPublisherLabel.TabIndex = 10064;
-            // 
-            // gameInfoDeveloperLabel
-            // 
-            this.gameInfoDeveloperLabel.BackColor = System.Drawing.Color.Transparent;
-            this.gameInfoDeveloperLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameInfoDeveloperLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.gameInfoDeveloperLabel.Location = new System.Drawing.Point(422, 167);
-            this.gameInfoDeveloperLabel.Name = "gameInfoDeveloperLabel";
-            this.gameInfoDeveloperLabel.Size = new System.Drawing.Size(339, 32);
-            this.gameInfoDeveloperLabel.TabIndex = 10063;
-            // 
-            // userInfoSimpleGroupBox
-            // 
-            this.userInfoSimpleGroupBox.BackColor = System.Drawing.Color.Transparent;
-            this.userInfoSimpleGroupBox.Controls.Add(this.userInfoSimpleFontOutlineColorBoxButton);
-            this.userInfoSimpleGroupBox.Controls.Add(this.userInfoSimpleFontOutlineColorPictureBox);
-            this.userInfoSimpleGroupBox.Controls.Add(this.userInfoSimpleFontColorBoxButton);
-            this.userInfoSimpleGroupBox.Controls.Add(this.userInfoSimpleOutlineCheckBox);
-            this.userInfoSimpleGroupBox.Controls.Add(this.userInfoSimpleFontOutlineNumericUpDown);
-            this.userInfoSimpleGroupBox.Controls.Add(this.userInfoSimpleFontColorPictureBox);
-            this.userInfoSimpleGroupBox.Controls.Add(this.userInfoSimpleFontComboBox);
-            this.userInfoSimpleGroupBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userInfoSimpleGroupBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
-            this.userInfoSimpleGroupBox.Location = new System.Drawing.Point(425, 6);
-            this.userInfoSimpleGroupBox.Name = "userInfoSimpleGroupBox";
-            this.userInfoSimpleGroupBox.Size = new System.Drawing.Size(165, 125);
-            this.userInfoSimpleGroupBox.TabIndex = 10036;
-            this.userInfoSimpleGroupBox.TabStop = false;
-            this.userInfoSimpleGroupBox.Text = "All";
-            // 
-            // userInfoSimpleFontOutlineColorBoxButton
-            // 
-            this.userInfoSimpleFontOutlineColorBoxButton.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userInfoSimpleFontOutlineColorBoxButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.userInfoSimpleFontOutlineColorBoxButton.Location = new System.Drawing.Point(5, 95);
-            this.userInfoSimpleFontOutlineColorBoxButton.Name = "userInfoSimpleFontOutlineColorBoxButton";
-            this.userInfoSimpleFontOutlineColorBoxButton.Size = new System.Drawing.Size(49, 23);
-            this.userInfoSimpleFontOutlineColorBoxButton.TabIndex = 45;
-            this.userInfoSimpleFontOutlineColorBoxButton.Text = "Set";
-            this.userInfoSimpleFontOutlineColorBoxButton.UseVisualStyleBackColor = true;
-            // 
-            // userInfoSimpleFontOutlineColorPictureBox
-            // 
-            this.userInfoSimpleFontOutlineColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.userInfoSimpleFontOutlineColorPictureBox.Location = new System.Drawing.Point(60, 95);
-            this.userInfoSimpleFontOutlineColorPictureBox.Name = "userInfoSimpleFontOutlineColorPictureBox";
-            this.userInfoSimpleFontOutlineColorPictureBox.Size = new System.Drawing.Size(22, 22);
-            this.userInfoSimpleFontOutlineColorPictureBox.TabIndex = 45;
-            this.userInfoSimpleFontOutlineColorPictureBox.TabStop = false;
-            // 
-            // userInfoSimpleFontColorBoxButton
-            // 
-            this.userInfoSimpleFontColorBoxButton.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userInfoSimpleFontColorBoxButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.userInfoSimpleFontColorBoxButton.Location = new System.Drawing.Point(5, 45);
-            this.userInfoSimpleFontColorBoxButton.Name = "userInfoSimpleFontColorBoxButton";
-            this.userInfoSimpleFontColorBoxButton.Size = new System.Drawing.Size(49, 23);
-            this.userInfoSimpleFontColorBoxButton.TabIndex = 45;
-            this.userInfoSimpleFontColorBoxButton.Text = "Set";
-            this.userInfoSimpleFontColorBoxButton.UseVisualStyleBackColor = true;
-            // 
-            // userInfoSimpleOutlineCheckBox
-            // 
-            this.userInfoSimpleOutlineCheckBox.AutoSize = true;
-            this.userInfoSimpleOutlineCheckBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userInfoSimpleOutlineCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.userInfoSimpleOutlineCheckBox.Location = new System.Drawing.Point(5, 75);
-            this.userInfoSimpleOutlineCheckBox.Name = "userInfoSimpleOutlineCheckBox";
-            this.userInfoSimpleOutlineCheckBox.Size = new System.Drawing.Size(73, 20);
-            this.userInfoSimpleOutlineCheckBox.TabIndex = 45;
-            this.userInfoSimpleOutlineCheckBox.Text = "Outline";
-            this.userInfoSimpleOutlineCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // userInfoSimpleFontOutlineNumericUpDown
-            // 
-            this.userInfoSimpleFontOutlineNumericUpDown.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userInfoSimpleFontOutlineNumericUpDown.Location = new System.Drawing.Point(89, 97);
-            this.userInfoSimpleFontOutlineNumericUpDown.Maximum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.userInfoSimpleFontOutlineNumericUpDown.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.userInfoSimpleFontOutlineNumericUpDown.Name = "userInfoSimpleFontOutlineNumericUpDown";
-            this.userInfoSimpleFontOutlineNumericUpDown.Size = new System.Drawing.Size(43, 21);
-            this.userInfoSimpleFontOutlineNumericUpDown.TabIndex = 45;
-            this.userInfoSimpleFontOutlineNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.userInfoSimpleFontOutlineNumericUpDown.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // userInfoSimpleFontColorPictureBox
-            // 
-            this.userInfoSimpleFontColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.userInfoSimpleFontColorPictureBox.Location = new System.Drawing.Point(60, 45);
-            this.userInfoSimpleFontColorPictureBox.Name = "userInfoSimpleFontColorPictureBox";
-            this.userInfoSimpleFontColorPictureBox.Size = new System.Drawing.Size(22, 22);
-            this.userInfoSimpleFontColorPictureBox.TabIndex = 45;
-            this.userInfoSimpleFontColorPictureBox.TabStop = false;
-            // 
-            // userInfoSimpleFontComboBox
-            // 
-            this.userInfoSimpleFontComboBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userInfoSimpleFontComboBox.FormattingEnabled = true;
-            this.userInfoSimpleFontComboBox.Location = new System.Drawing.Point(5, 20);
-            this.userInfoSimpleFontComboBox.Name = "userInfoSimpleFontComboBox";
-            this.userInfoSimpleFontComboBox.Size = new System.Drawing.Size(155, 24);
-            this.userInfoSimpleFontComboBox.TabIndex = 45;
-            // 
-            // focusSimpleGroupBox
-            // 
-            this.focusSimpleGroupBox.BackColor = System.Drawing.Color.Transparent;
-            this.focusSimpleGroupBox.Controls.Add(this.focusSimpleFontOutlineSetColorButton);
-            this.focusSimpleGroupBox.Controls.Add(this.focusSimpleFontOutlineColorPictureBox);
-            this.focusSimpleGroupBox.Controls.Add(this.focusSimpleFontSetColorButton);
-            this.focusSimpleGroupBox.Controls.Add(this.focusSimpleOutlineCheckBox);
-            this.focusSimpleGroupBox.Controls.Add(this.focusSimpleFontOutlineNumericUpDown);
-            this.focusSimpleGroupBox.Controls.Add(this.focusSimpleFontColorPictureBox);
-            this.focusSimpleGroupBox.Controls.Add(this.focusSimpleFontComboBox);
-            this.focusSimpleGroupBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.focusSimpleGroupBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
-            this.focusSimpleGroupBox.Location = new System.Drawing.Point(425, 6);
-            this.focusSimpleGroupBox.Name = "focusSimpleGroupBox";
-            this.focusSimpleGroupBox.Size = new System.Drawing.Size(165, 125);
-            this.focusSimpleGroupBox.TabIndex = 10042;
-            this.focusSimpleGroupBox.TabStop = false;
-            this.focusSimpleGroupBox.Text = "All";
-            // 
-            // focusSimpleFontOutlineSetColorButton
-            // 
-            this.focusSimpleFontOutlineSetColorButton.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.focusSimpleFontOutlineSetColorButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.focusSimpleFontOutlineSetColorButton.Location = new System.Drawing.Point(5, 95);
-            this.focusSimpleFontOutlineSetColorButton.Name = "focusSimpleFontOutlineSetColorButton";
-            this.focusSimpleFontOutlineSetColorButton.Size = new System.Drawing.Size(49, 23);
-            this.focusSimpleFontOutlineSetColorButton.TabIndex = 45;
-            this.focusSimpleFontOutlineSetColorButton.Text = "Set";
-            this.focusSimpleFontOutlineSetColorButton.UseVisualStyleBackColor = true;
-            // 
-            // focusSimpleFontOutlineColorPictureBox
-            // 
-            this.focusSimpleFontOutlineColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.focusSimpleFontOutlineColorPictureBox.Location = new System.Drawing.Point(60, 95);
-            this.focusSimpleFontOutlineColorPictureBox.Name = "focusSimpleFontOutlineColorPictureBox";
-            this.focusSimpleFontOutlineColorPictureBox.Size = new System.Drawing.Size(22, 22);
-            this.focusSimpleFontOutlineColorPictureBox.TabIndex = 45;
-            this.focusSimpleFontOutlineColorPictureBox.TabStop = false;
-            // 
-            // focusSimpleFontSetColorButton
-            // 
-            this.focusSimpleFontSetColorButton.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.focusSimpleFontSetColorButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.focusSimpleFontSetColorButton.Location = new System.Drawing.Point(5, 45);
-            this.focusSimpleFontSetColorButton.Name = "focusSimpleFontSetColorButton";
-            this.focusSimpleFontSetColorButton.Size = new System.Drawing.Size(49, 23);
-            this.focusSimpleFontSetColorButton.TabIndex = 45;
-            this.focusSimpleFontSetColorButton.Text = "Set";
-            this.focusSimpleFontSetColorButton.UseVisualStyleBackColor = true;
-            // 
-            // focusSimpleOutlineCheckBox
-            // 
-            this.focusSimpleOutlineCheckBox.AutoSize = true;
-            this.focusSimpleOutlineCheckBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.focusSimpleOutlineCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.focusSimpleOutlineCheckBox.Location = new System.Drawing.Point(5, 75);
-            this.focusSimpleOutlineCheckBox.Name = "focusSimpleOutlineCheckBox";
-            this.focusSimpleOutlineCheckBox.Size = new System.Drawing.Size(73, 20);
-            this.focusSimpleOutlineCheckBox.TabIndex = 45;
-            this.focusSimpleOutlineCheckBox.Text = "Outline";
-            this.focusSimpleOutlineCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // focusSimpleFontOutlineNumericUpDown
-            // 
-            this.focusSimpleFontOutlineNumericUpDown.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.focusSimpleFontOutlineNumericUpDown.Location = new System.Drawing.Point(89, 97);
-            this.focusSimpleFontOutlineNumericUpDown.Maximum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.focusSimpleFontOutlineNumericUpDown.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.focusSimpleFontOutlineNumericUpDown.Name = "focusSimpleFontOutlineNumericUpDown";
-            this.focusSimpleFontOutlineNumericUpDown.Size = new System.Drawing.Size(43, 21);
-            this.focusSimpleFontOutlineNumericUpDown.TabIndex = 45;
-            this.focusSimpleFontOutlineNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.focusSimpleFontOutlineNumericUpDown.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // focusSimpleFontColorPictureBox
-            // 
-            this.focusSimpleFontColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.focusSimpleFontColorPictureBox.Location = new System.Drawing.Point(60, 45);
-            this.focusSimpleFontColorPictureBox.Name = "focusSimpleFontColorPictureBox";
-            this.focusSimpleFontColorPictureBox.Size = new System.Drawing.Size(22, 22);
-            this.focusSimpleFontColorPictureBox.TabIndex = 45;
-            this.focusSimpleFontColorPictureBox.TabStop = false;
-            // 
-            // focusSimpleFontComboBox
-            // 
-            this.focusSimpleFontComboBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.focusSimpleFontComboBox.FormattingEnabled = true;
-            this.focusSimpleFontComboBox.Location = new System.Drawing.Point(5, 20);
-            this.focusSimpleFontComboBox.Name = "focusSimpleFontComboBox";
-            this.focusSimpleFontComboBox.Size = new System.Drawing.Size(155, 24);
-            this.focusSimpleFontComboBox.TabIndex = 45;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox1.Controls.Add(this.notificationsSimpleFontOutlineSetColorButton);
-            this.groupBox1.Controls.Add(this.notificationsSimpleFontOutlineColorPictureBox);
-            this.groupBox1.Controls.Add(this.notificationsSimpleFontSetColorButton);
-            this.groupBox1.Controls.Add(this.notificationsSimpleOutlineCheckBox);
-            this.groupBox1.Controls.Add(this.notificationsSimpleFontOutlineNumericUpDown);
-            this.groupBox1.Controls.Add(this.notificationsSimpleFontColorPictureBox);
-            this.groupBox1.Controls.Add(this.notificationsSimpleFontComboBox);
-            this.groupBox1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
-            this.groupBox1.Location = new System.Drawing.Point(425, 6);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(165, 125);
-            this.groupBox1.TabIndex = 10042;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "All";
-            // 
-            // notificationsSimpleFontOutlineSetColorButton
-            // 
-            this.notificationsSimpleFontOutlineSetColorButton.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.notificationsSimpleFontOutlineSetColorButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.notificationsSimpleFontOutlineSetColorButton.Location = new System.Drawing.Point(5, 95);
-            this.notificationsSimpleFontOutlineSetColorButton.Name = "notificationsSimpleFontOutlineSetColorButton";
-            this.notificationsSimpleFontOutlineSetColorButton.Size = new System.Drawing.Size(49, 23);
-            this.notificationsSimpleFontOutlineSetColorButton.TabIndex = 45;
-            this.notificationsSimpleFontOutlineSetColorButton.Text = "Set";
-            this.notificationsSimpleFontOutlineSetColorButton.UseVisualStyleBackColor = true;
-            // 
-            // notificationsSimpleFontOutlineColorPictureBox
-            // 
-            this.notificationsSimpleFontOutlineColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.notificationsSimpleFontOutlineColorPictureBox.Location = new System.Drawing.Point(60, 95);
-            this.notificationsSimpleFontOutlineColorPictureBox.Name = "notificationsSimpleFontOutlineColorPictureBox";
-            this.notificationsSimpleFontOutlineColorPictureBox.Size = new System.Drawing.Size(22, 22);
-            this.notificationsSimpleFontOutlineColorPictureBox.TabIndex = 45;
-            this.notificationsSimpleFontOutlineColorPictureBox.TabStop = false;
-            // 
-            // notificationsSimpleFontSetColorButton
-            // 
-            this.notificationsSimpleFontSetColorButton.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.notificationsSimpleFontSetColorButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.notificationsSimpleFontSetColorButton.Location = new System.Drawing.Point(5, 45);
-            this.notificationsSimpleFontSetColorButton.Name = "notificationsSimpleFontSetColorButton";
-            this.notificationsSimpleFontSetColorButton.Size = new System.Drawing.Size(49, 23);
-            this.notificationsSimpleFontSetColorButton.TabIndex = 45;
-            this.notificationsSimpleFontSetColorButton.Text = "Set";
-            this.notificationsSimpleFontSetColorButton.UseVisualStyleBackColor = true;
-            // 
-            // notificationsSimpleOutlineCheckBox
-            // 
-            this.notificationsSimpleOutlineCheckBox.AutoSize = true;
-            this.notificationsSimpleOutlineCheckBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.notificationsSimpleOutlineCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.notificationsSimpleOutlineCheckBox.Location = new System.Drawing.Point(5, 75);
-            this.notificationsSimpleOutlineCheckBox.Name = "notificationsSimpleOutlineCheckBox";
-            this.notificationsSimpleOutlineCheckBox.Size = new System.Drawing.Size(73, 20);
-            this.notificationsSimpleOutlineCheckBox.TabIndex = 45;
-            this.notificationsSimpleOutlineCheckBox.Text = "Outline";
-            this.notificationsSimpleOutlineCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // notificationsSimpleFontOutlineNumericUpDown
-            // 
-            this.notificationsSimpleFontOutlineNumericUpDown.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.notificationsSimpleFontOutlineNumericUpDown.Location = new System.Drawing.Point(89, 97);
-            this.notificationsSimpleFontOutlineNumericUpDown.Maximum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.notificationsSimpleFontOutlineNumericUpDown.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.notificationsSimpleFontOutlineNumericUpDown.Name = "notificationsSimpleFontOutlineNumericUpDown";
-            this.notificationsSimpleFontOutlineNumericUpDown.Size = new System.Drawing.Size(43, 21);
-            this.notificationsSimpleFontOutlineNumericUpDown.TabIndex = 45;
-            this.notificationsSimpleFontOutlineNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.notificationsSimpleFontOutlineNumericUpDown.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // notificationsSimpleFontColorPictureBox
-            // 
-            this.notificationsSimpleFontColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.notificationsSimpleFontColorPictureBox.Location = new System.Drawing.Point(60, 45);
-            this.notificationsSimpleFontColorPictureBox.Name = "notificationsSimpleFontColorPictureBox";
-            this.notificationsSimpleFontColorPictureBox.Size = new System.Drawing.Size(22, 22);
-            this.notificationsSimpleFontColorPictureBox.TabIndex = 45;
-            this.notificationsSimpleFontColorPictureBox.TabStop = false;
-            // 
-            // notificationsSimpleFontComboBox
-            // 
-            this.notificationsSimpleFontComboBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.notificationsSimpleFontComboBox.FormattingEnabled = true;
-            this.notificationsSimpleFontComboBox.Location = new System.Drawing.Point(5, 20);
-            this.notificationsSimpleFontComboBox.Name = "notificationsSimpleFontComboBox";
-            this.notificationsSimpleFontComboBox.Size = new System.Drawing.Size(155, 24);
-            this.notificationsSimpleFontComboBox.TabIndex = 45;
-            // 
-            // gameProgressSimpleGroupBox
-            // 
-            this.gameProgressSimpleGroupBox.BackColor = System.Drawing.Color.Transparent;
-            this.gameProgressSimpleGroupBox.Controls.Add(this.gameProgressSimpleFontOutlineColorBoxButton);
-            this.gameProgressSimpleGroupBox.Controls.Add(this.gameProgressSimpleFontOutlineColorPictureBox);
-            this.gameProgressSimpleGroupBox.Controls.Add(this.gameProgressSimpleFontColorBoxButton);
-            this.gameProgressSimpleGroupBox.Controls.Add(this.gameProgressSimpleOutlineCheckBox);
-            this.gameProgressSimpleGroupBox.Controls.Add(this.gameProgressSimpleFontOutlineNumericUpDown);
-            this.gameProgressSimpleGroupBox.Controls.Add(this.gameProgressSimpleFontColorPictureBox);
-            this.gameProgressSimpleGroupBox.Controls.Add(this.gameProgressSimpleFontComboBox);
-            this.gameProgressSimpleGroupBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameProgressSimpleGroupBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
-            this.gameProgressSimpleGroupBox.Location = new System.Drawing.Point(425, 6);
-            this.gameProgressSimpleGroupBox.Name = "gameProgressSimpleGroupBox";
-            this.gameProgressSimpleGroupBox.Size = new System.Drawing.Size(165, 125);
-            this.gameProgressSimpleGroupBox.TabIndex = 10048;
-            this.gameProgressSimpleGroupBox.TabStop = false;
-            this.gameProgressSimpleGroupBox.Text = "All";
-            // 
-            // gameProgressSimpleFontOutlineColorBoxButton
-            // 
-            this.gameProgressSimpleFontOutlineColorBoxButton.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameProgressSimpleFontOutlineColorBoxButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.gameProgressSimpleFontOutlineColorBoxButton.Location = new System.Drawing.Point(5, 95);
-            this.gameProgressSimpleFontOutlineColorBoxButton.Name = "gameProgressSimpleFontOutlineColorBoxButton";
-            this.gameProgressSimpleFontOutlineColorBoxButton.Size = new System.Drawing.Size(49, 23);
-            this.gameProgressSimpleFontOutlineColorBoxButton.TabIndex = 45;
-            this.gameProgressSimpleFontOutlineColorBoxButton.Text = "Set";
-            this.gameProgressSimpleFontOutlineColorBoxButton.UseVisualStyleBackColor = true;
-            // 
-            // gameProgressSimpleFontOutlineColorPictureBox
-            // 
-            this.gameProgressSimpleFontOutlineColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.gameProgressSimpleFontOutlineColorPictureBox.Location = new System.Drawing.Point(60, 95);
-            this.gameProgressSimpleFontOutlineColorPictureBox.Name = "gameProgressSimpleFontOutlineColorPictureBox";
-            this.gameProgressSimpleFontOutlineColorPictureBox.Size = new System.Drawing.Size(22, 22);
-            this.gameProgressSimpleFontOutlineColorPictureBox.TabIndex = 45;
-            this.gameProgressSimpleFontOutlineColorPictureBox.TabStop = false;
-            // 
-            // gameProgressSimpleFontColorBoxButton
-            // 
-            this.gameProgressSimpleFontColorBoxButton.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameProgressSimpleFontColorBoxButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.gameProgressSimpleFontColorBoxButton.Location = new System.Drawing.Point(5, 45);
-            this.gameProgressSimpleFontColorBoxButton.Name = "gameProgressSimpleFontColorBoxButton";
-            this.gameProgressSimpleFontColorBoxButton.Size = new System.Drawing.Size(49, 23);
-            this.gameProgressSimpleFontColorBoxButton.TabIndex = 45;
-            this.gameProgressSimpleFontColorBoxButton.Text = "Set";
-            this.gameProgressSimpleFontColorBoxButton.UseVisualStyleBackColor = true;
-            // 
-            // gameProgressSimpleOutlineCheckBox
-            // 
-            this.gameProgressSimpleOutlineCheckBox.AutoSize = true;
-            this.gameProgressSimpleOutlineCheckBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameProgressSimpleOutlineCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.gameProgressSimpleOutlineCheckBox.Location = new System.Drawing.Point(5, 75);
-            this.gameProgressSimpleOutlineCheckBox.Name = "gameProgressSimpleOutlineCheckBox";
-            this.gameProgressSimpleOutlineCheckBox.Size = new System.Drawing.Size(73, 20);
-            this.gameProgressSimpleOutlineCheckBox.TabIndex = 45;
-            this.gameProgressSimpleOutlineCheckBox.Text = "Outline";
-            this.gameProgressSimpleOutlineCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // gameProgressSimpleFontOutlineNumericUpDown
-            // 
-            this.gameProgressSimpleFontOutlineNumericUpDown.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameProgressSimpleFontOutlineNumericUpDown.Location = new System.Drawing.Point(89, 97);
-            this.gameProgressSimpleFontOutlineNumericUpDown.Maximum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.gameProgressSimpleFontOutlineNumericUpDown.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.gameProgressSimpleFontOutlineNumericUpDown.Name = "gameProgressSimpleFontOutlineNumericUpDown";
-            this.gameProgressSimpleFontOutlineNumericUpDown.Size = new System.Drawing.Size(43, 21);
-            this.gameProgressSimpleFontOutlineNumericUpDown.TabIndex = 45;
-            this.gameProgressSimpleFontOutlineNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.gameProgressSimpleFontOutlineNumericUpDown.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // gameProgressSimpleFontColorPictureBox
-            // 
-            this.gameProgressSimpleFontColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.gameProgressSimpleFontColorPictureBox.Location = new System.Drawing.Point(60, 45);
-            this.gameProgressSimpleFontColorPictureBox.Name = "gameProgressSimpleFontColorPictureBox";
-            this.gameProgressSimpleFontColorPictureBox.Size = new System.Drawing.Size(22, 22);
-            this.gameProgressSimpleFontColorPictureBox.TabIndex = 45;
-            this.gameProgressSimpleFontColorPictureBox.TabStop = false;
-            // 
-            // gameProgressSimpleFontComboBox
-            // 
-            this.gameProgressSimpleFontComboBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameProgressSimpleFontComboBox.FormattingEnabled = true;
-            this.gameProgressSimpleFontComboBox.Location = new System.Drawing.Point(5, 20);
-            this.gameProgressSimpleFontComboBox.Name = "gameProgressSimpleFontComboBox";
-            this.gameProgressSimpleFontComboBox.Size = new System.Drawing.Size(155, 24);
-            this.gameProgressSimpleFontComboBox.TabIndex = 45;
-            // 
-            // gameInfoSimpleGroupBox
-            // 
-            this.gameInfoSimpleGroupBox.BackColor = System.Drawing.Color.Transparent;
-            this.gameInfoSimpleGroupBox.Controls.Add(this.gameInfoSimpleFontOutlineColorBoxButton);
-            this.gameInfoSimpleGroupBox.Controls.Add(this.gameInfoSimpleFontOutlineColorPictureBox);
-            this.gameInfoSimpleGroupBox.Controls.Add(this.gameInfoSimpleFontColorBoxButton);
-            this.gameInfoSimpleGroupBox.Controls.Add(this.gameInfoSimpleOutlineCheckBox);
-            this.gameInfoSimpleGroupBox.Controls.Add(this.gameInfoSimpleFontOutlineNumericUpDown);
-            this.gameInfoSimpleGroupBox.Controls.Add(this.gameInfoSimpleFontColorPictureBox);
-            this.gameInfoSimpleGroupBox.Controls.Add(this.gameInfoSimpleFontComboBox);
-            this.gameInfoSimpleGroupBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameInfoSimpleGroupBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
-            this.gameInfoSimpleGroupBox.Location = new System.Drawing.Point(425, 6);
-            this.gameInfoSimpleGroupBox.Name = "gameInfoSimpleGroupBox";
-            this.gameInfoSimpleGroupBox.Size = new System.Drawing.Size(165, 125);
-            this.gameInfoSimpleGroupBox.TabIndex = 47;
-            this.gameInfoSimpleGroupBox.TabStop = false;
-            this.gameInfoSimpleGroupBox.Text = "All";
-            // 
-            // gameInfoSimpleFontOutlineColorBoxButton
-            // 
-            this.gameInfoSimpleFontOutlineColorBoxButton.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameInfoSimpleFontOutlineColorBoxButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.gameInfoSimpleFontOutlineColorBoxButton.Location = new System.Drawing.Point(5, 95);
-            this.gameInfoSimpleFontOutlineColorBoxButton.Name = "gameInfoSimpleFontOutlineColorBoxButton";
-            this.gameInfoSimpleFontOutlineColorBoxButton.Size = new System.Drawing.Size(49, 23);
-            this.gameInfoSimpleFontOutlineColorBoxButton.TabIndex = 45;
-            this.gameInfoSimpleFontOutlineColorBoxButton.Text = "Set";
-            this.gameInfoSimpleFontOutlineColorBoxButton.UseVisualStyleBackColor = true;
-            // 
-            // gameInfoSimpleFontOutlineColorPictureBox
-            // 
-            this.gameInfoSimpleFontOutlineColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.gameInfoSimpleFontOutlineColorPictureBox.Location = new System.Drawing.Point(60, 95);
-            this.gameInfoSimpleFontOutlineColorPictureBox.Name = "gameInfoSimpleFontOutlineColorPictureBox";
-            this.gameInfoSimpleFontOutlineColorPictureBox.Size = new System.Drawing.Size(22, 22);
-            this.gameInfoSimpleFontOutlineColorPictureBox.TabIndex = 45;
-            this.gameInfoSimpleFontOutlineColorPictureBox.TabStop = false;
-            // 
-            // gameInfoSimpleFontColorBoxButton
-            // 
-            this.gameInfoSimpleFontColorBoxButton.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameInfoSimpleFontColorBoxButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.gameInfoSimpleFontColorBoxButton.Location = new System.Drawing.Point(5, 45);
-            this.gameInfoSimpleFontColorBoxButton.Name = "gameInfoSimpleFontColorBoxButton";
-            this.gameInfoSimpleFontColorBoxButton.Size = new System.Drawing.Size(49, 23);
-            this.gameInfoSimpleFontColorBoxButton.TabIndex = 45;
-            this.gameInfoSimpleFontColorBoxButton.Text = "Set";
-            this.gameInfoSimpleFontColorBoxButton.UseVisualStyleBackColor = true;
-            // 
-            // gameInfoSimpleOutlineCheckBox
-            // 
-            this.gameInfoSimpleOutlineCheckBox.AutoSize = true;
-            this.gameInfoSimpleOutlineCheckBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameInfoSimpleOutlineCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.gameInfoSimpleOutlineCheckBox.Location = new System.Drawing.Point(5, 75);
-            this.gameInfoSimpleOutlineCheckBox.Name = "gameInfoSimpleOutlineCheckBox";
-            this.gameInfoSimpleOutlineCheckBox.Size = new System.Drawing.Size(73, 20);
-            this.gameInfoSimpleOutlineCheckBox.TabIndex = 45;
-            this.gameInfoSimpleOutlineCheckBox.Text = "Outline";
-            this.gameInfoSimpleOutlineCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // gameInfoSimpleFontOutlineNumericUpDown
-            // 
-            this.gameInfoSimpleFontOutlineNumericUpDown.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameInfoSimpleFontOutlineNumericUpDown.Location = new System.Drawing.Point(89, 97);
-            this.gameInfoSimpleFontOutlineNumericUpDown.Maximum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.gameInfoSimpleFontOutlineNumericUpDown.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.gameInfoSimpleFontOutlineNumericUpDown.Name = "gameInfoSimpleFontOutlineNumericUpDown";
-            this.gameInfoSimpleFontOutlineNumericUpDown.Size = new System.Drawing.Size(43, 21);
-            this.gameInfoSimpleFontOutlineNumericUpDown.TabIndex = 45;
-            this.gameInfoSimpleFontOutlineNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.gameInfoSimpleFontOutlineNumericUpDown.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // gameInfoSimpleFontColorPictureBox
-            // 
-            this.gameInfoSimpleFontColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.gameInfoSimpleFontColorPictureBox.Location = new System.Drawing.Point(60, 45);
-            this.gameInfoSimpleFontColorPictureBox.Name = "gameInfoSimpleFontColorPictureBox";
-            this.gameInfoSimpleFontColorPictureBox.Size = new System.Drawing.Size(22, 22);
-            this.gameInfoSimpleFontColorPictureBox.TabIndex = 45;
-            this.gameInfoSimpleFontColorPictureBox.TabStop = false;
-            // 
-            // gameInfoSimpleFontComboBox
-            // 
-            this.gameInfoSimpleFontComboBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameInfoSimpleFontComboBox.FormattingEnabled = true;
-            this.gameInfoSimpleFontComboBox.Location = new System.Drawing.Point(5, 20);
-            this.gameInfoSimpleFontComboBox.Name = "gameInfoSimpleFontComboBox";
-            this.gameInfoSimpleFontComboBox.Size = new System.Drawing.Size(155, 24);
-            this.gameInfoSimpleFontComboBox.TabIndex = 45;
-            // 
             // recentAchievementsSimpleGroupBox
             // 
             this.recentAchievementsSimpleGroupBox.BackColor = System.Drawing.Color.Transparent;
@@ -5627,6 +5593,68 @@ namespace Retro_Achievement_Tracker
             this.recentAchievementsSimpleFontComboBox.Size = new System.Drawing.Size(155, 24);
             this.recentAchievementsSimpleFontComboBox.TabIndex = 45;
             // 
+            // tabPage9
+            // 
+            this.tabPage9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
+            this.tabPage9.Controls.Add(this.achievementListBackgroundGroupBox);
+            this.tabPage9.Controls.Add(this.achievementListAutoOpenWindowCheckbox);
+            this.tabPage9.Controls.Add(this.achievementListScrollCheckBox);
+            this.tabPage9.Controls.Add(this.achievementListOpenWindowButton);
+            this.tabPage9.Location = new System.Drawing.Point(4, 24);
+            this.tabPage9.Name = "tabPage9";
+            this.tabPage9.Size = new System.Drawing.Size(769, 292);
+            this.tabPage9.TabIndex = 6;
+            this.tabPage9.Text = "Cheevo List";
+            // 
+            // achievementListBackgroundGroupBox
+            // 
+            this.achievementListBackgroundGroupBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
+            this.achievementListBackgroundGroupBox.Controls.Add(this.achievementListSetBackgroundColorButton);
+            this.achievementListBackgroundGroupBox.Controls.Add(this.achievementListBackgroundColorPictureBox);
+            this.achievementListBackgroundGroupBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.achievementListBackgroundGroupBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
+            this.achievementListBackgroundGroupBox.Location = new System.Drawing.Point(339, 6);
+            this.achievementListBackgroundGroupBox.Name = "achievementListBackgroundGroupBox";
+            this.achievementListBackgroundGroupBox.Size = new System.Drawing.Size(80, 49);
+            this.achievementListBackgroundGroupBox.TabIndex = 10052;
+            this.achievementListBackgroundGroupBox.TabStop = false;
+            this.achievementListBackgroundGroupBox.Text = "Back";
+            // 
+            // achievementListSetBackgroundColorButton
+            // 
+            this.achievementListSetBackgroundColorButton.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.achievementListSetBackgroundColorButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.achievementListSetBackgroundColorButton.Location = new System.Drawing.Point(6, 20);
+            this.achievementListSetBackgroundColorButton.Name = "achievementListSetBackgroundColorButton";
+            this.achievementListSetBackgroundColorButton.Size = new System.Drawing.Size(36, 23);
+            this.achievementListSetBackgroundColorButton.TabIndex = 43;
+            this.achievementListSetBackgroundColorButton.Text = "Set";
+            this.achievementListSetBackgroundColorButton.UseVisualStyleBackColor = true;
+            // 
+            // achievementListBackgroundColorPictureBox
+            // 
+            this.achievementListBackgroundColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.achievementListBackgroundColorPictureBox.Location = new System.Drawing.Point(48, 20);
+            this.achievementListBackgroundColorPictureBox.Name = "achievementListBackgroundColorPictureBox";
+            this.achievementListBackgroundColorPictureBox.Size = new System.Drawing.Size(22, 22);
+            this.achievementListBackgroundColorPictureBox.TabIndex = 42;
+            this.achievementListBackgroundColorPictureBox.TabStop = false;
+            // 
+            // tabPage10
+            // 
+            this.tabPage10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
+            this.tabPage10.Controls.Add(this.webBrowserAutoOpenCheckbox);
+            this.tabPage10.Controls.Add(this.rssFeedFriendCheckBox);
+            this.tabPage10.Controls.Add(this.rssFeedForumCheckBox);
+            this.tabPage10.Controls.Add(this.rssFeedListView);
+            this.tabPage10.Controls.Add(this.rssFeedNewsCheckBox);
+            this.tabPage10.Controls.Add(this.rssFeedCheevoCheckBox);
+            this.tabPage10.Location = new System.Drawing.Point(4, 24);
+            this.tabPage10.Name = "tabPage10";
+            this.tabPage10.Size = new System.Drawing.Size(769, 292);
+            this.tabPage10.TabIndex = 7;
+            this.tabPage10.Text = "Browser";
+            // 
             // MainPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -5649,25 +5677,25 @@ namespace Retro_Achievement_Tracker
             ((System.ComponentModel.ISupportInitialize)(this.notificationsCustomAchievementScaleNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.notificationsCustomAchievementXNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.notificationsCustomAchievementYNumericUpDown)).EndInit();
-            this.groupBox10.ResumeLayout(false);
-            this.groupBox10.PerformLayout();
+            this.achievementOutAnimationGroupBox.ResumeLayout(false);
+            this.achievementOutAnimationGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.notificationsCustomAchievementOutNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.notificationsCustomAchievementOutSpeedUpDown)).EndInit();
-            this.groupBox9.ResumeLayout(false);
-            this.groupBox9.PerformLayout();
+            this.achievementInAnimationGroupBox.ResumeLayout(false);
+            this.achievementInAnimationGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.notificationsCustomAchievementInNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.notificationsCustomAchievementInSpeedUpDown)).EndInit();
-            this.groupBox13.ResumeLayout(false);
-            this.groupBox13.PerformLayout();
+            this.masteryPositionGroupBox.ResumeLayout(false);
+            this.masteryPositionGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.notificationsCustomMasteryScaleNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.notificationsCustomMasteryXNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.notificationsCustomMasteryYNumericUpDown)).EndInit();
-            this.groupBox14.ResumeLayout(false);
-            this.groupBox14.PerformLayout();
+            this.masteryOutAnimationGroupBox.ResumeLayout(false);
+            this.masteryOutAnimationGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.notificationsCustomMasteryOutNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.notificationsCustomMasteryOutSpeedUpDown)).EndInit();
-            this.groupBox19.ResumeLayout(false);
-            this.groupBox19.PerformLayout();
+            this.masteryInAnimationGroupBox.ResumeLayout(false);
+            this.masteryInAnimationGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.notificationsCustomMasteryInNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.notificationsCustomMasteryInSpeedUpDown)).EndInit();
             this.groupBox17.ResumeLayout(false);
@@ -5692,16 +5720,21 @@ namespace Retro_Achievement_Tracker
             this.tabPage1.PerformLayout();
             this.userInfoBackgroundColorGroupBox.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.userInfoBackgroundColorPictureBox)).EndInit();
-            this.userInfoNamesGroupBox.ResumeLayout(false);
-            this.userInfoNamesGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.userInfoNamesFontOutlineColorPictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.userInfoNamesFontOutlineNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.userInfoNamesFontColorPictureBox)).EndInit();
             this.userInfoValuesGroupBox.ResumeLayout(false);
             this.userInfoValuesGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userInfoValuesFontOutlineColorPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.userInfoValuesFontOutlineNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.userInfoValuesFontColorPictureBox)).EndInit();
+            this.userInfoNamesGroupBox.ResumeLayout(false);
+            this.userInfoNamesGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.userInfoNamesFontOutlineColorPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userInfoNamesFontOutlineNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userInfoNamesFontColorPictureBox)).EndInit();
+            this.userInfoSimpleGroupBox.ResumeLayout(false);
+            this.userInfoSimpleGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.userInfoSimpleFontOutlineColorPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userInfoSimpleFontOutlineNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userInfoSimpleFontColorPictureBox)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.focusBackgroundColorGroupBox.ResumeLayout(false);
@@ -5728,6 +5761,11 @@ namespace Retro_Achievement_Tracker
             ((System.ComponentModel.ISupportInitialize)(this.focusDescriptionFontOutlineColorPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.focusDescriptionFontOutlineNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.focusDescriptionFontColorPictureBox)).EndInit();
+            this.focusSimpleGroupBox.ResumeLayout(false);
+            this.focusSimpleGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.focusSimpleFontOutlineColorPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.focusSimpleFontOutlineNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.focusSimpleFontColorPictureBox)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             this.tabControl2.ResumeLayout(false);
@@ -5759,22 +5797,37 @@ namespace Retro_Achievement_Tracker
             ((System.ComponentModel.ISupportInitialize)(this.notificationsDescriptionFontOutlineColorPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.notificationsDescriptionFontOutlineNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.notificationsDescriptionFontColorPictureBox)).EndInit();
+            this.notificationsAllFontGroupBox.ResumeLayout(false);
+            this.notificationsAllFontGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.notificationsSimpleFontOutlineColorPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.notificationsSimpleFontOutlineNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.notificationsSimpleFontColorPictureBox)).EndInit();
             this.tabPage6.ResumeLayout(false);
             this.tabPage6.PerformLayout();
             this.gameProgressBackgroundColorGroupBox.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gameProgressBackgroundColorPictureBox)).EndInit();
-            this.gameProgressNamesGroupBox.ResumeLayout(false);
-            this.gameProgressNamesGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gameProgressNamesFontOutlineColorPictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gameProgressNamesFontOutlineNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gameProgressNamesFontColorPictureBox)).EndInit();
             this.gameProgressValuesGroupBox.ResumeLayout(false);
             this.gameProgressValuesGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gameProgressValuesFontOutlineColorPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gameProgressValuesFontOutlineNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gameProgressValuesFontColorPictureBox)).EndInit();
+            this.gameProgressNamesGroupBox.ResumeLayout(false);
+            this.gameProgressNamesGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gameProgressNamesFontOutlineColorPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gameProgressNamesFontOutlineNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gameProgressNamesFontColorPictureBox)).EndInit();
+            this.gameProgressSimpleGroupBox.ResumeLayout(false);
+            this.gameProgressSimpleGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gameProgressSimpleFontOutlineColorPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gameProgressSimpleFontOutlineNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gameProgressSimpleFontColorPictureBox)).EndInit();
             this.tabPage7.ResumeLayout(false);
             this.tabPage7.PerformLayout();
+            this.gameInfoSimpleGroupBox.ResumeLayout(false);
+            this.gameInfoSimpleGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gameInfoSimpleFontOutlineColorPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gameInfoSimpleFontOutlineNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gameInfoSimpleFontColorPictureBox)).EndInit();
             this.tabPage8.ResumeLayout(false);
             this.tabPage8.PerformLayout();
             this.recentAchievementsBackgroundColorGroupBox.ResumeLayout(false);
@@ -5801,42 +5854,17 @@ namespace Retro_Achievement_Tracker
             ((System.ComponentModel.ISupportInitialize)(this.recentAchievementsDescriptionFontOutlineColorPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.recentAchievementsDescriptionFontOutlineNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.recentAchievementsDescriptionFontColorPictureBox)).EndInit();
+            this.recentAchievementsSimpleGroupBox.ResumeLayout(false);
+            this.recentAchievementsSimpleGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.recentAchievementsSimpleFontOutlineColorPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.recentAchievementsSimpleFontOutlineNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.recentAchievementsSimpleFontColorPictureBox)).EndInit();
             this.tabPage9.ResumeLayout(false);
             this.tabPage9.PerformLayout();
             this.achievementListBackgroundGroupBox.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.achievementListBackgroundColorPictureBox)).EndInit();
             this.tabPage10.ResumeLayout(false);
             this.tabPage10.PerformLayout();
-            this.userInfoSimpleGroupBox.ResumeLayout(false);
-            this.userInfoSimpleGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.userInfoSimpleFontOutlineColorPictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.userInfoSimpleFontOutlineNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.userInfoSimpleFontColorPictureBox)).EndInit();
-            this.focusSimpleGroupBox.ResumeLayout(false);
-            this.focusSimpleGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.focusSimpleFontOutlineColorPictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.focusSimpleFontOutlineNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.focusSimpleFontColorPictureBox)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.notificationsSimpleFontOutlineColorPictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.notificationsSimpleFontOutlineNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.notificationsSimpleFontColorPictureBox)).EndInit();
-            this.gameProgressSimpleGroupBox.ResumeLayout(false);
-            this.gameProgressSimpleGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gameProgressSimpleFontOutlineColorPictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gameProgressSimpleFontOutlineNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gameProgressSimpleFontColorPictureBox)).EndInit();
-            this.gameInfoSimpleGroupBox.ResumeLayout(false);
-            this.gameInfoSimpleGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gameInfoSimpleFontOutlineColorPictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gameInfoSimpleFontOutlineNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gameInfoSimpleFontColorPictureBox)).EndInit();
-            this.recentAchievementsSimpleGroupBox.ResumeLayout(false);
-            this.recentAchievementsSimpleGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.recentAchievementsSimpleFontOutlineColorPictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.recentAchievementsSimpleFontOutlineNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.recentAchievementsSimpleFontColorPictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -5911,33 +5939,33 @@ namespace Retro_Achievement_Tracker
         private Label xPositionLabel1;
         private Label yPositionLabel1;
         private NumericUpDown notificationsCustomAchievementYNumericUpDown;
-        private GroupBox groupBox9;
+        private GroupBox achievementInAnimationGroupBox;
         private Label label8;
         private Label label7;
         private Label label6;
         private ComboBox notificationsCustomAchievementAnimationInComboBox;
         private NumericUpDown notificationsCustomAchievementInSpeedUpDown;
-        private GroupBox groupBox10;
+        private GroupBox achievementOutAnimationGroupBox;
         private Label label11;
         private Label label12;
         private Label label13;
         private ComboBox notificationsCustomAchievementAnimationOutComboBox;
         private NumericUpDown notificationsCustomAchievementOutSpeedUpDown;
         private GroupBox groupBox17;
-        private GroupBox groupBox13;
+        private GroupBox masteryPositionGroupBox;
         private Label label16;
         private NumericUpDown notificationsCustomMasteryScaleNumericUpDown;
         private Label label17;
         private Label label18;
         private NumericUpDown notificationsCustomMasteryYNumericUpDown;
         private CheckBox masteryEditOultineCheckbox;
-        private GroupBox groupBox14;
+        private GroupBox masteryOutAnimationGroupBox;
         private Label label19;
         private Label label20;
         private Label label21;
         private ComboBox notificationsCustomMasteryAnimationOutComboBox;
         private NumericUpDown notificationsCustomMasteryOutSpeedUpDown;
-        private GroupBox groupBox19;
+        private GroupBox masteryInAnimationGroupBox;
         private Label label22;
         private Label label23;
         private Label label24;
@@ -6203,7 +6231,7 @@ namespace Retro_Achievement_Tracker
         private NumericUpDown focusSimpleFontOutlineNumericUpDown;
         private PictureBox focusSimpleFontColorPictureBox;
         private ComboBox focusSimpleFontComboBox;
-        private GroupBox groupBox1;
+        private GroupBox notificationsAllFontGroupBox;
         private Button notificationsSimpleFontOutlineSetColorButton;
         private PictureBox notificationsSimpleFontOutlineColorPictureBox;
         private Button notificationsSimpleFontSetColorButton;
@@ -6235,6 +6263,8 @@ namespace Retro_Achievement_Tracker
         private NumericUpDown recentAchievementsSimpleFontOutlineNumericUpDown;
         private PictureBox recentAchievementsSimpleFontColorPictureBox;
         private ComboBox recentAchievementsSimpleFontComboBox;
+        private CheckBox achievementEnableCheckbox;
+        private CheckBox masteryEnableCheckbox;
     }
 }
 
