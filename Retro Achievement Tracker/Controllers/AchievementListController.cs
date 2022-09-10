@@ -37,18 +37,19 @@ namespace Retro_Achievement_Tracker.Controllers
         public void Close()
         {
             AchievementListWindow.Close();
+            IsOpen = false;
         }
         public void Show()
         {
             if (!IsOpen)
             {
                 AchievementListWindow = new AchievementListWindow();
-
-                CurrentUnlockedAchievements = new List<Achievement>();
-                CurrentLockedAchievements = new List<Achievement>();
-
                 AchievementListWindow.Show();
+
+                UpdateAchievementList(CurrentUnlockedAchievements, CurrentLockedAchievements, true);
             }
+
+            IsOpen = true;
         }
 
         public void SetAllSettings()
@@ -56,7 +57,7 @@ namespace Retro_Achievement_Tracker.Controllers
             AchievementListWindow.SetWindowBackgroundColor(WindowBackgroundColor);
         }
 
-        public void UpdateAchievementList(List<Achievement> unlockedAchievements, List<Achievement> lockedAchievements, bool newGame)
+        public async void UpdateAchievementList(List<Achievement> unlockedAchievements, List<Achievement> lockedAchievements, bool newGame)
         {
             if (IsOpen)
             {
@@ -68,7 +69,9 @@ namespace Retro_Achievement_Tracker.Controllers
                 if (newGame)
                 {
                     AchievementListWindow.StopScrolling();
+
                     List<Achievement> ToClearList = new List<Achievement>();
+
                     ToClearList.AddRange(CurrentUnlockedAchievements);
                     ToClearList.AddRange(CurrentLockedAchievements);
 
@@ -100,6 +103,10 @@ namespace Retro_Achievement_Tracker.Controllers
                     }
 
                     AchievementListWindow.ClearAchievements(idsToTimeouts);
+                    
+                    await Task.Delay(timeoutValue + 800);
+
+                    AchievementListWindow.WaitForClear();
                 }
 
                 int achievementRowIndex = 0;
@@ -177,8 +184,6 @@ namespace Retro_Achievement_Tracker.Controllers
                 CurrentUnlockedAchievements.Reverse();
 
                 CurrentLockedAchievements.Sort();
-
-                await Task.Delay(2000);
 
                 for (int i = 0; i < CurrentUnlockedAchievements.Count; i++)
                 {

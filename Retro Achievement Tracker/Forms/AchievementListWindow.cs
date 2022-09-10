@@ -83,7 +83,7 @@ namespace Retro_Achievement_Tracker.Forms
                 "   }, 1000, 'easeInOutQuint'" +
                 ");"));
         }
-        public void ClearAchievements(Dictionary<int, int> idsToTimeouts)
+        public async void ClearAchievements(Dictionary<int, int> idsToTimeouts)
         {
             StringBuilder stringBuilder = new StringBuilder("stopScrolling();" +
                 "document.getElementById(\"container\")" +
@@ -111,10 +111,13 @@ namespace Retro_Achievement_Tracker.Forms
                     highestValue = value;
                 }
             }
+            string command = stringBuilder.ToString();
 
-            TaskController.Enqueue(() => ExecuteScript(stringBuilder.ToString()));
-            TaskController.Enqueue(() => Task.Delay(2000));
-            TaskController.Enqueue(() => ExecuteScript("document.getElementById(\"achievement-list\").innerHTML = \"\";"));
+            await TaskController.Enqueue(() => ExecuteScript(command));
+        }
+        public async void WaitForClear()
+        {
+            await TaskController.Enqueue(() => ExecuteScript("document.getElementById(\"achievement-list\").innerHTML = \"\";"));
         }
         protected async Task ExecuteScript(string script)
         {
