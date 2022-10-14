@@ -170,7 +170,7 @@ namespace Retro_Achievement_Tracker
 
                         if (achievementNotificationList.Contains(FocusController.Instance.CurrentlyFocusedAchievement))
                         {
-                            if (LockedAchievements.Count > 1)
+                            if (LockedAchievements.Count > 0)
                             {
                                 int currentIndex = GameInfo.Achievements.IndexOf(FocusController.Instance.CurrentlyFocusedAchievement);
 
@@ -309,6 +309,14 @@ namespace Retro_Achievement_Tracker
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.StackTrace);
+
+                    if (ShouldRun)
+                    {
+                        StartTimer();
+                    } else
+                    {
+                        StopButton_Click(null, null);
+                    }
                 }
             }
         }
