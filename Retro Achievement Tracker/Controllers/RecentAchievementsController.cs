@@ -133,6 +133,8 @@ namespace Retro_Achievement_Tracker.Controllers
                     }
                 }
 
+                VisibileAchievements = VisibileAchievements.GetRange(0, maxAchievementCount);
+
                 if (needsChanges)
                 {
                     RecentAchievementsWindow.HideRecentAchievements();
