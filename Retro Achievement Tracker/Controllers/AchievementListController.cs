@@ -2,6 +2,7 @@
 using Retro_Achievement_Tracker.Properties;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Retro_Achievement_Tracker.Controllers
@@ -342,5 +343,6 @@ namespace Retro_Achievement_Tracker.Controllers
 
             return 760 / Convert.ToInt32(Math.Floor(Math.Sqrt(listSize)));
         }
+        
     }
 }
