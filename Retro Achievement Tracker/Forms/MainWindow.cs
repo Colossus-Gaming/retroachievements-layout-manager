@@ -279,12 +279,7 @@ namespace Retro_Achievement_Tracker
 
                     UserSummary = await retroAchievementsAPIClient.GetUserSummary();
 
-                    if (UserSummary == null)
-                    {
-                        StartTimer();
-                        return;
-                    }
-                    else if (!UserSummary.Equals(userSummary))
+                    if (!UserSummary.Equals(userSummary))
                     {
                         UpdateUserInfo();
                     }
@@ -1264,7 +1259,7 @@ namespace Retro_Achievement_Tracker
                         FocusController.Instance.TitleOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
                         focusTitleFontOutlineColorPictureBox.BackColor = colorDialog1.Color;
                         break;
-                    case "focusDescriptionFontColorPictureBox":
+                    case "focusDescriptionFontSetColorButton":
                         FocusController.Instance.DescriptionColor = MediaHelper.HexConverter(colorDialog1.Color);
                         focusDescriptionFontColorPictureBox.BackColor = colorDialog1.Color;
                         break;
