@@ -1339,7 +1339,7 @@ namespace Retro_Achievement_Tracker
                         RecentAchievementsController.Instance.TitleColor = MediaHelper.HexConverter(colorDialog1.Color);
                         recentAchievementsTitleFontOutlineColorPictureBox.BackColor = colorDialog1.Color;
                         break;
-                    case "recentAchievementsDescriptionFontColorPictureBox":
+                    case "recentAchievementsDescriptionFontSetColorButton":
                         RecentAchievementsController.Instance.DateColor = MediaHelper.HexConverter(colorDialog1.Color);
                         recentAchievementsDescriptionFontColorPictureBox.BackColor = colorDialog1.Color;
                         break;
