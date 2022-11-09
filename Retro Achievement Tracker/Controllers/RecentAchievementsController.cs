@@ -52,6 +52,7 @@ namespace Retro_Achievement_Tracker.Controllers
         {
             if (IsOpen)
             {
+                RecentAchievementsWindow.AssignJavaScriptVariables();
                 RecentAchievementsWindow.SetBackgroundColor(BorderBackgroundColor);
                 RecentAchievementsWindow.SetWindowBackgroundColor(WindowBackgroundColor);
 
@@ -141,8 +142,6 @@ namespace Retro_Achievement_Tracker.Controllers
 
                     await Task.Delay(500);
 
-                    RecentAchievementsWindow.ClearRecentAchievements();
-
                     PopulateRecentAchievementsWindow();
                 }
             }
@@ -153,7 +152,9 @@ namespace Retro_Achievement_Tracker.Controllers
         {
             if (IsOpen)
             {
-                RecentAchievementsWindow.AssignJavaScriptVariables();
+
+                RecentAchievementsWindow.ClearRecentAchievements();
+
                 RecentAchievementsWindow.AddAchievements(VisibileAchievements);
 
                 SetAllSettings();
@@ -257,7 +258,6 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.Save();
                 if (IsOpen)
                 {
-
                     RecentAchievementsWindow.SetSimpleFontFamily(SimpleFontFamily);
                 }
             }
@@ -285,7 +285,6 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.Save();
                 if (IsOpen)
                 {
-
                     RecentAchievementsWindow.SetTitleFontFamily(SimpleFontFamily);
                 }
             }
@@ -312,8 +311,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.last_five_date_font_family = value.Name;
                 Settings.Default.Save();
                 if (IsOpen)
-                {
-
+                { 
                     RecentAchievementsWindow.SetDateFontFamily(SimpleFontFamily);
                 }
             }
@@ -341,7 +339,6 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.Save();
                 if (IsOpen)
                 {
-
                     RecentAchievementsWindow.SetPointsFontFamily(SimpleFontFamily);
                 }
             }
@@ -358,7 +355,6 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.Save();
                 if (IsOpen)
                 {
-
                     RecentAchievementsWindow.SetTitleColor(value);
                 }
             }
@@ -375,7 +371,6 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.Save();
                 if (IsOpen)
                 {
-
                     RecentAchievementsWindow.SetDateColor(value);
                 }
             }
@@ -393,8 +388,7 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-
-                    RecentAchievementsWindow.SetDateColor(value);
+                    RecentAchievementsWindow.SetLineColor(value);
                 }
             }
         }
@@ -410,7 +404,6 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.Save();
                 if (IsOpen)
                 {
-
                     RecentAchievementsWindow.SetPointsColor(value);
                 }
             }
@@ -427,7 +420,6 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.Save();
                 if (IsOpen)
                 {
-
                     RecentAchievementsWindow.SetTitleOutline(TitleOutlineEnabled ? TitleOutlineColor + " " + TitleOutlineSize + "px" : "0px");
                 }
             }
@@ -444,7 +436,6 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.Save();
                 if (IsOpen)
                 {
-
                     RecentAchievementsWindow.SetDateOutline(DescriptionOutlineEnabled ? DateOutlineColor + " " + DescriptionOutlineSize + "px" : "0px");
                 }
             }
@@ -461,7 +452,6 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.Save();
                 if (IsOpen)
                 {
-
                     RecentAchievementsWindow.SetPointsOutline(PointsOutlineEnabled ? PointsOutlineColor + " " + PointsOutlineSize + "px" : "0px");
                 }
             }
@@ -478,7 +468,6 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.Save();
                 if (IsOpen)
                 {
-
                     RecentAchievementsWindow.SetLineOutline(LineOutlineEnabled ? LineOutlineSize + "px solid " + LineOutlineColor : "0px");
                 }
             }
@@ -495,7 +484,6 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.Save();
                 if (IsOpen)
                 {
-
                     RecentAchievementsWindow.SetTitleOutline(TitleOutlineEnabled ? TitleOutlineColor + " " + TitleOutlineSize + "px" : "0px");
                 }
             }
@@ -512,7 +500,6 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.Save();
                 if (IsOpen)
                 {
-
                     RecentAchievementsWindow.SetDateOutline(DescriptionOutlineEnabled ? DateOutlineColor + " " + DescriptionOutlineSize + "px" : "0px");
                 }
             }
@@ -530,7 +517,6 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-
                     RecentAchievementsWindow.SetPointsOutline(PointsOutlineEnabled ? PointsOutlineColor + " " + PointsOutlineSize + "px" : "0px");
                 }
             }
@@ -548,7 +534,6 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-
                     RecentAchievementsWindow.SetLineOutline(LineOutlineEnabled ? LineOutlineSize + "px solid " + LineOutlineColor : "0px");
                 }
             }
@@ -565,7 +550,6 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.Save();
                 if (IsOpen)
                 {
-
                     RecentAchievementsWindow.SetSimpleFontColor(value);
                 }
             }
@@ -583,7 +567,6 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-
                     RecentAchievementsWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px", SimpleFontOutlineEnabled ? SimpleFontOutlineSize + "px solid " + SimpleFontOutlineColor : "0px");
                 }
             }
@@ -601,7 +584,6 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-
                     RecentAchievementsWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px", SimpleFontOutlineEnabled ? SimpleFontOutlineSize + "px solid " + SimpleFontOutlineColor : "0px");
 
                 }
@@ -620,7 +602,6 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-
                     RecentAchievementsWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px", SimpleFontOutlineEnabled ? SimpleFontOutlineSize + "px solid " + SimpleFontOutlineColor : "0px");
                 }
             }
@@ -638,7 +619,6 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-
                     RecentAchievementsWindow.SetTitleOutline(TitleOutlineEnabled ? TitleOutlineColor + " " + TitleOutlineSize + "px" : "0px");
                 }
             }
@@ -656,7 +636,6 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-
                     RecentAchievementsWindow.SetDateOutline(DescriptionOutlineEnabled ? DateOutlineColor + " " + DescriptionOutlineSize + "px" : "0px");
                 }
             }
@@ -674,7 +653,6 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-
                     RecentAchievementsWindow.SetPointsOutline(PointsOutlineEnabled ? PointsOutlineColor + " " + PointsOutlineSize + "px" : "0px");
                 }
             }
@@ -692,7 +670,6 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-
                     RecentAchievementsWindow.SetLineOutline(LineOutlineEnabled ? LineOutlineSize + "px solid " + LineOutlineColor : "0px");
                 }
             }
@@ -736,7 +713,6 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-
                     RecentAchievementsWindow.SetBackgroundColor(value);
                 }
             }

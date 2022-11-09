@@ -1336,7 +1336,7 @@ namespace Retro_Achievement_Tracker
                         recentAchievementsTitleFontColorPictureBox.BackColor = colorDialog1.Color;
                         break;
                     case "recentAchievementsTitleFontOutlineSetColorButton":
-                        RecentAchievementsController.Instance.TitleColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        RecentAchievementsController.Instance.TitleOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
                         recentAchievementsTitleFontOutlineColorPictureBox.BackColor = colorDialog1.Color;
                         break;
                     case "recentAchievementsDescriptionFontSetColorButton":
@@ -1437,15 +1437,19 @@ namespace Retro_Achievement_Tracker
                         break;
                     case "recentAchievementsSimpleFontComboBox":
                         RecentAchievementsController.Instance.SimpleFontFamily = fontFamily;
+                        RecentAchievementsController.Instance.PopulateRecentAchievementsWindow();
                         break;
                     case "recentAchievementsTitleFontComboBox":
                         RecentAchievementsController.Instance.TitleFontFamily = fontFamily;
+                        RecentAchievementsController.Instance.PopulateRecentAchievementsWindow();
                         break;
                     case "recentAchievementsDescriptionFontComboBox":
                         RecentAchievementsController.Instance.DateFontFamily = fontFamily;
+                        RecentAchievementsController.Instance.PopulateRecentAchievementsWindow();
                         break;
                     case "recentAchievementsPointsFontComboBox":
                         RecentAchievementsController.Instance.PointsFontFamily = fontFamily;
+                        RecentAchievementsController.Instance.PopulateRecentAchievementsWindow();
                         break;
                 }
             }
