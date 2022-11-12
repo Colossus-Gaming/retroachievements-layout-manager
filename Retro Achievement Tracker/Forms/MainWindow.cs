@@ -1454,7 +1454,7 @@ namespace Retro_Achievement_Tracker
                 }
             }
         }
-        private void BorderCheckBox_Click(object sender, EventArgs e)
+        private void BorderEnableCheckBox_Click(object sender, EventArgs e)
         {
             CheckBox checkBox = (CheckBox)sender;
             switch (checkBox.Name)
@@ -1561,7 +1561,7 @@ namespace Retro_Achievement_Tracker
                     break;
             }
         }
-        private void FontOutlineCheckBox_Click(object sender, EventArgs e)
+        private void FontOutlineEnableCheckBox_Click(object sender, EventArgs e)
         {
             CheckBox checkBox = sender as CheckBox;
 
@@ -2169,9 +2169,9 @@ namespace Retro_Achievement_Tracker
 
             userInfoSimpleCheckBox.Click += SimpleCheckBox_Click;
 
-            userInfoSimpleOutlineCheckBox.Click += FontOutlineCheckBox_Click;
-            userInfoNamesOutlineCheckBox.Click += FontOutlineCheckBox_Click;
-            userInfoValuesOutlineCheckBox.Click += FontOutlineCheckBox_Click;
+            userInfoSimpleOutlineCheckBox.Click += FontOutlineEnableCheckBox_Click;
+            userInfoNamesOutlineCheckBox.Click += FontOutlineEnableCheckBox_Click;
+            userInfoValuesOutlineCheckBox.Click += FontOutlineEnableCheckBox_Click;
 
             userInfoSimpleFontComboBox.SelectedIndexChanged += FontFamilyComboBox_SelectedIndexChanged;
             userInfoNamesFontComboBox.SelectedIndexChanged += FontFamilyComboBox_SelectedIndexChanged;
@@ -2246,9 +2246,9 @@ namespace Retro_Achievement_Tracker
 
             gameInfoSimpleCheckBox.Click += SimpleCheckBox_Click;
 
-            gameInfoSimpleOutlineCheckBox.Click += FontOutlineCheckBox_Click;
-            gameInfoNamesOutlineCheckBox.Click += FontOutlineCheckBox_Click;
-            gameInfoValuesOutlineCheckBox.Click += FontOutlineCheckBox_Click;
+            gameInfoSimpleOutlineCheckBox.Click += FontOutlineEnableCheckBox_Click;
+            gameInfoNamesOutlineCheckBox.Click += FontOutlineEnableCheckBox_Click;
+            gameInfoValuesOutlineCheckBox.Click += FontOutlineEnableCheckBox_Click;
 
             gameInfoSimpleFontComboBox.SelectedIndexChanged += FontFamilyComboBox_SelectedIndexChanged;
             gameInfoNamesFontComboBox.SelectedIndexChanged += FontFamilyComboBox_SelectedIndexChanged;
@@ -2316,9 +2316,9 @@ namespace Retro_Achievement_Tracker
             gameProgressNamesFontComboBox.SelectedIndexChanged += FontFamilyComboBox_SelectedIndexChanged;
             gameProgressValuesFontComboBox.SelectedIndexChanged += FontFamilyComboBox_SelectedIndexChanged;
 
-            gameProgressSimpleOutlineCheckBox.Click += FontOutlineCheckBox_Click;
-            gameProgressNamesOutlineCheckBox.Click += FontOutlineCheckBox_Click;
-            gameProgressValuesOutlineCheckBox.Click += FontOutlineCheckBox_Click;
+            gameProgressSimpleOutlineCheckBox.Click += FontOutlineEnableCheckBox_Click;
+            gameProgressNamesOutlineCheckBox.Click += FontOutlineEnableCheckBox_Click;
+            gameProgressValuesOutlineCheckBox.Click += FontOutlineEnableCheckBox_Click;
 
             gameProgressAchievementsCheckBox.Checked = GameProgressController.Instance.GameAchievementsEnabled;
             gameProgressPointsCheckBox.Checked = GameProgressController.Instance.GamePointsEnabled;
@@ -2383,7 +2383,7 @@ namespace Retro_Achievement_Tracker
             focusSetBorderColorButton.Click += BackgroundColorButton_Click;
 
             focusBorderCheckBox.Checked = FocusController.Instance.BorderEnabled;
-            focusBorderCheckBox.Click += BorderCheckBox_Click;
+            focusBorderCheckBox.Click += BorderEnableCheckBox_Click;
 
             SetFontFamilyBox(focusSimpleFontComboBox, FocusController.Instance.SimpleFontFamily);
             SetFontFamilyBox(focusTitleFontComboBox, FocusController.Instance.TitleFontFamily);
@@ -2423,11 +2423,11 @@ namespace Retro_Achievement_Tracker
             focusDescriptionFontComboBox.SelectedIndexChanged += FontFamilyComboBox_SelectedIndexChanged;
             focusPointsFontComboBox.SelectedIndexChanged += FontFamilyComboBox_SelectedIndexChanged;
 
-            focusSimpleOutlineCheckBox.Click += FontOutlineCheckBox_Click;
-            focusTitleOutlineCheckBox.Click += FontOutlineCheckBox_Click;
-            focusDescriptionOutlineCheckBox.Click += FontOutlineCheckBox_Click;
-            focusPointsOutlineCheckBox.Click += FontOutlineCheckBox_Click;
-            focusLineOutlineCheckBox.Click += FontOutlineCheckBox_Click;
+            focusSimpleOutlineCheckBox.Click += FontOutlineEnableCheckBox_Click;
+            focusTitleOutlineCheckBox.Click += FontOutlineEnableCheckBox_Click;
+            focusDescriptionOutlineCheckBox.Click += FontOutlineEnableCheckBox_Click;
+            focusPointsOutlineCheckBox.Click += FontOutlineEnableCheckBox_Click;
+            focusLineOutlineCheckBox.Click += FontOutlineEnableCheckBox_Click;
 
             focusAchievementPictureBox.Click += BrowserSensitiveControl_Click;
 
@@ -2467,7 +2467,7 @@ namespace Retro_Achievement_Tracker
             notificationsSetBorderColorButton.Click += BackgroundColorButton_Click;
 
             notificationsBorderCheckBox.Checked = NotificationsController.Instance.BorderEnabled;
-            notificationsBorderCheckBox.Click += BorderCheckBox_Click;
+            notificationsBorderCheckBox.Click += BorderEnableCheckBox_Click;
 
             SetFontFamilyBox(notificationsSimpleFontComboBox, NotificationsController.Instance.SimpleFontFamily);
             SetFontFamilyBox(notificationsTitleFontComboBox, NotificationsController.Instance.TitleFontFamily);
@@ -2510,11 +2510,11 @@ namespace Retro_Achievement_Tracker
             notificationsDescriptionFontComboBox.SelectedIndexChanged += FontFamilyComboBox_SelectedIndexChanged;
             notificationsPointsFontComboBox.SelectedIndexChanged += FontFamilyComboBox_SelectedIndexChanged;
 
-            notificationsSimpleOutlineCheckBox.Click += FontOutlineCheckBox_Click;
-            notificationsTitleOutlineCheckBox.Click += FontOutlineCheckBox_Click;
-            notificationsDescriptionOutlineCheckBox.Click += FontOutlineCheckBox_Click;
-            notificationsPointsOutlineCheckBox.Click += FontOutlineCheckBox_Click;
-            notificationsLineOutlineCheckBox.Click += FontOutlineCheckBox_Click;
+            notificationsSimpleOutlineCheckBox.Click += FontOutlineEnableCheckBox_Click;
+            notificationsTitleOutlineCheckBox.Click += FontOutlineEnableCheckBox_Click;
+            notificationsDescriptionOutlineCheckBox.Click += FontOutlineEnableCheckBox_Click;
+            notificationsPointsOutlineCheckBox.Click += FontOutlineEnableCheckBox_Click;
+            notificationsLineOutlineCheckBox.Click += FontOutlineEnableCheckBox_Click;
 
             notificationsSimpleFontSetColorButton.Click += FontColorButton_Click;
             notificationsSimpleFontOutlineSetColorButton.Click += FontColorButton_Click;
@@ -2552,7 +2552,7 @@ namespace Retro_Achievement_Tracker
             recentAchievementsSetBorderColorButton.Click += BackgroundColorButton_Click;
 
             recentAchievementsBorderCheckBox.Checked = RecentAchievementsController.Instance.BorderEnabled;
-            recentAchievementsBorderCheckBox.Click += BorderCheckBox_Click;
+            recentAchievementsBorderCheckBox.Click += BorderEnableCheckBox_Click;
 
             SetFontFamilyBox(recentAchievementsSimpleFontComboBox, RecentAchievementsController.Instance.SimpleFontFamily);
             SetFontFamilyBox(recentAchievementsTitleFontComboBox, RecentAchievementsController.Instance.TitleFontFamily);
@@ -2573,7 +2573,7 @@ namespace Retro_Achievement_Tracker
             recentAchievementsPointsFontColorPictureBox.BackColor = ColorTranslator.FromHtml(RecentAchievementsController.Instance.PointsColor);
             recentAchievementsPointsFontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(RecentAchievementsController.Instance.PointsOutlineColor);
             recentAchievementsLineColorPictureBox.BackColor = ColorTranslator.FromHtml(RecentAchievementsController.Instance.LineColor);
-            recentAchievementsLineOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(RecentAchievementsController.Instance.LineColor);
+            recentAchievementsLineOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(RecentAchievementsController.Instance.LineOutlineColor);
 
             if (!RecentAchievementsController.Instance.AdvancedSettingsEnabled)
             {
@@ -2592,11 +2592,11 @@ namespace Retro_Achievement_Tracker
             recentAchievementsDescriptionFontComboBox.SelectedIndexChanged += FontFamilyComboBox_SelectedIndexChanged;
             recentAchievementsPointsFontComboBox.SelectedIndexChanged += FontFamilyComboBox_SelectedIndexChanged;
 
-            recentAchievementsSimpleFontOutlineCheckBox.Click += FontOutlineCheckBox_Click;
-            recentAchievementsTitleFontOutlineCheckBox.Click += FontOutlineCheckBox_Click;
-            recentAchievementsDescriptionFontOutlineCheckBox.Click += FontOutlineCheckBox_Click;
-            recentAchievementsPointsFontOutlineCheckBox.Click += FontOutlineCheckBox_Click;
-            recentAchievementsLineOutlineCheckBox.Click += FontOutlineCheckBox_Click;
+            recentAchievementsSimpleFontOutlineCheckBox.Click += FontOutlineEnableCheckBox_Click;
+            recentAchievementsTitleFontOutlineCheckBox.Click += FontOutlineEnableCheckBox_Click;
+            recentAchievementsDescriptionFontOutlineCheckBox.Click += FontOutlineEnableCheckBox_Click;
+            recentAchievementsPointsFontOutlineCheckBox.Click += FontOutlineEnableCheckBox_Click;
+            recentAchievementsLineOutlineCheckBox.Click += FontOutlineEnableCheckBox_Click;
 
             recentAchievementsMaxListNumericUpDown.Value = RecentAchievementsController.Instance.MaxListSize;
             recentAchievementsMaxListNumericUpDown.ValueChanged += CustomNumericUpDown_ValueChanged;
