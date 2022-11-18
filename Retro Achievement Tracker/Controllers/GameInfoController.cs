@@ -8,8 +8,8 @@ namespace Retro_Achievement_Tracker.Controllers
     {
         private static GameInfoController instance = new GameInfoController();
         private static GameInfoWindow GameInfoWindow;
-        public static bool IsOpen;
 
+        public bool IsOpen;
         private string title;
         private string genre;
         private string console;

@@ -23,7 +23,7 @@ namespace Retro_Achievement_Tracker
             Name = "RA Tracker - User Stats";
             Text = "RA Tracker - User Stats";
 
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainPage));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.Icon = ((Icon)(resources.GetObject("$this.Icon")));
 
             Shown += UserStatsWindow_Shown;
@@ -36,12 +36,12 @@ namespace Retro_Achievement_Tracker
 
         private void UserStatsWindow_FormClosed(object sender, FormClosedEventArgs e)
         {
-            UserInfoController.IsOpen = false;
+            UserInfoController.Instance.IsOpen = false;
         }
 
         private void UserStatsWindow_Shown(object sender, EventArgs e)
         {
-            UserInfoController.IsOpen = true;
+            UserInfoController.Instance.IsOpen = true;
         }
 
         protected override bool ShowWithoutActivation
@@ -234,6 +234,7 @@ namespace Retro_Achievement_Tracker
                     ClientSize = new Size(805, 290);
                 });
 
+                UserInfoController.Instance.IsOpen = true;
                 UserInfoController.Instance.SetAllSettings();
             });
 

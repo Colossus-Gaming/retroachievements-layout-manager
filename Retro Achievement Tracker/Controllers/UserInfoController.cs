@@ -8,8 +8,8 @@ namespace Retro_Achievement_Tracker.Controllers
     {
         private static UserInfoController instance = new UserInfoController();
         private static UserStatsWindow UserStatsWindow;
-        public static bool IsOpen;
 
+        public bool IsOpen;
         private string rank;
         private string ratio;
         private string points;

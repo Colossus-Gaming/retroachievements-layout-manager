@@ -27,7 +27,7 @@ namespace Retro_Achievement_Tracker.Forms
             Name = "RA Tracker - Achievement List";
             Text = "RA Tracker - Achievement List";
 
-            ComponentResourceManager resources = new ComponentResourceManager(typeof(MainPage));
+            ComponentResourceManager resources = new ComponentResourceManager(typeof(MainWindow));
             this.Icon = ((Icon)(resources.GetObject("$this.Icon")));
 
             Shown += AchievementListWindow_Shown;
@@ -158,7 +158,10 @@ namespace Retro_Achievement_Tracker.Forms
                 {
                     ClientSize = new Size(748, 611);
 
+                    AchievementListController.Instance.IsOpen = true;
                     AchievementListController.Instance.SetAllSettings();
+
+                    MainWindow.UpdateAchievementList(true);
                 });
             });
 

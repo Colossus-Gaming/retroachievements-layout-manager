@@ -12,19 +12,20 @@ using System.Xml;
 using System.ServiceModel.Syndication;
 using CefSharp.Web;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Retro_Achievement_Tracker
 {
-    public partial class MainPage : Form
+    public partial class MainWindow : Form
     {
-        private UserSummary UserSummary { get; set; }
-        private GameInfo GameInfo { get; set; }
+        private static UserSummary UserSummary { get; set; }
+        private static GameInfo GameInfo { get; set; }
         private Achievement CurrentlyViewingAchievement;
         private int CurrentlyViewingIndex;
         private readonly List<ListViewItem> ListViewItems;
         public CefSharp.WinForms.ChromiumWebBrowser chromiumWebBrowser;
 
-        private List<Achievement> LockedAchievements
+        private static List<Achievement> LockedAchievements
         {
             get
             {
@@ -36,7 +37,7 @@ namespace Retro_Achievement_Tracker
             }
         }
 
-        private List<Achievement> UnlockedAchievements
+        private static List<Achievement> UnlockedAchievements
         {
             get
             {
@@ -55,9 +56,9 @@ namespace Retro_Achievement_Tracker
 
         private bool ShouldRun;
 
-        private RetroAchievementAPIClient retroAchievementsAPIClient;
+        private RetroAchievementAPIClient RetroAchievementsAPIClient;
 
-        public MainPage()
+        public MainWindow()
         {
             CurrentlyViewingIndex = -1;
             AutoUpdate();
@@ -277,7 +278,7 @@ namespace Retro_Achievement_Tracker
                         userSummary = (UserSummary)UserSummary.Clone();
                     }
 
-                    UserSummary = await retroAchievementsAPIClient.GetUserSummary();
+                    UserSummary = await RetroAchievementsAPIClient.GetUserSummary();
 
                     if (!UserSummary.Equals(userSummary))
                     {
@@ -285,7 +286,7 @@ namespace Retro_Achievement_Tracker
                     }
 
                     UpdateTimerLabel("Updating game info");
-                    GameInfo = await retroAchievementsAPIClient.GetGameInfo(UserSummary.LastGameID);
+                    GameInfo = await RetroAchievementsAPIClient.GetGameInfo(UserSummary.LastGameID);
 
                     UpdateTimerLabel("Updating tracker");
                     UpdateGameProgress(previousId == UserSummary.LastGameID);
@@ -411,7 +412,7 @@ namespace Retro_Achievement_Tracker
 
             if (Settings.Default.rss_news_feed)
             {
-                await retroAchievementsAPIClient.GetNewsFeed().ContinueWith(result =>
+                await RetroAchievementsAPIClient.GetNewsFeed().ContinueWith(result =>
                 {
                     newsReader = XmlReader.Create(new StringReader(result.Result));
                     feed = SyndicationFeed.Load(newsReader);
@@ -430,7 +431,7 @@ namespace Retro_Achievement_Tracker
 
             if (Settings.Default.rss_new_achievements_feed)
             {
-                await retroAchievementsAPIClient.GetNewAchievementsFeed().ContinueWith(result =>
+                await RetroAchievementsAPIClient.GetNewAchievementsFeed().ContinueWith(result =>
                 {
                     newsReader = XmlReader.Create(new StringReader(result.Result));
                     feed = SyndicationFeed.Load(newsReader);
@@ -450,7 +451,7 @@ namespace Retro_Achievement_Tracker
 
             if (Settings.Default.rss_forum_feed)
             {
-                await retroAchievementsAPIClient.GetForumActivityFeed().ContinueWith(result =>
+                await RetroAchievementsAPIClient.GetForumActivityFeed().ContinueWith(result =>
                 {
                     newsReader = XmlReader.Create(new StringReader(result.Result));
                     feed = SyndicationFeed.Load(newsReader);
@@ -476,7 +477,7 @@ namespace Retro_Achievement_Tracker
 
             if (Settings.Default.rss_friend_feed)
             {
-                await retroAchievementsAPIClient.GetFriendActivityFeed().ContinueWith(result =>
+                await RetroAchievementsAPIClient.GetFriendActivityFeed().ContinueWith(result =>
                 {
                     newsReader = XmlReader.Create(new StringReader(result.Result));
                     feed = SyndicationFeed.Load(newsReader);
@@ -512,7 +513,7 @@ namespace Retro_Achievement_Tracker
         {
             LoadProperties();
 
-            retroAchievementsAPIClient = new RetroAchievementAPIClient(Settings.Default.ra_username, Settings.Default.ra_key);
+            RetroAchievementsAPIClient = new RetroAchievementAPIClient(Settings.Default.ra_username, Settings.Default.ra_key);
 
             SetupInterface();
             CreateFolders();
@@ -586,6 +587,8 @@ namespace Retro_Achievement_Tracker
             userInfoOpenWindowButton.Enabled = true;
             gameInfoOpenWindowButton.Enabled = true;
 
+            UserAndGameUpdateTimer.Start();
+
             UpdateFromSite(null, null);
         }
         private void StopButton_Click(object sender, EventArgs e)
@@ -632,7 +635,7 @@ namespace Retro_Achievement_Tracker
                 UserAndGameUpdateTimer.Start();
             }
         }
-        private void UpdateRecentAchievements()
+        public static void UpdateRecentAchievements()
         {
             RecentAchievementsController.Instance.SetAchievements(UnlockedAchievements.ToList());
 
@@ -683,7 +686,7 @@ namespace Retro_Achievement_Tracker
 
             StreamLabelManager.Instance.EnqueueGameInfo(GameInfo);
         }
-        private void UpdateAchievementList(bool newGame)
+        public static void UpdateAchievementList(bool newGame)
         {
             AchievementListController.Instance.UpdateAchievementList(UnlockedAchievements.ToList(), LockedAchievements.ToList(), newGame);
         }

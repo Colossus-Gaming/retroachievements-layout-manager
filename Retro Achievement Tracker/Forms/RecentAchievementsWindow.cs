@@ -25,7 +25,7 @@ namespace Retro_Achievement_Tracker
             Name = "RA Tracker - Recent Achievements";
             Text = "RA Tracker - Recent Achievements";
 
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainPage));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.Icon = ((Icon)(resources.GetObject("$this.Icon")));
 
             Shown += RecentAchievementsWindow_Shown;
@@ -278,8 +278,10 @@ namespace Retro_Achievement_Tracker
                 Invoke((MethodInvoker)delegate
                 {
                     ClientSize = new Size(516, 600); 
+
                     RecentAchievementsController.Instance.IsOpen = true;
-                    RecentAchievementsController.Instance.PopulateRecentAchievementsWindow();
+                    RecentAchievementsController.Instance.PopulateRecentAchievementsWindow(); 
+                    MainWindow.UpdateRecentAchievements();
                 });
             });
 

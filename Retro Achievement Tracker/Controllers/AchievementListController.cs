@@ -49,8 +49,6 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 UpdateAchievementList(CurrentUnlockedAchievements, CurrentLockedAchievements, true);
             }
-
-            IsOpen = true;
         }
 
         public void SetAllSettings()
@@ -60,56 +58,62 @@ namespace Retro_Achievement_Tracker.Controllers
 
         public async void UpdateAchievementList(List<Achievement> unlockedAchievements, List<Achievement> lockedAchievements, bool newGame)
         {
-            if (IsOpen)
+            unlockedAchievements.Sort();
+            unlockedAchievements.Reverse();
+
+            lockedAchievements.Sort();
+
+            if (newGame)
             {
-                unlockedAchievements.Sort();
-                unlockedAchievements.Reverse();
 
-                lockedAchievements.Sort();
+                List<Achievement> ToClearList = new List<Achievement>();
 
-                if (newGame)
+                ToClearList.AddRange(CurrentUnlockedAchievements);
+                ToClearList.AddRange(CurrentLockedAchievements);
+
+                CurrentUnlockedAchievements = new List<Achievement>();
+                CurrentLockedAchievements = new List<Achievement>();
+
+                Random rand = new Random();
+
+                int timeoutValue = 0;
+
+                Dictionary<int, int> idsToTimeouts = new Dictionary<int, int>();
+
+                while (ToClearList.Count > 0 && timeoutValue <= 1600)
+                {
+                    Achievement achievement = ToClearList[rand.Next(ToClearList.Count - 1)];
+                    idsToTimeouts.Add(achievement.Id, timeoutValue);
+
+                    timeoutValue += 10;
+
+                    ToClearList.RemoveAt(ToClearList.IndexOf(achievement));
+                }
+
+                while (ToClearList.Count > 0)
+                {
+                    Achievement achievement = ToClearList[rand.Next(ToClearList.Count - 1)];
+
+                    idsToTimeouts.Add(achievement.Id, 1000 + rand.Next(600));
+                    ToClearList.RemoveAt(ToClearList.IndexOf(achievement));
+                }
+
+                if (IsOpen)
                 {
                     AchievementListWindow.StopScrolling();
 
-                    List<Achievement> ToClearList = new List<Achievement>();
-
-                    ToClearList.AddRange(CurrentUnlockedAchievements);
-                    ToClearList.AddRange(CurrentLockedAchievements);
-
-                    CurrentUnlockedAchievements = new List<Achievement>();
-                    CurrentLockedAchievements = new List<Achievement>();
-
-                    Random rand = new Random();
-
-                    int timeoutValue = 0;
-
-                    Dictionary<int, int> idsToTimeouts = new Dictionary<int, int>();
-
-                    while (ToClearList.Count > 0 && timeoutValue <= 1600)
-                    {
-                        Achievement achievement = ToClearList[rand.Next(ToClearList.Count - 1)];
-                        idsToTimeouts.Add(achievement.Id, timeoutValue);
-
-                        timeoutValue += 10;
-
-                        ToClearList.RemoveAt(ToClearList.IndexOf(achievement));
-                    }
-
-                    while (ToClearList.Count > 0)
-                    {
-                        Achievement achievement = ToClearList[rand.Next(ToClearList.Count - 1)];
-
-                        idsToTimeouts.Add(achievement.Id, 1000 + rand.Next(600));
-                        ToClearList.RemoveAt(ToClearList.IndexOf(achievement));
-                    }
+                    await Task.Delay(200);
 
                     AchievementListWindow.ClearAchievements(idsToTimeouts);
-                    
+
                     await Task.Delay(timeoutValue + 800);
 
                     AchievementListWindow.WaitForClear();
                 }
+            }
 
+            if (IsOpen)
+            {
                 int achievementRowIndex = 0;
                 int yCoord = 1048;
                 int xCoord = 0;
@@ -241,7 +245,8 @@ namespace Retro_Achievement_Tracker.Controllers
                 if (value)
                 {
                     AchievementListWindow.StartScrolling();
-                } else
+                }
+                else
                 {
                     AchievementListWindow.StopScrolling();
                 }
@@ -343,6 +348,6 @@ namespace Retro_Achievement_Tracker.Controllers
 
             return 760 / Convert.ToInt32(Math.Floor(Math.Sqrt(listSize)));
         }
-        
+
     }
 }

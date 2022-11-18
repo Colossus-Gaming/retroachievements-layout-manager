@@ -24,7 +24,7 @@ namespace Retro_Achievement_Tracker.Forms
             Name = "RA Tracker - Alerts";
             Text = "RA Tracker - Alerts";
 
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainPage));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.Icon = ((Icon)(resources.GetObject("$this.Icon")));
 
             Shown += AlertsWindow_Shown;
@@ -37,12 +37,12 @@ namespace Retro_Achievement_Tracker.Forms
 
         private void AlertsWindow_FormClosed(object sender, FormClosedEventArgs e)
         {
-            NotificationsController.IsOpen = false;
+            NotificationsController.Instance.IsOpen = false;
         }
 
         private void AlertsWindow_Shown(object sender, EventArgs e)
         {
-            NotificationsController.IsOpen = true;
+            NotificationsController.Instance.IsOpen = true;
         }
 
         protected override bool ShowWithoutActivation
@@ -516,6 +516,7 @@ namespace Retro_Achievement_Tracker.Forms
                 {
                     ClientSize = new Size(1024, 768);
 
+                    NotificationsController.Instance.IsOpen = true;
                     NotificationsController.Instance.SetAllSettings();
                     PromptUserInput();
                 });

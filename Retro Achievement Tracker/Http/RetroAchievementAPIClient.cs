@@ -8,7 +8,6 @@ namespace Retro_Achievement_Tracker
     class RetroAchievementAPIClient
     {
         private static readonly HttpClient client = new HttpClient();
-        private static readonly JsonSerializerSettings jsonSerializerSettings = new JsonSerializerSettings();
         private readonly string UserName;
         private readonly string ApiKey;
 
@@ -21,13 +20,13 @@ namespace Retro_Achievement_Tracker
         {
             HttpResponseMessage httpResponseMessage = await client.GetAsync("https://retroachievements.org/API/API_GetUserSummary.php?z=" + UserName + "&y=" + ApiKey + "&u=" + UserName + "&g=1&a=1000");
 
-            return JsonConvert.DeserializeObject<UserSummary>(await httpResponseMessage.Content.ReadAsStringAsync(), jsonSerializerSettings);
+            return JsonConvert.DeserializeObject<UserSummary>(await httpResponseMessage.Content.ReadAsStringAsync());
         }
         public async Task<GameInfo> GetGameInfo(int gameId)
         {
             HttpResponseMessage httpResponseMessage = await client.GetAsync("https://retroachievements.org/API/API_GetGameInfoAndUserProgress.php?z=" + UserName + "&y=" + ApiKey + "&u=" + UserName + "&g=" + gameId);
 
-            return JsonConvert.DeserializeObject<GameInfo>(await httpResponseMessage.Content.ReadAsStringAsync(), jsonSerializerSettings);
+            return JsonConvert.DeserializeObject<GameInfo>(await httpResponseMessage.Content.ReadAsStringAsync());
         }
         public async Task<string> GetNewsFeed()
         {

@@ -23,7 +23,7 @@ namespace Retro_Achievement_Tracker
             MaximizeBox = false;
             MinimizeBox = false;
 
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainPage));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.Icon = ((Icon)(resources.GetObject("$this.Icon")));
 
             Shown += GameInfoWindow_Shown;
@@ -36,12 +36,12 @@ namespace Retro_Achievement_Tracker
 
         private void GameInfoWindow_FormClosed(object sender, FormClosedEventArgs e)
         {
-            GameInfoController.IsOpen = false;
+            GameInfoController.Instance.IsOpen = false;
         }
 
         private void GameInfoWindow_Shown(object sender, EventArgs e)
         {
-            GameInfoController.IsOpen = true;
+            GameInfoController.Instance.IsOpen = true;
         }
 
         protected override bool ShowWithoutActivation
@@ -300,6 +300,7 @@ namespace Retro_Achievement_Tracker
                     ClientSize = new Size(1190, 645);
                 });
 
+                GameInfoController.Instance.IsOpen = true;
                 GameInfoController.Instance.SetAllSettings();
             });
             Controls.Add(chromiumWebBrowser);

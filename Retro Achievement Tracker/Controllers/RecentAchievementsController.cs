@@ -138,20 +138,19 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (needsChanges)
                 {
-                    RecentAchievementsWindow.HideRecentAchievements();
-
-                    await Task.Delay(500);
-
                     PopulateRecentAchievementsWindow();
                 }
             }
 
             CurrentAchievements = new List<Achievement>(achievements);
         }
-        public void PopulateRecentAchievementsWindow()
+        public async void PopulateRecentAchievementsWindow()
         {
             if (IsOpen)
             {
+                RecentAchievementsWindow.HideRecentAchievements();
+
+                await Task.Delay(500);
 
                 RecentAchievementsWindow.ClearRecentAchievements();
 

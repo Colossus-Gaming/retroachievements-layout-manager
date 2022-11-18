@@ -9,7 +9,9 @@ namespace Retro_Achievement_Tracker.Controllers
     {
         private static FocusController instance = new FocusController();
         private static FocusWindow FocusLayoutWindow;
+
         public bool IsOpen;
+
         public Achievement CurrentlyFocusedAchievement;
 
         private FocusController()

@@ -13,7 +13,7 @@ namespace Retro_Achievement_Tracker
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainPage());
+            Application.Run(new MainWindow());
         }
     }
 }

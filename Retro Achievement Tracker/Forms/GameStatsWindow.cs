@@ -24,7 +24,7 @@ namespace Retro_Achievement_Tracker.Forms
             Name = "RA Tracker - Game Stats";
             Text = "RA Tracker - Game Stats";
 
-            ComponentResourceManager resources = new ComponentResourceManager(typeof(MainPage));
+            ComponentResourceManager resources = new ComponentResourceManager(typeof(MainWindow));
             this.Icon = ((Icon)(resources.GetObject("$this.Icon")));
 
             Shown += GameStatsWindow_Shown;
@@ -36,12 +36,12 @@ namespace Retro_Achievement_Tracker.Forms
         }
         private void GameStatsWindow_FormClosed(object sender, FormClosedEventArgs e)
         {
-            GameProgressController.IsOpen = false;
+            GameProgressController.Instance.IsOpen = false;
         }
 
         private void GameStatsWindow_Shown(object sender, EventArgs e)
         {
-            GameProgressController.IsOpen = true;
+            GameProgressController.Instance.IsOpen = true;
         }
 
         protected override bool ShowWithoutActivation
@@ -249,6 +249,7 @@ namespace Retro_Achievement_Tracker.Forms
                     ClientSize = new Size(805, 350);
                 });
 
+                GameProgressController.Instance.IsOpen = true;
                 GameProgressController.Instance.SetAllSettings();
             });
 

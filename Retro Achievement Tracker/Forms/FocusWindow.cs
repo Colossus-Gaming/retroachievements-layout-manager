@@ -22,7 +22,7 @@ namespace Retro_Achievement_Tracker
 
             Name = "RA Tracker - Focus";
             Text = "RA Tracker - Focus";
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainPage));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.Icon = ((Icon)(resources.GetObject("$this.Icon")));
 
             Shown += FocusWindow_Shown;
@@ -329,6 +329,7 @@ namespace Retro_Achievement_Tracker
                 {
                     ClientSize = new Size(700, 165);
 
+                    FocusController.Instance.IsOpen = true;
                     FocusController.Instance.SetAllSettings();
                     FocusController.Instance.UpdateFocus();
                 });

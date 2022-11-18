@@ -9,7 +9,7 @@ namespace Retro_Achievement_Tracker.Controllers
     {
         private static GameProgressController instance = new GameProgressController();
         private static GameStatsWindow GameStatsWindow;
-        public static bool IsOpen;
+        public bool IsOpen;
 
         private string completed;
         private string gameAchievementsEarned;

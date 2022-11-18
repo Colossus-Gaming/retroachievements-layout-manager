@@ -17,7 +17,7 @@ namespace Retro_Achievement_Tracker.Controllers
     {
         private static NotificationsController instance = new NotificationsController();
         private static AlertsWindow AlertsLayoutWindow;
-        public static bool IsOpen;
+        public bool IsOpen;
         private Stopwatch NotificationsStopwatch;
         private Task NotificationsTask;
         private readonly ConcurrentQueue<NotificationRequest> NotificationRequests;
