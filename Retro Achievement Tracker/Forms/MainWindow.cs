@@ -160,7 +160,7 @@ namespace Retro_Achievement_Tracker
 
                     if (achievementNotificationList.Count > 0)
                     {
-                        UpdateTimerLabel("CHEEVOS POP!");
+                        UpdateLogLabel("CHEEVOS POP!");
 
                         achievementNotificationList.Sort();
 
@@ -218,13 +218,13 @@ namespace Retro_Achievement_Tracker
                 }
                 else
                 {
-                    UpdateTimerLabel("Changing game to [" + GameInfo.Title + "]");
+                    UpdateLogLabel("Changing game to [" + GameInfo.Title + "]");
 
                     CurrentlyViewingAchievement = null;
                     CurrentlyViewingIndex = -1;
                 }
 
-                if (needsUpdate)
+                if (GameInfo.Achievements.Count > 0 &&  needsUpdate)
                 {
                     UpdateAchievementList(!sameGame);
                     UpdateRecentAchievements();
@@ -232,9 +232,9 @@ namespace Retro_Achievement_Tracker
                     UpdateCurrentlyViewingAchievement();
 
                     SetFocus();
-                }
 
-                StreamLabelManager.Instance.RunNotifications();
+                    StreamLabelManager.Instance.RunNotifications();
+                }
             }
             catch (Exception e)
             {
@@ -250,9 +250,10 @@ namespace Retro_Achievement_Tracker
 
                 return;
             }
+
             UserAndGameTimerCounter--;
 
-            UpdateTimerLabel("Updating in " + UserAndGameTimerCounter + "...");
+            UpdateLogLabel("Updating in " + UserAndGameTimerCounter + "...");
 
             if (UserAndGameTimerCounter < 0)
             {
@@ -270,7 +271,7 @@ namespace Retro_Achievement_Tracker
 
                     OldUnlockedAchievements = UnlockedAchievements.ToList();
 
-                    UpdateTimerLabel("Updating user info");
+                    UpdateLogLabel("Updating user info");
                     UserSummary userSummary = null;
 
                     if (UserSummary != null)
@@ -280,25 +281,34 @@ namespace Retro_Achievement_Tracker
 
                     UserSummary = await RetroAchievementsAPIClient.GetUserSummary();
 
-                    if (!UserSummary.Equals(userSummary))
+                    if (UserSummary != null && UserSummary.LastGameID > 0)
                     {
-                        UpdateUserInfo();
-                    }
+                        if (!UserSummary.Equals(userSummary))
+                        {
+                            UpdateUserInfo();
+                        }
 
-                    UpdateTimerLabel("Updating game info");
-                    GameInfo = await RetroAchievementsAPIClient.GetGameInfo(UserSummary.LastGameID);
+                        UpdateLogLabel("Updating game info");
 
-                    UpdateTimerLabel("Updating tracker");
-                    UpdateGameProgress(previousId == UserSummary.LastGameID);
+                        GameInfo = await RetroAchievementsAPIClient.GetGameInfo(UserSummary.LastGameID);
 
-                    this.raConnectionStatusPictureBox.Image = Resources.green_button;
-                    userProfilePictureBox.ImageLocation = "https://retroachievements.org/UserPic/" + usernameTextBox.Text + ".png";
+                        UpdateLogLabel("Updating tracker");
+                        UpdateGameProgress(previousId == UserSummary.LastGameID);
 
-                    if (Settings.Default.rss_forum_feed || Settings.Default.rss_friend_feed || Settings.Default.rss_news_feed || Settings.Default.rss_new_achievements_feed)
+                        this.raConnectionStatusPictureBox.Image = Resources.green_button;
+                        userProfilePictureBox.ImageLocation = "https://retroachievements.org/UserPic/" + usernameTextBox.Text + ".png";
+
+                        if (Settings.Default.rss_forum_feed || Settings.Default.rss_friend_feed || Settings.Default.rss_news_feed || Settings.Default.rss_new_achievements_feed)
+                        {
+                            UpdateLogLabel("Updating RSS feed");
+
+                            await CheckRSSFeeds();
+                        }
+                    } else
                     {
-                        UpdateTimerLabel("Updating RSS feed");
+                        UpdateLogLabel("Not able to communicate with RetroAchievements API. Trying to restart gracefully...");
 
-                        await CheckRSSFeeds();
+                        await Task.Delay(5000);
                     }
                     StartTimer();
                 }
@@ -587,6 +597,7 @@ namespace Retro_Achievement_Tracker
             userInfoOpenWindowButton.Enabled = true;
             gameInfoOpenWindowButton.Enabled = true;
 
+            UserAndGameTimerCounter = 5;
             UserAndGameUpdateTimer.Start();
 
             UpdateFromSite(null, null);
@@ -599,7 +610,7 @@ namespace Retro_Achievement_Tracker
 
             raConnectionStatusPictureBox.Image = Resources.red_button;
 
-            UpdateTimerLabel("Stopped updating");
+            UpdateLogLabel("Stopped updating");
 
             stopButton.Enabled = false;
 
@@ -622,7 +633,7 @@ namespace Retro_Achievement_Tracker
             return !(string.IsNullOrEmpty(usernameTextBox.Text)
                 || string.IsNullOrEmpty(apiKeyTextBox.Text));
         }
-        private void UpdateTimerLabel(string s)
+        private void UpdateLogLabel(string s)
         {
             timerStatusLabel.Text = s;
         }
