@@ -25,6 +25,7 @@
 
             JToken RecentAchievements = item["RecentAchievements"];
             JToken LastGameID = item["LastGameID"];
+            JToken Motto = item["Motto"];
             JToken UserPic = item["UserPic"];
             JToken Rank = item["Rank"];
             JToken TotalPoints = item["TotalPoints"];
@@ -68,6 +69,14 @@
                 }
             }
 
+            if (Motto != null)
+            {
+                if (Motto.Type == JTokenType.String)
+                {
+                    UserSummary.Motto = Motto.ToString();
+                }
+            }
+
             if (TotalPoints != null)
             {
                 if (TotalPoints.Type == JTokenType.String)
@@ -106,7 +115,7 @@
                     object propVal = prop.GetValue(value, null);
                     if (propVal != null && !propVal.GetType().Name.Equals("List`1"))
                     {
-                        jo.Add(Char.ToLowerInvariant(prop.Name[0]) + prop.Name.Substring(1), JToken.FromObject(propVal, serializer));
+                        jo.Add(char.ToLowerInvariant(prop.Name[0]) + prop.Name.Substring(1), JToken.FromObject(propVal, serializer));
                     }
                 }
             }

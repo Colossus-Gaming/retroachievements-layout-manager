@@ -12,6 +12,7 @@
         public int TotalPoints { get; set; }
         public int TotalTruePoints { get; set; }
         public int Rank { get; set; }
+        public string Motto { get; set; }
         public string UserPic { get; set; }
         public List<Achievement> Achievements { get; set; }
         
@@ -19,7 +20,7 @@
         {
             get
             {
-                return ((float)TotalTruePoints / (float)TotalPoints).ToString("0.00") + "%";
+                return ((float)TotalTruePoints / TotalPoints).ToString("0.00");
             }
         }
         public bool Equals(UserSummary other)
@@ -32,7 +33,7 @@
         }
         public object Clone()
         {
-            return this.MemberwiseClone();
+            return MemberwiseClone();
         }
     }
 
@@ -86,7 +87,7 @@
 
         public object Clone()
         {
-            return this.MemberwiseClone();
+            return MemberwiseClone();
         }
     }
 }

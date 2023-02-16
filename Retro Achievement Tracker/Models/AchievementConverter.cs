@@ -91,10 +91,10 @@ namespace Retro_Achievement_Tracker.Models
                     {
                         if (propVal.GetType().Name.Equals("DateTime"))
                         {
-                            jo.Add(Char.ToLowerInvariant(prop.Name[0]) + prop.Name.Substring(1), JToken.FromObject(((DateTime)propVal).ToString(), serializer));
+                            jo.Add(char.ToLowerInvariant(prop.Name[0]) + prop.Name.Substring(1), JToken.FromObject(((DateTime)propVal).ToString(), serializer));
                         } else
                         {
-                            jo.Add(Char.ToLowerInvariant(prop.Name[0]) + prop.Name.Substring(1), JToken.FromObject(propVal, serializer));
+                            jo.Add(char.ToLowerInvariant(prop.Name[0]) + prop.Name.Substring(1), JToken.FromObject(propVal, serializer));
                         }
                     }
                 }

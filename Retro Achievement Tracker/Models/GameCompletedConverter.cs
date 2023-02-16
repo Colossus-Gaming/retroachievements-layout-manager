@@ -66,7 +66,7 @@ namespace Retro_Achievement_Tracker.Models
                     object propVal = prop.GetValue(value, null);
                     if (propVal != null && !propVal.GetType().Name.Equals("List`1"))
                     {
-                        jo.Add(Char.ToLowerInvariant(prop.Name[0]) + prop.Name.Substring(1), JToken.FromObject(propVal, serializer));
+                        jo.Add(char.ToLowerInvariant(prop.Name[0]) + prop.Name.Substring(1), JToken.FromObject(propVal, serializer));
                     }
                 }
             }

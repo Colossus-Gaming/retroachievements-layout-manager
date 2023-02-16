@@ -1,23 +1,28 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title>Focus Window</title>
+    <title>Notification Window</title>
     <meta charset="UTF-8">
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js" type="text/javascript"></script>
-    <script id="focus-scripts">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script id="achievement-script">
         /**
-                     * textFit v2.3.1
-                     * Previously known as jQuery.textFit
-                     * 11/2014 by STRML (strml.github.com)
-                     * MIT License
-                     *
-                     * To use: textFit(document.getElementById('target-div'), options);
-                     *
-                     * Will make the *text* content inside a container scale to fit the container
-                     * The container is required to have a set width and height
-                     * Uses binary search to fit text with minimal layout calls.
-                     * Version 2.0 does not use jQuery.
-                     */
+        * textFit v2.3.1
+        * Previously known as jQuery.textFit
+        * 11/2014 by STRML (strml.github.com)
+        * MIT License
+        *
+        * To use: textFit(document.getElementById('target-div'), options);
+        *
+        * Will make the *text* content inside a container scale to fit the container
+        * The container is required to have a set width and height
+        * Uses binary search to fit text with minimal layout calls.
+        * Version 2.0 does not use jQuery.
+        */
         /*global define:true, document:true, window:true, HTMLElement:true*/
 
         (function (root, factory) {
@@ -249,83 +254,76 @@
                 document.body.appendChild(css);
             }
         }));
-    </script>
-    <style id="focus-achievment-style" type="text/css">
 
-        #title {
-            right: 1922px;
+        (async function () {
+            await CefSharp.BindObjectAsync("alertControllerAsync");
+        })();
+
+        function setPlayingOn() {
+            alertControllerAsync.setIsPlaying(true);
+        }
+
+        function setPlayingOff() {
+            alertControllerAsync.setIsPlaying(false);
+        }
+    </script>
+    <style id="achievement-style" type="text/css">
+        @keyframes user-prompt-animation {
+            0% {
+                left: 125px;
+                top: -290px;
+            }
+
+            100% {
+                left: 125px;
+                top: 275px;
+            }
+        }
+
+        @keyframes user-prompt-animation-reverse {
+            0% {
+                left: 125px;
+                top: 275px;
+            }
+
+            100% {
+                left: 125px;
+                top: -290px;
+            }
+        }
+
+        #achievement-title,
+        #mastery-title {
             position: absolute;
             top: 10px;
-            right: 5px;
+            right: 10px;
             width: 530px;
             height: 65px;
         }
 
-        #description,
-        #mastery-description {
-            right: 1922px;
-            position: absolute;
-            bottom: 15px;
-            width: 525px;
-            height: 70px;
-        }
-
-        #points {
-            right: 1922px;
-            position: absolute;
-            display: grid;
-            text-align: left;
-            width: 100%;
-            height: 65px;
-            width: 65px;
-        }
-
-        #badge {
-            left: 1922px;
-            position: absolute;
+        #achievement-badge,
+        #mastery-badge {
+            left: 10px;
             bottom: 12px;
+            position: absolute;
             height: 140px;
+            border: 2px solid gold;
         }
 
-        #focus {
+        #achievement-description,
+        #mastery-description {
+            right: 10px;
             position: absolute;
-            top: 5px;
-            left: 5px;
-            width: 700px;
-            height: 165px;
-            background-repeat: no-repeat;
-            background-color: #cccccc;
-            background-size: cover;
-        }
-
-        #line {
-            right: 1922px;
-            position: absolute;
+            top: 80px;
             width: 525px;
-            height: 5px;
+            height: 75px;
         }
 
-        #container {
-            position: absolute;
-            background: magenta;
-            width: 800px;
-            height: 200px;
-            top: -5px;
-            left: -5px;
-        }
-
-        #mastery-achievements {
-            position: absolute;
-            bottom: -3px;
-            right: 2px;
-            width: 200px;
-            height: 80px;
-        }
+        #mastery-achievements,
         #mastery-points {
             position: absolute;
-            bottom: -3px;
             width: 230px;
-            height: 80px;
+            height: 75px;
         }
 
         #mastery-achievements {
@@ -336,24 +334,138 @@
             left: 10px;
         }
 
+        #achievement-video,
+        #mastery-video {
+            position: absolute;
+            padding-left: 5px;
+            padding-top: 5px;
+        }
+
+        #achievement,
+        #mastery {
+            position: absolute;
+            top: -600px;
+            left: -600px;
+            width: 700px;
+            height: 165px;
+            background-repeat: no-repeat;
+            background-color: #cccccc;
+            background-size: cover;
+        }
+
+        #achievement-points {
+            position: absolute;
+            left: 15px;
+            bottom: 10px;
+            display: grid;
+            align-content: end;
+            width: 100%;
+            height: 65px;
+            width: 65px;
+        }
+
+        #container {
+            position: absolute;
+            width: 1922px;
+            height: 1085px;
+            top: -5px;
+            left: -5px;
+            background-color: transparent;
+        }
+
+        #achievement-line,
+        #mastery-line {
+            position: absolute;
+            right: 10px;
+            top: 65px;
+            width: 525px;
+            height: 5px;
+        }
+
+        #ready-message {
+            position: absolute;
+            top: 100px;
+            width: 800px;
+            height: 100px;
+            text-align: center;
+            font-weight: bold;
+            vertical-align: middle;
+            font-size: 32px;
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        #user-prompt {
+            position: absolute;
+            width: 800px;
+            height: 100px;
+            text-align: center;
+            display: none;
+            animation-name: user-prompt-animation;
+            animation-iteration-count: 1;
+            animation-fill-mode: both;
+            animation-duration: 1s;
+        }
+
+        #confirm-button {
+            position: absolute;
+            top: 150px;
+            left: 235px;
+            text-align: center;
+            font-weight: bold;
+            width: 300px;
+            height: 50px;
+            vertical-align: middle;
+            font-size: 28px;
+            background-color: yellow;
+            font-family: 'Press Start 2P', cursive;
+        }
+
         html {
             overflow: hidden;
         }
     </style>
+    <script>
+        function acknowledgePrompt() {
+            document.getElementById("user-prompt").style.animationName = "user-prompt-animation-reverse";
+            alertControllerAsync.setCanPlay();
+
+            setTimeout(function () {
+                $("#user-prompt").hide();
+            }, 500);
+        };
+    </script>
 </head>
 <body>
     <div id="container">
-        <div id="focus">
-            <img id="badge">
-            <div id="title" class="has-font"></div>
-            <hr id="line">
-            <div id="description" class="has-font"></div>
-            <div id="mastery-description">
-                <div id="mastery-achievements" class="has-font"></div>
-                <div id="mastery-points" class="has-font"></div>
-            </div>
-            <div id="points" class="has-font"></div>
+        <div id="achievement">
+            <img id="achievement-badge" />
+            <div id="achievement-title" class="achievement has-font">Achievement</div>
+            <hr id="achievement-line" />
+            <div id="achievement-description" class="achievement has-font">Description</div>
+            <div id="achievement-points" class="achievement has-font">25</div>
         </div>
+
+        <div id="mastery">
+            <img id="mastery-badge" />
+            <div id="mastery-title" class="mastery has-font">Game Title</div>
+            <hr id="mastery-line" />
+            <div id="mastery-description">
+                <div id="mastery-achievements" class="mastery has-font">100</div>
+                <div id="mastery-points" class="mastery has-font">1500</div>
+            </div>
+        </div>
+    </div>
+
+    <video id="achievement-video" onended="setPlayingOff()" onplay="setPlayingOn()" autoplay></video>
+    <video id="mastery-video" onended="setPlayingOff()" onplay="setPlayingOn()" autoplay></video>
+    <div id="user-prompt">
+        <img src="https://retroachievements.org/Images/RA_Logo10.png" />
+        <div id="ready-message" class="prompt" style="color: blue;">
+            Are you ready?
+        </div>
+        <button id="confirm-button" onclick="acknowledgePrompt()" class="prompt" style="color: blue;">
+            CLICK HERE
+        </button>
     </div>
 </body>
 </html>

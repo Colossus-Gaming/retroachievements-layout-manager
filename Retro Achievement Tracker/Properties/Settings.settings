@@ -171,7 +171,7 @@
       <Value Profile="(Default)">True Points</Value>
     </Setting>
     <Setting Name="stats_game_achievements_name" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Cheevos</Value>
+      <Value Profile="(Default)">Achievements</Value>
     </Setting>
     <Setting Name="notifications_achievement_in_animation" Type="System.String" Scope="User">
       <Value Profile="(Default)">STATIC</Value>
@@ -688,6 +688,18 @@
     </Setting>
     <Setting Name="alerts_mastery_enable" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="auto_related_media" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="related_media_launchbox_filepath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="related_media_window_background_color" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#FF00FF</Value>
+    </Setting>
+    <Setting Name="related_media_selection" Type="System.String" Scope="User">
+      <Value Profile="(Default)">BADGE_ICON</Value>
     </Setting>
   </Settings>
 </SettingsFile>

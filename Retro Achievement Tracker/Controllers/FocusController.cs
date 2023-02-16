@@ -8,7 +8,7 @@ namespace Retro_Achievement_Tracker.Controllers
     public sealed class FocusController
     {
         private static FocusController instance = new FocusController();
-        private static FocusWindow FocusLayoutWindow;
+        private static FocusWindow FocusWindow;
 
         public bool IsOpen;
 
@@ -16,8 +16,7 @@ namespace Retro_Achievement_Tracker.Controllers
 
         private FocusController()
         {
-            FocusLayoutWindow = new FocusWindow();
-            IsOpen = false;
+            FocusWindow = new FocusWindow();
         }
         public Achievement GetCurrentlyFocusedAchievement()
         {
@@ -32,21 +31,23 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public void Close()
         {
-            FocusLayoutWindow.Close();
+            FocusWindow.Close();
         }
         public void Show()
         {
             if (!IsOpen)
             {
-                FocusLayoutWindow = new FocusWindow();
-                FocusLayoutWindow.Show();
+                if (FocusWindow == null || FocusWindow.IsDisposed)
+                {
+                    FocusWindow = new FocusWindow();
+                }
+                FocusWindow.Show();
             }
         }
         public void SetAllSettings()
         {
-            FocusLayoutWindow.AssignJavaScriptVariables();
-            FocusLayoutWindow.SetWindowBackgroundColor(WindowBackgroundColor);
-            FocusLayoutWindow.SetBorderBackgroundColor(BorderBackgroundColor);
+            FocusWindow.SetWindowBackgroundColor(WindowBackgroundColor);
+            FocusWindow.SetBorderBackgroundColor(BorderBackgroundColor);
 
             if (AdvancedSettingsEnabled)
             {
@@ -60,48 +61,48 @@ namespace Retro_Achievement_Tracker.Controllers
 
         private void SetAdvancedSettings()
         {
-            FocusLayoutWindow.SetTitleFontFamily(TitleFontFamily);
-            FocusLayoutWindow.SetTitleColor(TitleColor);
-            FocusLayoutWindow.SetTitleOutline(TitleOutlineEnabled ? TitleOutlineColor + " " + TitleOutlineSize + "px" : "0px");
+            FocusWindow.SetTitleFontFamily(TitleFontFamily);
+            FocusWindow.SetTitleColor(TitleColor);
+            FocusWindow.SetTitleOutline(TitleOutlineEnabled ? TitleOutlineColor + " " + TitleOutlineSize + "px" : "0px");
 
-            FocusLayoutWindow.SetDescriptionFontFamily(DescriptionFontFamily);
-            FocusLayoutWindow.SetDescriptionColor(DescriptionColor);
-            FocusLayoutWindow.SetDescriptionOutline(DescriptionOutlineEnabled ? DescriptionOutlineColor + " " + DescriptionOutlineSize + "px" : "0px");
+            FocusWindow.SetDescriptionFontFamily(DescriptionFontFamily);
+            FocusWindow.SetDescriptionColor(DescriptionColor);
+            FocusWindow.SetDescriptionOutline(DescriptionOutlineEnabled ? DescriptionOutlineColor + " " + DescriptionOutlineSize + "px" : "0px");
 
-            FocusLayoutWindow.SetPointsFontFamily(PointsFontFamily);
-            FocusLayoutWindow.SetPointsColor(PointsColor);
-            FocusLayoutWindow.SetPointsOutline(PointsOutlineEnabled ? PointsOutlineColor + " " + PointsOutlineSize + "px" : "0px");
+            FocusWindow.SetPointsFontFamily(PointsFontFamily);
+            FocusWindow.SetPointsColor(PointsColor);
+            FocusWindow.SetPointsOutline(PointsOutlineEnabled ? PointsOutlineColor + " " + PointsOutlineSize + "px" : "0px");
 
-            FocusLayoutWindow.SetLineColor(LineColor);
-            FocusLayoutWindow.SetLineOutline(LineOutlineEnabled ? LineOutlineSize + "px solid " + LineOutlineColor : "0px");
+            FocusWindow.SetLineColor(LineColor);
+            FocusWindow.SetLineOutline(LineOutlineEnabled ? LineOutlineSize + "px solid " + LineOutlineColor : "0px");
         }
 
-        public void SetSimpleSettings()
+        private void SetSimpleSettings()
         {
-            FocusLayoutWindow.SetSimpleFontFamily(SimpleFontFamily);
-            FocusLayoutWindow.SetSimpleFontColor(SimpleFontColor);
-            FocusLayoutWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px", SimpleFontOutlineEnabled ? SimpleFontOutlineSize + "px solid " + SimpleFontOutlineColor : "0px");
-        }
-
-        internal void HideFocus()
-        {
-            FocusLayoutWindow.HideFocus();
+            FocusWindow.SetSimpleFontFamily(SimpleFontFamily);
+            FocusWindow.SetSimpleFontColor(SimpleFontColor);
+            FocusWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px", SimpleFontOutlineEnabled ? SimpleFontOutlineSize + "px solid " + SimpleFontOutlineColor : "0px");
         }
 
         public void UpdateFocus()
         {
             if (IsOpen && CurrentlyFocusedAchievement != null)
             {
-                FocusLayoutWindow.SetFocus(CurrentlyFocusedAchievement);
+                FocusWindow.AssignJavaScriptVariables();
+                SetAllSettings();
+
+                FocusWindow.SetFocus(CurrentlyFocusedAchievement);
 
                 if (BorderEnabled)
                 {
-                    FocusLayoutWindow.EnableBorder();
+                    FocusWindow.EnableBorder();
                 }
                 else
                 {
-                    FocusLayoutWindow.DisableBorder();
+                    FocusWindow.DisableBorder();
                 }
+
+                FocusWindow.SetClientSize();
             }
         }
         public void SetFocus(Achievement currentlyViewingAchievement)
@@ -120,15 +121,15 @@ namespace Retro_Achievement_Tracker.Controllers
         {
             if (IsOpen)
             {
-                FocusLayoutWindow.SetFocus(gameInfo);
+                FocusWindow.SetFocus(gameInfo);
 
                 if (BorderEnabled)
                 {
-                    FocusLayoutWindow.EnableBorder();
+                    FocusWindow.EnableBorder();
                 }
                 else
                 {
-                    FocusLayoutWindow.DisableBorder();
+                    FocusWindow.DisableBorder();
                 }
             }
         }
@@ -143,10 +144,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.focus_advanced_options_enabled = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    SetAllSettings();
-                }
+                SetAllSettings();
             }
         }
         public FontFamily SimpleFontFamily
@@ -171,10 +169,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.focus_font_family_name = value.Name;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    FocusLayoutWindow.SetSimpleFontFamily(SimpleFontFamily);
-                }
+                SetAllSettings();
             }
         }
         public string SimpleFontColor
@@ -188,10 +183,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.focus_font_color_hex_code = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    FocusLayoutWindow.SetSimpleFontColor(value);
-                }
+                SetAllSettings();
             }
         }
         public string SimpleFontOutlineColor
@@ -204,11 +196,8 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.focus_font_outline_color_hex = value;
                 Settings.Default.Save();
-                if (IsOpen)
-                {
-                    FocusLayoutWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px", SimpleFontOutlineEnabled ? SimpleFontOutlineSize + "px solid " + SimpleFontOutlineColor : "0px");
 
-                }
+                SetAllSettings();
             }
         }
         public int SimpleFontOutlineSize
@@ -222,11 +211,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.focus_font_outline_size = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    FocusLayoutWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px", SimpleFontOutlineEnabled ? SimpleFontOutlineSize + "px solid " + SimpleFontOutlineColor : "0px");
-
-                }
+                SetAllSettings();
             }
         }
         public bool SimpleFontOutlineEnabled
@@ -239,11 +224,8 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.focus_font_outline_enabled = value;
                 Settings.Default.Save();
-                if (IsOpen)
-                {
-                    FocusLayoutWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px", SimpleFontOutlineEnabled ? SimpleFontOutlineSize + "px solid " + SimpleFontOutlineColor : "0px");
 
-                }
+                SetAllSettings();
             }
         }
         public FontFamily TitleFontFamily
@@ -267,11 +249,8 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.focus_title_font_family = value.Name;
                 Settings.Default.Save();
-                if (IsOpen)
-                {
-                    FocusLayoutWindow.SetTitleFontFamily(TitleFontFamily);
 
-                }
+                SetAllSettings();
             }
         }
         public FontFamily DescriptionFontFamily
@@ -295,11 +274,8 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.focus_description_font_family = value.Name;
                 Settings.Default.Save();
-                if (IsOpen)
-                {
-                    FocusLayoutWindow.SetDescriptionFontFamily(DescriptionFontFamily);
 
-                }
+                SetAllSettings();
             }
         }
 
@@ -325,11 +301,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.focus_points_font_family = value.Name;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    FocusLayoutWindow.SetPointsFontFamily(PointsFontFamily);
-
-                }
+                SetAllSettings();
             }
         }
 
@@ -344,11 +316,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.focus_title_color = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    FocusLayoutWindow.SetTitleColor(value);
-
-                }
+                SetAllSettings();
             }
         }
         public string DescriptionColor
@@ -362,11 +330,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.focus_description_color = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    FocusLayoutWindow.SetDescriptionColor(value);
-
-                }
+                SetAllSettings();
             }
         }
         public string PointsColor
@@ -380,11 +344,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.focus_points_color = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    FocusLayoutWindow.SetPointsColor(value);
-
-                }
+                SetAllSettings();
             }
         }
         public string LineColor
@@ -398,11 +358,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.focus_line_color = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    FocusLayoutWindow.SetLineColor(value);
-
-                }
+                SetAllSettings();
             }
         }
         public bool TitleOutlineEnabled
@@ -416,11 +372,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.focus_title_outline_enabled = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    FocusLayoutWindow.SetTitleOutline(TitleOutlineEnabled ? TitleOutlineColor + " " + TitleOutlineSize + "px" : "0px");
-
-                }
+                SetAllSettings();
             }
         }
         public bool DescriptionOutlineEnabled
@@ -434,11 +386,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.focus_description_outline_enabled = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    FocusLayoutWindow.SetDescriptionOutline(DescriptionOutlineEnabled ? DescriptionOutlineColor + " " + DescriptionOutlineSize + "px" : "0px");
-
-                }
+                SetAllSettings();
             }
         }
         public bool PointsOutlineEnabled
@@ -452,11 +400,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.focus_points_outline_enabled = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    FocusLayoutWindow.SetPointsOutline(PointsOutlineEnabled ? PointsOutlineColor + " " + PointsOutlineSize + "px" : "0px");
-
-                }
+                SetAllSettings();
             }
         }
         public bool LineOutlineEnabled
@@ -470,11 +414,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.focus_line_outline_enabled = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    FocusLayoutWindow.SetLineOutline(LineOutlineEnabled ? LineOutlineSize + "px solid " + LineOutlineColor : "0px");
-
-                }
+                SetAllSettings();
             }
         }
         public string TitleOutlineColor
@@ -487,11 +427,8 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.focus_title_outline_color = value;
                 Settings.Default.Save();
-                if (IsOpen)
-                {
-                    FocusLayoutWindow.SetTitleOutline(TitleOutlineEnabled ? TitleOutlineColor + " " + TitleOutlineSize + "px" : "0px");
 
-                }
+                SetAllSettings();
             }
         }
         public string DescriptionOutlineColor
@@ -504,11 +441,8 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.focus_description_outline_color = value;
                 Settings.Default.Save();
-                if (IsOpen)
-                {
-                    FocusLayoutWindow.SetDescriptionOutline(DescriptionOutlineEnabled ? DescriptionOutlineColor + " " + DescriptionOutlineSize + "px" : "0px");
 
-                }
+                SetAllSettings();
             }
         }
         public string PointsOutlineColor
@@ -521,11 +455,8 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.focus_points_outline_color = value;
                 Settings.Default.Save();
-                if (IsOpen)
-                {
-                    FocusLayoutWindow.SetPointsOutline(PointsOutlineEnabled ? PointsOutlineColor + " " + PointsOutlineSize + "px" : "0px");
 
-                }
+                SetAllSettings();
             }
         }
         public string LineOutlineColor
@@ -538,11 +469,8 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.focus_line_outline_color = value;
                 Settings.Default.Save();
-                if (IsOpen)
-                {
-                    FocusLayoutWindow.SetLineOutline(LineOutlineEnabled ? LineOutlineSize + "px solid " + LineOutlineColor : "0px");
 
-                }
+                SetAllSettings();
             }
         }
         public int TitleOutlineSize
@@ -555,10 +483,8 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.focus_title_outline_size = value;
                 Settings.Default.Save();
-                if (IsOpen)
-                {
-                    FocusLayoutWindow.SetTitleOutline(TitleOutlineEnabled ? TitleOutlineColor + " " + TitleOutlineSize + "px" : "0px");
-                }
+
+                SetAllSettings();
             }
         }
         public int DescriptionOutlineSize
@@ -571,10 +497,8 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.focus_description_outline_size = value;
                 Settings.Default.Save();
-                if (IsOpen)
-                {
-                    FocusLayoutWindow.SetDescriptionOutline(DescriptionOutlineEnabled ? DescriptionOutlineColor + " " + DescriptionOutlineSize + "px" : "0px");
-                }
+
+                SetAllSettings();
             }
         }
         public int PointsOutlineSize
@@ -588,10 +512,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.focus_points_outline_size = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    FocusLayoutWindow.SetPointsOutline(PointsOutlineEnabled ? PointsOutlineColor + " " + PointsOutlineSize + "px" : "0px");
-                }
+                SetAllSettings();
             }
         }
         public int LineOutlineSize
@@ -605,10 +526,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.focus_line_outline_size = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    FocusLayoutWindow.SetLineOutline(LineOutlineEnabled ? LineOutlineSize + "px solid " + LineOutlineColor : "0px");
-                }
+                SetAllSettings();
             }
         }
         public bool BorderEnabled
@@ -621,17 +539,8 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.focus_border_enable = value;
                 Settings.Default.Save();
-                if (IsOpen)
-                {
-                    if (value)
-                    {
-                        FocusLayoutWindow.EnableBorder();
-                    }
-                    else
-                    {
-                        FocusLayoutWindow.DisableBorder();
-                    }
-                }
+
+                SetAllSettings();
             }
         }
         public string BorderBackgroundColor
@@ -644,10 +553,8 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.focus_background_color = value;
                 Settings.Default.Save();
-                if (IsOpen)
-                {
-                    FocusLayoutWindow.SetBorderBackgroundColor(value);
-                }
+
+                SetAllSettings();
             }
         }
         public string WindowBackgroundColor
@@ -660,10 +567,8 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.focus_window_background_color = value;
                 Settings.Default.Save();
-                if (IsOpen)
-                {
-                    FocusLayoutWindow.SetWindowBackgroundColor(value);
-                }
+
+                SetAllSettings();
             }
         }
 

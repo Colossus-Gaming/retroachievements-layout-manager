@@ -4,6 +4,7 @@ using Retro_Achievement_Tracker.Controllers;
 using Retro_Achievement_Tracker.Properties;
 using System.Drawing;
 using System.IO;
+using System.Web;
 
 namespace Retro_Achievement_Tracker.Models
 {
@@ -20,10 +21,9 @@ namespace Retro_Achievement_Tracker.Models
             {
                 return ResourceHandler.FromByteArray(GetBitmapAsByteArray(Resources.notification_background));
             }
-
-            if (request.Url == "disk://achievement-notification")
+            else if (request.Url == "disk://achievement-notification")
             {
-                if (NotificationsController.Instance.CustomAchievementEnabled && File.Exists(Settings.Default.notification_custom_achievement_file))
+                if (AlertsController.Instance.CustomAchievementEnabled && File.Exists(Settings.Default.notification_custom_achievement_file))
                 {
                     return ResourceHandler.FromFilePath(Settings.Default.notification_custom_achievement_file, null, true);
                 }
@@ -32,10 +32,9 @@ namespace Retro_Achievement_Tracker.Models
                     return ResourceHandler.FromFilePath("video/achievement-notification.webm", null, true);
                 }
             }
-
-            if (request.Url == "disk://mastery-notification")
+            else if (request.Url == "disk://mastery-notification")
             {
-                if (NotificationsController.Instance.CustomMasteryEnabled && File.Exists(Settings.Default.notification_custom_mastery_file))
+                if (AlertsController.Instance.CustomMasteryEnabled && File.Exists(Settings.Default.notification_custom_mastery_file))
                 {
                     return ResourceHandler.FromFilePath(Settings.Default.notification_custom_mastery_file);
                 }
@@ -45,7 +44,7 @@ namespace Retro_Achievement_Tracker.Models
                 }
             }
 
-            return ResourceHandler.FromFilePath("" + request.Url.Replace("disk://", ""));
+            return ResourceHandler.FromFilePath(HttpUtility.UrlDecode(request.Url).Replace("disk://", "").Replace("\\", "/"), null, true);
         }
 
         private byte[] GetBitmapAsByteArray(Bitmap bitmap)

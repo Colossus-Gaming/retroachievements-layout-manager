@@ -63,47 +63,31 @@ namespace Retro_Achievement_Tracker.Models
         }
         public void EnqueueFocus(Achievement currentlyViewingAchievement)
         {
-            StreamLabelsRequests.Enqueue(Tuple.Create(new Task(() => WriteFocusStreamLabels(currentlyViewingAchievement)), false));
+            WriteFocusStreamLabels(currentlyViewingAchievement);
         }
         public void ClearFocus()
         {
-            StreamLabelsRequests.Enqueue(Tuple.Create(new Task(() => ClearFocusStreamLabels()), false));
+            ClearFocusStreamLabels();
         }
         public void EnqueueAlert(Achievement currentlyViewingAchievement)
         {
-            StreamLabelsRequests.Enqueue(Tuple.Create(new Task(() => WriteAlertsStreamLabels(currentlyViewingAchievement)), true));
+            WriteAlertsStreamLabels(currentlyViewingAchievement);
         }
         public void EnqueueAlert(GameInfo gameInfo)
         {
-            StreamLabelsRequests.Enqueue(Tuple.Create(new Task(() => WriteAlertsStreamLabels(gameInfo)), true));
-        }
-        public void EnqueueClearAlert()
-        {
-            StreamLabelsRequests.Enqueue(Tuple.Create(new Task(() => WriteAlertsStreamLabels((Achievement)null)), true));
+            WriteAlertsStreamLabels(gameInfo);
         }
         public void EnqueueUserInfo(UserSummary userSummary)
         {
-            StreamLabelsRequests.Enqueue(Tuple.Create(new Task(() => WriteUserInfoStreamLabels(userSummary)), false));
-        }
-        public void ClearUserInfo()
-        {
-            StreamLabelsRequests.Enqueue(Tuple.Create(new Task(() => ClearUserInfo()), false));
+            WriteUserInfoStreamLabels(userSummary);
         }
         public void EnqueueGameInfo(GameInfo gameInfo)
         {
-            StreamLabelsRequests.Enqueue(Tuple.Create(new Task(() => WriteGameInfoStreamLabels(gameInfo)), false));
-        }
-        public void ClearGameStats()
-        {
-            StreamLabelsRequests.Enqueue(Tuple.Create(new Task(() => ClearGameStats()), false));
+            WriteGameInfoStreamLabels(gameInfo);
         }
         public void EnqueueLastFive(GameInfo gameInfo)
         {
-            StreamLabelsRequests.Enqueue(Tuple.Create(new Task(() => WriteLastFiveStreamLabels(gameInfo)), false));
-        }
-        public void ClearLastFive()
-        {
-            StreamLabelsRequests.Enqueue(Tuple.Create(new Task(() => ClearLastFive()), false));
+            WriteLastFiveStreamLabels(gameInfo);
         }
         private void WriteFocusStreamLabels(Achievement currentlyViewingAchievement)
         {
@@ -211,7 +195,6 @@ namespace Retro_Achievement_Tracker.Models
                 File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/alerts/data.json", "{}");
             }
         }
-
         public void ClearAllStreamLabels()
         {
             File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/focus/title.txt", string.Empty);

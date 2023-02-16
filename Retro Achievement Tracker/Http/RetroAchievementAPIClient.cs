@@ -18,14 +18,14 @@ namespace Retro_Achievement_Tracker
         }
         public async Task<UserSummary> GetUserSummary()
         {
-            HttpResponseMessage httpResponseMessage = await client.GetAsync("https://retroachievements.org/API/API_GetUserSummary.php?z=" + UserName + "&y=" + ApiKey + "&u=" + UserName + "&g=1&a=1000");
-
+            HttpResponseMessage httpResponseMessage = await client.GetAsync("https://retroachievements.org/API/API_GetUserSummary.php?z=" + UserName + "&y=" + ApiKey + "&u=" + UserName + "&g=1&a=10000");
+            
             return JsonConvert.DeserializeObject<UserSummary>(await httpResponseMessage.Content.ReadAsStringAsync());
         }
         public async Task<GameInfo> GetGameInfo(int gameId)
         {
             HttpResponseMessage httpResponseMessage = await client.GetAsync("https://retroachievements.org/API/API_GetGameInfoAndUserProgress.php?z=" + UserName + "&y=" + ApiKey + "&u=" + UserName + "&g=" + gameId);
-
+            
             return JsonConvert.DeserializeObject<GameInfo>(await httpResponseMessage.Content.ReadAsStringAsync());
         }
         public async Task<string> GetNewsFeed()

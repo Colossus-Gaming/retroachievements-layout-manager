@@ -132,6 +132,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xaml">
       <Private>True</Private>
     </Reference>
@@ -168,12 +169,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AchievementListController.cs" />
-    <Compile Include="Controllers\NotificationsController.cs" />
+    <Compile Include="Controllers\RelatedMediaController.cs" />
+    <Compile Include="Controllers\AlertsController.cs" />
     <Compile Include="Controllers\FocusController.cs" />
     <Compile Include="Controllers\GameInfoController.cs" />
     <Compile Include="Controllers\RecentAchievementsController.cs" />
     <Compile Include="Controllers\GameProgressController.cs" />
-    <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Controllers\UserInfoController.cs" />
     <Compile Include="Forms\AchievementListWindow.cs">
       <SubType>Form</SubType>
@@ -181,11 +182,23 @@
     <Compile Include="Forms\AchievementListWindow.Designer.cs">
       <DependentUpon>AchievementListWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\GameStatsWindow.cs">
+    <Compile Include="Forms\DisplayForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\GameStatsWindow.Designer.cs">
-      <DependentUpon>GameStatsWindow.cs</DependentUpon>
+    <Compile Include="Forms\DisplayForm.Designer.cs">
+      <DependentUpon>DisplayForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\GameProgressWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\GameProgressWindow.Designer.cs">
+      <DependentUpon>GameProgressWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\RelatedMediaWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\RelatedMediaWindow.Designer.cs">
+      <DependentUpon>RelatedMediaWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\RecentAchievementsWindow.cs">
       <SubType>Form</SubType>
@@ -205,11 +218,11 @@
     <Compile Include="Forms\GameInfoWindow.Designer.cs">
       <DependentUpon>GameInfoWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\UserStatsWindow.cs">
+    <Compile Include="Forms\UserInfoWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\UserStatsWindow.Designer.cs">
-      <DependentUpon>UserStatsWindow.cs</DependentUpon>
+    <Compile Include="Forms\UserInfoWindow.Designer.cs">
+      <DependentUpon>UserInfoWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FocusWindow.cs">
       <SubType>Form</SubType>
@@ -240,6 +253,12 @@
     <EmbeddedResource Include="Forms\AchievementListWindow.resx">
       <DependentUpon>AchievementListWindow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DisplayForm.resx">
+      <DependentUpon>DisplayForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\GameProgressWindow.resx">
+      <DependentUpon>GameProgressWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\RecentAchievementsWindow.resx">
       <DependentUpon>RecentAchievementsWindow.cs</DependentUpon>
     </EmbeddedResource>
@@ -252,8 +271,8 @@
     <EmbeddedResource Include="Forms\GameInfoWindow.resx">
       <DependentUpon>GameInfoWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UserStatsWindow.resx">
-      <DependentUpon>UserStatsWindow.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\UserInfoWindow.resx">
+      <DependentUpon>UserInfoWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
@@ -290,7 +309,7 @@
       <Version>1.0.0.1</Version>
     </PackageReference>
     <PackageReference Include="CefSharp.WinForms">
-      <Version>107.1.40</Version>
+      <Version>110.0.250</Version>
     </PackageReference>
     <PackageReference Include="HtmlAgilityPack">
       <Version>1.11.46</Version>
@@ -302,7 +321,10 @@
       <Version>1.1.0.1</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
-      <Version>13.0.1</Version>
+      <Version>13.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="TradeWright.TabControlExtra">
+      <Version>2.0.1</Version>
     </PackageReference>
     <PackageReference Include="WindowsAPICodePack-Shell">
       <Version>1.1.1</Version>
@@ -321,11 +343,14 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\GameInfoWindow.html" />
-    <Resource Include="Resources\RecentAchievementsWindow.html" />
-    <EmbeddedResource Include="Resources\AchievementListWindow.html" />
-    <Content Include="Resources\GameStatsWindow.html" />
-    <Content Include="Resources\ROCK3.png" />
+    <Resource Include="Resources\game-info-window.html" />
+    <Resource Include="Resources\recent-achievements-window.html" />
+    <EmbeddedResource Include="Resources\achievement-list-window.html" />
+    <Resource Include="Resources\related-media-window.html" />
+    <Content Include="Resources\game-progress-window.html" />
+    <Content Include="Resources\mastered-icon.PNG" />
+    <Content Include="Resources\progression-meter.png" />
+    <Content Include="Resources\retro-achievements-banner.png" />
     <Content Include="video\achievement-notification.webm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -333,12 +358,11 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\notification-background.png" />
-    <None Include="Resources\ARCADE_N.TTF" />
     <None Include="Resources\yellow-button.png" />
-    <EmbeddedResource Include="Resources\FocusWindow.html" />
+    <EmbeddedResource Include="Resources\focus-window.html" />
     <None Include="Resources\green-button.png" />
-    <EmbeddedResource Include="Resources\UserStatsWindow.html" />
-    <EmbeddedResource Include="Resources\AlertsWindow.html" />
+    <EmbeddedResource Include="Resources\user-info-window.html" />
+    <EmbeddedResource Include="Resources\alerts-window.html" />
     <Content Include="Resources\image.ico" />
     <None Include="Resources\red-button.png" />
   </ItemGroup>

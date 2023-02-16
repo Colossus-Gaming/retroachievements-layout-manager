@@ -7,7 +7,7 @@ namespace Retro_Achievement_Tracker.Controllers
     public sealed class UserInfoController
     {
         private static UserInfoController instance = new UserInfoController();
-        private static UserStatsWindow UserStatsWindow;
+        private static UserInfoWindow UserInfoWindow;
 
         public bool IsOpen;
         private string rank;
@@ -17,8 +17,7 @@ namespace Retro_Achievement_Tracker.Controllers
 
         private UserInfoController()
         {
-            UserStatsWindow = new UserStatsWindow();
-            IsOpen = false;
+            UserInfoWindow = new UserInfoWindow();
         }
         public static UserInfoController Instance
         {
@@ -29,67 +28,78 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public void Close()
         {
-            UserStatsWindow.Close();
+            UserInfoWindow.Close();
         }
         public void Show()
         {
             if (!IsOpen)
             {
-                UserStatsWindow = new UserStatsWindow();
-                UserStatsWindow.Show();
+                if (UserInfoWindow == null || UserInfoWindow.IsDisposed)
+                {
+                    UserInfoWindow = new UserInfoWindow();
+                }
+                UserInfoWindow.Show();
+            }
+        }
+        public void UpdateUserInfo()
+        {
+            if (IsOpen)
+            {
+                UserInfoWindow.AssignJavaScriptVariables();
+
+                SetAllSettings();
+
+                UserInfoWindow.SetRankVisibility(RankEnabled);
+                UserInfoWindow.SetPointsVisibility(PointsEnabled);
+                UserInfoWindow.SetTruePointsVisibility(TruePointsEnabled);
+                UserInfoWindow.SetRatioVisibility(RatioEnabled);
+
+                UserInfoWindow.SetRankName(RankName);
+                UserInfoWindow.SetPointsName(PointsName);
+                UserInfoWindow.SetTruePointsName(TruePointsName);
+                UserInfoWindow.SetRatioName(RatioName);
+
+                if (!string.IsNullOrEmpty(rank))
+                {
+                    UserInfoWindow.SetRankValue(rank);
+                    UserInfoWindow.SetPointsValue(points);
+                    UserInfoWindow.SetTruePointsValue(truePoints);
+                    UserInfoWindow.SetRatioValue(ratio);
+                }
+
+                SetAllSettings();
+
+                UserInfoWindow.SetClientSize();
             }
         }
         public void SetAllSettings()
         {
+            UserInfoWindow.SetWindowBackgroundColor(WindowBackgroundColor);
 
-            if (IsOpen)
+            if (AdvancedSettingsEnabled)
             {
-                UserStatsWindow.AssignJavaScriptVariables();
-
-                if (AdvancedSettingsEnabled)
-                {
-                    SetAdvancedSettings();
-                }
-                else
-                {
-                    SetSimpleSettings();
-                }
-
-                UserStatsWindow.SetWindowBackgroundColor(WindowBackgroundColor);
-                UserStatsWindow.SetRankName(RankName);
-                UserStatsWindow.SetPointsName(PointsName);
-                UserStatsWindow.SetTruePointsName(TruePointsName);
-                UserStatsWindow.SetRatioName(RatioName);
-
-                if (!string.IsNullOrEmpty(rank))
-                {
-                    UserStatsWindow.SetRankValue(rank);
-                    UserStatsWindow.SetPointsValue(points);
-                    UserStatsWindow.SetTruePointsValue(truePoints);
-                    UserStatsWindow.SetRatioValue(ratio);
-                }
-
-                UserStatsWindow.SetRankVisibility(RankEnabled);
-                UserStatsWindow.SetPointsVisibility(PointsEnabled);
-                UserStatsWindow.SetTruePointsVisibility(TruePointsEnabled);
-                UserStatsWindow.SetRatioVisibility(RatioEnabled);
+                SetAdvancedSettings();
+            }
+            else
+            {
+                SetSimpleSettings();
             }
         }
-        public void SetSimpleSettings()
+        private void SetSimpleSettings()
         {
-            UserStatsWindow.SetSimpleFontFamily(SimpleFontFamily);
-            UserStatsWindow.SetSimpleFontColor(SimpleFontColor);
-            UserStatsWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px");
+            UserInfoWindow.SetSimpleFontFamily(SimpleFontFamily);
+            UserInfoWindow.SetSimpleFontColor(SimpleFontColor);
+            UserInfoWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px");
         }
-        public void SetAdvancedSettings()
+        private void SetAdvancedSettings()
         {
-            UserStatsWindow.SetNameFontFamily(NameFontFamily);
-            UserStatsWindow.SetNameColor(NameColor);
-            UserStatsWindow.SetNameOutline(NameOutlineEnabled ? NameOutlineColor + " " + NameOutlineSize + "px" : "0px");
+            UserInfoWindow.SetNameFontFamily(NameFontFamily);
+            UserInfoWindow.SetNameColor(NameColor);
+            UserInfoWindow.SetNameOutline(NameOutlineEnabled ? NameOutlineColor + " " + NameOutlineSize + "px" : "0px");
 
-            UserStatsWindow.SetValueFontFamily(ValueFontFamily);
-            UserStatsWindow.SetValueColor(ValueColor);
-            UserStatsWindow.SetValueOutline(ValueOutlineEnabled ? ValueOutlineColor + " " + ValueOutlineSize + "px" : "0px");
+            UserInfoWindow.SetValueFontFamily(ValueFontFamily);
+            UserInfoWindow.SetValueColor(ValueColor);
+            UserInfoWindow.SetValueOutline(ValueOutlineEnabled ? ValueOutlineColor + " " + ValueOutlineSize + "px" : "0px");
         }
 
         internal void SetRank(string value)
@@ -98,7 +108,7 @@ namespace Retro_Achievement_Tracker.Controllers
 
             if (IsOpen)
             {
-                UserStatsWindow.SetRankValue(value);
+                UserInfoWindow.SetRankValue(value);
             }
         }
 
@@ -108,7 +118,7 @@ namespace Retro_Achievement_Tracker.Controllers
 
             if (IsOpen)
             {
-                UserStatsWindow.SetRatioValue(value);
+                UserInfoWindow.SetRatioValue(value);
             }
         }
 
@@ -118,7 +128,7 @@ namespace Retro_Achievement_Tracker.Controllers
 
             if (IsOpen)
             {
-                UserStatsWindow.SetPointsValue(value);
+                UserInfoWindow.SetPointsValue(value);
             }
         }
 
@@ -128,7 +138,7 @@ namespace Retro_Achievement_Tracker.Controllers
 
             if (IsOpen)
             {
-                UserStatsWindow.SetTruePointsValue(value);
+                UserInfoWindow.SetTruePointsValue(value);
             }
         }
         public string WindowBackgroundColor
@@ -144,7 +154,7 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-                    UserStatsWindow.SetWindowBackgroundColor(value);
+                    UserInfoWindow.SetWindowBackgroundColor(value);
                 }
             }
         }
@@ -189,8 +199,8 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-                    UserStatsWindow.AssignJavaScriptVariables();
-                    UserStatsWindow.SetSimpleFontFamily(SimpleFontFamily);
+                    UserInfoWindow.AssignJavaScriptVariables();
+                    UserInfoWindow.SetSimpleFontFamily(SimpleFontFamily);
                 }
             }
         }
@@ -207,8 +217,8 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (IsOpen)
                 {
-                    UserStatsWindow.AssignJavaScriptVariables();
-                    UserStatsWindow.SetSimpleFontColor(value);
+                    UserInfoWindow.AssignJavaScriptVariables();
+                    UserInfoWindow.SetSimpleFontColor(value);
                 }
             }
         }
@@ -223,12 +233,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_font_outline_color_hex = value;
                 Settings.Default.Save();
 
-
-                if (IsOpen)
-                {
-                    UserStatsWindow.AssignJavaScriptVariables();
-                    UserStatsWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px");
-                }
+                UpdateUserInfo();
             }
         }
         public int SimpleFontOutlineSize
@@ -242,11 +247,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_font_outline_size = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    UserStatsWindow.AssignJavaScriptVariables();
-                    UserStatsWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px");
-                }
+                UpdateUserInfo();
             }
         }
         public bool SimpleFontOutlineEnabled
@@ -260,12 +261,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_font_outline_enabled = value;
                 Settings.Default.Save();
 
-
-                if (IsOpen)
-                {
-                    UserStatsWindow.AssignJavaScriptVariables();
-                    UserStatsWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px");
-                }
+                UpdateUserInfo();
             }
         }
         public FontFamily NameFontFamily
@@ -289,11 +285,8 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.stats_name_font_family = value.Name;
                 Settings.Default.Save();
-                if (IsOpen)
-                {
-                    UserStatsWindow.AssignJavaScriptVariables();
-                    UserStatsWindow.SetNameFontFamily(NameFontFamily);
-                }
+
+                UpdateUserInfo();
             }
         }
         public FontFamily ValueFontFamily
@@ -317,11 +310,8 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.stats_value_font_family = value.Name;
                 Settings.Default.Save();
-                if (IsOpen)
-                {
-                    UserStatsWindow.AssignJavaScriptVariables();
-                    UserStatsWindow.SetValueFontFamily(ValueFontFamily);
-                }
+
+                UpdateUserInfo();
             }
         }
 
@@ -336,11 +326,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_name_color = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    UserStatsWindow.AssignJavaScriptVariables();
-                    UserStatsWindow.SetNameColor(value);
-                }
+                UpdateUserInfo();
             }
         }
         public string ValueColor
@@ -354,11 +340,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_value_color = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    UserStatsWindow.AssignJavaScriptVariables();
-                    UserStatsWindow.SetValueColor(value);
-                }
+                UpdateUserInfo();
             }
         }
         public bool NameOutlineEnabled
@@ -372,11 +354,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_name_outline_enabled = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    UserStatsWindow.AssignJavaScriptVariables();
-                    UserStatsWindow.SetNameOutline(value ? NameOutlineColor + " " + NameOutlineSize + "px" : "0px");
-                }
+                UpdateUserInfo();
             }
         }
         public bool ValueOutlineEnabled
@@ -390,11 +368,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_value_outline_enabled = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    UserStatsWindow.AssignJavaScriptVariables();
-                    UserStatsWindow.SetValueOutline(value ? ValueOutlineColor + " " + ValueOutlineSize + "px" : "0px");
-                }
+                UpdateUserInfo();
             }
         }
         public string NameOutlineColor
@@ -409,11 +383,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.Save();
 
 
-                if (IsOpen)
-                {
-                    UserStatsWindow.AssignJavaScriptVariables();
-                    UserStatsWindow.SetNameOutline(NameOutlineEnabled ? NameOutlineColor + " " + NameOutlineSize + "px" : "0px");
-                }
+                UpdateUserInfo();
             }
         }
         public string ValueOutlineColor
@@ -426,11 +396,8 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.stats_value_outline_color = value;
                 Settings.Default.Save();
-                if (IsOpen)
-                {
-                    UserStatsWindow.AssignJavaScriptVariables();
-                    UserStatsWindow.SetValueOutline(ValueOutlineEnabled ? ValueOutlineColor + " " + ValueOutlineSize + "px" : "0px");
-                }
+               
+                UpdateUserInfo();
             }
         }
         public int NameOutlineSize
@@ -444,11 +411,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_name_outline_size = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    UserStatsWindow.AssignJavaScriptVariables();
-                    UserStatsWindow.SetNameOutline(NameOutlineColor + " " + NameOutlineSize + "px");
-                }
+                UpdateUserInfo();
             }
         }
         public int ValueOutlineSize
@@ -462,11 +425,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_value_outline_size = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    UserStatsWindow.AssignJavaScriptVariables();
-                    UserStatsWindow.SetValueOutline(ValueOutlineColor + " " + ValueOutlineSize + "px");
-                }
+                UpdateUserInfo();
             }
         }
         public string RankName
@@ -480,10 +439,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_rank_name = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    UserStatsWindow.SetRankName(value);
-                }
+                UpdateUserInfo();
             }
         }
         public string PointsName
@@ -497,10 +453,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_points_name = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    UserStatsWindow.SetPointsName(value);
-                }
+                UpdateUserInfo();
             }
         }
         public string TruePointsName
@@ -514,10 +467,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_game_true_points_name = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    UserStatsWindow.SetTruePointsName(value);
-                }
+                UpdateUserInfo();
             }
         }
         public string RatioName
@@ -531,10 +481,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_ratio_name = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    UserStatsWindow.SetRatioName(value);
-                }
+                UpdateUserInfo();
             }
         }
         public bool RankEnabled
@@ -548,10 +495,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_rank_enabled = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    UserStatsWindow.SetRankVisibility(value);
-                }
+                UpdateUserInfo();
             }
         }
         public bool PointsEnabled
@@ -565,10 +509,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_points_enabled = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    UserStatsWindow.SetPointsVisibility(value);
-                }
+                UpdateUserInfo();
             }
         }
         public bool TruePointsEnabled
@@ -582,10 +523,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_true_points_enabled = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    UserStatsWindow.SetTruePointsVisibility(value);
-                }
+                UpdateUserInfo();
             }
         }
         public bool RatioEnabled
@@ -599,10 +537,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_ratio_enabled = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    UserStatsWindow.SetRatioVisibility(value);
-                }
+                UpdateUserInfo();
             }
         }
         public bool AutoLaunch

@@ -118,20 +118,14 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="retro-achievements-banner" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\retro-achievements-banner.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="green_button" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\green-button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="FocusWindow" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\FocusWindow.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
   <data name="red_button" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\red-button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="GameStatsWindow" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\gamestatswindow.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
-  <data name="AlertsWindow" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\alertswindow.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="image" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\image.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -139,19 +133,37 @@
   <data name="notification_background" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\notification-background.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="UserStatsWindow" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\userstatswindow.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
-  <data name="RecentAchievementsWindow" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\recentachievementswindow.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  <data name="progression-meter" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\progression-meter.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="yellow_button" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\yellow-button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GameInfoWindow" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\gameinfowindow.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  <data name="mastered-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mastered-icon.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="AchievementListWindow" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\achievementlistwindow.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  <data name="achievement_list_window" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\achievement-list-window.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="alerts_window" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\alerts-window.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="focus_window" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\focus-window.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="game_info_window" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\game-info-window.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="game_progress_window" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\game-progress-window.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="recent_achievements_window" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\recent-achievements-window.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="related_media_window" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\related-media-window.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="user_info_window" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\user-info-window.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
 </root>

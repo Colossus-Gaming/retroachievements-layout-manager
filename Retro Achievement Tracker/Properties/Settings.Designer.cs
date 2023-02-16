@@ -12,7 +12,7 @@ namespace Retro_Achievement_Tracker.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.3.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.4.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -697,7 +697,7 @@ namespace Retro_Achievement_Tracker.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Cheevos")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Achievements")]
         public string stats_game_achievements_name {
             get {
                 return ((string)(this["stats_game_achievements_name"]));
@@ -2768,6 +2768,54 @@ namespace Retro_Achievement_Tracker.Properties {
             }
             set {
                 this["alerts_mastery_enable"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool auto_related_media {
+            get {
+                return ((bool)(this["auto_related_media"]));
+            }
+            set {
+                this["auto_related_media"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string related_media_launchbox_filepath {
+            get {
+                return ((string)(this["related_media_launchbox_filepath"]));
+            }
+            set {
+                this["related_media_launchbox_filepath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FF00FF")]
+        public string related_media_window_background_color {
+            get {
+                return ((string)(this["related_media_window_background_color"]));
+            }
+            set {
+                this["related_media_window_background_color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("BADGE_ICON")]
+        public string related_media_selection {
+            get {
+                return ((string)(this["related_media_selection"]));
+            }
+            set {
+                this["related_media_selection"] = value;
             }
         }
     }

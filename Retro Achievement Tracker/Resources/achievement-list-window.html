@@ -19,7 +19,7 @@
 
             var achievementImage = document.createElement('img');
             achievementImage.id = "achievement-" + achievement.id + "-image";
-            achievementImage.src = "https://s3-eu-west-1.amazonaws.com/i.retroachievements.org/Badge/" + achievement.badgeNumber + ".png";
+            achievementImage.src = "http://media.retroachievements.org/Badge/" + achievement.badgeNumber + ".png";
             achievementImage.style.border = "2px solid gold";
 
             achievementBlock.appendChild(achievementImage);
@@ -27,7 +27,7 @@
             if (!achievement.dateEarned) {
                 var achievementLockedImage = document.createElement('img');
                 achievementLockedImage.id = "achievement-" + achievement.id + "-locked-image";
-                achievementLockedImage.src = "https://s3-eu-west-1.amazonaws.com/i.retroachievements.org/Badge/" + achievement.badgeNumber + "_lock.png";
+                achievementLockedImage.src = "http://media.retroachievements.org/Badge/" + achievement.badgeNumber + "_lock.png";
                 achievementLockedImage.style.width = 64;
                 achievementLockedImage.style.height = 64;
                 achievementLockedImage.style.border = "2px solid #272727";
@@ -118,6 +118,7 @@
             overflow-y: visible;
             width: 750px;
             height: 612px;
+            background-color: transparent;
         }
 
         #container::-webkit-scrollbar {
@@ -131,7 +132,6 @@
             width: 750px;
             height: auto;
             overflow: visible;
-            background-color: transparent;
         }
 
         html {

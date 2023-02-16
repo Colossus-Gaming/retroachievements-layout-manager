@@ -1,15 +1,57 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title>Notification Window</title>
+    <title>Recent Achievements Window</title>
     <meta charset="UTF-8">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script id="achievement-script">
+    <script id="recent-achievements-scripts">
+        var scrollingDown = true;
+        var isScrolling = true;
+
+        function scrollList() {
+            if (document.getElementById("container").scrollHeight > 450) {
+                if (scrollingDown) {
+                    document.getElementById("container").scrollTo(0, document.getElementById("container").scrollTop + 1);
+                } else {
+                    document.getElementById("container").scrollTo(0, document.getElementById("container").scrollTop - 1);
+                }
+
+                if (document.getElementById("container").scrollTop >= document.getElementById("container").scrollHeight - document.getElementById("container").offsetHeight) {
+                    scrollingDown = false;
+                } else if (document.getElementById("container").scrollTop <= 0) {
+                    scrollingDown = true;
+                }
+            } else {
+                stopScrolling();
+            }
+        }
+
+        var intervalId = 0;
+
+        function stopScrolling() {
+            isScrolling = false;
+
+            clearInterval(intervalId);
+            intervalId = 0;
+        }
+
+        function startScrolling() {
+            isScrolling = true;
+
+            if (intervalId === 0) {
+                intervalId = setInterval(scrollList, 50);
+            }
+        }
+
+        function toggleScrolling() {
+            if (isScrolling) {
+                stopScrolling();
+            } else {
+                startScrolling();
+            }
+        }
         /**
         * textFit v2.3.1
         * Previously known as jQuery.textFit
@@ -254,218 +296,103 @@
                 document.body.appendChild(css);
             }
         }));
-
-        (async function () {
-            await CefSharp.BindObjectAsync("alertControllerAsync");
-        })();
-
-        function setPlayingOn() {
-            alertControllerAsync.setIsPlaying(true);
-        }
-
-        function setPlayingOff() {
-            alertControllerAsync.setIsPlaying(false);
-        }
     </script>
-    <style id="achievement-style" type="text/css">
-        @keyframes user-prompt-animation {
-            0% {
-                left: 125px;
-                top: -290px;
-            }
+    <style id="-style" type="text/css">
 
-            100% {
-                left: 125px;
-                top: 275px;
-            }
+        .title {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            height: 55px;
+            width: 385px;
         }
 
-        @keyframes user-prompt-animation-reverse {
-            0% {
-                left: 125px;
-                top: 275px;
-            }
-
-            100% {
-                left: 125px;
-                top: -290px;
-            }
+        .line {
+            position: absolute;
+            right: 10px;
+            top: 57px;
+            width: 385px;
+            height: 5px;
         }
 
-        #achievement-title,
-        #mastery-title {
+        .badge {
             position: absolute;
             top: 10px;
-            right: 10px;
-            width: 530px;
-            height: 65px;
-        }
-
-        #achievement-badge,
-        #mastery-badge {
             left: 10px;
-            bottom: 12px;
-            position: absolute;
-            height: 140px;
-            border: 2px solid gold;
+            height: 96px;
         }
 
-        #achievement-description,
-        #mastery-description {
-            right: 10px;
-            position: absolute;
-            top: 80px;
-            width: 525px;
-            height: 75px;
-        }
-
-        #mastery-achievements,
-        #mastery-points {
-            position: absolute;
-            width: 230px;
-            height: 75px;
-        }
-
-        #mastery-achievements {
-            right: 10px;
-        }
-
-        #mastery-points {
-            left: 10px;
-        }
-
-        #achievement-video,
-        #mastery-video {
-            position: absolute;
-            padding-left: 5px;
-            padding-top: 5px;
-        }
-
-        #achievement,
-        #mastery {
-            position: absolute;
-            top: -600px;
-            left: -600px;
-            width: 700px;
-            height: 165px;
+        .achievement {
+            position: relative;
+            top: 5px;
+            left: 5px;
+            width: 516px;
+            height: 120px;
             background-repeat: no-repeat;
             background-color: #cccccc;
             background-size: cover;
         }
 
-        #achievement-points {
+        .date {
             position: absolute;
+            right: 10px;
+            bottom: 5px;
+            width: 385px;
+            height: 40px;
+        }
+
+        .points {
+            position: absolute;
+            width: 100%;
             left: 15px;
-            bottom: 10px;
+            bottom: 12px;
+            height: 55px;
+            width: 55px;
             display: grid;
             align-content: end;
-            width: 100%;
-            height: 65px;
-            width: 65px;
+        }
+
+        .achievement,
+        .title,
+        .points,
+        .badge,
+        .line {
+            overflow: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+
+        #achievement-list {
+            position: absolute;
+            top: 0px;
+            left: 535px;
+            width: 516px;
+            height: auto;
+            overflow: visible;
         }
 
         #container {
             position: absolute;
-            width: 1922px;
-            height: 1085px;
             top: -5px;
             left: -5px;
-            background-color: magenta;
+            overflow-x: hidden;
+            overflow-y: visible;
+            width: 750px;
+            height: 605px;
+            background-color: transparent;
         }
 
-        #achievement-line,
-        #mastery-line {
-            position: absolute;
-            right: 10px;
-            top: 65px;
-            width: 525px;
-            height: 5px;
-        }
-
-        #ready-message {
-            position: absolute;
-            top: 100px;
-            width: 800px;
-            height: 100px;
-            text-align: center;
-            font-weight: bold;
-            vertical-align: middle;
-            font-size: 32px;
-            font-family: 'Press Start 2P', cursive;
-        }
-
-        #user-prompt {
-            position: absolute;
-            width: 800px;
-            height: 100px;
-            text-align: center;
+        #container::-webkit-scrollbar {
             display: none;
-            animation-name: user-prompt-animation;
-            animation-iteration-count: 1;
-            animation-fill-mode: both;
-            animation-duration: 1s;
-        }
-
-        #confirm-button {
-            position: absolute;
-            top: 150px;
-            left: 285px;
-            text-align: center;
-            font-weight: bold;
-            width: 200px;
-            height: 50px;
-            vertical-align: middle;
-            font-size: 24px;
-            background-color: yellow;
-            font-family: 'Press Start 2P', cursive;
         }
 
         html {
             overflow: hidden;
         }
     </style>
-    <script>
-        function acknowledgePrompt() {
-            document.getElementById("user-prompt").style.animationName = "user-prompt-animation-reverse";
-            alertControllerAsync.setCanPlay();
-
-            setTimeout(function () {
-                $("#user-prompt").hide();
-            }, 500);
-        };
-    </script>
 </head>
 <body>
     <div id="container">
-        <div id="achievement">
-            <img id="achievement-badge" />
-            <div id="achievement-title" class="achievement has-font">Achievement</div>
-            <hr id="achievement-line" />
-            <div id="achievement-description" class="achievement has-font">Description</div>
-            <div id="achievement-points" class="achievement has-font">25</div>
-        </div>
-
-        <div id="mastery">
-            <img id="mastery-badge" />
-            <div id="mastery-title" class="mastery has-font">Game Title</div>
-            <hr id="mastery-line" />
-            <div id="mastery-description">
-                <div id="mastery-achievements" class="mastery has-font">100</div>
-                <div id="mastery-points" class="mastery has-font">1500</div>
-            </div>
-        </div>
-    </div>
-
-    <video id="achievement-video" onended="setPlayingOff()" onplay="setPlayingOn()" autoplay></video>
-    <video id="mastery-video" onended="setPlayingOff()" onplay="setPlayingOn()" autoplay></video>
-    <div id="user-prompt">
-        <img src="https://retroachievements.org/Images/RA_Logo10.png" />
-        <div id="ready-message" class="prompt" style="color: blue;">
-            Are you ready?
-        </div>
-        <button id="confirm-button" onclick="acknowledgePrompt()" class="prompt" style="color: blue;">
-            ACHIEVE
-        </button>
+        <div id="achievement-list" onclick="toggleScrolling()"></div>
     </div>
 </body>
 </html>

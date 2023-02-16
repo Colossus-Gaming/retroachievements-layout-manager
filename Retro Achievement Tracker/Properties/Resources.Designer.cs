@@ -74,9 +74,9 @@ namespace Retro_Achievement_Tracker.Properties {
         ///
         ///      [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string AchievementListWindow {
+        internal static string achievement_list_window {
             get {
-                return ResourceManager.GetString("AchievementListWindow", resourceCulture);
+                return ResourceManager.GetString("achievement_list_window", resourceCulture);
             }
         }
         
@@ -92,9 +92,9 @@ namespace Retro_Achievement_Tracker.Properties {
         ///    &lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js&quot;&gt;&lt;/script&gt;
         ///    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://ajax.googleapis.com/ajax/libs/jq [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string AlertsWindow {
+        internal static string alerts_window {
             get {
-                return ResourceManager.GetString("AlertsWindow", resourceCulture);
+                return ResourceManager.GetString("alerts_window", resourceCulture);
             }
         }
         
@@ -114,9 +114,9 @@ namespace Retro_Achievement_Tracker.Properties {
         ///                     *
         ///                     * To use: textFit(document.getElement [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string FocusWindow {
+        internal static string focus_window {
             get {
-                return ResourceManager.GetString("FocusWindow", resourceCulture);
+                return ResourceManager.GetString("focus_window", resourceCulture);
             }
         }
         
@@ -137,9 +137,9 @@ namespace Retro_Achievement_Tracker.Properties {
         ///         *
         ///         * Will make the *text* content i [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string GameInfoWindow {
+        internal static string game_info_window {
             get {
-                return ResourceManager.GetString("GameInfoWindow", resourceCulture);
+                return ResourceManager.GetString("game_info_window", resourceCulture);
             }
         }
         
@@ -160,9 +160,9 @@ namespace Retro_Achievement_Tracker.Properties {
         ///                 * To use: textFit(document.getElementById(&apos;target-div&apos;), options);
         ///            [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string GameStatsWindow {
+        internal static string game_progress_window {
             get {
-                return ResourceManager.GetString("GameStatsWindow", resourceCulture);
+                return ResourceManager.GetString("game_progress_window", resourceCulture);
             }
         }
         
@@ -189,9 +189,29 @@ namespace Retro_Achievement_Tracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap mastered_icon {
+            get {
+                object obj = ResourceManager.GetObject("mastered-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap notification_background {
             get {
                 object obj = ResourceManager.GetObject("notification_background", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap progression_meter {
+            get {
+                object obj = ResourceManager.GetObject("progression-meter", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -209,9 +229,9 @@ namespace Retro_Achievement_Tracker.Properties {
         ///        var scrollingDown = true;
         ///       [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string RecentAchievementsWindow {
+        internal static string recent_achievements_window {
             get {
-                return ResourceManager.GetString("RecentAchievementsWindow", resourceCulture);
+                return ResourceManager.GetString("recent_achievements_window", resourceCulture);
             }
         }
         
@@ -221,6 +241,43 @@ namespace Retro_Achievement_Tracker.Properties {
         internal static System.Drawing.Bitmap red_button {
             get {
                 object obj = ResourceManager.GetObject("red_button", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+        ///&lt;html&gt;
+        ///&lt;head&gt;
+        ///    &lt;title&gt;Game Info Window&lt;/title&gt;
+        ///    &lt;meta charset=&quot;UTF-8&quot;&gt;
+        ///    &lt;script src=&quot;https://code.jquery.com/jquery-3.5.1.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+        ///    &lt;style id=&quot;style&quot; type=&quot;text/css&quot;&gt;
+        ///        #image-asset {
+        ///            left: 5px;
+        ///            top: 5px;
+        ///            max-height: 465px;
+        ///            max-width: 620px;
+        ///            min-height: 240px;
+        ///            min-width: 320px;
+        ///            object-fit: contain;
+        ///        }
+        ///
+        ///        #container {
+        ///             [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string related_media_window {
+            get {
+                return ResourceManager.GetString("related_media_window", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap retro_achievements_banner {
+            get {
+                object obj = ResourceManager.GetObject("retro-achievements-banner", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -242,9 +299,9 @@ namespace Retro_Achievement_Tracker.Properties {
         ///         *
         ///         * Will make the *text* content inside a containe [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string UserStatsWindow {
+        internal static string user_info_window {
             get {
-                return ResourceManager.GetString("UserStatsWindow", resourceCulture);
+                return ResourceManager.GetString("user_info_window", resourceCulture);
             }
         }
         

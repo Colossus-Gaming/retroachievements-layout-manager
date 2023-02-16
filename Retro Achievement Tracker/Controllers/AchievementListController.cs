@@ -2,7 +2,6 @@
 using Retro_Achievement_Tracker.Properties;
 using System;
 using System.Collections.Generic;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Retro_Achievement_Tracker.Controllers
@@ -12,7 +11,7 @@ namespace Retro_Achievement_Tracker.Controllers
         private static AchievementListController instance = new AchievementListController();
         private static AchievementListWindow AchievementListWindow;
 
-        private static int AchievementsPerRow = 11;
+        private readonly int AchievementsPerRow = 11;
 
         public bool IsOpen;
 
@@ -25,8 +24,6 @@ namespace Retro_Achievement_Tracker.Controllers
 
             CurrentUnlockedAchievements = new List<Achievement>();
             CurrentLockedAchievements = new List<Achievement>();
-
-            IsOpen = false;
         }
         public static AchievementListController Instance
         {
@@ -44,16 +41,24 @@ namespace Retro_Achievement_Tracker.Controllers
         {
             if (!IsOpen)
             {
-                AchievementListWindow = new AchievementListWindow();
+                if (AchievementListWindow == null || AchievementListWindow.IsDisposed)
+                {
+                    AchievementListWindow = new AchievementListWindow();
+                }
                 AchievementListWindow.Show();
-
-                UpdateAchievementList(CurrentUnlockedAchievements, CurrentLockedAchievements, true);
             }
         }
 
         public void SetAllSettings()
         {
             AchievementListWindow.SetWindowBackgroundColor(WindowBackgroundColor);
+            AchievementListWindow.SetClientSize();
+        }
+
+        public  void UpdateAchievementList()
+        {
+            UpdateAchievementList(CurrentUnlockedAchievements, CurrentLockedAchievements, true);
+
         }
 
         public async void UpdateAchievementList(List<Achievement> unlockedAchievements, List<Achievement> lockedAchievements, bool newGame)
@@ -108,25 +113,25 @@ namespace Retro_Achievement_Tracker.Controllers
 
                     await Task.Delay(timeoutValue + 800);
 
-                    AchievementListWindow.WaitForClear();
+                    AchievementListWindow.WipeOldAchievements();
                 }
             }
 
-            if (IsOpen)
+            int achievementRowIndex = 0;
+            int yCoord = 1048;
+            int xCoord = 0;
+
+            for (int i = 0; i < unlockedAchievements.Count; i++)
             {
-                int achievementRowIndex = 0;
-                int yCoord = 1048;
-                int xCoord = 0;
+                Achievement newAchievement = (Achievement)unlockedAchievements[i].Clone();
+                Achievement oldAchievement = CurrentLockedAchievements.Find(achievement1 => achievement1.Id == newAchievement.Id);
 
-                for (int i = 0; i < unlockedAchievements.Count; i++)
+                if (CurrentUnlockedAchievements.Find(achievement1 => achievement1.Id == newAchievement.Id) == null)
                 {
-                    Achievement newAchievement = (Achievement)unlockedAchievements[i].Clone();
-                    Achievement oldAchievement = CurrentLockedAchievements.Find(achievement1 => achievement1.Id == newAchievement.Id);
+                    CurrentUnlockedAchievements.Add(newAchievement);
 
-                    if (CurrentUnlockedAchievements.Find(achievement1 => achievement1.Id == newAchievement.Id) == null)
+                    if (IsOpen)
                     {
-                        CurrentUnlockedAchievements.Add(newAchievement);
-
                         if (oldAchievement == null)
                         {
                             AchievementListWindow.AddAchievement(newAchievement, xCoord, yCoord);
@@ -148,15 +153,17 @@ namespace Retro_Achievement_Tracker.Controllers
                         }
                     }
                 }
+            }
 
-                for (int i = 0; i < lockedAchievements.Count; i++)
+            for (int i = 0; i < lockedAchievements.Count; i++)
+            {
+                if (CurrentLockedAchievements.Find(achievement1 => achievement1.Id == lockedAchievements[i].Id) == null)
                 {
-                    if (CurrentLockedAchievements.Find(achievement1 => achievement1.Id == lockedAchievements[i].Id) == null)
+                    Achievement newAchievement = (Achievement)lockedAchievements[i].Clone();
+
+                    CurrentLockedAchievements.Add(newAchievement);
+                    if (IsOpen)
                     {
-                        Achievement newAchievement = (Achievement)lockedAchievements[i].Clone();
-
-                        CurrentLockedAchievements.Add(newAchievement);
-
                         AchievementListWindow.AddAchievement(newAchievement, xCoord, yCoord);
 
                         xCoord += 68;
@@ -170,11 +177,11 @@ namespace Retro_Achievement_Tracker.Controllers
                         }
                     }
                 }
+            }
 
-                if (CurrentUnlockedAchievements.Count > 0 || CurrentLockedAchievements.Count > 0)
-                {
-                    AnimateAchievementList();
-                }
+            if (IsOpen && (CurrentUnlockedAchievements.Count > 0 || CurrentLockedAchievements.Count > 0))
+            {
+                AnimateAchievementList();
             }
         }
         public async void AnimateAchievementList()
@@ -228,6 +235,8 @@ namespace Retro_Achievement_Tracker.Controllers
                 {
                     await Task.Delay(1000);
                     AchievementListWindow.StartScrolling();
+
+                    AchievementListWindow.AssignJavaScriptVariables();
                 }
             }
         }
@@ -274,80 +283,9 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.achievement_list_window_background_color = value;
                 Settings.Default.Save();
-                if (IsOpen)
-                {
-                    AchievementListWindow.SetWindowBackgroundColor(value);
-                }
-            }
-        }
-        public bool ColumnEnabled
-        {
-            get
-            {
-                return Settings.Default.achievement_list_column_enabled;
-            }
-            set
-            {
-                Settings.Default.achievement_list_column_enabled = value;
-                Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    AnimateAchievementList();
-                }
+                SetAllSettings();
             }
         }
-        public int ContainerCount
-        {
-            get
-            {
-                return Settings.Default.achievement_list_container_count;
-            }
-            set
-            {
-                Settings.Default.achievement_list_container_count = value;
-                Settings.Default.Save();
-
-                if (IsOpen)
-                {
-                    AnimateAchievementList();
-                }
-            }
-        }
-        public bool OptimizeEnabled
-        {
-            get
-            {
-                return Settings.Default.achievement_list_optimize_enabled;
-            }
-            set
-            {
-                Settings.Default.achievement_list_optimize_enabled = value;
-                Settings.Default.Save();
-
-                if (IsOpen)
-                {
-                    AnimateAchievementList();
-                }
-            }
-        }
-        public int ColumnCount
-        {
-            get
-            {
-                return Convert.ToInt32(Math.Sqrt(CurrentUnlockedAchievements.Count + CurrentLockedAchievements.Count));
-            }
-        }
-        public int GetImageSize(int listSize)
-        {
-            Console.WriteLine("List Size: " + listSize);
-            Console.WriteLine("Sqr Root: " + Math.Sqrt(listSize));
-            Console.WriteLine("Math Floor: " + Math.Floor(Math.Sqrt(listSize)));
-            Console.WriteLine("Integer: " + Math.Floor(Math.Sqrt(listSize)));
-            Console.WriteLine("Image Size: " + 740 / Convert.ToInt32(Math.Floor(Math.Sqrt(listSize))));
-
-            return 760 / Convert.ToInt32(Math.Floor(Math.Sqrt(listSize)));
-        }
-
     }
 }

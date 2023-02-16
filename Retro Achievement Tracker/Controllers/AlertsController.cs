@@ -13,25 +13,25 @@ using System.Threading.Tasks;
 
 namespace Retro_Achievement_Tracker.Controllers
 {
-    public sealed class NotificationsController
+    public sealed class AlertsController
     {
-        private static NotificationsController instance = new NotificationsController();
-        private static AlertsWindow AlertsLayoutWindow;
+        private static AlertsController instance = new AlertsController();
+        private static AlertsWindow AlertsWindow;
         public bool IsOpen;
         private Stopwatch NotificationsStopwatch;
         private Task NotificationsTask;
         private readonly ConcurrentQueue<NotificationRequest> NotificationRequests;
         private readonly CancellationTokenSource tokenSource2 = new CancellationTokenSource();
         private bool IsPlaying;
-        private bool CanPlay;
+        public bool CanPlay { get; set; }
         private bool AnimationInPlayed;
         private bool AnimationOutPlayed;
         private bool PlayingAchievement;
         private bool IsEditingAchievement;
 
-        private NotificationsController()
+        private AlertsController()
         {
-            AlertsLayoutWindow = new AlertsWindow();
+            AlertsWindow = new AlertsWindow();
 
             if (CustomAchievementEnabled && !File.Exists(CustomAchievementFile))
             {
@@ -48,13 +48,10 @@ namespace Retro_Achievement_Tracker.Controllers
             NotificationsStopwatch = new Stopwatch();
 
             NotificationsTask = Task.Factory.StartNew(() => { });
-
-            CanPlay = false;
-            IsOpen = false;
         }
         public void EnqueueAchievementNotifications(List<Achievement> achievements)
         {
-            if (CanPlay && !AlertsLayoutWindow.IsDisposed)
+            if (CanPlay && !AlertsWindow.IsDisposed)
             {
                 if (CustomAchievementEnabled && string.IsNullOrEmpty(CustomAchievementFile))
                 {
@@ -81,7 +78,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 GameInfoAndProgress = gameInfoAndProgress
             };
 
-            if (CanPlay && !AlertsLayoutWindow.IsDisposed)
+            if (CanPlay && !AlertsWindow.IsDisposed)
             {
                 if (CustomMasteryEnabled && string.IsNullOrEmpty(CustomMasteryFile))
                 {
@@ -114,12 +111,12 @@ namespace Retro_Achievement_Tracker.Controllers
                     if (notificationRequest.Achievement != null)
                     {
                         PlayingAchievement = true;
-                        AlertsLayoutWindow.StartAchievementAlert(notificationRequest.Achievement);
+                        AlertsWindow.StartAchievementAlert(notificationRequest.Achievement);
                     }
                     else if (notificationRequest.GameInfoAndProgress != null)
                     {
                         PlayingAchievement = false;
-                        AlertsLayoutWindow.StartMasteryAlert(notificationRequest.GameInfoAndProgress);
+                        AlertsWindow.StartMasteryAlert(notificationRequest.GameInfoAndProgress);
                     }
                 }
                 NotificationsTask = Task.Factory.StartNew(RunNotificationTask, tokenSource2.Token);
@@ -143,31 +140,31 @@ namespace Retro_Achievement_Tracker.Controllers
                 {
                     if (PlayingAchievement)
                     {
-                        float achievementPlayingTime = AlertsLayoutWindow.GetAchievementPlayingTime().Result;
+                        float achievementPlayingTime = AlertsWindow.GetAchievementPlayingTime().Result;
 
                         if (!AnimationInPlayed && (achievementPlayingTime * 1000) > (CustomAchievementEnabled ? CustomAchievementIn : 0))
                         {
-                            AlertsLayoutWindow.SetAchievementIn(CustomAchievementEnabled ? CustomAchievementInSpeed : 0, (CustomAchievementEnabled ? AchievementAnimationIn : AnimationDirection.STATIC));
+                            AlertsWindow.SetAchievementIn(CustomAchievementEnabled ? CustomAchievementInSpeed : 0, CustomAchievementEnabled ? AchievementAnimationIn : AnimationDirection.STATIC);
                             AnimationInPlayed = true;
                         }
                         else if (!AnimationOutPlayed && (achievementPlayingTime * 1000) > (CustomAchievementEnabled ? CustomAchievementOut : 5400))
                         {
-                            AlertsLayoutWindow.SetAchievementOut(CustomAchievementEnabled ? CustomAchievementOutSpeed : 700, (CustomAchievementEnabled ? AchievementAnimationOut : AnimationDirection.UP));
+                            AlertsWindow.SetAchievementOut(CustomAchievementEnabled ? CustomAchievementOutSpeed : 700, CustomAchievementEnabled ? AchievementAnimationOut : AnimationDirection.UP);
                             AnimationOutPlayed = true;
                         }
                     }
                     else
                     {
-                        float masteryPlayingTime = AlertsLayoutWindow.GetMasteryPlayingTime().Result;
+                        float masteryPlayingTime = AlertsWindow.GetMasteryPlayingTime().Result;
 
                         if (!AnimationInPlayed && (masteryPlayingTime * 1000) > (CustomMasteryEnabled ? CustomMasteryIn : 0))
                         {
-                            AlertsLayoutWindow.SetMasteryIn(CustomMasteryEnabled ? CustomMasteryInSpeed : 0, CustomMasteryEnabled ? MasteryAnimationIn : AnimationDirection.STATIC);
+                            AlertsWindow.SetMasteryIn(CustomMasteryEnabled ? CustomMasteryInSpeed : 0, CustomMasteryEnabled ? MasteryAnimationIn : AnimationDirection.STATIC);
                             AnimationInPlayed = true;
                         }
                         else if (!AnimationOutPlayed && (masteryPlayingTime * 1000) > (CustomMasteryEnabled ? CustomMasteryOut : 5400))
                         {
-                            AlertsLayoutWindow.SetMasteryOut(CustomMasteryEnabled ? CustomMasteryOutSpeed : 700, CustomMasteryEnabled ? MasteryAnimationOut : AnimationDirection.UP);
+                            AlertsWindow.SetMasteryOut(CustomMasteryEnabled ? CustomMasteryOutSpeed : 700, CustomMasteryEnabled ? MasteryAnimationOut : AnimationDirection.UP);
                             AnimationOutPlayed = true;
                         }
                     }
@@ -190,13 +187,13 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (!(AnimationInPlayed && AnimationOutPlayed))
                 {
-                    AlertsLayoutWindow.SetAchievementOut(100, AnimationDirection.STATIC);
-                    AlertsLayoutWindow.SetMasteryOut(100, AnimationDirection.STATIC);
+                    AlertsWindow.SetAchievementOut(100, AnimationDirection.STATIC);
+                    AlertsWindow.SetMasteryOut(100, AnimationDirection.STATIC);
                 }
 
                 if (!IsEditingAchievement)
                 {
-                    AlertsLayoutWindow.HideNotifications();
+                    AlertsWindow.HideNotifications();
 
                     if (NotificationRequests.Count > 0)
                     {
@@ -210,7 +207,7 @@ namespace Retro_Achievement_Tracker.Controllers
         {
             CanPlay = true;
         }
-        public static NotificationsController Instance
+        public static AlertsController Instance
         {
             get
             {
@@ -219,40 +216,53 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public void Close()
         {
-            AlertsLayoutWindow.Close();
+            AlertsWindow.Close();
         }
         public void Show()
         {
             if (!IsOpen)
             {
-                AlertsLayoutWindow = new AlertsWindow();
-                AlertsLayoutWindow.Show();
+                if (AlertsWindow == null || AlertsWindow.IsDisposed)
+                {
+                    AlertsWindow = new AlertsWindow();
+                }
+                AlertsWindow.Show();
+            } else
+            {
+                AlertsWindow.BringToFront();
             }
         }
         public void Reset()
         {
             if (IsOpen)
             {
+                AlertsWindow.ClientSize = new Size(0, 0);
+
+                CanPlay = false;
+                IsPlaying = false;
+
                 NotificationsStopwatch.Stop();
-                AlertsLayoutWindow.SetupBrowser();
+                AlertsWindow.SetupBrowser();
             }
         }
         public void SetAllSettings()
         {
             if (IsOpen)
             {
-                AlertsLayoutWindow.AssignJavaScriptVariables();
-                AlertsLayoutWindow.SetBorderBackgroundColor(BorderBackgroundColor);
-                AlertsLayoutWindow.SetWindowBackgroundColor(WindowBackgroundColor);
+                AlertsWindow.AssignJavaScriptVariables();
+
+                AlertsWindow.SetBorderBackgroundColor(BorderBackgroundColor);
+                AlertsWindow.SetWindowBackgroundColor(WindowBackgroundColor);
 
                 if (BorderEnabled)
                 {
-                    AlertsLayoutWindow.EnableBorder();
+                    AlertsWindow.EnableBorder();
                 }
                 else
                 {
-                    AlertsLayoutWindow.DisableBorder();
+                    AlertsWindow.DisableBorder();
                 }
+
                 if (AdvancedSettingsEnabled)
                 {
                     SetAdvancedSettings();
@@ -264,62 +274,69 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 SetAchievementSettings();
                 SetMasterySettings();
+
+                if (!CanPlay)
+                {
+                    AlertsWindow.PromptUserInput();
+                }
+
+                AlertsWindow.SetClientSize();
             }
         }
-        public void SetSimpleSettings()
+        private void SetSimpleSettings()
         {
-            AlertsLayoutWindow.SetSimpleFontFamily(SimpleFontFamily);
-            AlertsLayoutWindow.SetSimpleFontColor(SimpleFontColor);
-            AlertsLayoutWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px", SimpleFontOutlineEnabled ? SimpleFontOutlineSize + "px solid " + SimpleFontOutlineColor : "0px");
+            AlertsWindow.SetSimpleFontFamily(SimpleFontFamily);
+            AlertsWindow.SetSimpleFontColor(SimpleFontColor);
+            AlertsWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px", SimpleFontOutlineEnabled ? SimpleFontOutlineSize + "px solid " + SimpleFontOutlineColor : "0px");
         }
-        public void SetAdvancedSettings()
+        private void SetAdvancedSettings()
         {
-            AlertsLayoutWindow.SetTitleFontFamily(TitleFontFamily);
-            AlertsLayoutWindow.SetTitleColor(TitleColor);
-            AlertsLayoutWindow.SetTitleOutline(TitleOutlineEnabled ? TitleOutlineColor + " " + TitleOutlineSize + "px" : "0px");
+            AlertsWindow.SetTitleFontFamily(TitleFontFamily);
+            AlertsWindow.SetTitleColor(TitleColor);
+            AlertsWindow.SetTitleOutline(TitleOutlineEnabled ? TitleOutlineColor + " " + TitleOutlineSize + "px" : "0px");
 
-            AlertsLayoutWindow.SetDescriptionFontFamily(DescriptionFontFamily);
-            AlertsLayoutWindow.SetDescriptionColor(DescriptionColor);
-            AlertsLayoutWindow.SetDescriptionOutline(DescriptionOutlineEnabled ? DescriptionOutlineColor + " " + DescriptionOutlineSize + "px" : "0px");
+            AlertsWindow.SetDescriptionFontFamily(DescriptionFontFamily);
+            AlertsWindow.SetDescriptionColor(DescriptionColor);
+            AlertsWindow.SetDescriptionOutline(DescriptionOutlineEnabled ? DescriptionOutlineColor + " " + DescriptionOutlineSize + "px" : "0px");
 
-            AlertsLayoutWindow.SetPointsFontFamily(PointsFontFamily);
-            AlertsLayoutWindow.SetPointsColor(PointsColor);
-            AlertsLayoutWindow.SetPointsOutline(PointsOutlineEnabled ? PointsOutlineColor + " " + PointsOutlineSize + "px" : "0px");
+            AlertsWindow.SetPointsFontFamily(PointsFontFamily);
+            AlertsWindow.SetPointsColor(PointsColor);
+            AlertsWindow.SetPointsOutline(PointsOutlineEnabled ? PointsOutlineColor + " " + PointsOutlineSize + "px" : "0px");
 
-            AlertsLayoutWindow.SetLineColor(LineColor);
-            AlertsLayoutWindow.SetLineOutline(LineOutlineEnabled ? LineOutlineSize + "px solid " + LineOutlineColor : "0px");
+            AlertsWindow.SetLineColor(LineColor);
+            AlertsWindow.SetLineOutline(LineOutlineEnabled ? LineOutlineSize + "px solid " + LineOutlineColor : "0px");
         }
         public void SetAchievementSettings()
         {
-            AlertsLayoutWindow.SetAchievementLeft(CustomAchievementEnabled ? CustomAchievementX : -25);
-            AlertsLayoutWindow.SetAchievementTop(CustomAchievementEnabled ? CustomAchievementY : 5);
-            AlertsLayoutWindow.SetAchievementWidth(CustomAchievementEnabled ? Convert.ToInt32(CustomAchievementScale * MediaHelper.GetVideoWidth(CustomAchievementFile)) : 1028);
+            AlertsWindow.SetAchievementLeft(CustomAchievementEnabled ? CustomAchievementX : -25);
+            AlertsWindow.SetAchievementTop(CustomAchievementEnabled ? CustomAchievementY : 5);
+            AlertsWindow.SetAchievementWidth(CustomAchievementEnabled ? Convert.ToInt32(CustomAchievementScale * MediaHelper.GetVideoWidth(CustomAchievementFile)) : 1028);
         }
         public void SetMasterySettings()
         {
-            AlertsLayoutWindow.SetMasteryLeft(CustomMasteryEnabled ? CustomMasteryX : -25);
-            AlertsLayoutWindow.SetMasteryTop(CustomMasteryEnabled ? CustomMasteryY : 5);
-            AlertsLayoutWindow.SetMasteryWidth(CustomMasteryEnabled ? Convert.ToInt32(CustomMasteryScale * MediaHelper.GetVideoWidth(CustomMasteryFile)) : 1028);
+            AlertsWindow.SetMasteryLeft(CustomMasteryEnabled ? CustomMasteryX : -25);
+            AlertsWindow.SetMasteryTop(CustomMasteryEnabled ? CustomMasteryY : 5);
+            AlertsWindow.SetMasteryWidth(CustomMasteryEnabled ? Convert.ToInt32(CustomMasteryScale * MediaHelper.GetVideoWidth(CustomMasteryFile)) : 1028);
         }
         public void SendAchievementNotification(Achievement achievement)
         {
             if (IsOpen)
             {
-                AlertsLayoutWindow.StartAchievementAlert(achievement);
+                AlertsWindow.StartAchievementAlert(achievement);
             }
         }
         public void SendMasteryNotification(GameInfo gameInfo)
         {
             if (IsOpen)
             {
-                AlertsLayoutWindow.StartMasteryAlert(gameInfo);
+                AlertsWindow.StartMasteryAlert(gameInfo);
             }
         }
         public void EnableAchievementEdit()
         {
             if (IsOpen)
             {
-                AlertsLayoutWindow.EnableAchievementEdit();
+                AlertsWindow.EnableAchievementEdit();
                 IsEditingAchievement = true;
             }
         }
@@ -327,7 +344,7 @@ namespace Retro_Achievement_Tracker.Controllers
         {
             if (IsOpen)
             {
-                AlertsLayoutWindow.DisableAchievementEdit();
+                AlertsWindow.DisableAchievementEdit();
                 IsEditingAchievement = false;
                 IsPlaying = false;
             }
@@ -336,7 +353,7 @@ namespace Retro_Achievement_Tracker.Controllers
         {
             if (IsOpen)
             {
-                AlertsLayoutWindow.EnableMasteryEdit();
+                AlertsWindow.EnableMasteryEdit();
                 IsEditingAchievement = true;
             }
         }
@@ -344,7 +361,7 @@ namespace Retro_Achievement_Tracker.Controllers
         {
             if (IsOpen)
             {
-                AlertsLayoutWindow.DisableMasteryEdit();
+                AlertsWindow.DisableMasteryEdit();
                 IsEditingAchievement = false;
                 IsPlaying = false;
             }
@@ -387,10 +404,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.alerts_advanced_options_enabled = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    SetAllSettings();
-                }
+                SetAllSettings();
             }
         }
         public FontFamily SimpleFontFamily
@@ -416,11 +430,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.notification_font_family_name = value.Name;
                 Settings.Default.Save();
 
-
-                if (IsOpen)
-                {
-                    SetAllSettings();
-                }
+                SetAllSettings();
             }
         }
         public string SimpleFontColor
@@ -434,11 +444,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.notification_font_color_hex_code = value;
                 Settings.Default.Save();
 
-
-                if (IsOpen)
-                {
-                    SetAllSettings();
-                }
+                SetAllSettings();
             }
         }
         public string SimpleFontOutlineColor
@@ -452,11 +458,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.notification_font_outline_color_hex = value;
                 Settings.Default.Save();
 
-
-                if (IsOpen)
-                {
-                    SetAllSettings();
-                }
+                SetAllSettings();
             }
         }
         public int SimpleFontOutlineSize
@@ -470,11 +472,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.notification_font_outline_size = value;
                 Settings.Default.Save();
 
-
-                if (IsOpen)
-                {
-                    SetAllSettings();
-                }
+                SetAllSettings();
             }
         }
         public bool SimpleFontOutlineEnabled
@@ -488,10 +486,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.notification_font_outline_enabled = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    SetAllSettings();
-                }
+                SetAllSettings();
             }
         }
         public FontFamily TitleFontFamily
@@ -516,10 +511,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.alerts_title_font_family = value.Name;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    SetAllSettings();
-                }
+                SetAllSettings();
             }
         }
         public FontFamily DescriptionFontFamily
@@ -544,10 +536,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.alerts_description_font_family = value.Name;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    SetAllSettings();
-                }
+                SetAllSettings();
             }
         }
 
@@ -573,10 +562,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.alerts_points_font_family = value.Name;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    SetAllSettings();
-                }
+                SetAllSettings();
             }
         }
 
@@ -591,10 +577,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.alerts_title_color = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    SetAllSettings();
-                }
+                SetAllSettings();
             }
         }
         public string DescriptionColor
@@ -608,10 +591,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.alerts_description_color = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    SetAllSettings();
-                }
+                SetAllSettings();
             }
         }
         public string PointsColor
@@ -625,10 +605,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.alerts_points_color = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    SetAllSettings();
-                }
+                SetAllSettings();
             }
         }
         public string LineColor
@@ -642,10 +619,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.alerts_line_color = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    SetAllSettings();
-                }
+                SetAllSettings();
             }
         }
         public bool TitleOutlineEnabled
@@ -659,10 +633,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.alerts_title_outline_enabled = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    SetAllSettings();
-                }
+                SetAllSettings();
             }
         }
         public bool DescriptionOutlineEnabled
@@ -676,10 +647,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.alerts_description_outline_enabled = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    SetAllSettings();
-                }
+                SetAllSettings();
             }
         }
         public bool PointsOutlineEnabled
@@ -693,10 +661,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.alerts_points_outline_enabled = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    SetAllSettings();
-                }
+                SetAllSettings();
             }
         }
         public bool LineOutlineEnabled
@@ -710,10 +675,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.alerts_line_outline_enabled = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    SetAllSettings();
-                }
+                SetAllSettings();
             }
         }
         public string TitleOutlineColor
@@ -727,10 +689,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.alerts_title_outline_color = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    SetAllSettings();
-                }
+                SetAllSettings();
             }
         }
         public string DescriptionOutlineColor
@@ -744,10 +703,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.alerts_description_outline_color = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    SetAllSettings();
-                }
+                SetAllSettings();
             }
         }
         public string PointsOutlineColor
@@ -761,10 +717,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.alerts_points_outline_color = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    SetAllSettings();
-                }
+                SetAllSettings();
             }
         }
         public string LineOutlineColor
@@ -778,10 +731,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.alerts_line_outline_color = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    SetAllSettings();
-                }
+                SetAllSettings();
             }
         }
         public int TitleOutlineSize
@@ -795,10 +745,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.alerts_title_outline_size = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    SetAllSettings();
-                }
+                SetAllSettings();
             }
         }
         public int DescriptionOutlineSize
@@ -812,10 +759,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.alerts_description_outline_size = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    SetAllSettings();
-                }
+                SetAllSettings();
             }
         }
         public int PointsOutlineSize
@@ -829,10 +773,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.alerts_points_outline_size = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    SetAllSettings();
-                }
+                SetAllSettings();
             }
         }
         public int LineOutlineSize
@@ -846,10 +787,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.alerts_line_outline_size = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    SetAllSettings();
-                }
+                SetAllSettings();
             }
         }
         public bool BorderEnabled
@@ -863,10 +801,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.notifications_border_enable = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    SetAllSettings();
-                }
+                SetAllSettings();
             }
         }
         public string BorderBackgroundColor
@@ -880,10 +815,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.notifications_background_color = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    SetAllSettings();
-                }
+                SetAllSettings();
             }
         }
         public string WindowBackgroundColor
@@ -897,10 +829,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.alerts_window_background_color = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    SetAllSettings();
-                }
+                SetAllSettings();
             }
         }
         public bool CustomAchievementEnabled
@@ -938,10 +867,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.notification_custom_achievement_x = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    SetAchievementSettings();
-                }
+                SetAllSettings();
             }
         }
         public int CustomAchievementY
@@ -955,10 +881,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.notification_custom_achievement_y = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    SetAchievementSettings();
-                }
+                SetAllSettings();
             }
         }
         public int CustomMasteryX
@@ -972,10 +895,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.notification_custom_mastery_x = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    SetMasterySettings();
-                }
+                SetAllSettings();
             }
         }
         public int CustomMasteryY
@@ -989,10 +909,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.notification_custom_mastery_y = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    SetMasterySettings();
-                }
+                SetAllSettings();
             }
         }
         public decimal CustomAchievementScale
@@ -1006,10 +923,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.notification_custom_achievement_scale = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    SetAchievementSettings();
-                }
+                SetAllSettings();
             }
         }
         public decimal CustomMasteryScale
@@ -1023,10 +937,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.notification_custom_mastery_scale = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    SetMasterySettings();
-                }
+                SetAllSettings();
             }
         }
         public int CustomAchievementIn

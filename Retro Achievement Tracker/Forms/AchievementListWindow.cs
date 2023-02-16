@@ -1,87 +1,66 @@
 ﻿using CefSharp;
-using CefSharp.Web;
 using Newtonsoft.Json;
 using Retro_Achievement_Tracker.Controllers;
 using Retro_Achievement_Tracker.Models;
 using Retro_Achievement_Tracker.Properties;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Retro_Achievement_Tracker.Forms
 {
-    public partial class AchievementListWindow : Form
+    public partial class AchievementListWindow : DisplayForm
     {
-        private TaskController TaskController;
-        public AchievementListWindow()
+        public AchievementListWindow() : base()
         {
-            ClientSize = new Size(0, 0); 
-            FormBorderStyle = FormBorderStyle.FixedSingle;
-            MaximizeBox = false;
-            MinimizeBox = false;
-
             Name = "RA Tracker - Achievement List";
             Text = "RA Tracker - Achievement List";
-
-            ComponentResourceManager resources = new ComponentResourceManager(typeof(MainWindow));
-            this.Icon = ((Icon)(resources.GetObject("$this.Icon")));
-
-            Shown += AchievementListWindow_Shown;
-            FormClosed += AchievementListWindow_FormClosed;
-
-            TaskController = new TaskController();
+        }
+        protected override void OnShown(EventArgs e)
+        {
+            base.OnShown(e);
 
             SetupBrowser();
         }
-
-        private void AchievementListWindow_FormClosed(object sender, FormClosedEventArgs e)
+        protected override void OnClosed(EventArgs e)
         {
+            base.OnClosed(e);
+
             AchievementListController.Instance.IsOpen = false;
         }
 
-        private void AchievementListWindow_Shown(object sender, EventArgs e)
+        public override async void AssignJavaScriptVariables()
         {
-            AchievementListController.Instance.IsOpen = true;
-        }
-        public async void AssignJavaScriptVariables()
-        {
-            await TaskController.Enqueue(() => ExecuteScript("allAchievements = document.getElementsByClassName(\"achievement\");"));
+            await ExecuteScript("allAchievements = document.getElementsByClassName(\"achievement\");");
         }
         public async void AddAchievement(Achievement achievement, int xCoord, int yCoord)
         {
-            await TaskController.Enqueue(() => ExecuteScript("addAchievement(\"" + xCoord + "px\"," + "\"" + yCoord + "px\"," + JsonConvert.SerializeObject(achievement) + ");"));
-        }
-        public async void SetWindowBackgroundColor(string value)
-        {
-            await TaskController.Enqueue(() => ExecuteScript("container.style.backgroundColor = \"" + value + "\";"));
+            await ExecuteScript("addAchievement(\"" + xCoord + "px\"," + "\"" + yCoord + "px\"," + JsonConvert.SerializeObject(achievement) + ");");
         }
         public async void UnlockAchievement(Achievement achievement)
         {
-            await TaskController.Enqueue(() => ExecuteScript("$(\"#achievement-" + achievement.Id + "-locked-image\").toggle(\"pulsate\");" +
-                "$(\"#achievement-" + achievement.Id + "\").tooltip(\"option\", \"content\", \"" + (achievement.Title + "<br/><br/>" + achievement.Points + "pts<br/><br/>" + achievement.Description + "<br/><br/>" + achievement.DateEarned.Value.ToLocalTime().ToString()) + "\");"));
+            await ExecuteScript("$(\"#achievement-" + achievement.Id + "-locked-image\").toggle(\"pulsate\";" +
+                "$(\"#achievement-" + achievement.Id + "\").tooltip(\"option\", \"content\", \"" + achievement.Title + "<br/><br/>" + achievement.Points + "pts<br/><br/>" + achievement.Description + "<br/><br/>" + achievement.DateEarned.Value.ToLocalTime().ToString() + "\");");
         }
         public async void StartScrolling()
         {
-            await TaskController.Enqueue(() => ExecuteScript("startScrolling();"));
+            await ExecuteScript("startScrolling();");
         }
         public async void StopScrolling()
         {
-            await TaskController.Enqueue(() => ExecuteScript("stopScrolling();"));
+            await ExecuteScript("stopScrolling();");
         }
         public async void SetAchievementPosition(Achievement achievement, int xCoord, int yCoord)
         {
-
-            await TaskController.Enqueue(() => ExecuteScript("$(\"#achievement-" + achievement.Id + "\")" +
+            await ExecuteScript("$(\"#achievement-" + achievement.Id + "\")" +
                 ".animate(" +
                 "   {" +
                 "       left: '" + xCoord + "px', " +
                 "       top: '" + yCoord + "px' " +
                 "   }, 1000, 'easeInOutQuint'" +
-                ");"));
+                ");");
         }
         public async void ClearAchievements(Dictionary<int, int> idsToTimeouts)
         {
@@ -113,61 +92,44 @@ namespace Retro_Achievement_Tracker.Forms
             }
             string command = stringBuilder.ToString();
 
-            await TaskController.Enqueue(() => ExecuteScript(command));
+            await ExecuteScript(command);
         }
-        public async void WaitForClear()
+        public async void WipeOldAchievements()
         {
-            await TaskController.Enqueue(() => ExecuteScript("document.getElementById(\"achievement-list\").innerHTML = \"\";"));
+            await ExecuteScript("document.getElementById(\"achievement-list\").innerHTML = \"\";");
         }
-        protected async Task ExecuteScript(string script)
+        public void SetClientSize()
         {
-            if (chromiumWebBrowser != null)
-            {
-                try
-                {
-                    await chromiumWebBrowser.EvaluateScriptAsync(script, TimeSpan.FromSeconds(5));
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.StackTrace);
-                }
-            }
+            Invoke(new Action(() => {
+                ClientSize = new Size(748, 611);
+            }));
         }
-        protected override bool ShowWithoutActivation
+        public override void SetupBrowser()
         {
-            get { return true; }
-        }
-        public void SetupBrowser()
-        {
-            Controls.Remove(chromiumWebBrowser);
-
-            chromiumWebBrowser = new CefSharp.WinForms.ChromiumWebBrowser(new HtmlString(Resources.AchievementListWindow))
+            chromiumWebBrowser = new CefSharp.WinForms.ChromiumWebBrowser()
             {
                 ActivateBrowserOnCreation = false,
                 Location = new Point(0, 0),
-                Name = "chromiumWebBrowser",
+                Name = "achievementListBrowser",
                 Size = new Size(748, 611),
                 TabIndex = 0,
                 Dock = DockStyle.None,
                 RequestHandler = new CustomRequestHandler()
             };
 
-            chromiumWebBrowser.FrameLoadEnd += new EventHandler<FrameLoadEndEventArgs>((sender, frameLoadEndEventArgs) =>
-            {
-                Invoke((MethodInvoker)delegate
+            chromiumWebBrowser.LoadingStateChanged += new EventHandler<LoadingStateChangedEventArgs>((sender, loadingStateChangedEventArgs) => {
+                if (!loadingStateChangedEventArgs.IsLoading)
                 {
-                    ClientSize = new Size(748, 611);
-
                     AchievementListController.Instance.IsOpen = true;
-                    AchievementListController.Instance.SetAllSettings();
 
-                    MainWindow.UpdateAchievementList(true);
-                });
+                    AchievementListController.Instance.SetAllSettings();
+                    AchievementListController.Instance.UpdateAchievementList();
+                }
             });
+
+            chromiumWebBrowser.LoadHtml(Resources.achievement_list_window);
 
             Controls.Add(chromiumWebBrowser);
         }
-
-        public CefSharp.WinForms.ChromiumWebBrowser chromiumWebBrowser;
     }
 }

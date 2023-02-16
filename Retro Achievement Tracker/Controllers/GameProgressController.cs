@@ -8,7 +8,7 @@ namespace Retro_Achievement_Tracker.Controllers
     public sealed class GameProgressController
     {
         private static GameProgressController instance = new GameProgressController();
-        private static GameStatsWindow GameStatsWindow;
+        private static GameProgressWindow GameProgressWindow;
         public bool IsOpen;
 
         private string completed;
@@ -21,8 +21,7 @@ namespace Retro_Achievement_Tracker.Controllers
 
         private GameProgressController()
         {
-            GameStatsWindow = new GameStatsWindow();
-            IsOpen = false;
+            GameProgressWindow = new GameProgressWindow();
         }
         public static GameProgressController Instance
         {
@@ -33,23 +32,24 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public void Close()
         {
-            GameStatsWindow.Close();
+            GameProgressWindow.Close();
         }
         public void Show()
         {
             if (!IsOpen)
             {
-                GameStatsWindow = new GameStatsWindow();
-                GameStatsWindow.Show();
+                if (GameProgressWindow == null || GameProgressWindow.IsDisposed)
+                {
+                    GameProgressWindow = new GameProgressWindow();
+                }
+                GameProgressWindow.Show();
             }
         }
         public void SetAllSettings()
         {
-
             if (IsOpen)
             {
-                GameStatsWindow.AssignJavaScriptVariables();
-                GameStatsWindow.SetWindowBackgroundColor(WindowBackgroundColor);
+                GameProgressWindow.SetWindowBackgroundColor(WindowBackgroundColor);
 
                 if (AdvancedSettingsEnabled)
                 {
@@ -59,46 +59,59 @@ namespace Retro_Achievement_Tracker.Controllers
                 {
                     SetSimpleSettings();
                 }
-
-                GameStatsWindow.SetGameAchievementsName(GameAchievementsName);
-                GameStatsWindow.SetGamePointsName(GamePointsName);
-                GameStatsWindow.SetGameTruePointsName(GameTruePointsName);
-                GameStatsWindow.SetCompletedName(CompletedName);
-                GameStatsWindow.SetGameRatioName(GameRatioName);
-
-                if (!string.IsNullOrEmpty(gameAchievementsEarned))
-                {  
-                    GameStatsWindow.SetGameAchievementsValue(gameAchievementsEarned + " " + DividerCharacter + " " + gameAchievementsPossible);
-                    GameStatsWindow.SetGamePointsValue(gamePointsEarned + " " + DividerCharacter + " " + gamePointsPossible);
-                    GameStatsWindow.SetGameTruePointsValue(gameTruePointsEarned + " " + DividerCharacter + " " + gameTruePointsPossible);
-                    GameStatsWindow.SetCompletedValue(completed);
-                    GameStatsWindow.SetGameRatioValue(GameRatio);
-                }
-
-                GameStatsWindow.SetGameAchievementsVisibility(GameAchievementsEnabled);
-                GameStatsWindow.SetGamePointsVisibility(GamePointsEnabled);
-                GameStatsWindow.SetGameTruePointsVisibility(GameTruePointsEnabled);
-                GameStatsWindow.SetCompletedVisibility(CompletedEnabled);
-                GameStatsWindow.SetGameRatioVisibility(GameRatioEnabled);
             }
         }
-        public void SetSimpleSettings()
-        {
-            GameStatsWindow.SetSimpleFontFamily(SimpleFontFamily);
-            GameStatsWindow.SetSimpleFontColor(SimpleFontColor);
-            GameStatsWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px");
-        }
-        public void SetAdvancedSettings()
-        {
-            GameStatsWindow.SetNameFontFamily(NameFontFamily);
-            GameStatsWindow.SetNameColor(NameColor);
-            GameStatsWindow.SetNameOutline(NameOutlineEnabled ? NameOutlineColor + " " + NameOutlineSize + "px" : "0px");
 
-            GameStatsWindow.SetValueFontFamily(ValueFontFamily);
-            GameStatsWindow.SetValueColor(ValueColor);
-            GameStatsWindow.SetValueOutline(ValueOutlineEnabled ? ValueOutlineColor + " " + ValueOutlineSize + "px" : "0px");
-        }
+        public void UpdateGameProgress()
+        {
+            if (IsOpen)
+            {
+                GameProgressWindow.AssignJavaScriptVariables();
 
+                SetAllSettings();
+
+                GameProgressWindow.SetGameAchievementsName(AchievementsName);
+                GameProgressWindow.SetGamePointsName(PointsName);
+                GameProgressWindow.SetGameTruePointsName(TruePointsName);
+                GameProgressWindow.SetCompletedName(CompletedName);
+                GameProgressWindow.SetGameRatioName(RatioName);
+
+                if (!string.IsNullOrEmpty(gameAchievementsEarned))
+                {
+                    GameProgressWindow.SetGameAchievementsValue(gameAchievementsEarned + " " + DividerCharacter + " " + gameAchievementsPossible);
+                    GameProgressWindow.SetGamePointsValue(gamePointsEarned + " " + DividerCharacter + " " + gamePointsPossible);
+                    GameProgressWindow.SetGameTruePointsValue(gameTruePointsEarned + " " + DividerCharacter + " " + gameTruePointsPossible);
+                    GameProgressWindow.SetCompletedValue(completed);
+                    GameProgressWindow.SetGameRatioValue(GameRatio);
+                }
+
+                GameProgressWindow.SetGameAchievementsVisibility(AchievementsEnabled);
+                GameProgressWindow.SetGamePointsVisibility(PointsEnabled);
+                GameProgressWindow.SetGameTruePointsVisibility(TruePointsEnabled);
+                GameProgressWindow.SetCompletedVisibility(CompletedEnabled);
+                GameProgressWindow.SetGameRatioVisibility(RatioEnabled);
+
+                SetAllSettings();
+
+                GameProgressWindow.SetClientSize();
+            }
+        }
+        private void SetSimpleSettings()
+        {
+            GameProgressWindow.SetSimpleFontFamily(SimpleFontFamily);
+            GameProgressWindow.SetSimpleFontColor(SimpleFontColor);
+            GameProgressWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px");
+        }
+        private void SetAdvancedSettings()
+        {
+            GameProgressWindow.SetNameFontFamily(NameFontFamily);
+            GameProgressWindow.SetNameColor(NameColor);
+            GameProgressWindow.SetNameOutline(NameOutlineEnabled ? NameOutlineColor + " " + NameOutlineSize + "px" : "0px");
+
+            GameProgressWindow.SetValueFontFamily(ValueFontFamily);
+            GameProgressWindow.SetValueColor(ValueColor);
+            GameProgressWindow.SetValueOutline(ValueOutlineEnabled ? ValueOutlineColor + " " + ValueOutlineSize + "px" : "0px");
+        }
 
         internal void SetGamePoints(string pointsEarned, string pointsPossible)
         {
@@ -108,7 +121,8 @@ namespace Retro_Achievement_Tracker.Controllers
 
             if (IsOpen)
             {
-                GameStatsWindow.SetGamePointsValue(pointsEarned + " " + DividerCharacter + " " + pointsPossible);
+                GameProgressWindow.SetGamePointsValue(pointsEarned + " " + DividerCharacter + " " + pointsPossible); 
+                SetAllSettings();
             }
         }
 
@@ -120,7 +134,8 @@ namespace Retro_Achievement_Tracker.Controllers
 
             if (IsOpen)
             {
-                GameStatsWindow.SetGameAchievementsValue(achievementsEarned + " " + DividerCharacter + " " + achievementsPossible);
+                GameProgressWindow.SetGameAchievementsValue(achievementsEarned + " " + DividerCharacter + " " + achievementsPossible);
+                SetAllSettings();
             }
         }
 
@@ -132,7 +147,8 @@ namespace Retro_Achievement_Tracker.Controllers
 
             if (IsOpen)
             {
-                GameStatsWindow.SetGameTruePointsValue(truePointsEarned + " " + DividerCharacter + " " + truePointsPossible);
+                GameProgressWindow.SetGameTruePointsValue(truePointsEarned + " " + DividerCharacter + " " + truePointsPossible);
+                SetAllSettings();
             }
         }
 
@@ -141,7 +157,8 @@ namespace Retro_Achievement_Tracker.Controllers
 
             if (IsOpen)
             {
-                GameStatsWindow.SetGameRatioValue(GameRatio);
+                GameProgressWindow.SetGameRatioValue(GameRatio);
+                SetAllSettings();
             }
         }
 
@@ -151,7 +168,8 @@ namespace Retro_Achievement_Tracker.Controllers
 
             if (IsOpen)
             {
-                GameStatsWindow.SetCompletedValue(completed + "%");
+                GameProgressWindow.SetCompletedValue(completed + "%");
+                SetAllSettings();
             }
         }
         /**
@@ -179,10 +197,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.game_stats_window_background_color = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    GameStatsWindow.SetWindowBackgroundColor(value);
-                }
+                UpdateGameProgress();
             }
         }
         public bool AdvancedSettingsEnabled
@@ -196,10 +211,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.game_stats_advanced_options_enabled = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    SetAllSettings();
-                }
+                UpdateGameProgress();
             }
         }
         public FontFamily SimpleFontFamily
@@ -224,10 +236,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.game_stats_font_family_name = value.Name;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    GameStatsWindow.SetSimpleFontFamily(SimpleFontFamily);
-                }
+                UpdateGameProgress();
             }
         }
         public string SimpleFontColor
@@ -241,10 +250,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.game_stats_font_color_hex_code = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    GameStatsWindow.SetSimpleFontColor(value);
-                }
+                UpdateGameProgress();
             }
         }
         public string SimpleFontOutlineColor
@@ -258,11 +264,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.game_stats_font_outline_color_hex = value;
                 Settings.Default.Save();
 
-
-                if (IsOpen)
-                {
-                    GameStatsWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px");
-                }
+                UpdateGameProgress();
             }
         }
         public int SimpleFontOutlineSize
@@ -276,10 +278,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.game_stats_font_outline_size = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    GameStatsWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px");
-                }
+                UpdateGameProgress();
             }
         }
         public bool SimpleFontOutlineEnabled
@@ -293,11 +292,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.game_stats_font_outline_enabled = value;
                 Settings.Default.Save();
 
-
-                if (IsOpen)
-                {
-                    GameStatsWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px");
-                }
+                UpdateGameProgress();
             }
         }
         public FontFamily NameFontFamily
@@ -321,10 +316,8 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.game_stats_name_font_family = value.Name;
                 Settings.Default.Save();
-                if (IsOpen)
-                {
-                    GameStatsWindow.SetNameFontFamily(NameFontFamily);
-                }
+
+                UpdateGameProgress();
             }
         }
         public FontFamily ValueFontFamily
@@ -349,10 +342,8 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.game_stats_value_font_family = value.Name;
                 Settings.Default.Save();
-                if (IsOpen)
-                {
-                    GameStatsWindow.SetValueFontFamily(ValueFontFamily);
-                }
+
+                UpdateGameProgress();
             }
         }
 
@@ -367,10 +358,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.game_stats_name_color = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    GameStatsWindow.SetNameColor(value);
-                }
+                UpdateGameProgress();
             }
         }
         public string ValueColor
@@ -384,10 +372,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.game_stats_value_color = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    GameStatsWindow.SetValueColor(value);
-                }
+                UpdateGameProgress();
             }
         }
         public bool NameOutlineEnabled
@@ -401,10 +386,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.game_stats_name_outline_enabled = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    GameStatsWindow.SetNameOutline(value ? NameOutlineColor + " " + NameOutlineSize + "px" : "0px");
-                }
+                UpdateGameProgress();
             }
         }
         public bool ValueOutlineEnabled
@@ -418,10 +400,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.game_stats_value_outline_enabled = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    GameStatsWindow.SetValueOutline(value ? ValueOutlineColor + " " + ValueOutlineSize + "px" : "0px");
-                }
+                UpdateGameProgress();
             }
         }
         public string NameOutlineColor
@@ -435,11 +414,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.game_stats_name_outline_color = value;
                 Settings.Default.Save();
 
-
-                if (IsOpen)
-                {
-                    GameStatsWindow.SetNameOutline(NameOutlineEnabled ? NameOutlineColor + " " + NameOutlineSize + "px" : "0px");
-                }
+                UpdateGameProgress();
             }
         }
         public string ValueOutlineColor
@@ -452,10 +427,8 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.game_stats_value_outline_color = value;
                 Settings.Default.Save();
-                if (IsOpen)
-                {
-                    GameStatsWindow.SetValueOutline(ValueOutlineEnabled ? ValueOutlineColor + " " + ValueOutlineSize + "px" : "0px");
-                }
+
+                UpdateGameProgress();
             }
         }
         public int NameOutlineSize
@@ -469,10 +442,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.game_stats_name_outline_size = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    GameStatsWindow.SetNameOutline(NameOutlineColor + " " + NameOutlineSize + "px");
-                }
+                UpdateGameProgress();
             }
         }
         public int ValueOutlineSize
@@ -486,13 +456,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_value_outline_size = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    GameStatsWindow.SetValueOutline(ValueOutlineColor + " " + ValueOutlineSize + "px");
-                }
+                UpdateGameProgress();
             }
         }
-        public string GameRatioName
+        public string RatioName
         {
             get
             {
@@ -503,13 +470,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_game_ratio_name = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    GameStatsWindow.SetGameRatioName(value);
-                }
+                UpdateGameProgress();
             }
         }
-        public string GamePointsName
+        public string PointsName
         {
             get
             {
@@ -520,13 +484,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_game_points_name = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    GameStatsWindow.SetGamePointsName(value);
-                }
+                UpdateGameProgress();
             }
         }
-        public string GameTruePointsName
+        public string TruePointsName
         {
             get
             {
@@ -537,13 +498,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_game_true_points_name = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    GameStatsWindow.SetGameTruePointsName(value);
-                }
+                UpdateGameProgress();
             }
         }
-        public string GameAchievementsName
+        public string AchievementsName
         {
             get
             {
@@ -554,10 +512,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_game_achievements_name = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    GameStatsWindow.SetGameAchievementsName(value);
-                }
+                UpdateGameProgress();
             }
         }
         public string CompletedName
@@ -571,13 +526,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_completed_name = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    GameStatsWindow.SetCompletedName(value);
-                }
+                UpdateGameProgress();
             }
         }
-        public bool GameRatioEnabled
+        public bool RatioEnabled
         {
             get
             {
@@ -588,13 +540,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_game_ratio_enabled = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    GameStatsWindow.SetGameRatioVisibility(value);
-                }
+                UpdateGameProgress();
             }
         }
-        public bool GamePointsEnabled
+        public bool PointsEnabled
         {
             get
             {
@@ -605,13 +554,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_game_points_enabled = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    GameStatsWindow.SetGamePointsVisibility(value);
-                }
+                UpdateGameProgress();
             }
         }
-        public bool GameTruePointsEnabled
+        public bool TruePointsEnabled
         {
             get
             {
@@ -622,13 +568,10 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_game_true_points_enabled = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    GameStatsWindow.SetGameTruePointsVisibility(value);
-                }
+                UpdateGameProgress();
             }
         }
-        public bool GameAchievementsEnabled
+        public bool AchievementsEnabled
         {
             get
             {
@@ -639,10 +582,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_game_achievements_enabled = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    GameStatsWindow.SetGameAchievementsVisibility(value);
-                }
+                UpdateGameProgress();
             }
         }
         public bool CompletedEnabled
@@ -656,10 +596,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.stats_completed_enabled = value;
                 Settings.Default.Save();
 
-                if (IsOpen)
-                {
-                    GameStatsWindow.SetCompletedVisibility(value);
-                }
+                UpdateGameProgress();
             }
         }
         public bool AutoLaunch
@@ -685,9 +622,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.game_stats_divider_character_selection = value;
                 Settings.Default.Save();
 
-                SetGameAchievements(gameAchievementsEarned, gameAchievementsPossible);
-                SetGamePoints(gamePointsEarned, gamePointsPossible);
-                SetGameTruePoints(gameTruePointsEarned, gameTruePointsPossible);
+                UpdateGameProgress();
             }
         }
     }
