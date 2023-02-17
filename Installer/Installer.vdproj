@@ -1399,11 +1399,6 @@
             "AssemblyAsmDisplayName" = "8:CefSharp, Version=110.0.250.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_03219539288947B197CDA64FBF3E409E"
-                    {
-                    "Name" = "8:CefSharp.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\x64\\CefSharp.dll"
             "TargetName" = "8:"
@@ -1750,11 +1745,6 @@
             "AssemblyAsmDisplayName" = "8:TradeWright.TabControlExtra, Version=2.0.1.0, Culture=neutral, PublicKeyToken=f4d0df7e5886cbe9, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_1831D783786424B162C9DED87C13046F"
-                    {
-                    "Name" = "8:TradeWright.TabControlExtra.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:TradeWright.TabControlExtra.dll"
             "TargetName" = "8:"
@@ -1901,11 +1891,6 @@
             "AssemblyAsmDisplayName" = "8:Microsoft.Web.WebView2.WinForms, Version=1.0.1418.22, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_29F3CB9E53D85EA772F3D84A179168BB"
-                    {
-                    "Name" = "8:Microsoft.Web.WebView2.WinForms.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Microsoft.Web.WebView2.WinForms.dll"
             "TargetName" = "8:"
@@ -2212,11 +2197,6 @@
             "AssemblyAsmDisplayName" = "8:CefSharp.BrowserSubprocess.Core, Version=110.0.250.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
-                    "_3B8B9DFDB4844F1B8D8E49B9D00A92FF"
-                    {
-                    "Name" = "8:CefSharp.BrowserSubprocess.Core.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\x86\\CefSharp.BrowserSubprocess.Core.dll"
             "TargetName" = "8:"
@@ -2323,11 +2303,6 @@
             "AssemblyAsmDisplayName" = "8:MediaToolkit, Version=1.1.0.1, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_43A80A96E4D8AB7ED07975149AED97CE"
-                    {
-                    "Name" = "8:MediaToolkit.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:MediaToolkit.dll"
             "TargetName" = "8:"
@@ -2434,11 +2409,6 @@
             "AssemblyAsmDisplayName" = "8:CefSharp, Version=110.0.250.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_44E4ED8A5A969131E67B7266901BD6C5"
-                    {
-                    "Name" = "8:CefSharp.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:CefSharp.dll"
             "TargetName" = "8:"
@@ -2565,11 +2535,6 @@
             "AssemblyAsmDisplayName" = "8:System.Net.Http, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 "ScatterAssemblies"
                 {
-                    "_4A57181C611E0B0B3DF7BC63ED333C28"
-                    {
-                    "Name" = "8:System.Net.Http.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:System.Net.Http.dll"
             "TargetName" = "8:"
@@ -3056,11 +3021,6 @@
             "AssemblyAsmDisplayName" = "8:AutoUpdater.NET, Version=1.7.6.0, Culture=neutral, PublicKeyToken=501435c91b35f4bc, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_786D8465DF5CAEC8C916848CB942C7B3"
-                    {
-                    "Name" = "8:AutoUpdater.NET.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:AutoUpdater.NET.dll"
             "TargetName" = "8:"
@@ -3207,11 +3167,6 @@
             "AssemblyAsmDisplayName" = "8:CefSharp.Core, Version=110.0.250.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_81EFB782E52E4752F801BAE4CF7C9D08"
-                    {
-                    "Name" = "8:CefSharp.Core.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:CefSharp.Core.dll"
             "TargetName" = "8:"
@@ -3258,11 +3213,6 @@
             "AssemblyAsmDisplayName" = "8:CefSharp.Core.Runtime, Version=110.0.250.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=AMD64"
                 "ScatterAssemblies"
                 {
-                    "_8219043CD5304DFFB6F9403C0DCA3A4E"
-                    {
-                    "Name" = "8:CefSharp.Core.Runtime.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\x64\\CefSharp.Core.Runtime.dll"
             "TargetName" = "8:"
@@ -3469,11 +3419,6 @@
             "AssemblyAsmDisplayName" = "8:CefSharp.BrowserSubprocess, Version=110.0.250.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
-                    "_90F38F097D3F453490427C3E64A91568"
-                    {
-                    "Name" = "8:CefSharp.BrowserSubprocess.exe"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\x86\\CefSharp.BrowserSubprocess.exe"
             "TargetName" = "8:"
@@ -3500,11 +3445,6 @@
             "AssemblyAsmDisplayName" = "8:CefSharp.WinForms, Version=110.0.250.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_9174444BA232A0A180A77BAEF4BAFF8D"
-                    {
-                    "Name" = "8:CefSharp.WinForms.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:CefSharp.WinForms.dll"
             "TargetName" = "8:"
@@ -3531,11 +3471,6 @@
             "AssemblyAsmDisplayName" = "8:Microsoft.Web.WebView2.Core, Version=1.0.1418.22, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_935251B452739D941004045236FC0EFD"
-                    {
-                    "Name" = "8:Microsoft.Web.WebView2.Core.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Microsoft.Web.WebView2.Core.dll"
             "TargetName" = "8:"
@@ -3982,11 +3917,6 @@
             "AssemblyAsmDisplayName" = "8:Retro Achievement Tracker, Version=1.22.1.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_BDFF0201F73544788BFAD08A3DC79F0F"
-                    {
-                    "Name" = "8:Retro Achievement Tracker.exe"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\Retro Achievement Tracker.exe"
             "TargetName" = "8:"
@@ -4113,11 +4043,6 @@
             "AssemblyAsmDisplayName" = "8:CefSharp.Core.Runtime, Version=110.0.250.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
-                    "_C5FE9BB2684D4AB5941003526AE992EE"
-                    {
-                    "Name" = "8:CefSharp.Core.Runtime.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\x86\\CefSharp.Core.Runtime.dll"
             "TargetName" = "8:"
@@ -4444,11 +4369,6 @@
             "AssemblyAsmDisplayName" = "8:CefSharp.BrowserSubprocess.Core, Version=110.0.250.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=AMD64"
                 "ScatterAssemblies"
                 {
-                    "_E07E6013AAE04AC8BA51489EF358ADC8"
-                    {
-                    "Name" = "8:CefSharp.BrowserSubprocess.Core.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\x64\\CefSharp.BrowserSubprocess.Core.dll"
             "TargetName" = "8:"
@@ -4495,11 +4415,6 @@
             "AssemblyAsmDisplayName" = "8:CefSharp, Version=110.0.250.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_E421C94902ED4DD08016B81C257F7A0F"
-                    {
-                    "Name" = "8:CefSharp.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\x86\\CefSharp.dll"
             "TargetName" = "8:"
@@ -4786,11 +4701,6 @@
             "AssemblyAsmDisplayName" = "8:CefSharp.BrowserSubprocess.Core, Version=110.0.250.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
-                    "_F8010A88C7394BAD795C57E44510ACD0"
-                    {
-                    "Name" = "8:CefSharp.BrowserSubprocess.Core.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:CefSharp.BrowserSubprocess.Core.dll"
             "TargetName" = "8:"
@@ -4817,11 +4727,6 @@
             "AssemblyAsmDisplayName" = "8:Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_F8AE05B05683DB76A3EBF00C3D8951DC"
-                    {
-                    "Name" = "8:Newtonsoft.Json.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Newtonsoft.Json.dll"
             "TargetName" = "8:"
@@ -4968,11 +4873,6 @@
             "AssemblyAsmDisplayName" = "8:CefSharp.BrowserSubprocess, Version=110.0.250.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=AMD64"
                 "ScatterAssemblies"
                 {
-                    "_FEFEC0684E904CFCBA5F9767A9E98E28"
-                    {
-                    "Name" = "8:CefSharp.BrowserSubprocess.exe"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\x64\\CefSharp.BrowserSubprocess.exe"
             "TargetName" = "8:"
@@ -5211,15 +5111,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:RA Layout Manager"
-        "ProductCode" = "8:{689E3045-A5ED-4982-BFE3-1650E5277196}"
-        "PackageCode" = "8:{CEDB8A33-F419-4A6B-A5A7-F20DE0E1DE0E}"
+        "ProductCode" = "8:{763E61CA-8434-4E05-8F68-44B00DCD10D6}"
+        "PackageCode" = "8:{3226E140-C9AF-48C3-BF7D-A76F8568DC32}"
         "UpgradeCode" = "8:{2AED59AC-3EBE-4936-A1A3-3282811ECB5E}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.84"
+        "ProductVersion" = "8:1.85"
         "Manufacturer" = "8:Colossus Gaming"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"

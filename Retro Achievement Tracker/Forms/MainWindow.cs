@@ -1180,6 +1180,7 @@ namespace Retro_Achievement_Tracker
             else if (AlertsController.Instance.CustomAchievementEnabled && (string.IsNullOrEmpty(AlertsController.Instance.CustomAchievementFile) || !File.Exists(AlertsController.Instance.CustomAchievementFile)))
             {
                 AlertsController.Instance.CustomAchievementEnabled = false;
+                alertsCustomAchievementEnableCheckbox.Checked = false;
             }
         }
         private void SelectCustomMasteryFile()
@@ -1191,6 +1192,7 @@ namespace Retro_Achievement_Tracker
             else if (AlertsController.Instance.CustomMasteryEnabled && (string.IsNullOrEmpty(AlertsController.Instance.CustomMasteryFile) || !File.Exists(AlertsController.Instance.CustomMasteryFile)))
             {
                 AlertsController.Instance.CustomMasteryEnabled = false;
+                alertsCustomMasteryEnableCheckbox.Checked = false;
             }
         }
         private void ShowAlertButton_Click(object sender, EventArgs eventArgs)
