@@ -30,6 +30,7 @@
             JToken Rank = item["Rank"];
             JToken TotalPoints = item["TotalPoints"];
             JToken TotalTruePoints = item["TotalTruePoints"];
+            JToken User = item["User"];
 
             if (RecentAchievements != null)
             {
@@ -50,6 +51,14 @@
                             }
                         }
                     }
+                }
+            }
+
+            if (User != null)
+            {
+                if (User.Type == JTokenType.String)
+                {
+                    UserSummary.UserName = User.ToString();
                 }
             }
 

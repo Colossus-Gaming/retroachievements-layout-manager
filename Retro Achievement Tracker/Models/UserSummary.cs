@@ -8,6 +8,7 @@
     [JsonConverter(typeof(UserSummaryConverter))]
     public partial class UserSummary : IEquatable<UserSummary>, ICloneable
     {
+        public string UserName { get; set; }
         public int LastGameID { get; set; }
         public int TotalPoints { get; set; }
         public int TotalTruePoints { get; set; }
