@@ -1297,19 +1297,13 @@ namespace Retro_Achievement_Tracker
         }
         private void SetRelatedMediaPathButton_Click(object sender, EventArgs e)
         {
-            Button button = sender as Button;
-
-            switch (button.Name)
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
-                case "relatedMediaSetLaunchBoxPathButton":
-                    if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
-                    {
-                        RelatedMediaController.Instance.LaunchBoxFilePath = folderBrowserDialog1.SelectedPath;
-                    }
-                    break;
-            }
+                RelatedMediaController.Instance.LaunchBoxFilePath = folderBrowserDialog1.SelectedPath;
 
-            UpdateRelatedMediaRadioButtons();
+                UpdateRelatedMediaRadioButtons();
+                UpdateMediaReferences();
+            }
         }
         private void SetFontFamilyBox(ComboBox comboBox, FontFamily fontFamily)
         {
@@ -2792,7 +2786,7 @@ namespace Retro_Achievement_Tracker
                                 }
                             }
                         }
-                        
+
                         if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Back/" + highestConfidenceGame + "-01.jpg"))
                         {
                             RelatedMediaController.Instance.LBBoxBackURI = "disk://" + resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Back/" + highestConfidenceGame + "-01.jpg";
