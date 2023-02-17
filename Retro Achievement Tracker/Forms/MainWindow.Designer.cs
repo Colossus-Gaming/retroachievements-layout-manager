@@ -182,7 +182,7 @@ namespace Retro_Achievement_Tracker
             this.alertsTitleOutlineCheckBox = new System.Windows.Forms.CheckBox();
             this.alertsTitleOutlineLabel = new System.Windows.Forms.Label();
             this.alertsTitleFontOutlineColorPictureBox = new System.Windows.Forms.PictureBox();
-            this.notificationsOpenWindowButton = new System.Windows.Forms.Button();
+            this.alertsOpenWindowButton = new System.Windows.Forms.Button();
             this.alertsDescriptionOutlinePanel = new System.Windows.Forms.Panel();
             this.label122 = new System.Windows.Forms.Label();
             this.alertsDescriptionFontOutlineColorPictureBox = new System.Windows.Forms.PictureBox();
@@ -2706,7 +2706,7 @@ namespace Retro_Achievement_Tracker
             this.panel65.Controls.Add(this.alertsPointsPanel);
             this.panel65.Controls.Add(this.panel69);
             this.panel65.Controls.Add(this.panel70);
-            this.panel65.Controls.Add(this.notificationsOpenWindowButton);
+            this.panel65.Controls.Add(this.alertsOpenWindowButton);
             this.panel65.Controls.Add(this.alertsDescriptionOutlinePanel);
             this.panel65.Controls.Add(this.alertsDescriptionPanel);
             this.panel65.Controls.Add(this.alertsAutoOpenWindowCheckbox);
@@ -2999,21 +2999,21 @@ namespace Retro_Achievement_Tracker
             this.alertsTitleFontOutlineColorPictureBox.TabStop = false;
             this.alertsTitleFontOutlineColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
             // 
-            // notificationsOpenWindowButton
+            // alertsOpenWindowButton
             // 
-            this.notificationsOpenWindowButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
-            this.notificationsOpenWindowButton.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.notificationsOpenWindowButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.notificationsOpenWindowButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.notificationsOpenWindowButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
-            this.notificationsOpenWindowButton.Location = new System.Drawing.Point(382, 2);
-            this.notificationsOpenWindowButton.Margin = new System.Windows.Forms.Padding(0);
-            this.notificationsOpenWindowButton.Name = "notificationsOpenWindowButton";
-            this.notificationsOpenWindowButton.Size = new System.Drawing.Size(75, 27);
-            this.notificationsOpenWindowButton.TabIndex = 10021;
-            this.notificationsOpenWindowButton.Text = "Open";
-            this.notificationsOpenWindowButton.UseVisualStyleBackColor = false;
-            this.notificationsOpenWindowButton.Click += new System.EventHandler(this.ShowWindowButton_Click);
+            this.alertsOpenWindowButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
+            this.alertsOpenWindowButton.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.alertsOpenWindowButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.alertsOpenWindowButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.alertsOpenWindowButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
+            this.alertsOpenWindowButton.Location = new System.Drawing.Point(382, 2);
+            this.alertsOpenWindowButton.Margin = new System.Windows.Forms.Padding(0);
+            this.alertsOpenWindowButton.Name = "alertsOpenWindowButton";
+            this.alertsOpenWindowButton.Size = new System.Drawing.Size(75, 27);
+            this.alertsOpenWindowButton.TabIndex = 10021;
+            this.alertsOpenWindowButton.Text = "Open";
+            this.alertsOpenWindowButton.UseVisualStyleBackColor = false;
+            this.alertsOpenWindowButton.Click += new System.EventHandler(this.ShowWindowButton_Click);
             // 
             // alertsDescriptionOutlinePanel
             // 
@@ -9005,7 +9005,7 @@ namespace Retro_Achievement_Tracker
         private CheckBox alertsTitleOutlineCheckBox;
         private Label alertsTitleOutlineLabel;
         private PictureBox alertsTitleFontOutlineColorPictureBox;
-        private Button notificationsOpenWindowButton;
+        private Button alertsOpenWindowButton;
         private Panel alertsDescriptionOutlinePanel;
         private Label label122;
         private PictureBox alertsDescriptionFontOutlineColorPictureBox;

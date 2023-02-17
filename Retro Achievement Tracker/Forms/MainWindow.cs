@@ -769,7 +769,7 @@ namespace Retro_Achievement_Tracker
             apiKeyTextBox.Enabled = false;
 
             focusOpenWindowButton.Enabled = true;
-            notificationsOpenWindowButton.Enabled = true;
+            alertsOpenWindowButton.Enabled = true;
             userInfoOpenWindowButton.Enabled = true;
             gameInfoOpenWindowButton.Enabled = true;
 
@@ -791,7 +791,7 @@ namespace Retro_Achievement_Tracker
             bool canStart = CanStart();
 
             focusOpenWindowButton.Enabled = canStart;
-            notificationsOpenWindowButton.Enabled = canStart;
+            alertsOpenWindowButton.Enabled = canStart;
             userInfoOpenWindowButton.Enabled = canStart;
             gameInfoOpenWindowButton.Enabled = canStart;
             recentAchievementsOpenWindowButton.Enabled = canStart;
