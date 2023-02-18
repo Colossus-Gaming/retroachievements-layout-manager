@@ -30,7 +30,7 @@
             JToken Rank = item["Rank"];
             JToken TotalPoints = item["TotalPoints"];
             JToken TotalTruePoints = item["TotalTruePoints"];
-            JToken User = item["User"];
+            JToken LastActivity = item["LastActivity"];
 
             if (RecentAchievements != null)
             {
@@ -54,11 +54,11 @@
                 }
             }
 
-            if (User != null)
+            if (LastActivity != null)
             {
-                if (User.Type == JTokenType.String)
+                if (LastActivity.Type == JTokenType.Object)
                 {
-                    UserSummary.UserName = User.ToString();
+                    UserSummary.UserName = LastActivity.SelectToken("User").ToString();
                 }
             }
 
