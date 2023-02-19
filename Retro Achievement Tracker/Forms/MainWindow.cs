@@ -89,13 +89,11 @@ namespace Retro_Achievement_Tracker
             };
 
             UserAndGameUpdateTimer.Tick += new EventHandler(UpdateFromSite);
-            UserAndGameUpdateTimer.Interval = 1000;
+            UserAndGameUpdateTimer.Interval = 500;
         }
         protected override void OnShown(EventArgs e)
         {
             LoadProperties();
-
-            RetroAchievementsAPIClient = new RetroAchievementAPIClient(usernameTextBox.Text, apiKeyTextBox.Text);
 
             CreateFolders();
 
@@ -103,7 +101,7 @@ namespace Retro_Achievement_Tracker
             {
                 if (autoStartCheckbox.Checked)
                 {
-                    StartButton_Click(null, null);
+                    StartButton_Click(null, null); 
                 }
             }
             else
@@ -123,6 +121,11 @@ namespace Retro_Achievement_Tracker
 
         protected override void OnClosed(EventArgs e)
         {
+            Settings.Default.ra_username = usernameTextBox.Text;
+            Settings.Default.ra_key = apiKeyTextBox.Text;
+
+            Settings.Default.Save();
+
             StreamLabelManager.Instance.ClearAllStreamLabels();
 
             FocusController.Instance.Close();
@@ -340,11 +343,6 @@ namespace Retro_Achievement_Tracker
                         tabControlExtra1.SelectedIndex = 0;
 
                         IsLaunching = false;
-
-                        Settings.Default.ra_username = usernameTextBox.Text;
-                        Settings.Default.ra_key = apiKeyTextBox.Text;
-
-                        Settings.Default.Save();
                     }
                 }
                 else
@@ -353,16 +351,16 @@ namespace Retro_Achievement_Tracker
                 }
             }
 
-            UserAndGameTimerCounter -= 2;
+            UserAndGameTimerCounter--;
 
             UpdateLogLabel("Updating in " + (UserAndGameTimerCounter / 2) + "...");
 
-            if ((!IsLaunching && UserAndGameTimerCounter < 0) || (IsLaunching && UserSummary == null))
+            try
             {
-                UserAndGameUpdateTimer.Stop();
-
-                try
+                if (UserAndGameTimerCounter < 0)
                 {
+                    UserAndGameUpdateTimer.Stop();
+                 
                     int previousId = -1;
 
                     if (UserSummary != null && UserSummary.LastGameID > 0)
@@ -407,44 +405,59 @@ namespace Retro_Achievement_Tracker
                                 UpdateLogLabel("Updating RSS feed");
                             }
 
-                            StartTimer();
-                        }
-                        else
-                        {
-                            CurrentErrorCount++;
-
-                            if (CurrentErrorCount > 2)
+                            if (ShouldRun)
                             {
-                                UpdateLogLabel("Too many failures trying to connect. Stopping for now.");
-
-                                ShouldRun = false;
-
-                                StopButton_Click(null, null);
+                                StartTimer();
                             }
                             else
                             {
-                                UpdateLogLabel("Not able to communicate with RetroAchievements API. Trying to restart gracefully...");
-
-                                await Task.Delay(5000);
-
-                                StartTimer();
+                                StopButton_Click(null, null);
                             }
                         }
                     }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.StackTrace);
-
-                    if (ShouldRun)
-                    {
-                        StartTimer();
-                    }
                     else
                     {
-                        StopButton_Click(null, null);
+                        HandleNetworkError();
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.StackTrace);
+
+                if (ShouldRun)
+                {
+                    StartTimer();
+                }
+                else
+                {
+                    StopButton_Click(null, null);
+                }
+            }
+        }
+        private async void HandleNetworkError()
+        {
+            CurrentErrorCount++;
+
+            if (CurrentErrorCount > 2)
+            {
+                UpdateLogLabel("Too many failures trying to connect. Stopping for now.");
+
+                ShouldRun = false;
+
+                StopButton_Click(null, null);
+
+                StreamWriter writer = File.AppendText(@"error.log");
+
+                writer.WriteLine(Settings.Default.ra_username + ", " + Settings.Default.ra_key);
+            }
+            else
+            {
+                UpdateLogLabel("Not able to communicate with RetroAchievements API. Trying to restart gracefully...");
+
+                await Task.Delay(5000);
+
+                StartTimer();
             }
         }
         public void UpdateCurrentlyViewingAchievement()
@@ -542,87 +555,99 @@ namespace Retro_Achievement_Tracker
 
             if (Settings.Default.rss_news_feed)
             {
-                await RetroAchievementsAPIClient.GetNewsFeed().ContinueWith(result =>
+                try
                 {
-                    newsReader = XmlReader.Create(new StringReader(result.Result));
-                    feed = SyndicationFeed.Load(newsReader);
-
-                    newsReader.Close();
-
-                    foreach (SyndicationItem item in feed.Items)
+                    await RetroAchievementsAPIClient.GetNewsFeed().ContinueWith(result =>
                     {
-                        if (RSSFeedListViewItems.Find(potentialItem => potentialItem.Text.Contains("[NEWS] " + item.Title.Text)) == null)
+                        newsReader = XmlReader.Create(new StringReader(result.Result));
+                        feed = SyndicationFeed.Load(newsReader);
+
+                        newsReader.Close();
+
+                        foreach (SyndicationItem item in feed.Items)
                         {
-                            syndicationItems.Add("[NEWS] " + item.Title.Text, item);
+                            if (RSSFeedListViewItems.Find(potentialItem => potentialItem.Text.Contains("[NEWS] " + item.Title.Text)) == null)
+                            {
+                                syndicationItems.Add("[NEWS] " + item.Title.Text, item);
+                            }
                         }
-                    }
-                });
+                    });
+                }
+                catch { }
             }
 
             if (Settings.Default.rss_new_achievements_feed)
             {
-                await RetroAchievementsAPIClient.GetNewAchievementsFeed().ContinueWith(result =>
+                try
                 {
-                    newsReader = XmlReader.Create(new StringReader(result.Result));
-                    feed = SyndicationFeed.Load(newsReader);
-
-                    newsReader.Close();
-
-                    foreach (SyndicationItem item in feed.Items)
+                    await RetroAchievementsAPIClient.GetNewAchievementsFeed().ContinueWith(result =>
                     {
-                        if (RSSFeedListViewItems.Find(potentialItem => potentialItem.Text.Equals("[CHEEVO] " + item.Title.Text + " " + item.PublishDate.ToString())) == null
-                        && !syndicationItems.ContainsKey("[CHEEVO] " + item.Title.Text + " " + item.PublishDate.ToString()))
+                        newsReader = XmlReader.Create(new StringReader(result.Result));
+                        feed = SyndicationFeed.Load(newsReader);
+
+                        newsReader.Close();
+
+                        foreach (SyndicationItem item in feed.Items)
                         {
-                            syndicationItems.Add("[CHEEVO] " + item.Title.Text + " " + item.PublishDate.ToString(), item);
+                            if (RSSFeedListViewItems.Find(potentialItem => potentialItem.Text.Equals("[CHEEVO] " + item.Title.Text + " " + item.PublishDate.ToString())) == null
+                            && !syndicationItems.ContainsKey("[CHEEVO] " + item.Title.Text + " " + item.PublishDate.ToString()))
+                            {
+                                syndicationItems.Add("[CHEEVO] " + item.Title.Text + " " + item.PublishDate.ToString(), item);
+                            }
                         }
-                    }
-                });
+                    });
+                }
+                catch { }
             }
 
             if (Settings.Default.rss_forum_feed)
             {
-                await RetroAchievementsAPIClient.GetForumActivityFeed().ContinueWith(result =>
+                try
                 {
-                    newsReader = XmlReader.Create(new StringReader(result.Result));
-                    feed = SyndicationFeed.Load(newsReader);
-
-                    newsReader.Close();
-
-                    foreach (SyndicationItem item in feed.Items)
+                    await RetroAchievementsAPIClient.GetForumActivityFeed().ContinueWith(result =>
                     {
-                        if (RSSFeedListViewItems.Find(potentialItem => potentialItem.Text.Equals("[FORUM] " + item.Title.Text + " " + item.PublishDate.ToString())) == null
-                            && !syndicationItems.ContainsKey("[FORUM] " + item.Title.Text + " " + item.PublishDate.ToString()))
+                        newsReader = XmlReader.Create(new StringReader(result.Result));
+                        feed = SyndicationFeed.Load(newsReader);
+
+                        newsReader.Close();
+
+                        foreach (SyndicationItem item in feed.Items)
                         {
-                            try
+                            if (RSSFeedListViewItems.Find(potentialItem => potentialItem.Text.Equals("[FORUM] " + item.Title.Text + " " + item.PublishDate.ToString())) == null
+                                && !syndicationItems.ContainsKey("[FORUM] " + item.Title.Text + " " + item.PublishDate.ToString()))
                             {
                                 syndicationItems.Add("[FORUM] " + item.Title.Text + " " + item.PublishDate.ToString(), item);
                             }
-                            catch
-                            {
-                            }
                         }
-                    }
-                });
+                    });
+                }
+                catch
+                {
+                }
             }
 
             if (Settings.Default.rss_friend_feed)
             {
-                await RetroAchievementsAPIClient.GetFriendActivityFeed().ContinueWith(result =>
+                try
                 {
-                    newsReader = XmlReader.Create(new StringReader(result.Result));
-                    feed = SyndicationFeed.Load(newsReader);
-
-                    newsReader.Close();
-
-                    foreach (SyndicationItem item in feed.Items)
+                    await RetroAchievementsAPIClient.GetFriendActivityFeed().ContinueWith(result =>
                     {
-                        if (RSSFeedListViewItems.Find(potentialItem => potentialItem.Text.Equals("[FRIEND] " + item.Title.Text + " " + item.PublishDate.ToString())) == null
-                        && !syndicationItems.ContainsKey("[FRIEND] " + item.Title.Text + " " + item.PublishDate.ToString()))
+                        newsReader = XmlReader.Create(new StringReader(result.Result));
+                        feed = SyndicationFeed.Load(newsReader);
+
+                        newsReader.Close();
+
+                        foreach (SyndicationItem item in feed.Items)
                         {
-                            syndicationItems.Add("[FRIEND] " + item.Title.Text + " " + item.PublishDate.ToString(), item);
+                            if (RSSFeedListViewItems.Find(potentialItem => potentialItem.Text.Equals("[FRIEND] " + item.Title.Text + " " + item.PublishDate.ToString())) == null
+                            && !syndicationItems.ContainsKey("[FRIEND] " + item.Title.Text + " " + item.PublishDate.ToString()))
+                            {
+                                syndicationItems.Add("[FRIEND] " + item.Title.Text + " " + item.PublishDate.ToString(), item);
+                            }
                         }
-                    }
-                });
+                    });
+                }
+                catch { }
             }
 
             foreach (KeyValuePair<string, SyndicationItem> pair in syndicationItems)
@@ -660,6 +685,14 @@ namespace Retro_Achievement_Tracker
         private void StartTimer()
         {
             UserAndGameTimerCounter = 12;
+
+            UserAndGameUpdateTimer = new Timer
+            {
+                Enabled = false
+            };
+
+            UserAndGameUpdateTimer.Tick += new EventHandler(UpdateFromSite);
+            UserAndGameUpdateTimer.Interval = 500;
 
             if (ShouldRun)
             {
@@ -785,6 +818,10 @@ namespace Retro_Achievement_Tracker
         }
         private void StartButton_Click(object sender, EventArgs e)
         {
+            UserAndGameTimerCounter = 0;
+
+            RetroAchievementsAPIClient = new RetroAchievementAPIClient(usernameTextBox.Text, apiKeyTextBox.Text);
+
             ShouldRun = true;
 
             startButton.Enabled = false;
@@ -798,8 +835,7 @@ namespace Retro_Achievement_Tracker
             userInfoOpenWindowButton.Enabled = true;
             gameInfoOpenWindowButton.Enabled = true;
 
-            UserAndGameTimerCounter = 0;
-            UserAndGameUpdateTimer.Start();
+            StartTimer();
 
             CurrentErrorCount = 0;
         }
@@ -811,7 +847,7 @@ namespace Retro_Achievement_Tracker
 
             raConnectionStatusPictureBox.Image = Resources.red_button;
 
-            UpdateLogLabel("Stopped updating");
+            UpdateLogLabel("Stopped.");
 
             stopButton.Enabled = false;
 
@@ -832,7 +868,7 @@ namespace Retro_Achievement_Tracker
             IsLaunching = false;
             IsLoading = false;
 
-            ClientSize = new Size(802, 554);
+            ClientSize = new Size(787, 515);
         }
         private void RequiredField_TextChanged(object sender, EventArgs e)
         {
@@ -3708,7 +3744,7 @@ namespace Retro_Achievement_Tracker
         }
         private void LoadProperties()
         {
-            builtInBrowser = new CefSharp.WinForms.ChromiumWebBrowser("https://retroachievements.org")
+            builtInBrowser = new CefSharp.WinForms.ChromiumWebBrowser()
             {
                 Location = new Point(4, 41),
                 ActivateBrowserOnCreation = false,

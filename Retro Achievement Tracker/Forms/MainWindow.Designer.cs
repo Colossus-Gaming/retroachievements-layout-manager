@@ -880,6 +880,7 @@ namespace Retro_Achievement_Tracker
             this.apiKeyTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.apiKeyTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.apiKeyTextBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.apiKeyTextBox.ForeColor = System.Drawing.Color.White;
             this.apiKeyTextBox.Location = new System.Drawing.Point(108, 2);
             this.apiKeyTextBox.Name = "apiKeyTextBox";
             this.apiKeyTextBox.PasswordChar = '*';
@@ -905,6 +906,7 @@ namespace Retro_Achievement_Tracker
             this.usernameTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.usernameTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.usernameTextBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.usernameTextBox.ForeColor = System.Drawing.Color.White;
             this.usernameTextBox.Location = new System.Drawing.Point(108, 3);
             this.usernameTextBox.Name = "usernameTextBox";
             this.usernameTextBox.Size = new System.Drawing.Size(286, 23);
@@ -1124,6 +1126,7 @@ namespace Retro_Achievement_Tracker
             this.rssFeedFriendCheckBox.TabIndex = 10010;
             this.rssFeedFriendCheckBox.Text = "FRIENDS";
             this.rssFeedFriendCheckBox.UseVisualStyleBackColor = false;
+            this.rssFeedFriendCheckBox.CheckedChanged += new System.EventHandler(this.RSSFeedCheckbox_CheckedChanged);
             // 
             // rssFeedCheevoCheckBox
             // 
@@ -1137,6 +1140,7 @@ namespace Retro_Achievement_Tracker
             this.rssFeedCheevoCheckBox.TabIndex = 10011;
             this.rssFeedCheevoCheckBox.Text = "CHEEVO";
             this.rssFeedCheevoCheckBox.UseVisualStyleBackColor = false;
+            this.rssFeedCheevoCheckBox.CheckedChanged += new System.EventHandler(this.RSSFeedCheckbox_CheckedChanged);
             // 
             // rssFeedNewsCheckBox
             // 
@@ -1150,6 +1154,7 @@ namespace Retro_Achievement_Tracker
             this.rssFeedNewsCheckBox.TabIndex = 10012;
             this.rssFeedNewsCheckBox.Text = "NEWS";
             this.rssFeedNewsCheckBox.UseVisualStyleBackColor = false;
+            this.rssFeedNewsCheckBox.CheckedChanged += new System.EventHandler(this.RSSFeedCheckbox_CheckedChanged);
             // 
             // rssFeedForumCheckBox
             // 
@@ -1163,6 +1168,7 @@ namespace Retro_Achievement_Tracker
             this.rssFeedForumCheckBox.TabIndex = 10009;
             this.rssFeedForumCheckBox.Text = "FORUM";
             this.rssFeedForumCheckBox.UseVisualStyleBackColor = false;
+            this.rssFeedForumCheckBox.CheckedChanged += new System.EventHandler(this.RSSFeedCheckbox_CheckedChanged);
             // 
             // rssFeedListView
             // 
