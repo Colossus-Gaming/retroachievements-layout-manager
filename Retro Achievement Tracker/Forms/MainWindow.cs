@@ -897,6 +897,8 @@ namespace Retro_Achievement_Tracker
                         break;
                 }
 
+                IsLoading = false;
+
                 Settings.Default.Save();
 
                 rssFeedListView.Items.Clear();
