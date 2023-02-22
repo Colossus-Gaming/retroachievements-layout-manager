@@ -230,6 +230,7 @@
     <Compile Include="Forms\FocusWindow.Designer.cs">
       <DependentUpon>FocusWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\Constants.cs" />
     <Compile Include="Models\GameCompleted.cs" />
     <Compile Include="Models\GameCompletedConverter.cs" />
     <Compile Include="Models\MediaHelper.cs" />

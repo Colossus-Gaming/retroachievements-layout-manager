@@ -357,7 +357,7 @@ namespace Retro_Achievement_Tracker
 
             try
             {
-                if (UserAndGameTimerCounter < 0)
+                if (UserAndGameTimerCounter <= 0)
                 {
                     UserAndGameUpdateTimer.Stop();
                  
@@ -782,10 +782,10 @@ namespace Retro_Achievement_Tracker
 
             StreamLabelManager.Instance.EnqueueGameInfo(GameInfo);
 
-            RelatedMediaController.Instance.RABadgeIconURI = "https://media.retroachievements.org" + GameInfo.ImageIcon;
-            RelatedMediaController.Instance.RATitleScreenURI = "https://media.retroachievements.org" + GameInfo.ImageTitle;
-            RelatedMediaController.Instance.RAScreenshotURI = "https://media.retroachievements.org" + GameInfo.ImageIngame;
-            RelatedMediaController.Instance.RABoxArtURI = "https://media.retroachievements.org" + GameInfo.ImageBoxArt;
+            RelatedMediaController.Instance.RABadgeIconURI = Constants.RETRO_ACHIEVEMENTS_MEDIA_URL + GameInfo.ImageIcon;
+            RelatedMediaController.Instance.RATitleScreenURI = Constants.RETRO_ACHIEVEMENTS_MEDIA_URL + GameInfo.ImageTitle;
+            RelatedMediaController.Instance.RAScreenshotURI = Constants.RETRO_ACHIEVEMENTS_MEDIA_URL + GameInfo.ImageIngame;
+            RelatedMediaController.Instance.RABoxArtURI = Constants.RETRO_ACHIEVEMENTS_MEDIA_URL + GameInfo.ImageBoxArt;
         }
         private void UpdateFocusButtons()
         {
@@ -3688,6 +3688,8 @@ namespace Retro_Achievement_Tracker
                         GameInfoController.Instance.TitleName = textBox.Text;
                         break;
                 }
+
+                IsLoading = false;
             }
         }
         private void BrowserSensitiveControl_Click(object sender, EventArgs e)
