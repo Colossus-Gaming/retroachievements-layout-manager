@@ -55,7 +55,7 @@ namespace Retro_Achievement_Tracker.Controllers
             AchievementListWindow.SetClientSize();
         }
 
-        public  void UpdateAchievementList()
+        public void UpdateAchievementList()
         {
             UpdateAchievementList(CurrentUnlockedAchievements, CurrentLockedAchievements, true);
 
@@ -130,9 +130,9 @@ namespace Retro_Achievement_Tracker.Controllers
                 {
                     CurrentUnlockedAchievements.Add(newAchievement);
 
-                    if (IsOpen)
+                    if (oldAchievement == null)
                     {
-                        if (oldAchievement == null)
+                        if (IsOpen)
                         {
                             AchievementListWindow.AddAchievement(newAchievement, xCoord, yCoord);
 
@@ -146,11 +146,14 @@ namespace Retro_Achievement_Tracker.Controllers
                                 achievementRowIndex = 0;
                             }
                         }
-                        else
+                    }
+                    else
+                    {
+                        if (IsOpen)
                         {
                             AchievementListWindow.UnlockAchievement(newAchievement);
-                            CurrentLockedAchievements.Remove(oldAchievement);
                         }
+                        CurrentLockedAchievements.Remove(oldAchievement);
                     }
                 }
             }
@@ -186,58 +189,55 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public async void AnimateAchievementList()
         {
-            if (IsOpen)
+            int achievementRowIndex = 0;
+            int yCoord = 0;
+            int xCoord = 0;
+
+            CurrentUnlockedAchievements.Sort();
+            CurrentUnlockedAchievements.Reverse();
+
+            CurrentLockedAchievements.Sort();
+
+            for (int i = 0; i < CurrentUnlockedAchievements.Count; i++)
             {
-                int achievementRowIndex = 0;
-                int yCoord = 0;
-                int xCoord = 0;
+                AchievementListWindow.SetAchievementPosition(CurrentUnlockedAchievements[i], xCoord, yCoord);
 
-                CurrentUnlockedAchievements.Sort();
-                CurrentUnlockedAchievements.Reverse();
+                xCoord += 68;
+                achievementRowIndex++;
 
-                CurrentLockedAchievements.Sort();
-
-                for (int i = 0; i < CurrentUnlockedAchievements.Count; i++)
+                if (achievementRowIndex > AchievementsPerRow - 1)
                 {
-                    AchievementListWindow.SetAchievementPosition(CurrentUnlockedAchievements[i], xCoord, yCoord);
-
-                    xCoord += 68;
-                    achievementRowIndex++;
-
-                    if (achievementRowIndex > AchievementsPerRow - 1)
-                    {
-                        xCoord = 0;
-                        yCoord += 68;
-                        achievementRowIndex = 0;
-                    }
-
-                    await Task.Delay(50);
+                    xCoord = 0;
+                    yCoord += 68;
+                    achievementRowIndex = 0;
                 }
 
-                for (int i = 0; i < CurrentLockedAchievements.Count; i++)
+                await Task.Delay(50);
+            }
+
+            for (int i = 0; i < CurrentLockedAchievements.Count; i++)
+            {
+                AchievementListWindow.SetAchievementPosition(CurrentLockedAchievements[i], xCoord, yCoord);
+
+                xCoord += 68;
+                achievementRowIndex++;
+
+                if (achievementRowIndex > AchievementsPerRow - 1)
                 {
-                    AchievementListWindow.SetAchievementPosition(CurrentLockedAchievements[i], xCoord, yCoord);
-
-                    xCoord += 68;
-                    achievementRowIndex++;
-
-                    if (achievementRowIndex > AchievementsPerRow - 1)
-                    {
-                        xCoord = 0;
-                        yCoord += 68;
-                        achievementRowIndex = 0;
-                    }
-
-                    await Task.Delay(50);
+                    xCoord = 0;
+                    yCoord += 68;
+                    achievementRowIndex = 0;
                 }
 
-                if (AutoScroll)
-                {
-                    await Task.Delay(1000);
-                    AchievementListWindow.StartScrolling();
+                await Task.Delay(50);
+            }
 
-                    AchievementListWindow.AssignJavaScriptVariables();
-                }
+            if (AutoScroll)
+            {
+                await Task.Delay(1000);
+                AchievementListWindow.StartScrolling();
+
+                AchievementListWindow.AssignJavaScriptVariables();
             }
         }
         public bool AutoScroll

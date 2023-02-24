@@ -116,7 +116,7 @@ namespace Retro_Achievement_Tracker
             AutoUpdater.CheckForUpdateEvent += AutoUpdaterOnCheckForUpdateEvent;
             AutoUpdater.ReportErrors = false;
             AutoUpdater.Synchronous = true;
-            AutoUpdater.Start("https://github.com/Colossus-Gaming/retroachievements-layout-manager/releases/download/release-management/ra-layout-manager-release.xml");
+            AutoUpdater.Start(Constants.GITHUB_AUTO_UPDATE_URL);
         }
 
         protected override void OnClosed(EventArgs e)
@@ -4188,45 +4188,4 @@ namespace Retro_Achievement_Tracker
         UP,
         DOWN
     }
-
-    //public enum ConsolePlatform
-    //{
-    //    3DO Interactive Multiplayer,
-    //    Amstrad CPC,
-    //    Arcade,
-    //    Atari 2600,
-    //    Atari 7800,
-    //    Atari Jaguar,
-    //    Atari Lynx,
-    //    Fairchild Channel F,
-    //    GCE Vectrex,
-    //    Magnavox Odyssey 2,
-    //    Mattel Intellivision,
-    //    Microsoft MSX,
-    //    NEC TurboGrafx-16,
-    //    NEC TurboGrafx-CD,
-    //    Nintendo 64,
-    //    Nintendo DS,
-    //    Nintendo Entertainment System,
-    //    Nintendo Game Boy,
-    //    Nintendo Game Boy Advance,
-    //    Nintendo Game Boy Color,
-    //    Nintendo Pokemon Mini,
-    //    Nintendo Virtual Boy,
-    //    PC Engine SuperGrafx,
-    //    Sega 32X,
-    //    Sega CD,
-    //    Sega Dreamcast,
-    //    Sega Game Gear,
-    //    Sega Genesis,
-    //    Sega Master System,
-    //    Sega Saturn,
-    //    Sega SG-1000,
-    //    Sony Playstation,
-    //    Sony Playstation 2,
-    //    Sony PSP,
-    //    Super Nintendo Entertainment System,
-    //    Watara Supervision,
-    //    WonderSwan
-    //}
 }

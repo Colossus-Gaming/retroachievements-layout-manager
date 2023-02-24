@@ -41,7 +41,7 @@ namespace Retro_Achievement_Tracker.Forms
         }
         public async void UnlockAchievement(Achievement achievement)
         {
-            await ExecuteScript("$(\"#achievement-" + achievement.Id + "-locked-image\").toggle(\"pulsate\";" +
+            await ExecuteScript("$(\"#achievement-" + achievement.Id + "-locked-image\").toggle(\"pulsate\");" +
                 "$(\"#achievement-" + achievement.Id + "\").tooltip(\"option\", \"content\", \"" + achievement.Title + "<br/><br/>" + achievement.Points + "pts<br/><br/>" + achievement.Description + "<br/><br/>" + achievement.DateEarned.Value.ToLocalTime().ToString() + "\");");
         }
         public async void StartScrolling()

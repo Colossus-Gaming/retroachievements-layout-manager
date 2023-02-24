@@ -30,25 +30,25 @@ namespace Retro_Achievement_Tracker
         }
         public async Task<string> GetNewsFeed()
         {
-            HttpResponseMessage httpResponseMessage = await client.GetAsync(Constants.RETRO_ACHIEVEMENTS_URL + "/rss-news");
+            HttpResponseMessage httpResponseMessage = await client.GetAsync(Constants.RETRO_ACHIEVEMENTS_URL + Constants.RETRO_ACHIEVEMENTS_RSS_NEWS_URI);
 
             return await httpResponseMessage.Content.ReadAsStringAsync();
         }
         public async Task<string> GetNewAchievementsFeed()
         {
-            HttpResponseMessage httpResponseMessage = await client.GetAsync(Constants.RETRO_ACHIEVEMENTS_URL + "/rss-newachievements");
+            HttpResponseMessage httpResponseMessage = await client.GetAsync(Constants.RETRO_ACHIEVEMENTS_URL + Constants.RETRO_ACHIEVEMENTS_RSS_CHEEVO_URI);
 
             return await httpResponseMessage.Content.ReadAsStringAsync();
         }
         public async Task<string> GetForumActivityFeed()
         {
-            HttpResponseMessage httpResponseMessage = await client.GetAsync(Constants.RETRO_ACHIEVEMENTS_URL + "/rss-forum");
+            HttpResponseMessage httpResponseMessage = await client.GetAsync(Constants.RETRO_ACHIEVEMENTS_URL + Constants.RETRO_ACHIEVEMENTS_RSS_FORUM_URI);
 
             return await httpResponseMessage.Content.ReadAsStringAsync();
         }
         public async Task<string> GetFriendActivityFeed()
         {
-            HttpResponseMessage httpResponseMessage = await client.GetAsync(Constants.RETRO_ACHIEVEMENTS_URL + "/rss-activity?u=" + UserName);
+            HttpResponseMessage httpResponseMessage = await client.GetAsync(string.Format(Constants.RETRO_ACHIEVEMENTS_URL + Constants.RETRO_ACHIEVEMENTS_RSS_FRIEND_URI, UserName));
 
             return await httpResponseMessage.Content.ReadAsStringAsync();
         }
