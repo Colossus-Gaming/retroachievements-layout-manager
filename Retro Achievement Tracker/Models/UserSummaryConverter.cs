@@ -64,7 +64,7 @@
 
             if (LastGameID != null)
             {
-                if (LastGameID.Type == JTokenType.String)
+                if (LastGameID.Type == JTokenType.Integer)
                 {
                     UserSummary.LastGameID = Convert.ToInt32(LastGameID);
                 }
@@ -88,7 +88,7 @@
 
             if (TotalPoints != null)
             {
-                if (TotalPoints.Type == JTokenType.String)
+                if (TotalPoints.Type == JTokenType.Integer)
                 {
                     UserSummary.TotalPoints = Convert.ToInt32(TotalPoints);
                 }
@@ -96,7 +96,7 @@
 
             if (TotalTruePoints != null)
             {
-                if (TotalTruePoints.Type == JTokenType.String)
+                if (TotalTruePoints.Type == JTokenType.Integer)
                 {
                     UserSummary.TotalTruePoints = Convert.ToInt32(TotalTruePoints);
                 }
