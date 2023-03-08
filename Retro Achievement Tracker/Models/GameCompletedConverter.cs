@@ -28,27 +28,18 @@ namespace Retro_Achievement_Tracker.Models
 
             if (NumAwarded != null)
             {
-                if (NumAwarded.Type == JTokenType.String)
-                {
-                    GameCompleted.AchievementsEarned = Convert.ToInt32(NumAwarded);
-                }
+                GameCompleted.AchievementsEarned = Convert.ToInt32(NumAwarded);
             }
 
 
             if (MaxPossible != null)
             {
-                if (MaxPossible.Type == JTokenType.String)
-                {
-                    GameCompleted.AchievementsPossible = Convert.ToInt32(MaxPossible);
-                }
+                GameCompleted.AchievementsPossible = Convert.ToInt32(MaxPossible);
             }
 
             if (HardcoreMode != null)
             {
-                if (HardcoreMode.Type == JTokenType.String)
-                {
-                    GameCompleted.HardcoreMode = HardcoreMode.ToString() == "1";
-                }
+                GameCompleted.HardcoreMode = HardcoreMode.ToString() == "1";
             }
 
             return GameCompleted;

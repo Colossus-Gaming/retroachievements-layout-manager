@@ -81,15 +81,15 @@ namespace Retro_Achievement_Tracker.Controllers
                     GameProgressWindow.SetGameAchievementsValue(gameAchievementsEarned + " " + DividerCharacter + " " + gameAchievementsPossible);
                     GameProgressWindow.SetGamePointsValue(gamePointsEarned + " " + DividerCharacter + " " + gamePointsPossible);
                     GameProgressWindow.SetGameTruePointsValue(gameTruePointsEarned + " " + DividerCharacter + " " + gameTruePointsPossible);
-                    GameProgressWindow.SetCompletedValue(completed);
                     GameProgressWindow.SetGameRatioValue(GameRatio);
+                    GameProgressWindow.SetCompletedValue(completed + " %");
                 }
 
                 GameProgressWindow.SetGameAchievementsVisibility(AchievementsEnabled);
                 GameProgressWindow.SetGamePointsVisibility(PointsEnabled);
                 GameProgressWindow.SetGameTruePointsVisibility(TruePointsEnabled);
-                GameProgressWindow.SetCompletedVisibility(CompletedEnabled);
                 GameProgressWindow.SetGameRatioVisibility(RatioEnabled);
+                GameProgressWindow.SetCompletedVisibility(CompletedEnabled);
 
                 SetAllSettings();
 

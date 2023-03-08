@@ -42,9 +42,6 @@ namespace Retro_Achievement_Tracker
 
         private RetroAchievementAPIClient RetroAchievementsAPIClient;
 
-        public CefSharp.WinForms.ChromiumWebBrowser builtInBrowser;
-        public CefSharp.WinForms.ChromiumWebBrowser manualViewingBrowser;
-
         private List<Achievement> LockedAchievements
         {
             get
@@ -91,6 +88,7 @@ namespace Retro_Achievement_Tracker
             UserAndGameUpdateTimer.Tick += new EventHandler(UpdateFromSite);
             UserAndGameUpdateTimer.Interval = 500;
         }
+
         protected override void OnShown(EventArgs e)
         {
             LoadProperties();
@@ -101,7 +99,7 @@ namespace Retro_Achievement_Tracker
             {
                 if (autoStartCheckbox.Checked)
                 {
-                    StartButton_Click(null, null); 
+                    StartButton_Click(null, null);
                 }
             }
             else
@@ -114,8 +112,10 @@ namespace Retro_Achievement_Tracker
         private void AutoUpdate()
         {
             AutoUpdater.CheckForUpdateEvent += AutoUpdaterOnCheckForUpdateEvent;
+
             AutoUpdater.ReportErrors = false;
             AutoUpdater.Synchronous = true;
+
             AutoUpdater.Start(Constants.GITHUB_AUTO_UPDATE_URL);
         }
 
@@ -175,13 +175,8 @@ namespace Retro_Achievement_Tracker
                 {
                     GameInfo.Achievements.ForEach(achievement =>
                     {
-                        Achievement otherAchievement = UserSummary.Achievements.Find(achievement1 => achievement.Id == achievement1.Id);
-
-                        if (otherAchievement != null)
-                        {
-                            achievement.GameId = otherAchievement.GameId;
-                            achievement.GameTitle = otherAchievement.GameTitle;
-                        }
+                        achievement.GameId = (int)GameInfo.Id;
+                        achievement.GameTitle = GameInfo.Title;
                     });
                 }
 
@@ -360,7 +355,7 @@ namespace Retro_Achievement_Tracker
                 if (UserAndGameTimerCounter <= 0)
                 {
                     UserAndGameUpdateTimer.Stop();
-                 
+
                     int previousId = -1;
 
                     if (UserSummary != null && UserSummary.LastGameID > 0)
@@ -402,7 +397,7 @@ namespace Retro_Achievement_Tracker
                             {
                                 await CheckRSSFeeds();
 
-                                UpdateLogLabel("Updating RSS feed");
+                                UpdateLogLabel(Constants.RETRO_ACHIEVEMENTS_LABEL_MSG_UPDATING_RSS_FEED);
                             }
 
                             if (ShouldRun)
@@ -593,7 +588,9 @@ namespace Retro_Achievement_Tracker
                         }
                     });
                 }
-                catch { }
+                catch
+                {
+                }
             }
 
             if (Settings.Default.rss_forum_feed)
@@ -680,7 +677,7 @@ namespace Retro_Achievement_Tracker
         }
         private void StartTimer()
         {
-            UserAndGameTimerCounter = 12;
+            UserAndGameTimerCounter = (IsLaunching && UserSummary == null) ? 0 : 12;
 
             UserAndGameUpdateTimer = new Timer
             {
@@ -814,8 +811,6 @@ namespace Retro_Achievement_Tracker
         }
         private void StartButton_Click(object sender, EventArgs e)
         {
-            UserAndGameTimerCounter = 0;
-
             RetroAchievementsAPIClient = new RetroAchievementAPIClient(usernameTextBox.Text, apiKeyTextBox.Text);
 
             ShouldRun = true;
@@ -3385,6 +3380,7 @@ namespace Retro_Achievement_Tracker
                 }
 
                 UpdateAdvancedSettings();
+
                 IsLoading = false;
             }
         }
@@ -3718,25 +3714,7 @@ namespace Retro_Achievement_Tracker
                         }
                         else
                         {
-                            string s = "<!DOCTYPE html>" +
-                            "<html>" +
-                            "<style>" +
-                            "html { " +
-                            "  color: #ffffff;" +
-                            "  font-family: \"Lucida Console Bold\", \"Courier New\", monospace;" +
-                            "  font-size: 14px;" +
-                            "  background-color: #272727;" +
-                            "}" +
-                            "a:link {" +
-                            " color: #ffa200;" +
-                            "}" +
-                            "</style>" +
-                            "<body>" +
-                            listView.SelectedItems[0].SubItems[2].Text +
-                            "</body>" +
-                            "</html>";
-
-                            builtInBrowser.LoadHtml(s);
+                            webBrowser1.DocumentText = string.Format(Constants.RETRO_ACHIEVEMENTS_RSS_NEWS_HTML, listView.SelectedItems[0].SubItems[2].Text);
                         }
                     }
                     break;
@@ -3744,18 +3722,6 @@ namespace Retro_Achievement_Tracker
         }
         private void LoadProperties()
         {
-            builtInBrowser = new CefSharp.WinForms.ChromiumWebBrowser()
-            {
-                Location = new Point(4, 41),
-                ActivateBrowserOnCreation = false,
-                Name = "builtInBrowser",
-                Size = new Size(458, 318),
-                TabIndex = 0,
-                Dock = DockStyle.None
-            };
-
-            panel126.Controls.Add(builtInBrowser);
-
             if (Settings.Default.UpdateSettings)
             {
                 Settings.Default.Upgrade();
@@ -3764,6 +3730,8 @@ namespace Retro_Achievement_Tracker
 
                 Settings.Default.Save();
             }
+
+            webBrowser1.DocumentText = string.Format(Constants.RETRO_ACHIEVEMENTS_RSS_NEWS_HTML, "");
 
             usernameTextBox.Text = Settings.Default.ra_username;
             apiKeyTextBox.Text = Settings.Default.ra_key;

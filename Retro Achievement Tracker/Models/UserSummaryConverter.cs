@@ -34,81 +34,59 @@
 
             if (RecentAchievements != null)
             {
-                if (RecentAchievements.Type == JTokenType.Object)
-                {
-                    UserSummary.Achievements = new List<Achievement>();
+                UserSummary.Achievements = new List<Achievement>();
 
-                    foreach (JToken jobject in RecentAchievements.Children<JToken>())
+                foreach (JToken jobject in RecentAchievements.Children<JToken>())
+                {
+                    foreach (JToken jobjectJr in jobject.Children<JToken>())
                     {
-                        foreach (JToken jobjectJr in jobject.Children<JToken>())
+                        foreach (JToken jobjectIII in jobjectJr.Children<JToken>())
                         {
-                            foreach (JToken jobjectIII in jobjectJr.Children<JToken>())
+                            foreach (JToken jobjectIV in jobjectIII.Children<JToken>())
                             {
-                                foreach (JToken jobjectIV in jobjectIII.Children<JToken>())
-                                {
-                                    UserSummary.Achievements.Add(jobjectIV.ToObject<Achievement>());
-                                }
+                                UserSummary.Achievements.Add(jobjectIV.ToObject<Achievement>());
                             }
                         }
                     }
                 }
+
             }
 
             if (LastActivity != null)
             {
-                if (LastActivity.Type == JTokenType.Object)
-                {
-                    UserSummary.UserName = LastActivity.SelectToken("User").ToString();
-                }
+                UserSummary.UserName = LastActivity.SelectToken("User").ToString();
             }
 
             if (LastGameID != null)
             {
-                if (LastGameID.Type == JTokenType.Integer)
-                {
-                    UserSummary.LastGameID = Convert.ToInt32(LastGameID);
-                }
+                UserSummary.LastGameID = Convert.ToInt32(LastGameID);
             }
 
             if (UserPic != null)
             {
-                if (UserPic.Type == JTokenType.String)
-                {
-                    UserSummary.UserPic = UserPic.ToString();
-                }
+                UserSummary.UserPic = UserPic.ToString();
             }
 
             if (Motto != null)
             {
-                if (Motto.Type == JTokenType.String)
-                {
-                    UserSummary.Motto = Motto.ToString();
-                }
+                UserSummary.Motto = Motto.ToString();
             }
 
             if (TotalPoints != null)
             {
-                if (TotalPoints.Type == JTokenType.Integer)
-                {
-                    UserSummary.TotalPoints = Convert.ToInt32(TotalPoints);
-                }
+                UserSummary.TotalPoints = Convert.ToInt32(TotalPoints);
             }
 
             if (TotalTruePoints != null)
             {
-                if (TotalTruePoints.Type == JTokenType.Integer)
-                {
-                    UserSummary.TotalTruePoints = Convert.ToInt32(TotalTruePoints);
-                }
+                UserSummary.TotalTruePoints = Convert.ToInt32(TotalTruePoints);
             }
 
             if (Rank != null)
             {
-                if (Rank.Type == JTokenType.Integer)
-                {
-                    UserSummary.Rank = Convert.ToInt32(Rank);
-                }
+                UserSummary.Rank = Convert.ToInt32(Rank);
             }
+
             return UserSummary;
         }
 

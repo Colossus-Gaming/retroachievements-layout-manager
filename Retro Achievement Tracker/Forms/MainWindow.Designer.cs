@@ -605,6 +605,7 @@ namespace Retro_Achievement_Tracker
             this.relatedMediaTabPage = new System.Windows.Forms.TabPage();
             this.browserTabPage = new System.Windows.Forms.TabPage();
             this.panel126 = new System.Windows.Forms.Panel();
+            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.label95 = new System.Windows.Forms.Label();
             this.pictureBox27 = new System.Windows.Forms.PictureBox();
             this.panel125 = new System.Windows.Forms.Panel();
@@ -8257,12 +8258,21 @@ namespace Retro_Achievement_Tracker
             // panel126
             // 
             this.panel126.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            this.panel126.Controls.Add(this.webBrowser1);
             this.panel126.Controls.Add(this.label95);
             this.panel126.Controls.Add(this.pictureBox27);
             this.panel126.Location = new System.Drawing.Point(299, 3);
             this.panel126.Name = "panel126";
             this.panel126.Size = new System.Drawing.Size(467, 362);
             this.panel126.TabIndex = 10086;
+            // 
+            // webBrowser1
+            // 
+            this.webBrowser1.Location = new System.Drawing.Point(8, 40);
+            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser1.Name = "webBrowser1";
+            this.webBrowser1.Size = new System.Drawing.Size(454, 319);
+            this.webBrowser1.TabIndex = 10087;
             // 
             // label95
             // 
@@ -8273,7 +8283,7 @@ namespace Retro_Achievement_Tracker
             this.label95.Name = "label95";
             this.label95.Size = new System.Drawing.Size(190, 26);
             this.label95.TabIndex = 10069;
-            this.label95.Text = "Browser";
+            this.label95.Text = "News Preview";
             // 
             // pictureBox27
             // 
@@ -9233,6 +9243,7 @@ namespace Retro_Achievement_Tracker
         private Label gameProgressHardcoreWorthLabel;
         private Label gameProgressPoints2Label;
         private Label gameProgressTruePoints2Label;
+        private WebBrowser webBrowser1;
     }
 }
 
