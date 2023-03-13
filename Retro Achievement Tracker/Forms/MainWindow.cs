@@ -1769,7 +1769,7 @@ namespace Retro_Achievement_Tracker
 
                 switch (comboBox.Name)
                 {
-                    case "alertsAchievementAnimationInComboBox":
+                    case "alertsCustomAchievementAnimationInComboBox":
                         switch ((string)(sender as ComboBox).SelectedItem)
                         {
                             case "DOWN":
@@ -1789,7 +1789,7 @@ namespace Retro_Achievement_Tracker
                                 break;
                         }
                         break;
-                    case "alertsAchievementAnimationOutComboBox":
+                    case "alertsCustomAchievementAnimationOutComboBox":
                         switch ((string)alertsCustomAchievementAnimationOutComboBox.SelectedItem)
                         {
                             case "DOWN":
@@ -1809,7 +1809,7 @@ namespace Retro_Achievement_Tracker
                                 break;
                         }
                         break;
-                    case "alertsMasteryAnimationInComboBox":
+                    case "alertsCustomMasteryAnimationInComboBox":
                         switch ((string)alertsCustomMasteryAnimationInComboBox.SelectedItem)
                         {
                             case "DOWN":
@@ -1829,7 +1829,7 @@ namespace Retro_Achievement_Tracker
                                 break;
                         }
                         break;
-                    case "alertsMasteryAnimationOutComboBox":
+                    case "alertsCustomMasteryAnimationOutComboBox":
                         switch ((string)alertsCustomMasteryAnimationOutComboBox.SelectedItem)
                         {
                             case "DOWN":
