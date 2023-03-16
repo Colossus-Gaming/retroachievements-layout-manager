@@ -84,7 +84,11 @@
 
             if (Rank != null)
             {
-                UserSummary.Rank = Convert.ToInt32(Rank);
+                try
+                {
+                    UserSummary.Rank = Convert.ToInt32(Rank);
+                }
+                catch (Exception) { }
             }
 
             return UserSummary;

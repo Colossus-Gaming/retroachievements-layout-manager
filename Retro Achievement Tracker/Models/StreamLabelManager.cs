@@ -143,7 +143,7 @@ namespace Retro_Achievement_Tracker.Models
         {
             if (userSummary != null)
             {
-                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/user-info/rank.txt", userSummary.Rank.ToString());
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/user-info/rank.txt", userSummary.Rank == 0 ? "No Rank" : userSummary.Rank.ToString());
                 File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/user-info/ratio.txt", userSummary.RetroRatio);
                 File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/user-info/points.txt", userSummary.TotalPoints.ToString());
                 File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/user-info/true-points.txt", userSummary.TotalTruePoints.ToString());

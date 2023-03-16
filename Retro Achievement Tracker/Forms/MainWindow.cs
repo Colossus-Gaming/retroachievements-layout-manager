@@ -88,7 +88,15 @@ namespace Retro_Achievement_Tracker
             UserAndGameUpdateTimer.Tick += new EventHandler(UpdateFromSite);
             UserAndGameUpdateTimer.Interval = 500;
         }
+        private void AutoUpdate()
+        {
+            AutoUpdater.CheckForUpdateEvent += AutoUpdaterOnCheckForUpdateEvent;
 
+            AutoUpdater.ReportErrors = false;
+            AutoUpdater.Synchronous = true;
+
+            AutoUpdater.Start(Constants.GITHUB_AUTO_UPDATE_URL);
+        }
         protected override void OnShown(EventArgs e)
         {
             LoadProperties();
@@ -109,16 +117,6 @@ namespace Retro_Achievement_Tracker
 
             IsLoading = false;
         }
-        private void AutoUpdate()
-        {
-            AutoUpdater.CheckForUpdateEvent += AutoUpdaterOnCheckForUpdateEvent;
-
-            AutoUpdater.ReportErrors = false;
-            AutoUpdater.Synchronous = true;
-
-            AutoUpdater.Start(Constants.GITHUB_AUTO_UPDATE_URL);
-        }
-
         protected override void OnClosed(EventArgs e)
         {
             Settings.Default.ra_username = usernameTextBox.Text;
@@ -696,12 +694,12 @@ namespace Retro_Achievement_Tracker
         {
             userInfoUsernameLabel.Text = UserSummary.UserName;
             userInfoMottoLabel.Text = UserSummary.Motto;
-            userInfoRankLabel.Text = "Site Rank: " + UserSummary.Rank.ToString();
+            userInfoRankLabel.Text = "Site Rank: " + (UserSummary.Rank == 0 ? "No Rank" : UserSummary.Rank.ToString());
             userInfoPointsLabel.Text = "Hardcore Points: " + UserSummary.TotalPoints.ToString() + " points";
             userInfoTruePointsLabel.Text = "(" + UserSummary.TotalTruePoints.ToString() + ")";
             userInfoRatioLabel.Text = UserSummary.RetroRatio;
 
-            UserInfoController.Instance.SetRank(UserSummary.Rank.ToString());
+            UserInfoController.Instance.SetRank(UserSummary.Rank == 0 ? "No Rank" : UserSummary.Rank.ToString());
             UserInfoController.Instance.SetPoints(UserSummary.TotalPoints.ToString());
             UserInfoController.Instance.SetTruePoints(UserSummary.TotalTruePoints.ToString());
             UserInfoController.Instance.SetRatio(UserSummary.RetroRatio);
@@ -2655,6 +2653,7 @@ namespace Retro_Achievement_Tracker
                     case RelatedMediaSelection.LBCartFront:
                     case RelatedMediaSelection.LBCartBack:
                         relatedMediaRABadgeIconRadioButton.Checked = true;
+
                         RelatedMediaController.Instance.RelatedMediaSelection = RelatedMediaSelection.RABadgeIcon;
                         break;
                 }
