@@ -21,9 +21,6 @@ namespace Retro_Achievement_Tracker.Forms
             Icon = (Icon)resources.GetObject("$this.Icon");
 
             ClientSize = new Size(0, 0);
-            FormBorderStyle = FormBorderStyle.FixedSingle;
-            MaximizeBox = false;
-            MinimizeBox = false;
 
             ScriptExecutionTimer = new Timer();
             ScriptExecutionTimer.Tick += ExecuteNextScript;

@@ -30,6 +30,7 @@ namespace Retro_Achievement_Tracker
         private int CurrentlyViewingIndex;
         private int UserAndGameTimerCounter;
         private int CurrentErrorCount = 0;
+        private int MaxCheevoCount = 0;
 
         private UserSummary UserSummary;
         private GameInfo GameInfo;
@@ -186,8 +187,10 @@ namespace Retro_Achievement_Tracker
 
                     achievementNotificationList.ForEach((achievement) => StreamLabelManager.Instance.EnqueueAlert(achievement));
 
-                    if (achievementNotificationList.Count > 0)
+                    if (achievementNotificationList.Count > 0 && UnlockedAchievements.Count > MaxCheevoCount)
                     {
+                        MaxCheevoCount = UnlockedAchievements.Count;
+
                         UpdateLogLabel(Constants.RETRO_ACHIEVEMENTS_LABEL_MSG_CHEEVO_POP);
 
                         achievementNotificationList.Sort();
@@ -247,6 +250,8 @@ namespace Retro_Achievement_Tracker
                 else
                 {
                     UpdateLogLabel(string.Format(Constants.RETRO_ACHIEVEMENTS_LABEL_MSG_CHANGING_TITLE, GameInfo.Title));
+
+                    MaxCheevoCount = UnlockedAchievements.Count;
 
                     CurrentlyViewingAchievement = null;
                     CurrentlyViewingIndex = -1;
