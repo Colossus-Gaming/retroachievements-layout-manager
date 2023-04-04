@@ -85,7 +85,7 @@ namespace Retro_Achievement_Tracker.Models
         {
             WriteGameInfoStreamLabels(gameInfo);
         }
-        public void EnqueueLastFive(GameInfo gameInfo)
+        public void EnqueueRecentUnlocks(GameInfo gameInfo)
         {
             WriteLastFiveStreamLabels(gameInfo);
         }

@@ -612,6 +612,7 @@ namespace Retro_Achievement_Tracker
             this.label94 = new System.Windows.Forms.Label();
             this.pictureBox26 = new System.Windows.Forms.PictureBox();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.checkForUpdatesButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.userProfilePictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.focusAchievementPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gameInfoPictureBox)).BeginInit();
@@ -938,7 +939,7 @@ namespace Retro_Achievement_Tracker
             this.autoStartCheckbox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.autoStartCheckbox.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.autoStartCheckbox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.autoStartCheckbox.Location = new System.Drawing.Point(111, 67);
+            this.autoStartCheckbox.Location = new System.Drawing.Point(156, 71);
             this.autoStartCheckbox.Name = "autoStartCheckbox";
             this.autoStartCheckbox.Size = new System.Drawing.Size(88, 18);
             this.autoStartCheckbox.TabIndex = 2;
@@ -7507,6 +7508,7 @@ namespace Retro_Achievement_Tracker
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.checkForUpdatesButton);
             this.panel1.Controls.Add(this.panel3);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.startButton);
@@ -8328,6 +8330,21 @@ namespace Retro_Achievement_Tracker
             this.pictureBox26.Size = new System.Drawing.Size(275, 2);
             this.pictureBox26.TabIndex = 10070;
             this.pictureBox26.TabStop = false;
+            // 
+            // checkForUpdatesButton
+            // 
+            this.checkForUpdatesButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
+            this.checkForUpdatesButton.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.checkForUpdatesButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkForUpdatesButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkForUpdatesButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
+            this.checkForUpdatesButton.Location = new System.Drawing.Point(3, 62);
+            this.checkForUpdatesButton.Margin = new System.Windows.Forms.Padding(0);
+            this.checkForUpdatesButton.Name = "checkForUpdatesButton";
+            this.checkForUpdatesButton.Size = new System.Drawing.Size(150, 27);
+            this.checkForUpdatesButton.TabIndex = 29;
+            this.checkForUpdatesButton.Text = "Check For Updates";
+            this.checkForUpdatesButton.UseVisualStyleBackColor = false;
             // 
             // MainWindow
             // 
@@ -9244,6 +9261,7 @@ namespace Retro_Achievement_Tracker
         private Label gameProgressPoints2Label;
         private Label gameProgressTruePoints2Label;
         private WebBrowser webBrowser1;
+        private Button checkForUpdatesButton;
     }
 }
 

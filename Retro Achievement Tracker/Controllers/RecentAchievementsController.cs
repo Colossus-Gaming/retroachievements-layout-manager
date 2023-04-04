@@ -16,8 +16,6 @@ namespace Retro_Achievement_Tracker.Controllers
         private List<Achievement> CurrentAchievements;
         private List<Achievement> VisibileAchievements;
 
-        private int GameId;
-
         private RecentAchievementsController()
         {
             RecentAchievementsWindow = new RecentAchievementsWindow();
@@ -104,61 +102,25 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public void SetAchievements()
         {
-            SetAchievements(CurrentAchievements, true);
+            SetAchievements(CurrentAchievements);
         }
-        public async void SetAchievements(List<Achievement> achievements, bool needsChanges)
+        public void SetAchievements(List<Achievement> achievements)
         {
-            achievements.Sort();
-            achievements.Reverse(); 
-            
             CurrentAchievements = new List<Achievement>(achievements);
+            CurrentAchievements.Sort();
+            CurrentAchievements.Reverse();
 
             if (IsOpen)
             {
                 RecentAchievementsWindow.AssignJavaScriptVariables();
 
-                SetAllSettings();
-
-                if (CurrentAchievements.Count == 0 || needsChanges)
-                {
-                    RecentAchievementsWindow.HideRecentAchievements(); 
-                    
-                    await Task.Delay(500);
-                    
-                    RecentAchievementsWindow.ClearRecentAchievements();
-
-                    VisibileAchievements = new List<Achievement>();
-                }
-
                 if (CurrentAchievements.Count > 0)
                 {
-                    if (needsChanges)
-                    {
-                        GameId = CurrentAchievements[0].GameId;
-                        VisibileAchievements = new List<Achievement>();
-                    }
-
-                    needsChanges = CurrentAchievements.Count > VisibileAchievements.Count || needsChanges;
-
-                    int maxAchievementCount = Math.Min(CurrentAchievements.Count, MaxListSize);
-
-                    for (int i = maxAchievementCount - 1; i >= 0; i--)
-                    {
-                        if (!VisibileAchievements.Contains(CurrentAchievements[i]))
-                        {
-                            needsChanges = true;
-                            VisibileAchievements.Add(CurrentAchievements[i]);
-                        }
-                    }
-
-                    VisibileAchievements = VisibileAchievements.GetRange(0, maxAchievementCount);
-
-                    if (needsChanges)
-                    {
-                        PopulateRecentAchievementsWindow();
-                    }
+                    VisibileAchievements = CurrentAchievements.GetRange(0, Math.Min(CurrentAchievements.Count, MaxListSize));
                 }
-            }            
+
+                PopulateRecentAchievementsWindow();
+            }
         }
         public async void PopulateRecentAchievementsWindow()
         {

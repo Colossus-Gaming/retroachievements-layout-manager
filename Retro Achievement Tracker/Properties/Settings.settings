@@ -701,5 +701,11 @@
     <Setting Name="related_media_selection" Type="System.String" Scope="User">
       <Value Profile="(Default)">BADGE_ICON</Value>
     </Setting>
+    <Setting Name="check_for_update_on_version" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="check_for_update_version" Type="System.String" Scope="User">
+      <Value Profile="(Default)">1.0.0.0</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

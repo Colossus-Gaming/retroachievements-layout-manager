@@ -18,6 +18,7 @@ using File = System.IO.File;
 using Retro_Achievement_Tracker.Forms;
 using System.Globalization;
 using System.Text;
+using TradeWright.UI.Forms;
 
 namespace Retro_Achievement_Tracker
 {
@@ -88,7 +89,34 @@ namespace Retro_Achievement_Tracker
 
             UserAndGameUpdateTimer.Tick += new EventHandler(UpdateFromSite);
             UserAndGameUpdateTimer.Interval = 500;
+
+            tabControlExtra1.TabIndexChanged += TabControlExtra1_TabIndexChanged;
+
+            checkForUpdatesButton.Click += CheckForUpdatesButton_Click;
         }
+
+        private void CheckForUpdatesButton_Click(object sender, EventArgs e)
+        {
+            Settings.Default.check_for_update_on_version = true;
+
+            AutoUpdate();
+        }
+
+        private void TabControlExtra1_TabIndexChanged(object sender, EventArgs e)
+        {
+            foreach (TabPage tab in tabControlExtra1.TabPages)
+            {
+                if (tabControlExtra1.SelectedTab.Equals(tab))
+                {
+                    tab.Show();
+                }
+                else
+                {
+                    tab.Hide();
+                }
+            }
+        }
+
         private void AutoUpdate()
         {
             AutoUpdater.CheckForUpdateEvent += AutoUpdaterOnCheckForUpdateEvent;
@@ -140,27 +168,37 @@ namespace Retro_Achievement_Tracker
         {
             if (args != null)
             {
-                if (args.IsUpdateAvailable)
+                if (args.IsUpdateAvailable && (Settings.Default.check_for_update_on_version || (!Settings.Default.check_for_update_version.Equals(args.CurrentVersion) && Settings.Default.check_for_update_on_version)))
                 {
+                    Settings.Default.check_for_update_version = args.CurrentVersion;
+
                     try
                     {
-                        if (AutoUpdater.DownloadUpdate(args))
+                        DialogResult dialogResult = MessageBox.Show("Old version: " + args.InstalledVersion + "\nNew version: " + args.CurrentVersion, "New Update Available", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+                        if (dialogResult.Equals(DialogResult.Yes))
                         {
-                            Close();
+                            if (AutoUpdater.DownloadUpdate(args))
+                            {
+                                Close();
+                            }
+                        }
+                        else
+                        {
+                            Settings.Default.check_for_update_on_version = false;
                         }
                     }
                     catch (Exception exception)
                     {
-                        MessageBox.Show(exception.Message, exception.GetType().ToString(), MessageBoxButtons.OK,
-                            MessageBoxIcon.Error);
+                        MessageBox.Show(exception.Message, exception.GetType().ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
+
+                    Settings.Default.Save();
                 }
             }
             else
             {
-                MessageBox.Show(
-                        @"There is a problem reaching update server please check your internet connection and try again later.",
-                        @"Update check failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(@"There is a problem reaching update server please check your internet connection and try again later.", @"Update check failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -212,19 +250,29 @@ namespace Retro_Achievement_Tracker
                                         currentIndex = -1;
                                         break;
                                     case RefocusBehaviorEnum.GO_TO_PREVIOUS:
-                                        Achievement previousAchievement = GameInfo.Achievements[currentIndex];
-
-                                        while (currentIndex >= 0 && !LockedAchievements.Contains(previousAchievement))
+                                        while (currentIndex > 0 && !LockedAchievements.Contains(GameInfo.Achievements[currentIndex]))
                                         {
-                                            previousAchievement = GameInfo.Achievements[--currentIndex];
+                                            currentIndex--;
+                                        }
+                                        if (currentIndex == 0)
+                                        {
+                                            while (currentIndex < GameInfo.Achievements.Count - 1 && !LockedAchievements.Contains(GameInfo.Achievements[currentIndex]))
+                                            {
+                                                currentIndex++;
+                                            }
                                         }
                                         break;
                                     case RefocusBehaviorEnum.GO_TO_NEXT:
-                                        Achievement nextAchievement = GameInfo.Achievements[currentIndex];
-
-                                        while (currentIndex <= GameInfo.Achievements.Count - 1 && !LockedAchievements.Contains(nextAchievement))
+                                        while (currentIndex < GameInfo.Achievements.Count - 1 && !LockedAchievements.Contains(GameInfo.Achievements[currentIndex]))
                                         {
-                                            nextAchievement = GameInfo.Achievements[++currentIndex];
+                                            currentIndex++;
+                                        }
+                                        if (currentIndex == GameInfo.Achievements.Count - 1)
+                                        {
+                                            while (currentIndex > 0 && !LockedAchievements.Contains(GameInfo.Achievements[currentIndex]))
+                                            {
+                                                currentIndex--;
+                                            }
                                         }
                                         break;
                                     case RefocusBehaviorEnum.GO_TO_LAST:
@@ -263,9 +311,9 @@ namespace Retro_Achievement_Tracker
                 {
                     AchievementListController.Instance.UpdateAchievementList(UnlockedAchievements.ToList(), LockedAchievements.ToList(), !sameGame);
 
-                    RecentAchievementsController.Instance.SetAchievements(UnlockedAchievements.ToList(), !sameGame);
+                    RecentAchievementsController.Instance.SetAchievements(UnlockedAchievements.ToList());
 
-                    StreamLabelManager.Instance.EnqueueLastFive(GameInfo);
+                    StreamLabelManager.Instance.EnqueueRecentUnlocks(GameInfo);
 
                     UpdateGameInfo();
                     UpdateCurrentlyViewingAchievement();
@@ -296,7 +344,7 @@ namespace Retro_Achievement_Tracker
                 {
                     if (tabControlExtra1.SelectedIndex < tabControlExtra1.TabPages.Count - 1)
                     {
-                        tabControlExtra1.SelectedIndex = tabControlExtra1.SelectedIndex + 1;
+                        tabControlExtra1.SelectedIndex++;
                     }
 
                     if (FocusController.Instance.AutoLaunch && !FocusController.Instance.IsOpen)
@@ -411,6 +459,10 @@ namespace Retro_Achievement_Tracker
                             {
                                 StopButton_Click(null, null);
                             }
+                        }
+                        else
+                        {
+                            HandleNetworkError();
                         }
                     }
                     else
@@ -680,7 +732,7 @@ namespace Retro_Achievement_Tracker
         }
         private void StartTimer()
         {
-            UserAndGameTimerCounter = (IsLaunching && UserSummary == null) ? 0 : 12;
+            UserAndGameTimerCounter = (IsLaunching || UserSummary == null) ? 0 : 12;
 
             UserAndGameUpdateTimer = new Timer
             {
@@ -1191,7 +1243,7 @@ namespace Retro_Achievement_Tracker
                         break;
                     case "recentAchievementsMaxListNumericUpDown":
                         RecentAchievementsController.Instance.MaxListSize = Convert.ToInt32(numericUpDown.Value);
-                        RecentAchievementsController.Instance.SetAchievements(UnlockedAchievements.ToList(), true);
+                        RecentAchievementsController.Instance.SetAchievements(UnlockedAchievements.ToList());
                         break;
                 }
 
@@ -3346,13 +3398,13 @@ namespace Retro_Achievement_Tracker
                         RelatedMediaController.Instance.LBCartBackURI = string.Empty;
                     }
 
-                    RelatedMediaController.Instance.SetAllSettings();
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e.ToString());
                 }
             }
+            RelatedMediaController.Instance.SetAllSettings();
         }
         private void AdvancedCheckBox_Click(object sender, EventArgs e)
         {

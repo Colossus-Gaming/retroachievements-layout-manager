@@ -283,6 +283,7 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Content Include="CleanupUninstall.vbs" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -304,13 +305,13 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Autoupdater.NET.Official">
-      <Version>1.7.6</Version>
+      <Version>1.7.7</Version>
     </PackageReference>
     <PackageReference Include="Bootstrapper.WindowsInstaller4_5">
       <Version>1.0.0.1</Version>
     </PackageReference>
     <PackageReference Include="CefSharp.WinForms">
-      <Version>99.2.90</Version>
+      <Version>107.1.120</Version>
     </PackageReference>
     <PackageReference Include="HtmlAgilityPack">
       <Version>1.11.46</Version>
@@ -322,7 +323,7 @@
       <Version>1.1.0.1</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
-      <Version>13.0.2</Version>
+      <Version>13.0.3</Version>
     </PackageReference>
     <PackageReference Include="TradeWright.TabControlExtra">
       <Version>2.0.1</Version>

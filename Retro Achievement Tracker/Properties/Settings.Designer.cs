@@ -2818,5 +2818,29 @@ namespace Retro_Achievement_Tracker.Properties {
                 this["related_media_selection"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool check_for_update_on_version {
+            get {
+                return ((bool)(this["check_for_update_on_version"]));
+            }
+            set {
+                this["check_for_update_on_version"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1.0.0.0")]
+        public string check_for_update_version {
+            get {
+                return ((string)(this["check_for_update_version"]));
+            }
+            set {
+                this["check_for_update_version"] = value;
+            }
+        }
     }
 }

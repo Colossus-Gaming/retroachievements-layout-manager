@@ -197,6 +197,7 @@ namespace Retro_Achievement_Tracker.Controllers
             CurrentUnlockedAchievements.Reverse();
 
             CurrentLockedAchievements.Sort();
+            CurrentLockedAchievements.Reverse();
 
             for (int i = 0; i < CurrentUnlockedAchievements.Count; i++)
             {

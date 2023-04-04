@@ -167,7 +167,7 @@ namespace Retro_Achievement_Tracker
         {
             StringBuilder stringBuilder = new StringBuilder();
 
-            for (int i = 0; i < achievements.Count; i++)
+            for (int i = achievements.Count - 1; i >= 0; i--)
             {
                 stringBuilder.Append(
                     "var achievementBlock = document.createElement('div');" +

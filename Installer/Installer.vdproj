@@ -340,12 +340,6 @@
         "Entry"
         {
         "MsmKey" = "8:_44E4ED8A5A969131E67B7266901BD6C5"
-        "OwnerKey" = "8:_E07E6013AAE04AC8BA51489EF358ADC8"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_44E4ED8A5A969131E67B7266901BD6C5"
         "OwnerKey" = "8:_C5FE9BB2684D4AB5941003526AE992EE"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -550,12 +544,6 @@
         "Entry"
         {
         "MsmKey" = "8:_74829631B92B4169B7B10F5A77D74380"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_769F1835D6084332B0DF2ED43929F695"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -789,19 +777,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_B1DDF0567FE74D3B911CE9797440171B"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_B4E3F879DA8743ADA2401E1A6E068AD4"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_B4FC1EAC5264439C80817675C85EF0ED"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -897,12 +873,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_CEF76944B8FA40FEB089D70839337205"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_CFBC397324D340B1A28F1481D674C211"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -952,12 +922,6 @@
         "Entry"
         {
         "MsmKey" = "8:_DE2C9884E30D46B5B7731FBBEC7DA763"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_E07E6013AAE04AC8BA51489EF358ADC8"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1120,7 +1084,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_BDFF0201F73544788BFAD08A3DC79F0F"
+        "OwnerKey" = "8:_03219539288947B197CDA64FBF3E409E"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1138,13 +1102,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_E07E6013AAE04AC8BA51489EF358ADC8"
+        "OwnerKey" = "8:_C5FE9BB2684D4AB5941003526AE992EE"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_C5FE9BB2684D4AB5941003526AE992EE"
+        "OwnerKey" = "8:_BDFF0201F73544788BFAD08A3DC79F0F"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1229,12 +1193,6 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_44E4ED8A5A969131E67B7266901BD6C5"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_03219539288947B197CDA64FBF3E409E"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -1396,14 +1354,9 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:CefSharp, Version=110.0.250.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:CefSharp, Version=107.1.120.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_03219539288947B197CDA64FBF3E409E"
-                    {
-                    "Name" = "8:CefSharp.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\x64\\CefSharp.dll"
             "TargetName" = "8:"
@@ -1750,11 +1703,6 @@
             "AssemblyAsmDisplayName" = "8:TradeWright.TabControlExtra, Version=2.0.1.0, Culture=neutral, PublicKeyToken=f4d0df7e5886cbe9, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_1831D783786424B162C9DED87C13046F"
-                    {
-                    "Name" = "8:TradeWright.TabControlExtra.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:TradeWright.TabControlExtra.dll"
             "TargetName" = "8:"
@@ -1898,14 +1846,9 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Microsoft.Web.WebView2.WinForms, Version=1.0.1418.22, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Microsoft.Web.WebView2.WinForms, Version=1.0.1587.40, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_29F3CB9E53D85EA772F3D84A179168BB"
-                    {
-                    "Name" = "8:Microsoft.Web.WebView2.WinForms.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Microsoft.Web.WebView2.WinForms.dll"
             "TargetName" = "8:"
@@ -2209,14 +2152,9 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:CefSharp.BrowserSubprocess.Core, Version=110.0.250.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:CefSharp.BrowserSubprocess.Core, Version=107.1.120.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
-                    "_3B8B9DFDB4844F1B8D8E49B9D00A92FF"
-                    {
-                    "Name" = "8:CefSharp.BrowserSubprocess.Core.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\x86\\CefSharp.BrowserSubprocess.Core.dll"
             "TargetName" = "8:"
@@ -2323,11 +2261,6 @@
             "AssemblyAsmDisplayName" = "8:MediaToolkit, Version=1.1.0.1, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_43A80A96E4D8AB7ED07975149AED97CE"
-                    {
-                    "Name" = "8:MediaToolkit.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:MediaToolkit.dll"
             "TargetName" = "8:"
@@ -2431,14 +2364,9 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:CefSharp, Version=110.0.250.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:CefSharp, Version=107.1.120.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_44E4ED8A5A969131E67B7266901BD6C5"
-                    {
-                    "Name" = "8:CefSharp.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:CefSharp.dll"
             "TargetName" = "8:"
@@ -2565,11 +2493,6 @@
             "AssemblyAsmDisplayName" = "8:System.Net.Http, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 "ScatterAssemblies"
                 {
-                    "_4A57181C611E0B0B3DF7BC63ED333C28"
-                    {
-                    "Name" = "8:System.Net.Http.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:System.Net.Http.dll"
             "TargetName" = "8:"
@@ -3029,38 +2952,13 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_769F1835D6084332B0DF2ED43929F695"
-            {
-            "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\x64\\swiftshader\\libGLESv2.dll"
-            "TargetName" = "8:libGLESv2.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_A39E833920EC4C20B9B3DBE23BDC4297"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_786D8465DF5CAEC8C916848CB942C7B3"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:AutoUpdater.NET, Version=1.7.6.0, Culture=neutral, PublicKeyToken=501435c91b35f4bc, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:AutoUpdater.NET, Version=1.7.7.0, Culture=neutral, PublicKeyToken=501435c91b35f4bc, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_786D8465DF5CAEC8C916848CB942C7B3"
-                    {
-                    "Name" = "8:AutoUpdater.NET.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:AutoUpdater.NET.dll"
             "TargetName" = "8:"
@@ -3204,14 +3102,9 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:CefSharp.Core, Version=110.0.250.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:CefSharp.Core, Version=107.1.120.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_81EFB782E52E4752F801BAE4CF7C9D08"
-                    {
-                    "Name" = "8:CefSharp.Core.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:CefSharp.Core.dll"
             "TargetName" = "8:"
@@ -3255,14 +3148,9 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:CefSharp.Core.Runtime, Version=110.0.250.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=AMD64"
+            "AssemblyAsmDisplayName" = "8:CefSharp.Core.Runtime, Version=107.1.120.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=AMD64"
                 "ScatterAssemblies"
                 {
-                    "_8219043CD5304DFFB6F9403C0DCA3A4E"
-                    {
-                    "Name" = "8:CefSharp.Core.Runtime.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\x64\\CefSharp.Core.Runtime.dll"
             "TargetName" = "8:"
@@ -3466,14 +3354,9 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:CefSharp.BrowserSubprocess, Version=110.0.250.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:CefSharp.BrowserSubprocess, Version=107.1.120.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
-                    "_90F38F097D3F453490427C3E64A91568"
-                    {
-                    "Name" = "8:CefSharp.BrowserSubprocess.exe"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\x86\\CefSharp.BrowserSubprocess.exe"
             "TargetName" = "8:"
@@ -3497,14 +3380,9 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:CefSharp.WinForms, Version=110.0.250.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:CefSharp.WinForms, Version=107.1.120.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_9174444BA232A0A180A77BAEF4BAFF8D"
-                    {
-                    "Name" = "8:CefSharp.WinForms.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:CefSharp.WinForms.dll"
             "TargetName" = "8:"
@@ -3528,14 +3406,9 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Microsoft.Web.WebView2.Core, Version=1.0.1418.22, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Microsoft.Web.WebView2.Core, Version=1.0.1587.40, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_935251B452739D941004045236FC0EFD"
-                    {
-                    "Name" = "8:Microsoft.Web.WebView2.Core.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Microsoft.Web.WebView2.Core.dll"
             "TargetName" = "8:"
@@ -3855,52 +3728,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B1DDF0567FE74D3B911CE9797440171B"
-            {
-            "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\x64\\swiftshader\\libEGL.dll"
-            "TargetName" = "8:libEGL.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_A39E833920EC4C20B9B3DBE23BDC4297"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B4E3F879DA8743ADA2401E1A6E068AD4"
             {
             "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\x86\\locales\\gu.pak"
             "TargetName" = "8:gu.pak"
             "Tag" = "8:"
             "Folder" = "8:_2FB7CBB865AB4F48B5850DDFA7466E1A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B4FC1EAC5264439C80817675C85EF0ED"
-            {
-            "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\x86\\swiftshader\\libEGL.dll"
-            "TargetName" = "8:libEGL.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_34762E433AE147D0819B557A5488A885"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -3979,14 +3812,9 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Retro Achievement Tracker, Version=1.22.11.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Retro Achievement Tracker, Version=1.23.1.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_BDFF0201F73544788BFAD08A3DC79F0F"
-                    {
-                    "Name" = "8:Retro Achievement Tracker.exe"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\Retro Achievement Tracker.exe"
             "TargetName" = "8:"
@@ -4110,14 +3938,9 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:CefSharp.Core.Runtime, Version=110.0.250.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:CefSharp.Core.Runtime, Version=107.1.120.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
-                    "_C5FE9BB2684D4AB5941003526AE992EE"
-                    {
-                    "Name" = "8:CefSharp.Core.Runtime.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\x86\\CefSharp.Core.Runtime.dll"
             "TargetName" = "8:"
@@ -4223,26 +4046,6 @@
             "TargetName" = "8:libcef.dll"
             "Tag" = "8:"
             "Folder" = "8:_4C3A3A9D0BF3415498E3F7659B7135A8"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CEF76944B8FA40FEB089D70839337205"
-            {
-            "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\x86\\swiftshader\\libGLESv2.dll"
-            "TargetName" = "8:libGLESv2.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_34762E433AE147D0819B557A5488A885"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -4437,37 +4240,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_E07E6013AAE04AC8BA51489EF358ADC8"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:CefSharp.BrowserSubprocess.Core, Version=110.0.250.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=AMD64"
-                "ScatterAssemblies"
-                {
-                    "_E07E6013AAE04AC8BA51489EF358ADC8"
-                    {
-                    "Name" = "8:CefSharp.BrowserSubprocess.Core.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\x64\\CefSharp.BrowserSubprocess.Core.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_E17086BCED8E4628AA79E76347C38112"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E0E9B5EBB7484841BF176A3393483C6C"
             {
             "SourcePath" = "8:..\\Retro Achievement Tracker\\video\\mastery-notification.webm"
@@ -4492,14 +4264,9 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:CefSharp, Version=110.0.250.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:CefSharp, Version=107.1.120.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_E421C94902ED4DD08016B81C257F7A0F"
-                    {
-                    "Name" = "8:CefSharp.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\x86\\CefSharp.dll"
             "TargetName" = "8:"
@@ -4783,14 +4550,9 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:CefSharp.BrowserSubprocess.Core, Version=110.0.250.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:CefSharp.BrowserSubprocess.Core, Version=107.1.120.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
-                    "_F8010A88C7394BAD795C57E44510ACD0"
-                    {
-                    "Name" = "8:CefSharp.BrowserSubprocess.Core.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:CefSharp.BrowserSubprocess.Core.dll"
             "TargetName" = "8:"
@@ -4817,11 +4579,6 @@
             "AssemblyAsmDisplayName" = "8:Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_F8AE05B05683DB76A3EBF00C3D8951DC"
-                    {
-                    "Name" = "8:Newtonsoft.Json.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Newtonsoft.Json.dll"
             "TargetName" = "8:"
@@ -4965,14 +4722,9 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:CefSharp.BrowserSubprocess, Version=110.0.250.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=AMD64"
+            "AssemblyAsmDisplayName" = "8:CefSharp.BrowserSubprocess, Version=107.1.120.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=AMD64"
                 "ScatterAssemblies"
                 {
-                    "_FEFEC0684E904CFCBA5F9767A9E98E28"
-                    {
-                    "Name" = "8:CefSharp.BrowserSubprocess.exe"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:..\\Retro Achievement Tracker\\bin\\Debug\\x64\\CefSharp.BrowserSubprocess.exe"
             "TargetName" = "8:"
@@ -5070,83 +4822,6 @@
                                 {
                                 }
                             }
-                            "{9EF0B969-E518-4E46-987F-47570745A589}:_34762E433AE147D0819B557A5488A885"
-                            {
-                            "Name" = "8:swiftshader"
-                            "AlwaysCreate" = "11:FALSE"
-                            "Condition" = "8:"
-                            "Transitive" = "11:FALSE"
-                            "Property" = "8:_7C474A2F9A624920B4B53340FED64B1F"
-                                "Folders"
-                                {
-                                }
-                            }
-                        }
-                    }
-                    "{9EF0B969-E518-4E46-987F-47570745A589}:_657B7E549FA648AF982C90DF4A301C31"
-                    {
-                    "Name" = "8:stream-labels"
-                    "AlwaysCreate" = "11:FALSE"
-                    "Condition" = "8:"
-                    "Transitive" = "11:FALSE"
-                    "Property" = "8:_5EB9C730C9824A58AE80735972A5A164"
-                        "Folders"
-                        {
-                            "{9EF0B969-E518-4E46-987F-47570745A589}:_5234DEBB443D4DEDA3D3BD1754CF57E7"
-                            {
-                            "Name" = "8:game-info"
-                            "AlwaysCreate" = "11:FALSE"
-                            "Condition" = "8:"
-                            "Transitive" = "11:FALSE"
-                            "Property" = "8:_2975F33CC0A44087BF0F702C52027AF2"
-                                "Folders"
-                                {
-                                }
-                            }
-                            "{9EF0B969-E518-4E46-987F-47570745A589}:_7AA7915935A8441E8EA662C78A2FCA2B"
-                            {
-                            "Name" = "8:last-five"
-                            "AlwaysCreate" = "11:FALSE"
-                            "Condition" = "8:"
-                            "Transitive" = "11:FALSE"
-                            "Property" = "8:_FC5D7E6880274624A6373A2941D3D0D1"
-                                "Folders"
-                                {
-                                }
-                            }
-                            "{9EF0B969-E518-4E46-987F-47570745A589}:_8D8382A3CB6F4F97B378200BDDC22BD7"
-                            {
-                            "Name" = "8:alerts"
-                            "AlwaysCreate" = "11:FALSE"
-                            "Condition" = "8:"
-                            "Transitive" = "11:FALSE"
-                            "Property" = "8:_E3C37261E67B4FA5A64FD6DA9992D31B"
-                                "Folders"
-                                {
-                                }
-                            }
-                            "{9EF0B969-E518-4E46-987F-47570745A589}:_C927EB334EFC467CB49765494BB0DBA6"
-                            {
-                            "Name" = "8:stats"
-                            "AlwaysCreate" = "11:FALSE"
-                            "Condition" = "8:"
-                            "Transitive" = "11:FALSE"
-                            "Property" = "8:_5A8ADEB7F550470C936E6DC4DDBC4043"
-                                "Folders"
-                                {
-                                }
-                            }
-                            "{9EF0B969-E518-4E46-987F-47570745A589}:_CDC84DDB47B940C38A5058C26DE4A97A"
-                            {
-                            "Name" = "8:focus"
-                            "AlwaysCreate" = "11:FALSE"
-                            "Condition" = "8:"
-                            "Transitive" = "11:FALSE"
-                            "Property" = "8:_D98F0C108B8E42EA9412A74032AA6575"
-                                "Folders"
-                                {
-                                }
-                            }
                         }
                     }
                     "{9EF0B969-E518-4E46-987F-47570745A589}:_998098A8417548BA8ADC79A66EB42A36"
@@ -5169,17 +4844,6 @@
                     "Property" = "8:_8A3BF0E683464A57BDD778C26199E2A6"
                         "Folders"
                         {
-                            "{9EF0B969-E518-4E46-987F-47570745A589}:_A39E833920EC4C20B9B3DBE23BDC4297"
-                            {
-                            "Name" = "8:swiftshader"
-                            "AlwaysCreate" = "11:FALSE"
-                            "Condition" = "8:"
-                            "Transitive" = "11:FALSE"
-                            "Property" = "8:_43A3028AB9454273A022638D8432E1DD"
-                                "Folders"
-                                {
-                                }
-                            }
                             "{9EF0B969-E518-4E46-987F-47570745A589}:_AA76468DB9C04470B1810F56BC03A7E5"
                             {
                             "Name" = "8:locales"
@@ -5211,15 +4875,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:RA Layout Manager"
-        "ProductCode" = "8:{BB1786A0-0F04-4EAE-A014-AA7BD72F1377}"
-        "PackageCode" = "8:{53EA89F7-E4F2-4443-810E-2ECDE298FFB2}"
+        "ProductCode" = "8:{E7EFFA26-8D55-47A9-ACF2-66F41FD153AB}"
+        "PackageCode" = "8:{5F816C9A-C12C-48CE-94D0-38BC0BBAEDA5}"
         "UpgradeCode" = "8:{2AED59AC-3EBE-4936-A1A3-3282811ECB5E}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
-        "DetectNewerInstalledVersion" = "11:TRUE"
+        "DetectNewerInstalledVersion" = "11:FALSE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.94"
+        "ProductVersion" = "8:1.97"
         "Manufacturer" = "8:Colossus Gaming"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"

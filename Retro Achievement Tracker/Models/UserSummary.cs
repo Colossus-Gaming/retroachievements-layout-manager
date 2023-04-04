@@ -78,7 +78,7 @@
             {
                 return Id.CompareTo(other.Id);
             }
-            return DisplayOrder.CompareTo(other.DisplayOrder);
+            return other.DisplayOrder.CompareTo(DisplayOrder);
         }
 
         public bool Equals(Achievement other)
