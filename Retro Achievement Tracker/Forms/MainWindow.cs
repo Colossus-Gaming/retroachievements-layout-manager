@@ -937,6 +937,7 @@ namespace Retro_Achievement_Tracker
             if (!IsLoading)
             {
                 IsLoading = true;
+
                 CheckBox checkBox = sender as CheckBox;
                 bool isChecked = checkBox.Checked;
 
@@ -958,8 +959,6 @@ namespace Retro_Achievement_Tracker
                                 SelectCustomAchievementFile();
                             }
                         }
-
-                        AlertsController.Instance.Reset();
                         break;
                     case "alertsCustomMasteryEnableCheckbox":
                         AlertsController.Instance.CustomMasteryEnabled = isChecked;
@@ -971,8 +970,6 @@ namespace Retro_Achievement_Tracker
                                 SelectCustomMasteryFile();
                             }
                         }
-
-                        AlertsController.Instance.Reset();
                         break;
                     case "alertsAchievementEditOutlineCheckbox":
                         if (checkBox.Checked)

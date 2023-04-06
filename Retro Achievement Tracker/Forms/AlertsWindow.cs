@@ -6,8 +6,10 @@ using Retro_Achievement_Tracker.Models;
 using Retro_Achievement_Tracker.Properties;
 using System;
 using System.Drawing;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Shapes;
 
 namespace Retro_Achievement_Tracker.Forms
 {
@@ -29,11 +31,32 @@ namespace Retro_Achievement_Tracker.Forms
 
             webView21.CoreWebView2.SetVirtualHostNameToFolderMapping("appassets.images", @"images", CoreWebView2HostResourceAccessKind.DenyCors);
             webView21.CoreWebView2.SetVirtualHostNameToFolderMapping("appassets.video", @"video", CoreWebView2HostResourceAccessKind.DenyCors);
+
+            if (AlertsController.Instance.CustomAchievementEnabled && File.Exists(AlertsController.Instance.CustomAchievementFile))
+            {
+                webView21.CoreWebView2.SetVirtualHostNameToFolderMapping("appassets.customachievement", new FileInfo(AlertsController.Instance.CustomAchievementFile).Directory.FullName, CoreWebView2HostResourceAccessKind.DenyCors);
+            }
+
+            if (AlertsController.Instance.CustomMasteryEnabled && File.Exists(AlertsController.Instance.CustomMasteryFile))
+            {
+                webView21.CoreWebView2.SetVirtualHostNameToFolderMapping("appassets.custommastery", new FileInfo(AlertsController.Instance.CustomMasteryFile).Directory.FullName, CoreWebView2HostResourceAccessKind.DenyCors);
+            }
+
             webView21.CoreWebView2.WebMessageReceived += MessageReceived;
 
             webView21.NavigateToString(Resources.alerts_window);
         }
-        void MessageReceived(object sender, CoreWebView2WebMessageReceivedEventArgs args)
+        public void SetCustomAchievementDirectorMapping()
+        {
+            webView21.CoreWebView2.SetVirtualHostNameToFolderMapping("appassets.customachievement", new FileInfo(AlertsController.Instance.CustomAchievementFile).Directory.FullName, CoreWebView2HostResourceAccessKind.DenyCors); 
+            webView21.NavigateToString(Resources.alerts_window);
+        }
+        public void SetCustomMasteryDirectorMapping()
+        {
+            webView21.CoreWebView2.SetVirtualHostNameToFolderMapping("appassets.custommastery", new FileInfo(AlertsController.Instance.CustomMasteryFile).Directory.FullName, CoreWebView2HostResourceAccessKind.DenyCors);
+            webView21.NavigateToString(Resources.alerts_window);
+        }
+        private void MessageReceived(object sender, CoreWebView2WebMessageReceivedEventArgs args)
         {
             string content = args.TryGetWebMessageAsString();
 

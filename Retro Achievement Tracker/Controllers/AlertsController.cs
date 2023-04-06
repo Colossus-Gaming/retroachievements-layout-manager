@@ -226,20 +226,10 @@ namespace Retro_Achievement_Tracker.Controllers
                     AlertsWindow = new AlertsWindow();
                 }
                 AlertsWindow.Show();
-            } else
+            }
+            else
             {
                 AlertsWindow.BringToFront();
-            }
-        }
-        public void Reset()
-        {
-            if (IsOpen)
-            {
-                AlertsWindow.ClientSize = new Size(0, 0);
-
-                IsPlaying = false;
-
-                NotificationsStopwatch.Stop();
             }
         }
         public void SetAllSettings()
@@ -300,17 +290,17 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public void SetAchievementSettings()
         {
+            AlertsWindow.SetAchievementVideo(CustomAchievementEnabled ? "https://appassets.customachievement/" + new FileInfo(CustomAchievementFile).Name : "https://appassets.video/achievement-notification.webm");
             AlertsWindow.SetAchievementLeft(CustomAchievementEnabled ? CustomAchievementX : -25);
             AlertsWindow.SetAchievementTop(CustomAchievementEnabled ? CustomAchievementY : 5);
             AlertsWindow.SetAchievementWidth(CustomAchievementEnabled ? Convert.ToInt32(CustomAchievementScale * MediaHelper.GetVideoWidth(CustomAchievementFile)) : 1028);
-            AlertsWindow.SetAchievementVideo(CustomAchievementEnabled ? CustomAchievementFile : "https://appassets.video/achievement-notification.webm");
         }
         public void SetMasterySettings()
         {
+            AlertsWindow.SetMasteryVideo(CustomMasteryEnabled ? "https://appassets.custommastery/" + new FileInfo(CustomMasteryFile).Name : "https://appassets.video/mastery-notification.webm");
             AlertsWindow.SetMasteryLeft(CustomMasteryEnabled ? CustomMasteryX : -25);
             AlertsWindow.SetMasteryTop(CustomMasteryEnabled ? CustomMasteryY : 5);
             AlertsWindow.SetMasteryWidth(CustomMasteryEnabled ? Convert.ToInt32(CustomMasteryScale * MediaHelper.GetVideoWidth(CustomMasteryFile)) : 1028);
-            AlertsWindow.SetMasteryVideo(CustomMasteryEnabled ? CustomMasteryFile : "https://appassets.video/mastery-notification.webm");
         }
         public void SendAchievementNotification(Achievement achievement)
         {
@@ -836,6 +826,15 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.notification_custom_achievement_enable = value;
                 Settings.Default.Save();
+
+                if (value)
+                {
+                    AlertsWindow.SetCustomAchievementDirectorMapping();
+                }
+                else
+                {
+                    SetAllSettings();
+                }
             }
         }
         public bool CustomMasteryEnabled
@@ -848,6 +847,15 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.notification_custom_mastery_enable = value;
                 Settings.Default.Save();
+
+                if (value)
+                {
+                    AlertsWindow.SetCustomMasteryDirectorMapping();
+                }
+                else
+                {
+                    SetAllSettings();
+                }
             }
         }
         public int CustomAchievementX
@@ -1132,6 +1140,8 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.notification_custom_achievement_file = value;
                 Settings.Default.Save();
+
+                SetAllSettings();
             }
         }
         public string CustomMasteryFile
@@ -1144,6 +1154,8 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.notification_custom_mastery_file = value;
                 Settings.Default.Save();
+
+                SetAllSettings();
             }
         }
         public bool AutoLaunch
