@@ -249,6 +249,183 @@
                 document.body.appendChild(css);
             }
         }));
+
+        function setWindowBackgroundColor(color) {
+            document.body.style.backgroundColor = color;
+        }
+        function setBorderBackgroundColor(color) {
+            focus.style.backgroundColor = color;
+        }
+
+        var focus;
+        var titleElement;
+        var achievementDescriptionElement;
+        var masteryDescriptionElement;
+        var masteryAchievementsElement;
+        var masteryPointsElement;
+        var badgeElement;
+        var lineElement;
+
+        var allElements;
+
+        function assignJavaScriptVariables() {
+            focus = document.getElementById("focus");
+            titleElement = document.getElementById("title");
+            achievementDescriptionElement = document.getElementById("achievement-description");
+            pointsElement = document.getElementById("achievement-points");
+            masteryDescriptionElement = document.getElementById("mastery-description");
+            masteryAchievementsElement = document.getElementById("mastery-achievements");
+            masteryPointsElement = document.getElementById("mastery-points");
+            badgeElement = document.getElementById("badge");
+            lineElement = document.getElementById("line");
+
+            allElements = document.getElementsByClassName("has-font");
+        }
+
+        function setSimpleFontFamily(fontFamily, lineSpacing) {
+            titleElement.style.lineHeight = lineSpacing;
+            titleElement.style.fontFamily = fontFamily;
+
+            achievementDescriptionElement.style.lineHeight = lineSpacing;
+            achievementDescriptionElement.style.fontFamily = fontFamily;
+
+            masteryAchievementsElement.style.lineHeight = lineSpacing;
+            masteryAchievementsElement.style.fontFamily = fontFamily;
+
+            masteryPointsElement.style.lineHeight = lineSpacing;
+            masteryPointsElement.style.fontFamily = fontFamily;
+
+            pointsElement.style.lineHeight = lineSpacing;
+            pointsElement.style.fontFamily = fontFamily;
+
+            setTimeout(function () { textFit(titleElement, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true }); }, 100);
+            setTimeout(function () { textFit(achievementDescriptionElement, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true }); }, 200);
+            setTimeout(function () { textFit(masteryAchievementsElement, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true }); }, 300);
+            setTimeout(function () { textFit(masteryPointsElement, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true }); }, 400);
+            setTimeout(function () { textFit(pointsElement); }, 500);
+        }
+
+        function setSimpleFontColor(color) {
+            for (var i = 0; i < allElements.length; i++) { allElements[i].style.color = color; }
+        }
+
+        function setSimpleFontOutline(webstroke) {
+            for (var i = 0; i < allElements.length; i++) { allElements[i].style.webkitTextStroke = webstroke; }
+        }
+
+        function setLineColor(color) {
+            lineElement.style.color = color;
+            lineElement.style.backgroundColor = color;
+        }
+        function setLineOutline(borderOutline) {
+            lineElement.style.border = borderOutline;
+        }
+        function setTitleFontFamily(fontFamily, lineSpacing) {
+            titleElement.style.lineHeight = lineSpacing;
+            titleElement.style.fontFamily = fontFamily;
+
+            textFit(titleElement, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true });
+        }
+        function setTitleColor(color) {
+            titleElement.style.color = color;
+        }
+        function setTitleOutlineColor(color) {
+            titleElement.style.webkitTextStroke = color;
+        }
+        function setDescriptionFontFamily(fontFamily, lineSpacing) {
+            masteryAchievementsElement.style.lineHeight = lineSpacing;
+            masteryAchievementsElement.style.fontFamily = fontFamily;
+
+            masteryPointsElement.style.lineHeight = lineSpacing;
+            masteryPointsElement.style.fontFamily = fontFamily;
+
+            achievementDescriptionElement.style.lineHeight = lineSpacing;
+            achievementDescriptionElement.style.fontFamily = fontFamily;
+
+            textFit(achievementDescriptionElement, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true });
+            textFit(masteryAchievementsElement, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true });
+            textFit(masteryPointsElement, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true });
+        }
+        function setDescriptionColor(color) {
+            achievementDescriptionElement.style.color = color;
+            masteryAchievementsElement.style.color = color;
+            masteryPointsElement.style.color = color;
+        }
+        function setDescriptionOutlineColor(color) {
+            achievementDescriptionElement.style.webkitTextStroke = color;
+            masteryAchievementsElement.style.webkitTextStroke = color;
+            masteryPointsElement.style.webkitTextStroke = color;
+        }
+        function setPointsFontFamily(fontFamily, lineSpacing) {
+            pointsElement.style.lineHeight = lineSpacing;
+            pointsElement.style.fontFamily = fontFamily;
+
+            textFit(pointsElement, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true });
+        }
+        function setPointsColor(color) {
+            pointsElement.style.color = color;
+        }
+        function setPointsOutlineColor(color) {
+            pointsElement.style.webkitTextStroke = color;
+        }
+        function hideFocus() {
+            $("#focus").fadeOut();
+        }
+        function fadeOutFocus() {
+            $("#badge").fadeOut("fast");
+            $("#title").fadeOut("fast");
+            $("#line").fadeOut("fast");
+            $("#achievement-description").fadeOut("fast");
+            $("#achievement-points").fadeOut("fast");
+            $("#mastery-description").fadeOut("fast");
+        }
+        function fadeInFocus() {
+            $("#focus").fadeIn();
+            $("#badge").fadeIn();
+
+            badgeElement.animate([{ left: '705px', top: '10px' }, { left: '10px', top: '10px' }], { interations: 1, duration: 700, fill: "forwards", easing: "ease-out" });
+
+            setTimeout(function () { $("#title").fadeIn(); textFit(titleElement, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true }); titleElement.animate([{ right: '-705px', top: '10px' }, { right: '10px', top: '10px' }], { interations: 1, duration: 700, fill: "forwards", easing: "ease-out" }); }, 400);
+            setTimeout(function () { $("#line").fadeIn(); lineElement.animate([{ right: '-705px', top: '65px' }, { right: '10px', top: '65px' }], { interations: 1, duration: 700, fill: "forwards", easing: "ease-out" }); }, 600);
+        }
+        function fadeInAchievementDescription() {
+            setTimeout(function () { $("#achievement-points").fadeIn(); textFit(pointsElement, { reProcess: true }); pointsElement.style.textAlign = "left"; pointsElement.style.alignContent = "end"; pointsElement.animate([{ left: '705px', bottom: '10px' }, { left: '20px', bottom: '10px' }], { interations: 1, duration: 700, fill: "forwards", easing: "ease-out" }); }, 200);
+            setTimeout(function () { $("#achievement-description").fadeIn(); textFit(achievementDescriptionElement, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true }); achievementDescriptionElement.animate([{ right: '-705px', bottom: '10px' }, { right: '10px', bottom: '10px' }], { interations: 1, duration: 700, fill: "forwards", easing: "ease-out" }); }, 800);
+        }
+        function fadeInMasteryDescription() {
+            setTimeout(function () {
+                $("#mastery-description").fadeIn();
+
+                textFit(masteryAchievementsElement, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true });
+                textFit(masteryPointsElement, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true });
+
+                masteryDescriptionElement.animate([{ right: '-705px', bottom: '10px' }, { right: '10px', bottom: '10px' }], { interations: 1, duration: 700, fill: "forwards", easing: "ease-out" });
+            }, 800);
+        }
+        function addAchievement(achievement) {
+            titleElement.innerHTML = achievement.title;
+            achievementDescriptionElement.innerHTML = achievement.description;
+            pointsElement.innerHTML = achievement.points;
+
+            badgeElement.style.border = "0px solid gold";
+
+            $("#badge").attr('src', achievement.badgeUri);
+        }
+        function addGameInfo(gameInfo) {
+            titleElement.innerHTML = gameInfo.title;
+            masteryAchievementsElement.innerHTML = "Cheevos:<br/>" + gameInfo.achievementsEarned;
+            masteryPointsElement.innerHTML = "Points:<br/>" + gameInfo.gamePointsPossible;
+
+            badgeElement.style.border = "4px solid gold";
+
+            $("#badge").attr('src', gameInfo.badgeUri);
+        }
+        function enableBorder() {
+            $("#border").attr('src', 'https://appassets.tracker/notification-background.png');
+        }
+        function disableBorder() {
+            $("#border").attr('src', '');
+        }        
     </script>
     <style id="focus-achievment-style" type="text/css">
 
@@ -261,7 +438,7 @@
             height: 65px;
         }
 
-        #description,
+        #achievement-description,
         #mastery-description {
             right: 1922px;
             position: absolute;
@@ -270,7 +447,7 @@
             height: 70px;
         }
 
-        #points {
+        #achievement-points {
             right: 1922px;
             position: absolute;
             display: grid;
@@ -289,8 +466,8 @@
 
         #focus {
             position: absolute;
-            top: 5px;
-            left: 5px;
+            top: 0px;
+            left: 0px;
             width: 700px;
             height: 165px;
             background-repeat: no-repeat;
@@ -307,11 +484,11 @@
 
         #container {
             position: absolute;
+            top: 0px;
+            left: 0px;
             background-color: transparent;
             width: 800px;
             height: 200px;
-            top: -5px;
-            left: -5px;
         }
 
         #mastery-achievements {
@@ -321,6 +498,7 @@
             width: 200px;
             height: 80px;
         }
+
         #mastery-points {
             position: absolute;
             bottom: -3px;
@@ -344,15 +522,16 @@
 <body>
     <div id="container">
         <div id="focus">
+            <img id="border" style="max-width: 100%; max-height: 100%;">
             <img id="badge">
             <div id="title" class="has-font"></div>
             <hr id="line">
-            <div id="description" class="has-font"></div>
+            <div id="achievement-description" class="has-font"></div>
             <div id="mastery-description">
                 <div id="mastery-achievements" class="has-font"></div>
                 <div id="mastery-points" class="has-font"></div>
             </div>
-            <div id="points" class="has-font"></div>
+            <div id="achievement-points" class="has-font"></div>
         </div>
     </div>
 </body>

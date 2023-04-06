@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Retro_Achievement_Tracker.Models
+﻿namespace Retro_Achievement_Tracker.Models
 {
     public class Constants
     {

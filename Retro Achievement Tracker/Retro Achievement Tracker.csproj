@@ -182,12 +182,6 @@
     <Compile Include="Forms\AchievementListWindow.Designer.cs">
       <DependentUpon>AchievementListWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\DisplayForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\DisplayForm.Designer.cs">
-      <DependentUpon>DisplayForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\GameProgressWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -235,7 +229,6 @@
     <Compile Include="Models\GameCompletedConverter.cs" />
     <Compile Include="Models\MediaHelper.cs" />
     <Compile Include="Models\AchievementConverter.cs" />
-    <Compile Include="Models\CustomResourceRequestHandler.cs" />
     <Compile Include="Models\GameInfo.cs" />
     <Compile Include="Models\GameInfoConverter.cs" />
     <Compile Include="Models\NotificationRequest.cs" />
@@ -254,9 +247,6 @@
     <EmbeddedResource Include="Forms\AchievementListWindow.resx">
       <DependentUpon>AchievementListWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\DisplayForm.resx">
-      <DependentUpon>DisplayForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\GameProgressWindow.resx">
       <DependentUpon>GameProgressWindow.cs</DependentUpon>
     </EmbeddedResource>
@@ -272,6 +262,9 @@
     <EmbeddedResource Include="Forms\GameInfoWindow.resx">
       <DependentUpon>GameInfoWindow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\RelatedMediaWindow.resx">
+      <DependentUpon>RelatedMediaWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\UserInfoWindow.resx">
       <DependentUpon>UserInfoWindow.cs</DependentUpon>
     </EmbeddedResource>
@@ -283,7 +276,6 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Content Include="CleanupUninstall.vbs" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -307,29 +299,17 @@
     <PackageReference Include="Autoupdater.NET.Official">
       <Version>1.7.7</Version>
     </PackageReference>
-    <PackageReference Include="Bootstrapper.WindowsInstaller4_5">
-      <Version>1.0.0.1</Version>
-    </PackageReference>
-    <PackageReference Include="CefSharp.WinForms">
-      <Version>107.1.120</Version>
-    </PackageReference>
     <PackageReference Include="HtmlAgilityPack">
       <Version>1.11.46</Version>
-    </PackageReference>
-    <PackageReference Include="InstallManager">
-      <Version>1.1.0</Version>
     </PackageReference>
     <PackageReference Include="MediaToolkit">
       <Version>1.1.0.1</Version>
     </PackageReference>
+    <PackageReference Include="Microsoft.Web.WebView2">
+      <Version>1.0.1661.34</Version>
+    </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.3</Version>
-    </PackageReference>
-    <PackageReference Include="TradeWright.TabControlExtra">
-      <Version>2.0.1</Version>
-    </PackageReference>
-    <PackageReference Include="WindowsAPICodePack-Shell">
-      <Version>1.1.1</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
@@ -359,7 +339,9 @@
     <Content Include="video\mastery-notification.webm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\notification-background.png" />
+    <Content Include="images\notification-background.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\yellow-button.png" />
     <EmbeddedResource Include="Resources\focus-window.html" />
     <None Include="Resources\green-button.png" />

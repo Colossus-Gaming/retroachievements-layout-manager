@@ -7,12 +7,13 @@ namespace Retro_Achievement_Tracker.Controllers
 {
     public sealed class FocusController
     {
-        private static FocusController instance = new FocusController();
+        private static readonly FocusController instance = new FocusController();
         private static FocusWindow FocusWindow;
 
         public bool IsOpen;
 
         public Achievement CurrentlyFocusedAchievement;
+        public GameInfo CurrentGame;
 
         private FocusController()
         {
@@ -46,8 +47,19 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public void SetAllSettings()
         {
+            FocusWindow.AssignJavaScriptVariables();
+
             FocusWindow.SetWindowBackgroundColor(WindowBackgroundColor);
             FocusWindow.SetBorderBackgroundColor(BorderBackgroundColor);
+
+            if (BorderEnabled)
+            {
+                FocusWindow.EnableBorder();
+            }
+            else
+            {
+                FocusWindow.DisableBorder();
+            }
 
             if (AdvancedSettingsEnabled)
             {
@@ -86,21 +98,18 @@ namespace Retro_Achievement_Tracker.Controllers
 
         public void UpdateFocus()
         {
-            if (IsOpen && CurrentlyFocusedAchievement != null)
+            if (IsOpen)
             {
-                FocusWindow.AssignJavaScriptVariables();
-                SetAllSettings();
-
-                FocusWindow.SetFocus(CurrentlyFocusedAchievement);
-
-                if (BorderEnabled)
+                if (CurrentlyFocusedAchievement != null)
                 {
-                    FocusWindow.EnableBorder();
+                    FocusWindow.SetFocus(CurrentlyFocusedAchievement);
                 }
                 else
                 {
-                    FocusWindow.DisableBorder();
+                    FocusWindow.SetFocus(CurrentGame);
                 }
+
+                SetAllSettings();
 
                 FocusWindow.SetClientSize();
             }
@@ -114,23 +123,24 @@ namespace Retro_Achievement_Tracker.Controllers
             else if (CurrentlyFocusedAchievement == null || currentlyViewingAchievement.Id != CurrentlyFocusedAchievement.Id)
             {
                 CurrentlyFocusedAchievement = currentlyViewingAchievement;
-                UpdateFocus();
+
+                if (IsOpen)
+                {
+                    FocusWindow.SetFocus(CurrentlyFocusedAchievement);
+
+                    UpdateFocus();
+                }
             }
         }
         public void SetFocus(GameInfo gameInfo)
         {
+            CurrentGame = gameInfo;
+
             if (IsOpen)
             {
                 FocusWindow.SetFocus(gameInfo);
 
-                if (BorderEnabled)
-                {
-                    FocusWindow.EnableBorder();
-                }
-                else
-                {
-                    FocusWindow.DisableBorder();
-                }
+                UpdateFocus();
             }
         }
         public bool AdvancedSettingsEnabled

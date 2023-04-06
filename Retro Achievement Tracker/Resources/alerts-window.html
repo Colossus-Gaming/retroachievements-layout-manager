@@ -255,43 +255,325 @@
             }
         }));
 
-        (async function () {
-            await CefSharp.BindObjectAsync("alertControllerAsync");
-        })();
-
-        function setPlayingOn() {
-            alertControllerAsync.setIsPlaying(true);
+        function setWindowBackgroundColor(color) {
+            document.body.style.backgroundColor = color;
+        }
+        function setBorderBackgroundColor(color) {
+            achievementElement.style.backgroundColor = color;
+            masteryElement.style.backgroundColor = color;
         }
 
+        var allElements;
+        var achievementElement;
+        var achievementTitleElement;
+        var achievementDescriptionElement;
+        var achievementPointsElement;
+        var masteryElement;
+        var masteryTitleElement;
+        var masteryAchievementsElement;
+        var masteryPointsElement;
+        var achievementLine;
+        var masteryLine;
+        var achievementVideoElement;
+        var masteryVideoElement;
+
+        function assignJavaScriptVariables() {
+            allElements = document.getElementsByClassName("has-font");
+
+            achievementElement = document.getElementById("achievement");
+            achievementTitleElement = document.getElementById("achievement-title");
+            achievementDescriptionElement = document.getElementById("achievement-description");
+            achievementPointsElement = document.getElementById("achievement-points");
+
+            masteryElement = document.getElementById("mastery");
+            masteryTitleElement = document.getElementById("mastery-title");
+            masteryAchievementsElement = document.getElementById("mastery-achievements");
+            masteryPointsElement = document.getElementById("mastery-points");
+
+            achievementLine = document.getElementById("achievement-line");
+            masteryLine = document.getElementById("mastery-line");
+
+            achievementVideoElement = document.getElementById("achievement-video");
+            masteryVideoElement = document.getElementById("mastery-video");
+        }
+
+        function setSimpleFontFamily(fontFamily, lineSpacing) {
+            achievementTitleElement.style.fontFamily = fontFamily;
+            achievementTitleElement.style.lineHeight = lineSpacing;
+
+            masteryTitleElement.style.fontFamily = fontFamily;
+            masteryTitleElement.style.lineHeight = lineSpacing;
+
+            achievementDescriptionElement.style.fontFamily = fontFamily;
+            achievementDescriptionElement.style.lineHeight = lineSpacing;
+
+            masteryAchievementsElement.style.fontFamily = fontFamily;
+            masteryAchievementsElement.style.lineHeight = lineSpacing;
+
+            masteryPointsElement.style.fontFamily = fontFamily;
+            masteryPointsElement.style.lineHeight = lineSpacing;
+
+            achievementPointsElement.style.fontFamily = fontFamily;
+            achievementPointsElement.style.lineHeight = lineSpacing;
+
+            setTimeout(function () { textFit(achievementTitleElement, { alignVert: true, alignHoriz: true, reProcess: true }); }, 100);
+            setTimeout(function () { textFit(achievementDescriptionElement, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true }); }, 200);
+            setTimeout(function () { textFit(achievementPointsElement, { reProcess: true }); }, 300);
+            setTimeout(function () { textFit(masteryTitleElement, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true }); }, 400);
+            setTimeout(function () { textFit(masteryAchievementsElement, { alignVert: true, alignHoriz: true, reProcess: true }); }, 500);
+            setTimeout(function () { textFit(masteryPointsElement, { alignVert: true, alignHoriz: true, reProcess: true }); }, 600);
+        }
+        function setSimpleFontColor(color) {
+            for (var i = 0; i < allElements.length; i++) { allElements[i].style.color = color; }
+        }
+        function setSimpleFontOutline(webstroke) {
+            for (var i = 0; i < allElements.length; i++) { allElements[i].style.webkitTextStroke = webstroke; }
+        }
+
+        function setLineColor(color) {
+            achievementLine.style.color = color;
+            masteryLine.style.color = color;
+
+            achievementLine.style.backgroundColor = color;
+            masteryLine.style.backgroundColor = color;
+        }
+        function setLineOutline(borderOutline) {
+            achievementLine.style.border = borderOutline;
+            masteryLine.style.border = borderOutline;
+        }
+        function setTitleFontFamily(fontFamily, lineSpacing) {
+            achievementTitleElement.style.lineHeight = lineSpacing;
+            achievementTitleElement.style.fontFamily = fontFamily;
+
+            masteryTitleElement.style.lineHeight = lineSpacing;
+            masteryTitleElement.style.fontFamily = fontFamily;
+
+            textFit(achievementTitleElement, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true });
+            textFit(masteryTitleElement, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true });
+        }
+        function setTitleColor(color) {
+            achievementTitleElement.style.color = color;
+            masteryTitleElement.style.color = color;
+        }
+        function setTitleOutlineColor(color) {
+            achievementTitleElement.style.webkitTextStroke = color;
+            masteryTitleElement.style.webkitTextStroke = color;
+        }
+        function setDescriptionFontFamily(fontFamily, lineSpacing) {
+            achievementDescriptionElement.style.fontFamily = fontFamily;
+            achievementDescriptionElement.style.lineHeight = lineSpacing;
+
+            masteryAchievementsElement.style.fontFamily = fontFamily;
+            masteryAchievementsElement.style.lineHeight = lineSpacing;
+
+            masteryPointsElement.style.fontFamily = fontFamily;
+            masteryPointsElement.style.lineHeight = lineSpacing;
+
+            textFit(achievementDescriptionElement, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true });
+            textFit(masteryAchievementsElement, { alignVert: true, alignHoriz: true, reProcess: true });
+            textFit(masteryPointsElement, { alignVert: true, alignHoriz: true, reProcess: true });
+        }
+        function setDescriptionColor(color) {
+            achievementDescriptionElement.style.color = color;
+            masteryAchievementsElement.style.color = color;
+            masteryPointsElementElement.style.color = color;
+        }
+        function setDescriptionOutlineColor(color) {
+            achievementDescriptionElement.style.webkitTextStroke = color;
+            masteryAchievementsElement.style.webkitTextStroke = color;
+            masteryPointsElementElement.style.webkitTextStroke = color;
+        }
+        function setPointsFontFamily(fontFamily, lineSpacing) {
+            achievementPointsElement.style.lineHeight = lineSpacing;
+            achievementPointsElement.style.fontFamily = lineHeight;
+
+            masteryPointsElement.style.lineHeight = lineSpacing;
+            masteryPointsElement.style.fontFamily = lineHeight;
+
+            textFit(achievementPointsElement);
+            textFit(masteryPointsElement);
+        }
+        function setPointsColor(color) {
+            achievementPointsElement.style.color = color;
+            masteryAchievementsElement.style.color = color;
+            masteryPointsElement.style.color = color;
+        }
+        function setPointsOutlineColor(color) {
+            achievementPointsElement.style.webkitTextStroke = color;
+            masteryAchievementsElement.style.webkitTextStroke = color;
+            masteryPointsElement.style.webkitTextStroke = color;
+        }
+        function startAchievementAlert(achievement) {
+            achievementTitleElement.innerHTML = achievement.title;
+            achievementDescriptionElement.innerHTML = achievement.description;
+            achievementPointsElement.innerHTML = achievement.points;
+
+            $("#achievement-badge").attr('src', achievement.badgeUri);
+
+            achievementVideoElement.currentTime = 0;
+
+            $("#achievement-video").show();
+
+            achievementVideoElement.play();
+
+            textFit(achievementTitleElement, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true });
+            textFit(achievementDescriptionElement, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true });
+            textFit(achievementPointsElement, { reProcess: true });
+        }
+        function startMasteryAlert(gameInfo) {
+            masteryTitleElement.innerHTML = gameInfo.title;
+            masteryAchievementsElement.innerHTML = "Cheevos:<br/>" + gameInfo.achievementsEarned;
+            masteryPointsElement.innerHTML = "Points:<br/>" + gameInfo.gamePointsPossible;
+
+            $("#mastery-badge").attr('src', gameInfo.badgeUri);
+
+            masteryVideoElement.currentTime = 0;
+
+            $("#mastery-video").show();
+
+            masteryVideoElement.play();
+
+            textFit(masteryTitleElement, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true });
+            textFit(masteryAchievementsElement, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true });
+            textFit(masteryPointsElement, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true });
+        }
+        function setAchievementVideo(video) {
+            $("#achievement-video").attr('src', video);
+        }
+        function setMasteryVideo(video) {
+            $("#mastery-video").attr('src', video);
+        }
+        function enableBorder() {
+            $("#achievement-border").attr('src', 'https://appassets.images/notification-background.png');
+            $("#mastery-border").attr('src', 'https://appassets.images/notification-background.png');
+        }
+        function disableBorder() {
+            $("#achievement-border").attr('src', '');
+            $("#mastery-border").attr('src', '');
+        }
+        function enableAchievementEdit() {
+            achievementVideoElement.controls = true;
+        }
+        function enableMasteryEdit() {
+            masteryVideoElement.controls = true;
+        }
+        function disableAchievementEdit() {
+            achievementVideoElement.controls = false;
+            achievementVideoElement.style.border = "";
+
+            $("#achievement-video").hide();
+        }
+        function disableMasteryEdit() {
+            masteryVideoElement.controls = false;
+            masteryVideoElement.style.border = "";
+
+            $("#mastery-video").hide();
+        }
+        function hideNotifications() {
+            assignJavaScriptVariables();
+
+            achievementVideoElement.pause();
+            masteryVideoElement.pause();
+
+            $("#achievement-video").hide();
+            $("#mastery-video").hide();
+
+            setTimeout(function () { achievementVideoElement.currentTime = 0; masteryVideoElement.currentTime = 0; }, 200);
+        }
+        function setAchievementLeft(value) {
+            achievementVideoElement.style.left = value;
+        }
+        function setAchievementTop(value) {
+            achievementVideoElement.style.top = value;
+        }
+        function setAchievementWidth(value) {
+            achievementVideoElement.style.width = value;
+        }
+        function setMasteryLeft(value) {
+            masteryVideoElement.style.left = value;
+        }
+        function setMasteryTop(value) {
+            masteryVideoElement.style.top = value;
+        }
+        function setMasteryWidth(value) {
+            masteryVideoElement.style.width = value;
+        }
+        function animateAchievementInUp(value) {
+            achievementElement.animate([{ left: '165px', top: '-310px' }, { left: '165px', top: '220px' }], { interations: 1, duration: value, fill: "forwards" });
+        }
+        function animateAchievementInDown(value) {
+            achievementElement.animate([{ left: '165px', top: '600px' }, { left: '165px', top: '220px' }], { interations: 1, duration: value, fill: "forwards" });
+        }
+        function animateAchievementInLeft(value) {
+            achievementElement.animate([{ left: '-300px', top: '220px' }, { left: '165px', top: '220px' }], { interations: 1, duration: value, fill: "forwards" });
+        }
+        function animateAchievementInRight(value) {
+            achievementElement.animate([{ left: '1034px', top: '220px' }, { left: '165px', top: '220px' }], { interations: 1, duration: value, fill: "forwards" });
+        }
+        function animateAchievementInStatic() {
+            achievementElement.animate([{ left: '-300px', top: '-310px' }, { left: '165px', top: '220px' }], { interations: 1, duration: 10, fill: "forwards" });
+        }
+        function animateAchievementOutUp(value) {
+            achievementElement.animate([{ left: '165px', top: '220px' }, { left: '165px', top: '-310px' }], { interations: 1, duration: value, fill: "forwards" });
+        }
+        function animateAchievementOutDown(value) {
+            achievementElement.animate([{ left: '165px', top: '220px' }, { left: '165px', top: '600px' }], { interations: 1, duration: value, fill: "forwards" });
+        }
+        function animateAchievementOutLeft(value) {
+            achievementElement.animate([{ left: '165px', top: '220px' }, { left: '-300px', top: '220px' }], { interations: 1, duration: value, fill: "forwards" });
+        }
+        function animateAchievementOutRight(value) {
+            achievementElement.animate([{ left: '165px', top: '220px' }, { left: '1034px', top: '220px' }], { interations: 1, duration: value, fill: "forwards" });
+        }
+        function animateAchievementOutStatic() {
+            achievementElement.animate([{ left: '-300px', top: '-310px' }, { left: '-300px', top: '-310px' }], { interations: 1, duration: 10, fill: "forwards" });
+        }
+        function animateMasteryInUp(value) {
+            masteryElement.animate([{ left: '165px', top: '-310px' }, { left: '165px', top: '220px' }], { interations: 1, duration: value, fill: "forwards" });
+        }
+        function animateMasteryInDown(value) {
+            masteryElement.animate([{ left: '165px', top: '600px' }, { left: '165px', top: '220px' }], { interations: 1, duration: value, fill: "forwards" });
+        }
+        function animateMasteryInLeft(value) {
+            masteryElement.animate([{ left: '-300px', top: '220px' }, { left: '165px', top: '220px' }], { interations: 1, duration: value, fill: "forwards" });
+        }
+        function animateMasteryInRight(value) {
+            masteryElement.animate([{ left: '1034px', top: '220px' }, { left: '165px', top: '220px' }], { interations: 1, duration: value, fill: "forwards" });
+        }
+        function animateMasteryInStatic() {
+            masteryElement.animate([{ left: '-300px', top: '-310px' }, { left: '165px', top: '220px' }], { interations: 1, duration: 10, fill: "forwards" });
+        }
+        function animateMasteryOutUp(value) {
+            masteryElement.animate([{ left: '165px', top: '220px' }, { left: '165px', top: '-310px' }], { interations: 1, duration: value, fill: "forwards" });
+        }
+        function animateMasteryOutDown(value) {
+            masteryElement.animate([{ left: '165px', top: '220px' }, { left: '165px', top: '600px' }], { interations: 1, duration: value, fill: "forwards" });
+        }
+        function animateMasteryOutLeft(value) {
+            masteryElement.animate([{ left: '165px', top: '220px' }, { left: '-300px', top: '220px' }], { interations: 1, duration: value, fill: "forwards" });
+        }
+        function animateMasteryOutRight(value) {
+            masteryElement.animate([{ left: '165px', top: '220px' }, { left: '1034px', top: '220px' }], { interations: 1, duration: value, fill: "forwards" });
+        }
+        function animateMasteryOutStatic() {
+            masteryElement.animate([{ left: '-300px', top: '-310px' }, { left: '-300px', top: '-310px' }], { interations: 1, duration: 10, fill: "forwards" });
+        }
+        function getAchievementPlayingTime() {
+            window.chrome.webview.postMessage('getAchievementPlayingTime' + achievementVideoElement.currentTime);
+        }
+        function getMasteryPlayingTime() {
+            window.chrome.webview.postMessage('getMasteryPlayingTime' + masteryVideoElement.currentTime);
+        }
+        function setPlayingOn() {
+            window.chrome.webview.postMessage('setIsPlayingTrue');
+        }
         function setPlayingOff() {
-            alertControllerAsync.setIsPlaying(false);
+            hideNotifications();
+
+            window.chrome.webview.postMessage('setIsPlayingFalse');
         }
     </script>
     <style id="achievement-style" type="text/css">
-        @keyframes user-prompt-animation {
-            0% {
-                left: 125px;
-                top: -290px;
-            }
-
-            100% {
-                left: 125px;
-                top: 275px;
-            }
-        }
-
-        @keyframes user-prompt-animation-reverse {
-            0% {
-                left: 125px;
-                top: 275px;
-            }
-
-            100% {
-                left: 125px;
-                top: -290px;
-            }
-        }
-
         #achievement-title,
         #mastery-title {
             position: absolute;
@@ -337,8 +619,6 @@
         #achievement-video,
         #mastery-video {
             position: absolute;
-            padding-left: 5px;
-            padding-top: 5px;
         }
 
         #achievement,
@@ -368,8 +648,6 @@
             position: absolute;
             width: 1922px;
             height: 1085px;
-            top: -5px;
-            left: -5px;
             background-color: transparent;
         }
 
@@ -394,26 +672,14 @@
             font-family: 'Press Start 2P', cursive;
         }
 
-        #user-prompt {
-            position: absolute;
-            width: 800px;
-            height: 100px;
-            text-align: center;
-            display: none;
-            animation-name: user-prompt-animation;
-            animation-iteration-count: 1;
-            animation-fill-mode: both;
-            animation-duration: 1s;
-        }
-
         #confirm-button {
             position: absolute;
             top: 150px;
             left: 235px;
+            height: 50px;
+            width: 300px;
             text-align: center;
             font-weight: bold;
-            width: 300px;
-            height: 50px;
             vertical-align: middle;
             font-size: 28px;
             background-color: yellow;
@@ -424,20 +690,11 @@
             overflow: hidden;
         }
     </style>
-    <script>
-        function acknowledgePrompt() {
-            document.getElementById("user-prompt").style.animationName = "user-prompt-animation-reverse";
-            alertControllerAsync.setCanPlay();
-
-            setTimeout(function () {
-                $("#user-prompt").hide();
-            }, 500);
-        };
-    </script>
 </head>
-<body>
+<body onload="hideNotifications()">
     <div id="container">
         <div id="achievement">
+            <img id="achievement-border" style="max-width: 100%; max-height: 100%;">
             <img id="achievement-badge" />
             <div id="achievement-title" class="achievement has-font">Achievement</div>
             <hr id="achievement-line" />
@@ -446,6 +703,7 @@
         </div>
 
         <div id="mastery">
+            <img id="mastery-border" style="max-width: 100%; max-height: 100%;">
             <img id="mastery-badge" />
             <div id="mastery-title" class="mastery has-font">Game Title</div>
             <hr id="mastery-line" />
@@ -456,16 +714,7 @@
         </div>
     </div>
 
-    <video id="achievement-video" onended="setPlayingOff()" onplay="setPlayingOn()" autoplay></video>
-    <video id="mastery-video" onended="setPlayingOff()" onplay="setPlayingOn()" autoplay></video>
-    <div id="user-prompt">
-        <img src="https://retroachievements.org/Images/RA_Logo10.png" />
-        <div id="ready-message" class="prompt" style="color: blue;">
-            Are you ready?
-        </div>
-        <button id="confirm-button" onclick="acknowledgePrompt()" class="prompt" style="color: blue;">
-            CLICK HERE
-        </button>
-    </div>
+    <video id="achievement-video" onended="setPlayingOff()" onplay="setPlayingOn()" preload="auto"></video>
+    <video id="mastery-video" onended="setPlayingOff()" onplay="setPlayingOn()" preload="auto"></video>
 </body>
 </html>

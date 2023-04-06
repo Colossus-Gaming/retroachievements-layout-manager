@@ -1,5 +1,4 @@
-﻿using CefSharp.DevTools.CSS;
-using Retro_Achievement_Tracker.Forms;
+﻿using Retro_Achievement_Tracker.Forms;
 using Retro_Achievement_Tracker.Properties;
 using System.Threading.Tasks;
 
@@ -7,7 +6,7 @@ namespace Retro_Achievement_Tracker.Controllers
 {
     public sealed class RelatedMediaController
     {
-        private static RelatedMediaController instance = new RelatedMediaController();
+        private static readonly RelatedMediaController instance = new RelatedMediaController();
         private static RelatedMediaWindow RelatedMediaWindow;
 
         public bool IsOpen;
@@ -56,68 +55,74 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public async void UpdateImage()
         {
-            RelatedMediaWindow.HideImage();
-
-            await Task.Delay(1000);
+            string imageUri = "";
 
             switch (RelatedMediaSelection)
             {
                 case RelatedMediaSelection.RABadgeIcon:
-                    RelatedMediaWindow.SetImage(RABadgeIconURI);
+                    imageUri = RABadgeIconURI;
                     break;
                 case RelatedMediaSelection.RATitleScreen:
-                    RelatedMediaWindow.SetImage(RATitleScreenURI);
+                    imageUri = RATitleScreenURI;
                     break;
                 case RelatedMediaSelection.RAIngameScreen:
-                    RelatedMediaWindow.SetImage(RAScreenshotURI);
+                    imageUri = RAScreenshotURI;
                     break;
                 case RelatedMediaSelection.RABoxArt:
-                    RelatedMediaWindow.SetImage(RABoxArtURI);
+                    imageUri = RABoxArtURI;
                     break;
                 case RelatedMediaSelection.LBBoxArtFront:
-                    RelatedMediaWindow.SetImage(LBBoxFrontURI);
+                    imageUri = "http://appassets.tracker/" + LBBoxFrontURI;
                     break;
                 case RelatedMediaSelection.LBBoxArtBack:
-                    RelatedMediaWindow.SetImage(LBBoxBackURI);
+                    imageUri = "http://appassets.tracker/" + LBBoxBackURI;
                     break;
                 case RelatedMediaSelection.LBBoxArt3D:
-                    RelatedMediaWindow.SetImage(LBBox3DURI);
+                    imageUri = "http://appassets.tracker/" + LBBox3DURI;
                     break;
                 case RelatedMediaSelection.LBBoxArtFrontRecon:
-                    RelatedMediaWindow.SetImage(LBBoxFrontReconURI);
+                    imageUri = "http://appassets.tracker/" + LBBoxFrontReconURI;
                     break;
                 case RelatedMediaSelection.LBBoxArtBackRecon:
-                    RelatedMediaWindow.SetImage(LBBoxBackReconURI);
+                    imageUri = "http://appassets.tracker/" + LBBoxBackReconURI;
                     break;
                 case RelatedMediaSelection.LBBoxArtFull:
-                    RelatedMediaWindow.SetImage(LBBoxFullURI);
+                    imageUri = "http://appassets.tracker/" + LBBoxFullURI;
                     break;
                 case RelatedMediaSelection.LBBoxArtSpine:
-                    RelatedMediaWindow.SetImage(LBBoxSpineURI);
+                    imageUri = "http://appassets.tracker/" + LBBoxSpineURI;
                     break;
                 case RelatedMediaSelection.LBClearLogo:
-                    RelatedMediaWindow.SetImage(LBClearLogoURI);
+                    imageUri = "http://appassets.tracker/" + LBClearLogoURI;
                     break;
                 case RelatedMediaSelection.LBBanner:
-                    RelatedMediaWindow.SetImage(LBBannerURI);
+                    imageUri = "http://appassets.tracker/" + LBBannerURI;
                     break;
                 case RelatedMediaSelection.LBTitleScreen:
-                    RelatedMediaWindow.SetImage(LBTitleSceenURI);
+                    imageUri = "http://appassets.tracker/" + LBTitleSceenURI;
                     break;
                 case RelatedMediaSelection.LBCartFront:
-                    RelatedMediaWindow.SetImage(LBCartFrontURI);
+                    imageUri = "http://appassets.tracker/" + LBCartFrontURI;
                     break;
                 case RelatedMediaSelection.LBCartBack:
-                    RelatedMediaWindow.SetImage(LBCartBackURI);
+                    imageUri = "http://appassets.tracker/" + LBCartBackURI;
                     break;
                 default:
-                    RelatedMediaWindow.HideImage();
                     break;
             }
 
-            await Task.Delay(500);
+            RelatedMediaWindow.HideImage();
 
-            RelatedMediaWindow.ShowImage();
+            if (imageUri.Contains(".png") || imageUri.Contains(".jpg") || imageUri.Contains(".jpeg"))
+            {
+                await Task.Delay(500);
+
+                RelatedMediaWindow.SetImage(imageUri);
+
+                await Task.Delay(500);
+
+                RelatedMediaWindow.ShowImage();
+            }
         }
         public string WindowBackgroundColor
         {

@@ -57,7 +57,7 @@ namespace Retro_Achievement_Tracker.Models
             }
             if (BadgeName != null)
             {
-                Achievement.BadgeNumber = Convert.ToString(BadgeName);
+                Achievement.BadgeUri = Constants.RETRO_ACHIEVEMENTS_MEDIA_URL + "/Badge/" + Convert.ToString(BadgeName) + ".png";
             }
             if (DisplayOrder != null)
             {

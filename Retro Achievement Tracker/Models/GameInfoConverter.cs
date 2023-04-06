@@ -58,22 +58,22 @@
 
             if (ImageBoxArt != null)
             {
-                GameInfo.ImageBoxArt = ImageBoxArt.ToString();
+                GameInfo.ImageBoxArt = Constants.RETRO_ACHIEVEMENTS_MEDIA_URL + ImageBoxArt.ToString();
             }
 
             if (ImageIngame != null)
             {
-                GameInfo.ImageIngame = ImageIngame.ToString();
+                GameInfo.ImageIngame = Constants.RETRO_ACHIEVEMENTS_MEDIA_URL + ImageIngame.ToString();
             }
 
             if (ImageTitle != null)
             {
-                GameInfo.ImageTitle = ImageTitle.ToString();
+                GameInfo.ImageTitle = Constants.RETRO_ACHIEVEMENTS_MEDIA_URL + ImageTitle.ToString();
             }
 
             if (ImageIcon != null)
             {
-                GameInfo.ImageIcon = ImageIcon.ToString();
+                GameInfo.BadgeUri = Constants.RETRO_ACHIEVEMENTS_MEDIA_URL + ImageIcon.ToString();
             }
 
             if (Title != null)

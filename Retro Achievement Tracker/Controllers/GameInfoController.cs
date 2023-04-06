@@ -6,7 +6,7 @@ namespace Retro_Achievement_Tracker.Controllers
 {
     public sealed class GameInfoController
     {
-        private static GameInfoController instance = new GameInfoController();
+        private static readonly GameInfoController instance = new GameInfoController();
         private static GameInfoWindow GameInfoWindow;
 
         public bool IsOpen;

@@ -1,28 +1,31 @@
-﻿using CefSharp;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Retro_Achievement_Tracker.Controllers;
-using Retro_Achievement_Tracker.Models;
 using Retro_Achievement_Tracker.Properties;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Retro_Achievement_Tracker.Forms
 {
-    public partial class AchievementListWindow : DisplayForm
+    public partial class AchievementListWindow : Form
     {
-        public AchievementListWindow() : base()
+        public AchievementListWindow()
         {
-            Name = "RA Tracker - Achievement List";
-            Text = "RA Tracker - Achievement List";
+            InitializeComponent();
         }
-        protected override void OnShown(EventArgs e)
+        protected override async void OnShown(EventArgs e)
         {
             base.OnShown(e);
 
-            SetupBrowser();
+            await InitializeAsync();
+        }
+        private async Task InitializeAsync()
+        {
+            await webView21.EnsureCoreWebView2Async(null);
+
+            webView21.NavigateToString(Resources.achievement_list_window);
         }
         protected override void OnClosed(EventArgs e)
         {
@@ -30,106 +33,66 @@ namespace Retro_Achievement_Tracker.Forms
 
             AchievementListController.Instance.IsOpen = false;
         }
-
-        public override async void AssignJavaScriptVariables()
+        public void AssignJavaScriptVariables()
         {
-            await ExecuteScript("allAchievements = document.getElementsByClassName(\"achievement\");");
+            webView21.ExecuteScriptAsync("assignJavaScriptVariables();");
         }
-        public async void AddAchievement(Achievement achievement, int xCoord, int yCoord)
+        public void SetWindowBackgroundColor(string value)
         {
-            await ExecuteScript("addAchievement(\"" + xCoord + "px\"," + "\"" + yCoord + "px\"," + JsonConvert.SerializeObject(achievement) + ");");
+            webView21.ExecuteScriptAsync(string.Format("setWindowBackgroundColor(\"{0}\");", value));
         }
-        public async void UnlockAchievement(Achievement achievement)
+        public void AddAchievement(Achievement achievement, int xCoord, int yCoord)
         {
-            await ExecuteScript("$(\"#achievement-" + achievement.Id + "-locked-image\").toggle(\"pulsate\");" +
-                "$(\"#achievement-" + achievement.Id + "\").tooltip(\"option\", \"content\", \"" + achievement.Title + "<br/><br/>" + achievement.Points + "pts<br/><br/>" + achievement.Description + "<br/><br/>" + achievement.DateEarned.Value.ToLocalTime().ToString() + "\");");
+            webView21.ExecuteScriptAsync($"addAchievement({JsonConvert.SerializeObject(achievement)}, \"" + xCoord + "px\", \"" + (yCoord < 612 ? yCoord + 612 : yCoord) + "px\");");
         }
-        public async void StartScrolling()
+        public void UnlockAchievement(Achievement achievement)
         {
-            await ExecuteScript("startScrolling();");
+            webView21.ExecuteScriptAsync($"unlockAchievement({JsonConvert.SerializeObject(achievement)});");
         }
-        public async void StopScrolling()
+        public void StartScrolling()
         {
-            await ExecuteScript("stopScrolling();");
+            webView21.ExecuteScriptAsync("startScrolling();");
         }
-        public async void SetAchievementPosition(Achievement achievement, int xCoord, int yCoord)
+        public void StopScrolling()
         {
-            await ExecuteScript("$(\"#achievement-" + achievement.Id + "\")" +
-                ".animate(" +
-                "   {" +
-                "       left: '" + xCoord + "px', " +
-                "       top: '" + yCoord + "px' " +
-                "   }, 1000, 'easeInOutQuint'" +
-                ");");
+            webView21.ExecuteScriptAsync("stopScrolling();");
         }
-        public async void ClearAchievements(Dictionary<int, int> idsToTimeouts)
+        public void SetAchievementPosition(Achievement achievement, int xCoord, int yCoord)
         {
-            StringBuilder stringBuilder = new StringBuilder("stopScrolling();" +
-                "document.getElementById(\"container\")" +
-                ".scrollTo(" +
-                "   {" +
-                "       top: 0," +
-                "       left: 0," +
-                "       behavior: 'smooth'" +
-                "   }" +
-                ");");
-
-            int highestValue = 0;
+            webView21.ExecuteScriptAsync(string.Format("setAchievementPosition(\"{0}\", \"{1}\", \"{2}\");", achievement.Id.ToString(), xCoord + "px", yCoord + "px"));
+        }
+        public void ClearAchievements(Dictionary<int, int> idsToTimeouts)
+        {
+            webView21.ExecuteScriptAsync("scrollToTop();");
 
             foreach (int id in idsToTimeouts.Keys)
             {
-
                 idsToTimeouts.TryGetValue(id, out int value);
 
-                stringBuilder.Append("var achievement" + id + "OffsetTop = document.getElementById(\"achievement-" + id + "\").offsetTop;" +
-                    "var achievement" + id + "OffsetTopNew = achievement" + id + "OffsetTop + 1048;" +
-                    "setTimeout(function() { $(\"#achievement-" + id + "\").animate( { top: `${ achievement" + id + "OffsetTopNew }px` }, 800, 'easeInOutQuint'); }, " + value + ");");
-
-                if (value > highestValue)
-                {
-                    highestValue = value;
-                }
+                webView21.ExecuteScriptAsync(string.Format("setAchievementOutDelayed(\"{0}\", \"{1}\");", id.ToString(), value.ToString()));
             }
-            string command = stringBuilder.ToString();
-
-            await ExecuteScript(command);
         }
-        public async void WipeOldAchievements()
+        public void WipeOldAchievements()
         {
-            await ExecuteScript("document.getElementById(\"achievement-list\").innerHTML = \"\";");
+            webView21.ExecuteScriptAsync("wipeOldAchievements();");
         }
         public void SetClientSize()
         {
-            Invoke(new Action(() => {
-                ClientSize = new Size(748, 611);
+            Invoke(new Action(() =>
+            {
+                ClientSize = new Size(748, 612);
             }));
         }
-        public override void SetupBrowser()
+
+        private void NavigationCompleted(object sender, Microsoft.Web.WebView2.Core.CoreWebView2NavigationCompletedEventArgs e)
         {
-            chromiumWebBrowser = new CefSharp.WinForms.ChromiumWebBrowser()
+            if (e.IsSuccess)
             {
-                ActivateBrowserOnCreation = false,
-                Location = new Point(0, 0),
-                Name = "achievementListBrowser",
-                Size = new Size(748, 611),
-                TabIndex = 0,
-                Dock = DockStyle.None,
-                RequestHandler = new CustomRequestHandler()
-            };
+                AchievementListController.Instance.IsOpen = true;
 
-            chromiumWebBrowser.LoadingStateChanged += new EventHandler<LoadingStateChangedEventArgs>((sender, loadingStateChangedEventArgs) => {
-                if (!loadingStateChangedEventArgs.IsLoading)
-                {
-                    AchievementListController.Instance.IsOpen = true;
-
-                    AchievementListController.Instance.SetAllSettings();
-                    AchievementListController.Instance.UpdateAchievementList();
-                }
-            });
-
-            chromiumWebBrowser.LoadHtml(Resources.achievement_list_window);
-
-            Controls.Add(chromiumWebBrowser);
+                AchievementListController.Instance.SetAllSettings();
+                AchievementListController.Instance.UpdateAchievementList();
+            }
         }
     }
 }

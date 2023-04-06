@@ -8,7 +8,7 @@ namespace Retro_Achievement_Tracker.Controllers
 {
     public sealed class AchievementListController
     {
-        private static AchievementListController instance = new AchievementListController();
+        private static readonly AchievementListController instance = new AchievementListController();
         private static AchievementListWindow AchievementListWindow;
 
         private readonly int AchievementsPerRow = 11;
@@ -67,6 +67,7 @@ namespace Retro_Achievement_Tracker.Controllers
             unlockedAchievements.Reverse();
 
             lockedAchievements.Sort();
+            lockedAchievements.Reverse();
 
             if (newGame)
             {
@@ -118,8 +119,8 @@ namespace Retro_Achievement_Tracker.Controllers
             }
 
             int achievementRowIndex = 0;
-            int yCoord = 1048;
             int xCoord = 0;
+            int yCoord = 0;
 
             for (int i = 0; i < unlockedAchievements.Count; i++)
             {
@@ -213,7 +214,10 @@ namespace Retro_Achievement_Tracker.Controllers
                     achievementRowIndex = 0;
                 }
 
-                await Task.Delay(50);
+                if(yCoord <= 612)
+                {
+                    await Task.Delay(50);
+                }
             }
 
             for (int i = 0; i < CurrentLockedAchievements.Count; i++)
@@ -230,7 +234,10 @@ namespace Retro_Achievement_Tracker.Controllers
                     achievementRowIndex = 0;
                 }
 
-                await Task.Delay(50);
+                if (yCoord <= 612)
+                {
+                    await Task.Delay(50);
+                }
             }
 
             if (AutoScroll)

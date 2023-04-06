@@ -555,6 +555,7 @@ namespace Retro_Achievement_Tracker
             this.achievementListBackgroundColorPictureBox = new System.Windows.Forms.PictureBox();
             this.label156 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.checkForUpdatesButton = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -591,10 +592,10 @@ namespace Retro_Achievement_Tracker
             this.relatedMediaLBBox3DRadioButton = new System.Windows.Forms.RadioButton();
             this.relatedMediaLBLinePictureBox = new System.Windows.Forms.PictureBox();
             this.relatedMediaLBLabel = new System.Windows.Forms.Label();
-            this.tabControlExtra1 = new TradeWright.UI.Forms.TabControlExtra();
+            this.mainTabControl = new System.Windows.Forms.TabControl();
             this.focusTabPage = new System.Windows.Forms.TabPage();
             this.alertsTabPage2 = new System.Windows.Forms.TabPage();
-            this.tabControlExtra2 = new TradeWright.UI.Forms.TabControlExtra();
+            this.alertTabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.userInfoTabPage = new System.Windows.Forms.TabPage();
@@ -612,7 +613,6 @@ namespace Retro_Achievement_Tracker
             this.label94 = new System.Windows.Forms.Label();
             this.pictureBox26 = new System.Windows.Forms.PictureBox();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.checkForUpdatesButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.userProfilePictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.focusAchievementPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gameInfoPictureBox)).BeginInit();
@@ -846,10 +846,10 @@ namespace Retro_Achievement_Tracker
             ((System.ComponentModel.ISupportInitialize)(this.relatedMediaBackgroundColorPictureBox)).BeginInit();
             this.panel124.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.relatedMediaLBLinePictureBox)).BeginInit();
-            this.tabControlExtra1.SuspendLayout();
+            this.mainTabControl.SuspendLayout();
             this.focusTabPage.SuspendLayout();
             this.alertsTabPage2.SuspendLayout();
-            this.tabControlExtra2.SuspendLayout();
+            this.alertTabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.userInfoTabPage.SuspendLayout();
@@ -2312,7 +2312,7 @@ namespace Retro_Achievement_Tracker
             this.focusTitleOutlineLabel.Name = "focusTitleOutlineLabel";
             this.focusTitleOutlineLabel.Size = new System.Drawing.Size(144, 16);
             this.focusTitleOutlineLabel.TabIndex = 10066;
-            this.focusTitleOutlineLabel.Text = "Title Outline";
+            this.focusTitleOutlineLabel.Text = "Title OutlineColor";
             // 
             // focusTitleFontOutlineColorPictureBox
             // 
@@ -2362,7 +2362,7 @@ namespace Retro_Achievement_Tracker
             this.label110.Name = "label110";
             this.label110.Size = new System.Drawing.Size(144, 16);
             this.label110.TabIndex = 10066;
-            this.label110.Text = "Description Outline";
+            this.label110.Text = "Description OutlineColor";
             // 
             // focusDescriptionFontOutlineColorPictureBox
             // 
@@ -2619,7 +2619,7 @@ namespace Retro_Achievement_Tracker
             this.label104.Name = "label104";
             this.label104.Size = new System.Drawing.Size(144, 16);
             this.label104.TabIndex = 10066;
-            this.label104.Text = "Points Outline";
+            this.label104.Text = "Points OutlineColor";
             // 
             // focusPointsFontOutlineColorPictureBox
             // 
@@ -2653,7 +2653,7 @@ namespace Retro_Achievement_Tracker
             this.label105.Name = "label105";
             this.label105.Size = new System.Drawing.Size(144, 16);
             this.label105.TabIndex = 10066;
-            this.label105.Text = "Line Outline";
+            this.label105.Text = "Line OutlineColor";
             // 
             // focusLineOutlineColorPictureBox
             // 
@@ -2994,7 +2994,7 @@ namespace Retro_Achievement_Tracker
             this.alertsTitleOutlineLabel.Name = "alertsTitleOutlineLabel";
             this.alertsTitleOutlineLabel.Size = new System.Drawing.Size(144, 16);
             this.alertsTitleOutlineLabel.TabIndex = 10066;
-            this.alertsTitleOutlineLabel.Text = "Title Outline";
+            this.alertsTitleOutlineLabel.Text = "Title OutlineColor";
             // 
             // alertsTitleFontOutlineColorPictureBox
             // 
@@ -3044,7 +3044,7 @@ namespace Retro_Achievement_Tracker
             this.label122.Name = "label122";
             this.label122.Size = new System.Drawing.Size(144, 16);
             this.label122.TabIndex = 10066;
-            this.label122.Text = "Description Outline";
+            this.label122.Text = "Description OutlineColor";
             // 
             // alertsDescriptionFontOutlineColorPictureBox
             // 
@@ -3303,7 +3303,7 @@ namespace Retro_Achievement_Tracker
             this.label126.Name = "label126";
             this.label126.Size = new System.Drawing.Size(144, 16);
             this.label126.TabIndex = 10066;
-            this.label126.Text = "Points Outline";
+            this.label126.Text = "Points OutlineColor";
             // 
             // alertsPointsFontOutlineColorPictureBox
             // 
@@ -3337,7 +3337,7 @@ namespace Retro_Achievement_Tracker
             this.label127.Name = "label127";
             this.label127.Size = new System.Drawing.Size(144, 16);
             this.label127.TabIndex = 10066;
-            this.label127.Text = "Line Outline";
+            this.label127.Text = "Line OutlineColor";
             // 
             // alertsLineOutlineColorPictureBox
             // 
@@ -4510,7 +4510,7 @@ namespace Retro_Achievement_Tracker
             this.userInfoNamesOutlineLabel.Name = "userInfoNamesOutlineLabel";
             this.userInfoNamesOutlineLabel.Size = new System.Drawing.Size(144, 16);
             this.userInfoNamesOutlineLabel.TabIndex = 10066;
-            this.userInfoNamesOutlineLabel.Text = "Names Outline";
+            this.userInfoNamesOutlineLabel.Text = "Names OutlineColor";
             // 
             // userInfoNamesFontOutlineColorPictureBox
             // 
@@ -4544,7 +4544,7 @@ namespace Retro_Achievement_Tracker
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(144, 16);
             this.label27.TabIndex = 10066;
-            this.label27.Text = "Values Outline";
+            this.label27.Text = "Values OutlineColor";
             // 
             // userInfoValuesFontOutlineColorPictureBox
             // 
@@ -5465,7 +5465,7 @@ namespace Retro_Achievement_Tracker
             this.gameInfoNamesOutlineLabel.Name = "gameInfoNamesOutlineLabel";
             this.gameInfoNamesOutlineLabel.Size = new System.Drawing.Size(144, 16);
             this.gameInfoNamesOutlineLabel.TabIndex = 10066;
-            this.gameInfoNamesOutlineLabel.Text = "Names Outline";
+            this.gameInfoNamesOutlineLabel.Text = "Names OutlineColor";
             // 
             // gameInfoNamesFontOutlineColorPictureBox
             // 
@@ -5499,7 +5499,7 @@ namespace Retro_Achievement_Tracker
             this.label86.Name = "label86";
             this.label86.Size = new System.Drawing.Size(144, 16);
             this.label86.TabIndex = 10066;
-            this.label86.Text = "Values Outline";
+            this.label86.Text = "Values OutlineColor";
             // 
             // gameInfoValuesFontOutlineColorPictureBox
             // 
@@ -6103,7 +6103,7 @@ namespace Retro_Achievement_Tracker
             this.gameProgressNamesOutlineLabel.Name = "gameProgressNamesOutlineLabel";
             this.gameProgressNamesOutlineLabel.Size = new System.Drawing.Size(144, 16);
             this.gameProgressNamesOutlineLabel.TabIndex = 10066;
-            this.gameProgressNamesOutlineLabel.Text = "Names Outline";
+            this.gameProgressNamesOutlineLabel.Text = "Names OutlineColor";
             // 
             // gameProgressNamesFontOutlineColorPictureBox
             // 
@@ -6137,7 +6137,7 @@ namespace Retro_Achievement_Tracker
             this.label50.Name = "label50";
             this.label50.Size = new System.Drawing.Size(144, 16);
             this.label50.TabIndex = 10066;
-            this.label50.Text = "Values Outline";
+            this.label50.Text = "Values OutlineColor";
             // 
             // gameProgressValuesFontOutlineColorPictureBox
             // 
@@ -6949,7 +6949,7 @@ namespace Retro_Achievement_Tracker
             this.recentAchievementsTitleOutlineLabel.Name = "recentAchievementsTitleOutlineLabel";
             this.recentAchievementsTitleOutlineLabel.Size = new System.Drawing.Size(144, 16);
             this.recentAchievementsTitleOutlineLabel.TabIndex = 10066;
-            this.recentAchievementsTitleOutlineLabel.Text = "Title Outline";
+            this.recentAchievementsTitleOutlineLabel.Text = "Title OutlineColor";
             // 
             // recentAchievementsTitleFontOutlineColorPictureBox
             // 
@@ -6999,7 +6999,7 @@ namespace Retro_Achievement_Tracker
             this.label144.Name = "label144";
             this.label144.Size = new System.Drawing.Size(144, 16);
             this.label144.TabIndex = 10066;
-            this.label144.Text = "Date Outline";
+            this.label144.Text = "Date OutlineColor";
             // 
             // recentAchievementsDateFontOutlineColorPictureBox
             // 
@@ -7256,7 +7256,7 @@ namespace Retro_Achievement_Tracker
             this.label148.Name = "label148";
             this.label148.Size = new System.Drawing.Size(144, 16);
             this.label148.TabIndex = 10066;
-            this.label148.Text = "Points Outline";
+            this.label148.Text = "Points OutlineColor";
             // 
             // recentAchievementsPointsFontOutlineColorPictureBox
             // 
@@ -7290,7 +7290,7 @@ namespace Retro_Achievement_Tracker
             this.label149.Name = "label149";
             this.label149.Size = new System.Drawing.Size(144, 16);
             this.label149.TabIndex = 10066;
-            this.label149.Text = "Line Outline";
+            this.label149.Text = "Line OutlineColor";
             // 
             // recentAchievementsLineOutlineColorPictureBox
             // 
@@ -7518,6 +7518,21 @@ namespace Retro_Achievement_Tracker
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(405, 96);
             this.panel1.TabIndex = 10031;
+            // 
+            // checkForUpdatesButton
+            // 
+            this.checkForUpdatesButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
+            this.checkForUpdatesButton.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.checkForUpdatesButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkForUpdatesButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkForUpdatesButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
+            this.checkForUpdatesButton.Location = new System.Drawing.Point(3, 62);
+            this.checkForUpdatesButton.Margin = new System.Windows.Forms.Padding(0);
+            this.checkForUpdatesButton.Name = "checkForUpdatesButton";
+            this.checkForUpdatesButton.Size = new System.Drawing.Size(150, 27);
+            this.checkForUpdatesButton.TabIndex = 29;
+            this.checkForUpdatesButton.Text = "Check For Updates";
+            this.checkForUpdatesButton.UseVisualStyleBackColor = false;
             // 
             // panel3
             // 
@@ -7971,85 +7986,24 @@ namespace Retro_Achievement_Tracker
             this.relatedMediaLBLabel.TabIndex = 10063;
             this.relatedMediaLBLabel.Text = "LaunchBox";
             // 
-            // tabControlExtra1
+            // mainTabControl
             // 
-            this.tabControlExtra1.Controls.Add(this.focusTabPage);
-            this.tabControlExtra1.Controls.Add(this.alertsTabPage2);
-            this.tabControlExtra1.Controls.Add(this.userInfoTabPage);
-            this.tabControlExtra1.Controls.Add(this.gameInfoTabPage);
-            this.tabControlExtra1.Controls.Add(this.gameProgressTabPage);
-            this.tabControlExtra1.Controls.Add(this.recentCheevosTabPage);
-            this.tabControlExtra1.Controls.Add(this.cheevosListTabPage);
-            this.tabControlExtra1.Controls.Add(this.relatedMediaTabPage);
-            this.tabControlExtra1.Controls.Add(this.browserTabPage);
-            // 
-            // 
-            // 
-            this.tabControlExtra1.DisplayStyleProvider.BlendStyle = TradeWright.UI.Forms.BlendStyle.Normal;
-            this.tabControlExtra1.DisplayStyleProvider.BorderColorDisabled = System.Drawing.SystemColors.ControlLight;
-            this.tabControlExtra1.DisplayStyleProvider.BorderColorFocused = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(157)))), ((int)(((byte)(185)))));
-            this.tabControlExtra1.DisplayStyleProvider.BorderColorHighlighted = System.Drawing.SystemColors.ControlDark;
-            this.tabControlExtra1.DisplayStyleProvider.BorderColorSelected = System.Drawing.SystemColors.ControlDark;
-            this.tabControlExtra1.DisplayStyleProvider.BorderColorUnselected = System.Drawing.SystemColors.ControlDark;
-            this.tabControlExtra1.DisplayStyleProvider.CloserButtonFillColorFocused = System.Drawing.Color.Empty;
-            this.tabControlExtra1.DisplayStyleProvider.CloserButtonFillColorFocusedActive = System.Drawing.Color.Empty;
-            this.tabControlExtra1.DisplayStyleProvider.CloserButtonFillColorHighlighted = System.Drawing.Color.Empty;
-            this.tabControlExtra1.DisplayStyleProvider.CloserButtonFillColorHighlightedActive = System.Drawing.Color.Empty;
-            this.tabControlExtra1.DisplayStyleProvider.CloserButtonFillColorSelected = System.Drawing.Color.Empty;
-            this.tabControlExtra1.DisplayStyleProvider.CloserButtonFillColorSelectedActive = System.Drawing.Color.Empty;
-            this.tabControlExtra1.DisplayStyleProvider.CloserButtonFillColorUnselected = System.Drawing.Color.Empty;
-            this.tabControlExtra1.DisplayStyleProvider.CloserButtonOutlineColorFocused = System.Drawing.Color.Empty;
-            this.tabControlExtra1.DisplayStyleProvider.CloserButtonOutlineColorFocusedActive = System.Drawing.Color.Empty;
-            this.tabControlExtra1.DisplayStyleProvider.CloserButtonOutlineColorHighlighted = System.Drawing.Color.Empty;
-            this.tabControlExtra1.DisplayStyleProvider.CloserButtonOutlineColorHighlightedActive = System.Drawing.Color.Empty;
-            this.tabControlExtra1.DisplayStyleProvider.CloserButtonOutlineColorSelected = System.Drawing.Color.Empty;
-            this.tabControlExtra1.DisplayStyleProvider.CloserButtonOutlineColorSelectedActive = System.Drawing.Color.Empty;
-            this.tabControlExtra1.DisplayStyleProvider.CloserButtonOutlineColorUnselected = System.Drawing.Color.Empty;
-            this.tabControlExtra1.DisplayStyleProvider.CloserColorFocused = System.Drawing.SystemColors.ControlDark;
-            this.tabControlExtra1.DisplayStyleProvider.CloserColorFocusedActive = System.Drawing.SystemColors.ControlDark;
-            this.tabControlExtra1.DisplayStyleProvider.CloserColorHighlighted = System.Drawing.SystemColors.ControlDark;
-            this.tabControlExtra1.DisplayStyleProvider.CloserColorHighlightedActive = System.Drawing.SystemColors.ControlDark;
-            this.tabControlExtra1.DisplayStyleProvider.CloserColorSelected = System.Drawing.SystemColors.ControlDark;
-            this.tabControlExtra1.DisplayStyleProvider.CloserColorSelectedActive = System.Drawing.SystemColors.ControlDark;
-            this.tabControlExtra1.DisplayStyleProvider.CloserColorUnselected = System.Drawing.Color.Empty;
-            this.tabControlExtra1.DisplayStyleProvider.FocusTrack = false;
-            this.tabControlExtra1.DisplayStyleProvider.HotTrack = true;
-            this.tabControlExtra1.DisplayStyleProvider.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.tabControlExtra1.DisplayStyleProvider.Opacity = 1F;
-            this.tabControlExtra1.DisplayStyleProvider.Overlap = 0;
-            this.tabControlExtra1.DisplayStyleProvider.Padding = new System.Drawing.Point(6, 3);
-            this.tabControlExtra1.DisplayStyleProvider.PageBackgroundColorDisabled = System.Drawing.SystemColors.Control;
-            this.tabControlExtra1.DisplayStyleProvider.PageBackgroundColorFocused = System.Drawing.SystemColors.ControlLight;
-            this.tabControlExtra1.DisplayStyleProvider.PageBackgroundColorHighlighted = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(244)))), ((int)(((byte)(252)))));
-            this.tabControlExtra1.DisplayStyleProvider.PageBackgroundColorSelected = System.Drawing.SystemColors.ControlLightLight;
-            this.tabControlExtra1.DisplayStyleProvider.PageBackgroundColorUnselected = System.Drawing.SystemColors.Control;
-            this.tabControlExtra1.DisplayStyleProvider.Radius = 2;
-            this.tabControlExtra1.DisplayStyleProvider.SelectedTabIsLarger = true;
-            this.tabControlExtra1.DisplayStyleProvider.ShowTabCloser = false;
-            this.tabControlExtra1.DisplayStyleProvider.TabColorDisabled1 = System.Drawing.SystemColors.Control;
-            this.tabControlExtra1.DisplayStyleProvider.TabColorDisabled2 = System.Drawing.SystemColors.Control;
-            this.tabControlExtra1.DisplayStyleProvider.TabColorFocused1 = System.Drawing.SystemColors.ControlLight;
-            this.tabControlExtra1.DisplayStyleProvider.TabColorFocused2 = System.Drawing.SystemColors.ControlLight;
-            this.tabControlExtra1.DisplayStyleProvider.TabColorHighLighted1 = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(244)))), ((int)(((byte)(252)))));
-            this.tabControlExtra1.DisplayStyleProvider.TabColorHighLighted2 = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(237)))), ((int)(((byte)(252)))));
-            this.tabControlExtra1.DisplayStyleProvider.TabColorSelected1 = System.Drawing.SystemColors.ControlLightLight;
-            this.tabControlExtra1.DisplayStyleProvider.TabColorSelected2 = System.Drawing.SystemColors.ControlLightLight;
-            this.tabControlExtra1.DisplayStyleProvider.TabColorUnSelected1 = System.Drawing.SystemColors.Control;
-            this.tabControlExtra1.DisplayStyleProvider.TabColorUnSelected2 = System.Drawing.SystemColors.Control;
-            this.tabControlExtra1.DisplayStyleProvider.TabPageMargin = new System.Windows.Forms.Padding(1);
-            this.tabControlExtra1.DisplayStyleProvider.TextColorDisabled = System.Drawing.SystemColors.ControlDark;
-            this.tabControlExtra1.DisplayStyleProvider.TextColorFocused = System.Drawing.SystemColors.ControlText;
-            this.tabControlExtra1.DisplayStyleProvider.TextColorHighlighted = System.Drawing.SystemColors.ControlText;
-            this.tabControlExtra1.DisplayStyleProvider.TextColorSelected = System.Drawing.SystemColors.ControlText;
-            this.tabControlExtra1.DisplayStyleProvider.TextColorUnselected = System.Drawing.SystemColors.ControlText;
-            this.tabControlExtra1.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControlExtra1.HotTrack = true;
-            this.tabControlExtra1.Location = new System.Drawing.Point(4, 111);
-            this.tabControlExtra1.Name = "tabControlExtra1";
-            this.tabControlExtra1.SelectedIndex = 0;
-            this.tabControlExtra1.ShowToolTips = true;
-            this.tabControlExtra1.Size = new System.Drawing.Size(777, 398);
-            this.tabControlExtra1.TabIndex = 10033;
+            this.mainTabControl.Controls.Add(this.focusTabPage);
+            this.mainTabControl.Controls.Add(this.alertsTabPage2);
+            this.mainTabControl.Controls.Add(this.userInfoTabPage);
+            this.mainTabControl.Controls.Add(this.gameInfoTabPage);
+            this.mainTabControl.Controls.Add(this.gameProgressTabPage);
+            this.mainTabControl.Controls.Add(this.recentCheevosTabPage);
+            this.mainTabControl.Controls.Add(this.cheevosListTabPage);
+            this.mainTabControl.Controls.Add(this.relatedMediaTabPage);
+            this.mainTabControl.Controls.Add(this.browserTabPage);
+            this.mainTabControl.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mainTabControl.HotTrack = true;
+            this.mainTabControl.Location = new System.Drawing.Point(4, 111);
+            this.mainTabControl.Name = "mainTabControl";
+            this.mainTabControl.SelectedIndex = 0;
+            this.mainTabControl.Size = new System.Drawing.Size(777, 398);
+            this.mainTabControl.TabIndex = 10033;
             // 
             // focusTabPage
             // 
@@ -8057,95 +8011,35 @@ namespace Retro_Achievement_Tracker
             this.focusTabPage.Controls.Add(this.panel64);
             this.focusTabPage.Controls.Add(this.panel63);
             this.focusTabPage.Controls.Add(this.panel51);
-            this.focusTabPage.Location = new System.Drawing.Point(4, 26);
+            this.focusTabPage.Location = new System.Drawing.Point(4, 22);
             this.focusTabPage.Name = "focusTabPage";
-            this.focusTabPage.Size = new System.Drawing.Size(769, 368);
+            this.focusTabPage.Size = new System.Drawing.Size(769, 372);
             this.focusTabPage.TabIndex = 0;
             this.focusTabPage.Text = "Focus";
             // 
             // alertsTabPage2
             // 
             this.alertsTabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
-            this.alertsTabPage2.Controls.Add(this.tabControlExtra2);
+            this.alertsTabPage2.Controls.Add(this.alertTabControl);
             this.alertsTabPage2.Controls.Add(this.panel65);
-            this.alertsTabPage2.Location = new System.Drawing.Point(4, 26);
+            this.alertsTabPage2.Location = new System.Drawing.Point(4, 22);
             this.alertsTabPage2.Name = "alertsTabPage2";
-            this.alertsTabPage2.Size = new System.Drawing.Size(769, 368);
+            this.alertsTabPage2.Size = new System.Drawing.Size(769, 372);
             this.alertsTabPage2.TabIndex = 1;
             this.alertsTabPage2.Text = "Alerts";
             // 
-            // tabControlExtra2
+            // alertTabControl
             // 
-            this.tabControlExtra2.Alignment = System.Windows.Forms.TabAlignment.Bottom;
-            this.tabControlExtra2.Controls.Add(this.tabPage1);
-            this.tabControlExtra2.Controls.Add(this.tabPage2);
-            this.tabControlExtra2.Cursor = System.Windows.Forms.Cursors.Arrow;
-            // 
-            // 
-            // 
-            this.tabControlExtra2.DisplayStyleProvider.BlendStyle = TradeWright.UI.Forms.BlendStyle.Normal;
-            this.tabControlExtra2.DisplayStyleProvider.BorderColorDisabled = System.Drawing.SystemColors.ControlLight;
-            this.tabControlExtra2.DisplayStyleProvider.BorderColorFocused = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(157)))), ((int)(((byte)(185)))));
-            this.tabControlExtra2.DisplayStyleProvider.BorderColorHighlighted = System.Drawing.SystemColors.ControlDark;
-            this.tabControlExtra2.DisplayStyleProvider.BorderColorSelected = System.Drawing.SystemColors.ControlDark;
-            this.tabControlExtra2.DisplayStyleProvider.BorderColorUnselected = System.Drawing.SystemColors.ControlDark;
-            this.tabControlExtra2.DisplayStyleProvider.CloserButtonFillColorFocused = System.Drawing.Color.Empty;
-            this.tabControlExtra2.DisplayStyleProvider.CloserButtonFillColorFocusedActive = System.Drawing.Color.Empty;
-            this.tabControlExtra2.DisplayStyleProvider.CloserButtonFillColorHighlighted = System.Drawing.Color.Empty;
-            this.tabControlExtra2.DisplayStyleProvider.CloserButtonFillColorHighlightedActive = System.Drawing.Color.Empty;
-            this.tabControlExtra2.DisplayStyleProvider.CloserButtonFillColorSelected = System.Drawing.Color.Empty;
-            this.tabControlExtra2.DisplayStyleProvider.CloserButtonFillColorSelectedActive = System.Drawing.Color.Empty;
-            this.tabControlExtra2.DisplayStyleProvider.CloserButtonFillColorUnselected = System.Drawing.Color.Empty;
-            this.tabControlExtra2.DisplayStyleProvider.CloserButtonOutlineColorFocused = System.Drawing.Color.Empty;
-            this.tabControlExtra2.DisplayStyleProvider.CloserButtonOutlineColorFocusedActive = System.Drawing.Color.Empty;
-            this.tabControlExtra2.DisplayStyleProvider.CloserButtonOutlineColorHighlighted = System.Drawing.Color.Empty;
-            this.tabControlExtra2.DisplayStyleProvider.CloserButtonOutlineColorHighlightedActive = System.Drawing.Color.Empty;
-            this.tabControlExtra2.DisplayStyleProvider.CloserButtonOutlineColorSelected = System.Drawing.Color.Empty;
-            this.tabControlExtra2.DisplayStyleProvider.CloserButtonOutlineColorSelectedActive = System.Drawing.Color.Empty;
-            this.tabControlExtra2.DisplayStyleProvider.CloserButtonOutlineColorUnselected = System.Drawing.Color.Empty;
-            this.tabControlExtra2.DisplayStyleProvider.CloserColorFocused = System.Drawing.SystemColors.ControlDark;
-            this.tabControlExtra2.DisplayStyleProvider.CloserColorFocusedActive = System.Drawing.SystemColors.ControlDark;
-            this.tabControlExtra2.DisplayStyleProvider.CloserColorHighlighted = System.Drawing.SystemColors.ControlDark;
-            this.tabControlExtra2.DisplayStyleProvider.CloserColorHighlightedActive = System.Drawing.SystemColors.ControlDark;
-            this.tabControlExtra2.DisplayStyleProvider.CloserColorSelected = System.Drawing.SystemColors.ControlDark;
-            this.tabControlExtra2.DisplayStyleProvider.CloserColorSelectedActive = System.Drawing.SystemColors.ControlDark;
-            this.tabControlExtra2.DisplayStyleProvider.CloserColorUnselected = System.Drawing.Color.Empty;
-            this.tabControlExtra2.DisplayStyleProvider.FocusTrack = false;
-            this.tabControlExtra2.DisplayStyleProvider.HotTrack = true;
-            this.tabControlExtra2.DisplayStyleProvider.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.tabControlExtra2.DisplayStyleProvider.Opacity = 1F;
-            this.tabControlExtra2.DisplayStyleProvider.Overlap = 0;
-            this.tabControlExtra2.DisplayStyleProvider.Padding = new System.Drawing.Point(6, 3);
-            this.tabControlExtra2.DisplayStyleProvider.PageBackgroundColorDisabled = System.Drawing.SystemColors.Control;
-            this.tabControlExtra2.DisplayStyleProvider.PageBackgroundColorFocused = System.Drawing.SystemColors.ControlLight;
-            this.tabControlExtra2.DisplayStyleProvider.PageBackgroundColorHighlighted = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(244)))), ((int)(((byte)(252)))));
-            this.tabControlExtra2.DisplayStyleProvider.PageBackgroundColorSelected = System.Drawing.SystemColors.ControlLightLight;
-            this.tabControlExtra2.DisplayStyleProvider.PageBackgroundColorUnselected = System.Drawing.SystemColors.Control;
-            this.tabControlExtra2.DisplayStyleProvider.Radius = 2;
-            this.tabControlExtra2.DisplayStyleProvider.SelectedTabIsLarger = true;
-            this.tabControlExtra2.DisplayStyleProvider.ShowTabCloser = false;
-            this.tabControlExtra2.DisplayStyleProvider.TabColorDisabled1 = System.Drawing.SystemColors.Control;
-            this.tabControlExtra2.DisplayStyleProvider.TabColorDisabled2 = System.Drawing.SystemColors.Control;
-            this.tabControlExtra2.DisplayStyleProvider.TabColorFocused1 = System.Drawing.SystemColors.ControlLight;
-            this.tabControlExtra2.DisplayStyleProvider.TabColorFocused2 = System.Drawing.SystemColors.ControlLight;
-            this.tabControlExtra2.DisplayStyleProvider.TabColorHighLighted1 = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(244)))), ((int)(((byte)(252)))));
-            this.tabControlExtra2.DisplayStyleProvider.TabColorHighLighted2 = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(237)))), ((int)(((byte)(252)))));
-            this.tabControlExtra2.DisplayStyleProvider.TabColorSelected1 = System.Drawing.SystemColors.ControlLightLight;
-            this.tabControlExtra2.DisplayStyleProvider.TabColorSelected2 = System.Drawing.SystemColors.ControlLightLight;
-            this.tabControlExtra2.DisplayStyleProvider.TabColorUnSelected1 = System.Drawing.SystemColors.Control;
-            this.tabControlExtra2.DisplayStyleProvider.TabColorUnSelected2 = System.Drawing.SystemColors.Control;
-            this.tabControlExtra2.DisplayStyleProvider.TabPageMargin = new System.Windows.Forms.Padding(1);
-            this.tabControlExtra2.DisplayStyleProvider.TextColorDisabled = System.Drawing.SystemColors.ControlDark;
-            this.tabControlExtra2.DisplayStyleProvider.TextColorFocused = System.Drawing.SystemColors.ControlText;
-            this.tabControlExtra2.DisplayStyleProvider.TextColorHighlighted = System.Drawing.SystemColors.ControlText;
-            this.tabControlExtra2.DisplayStyleProvider.TextColorSelected = System.Drawing.SystemColors.ControlText;
-            this.tabControlExtra2.DisplayStyleProvider.TextColorUnselected = System.Drawing.SystemColors.ControlText;
-            this.tabControlExtra2.HotTrack = true;
-            this.tabControlExtra2.Location = new System.Drawing.Point(3, 3);
-            this.tabControlExtra2.Name = "tabControlExtra2";
-            this.tabControlExtra2.SelectedIndex = 0;
-            this.tabControlExtra2.Size = new System.Drawing.Size(292, 362);
-            this.tabControlExtra2.TabIndex = 10082;
+            this.alertTabControl.Alignment = System.Windows.Forms.TabAlignment.Bottom;
+            this.alertTabControl.Controls.Add(this.tabPage1);
+            this.alertTabControl.Controls.Add(this.tabPage2);
+            this.alertTabControl.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.alertTabControl.HotTrack = true;
+            this.alertTabControl.Location = new System.Drawing.Point(3, 3);
+            this.alertTabControl.Name = "alertTabControl";
+            this.alertTabControl.SelectedIndex = 0;
+            this.alertTabControl.Size = new System.Drawing.Size(292, 362);
+            this.alertTabControl.TabIndex = 10082;
             // 
             // tabPage1
             // 
@@ -8158,7 +8052,7 @@ namespace Retro_Achievement_Tracker
             this.tabPage1.Location = new System.Drawing.Point(4, 4);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(284, 332);
+            this.tabPage1.Size = new System.Drawing.Size(284, 336);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Achievement";
             // 
@@ -8172,7 +8066,7 @@ namespace Retro_Achievement_Tracker
             this.tabPage2.Location = new System.Drawing.Point(4, 4);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(284, 332);
+            this.tabPage2.Size = new System.Drawing.Size(284, 336);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Mastery";
             // 
@@ -8182,9 +8076,9 @@ namespace Retro_Achievement_Tracker
             this.userInfoTabPage.Controls.Add(this.panel14);
             this.userInfoTabPage.Controls.Add(this.panel21);
             this.userInfoTabPage.Controls.Add(this.panel20);
-            this.userInfoTabPage.Location = new System.Drawing.Point(4, 26);
+            this.userInfoTabPage.Location = new System.Drawing.Point(4, 22);
             this.userInfoTabPage.Name = "userInfoTabPage";
-            this.userInfoTabPage.Size = new System.Drawing.Size(769, 368);
+            this.userInfoTabPage.Size = new System.Drawing.Size(769, 372);
             this.userInfoTabPage.TabIndex = 2;
             this.userInfoTabPage.Text = "User Info";
             // 
@@ -8194,9 +8088,9 @@ namespace Retro_Achievement_Tracker
             this.gameInfoTabPage.Controls.Add(this.panel50);
             this.gameInfoTabPage.Controls.Add(this.panel29);
             this.gameInfoTabPage.Controls.Add(this.panel35);
-            this.gameInfoTabPage.Location = new System.Drawing.Point(4, 26);
+            this.gameInfoTabPage.Location = new System.Drawing.Point(4, 22);
             this.gameInfoTabPage.Name = "gameInfoTabPage";
-            this.gameInfoTabPage.Size = new System.Drawing.Size(769, 368);
+            this.gameInfoTabPage.Size = new System.Drawing.Size(769, 372);
             this.gameInfoTabPage.TabIndex = 3;
             this.gameInfoTabPage.Text = "Game Info";
             // 
@@ -8206,9 +8100,9 @@ namespace Retro_Achievement_Tracker
             this.gameProgressTabPage.Controls.Add(this.panel28);
             this.gameProgressTabPage.Controls.Add(this.panel36);
             this.gameProgressTabPage.Controls.Add(this.panel15);
-            this.gameProgressTabPage.Location = new System.Drawing.Point(4, 26);
+            this.gameProgressTabPage.Location = new System.Drawing.Point(4, 22);
             this.gameProgressTabPage.Name = "gameProgressTabPage";
-            this.gameProgressTabPage.Size = new System.Drawing.Size(769, 368);
+            this.gameProgressTabPage.Size = new System.Drawing.Size(769, 372);
             this.gameProgressTabPage.TabIndex = 4;
             this.gameProgressTabPage.Text = "Progress";
             // 
@@ -8217,9 +8111,9 @@ namespace Retro_Achievement_Tracker
             this.recentCheevosTabPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.recentCheevosTabPage.Controls.Add(this.panel113);
             this.recentCheevosTabPage.Controls.Add(this.panel99);
-            this.recentCheevosTabPage.Location = new System.Drawing.Point(4, 26);
+            this.recentCheevosTabPage.Location = new System.Drawing.Point(4, 22);
             this.recentCheevosTabPage.Name = "recentCheevosTabPage";
-            this.recentCheevosTabPage.Size = new System.Drawing.Size(769, 368);
+            this.recentCheevosTabPage.Size = new System.Drawing.Size(769, 372);
             this.recentCheevosTabPage.TabIndex = 5;
             this.recentCheevosTabPage.Text = "Recent Unlocks";
             // 
@@ -8228,9 +8122,9 @@ namespace Retro_Achievement_Tracker
             this.cheevosListTabPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.cheevosListTabPage.Controls.Add(this.panel115);
             this.cheevosListTabPage.Controls.Add(this.panel111);
-            this.cheevosListTabPage.Location = new System.Drawing.Point(4, 26);
+            this.cheevosListTabPage.Location = new System.Drawing.Point(4, 22);
             this.cheevosListTabPage.Name = "cheevosListTabPage";
-            this.cheevosListTabPage.Size = new System.Drawing.Size(769, 368);
+            this.cheevosListTabPage.Size = new System.Drawing.Size(769, 372);
             this.cheevosListTabPage.TabIndex = 6;
             this.cheevosListTabPage.Text = "Achievement List";
             // 
@@ -8240,9 +8134,9 @@ namespace Retro_Achievement_Tracker
             this.relatedMediaTabPage.Controls.Add(this.panel124);
             this.relatedMediaTabPage.Controls.Add(this.panel120);
             this.relatedMediaTabPage.Controls.Add(this.panel121);
-            this.relatedMediaTabPage.Location = new System.Drawing.Point(4, 26);
+            this.relatedMediaTabPage.Location = new System.Drawing.Point(4, 22);
             this.relatedMediaTabPage.Name = "relatedMediaTabPage";
-            this.relatedMediaTabPage.Size = new System.Drawing.Size(769, 368);
+            this.relatedMediaTabPage.Size = new System.Drawing.Size(769, 372);
             this.relatedMediaTabPage.TabIndex = 7;
             this.relatedMediaTabPage.Text = "Related Media";
             // 
@@ -8251,9 +8145,9 @@ namespace Retro_Achievement_Tracker
             this.browserTabPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.browserTabPage.Controls.Add(this.panel126);
             this.browserTabPage.Controls.Add(this.panel125);
-            this.browserTabPage.Location = new System.Drawing.Point(4, 26);
+            this.browserTabPage.Location = new System.Drawing.Point(4, 22);
             this.browserTabPage.Name = "browserTabPage";
-            this.browserTabPage.Size = new System.Drawing.Size(769, 368);
+            this.browserTabPage.Size = new System.Drawing.Size(769, 372);
             this.browserTabPage.TabIndex = 8;
             this.browserTabPage.Text = "Browser";
             // 
@@ -8331,28 +8225,13 @@ namespace Retro_Achievement_Tracker
             this.pictureBox26.TabIndex = 10070;
             this.pictureBox26.TabStop = false;
             // 
-            // checkForUpdatesButton
-            // 
-            this.checkForUpdatesButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
-            this.checkForUpdatesButton.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.checkForUpdatesButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkForUpdatesButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkForUpdatesButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
-            this.checkForUpdatesButton.Location = new System.Drawing.Point(3, 62);
-            this.checkForUpdatesButton.Margin = new System.Windows.Forms.Padding(0);
-            this.checkForUpdatesButton.Name = "checkForUpdatesButton";
-            this.checkForUpdatesButton.Size = new System.Drawing.Size(150, 27);
-            this.checkForUpdatesButton.TabIndex = 29;
-            this.checkForUpdatesButton.Text = "Check For Updates";
-            this.checkForUpdatesButton.UseVisualStyleBackColor = false;
-            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.ClientSize = new System.Drawing.Size(786, 514);
-            this.Controls.Add(this.tabControlExtra1);
+            this.Controls.Add(this.mainTabControl);
             this.Controls.Add(this.raConnectionStatusPictureBox);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.timerStatusLabel);
@@ -8655,10 +8534,10 @@ namespace Retro_Achievement_Tracker
             this.panel124.ResumeLayout(false);
             this.panel124.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.relatedMediaLBLinePictureBox)).EndInit();
-            this.tabControlExtra1.ResumeLayout(false);
+            this.mainTabControl.ResumeLayout(false);
             this.focusTabPage.ResumeLayout(false);
             this.alertsTabPage2.ResumeLayout(false);
-            this.tabControlExtra2.ResumeLayout(false);
+            this.alertTabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
@@ -9225,7 +9104,7 @@ namespace Retro_Achievement_Tracker
         private RadioButton relatedMediaLBBox3DRadioButton;
         private PictureBox relatedMediaLBLinePictureBox;
         private Label relatedMediaLBLabel;
-        private TradeWright.UI.Forms.TabControlExtra tabControlExtra1;
+        private TabControl mainTabControl;
         private TabPage focusTabPage;
         private TabPage alertsTabPage2;
         private TabPage userInfoTabPage;
@@ -9235,7 +9114,7 @@ namespace Retro_Achievement_Tracker
         private TabPage cheevosListTabPage;
         private TabPage relatedMediaTabPage;
         private TabPage browserTabPage;
-        private TradeWright.UI.Forms.TabControlExtra tabControlExtra2;
+        private TabControl alertTabControl;
         private TabPage tabPage1;
         private TabPage tabPage2;
         private Panel panel125;

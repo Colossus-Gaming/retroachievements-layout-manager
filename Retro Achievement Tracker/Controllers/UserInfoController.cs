@@ -6,7 +6,7 @@ namespace Retro_Achievement_Tracker.Controllers
 {
     public sealed class UserInfoController
     {
-        private static UserInfoController instance = new UserInfoController();
+        private static readonly UserInfoController instance = new UserInfoController();
         private static UserInfoWindow UserInfoWindow;
 
         public bool IsOpen;

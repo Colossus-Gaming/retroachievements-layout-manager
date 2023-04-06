@@ -11,14 +11,8 @@ using System.Windows.Forms;
 using System.Xml;
 using System.ServiceModel.Syndication;
 using System.Threading.Tasks;
-using CefSharp;
 using FontFamily = System.Drawing.FontFamily;
-using static System.Net.WebRequestMethods;
 using File = System.IO.File;
-using Retro_Achievement_Tracker.Forms;
-using System.Globalization;
-using System.Text;
-using TradeWright.UI.Forms;
 
 namespace Retro_Achievement_Tracker
 {
@@ -78,21 +72,6 @@ namespace Retro_Achievement_Tracker
 
             AutoUpdate();
             InitializeComponent();
-
-            ClientSize = new Size(787, 112);
-            rssFeedListView.ListViewItemSorter = Comparer<ListViewItem>.Create((item1, item2) => DateTime.Parse(item2.SubItems[1].Text).CompareTo(DateTime.Parse(item1.SubItems[1].Text)));
-
-            UserAndGameUpdateTimer = new Timer
-            {
-                Enabled = false
-            };
-
-            UserAndGameUpdateTimer.Tick += new EventHandler(UpdateFromSite);
-            UserAndGameUpdateTimer.Interval = 500;
-
-            tabControlExtra1.TabIndexChanged += TabControlExtra1_TabIndexChanged;
-
-            checkForUpdatesButton.Click += CheckForUpdatesButton_Click;
         }
 
         private void CheckForUpdatesButton_Click(object sender, EventArgs e)
@@ -104,9 +83,9 @@ namespace Retro_Achievement_Tracker
 
         private void TabControlExtra1_TabIndexChanged(object sender, EventArgs e)
         {
-            foreach (TabPage tab in tabControlExtra1.TabPages)
+            foreach (TabPage tab in mainTabControl.TabPages)
             {
-                if (tabControlExtra1.SelectedTab.Equals(tab))
+                if (mainTabControl.SelectedTab.Equals(tab))
                 {
                     tab.Show();
                 }
@@ -128,6 +107,22 @@ namespace Retro_Achievement_Tracker
         }
         protected override void OnShown(EventArgs e)
         {
+            base.OnShown(e);
+
+            rssFeedListView.ListViewItemSorter = Comparer<ListViewItem>.Create((item1, item2) => DateTime.Parse(item2.SubItems[1].Text).CompareTo(DateTime.Parse(item1.SubItems[1].Text)));
+
+            UserAndGameUpdateTimer = new Timer
+            {
+                Enabled = false
+            };
+
+            UserAndGameUpdateTimer.Tick += new EventHandler(UpdateFromSite);
+            UserAndGameUpdateTimer.Interval = 500;
+
+            mainTabControl.TabIndexChanged += TabControlExtra1_TabIndexChanged;
+
+            checkForUpdatesButton.Click += CheckForUpdatesButton_Click;
+
             LoadProperties();
 
             CreateFolders();
@@ -342,14 +337,13 @@ namespace Retro_Achievement_Tracker
             {
                 if (IsLaunching)
                 {
-                    if (tabControlExtra1.SelectedIndex < tabControlExtra1.TabPages.Count - 1)
-                    {
-                        tabControlExtra1.SelectedIndex++;
-                    }
-
                     if (FocusController.Instance.AutoLaunch && !FocusController.Instance.IsOpen)
                     {
                         FocusController.Instance.Show();
+                    }
+                    else if (AlertsController.Instance.AutoLaunch && !AlertsController.Instance.IsOpen)
+                    {
+                        AlertsController.Instance.Show();
                     }
                     else if (UserInfoController.Instance.AutoLaunch && !UserInfoController.Instance.IsOpen)
                     {
@@ -379,21 +373,10 @@ namespace Retro_Achievement_Tracker
                     {
                         AlertsController.Instance.Show();
                     }
-                    else if (tabControlExtra1.SelectedIndex == tabControlExtra1.TabPages.Count - 1)
+                    else
                     {
-                        if (AlertsController.Instance.IsOpen)
-                        {
-                            AlertsController.Instance.Show();
-                        }
-
-                        tabControlExtra1.SelectedIndex = 0;
-
                         IsLaunching = false;
                     }
-                }
-                else
-                {
-                    ClientSize = new Size(787, 515);
                 }
             }
 
@@ -534,7 +517,7 @@ namespace Retro_Achievement_Tracker
 
                     CurrentlyViewingAchievement = GameInfo.Achievements[CurrentlyViewingIndex];
 
-                    focusAchievementPictureBox.ImageLocation = "https://retroachievements.org/Badge/" + CurrentlyViewingAchievement.BadgeNumber + ".png";
+                    focusAchievementPictureBox.ImageLocation = CurrentlyViewingAchievement.BadgeUri;
                     focusAchievementTitleLabel.Text = "[" + CurrentlyViewingAchievement.Points + "] - " + CurrentlyViewingAchievement.Title;
                     focusAchievementDescriptionLabel.Text = CurrentlyViewingAchievement.Description;
                 }
@@ -555,7 +538,6 @@ namespace Retro_Achievement_Tracker
         {
             if (CurrentlyViewingAchievement != null)
             {
-
                 if (FocusController.Instance.GetCurrentlyFocusedAchievement() == null || FocusController.Instance.GetCurrentlyFocusedAchievement().Id != CurrentlyViewingAchievement.Id)
                 {
                     FocusController.Instance.SetFocus(CurrentlyViewingAchievement);
@@ -765,7 +747,7 @@ namespace Retro_Achievement_Tracker
         }
         private void UpdateGameInfo()
         {
-            gameInfoPictureBox.ImageLocation = "http://media.retroachievements.org" + GameInfo.ImageIcon;
+            gameInfoPictureBox.ImageLocation = GameInfo.BadgeUri;
             gameInfoTitleLabel.Text = GameInfo.Title + " (" + GameInfo.ConsoleName + ")";
             gameInfoDeveloperLabel.Text = GameInfo.Developer;
             gameInfoPublisherLabel.Text = GameInfo.Publisher;
@@ -830,10 +812,10 @@ namespace Retro_Achievement_Tracker
 
             StreamLabelManager.Instance.EnqueueGameInfo(GameInfo);
 
-            RelatedMediaController.Instance.RABadgeIconURI = Constants.RETRO_ACHIEVEMENTS_MEDIA_URL + GameInfo.ImageIcon;
-            RelatedMediaController.Instance.RATitleScreenURI = Constants.RETRO_ACHIEVEMENTS_MEDIA_URL + GameInfo.ImageTitle;
-            RelatedMediaController.Instance.RAScreenshotURI = Constants.RETRO_ACHIEVEMENTS_MEDIA_URL + GameInfo.ImageIngame;
-            RelatedMediaController.Instance.RABoxArtURI = Constants.RETRO_ACHIEVEMENTS_MEDIA_URL + GameInfo.ImageBoxArt;
+            RelatedMediaController.Instance.RABadgeIconURI = GameInfo.BadgeUri;
+            RelatedMediaController.Instance.RATitleScreenURI = GameInfo.ImageTitle;
+            RelatedMediaController.Instance.RAScreenshotURI = GameInfo.ImageIngame;
+            RelatedMediaController.Instance.RABoxArtURI = GameInfo.ImageBoxArt;
         }
         private void UpdateFocusButtons()
         {
@@ -913,8 +895,6 @@ namespace Retro_Achievement_Tracker
 
             IsLaunching = false;
             IsLoading = false;
-
-            ClientSize = new Size(787, 515);
         }
         private void RequiredField_TextChanged(object sender, EventArgs e)
         {
@@ -1002,7 +982,7 @@ namespace Retro_Achievement_Tracker
                             {
                                 Title = "Thrilling!!!!",
                                 Description = "Color every bit of Dinosaur 2. [Must color white if leaving white]",
-                                BadgeNumber = "49987",
+                                BadgeUri = "https://retroachievements.org/Badge/49987.png",
                                 Points = 1
                             });
                         }
@@ -1311,7 +1291,7 @@ namespace Retro_Achievement_Tracker
                         {
                             Title = "Thrilling!!!!",
                             Description = "Color every bit of Dinosaur 2. [Must color white if leaving white]",
-                            BadgeNumber = "49987",
+                            BadgeUri = "https://retroachievements.org/Badge/49987.png",
                             Points = 1
                         };
 
@@ -2737,671 +2717,673 @@ namespace Retro_Achievement_Tracker
         {
             if (GameInfo != null)
             {
-                try
+                if (Directory.Exists(Settings.Default.related_media_launchbox_filepath))
                 {
-                    Dictionary<string, DateTime> gameNames = new Dictionary<string, DateTime>();
-
-                    using (XmlReader reader = XmlReader.Create(Settings.Default.related_media_launchbox_filepath + "\\Data\\Platforms\\" + GameInfo.ConsoleName + ".xml"))
+                    try
                     {
-                        string currentGameName = string.Empty;
+                        Dictionary<string, DateTime> gameNames = new Dictionary<string, DateTime>();
 
-                        bool inGame = false;
-                        bool inName = false;
-                        bool inLastPlayed = false;
-
-                        DateTime lastPlayed = DateTime.MinValue;
-
-                        while (reader.Read())
+                        using (XmlReader reader = XmlReader.Create(Settings.Default.related_media_launchbox_filepath + "\\Data\\Platforms\\" + GameInfo.ConsoleName + ".xml"))
                         {
-                            switch (reader.NodeType)
+                            string currentGameName = string.Empty;
+
+                            bool inGame = false;
+                            bool inName = false;
+                            bool inLastPlayed = false;
+
+                            DateTime lastPlayed = DateTime.MinValue;
+
+                            while (reader.Read())
                             {
-                                case XmlNodeType.Element:
-                                    if ("Game".Equals(reader.Name))
-                                    {
-                                        inGame = true;
-                                    }
-                                    else if ("Title".Equals(reader.Name))
-                                    {
-                                        inName = true;
-                                    }
-                                    else if ("LastPlayedDate".Equals(reader.Name))
-                                    {
-                                        inLastPlayed = true;
-                                    }
-                                    break;
-                                case XmlNodeType.Text:
-                                    if (inGame)
-                                    {
-                                        if (inName)
+                                switch (reader.NodeType)
+                                {
+                                    case XmlNodeType.Element:
+                                        if ("Game".Equals(reader.Name))
                                         {
+                                            inGame = true;
+                                        }
+                                        else if ("Title".Equals(reader.Name))
+                                        {
+                                            inName = true;
+                                        }
+                                        else if ("LastPlayedDate".Equals(reader.Name))
+                                        {
+                                            inLastPlayed = true;
+                                        }
+                                        break;
+                                    case XmlNodeType.Text:
+                                        if (inGame)
+                                        {
+                                            if (inName)
+                                            {
+                                                inName = false;
+                                                currentGameName = reader.Value;
+                                            }
+                                            else if (inLastPlayed)
+                                            {
+                                                inLastPlayed = false;
+                                                lastPlayed = DateTime.Parse(reader.Value);
+                                            }
+                                        }
+                                        break;
+                                    case XmlNodeType.EndElement:
+                                        if ("Game".Equals(reader.Name))
+                                        {
+                                            if (!lastPlayed.Equals(DateTime.MinValue))
+                                            {
+                                                gameNames.Add(currentGameName, lastPlayed);
+                                            }
+
+                                            inGame = false;
                                             inName = false;
-                                            currentGameName = reader.Value;
-                                        }
-                                        else if (inLastPlayed)
-                                        {
                                             inLastPlayed = false;
-                                            lastPlayed = DateTime.Parse(reader.Value);
+
+                                            lastPlayed = DateTime.MinValue;
                                         }
-                                    }
-                                    break;
-                                case XmlNodeType.EndElement:
-                                    if ("Game".Equals(reader.Name))
+                                        break;
+                                }
+                            }
+                        }
+
+                        string highestConfidenceGame = string.Empty;
+                        DateTime dateTime = DateTime.MinValue;
+
+                        foreach (string name in gameNames.Keys)
+                        {
+                            gameNames.TryGetValue(name, out DateTime value);
+
+                            if (value.CompareTo(dateTime) > 0)
+                            {
+                                highestConfidenceGame = name;
+                                dateTime = value;
+                            }
+                        }
+
+                        if (!string.IsNullOrEmpty(highestConfidenceGame))
+                        {
+                            highestConfidenceGame = highestConfidenceGame.Replace('\'', '_').Replace(':', '_');
+
+                            string[] boxFrontSubFolders = Directory.Exists(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Box - Front") ? Directory.GetDirectories(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Box - Front") : Array.Empty<string>();
+                            string[] boxBackSubFolders = Directory.Exists(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Box - Back") ? Directory.GetDirectories(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Box - Back") : Array.Empty<string>();
+                            string[] box3DSubFolders = Directory.Exists(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Box - 3D") ? Directory.GetDirectories(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Box - 3D") : Array.Empty<string>();
+                            string[] boxFrontReconSubFolders = Directory.Exists(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Box - Front - Reconstructed") ? Directory.GetDirectories(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Box - Front - Reconstructed") : Array.Empty<string>();
+                            string[] boxBackReconSubFolders = Directory.Exists(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Box - Back - Reconstructed") ? Directory.GetDirectories(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Box - Back - Reconstructed") : Array.Empty<string>();
+                            string[] boxFullSubFolders = Directory.Exists(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Box - Full") ? Directory.GetDirectories(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Box - Full") : Array.Empty<string>();
+                            string[] boxSpineSubFolders = Directory.Exists(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Box - Spine") ? Directory.GetDirectories(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Box - Spine") : Array.Empty<string>();
+                            string[] clearLogoSubFolders = Directory.Exists(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Clear Logo") ? Directory.GetDirectories(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Clear Logo") : Array.Empty<string>();
+                            string[] screenshotGameTitleSubFolders = Directory.Exists(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Screenshot - Game Title") ? Directory.GetDirectories(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Screenshot - Game Title") : Array.Empty<string>();
+                            string[] bannerSubFolders = Directory.Exists(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Banner") ? Directory.GetDirectories(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Banner") : Array.Empty<string>();
+                            string[] cartFrontSubFolders = Directory.Exists(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Cart - Front") ? Directory.GetDirectories(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Cart - Front") : Array.Empty<string>();
+                            string[] cartBackSubFolders = Directory.Exists(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Cart - Back") ? Directory.GetDirectories(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Cart - Back") : Array.Empty<string>();
+
+                            string resourceFilePath = RelatedMediaController.Instance.LaunchBoxFilePath.Replace("\\", "/");
+
+                            if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Front/" + highestConfidenceGame + "-01.jpg"))
+                            {
+                                RelatedMediaController.Instance.LBBoxFrontURI = "Images/" + GameInfo.ConsoleName + "/Box - Front/" + highestConfidenceGame + "-01.jpg";
+                            }
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Front/" + highestConfidenceGame + "-02.jpg"))
+                            {
+                                RelatedMediaController.Instance.LBBoxFrontURI = "Images/" + GameInfo.ConsoleName + "/Box - Front/" + highestConfidenceGame + "-02.jpg";
+                            }
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Front/" + highestConfidenceGame + "-01.png"))
+                            {
+                                RelatedMediaController.Instance.LBBoxFrontURI = "Images/" + GameInfo.ConsoleName + "/Box - Front/" + highestConfidenceGame + "-01.png";
+                            }
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Front/" + highestConfidenceGame + "-02.png"))
+                            {
+                                RelatedMediaController.Instance.LBBoxFrontURI = "Images/" + GameInfo.ConsoleName + "/Box - Front/" + highestConfidenceGame + "-02.png";
+                            }
+                            else
+                            {
+                                foreach (string folder in boxFrontSubFolders)
+                                {
+                                    if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.jpg"))
                                     {
-                                        if (!lastPlayed.Equals(DateTime.MinValue))
-                                        {
-                                            gameNames.Add(currentGameName, lastPlayed);
-                                        }
-
-                                        inGame = false;
-                                        inName = false;
-                                        inLastPlayed = false;
-
-                                        lastPlayed = DateTime.MinValue;
+                                        RelatedMediaController.Instance.LBBoxFrontURI = folder.Substring(RelatedMediaController.Instance.LaunchBoxFilePath.Length).Replace("\\", "/") + "/" + highestConfidenceGame + "-01.jpg";
+                                        break;
                                     }
-                                    break;
+                                    else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.jpg"))
+                                    {
+                                        RelatedMediaController.Instance.LBBoxFrontURI = folder.Substring(RelatedMediaController.Instance.LaunchBoxFilePath.Length).Replace("\\", "/") + "/" + highestConfidenceGame + "-02.jpg";
+                                        break;
+                                    }
+                                    else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.png"))
+                                    {
+                                        RelatedMediaController.Instance.LBBoxFrontURI = folder.Substring(RelatedMediaController.Instance.LaunchBoxFilePath.Length).Replace("\\", "/") + "/" + highestConfidenceGame + "-01.png";
+                                        break;
+                                    }
+                                    else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.png"))
+                                    {
+                                        RelatedMediaController.Instance.LBBoxFrontURI = folder.Substring(RelatedMediaController.Instance.LaunchBoxFilePath.Length).Replace("\\", "/") + "/" + highestConfidenceGame + "-02.png";
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        RelatedMediaController.Instance.LBBoxFrontURI = "";
+                                    }
+                                }
+                            }
+
+                            if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Back/" + highestConfidenceGame + "-01.jpg"))
+                            {
+                                RelatedMediaController.Instance.LBBoxBackURI = "Images/" + GameInfo.ConsoleName + "/Box - Back/" + highestConfidenceGame + "-01.jpg";
+                            }
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Back/" + highestConfidenceGame + "-02.jpg"))
+                            {
+                                RelatedMediaController.Instance.LBBoxBackURI = "Images/" + GameInfo.ConsoleName + "/Box - Back/" + highestConfidenceGame + "-02.jpg";
+                            }
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Back/" + highestConfidenceGame + "-01.png"))
+                            {
+                                RelatedMediaController.Instance.LBBoxBackURI = "Images/" + GameInfo.ConsoleName + "/Box - Back/" + highestConfidenceGame + "-01.png";
+                            }
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Back/" + highestConfidenceGame + "-02.png"))
+                            {
+                                RelatedMediaController.Instance.LBBoxBackURI = "Images/" + GameInfo.ConsoleName + "/Box - Back/" + highestConfidenceGame + "-02.png";
+                            }
+                            else
+                            {
+                                foreach (string folder in boxBackSubFolders)
+                                {
+                                    if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.jpg"))
+                                    {
+                                        RelatedMediaController.Instance.LBBoxBackURI = folder.Substring(RelatedMediaController.Instance.LaunchBoxFilePath.Length).Replace("\\", "/") + "/" + highestConfidenceGame + "-01.jpg";
+                                        break;
+                                    }
+                                    else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.jpg"))
+                                    {
+                                        RelatedMediaController.Instance.LBBoxBackURI = folder.Substring(RelatedMediaController.Instance.LaunchBoxFilePath.Length).Replace("\\", "/") + "/" + highestConfidenceGame + "-02.jpg";
+                                        break;
+                                    }
+                                    else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.png"))
+                                    {
+                                        RelatedMediaController.Instance.LBBoxBackURI = folder.Substring(RelatedMediaController.Instance.LaunchBoxFilePath.Length).Replace("\\", "/") + "/" + highestConfidenceGame + "-01.png";
+                                        break;
+                                    }
+                                    else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.png"))
+                                    {
+                                        RelatedMediaController.Instance.LBBoxBackURI = folder.Substring(RelatedMediaController.Instance.LaunchBoxFilePath.Length).Replace("\\", "/") + "/" + highestConfidenceGame + "-02.png";
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        RelatedMediaController.Instance.LBBoxBackURI = "";
+                                    }
+                                }
+                            }
+
+                            if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - 3D/" + highestConfidenceGame + "-01.jpg"))
+                            {
+                                RelatedMediaController.Instance.LBBox3DURI = "Images/" + GameInfo.ConsoleName + "/Box - 3D/" + highestConfidenceGame + "-01.jpg";
+                            }
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - 3D/" + highestConfidenceGame + "-02.jpg"))
+                            {
+                                RelatedMediaController.Instance.LBBox3DURI = "Images/" + GameInfo.ConsoleName + "/Box - 3D/" + highestConfidenceGame + "-02.jpg";
+                            }
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - 3D/" + highestConfidenceGame + "-01.png"))
+                            {
+                                RelatedMediaController.Instance.LBBox3DURI = "Images/" + GameInfo.ConsoleName + "/Box - 3D/" + highestConfidenceGame + "-01.png";
+                            }
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - 3D/" + highestConfidenceGame + "-02.png"))
+                            {
+                                RelatedMediaController.Instance.LBBox3DURI = "Images/" + GameInfo.ConsoleName + "/Box - 3D/" + highestConfidenceGame + "-02.png";
+                            }
+                            else
+                            {
+                                foreach (string folder in box3DSubFolders)
+                                {
+                                    if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.jpg"))
+                                    {
+                                        RelatedMediaController.Instance.LBBox3DURI = folder.Substring(RelatedMediaController.Instance.LaunchBoxFilePath.Length).Replace("\\", "/") + "/" + highestConfidenceGame + "-01.jpg";
+                                        break;
+                                    }
+                                    else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.jpg"))
+                                    {
+                                        RelatedMediaController.Instance.LBBox3DURI = folder.Substring(RelatedMediaController.Instance.LaunchBoxFilePath.Length).Replace("\\", "/") + "/" + highestConfidenceGame + "-02.jpg";
+                                        break;
+                                    }
+                                    else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.png"))
+                                    {
+                                        RelatedMediaController.Instance.LBBox3DURI = folder.Substring(RelatedMediaController.Instance.LaunchBoxFilePath.Length).Replace("\\", "/") + "/" + highestConfidenceGame + "-01.png";
+                                        break;
+                                    }
+                                    else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.png"))
+                                    {
+                                        RelatedMediaController.Instance.LBBox3DURI = folder.Substring(RelatedMediaController.Instance.LaunchBoxFilePath.Length).Replace("\\", "/") + "/" + highestConfidenceGame + "-02.png";
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        RelatedMediaController.Instance.LBBox3DURI = "";
+                                    }
+                                }
+                            }
+
+                            if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Front - Reconstructed/" + highestConfidenceGame + "-01.jpg"))
+                            {
+                                RelatedMediaController.Instance.LBBoxFrontReconURI = "Images/" + GameInfo.ConsoleName + "/Box - Front - Reconstructed/" + highestConfidenceGame + "-01.jpg";
+                            }
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Front - Reconstructed/" + highestConfidenceGame + "-02.jpg"))
+                            {
+                                RelatedMediaController.Instance.LBBoxFrontReconURI = "Images/" + GameInfo.ConsoleName + "/Box - Front - Reconstructed/" + highestConfidenceGame + "-02.jpg";
+                            }
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Front - Reconstructed/" + highestConfidenceGame + "-01.png"))
+                            {
+                                RelatedMediaController.Instance.LBBoxFrontReconURI = "Images/" + GameInfo.ConsoleName + "/Box - Front - Reconstructed/" + highestConfidenceGame + "-01.png";
+                            }
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Front - Reconstructed/" + highestConfidenceGame + "-02.png"))
+                            {
+                                RelatedMediaController.Instance.LBBoxFrontReconURI = "Images/" + GameInfo.ConsoleName + "/Box - Front - Reconstructed/" + highestConfidenceGame + "-02.png";
+                            }
+                            else
+                            {
+                                foreach (string folder in boxFrontReconSubFolders)
+                                {
+                                    if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.jpg"))
+                                    {
+                                        RelatedMediaController.Instance.LBBoxFrontReconURI = folder.Substring(RelatedMediaController.Instance.LaunchBoxFilePath.Length).Replace("\\", "/") + "/" + highestConfidenceGame + "-01.jpg";
+                                        break;
+                                    }
+                                    else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.jpg"))
+                                    {
+                                        RelatedMediaController.Instance.LBBoxFrontReconURI = folder.Substring(RelatedMediaController.Instance.LaunchBoxFilePath.Length).Replace("\\", "/") + "/" + highestConfidenceGame + "-02.jpg";
+                                        break;
+                                    }
+                                    else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.png"))
+                                    {
+                                        RelatedMediaController.Instance.LBBoxFrontReconURI = folder.Substring(RelatedMediaController.Instance.LaunchBoxFilePath.Length).Replace("\\", "/") + "/" + highestConfidenceGame + "-01.png";
+                                        break;
+                                    }
+                                    else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.png"))
+                                    {
+                                        RelatedMediaController.Instance.LBBoxFrontReconURI = folder.Substring(RelatedMediaController.Instance.LaunchBoxFilePath.Length).Replace("\\", "/") + "/" + highestConfidenceGame + "-02.png";
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        RelatedMediaController.Instance.LBBoxFrontReconURI = "";
+                                    }
+                                }
+                            }
+
+                            if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Back - Reconstructed/" + highestConfidenceGame + "-01.jpg"))
+                            {
+                                RelatedMediaController.Instance.LBBoxBackReconURI = "Images/" + GameInfo.ConsoleName + "/Box - Back - Reconstructed/" + highestConfidenceGame + "-01.jpg";
+                            }
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Back - Reconstructed/" + highestConfidenceGame + "-02.jpg"))
+                            {
+                                RelatedMediaController.Instance.LBBoxBackReconURI = "Images/" + GameInfo.ConsoleName + "/Box - Back - Reconstructed/" + highestConfidenceGame + "-02.jpg";
+                            }
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Back - Reconstructed/" + highestConfidenceGame + "-01.png"))
+                            {
+                                RelatedMediaController.Instance.LBBoxBackReconURI = "Images/" + GameInfo.ConsoleName + "/Box - Back - Reconstructed/" + highestConfidenceGame + "-01.png";
+                            }
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Back - Reconstructed/" + highestConfidenceGame + "-02.png"))
+                            {
+                                RelatedMediaController.Instance.LBBoxBackReconURI = "Images/" + GameInfo.ConsoleName + "/Box - Back - Reconstructed/" + highestConfidenceGame + "-02.png";
+                            }
+                            else
+                            {
+                                foreach (string folder in boxBackReconSubFolders)
+                                {
+                                    if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.jpg"))
+                                    {
+                                        RelatedMediaController.Instance.LBBoxBackReconURI = folder.Substring(RelatedMediaController.Instance.LaunchBoxFilePath.Length).Replace("\\", "/") + "/" + highestConfidenceGame + "-01.jpg";
+                                        break;
+                                    }
+                                    else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.jpg"))
+                                    {
+                                        RelatedMediaController.Instance.LBBoxBackReconURI = folder.Substring(RelatedMediaController.Instance.LaunchBoxFilePath.Length).Replace("\\", "/") + "/" + highestConfidenceGame + "-02.jpg";
+                                        break;
+                                    }
+                                    else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.png"))
+                                    {
+                                        RelatedMediaController.Instance.LBBoxBackReconURI = folder.Substring(RelatedMediaController.Instance.LaunchBoxFilePath.Length).Replace("\\", "/") + "/" + highestConfidenceGame + "-01.png";
+                                        break;
+                                    }
+                                    else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.png"))
+                                    {
+                                        RelatedMediaController.Instance.LBBoxBackReconURI = folder.Substring(RelatedMediaController.Instance.LaunchBoxFilePath.Length).Replace("\\", "/") + "/" + highestConfidenceGame + "-02.png";
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        RelatedMediaController.Instance.LBBoxBackReconURI = "";
+                                    }
+                                }
+                            }
+
+                            if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Full/" + highestConfidenceGame + "-01.jpg"))
+                            {
+                                RelatedMediaController.Instance.LBBoxFullURI = "Images/" + GameInfo.ConsoleName + "/Box - Full/" + highestConfidenceGame + "-01.jpg";
+                            }
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Full/" + highestConfidenceGame + "-02.jpg"))
+                            {
+                                RelatedMediaController.Instance.LBBoxFullURI = "Images/" + GameInfo.ConsoleName + "/Box - Full/" + highestConfidenceGame + "-02.jpg";
+                            }
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Full/" + highestConfidenceGame + "-01.png"))
+                            {
+                                RelatedMediaController.Instance.LBBoxFullURI = "Images/" + GameInfo.ConsoleName + "/Box - Full/" + highestConfidenceGame + "-01.png";
+                            }
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Full/" + highestConfidenceGame + "-02.png"))
+                            {
+                                RelatedMediaController.Instance.LBBoxFullURI = "Images/" + GameInfo.ConsoleName + "/Box - Full/" + highestConfidenceGame + "-02.png";
+                            }
+                            else
+                            {
+                                foreach (string folder in boxFullSubFolders)
+                                {
+                                    if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.jpg"))
+                                    {
+                                        RelatedMediaController.Instance.LBBoxFrontReconURI = folder.Substring(RelatedMediaController.Instance.LaunchBoxFilePath.Length).Replace("\\", "/") + "/" + highestConfidenceGame + "-01.jpg";
+                                        break;
+                                    }
+                                    else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.jpg"))
+                                    {
+                                        RelatedMediaController.Instance.LBBoxFrontReconURI = folder.Substring(RelatedMediaController.Instance.LaunchBoxFilePath.Length).Replace("\\", "/") + "/" + highestConfidenceGame + "-02.jpg";
+                                        break;
+                                    }
+                                    else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.png"))
+                                    {
+                                        RelatedMediaController.Instance.LBBoxFrontReconURI = folder.Substring(RelatedMediaController.Instance.LaunchBoxFilePath.Length).Replace("\\", "/") + "/" + highestConfidenceGame + "-01.png";
+                                        break;
+                                    }
+                                    else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.png"))
+                                    {
+                                        RelatedMediaController.Instance.LBBoxFrontReconURI = folder.Substring(RelatedMediaController.Instance.LaunchBoxFilePath.Length).Replace("\\", "/") + "/" + highestConfidenceGame + "-02.png";
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        RelatedMediaController.Instance.LBBoxFrontReconURI = "";
+                                    }
+                                }
+                            }
+
+                            if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Spine/" + highestConfidenceGame + "-01.jpg"))
+                            {
+                                RelatedMediaController.Instance.LBBoxSpineURI = "Images/" + GameInfo.ConsoleName + "/Box - Spine/" + highestConfidenceGame + "-01.jpg";
+                            }
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Spine/" + highestConfidenceGame + "-02.jpg"))
+                            {
+                                RelatedMediaController.Instance.LBBoxSpineURI = "Images/" + GameInfo.ConsoleName + "/Box - Spine/" + highestConfidenceGame + "-02.jpg";
+                            }
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Spine/" + highestConfidenceGame + "-01.png"))
+                            {
+                                RelatedMediaController.Instance.LBBoxSpineURI = "Images/" + GameInfo.ConsoleName + "/Box - Spine/" + highestConfidenceGame + "-01.png";
+                            }
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Spine/" + highestConfidenceGame + "-02.png"))
+                            {
+                                RelatedMediaController.Instance.LBBoxSpineURI = "Images/" + GameInfo.ConsoleName + "/Box - Spine/" + highestConfidenceGame + "-02.png";
+                            }
+                            else
+                            {
+                                foreach (string folder in boxSpineSubFolders)
+                                {
+                                    if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.jpg"))
+                                    {
+                                        RelatedMediaController.Instance.LBBoxSpineURI = folder.Substring(RelatedMediaController.Instance.LaunchBoxFilePath.Length).Replace("\\", "/") + "/" + highestConfidenceGame + "-01.jpg";
+                                        break;
+                                    }
+                                    else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.jpg"))
+                                    {
+                                        RelatedMediaController.Instance.LBBoxSpineURI = folder.Substring(RelatedMediaController.Instance.LaunchBoxFilePath.Length).Replace("\\", "/") + "/" + highestConfidenceGame + "-02.jpg";
+                                        break;
+                                    }
+                                    else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.png"))
+                                    {
+                                        RelatedMediaController.Instance.LBBoxSpineURI = folder.Substring(RelatedMediaController.Instance.LaunchBoxFilePath.Length).Replace("\\", "/") + "/" + highestConfidenceGame + "-01.png";
+                                        break;
+                                    }
+                                    else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.png"))
+                                    {
+                                        RelatedMediaController.Instance.LBBoxSpineURI = folder.Substring(RelatedMediaController.Instance.LaunchBoxFilePath.Length).Replace("\\", "/") + "/" + highestConfidenceGame + "-02.png";
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        RelatedMediaController.Instance.LBBoxSpineURI = "";
+                                    }
+                                }
+                            }
+
+                            if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Clear Logo/" + highestConfidenceGame + "-01.png"))
+                            {
+                                RelatedMediaController.Instance.LBClearLogoURI = "Images/" + GameInfo.ConsoleName + "/Clear Logo/" + highestConfidenceGame + "-01.png";
+                            }
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Clear Logo/" + highestConfidenceGame + "-02.png"))
+                            {
+                                RelatedMediaController.Instance.LBClearLogoURI = "Images/" + GameInfo.ConsoleName + "/Clear Logo/" + highestConfidenceGame + "-02.png";
+                            }
+                            else
+                            {
+                                foreach (string folder in clearLogoSubFolders)
+                                {
+                                    if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.png"))
+                                    {
+                                        RelatedMediaController.Instance.LBClearLogoURI = folder.Substring(RelatedMediaController.Instance.LaunchBoxFilePath.Length).Replace("\\", "/") + "/" + highestConfidenceGame + "-01.png";
+                                        break;
+                                    }
+                                    else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.png"))
+                                    {
+                                        RelatedMediaController.Instance.LBClearLogoURI = folder.Substring(RelatedMediaController.Instance.LaunchBoxFilePath.Length).Replace("\\", "/") + "/" + highestConfidenceGame + "-02.png";
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        RelatedMediaController.Instance.LBClearLogoURI = "";
+                                    }
+                                }
+                            }
+
+                            if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Screenshot - Game Title/" + highestConfidenceGame + "-01.jpg"))
+                            {
+                                RelatedMediaController.Instance.LBTitleSceenURI = "Images/" + GameInfo.ConsoleName + "/Screenshot - Game Title/" + highestConfidenceGame + "-01.jpg";
+                            }
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Screenshot - Game Title/" + highestConfidenceGame + "-02.jpg"))
+                            {
+                                RelatedMediaController.Instance.LBTitleSceenURI = "Images/" + GameInfo.ConsoleName + "/Screenshot - Game Title/" + highestConfidenceGame + "-02.jpg";
+                            }
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Screenshot - Game Title/" + highestConfidenceGame + "-01.png"))
+                            {
+                                RelatedMediaController.Instance.LBTitleSceenURI = "Images/" + GameInfo.ConsoleName + "/Screenshot - Game Title/" + highestConfidenceGame + "-01.png";
+                            }
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Screenshot - Game Title/" + highestConfidenceGame + "-02.png"))
+                            {
+                                RelatedMediaController.Instance.LBTitleSceenURI = "Images/" + GameInfo.ConsoleName + "/Screenshot - Game Title/" + highestConfidenceGame + "-02.png";
+                            }
+                            else
+                            {
+                                foreach (string folder in screenshotGameTitleSubFolders)
+                                {
+                                    if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.jpg"))
+                                    {
+                                        RelatedMediaController.Instance.LBTitleSceenURI = folder.Substring(RelatedMediaController.Instance.LaunchBoxFilePath.Length).Replace("\\", "/") + "/" + highestConfidenceGame + "-01.jpg";
+                                        break;
+                                    }
+                                    else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.jpg"))
+                                    {
+                                        RelatedMediaController.Instance.LBTitleSceenURI = folder.Substring(RelatedMediaController.Instance.LaunchBoxFilePath.Length).Replace("\\", "/") + "/" + highestConfidenceGame + "-02.jpg";
+                                        break;
+                                    }
+                                    else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.png"))
+                                    {
+                                        RelatedMediaController.Instance.LBTitleSceenURI = folder.Substring(RelatedMediaController.Instance.LaunchBoxFilePath.Length).Replace("\\", "/") + "/" + highestConfidenceGame + "-01.png";
+                                        break;
+                                    }
+                                    else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.png"))
+                                    {
+                                        RelatedMediaController.Instance.LBTitleSceenURI = folder.Substring(RelatedMediaController.Instance.LaunchBoxFilePath.Length).Replace("\\", "/") + "/" + highestConfidenceGame + "-02.png";
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        RelatedMediaController.Instance.LBTitleSceenURI = "";
+                                    }
+                                }
+                            }
+
+                            if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Banner/" + highestConfidenceGame + "-01.jpg"))
+                            {
+                                RelatedMediaController.Instance.LBBannerURI = "Images/" + GameInfo.ConsoleName + "/Banner/" + highestConfidenceGame + "-01.jpg";
+                            }
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Banner/" + highestConfidenceGame + "-02.jpg"))
+                            {
+                                RelatedMediaController.Instance.LBBannerURI = "Images/" + GameInfo.ConsoleName + "/Banner/" + highestConfidenceGame + "-02.jpg";
+                            }
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Banner/" + highestConfidenceGame + "-01.png"))
+                            {
+                                RelatedMediaController.Instance.LBBannerURI = "Images/" + GameInfo.ConsoleName + "/Banner/" + highestConfidenceGame + "-01.png";
+                            }
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Banner/" + highestConfidenceGame + "-02.png"))
+                            {
+                                RelatedMediaController.Instance.LBBannerURI = "Images/" + GameInfo.ConsoleName + "/Banner/" + highestConfidenceGame + "-02.png";
+                            }
+                            else
+                            {
+                                foreach (string folder in bannerSubFolders)
+                                {
+                                    if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.jpg"))
+                                    {
+                                        RelatedMediaController.Instance.LBBannerURI = folder.Substring(RelatedMediaController.Instance.LaunchBoxFilePath.Length).Replace("\\", "/") + "/" + highestConfidenceGame + "-01.jpg";
+                                        break;
+                                    }
+                                    else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.jpg"))
+                                    {
+                                        RelatedMediaController.Instance.LBBannerURI = folder.Substring(RelatedMediaController.Instance.LaunchBoxFilePath.Length).Replace("\\", "/") + "/" + highestConfidenceGame + "-02.jpg";
+                                        break;
+                                    }
+                                    else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.png"))
+                                    {
+                                        RelatedMediaController.Instance.LBTitleSceenURI = folder.Substring(RelatedMediaController.Instance.LaunchBoxFilePath.Length).Replace("\\", "/") + "/" + highestConfidenceGame + "-01.png";
+                                        break;
+                                    }
+                                    else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.png"))
+                                    {
+                                        RelatedMediaController.Instance.LBBannerURI = folder.Substring(RelatedMediaController.Instance.LaunchBoxFilePath.Length).Replace("\\", "/") + "/" + highestConfidenceGame + "-02.png";
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        RelatedMediaController.Instance.LBBannerURI = "";
+                                    }
+                                }
+                            }
+
+                            if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Cart - Front/" + highestConfidenceGame + "-01.jpg"))
+                            {
+                                RelatedMediaController.Instance.LBCartFrontURI = "Images/" + GameInfo.ConsoleName + "/Cart - Front/" + highestConfidenceGame + "-01.jpg";
+                            }
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Cart - Front/" + highestConfidenceGame + "-02.jpg"))
+                            {
+                                RelatedMediaController.Instance.LBCartFrontURI = "Images/" + GameInfo.ConsoleName + "/Cart - Front/" + highestConfidenceGame + "-02.jpg";
+                            }
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Cart - Front/" + highestConfidenceGame + "-01.png"))
+                            {
+                                RelatedMediaController.Instance.LBCartFrontURI = "Images/" + GameInfo.ConsoleName + "/Cart - Front/" + highestConfidenceGame + "-01.png";
+                            }
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Cart - Front/" + highestConfidenceGame + "-02.png"))
+                            {
+                                RelatedMediaController.Instance.LBCartFrontURI = "Images/" + GameInfo.ConsoleName + "/Cart - Front/" + highestConfidenceGame + "-02.png";
+                            }
+                            else
+                            {
+                                foreach (string folder in cartFrontSubFolders)
+                                {
+                                    if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.jpg"))
+                                    {
+                                        RelatedMediaController.Instance.LBCartFrontURI = folder.Substring(RelatedMediaController.Instance.LaunchBoxFilePath.Length).Replace("\\", "/") + "/" + highestConfidenceGame + "-01.jpg";
+                                        break;
+                                    }
+                                    else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.jpg"))
+                                    {
+                                        RelatedMediaController.Instance.LBCartFrontURI = folder.Substring(RelatedMediaController.Instance.LaunchBoxFilePath.Length).Replace("\\", "/") + "/" + highestConfidenceGame + "-02.jpg";
+                                        break;
+                                    }
+                                    else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.png"))
+                                    {
+                                        RelatedMediaController.Instance.LBCartFrontURI = folder.Substring(RelatedMediaController.Instance.LaunchBoxFilePath.Length).Replace("\\", "/") + "/" + highestConfidenceGame + "-01.png";
+                                        break;
+                                    }
+                                    else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.png"))
+                                    {
+                                        RelatedMediaController.Instance.LBCartFrontURI = folder.Substring(RelatedMediaController.Instance.LaunchBoxFilePath.Length).Replace("\\", "/") + "/" + highestConfidenceGame + "-02.png";
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        RelatedMediaController.Instance.LBCartFrontURI = "";
+                                    }
+                                }
+                            }
+
+                            if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Cart - Back/" + highestConfidenceGame + "-01.jpg"))
+                            {
+                                RelatedMediaController.Instance.LBCartBackURI = "Images/" + GameInfo.ConsoleName + "/Cart - Back/" + highestConfidenceGame + "-01.jpg";
+                            }
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Cart - Back/" + highestConfidenceGame + "-02.jpg"))
+                            {
+                                RelatedMediaController.Instance.LBCartBackURI = "Images/" + GameInfo.ConsoleName + "/Cart - Back/" + highestConfidenceGame + "-02.jpg";
+                            }
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Cart - Back/" + highestConfidenceGame + "-01.png"))
+                            {
+                                RelatedMediaController.Instance.LBCartBackURI = "Images/" + GameInfo.ConsoleName + "/Cart - Back/" + highestConfidenceGame + "-01.png";
+                            }
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Cart - Back/" + highestConfidenceGame + "-02.png"))
+                            {
+                                RelatedMediaController.Instance.LBCartBackURI = "Images/" + GameInfo.ConsoleName + "/Cart - Back/" + highestConfidenceGame + "-02.png";
+                            }
+                            else
+                            {
+                                foreach (string folder in cartBackSubFolders)
+                                {
+                                    if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.jpg"))
+                                    {
+                                        RelatedMediaController.Instance.LBCartBackURI = folder.Substring(RelatedMediaController.Instance.LaunchBoxFilePath.Length).Replace("\\", "/") + "/" + highestConfidenceGame + "-01.jpg";
+                                        break;
+                                    }
+                                    else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.jpg"))
+                                    {
+                                        RelatedMediaController.Instance.LBCartBackURI = folder.Substring(RelatedMediaController.Instance.LaunchBoxFilePath.Length).Replace("\\", "/") + "/" + highestConfidenceGame + "-02.jpg";
+                                        break;
+                                    }
+                                    else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.png"))
+                                    {
+                                        RelatedMediaController.Instance.LBCartBackURI = folder.Substring(RelatedMediaController.Instance.LaunchBoxFilePath.Length).Replace("\\", "/") + "/" + highestConfidenceGame + "-01.png";
+                                        break;
+                                    }
+                                    else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.png"))
+                                    {
+                                        RelatedMediaController.Instance.LBCartBackURI = folder.Substring(RelatedMediaController.Instance.LaunchBoxFilePath.Length).Replace("\\", "/") + "/" + highestConfidenceGame + "-02.png";
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        RelatedMediaController.Instance.LBCartBackURI = "";
+                                    }
+                                }
                             }
                         }
+                        else
+                        {
+                            RelatedMediaController.Instance.LBBoxFrontURI = string.Empty;
+                            RelatedMediaController.Instance.LBBoxBackURI = string.Empty;
+                            RelatedMediaController.Instance.LBBox3DURI = string.Empty;
+                            RelatedMediaController.Instance.LBBoxFrontReconURI = string.Empty;
+                            RelatedMediaController.Instance.LBBoxBackReconURI = string.Empty;
+                            RelatedMediaController.Instance.LBBoxFullURI = string.Empty;
+                            RelatedMediaController.Instance.LBBoxSpineURI = string.Empty;
+                            RelatedMediaController.Instance.LBBannerURI = string.Empty;
+                            RelatedMediaController.Instance.LBTitleSceenURI = string.Empty;
+                            RelatedMediaController.Instance.LBClearLogoURI = string.Empty;
+                            RelatedMediaController.Instance.LBCartFrontURI = string.Empty;
+                            RelatedMediaController.Instance.LBCartBackURI = string.Empty;
+                        }
                     }
-
-                    string highestConfidenceGame = string.Empty;
-                    DateTime dateTime = DateTime.MinValue;
-
-                    foreach (string name in gameNames.Keys)
+                    catch (Exception e)
                     {
-                        gameNames.TryGetValue(name, out DateTime value);
-
-                        if (value.CompareTo(dateTime) > 0)
-                        {
-                            highestConfidenceGame = name;
-                            dateTime = value;
-                        }
+                        Console.WriteLine(e.ToString());
                     }
-
-                    if (!string.IsNullOrEmpty(highestConfidenceGame))
-                    {
-                        highestConfidenceGame = highestConfidenceGame.Replace('\'', '_').Replace(':', '_');
-
-                        string[] boxFrontSubFolders = Directory.Exists(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Box - Front") ? Directory.GetDirectories(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Box - Front") : Array.Empty<string>();
-                        string[] boxBackSubFolders = Directory.Exists(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Box - Back") ? Directory.GetDirectories(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Box - Back") : Array.Empty<string>();
-                        string[] box3DSubFolders = Directory.Exists(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Box - 3D") ? Directory.GetDirectories(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Box - 3D") : Array.Empty<string>();
-                        string[] boxFrontReconSubFolders = Directory.Exists(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Box - Front - Reconstructed") ? Directory.GetDirectories(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Box - Front - Reconstructed") : Array.Empty<string>();
-                        string[] boxBackReconSubFolders = Directory.Exists(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Box - Back - Reconstructed") ? Directory.GetDirectories(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Box - Back - Reconstructed") : Array.Empty<string>();
-                        string[] boxFullSubFolders = Directory.Exists(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Box - Full") ? Directory.GetDirectories(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Box - Full") : Array.Empty<string>();
-                        string[] boxSpineSubFolders = Directory.Exists(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Box - Spine") ? Directory.GetDirectories(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Box - Spine") : Array.Empty<string>();
-                        string[] clearLogoSubFolders = Directory.Exists(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Clear Logo") ? Directory.GetDirectories(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Clear Logo") : Array.Empty<string>();
-                        string[] screenshotGameTitleSubFolders = Directory.Exists(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Screenshot - Game Title") ? Directory.GetDirectories(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Screenshot - Game Title") : Array.Empty<string>();
-                        string[] bannerSubFolders = Directory.Exists(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Banner") ? Directory.GetDirectories(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Banner") : Array.Empty<string>();
-                        string[] cartFrontSubFolders = Directory.Exists(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Cart - Front") ? Directory.GetDirectories(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Cart - Front") : Array.Empty<string>();
-                        string[] cartBackSubFolders = Directory.Exists(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Cart - Back") ? Directory.GetDirectories(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Cart - Back") : Array.Empty<string>();
-
-                        string resourceFilePath = RelatedMediaController.Instance.LaunchBoxFilePath.Replace("\\", "/");
-
-                        if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Front/" + highestConfidenceGame + "-01.jpg"))
-                        {
-                            RelatedMediaController.Instance.LBBoxFrontURI = "disk://" + resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Front/" + highestConfidenceGame + "-01.jpg";
-                        }
-                        else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Front/" + highestConfidenceGame + "-02.jpg"))
-                        {
-                            RelatedMediaController.Instance.LBBoxFrontURI = "disk://" + resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Front/" + highestConfidenceGame + "-02.jpg";
-                        }
-                        else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Front/" + highestConfidenceGame + "-01.png"))
-                        {
-                            RelatedMediaController.Instance.LBBoxFrontURI = "disk://" + resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Front/" + highestConfidenceGame + "-01.png";
-                        }
-                        else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Front/" + highestConfidenceGame + "-02.png"))
-                        {
-                            RelatedMediaController.Instance.LBBoxFrontURI = "disk://" + resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Front/" + highestConfidenceGame + "-02.png";
-                        }
-                        else
-                        {
-                            foreach (string folder in boxFrontSubFolders)
-                            {
-                                if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.jpg"))
-                                {
-                                    RelatedMediaController.Instance.LBBoxFrontURI = "disk://" + folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.jpg";
-                                    break;
-                                }
-                                else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.jpg"))
-                                {
-                                    RelatedMediaController.Instance.LBBoxFrontURI = "disk://" + folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.jpg";
-                                    break;
-                                }
-                                else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.png"))
-                                {
-                                    RelatedMediaController.Instance.LBBoxFrontURI = "disk://" + folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.png";
-                                    break;
-                                }
-                                else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.png"))
-                                {
-                                    RelatedMediaController.Instance.LBBoxFrontURI = "disk://" + folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.png";
-                                    break;
-                                }
-                                else
-                                {
-                                    RelatedMediaController.Instance.LBBoxFrontURI = "";
-                                }
-                            }
-                        }
-
-                        if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Back/" + highestConfidenceGame + "-01.jpg"))
-                        {
-                            RelatedMediaController.Instance.LBBoxBackURI = "disk://" + resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Back/" + highestConfidenceGame + "-01.jpg";
-                        }
-                        else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Back/" + highestConfidenceGame + "-02.jpg"))
-                        {
-                            RelatedMediaController.Instance.LBBoxBackURI = "disk://" + resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Back/" + highestConfidenceGame + "-02.jpg";
-                        }
-                        else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Back/" + highestConfidenceGame + "-01.png"))
-                        {
-                            RelatedMediaController.Instance.LBBoxBackURI = "disk://" + resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Back/" + highestConfidenceGame + "-01.png";
-                        }
-                        else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Back/" + highestConfidenceGame + "-02.png"))
-                        {
-                            RelatedMediaController.Instance.LBBoxBackURI = "disk://" + resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Back/" + highestConfidenceGame + "-02.png";
-                        }
-                        else
-                        {
-                            foreach (string folder in boxBackSubFolders)
-                            {
-                                if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.jpg"))
-                                {
-                                    RelatedMediaController.Instance.LBBoxBackURI = "disk://" + folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.jpg";
-                                    break;
-                                }
-                                else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.jpg"))
-                                {
-                                    RelatedMediaController.Instance.LBBoxBackURI = "disk://" + folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.jpg";
-                                    break;
-                                }
-                                else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.png"))
-                                {
-                                    RelatedMediaController.Instance.LBBoxBackURI = "disk://" + folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.png";
-                                    break;
-                                }
-                                else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.png"))
-                                {
-                                    RelatedMediaController.Instance.LBBoxBackURI = "disk://" + folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.png";
-                                    break;
-                                }
-                                else
-                                {
-                                    RelatedMediaController.Instance.LBBoxBackURI = "";
-                                }
-                            }
-                        }
-
-                        if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - 3D/" + highestConfidenceGame + "-01.jpg"))
-                        {
-                            RelatedMediaController.Instance.LBBox3DURI = "disk://" + resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - 3D/" + highestConfidenceGame + "-01.jpg";
-                        }
-                        else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - 3D/" + highestConfidenceGame + "-02.jpg"))
-                        {
-                            RelatedMediaController.Instance.LBBox3DURI = "disk://" + resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - 3D/" + highestConfidenceGame + "-02.jpg";
-                        }
-                        else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - 3D/" + highestConfidenceGame + "-01.png"))
-                        {
-                            RelatedMediaController.Instance.LBBox3DURI = "disk://" + resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - 3D/" + highestConfidenceGame + "-01.png";
-                        }
-                        else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - 3D/" + highestConfidenceGame + "-02.png"))
-                        {
-                            RelatedMediaController.Instance.LBBox3DURI = "disk://" + resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - 3D/" + highestConfidenceGame + "-02.png";
-                        }
-                        else
-                        {
-                            foreach (string folder in box3DSubFolders)
-                            {
-                                if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.jpg"))
-                                {
-                                    RelatedMediaController.Instance.LBBox3DURI = "disk://" + folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.jpg";
-                                    break;
-                                }
-                                else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.jpg"))
-                                {
-                                    RelatedMediaController.Instance.LBBox3DURI = "disk://" + folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.jpg";
-                                    break;
-                                }
-                                else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.png"))
-                                {
-                                    RelatedMediaController.Instance.LBBox3DURI = "disk://" + folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.png";
-                                    break;
-                                }
-                                else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.png"))
-                                {
-                                    RelatedMediaController.Instance.LBBox3DURI = "disk://" + folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.png";
-                                    break;
-                                }
-                                else
-                                {
-                                    RelatedMediaController.Instance.LBBox3DURI = "";
-                                }
-                            }
-                        }
-
-                        if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Front - Reconstructed/" + highestConfidenceGame + "-01.jpg"))
-                        {
-                            RelatedMediaController.Instance.LBBoxFrontReconURI = "disk://" + resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Front - Reconstructed/" + highestConfidenceGame + "-01.jpg";
-                        }
-                        else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Front - Reconstructed/" + highestConfidenceGame + "-02.jpg"))
-                        {
-                            RelatedMediaController.Instance.LBBoxFrontReconURI = "disk://" + resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Front - Reconstructed/" + highestConfidenceGame + "-02.jpg";
-                        }
-                        else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Front - Reconstructed/" + highestConfidenceGame + "-01.png"))
-                        {
-                            RelatedMediaController.Instance.LBBoxFrontReconURI = "disk://" + resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Front - Reconstructed/" + highestConfidenceGame + "-01.png";
-                        }
-                        else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Front - Reconstructed/" + highestConfidenceGame + "-02.png"))
-                        {
-                            RelatedMediaController.Instance.LBBoxFrontReconURI = "disk://" + resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Front - Reconstructed/" + highestConfidenceGame + "-02.png";
-                        }
-                        else
-                        {
-                            foreach (string folder in boxFrontReconSubFolders)
-                            {
-                                if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.jpg"))
-                                {
-                                    RelatedMediaController.Instance.LBBoxFrontReconURI = "disk://" + folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.jpg";
-                                    break;
-                                }
-                                else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.jpg"))
-                                {
-                                    RelatedMediaController.Instance.LBBoxFrontReconURI = "disk://" + folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.jpg";
-                                    break;
-                                }
-                                else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.png"))
-                                {
-                                    RelatedMediaController.Instance.LBBoxFrontReconURI = "disk://" + folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.png";
-                                    break;
-                                }
-                                else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.png"))
-                                {
-                                    RelatedMediaController.Instance.LBBoxFrontReconURI = "disk://" + folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.png";
-                                    break;
-                                }
-                                else
-                                {
-                                    RelatedMediaController.Instance.LBBoxFrontReconURI = "";
-                                }
-                            }
-                        }
-
-                        if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Back - Reconstructed/" + highestConfidenceGame + "-01.jpg"))
-                        {
-                            RelatedMediaController.Instance.LBBoxBackReconURI = "disk://" + resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Back - Reconstructed/" + highestConfidenceGame + "-01.jpg";
-                        }
-                        else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Back - Reconstructed/" + highestConfidenceGame + "-02.jpg"))
-                        {
-                            RelatedMediaController.Instance.LBBoxBackReconURI = "disk://" + resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Back - Reconstructed/" + highestConfidenceGame + "-02.jpg";
-                        }
-                        else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Back - Reconstructed/" + highestConfidenceGame + "-01.png"))
-                        {
-                            RelatedMediaController.Instance.LBBoxBackReconURI = "disk://" + resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Back - Reconstructed/" + highestConfidenceGame + "-01.png";
-                        }
-                        else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Back - Reconstructed/" + highestConfidenceGame + "-02.png"))
-                        {
-                            RelatedMediaController.Instance.LBBoxBackReconURI = "disk://" + resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Back - Reconstructed/" + highestConfidenceGame + "-02.png";
-                        }
-                        else
-                        {
-                            foreach (string folder in boxBackReconSubFolders)
-                            {
-                                if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.jpg"))
-                                {
-                                    RelatedMediaController.Instance.LBBoxBackReconURI = "disk://" + folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.jpg";
-                                    break;
-                                }
-                                else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.jpg"))
-                                {
-                                    RelatedMediaController.Instance.LBBoxBackReconURI = "disk://" + folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.jpg";
-                                    break;
-                                }
-                                else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.png"))
-                                {
-                                    RelatedMediaController.Instance.LBBoxBackReconURI = "disk://" + folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.png";
-                                    break;
-                                }
-                                else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.png"))
-                                {
-                                    RelatedMediaController.Instance.LBBoxBackReconURI = "disk://" + folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.png";
-                                    break;
-                                }
-                                else
-                                {
-                                    RelatedMediaController.Instance.LBBoxBackReconURI = "";
-                                }
-                            }
-                        }
-
-                        if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Full/" + highestConfidenceGame + "-01.jpg"))
-                        {
-                            RelatedMediaController.Instance.LBBoxFullURI = "disk://" + resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Full/" + highestConfidenceGame + "-01.jpg";
-                        }
-                        else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Full/" + highestConfidenceGame + "-02.jpg"))
-                        {
-                            RelatedMediaController.Instance.LBBoxFullURI = "disk://" + resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Full/" + highestConfidenceGame + "-02.jpg";
-                        }
-                        else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Full/" + highestConfidenceGame + "-01.png"))
-                        {
-                            RelatedMediaController.Instance.LBBoxFullURI = "disk://" + resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Full/" + highestConfidenceGame + "-01.png";
-                        }
-                        else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Full/" + highestConfidenceGame + "-02.png"))
-                        {
-                            RelatedMediaController.Instance.LBBoxFullURI = "disk://" + resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Full/" + highestConfidenceGame + "-02.png";
-                        }
-                        else
-                        {
-                            foreach (string folder in boxFullSubFolders)
-                            {
-                                if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.jpg"))
-                                {
-                                    RelatedMediaController.Instance.LBBoxFrontReconURI = "disk://" + folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.jpg";
-                                    break;
-                                }
-                                else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.jpg"))
-                                {
-                                    RelatedMediaController.Instance.LBBoxFrontReconURI = "disk://" + folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.jpg";
-                                    break;
-                                }
-                                else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.png"))
-                                {
-                                    RelatedMediaController.Instance.LBBoxFrontReconURI = "disk://" + folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.png";
-                                    break;
-                                }
-                                else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.png"))
-                                {
-                                    RelatedMediaController.Instance.LBBoxFrontReconURI = "disk://" + folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.png";
-                                    break;
-                                }
-                                else
-                                {
-                                    RelatedMediaController.Instance.LBBoxFrontReconURI = "";
-                                }
-                            }
-                        }
-
-                        if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Spine/" + highestConfidenceGame + "-01.jpg"))
-                        {
-                            RelatedMediaController.Instance.LBBoxSpineURI = "disk://" + resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Spine/" + highestConfidenceGame + "-01.jpg";
-                        }
-                        else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Spine/" + highestConfidenceGame + "-02.jpg"))
-                        {
-                            RelatedMediaController.Instance.LBBoxSpineURI = "disk://" + resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Spine/" + highestConfidenceGame + "-02.jpg";
-                        }
-                        else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Spine/" + highestConfidenceGame + "-01.png"))
-                        {
-                            RelatedMediaController.Instance.LBBoxSpineURI = "disk://" + resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Spine/" + highestConfidenceGame + "-01.png";
-                        }
-                        else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Spine/" + highestConfidenceGame + "-02.png"))
-                        {
-                            RelatedMediaController.Instance.LBBoxSpineURI = "disk://" + resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Spine/" + highestConfidenceGame + "-02.png";
-                        }
-                        else
-                        {
-                            foreach (string folder in boxSpineSubFolders)
-                            {
-                                if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.jpg"))
-                                {
-                                    RelatedMediaController.Instance.LBBoxSpineURI = "disk://" + folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.jpg";
-                                    break;
-                                }
-                                else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.jpg"))
-                                {
-                                    RelatedMediaController.Instance.LBBoxSpineURI = "disk://" + folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.jpg";
-                                    break;
-                                }
-                                else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.png"))
-                                {
-                                    RelatedMediaController.Instance.LBBoxSpineURI = "disk://" + folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.png";
-                                    break;
-                                }
-                                else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.png"))
-                                {
-                                    RelatedMediaController.Instance.LBBoxSpineURI = "disk://" + folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.png";
-                                    break;
-                                }
-                                else
-                                {
-                                    RelatedMediaController.Instance.LBBoxSpineURI = "";
-                                }
-                            }
-                        }
-
-                        if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Clear Logo/" + highestConfidenceGame + "-01.png"))
-                        {
-                            RelatedMediaController.Instance.LBClearLogoURI = "disk://" + resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Clear Logo/" + highestConfidenceGame + "-01.png";
-                        }
-                        else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Clear Logo/" + highestConfidenceGame + "-02.png"))
-                        {
-                            RelatedMediaController.Instance.LBClearLogoURI = "disk://" + resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Clear Logo/" + highestConfidenceGame + "-02.png";
-                        }
-                        else
-                        {
-                            foreach (string folder in clearLogoSubFolders)
-                            {
-                                if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.png"))
-                                {
-                                    RelatedMediaController.Instance.LBClearLogoURI = "disk://" + folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.png";
-                                    break;
-                                }
-                                else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.png"))
-                                {
-                                    RelatedMediaController.Instance.LBClearLogoURI = "disk://" + folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.png";
-                                    break;
-                                }
-                                else
-                                {
-                                    RelatedMediaController.Instance.LBClearLogoURI = "";
-                                }
-                            }
-                        }
-
-                        if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Screenshot - Game Title/" + highestConfidenceGame + "-01.jpg"))
-                        {
-                            RelatedMediaController.Instance.LBTitleSceenURI = "disk://" + resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Screenshot - Game Title/" + highestConfidenceGame + "-01.jpg";
-                        }
-                        else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Screenshot - Game Title/" + highestConfidenceGame + "-02.jpg"))
-                        {
-                            RelatedMediaController.Instance.LBTitleSceenURI = "disk://" + resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Screenshot - Game Title/" + highestConfidenceGame + "-02.jpg";
-                        }
-                        else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Screenshot - Game Title/" + highestConfidenceGame + "-01.png"))
-                        {
-                            RelatedMediaController.Instance.LBTitleSceenURI = "disk://" + resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Screenshot - Game Title/" + highestConfidenceGame + "-01.png";
-                        }
-                        else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Screenshot - Game Title/" + highestConfidenceGame + "-02.png"))
-                        {
-                            RelatedMediaController.Instance.LBTitleSceenURI = "disk://" + resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Screenshot - Game Title/" + highestConfidenceGame + "-02.png";
-                        }
-                        else
-                        {
-                            foreach (string folder in screenshotGameTitleSubFolders)
-                            {
-                                if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.jpg"))
-                                {
-                                    RelatedMediaController.Instance.LBTitleSceenURI = "disk://" + folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.jpg";
-                                    break;
-                                }
-                                else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.jpg"))
-                                {
-                                    RelatedMediaController.Instance.LBTitleSceenURI = "disk://" + folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.jpg";
-                                    break;
-                                }
-                                else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.png"))
-                                {
-                                    RelatedMediaController.Instance.LBTitleSceenURI = "disk://" + folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.png";
-                                    break;
-                                }
-                                else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.png"))
-                                {
-                                    RelatedMediaController.Instance.LBTitleSceenURI = "disk://" + folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.png";
-                                    break;
-                                }
-                                else
-                                {
-                                    RelatedMediaController.Instance.LBTitleSceenURI = "";
-                                }
-                            }
-                        }
-
-                        if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Banner/" + highestConfidenceGame + "-01.jpg"))
-                        {
-                            RelatedMediaController.Instance.LBBannerURI = "disk://" + resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Banner/" + highestConfidenceGame + "-01.jpg";
-                        }
-                        else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Banner/" + highestConfidenceGame + "-02.jpg"))
-                        {
-                            RelatedMediaController.Instance.LBBannerURI = "disk://" + resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Banner/" + highestConfidenceGame + "-02.jpg";
-                        }
-                        else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Banner/" + highestConfidenceGame + "-01.png"))
-                        {
-                            RelatedMediaController.Instance.LBBannerURI = "disk://" + resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Banner/" + highestConfidenceGame + "-01.png";
-                        }
-                        else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Banner/" + highestConfidenceGame + "-02.png"))
-                        {
-                            RelatedMediaController.Instance.LBBannerURI = "disk://" + resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Banner/" + highestConfidenceGame + "-02.png";
-                        }
-                        else
-                        {
-                            foreach (string folder in bannerSubFolders)
-                            {
-                                if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.jpg"))
-                                {
-                                    RelatedMediaController.Instance.LBBannerURI = "disk://" + folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.jpg";
-                                    break;
-                                }
-                                else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.jpg"))
-                                {
-                                    RelatedMediaController.Instance.LBBannerURI = "disk://" + folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.jpg";
-                                    break;
-                                }
-                                else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.png"))
-                                {
-                                    RelatedMediaController.Instance.LBTitleSceenURI = "disk://" + folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.png";
-                                    break;
-                                }
-                                else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.png"))
-                                {
-                                    RelatedMediaController.Instance.LBBannerURI = "disk://" + folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.png";
-                                    break;
-                                }
-                                else
-                                {
-                                    RelatedMediaController.Instance.LBBannerURI = "";
-                                }
-                            }
-                        }
-
-                        if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Cart - Front/" + highestConfidenceGame + "-01.jpg"))
-                        {
-                            RelatedMediaController.Instance.LBCartFrontURI = "disk://" + resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Cart - Front/" + highestConfidenceGame + "-01.jpg";
-                        }
-                        else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Cart - Front/" + highestConfidenceGame + "-02.jpg"))
-                        {
-                            RelatedMediaController.Instance.LBCartFrontURI = "disk://" + resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Cart - Front/" + highestConfidenceGame + "-02.jpg";
-                        }
-                        else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Cart - Front/" + highestConfidenceGame + "-01.png"))
-                        {
-                            RelatedMediaController.Instance.LBCartFrontURI = "disk://" + resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Cart - Front/" + highestConfidenceGame + "-01.png";
-                        }
-                        else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Cart - Front/" + highestConfidenceGame + "-02.png"))
-                        {
-                            RelatedMediaController.Instance.LBCartFrontURI = "disk://" + resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Cart - Front/" + highestConfidenceGame + "-02.png";
-                        }
-                        else
-                        {
-                            foreach (string folder in cartFrontSubFolders)
-                            {
-                                if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.jpg"))
-                                {
-                                    RelatedMediaController.Instance.LBCartFrontURI = "disk://" + folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.jpg";
-                                    break;
-                                }
-                                else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.jpg"))
-                                {
-                                    RelatedMediaController.Instance.LBCartFrontURI = "disk://" + folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.jpg";
-                                    break;
-                                }
-                                else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.png"))
-                                {
-                                    RelatedMediaController.Instance.LBCartFrontURI = "disk://" + folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.png";
-                                    break;
-                                }
-                                else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.png"))
-                                {
-                                    RelatedMediaController.Instance.LBCartFrontURI = "disk://" + folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.png";
-                                    break;
-                                }
-                                else
-                                {
-                                    RelatedMediaController.Instance.LBCartFrontURI = "";
-                                }
-                            }
-                        }
-
-                        if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Cart - Back/" + highestConfidenceGame + "-01.jpg"))
-                        {
-                            RelatedMediaController.Instance.LBCartBackURI = "disk://" + resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Cart - Back/" + highestConfidenceGame + "-01.jpg";
-                        }
-                        else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Cart - Back/" + highestConfidenceGame + "-02.jpg"))
-                        {
-                            RelatedMediaController.Instance.LBCartBackURI = "disk://" + resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Cart - Back/" + highestConfidenceGame + "-02.jpg";
-                        }
-                        else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Cart - Back/" + highestConfidenceGame + "-01.png"))
-                        {
-                            RelatedMediaController.Instance.LBCartBackURI = "disk://" + resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Cart - Back/" + highestConfidenceGame + "-01.png";
-                        }
-                        else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Cart - Back/" + highestConfidenceGame + "-02.png"))
-                        {
-                            RelatedMediaController.Instance.LBCartBackURI = "disk://" + resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Cart - Back/" + highestConfidenceGame + "-02.png";
-                        }
-                        else
-                        {
-                            foreach (string folder in cartBackSubFolders)
-                            {
-                                if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.jpg"))
-                                {
-                                    RelatedMediaController.Instance.LBCartBackURI = "disk://" + folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.jpg";
-                                    break;
-                                }
-                                else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.jpg"))
-                                {
-                                    RelatedMediaController.Instance.LBCartBackURI = "disk://" + folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.jpg";
-                                    break;
-                                }
-                                else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.png"))
-                                {
-                                    RelatedMediaController.Instance.LBCartBackURI = "disk://" + folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-01.png";
-                                    break;
-                                }
-                                else if (File.Exists(folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.png"))
-                                {
-                                    RelatedMediaController.Instance.LBCartBackURI = "disk://" + folder.Replace("\\", "/") + "/" + highestConfidenceGame + "-02.png";
-                                    break;
-                                }
-                                else
-                                {
-                                    RelatedMediaController.Instance.LBCartBackURI = "";
-                                }
-                            }
-                        }
-                    }
-                    else
-                    {
-                        RelatedMediaController.Instance.LBBoxFrontURI = string.Empty;
-                        RelatedMediaController.Instance.LBBoxBackURI = string.Empty;
-                        RelatedMediaController.Instance.LBBox3DURI = string.Empty;
-                        RelatedMediaController.Instance.LBBoxFrontReconURI = string.Empty;
-                        RelatedMediaController.Instance.LBBoxBackReconURI = string.Empty;
-                        RelatedMediaController.Instance.LBBoxFullURI = string.Empty;
-                        RelatedMediaController.Instance.LBBoxSpineURI = string.Empty;
-                        RelatedMediaController.Instance.LBBannerURI = string.Empty;
-                        RelatedMediaController.Instance.LBTitleSceenURI = string.Empty;
-                        RelatedMediaController.Instance.LBClearLogoURI = string.Empty;
-                        RelatedMediaController.Instance.LBCartFrontURI = string.Empty;
-                        RelatedMediaController.Instance.LBCartBackURI = string.Empty;
-                    }
-
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.ToString());
                 }
             }
             RelatedMediaController.Instance.SetAllSettings();
@@ -3445,7 +3427,7 @@ namespace Retro_Achievement_Tracker
             if (FocusController.Instance.AdvancedSettingsEnabled)
             {
                 focusTitleLabel.Text = "Title";
-                focusTitleOutlineLabel.Text = "Title Outline";
+                focusTitleOutlineLabel.Text = "Title OutlineColor";
 
                 SetFontFamilyBox(focusTitleFontComboBox, FocusController.Instance.TitleFontFamily);
 
@@ -3464,7 +3446,7 @@ namespace Retro_Achievement_Tracker
             else
             {
                 focusTitleLabel.Text = "Font";
-                focusTitleOutlineLabel.Text = "Font Outline";
+                focusTitleOutlineLabel.Text = "Font OutlineColor";
 
                 SetFontFamilyBox(focusTitleFontComboBox, FocusController.Instance.SimpleFontFamily);
 
@@ -3484,7 +3466,7 @@ namespace Retro_Achievement_Tracker
             if (AlertsController.Instance.AdvancedSettingsEnabled)
             {
                 alertsTitleLabel.Text = "Title";
-                alertsTitleOutlineLabel.Text = "Title Outline";
+                alertsTitleOutlineLabel.Text = "Title OutlineColor";
 
                 SetFontFamilyBox(alertsTitleFontComboBox, AlertsController.Instance.TitleFontFamily);
 
@@ -3503,7 +3485,7 @@ namespace Retro_Achievement_Tracker
             else
             {
                 alertsTitleLabel.Text = "Font";
-                alertsTitleOutlineLabel.Text = "Font Outline";
+                alertsTitleOutlineLabel.Text = "Font OutlineColor";
 
                 SetFontFamilyBox(alertsTitleFontComboBox, AlertsController.Instance.SimpleFontFamily);
 
@@ -3523,7 +3505,7 @@ namespace Retro_Achievement_Tracker
             if (UserInfoController.Instance.AdvancedSettingsEnabled)
             {
                 userInfoNamesLabel.Text = "Names";
-                userInfoNamesOutlineLabel.Text = "Names Outline";
+                userInfoNamesOutlineLabel.Text = "Names OutlineColor";
 
                 SetFontFamilyBox(userInfoNamesFontComboBox, UserInfoController.Instance.NameFontFamily);
 
@@ -3538,7 +3520,7 @@ namespace Retro_Achievement_Tracker
             else
             {
                 userInfoNamesLabel.Text = "Font";
-                userInfoNamesOutlineLabel.Text = "Font Outline";
+                userInfoNamesOutlineLabel.Text = "Font OutlineColor";
 
                 SetFontFamilyBox(userInfoNamesFontComboBox, UserInfoController.Instance.SimpleFontFamily);
 
@@ -3554,7 +3536,7 @@ namespace Retro_Achievement_Tracker
             if (GameInfoController.Instance.AdvancedSettingsEnabled)
             {
                 gameInfoNamesLabel.Text = "Names";
-                gameInfoNamesOutlineLabel.Text = "Names Outline";
+                gameInfoNamesOutlineLabel.Text = "Names OutlineColor";
 
                 SetFontFamilyBox(gameInfoNamesFontComboBox, GameInfoController.Instance.NameFontFamily);
 
@@ -3569,7 +3551,7 @@ namespace Retro_Achievement_Tracker
             else
             {
                 gameInfoNamesLabel.Text = "Font";
-                gameInfoNamesOutlineLabel.Text = "Font Outline";
+                gameInfoNamesOutlineLabel.Text = "Font OutlineColor";
 
                 SetFontFamilyBox(gameInfoNamesFontComboBox, GameInfoController.Instance.SimpleFontFamily);
 
@@ -3585,7 +3567,7 @@ namespace Retro_Achievement_Tracker
             if (GameProgressController.Instance.AdvancedSettingsEnabled)
             {
                 gameProgressNamesLabel.Text = "Names";
-                gameProgressNamesOutlineLabel.Text = "Names Outline";
+                gameProgressNamesOutlineLabel.Text = "Names OutlineColor";
 
                 SetFontFamilyBox(gameProgressNamesFontComboBox, GameProgressController.Instance.NameFontFamily);
 
@@ -3600,7 +3582,7 @@ namespace Retro_Achievement_Tracker
             else
             {
                 gameProgressNamesLabel.Text = "Font";
-                gameProgressNamesOutlineLabel.Text = "Font Outline";
+                gameProgressNamesOutlineLabel.Text = "Font OutlineColor";
 
                 SetFontFamilyBox(gameProgressNamesFontComboBox, GameProgressController.Instance.SimpleFontFamily);
 
@@ -3616,7 +3598,7 @@ namespace Retro_Achievement_Tracker
             if (RecentAchievementsController.Instance.AdvancedSettingsEnabled)
             {
                 recentAchievementsTitleLabel.Text = "Title";
-                recentAchievementsTitleOutlineLabel.Text = "Title Outline";
+                recentAchievementsTitleOutlineLabel.Text = "Title OutlineColor";
 
                 SetFontFamilyBox(recentAchievementsTitleFontComboBox, RecentAchievementsController.Instance.TitleFontFamily);
 
@@ -3635,7 +3617,7 @@ namespace Retro_Achievement_Tracker
             else
             {
                 recentAchievementsTitleLabel.Text = "Font";
-                recentAchievementsTitleOutlineLabel.Text = "Font Outline";
+                recentAchievementsTitleOutlineLabel.Text = "Font OutlineColor";
 
                 SetFontFamilyBox(recentAchievementsTitleFontComboBox, RecentAchievementsController.Instance.SimpleFontFamily);
 

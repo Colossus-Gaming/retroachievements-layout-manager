@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script id="scripts">
-        function addAchievement(xCoord, yCoord, achievement) {
+        var allAchievements;
+
+        function addAchievement(achievement, xCoord, yCoord) {
 
             var tooltipString = (achievement.title + "<br/><br/>" + achievement.points + "pts<br/><br/>" + achievement.description);
 
@@ -19,7 +21,7 @@
 
             var achievementImage = document.createElement('img');
             achievementImage.id = "achievement-" + achievement.id + "-image";
-            achievementImage.src = "http://media.retroachievements.org/Badge/" + achievement.badgeNumber + ".png";
+            achievementImage.src = achievement.badgeUri;
             achievementImage.style.border = "2px solid gold";
 
             achievementBlock.appendChild(achievementImage);
@@ -27,7 +29,7 @@
             if (!achievement.dateEarned) {
                 var achievementLockedImage = document.createElement('img');
                 achievementLockedImage.id = "achievement-" + achievement.id + "-locked-image";
-                achievementLockedImage.src = "http://media.retroachievements.org/Badge/" + achievement.badgeNumber + "_lock.png";
+                achievementLockedImage.src = achievement.badgeUri.replace(".png", "_lock.png");
                 achievementLockedImage.style.width = 64;
                 achievementLockedImage.style.height = 64;
                 achievementLockedImage.style.border = "2px solid #272727";
@@ -93,6 +95,35 @@
             } else {
                 startScrolling();
             }
+        }
+
+        function scrollToTop() {
+            document.getElementById("container").scrollTo( { top: 0, left: 0, behavior: 'smooth' } );
+        }
+
+        function setAchievementPosition(id, xCoord, yCoord) {
+            $("#achievement-" + id).animate({ left: xCoord, top: yCoord, }, 1000, 'easeInOutQuint');
+        }
+
+        function unlockAchievement(achievement) {
+            $("#achievement-" + achievement.id + "-locked-image").toggle("pulsate");
+            $("#achievement-" + achievement.id + "").tooltip("option", "content", achievement.title + "<br/><br/>" + achievement.points + "pts<br/><br/>" + achievement.description + "<br/><br/>" + achievement.dateEarned);
+        }
+
+        function setWindowBackgroundColor(color) {
+            document.body.style.backgroundColor = color;
+        }
+
+        function setAchievementOutDelayed(id, timeOut) {
+            setTimeout(function () { $("#achievement-" + id).animate({ top: document.getElementById("achievement-" + id).offsetTop + 1048 + "px" }, 800, 'easeInOutQuint'); }, timeOut);
+        }
+
+        function assignJavaScriptVariables() {
+            allAchievements = document.getElementsByClassName("achievement");
+        }
+
+        function wipeOldAchievements() {
+            document.getElementById("achievement-list").innerHTML = "";
         }
     </script>
     <style id="style" type="text/css">

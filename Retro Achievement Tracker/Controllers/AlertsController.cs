@@ -15,7 +15,7 @@ namespace Retro_Achievement_Tracker.Controllers
 {
     public sealed class AlertsController
     {
-        private static AlertsController instance = new AlertsController();
+        private static readonly AlertsController instance = new AlertsController();
         private static AlertsWindow AlertsWindow;
         public bool IsOpen;
         private Stopwatch NotificationsStopwatch;
@@ -23,11 +23,13 @@ namespace Retro_Achievement_Tracker.Controllers
         private readonly ConcurrentQueue<NotificationRequest> NotificationRequests;
         private readonly CancellationTokenSource tokenSource2 = new CancellationTokenSource();
         private bool IsPlaying;
-        public bool CanPlay { get; set; }
         private bool AnimationInPlayed;
         private bool AnimationOutPlayed;
         private bool PlayingAchievement;
         private bool IsEditingAchievement;
+
+        public float AchievementPlayingTime;
+        public float MasteryPlayingTime;
 
         private AlertsController()
         {
@@ -51,7 +53,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public void EnqueueAchievementNotifications(List<Achievement> achievements)
         {
-            if (CanPlay && !AlertsWindow.IsDisposed)
+            if (!AlertsWindow.IsDisposed)
             {
                 if (CustomAchievementEnabled && string.IsNullOrEmpty(CustomAchievementFile))
                 {
@@ -78,7 +80,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 GameInfoAndProgress = gameInfoAndProgress
             };
 
-            if (CanPlay && !AlertsWindow.IsDisposed)
+            if (!AlertsWindow.IsDisposed)
             {
                 if (CustomMasteryEnabled && string.IsNullOrEmpty(CustomMasteryFile))
                 {
@@ -97,7 +99,7 @@ namespace Retro_Achievement_Tracker.Controllers
 
         public void RunNotifications()
         {
-            if (NotificationRequests.Count > 0 && CanPlay && !IsPlaying && !NotificationsStopwatch.IsRunning)
+            if (NotificationRequests.Count > 0 && !IsPlaying && !NotificationsStopwatch.IsRunning)
             {
                 NotificationRequest notificationRequest = NotificationRequestDequeue();
 
@@ -140,14 +142,14 @@ namespace Retro_Achievement_Tracker.Controllers
                 {
                     if (PlayingAchievement)
                     {
-                        float achievementPlayingTime = AlertsWindow.GetAchievementPlayingTime().Result;
+                        AlertsWindow.GetAchievementPlayingTime();
 
-                        if (!AnimationInPlayed && (achievementPlayingTime * 1000) > (CustomAchievementEnabled ? CustomAchievementIn : 0))
+                        if (!AnimationInPlayed && (AchievementPlayingTime * 1000) > (CustomAchievementEnabled ? CustomAchievementIn : 0))
                         {
                             AlertsWindow.SetAchievementIn(CustomAchievementEnabled ? CustomAchievementInSpeed : 0, CustomAchievementEnabled ? AchievementAnimationIn : AnimationDirection.STATIC);
                             AnimationInPlayed = true;
                         }
-                        else if (!AnimationOutPlayed && (achievementPlayingTime * 1000) > (CustomAchievementEnabled ? CustomAchievementOut : 5400))
+                        else if (!AnimationOutPlayed && (AchievementPlayingTime * 1000) > (CustomAchievementEnabled ? CustomAchievementOut : 5400))
                         {
                             AlertsWindow.SetAchievementOut(CustomAchievementEnabled ? CustomAchievementOutSpeed : 700, CustomAchievementEnabled ? AchievementAnimationOut : AnimationDirection.UP);
                             AnimationOutPlayed = true;
@@ -155,20 +157,20 @@ namespace Retro_Achievement_Tracker.Controllers
                     }
                     else
                     {
-                        float masteryPlayingTime = AlertsWindow.GetMasteryPlayingTime().Result;
+                        AlertsWindow.GetMasteryPlayingTime();
 
-                        if (!AnimationInPlayed && (masteryPlayingTime * 1000) > (CustomMasteryEnabled ? CustomMasteryIn : 0))
+                        if (!AnimationInPlayed && (MasteryPlayingTime * 1000) > (CustomMasteryEnabled ? CustomMasteryIn : 0))
                         {
                             AlertsWindow.SetMasteryIn(CustomMasteryEnabled ? CustomMasteryInSpeed : 0, CustomMasteryEnabled ? MasteryAnimationIn : AnimationDirection.STATIC);
                             AnimationInPlayed = true;
                         }
-                        else if (!AnimationOutPlayed && (masteryPlayingTime * 1000) > (CustomMasteryEnabled ? CustomMasteryOut : 5400))
+                        else if (!AnimationOutPlayed && (MasteryPlayingTime * 1000) > (CustomMasteryEnabled ? CustomMasteryOut : 5400))
                         {
                             AlertsWindow.SetMasteryOut(CustomMasteryEnabled ? CustomMasteryOutSpeed : 700, CustomMasteryEnabled ? MasteryAnimationOut : AnimationDirection.UP);
                             AnimationOutPlayed = true;
                         }
                     }
-                    if (AnimationInPlayed && AnimationOutPlayed)
+                    if (AnimationOutPlayed && AnimationInPlayed)
                     {
                         NotificationsStopwatch.Stop();
                     }
@@ -177,7 +179,7 @@ namespace Retro_Achievement_Tracker.Controllers
             }
         }
 
-        public void SetIsPlaying(bool isPlaying)
+        public async void SetIsPlaying(bool isPlaying)
         {
             IsPlaying = isPlaying;
 
@@ -197,15 +199,12 @@ namespace Retro_Achievement_Tracker.Controllers
 
                     if (NotificationRequests.Count > 0)
                     {
+                        await Task.Delay(200);
+
                         RunNotifications();
                     }
                 }
             }
-        }
-
-        public void SetCanPlay()
-        {
-            CanPlay = true;
         }
         public static AlertsController Instance
         {
@@ -238,11 +237,9 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 AlertsWindow.ClientSize = new Size(0, 0);
 
-                CanPlay = false;
                 IsPlaying = false;
 
                 NotificationsStopwatch.Stop();
-                AlertsWindow.SetupBrowser();
             }
         }
         public void SetAllSettings()
@@ -275,11 +272,6 @@ namespace Retro_Achievement_Tracker.Controllers
                 SetAchievementSettings();
                 SetMasterySettings();
 
-                if (!CanPlay)
-                {
-                    AlertsWindow.PromptUserInput();
-                }
-
                 AlertsWindow.SetClientSize();
             }
         }
@@ -311,12 +303,14 @@ namespace Retro_Achievement_Tracker.Controllers
             AlertsWindow.SetAchievementLeft(CustomAchievementEnabled ? CustomAchievementX : -25);
             AlertsWindow.SetAchievementTop(CustomAchievementEnabled ? CustomAchievementY : 5);
             AlertsWindow.SetAchievementWidth(CustomAchievementEnabled ? Convert.ToInt32(CustomAchievementScale * MediaHelper.GetVideoWidth(CustomAchievementFile)) : 1028);
+            AlertsWindow.SetAchievementVideo(CustomAchievementEnabled ? CustomAchievementFile : "https://appassets.video/achievement-notification.webm");
         }
         public void SetMasterySettings()
         {
             AlertsWindow.SetMasteryLeft(CustomMasteryEnabled ? CustomMasteryX : -25);
             AlertsWindow.SetMasteryTop(CustomMasteryEnabled ? CustomMasteryY : 5);
             AlertsWindow.SetMasteryWidth(CustomMasteryEnabled ? Convert.ToInt32(CustomMasteryScale * MediaHelper.GetVideoWidth(CustomMasteryFile)) : 1028);
+            AlertsWindow.SetMasteryVideo(CustomMasteryEnabled ? CustomMasteryFile : "https://appassets.video/mastery-notification.webm");
         }
         public void SendAchievementNotification(Achievement achievement)
         {

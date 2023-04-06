@@ -1,25 +1,31 @@
-﻿using CefSharp;
+﻿using Microsoft.Web.WebView2.Core;
 using Retro_Achievement_Tracker.Controllers;
-using Retro_Achievement_Tracker.Models;
 using Retro_Achievement_Tracker.Properties;
 using System;
 using System.Drawing;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Retro_Achievement_Tracker.Forms
 {
-    public partial class RelatedMediaWindow : DisplayForm 
-    { 
-        public RelatedMediaWindow() : base()
+    public partial class RelatedMediaWindow : Form
+    {
+        public RelatedMediaWindow()
         {
-            Name = "RA Tracker - Related Media";
-            Text = "RA Tracker - Related Media";
+            InitializeComponent();
         }
-        protected override void OnShown(EventArgs e)
+        protected override async void OnShown(EventArgs e)
         {
             base.OnShown(e);
 
-            SetupBrowser();
+            await InitializeAsync();
+        }
+        private async Task InitializeAsync()
+        {
+            await webView21.EnsureCoreWebView2Async(null);
+
+            webView21.CoreWebView2.SetVirtualHostNameToFolderMapping("appassets.tracker", RelatedMediaController.Instance.LaunchBoxFilePath.Replace("\\", "/"), CoreWebView2HostResourceAccessKind.DenyCors);
+            webView21.NavigateToString(Resources.related_media_window);
         }
         protected override void OnClosed(EventArgs e)
         {
@@ -27,59 +33,40 @@ namespace Retro_Achievement_Tracker.Forms
 
             RelatedMediaController.Instance.IsOpen = false;
         }
-
-        public override void AssignJavaScriptVariables()
+        public void AssignJavaScriptVariables()
         {
-            ExecutionScripts.Enqueue(
-                "container = document.getElementById(\"container\");" + 
-                "imageAsset = document.getElementById(\"image-asset\");");
+            webView21.ExecuteScriptAsync("assignJavaScriptVariables();");
+        }
+        public void SetWindowBackgroundColor(string value)
+        {
+            webView21.ExecuteScriptAsync(string.Format("setWindowBackgroundColor(\"{0}\");", value));
         }
         public void SetImage(string imageUri)
         {
-            ExecutionScripts.Enqueue("imageAsset.src = \"" + imageUri +"\";");
+            webView21.ExecuteScriptAsync($"setImage(\"{imageUri}\");");
         }
         public void HideImage()
         {
-            ExecutionScripts.Enqueue("container.animate([ { left: '5px' }, { left: '650px' } ], { interations: 1, duration: 500, fill: \"forwards\", easing: \"ease-out\" });");
+            webView21.ExecuteScriptAsync("hideImage();");
         }
         public void ShowImage()
         {
-            ExecutionScripts.Enqueue("container.animate([ { left: '650px' }, { left: '5px' } ], { interations: 1, duration: 500, fill: \"forwards\", easing: \"ease-out\" });");
+            webView21.ExecuteScriptAsync("showImage();");
         }
         public void SetClientSize()
         {
-            Invoke(new Action(() => {
+            Invoke(new Action(() =>
+            {
                 ClientSize = new Size(640, 480);
             }));
         }
-
-        public override void SetupBrowser()
+        private void NavigationCompleted(object sender, CoreWebView2NavigationCompletedEventArgs e)
         {
-            Controls.Remove(chromiumWebBrowser);
-
-            chromiumWebBrowser = new CefSharp.WinForms.ChromiumWebBrowser()
+            if (e.IsSuccess)
             {
-                ActivateBrowserOnCreation = false,
-                Location = new Point(0, 0),
-                Name = "relatedMediaBrowser",
-                Size = new Size(650, 490),
-                TabIndex = 0,
-                Dock = DockStyle.None,
-                RequestHandler = new CustomRequestHandler()
-            };
-
-            chromiumWebBrowser.LoadingStateChanged += new EventHandler<LoadingStateChangedEventArgs>((sender, loadingStateChangedEventArgs) =>
-            {
-                if (!loadingStateChangedEventArgs.IsLoading)
-                {
-                    RelatedMediaController.Instance.IsOpen = true;
-                    RelatedMediaController.Instance.SetAllSettings();
-                }
-            });
-            
-            chromiumWebBrowser.LoadHtml(Resources.related_media_window);
-
-            Controls.Add(chromiumWebBrowser);
+                RelatedMediaController.Instance.IsOpen = true;
+                RelatedMediaController.Instance.SetAllSettings();
+            }
         }
     }
 }

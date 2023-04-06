@@ -178,7 +178,7 @@ namespace Retro_Achievement_Tracker.Models
                 _consoleId = value;
             }
         }
-        public string ImageIcon { get; set; }
+        public string BadgeUri { get; set; }
         public string ImageTitle { get; set; }
         public string ImageIngame { get; set; }
         public string ImageBoxArt { get; set; }

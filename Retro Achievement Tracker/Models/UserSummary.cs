@@ -48,7 +48,7 @@
         public string Description { get; set; }
         public int Points { get; set; }
         public int TrueRatio { get; set; }
-        public string BadgeNumber { get; set; }
+        public string BadgeUri { get; set; }
         public int DisplayOrder { get; set; }
         public DateTime? DateEarned { get; set; }
 

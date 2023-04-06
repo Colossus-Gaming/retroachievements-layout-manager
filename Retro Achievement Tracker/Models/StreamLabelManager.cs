@@ -10,7 +10,7 @@ namespace Retro_Achievement_Tracker.Models
 {
     public sealed class StreamLabelManager
     {
-        private static StreamLabelManager instance = new StreamLabelManager();
+        private static readonly StreamLabelManager instance = new StreamLabelManager();
         private Stopwatch StreamLabelsStopwatch;
         private Task StreamLabelsTask;
         private readonly ConcurrentQueue<Tuple<Task, bool>> StreamLabelsRequests;

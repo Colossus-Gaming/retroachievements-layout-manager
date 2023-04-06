@@ -249,6 +249,185 @@
                 document.body.appendChild(css);
             }
         }));
+
+        function setWindowBackgroundColor(color) {
+            document.body.style.backgroundColor = color;
+        }
+
+        var completedName;
+        var completedValue;
+        var gameRatioName;
+        var gameRatioValue;
+        var gameAchievementsName;
+        var gameAchievementsValue;
+        var gamePointsName;
+        var gamePointsValue;
+        var gameTruePointsName;
+        var gameTruePointsValue;
+
+        var allElements;
+        var allNames;
+        var allValues;
+
+        function assignJavaScriptVariables() {
+            gameAchievementsName = document.getElementById("game-achievements-name");
+            gameAchievementsValue = document.getElementById("game-achievements-value");
+            gamePointsName = document.getElementById("game-points-name");
+            gamePointsValue = document.getElementById("game-points-value");
+            gameTruePointsName = document.getElementById("game-true-points-name");
+            gameTruePointsValue = document.getElementById("game-true-points-value");
+            completedName = document.getElementById("completed-name");
+            completedValue = document.getElementById("completed-value");
+            gameRatioName = document.getElementById("game-ratio-name");
+            gameRatioValue = document.getElementById("game-ratio-value");
+
+            allElements = document.getElementsByClassName("has-font");
+            allNames = document.getElementsByClassName("name");
+            allValues = document.getElementsByClassName("value");
+        }
+
+        function setSimpleFontFamily(fontFamily, lineSpacing) {
+            for (var i = 0; i < allElements.length; i++) {
+                allElements[i].style.lineHeight = lineSpacing;
+                allElements[i].style.fontFamily = fontFamily;
+            }
+
+            for (var i = 0; i < allNames.length; i++) {
+
+                textFit(allNames[i], { alignVert: true, reProcess: true });
+            }
+
+            for (var i = 0; i < allValues.length; i++) {
+                textFit(allValues[i], { alignVert: true, reProcess: true });
+            }
+        }
+
+        function setSimpleFontColor(color) {
+            for (var i = 0; i < allElements.length; i++) { allElements[i].style.color = color; }
+        }
+
+        function setSimpleFontOutline(webstroke) {
+            for (var i = 0; i < allElements.length; i++) { allElements[i].style.webkitTextStroke = webstroke; }
+        }
+
+        function setNameFontFamily(fontFamily, lineSpacing) {
+            for (var i = 0; i < allNames.length; i++) {
+                allNames[i].style.lineHeight = lineSpacing;
+                allNames[i].style.fontFamily = fontFamily;
+            }
+
+            for (var i = 0; i < allNames.length; i++) {
+
+                textFit(allNames[i], { alignVert: true, reProcess: true });
+            }
+        }
+
+        function setNameFontColor(color) {
+            for (var i = 0; i < allNames.length; i++) { allNames[i].style.color = color; }
+        }
+
+        function setNameFontOutline(webstroke) {
+            for (var i = 0; i < allNames.length; i++) { allNames[i].style.webkitTextStroke = webstroke; }
+        }
+
+        function setValueFontFamily(fontFamily, lineSpacing) {
+            for (var i = 0; i < allValues.length; i++) {
+                allValues[i].style.lineHeight = lineSpacing;
+                allValues[i].style.fontFamily = fontFamily;
+
+                for (var i = 0; i < allValues.length; i++) {
+                    textFit(allValues[i], { alignVert: true, reProcess: true });
+                }
+            }
+        }
+
+        function setValueFontColor(color) {
+            for (var i = 0; i < allValues.length; i++) { allValues[i].style.color = color; }
+        }
+
+        function setValueFontOutline(webstroke) {
+            for (var i = 0; i < allValues.length; i++) { allValues[i].style.webkitTextStroke = webstroke; }
+        }
+
+        function setCompletedName(value) {
+            completedName.innerHTML = value;
+            textFit(completedName, { alignVert: true, reProcess: true });
+        }
+        function setCompletedValue(value) {
+            completedValue.innerHTML = value;
+            textFit(completedValue, { alignVert: true, reProcess: true });
+        }
+        function setCompletedVisibility(isVisible) {
+            if (isVisible) {
+                $("#completed").fadeIn();
+            } else {
+                $("#completed").fadeOut();
+            }
+        }
+
+        function setGamePointsName(value) {
+            gamePointsName.innerHTML = value;
+            textFit(gamePointsName, { alignVert: true, reProcess: true });
+        }
+        function setGamePointsValue(value) {
+            gamePointsValue.innerHTML = value;
+            textFit(gamePointsValue, { alignVert: true, reProcess: true });
+        }
+        function setGamePointsVisibility(isVisible) {
+            if (isVisible) {
+                $("#game-points").fadeIn();
+            } else {
+                $("#game-points").fadeOut();
+            }
+        }
+
+        function setGameTruePointsName(value) {
+            gameTruePointsName.innerHTML = value;
+            textFit(gameTruePointsName, { alignVert: true, reProcess: true });
+        }
+        function setGameTruePointsValue(value) {
+            gameTruePointsValue.innerHTML = value;
+            textFit(gameTruePointsValue, { alignVert: true, reProcess: true });
+        }
+        function setGameTruePointsVisibility(isVisible) {
+            if (isVisible) {
+                $("#game-true-points").fadeIn();
+            } else {
+                $("#game-true-points").fadeOut();
+            }
+        }
+
+        function setGameAchievementsName(value) {
+            gameAchievementsName.innerHTML = value;
+            textFit(gameAchievementsName, { alignVert: true, reProcess: true });
+        }
+        function setGameAchievementsValue(value) {
+            gameAchievementsValue.innerHTML = value;
+            textFit(gameAchievementsValue, { alignVert: true, reProcess: true });
+        }
+        function setGameAchievementsVisibility(isVisible) {
+            if (isVisible) {
+                $("#game-achievements").fadeIn();
+            } else {
+                $("#game-achievements").fadeOut();
+            }
+        }
+
+        function setGameRatioName(value) {
+            gameRatioName.innerHTML = value;
+            textFit(gameRatioName, { alignVert: true, reProcess: true });
+        }
+        function setGameRatioValue(value) {
+            gameRatioValue.innerHTML = value;
+            textFit(gameRatioValue, { alignVert: true, reProcess: true });
+        }
+        function setGameRatioVisibility(isVisible) {
+            if (isVisible) {
+                $("#game-ratio").fadeIn();
+            } else {
+                $("#game-ratio").fadeOut();
+            }
+        }
     </script>
     <style id="style" type="text/css">
 
@@ -283,7 +462,7 @@
         }
 
         #game-ratio,
-        #game-completed,
+        #completed,
         #game-achievements,
         #game-points,
         #game-true-points {
@@ -314,9 +493,9 @@
             <div id="game-ratio-name" class="has-font name"></div>
             <div id="game-ratio-value" class="has-font value"></div>
         </div>
-        <div id="game-completed">
-            <div id="game-completed-name" class="has-font name"></div>
-            <div id="game-completed-value" class="has-font value"></div>
+        <div id="completed">
+            <div id="completed-name" class="has-font name"></div>
+            <div id="completed-value" class="has-font value"></div>
         </div>
     </div>
 </body>

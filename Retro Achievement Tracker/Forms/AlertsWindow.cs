@@ -1,5 +1,6 @@
-﻿using CefSharp;
-using CefSharp.JavascriptBinding;
+﻿using Microsoft.Web.WebView2.Core;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Retro_Achievement_Tracker.Controllers;
 using Retro_Achievement_Tracker.Models;
 using Retro_Achievement_Tracker.Properties;
@@ -10,498 +11,342 @@ using System.Windows.Forms;
 
 namespace Retro_Achievement_Tracker.Forms
 {
-    public partial class AlertsWindow : DisplayForm
+    public partial class AlertsWindow : Form
     {
-        public AlertsWindow() : base()
+        public AlertsWindow()
         {
-            Name = "RA Tracker - Alerts";
-            Text = "RA Tracker - Alerts";
+            InitializeComponent();
         }
-        protected override void OnShown(EventArgs e)
+        protected override async void OnShown(EventArgs e)
         {
             base.OnShown(e);
 
-            SetupBrowser();
+            await InitializeAsync();
+        }
+        private async Task InitializeAsync()
+        {
+            await webView21.EnsureCoreWebView2Async(null);
+
+            webView21.CoreWebView2.SetVirtualHostNameToFolderMapping("appassets.images", @"images", CoreWebView2HostResourceAccessKind.DenyCors);
+            webView21.CoreWebView2.SetVirtualHostNameToFolderMapping("appassets.video", @"video", CoreWebView2HostResourceAccessKind.DenyCors);
+            webView21.CoreWebView2.WebMessageReceived += MessageReceived;
+
+            webView21.NavigateToString(Resources.alerts_window);
+        }
+        void MessageReceived(object sender, CoreWebView2WebMessageReceivedEventArgs args)
+        {
+            string content = args.TryGetWebMessageAsString();
+
+            if (content.Equals("setIsPlayingTrue"))
+            {
+                AlertsController.Instance.SetIsPlaying(true);
+            }
+            else if (content.Equals("setIsPlayingFalse"))
+            {
+                AlertsController.Instance.SetIsPlaying(false);
+            }
+            else if (content.StartsWith("getAchievementPlayingTime"))
+            {
+                AlertsController.Instance.AchievementPlayingTime = float.Parse(content.Replace("getAchievementPlayingTime", ""));
+            }
+            else if (content.StartsWith("getMasteryPlayingTime"))
+            {
+                AlertsController.Instance.MasteryPlayingTime = float.Parse(content.Replace("getMasteryPlayingTime", ""));
+            }
         }
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
 
-            AlertsController.Instance.CanPlay = false;
             AlertsController.Instance.IsOpen = false;
         }
-        public override async void AssignJavaScriptVariables()
+        public void AssignJavaScriptVariables()
         {
-            await ExecuteScript(
-                "allElements = document.getElementsByClassName(\"has-font\");" +
-                "allAchievements = document.getElementsByClassName(\"achievement\");" +
-                "allMastery = document.getElementsByClassName(\"mastery\");" +
-                "achievementElement = document.getElementById(\"achievement\");" +
-                "achievementTitle = document.getElementById(\"achievement-title\");" +
-                "achievementDescription = document.getElementById(\"achievement-description\");" +
-                "achievementPoints = document.getElementById(\"achievement-points\");" +
-                "masteryElement = document.getElementById(\"mastery\");" +
-                "masteryTitle = document.getElementById(\"mastery-title\");" +
-                "masteryAchievements = document.getElementById(\"mastery-achievements\");" +
-                "masteryPoints = document.getElementById(\"mastery-points\");" +
-                "achievementLine = document.getElementById(\"achievement-line\");" +
-                "masteryLine = document.getElementById(\"mastery-line\");" +
-                "achievementVideoElement = document.getElementById(\"achievement-video\");" +
-                "masteryVideoElement = document.getElementById(\"mastery-video\");");
+            webView21.ExecuteScriptAsync("assignJavaScriptVariables();");
         }
-        public async void StartAchievementAlert(Achievement achievement)
+        public void SetWindowBackgroundColor(string value)
         {
-            await ExecuteScript(
-                "achievementTitle.innerHTML = \"" + achievement.Title.Replace("\"", "\\\"") + "\";" +
-                "achievementDescription.innerHTML = \"" + achievement.Description.Replace("\"", "\\\"") + "\";" +
-                "achievementPoints.innerHTML = \"" + achievement.Points + "\";" +
-                "$(\"#achievement-badge\").attr(\"src\", \"https://retroachievements.org/Badge/" + achievement.BadgeNumber + ".png\");" +
-                "document.getElementById(\"achievement-video\").currentTime = 0;" +
-                "$(\"#achievement-video\").attr(\"src\", \"disk://achievement-notification\");" +
-                "$(\"#achievement-video\").show();");
-
-            await ExecuteScript(
-                "textFit(achievementTitle, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true });" +
-                "textFit(achievementDescription, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true });" +
-                "textFit(achievementPoints, { reProcess: true });");
+            webView21.ExecuteScriptAsync(string.Format("setWindowBackgroundColor(\"{0}\");", value));
         }
-        public async void StartMasteryAlert(GameInfo gameInfo)
+        public void SetBorderBackgroundColor(string value)
         {
-            await ExecuteScript(
-                    "masteryTitle.innerHTML = \"" + gameInfo.Title.Replace("\"", "\\\"") + "\";" +
-                    "masteryAchievements.innerHTML = \"Cheevos:<br/>" + gameInfo.Achievements.Count + "\";" +
-                    "masteryPoints.innerHTML = \"Points:<br/>" + gameInfo.GamePointsPossible + "\";" +
-                    "$(\"#mastery-badge\").attr('src', \"https://retroachievements.org" + gameInfo.ImageIcon + "\");" +
-                    "document.getElementById(\"mastery-video\").currentTime = 0;" +
-                    "$(\"#mastery-video\").attr('src', \"disk://mastery-notification\");" +
-                    "$(\"#mastery-video\").show();");
+            webView21.ExecuteScriptAsync(string.Format("setBorderBackgroundColor(\"{0}\");", value));
+        }
+        public void SetSimpleFontFamily(FontFamily value)
+        {
+            int lineSpacing = value.GetLineSpacing(FontStyle.Regular) / value.GetEmHeight(FontStyle.Regular);
 
-            await ExecuteScript(
-                    "textFit(masteryTitle, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true });" +
-                    "textFit(masteryPoints, { alignVert: true, alignHoriz: true, reProcess: true });" +
-                    "textFit(masteryAchievements, { alignVert: true, alignHoriz: true, reProcess: true });");
+            webView21.ExecuteScriptAsync(string.Format("setSimpleFontFamily(\"{0}\", \"{1}\");", value.Name.Replace(":", "\\:"), (lineSpacing == 0 ? 1 : lineSpacing).ToString()));
+        }
+        public void SetSimpleFontColor(string value)
+        {
+            webView21.ExecuteScriptAsync(string.Format("setSimpleFontColor(\"{0}\");", value));
+            SetLineColor(value);
+        }
+        public void SetSimpleFontOutline(string fontOutline, string borderOutline)
+        {
+            webView21.ExecuteScriptAsync(string.Format("setSimpleFontOutline(\"{0}\");", fontOutline));
+            SetLineOutline(borderOutline);
+        }
+        public void SetTitleFontFamily(FontFamily value)
+        {
+            int lineSpacing = value.GetLineSpacing(FontStyle.Regular) / value.GetEmHeight(FontStyle.Regular);
+
+            webView21.ExecuteScriptAsync(string.Format("setTitleFontFamily(\"{0}\", \"{1}\");", value.Name.Replace(":", "\\:"), (lineSpacing == 0 ? 1 : lineSpacing).ToString()));
+        }
+        public void SetTitleColor(string value)
+        {
+            webView21.ExecuteScriptAsync(string.Format("setTitleColor(\"{0}\");", value));
+        }
+        public void SetTitleOutline(string value)
+        {
+            webView21.ExecuteScriptAsync(string.Format("setTitleOutlineColor(\"{0}\");", value));
+        }
+        public void SetDescriptionFontFamily(FontFamily value)
+        {
+            int lineSpacing = value.GetLineSpacing(FontStyle.Regular) / value.GetEmHeight(FontStyle.Regular);
+
+            webView21.ExecuteScriptAsync(string.Format("setDescriptionFontFamily(\"{0}\", \"{1}\");", value.Name.Replace(":", "\\:"), (lineSpacing == 0 ? 1 : lineSpacing).ToString()));
         }
 
-        public async void PromptUserInput()
+        public void SetDescriptionColor(string value)
         {
-            await ExecuteScript("$(\"#user-prompt\").show();");
+            webView21.ExecuteScriptAsync(string.Format("setDescriptionColor(\"{0}\");", value));
+        }
+        public void SetDescriptionOutline(string value)
+        {
+            webView21.ExecuteScriptAsync(string.Format("setDescriptionOutlineColor(\"{0}\");", value));
+        }
+        public void SetPointsFontFamily(FontFamily value)
+        {
+            int lineSpacing = value.GetLineSpacing(FontStyle.Regular) / value.GetEmHeight(FontStyle.Regular);
+
+            webView21.ExecuteScriptAsync(string.Format("setPointsFontFamily(\"{0}\", \"{1}\");", value.Name.Replace(":", "\\:"), (lineSpacing == 0 ? 1 : lineSpacing).ToString()));
+        }
+        public void SetPointsColor(string value)
+        {
+            webView21.ExecuteScriptAsync(string.Format("setPointsColor(\"{0}\");", value));
+        }
+        public void SetPointsOutline(string value)
+        {
+            webView21.ExecuteScriptAsync(string.Format("setPointsOutlineColor(\"{0}\");", value));
+        }
+        public void SetLineColor(string value)
+        {
+            webView21.ExecuteScriptAsync(string.Format("setLineColor(\"{0}\");", value));
+        }
+        public void SetLineOutline(string borderOutline)
+        {
+            webView21.ExecuteScriptAsync(string.Format("setLineOutlineColor(\"{0}\");", borderOutline));
+        }
+        public void StartAchievementAlert(Achievement achievement)
+        {
+            webView21.ExecuteScriptAsync($"startAchievementAlert({JsonConvert.SerializeObject(achievement)});");
+        }
+        public void StartMasteryAlert(GameInfo gameInfo)
+        {
+            webView21.ExecuteScriptAsync($"startMasteryAlert({JsonConvert.SerializeObject(gameInfo)});");
         }
         public void EnableBorder()
         {
-            ExecutionScripts.Enqueue(
-                "achievementElement.style.backgroundImage = \"url('disk://background')\"; " +
-                "masteryElement.style.backgroundImage = \"url('disk://background')\";");
+            webView21.ExecuteScriptAsync("enableBorder();");
         }
 
         public void DisableBorder()
         {
-            ExecutionScripts.Enqueue(
-                "achievementElement.style.backgroundImage = \"\"; " +
-                "masteryElement.style.backgroundImage = \"\";");
+            webView21.ExecuteScriptAsync("disableBorder();");
         }
-        public async void EnableAchievementEdit()
+        public void EnableAchievementEdit()
         {
-            await ExecuteScript(
-                "achievementVideoElement.controls = true;");
+            webView21.ExecuteScriptAsync("enableAchievementEdit();");
 
             SetAchievementIn(0, AnimationDirection.STATIC);
         }
 
-        public async void DisableAchievementEdit()
+        public void DisableAchievementEdit()
         {
-            await ExecuteScript(
-                 "achievementVideoElement.controls = false; " +
-                "achievementVideoElement.style.border = \"\";  " +
-                "$(\"#achievement-video\").hide();");
+            webView21.ExecuteScriptAsync("disableAchievementEdit();");
 
             SetAchievementOut(0, AnimationDirection.STATIC);
         }
 
-        public async void EnableMasteryEdit()
+        public void EnableMasteryEdit()
         {
-            await ExecuteScript(
-                "masteryVideoElement.controls = true;");
+            webView21.ExecuteScriptAsync("enableMasteryEdit();");
 
             SetMasteryIn(0, AnimationDirection.STATIC);
         }
 
-        public async void DisableMasteryEdit()
+        public void DisableMasteryEdit()
         {
-            await ExecuteScript(
-                "masteryVideoElement.controls = false; " +
-                "masteryVideoElement.style.border = \"\"; " +
-                "$(\"#mastery-video\").hide(); ");
+            webView21.ExecuteScriptAsync("disableMasteryEdit();");
 
             SetMasteryOut(0, AnimationDirection.STATIC);
         }
 
         public void SetAchievementLeft(int value)
         {
-            ExecutionScripts.Enqueue("achievementVideoElement.style.left = \"" + value + "px\";");
+            webView21.ExecuteScriptAsync(string.Format("setAchievementLeft(\"{0}\");", value + "px"));
         }
 
         public void SetAchievementTop(int value)
         {
-            ExecutionScripts.Enqueue("achievementVideoElement.style.top = \"" + value + "px\";");
+            webView21.ExecuteScriptAsync(string.Format("setAchievementTop(\"{0}\");", value + "px"));
         }
 
         public void SetMasteryLeft(int value)
         {
-            ExecutionScripts.Enqueue("masteryVideoElement.style.left = \"" + value + "px\";");
+            webView21.ExecuteScriptAsync(string.Format("setMasteryLeft(\"{0}\");", value + "px"));
         }
 
         public void SetMasteryTop(int value)
         {
-            ExecutionScripts.Enqueue("masteryVideoElement.style.top = \"" + value + "px\";");
+            webView21.ExecuteScriptAsync(string.Format("setMasteryTop(\"{0}\");", value + "px"));
         }
 
         public void SetAchievementWidth(int value)
         {
-            ExecutionScripts.Enqueue("achievementVideoElement.style.width = \"" + value + "px\";");
+            webView21.ExecuteScriptAsync(string.Format("setAchievementWidth(\"{0}\");", value + "px"));
         }
 
         public void SetMasteryWidth(int value)
         {
-            ExecutionScripts.Enqueue("masteryVideoElement.style.width = \"" + value + "px\";");
+            webView21.ExecuteScriptAsync(string.Format("setMasteryWidth(\"{0}\");", value + "px"));
         }
 
-        public async void SetAchievementIn(int value, AnimationDirection animationDirection)
+        public void SetAchievementIn(int value, AnimationDirection animationDirection)
         {
-            string animationScript;
-            switch (animationDirection)
+            Invoke(new Action(() =>
             {
-                case AnimationDirection.UP:
-                    animationScript = "achievementElement.animate([ { left: '165px', top: '-310px' }, { left: '165px', top: '220px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\" });";
-                    break;
-                case AnimationDirection.DOWN:
-                    animationScript = "achievementElement.animate([ { left: '165px', top: '600px' }, { left: '165px', top: '220px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\" });";
-                    break;
-                case AnimationDirection.LEFT:
-                    animationScript = "achievementElement.animate([ { left: '-300px', top: '220px' }, { left: '165px', top: '220px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\" });";
-                    break;
-                case AnimationDirection.RIGHT:
-                    animationScript = "achievementElement.animate([ { left: '1034px', top: '220px' }, { left: '165px', top: '220px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\" });";
-                    break;
-                default:
-                    animationScript = "achievementElement.animate([ { left: '-300px', top: '-310px' }, { left: '165px', top: '220px' } ], { interations: 1, duration: 10, fill: \"forwards\" });";
-                    break;
-            }
-
-            await ExecuteScript(animationScript);
+                switch (animationDirection)
+                {
+                    case AnimationDirection.UP:
+                        webView21.ExecuteScriptAsync(string.Format("animateAchievementInUp({0});", value.ToString()));
+                        break;
+                    case AnimationDirection.DOWN:
+                        webView21.ExecuteScriptAsync(string.Format("animateAchievementInDown({0});", value.ToString()));
+                        break;
+                    case AnimationDirection.LEFT:
+                        webView21.ExecuteScriptAsync(string.Format("animateAchievementInLeft({0});", value.ToString()));
+                        break;
+                    case AnimationDirection.RIGHT:
+                        webView21.ExecuteScriptAsync(string.Format("animateAchievementInRight({0});", value.ToString()));
+                        break;
+                    default:
+                        webView21.ExecuteScriptAsync("animateAchievementInStatic();");
+                        break;
+                }
+            }));
         }
-
-        public async void SetAchievementOut(int value, AnimationDirection animationDirection)
+        public void SetAchievementOut(int value, AnimationDirection animationDirection)
         {
-            string animationScript;
-            switch (animationDirection)
+            Invoke(new Action(() =>
             {
-                case AnimationDirection.UP:
-                    animationScript = "achievementElement.animate([ { left: '165px', top: '220px' }, { left: '165px', top: '-310px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\" });";
-                    break;
-                case AnimationDirection.DOWN:
-                    animationScript = "achievementElement.animate([ { left: '165px', top: '220px' }, { left: '165px', top: '600px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\" });";
-                    break;
-                case AnimationDirection.LEFT:
-                    animationScript = "achievementElement.animate([ { left: '165px', top: '220px' }, { left: '-300px', top: '220px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\" });";
-                    break;
-                case AnimationDirection.RIGHT:
-                    animationScript = "achievementElement.animate([ { left: '165px', top: '220px' }, { left: '1034px', top: '220px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\" });";
-                    break;
-                default:
-                    animationScript = "achievementElement.animate([ { left: '-300px', top: '-310px' }, { left: '-300px', top: '-310px' } ], { interations: 1, duration: 10, fill: \"forwards\" });";
-                    break;
-            }
-
-            await ExecuteScript(animationScript);
+                switch (animationDirection)
+                {
+                    case AnimationDirection.UP:
+                        webView21.ExecuteScriptAsync(string.Format("animateAchievementOutUp({0});", value.ToString()));
+                        break;
+                    case AnimationDirection.DOWN:
+                        webView21.ExecuteScriptAsync(string.Format("animateAchievementOutDown({0});", value.ToString()));
+                        break;
+                    case AnimationDirection.LEFT:
+                        webView21.ExecuteScriptAsync(string.Format("animateAchievementOutLeft({0});", value.ToString()));
+                        break;
+                    case AnimationDirection.RIGHT:
+                        webView21.ExecuteScriptAsync(string.Format("animateAchievementOutRight({0});", value.ToString()));
+                        break;
+                    default:
+                        webView21.ExecuteScriptAsync("animateAchievementOutStatic();");
+                        break;
+                }
+            }));
         }
-
-        public async void SetMasteryIn(int value, AnimationDirection animationDirection)
+        public void SetMasteryIn(int value, AnimationDirection animationDirection)
         {
-            string animationScript;
-            switch (animationDirection)
+            Invoke(new Action(() =>
             {
-                case AnimationDirection.UP:
-                    animationScript = "masteryElement.animate([ { left: '165px', top: '-310px' }, { left: '165px', top: '220px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\" });";
-                    break;
-                case AnimationDirection.DOWN:
-                    animationScript = "masteryElement.animate([ { left: '165px', top: '600px' }, { left: '165px', top: '220px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\" });";
-                    break;
-                case AnimationDirection.LEFT:
-                    animationScript = "masteryElement.animate([ { left: '-300px', top: '220px' }, { left: '165px', top: '220px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\" });";
-                    break;
-                case AnimationDirection.RIGHT:
-                    animationScript = "masteryElement.animate([ { left: '1034px', top: '220px' }, { left: '165px', top: '220px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\" });";
-                    break;
-                default:
-                    animationScript = "masteryElement.animate([ { left: '-300px', top: '-310px' }, { left: '165px', top: '220px' } ], { interations: 1, duration: 10, fill: \"forwards\" });";
-                    break;
-            }
-
-            await ExecuteScript(animationScript);
+                switch (animationDirection)
+                {
+                    case AnimationDirection.UP:
+                        webView21.ExecuteScriptAsync(string.Format("animateMasteryInUp({0});", value.ToString()));
+                        break;
+                    case AnimationDirection.DOWN:
+                        webView21.ExecuteScriptAsync(string.Format("animateMasteryInDown({0});", value.ToString()));
+                        break;
+                    case AnimationDirection.LEFT:
+                        webView21.ExecuteScriptAsync(string.Format("animateMasteryInLeft({0});", value.ToString()));
+                        break;
+                    case AnimationDirection.RIGHT:
+                        webView21.ExecuteScriptAsync(string.Format("animateMasteryInRight({0});", value.ToString()));
+                        break;
+                    default:
+                        webView21.ExecuteScriptAsync("animateMasteryInStatic();");
+                        break;
+                }
+            }));
         }
-
-        public async void SetMasteryOut(int value, AnimationDirection animationDirection)
+        public void SetMasteryOut(int value, AnimationDirection animationDirection)
         {
-            string animationScript;
-            switch (animationDirection)
+            Invoke(new Action(() =>
             {
-                case AnimationDirection.UP:
-                    animationScript = "masteryElement.animate([ { left: '165px', top: '220px' }, { left: '165px', top: '-310px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\" });";
-                    break;
-                case AnimationDirection.DOWN:
-                    animationScript = "masteryElement.animate([ { left: '165px', top: '220px' }, { left: '165px', top: '600px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\" });";
-                    break;
-                case AnimationDirection.LEFT:
-                    animationScript = "masteryElement.animate([ { left: '165px', top: '220px' }, { left: '-300px', top: '220px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\" });";
-                    break;
-                case AnimationDirection.RIGHT:
-                    animationScript = "masteryElement.animate([ { left: '165px', top: '220px' }, { left: '1034px', top: '220px' } ], { interations: 1, duration: " + value + ", fill: \"forwards\" });";
-                    break;
-                default:
-                    animationScript = "masteryElement.animate([ { left: '-300px', top: '-310px' }, { left: '-300px', top: '-310px' } ], { interations: 1, duration: 0, fill: \"forwards\" });";
-                    break;
-            }
-
-            await ExecuteScript(animationScript);
+                switch (animationDirection)
+                {
+                    case AnimationDirection.UP:
+                        webView21.ExecuteScriptAsync(string.Format("animateMasteryOutUp({0});", value.ToString()));
+                        break;
+                    case AnimationDirection.DOWN:
+                        webView21.ExecuteScriptAsync(string.Format("animateMasteryOutDown({0});", value.ToString()));
+                        break;
+                    case AnimationDirection.LEFT:
+                        webView21.ExecuteScriptAsync(string.Format("animateMasteryOutLeft({0});", value.ToString()));
+                        break;
+                    case AnimationDirection.RIGHT:
+                        webView21.ExecuteScriptAsync(string.Format("animateMasteryOutRight({0});", value.ToString()));
+                        break;
+                    default:
+                        webView21.ExecuteScriptAsync("animateMasteryOutStatic();");
+                        break;
+                }
+            }));
         }
-
-        public async void HideNotifications()
+        public void HideNotifications()
         {
-            await ExecuteScript(
-                "$(\"#achievement-video\").hide();" +
-                "$(\"#mastery-video\").hide();");
-
-            await ExecuteScript(
-                "achievementVideoElement.currentTime = 0;" +
-                "masteryVideoElement.currentTime = 0;");
+            webView21.ExecuteScriptAsync("hideNotifications();");
         }
-
-        public void SetSimpleFontColor(string value)
+        public void SetAchievementVideo(string filePath)
         {
-            ExecutionScripts.Enqueue(
-                "achievementLine.style.color = \"" + value + "\";" +
-                "masteryLine.style.color = \"" + value + "\";" +
-                "achievementLine.style.backgroundColor = \"" + value + "\";" +
-                "masteryLine.style.backgroundColor = \"" + value + "\";" +
-                "for (var i = 0; i < allElements.length; i++) { allElements[i].style.color = \"" + value + "\"; }");
+            webView21.ExecuteScriptAsync(string.Format("setAchievementVideo(\"{0}\");", filePath));
         }
-
-        public void SetSimpleFontFamily(FontFamily value)
+        public void SetMasteryVideo(string filePath)
         {
-
-            int lineSpacing = value.GetLineSpacing(FontStyle.Regular) / value.GetEmHeight(FontStyle.Regular);
-            if (lineSpacing == 0)
+            webView21.ExecuteScriptAsync(string.Format("setMasteryVideo(\"{0}\");", filePath));
+        }
+        public void GetAchievementPlayingTime()
+        {
+            Invoke(new Action(() =>
             {
-                lineSpacing = 1;
-            }
-
-            string fontFamily = value.Name.Replace(":", "\\:");
-
-            ExecutionScripts.Enqueue(
-                "achievementTitle.style.lineHeight = " + lineSpacing + ";" +
-                "achievementTitle.style.fontFamily = \"" + fontFamily + "\";" +
-                "masteryTitle.style.lineHeight = " + lineSpacing + ";" +
-                "masteryTitle.style.fontFamily = \"" + fontFamily + "\";" +
-                "achievementDescription.style.lineHeight = " + lineSpacing + ";" +
-                "achievementDescription.style.fontFamily = \"" + fontFamily + "\";" +
-                "masteryAchievements.style.lineHeight = " + lineSpacing + ";" +
-                "masteryAchievements.style.fontFamily = \"" + fontFamily + "\";" +
-                "masteryPoints.style.lineHeight = " + lineSpacing + ";" +
-                "masteryPoints.style.fontFamily = \"" + fontFamily + "\";" +
-                "achievementPoints.style.lineHeight = " + lineSpacing + ";" +
-                "achievementPoints.style.fontFamily = \"" + fontFamily + "\";");
-
-            ExecutionScripts.Enqueue(
-                "setTimeout(function() { textFit(achievementDescription, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true }); }, 100);" +
-                "setTimeout(function() { textFit(masteryAchievements, { alignVert: true, alignHoriz: true, reProcess: true }); }, 200);" +
-                "setTimeout(function() { textFit(masteryPoints, { alignVert: true, alignHoriz: true, reProcess: true }); }, 300);" +
-                "setTimeout(function() { textFit(achievementTitle, { alignVert: true, alignHoriz: true, reProcess: true }); }, 400);" +
-                "setTimeout(function() { textFit(masteryTitle, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true }); }, 500);" +
-                "setTimeout(function() { textFit(achievementPoints, { reProcess: true }); }, 600);");
+                webView21.ExecuteScriptAsync("getAchievementPlayingTime();");
+            }));
         }
-
-        public void SetSimpleFontOutline(string fontOutline, string borderOutline)
+        public void GetMasteryPlayingTime()
         {
-            ExecutionScripts.Enqueue(
-                "achievementLine.style.border = \"" + borderOutline + "\";" +
-                "masteryLine.style.border = \"" + borderOutline + "\";" +
-                "for (var i = 0; i < allElements.length; i++) { allElements[i].style.webkitTextStroke = \"" + fontOutline + "\"; }");
-        }
-        public void SetBorderBackgroundColor(string value)
-        {
-            ExecutionScripts.Enqueue(
-                "achievementElement.style.backgroundColor = \"" + value + "\";" +
-                "masteryElement.style.backgroundColor = \"" + value + "\";");
-        }
-
-        public void SetDescriptionOutline(string value)
-        {
-            ExecutionScripts.Enqueue(
-                "achievementDescription.style.webkitTextStroke = \"" + value + "\";" +
-                "masteryAchievements.style.webkitTextStroke = \"" + value + "\";" +
-                "masteryPoints.style.webkitTextStroke = \"" + value + "\";");
-        }
-
-        public void SetDescriptionColor(string value)
-        {
-            ExecutionScripts.Enqueue(
-                "achievementDescription.style.color = \"" + value + "\";" +
-                "masteryAchievements.style.color = \"" + value + "\";" +
-                "masteryPoints.style.color = \"" + value + "\";");
-        }
-
-        public void SetDescriptionFontFamily(FontFamily value)
-        {
-            int lineSpacing = value.GetLineSpacing(FontStyle.Regular) / value.GetEmHeight(FontStyle.Regular);
-            if (lineSpacing == 0)
+            Invoke(new Action(() =>
             {
-                lineSpacing = 1;
-            }
-
-            string fontFamily = value.Name.Replace(":", "\\:");
-
-            ExecutionScripts.Enqueue(
-                 "achievementDescription.style.lineHeight = " + lineSpacing + ";" +
-                 "achievementDescription.style.fontFamily = \"" + fontFamily + "\";" +
-                 "masteryAchievements.style.lineHeight = " + lineSpacing + ";" +
-                 "masteryAchievements.style.fontFamily = \"" + fontFamily + "\";" +
-                 "masteryPoints.style.lineHeight = " + lineSpacing + ";" +
-                 "masteryPoints.style.fontFamily = \"" + fontFamily + "\";");
-
-            ExecutionScripts.Enqueue(
-                "textFit(achievementDescription, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true });" +
-                 "textFit(masteryAchievements, { alignVert: true, alignHoriz: true, reProcess: true });" +
-                 "textFit(masteryPoints, { alignVert: true, alignHoriz: true, reProcess: true });");
-        }
-
-        public void SetTitleOutline(string value)
-        {
-            ExecutionScripts.Enqueue(
-                 "achievementTitle.style.webkitTextStroke = \"" + value + "\";" +
-                 "masteryTitle.style.webkitTextStroke = \"" + value + "\";");
-        }
-
-        public void SetTitleColor(string value)
-        {
-            ExecutionScripts.Enqueue(
-                "achievementTitle.style.color = \"" + value + "\";" +
-                "masteryTitle.style.color = \"" + value + "\";");
-        }
-
-        public void SetTitleFontFamily(FontFamily value)
-        {
-
-            int lineSpacing = value.GetLineSpacing(FontStyle.Regular) / value.GetEmHeight(FontStyle.Regular);
-            if (lineSpacing == 0)
-            {
-                lineSpacing = 1;
-            }
-
-            string fontFamily = value.Name.Replace(":", "\\:");
-
-            ExecutionScripts.Enqueue(
-                "achievementTitle.style.lineHeight = " + lineSpacing + ";" +
-                "achievementTitle.style.fontFamily = \"" + fontFamily + "\";" +
-                "masteryTitle.style.lineHeight = " + lineSpacing + ";" +
-                "masteryTitle.style.fontFamily = \"" + fontFamily + "\";");
-
-            ExecutionScripts.Enqueue(
-                "textFit(achievementTitle, { alignVert: true, alignHoriz: true, reProcess: true });" +
-                "textFit(masteryTitle, { alignVert: true, alignHoriz: true, multiLine: true, reProcess: true });");
-        }
-        public void SetPointsFontFamily(FontFamily value)
-        {
-            int lineSpacing = value.GetLineSpacing(FontStyle.Regular) / value.GetEmHeight(FontStyle.Regular);
-            ExecutionScripts.Enqueue(
-                  "achievementPoints.style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
-                  "achievementPoints.style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
-                  "textFit(achievementPoints);");
-        }
-        public void SetPointsColor(string value)
-        {
-            ExecutionScripts.Enqueue(
-                 "achievementPoints.style.color = \"" + value + "\";" +
-                 "masteryAchievements.style.color = \"" + value + "\";" +
-                 "masteryPoints.style.color = \"" + value + "\";");
-        }
-        public void SetPointsOutline(string fontOutline)
-        {
-            ExecutionScripts.Enqueue(
-                "achievementPoints.style.webkitTextStroke = \"" + fontOutline + "\";" +
-                "masteryAchievements.style.webkitTextStroke = \"" + fontOutline + "\";" +
-                "masteryPoints.style.webkitTextStroke = \"" + fontOutline + "\";");
-        }
-        public void SetLineColor(string value)
-        {
-            ExecutionScripts.Enqueue(
-                 "achievementLine.style.color = \"" + value + "\";" +
-                 "achievementLine.style.backgroundColor = \"" + value + "\";" +
-                 "masteryLine.style.color = \"" + value + "\";" +
-                 "masteryLine.style.backgroundColor = \"" + value + "\";");
-        }
-
-        public void SetLineOutline(string borderOutline)
-        {
-            ExecutionScripts.Enqueue(
-                "achievementLine.style.border = \"" + borderOutline + "\";" +
-                "masteryLine.style.border = \"" + borderOutline + "\";");
-        }
-        public async Task<float> GetAchievementPlayingTime()
-        {
-            JavascriptResponse javascriptResponse = await chromiumWebBrowser.EvaluateScriptAsync("achievementVideoElement.currentTime");
-            return float.Parse(javascriptResponse.Result.ToString());
-        }
-        public async Task<float> GetMasteryPlayingTime()
-        {
-            JavascriptResponse javascriptResponse = await chromiumWebBrowser.EvaluateScriptAsync("masteryVideoElement.currentTime");
-            return float.Parse(javascriptResponse.Result.ToString());
+                webView21.ExecuteScriptAsync("getMasteryPlayingTime();");
+            }));
         }
         public void SetClientSize()
         {
-            Invoke(new Action(() => {
+            Invoke(new Action(() =>
+            {
                 ClientSize = new Size(1024, 768);
             }));
         }
-        public override void SetupBrowser()
+        private void NavigationCompleted(object sender, CoreWebView2NavigationCompletedEventArgs e)
         {
-            Controls.Remove(chromiumWebBrowser);
-
-            chromiumWebBrowser = new CefSharp.WinForms.ChromiumWebBrowser()
-            {
-                ActivateBrowserOnCreation = false,
-                Location = new Point(0, 0),
-                Name = "alertsBrowser",
-                Size = new Size(1024, 768),
-                TabIndex = 0,
-                Dock = DockStyle.None,
-                RequestHandler = new CustomRequestHandler()
-            };
-
-            chromiumWebBrowser.LoadingStateChanged += new EventHandler<LoadingStateChangedEventArgs>((sender, loadingStateChangedEventArgs) =>
-            {
-                if (!loadingStateChangedEventArgs.IsLoading)
-                {
-
-                    AlertsController.Instance.IsOpen = true;
-                    AlertsController.Instance.SetAllSettings();
-                }
-            });
-
-            chromiumWebBrowser.LoadHtml(Resources.alerts_window);
-
-            chromiumWebBrowser.JavascriptObjectRepository.ResolveObject += (sender1, e) =>
-            {
-                var repo = e.ObjectRepository;
-                if (e.ObjectName == "alertControllerAsync")
-                {
-                    BindingOptions bindingOptions = null; //Binding options is an optional param, defaults to null
-                    bindingOptions = BindingOptions.DefaultBinder; //Use the default binder to serialize values into complex objects
-                    repo.NameConverter = new CamelCaseJavascriptNameConverter();
-                    repo.Register("alertControllerAsync", AlertsController.Instance, isAsync: true, options: bindingOptions);
-                }
-            };
-
-            Controls.Add(chromiumWebBrowser);
+            AlertsController.Instance.IsOpen = true;
+            AlertsController.Instance.SetAllSettings();
         }
     }
 }

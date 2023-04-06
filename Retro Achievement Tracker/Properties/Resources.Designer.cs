@@ -70,9 +70,9 @@ namespace Retro_Achievement_Tracker.Properties {
         ///    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css&quot;&gt;
         ///    &lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js&quot;&gt;&lt;/script&gt;
         ///    &lt;script id=&quot;scripts&quot;&gt;
-        ///        function addAchievement(xCoord, yCoord, achievement) {
+        ///        var allAchievements;
         ///
-        ///      [rest of string was truncated]&quot;;.
+        ///        function addAchievement(achieve [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string achievement_list_window {
             get {
@@ -127,15 +127,14 @@ namespace Retro_Achievement_Tracker.Properties {
         ///    &lt;title&gt;Game Info Window&lt;/title&gt;
         ///    &lt;meta charset=&quot;UTF-8&quot;&gt;
         ///    &lt;script src=&quot;https://code.jquery.com/jquery-3.5.1.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
-        ///    &lt;script id=&quot;scripts&quot;&gt;/**
-        ///         * textFit v2.3.1
-        ///         * Previously known as jQuery.textFit
-        ///         * 11/2014 by STRML (strml.github.com)
-        ///         * MIT License
-        ///         *
-        ///         * To use: textFit(document.getElementById(&apos;target-div&apos;), options);
-        ///         *
-        ///         * Will make the *text* content i [rest of string was truncated]&quot;;.
+        ///    &lt;script id=&quot;scripts&quot;&gt;
+        ///    /**
+        ///                 * textFit v2.3.1
+        ///                 * Previously known as jQuery.textFit
+        ///                 * 11/2014 by STRML (strml.github.com)
+        ///                 * MIT License
+        ///                 *
+        ///                 * To use: textFit(document.getElementById(&apos;target-div&apos;), options);        /// [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string game_info_window {
             get {
@@ -199,16 +198,6 @@ namespace Retro_Achievement_Tracker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap notification_background {
-            get {
-                object obj = ResourceManager.GetObject("notification_background", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap progression_meter {
             get {
                 object obj = ResourceManager.GetObject("progression-meter", resourceCulture);
@@ -226,8 +215,9 @@ namespace Retro_Achievement_Tracker.Properties {
         ///    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css&quot;&gt;
         ///    &lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js&quot;&gt;&lt;/script&gt;
         ///    &lt;script id=&quot;recent-achievements-scripts&quot;&gt;
-        ///        var scrollingDown = true;
-        ///       [rest of string was truncated]&quot;;.
+        ///        /**
+        ///        * textFit v2.3.1
+        ///   [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string recent_achievements_window {
             get {
@@ -247,24 +237,22 @@ namespace Retro_Achievement_Tracker.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
-        ///&lt;html&gt;
-        ///&lt;head&gt;
-        ///    &lt;title&gt;Game Info Window&lt;/title&gt;
-        ///    &lt;meta charset=&quot;UTF-8&quot;&gt;
-        ///    &lt;script src=&quot;https://code.jquery.com/jquery-3.5.1.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
-        ///    &lt;style id=&quot;style&quot; type=&quot;text/css&quot;&gt;
-        ///        #image-asset {
-        ///            left: 5px;
-        ///            top: 5px;
-        ///            max-height: 465px;
-        ///            max-width: 620px;
-        ///            min-height: 240px;
-        ///            min-width: 320px;
-        ///            object-fit: contain;
-        ///        }
+        ///&lt;script&gt;
+        ///    function setWindowBackgroundColor(color) {
+        ///        document.body.style.backgroundColor = color;
+        ///    }
         ///
-        ///        #container {
-        ///             [rest of string was truncated]&quot;;.
+        ///    var container;
+        ///
+        ///    function assignJavaScriptVariables() {
+        ///        container = document.getElementById(&quot;container&quot;);
+        ///    }
+        ///    function setImage(imageUri) {
+        ///        $(&quot;#image-asset&quot;).attr(&apos;src&apos;, imageUri);
+        ///    }
+        ///    function hideImage() {
+        ///        var currentLeft = container.left;
+        ///        container.animate([{ left: currentLeft }, { left: &apos;650px&apos; }], { interat [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string related_media_window {
             get {
@@ -277,7 +265,7 @@ namespace Retro_Achievement_Tracker.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap retro_achievements_banner {
             get {
-                object obj = ResourceManager.GetObject("retro-achievements-banner", resourceCulture);
+                object obj = ResourceManager.GetObject("retro_achievements_banner", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -289,15 +277,14 @@ namespace Retro_Achievement_Tracker.Properties {
         ///    &lt;title&gt;&lt;/title&gt;
         ///    &lt;meta charset=&quot;UTF-8&quot;&gt;
         ///    &lt;script src=&quot;https://code.jquery.com/jquery-3.5.1.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
-        ///    &lt;script id=&quot;scripts&quot;&gt;/**
-        ///         * textFit v2.3.1
-        ///         * Previously known as jQuery.textFit
-        ///         * 11/2014 by STRML (strml.github.com)
-        ///         * MIT License
-        ///         *
-        ///         * To use: textFit(document.getElementById(&apos;target-div&apos;), options);
-        ///         *
-        ///         * Will make the *text* content inside a containe [rest of string was truncated]&quot;;.
+        ///    &lt;script id=&quot;scripts&quot;&gt;
+        ///        /**
+        ///                     * textFit v2.3.1
+        ///                     * Previously known as jQuery.textFit
+        ///                     * 11/2014 by STRML (strml.github.com)
+        ///                     * MIT License
+        ///                     *
+        ///                     * To use: textFit(document.getElementById(&apos;target-div&apos;) [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string user_info_window {
             get {

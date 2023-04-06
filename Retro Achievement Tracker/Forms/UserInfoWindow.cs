@@ -1,26 +1,35 @@
-﻿using CefSharp;
-using Retro_Achievement_Tracker.Controllers;
-using Retro_Achievement_Tracker.Forms;
-using Retro_Achievement_Tracker.Models;
+﻿using Retro_Achievement_Tracker.Controllers;
 using Retro_Achievement_Tracker.Properties;
 using System;
 using System.Drawing;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Retro_Achievement_Tracker
 {
-    public partial class UserInfoWindow : DisplayForm
+    public partial class UserInfoWindow : Form
     {
-        public UserInfoWindow() : base()
+        public UserInfoWindow()
         {
-            Name = "RA Tracker - User Info";
-            Text = "RA Tracker - User Info";
+            InitializeComponent();
         }
-        protected override void OnShown(EventArgs e)
+        private void NavigationCompleted(object sender, Microsoft.Web.WebView2.Core.CoreWebView2NavigationCompletedEventArgs e)
+        {
+            UserInfoController.Instance.IsOpen = true;
+            UserInfoController.Instance.UpdateUserInfo();
+        }
+        protected override async void OnShown(EventArgs e)
         {
             base.OnShown(e);
 
-            SetupBrowser();
+            await InitializeAsync();
+        }
+
+        private async Task InitializeAsync()
+        {
+            await webView21.EnsureCoreWebView2Async(null);
+
+            webView21.NavigateToString(Resources.user_info_window);
         }
         protected override void OnClosed(EventArgs e)
         {
@@ -28,185 +37,113 @@ namespace Retro_Achievement_Tracker
 
             UserInfoController.Instance.IsOpen = false;
         }
-        public override async void AssignJavaScriptVariables()
+        public void AssignJavaScriptVariables()
         {
-            await ExecuteScript(
-                "rankName = document.getElementById(\"rank-name\");" +
-                "rankValue = document.getElementById(\"rank-value\");" +
-                "ratioName = document.getElementById(\"ratio-name\");" +
-                "ratioValue = document.getElementById(\"ratio-value\");" +
-                "pointsName = document.getElementById(\"points-name\");" +
-                "pointsValue = document.getElementById(\"points-value\");" +
-                "truePointsName = document.getElementById(\"true-points-name\");" +
-                "truePointsValue = document.getElementById(\"true-points-value\");" +
-                "allElements = document.getElementsByClassName(\"has-font\");" +
-                "allNames = document.getElementsByClassName(\"name\");" +
-                "allValues = document.getElementsByClassName(\"value\");");
+            webView21.ExecuteScriptAsync("assignJavaScriptVariables();");
+        }
+        public void SetWindowBackgroundColor(string value)
+        {
+            webView21.ExecuteScriptAsync(string.Format("setWindowBackgroundColor(\"{0}\");", value));
         }
         public void SetSimpleFontFamily(FontFamily value)
         {
             int lineSpacing = value.GetLineSpacing(FontStyle.Regular) / value.GetEmHeight(FontStyle.Regular);
 
-            ExecutionScripts.Enqueue(
-                "for (var i = 0; i < allElements.length; i++) { " +
-                "   allElements[i].style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
-                "   allElements[i].style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
-                "}");
-            ExecutionScripts.Enqueue(
-                "for (var i = 0; i < allNames.length; i++) { " +
-                "   textFit(allNames[i], { alignVert: true, reProcess: true });" +
-                "}");
-            ExecutionScripts.Enqueue(
-                "for (var i = 0; i < allValues.length; i++) { " +
-                "   textFit(allValues[i], { alignVert: true, reProcess: true });" +
-                "}");
+            webView21.ExecuteScriptAsync(string.Format("setSimpleFontFamily(\"{0}\", \"{1}\");", value.Name.Replace(":", "\\:"), (lineSpacing == 0 ? 1 : lineSpacing).ToString()));
         }
         public void SetSimpleFontColor(string value)
         {
-            ExecutionScripts.Enqueue("for (var i = 0; i < allElements.length; i++) { allElements[i].style.color = \"" + value + "\"; }");
+            webView21.ExecuteScriptAsync(string.Format("setSimpleFontColor(\"{0}\");", value));
         }
-
         public void SetSimpleFontOutline(string value)
         {
-            ExecutionScripts.Enqueue("for (var i = 0; i < allElements.length; i++) { allElements[i].style.webkitTextStroke = \"" + value + "\"; }");
+            webView21.ExecuteScriptAsync(string.Format("setSimpleFontOutline(\"{0}\");", value));
         }
-
         public void SetNameFontFamily(FontFamily value)
         {
             int lineSpacing = value.GetLineSpacing(FontStyle.Regular) / value.GetEmHeight(FontStyle.Regular);
-            ExecutionScripts.Enqueue(
-                "for (var i = 0; i < allNames.length; i++) { " +
-                "   allNames[i].style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
-                "   allNames[i].style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
-                "   textFit(allNames[i], { alignVert: true, reProcess: true });" +
-                "}");
-        }
 
+            webView21.ExecuteScriptAsync(string.Format("setNameFontFamily(\"{0}\", \"{1}\");", value.Name.Replace(":", "\\:"), (lineSpacing == 0 ? 1 : lineSpacing).ToString()));
+        }
         public void SetValueFontFamily(FontFamily value)
         {
             int lineSpacing = value.GetLineSpacing(FontStyle.Regular) / value.GetEmHeight(FontStyle.Regular);
-            ExecutionScripts.Enqueue(
-                "for (var i = 0; i < allValues.length; i++) { " +
-                "   allValues[i].style.lineHeight = " + (lineSpacing == 0 ? 1 : lineSpacing) + ";" +
-                "   allValues[i].style.fontFamily = \"" + value.Name.Replace(":", "\\:") + "\";" +
-                "   textFit(allValues[i], { alignVert: true, reProcess: true });" +
-                "}");
-        }
 
+            webView21.ExecuteScriptAsync(string.Format("setValueFontFamily(\"{0}\", \"{1}\");", value.Name.Replace(":", "\\:"), (lineSpacing == 0 ? 1 : lineSpacing).ToString()));
+        }
         public void SetNameColor(string value)
         {
-            ExecutionScripts.Enqueue(
-                 "for (var i = 0; i < allNames.length; i++) { allNames[i].style.color = \"" + value + "\"; }");
+            webView21.ExecuteScriptAsync(string.Format("setNameColor(\"{0}\");", value));
         }
-
         public void SetValueColor(string value)
         {
-            ExecutionScripts.Enqueue(
-                 "for (var i = 0; i < allValues.length; i++) { allValues[i].style.color = \"" + value + "\"; }");
+            webView21.ExecuteScriptAsync(string.Format("setValueColor(\"{0}\");", value));
         }
-
         public void SetNameOutline(string value)
         {
-            ExecutionScripts.Enqueue(
-                  "for (var i = 0; i < allNames.length; i++) { allNames[i].style.webkitTextStroke = \"" + value + "\"; }");
+            webView21.ExecuteScriptAsync(string.Format("setNameOutlineColor(\"{0}\");", value));
         }
-
         public void SetValueOutline(string value)
         {
-            ExecutionScripts.Enqueue(
-                  "for (var i = 0; i < allValues.length; i++) { allValues[i].style.webkitTextStroke = \"" + value + "\"; }");
+            webView21.ExecuteScriptAsync(string.Format("setValueOutlineColor(\"{0}\");", value));
         }
         public void SetRankName(string value)
         {
-            ExecutionScripts.Enqueue("rankName.innerHTML = \"" + value + ":\";" +
-                "textFit(rankName, { alignVert: true, reProcess: true });");
+            webView21.ExecuteScriptAsync(string.Format("setRankName(\"{0}\");", string.IsNullOrEmpty(value.Trim()) ? string.Empty : value.Trim() + ":"));
         }
         public void SetRankValue(string value)
         {
-            ExecutionScripts.Enqueue("rankValue.innerHTML = \"" + value + "\";" +
-                "textFit(rankValue, { alignVert: true, reProcess: true });");
+            webView21.ExecuteScriptAsync(string.Format("setRankValue(\"{0}\");", value));
         }
         public void SetRankVisibility(bool isVisible)
         {
-            ExecutionScripts.Enqueue(isVisible ? "$(\"#rank\").fadeIn();" : "$(\"#rank\").fadeOut();");
+            webView21.ExecuteScriptAsync(string.Format("setRankVisibility(\"{0}\");", isVisible.ToString()));
         }
         //Points
         public void SetPointsName(string value)
         {
-            ExecutionScripts.Enqueue("pointsName.innerHTML = \"" + value + ":\";" +
-                "textFit(pointsName, { alignVert: true, reProcess: true });");
+            webView21.ExecuteScriptAsync(string.Format("setPointsName(\"{0}\");", string.IsNullOrEmpty(value.Trim()) ? string.Empty : value.Trim() + ":"));
         }
         public void SetPointsValue(string value)
         {
-            ExecutionScripts.Enqueue("pointsValue.innerHTML = \"" + value + "\";" +
-                "textFit(pointsValue, { alignVert: true, reProcess: true });");
+            webView21.ExecuteScriptAsync(string.Format("setPointsValue(\"{0}\");", value));
         }
         public void SetPointsVisibility(bool isVisible)
         {
-            ExecutionScripts.Enqueue(isVisible ? "$(\"#points\").fadeIn();" : "$(\"#points\").fadeOut();");
+            webView21.ExecuteScriptAsync(string.Format("setPointsVisibility(\"{0}\");", isVisible.ToString()));
         }
         //True Points
         public void SetTruePointsName(string value)
         {
-            ExecutionScripts.Enqueue("truePointsName.innerHTML = \"" + value + ":\";" +
-                "textFit(truePointsName, { alignVert: true, reProcess: true });");
+            webView21.ExecuteScriptAsync(string.Format("setTruePointsName(\"{0}\");", string.IsNullOrEmpty(value.Trim()) ? string.Empty : value.Trim() + ":"));
         }
         public void SetTruePointsValue(string value)
         {
-            ExecutionScripts.Enqueue("truePointsValue.innerHTML = \"" + value + "\";" +
-                "textFit(truePointsValue, { alignVert: true, reProcess: true });");
+            webView21.ExecuteScriptAsync(string.Format("setTruePointsValue(\"{0}\");", value));
         }
         public void SetTruePointsVisibility(bool isVisible)
         {
-            ExecutionScripts.Enqueue(isVisible ? "$(\"#true-points\").fadeIn();" : "$(\"#true-points\").fadeOut();");
+            webView21.ExecuteScriptAsync(string.Format("setTruePointsVisibility(\"{0}\");", isVisible.ToString()));
         }
         //Ratio
         public void SetRatioName(string value)
         {
-            ExecutionScripts.Enqueue("ratioName.innerHTML = \"" + value + ":\";" +
-                "textFit(ratioName, { alignVert: true, reProcess: true });");
+            webView21.ExecuteScriptAsync(string.Format("setRatioName(\"{0}\");", string.IsNullOrEmpty(value.Trim()) ? string.Empty : value.Trim() + ":"));
         }
         public void SetRatioValue(string value)
         {
-            ExecutionScripts.Enqueue("ratioValue.innerHTML = \"" + value + "\";" +
-                "textFit(ratioValue, { alignVert: true, reProcess: true });");
+            webView21.ExecuteScriptAsync(string.Format("setRatioValue(\"{0}\");", value));
         }
         public void SetRatioVisibility(bool isVisible)
         {
-            ExecutionScripts.Enqueue(isVisible ? "$(\"#ratio\").fadeIn();" : "$(\"#ratio\").fadeOut();");
+            webView21.ExecuteScriptAsync(string.Format("setRatioVisibility(\"{0}\");", isVisible.ToString()));
         }
         public void SetClientSize()
         {
-            Invoke(new Action(() => {
+            Invoke(new Action(() =>
+            {
                 ClientSize = new Size(805, 290);
             }));
-        }
-        public override void SetupBrowser()
-        {
-            chromiumWebBrowser = new CefSharp.WinForms.ChromiumWebBrowser()
-            {
-                ActivateBrowserOnCreation = false,
-                Location = new Point(0, 0),
-                Name = "userInfoBrowser",
-                Size = new Size(805, 290),
-                TabIndex = 0,
-                Dock = DockStyle.None,
-                RequestHandler = new CustomRequestHandler()
-            };
-
-            chromiumWebBrowser.LoadingStateChanged += new EventHandler<LoadingStateChangedEventArgs>((sender, loadingStateChangedEventArgs) =>
-            {
-                if (!loadingStateChangedEventArgs.IsLoading)
-                {
-                    UserInfoController.Instance.IsOpen = true;
-
-                    UserInfoController.Instance.UpdateUserInfo();
-                }
-            });
-
-            chromiumWebBrowser.LoadHtml(Resources.user_info_window);
-
-            Controls.Add(chromiumWebBrowser);
         }
     }
 }

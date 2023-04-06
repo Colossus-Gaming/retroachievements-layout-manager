@@ -9,7 +9,7 @@ namespace Retro_Achievement_Tracker.Controllers
 {
     public sealed class RecentAchievementsController
     {
-        private static RecentAchievementsController instance = new RecentAchievementsController();
+        private static readonly RecentAchievementsController instance = new RecentAchievementsController();
         private static RecentAchievementsWindow RecentAchievementsWindow;
         public bool IsOpen;
 
@@ -53,8 +53,8 @@ namespace Retro_Achievement_Tracker.Controllers
         {
             if (IsOpen)
             {
-                RecentAchievementsWindow.SetBackgroundColor(BorderBackgroundColor);
                 RecentAchievementsWindow.SetWindowBackgroundColor(WindowBackgroundColor);
+                RecentAchievementsWindow.SetBorderBackgroundColor(BorderBackgroundColor);
 
                 if (BorderEnabled)
                 {
