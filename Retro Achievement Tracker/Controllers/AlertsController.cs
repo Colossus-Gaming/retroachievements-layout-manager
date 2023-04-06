@@ -827,7 +827,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.notification_custom_achievement_enable = value;
                 Settings.Default.Save();
 
-                if (value)
+                if (IsOpen && value)
                 {
                     AlertsWindow.SetCustomAchievementDirectorMapping();
                 }
@@ -848,7 +848,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 Settings.Default.notification_custom_mastery_enable = value;
                 Settings.Default.Save();
 
-                if (value)
+                if (IsOpen && value)
                 {
                     AlertsWindow.SetCustomMasteryDirectorMapping();
                 }

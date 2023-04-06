@@ -1,6 +1,5 @@
 ﻿using Microsoft.Web.WebView2.Core;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Retro_Achievement_Tracker.Controllers;
 using Retro_Achievement_Tracker.Models;
 using Retro_Achievement_Tracker.Properties;
@@ -9,7 +8,6 @@ using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Shapes;
 
 namespace Retro_Achievement_Tracker.Forms
 {
