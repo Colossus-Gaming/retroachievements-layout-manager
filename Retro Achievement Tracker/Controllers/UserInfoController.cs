@@ -47,8 +47,6 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 UserInfoWindow.AssignJavaScriptVariables();
 
-                SetAllSettings();
-
                 UserInfoWindow.SetRankVisibility(RankEnabled);
                 UserInfoWindow.SetPointsVisibility(PointsEnabled);
                 UserInfoWindow.SetTruePointsVisibility(TruePointsEnabled);

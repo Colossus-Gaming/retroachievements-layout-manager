@@ -6243,7 +6243,7 @@ namespace Retro_Achievement_Tracker
             this.gameProgressRadioButtonPeriod.Size = new System.Drawing.Size(14, 13);
             this.gameProgressRadioButtonPeriod.TabIndex = 10073;
             this.gameProgressRadioButtonPeriod.UseVisualStyleBackColor = true;
-            this.gameProgressRadioButtonPeriod.CheckedChanged += new System.EventHandler(this.FeatureEnablementCheckBox_CheckedChanged);
+            this.gameProgressRadioButtonPeriod.CheckedChanged += new System.EventHandler(this.DividerCharacter_RadioButtonClicked);
             // 
             // label54
             // 
@@ -6265,7 +6265,7 @@ namespace Retro_Achievement_Tracker
             this.gameProgressRadioButtonColon.Size = new System.Drawing.Size(14, 13);
             this.gameProgressRadioButtonColon.TabIndex = 10071;
             this.gameProgressRadioButtonColon.UseVisualStyleBackColor = true;
-            this.gameProgressRadioButtonColon.CheckedChanged += new System.EventHandler(this.FeatureEnablementCheckBox_CheckedChanged);
+            this.gameProgressRadioButtonColon.CheckedChanged += new System.EventHandler(this.DividerCharacter_RadioButtonClicked);
             // 
             // label53
             // 
@@ -6287,7 +6287,7 @@ namespace Retro_Achievement_Tracker
             this.gameProgressRadioButtonBackslash.Size = new System.Drawing.Size(14, 13);
             this.gameProgressRadioButtonBackslash.TabIndex = 10067;
             this.gameProgressRadioButtonBackslash.UseVisualStyleBackColor = true;
-            this.gameProgressRadioButtonBackslash.CheckedChanged += new System.EventHandler(this.FeatureEnablementCheckBox_CheckedChanged);
+            this.gameProgressRadioButtonBackslash.CheckedChanged += new System.EventHandler(this.DividerCharacter_RadioButtonClicked);
             // 
             // label51
             // 

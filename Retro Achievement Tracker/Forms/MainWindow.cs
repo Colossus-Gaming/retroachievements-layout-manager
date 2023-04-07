@@ -1990,19 +1990,6 @@ namespace Retro_Achievement_Tracker
                     case "userInfoValuesOutlineCheckBox":
                         UserInfoController.Instance.ValueOutlineEnabled = checkBox.Checked;
                         break;
-                    case "gameProgressNamesOutlineCheckBox":
-                        if (GameProgressController.Instance.AdvancedSettingsEnabled)
-                        {
-                            GameProgressController.Instance.NameOutlineEnabled = checkBox.Checked;
-                        }
-                        else
-                        {
-                            GameProgressController.Instance.SimpleFontOutlineEnabled = checkBox.Checked;
-                        }
-                        break;
-                    case "gameProgressValuesOutlineCheckBox":
-                        GameProgressController.Instance.ValueOutlineEnabled = checkBox.Checked;
-                        break;
                     case "gameInfoNamesOutlineCheckBox":
                         if (GameInfoController.Instance.AdvancedSettingsEnabled)
                         {
@@ -2015,6 +2002,19 @@ namespace Retro_Achievement_Tracker
                         break;
                     case "gameInfoValuesOutlineCheckBox":
                         GameInfoController.Instance.ValueOutlineEnabled = checkBox.Checked;
+                        break;
+                    case "gameProgressNamesOutlineCheckBox":
+                        if (GameProgressController.Instance.AdvancedSettingsEnabled)
+                        {
+                            GameProgressController.Instance.NameOutlineEnabled = checkBox.Checked;
+                        }
+                        else
+                        {
+                            GameProgressController.Instance.SimpleFontOutlineEnabled = checkBox.Checked;
+                        }
+                        break;
+                    case "gameProgressValuesOutlineCheckBox":
+                        GameProgressController.Instance.ValueOutlineEnabled = checkBox.Checked;
                         break;
                     case "recentAchievementsTitleFontOutlineCheckBox":
                         if (RecentAchievementsController.Instance.AdvancedSettingsEnabled)
@@ -2047,21 +2047,6 @@ namespace Retro_Achievement_Tracker
                     case "userInfoRatioCheckBox":
                         UserInfoController.Instance.RatioEnabled = checkBox.Checked;
                         break;
-                    case "gameProgressAchievementsCheckBox":
-                        GameProgressController.Instance.AchievementsEnabled = checkBox.Checked;
-                        break;
-                    case "gameProgressPointsCheckBox":
-                        GameProgressController.Instance.PointsEnabled = checkBox.Checked;
-                        break;
-                    case "gameProgressTruePointsCheckBox":
-                        GameProgressController.Instance.TruePointsEnabled = checkBox.Checked;
-                        break;
-                    case "gameProgressCompletedCheckBox":
-                        GameProgressController.Instance.CompletedEnabled = checkBox.Checked;
-                        break;
-                    case "gameProgressRatioCheckBox":
-                        GameProgressController.Instance.RatioEnabled = checkBox.Checked;
-                        break;
                     case "gameInfoTitleCheckBox":
                         GameInfoController.Instance.TitleEnabled = checkBox.Checked;
                         break;
@@ -2080,6 +2065,21 @@ namespace Retro_Achievement_Tracker
                     case "gameInfoReleasedCheckBox":
                         GameInfoController.Instance.ReleasedDateEnabled = checkBox.Checked;
                         break;
+                    case "gameProgressAchievementsCheckBox":
+                        GameProgressController.Instance.AchievementsEnabled = checkBox.Checked;
+                        break;
+                    case "gameProgressPointsCheckBox":
+                        GameProgressController.Instance.PointsEnabled = checkBox.Checked;
+                        break;
+                    case "gameProgressTruePointsCheckBox":
+                        GameProgressController.Instance.TruePointsEnabled = checkBox.Checked;
+                        break;
+                    case "gameProgressCompletedCheckBox":
+                        GameProgressController.Instance.CompletedEnabled = checkBox.Checked;
+                        break;
+                    case "gameProgressRatioCheckBox":
+                        GameProgressController.Instance.RatioEnabled = checkBox.Checked;
+                        break;
                 }
 
                 IsLoading = false;
@@ -2087,29 +2087,28 @@ namespace Retro_Achievement_Tracker
         }
         private void DividerCharacter_RadioButtonClicked(object sender, EventArgs e)
         {
-            if (!IsLoading)
+            RadioButton radioButton = sender as RadioButton;
+
+            if (!IsLoading && radioButton.Checked)
             {
                 IsLoading = true;
-                RadioButton radioButton = sender as RadioButton;
-
-                if (radioButton.Checked)
                 {
                     switch (radioButton.Name)
                     {
-                        case "gameProgressCheckBoxBackslash":
+                        case "gameProgressRadioButtonBackslash":
                             GameProgressController.Instance.DividerCharacter = "/";
                             break;
-                        case "gameProgressCheckBoxColon":
+                        case "gameProgressRadioButtonColon":
                             GameProgressController.Instance.DividerCharacter = ":";
                             break;
-                        case "gameProgressCheckBoxPeriod":
+                        case "gameProgressRadioButtonPeriod":
                             GameProgressController.Instance.DividerCharacter = ".";
                             break;
                     }
-                }
 
-                UpdateDividerCharacterRadioButtons();
-                IsLoading = false;
+                    UpdateDividerCharacterRadioButtons();
+                    IsLoading = false;
+                }
             }
         }
         private void UpdateDividerCharacterRadioButtons()

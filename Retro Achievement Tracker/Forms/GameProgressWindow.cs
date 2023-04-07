@@ -67,19 +67,19 @@ namespace Retro_Achievement_Tracker.Forms
         }
         public void SetNameColor(string value)
         {
-            webView21.ExecuteScriptAsync(string.Format("setNameColor(\"{0}\");", value));
+            webView21.ExecuteScriptAsync(string.Format("setNameFontColor(\"{0}\");", value));
         }
         public void SetValueColor(string value)
         {
-            webView21.ExecuteScriptAsync(string.Format("setValueColor(\"{0}\");", value));
+            webView21.ExecuteScriptAsync(string.Format("setValueFontColor(\"{0}\");", value));
         }
         public void SetNameOutline(string value)
         {
-            webView21.ExecuteScriptAsync(string.Format("setNameOutlineColor(\"{0}\");", value));
+            webView21.ExecuteScriptAsync(string.Format("setNameFontOutline(\"{0}\");", value));
         }
         public void SetValueOutline(string value)
         {
-            webView21.ExecuteScriptAsync(string.Format("setValueOutlineColor(\"{0}\");", value));
+            webView21.ExecuteScriptAsync(string.Format("setValueFontOutline(\"{0}\");", value));
         }
         public void SetGameRatioName(string value)
         {

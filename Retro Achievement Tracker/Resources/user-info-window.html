@@ -289,7 +289,6 @@
             }
 
             for (var i = 0; i < allNames.length; i++) {
-
                 textFit(allNames[i], { alignVert: true, reProcess: true });
             }
 
@@ -313,7 +312,6 @@
             }
 
             for (var i = 0; i < allNames.length; i++) {
-
                 textFit(allNames[i], { alignVert: true, reProcess: true });
             }
         }
@@ -330,10 +328,10 @@
             for (var i = 0; i < allValues.length; i++) {
                 allValues[i].style.lineHeight = lineSpacing;
                 allValues[i].style.fontFamily = fontFamily;
+            }
 
-                for (var i = 0; i < allValues.length; i++) {
-                    textFit(allValues[i], { alignVert: true, reProcess: true });
-                }
+            for (var i = 0; i < allValues.length; i++) {
+                textFit(allValues[i], { alignVert: true, reProcess: true });
             }
         }
 
@@ -354,7 +352,7 @@
             textFit(rankValue, { alignVert: true, reProcess: true });
         }
         function setRankVisibility(isVisible) {
-            if (isVisible) {
+            if ('True' === isVisible) {
                 $("#rank").fadeIn();
             } else {
                 $("#rank").fadeOut();
@@ -370,7 +368,7 @@
             textFit(pointsValue, { alignVert: true, reProcess: true });
         }
         function setPointsVisibility(isVisible) {
-            if (isVisible) {
+            if ('True' === isVisible) {
                 $("#points").fadeIn();
             } else {
                 $("#points").fadeOut();
@@ -386,7 +384,7 @@
             textFit(truePointsValue, { alignVert: true, reProcess: true });
         }
         function setTruePointsVisibility(isVisible) {
-            if (isVisible) {
+            if ('True' === isVisible) {
                 $("#true-points").fadeIn();
             } else {
                 $("#true-points").fadeOut();
@@ -402,7 +400,7 @@
             textFit(ratioValue, { alignVert: true, reProcess: true });
         }
         function setRatioVisibility(isVisible) {
-            if (isVisible) {
+            if ('True' === isVisible) {
                 $("#ratio").fadeIn();
             } else {
                 $("#ratio").fadeOut();

@@ -317,7 +317,6 @@
             }
 
             for (var i = 0; i < allNames.length; i++) {
-
                 textFit(allNames[i], { alignVert: true, reProcess: true });
             }
         }
@@ -334,10 +333,10 @@
             for (var i = 0; i < allValues.length; i++) {
                 allValues[i].style.lineHeight = lineSpacing;
                 allValues[i].style.fontFamily = fontFamily;
+            }
 
-                for (var i = 0; i < allValues.length; i++) {
-                    textFit(allValues[i], { alignVert: true, reProcess: true });
-                }
+            for (var i = 0; i < allValues.length; i++) {
+                textFit(allValues[i], { alignVert: true, reProcess: true });
             }
         }
 
@@ -358,7 +357,7 @@
             textFit(completedValue, { alignVert: true, reProcess: true });
         }
         function setCompletedVisibility(isVisible) {
-            if (isVisible) {
+            if ('True' === isVisible) {
                 $("#completed").fadeIn();
             } else {
                 $("#completed").fadeOut();
@@ -374,7 +373,7 @@
             textFit(gamePointsValue, { alignVert: true, reProcess: true });
         }
         function setGamePointsVisibility(isVisible) {
-            if (isVisible) {
+            if ('True' === isVisible) {
                 $("#game-points").fadeIn();
             } else {
                 $("#game-points").fadeOut();
@@ -390,7 +389,7 @@
             textFit(gameTruePointsValue, { alignVert: true, reProcess: true });
         }
         function setGameTruePointsVisibility(isVisible) {
-            if (isVisible) {
+            if ('True' === isVisible) {
                 $("#game-true-points").fadeIn();
             } else {
                 $("#game-true-points").fadeOut();
@@ -406,7 +405,7 @@
             textFit(gameAchievementsValue, { alignVert: true, reProcess: true });
         }
         function setGameAchievementsVisibility(isVisible) {
-            if (isVisible) {
+            if ('True' === isVisible) {
                 $("#game-achievements").fadeIn();
             } else {
                 $("#game-achievements").fadeOut();
@@ -422,7 +421,7 @@
             textFit(gameRatioValue, { alignVert: true, reProcess: true });
         }
         function setGameRatioVisibility(isVisible) {
-            if (isVisible) {
+            if ('True' === isVisible) {
                 $("#game-ratio").fadeIn();
             } else {
                 $("#game-ratio").fadeOut();

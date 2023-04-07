@@ -45,30 +45,12 @@ namespace Retro_Achievement_Tracker.Controllers
                 GameProgressWindow.Show();
             }
         }
-        public void SetAllSettings()
-        {
-            if (IsOpen)
-            {
-                GameProgressWindow.SetWindowBackgroundColor(WindowBackgroundColor);
-
-                if (AdvancedSettingsEnabled)
-                {
-                    SetAdvancedSettings();
-                }
-                else
-                {
-                    SetSimpleSettings();
-                }
-            }
-        }
 
         public void UpdateGameProgress()
         {
             if (IsOpen)
             {
                 GameProgressWindow.AssignJavaScriptVariables();
-
-                SetAllSettings();
 
                 GameProgressWindow.SetGameAchievementsName(AchievementsName);
                 GameProgressWindow.SetGamePointsName(PointsName);
@@ -96,6 +78,22 @@ namespace Retro_Achievement_Tracker.Controllers
                 GameProgressWindow.SetClientSize();
             }
         }
+        public void SetAllSettings()
+        {
+            if (IsOpen)
+            {
+                GameProgressWindow.SetWindowBackgroundColor(WindowBackgroundColor);
+
+                if (AdvancedSettingsEnabled)
+                {
+                    SetAdvancedSettings();
+                }
+                else
+                {
+                    SetSimpleSettings();
+                }
+            }
+        }
         private void SetSimpleSettings()
         {
             GameProgressWindow.SetSimpleFontFamily(SimpleFontFamily);
@@ -113,7 +111,7 @@ namespace Retro_Achievement_Tracker.Controllers
             GameProgressWindow.SetValueOutline(ValueOutlineEnabled ? ValueOutlineColor + " " + ValueOutlineSize + "px" : "0px");
         }
 
-        internal void SetGamePoints(string pointsEarned, string pointsPossible)
+        public void SetGamePoints(string pointsEarned, string pointsPossible)
         {
             gamePointsEarned = pointsEarned;
             gamePointsPossible = pointsPossible;
@@ -126,7 +124,7 @@ namespace Retro_Achievement_Tracker.Controllers
             }
         }
 
-        internal void SetGameAchievements(string achievementsEarned, string achievementsPossible)
+        public void SetGameAchievements(string achievementsEarned, string achievementsPossible)
         {
             gameAchievementsEarned = achievementsEarned;
             gameAchievementsPossible = achievementsPossible;
@@ -139,7 +137,7 @@ namespace Retro_Achievement_Tracker.Controllers
             }
         }
 
-        internal void SetGameTruePoints(string truePointsEarned, string truePointsPossible)
+        public void SetGameTruePoints(string truePointsEarned, string truePointsPossible)
         {
             gameTruePointsEarned = truePointsEarned;
             gameTruePointsPossible = truePointsPossible;
@@ -152,7 +150,7 @@ namespace Retro_Achievement_Tracker.Controllers
             }
         }
 
-        internal void SetGameRatio()
+        public void SetGameRatio()
         {
 
             if (IsOpen)
@@ -162,7 +160,7 @@ namespace Retro_Achievement_Tracker.Controllers
             }
         }
 
-        internal void SetCompleted(float value)
+        public void SetCompleted(float value)
         {
             completed = value.ToString("0.00");
 

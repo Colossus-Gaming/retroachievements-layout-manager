@@ -321,7 +321,6 @@
             }
 
             for (var i = 0; i < allNames.length; i++) {
-
                 textFit(allNames[i], { alignVert: true, reProcess: true });
             }
         }
@@ -338,10 +337,10 @@
             for (var i = 0; i < allValues.length; i++) {
                 allValues[i].style.lineHeight = lineSpacing;
                 allValues[i].style.fontFamily = fontFamily;
+            }
 
-                for (var i = 0; i < allValues.length; i++) {
-                    textFit(allValues[i], { alignVert: true, reProcess: true });
-                }
+            for (var i = 0; i < allValues.length; i++) {
+                textFit(allValues[i], { alignVert: true, reProcess: true });
             }
         }
 
@@ -362,7 +361,7 @@
             textFit(titleValue, { alignVert: true, reProcess: true });
         }
         function setTitleVisibility(isVisible) {
-            if (isVisible) {
+            if ('True' === isVisible) {
                 $("#title").fadeIn();
             } else {
                 $("#title").fadeOut();
@@ -378,7 +377,7 @@
             textFit(publisherValue, { alignVert: true, reProcess: true });
         }
         function setPublisherVisibility(isVisible) {
-            if (isVisible) {
+            if ('True' === isVisible) {
                 $("#publisher").fadeIn();
             } else {
                 $("#publisher").fadeOut();
@@ -394,7 +393,7 @@
             textFit(genreValue, { alignVert: true, reProcess: true });
         }
         function setGenreVisibility(isVisible) {
-            if (isVisible) {
+            if ('True' === isVisible) {
                 $("#genre").fadeIn();
             } else {
                 $("#genre").fadeOut();
@@ -410,7 +409,7 @@
             textFit(developerValue, { alignVert: true, reProcess: true });
         }
         function setDeveloperVisibility(isVisible) {
-            if (isVisible) {
+            if ('True' === isVisible) {
                 $("#developer").fadeIn();
             } else {
                 $("#developer").fadeOut();
@@ -426,7 +425,7 @@
             textFit(consoleValue, { alignVert: true, reProcess: true });
         }
         function setConsoleVisibility(isVisible) {
-            if (isVisible) {
+            if ('True' === isVisible) {
                 $("#console").fadeIn();
             } else {
                 $("#console").fadeOut();
@@ -442,7 +441,7 @@
             textFit(releaseDateValue, { alignVert: true, reProcess: true });
         }
         function setReleaseDateVisibility(isVisible) {
-            if (isVisible) {
+            if ('True' === isVisible) {
                 $("#release-date").fadeIn();
             } else {
                 $("#release-date").fadeOut();
