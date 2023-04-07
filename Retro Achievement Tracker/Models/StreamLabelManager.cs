@@ -165,7 +165,7 @@ namespace Retro_Achievement_Tracker.Models
                 File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/points.txt", gameInfo.GamePointsPossible == 0 ? "0 / 0" : gameInfo.GamePointsEarned.ToString() + " / " + gameInfo.GamePointsPossible.ToString());
                 File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/true-points.txt", gameInfo.GameTruePointsPossible == 0 ? "0 / 0" : gameInfo.GameTruePointsEarned.ToString() + " / " + gameInfo.GameTruePointsPossible.ToString());
                 File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/achievements.txt", gameInfo.AchievementsEarned + " / " + (gameInfo.Achievements == null ? 0 : gameInfo.Achievements.Count));
-                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/completed.txt", (gameInfo.Achievements == null || gameInfo.Achievements.Count == 0 ? 0 : Convert.ToInt32(Convert.ToDecimal(gameInfo.Achievements.Count(achievement => achievement.DateEarned.HasValue)) / Convert.ToDecimal(gameInfo.Achievements == null ? 0 : gameInfo.Achievements.Count) * 200)) + " %");
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/completed.txt", (gameInfo.Achievements == null || gameInfo.Achievements.Count == 0 ? 0 : Convert.ToInt32(Convert.ToDecimal(gameInfo.Achievements.Count(achievement => achievement.DateEarned.HasValue)) / Convert.ToDecimal(gameInfo.Achievements == null ? 0 : gameInfo.Achievements.Count) * 100)) + " %");
                 File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/data.json", JsonConvert.SerializeObject(gameInfo));
             }
         }
