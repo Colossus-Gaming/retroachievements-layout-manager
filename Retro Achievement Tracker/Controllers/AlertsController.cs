@@ -20,7 +20,7 @@ namespace Retro_Achievement_Tracker.Controllers
         public bool IsOpen;
         private Stopwatch NotificationsStopwatch;
         private Task NotificationsTask;
-        private readonly ConcurrentQueue<NotificationRequest> NotificationRequests;
+        private ConcurrentQueue<NotificationRequest> NotificationRequests;
         private readonly CancellationTokenSource tokenSource2 = new CancellationTokenSource();
         private bool IsPlaying;
         private bool AnimationInPlayed;
@@ -50,6 +50,56 @@ namespace Retro_Achievement_Tracker.Controllers
             NotificationsStopwatch = new Stopwatch();
 
             NotificationsTask = Task.Factory.StartNew(() => { });
+        }
+        public static AlertsController Instance
+        {
+            get
+            {
+                return instance;
+            }
+        }
+        public void Close()
+        {
+            AlertsWindow.Close();
+        }
+        public void Show()
+        {
+            if (!IsOpen)
+            {
+                if (AlertsWindow == null || AlertsWindow.IsDisposed)
+                {
+                    AlertsWindow = new AlertsWindow();
+                }
+
+                IsPlaying = false;
+
+                AnimationInPlayed = false;
+                AnimationOutPlayed = false;
+
+                PlayingAchievement = false;
+                IsEditingAchievement = false;
+
+                if (CustomAchievementEnabled && !File.Exists(CustomAchievementFile))
+                {
+                    CustomAchievementEnabled = false;
+                }
+
+                if (CustomMasteryEnabled && !File.Exists(CustomMasteryFile))
+                {
+                    CustomMasteryEnabled = false;
+                }
+
+                NotificationRequests = new ConcurrentQueue<NotificationRequest>();
+                NotificationsStopwatch = new Stopwatch();
+
+                NotificationsTask = Task.Factory.StartNew(() => { });
+
+                AlertsWindow.Show();
+            }
+            else
+            {
+                AlertsWindow.BringToFront();
+            }
         }
         public void EnqueueAchievementNotifications(List<Achievement> achievements)
         {
@@ -131,6 +181,8 @@ namespace Retro_Achievement_Tracker.Controllers
             AnimationInPlayed = false;
             AnimationOutPlayed = false;
 
+            AchievementPlayingTime = 0;
+
             while (NotificationsStopwatch.IsRunning)
             {
                 if (tokenSource2.Token.IsCancellationRequested)
@@ -149,7 +201,7 @@ namespace Retro_Achievement_Tracker.Controllers
                             AlertsWindow.SetAchievementIn(CustomAchievementEnabled ? CustomAchievementInSpeed : 0, CustomAchievementEnabled ? AchievementAnimationIn : AnimationDirection.STATIC);
                             AnimationInPlayed = true;
                         }
-                        else if (!AnimationOutPlayed && (AchievementPlayingTime * 1000) > (CustomAchievementEnabled ? CustomAchievementOut : 5400))
+                        else if (!AnimationOutPlayed && (AchievementPlayingTime * 1000) > (CustomAchievementEnabled ? CustomAchievementOut : 5400) || !IsPlaying)
                         {
                             AlertsWindow.SetAchievementOut(CustomAchievementEnabled ? CustomAchievementOutSpeed : 700, CustomAchievementEnabled ? AchievementAnimationOut : AnimationDirection.UP);
                             AnimationOutPlayed = true;
@@ -164,13 +216,13 @@ namespace Retro_Achievement_Tracker.Controllers
                             AlertsWindow.SetMasteryIn(CustomMasteryEnabled ? CustomMasteryInSpeed : 0, CustomMasteryEnabled ? MasteryAnimationIn : AnimationDirection.STATIC);
                             AnimationInPlayed = true;
                         }
-                        else if (!AnimationOutPlayed && (MasteryPlayingTime * 1000) > (CustomMasteryEnabled ? CustomMasteryOut : 5400))
+                        else if (!AnimationOutPlayed && (MasteryPlayingTime * 1000) > (CustomMasteryEnabled ? CustomMasteryOut : 5400) || !IsPlaying)
                         {
                             AlertsWindow.SetMasteryOut(CustomMasteryEnabled ? CustomMasteryOutSpeed : 700, CustomMasteryEnabled ? MasteryAnimationOut : AnimationDirection.UP);
                             AnimationOutPlayed = true;
                         }
                     }
-                    if (AnimationOutPlayed && AnimationInPlayed)
+                    if ((AnimationOutPlayed && AnimationInPlayed) || !IsPlaying)
                     {
                         NotificationsStopwatch.Stop();
                     }
@@ -204,32 +256,6 @@ namespace Retro_Achievement_Tracker.Controllers
                         RunNotifications();
                     }
                 }
-            }
-        }
-        public static AlertsController Instance
-        {
-            get
-            {
-                return instance;
-            }
-        }
-        public void Close()
-        {
-            AlertsWindow.Close();
-        }
-        public void Show()
-        {
-            if (!IsOpen)
-            {
-                if (AlertsWindow == null || AlertsWindow.IsDisposed)
-                {
-                    AlertsWindow = new AlertsWindow();
-                }
-                AlertsWindow.Show();
-            }
-            else
-            {
-                AlertsWindow.BringToFront();
             }
         }
         public void SetAllSettings()
@@ -363,6 +389,8 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.alerts_achievement_enable = value;
                 Settings.Default.Save();
+
+                SetAllSettings();
             }
         }
         public bool MasteryAlertEnable
@@ -375,6 +403,8 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.alerts_mastery_enable = value;
                 Settings.Default.Save();
+
+                SetAllSettings();
             }
         }
         public bool AdvancedSettingsEnabled
@@ -831,10 +861,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 {
                     AlertsWindow.SetCustomAchievementDirectorMapping();
                 }
-                else
-                {
-                    SetAllSettings();
-                }
+                SetAllSettings();
             }
         }
         public bool CustomMasteryEnabled
@@ -852,10 +879,8 @@ namespace Retro_Achievement_Tracker.Controllers
                 {
                     AlertsWindow.SetCustomMasteryDirectorMapping();
                 }
-                else
-                {
-                    SetAllSettings();
-                }
+                SetAllSettings();
+
             }
         }
         public int CustomAchievementX
@@ -952,6 +977,8 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.notification_custom_achievement_fade_in = value;
                 Settings.Default.Save();
+
+                SetAllSettings();
             }
         }
         public int CustomAchievementOut
@@ -964,6 +991,8 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.notification_custom_achievement_fade_out = value;
                 Settings.Default.Save();
+
+                SetAllSettings();
             }
         }
         public int CustomMasteryIn
@@ -976,6 +1005,8 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.notification_custom_mastery_fade_in = value;
                 Settings.Default.Save();
+
+                SetAllSettings();
             }
         }
         public int CustomMasteryOut
@@ -988,6 +1019,8 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.notification_custom_mastery_fade_out = value;
                 Settings.Default.Save();
+
+                SetAllSettings();
             }
         }
         public int CustomAchievementInSpeed
@@ -1000,6 +1033,8 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.alerts_custom_achievement_in_speed = value;
                 Settings.Default.Save();
+
+                SetAllSettings();
             }
         }
         public int CustomAchievementOutSpeed
@@ -1012,6 +1047,8 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.alerts_custom_achievement_out_speed = value;
                 Settings.Default.Save();
+
+                SetAllSettings();
             }
         }
         public int CustomMasteryInSpeed
@@ -1024,6 +1061,8 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.alerts_custom_mastery_in_speed = value;
                 Settings.Default.Save();
+
+                SetAllSettings();
             }
         }
         public int CustomMasteryOutSpeed
@@ -1036,6 +1075,8 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 Settings.Default.alerts_custom_mastery_out_speed = value;
                 Settings.Default.Save();
+
+                SetAllSettings();
             }
         }
         public AnimationDirection AchievementAnimationIn

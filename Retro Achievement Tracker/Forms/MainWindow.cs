@@ -1011,6 +1011,9 @@ namespace Retro_Achievement_Tracker
             alertsAchievementEnableCheckbox.Checked = AlertsController.Instance.AchievementAlertEnable;
             alertsMasteryEnableCheckbox.Checked = AlertsController.Instance.MasteryAlertEnable;
 
+            alertsCustomAchievementEnableCheckbox.Checked = AlertsController.Instance.CustomAchievementEnabled;
+            alertsCustomMasteryEnableCheckbox.Checked = AlertsController.Instance.CustomMasteryEnabled;
+
             if (AlertsController.Instance.AchievementAlertEnable)
             {
                 alertsPlayAchievementButton.Enabled = true;
