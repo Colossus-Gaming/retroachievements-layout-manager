@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Retro_Achievement_Tracker
 {
-    public partial class RecentAchievementsWindow : Form
+    public partial class RecentUnlocksWindow : Form
     {
-        public RecentAchievementsWindow()
+        public RecentUnlocksWindow()
         {
             InitializeComponent();
         }
@@ -33,7 +33,7 @@ namespace Retro_Achievement_Tracker
         {
             base.OnClosed(e);
 
-            RecentAchievementsController.Instance.IsOpen = false;
+            RecentUnlocksController.Instance.IsOpen = false;
         }
         public void AssignJavaScriptVariables()
         {
@@ -157,8 +157,8 @@ namespace Retro_Achievement_Tracker
         }
         private void NavigationCompleted(object sender, CoreWebView2NavigationCompletedEventArgs e)
         {
-            RecentAchievementsController.Instance.IsOpen = true;
-            RecentAchievementsController.Instance.SetAchievements();
+            RecentUnlocksController.Instance.IsOpen = true;
+            RecentUnlocksController.Instance.SetAchievements();
         }
     }
 }

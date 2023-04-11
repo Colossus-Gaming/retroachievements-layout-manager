@@ -173,7 +173,7 @@
     <Compile Include="Controllers\AlertsController.cs" />
     <Compile Include="Controllers\FocusController.cs" />
     <Compile Include="Controllers\GameInfoController.cs" />
-    <Compile Include="Controllers\RecentAchievementsController.cs" />
+    <Compile Include="Controllers\RecentUnlocksController.cs" />
     <Compile Include="Controllers\GameProgressController.cs" />
     <Compile Include="Controllers\UserInfoController.cs" />
     <Compile Include="Forms\AchievementListWindow.cs">

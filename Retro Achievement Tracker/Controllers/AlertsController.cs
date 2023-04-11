@@ -861,6 +861,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 {
                     AlertsWindow.SetCustomAchievementDirectorMapping();
                 }
+
                 SetAllSettings();
             }
         }
@@ -879,6 +880,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 {
                     AlertsWindow.SetCustomMasteryDirectorMapping();
                 }
+
                 SetAllSettings();
 
             }

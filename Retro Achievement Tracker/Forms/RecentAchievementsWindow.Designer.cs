@@ -3,7 +3,7 @@ using Retro_Achievement_Tracker.Properties;
 
 namespace Retro_Achievement_Tracker
 {
-    partial class RecentAchievementsWindow
+    partial class RecentUnlocksWindow
     {
         /// <summary>
         /// Required designer variable.
@@ -26,7 +26,7 @@ namespace Retro_Achievement_Tracker
         #region Windows Form Designer generated code
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RecentAchievementsWindow));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RecentUnlocksWindow));
             this.webView21 = new Microsoft.Web.WebView2.WinForms.WebView2();
             ((System.ComponentModel.ISupportInitialize)(this.webView21)).BeginInit();
             this.SuspendLayout();

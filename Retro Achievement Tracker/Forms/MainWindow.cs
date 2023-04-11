@@ -154,7 +154,7 @@ namespace Retro_Achievement_Tracker
             UserInfoController.Instance.Close();
             AlertsController.Instance.Close();
             GameInfoController.Instance.Close();
-            RecentAchievementsController.Instance.Close();
+            RecentUnlocksController.Instance.Close();
             AchievementListController.Instance.Close();
             RelatedMediaController.Instance.Close();
         }
@@ -306,7 +306,7 @@ namespace Retro_Achievement_Tracker
                 {
                     AchievementListController.Instance.UpdateAchievementList(UnlockedAchievements.ToList(), LockedAchievements.ToList(), !sameGame);
 
-                    RecentAchievementsController.Instance.SetAchievements(UnlockedAchievements.ToList());
+                    RecentUnlocksController.Instance.SetAchievements(UnlockedAchievements.ToList());
 
                     StreamLabelManager.Instance.EnqueueRecentUnlocks(GameInfo);
 
@@ -357,9 +357,9 @@ namespace Retro_Achievement_Tracker
                     {
                         GameProgressController.Instance.Show();
                     }
-                    else if (RecentAchievementsController.Instance.AutoLaunch && !RecentAchievementsController.Instance.IsOpen)
+                    else if (RecentUnlocksController.Instance.AutoLaunch && !RecentUnlocksController.Instance.IsOpen)
                     {
-                        RecentAchievementsController.Instance.Show();
+                        RecentUnlocksController.Instance.Show();
                     }
                     else if (AchievementListController.Instance.AutoLaunch && !AchievementListController.Instance.IsOpen)
                     {
@@ -1203,27 +1203,27 @@ namespace Retro_Achievement_Tracker
                         GameProgressController.Instance.ValueOutlineSize = Convert.ToInt32(numericUpDown.Value);
                         break;
                     case "recentAchievementsTitleFontOutlineNumericUpDown":
-                        if (RecentAchievementsController.Instance.AdvancedSettingsEnabled)
+                        if (RecentUnlocksController.Instance.AdvancedSettingsEnabled)
                         {
-                            RecentAchievementsController.Instance.TitleOutlineSize = Convert.ToInt32(numericUpDown.Value);
+                            RecentUnlocksController.Instance.TitleOutlineSize = Convert.ToInt32(numericUpDown.Value);
                         }
                         else
                         {
-                            RecentAchievementsController.Instance.SimpleFontOutlineSize = Convert.ToInt32(numericUpDown.Value);
+                            RecentUnlocksController.Instance.SimpleFontOutlineSize = Convert.ToInt32(numericUpDown.Value);
                         }
                         break;
                     case "recentAchievementsDescriptionFontOutlineNumericUpDown":
-                        RecentAchievementsController.Instance.DescriptionOutlineSize = Convert.ToInt32(numericUpDown.Value);
+                        RecentUnlocksController.Instance.DescriptionOutlineSize = Convert.ToInt32(numericUpDown.Value);
                         break;
                     case "recentAchievementsPointsFontOutlineNumericUpDown":
-                        RecentAchievementsController.Instance.PointsOutlineSize = Convert.ToInt32(numericUpDown.Value);
+                        RecentUnlocksController.Instance.PointsOutlineSize = Convert.ToInt32(numericUpDown.Value);
                         break;
                     case "recentAchievementsLineOutlineNumericUpDown":
-                        RecentAchievementsController.Instance.LineOutlineSize = Convert.ToInt32(numericUpDown.Value);
+                        RecentUnlocksController.Instance.LineOutlineSize = Convert.ToInt32(numericUpDown.Value);
                         break;
                     case "recentAchievementsMaxListNumericUpDown":
-                        RecentAchievementsController.Instance.MaxListSize = Convert.ToInt32(numericUpDown.Value);
-                        RecentAchievementsController.Instance.SetAchievements(UnlockedAchievements.ToList());
+                        RecentUnlocksController.Instance.MaxListSize = Convert.ToInt32(numericUpDown.Value);
+                        RecentUnlocksController.Instance.SetAchievements(UnlockedAchievements.ToList());
                         break;
                 }
 
@@ -1359,7 +1359,7 @@ namespace Retro_Achievement_Tracker
                     GameInfoController.Instance.Show();
                     break;
                 case "recentAchievementsOpenWindowButton":
-                    RecentAchievementsController.Instance.Show();
+                    RecentUnlocksController.Instance.Show();
                     break;
                 case "achievementListOpenWindowButton":
                     AchievementListController.Instance.Show();
@@ -1611,57 +1611,57 @@ namespace Retro_Achievement_Tracker
                         gameProgressValuesFontOutlineColorPictureBox.BackColor = colorDialog1.Color;
                         break;
                     case "recentAchievementsBackgroundColorPictureBox":
-                        RecentAchievementsController.Instance.WindowBackgroundColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        RecentUnlocksController.Instance.WindowBackgroundColor = MediaHelper.HexConverter(colorDialog1.Color);
                         recentAchievementsBackgroundColorPictureBox.BackColor = colorDialog1.Color;
                         break;
                     case "recentAchievementsBorderColorPictureBox":
-                        RecentAchievementsController.Instance.BorderBackgroundColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        RecentUnlocksController.Instance.BorderBackgroundColor = MediaHelper.HexConverter(colorDialog1.Color);
                         recentAchievementsBorderColorPictureBox.BackColor = colorDialog1.Color;
                         break;
                     case "recentAchievementsTitleFontColorPictureBox":
-                        if (RecentAchievementsController.Instance.AdvancedSettingsEnabled)
+                        if (RecentUnlocksController.Instance.AdvancedSettingsEnabled)
                         {
-                            RecentAchievementsController.Instance.TitleColor = MediaHelper.HexConverter(colorDialog1.Color);
+                            RecentUnlocksController.Instance.TitleColor = MediaHelper.HexConverter(colorDialog1.Color);
                         }
                         else
                         {
-                            RecentAchievementsController.Instance.SimpleFontColor = MediaHelper.HexConverter(colorDialog1.Color);
+                            RecentUnlocksController.Instance.SimpleFontColor = MediaHelper.HexConverter(colorDialog1.Color);
                         }
                         recentAchievementsTitleFontColorPictureBox.BackColor = colorDialog1.Color;
                         break;
                     case "recentAchievementsDateFontColorPictureBox":
-                        RecentAchievementsController.Instance.DateColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        RecentUnlocksController.Instance.DateColor = MediaHelper.HexConverter(colorDialog1.Color);
                         recentAchievementsDateFontColorPictureBox.BackColor = colorDialog1.Color;
                         break;
                     case "recentAchievementsPointsFontColorPictureBox":
-                        RecentAchievementsController.Instance.PointsColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        RecentUnlocksController.Instance.PointsColor = MediaHelper.HexConverter(colorDialog1.Color);
                         recentAchievementsPointsFontColorPictureBox.BackColor = colorDialog1.Color;
                         break;
                     case "recentAchievementsLineColorPictureBox":
-                        RecentAchievementsController.Instance.LineColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        RecentUnlocksController.Instance.LineColor = MediaHelper.HexConverter(colorDialog1.Color);
                         recentAchievementsLineColorPictureBox.BackColor = colorDialog1.Color;
                         break;
                     case "recentAchievementsTitleFontOutlineColorPictureBox":
-                        if (RecentAchievementsController.Instance.AdvancedSettingsEnabled)
+                        if (RecentUnlocksController.Instance.AdvancedSettingsEnabled)
                         {
-                            RecentAchievementsController.Instance.TitleOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
+                            RecentUnlocksController.Instance.TitleOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
                         }
                         else
                         {
-                            RecentAchievementsController.Instance.SimpleFontOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
+                            RecentUnlocksController.Instance.SimpleFontOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
                         }
                         recentAchievementsTitleFontOutlineColorPictureBox.BackColor = colorDialog1.Color;
                         break;
                     case "recentAchievementsDateFontOutlineColorPictureBox":
-                        RecentAchievementsController.Instance.DateOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        RecentUnlocksController.Instance.DateOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
                         recentAchievementsDateFontOutlineColorPictureBox.BackColor = colorDialog1.Color;
                         break;
                     case "recentAchievementsPointsFontOutlineColorPictureBox":
-                        RecentAchievementsController.Instance.PointsOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        RecentUnlocksController.Instance.PointsOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
                         recentAchievementsPointsFontOutlineColorPictureBox.BackColor = colorDialog1.Color;
                         break;
                     case "recentAchievementsLineOutlineColorPictureBox":
-                        RecentAchievementsController.Instance.LineOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
+                        RecentUnlocksController.Instance.LineOutlineColor = MediaHelper.HexConverter(colorDialog1.Color);
                         recentAchievementsLineOutlineColorPictureBox.BackColor = colorDialog1.Color;
                         break;
                     case "achievementListBackgroundColorPictureBox":
@@ -1770,24 +1770,24 @@ namespace Retro_Achievement_Tracker
                             GameProgressController.Instance.ValueFontFamily = fontFamily;
                             break;
                         case "recentAchievementsTitleFontComboBox":
-                            if (RecentAchievementsController.Instance.AdvancedSettingsEnabled)
+                            if (RecentUnlocksController.Instance.AdvancedSettingsEnabled)
                             {
-                                RecentAchievementsController.Instance.TitleFontFamily = fontFamily;
+                                RecentUnlocksController.Instance.TitleFontFamily = fontFamily;
                             }
                             else
                             {
-                                RecentAchievementsController.Instance.SimpleFontFamily = fontFamily;
+                                RecentUnlocksController.Instance.SimpleFontFamily = fontFamily;
                             }
 
-                            RecentAchievementsController.Instance.PopulateRecentAchievementsWindow();
+                            RecentUnlocksController.Instance.PopulateRecentAchievementsWindow();
                             break;
                         case "recentAchievementsDescriptionFontComboBox":
-                            RecentAchievementsController.Instance.DateFontFamily = fontFamily;
-                            RecentAchievementsController.Instance.PopulateRecentAchievementsWindow();
+                            RecentUnlocksController.Instance.DateFontFamily = fontFamily;
+                            RecentUnlocksController.Instance.PopulateRecentAchievementsWindow();
                             break;
                         case "recentAchievementsPointsFontComboBox":
-                            RecentAchievementsController.Instance.PointsFontFamily = fontFamily;
-                            RecentAchievementsController.Instance.PopulateRecentAchievementsWindow();
+                            RecentUnlocksController.Instance.PointsFontFamily = fontFamily;
+                            RecentUnlocksController.Instance.PopulateRecentAchievementsWindow();
                             break;
                     }
                 }
@@ -1900,7 +1900,7 @@ namespace Retro_Achievement_Tracker
                 switch (checkBox.Name)
                 {
                     case "recentAchievementsAutoOpenWindowCheckbox":
-                        RecentAchievementsController.Instance.AutoLaunch = checkBox.Checked;
+                        RecentUnlocksController.Instance.AutoLaunch = checkBox.Checked;
                         break;
                     case "gameInfoAutoOpenWindowCheckbox":
                         GameInfoController.Instance.AutoLaunch = checkBox.Checked;
@@ -1931,7 +1931,7 @@ namespace Retro_Achievement_Tracker
                         AchievementListController.Instance.AutoScroll = checkBox.Checked;
                         break;
                     case "recentAchievementsAutoScrollCheckBox":
-                        RecentAchievementsController.Instance.AutoScroll = checkBox.Checked;
+                        RecentUnlocksController.Instance.AutoScroll = checkBox.Checked;
                         break;
                     case "focusBorderCheckBox":
                         FocusController.Instance.BorderEnabled = checkBox.Checked;
@@ -1940,7 +1940,7 @@ namespace Retro_Achievement_Tracker
                         AlertsController.Instance.BorderEnabled = checkBox.Checked;
                         break;
                     case "recentAchievementsBorderCheckBox":
-                        RecentAchievementsController.Instance.BorderEnabled = checkBox.Checked;
+                        RecentUnlocksController.Instance.BorderEnabled = checkBox.Checked;
                         break;
                     case "focusTitleOutlineCheckBox":
                         if (FocusController.Instance.AdvancedSettingsEnabled)
@@ -2020,23 +2020,23 @@ namespace Retro_Achievement_Tracker
                         GameProgressController.Instance.ValueOutlineEnabled = checkBox.Checked;
                         break;
                     case "recentAchievementsTitleFontOutlineCheckBox":
-                        if (RecentAchievementsController.Instance.AdvancedSettingsEnabled)
+                        if (RecentUnlocksController.Instance.AdvancedSettingsEnabled)
                         {
-                            RecentAchievementsController.Instance.TitleOutlineEnabled = checkBox.Checked;
+                            RecentUnlocksController.Instance.TitleOutlineEnabled = checkBox.Checked;
                         }
                         else
                         {
-                            RecentAchievementsController.Instance.SimpleFontOutlineEnabled = checkBox.Checked;
+                            RecentUnlocksController.Instance.SimpleFontOutlineEnabled = checkBox.Checked;
                         }
                         break;
                     case "recentAchievementsDateFontOutlineCheckBox":
-                        RecentAchievementsController.Instance.DescriptionOutlineEnabled = checkBox.Checked;
+                        RecentUnlocksController.Instance.DescriptionOutlineEnabled = checkBox.Checked;
                         break;
                     case "recentAchievementsPointsFontOutlineCheckBox":
-                        RecentAchievementsController.Instance.PointsOutlineEnabled = checkBox.Checked;
+                        RecentUnlocksController.Instance.PointsOutlineEnabled = checkBox.Checked;
                         break;
                     case "recentAchievementsLineOutlineCheckBox":
-                        RecentAchievementsController.Instance.LineOutlineEnabled = checkBox.Checked;
+                        RecentUnlocksController.Instance.LineOutlineEnabled = checkBox.Checked;
                         break;
                     case "userInfoRankCheckBox":
                         UserInfoController.Instance.RankEnabled = checkBox.Checked;
@@ -3412,7 +3412,7 @@ namespace Retro_Achievement_Tracker
                         GameProgressController.Instance.AdvancedSettingsEnabled = checkBox.Checked;
                         break;
                     case "recentAchievementsAdvancedCheckBox":
-                        RecentAchievementsController.Instance.AdvancedSettingsEnabled = checkBox.Checked;
+                        RecentUnlocksController.Instance.AdvancedSettingsEnabled = checkBox.Checked;
                         break;
                 }
 
@@ -3594,14 +3594,14 @@ namespace Retro_Achievement_Tracker
                 gameProgressValuesOutlinePanel.Enabled = false;
             }
 
-            if (RecentAchievementsController.Instance.AdvancedSettingsEnabled)
+            if (RecentUnlocksController.Instance.AdvancedSettingsEnabled)
             {
                 recentAchievementsTitleLabel.Text = "Title";
                 recentAchievementsTitleOutlineLabel.Text = "Title OutlineColor";
 
-                SetFontFamilyBox(recentAchievementsTitleFontComboBox, RecentAchievementsController.Instance.TitleFontFamily);
+                SetFontFamilyBox(recentAchievementsTitleFontComboBox, RecentUnlocksController.Instance.TitleFontFamily);
 
-                recentAchievementsTitleFontOutlineCheckBox.Checked = RecentAchievementsController.Instance.TitleOutlineEnabled;
+                recentAchievementsTitleFontOutlineCheckBox.Checked = RecentUnlocksController.Instance.TitleOutlineEnabled;
 
                 recentAchievementsTitleFontColorPictureBox.BackColor = ColorTranslator.FromHtml(FocusController.Instance.TitleColor);
                 recentAchievementsTitleFontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(FocusController.Instance.TitleOutlineColor);
@@ -3618,12 +3618,12 @@ namespace Retro_Achievement_Tracker
                 recentAchievementsTitleLabel.Text = "Font";
                 recentAchievementsTitleOutlineLabel.Text = "Font OutlineColor";
 
-                SetFontFamilyBox(recentAchievementsTitleFontComboBox, RecentAchievementsController.Instance.SimpleFontFamily);
+                SetFontFamilyBox(recentAchievementsTitleFontComboBox, RecentUnlocksController.Instance.SimpleFontFamily);
 
-                recentAchievementsTitleFontOutlineCheckBox.Checked = RecentAchievementsController.Instance.SimpleFontOutlineEnabled;
+                recentAchievementsTitleFontOutlineCheckBox.Checked = RecentUnlocksController.Instance.SimpleFontOutlineEnabled;
 
-                recentAchievementsTitleFontColorPictureBox.BackColor = ColorTranslator.FromHtml(RecentAchievementsController.Instance.SimpleFontColor);
-                recentAchievementsTitleFontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(RecentAchievementsController.Instance.SimpleFontOutlineColor);
+                recentAchievementsTitleFontColorPictureBox.BackColor = ColorTranslator.FromHtml(RecentUnlocksController.Instance.SimpleFontColor);
+                recentAchievementsTitleFontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(RecentUnlocksController.Instance.SimpleFontOutlineColor);
 
                 recentAchievementsDescriptionPanel.Enabled = false;
                 recentAchievementsPointsPanel.Enabled = false;
@@ -3801,7 +3801,7 @@ namespace Retro_Achievement_Tracker
             userInfoAutoOpenWindowCheckbox.Checked = UserInfoController.Instance.AutoLaunch;
             gameInfoAutoOpenWindowCheckbox.Checked = GameInfoController.Instance.AutoLaunch;
             gameProgressAutoOpenWindowCheckbox.Checked = GameProgressController.Instance.AutoLaunch;
-            recentAchievementsAutoOpenWindowCheckbox.Checked = RecentAchievementsController.Instance.AutoLaunch;
+            recentAchievementsAutoOpenWindowCheckbox.Checked = RecentUnlocksController.Instance.AutoLaunch;
             achievementListAutoOpenWindowCheckbox.Checked = AchievementListController.Instance.AutoLaunch;
             relatedMediaAutoOpenWindowCheckbox.Checked = RelatedMediaController.Instance.AutoLaunch;
 
@@ -3813,7 +3813,7 @@ namespace Retro_Achievement_Tracker
             userInfoBackgroundColorPictureBox.BackColor = ColorTranslator.FromHtml(UserInfoController.Instance.WindowBackgroundColor);
             gameInfoBackgroundColorPictureBox.BackColor = ColorTranslator.FromHtml(GameInfoController.Instance.WindowBackgroundColor);
             gameProgressBackgroundColorPictureBox.BackColor = ColorTranslator.FromHtml(GameProgressController.Instance.WindowBackgroundColor);
-            recentAchievementsBackgroundColorPictureBox.BackColor = ColorTranslator.FromHtml(RecentAchievementsController.Instance.WindowBackgroundColor);
+            recentAchievementsBackgroundColorPictureBox.BackColor = ColorTranslator.FromHtml(RecentUnlocksController.Instance.WindowBackgroundColor);
             achievementListBackgroundColorPictureBox.BackColor = ColorTranslator.FromHtml(AchievementListController.Instance.WindowBackgroundColor);
             relatedMediaBackgroundColorPictureBox.BackColor = ColorTranslator.FromHtml(RelatedMediaController.Instance.WindowBackgroundColor);
 
@@ -3822,14 +3822,14 @@ namespace Retro_Achievement_Tracker
              */
             focusBorderColorPictureBox.BackColor = ColorTranslator.FromHtml(FocusController.Instance.BorderBackgroundColor);
             alertsBorderColorPictureBox.BackColor = ColorTranslator.FromHtml(AlertsController.Instance.BorderBackgroundColor);
-            recentAchievementsBorderColorPictureBox.BackColor = ColorTranslator.FromHtml(RecentAchievementsController.Instance.BorderBackgroundColor);
+            recentAchievementsBorderColorPictureBox.BackColor = ColorTranslator.FromHtml(RecentUnlocksController.Instance.BorderBackgroundColor);
 
             /*
              * Border Enabled
              */
             focusBorderCheckBox.Checked = FocusController.Instance.BorderEnabled;
             alertsBorderCheckBox.Checked = AlertsController.Instance.BorderEnabled;
-            recentAchievementsBorderCheckBox.Checked = RecentAchievementsController.Instance.BorderEnabled;
+            recentAchievementsBorderCheckBox.Checked = RecentUnlocksController.Instance.BorderEnabled;
 
             /*
              * Advanced Settings
@@ -3839,7 +3839,7 @@ namespace Retro_Achievement_Tracker
             userInfoAdvancedCheckBox.Checked = UserInfoController.Instance.AdvancedSettingsEnabled;
             gameInfoAdvancedCheckBox.Checked = GameInfoController.Instance.AdvancedSettingsEnabled;
             gameProgressAdvancedCheckBox.Checked = GameProgressController.Instance.AdvancedSettingsEnabled;
-            recentAchievementsAdvancedCheckBox.Checked = RecentAchievementsController.Instance.AdvancedSettingsEnabled;
+            recentAchievementsAdvancedCheckBox.Checked = RecentUnlocksController.Instance.AdvancedSettingsEnabled;
 
             userInfoRankCheckBox.Checked = UserInfoController.Instance.RankEnabled;
             userInfoPointsCheckBox.Checked = UserInfoController.Instance.PointsEnabled;
@@ -3879,9 +3879,9 @@ namespace Retro_Achievement_Tracker
             SetFontFamilyBox(gameProgressNamesFontComboBox, GameProgressController.Instance.AdvancedSettingsEnabled ? GameProgressController.Instance.NameFontFamily : GameProgressController.Instance.SimpleFontFamily);
             SetFontFamilyBox(gameProgressValuesFontComboBox, GameProgressController.Instance.ValueFontFamily);
 
-            SetFontFamilyBox(recentAchievementsTitleFontComboBox, RecentAchievementsController.Instance.AdvancedSettingsEnabled ? RecentAchievementsController.Instance.TitleFontFamily : RecentAchievementsController.Instance.SimpleFontFamily);
-            SetFontFamilyBox(recentAchievementsDescriptionFontComboBox, RecentAchievementsController.Instance.DateFontFamily);
-            SetFontFamilyBox(recentAchievementsPointsFontComboBox, RecentAchievementsController.Instance.PointsFontFamily);
+            SetFontFamilyBox(recentAchievementsTitleFontComboBox, RecentUnlocksController.Instance.AdvancedSettingsEnabled ? RecentUnlocksController.Instance.TitleFontFamily : RecentUnlocksController.Instance.SimpleFontFamily);
+            SetFontFamilyBox(recentAchievementsDescriptionFontComboBox, RecentUnlocksController.Instance.DateFontFamily);
+            SetFontFamilyBox(recentAchievementsPointsFontComboBox, RecentUnlocksController.Instance.PointsFontFamily);
 
             /*
              * Font & Outline Enablement
@@ -3905,10 +3905,10 @@ namespace Retro_Achievement_Tracker
             userInfoNamesOutlineCheckBox.Checked = UserInfoController.Instance.AdvancedSettingsEnabled ? UserInfoController.Instance.NameOutlineEnabled : UserInfoController.Instance.SimpleFontOutlineEnabled;
             userInfoValuesOutlineCheckBox.Checked = UserInfoController.Instance.ValueOutlineEnabled;
 
-            recentAchievementsTitleFontOutlineCheckBox.Checked = RecentAchievementsController.Instance.AdvancedSettingsEnabled ? RecentAchievementsController.Instance.TitleOutlineEnabled : RecentAchievementsController.Instance.SimpleFontOutlineEnabled;
-            recentAchievementsDateFontOutlineCheckBox.Checked = RecentAchievementsController.Instance.DescriptionOutlineEnabled;
-            recentAchievementsPointsFontOutlineCheckBox.Checked = RecentAchievementsController.Instance.PointsOutlineEnabled;
-            recentAchievementsLineOutlineCheckBox.Checked = RecentAchievementsController.Instance.LineOutlineEnabled;
+            recentAchievementsTitleFontOutlineCheckBox.Checked = RecentUnlocksController.Instance.AdvancedSettingsEnabled ? RecentUnlocksController.Instance.TitleOutlineEnabled : RecentUnlocksController.Instance.SimpleFontOutlineEnabled;
+            recentAchievementsDateFontOutlineCheckBox.Checked = RecentUnlocksController.Instance.DescriptionOutlineEnabled;
+            recentAchievementsPointsFontOutlineCheckBox.Checked = RecentUnlocksController.Instance.PointsOutlineEnabled;
+            recentAchievementsLineOutlineCheckBox.Checked = RecentUnlocksController.Instance.LineOutlineEnabled;
 
             /*
              * Font Color PictureBox Assignment
@@ -3951,15 +3951,15 @@ namespace Retro_Achievement_Tracker
             gameProgressNamesFontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(GameProgressController.Instance.AdvancedSettingsEnabled ? GameProgressController.Instance.NameOutlineColor : GameProgressController.Instance.SimpleFontOutlineColor);
             gameProgressValuesFontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(GameProgressController.Instance.ValueOutlineColor);
 
-            recentAchievementsTitleFontColorPictureBox.BackColor = ColorTranslator.FromHtml(RecentAchievementsController.Instance.AdvancedSettingsEnabled ? RecentAchievementsController.Instance.TitleColor : RecentAchievementsController.Instance.SimpleFontColor);
-            recentAchievementsDateFontColorPictureBox.BackColor = ColorTranslator.FromHtml(RecentAchievementsController.Instance.DateColor);
-            recentAchievementsPointsFontColorPictureBox.BackColor = ColorTranslator.FromHtml(RecentAchievementsController.Instance.PointsColor);
-            recentAchievementsLineColorPictureBox.BackColor = ColorTranslator.FromHtml(RecentAchievementsController.Instance.LineColor);
+            recentAchievementsTitleFontColorPictureBox.BackColor = ColorTranslator.FromHtml(RecentUnlocksController.Instance.AdvancedSettingsEnabled ? RecentUnlocksController.Instance.TitleColor : RecentUnlocksController.Instance.SimpleFontColor);
+            recentAchievementsDateFontColorPictureBox.BackColor = ColorTranslator.FromHtml(RecentUnlocksController.Instance.DateColor);
+            recentAchievementsPointsFontColorPictureBox.BackColor = ColorTranslator.FromHtml(RecentUnlocksController.Instance.PointsColor);
+            recentAchievementsLineColorPictureBox.BackColor = ColorTranslator.FromHtml(RecentUnlocksController.Instance.LineColor);
 
-            recentAchievementsTitleFontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(RecentAchievementsController.Instance.AdvancedSettingsEnabled ? RecentAchievementsController.Instance.TitleOutlineColor : RecentAchievementsController.Instance.SimpleFontOutlineColor);
-            recentAchievementsDateFontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(RecentAchievementsController.Instance.DateOutlineColor);
-            recentAchievementsPointsFontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(RecentAchievementsController.Instance.PointsOutlineColor);
-            recentAchievementsLineOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(RecentAchievementsController.Instance.LineOutlineColor);
+            recentAchievementsTitleFontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(RecentUnlocksController.Instance.AdvancedSettingsEnabled ? RecentUnlocksController.Instance.TitleOutlineColor : RecentUnlocksController.Instance.SimpleFontOutlineColor);
+            recentAchievementsDateFontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(RecentUnlocksController.Instance.DateOutlineColor);
+            recentAchievementsPointsFontOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(RecentUnlocksController.Instance.PointsOutlineColor);
+            recentAchievementsLineOutlineColorPictureBox.BackColor = ColorTranslator.FromHtml(RecentUnlocksController.Instance.LineOutlineColor);
 
             /*
              * Font Outline Size NumericUpDown Assignment
@@ -3983,12 +3983,12 @@ namespace Retro_Achievement_Tracker
             gameProgressNamesFontOutlineNumericUpDown.Value = GameProgressController.Instance.AdvancedSettingsEnabled ? GameProgressController.Instance.NameOutlineSize : GameProgressController.Instance.SimpleFontOutlineSize;
             gameProgressValuesFontOutlineNumericUpDown.Value = GameProgressController.Instance.ValueOutlineSize;
 
-            recentAchievementsTitleFontOutlineNumericUpDown.Value = RecentAchievementsController.Instance.AdvancedSettingsEnabled ? RecentAchievementsController.Instance.TitleOutlineSize : RecentAchievementsController.Instance.SimpleFontOutlineSize;
-            recentAchievementsDescriptionFontOutlineNumericUpDown.Value = RecentAchievementsController.Instance.DescriptionOutlineSize;
-            recentAchievementsPointsFontOutlineNumericUpDown.Value = RecentAchievementsController.Instance.PointsOutlineSize;
-            recentAchievementsLineOutlineNumericUpDown.Value = RecentAchievementsController.Instance.LineOutlineSize;
+            recentAchievementsTitleFontOutlineNumericUpDown.Value = RecentUnlocksController.Instance.AdvancedSettingsEnabled ? RecentUnlocksController.Instance.TitleOutlineSize : RecentUnlocksController.Instance.SimpleFontOutlineSize;
+            recentAchievementsDescriptionFontOutlineNumericUpDown.Value = RecentUnlocksController.Instance.DescriptionOutlineSize;
+            recentAchievementsPointsFontOutlineNumericUpDown.Value = RecentUnlocksController.Instance.PointsOutlineSize;
+            recentAchievementsLineOutlineNumericUpDown.Value = RecentUnlocksController.Instance.LineOutlineSize;
 
-            recentAchievementsMaxListNumericUpDown.Value = RecentAchievementsController.Instance.MaxListSize;
+            recentAchievementsMaxListNumericUpDown.Value = RecentUnlocksController.Instance.MaxListSize;
 
             /*
              * RSS Feed CheckBoxes
@@ -4170,7 +4170,7 @@ namespace Retro_Achievement_Tracker
             /*
              * Auto-Scrolling
              */
-            recentAchievementsAutoScrollCheckBox.Checked = RecentAchievementsController.Instance.AutoScroll;
+            recentAchievementsAutoScrollCheckBox.Checked = RecentUnlocksController.Instance.AutoScroll;
             achievementListAutoScrollCheckBox.Checked = AchievementListController.Instance.AutoScroll;
 
             UpdateAdvancedSettings();

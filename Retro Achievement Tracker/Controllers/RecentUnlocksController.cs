@@ -7,23 +7,23 @@ using System.Threading.Tasks;
 
 namespace Retro_Achievement_Tracker.Controllers
 {
-    public sealed class RecentAchievementsController
+    public sealed class RecentUnlocksController
     {
-        private static readonly RecentAchievementsController instance = new RecentAchievementsController();
-        private static RecentAchievementsWindow RecentAchievementsWindow;
+        private static readonly RecentUnlocksController instance = new RecentUnlocksController();
+        private static RecentUnlocksWindow RecentUnlocksWindow;
         public bool IsOpen;
 
         private List<Achievement> CurrentAchievements;
         private List<Achievement> VisibileAchievements;
 
-        private RecentAchievementsController()
+        private RecentUnlocksController()
         {
-            RecentAchievementsWindow = new RecentAchievementsWindow();
+            RecentUnlocksWindow = new RecentUnlocksWindow();
 
             CurrentAchievements = new List<Achievement>();
             VisibileAchievements = new List<Achievement>();
         }
-        public static RecentAchievementsController Instance
+        public static RecentUnlocksController Instance
         {
             get
             {
@@ -32,7 +32,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public void Close()
         {
-            RecentAchievementsWindow.Close();
+            RecentUnlocksWindow.Close();
         }
         public void Show()
         {
@@ -40,11 +40,11 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 VisibileAchievements = new List<Achievement>();
 
-                if (RecentAchievementsWindow == null || RecentAchievementsWindow.IsDisposed)
+                if (RecentUnlocksWindow == null || RecentUnlocksWindow.IsDisposed)
                 {
-                    RecentAchievementsWindow = new RecentAchievementsWindow();
+                    RecentUnlocksWindow = new RecentUnlocksWindow();
                 }
-                RecentAchievementsWindow.Show();
+                RecentUnlocksWindow.Show();
 
                 SetAchievements();
             }
@@ -53,16 +53,16 @@ namespace Retro_Achievement_Tracker.Controllers
         {
             if (IsOpen)
             {
-                RecentAchievementsWindow.SetWindowBackgroundColor(WindowBackgroundColor);
-                RecentAchievementsWindow.SetBorderBackgroundColor(BorderBackgroundColor);
+                RecentUnlocksWindow.SetWindowBackgroundColor(WindowBackgroundColor);
+                RecentUnlocksWindow.SetBorderBackgroundColor(BorderBackgroundColor);
 
                 if (BorderEnabled)
                 {
-                    RecentAchievementsWindow.EnableBorder();
+                    RecentUnlocksWindow.EnableBorder();
                 }
                 else
                 {
-                    RecentAchievementsWindow.DisableBorder();
+                    RecentUnlocksWindow.DisableBorder();
                 }
 
                 if (AdvancedSettingsEnabled)
@@ -78,27 +78,27 @@ namespace Retro_Achievement_Tracker.Controllers
 
         private void SetAdvancedSettings()
         {
-            RecentAchievementsWindow.SetTitleFontFamily(TitleFontFamily);
-            RecentAchievementsWindow.SetTitleColor(TitleColor);
-            RecentAchievementsWindow.SetTitleOutline(TitleOutlineEnabled ? TitleOutlineColor + " " + TitleOutlineSize + "px" : "0px");
+            RecentUnlocksWindow.SetTitleFontFamily(TitleFontFamily);
+            RecentUnlocksWindow.SetTitleColor(TitleColor);
+            RecentUnlocksWindow.SetTitleOutline(TitleOutlineEnabled ? TitleOutlineColor + " " + TitleOutlineSize + "px" : "0px");
 
-            RecentAchievementsWindow.SetDateFontFamily(DateFontFamily);
-            RecentAchievementsWindow.SetDateColor(DateColor);
-            RecentAchievementsWindow.SetDateOutline(DescriptionOutlineEnabled ? DateOutlineColor + " " + DescriptionOutlineSize + "px" : "0px");
+            RecentUnlocksWindow.SetDateFontFamily(DateFontFamily);
+            RecentUnlocksWindow.SetDateColor(DateColor);
+            RecentUnlocksWindow.SetDateOutline(DescriptionOutlineEnabled ? DateOutlineColor + " " + DescriptionOutlineSize + "px" : "0px");
 
-            RecentAchievementsWindow.SetPointsFontFamily(PointsFontFamily);
-            RecentAchievementsWindow.SetPointsColor(PointsColor);
-            RecentAchievementsWindow.SetPointsOutline(PointsOutlineEnabled ? PointsOutlineColor + " " + PointsOutlineSize + "px" : "0px");
+            RecentUnlocksWindow.SetPointsFontFamily(PointsFontFamily);
+            RecentUnlocksWindow.SetPointsColor(PointsColor);
+            RecentUnlocksWindow.SetPointsOutline(PointsOutlineEnabled ? PointsOutlineColor + " " + PointsOutlineSize + "px" : "0px");
 
-            RecentAchievementsWindow.SetLineColor(LineColor);
-            RecentAchievementsWindow.SetLineOutline(LineOutlineEnabled ? LineOutlineSize + "px solid " + LineOutlineColor : "0px");
+            RecentUnlocksWindow.SetLineColor(LineColor);
+            RecentUnlocksWindow.SetLineOutline(LineOutlineEnabled ? LineOutlineSize + "px solid " + LineOutlineColor : "0px");
         }
 
         private void SetSimpleSettings()
         {
-            RecentAchievementsWindow.SetSimpleFontFamily(SimpleFontFamily);
-            RecentAchievementsWindow.SetSimpleFontColor(SimpleFontColor);
-            RecentAchievementsWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px", SimpleFontOutlineEnabled ? SimpleFontOutlineSize + "px solid " + SimpleFontOutlineColor : "0px");
+            RecentUnlocksWindow.SetSimpleFontFamily(SimpleFontFamily);
+            RecentUnlocksWindow.SetSimpleFontColor(SimpleFontColor);
+            RecentUnlocksWindow.SetSimpleFontOutline(SimpleFontOutlineEnabled ? SimpleFontOutlineColor + " " + SimpleFontOutlineSize + "px" : "0px", SimpleFontOutlineEnabled ? SimpleFontOutlineSize + "px solid " + SimpleFontOutlineColor : "0px");
         }
         public void SetAchievements()
         {
@@ -112,12 +112,9 @@ namespace Retro_Achievement_Tracker.Controllers
 
             if (IsOpen)
             {
-                RecentAchievementsWindow.AssignJavaScriptVariables();
+                RecentUnlocksWindow.AssignJavaScriptVariables();
 
-                if (CurrentAchievements.Count > 0)
-                {
-                    VisibileAchievements = CurrentAchievements.GetRange(0, Math.Min(CurrentAchievements.Count, MaxListSize));
-                }
+                VisibileAchievements = CurrentAchievements.GetRange(0, Math.Min(CurrentAchievements.Count, MaxListSize));
 
                 PopulateRecentAchievementsWindow();
             }
@@ -126,22 +123,22 @@ namespace Retro_Achievement_Tracker.Controllers
         {
             if (IsOpen)
             {
-                RecentAchievementsWindow.SetClientSize();
-                RecentAchievementsWindow.HideRecentAchievements();
+                RecentUnlocksWindow.SetClientSize();
+                RecentUnlocksWindow.HideRecentAchievements();
 
                 await Task.Delay(500);
 
-                RecentAchievementsWindow.ClearRecentAchievements();
-                RecentAchievementsWindow.AddAchievements(VisibileAchievements);
-                RecentAchievementsWindow.AssignJavaScriptVariables();
+                RecentUnlocksWindow.ClearRecentAchievements();
+                RecentUnlocksWindow.AddAchievements(VisibileAchievements);
+                RecentUnlocksWindow.AssignJavaScriptVariables();
 
                 SetAllSettings();
 
-                RecentAchievementsWindow.ShowRecentAchievements();
+                RecentUnlocksWindow.ShowRecentAchievements();
 
                 if (AutoScroll)
                 {
-                    RecentAchievementsWindow.StartScrolling();
+                    RecentUnlocksWindow.StartScrolling();
                 }
             }
             else
@@ -174,11 +171,11 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (value)
                 {
-                    RecentAchievementsWindow.StartScrolling();
+                    RecentUnlocksWindow.StartScrolling();
                 }
                 else
                 {
-                    RecentAchievementsWindow.StopScrolling();
+                    RecentUnlocksWindow.StopScrolling();
                 }
             }
         }
