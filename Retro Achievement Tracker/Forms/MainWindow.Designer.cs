@@ -966,14 +966,13 @@ namespace Retro_Achievement_Tracker
             // timerStatusLabel
             // 
             this.timerStatusLabel.BackColor = System.Drawing.Color.Transparent;
-            this.timerStatusLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.timerStatusLabel.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.timerStatusLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
             this.timerStatusLabel.Location = new System.Drawing.Point(12, 76);
             this.timerStatusLabel.Name = "timerStatusLabel";
             this.timerStatusLabel.Size = new System.Drawing.Size(323, 29);
             this.timerStatusLabel.TabIndex = 10024;
             this.timerStatusLabel.Text = "Offline";
-            this.timerStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // userInfoAutoOpenWindowCheckbox
             // 

@@ -24,7 +24,6 @@ namespace Retro_Achievement_Tracker
 
         private int CurrentlyViewingIndex;
         private int UserAndGameTimerCounter;
-        private int CurrentErrorCount = 0;
         private int MaxCheevoCount = 0;
 
         private UserSummary UserSummary;
@@ -443,20 +442,18 @@ namespace Retro_Achievement_Tracker
                                 StopButton_Click(null, null);
                             }
                         }
-                        else
-                        {
-                            HandleNetworkError();
-                        }
-                    }
-                    else
-                    {
-                        HandleNetworkError();
                     }
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.StackTrace);
+                if (ex.Message.Contains("RA backend"))
+                {
+                    ShouldRun = false;
+                    IsLaunching = false;
+
+                    UpdateLogLabel(ex.Message);
+                }
 
                 if (ShouldRun)
                 {
@@ -465,28 +462,9 @@ namespace Retro_Achievement_Tracker
                 else
                 {
                     StopButton_Click(null, null);
+
+                    MessageBox.Show("The Retro Achievements web API is not responding successfully. This will prevent the tracker from getting information from the site. It could also mean that the site is having issues and you may not be able to unlock achievments at this time. Sorry for the inconvenience.", "Errors from Retro Achievements", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-            }
-        }
-        private async void HandleNetworkError()
-        {
-            CurrentErrorCount++;
-
-            if (CurrentErrorCount > 2)
-            {
-                UpdateLogLabel("Too many failures trying to connect. Stopping for now.");
-
-                ShouldRun = false;
-
-                StopButton_Click(null, null);
-            }
-            else
-            {
-                UpdateLogLabel("Not able to communicate with RetroAchievements API. Trying to restart gracefully...");
-
-                await Task.Delay(5000);
-
-                StartTimer();
             }
         }
         public void UpdateCurrentlyViewingAchievement()
@@ -864,8 +842,6 @@ namespace Retro_Achievement_Tracker
             gameInfoOpenWindowButton.Enabled = true;
 
             StartTimer();
-
-            CurrentErrorCount = 0;
         }
         private void StopButton_Click(object sender, EventArgs e)
         {
@@ -874,8 +850,6 @@ namespace Retro_Achievement_Tracker
             UserAndGameUpdateTimer.Stop();
 
             raConnectionStatusPictureBox.Image = Resources.red_button;
-
-            UpdateLogLabel("Stopped.");
 
             stopButton.Enabled = false;
 

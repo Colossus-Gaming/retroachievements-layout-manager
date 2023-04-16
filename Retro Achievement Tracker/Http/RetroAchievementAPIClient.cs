@@ -20,24 +20,32 @@ namespace Retro_Achievement_Tracker
         {
             HttpResponseMessage httpResponseMessage = await client.GetAsync(string.Format(Constants.RETRO_ACHIEVEMENTS_URL + Constants.RETRO_ACHIEVEMENTS_API_GET_USER, UserName, ApiKey, UserName));
 
+            if (!httpResponseMessage.IsSuccessStatusCode)
+            {
+                throw new System.Exception("RA backend responding with errors: " + httpResponseMessage.StatusCode);
+            }
             return JsonConvert.DeserializeObject<UserSummary>(await httpResponseMessage.Content.ReadAsStringAsync());
         }
         public async Task<GameInfo> GetGameInfo(int gameId)
         {
             HttpResponseMessage httpResponseMessage = await client.GetAsync(string.Format(Constants.RETRO_ACHIEVEMENTS_URL + Constants.RETRO_ACHIEVEMENTS_API_GET_GAME, UserName, ApiKey, UserName, gameId));
-
+            
+            if (!httpResponseMessage.IsSuccessStatusCode)
+            {
+                throw new System.Exception("RA backend responding with errors: " + httpResponseMessage.StatusCode);
+            }
             return JsonConvert.DeserializeObject<GameInfo>(await httpResponseMessage.Content.ReadAsStringAsync());
         }
         public async Task<string> GetNewsFeed()
         {
             HttpResponseMessage httpResponseMessage = await client.GetAsync(Constants.RETRO_ACHIEVEMENTS_URL + Constants.RETRO_ACHIEVEMENTS_RSS_NEWS_URI);
-
+            
             return await httpResponseMessage.Content.ReadAsStringAsync();
         }
         public async Task<string> GetNewAchievementsFeed()
         {
             HttpResponseMessage httpResponseMessage = await client.GetAsync(Constants.RETRO_ACHIEVEMENTS_URL + Constants.RETRO_ACHIEVEMENTS_RSS_CHEEVO_URI);
-
+            
             return await httpResponseMessage.Content.ReadAsStringAsync();
         }
         public async Task<string> GetForumActivityFeed()
