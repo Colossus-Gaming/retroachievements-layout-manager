@@ -23,11 +23,13 @@ namespace Retro_Achievement_Tracker.Models
             }
 
             JToken ID = item["ID"];
+            JToken AchievementID = item["AchievementID"];
             JToken GameID = item["GameID"];
             JToken Title = item["Title"];
             JToken Description = item["Description"];
             JToken Points = item["Points"];
             JToken TrueRatio = item["TrueRatio"];
+            JToken Date = item["Date"];
             JToken DateEarned = item["DateEarnedHardcore"];
             JToken BadgeName = item["BadgeName"];
             JToken DisplayOrder = item["DisplayOrder"];
@@ -35,6 +37,10 @@ namespace Retro_Achievement_Tracker.Models
             if (ID != null)
             {
                 Achievement.Id = int.Parse(ID.ToString());
+            }
+            if (AchievementID != null)
+            {
+                Achievement.Id = int.Parse(AchievementID.ToString());
             }
             if (GameID != null)
             {
@@ -55,6 +61,10 @@ namespace Retro_Achievement_Tracker.Models
             if (TrueRatio != null)
             {
                 Achievement.TrueRatio = int.Parse(TrueRatio.ToString());
+            }
+            if (Date != null && !string.IsNullOrEmpty(Date.ToString()))
+            {
+                Achievement.DateEarned = DateTime.Parse(Date.ToString());
             }
             if (DateEarned != null && !string.IsNullOrEmpty(DateEarned.ToString()))
             {

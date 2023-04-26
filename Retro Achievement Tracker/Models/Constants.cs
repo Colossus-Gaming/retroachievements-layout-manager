@@ -9,6 +9,7 @@
 
         public static readonly string RETRO_ACHIEVEMENTS_API_GET_USER = "/API/API_GetUserSummary.php?z={0}&y={1}&u={2}&g=1&a=1";
         public static readonly string RETRO_ACHIEVEMENTS_API_GET_RECENTLY_PLAYED = "/API/API_GetUserRecentlyPlayedGames.php?z={0}&y={1}&u={2}&c=1";
+        public static readonly string RETRO_ACHIEVEMENTS_API_GET_RECENT_ACHIEVEMENTS = "/API/API_GetUserRecentAchievements.php?z={0}&y={1}&u={2}&m=1";
         public static readonly string RETRO_ACHIEVEMENTS_API_GET_GAME = "/API/API_GetGameInfoAndUserProgress.php?z={0}&y={1}&u={2}&g={3}";
         public static readonly string RETRO_ACHIEVEMENTS_API_GET_RANK_AND_SCORE = "/API/API_GetUserRankAndScore.php?z={0}&y={1}&u={2}";
 

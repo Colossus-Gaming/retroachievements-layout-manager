@@ -48,6 +48,16 @@ namespace Retro_Achievement_Tracker
             }
             return JsonConvert.DeserializeObject<List<GameInfo>>(await httpResponseMessage.Content.ReadAsStringAsync());
         }
+        public async Task<List<Achievement>> GetRecentAchievements()
+        {
+            HttpResponseMessage httpResponseMessage = await client.GetAsync(string.Format(Constants.RETRO_ACHIEVEMENTS_URL + Constants.RETRO_ACHIEVEMENTS_API_GET_RECENT_ACHIEVEMENTS, UserName, ApiKey, UserName));
+
+            if (!httpResponseMessage.IsSuccessStatusCode)
+            {
+                throw new Exception("RA backend responding with errors: " + httpResponseMessage.StatusCode);
+            }
+            return JsonConvert.DeserializeObject<List<Achievement>>(await httpResponseMessage.Content.ReadAsStringAsync());
+        }
         public async Task<UserRankAndScore> GetRankAndScore()
         {
             HttpResponseMessage httpResponseMessage = await client.GetAsync(string.Format(Constants.RETRO_ACHIEVEMENTS_URL + Constants.RETRO_ACHIEVEMENTS_API_GET_RANK_AND_SCORE, UserName, ApiKey, UserName));

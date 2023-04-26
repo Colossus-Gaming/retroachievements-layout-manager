@@ -271,23 +271,27 @@ namespace Retro_Achievement_Tracker
                     if (UserSummary != null && UserSummary.LastGameID > 0)
                     {
                         List<GameInfo> previouslyPlayed = await RetroAchievementsAPIClient.GetRecentlyPlayedGames();
-                        previouslyPlayed.Sort();
 
                         if (previouslyPlayed.Count > 0)
                         {
-                            bool sameGame = GameInfoAndProgress != null && previouslyPlayed[0].Id.Equals(GameInfoAndProgress.Id);
+                            List<Achievement> recentlyUnlockedAchievements = await RetroAchievementsAPIClient.GetRecentAchievements();
 
-                            UpdateLogLabel(Constants.RETRO_ACHIEVEMENTS_LABEL_MSG_UPDATING_GAME_INFO);
-                            GameInfoAndProgress = await RetroAchievementsAPIClient.GetGameInfoAndProgress(previouslyPlayed[0].Id);
-
-                            if (UpdateGameProgress(sameGame))
+                            if (GameInfoAndProgress == null || !previouslyPlayed[0].Id.Equals(GameInfoAndProgress.Id) || recentlyUnlockedAchievements.Count(x => LockedAchievements.Contains(x)) > 0)
                             {
-                                UserRankAndScore userRankAndScore = await RetroAchievementsAPIClient.GetRankAndScore();
+                                bool sameGame = GameInfoAndProgress != null && previouslyPlayed[0].Id.Equals(GameInfoAndProgress.Id);
 
-                                UserSummary.Rank = userRankAndScore.Rank;
-                                UserSummary.TotalPoints = userRankAndScore.Score;
+                                UpdateLogLabel(Constants.RETRO_ACHIEVEMENTS_LABEL_MSG_UPDATING_GAME_INFO);
+                                GameInfoAndProgress = await RetroAchievementsAPIClient.GetGameInfoAndProgress(previouslyPlayed[0].Id);
 
-                                UpdateUserInfo();
+                                if (UpdateGameProgress(sameGame))
+                                {
+                                    UserRankAndScore userRankAndScore = await RetroAchievementsAPIClient.GetRankAndScore();
+
+                                    UserSummary.Rank = userRankAndScore.Rank;
+                                    UserSummary.TotalPoints = userRankAndScore.Score;
+
+                                    UpdateUserInfo();
+                                }
                             }
 
                             if (GameInfoAndProgress == null)
