@@ -1,4 +1,5 @@
 ﻿using Retro_Achievement_Tracker.Forms;
+using Retro_Achievement_Tracker.Models;
 using Retro_Achievement_Tracker.Properties;
 using System;
 using System.Collections.Generic;

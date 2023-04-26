@@ -49,12 +49,6 @@ namespace Retro_Achievement_Tracker
             this.focusAchievementButtonPrevious = new System.Windows.Forms.Button();
             this.focusAchievementButtonNext = new System.Windows.Forms.Button();
             this.gameInfoPictureBox = new System.Windows.Forms.PictureBox();
-            this.rssFeedFriendCheckBox = new System.Windows.Forms.CheckBox();
-            this.rssFeedCheevoCheckBox = new System.Windows.Forms.CheckBox();
-            this.rssFeedNewsCheckBox = new System.Windows.Forms.CheckBox();
-            this.rssFeedForumCheckBox = new System.Windows.Forms.CheckBox();
-            this.rssFeedListView = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.raConnectionStatusPictureBox = new System.Windows.Forms.PictureBox();
             this.alertsPlayAchievementButton = new System.Windows.Forms.Button();
             this.alertsSelectCustomAchievementFileButton = new System.Windows.Forms.Button();
@@ -604,14 +598,6 @@ namespace Retro_Achievement_Tracker
             this.recentCheevosTabPage = new System.Windows.Forms.TabPage();
             this.cheevosListTabPage = new System.Windows.Forms.TabPage();
             this.relatedMediaTabPage = new System.Windows.Forms.TabPage();
-            this.browserTabPage = new System.Windows.Forms.TabPage();
-            this.panel126 = new System.Windows.Forms.Panel();
-            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
-            this.label95 = new System.Windows.Forms.Label();
-            this.pictureBox27 = new System.Windows.Forms.PictureBox();
-            this.panel125 = new System.Windows.Forms.Panel();
-            this.label94 = new System.Windows.Forms.Label();
-            this.pictureBox26 = new System.Windows.Forms.PictureBox();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             ((System.ComponentModel.ISupportInitialize)(this.userProfilePictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.focusAchievementPictureBox)).BeginInit();
@@ -858,11 +844,6 @@ namespace Retro_Achievement_Tracker
             this.recentCheevosTabPage.SuspendLayout();
             this.cheevosListTabPage.SuspendLayout();
             this.relatedMediaTabPage.SuspendLayout();
-            this.browserTabPage.SuspendLayout();
-            this.panel126.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox27)).BeginInit();
-            this.panel125.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox26)).BeginInit();
             this.SuspendLayout();
             // 
             // apiKeyLabel
@@ -1114,83 +1095,6 @@ namespace Retro_Achievement_Tracker
             this.gameInfoPictureBox.TabIndex = 10004;
             this.gameInfoPictureBox.TabStop = false;
             this.gameInfoPictureBox.Click += new System.EventHandler(this.BrowserSensitiveControl_Click);
-            // 
-            // rssFeedFriendCheckBox
-            // 
-            this.rssFeedFriendCheckBox.AutoSize = true;
-            this.rssFeedFriendCheckBox.BackColor = System.Drawing.Color.Transparent;
-            this.rssFeedFriendCheckBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rssFeedFriendCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.rssFeedFriendCheckBox.Location = new System.Drawing.Point(119, 63);
-            this.rssFeedFriendCheckBox.Name = "rssFeedFriendCheckBox";
-            this.rssFeedFriendCheckBox.Size = new System.Drawing.Size(77, 17);
-            this.rssFeedFriendCheckBox.TabIndex = 10010;
-            this.rssFeedFriendCheckBox.Text = "FRIENDS";
-            this.rssFeedFriendCheckBox.UseVisualStyleBackColor = false;
-            this.rssFeedFriendCheckBox.CheckedChanged += new System.EventHandler(this.RSSFeedCheckbox_CheckedChanged);
-            // 
-            // rssFeedCheevoCheckBox
-            // 
-            this.rssFeedCheevoCheckBox.AutoSize = true;
-            this.rssFeedCheevoCheckBox.BackColor = System.Drawing.Color.Transparent;
-            this.rssFeedCheevoCheckBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rssFeedCheevoCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.rssFeedCheevoCheckBox.Location = new System.Drawing.Point(119, 40);
-            this.rssFeedCheevoCheckBox.Name = "rssFeedCheevoCheckBox";
-            this.rssFeedCheevoCheckBox.Size = new System.Drawing.Size(74, 17);
-            this.rssFeedCheevoCheckBox.TabIndex = 10011;
-            this.rssFeedCheevoCheckBox.Text = "CHEEVO";
-            this.rssFeedCheevoCheckBox.UseVisualStyleBackColor = false;
-            this.rssFeedCheevoCheckBox.CheckedChanged += new System.EventHandler(this.RSSFeedCheckbox_CheckedChanged);
-            // 
-            // rssFeedNewsCheckBox
-            // 
-            this.rssFeedNewsCheckBox.AutoSize = true;
-            this.rssFeedNewsCheckBox.BackColor = System.Drawing.Color.Transparent;
-            this.rssFeedNewsCheckBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rssFeedNewsCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.rssFeedNewsCheckBox.Location = new System.Drawing.Point(3, 40);
-            this.rssFeedNewsCheckBox.Name = "rssFeedNewsCheckBox";
-            this.rssFeedNewsCheckBox.Size = new System.Drawing.Size(60, 17);
-            this.rssFeedNewsCheckBox.TabIndex = 10012;
-            this.rssFeedNewsCheckBox.Text = "NEWS";
-            this.rssFeedNewsCheckBox.UseVisualStyleBackColor = false;
-            this.rssFeedNewsCheckBox.CheckedChanged += new System.EventHandler(this.RSSFeedCheckbox_CheckedChanged);
-            // 
-            // rssFeedForumCheckBox
-            // 
-            this.rssFeedForumCheckBox.AutoSize = true;
-            this.rssFeedForumCheckBox.BackColor = System.Drawing.Color.Transparent;
-            this.rssFeedForumCheckBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rssFeedForumCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.rssFeedForumCheckBox.Location = new System.Drawing.Point(3, 63);
-            this.rssFeedForumCheckBox.Name = "rssFeedForumCheckBox";
-            this.rssFeedForumCheckBox.Size = new System.Drawing.Size(66, 17);
-            this.rssFeedForumCheckBox.TabIndex = 10009;
-            this.rssFeedForumCheckBox.Text = "FORUM";
-            this.rssFeedForumCheckBox.UseVisualStyleBackColor = false;
-            this.rssFeedForumCheckBox.CheckedChanged += new System.EventHandler(this.RSSFeedCheckbox_CheckedChanged);
-            // 
-            // rssFeedListView
-            // 
-            this.rssFeedListView.Activation = System.Windows.Forms.ItemActivation.OneClick;
-            this.rssFeedListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1});
-            this.rssFeedListView.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rssFeedListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            this.rssFeedListView.HideSelection = false;
-            this.rssFeedListView.Location = new System.Drawing.Point(2, 86);
-            this.rssFeedListView.Name = "rssFeedListView";
-            this.rssFeedListView.Size = new System.Drawing.Size(283, 273);
-            this.rssFeedListView.TabIndex = 10006;
-            this.rssFeedListView.UseCompatibleStateImageBehavior = false;
-            this.rssFeedListView.View = System.Windows.Forms.View.Details;
-            this.rssFeedListView.Click += new System.EventHandler(this.BrowserSensitiveControl_Click);
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "";
-            this.columnHeader1.Width = 400;
             // 
             // raConnectionStatusPictureBox
             // 
@@ -7995,7 +7899,6 @@ namespace Retro_Achievement_Tracker
             this.mainTabControl.Controls.Add(this.recentCheevosTabPage);
             this.mainTabControl.Controls.Add(this.cheevosListTabPage);
             this.mainTabControl.Controls.Add(this.relatedMediaTabPage);
-            this.mainTabControl.Controls.Add(this.browserTabPage);
             this.mainTabControl.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mainTabControl.HotTrack = true;
             this.mainTabControl.Location = new System.Drawing.Point(4, 111);
@@ -8138,91 +8041,6 @@ namespace Retro_Achievement_Tracker
             this.relatedMediaTabPage.Size = new System.Drawing.Size(769, 372);
             this.relatedMediaTabPage.TabIndex = 7;
             this.relatedMediaTabPage.Text = "Related Media";
-            // 
-            // browserTabPage
-            // 
-            this.browserTabPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
-            this.browserTabPage.Controls.Add(this.panel126);
-            this.browserTabPage.Controls.Add(this.panel125);
-            this.browserTabPage.Location = new System.Drawing.Point(4, 22);
-            this.browserTabPage.Name = "browserTabPage";
-            this.browserTabPage.Size = new System.Drawing.Size(769, 372);
-            this.browserTabPage.TabIndex = 8;
-            this.browserTabPage.Text = "Browser";
-            // 
-            // panel126
-            // 
-            this.panel126.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.panel126.Controls.Add(this.webBrowser1);
-            this.panel126.Controls.Add(this.label95);
-            this.panel126.Controls.Add(this.pictureBox27);
-            this.panel126.Location = new System.Drawing.Point(299, 3);
-            this.panel126.Name = "panel126";
-            this.panel126.Size = new System.Drawing.Size(467, 362);
-            this.panel126.TabIndex = 10086;
-            // 
-            // webBrowser1
-            // 
-            this.webBrowser1.Location = new System.Drawing.Point(8, 40);
-            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(454, 319);
-            this.webBrowser1.TabIndex = 10087;
-            // 
-            // label95
-            // 
-            this.label95.BackColor = System.Drawing.Color.Transparent;
-            this.label95.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label95.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label95.Location = new System.Drawing.Point(3, 3);
-            this.label95.Name = "label95";
-            this.label95.Size = new System.Drawing.Size(190, 26);
-            this.label95.TabIndex = 10069;
-            this.label95.Text = "News Preview";
-            // 
-            // pictureBox27
-            // 
-            this.pictureBox27.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.pictureBox27.Location = new System.Drawing.Point(2, 32);
-            this.pictureBox27.Name = "pictureBox27";
-            this.pictureBox27.Size = new System.Drawing.Size(460, 2);
-            this.pictureBox27.TabIndex = 10070;
-            this.pictureBox27.TabStop = false;
-            // 
-            // panel125
-            // 
-            this.panel125.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.panel125.Controls.Add(this.label94);
-            this.panel125.Controls.Add(this.rssFeedFriendCheckBox);
-            this.panel125.Controls.Add(this.pictureBox26);
-            this.panel125.Controls.Add(this.rssFeedNewsCheckBox);
-            this.panel125.Controls.Add(this.rssFeedForumCheckBox);
-            this.panel125.Controls.Add(this.rssFeedListView);
-            this.panel125.Controls.Add(this.rssFeedCheevoCheckBox);
-            this.panel125.Location = new System.Drawing.Point(4, 3);
-            this.panel125.Name = "panel125";
-            this.panel125.Size = new System.Drawing.Size(289, 362);
-            this.panel125.TabIndex = 10085;
-            // 
-            // label94
-            // 
-            this.label94.BackColor = System.Drawing.Color.Transparent;
-            this.label94.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label94.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label94.Location = new System.Drawing.Point(3, 3);
-            this.label94.Name = "label94";
-            this.label94.Size = new System.Drawing.Size(190, 26);
-            this.label94.TabIndex = 10069;
-            this.label94.Text = "RSS Feed";
-            // 
-            // pictureBox26
-            // 
-            this.pictureBox26.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.pictureBox26.Location = new System.Drawing.Point(2, 32);
-            this.pictureBox26.Name = "pictureBox26";
-            this.pictureBox26.Size = new System.Drawing.Size(275, 2);
-            this.pictureBox26.TabIndex = 10070;
-            this.pictureBox26.TabStop = false;
             // 
             // MainWindow
             // 
@@ -8547,12 +8365,6 @@ namespace Retro_Achievement_Tracker
             this.recentCheevosTabPage.ResumeLayout(false);
             this.cheevosListTabPage.ResumeLayout(false);
             this.relatedMediaTabPage.ResumeLayout(false);
-            this.browserTabPage.ResumeLayout(false);
-            this.panel126.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox27)).EndInit();
-            this.panel125.ResumeLayout(false);
-            this.panel125.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox26)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -8602,12 +8414,6 @@ namespace Retro_Achievement_Tracker
         private CheckBox userInfoPointsCheckBox;
         private CheckBox userInfoRankCheckBox;
         private PictureBox gameInfoPictureBox;
-        private ListView rssFeedListView;
-        private CheckBox rssFeedNewsCheckBox;
-        private CheckBox rssFeedCheevoCheckBox;
-        private CheckBox rssFeedFriendCheckBox;
-        private CheckBox rssFeedForumCheckBox;
-        private ColumnHeader columnHeader1;
         private Label recentAchievementsMaxListLabel;
         private NumericUpDown recentAchievementsMaxListNumericUpDown;
         private RadioButton focusBehaviorGoToLastRadioButton;
@@ -9112,16 +8918,9 @@ namespace Retro_Achievement_Tracker
         private TabPage recentCheevosTabPage;
         private TabPage cheevosListTabPage;
         private TabPage relatedMediaTabPage;
-        private TabPage browserTabPage;
         private TabControl alertTabControl;
         private TabPage tabPage1;
         private TabPage tabPage2;
-        private Panel panel125;
-        private Label label94;
-        private PictureBox pictureBox26;
-        private Panel panel126;
-        private Label label95;
-        private PictureBox pictureBox27;
         private Button relatedMediaSetLaunchBoxPathButton;
         private RadioButton relatedMediaLBCartFrontRadioButton;
         private RadioButton relatedMediaLBCartBackRadioButton;
@@ -9138,7 +8937,6 @@ namespace Retro_Achievement_Tracker
         private Label gameProgressHardcoreWorthLabel;
         private Label gameProgressPoints2Label;
         private Label gameProgressTruePoints2Label;
-        private WebBrowser webBrowser1;
         private Button checkForUpdatesButton;
     }
 }

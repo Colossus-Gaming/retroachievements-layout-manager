@@ -1,5 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Retro_Achievement_Tracker.Models;
+using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -22,43 +24,39 @@ namespace Retro_Achievement_Tracker
 
             if (!httpResponseMessage.IsSuccessStatusCode)
             {
-                throw new System.Exception("RA backend responding with errors: " + httpResponseMessage.StatusCode);
+                throw new Exception("RA backend responding with errors: " + httpResponseMessage.StatusCode);
             }
             return JsonConvert.DeserializeObject<UserSummary>(await httpResponseMessage.Content.ReadAsStringAsync());
         }
-        public async Task<GameInfo> GetGameInfo(int gameId)
+        public async Task<GameInfo> GetGameInfoAndProgress(long gameId)
         {
             HttpResponseMessage httpResponseMessage = await client.GetAsync(string.Format(Constants.RETRO_ACHIEVEMENTS_URL + Constants.RETRO_ACHIEVEMENTS_API_GET_GAME, UserName, ApiKey, UserName, gameId));
-            
+
             if (!httpResponseMessage.IsSuccessStatusCode)
             {
-                throw new System.Exception("RA backend responding with errors: " + httpResponseMessage.StatusCode);
+                throw new Exception("RA backend responding with errors: " + httpResponseMessage.StatusCode);
             }
             return JsonConvert.DeserializeObject<GameInfo>(await httpResponseMessage.Content.ReadAsStringAsync());
         }
-        public async Task<string> GetNewsFeed()
+        public async Task<List<GameInfo>> GetRecentlyPlayedGames()
         {
-            HttpResponseMessage httpResponseMessage = await client.GetAsync(Constants.RETRO_ACHIEVEMENTS_URL + Constants.RETRO_ACHIEVEMENTS_RSS_NEWS_URI);
-            
-            return await httpResponseMessage.Content.ReadAsStringAsync();
-        }
-        public async Task<string> GetNewAchievementsFeed()
-        {
-            HttpResponseMessage httpResponseMessage = await client.GetAsync(Constants.RETRO_ACHIEVEMENTS_URL + Constants.RETRO_ACHIEVEMENTS_RSS_CHEEVO_URI);
-            
-            return await httpResponseMessage.Content.ReadAsStringAsync();
-        }
-        public async Task<string> GetForumActivityFeed()
-        {
-            HttpResponseMessage httpResponseMessage = await client.GetAsync(Constants.RETRO_ACHIEVEMENTS_URL + Constants.RETRO_ACHIEVEMENTS_RSS_FORUM_URI);
+            HttpResponseMessage httpResponseMessage = await client.GetAsync(string.Format(Constants.RETRO_ACHIEVEMENTS_URL + Constants.RETRO_ACHIEVEMENTS_API_GET_RECENTLY_PLAYED, UserName, ApiKey, UserName));
 
-            return await httpResponseMessage.Content.ReadAsStringAsync();
+            if (!httpResponseMessage.IsSuccessStatusCode)
+            {
+                throw new Exception("RA backend responding with errors: " + httpResponseMessage.StatusCode);
+            }
+            return JsonConvert.DeserializeObject<List<GameInfo>>(await httpResponseMessage.Content.ReadAsStringAsync());
         }
-        public async Task<string> GetFriendActivityFeed()
+        public async Task<UserRankAndScore> GetRankAndScore()
         {
-            HttpResponseMessage httpResponseMessage = await client.GetAsync(string.Format(Constants.RETRO_ACHIEVEMENTS_URL + Constants.RETRO_ACHIEVEMENTS_RSS_FRIEND_URI, UserName));
+            HttpResponseMessage httpResponseMessage = await client.GetAsync(string.Format(Constants.RETRO_ACHIEVEMENTS_URL + Constants.RETRO_ACHIEVEMENTS_API_GET_RANK_AND_SCORE, UserName, ApiKey, UserName));
 
-            return await httpResponseMessage.Content.ReadAsStringAsync();
+            if (!httpResponseMessage.IsSuccessStatusCode)
+            {
+                throw new Exception("RA backend responding with errors: " + httpResponseMessage.StatusCode);
+            }
+            return JsonConvert.DeserializeObject<UserRankAndScore>(await httpResponseMessage.Content.ReadAsStringAsync());
         }
     }
 }

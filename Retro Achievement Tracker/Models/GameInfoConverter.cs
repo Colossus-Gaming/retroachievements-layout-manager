@@ -24,7 +24,8 @@
                 GameInfo = (GameInfo)existingValue;
             }
 
-            JToken ID = item["ID"];
+            JToken ID = item["ID"]; 
+            JToken GameID = item["GameID"];
             JToken Title = item["Title"];
             JToken ConsoleID = item["ConsoleID"];
             JToken ImageIcon = item["ImageIcon"];
@@ -35,6 +36,7 @@
             JToken Developer = item["Developer"];
             JToken Genre = item["Genre"];
             JToken Released = item["Released"];
+            JToken LastPlayed = item["LastPlayed"];
             JToken Achievements = item["Achievements"];
 
             if (Released != null)
@@ -89,6 +91,16 @@
             if (ID != null)
             {
                 GameInfo.Id = Convert.ToInt32(ID);
+            }
+
+            if (GameID != null)
+            {
+                GameInfo.Id = Convert.ToInt32(GameID);
+            }
+
+            if (LastPlayed != null)
+            {
+                GameInfo.LastPlayed = DateTime.Parse(LastPlayed.ToString());
             }
 
             if (Achievements != null)

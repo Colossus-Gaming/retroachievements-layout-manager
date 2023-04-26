@@ -1,11 +1,12 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Retro_Achievement_Tracker.Models
 {
     [JsonConverter(typeof(GameInfoConverter))]
-    public partial class GameInfo
+    public partial class GameInfo : IComparable<GameInfo>
     {
         public long Id { get; set; }
         public string Title { get; set; }
@@ -260,6 +261,20 @@ namespace Retro_Achievement_Tracker.Models
             {
                 return (AchievementsEarned / (float)AchievementsPossible * 100f).ToString("0.00");
             }
+        }
+        public DateTime? LastPlayed { get; set; }
+
+        public int CompareTo(GameInfo other)
+        {
+            if (other == null || !other.LastPlayed.HasValue)
+            {
+                return 1;
+            }
+            else if (!LastPlayed.HasValue)
+            {
+                return -1;
+            }
+            return other.LastPlayed.Value.CompareTo(LastPlayed.Value);
         }
     }
 }

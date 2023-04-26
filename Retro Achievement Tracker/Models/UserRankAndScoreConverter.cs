@@ -1,11 +1,15 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Retro_Achievement_Tracker.Models
 {
-    class GameCompletedConverter : JsonConverter
+    class UserRankAndScoreConverter : JsonConverter
     {
         public override bool CanConvert(Type objectType)
         {
@@ -14,35 +18,27 @@ namespace Retro_Achievement_Tracker.Models
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
+            UserRankAndScore UserRankAndScore = new UserRankAndScore();
             JObject item = JObject.Load(reader);
-            GameCompleted GameCompleted = new GameCompleted();
 
             if (existingValue != null)
             {
-                GameCompleted = (GameCompleted)existingValue;
+                UserRankAndScore = (UserRankAndScore)existingValue;
             }
 
-            JToken NumAwarded = item["NumAwarded"];
-            JToken MaxPossible = item["MaxPossible"];
-            JToken HardcoreMode = item["HardcoreMode"];
+            JToken Rank = item["Rank"];
+            JToken Score = item["Score"];
 
-            if (NumAwarded != null)
+            if (Rank != null)
             {
-                GameCompleted.AchievementsEarned = Convert.ToInt32(NumAwarded);
+                UserRankAndScore.Rank = int.Parse(Rank.ToString());
             }
-
-
-            if (MaxPossible != null)
+            if (Score != null)
             {
-                GameCompleted.AchievementsPossible = Convert.ToInt32(MaxPossible);
+                UserRankAndScore.Score = int.Parse(Score.ToString());
             }
 
-            if (HardcoreMode != null)
-            {
-                GameCompleted.HardcoreMode = HardcoreMode.ToString() == "1";
-            }
-
-            return GameCompleted;
+            return UserRankAndScore;
         }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
@@ -57,7 +53,14 @@ namespace Retro_Achievement_Tracker.Models
                     object propVal = prop.GetValue(value, null);
                     if (propVal != null && !propVal.GetType().Name.Equals("List`1"))
                     {
-                        jo.Add(char.ToLowerInvariant(prop.Name[0]) + prop.Name.Substring(1), JToken.FromObject(propVal, serializer));
+                        if (propVal.GetType().Name.Equals("DateTime"))
+                        {
+                            jo.Add(char.ToLowerInvariant(prop.Name[0]) + prop.Name.Substring(1), JToken.FromObject(((DateTime)propVal).ToString(), serializer));
+                        }
+                        else
+                        {
+                            jo.Add(char.ToLowerInvariant(prop.Name[0]) + prop.Name.Substring(1), JToken.FromObject(propVal, serializer));
+                        }
                     }
                 }
             }

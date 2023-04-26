@@ -9,7 +9,6 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using System.Xml;
-using System.ServiceModel.Syndication;
 using System.Threading.Tasks;
 using FontFamily = System.Drawing.FontFamily;
 using File = System.IO.File;
@@ -19,19 +18,20 @@ namespace Retro_Achievement_Tracker
     public partial class MainWindow : Form
     {
         private bool ShouldRun;
-        private bool IsLoading;
-        private bool IsLaunching;
+        private bool IsChanging;
+        private bool IsBooting;
+        private bool IsStarting;
 
         private int CurrentlyViewingIndex;
         private int UserAndGameTimerCounter;
         private int MaxCheevoCount = 0;
 
         private UserSummary UserSummary;
-        private GameInfo GameInfo;
+        private GameInfo GameInfoAndProgress;
+
         private Achievement CurrentlyViewingAchievement;
 
         private List<Achievement> OldUnlockedAchievements;
-        private readonly List<ListViewItem> RSSFeedListViewItems = new List<ListViewItem>();
 
         private Timer UserAndGameUpdateTimer;
 
@@ -41,9 +41,9 @@ namespace Retro_Achievement_Tracker
         {
             get
             {
-                if (GameInfo != null && GameInfo.Achievements != null)
+                if (GameInfoAndProgress != null && GameInfoAndProgress.Achievements != null)
                 {
-                    return GameInfo.Achievements.FindAll(x => !x.DateEarned.HasValue);
+                    return GameInfoAndProgress.Achievements.FindAll(x => !x.DateEarned.HasValue);
                 }
                 return new List<Achievement>();
             }
@@ -53,9 +53,9 @@ namespace Retro_Achievement_Tracker
         {
             get
             {
-                if (GameInfo != null && GameInfo.Achievements != null)
+                if (GameInfoAndProgress != null && GameInfoAndProgress.Achievements != null)
                 {
-                    return GameInfo.Achievements.FindAll(x => x.DateEarned.HasValue);
+                    return GameInfoAndProgress.Achievements.FindAll(x => x.DateEarned.HasValue);
                 }
                 return new List<Achievement>();
             }
@@ -65,8 +65,8 @@ namespace Retro_Achievement_Tracker
         {
             MaximizeBox = false;
 
-            IsLaunching = true;
-            IsLoading = true;
+            IsBooting = true;
+            IsChanging = true;
             CurrentlyViewingIndex = -1;
 
             AutoUpdate();
@@ -108,8 +108,6 @@ namespace Retro_Achievement_Tracker
         {
             base.OnShown(e);
 
-            rssFeedListView.ListViewItemSorter = Comparer<ListViewItem>.Create((item1, item2) => DateTime.Parse(item2.SubItems[1].Text).CompareTo(DateTime.Parse(item1.SubItems[1].Text)));
-
             UserAndGameUpdateTimer = new Timer
             {
                 Enabled = false
@@ -138,7 +136,7 @@ namespace Retro_Achievement_Tracker
                 StopButton_Click(null, null);
             }
 
-            IsLoading = false;
+            IsChanging = false;
         }
         protected override void OnClosed(EventArgs e)
         {
@@ -196,133 +194,6 @@ namespace Retro_Achievement_Tracker
             }
         }
 
-        private void UpdateGameProgress(bool sameGame)
-        {
-            try
-            {
-                bool needsUpdate = !sameGame;
-
-                if (GameInfo.Achievements != null)
-                {
-                    GameInfo.Achievements.ForEach(achievement =>
-                    {
-                        achievement.GameId = (int)GameInfo.Id;
-                        achievement.GameTitle = GameInfo.Title;
-                    });
-                }
-
-                if (sameGame)
-                {
-                    List<Achievement> achievementNotificationList = UnlockedAchievements
-                    .FindAll(unlockedAchievement => !OldUnlockedAchievements.Contains(unlockedAchievement))
-                    .ToList();
-
-                    achievementNotificationList.ForEach((achievement) => StreamLabelManager.Instance.EnqueueAlert(achievement));
-
-                    if (achievementNotificationList.Count > 0 && UnlockedAchievements.Count > MaxCheevoCount)
-                    {
-                        MaxCheevoCount = UnlockedAchievements.Count;
-
-                        UpdateLogLabel(Constants.RETRO_ACHIEVEMENTS_LABEL_MSG_CHEEVO_POP);
-
-                        achievementNotificationList.Sort();
-
-                        if (AlertsController.Instance.AchievementAlertEnable)
-                        {
-                            AlertsController.Instance.EnqueueAchievementNotifications(achievementNotificationList);
-                        }
-
-                        if (achievementNotificationList.Contains(FocusController.Instance.CurrentlyFocusedAchievement))
-                        {
-                            if (LockedAchievements.Count > 0)
-                            {
-                                int currentIndex = GameInfo.Achievements.IndexOf(FocusController.Instance.CurrentlyFocusedAchievement);
-
-                                switch (FocusController.Instance.RefocusBehavior)
-                                {
-                                    case RefocusBehaviorEnum.GO_TO_FIRST:
-                                        currentIndex = -1;
-                                        break;
-                                    case RefocusBehaviorEnum.GO_TO_PREVIOUS:
-                                        while (currentIndex > 0 && !LockedAchievements.Contains(GameInfo.Achievements[currentIndex]))
-                                        {
-                                            currentIndex--;
-                                        }
-                                        if (currentIndex == 0)
-                                        {
-                                            while (currentIndex < GameInfo.Achievements.Count - 1 && !LockedAchievements.Contains(GameInfo.Achievements[currentIndex]))
-                                            {
-                                                currentIndex++;
-                                            }
-                                        }
-                                        break;
-                                    case RefocusBehaviorEnum.GO_TO_NEXT:
-                                        while (currentIndex < GameInfo.Achievements.Count - 1 && !LockedAchievements.Contains(GameInfo.Achievements[currentIndex]))
-                                        {
-                                            currentIndex++;
-                                        }
-                                        if (currentIndex == GameInfo.Achievements.Count - 1)
-                                        {
-                                            while (currentIndex > 0 && !LockedAchievements.Contains(GameInfo.Achievements[currentIndex]))
-                                            {
-                                                currentIndex--;
-                                            }
-                                        }
-                                        break;
-                                    case RefocusBehaviorEnum.GO_TO_LAST:
-                                        currentIndex = GameInfo.Achievements.Count;
-                                        break;
-                                }
-
-                                CurrentlyViewingIndex = currentIndex;
-                            }
-                        }
-
-                        if (AlertsController.Instance.MasteryAlertEnable && UnlockedAchievements.Count == GameInfo.Achievements.Count && OldUnlockedAchievements.Count < GameInfo.Achievements.Count)
-                        {
-                            AlertsController.Instance.EnqueueMasteryNotification(GameInfo);
-                            StreamLabelManager.Instance.EnqueueAlert(GameInfo);
-                        }
-
-                        AlertsController.Instance.RunNotifications();
-
-                        needsUpdate = true;
-                    }
-                }
-                else
-                {
-                    UpdateLogLabel(string.Format(Constants.RETRO_ACHIEVEMENTS_LABEL_MSG_CHANGING_TITLE, GameInfo.Title));
-
-                    MaxCheevoCount = UnlockedAchievements.Count;
-
-                    CurrentlyViewingAchievement = null;
-                    CurrentlyViewingIndex = -1;
-
-                    UpdateMediaReferences();
-                }
-
-                if (GameInfo.Achievements != null && GameInfo.Achievements.Count > 0 && needsUpdate)
-                {
-                    AchievementListController.Instance.UpdateAchievementList(UnlockedAchievements.ToList(), LockedAchievements.ToList(), !sameGame);
-
-                    RecentUnlocksController.Instance.SetAchievements(UnlockedAchievements.ToList());
-
-                    StreamLabelManager.Instance.EnqueueRecentUnlocks(GameInfo);
-
-                    UpdateGameInfo();
-                    UpdateCurrentlyViewingAchievement();
-
-                    SetFocus();
-
-                    StreamLabelManager.Instance.RunNotifications();
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.StackTrace);
-            }
-        }
-
         private async void UpdateFromSite(object sender, EventArgs e)
         {
             if (!ShouldRun)
@@ -332,9 +203,9 @@ namespace Retro_Achievement_Tracker
                 return;
             }
 
-            if (UserSummary != null)
+            if (UserSummary != null && GameInfoAndProgress != null)
             {
-                if (IsLaunching)
+                if (IsBooting)
                 {
                     if (FocusController.Instance.AutoLaunch && !FocusController.Instance.IsOpen)
                     {
@@ -374,7 +245,7 @@ namespace Retro_Achievement_Tracker
                     }
                     else
                     {
-                        IsLaunching = false;
+                        IsBooting = false;
                     }
                 }
             }
@@ -389,58 +260,49 @@ namespace Retro_Achievement_Tracker
                 {
                     UserAndGameUpdateTimer.Stop();
 
-                    int previousId = -1;
+                    if (UserSummary == null)
+                    {
+                        UpdateLogLabel(Constants.RETRO_ACHIEVEMENTS_LABEL_MSG_UPDATING_USER_INFO);
+                        UserSummary = await RetroAchievementsAPIClient.GetUserSummary();
+
+                        UpdateUserInfo();
+                    }
 
                     if (UserSummary != null && UserSummary.LastGameID > 0)
                     {
-                        previousId = UserSummary.LastGameID;
-                    }
+                        List<GameInfo> previouslyPlayed = await RetroAchievementsAPIClient.GetRecentlyPlayedGames();
+                        previouslyPlayed.Sort();
 
-                    OldUnlockedAchievements = UnlockedAchievements.ToList();
-
-                    UpdateLogLabel(Constants.RETRO_ACHIEVEMENTS_LABEL_MSG_UPDATING_USER_INFO);
-                    UserSummary userSummary = null;
-
-                    if (UserSummary != null)
-                    {
-                        userSummary = (UserSummary)UserSummary.Clone();
-                    }
-
-                    UserSummary = await RetroAchievementsAPIClient.GetUserSummary();
-
-                    if (UserSummary != null)
-                    {
-                        if (UserSummary.LastGameID > 0)
+                        if (previouslyPlayed.Count > 0)
                         {
-                            if (!UserSummary.Equals(userSummary))
-                            {
-                                UpdateUserInfo();
-
-                                raConnectionStatusPictureBox.Image = Resources.green_button;
-                                userProfilePictureBox.ImageLocation = string.Format(Constants.RETRO_ACHIEVEMENTS_PROFILE_PIC_URL, UserSummary.UserName);
-                            }
+                            bool sameGame = GameInfoAndProgress != null && previouslyPlayed[0].Id.Equals(GameInfoAndProgress.Id);
 
                             UpdateLogLabel(Constants.RETRO_ACHIEVEMENTS_LABEL_MSG_UPDATING_GAME_INFO);
+                            GameInfoAndProgress = await RetroAchievementsAPIClient.GetGameInfoAndProgress(previouslyPlayed[0].Id);
 
-                            GameInfo = await RetroAchievementsAPIClient.GetGameInfo(UserSummary.LastGameID);
-
-                            UpdateGameProgress(previousId == UserSummary.LastGameID);
-
-                            if (Settings.Default.rss_forum_feed || Settings.Default.rss_friend_feed || Settings.Default.rss_news_feed || Settings.Default.rss_new_achievements_feed)
+                            if (UpdateGameProgress(sameGame))
                             {
-                                await CheckRSSFeeds();
+                                UserRankAndScore userRankAndScore = await RetroAchievementsAPIClient.GetRankAndScore();
 
-                                UpdateLogLabel(Constants.RETRO_ACHIEVEMENTS_LABEL_MSG_UPDATING_RSS_FEED);
+                                UserSummary.Rank = userRankAndScore.Rank;
+                                UserSummary.TotalPoints = userRankAndScore.Score;
+
+                                UpdateUserInfo();
                             }
 
-                            if (ShouldRun)
+                            if (GameInfoAndProgress == null)
                             {
-                                StartTimer();
+                                ShouldRun = false;
                             }
-                            else
-                            {
-                                StopButton_Click(null, null);
-                            }
+                        }
+
+                        if (ShouldRun)
+                        {
+                            StartTimer();
+                        }
+                        else
+                        {
+                            StopButton_Click(null, null);
                         }
                     }
                 }
@@ -450,7 +312,7 @@ namespace Retro_Achievement_Tracker
                 if (ex.Message.Contains("RA backend"))
                 {
                     ShouldRun = false;
-                    IsLaunching = false;
+                    IsBooting = false;
 
                     UpdateLogLabel(ex.Message);
                 }
@@ -467,17 +329,156 @@ namespace Retro_Achievement_Tracker
                 }
             }
         }
+
+        private bool UpdateGameProgress(bool sameGame)
+        {
+            bool needsUpdate = !sameGame;
+            bool triggeredUpdate = false;
+
+            try
+            {
+                if (GameInfoAndProgress.Achievements != null)
+                {
+                    GameInfoAndProgress.Achievements.ForEach(achievement =>
+                    {
+                        achievement.GameId = (int)GameInfoAndProgress.Id;
+                        achievement.GameTitle = GameInfoAndProgress.Title;
+                    });
+                }
+
+                if (sameGame)
+                {
+                    List<Achievement> achievementNotificationList = UnlockedAchievements
+                    .FindAll(unlockedAchievement => !OldUnlockedAchievements.Contains(unlockedAchievement))
+                    .ToList();
+
+                    achievementNotificationList.ForEach((achievement) => StreamLabelManager.Instance.EnqueueAlert(achievement));
+
+                    if (achievementNotificationList.Count > 0 && UnlockedAchievements.Count > MaxCheevoCount)
+                    {
+                        MaxCheevoCount = UnlockedAchievements.Count;
+
+                        UpdateLogLabel(Constants.RETRO_ACHIEVEMENTS_LABEL_MSG_CHEEVO_POP);
+
+                        achievementNotificationList.Sort();
+
+                        if (AlertsController.Instance.AchievementAlertEnable)
+                        {
+                            triggeredUpdate = true;
+                            AlertsController.Instance.EnqueueAchievementNotifications(achievementNotificationList);
+                        }
+
+                        if (achievementNotificationList.Contains(FocusController.Instance.CurrentlyFocusedAchievement))
+                        {
+                            if (LockedAchievements.Count > 0)
+                            {
+                                FindNewFocus();
+                            }
+                        }
+
+                        if (AlertsController.Instance.MasteryAlertEnable && UnlockedAchievements.Count == GameInfoAndProgress.Achievements.Count && OldUnlockedAchievements.Count < GameInfoAndProgress.Achievements.Count)
+                        {
+                            AlertsController.Instance.EnqueueMasteryNotification(GameInfoAndProgress);
+                            StreamLabelManager.Instance.EnqueueAlert(GameInfoAndProgress);
+                        }
+
+                        AlertsController.Instance.RunNotifications();
+
+                        needsUpdate = true;
+                    }
+                }
+                else
+                {
+                    UpdateLogLabel(string.Format(Constants.RETRO_ACHIEVEMENTS_LABEL_MSG_CHANGING_TITLE, GameInfoAndProgress.Title));
+
+                    MaxCheevoCount = UnlockedAchievements.Count;
+
+                    CurrentlyViewingAchievement = null;
+                    CurrentlyViewingIndex = -1;
+
+                    UpdateLaunchBoxReferences();
+                    triggeredUpdate = true;
+                }
+
+                if (GameInfoAndProgress.Achievements != null && GameInfoAndProgress.Achievements.Count > 0 && needsUpdate)
+                {
+                    AchievementListController.Instance.UpdateAchievementList(UnlockedAchievements.ToList(), LockedAchievements.ToList(), !sameGame);
+
+                    RecentUnlocksController.Instance.SetAchievements(UnlockedAchievements.ToList());
+
+                    StreamLabelManager.Instance.EnqueueRecentUnlocks(GameInfoAndProgress);
+
+                    UpdateGameInfo();
+                    UpdateCurrentlyViewingAchievement();
+
+                    SetFocus();
+
+                    StreamLabelManager.Instance.RunNotifications();
+                }
+
+                OldUnlockedAchievements = UnlockedAchievements.ToList();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
+            }
+
+            return triggeredUpdate;
+        }
+
+        private void FindNewFocus()
+        {
+            int currentIndex = GameInfoAndProgress.Achievements.IndexOf(FocusController.Instance.CurrentlyFocusedAchievement);
+
+            switch (FocusController.Instance.RefocusBehavior)
+            {
+                case RefocusBehaviorEnum.GO_TO_FIRST:
+                    currentIndex = -1;
+                    break;
+                case RefocusBehaviorEnum.GO_TO_PREVIOUS:
+                    while (currentIndex > 0 && !LockedAchievements.Contains(GameInfoAndProgress.Achievements[currentIndex]))
+                    {
+                        currentIndex--;
+                    }
+                    if (currentIndex == 0)
+                    {
+                        while (currentIndex < GameInfoAndProgress.Achievements.Count - 1 && !LockedAchievements.Contains(GameInfoAndProgress.Achievements[currentIndex]))
+                        {
+                            currentIndex++;
+                        }
+                    }
+                    break;
+                case RefocusBehaviorEnum.GO_TO_NEXT:
+                    while (currentIndex < GameInfoAndProgress.Achievements.Count - 1 && !LockedAchievements.Contains(GameInfoAndProgress.Achievements[currentIndex]))
+                    {
+                        currentIndex++;
+                    }
+                    if (currentIndex == GameInfoAndProgress.Achievements.Count - 1)
+                    {
+                        while (currentIndex > 0 && !LockedAchievements.Contains(GameInfoAndProgress.Achievements[currentIndex]))
+                        {
+                            currentIndex--;
+                        }
+                    }
+                    break;
+                case RefocusBehaviorEnum.GO_TO_LAST:
+                    currentIndex = GameInfoAndProgress.Achievements.Count;
+                    break;
+            }
+
+            CurrentlyViewingIndex = currentIndex;
+        }
         public void UpdateCurrentlyViewingAchievement()
         {
             if (Visible)
             {
                 if (LockedAchievements.Count > 0)
                 {
-                    if (CurrentlyViewingIndex >= GameInfo.Achievements.Count)
+                    if (CurrentlyViewingIndex >= GameInfoAndProgress.Achievements.Count)
                     {
-                        CurrentlyViewingIndex = GameInfo.Achievements.Count - 1;
+                        CurrentlyViewingIndex = GameInfoAndProgress.Achievements.Count - 1;
 
-                        while (CurrentlyViewingIndex > 0 && !LockedAchievements.Contains(GameInfo.Achievements[CurrentlyViewingIndex]))
+                        while (CurrentlyViewingIndex > 0 && !LockedAchievements.Contains(GameInfoAndProgress.Achievements[CurrentlyViewingIndex]))
                         {
                             CurrentlyViewingIndex--;
                         }
@@ -487,13 +488,13 @@ namespace Retro_Achievement_Tracker
                     {
                         CurrentlyViewingIndex = 0;
 
-                        while (CurrentlyViewingIndex < GameInfo.Achievements.Count - 1 && !LockedAchievements.Contains(GameInfo.Achievements[CurrentlyViewingIndex]))
+                        while (CurrentlyViewingIndex < GameInfoAndProgress.Achievements.Count - 1 && !LockedAchievements.Contains(GameInfoAndProgress.Achievements[CurrentlyViewingIndex]))
                         {
                             CurrentlyViewingIndex++;
                         }
                     }
 
-                    CurrentlyViewingAchievement = GameInfo.Achievements[CurrentlyViewingIndex];
+                    CurrentlyViewingAchievement = GameInfoAndProgress.Achievements[CurrentlyViewingIndex];
 
                     focusAchievementPictureBox.ImageLocation = CurrentlyViewingAchievement.BadgeUri;
                     focusAchievementTitleLabel.Text = "[" + CurrentlyViewingAchievement.Points + "] - " + CurrentlyViewingAchievement.Title;
@@ -526,7 +527,7 @@ namespace Retro_Achievement_Tracker
             else if (LockedAchievements.Count == 0 && UnlockedAchievements.Count > 0)
             {
                 FocusController.Instance.SetFocus((Achievement)null);
-                FocusController.Instance.SetFocus(GameInfo);
+                FocusController.Instance.SetFocus(GameInfoAndProgress);
 
                 StreamLabelManager.Instance.ClearFocus();
             }
@@ -534,143 +535,6 @@ namespace Retro_Achievement_Tracker
             {
                 StreamLabelManager.Instance.ClearFocus();
             }
-        }
-        private void RefreshRSSFeed()
-        {
-            foreach (ListViewItem item in RSSFeedListViewItems)
-            {
-                if (((item.Text.Contains("[FORUM] ") && Settings.Default.rss_forum_feed)
-                    || (item.Text.Contains("[NEWS] ") && Settings.Default.rss_news_feed)
-                    || (item.Text.Contains("[FRIEND] ") && Settings.Default.rss_friend_feed)
-                    || (item.Text.Contains("[CHEEVO] ") && Settings.Default.rss_new_achievements_feed)) && rssFeedListView.FindItemWithText(item.Text) == null)
-                {
-                    rssFeedListView.Items.Add(item);
-                }
-            }
-
-            rssFeedListView.Sort();
-        }
-        private async Task CheckRSSFeeds()
-        {
-            Dictionary<string, SyndicationItem> syndicationItems = new Dictionary<string, SyndicationItem>();
-
-            List<ListViewItem> newListViewItems = new List<ListViewItem>();
-
-            XmlReader newsReader;
-            SyndicationFeed feed;
-
-            if (Settings.Default.rss_news_feed)
-            {
-                try
-                {
-                    await RetroAchievementsAPIClient.GetNewsFeed().ContinueWith(result =>
-                    {
-                        newsReader = XmlReader.Create(new StringReader(result.Result));
-                        feed = SyndicationFeed.Load(newsReader);
-
-                        newsReader.Close();
-
-                        foreach (SyndicationItem item in feed.Items)
-                        {
-                            if (RSSFeedListViewItems.Find(potentialItem => potentialItem.Text.Contains("[NEWS] " + item.Title.Text)) == null)
-                            {
-                                syndicationItems.Add("[NEWS] " + item.Title.Text, item);
-                            }
-                        }
-                    });
-                }
-                catch { }
-            }
-
-            if (Settings.Default.rss_new_achievements_feed)
-            {
-                try
-                {
-                    await RetroAchievementsAPIClient.GetNewAchievementsFeed().ContinueWith(result =>
-                    {
-                        newsReader = XmlReader.Create(new StringReader(result.Result));
-                        feed = SyndicationFeed.Load(newsReader);
-
-                        newsReader.Close();
-
-                        foreach (SyndicationItem item in feed.Items)
-                        {
-                            if (RSSFeedListViewItems.Find(potentialItem => potentialItem.Text.Equals("[CHEEVO] " + item.Title.Text + " " + item.PublishDate.ToString())) == null
-                            && !syndicationItems.ContainsKey("[CHEEVO] " + item.Title.Text + " " + item.PublishDate.ToString()))
-                            {
-                                syndicationItems.Add("[CHEEVO] " + item.Title.Text + " " + item.PublishDate.ToString(), item);
-                            }
-                        }
-                    });
-                }
-                catch
-                {
-                }
-            }
-
-            if (Settings.Default.rss_forum_feed)
-            {
-                try
-                {
-                    await RetroAchievementsAPIClient.GetForumActivityFeed().ContinueWith(result =>
-                    {
-                        newsReader = XmlReader.Create(new StringReader(result.Result));
-                        feed = SyndicationFeed.Load(newsReader);
-
-                        newsReader.Close();
-
-                        foreach (SyndicationItem item in feed.Items)
-                        {
-                            if (RSSFeedListViewItems.Find(potentialItem => potentialItem.Text.Equals("[FORUM] " + item.Title.Text + " " + item.PublishDate.ToString())) == null
-                                && !syndicationItems.ContainsKey("[FORUM] " + item.Title.Text + " " + item.PublishDate.ToString()))
-                            {
-                                syndicationItems.Add("[FORUM] " + item.Title.Text + " " + item.PublishDate.ToString(), item);
-                            }
-                        }
-                    });
-                }
-                catch
-                {
-                }
-            }
-
-            if (Settings.Default.rss_friend_feed)
-            {
-                try
-                {
-                    await RetroAchievementsAPIClient.GetFriendActivityFeed().ContinueWith(result =>
-                    {
-                        newsReader = XmlReader.Create(new StringReader(result.Result));
-                        feed = SyndicationFeed.Load(newsReader);
-
-                        newsReader.Close();
-
-                        foreach (SyndicationItem item in feed.Items)
-                        {
-                            if (RSSFeedListViewItems.Find(potentialItem => potentialItem.Text.Equals("[FRIEND] " + item.Title.Text + " " + item.PublishDate.ToString())) == null
-                            && !syndicationItems.ContainsKey("[FRIEND] " + item.Title.Text + " " + item.PublishDate.ToString()))
-                            {
-                                syndicationItems.Add("[FRIEND] " + item.Title.Text + " " + item.PublishDate.ToString(), item);
-                            }
-                        }
-                    });
-                }
-                catch { }
-            }
-
-            foreach (KeyValuePair<string, SyndicationItem> pair in syndicationItems)
-            {
-                ListViewItem listViewItem = new ListViewItem(pair.Key);
-                listViewItem.SubItems.Add(pair.Value.PublishDate.ToString());
-                listViewItem.SubItems.Add(pair.Value.Summary.Text);
-                listViewItem.SubItems.Add(pair.Value.Links[0].Uri.AbsoluteUri);
-
-                newListViewItems.Add(listViewItem);
-            }
-
-            RSSFeedListViewItems.AddRange(newListViewItems);
-
-            RefreshRSSFeed();
         }
         private void CreateFolders()
         {
@@ -688,11 +552,11 @@ namespace Retro_Achievement_Tracker
         }
         private void UpdateLogLabel(string s)
         {
-            timerStatusLabel.Text = IsLaunching ? "Booting. Please stand by..." : s;
+            timerStatusLabel.Text = s;
         }
         private void StartTimer()
         {
-            UserAndGameTimerCounter = (IsLaunching || UserSummary == null) ? 0 : 12;
+            UserAndGameTimerCounter = (IsStarting || IsBooting) ? 0 : 60;
 
             UserAndGameUpdateTimer = new Timer
             {
@@ -709,6 +573,9 @@ namespace Retro_Achievement_Tracker
         }
         private void UpdateUserInfo()
         {
+            raConnectionStatusPictureBox.Image = Resources.green_button;
+            userProfilePictureBox.ImageLocation = string.Format(Constants.RETRO_ACHIEVEMENTS_PROFILE_PIC_URL, UserSummary.UserName);
+
             userInfoUsernameLabel.Text = UserSummary.UserName;
             userInfoMottoLabel.Text = UserSummary.Motto;
             userInfoRankLabel.Text = "Site Rank: " + (UserSummary.Rank == 0 ? "No Rank" : UserSummary.Rank.ToString());
@@ -725,18 +592,18 @@ namespace Retro_Achievement_Tracker
         }
         private void UpdateGameInfo()
         {
-            gameInfoPictureBox.ImageLocation = GameInfo.BadgeUri;
-            gameInfoTitleLabel.Text = GameInfo.Title + " (" + GameInfo.ConsoleName + ")";
-            gameInfoDeveloperLabel.Text = GameInfo.Developer;
-            gameInfoPublisherLabel.Text = GameInfo.Publisher;
-            gameInfoGenreLabel.Text = GameInfo.Genre;
-            gameInfoReleasedLabel.Text = GameInfo.Released;
+            gameInfoPictureBox.ImageLocation = GameInfoAndProgress.BadgeUri;
+            gameInfoTitleLabel.Text = GameInfoAndProgress.Title + " (" + GameInfoAndProgress.ConsoleName + ")";
+            gameInfoDeveloperLabel.Text = GameInfoAndProgress.Developer;
+            gameInfoPublisherLabel.Text = GameInfoAndProgress.Publisher;
+            gameInfoGenreLabel.Text = GameInfoAndProgress.Genre;
+            gameInfoReleasedLabel.Text = GameInfoAndProgress.Released;
 
-            int percentageCompleted = (int)float.Parse(GameInfo.PercentComplete);
+            int percentageCompleted = (int)float.Parse(GameInfoAndProgress.PercentComplete);
 
-            gameProgressAchievements1Label.Text = GameInfo.AchievementsPossible.ToString();
-            gameProgressPoints1Label.Text = GameInfo.GamePointsPossible.ToString();
-            gameProgressTruePoints1Label.Text = "(" + GameInfo.GameTruePointsPossible.ToString() + ")";
+            gameProgressAchievements1Label.Text = GameInfoAndProgress.AchievementsPossible.ToString();
+            gameProgressPoints1Label.Text = GameInfoAndProgress.GamePointsPossible.ToString();
+            gameProgressTruePoints1Label.Text = "(" + GameInfoAndProgress.GameTruePointsPossible.ToString() + ")";
 
             gameProgressPercentCompletePictureBox.Size = new Size((int)(1.82 * percentageCompleted), 2);
 
@@ -770,30 +637,30 @@ namespace Retro_Achievement_Tracker
                 gameProgressTruePoints2Label.Show();
                 gameProgressPointsTextLabel.Show();
 
-                gameProgressAchievements2Label.Text = GameInfo.AchievementsEarned.ToString();
-                gameProgressPoints2Label.Text = GameInfo.GamePointsEarned.ToString();
-                gameProgressTruePoints2Label.Text = "(" + GameInfo.GameTruePointsEarned.ToString() + ")";
+                gameProgressAchievements2Label.Text = GameInfoAndProgress.AchievementsEarned.ToString();
+                gameProgressPoints2Label.Text = GameInfoAndProgress.GamePointsEarned.ToString();
+                gameProgressTruePoints2Label.Text = "(" + GameInfoAndProgress.GameTruePointsEarned.ToString() + ")";
             }
 
-            GameInfoController.Instance.SetTitleValue(GameInfo.Title);
-            GameInfoController.Instance.SetDeveloperValue(GameInfo.Developer);
-            GameInfoController.Instance.SetPublisherValue(GameInfo.Publisher);
-            GameInfoController.Instance.SetGenreValue(GameInfo.Genre);
-            GameInfoController.Instance.SetConsoleValue(GameInfo.ConsoleName);
-            GameInfoController.Instance.SetReleaseDateValue(GameInfo.Released);
+            GameInfoController.Instance.SetTitleValue(GameInfoAndProgress.Title);
+            GameInfoController.Instance.SetDeveloperValue(GameInfoAndProgress.Developer);
+            GameInfoController.Instance.SetPublisherValue(GameInfoAndProgress.Publisher);
+            GameInfoController.Instance.SetGenreValue(GameInfoAndProgress.Genre);
+            GameInfoController.Instance.SetConsoleValue(GameInfoAndProgress.ConsoleName);
+            GameInfoController.Instance.SetReleaseDateValue(GameInfoAndProgress.Released);
 
-            GameProgressController.Instance.SetGameAchievements(GameInfo.AchievementsEarned.ToString(), GameInfo.Achievements == null ? "0" : GameInfo.Achievements.Count.ToString());
-            GameProgressController.Instance.SetGamePoints(GameInfo.GamePointsEarned.ToString(), GameInfo.GamePointsPossible.ToString());
-            GameProgressController.Instance.SetGameTruePoints(GameInfo.GameTruePointsEarned.ToString(), GameInfo.GameTruePointsPossible.ToString());
-            GameProgressController.Instance.SetCompleted(GameInfo.Achievements == null ? 0.00f : GameInfo.AchievementsEarned / (float)GameInfo.Achievements.Count * 100f);
+            GameProgressController.Instance.SetGameAchievements(GameInfoAndProgress.AchievementsEarned.ToString(), GameInfoAndProgress.Achievements == null ? "0" : GameInfoAndProgress.Achievements.Count.ToString());
+            GameProgressController.Instance.SetGamePoints(GameInfoAndProgress.GamePointsEarned.ToString(), GameInfoAndProgress.GamePointsPossible.ToString());
+            GameProgressController.Instance.SetGameTruePoints(GameInfoAndProgress.GameTruePointsEarned.ToString(), GameInfoAndProgress.GameTruePointsPossible.ToString());
+            GameProgressController.Instance.SetCompleted(GameInfoAndProgress.Achievements == null ? 0.00f : GameInfoAndProgress.AchievementsEarned / (float)GameInfoAndProgress.Achievements.Count * 100f);
             GameProgressController.Instance.SetGameRatio();
 
-            StreamLabelManager.Instance.EnqueueGameInfo(GameInfo);
+            StreamLabelManager.Instance.EnqueueGameInfo(GameInfoAndProgress);
 
-            RelatedMediaController.Instance.RABadgeIconURI = GameInfo.BadgeUri;
-            RelatedMediaController.Instance.RATitleScreenURI = GameInfo.ImageTitle;
-            RelatedMediaController.Instance.RAScreenshotURI = GameInfo.ImageIngame;
-            RelatedMediaController.Instance.RABoxArtURI = GameInfo.ImageBoxArt;
+            RelatedMediaController.Instance.RABadgeIconURI = GameInfoAndProgress.BadgeUri;
+            RelatedMediaController.Instance.RATitleScreenURI = GameInfoAndProgress.ImageTitle;
+            RelatedMediaController.Instance.RAScreenshotURI = GameInfoAndProgress.ImageIngame;
+            RelatedMediaController.Instance.RABoxArtURI = GameInfoAndProgress.ImageBoxArt;
         }
         private void UpdateFocusButtons()
         {
@@ -826,6 +693,8 @@ namespace Retro_Achievement_Tracker
         }
         private void StartButton_Click(object sender, EventArgs e)
         {
+            IsStarting = true;
+
             RetroAchievementsAPIClient = new RetroAchievementAPIClient(usernameTextBox.Text, apiKeyTextBox.Text);
 
             ShouldRun = true;
@@ -842,6 +711,8 @@ namespace Retro_Achievement_Tracker
             gameInfoOpenWindowButton.Enabled = true;
 
             StartTimer();
+
+            IsStarting = false;
         }
         private void StopButton_Click(object sender, EventArgs e)
         {
@@ -867,50 +738,18 @@ namespace Retro_Achievement_Tracker
 
             startButton.Enabled = canStart;
 
-            IsLaunching = false;
-            IsLoading = false;
+            IsBooting = false;
+            IsChanging = false;
         }
         private void RequiredField_TextChanged(object sender, EventArgs e)
         {
             startButton.Enabled = CanStart();
         }
-        private void RSSFeedCheckbox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (!IsLoading)
-            {
-                IsLoading = true;
-                CheckBox checkBox = sender as CheckBox;
-
-                switch (checkBox.Name)
-                {
-                    case "rssFeedCheevoCheckBox":
-                        Settings.Default.rss_new_achievements_feed = checkBox.Checked;
-                        break;
-                    case "rssFeedForumCheckBox":
-                        Settings.Default.rss_forum_feed = checkBox.Checked;
-                        break;
-                    case "rssFeedFriendCheckBox":
-                        Settings.Default.rss_friend_feed = checkBox.Checked;
-                        break;
-                    case "rssFeedNewsCheckBox":
-                        Settings.Default.rss_news_feed = checkBox.Checked;
-                        break;
-                }
-
-                IsLoading = false;
-
-                Settings.Default.Save();
-
-                rssFeedListView.Items.Clear();
-
-                RefreshRSSFeed();
-            }
-        }
         private void CustomAlertsCheckBox_CheckedChanged(object sender, EventArgs eventArgs)
         {
-            if (!IsLoading)
+            if (!IsChanging)
             {
-                IsLoading = true;
+                IsChanging = true;
 
                 CheckBox checkBox = sender as CheckBox;
                 bool isChecked = checkBox.Checked;
@@ -966,7 +805,7 @@ namespace Retro_Achievement_Tracker
                         if (checkBox.Checked)
                         {
                             AlertsController.Instance.EnableMasteryEdit();
-                            AlertsController.Instance.SendMasteryNotification(GameInfo);
+                            AlertsController.Instance.SendMasteryNotification(GameInfoAndProgress);
                         }
                         else
                         {
@@ -977,7 +816,7 @@ namespace Retro_Achievement_Tracker
 
                 UpdateAlertsEnabledControls();
 
-                IsLoading = false;
+                IsChanging = false;
             }
         }
         private void UpdateAlertsEnabledControls()
@@ -1050,9 +889,9 @@ namespace Retro_Achievement_Tracker
         }
         private void CustomNumericUpDown_ValueChanged(object sender, EventArgs eventArgs)
         {
-            if (!IsLoading)
+            if (!IsChanging)
             {
-                IsLoading = true;
+                IsChanging = true;
                 NumericUpDown numericUpDown = sender as NumericUpDown;
 
                 switch (numericUpDown.Name)
@@ -1201,7 +1040,7 @@ namespace Retro_Achievement_Tracker
                         break;
                 }
 
-                IsLoading = false;
+                IsChanging = false;
             }
         }
         private void SelectCustomAlertButton_Click(object sender, EventArgs eventArgs)
@@ -1274,8 +1113,8 @@ namespace Retro_Achievement_Tracker
                     }
                     break;
                 case "alertsPlayMasteryButton":
-                    AlertsController.Instance.EnqueueMasteryNotification(GameInfo);
-                    StreamLabelManager.Instance.EnqueueAlert(GameInfo);
+                    AlertsController.Instance.EnqueueMasteryNotification(GameInfoAndProgress);
+                    StreamLabelManager.Instance.EnqueueAlert(GameInfoAndProgress);
                     break;
             }
 
@@ -1292,7 +1131,7 @@ namespace Retro_Achievement_Tracker
         {
             CurrentlyViewingIndex--;
 
-            while (CurrentlyViewingIndex > -1 && !LockedAchievements.Contains(GameInfo.Achievements[CurrentlyViewingIndex]))
+            while (CurrentlyViewingIndex > -1 && !LockedAchievements.Contains(GameInfoAndProgress.Achievements[CurrentlyViewingIndex]))
             {
                 CurrentlyViewingIndex--;
             }
@@ -1303,7 +1142,7 @@ namespace Retro_Achievement_Tracker
         {
             CurrentlyViewingIndex++;
 
-            while (CurrentlyViewingIndex < GameInfo.Achievements.Count - 1 && !LockedAchievements.Contains(GameInfo.Achievements[CurrentlyViewingIndex]))
+            while (CurrentlyViewingIndex < GameInfoAndProgress.Achievements.Count - 1 && !LockedAchievements.Contains(GameInfoAndProgress.Achievements[CurrentlyViewingIndex]))
             {
                 CurrentlyViewingIndex++;
             }
@@ -1351,7 +1190,7 @@ namespace Retro_Achievement_Tracker
                 RelatedMediaController.Instance.LaunchBoxFilePath = folderBrowserDialog1.SelectedPath;
 
                 UpdateRelatedMediaRadioButtons();
-                UpdateMediaReferences();
+                UpdateLaunchBoxReferences();
             }
         }
         private void SetFontFamilyBox(ComboBox comboBox, FontFamily fontFamily)
@@ -1651,9 +1490,9 @@ namespace Retro_Achievement_Tracker
         }
         private void FontFamilyComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!IsLoading)
+            if (!IsChanging)
             {
-                IsLoading = true;
+                IsChanging = true;
 
                 FontFamily[] familyArray = FontFamily.Families.ToArray();
                 FontFamily fontFamily = null;
@@ -1766,14 +1605,14 @@ namespace Retro_Achievement_Tracker
                     }
                 }
 
-                IsLoading = false;
+                IsChanging = false;
             }
         }
         private void NotificationAnimationComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!IsLoading)
+            if (!IsChanging)
             {
-                IsLoading = true;
+                IsChanging = true;
                 ComboBox comboBox = sender as ComboBox;
 
                 switch (comboBox.Name)
@@ -1860,14 +1699,14 @@ namespace Retro_Achievement_Tracker
                         break;
                 }
 
-                IsLoading = false;
+                IsChanging = false;
             }
         }
         private void FeatureEnablementCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (!IsLoading)
+            if (!IsChanging)
             {
-                IsLoading = true;
+                IsChanging = true;
 
                 CheckBox checkBox = sender as CheckBox;
 
@@ -2059,16 +1898,16 @@ namespace Retro_Achievement_Tracker
                         break;
                 }
 
-                IsLoading = false;
+                IsChanging = false;
             }
         }
         private void DividerCharacter_RadioButtonClicked(object sender, EventArgs e)
         {
             RadioButton radioButton = sender as RadioButton;
 
-            if (!IsLoading && radioButton.Checked)
+            if (!IsChanging && radioButton.Checked)
             {
-                IsLoading = true;
+                IsChanging = true;
                 {
                     switch (radioButton.Name)
                     {
@@ -2084,7 +1923,7 @@ namespace Retro_Achievement_Tracker
                     }
 
                     UpdateDividerCharacterRadioButtons();
-                    IsLoading = false;
+                    IsChanging = false;
                 }
             }
         }
@@ -2111,9 +1950,9 @@ namespace Retro_Achievement_Tracker
         }
         private void RefocusBehavior_RadioButtonCheckChanged(object sender, EventArgs e)
         {
-            if (!IsLoading)
+            if (!IsChanging)
             {
-                IsLoading = true;
+                IsChanging = true;
                 RadioButton radioButton = sender as RadioButton;
 
                 if (radioButton.Checked)
@@ -2137,7 +1976,7 @@ namespace Retro_Achievement_Tracker
                     UpdateRefocusBehaviorRadioButtons();
                 }
 
-                IsLoading = false;
+                IsChanging = false;
             }
         }
         private void UpdateRefocusBehaviorRadioButtons()
@@ -2174,16 +2013,16 @@ namespace Retro_Achievement_Tracker
         {
             RadioButton radioButton = sender as RadioButton;
 
-            if (!IsLoading)
+            if (!IsChanging)
             {
-                IsLoading = true;
+                IsChanging = true;
 
                 switch (radioButton.Name)
                 {
                     case "relatedMediaRABadgeIconRadioButton":
                         if (RelatedMediaController.Instance.RelatedMediaSelection == RelatedMediaSelection.RABadgeIcon)
                         {
-                            IsLoading = false;
+                            IsChanging = false;
                             return;
                         }
                         RelatedMediaController.Instance.RelatedMediaSelection = RelatedMediaSelection.RABadgeIcon;
@@ -2191,7 +2030,7 @@ namespace Retro_Achievement_Tracker
                     case "relatedMediaRABoxArtRadioButton":
                         if (RelatedMediaController.Instance.RelatedMediaSelection == RelatedMediaSelection.RABoxArt)
                         {
-                            IsLoading = false;
+                            IsChanging = false;
                             return;
                         }
                         RelatedMediaController.Instance.RelatedMediaSelection = RelatedMediaSelection.RABoxArt;
@@ -2199,7 +2038,7 @@ namespace Retro_Achievement_Tracker
                     case "relatedMediaRATitleScreenRadioButton":
                         if (RelatedMediaController.Instance.RelatedMediaSelection == RelatedMediaSelection.RATitleScreen)
                         {
-                            IsLoading = false;
+                            IsChanging = false;
                             return;
                         }
                         RelatedMediaController.Instance.RelatedMediaSelection = RelatedMediaSelection.RATitleScreen;
@@ -2207,7 +2046,7 @@ namespace Retro_Achievement_Tracker
                     case "relatedMediaRAScreenshotRadioButton":
                         if (RelatedMediaController.Instance.RelatedMediaSelection == RelatedMediaSelection.RAIngameScreen)
                         {
-                            IsLoading = false;
+                            IsChanging = false;
                             return;
                         }
                         RelatedMediaController.Instance.RelatedMediaSelection = RelatedMediaSelection.RAIngameScreen;
@@ -2215,7 +2054,7 @@ namespace Retro_Achievement_Tracker
                     case "relatedMediaLBBoxFrontRadioButton":
                         if (RelatedMediaController.Instance.RelatedMediaSelection == RelatedMediaSelection.LBBoxArtFront)
                         {
-                            IsLoading = false;
+                            IsChanging = false;
                             return;
                         }
                         RelatedMediaController.Instance.RelatedMediaSelection = RelatedMediaSelection.LBBoxArtFront;
@@ -2223,7 +2062,7 @@ namespace Retro_Achievement_Tracker
                     case "relatedMediaLBBoxBackRadioButton":
                         if (RelatedMediaController.Instance.RelatedMediaSelection == RelatedMediaSelection.LBBoxArtBack)
                         {
-                            IsLoading = false;
+                            IsChanging = false;
                             return;
                         }
                         RelatedMediaController.Instance.RelatedMediaSelection = RelatedMediaSelection.LBBoxArtBack;
@@ -2231,7 +2070,7 @@ namespace Retro_Achievement_Tracker
                     case "relatedMediaLBBox3DRadioButton":
                         if (RelatedMediaController.Instance.RelatedMediaSelection == RelatedMediaSelection.LBBoxArt3D)
                         {
-                            IsLoading = false;
+                            IsChanging = false;
                             return;
                         }
                         RelatedMediaController.Instance.RelatedMediaSelection = RelatedMediaSelection.LBBoxArt3D;
@@ -2239,7 +2078,7 @@ namespace Retro_Achievement_Tracker
                     case "relatedMediaLBBoxFrontReconRadioButton":
                         if (RelatedMediaController.Instance.RelatedMediaSelection == RelatedMediaSelection.LBBoxArtFrontRecon)
                         {
-                            IsLoading = false;
+                            IsChanging = false;
                             return;
                         }
                         RelatedMediaController.Instance.RelatedMediaSelection = RelatedMediaSelection.LBBoxArtFrontRecon;
@@ -2247,7 +2086,7 @@ namespace Retro_Achievement_Tracker
                     case "relatedMediaLBBoxBackReconRadioButton":
                         if (RelatedMediaController.Instance.RelatedMediaSelection == RelatedMediaSelection.LBBoxArtBackRecon)
                         {
-                            IsLoading = false;
+                            IsChanging = false;
                             return;
                         }
                         RelatedMediaController.Instance.RelatedMediaSelection = RelatedMediaSelection.LBBoxArtBackRecon;
@@ -2255,7 +2094,7 @@ namespace Retro_Achievement_Tracker
                     case "relatedMediaLBBoxFullRadioButton":
                         if (RelatedMediaController.Instance.RelatedMediaSelection == RelatedMediaSelection.LBBoxArtFull)
                         {
-                            IsLoading = false;
+                            IsChanging = false;
                             return;
                         }
                         RelatedMediaController.Instance.RelatedMediaSelection = RelatedMediaSelection.LBBoxArtFull;
@@ -2263,7 +2102,7 @@ namespace Retro_Achievement_Tracker
                     case "relatedMediaLBBoxSpineRadioButton":
                         if (RelatedMediaController.Instance.RelatedMediaSelection == RelatedMediaSelection.LBBoxArtSpine)
                         {
-                            IsLoading = false;
+                            IsChanging = false;
                             return;
                         }
                         RelatedMediaController.Instance.RelatedMediaSelection = RelatedMediaSelection.LBBoxArtSpine;
@@ -2271,7 +2110,7 @@ namespace Retro_Achievement_Tracker
                     case "relatedMediaLBBannerRadioButton":
                         if (RelatedMediaController.Instance.RelatedMediaSelection == RelatedMediaSelection.LBBanner)
                         {
-                            IsLoading = false;
+                            IsChanging = false;
                             return;
                         }
                         RelatedMediaController.Instance.RelatedMediaSelection = RelatedMediaSelection.LBBanner;
@@ -2279,7 +2118,7 @@ namespace Retro_Achievement_Tracker
                     case "relatedMediaLBTitleScreenRadioButton":
                         if (RelatedMediaController.Instance.RelatedMediaSelection == RelatedMediaSelection.LBTitleScreen)
                         {
-                            IsLoading = false;
+                            IsChanging = false;
                             return;
                         }
                         RelatedMediaController.Instance.RelatedMediaSelection = RelatedMediaSelection.LBTitleScreen;
@@ -2287,7 +2126,7 @@ namespace Retro_Achievement_Tracker
                     case "relatedMediaLBClearLogoRadioButton":
                         if (RelatedMediaController.Instance.RelatedMediaSelection == RelatedMediaSelection.LBClearLogo)
                         {
-                            IsLoading = false;
+                            IsChanging = false;
                             return;
                         }
                         RelatedMediaController.Instance.RelatedMediaSelection = RelatedMediaSelection.LBClearLogo;
@@ -2295,7 +2134,7 @@ namespace Retro_Achievement_Tracker
                     case "relatedMediaLBCartFrontRadioButton":
                         if (RelatedMediaController.Instance.RelatedMediaSelection == RelatedMediaSelection.LBCartFront)
                         {
-                            IsLoading = false;
+                            IsChanging = false;
                             return;
                         }
                         RelatedMediaController.Instance.RelatedMediaSelection = RelatedMediaSelection.LBCartFront;
@@ -2303,7 +2142,7 @@ namespace Retro_Achievement_Tracker
                     case "relatedMediaLBCartBackRadioButton":
                         if (RelatedMediaController.Instance.RelatedMediaSelection == RelatedMediaSelection.LBCartBack)
                         {
-                            IsLoading = false;
+                            IsChanging = false;
                             return;
                         }
                         RelatedMediaController.Instance.RelatedMediaSelection = RelatedMediaSelection.LBCartBack;
@@ -2312,7 +2151,7 @@ namespace Retro_Achievement_Tracker
 
                 UpdateRelatedMediaRadioButtons();
 
-                IsLoading = false;
+                IsChanging = false;
             }
         }
         private void UpdateRelatedMediaRadioButtons()
@@ -2686,9 +2525,9 @@ namespace Retro_Achievement_Tracker
                 relatedMediaLBCartBackRadioButton.Enabled = true;
             }
         }
-        private void UpdateMediaReferences()
+        private void UpdateLaunchBoxReferences()
         {
-            if (GameInfo != null)
+            if (GameInfoAndProgress != null)
             {
                 if (Directory.Exists(Settings.Default.related_media_launchbox_filepath))
                 {
@@ -2696,7 +2535,7 @@ namespace Retro_Achievement_Tracker
                     {
                         Dictionary<string, DateTime> gameNames = new Dictionary<string, DateTime>();
 
-                        using (XmlReader reader = XmlReader.Create(Settings.Default.related_media_launchbox_filepath + "\\Data\\Platforms\\" + GameInfo.ConsoleName + ".xml"))
+                        using (XmlReader reader = XmlReader.Create(Settings.Default.related_media_launchbox_filepath + "\\Data\\Platforms\\" + GameInfoAndProgress.ConsoleName + ".xml"))
                         {
                             string currentGameName = string.Empty;
 
@@ -2776,36 +2615,36 @@ namespace Retro_Achievement_Tracker
                         {
                             highestConfidenceGame = highestConfidenceGame.Replace('\'', '_').Replace(':', '_');
 
-                            string[] boxFrontSubFolders = Directory.Exists(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Box - Front") ? Directory.GetDirectories(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Box - Front") : Array.Empty<string>();
-                            string[] boxBackSubFolders = Directory.Exists(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Box - Back") ? Directory.GetDirectories(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Box - Back") : Array.Empty<string>();
-                            string[] box3DSubFolders = Directory.Exists(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Box - 3D") ? Directory.GetDirectories(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Box - 3D") : Array.Empty<string>();
-                            string[] boxFrontReconSubFolders = Directory.Exists(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Box - Front - Reconstructed") ? Directory.GetDirectories(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Box - Front - Reconstructed") : Array.Empty<string>();
-                            string[] boxBackReconSubFolders = Directory.Exists(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Box - Back - Reconstructed") ? Directory.GetDirectories(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Box - Back - Reconstructed") : Array.Empty<string>();
-                            string[] boxFullSubFolders = Directory.Exists(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Box - Full") ? Directory.GetDirectories(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Box - Full") : Array.Empty<string>();
-                            string[] boxSpineSubFolders = Directory.Exists(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Box - Spine") ? Directory.GetDirectories(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Box - Spine") : Array.Empty<string>();
-                            string[] clearLogoSubFolders = Directory.Exists(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Clear Logo") ? Directory.GetDirectories(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Clear Logo") : Array.Empty<string>();
-                            string[] screenshotGameTitleSubFolders = Directory.Exists(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Screenshot - Game Title") ? Directory.GetDirectories(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Screenshot - Game Title") : Array.Empty<string>();
-                            string[] bannerSubFolders = Directory.Exists(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Banner") ? Directory.GetDirectories(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Banner") : Array.Empty<string>();
-                            string[] cartFrontSubFolders = Directory.Exists(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Cart - Front") ? Directory.GetDirectories(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Cart - Front") : Array.Empty<string>();
-                            string[] cartBackSubFolders = Directory.Exists(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Cart - Back") ? Directory.GetDirectories(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfo.ConsoleName + "\\Cart - Back") : Array.Empty<string>();
+                            string[] boxFrontSubFolders = Directory.Exists(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfoAndProgress.ConsoleName + "\\Box - Front") ? Directory.GetDirectories(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfoAndProgress.ConsoleName + "\\Box - Front") : Array.Empty<string>();
+                            string[] boxBackSubFolders = Directory.Exists(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfoAndProgress.ConsoleName + "\\Box - Back") ? Directory.GetDirectories(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfoAndProgress.ConsoleName + "\\Box - Back") : Array.Empty<string>();
+                            string[] box3DSubFolders = Directory.Exists(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfoAndProgress.ConsoleName + "\\Box - 3D") ? Directory.GetDirectories(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfoAndProgress.ConsoleName + "\\Box - 3D") : Array.Empty<string>();
+                            string[] boxFrontReconSubFolders = Directory.Exists(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfoAndProgress.ConsoleName + "\\Box - Front - Reconstructed") ? Directory.GetDirectories(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfoAndProgress.ConsoleName + "\\Box - Front - Reconstructed") : Array.Empty<string>();
+                            string[] boxBackReconSubFolders = Directory.Exists(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfoAndProgress.ConsoleName + "\\Box - Back - Reconstructed") ? Directory.GetDirectories(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfoAndProgress.ConsoleName + "\\Box - Back - Reconstructed") : Array.Empty<string>();
+                            string[] boxFullSubFolders = Directory.Exists(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfoAndProgress.ConsoleName + "\\Box - Full") ? Directory.GetDirectories(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfoAndProgress.ConsoleName + "\\Box - Full") : Array.Empty<string>();
+                            string[] boxSpineSubFolders = Directory.Exists(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfoAndProgress.ConsoleName + "\\Box - Spine") ? Directory.GetDirectories(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfoAndProgress.ConsoleName + "\\Box - Spine") : Array.Empty<string>();
+                            string[] clearLogoSubFolders = Directory.Exists(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfoAndProgress.ConsoleName + "\\Clear Logo") ? Directory.GetDirectories(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfoAndProgress.ConsoleName + "\\Clear Logo") : Array.Empty<string>();
+                            string[] screenshotGameTitleSubFolders = Directory.Exists(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfoAndProgress.ConsoleName + "\\Screenshot - Game Title") ? Directory.GetDirectories(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfoAndProgress.ConsoleName + "\\Screenshot - Game Title") : Array.Empty<string>();
+                            string[] bannerSubFolders = Directory.Exists(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfoAndProgress.ConsoleName + "\\Banner") ? Directory.GetDirectories(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfoAndProgress.ConsoleName + "\\Banner") : Array.Empty<string>();
+                            string[] cartFrontSubFolders = Directory.Exists(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfoAndProgress.ConsoleName + "\\Cart - Front") ? Directory.GetDirectories(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfoAndProgress.ConsoleName + "\\Cart - Front") : Array.Empty<string>();
+                            string[] cartBackSubFolders = Directory.Exists(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfoAndProgress.ConsoleName + "\\Cart - Back") ? Directory.GetDirectories(RelatedMediaController.Instance.LaunchBoxFilePath + "\\Images\\" + GameInfoAndProgress.ConsoleName + "\\Cart - Back") : Array.Empty<string>();
 
                             string resourceFilePath = RelatedMediaController.Instance.LaunchBoxFilePath.Replace("\\", "/");
 
-                            if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Front/" + highestConfidenceGame + "-01.jpg"))
+                            if (File.Exists(resourceFilePath + "/Images/" + GameInfoAndProgress.ConsoleName + "/Box - Front/" + highestConfidenceGame + "-01.jpg"))
                             {
-                                RelatedMediaController.Instance.LBBoxFrontURI = "Images/" + GameInfo.ConsoleName + "/Box - Front/" + highestConfidenceGame + "-01.jpg";
+                                RelatedMediaController.Instance.LBBoxFrontURI = "Images/" + GameInfoAndProgress.ConsoleName + "/Box - Front/" + highestConfidenceGame + "-01.jpg";
                             }
-                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Front/" + highestConfidenceGame + "-02.jpg"))
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfoAndProgress.ConsoleName + "/Box - Front/" + highestConfidenceGame + "-02.jpg"))
                             {
-                                RelatedMediaController.Instance.LBBoxFrontURI = "Images/" + GameInfo.ConsoleName + "/Box - Front/" + highestConfidenceGame + "-02.jpg";
+                                RelatedMediaController.Instance.LBBoxFrontURI = "Images/" + GameInfoAndProgress.ConsoleName + "/Box - Front/" + highestConfidenceGame + "-02.jpg";
                             }
-                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Front/" + highestConfidenceGame + "-01.png"))
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfoAndProgress.ConsoleName + "/Box - Front/" + highestConfidenceGame + "-01.png"))
                             {
-                                RelatedMediaController.Instance.LBBoxFrontURI = "Images/" + GameInfo.ConsoleName + "/Box - Front/" + highestConfidenceGame + "-01.png";
+                                RelatedMediaController.Instance.LBBoxFrontURI = "Images/" + GameInfoAndProgress.ConsoleName + "/Box - Front/" + highestConfidenceGame + "-01.png";
                             }
-                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Front/" + highestConfidenceGame + "-02.png"))
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfoAndProgress.ConsoleName + "/Box - Front/" + highestConfidenceGame + "-02.png"))
                             {
-                                RelatedMediaController.Instance.LBBoxFrontURI = "Images/" + GameInfo.ConsoleName + "/Box - Front/" + highestConfidenceGame + "-02.png";
+                                RelatedMediaController.Instance.LBBoxFrontURI = "Images/" + GameInfoAndProgress.ConsoleName + "/Box - Front/" + highestConfidenceGame + "-02.png";
                             }
                             else
                             {
@@ -2838,21 +2677,21 @@ namespace Retro_Achievement_Tracker
                                 }
                             }
 
-                            if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Back/" + highestConfidenceGame + "-01.jpg"))
+                            if (File.Exists(resourceFilePath + "/Images/" + GameInfoAndProgress.ConsoleName + "/Box - Back/" + highestConfidenceGame + "-01.jpg"))
                             {
-                                RelatedMediaController.Instance.LBBoxBackURI = "Images/" + GameInfo.ConsoleName + "/Box - Back/" + highestConfidenceGame + "-01.jpg";
+                                RelatedMediaController.Instance.LBBoxBackURI = "Images/" + GameInfoAndProgress.ConsoleName + "/Box - Back/" + highestConfidenceGame + "-01.jpg";
                             }
-                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Back/" + highestConfidenceGame + "-02.jpg"))
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfoAndProgress.ConsoleName + "/Box - Back/" + highestConfidenceGame + "-02.jpg"))
                             {
-                                RelatedMediaController.Instance.LBBoxBackURI = "Images/" + GameInfo.ConsoleName + "/Box - Back/" + highestConfidenceGame + "-02.jpg";
+                                RelatedMediaController.Instance.LBBoxBackURI = "Images/" + GameInfoAndProgress.ConsoleName + "/Box - Back/" + highestConfidenceGame + "-02.jpg";
                             }
-                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Back/" + highestConfidenceGame + "-01.png"))
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfoAndProgress.ConsoleName + "/Box - Back/" + highestConfidenceGame + "-01.png"))
                             {
-                                RelatedMediaController.Instance.LBBoxBackURI = "Images/" + GameInfo.ConsoleName + "/Box - Back/" + highestConfidenceGame + "-01.png";
+                                RelatedMediaController.Instance.LBBoxBackURI = "Images/" + GameInfoAndProgress.ConsoleName + "/Box - Back/" + highestConfidenceGame + "-01.png";
                             }
-                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Back/" + highestConfidenceGame + "-02.png"))
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfoAndProgress.ConsoleName + "/Box - Back/" + highestConfidenceGame + "-02.png"))
                             {
-                                RelatedMediaController.Instance.LBBoxBackURI = "Images/" + GameInfo.ConsoleName + "/Box - Back/" + highestConfidenceGame + "-02.png";
+                                RelatedMediaController.Instance.LBBoxBackURI = "Images/" + GameInfoAndProgress.ConsoleName + "/Box - Back/" + highestConfidenceGame + "-02.png";
                             }
                             else
                             {
@@ -2885,21 +2724,21 @@ namespace Retro_Achievement_Tracker
                                 }
                             }
 
-                            if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - 3D/" + highestConfidenceGame + "-01.jpg"))
+                            if (File.Exists(resourceFilePath + "/Images/" + GameInfoAndProgress.ConsoleName + "/Box - 3D/" + highestConfidenceGame + "-01.jpg"))
                             {
-                                RelatedMediaController.Instance.LBBox3DURI = "Images/" + GameInfo.ConsoleName + "/Box - 3D/" + highestConfidenceGame + "-01.jpg";
+                                RelatedMediaController.Instance.LBBox3DURI = "Images/" + GameInfoAndProgress.ConsoleName + "/Box - 3D/" + highestConfidenceGame + "-01.jpg";
                             }
-                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - 3D/" + highestConfidenceGame + "-02.jpg"))
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfoAndProgress.ConsoleName + "/Box - 3D/" + highestConfidenceGame + "-02.jpg"))
                             {
-                                RelatedMediaController.Instance.LBBox3DURI = "Images/" + GameInfo.ConsoleName + "/Box - 3D/" + highestConfidenceGame + "-02.jpg";
+                                RelatedMediaController.Instance.LBBox3DURI = "Images/" + GameInfoAndProgress.ConsoleName + "/Box - 3D/" + highestConfidenceGame + "-02.jpg";
                             }
-                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - 3D/" + highestConfidenceGame + "-01.png"))
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfoAndProgress.ConsoleName + "/Box - 3D/" + highestConfidenceGame + "-01.png"))
                             {
-                                RelatedMediaController.Instance.LBBox3DURI = "Images/" + GameInfo.ConsoleName + "/Box - 3D/" + highestConfidenceGame + "-01.png";
+                                RelatedMediaController.Instance.LBBox3DURI = "Images/" + GameInfoAndProgress.ConsoleName + "/Box - 3D/" + highestConfidenceGame + "-01.png";
                             }
-                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - 3D/" + highestConfidenceGame + "-02.png"))
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfoAndProgress.ConsoleName + "/Box - 3D/" + highestConfidenceGame + "-02.png"))
                             {
-                                RelatedMediaController.Instance.LBBox3DURI = "Images/" + GameInfo.ConsoleName + "/Box - 3D/" + highestConfidenceGame + "-02.png";
+                                RelatedMediaController.Instance.LBBox3DURI = "Images/" + GameInfoAndProgress.ConsoleName + "/Box - 3D/" + highestConfidenceGame + "-02.png";
                             }
                             else
                             {
@@ -2932,21 +2771,21 @@ namespace Retro_Achievement_Tracker
                                 }
                             }
 
-                            if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Front - Reconstructed/" + highestConfidenceGame + "-01.jpg"))
+                            if (File.Exists(resourceFilePath + "/Images/" + GameInfoAndProgress.ConsoleName + "/Box - Front - Reconstructed/" + highestConfidenceGame + "-01.jpg"))
                             {
-                                RelatedMediaController.Instance.LBBoxFrontReconURI = "Images/" + GameInfo.ConsoleName + "/Box - Front - Reconstructed/" + highestConfidenceGame + "-01.jpg";
+                                RelatedMediaController.Instance.LBBoxFrontReconURI = "Images/" + GameInfoAndProgress.ConsoleName + "/Box - Front - Reconstructed/" + highestConfidenceGame + "-01.jpg";
                             }
-                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Front - Reconstructed/" + highestConfidenceGame + "-02.jpg"))
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfoAndProgress.ConsoleName + "/Box - Front - Reconstructed/" + highestConfidenceGame + "-02.jpg"))
                             {
-                                RelatedMediaController.Instance.LBBoxFrontReconURI = "Images/" + GameInfo.ConsoleName + "/Box - Front - Reconstructed/" + highestConfidenceGame + "-02.jpg";
+                                RelatedMediaController.Instance.LBBoxFrontReconURI = "Images/" + GameInfoAndProgress.ConsoleName + "/Box - Front - Reconstructed/" + highestConfidenceGame + "-02.jpg";
                             }
-                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Front - Reconstructed/" + highestConfidenceGame + "-01.png"))
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfoAndProgress.ConsoleName + "/Box - Front - Reconstructed/" + highestConfidenceGame + "-01.png"))
                             {
-                                RelatedMediaController.Instance.LBBoxFrontReconURI = "Images/" + GameInfo.ConsoleName + "/Box - Front - Reconstructed/" + highestConfidenceGame + "-01.png";
+                                RelatedMediaController.Instance.LBBoxFrontReconURI = "Images/" + GameInfoAndProgress.ConsoleName + "/Box - Front - Reconstructed/" + highestConfidenceGame + "-01.png";
                             }
-                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Front - Reconstructed/" + highestConfidenceGame + "-02.png"))
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfoAndProgress.ConsoleName + "/Box - Front - Reconstructed/" + highestConfidenceGame + "-02.png"))
                             {
-                                RelatedMediaController.Instance.LBBoxFrontReconURI = "Images/" + GameInfo.ConsoleName + "/Box - Front - Reconstructed/" + highestConfidenceGame + "-02.png";
+                                RelatedMediaController.Instance.LBBoxFrontReconURI = "Images/" + GameInfoAndProgress.ConsoleName + "/Box - Front - Reconstructed/" + highestConfidenceGame + "-02.png";
                             }
                             else
                             {
@@ -2979,21 +2818,21 @@ namespace Retro_Achievement_Tracker
                                 }
                             }
 
-                            if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Back - Reconstructed/" + highestConfidenceGame + "-01.jpg"))
+                            if (File.Exists(resourceFilePath + "/Images/" + GameInfoAndProgress.ConsoleName + "/Box - Back - Reconstructed/" + highestConfidenceGame + "-01.jpg"))
                             {
-                                RelatedMediaController.Instance.LBBoxBackReconURI = "Images/" + GameInfo.ConsoleName + "/Box - Back - Reconstructed/" + highestConfidenceGame + "-01.jpg";
+                                RelatedMediaController.Instance.LBBoxBackReconURI = "Images/" + GameInfoAndProgress.ConsoleName + "/Box - Back - Reconstructed/" + highestConfidenceGame + "-01.jpg";
                             }
-                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Back - Reconstructed/" + highestConfidenceGame + "-02.jpg"))
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfoAndProgress.ConsoleName + "/Box - Back - Reconstructed/" + highestConfidenceGame + "-02.jpg"))
                             {
-                                RelatedMediaController.Instance.LBBoxBackReconURI = "Images/" + GameInfo.ConsoleName + "/Box - Back - Reconstructed/" + highestConfidenceGame + "-02.jpg";
+                                RelatedMediaController.Instance.LBBoxBackReconURI = "Images/" + GameInfoAndProgress.ConsoleName + "/Box - Back - Reconstructed/" + highestConfidenceGame + "-02.jpg";
                             }
-                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Back - Reconstructed/" + highestConfidenceGame + "-01.png"))
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfoAndProgress.ConsoleName + "/Box - Back - Reconstructed/" + highestConfidenceGame + "-01.png"))
                             {
-                                RelatedMediaController.Instance.LBBoxBackReconURI = "Images/" + GameInfo.ConsoleName + "/Box - Back - Reconstructed/" + highestConfidenceGame + "-01.png";
+                                RelatedMediaController.Instance.LBBoxBackReconURI = "Images/" + GameInfoAndProgress.ConsoleName + "/Box - Back - Reconstructed/" + highestConfidenceGame + "-01.png";
                             }
-                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Back - Reconstructed/" + highestConfidenceGame + "-02.png"))
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfoAndProgress.ConsoleName + "/Box - Back - Reconstructed/" + highestConfidenceGame + "-02.png"))
                             {
-                                RelatedMediaController.Instance.LBBoxBackReconURI = "Images/" + GameInfo.ConsoleName + "/Box - Back - Reconstructed/" + highestConfidenceGame + "-02.png";
+                                RelatedMediaController.Instance.LBBoxBackReconURI = "Images/" + GameInfoAndProgress.ConsoleName + "/Box - Back - Reconstructed/" + highestConfidenceGame + "-02.png";
                             }
                             else
                             {
@@ -3026,21 +2865,21 @@ namespace Retro_Achievement_Tracker
                                 }
                             }
 
-                            if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Full/" + highestConfidenceGame + "-01.jpg"))
+                            if (File.Exists(resourceFilePath + "/Images/" + GameInfoAndProgress.ConsoleName + "/Box - Full/" + highestConfidenceGame + "-01.jpg"))
                             {
-                                RelatedMediaController.Instance.LBBoxFullURI = "Images/" + GameInfo.ConsoleName + "/Box - Full/" + highestConfidenceGame + "-01.jpg";
+                                RelatedMediaController.Instance.LBBoxFullURI = "Images/" + GameInfoAndProgress.ConsoleName + "/Box - Full/" + highestConfidenceGame + "-01.jpg";
                             }
-                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Full/" + highestConfidenceGame + "-02.jpg"))
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfoAndProgress.ConsoleName + "/Box - Full/" + highestConfidenceGame + "-02.jpg"))
                             {
-                                RelatedMediaController.Instance.LBBoxFullURI = "Images/" + GameInfo.ConsoleName + "/Box - Full/" + highestConfidenceGame + "-02.jpg";
+                                RelatedMediaController.Instance.LBBoxFullURI = "Images/" + GameInfoAndProgress.ConsoleName + "/Box - Full/" + highestConfidenceGame + "-02.jpg";
                             }
-                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Full/" + highestConfidenceGame + "-01.png"))
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfoAndProgress.ConsoleName + "/Box - Full/" + highestConfidenceGame + "-01.png"))
                             {
-                                RelatedMediaController.Instance.LBBoxFullURI = "Images/" + GameInfo.ConsoleName + "/Box - Full/" + highestConfidenceGame + "-01.png";
+                                RelatedMediaController.Instance.LBBoxFullURI = "Images/" + GameInfoAndProgress.ConsoleName + "/Box - Full/" + highestConfidenceGame + "-01.png";
                             }
-                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Full/" + highestConfidenceGame + "-02.png"))
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfoAndProgress.ConsoleName + "/Box - Full/" + highestConfidenceGame + "-02.png"))
                             {
-                                RelatedMediaController.Instance.LBBoxFullURI = "Images/" + GameInfo.ConsoleName + "/Box - Full/" + highestConfidenceGame + "-02.png";
+                                RelatedMediaController.Instance.LBBoxFullURI = "Images/" + GameInfoAndProgress.ConsoleName + "/Box - Full/" + highestConfidenceGame + "-02.png";
                             }
                             else
                             {
@@ -3073,21 +2912,21 @@ namespace Retro_Achievement_Tracker
                                 }
                             }
 
-                            if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Spine/" + highestConfidenceGame + "-01.jpg"))
+                            if (File.Exists(resourceFilePath + "/Images/" + GameInfoAndProgress.ConsoleName + "/Box - Spine/" + highestConfidenceGame + "-01.jpg"))
                             {
-                                RelatedMediaController.Instance.LBBoxSpineURI = "Images/" + GameInfo.ConsoleName + "/Box - Spine/" + highestConfidenceGame + "-01.jpg";
+                                RelatedMediaController.Instance.LBBoxSpineURI = "Images/" + GameInfoAndProgress.ConsoleName + "/Box - Spine/" + highestConfidenceGame + "-01.jpg";
                             }
-                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Spine/" + highestConfidenceGame + "-02.jpg"))
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfoAndProgress.ConsoleName + "/Box - Spine/" + highestConfidenceGame + "-02.jpg"))
                             {
-                                RelatedMediaController.Instance.LBBoxSpineURI = "Images/" + GameInfo.ConsoleName + "/Box - Spine/" + highestConfidenceGame + "-02.jpg";
+                                RelatedMediaController.Instance.LBBoxSpineURI = "Images/" + GameInfoAndProgress.ConsoleName + "/Box - Spine/" + highestConfidenceGame + "-02.jpg";
                             }
-                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Spine/" + highestConfidenceGame + "-01.png"))
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfoAndProgress.ConsoleName + "/Box - Spine/" + highestConfidenceGame + "-01.png"))
                             {
-                                RelatedMediaController.Instance.LBBoxSpineURI = "Images/" + GameInfo.ConsoleName + "/Box - Spine/" + highestConfidenceGame + "-01.png";
+                                RelatedMediaController.Instance.LBBoxSpineURI = "Images/" + GameInfoAndProgress.ConsoleName + "/Box - Spine/" + highestConfidenceGame + "-01.png";
                             }
-                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Box - Spine/" + highestConfidenceGame + "-02.png"))
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfoAndProgress.ConsoleName + "/Box - Spine/" + highestConfidenceGame + "-02.png"))
                             {
-                                RelatedMediaController.Instance.LBBoxSpineURI = "Images/" + GameInfo.ConsoleName + "/Box - Spine/" + highestConfidenceGame + "-02.png";
+                                RelatedMediaController.Instance.LBBoxSpineURI = "Images/" + GameInfoAndProgress.ConsoleName + "/Box - Spine/" + highestConfidenceGame + "-02.png";
                             }
                             else
                             {
@@ -3120,13 +2959,13 @@ namespace Retro_Achievement_Tracker
                                 }
                             }
 
-                            if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Clear Logo/" + highestConfidenceGame + "-01.png"))
+                            if (File.Exists(resourceFilePath + "/Images/" + GameInfoAndProgress.ConsoleName + "/Clear Logo/" + highestConfidenceGame + "-01.png"))
                             {
-                                RelatedMediaController.Instance.LBClearLogoURI = "Images/" + GameInfo.ConsoleName + "/Clear Logo/" + highestConfidenceGame + "-01.png";
+                                RelatedMediaController.Instance.LBClearLogoURI = "Images/" + GameInfoAndProgress.ConsoleName + "/Clear Logo/" + highestConfidenceGame + "-01.png";
                             }
-                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Clear Logo/" + highestConfidenceGame + "-02.png"))
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfoAndProgress.ConsoleName + "/Clear Logo/" + highestConfidenceGame + "-02.png"))
                             {
-                                RelatedMediaController.Instance.LBClearLogoURI = "Images/" + GameInfo.ConsoleName + "/Clear Logo/" + highestConfidenceGame + "-02.png";
+                                RelatedMediaController.Instance.LBClearLogoURI = "Images/" + GameInfoAndProgress.ConsoleName + "/Clear Logo/" + highestConfidenceGame + "-02.png";
                             }
                             else
                             {
@@ -3149,21 +2988,21 @@ namespace Retro_Achievement_Tracker
                                 }
                             }
 
-                            if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Screenshot - Game Title/" + highestConfidenceGame + "-01.jpg"))
+                            if (File.Exists(resourceFilePath + "/Images/" + GameInfoAndProgress.ConsoleName + "/Screenshot - Game Title/" + highestConfidenceGame + "-01.jpg"))
                             {
-                                RelatedMediaController.Instance.LBTitleSceenURI = "Images/" + GameInfo.ConsoleName + "/Screenshot - Game Title/" + highestConfidenceGame + "-01.jpg";
+                                RelatedMediaController.Instance.LBTitleSceenURI = "Images/" + GameInfoAndProgress.ConsoleName + "/Screenshot - Game Title/" + highestConfidenceGame + "-01.jpg";
                             }
-                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Screenshot - Game Title/" + highestConfidenceGame + "-02.jpg"))
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfoAndProgress.ConsoleName + "/Screenshot - Game Title/" + highestConfidenceGame + "-02.jpg"))
                             {
-                                RelatedMediaController.Instance.LBTitleSceenURI = "Images/" + GameInfo.ConsoleName + "/Screenshot - Game Title/" + highestConfidenceGame + "-02.jpg";
+                                RelatedMediaController.Instance.LBTitleSceenURI = "Images/" + GameInfoAndProgress.ConsoleName + "/Screenshot - Game Title/" + highestConfidenceGame + "-02.jpg";
                             }
-                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Screenshot - Game Title/" + highestConfidenceGame + "-01.png"))
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfoAndProgress.ConsoleName + "/Screenshot - Game Title/" + highestConfidenceGame + "-01.png"))
                             {
-                                RelatedMediaController.Instance.LBTitleSceenURI = "Images/" + GameInfo.ConsoleName + "/Screenshot - Game Title/" + highestConfidenceGame + "-01.png";
+                                RelatedMediaController.Instance.LBTitleSceenURI = "Images/" + GameInfoAndProgress.ConsoleName + "/Screenshot - Game Title/" + highestConfidenceGame + "-01.png";
                             }
-                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Screenshot - Game Title/" + highestConfidenceGame + "-02.png"))
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfoAndProgress.ConsoleName + "/Screenshot - Game Title/" + highestConfidenceGame + "-02.png"))
                             {
-                                RelatedMediaController.Instance.LBTitleSceenURI = "Images/" + GameInfo.ConsoleName + "/Screenshot - Game Title/" + highestConfidenceGame + "-02.png";
+                                RelatedMediaController.Instance.LBTitleSceenURI = "Images/" + GameInfoAndProgress.ConsoleName + "/Screenshot - Game Title/" + highestConfidenceGame + "-02.png";
                             }
                             else
                             {
@@ -3196,21 +3035,21 @@ namespace Retro_Achievement_Tracker
                                 }
                             }
 
-                            if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Banner/" + highestConfidenceGame + "-01.jpg"))
+                            if (File.Exists(resourceFilePath + "/Images/" + GameInfoAndProgress.ConsoleName + "/Banner/" + highestConfidenceGame + "-01.jpg"))
                             {
-                                RelatedMediaController.Instance.LBBannerURI = "Images/" + GameInfo.ConsoleName + "/Banner/" + highestConfidenceGame + "-01.jpg";
+                                RelatedMediaController.Instance.LBBannerURI = "Images/" + GameInfoAndProgress.ConsoleName + "/Banner/" + highestConfidenceGame + "-01.jpg";
                             }
-                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Banner/" + highestConfidenceGame + "-02.jpg"))
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfoAndProgress.ConsoleName + "/Banner/" + highestConfidenceGame + "-02.jpg"))
                             {
-                                RelatedMediaController.Instance.LBBannerURI = "Images/" + GameInfo.ConsoleName + "/Banner/" + highestConfidenceGame + "-02.jpg";
+                                RelatedMediaController.Instance.LBBannerURI = "Images/" + GameInfoAndProgress.ConsoleName + "/Banner/" + highestConfidenceGame + "-02.jpg";
                             }
-                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Banner/" + highestConfidenceGame + "-01.png"))
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfoAndProgress.ConsoleName + "/Banner/" + highestConfidenceGame + "-01.png"))
                             {
-                                RelatedMediaController.Instance.LBBannerURI = "Images/" + GameInfo.ConsoleName + "/Banner/" + highestConfidenceGame + "-01.png";
+                                RelatedMediaController.Instance.LBBannerURI = "Images/" + GameInfoAndProgress.ConsoleName + "/Banner/" + highestConfidenceGame + "-01.png";
                             }
-                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Banner/" + highestConfidenceGame + "-02.png"))
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfoAndProgress.ConsoleName + "/Banner/" + highestConfidenceGame + "-02.png"))
                             {
-                                RelatedMediaController.Instance.LBBannerURI = "Images/" + GameInfo.ConsoleName + "/Banner/" + highestConfidenceGame + "-02.png";
+                                RelatedMediaController.Instance.LBBannerURI = "Images/" + GameInfoAndProgress.ConsoleName + "/Banner/" + highestConfidenceGame + "-02.png";
                             }
                             else
                             {
@@ -3243,21 +3082,21 @@ namespace Retro_Achievement_Tracker
                                 }
                             }
 
-                            if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Cart - Front/" + highestConfidenceGame + "-01.jpg"))
+                            if (File.Exists(resourceFilePath + "/Images/" + GameInfoAndProgress.ConsoleName + "/Cart - Front/" + highestConfidenceGame + "-01.jpg"))
                             {
-                                RelatedMediaController.Instance.LBCartFrontURI = "Images/" + GameInfo.ConsoleName + "/Cart - Front/" + highestConfidenceGame + "-01.jpg";
+                                RelatedMediaController.Instance.LBCartFrontURI = "Images/" + GameInfoAndProgress.ConsoleName + "/Cart - Front/" + highestConfidenceGame + "-01.jpg";
                             }
-                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Cart - Front/" + highestConfidenceGame + "-02.jpg"))
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfoAndProgress.ConsoleName + "/Cart - Front/" + highestConfidenceGame + "-02.jpg"))
                             {
-                                RelatedMediaController.Instance.LBCartFrontURI = "Images/" + GameInfo.ConsoleName + "/Cart - Front/" + highestConfidenceGame + "-02.jpg";
+                                RelatedMediaController.Instance.LBCartFrontURI = "Images/" + GameInfoAndProgress.ConsoleName + "/Cart - Front/" + highestConfidenceGame + "-02.jpg";
                             }
-                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Cart - Front/" + highestConfidenceGame + "-01.png"))
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfoAndProgress.ConsoleName + "/Cart - Front/" + highestConfidenceGame + "-01.png"))
                             {
-                                RelatedMediaController.Instance.LBCartFrontURI = "Images/" + GameInfo.ConsoleName + "/Cart - Front/" + highestConfidenceGame + "-01.png";
+                                RelatedMediaController.Instance.LBCartFrontURI = "Images/" + GameInfoAndProgress.ConsoleName + "/Cart - Front/" + highestConfidenceGame + "-01.png";
                             }
-                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Cart - Front/" + highestConfidenceGame + "-02.png"))
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfoAndProgress.ConsoleName + "/Cart - Front/" + highestConfidenceGame + "-02.png"))
                             {
-                                RelatedMediaController.Instance.LBCartFrontURI = "Images/" + GameInfo.ConsoleName + "/Cart - Front/" + highestConfidenceGame + "-02.png";
+                                RelatedMediaController.Instance.LBCartFrontURI = "Images/" + GameInfoAndProgress.ConsoleName + "/Cart - Front/" + highestConfidenceGame + "-02.png";
                             }
                             else
                             {
@@ -3290,21 +3129,21 @@ namespace Retro_Achievement_Tracker
                                 }
                             }
 
-                            if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Cart - Back/" + highestConfidenceGame + "-01.jpg"))
+                            if (File.Exists(resourceFilePath + "/Images/" + GameInfoAndProgress.ConsoleName + "/Cart - Back/" + highestConfidenceGame + "-01.jpg"))
                             {
-                                RelatedMediaController.Instance.LBCartBackURI = "Images/" + GameInfo.ConsoleName + "/Cart - Back/" + highestConfidenceGame + "-01.jpg";
+                                RelatedMediaController.Instance.LBCartBackURI = "Images/" + GameInfoAndProgress.ConsoleName + "/Cart - Back/" + highestConfidenceGame + "-01.jpg";
                             }
-                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Cart - Back/" + highestConfidenceGame + "-02.jpg"))
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfoAndProgress.ConsoleName + "/Cart - Back/" + highestConfidenceGame + "-02.jpg"))
                             {
-                                RelatedMediaController.Instance.LBCartBackURI = "Images/" + GameInfo.ConsoleName + "/Cart - Back/" + highestConfidenceGame + "-02.jpg";
+                                RelatedMediaController.Instance.LBCartBackURI = "Images/" + GameInfoAndProgress.ConsoleName + "/Cart - Back/" + highestConfidenceGame + "-02.jpg";
                             }
-                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Cart - Back/" + highestConfidenceGame + "-01.png"))
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfoAndProgress.ConsoleName + "/Cart - Back/" + highestConfidenceGame + "-01.png"))
                             {
-                                RelatedMediaController.Instance.LBCartBackURI = "Images/" + GameInfo.ConsoleName + "/Cart - Back/" + highestConfidenceGame + "-01.png";
+                                RelatedMediaController.Instance.LBCartBackURI = "Images/" + GameInfoAndProgress.ConsoleName + "/Cart - Back/" + highestConfidenceGame + "-01.png";
                             }
-                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfo.ConsoleName + "/Cart - Back/" + highestConfidenceGame + "-02.png"))
+                            else if (File.Exists(resourceFilePath + "/Images/" + GameInfoAndProgress.ConsoleName + "/Cart - Back/" + highestConfidenceGame + "-02.png"))
                             {
-                                RelatedMediaController.Instance.LBCartBackURI = "Images/" + GameInfo.ConsoleName + "/Cart - Back/" + highestConfidenceGame + "-02.png";
+                                RelatedMediaController.Instance.LBCartBackURI = "Images/" + GameInfoAndProgress.ConsoleName + "/Cart - Back/" + highestConfidenceGame + "-02.png";
                             }
                             else
                             {
@@ -3363,9 +3202,9 @@ namespace Retro_Achievement_Tracker
         }
         private void AdvancedCheckBox_Click(object sender, EventArgs e)
         {
-            if (!IsLoading)
+            if (!IsChanging)
             {
-                IsLoading = true;
+                IsChanging = true;
                 CheckBox checkBox = (CheckBox)sender;
 
                 switch (checkBox.Name)
@@ -3392,7 +3231,7 @@ namespace Retro_Achievement_Tracker
 
                 UpdateAdvancedSettings();
 
-                IsLoading = false;
+                IsChanging = false;
             }
         }
         private void UpdateAdvancedSettings()
@@ -3638,9 +3477,9 @@ namespace Retro_Achievement_Tracker
         }
         private void OverrideTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (!IsLoading)
+            if (!IsChanging)
             {
-                IsLoading = true;
+                IsChanging = true;
                 TextBox textBox = sender as TextBox;
 
                 switch (textBox.Name)
@@ -3692,7 +3531,7 @@ namespace Retro_Achievement_Tracker
                         break;
                 }
 
-                IsLoading = false;
+                IsChanging = false;
             }
         }
         private void BrowserSensitiveControl_Click(object sender, EventArgs e)
@@ -3705,7 +3544,7 @@ namespace Retro_Achievement_Tracker
                     System.Diagnostics.Process.Start("https://retroachievements.org/User/" + UserSummary.UserName);
                     break;
                 case "gameInfoPictureBox":
-                    System.Diagnostics.Process.Start("https://retroachievements.org/game/" + GameInfo.Id);
+                    System.Diagnostics.Process.Start("https://retroachievements.org/game/" + GameInfoAndProgress.Id);
                     break;
                 case "focusAchievementPictureBox":
                 case "focusAchievementTitleLabel":
@@ -3723,10 +3562,6 @@ namespace Retro_Achievement_Tracker
                         {
                             System.Diagnostics.Process.Start(listView.SelectedItems[0].SubItems[3].Text);
                         }
-                        else
-                        {
-                            webBrowser1.DocumentText = string.Format(Constants.RETRO_ACHIEVEMENTS_RSS_NEWS_HTML, listView.SelectedItems[0].SubItems[2].Text);
-                        }
                     }
                     break;
             }
@@ -3741,8 +3576,6 @@ namespace Retro_Achievement_Tracker
 
                 Settings.Default.Save();
             }
-
-            webBrowser1.DocumentText = string.Format(Constants.RETRO_ACHIEVEMENTS_RSS_NEWS_HTML, "");
 
             usernameTextBox.Text = Settings.Default.ra_username;
             apiKeyTextBox.Text = Settings.Default.ra_key;
@@ -3963,14 +3796,6 @@ namespace Retro_Achievement_Tracker
             recentAchievementsLineOutlineNumericUpDown.Value = RecentUnlocksController.Instance.LineOutlineSize;
 
             recentAchievementsMaxListNumericUpDown.Value = RecentUnlocksController.Instance.MaxListSize;
-
-            /*
-             * RSS Feed CheckBoxes
-             */
-            rssFeedCheevoCheckBox.Checked = Settings.Default.rss_new_achievements_feed;
-            rssFeedForumCheckBox.Checked = Settings.Default.rss_forum_feed;
-            rssFeedFriendCheckBox.Checked = Settings.Default.rss_friend_feed;
-            rssFeedNewsCheckBox.Checked = Settings.Default.rss_news_feed;
 
             if (AlertsController.Instance.CustomAchievementScale > alertsCustomAchievementScaleNumericUpDown.Maximum)
             {

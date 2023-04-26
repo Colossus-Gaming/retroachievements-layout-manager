@@ -23,6 +23,7 @@ namespace Retro_Achievement_Tracker.Models
             }
 
             JToken ID = item["ID"];
+            JToken GameID = item["GameID"];
             JToken Title = item["Title"];
             JToken Description = item["Description"];
             JToken Points = item["Points"];
@@ -34,6 +35,10 @@ namespace Retro_Achievement_Tracker.Models
             if (ID != null)
             {
                 Achievement.Id = int.Parse(ID.ToString());
+            }
+            if (GameID != null)
+            {
+                Achievement.GameId = int.Parse(GameID.ToString());
             }
             if (Description != null)
             {

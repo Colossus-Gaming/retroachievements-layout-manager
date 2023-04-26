@@ -2,6 +2,7 @@
 {
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
+    using Retro_Achievement_Tracker.Models;
     using System;
     using System.Collections.Generic;
     using System.Reflection;

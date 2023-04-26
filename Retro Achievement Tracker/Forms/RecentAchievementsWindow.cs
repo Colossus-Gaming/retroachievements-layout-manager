@@ -1,6 +1,7 @@
 ﻿using Microsoft.Web.WebView2.Core;
 using Newtonsoft.Json;
 using Retro_Achievement_Tracker.Controllers;
+using Retro_Achievement_Tracker.Models;
 using Retro_Achievement_Tracker.Properties;
 using System;
 using System.Collections.Generic;
