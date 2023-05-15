@@ -22,9 +22,8 @@ Window for focusing on a particular achievement.
 `Focus Customization`
 
 - `Window Background` Changes the background color of the window.
-- `Border` Changes the background color of the border around the achievement.
+- `Border` Changes the background color as well as enable/disable of the border around the achievement.
 - `Advanced` If checked, will allow for individual font/color selection for `title`, `description`, `points`, and the separator `line`.
-- `Border` Enabled/Disable the achievement border. Otherwise, applies settings to all elements.
 - Font customization allows for changing `Font Family`, `Font Color`, `Font Outline`, `Font Outline Color`, and `Font Outline Size`.
 
 ## Alerts Window
@@ -41,9 +40,8 @@ Window for showing animated alerts when a tracker timer update detects new achie
 `Alerts Window Customization`
 
 - `Window Background` Changes the background color of the window.
-- `Border` Changes the background color of the border around the achievement.
+- `Border` Changes the background color as well as enable/disable of the border around the achievement.
 - `Advanced` If checked, will allow for individual font/color selection for `title`, `description`, `points`, and the separator `line`.
-- `Border` Enabled/Disable the achievement border. Otherwise, applies settings to all elements.
 - Font customization allows for changing `Font Family`, `Font Color`, `Font Outline`, `Font Outline Color`, and `Font Outline Size`.
 - `Play` Replays the last achievement earned or a mastery alert respectively.
 - `Custom` If enabled, will allow for a custom alert for achievement pop and set mastery.
@@ -71,9 +69,8 @@ Window for displaying the most recent achievements in your current game.
 ![Recent Unlocks Window 2](https://i.imgur.com/vUfCdKT.png)
 
 - `Window Background` Changes the background color of the window.
-- `Border` Changes the background color of the border around the achievement.
+- `Border` Changes the background color as well as enable/disable of the border around the achievement.
 - `Advanced` If checked, will allow for individual font/color selection for `title`, `description`, `points`, and the separator `line`.
-- `Border` Enabled/Disable the achievement border. Otherwise, applies settings to all elements.
 - `Auto-Scroll` Enabled/Disable auto-scrolling when the list has more than five achievements in it.
 - `Max List Size` The maximum number of achievements to add to the list. `Min: 5, Max: 20`
 - Font customization allows for changing `Font Family`, `Font Color`, `Font Outline`, `Font Outline Color`, and `Font Outline Size`.
@@ -104,9 +101,7 @@ Window for displaying user information such as rank and total points earned.
 ![User Info Window 2](https://i.imgur.com/680B5Q3.png)
 
 - `Window Background` Changes the background color of the window.
-- `Border` Toggles the border around the achievement.
 - `Advanced` If checked, will allow for individual font/color selection for `name` and `value`.
-- `Border` Enabled/Disable the achievement border.
 - Font customization allows for changing `Font Family`, `Font Color`, `Font Outline`, `Font Outline Color`, and `Font Outline Size`.
 - `Display Text` Allows the user to override label names or disable them completely.
 
@@ -122,9 +117,7 @@ Window for displaying game information such as the developer, genre, and release
 ![Game Info Window 2](https://i.imgur.com/IrREADv.png)
 
 - `Window Background` Changes the background color of the window.
-- `Border` Toggles the border around the achievement.
 - `Advanced` If checked, will allow for individual font/color selection for `name` and `value`.
-- `Border` Enabled/Disable the achievement border.
 - Font customization allows for changing `Font Family`, `Font Color`, `Font Outline`, `Font Outline Color`, and `Font Outline Size`.
 - `Display Text` Allows the user to override label names or disable them completely.
 
@@ -140,9 +133,7 @@ Window for displaying game stats as it pertains to your progress. This includes 
 ![Game Progress Window 2](https://i.imgur.com/hqvwejj.png)
 
 - `Window Background` Changes the background color of the window.
-- `Border` Toggles the border around the achievement.
 - `Advanced` If checked, will allow for individual font/color selection for `name` and `value`.
-- `Border` Enabled/Disable the achievement border.
 - Font customization allows for changing `Font Family`, `Font Color`, `Font Outline`, `Font Outline Color`, and `Font Outline Size`.
 - `Display Text` Allows the user to override label names or disable them completely.
 
