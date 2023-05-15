@@ -386,8 +386,6 @@ namespace Retro_Achievement_Tracker
                             StreamLabelManager.Instance.EnqueueAlert(GameInfoAndProgress);
                         }
 
-                        AlertsController.Instance.RunNotifications();
-
                         needsUpdate = true;
                     }
                 }
@@ -564,16 +562,13 @@ namespace Retro_Achievement_Tracker
 
             UserAndGameUpdateTimer = new Timer
             {
+                Interval = 500,
                 Enabled = false
             };
 
             UserAndGameUpdateTimer.Tick += new EventHandler(UpdateFromSite);
-            UserAndGameUpdateTimer.Interval = 500;
 
-            if (ShouldRun)
-            {
-                UserAndGameUpdateTimer.Start();
-            }
+            UserAndGameUpdateTimer.Start();
         }
         private void UpdateUserInfo()
         {
@@ -948,13 +943,13 @@ namespace Retro_Achievement_Tracker
                         AlertsController.Instance.CustomAchievementScale = Convert.ToInt32(numericUpDown.Value);
                         break;
                     case "alertsCustomAchievementInNumericUpDown":
-                        AlertsController.Instance.CustomAchievementIn = Convert.ToInt32(numericUpDown.Value);
+                        AlertsController.Instance.CustomAchievementInTime = Convert.ToInt32(numericUpDown.Value);
                         break;
                     case "alertsCustomAchievementInSpeedUpDown":
                         AlertsController.Instance.CustomAchievementInSpeed = Convert.ToInt32(numericUpDown.Value);
                         break;
                     case "alertsCustomAchievementOutNumericUpDown":
-                        AlertsController.Instance.CustomAchievementOut = Convert.ToInt32(numericUpDown.Value);
+                        AlertsController.Instance.CustomAchievementOutTime = Convert.ToInt32(numericUpDown.Value);
                         break;
                     case "alertsCustomAchievementOutSpeedUpDown":
                         AlertsController.Instance.CustomAchievementOutSpeed = Convert.ToInt32(numericUpDown.Value);
@@ -969,13 +964,13 @@ namespace Retro_Achievement_Tracker
                         AlertsController.Instance.CustomMasteryScale = Convert.ToInt32(numericUpDown.Value);
                         break;
                     case "alertsCustomMasteryInNumericUpDown":
-                        AlertsController.Instance.CustomMasteryIn = Convert.ToInt32(numericUpDown.Value);
+                        AlertsController.Instance.CustomMasteryInTime = Convert.ToInt32(numericUpDown.Value);
                         break;
                     case "alertsCustomMasteryInSpeedUpDown":
                         AlertsController.Instance.CustomMasteryInSpeed = Convert.ToInt32(numericUpDown.Value);
                         break;
                     case "alertsCustomMasteryOutNumericUpDown":
-                        AlertsController.Instance.CustomMasteryOut = Convert.ToInt32(numericUpDown.Value);
+                        AlertsController.Instance.CustomMasteryOutTime = Convert.ToInt32(numericUpDown.Value);
                         break;
                     case "alertsCustomMasteryOutSpeedUpDown":
                         AlertsController.Instance.CustomMasteryOutSpeed = Convert.ToInt32(numericUpDown.Value);
@@ -1121,8 +1116,6 @@ namespace Retro_Achievement_Tracker
                     StreamLabelManager.Instance.EnqueueAlert(GameInfoAndProgress);
                     break;
             }
-
-            AlertsController.Instance.RunNotifications();
             StreamLabelManager.Instance.RunNotifications();
         }
         private void SetFocusButton_Click(object sender, EventArgs e)
@@ -3828,22 +3821,22 @@ namespace Retro_Achievement_Tracker
                 AlertsController.Instance.CustomAchievementY = (int)alertsCustomAchievementYNumericUpDown.Minimum;
             }
 
-            if (AlertsController.Instance.CustomAchievementIn > alertsCustomAchievementInNumericUpDown.Maximum)
+            if (AlertsController.Instance.CustomAchievementInTime > alertsCustomAchievementInNumericUpDown.Maximum)
             {
-                AlertsController.Instance.CustomAchievementIn = (int)alertsCustomAchievementInNumericUpDown.Maximum;
+                AlertsController.Instance.CustomAchievementInTime = (int)alertsCustomAchievementInNumericUpDown.Maximum;
             }
-            else if (AlertsController.Instance.CustomAchievementIn < alertsCustomAchievementInNumericUpDown.Minimum)
+            else if (AlertsController.Instance.CustomAchievementInTime < alertsCustomAchievementInNumericUpDown.Minimum)
             {
-                AlertsController.Instance.CustomAchievementIn = (int)alertsCustomAchievementInNumericUpDown.Minimum;
+                AlertsController.Instance.CustomAchievementInTime = (int)alertsCustomAchievementInNumericUpDown.Minimum;
             }
 
-            if (AlertsController.Instance.CustomAchievementOut > alertsCustomAchievementOutNumericUpDown.Maximum)
+            if (AlertsController.Instance.CustomAchievementOutTime > alertsCustomAchievementOutNumericUpDown.Maximum)
             {
-                AlertsController.Instance.CustomAchievementOut = (int)alertsCustomAchievementOutNumericUpDown.Maximum;
+                AlertsController.Instance.CustomAchievementOutTime = (int)alertsCustomAchievementOutNumericUpDown.Maximum;
             }
-            else if (AlertsController.Instance.CustomAchievementOut < alertsCustomAchievementOutNumericUpDown.Minimum)
+            else if (AlertsController.Instance.CustomAchievementOutTime < alertsCustomAchievementOutNumericUpDown.Minimum)
             {
-                AlertsController.Instance.CustomAchievementOut = (int)alertsCustomAchievementOutNumericUpDown.Minimum;
+                AlertsController.Instance.CustomAchievementOutTime = (int)alertsCustomAchievementOutNumericUpDown.Minimum;
             }
 
             if (AlertsController.Instance.CustomAchievementInSpeed > alertsCustomAchievementInSpeedUpDown.Maximum)
@@ -3891,22 +3884,22 @@ namespace Retro_Achievement_Tracker
                 AlertsController.Instance.CustomMasteryY = (int)alertsCustomMasteryYNumericUpDown.Minimum;
             }
 
-            if (AlertsController.Instance.CustomMasteryIn > alertsCustomMasteryInNumericUpDown.Maximum)
+            if (AlertsController.Instance.CustomMasteryInTime > alertsCustomMasteryInNumericUpDown.Maximum)
             {
-                AlertsController.Instance.CustomMasteryIn = (int)alertsCustomMasteryInNumericUpDown.Maximum;
+                AlertsController.Instance.CustomMasteryInTime = (int)alertsCustomMasteryInNumericUpDown.Maximum;
             }
-            else if (AlertsController.Instance.CustomMasteryIn < alertsCustomMasteryInNumericUpDown.Minimum)
+            else if (AlertsController.Instance.CustomMasteryInTime < alertsCustomMasteryInNumericUpDown.Minimum)
             {
-                AlertsController.Instance.CustomMasteryIn = (int)alertsCustomMasteryInNumericUpDown.Minimum;
+                AlertsController.Instance.CustomMasteryInTime = (int)alertsCustomMasteryInNumericUpDown.Minimum;
             }
 
-            if (AlertsController.Instance.CustomMasteryOut > alertsCustomMasteryOutNumericUpDown.Maximum)
+            if (AlertsController.Instance.CustomMasteryOutTime > alertsCustomMasteryOutNumericUpDown.Maximum)
             {
-                AlertsController.Instance.CustomMasteryOut = (int)alertsCustomMasteryOutNumericUpDown.Maximum;
+                AlertsController.Instance.CustomMasteryOutTime = (int)alertsCustomMasteryOutNumericUpDown.Maximum;
             }
-            else if (AlertsController.Instance.CustomMasteryOut < alertsCustomMasteryOutNumericUpDown.Minimum)
+            else if (AlertsController.Instance.CustomMasteryOutTime < alertsCustomMasteryOutNumericUpDown.Minimum)
             {
-                AlertsController.Instance.CustomMasteryOut = (int)alertsCustomMasteryOutNumericUpDown.Minimum;
+                AlertsController.Instance.CustomMasteryOutTime = (int)alertsCustomMasteryOutNumericUpDown.Minimum;
             }
 
             if (AlertsController.Instance.CustomMasteryInSpeed > alertsCustomMasteryInSpeedUpDown.Maximum)
@@ -3952,11 +3945,11 @@ namespace Retro_Achievement_Tracker
             alertsCustomAchievementScaleNumericUpDown.Value = AlertsController.Instance.CustomAchievementScale;
             alertsCustomMasteryScaleNumericUpDown.Value = AlertsController.Instance.CustomMasteryScale;
 
-            alertsCustomAchievementInNumericUpDown.Value = AlertsController.Instance.CustomAchievementIn;
-            alertsCustomAchievementOutNumericUpDown.Value = AlertsController.Instance.CustomAchievementOut;
+            alertsCustomAchievementInNumericUpDown.Value = AlertsController.Instance.CustomAchievementInTime;
+            alertsCustomAchievementOutNumericUpDown.Value = AlertsController.Instance.CustomAchievementOutTime;
 
-            alertsCustomMasteryInNumericUpDown.Value = AlertsController.Instance.CustomMasteryIn;
-            alertsCustomMasteryOutNumericUpDown.Value = AlertsController.Instance.CustomMasteryOut;
+            alertsCustomMasteryInNumericUpDown.Value = AlertsController.Instance.CustomMasteryInTime;
+            alertsCustomMasteryOutNumericUpDown.Value = AlertsController.Instance.CustomMasteryOutTime;
 
             alertsCustomAchievementInSpeedUpDown.Value = AlertsController.Instance.CustomAchievementInSpeed;
             alertsCustomAchievementOutSpeedUpDown.Value = AlertsController.Instance.CustomAchievementOutSpeed;

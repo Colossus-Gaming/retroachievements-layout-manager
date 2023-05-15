@@ -8,8 +8,8 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Retro_Achievement_Tracker.Controllers
 {
@@ -19,9 +19,8 @@ namespace Retro_Achievement_Tracker.Controllers
         private static AlertsWindow AlertsWindow;
         public bool IsOpen;
         private Stopwatch NotificationsStopwatch;
-        private Task NotificationsTask;
+        private Timer NotificationTimer;
         private ConcurrentQueue<NotificationRequest> NotificationRequests;
-        private readonly CancellationTokenSource tokenSource2 = new CancellationTokenSource();
         private bool IsPlaying;
         private bool AnimationInPlayed;
         private bool AnimationOutPlayed;
@@ -49,7 +48,13 @@ namespace Retro_Achievement_Tracker.Controllers
 
             NotificationsStopwatch = new Stopwatch();
 
-            NotificationsTask = Task.Factory.StartNew(() => { });
+            NotificationTimer = new Timer
+            {
+                Enabled = false
+            };
+
+            NotificationTimer.Tick += new EventHandler(CheckForNotifications);
+            NotificationTimer.Interval = 10;
         }
         public static AlertsController Instance
         {
@@ -92,7 +97,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 NotificationRequests = new ConcurrentQueue<NotificationRequest>();
                 NotificationsStopwatch = new Stopwatch();
 
-                NotificationsTask = Task.Factory.StartNew(() => { });
+                StartNewTimer();
 
                 AlertsWindow.Show();
             }
@@ -101,6 +106,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 AlertsWindow.BringToFront();
             }
         }
+
         public void EnqueueAchievementNotifications(List<Achievement> achievements)
         {
             if (!AlertsWindow.IsDisposed)
@@ -147,16 +153,13 @@ namespace Retro_Achievement_Tracker.Controllers
             return notificationRequest;
         }
 
-        public void RunNotifications()
+        public void CheckForNotifications(object sender, EventArgs e)
         {
             if (NotificationRequests.Count > 0 && !IsPlaying && !NotificationsStopwatch.IsRunning)
             {
-                NotificationRequest notificationRequest = NotificationRequestDequeue();
+                NotificationTimer.Stop();
 
-                if (tokenSource2.Token.IsCancellationRequested)
-                {
-                    tokenSource2.Token.ThrowIfCancellationRequested();
-                }
+                NotificationRequest notificationRequest = NotificationRequestDequeue();
 
                 if (notificationRequest != null)
                 {
@@ -171,7 +174,6 @@ namespace Retro_Achievement_Tracker.Controllers
                         AlertsWindow.StartMasteryAlert(notificationRequest.GameInfoAndProgress);
                     }
                 }
-                NotificationsTask = Task.Factory.StartNew(RunNotificationTask, tokenSource2.Token);
             }
         }
         private async void RunNotificationTask()
@@ -181,82 +183,147 @@ namespace Retro_Achievement_Tracker.Controllers
             AnimationInPlayed = false;
             AnimationOutPlayed = false;
 
+            int achievementInSpeed = GetAchievementInSpeed();
+            int achievementOutSpeed = GetAchievementOutSpeed();
+
+            int achievementInTime = GetAchievementInTime();
+            int achievementOutTime = GetAchievementOutTime();
+
+            int masteryInSpeed = GetMasteryInSpeed();
+            int masteryOutSpeed = GetMasteryOutSpeed();
+
+            int masteryInTime = GetMasteryInTime();
+            int masteryOutTime = GetMasteryOutTime();
+
             AchievementPlayingTime = 0;
 
             while (NotificationsStopwatch.IsRunning)
             {
-                if (tokenSource2.Token.IsCancellationRequested)
+                if (AnimationOutPlayed && AnimationInPlayed && !IsPlaying)
                 {
-                    tokenSource2.Token.ThrowIfCancellationRequested();
+                    NotificationsStopwatch.Stop();
+
+                    if (!IsEditingAchievement)
+                    {
+                        AlertsWindow.HideNotifications();
+
+                        await Task.Delay(500);
+
+                        StartNewTimer();
+                    }
                 }
 
-                if (IsPlaying)
+                if (PlayingAchievement)
                 {
-                    if (PlayingAchievement)
-                    {
-                        AlertsWindow.GetAchievementPlayingTime();
+                    AlertsWindow.GetAchievementPlayingTime();
 
-                        if (!AnimationInPlayed && (AchievementPlayingTime * 1000) > (CustomAchievementEnabled ? CustomAchievementIn : 0))
-                        {
-                            AlertsWindow.SetAchievementIn(CustomAchievementEnabled ? CustomAchievementInSpeed : 0, CustomAchievementEnabled ? AchievementAnimationIn : AnimationDirection.STATIC);
-                            AnimationInPlayed = true;
-                        }
-                        else if (!AnimationOutPlayed && (AchievementPlayingTime * 1000) > (CustomAchievementEnabled ? CustomAchievementOut : 5400) || !IsPlaying)
-                        {
-                            AlertsWindow.SetAchievementOut(CustomAchievementEnabled ? CustomAchievementOutSpeed : 700, CustomAchievementEnabled ? AchievementAnimationOut : AnimationDirection.UP);
-                            AnimationOutPlayed = true;
-                        }
-                    }
-                    else
+                    if (!AnimationInPlayed && (AchievementPlayingTime * 1000) > achievementInTime)
                     {
-                        AlertsWindow.GetMasteryPlayingTime();
+                        AnimationDirection inDirection = CustomAchievementEnabled ? AchievementAnimationIn : AnimationDirection.STATIC;
 
-                        if (!AnimationInPlayed && (MasteryPlayingTime * 1000) > (CustomMasteryEnabled ? CustomMasteryIn : 0))
-                        {
-                            AlertsWindow.SetMasteryIn(CustomMasteryEnabled ? CustomMasteryInSpeed : 0, CustomMasteryEnabled ? MasteryAnimationIn : AnimationDirection.STATIC);
-                            AnimationInPlayed = true;
-                        }
-                        else if (!AnimationOutPlayed && (MasteryPlayingTime * 1000) > (CustomMasteryEnabled ? CustomMasteryOut : 5400) || !IsPlaying)
-                        {
-                            AlertsWindow.SetMasteryOut(CustomMasteryEnabled ? CustomMasteryOutSpeed : 700, CustomMasteryEnabled ? MasteryAnimationOut : AnimationDirection.UP);
-                            AnimationOutPlayed = true;
-                        }
+                        AlertsWindow.SetAchievementIn(achievementInSpeed, inDirection);
+                        AnimationInPlayed = true;
+
+                        await Task.Delay(achievementInSpeed);
                     }
-                    if ((AnimationOutPlayed && AnimationInPlayed) || !IsPlaying)
+                    else if (!AnimationOutPlayed && (AchievementPlayingTime * 1000) > achievementOutTime)
                     {
-                        NotificationsStopwatch.Stop();
+                        AnimationDirection outDirection = CustomAchievementEnabled ? AchievementAnimationOut : AnimationDirection.UP;
+
+                        AlertsWindow.SetAchievementOut(achievementOutSpeed, outDirection);
+                        AnimationOutPlayed = true;
+
+                        await Task.Delay(achievementOutSpeed);
                     }
-                    await Task.Delay(10);
                 }
+                else
+                {
+                    AlertsWindow.GetMasteryPlayingTime();
+
+                    if (!AnimationInPlayed && (MasteryPlayingTime * 1000) > masteryInTime)
+                    {
+                        AnimationDirection inDirection = CustomMasteryEnabled ? MasteryAnimationIn : AnimationDirection.STATIC;
+
+                        AlertsWindow.SetMasteryIn(masteryInSpeed, inDirection);
+                        AnimationInPlayed = true;
+
+                        await Task.Delay(masteryInSpeed);
+                    }
+                    else if (!AnimationOutPlayed && (MasteryPlayingTime * 1000) > masteryOutTime)
+                    {
+                        AnimationDirection outDirection = CustomAchievementEnabled ? AchievementAnimationOut : AnimationDirection.UP;
+
+                        AlertsWindow.SetMasteryOut(masteryOutSpeed, outDirection);
+                        AnimationOutPlayed = true;
+
+                        await Task.Delay(masteryOutSpeed);
+                    }
+                }
+                await Task.Delay(10);
             }
         }
 
-        public async void SetIsPlaying(bool isPlaying)
+        private void StartNewTimer()
+        {
+            NotificationTimer = new Timer
+            {
+                Interval = 100,
+                Enabled = false
+            };
+
+            NotificationTimer.Tick += new EventHandler(CheckForNotifications);
+
+            NotificationTimer.Start();
+        }
+
+        public void SetIsPlaying(bool isPlaying)
         {
             IsPlaying = isPlaying;
 
-            if (!IsPlaying)
+            if (IsPlaying)
             {
-                NotificationsStopwatch.Stop();
-
-                if (!(AnimationInPlayed && AnimationOutPlayed))
-                {
-                    AlertsWindow.SetAchievementOut(100, AnimationDirection.STATIC);
-                    AlertsWindow.SetMasteryOut(100, AnimationDirection.STATIC);
-                }
-
-                if (!IsEditingAchievement)
-                {
-                    AlertsWindow.HideNotifications();
-
-                    if (NotificationRequests.Count > 0)
-                    {
-                        await Task.Delay(200);
-
-                        RunNotifications();
-                    }
-                }
+                RunNotificationTask();
             }
+        }
+
+        private int GetMasteryOutTime()
+        {
+            return CustomMasteryEnabled ? CustomMasteryOutTime : 5400;
+        }
+
+        private int GetMasteryInTime()
+        {
+            return CustomMasteryEnabled ? CustomMasteryInTime : 0;
+        }
+
+        private int GetMasteryOutSpeed()
+        {
+            return CustomMasteryEnabled ? CustomMasteryOutSpeed : 700;
+        }
+
+        private int GetMasteryInSpeed()
+        {
+            return CustomMasteryEnabled ? CustomMasteryInSpeed : 0;
+        }
+
+        private int GetAchievementOutTime()
+        {
+            return CustomAchievementEnabled ? CustomAchievementOutTime : 5400;
+        }
+
+        private int GetAchievementInTime()
+        {
+            return CustomAchievementEnabled ? CustomAchievementInTime : 0;
+        }
+
+        private int GetAchievementOutSpeed()
+        {
+            return CustomAchievementEnabled ? CustomAchievementOutSpeed : 700;
+        }
+
+        private int GetAchievementInSpeed()
+        {
+            return CustomAchievementEnabled ? CustomAchievementInSpeed : 0;
         }
         public void SetAllSettings()
         {
@@ -969,7 +1036,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 SetAllSettings();
             }
         }
-        public int CustomAchievementIn
+        public int CustomAchievementInTime
         {
             get
             {
@@ -983,7 +1050,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 SetAllSettings();
             }
         }
-        public int CustomAchievementOut
+        public int CustomAchievementOutTime
         {
             get
             {
@@ -997,7 +1064,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 SetAllSettings();
             }
         }
-        public int CustomMasteryIn
+        public int CustomMasteryInTime
         {
             get
             {
@@ -1011,7 +1078,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 SetAllSettings();
             }
         }
-        public int CustomMasteryOut
+        public int CustomMasteryOutTime
         {
             get
             {

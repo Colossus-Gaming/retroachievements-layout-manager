@@ -3,6 +3,7 @@ using Retro_Achievement_Tracker.Models;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace Retro_Achievement_Tracker
@@ -17,6 +18,11 @@ namespace Retro_Achievement_Tracker
         {
             UserName = username;
             ApiKey = apiKey;
+
+            client.DefaultRequestHeaders.CacheControl = new CacheControlHeaderValue
+            {
+                NoCache = true
+            };
         }
         public async Task<UserSummary> GetUserSummary()
         {
