@@ -173,6 +173,8 @@ namespace Retro_Achievement_Tracker.Controllers
                         PlayingAchievement = false;
                         AlertsWindow.StartMasteryAlert(notificationRequest.GameInfoAndProgress);
                     }
+
+                    RunNotificationTask();
                 }
             }
         }
@@ -182,6 +184,9 @@ namespace Retro_Achievement_Tracker.Controllers
 
             AnimationInPlayed = false;
             AnimationOutPlayed = false;
+
+            AchievementPlayingTime = 0;
+            MasteryPlayingTime = 0;
 
             int achievementInSpeed = GetAchievementInSpeed();
             int achievementOutSpeed = GetAchievementOutSpeed();
@@ -194,8 +199,6 @@ namespace Retro_Achievement_Tracker.Controllers
 
             int masteryInTime = GetMasteryInTime();
             int masteryOutTime = GetMasteryOutTime();
-
-            AchievementPlayingTime = 0;
 
             while (NotificationsStopwatch.IsRunning)
             {
@@ -215,8 +218,6 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (PlayingAchievement)
                 {
-                    AlertsWindow.GetAchievementPlayingTime();
-
                     if (!AnimationInPlayed && (AchievementPlayingTime * 1000) > achievementInTime)
                     {
                         AnimationDirection inDirection = CustomAchievementEnabled ? AchievementAnimationIn : AnimationDirection.STATIC;
@@ -238,8 +239,6 @@ namespace Retro_Achievement_Tracker.Controllers
                 }
                 else
                 {
-                    AlertsWindow.GetMasteryPlayingTime();
-
                     if (!AnimationInPlayed && (MasteryPlayingTime * 1000) > masteryInTime)
                     {
                         AnimationDirection inDirection = CustomMasteryEnabled ? MasteryAnimationIn : AnimationDirection.STATIC;
@@ -279,16 +278,11 @@ namespace Retro_Achievement_Tracker.Controllers
         public void SetIsPlaying(bool isPlaying)
         {
             IsPlaying = isPlaying;
-
-            if (IsPlaying)
-            {
-                RunNotificationTask();
-            }
         }
 
         private int GetMasteryOutTime()
         {
-            return CustomMasteryEnabled ? CustomMasteryOutTime : 5400;
+            return CustomMasteryEnabled ? CustomMasteryOutTime : 5200;
         }
 
         private int GetMasteryInTime()
@@ -308,7 +302,7 @@ namespace Retro_Achievement_Tracker.Controllers
 
         private int GetAchievementOutTime()
         {
-            return CustomAchievementEnabled ? CustomAchievementOutTime : 5400;
+            return CustomAchievementEnabled ? CustomAchievementOutTime : 5200;
         }
 
         private int GetAchievementInTime()
@@ -343,6 +337,9 @@ namespace Retro_Achievement_Tracker.Controllers
                     AlertsWindow.DisableBorder();
                 }
 
+                SetAchievementSettings();
+                SetMasterySettings();
+
                 if (AdvancedSettingsEnabled)
                 {
                     SetAdvancedSettings();
@@ -351,9 +348,6 @@ namespace Retro_Achievement_Tracker.Controllers
                 {
                     SetSimpleSettings();
                 }
-
-                SetAchievementSettings();
-                SetMasterySettings();
 
                 AlertsWindow.SetClientSize();
             }

@@ -480,6 +480,18 @@
 
             setTimeout(function () { achievementVideoElement.currentTime = 0; masteryVideoElement.currentTime = 0; }, 200);
         }
+        function setInitialState() {
+            hideNotifications();
+
+            setTimeout(function () {
+                achievementVideoElement.addEventListener("timeupdate", (event) => {
+                    window.chrome.webview.postMessage('setAchievementPlayingTime' + achievementVideoElement.currentTime);
+                });
+                masteryVideoElement.addEventListener("timeupdate", (event) => {
+                    window.chrome.webview.postMessage('setMasteryPlayingTime' + masteryVideoElement.currentTime);
+                });
+            }, 300);
+        }
         function setAchievementLeft(value) {
             achievementVideoElement.style.left = value;
         }
@@ -511,7 +523,7 @@
             achievementElement.animate([{ left: '1034px', top: '220px' }, { left: '165px', top: '220px' }], { interations: 1, duration: value, fill: "forwards" });
         }
         function animateAchievementInStatic() {
-            achievementElement.animate([{ left: '-300px', top: '-310px' }, { left: '165px', top: '220px' }], { interations: 1, duration: 10, fill: "forwards" });
+            achievementElement.animate([{ left: '-300px', top: '-310px' }, { left: '165px', top: '220px' }], { interations: 1, duration: 1, fill: "forwards" });
         }
         function animateAchievementOutUp(value) {
             achievementElement.animate([{ left: '165px', top: '220px' }, { left: '165px', top: '-310px' }], { interations: 1, duration: value, fill: "forwards" });
@@ -526,7 +538,7 @@
             achievementElement.animate([{ left: '165px', top: '220px' }, { left: '1034px', top: '220px' }], { interations: 1, duration: value, fill: "forwards" });
         }
         function animateAchievementOutStatic() {
-            achievementElement.animate([{ left: '-300px', top: '-310px' }, { left: '-300px', top: '-310px' }], { interations: 1, duration: 10, fill: "forwards" });
+            achievementElement.animate([{ left: '-300px', top: '-310px' }, { left: '-300px', top: '-310px' }], { interations: 1, duration: 1, fill: "forwards" });
         }
         function animateMasteryInUp(value) {
             masteryElement.animate([{ left: '165px', top: '-310px' }, { left: '165px', top: '220px' }], { interations: 1, duration: value, fill: "forwards" });
@@ -541,7 +553,7 @@
             masteryElement.animate([{ left: '1034px', top: '220px' }, { left: '165px', top: '220px' }], { interations: 1, duration: value, fill: "forwards" });
         }
         function animateMasteryInStatic() {
-            masteryElement.animate([{ left: '-300px', top: '-310px' }, { left: '165px', top: '220px' }], { interations: 1, duration: 10, fill: "forwards" });
+            masteryElement.animate([{ left: '-300px', top: '-310px' }, { left: '165px', top: '220px' }], { interations: 1, duration: 1, fill: "forwards" });
         }
         function animateMasteryOutUp(value) {
             masteryElement.animate([{ left: '165px', top: '220px' }, { left: '165px', top: '-310px' }], { interations: 1, duration: value, fill: "forwards" });
@@ -556,13 +568,7 @@
             masteryElement.animate([{ left: '165px', top: '220px' }, { left: '1034px', top: '220px' }], { interations: 1, duration: value, fill: "forwards" });
         }
         function animateMasteryOutStatic() {
-            masteryElement.animate([{ left: '-300px', top: '-310px' }, { left: '-300px', top: '-310px' }], { interations: 1, duration: 10, fill: "forwards" });
-        }
-        function getAchievementPlayingTime() {
-            window.chrome.webview.postMessage('getAchievementPlayingTime' + achievementVideoElement.currentTime);
-        }
-        function getMasteryPlayingTime() {
-            window.chrome.webview.postMessage('getMasteryPlayingTime' + masteryVideoElement.currentTime);
+            masteryElement.animate([{ left: '-300px', top: '-310px' }, { left: '-300px', top: '-310px' }], { interations: 1, duration: 1, fill: "forwards" });
         }
         function setPlayingOn() {
             window.chrome.webview.postMessage('setIsPlayingTrue');
@@ -691,7 +697,7 @@
         }
     </style>
 </head>
-<body onload="hideNotifications()">
+<body onload="setInitialState()">
     <div id="container">
         <div id="achievement">
             <img id="achievement-border" style="max-width: 100%; max-height: 100%;">

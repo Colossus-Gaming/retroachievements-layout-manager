@@ -66,13 +66,13 @@ namespace Retro_Achievement_Tracker.Forms
             {
                 AlertsController.Instance.SetIsPlaying(false);
             }
-            else if (content.StartsWith("getAchievementPlayingTime"))
+            else if (content.StartsWith("setAchievementPlayingTime"))
             {
-                AlertsController.Instance.AchievementPlayingTime = float.Parse(content.Replace("getAchievementPlayingTime", ""));
+                AlertsController.Instance.AchievementPlayingTime = float.Parse(content.Replace("setAchievementPlayingTime", ""));
             }
-            else if (content.StartsWith("getMasteryPlayingTime"))
+            else if (content.StartsWith("setMasteryPlayingTime"))
             {
-                AlertsController.Instance.MasteryPlayingTime = float.Parse(content.Replace("getMasteryPlayingTime", ""));
+                AlertsController.Instance.MasteryPlayingTime = float.Parse(content.Replace("setMasteryPlayingTime", ""));
             }
         }
         protected override void OnClosed(EventArgs e)
@@ -342,20 +342,6 @@ namespace Retro_Achievement_Tracker.Forms
         public void SetMasteryVideo(string filePath)
         {
             webView21.ExecuteScriptAsync(string.Format("setMasteryVideo(\"{0}\");", filePath));
-        }
-        public void GetAchievementPlayingTime()
-        {
-            Invoke(new Action(() =>
-            {
-                webView21.ExecuteScriptAsync("getAchievementPlayingTime();");
-            }));
-        }
-        public void GetMasteryPlayingTime()
-        {
-            Invoke(new Action(() =>
-            {
-                webView21.ExecuteScriptAsync("getMasteryPlayingTime();");
-            }));
         }
         public void SetClientSize()
         {
