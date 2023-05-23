@@ -399,22 +399,24 @@ namespace Retro_Achievement_Tracker
                     CurrentlyViewingIndex = -1;
 
                     UpdateLaunchBoxReferences();
+
                     triggeredUpdate = true;
                 }
 
                 if (GameInfoAndProgress.Achievements != null && GameInfoAndProgress.Achievements.Count > 0 && needsUpdate)
                 {
-                    AchievementListController.Instance.UpdateAchievementList(UnlockedAchievements.ToList(), LockedAchievements.ToList(), !sameGame);
-
-                    RecentUnlocksController.Instance.SetAchievements(UnlockedAchievements.ToList());
-
-                    StreamLabelManager.Instance.EnqueueRecentUnlocks(GameInfoAndProgress);
-
                     UpdateGameInfo();
                     UpdateCurrentlyViewingAchievement();
 
                     SetFocus();
 
+                    AchievementListController.Instance.UpdateAchievementList(UnlockedAchievements.ToList(), LockedAchievements.ToList(), !sameGame);
+
+                    RecentUnlocksController.Instance.SetAchievements(UnlockedAchievements.ToList());
+
+                    RelatedMediaController.Instance.SetAllSettings();
+
+                    StreamLabelManager.Instance.EnqueueRecentUnlocks(GameInfoAndProgress);
                     StreamLabelManager.Instance.RunNotifications();
                 }
 
@@ -3195,7 +3197,6 @@ namespace Retro_Achievement_Tracker
                     }
                 }
             }
-            RelatedMediaController.Instance.SetAllSettings();
         }
         private void AdvancedCheckBox_Click(object sender, EventArgs e)
         {
