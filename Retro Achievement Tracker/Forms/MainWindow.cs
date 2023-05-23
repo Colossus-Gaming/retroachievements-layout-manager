@@ -762,8 +762,6 @@ namespace Retro_Achievement_Tracker
                         AlertsController.Instance.MasteryAlertEnable = isChecked;
                         break;
                     case "alertsCustomAchievementEnableCheckbox":
-                        AlertsController.Instance.CustomAchievementEnabled = isChecked;
-
                         if (isChecked)
                         {
                             if (!File.Exists(AlertsController.Instance.CustomAchievementFile))
@@ -771,10 +769,10 @@ namespace Retro_Achievement_Tracker
                                 SelectCustomAchievementFile();
                             }
                         }
+
+                        AlertsController.Instance.CustomAchievementEnabled = isChecked;
                         break;
                     case "alertsCustomMasteryEnableCheckbox":
-                        AlertsController.Instance.CustomMasteryEnabled = isChecked;
-
                         if (isChecked)
                         {
                             if (!File.Exists(AlertsController.Instance.CustomMasteryFile))
@@ -782,6 +780,8 @@ namespace Retro_Achievement_Tracker
                                 SelectCustomMasteryFile();
                             }
                         }
+
+                        AlertsController.Instance.CustomMasteryEnabled = isChecked;
                         break;
                     case "alertsAchievementEditOutlineCheckbox":
                         if (checkBox.Checked)

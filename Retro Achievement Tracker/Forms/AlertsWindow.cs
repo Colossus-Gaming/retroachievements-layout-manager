@@ -68,11 +68,11 @@ namespace Retro_Achievement_Tracker.Forms
             }
             else if (content.StartsWith("setAchievementPlayingTime"))
             {
-                AlertsController.Instance.AchievementPlayingTime = float.Parse(content.Replace("setAchievementPlayingTime", ""));
+                AlertsController.Instance.AchievementPlayingTime = float.Parse(content.Replace("setAchievementPlayingTime", "")) * 1000;
             }
             else if (content.StartsWith("setMasteryPlayingTime"))
             {
-                AlertsController.Instance.MasteryPlayingTime = float.Parse(content.Replace("setMasteryPlayingTime", ""));
+                AlertsController.Instance.MasteryPlayingTime = float.Parse(content.Replace("setMasteryPlayingTime", "")) * 1000;
             }
         }
         protected override void OnClosed(EventArgs e)

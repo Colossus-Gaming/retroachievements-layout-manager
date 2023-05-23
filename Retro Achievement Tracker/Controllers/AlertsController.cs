@@ -218,18 +218,18 @@ namespace Retro_Achievement_Tracker.Controllers
 
                 if (PlayingAchievement)
                 {
-                    if (!AnimationInPlayed && (AchievementPlayingTime * 1000) > achievementInTime)
+                    if (!AnimationInPlayed && AchievementPlayingTime > achievementInTime)
                     {
-                        AnimationDirection inDirection = CustomAchievementEnabled ? AchievementAnimationIn : AnimationDirection.STATIC;
+                        AnimationDirection inDirection = GetAchievementInDirection();
 
                         AlertsWindow.SetAchievementIn(achievementInSpeed, inDirection);
                         AnimationInPlayed = true;
 
                         await Task.Delay(achievementInSpeed);
                     }
-                    else if (!AnimationOutPlayed && (AchievementPlayingTime * 1000) > achievementOutTime)
+                    else if (!AnimationOutPlayed && AchievementPlayingTime > achievementOutTime)
                     {
-                        AnimationDirection outDirection = CustomAchievementEnabled ? AchievementAnimationOut : AnimationDirection.UP;
+                        AnimationDirection outDirection = GetAchievementOutDirection();
 
                         AlertsWindow.SetAchievementOut(achievementOutSpeed, outDirection);
                         AnimationOutPlayed = true;
@@ -239,18 +239,18 @@ namespace Retro_Achievement_Tracker.Controllers
                 }
                 else
                 {
-                    if (!AnimationInPlayed && (MasteryPlayingTime * 1000) > masteryInTime)
+                    if (!AnimationInPlayed && MasteryPlayingTime > masteryInTime)
                     {
-                        AnimationDirection inDirection = CustomMasteryEnabled ? MasteryAnimationIn : AnimationDirection.STATIC;
+                        AnimationDirection inDirection = GetMasteryInDirection();
 
                         AlertsWindow.SetMasteryIn(masteryInSpeed, inDirection);
                         AnimationInPlayed = true;
 
                         await Task.Delay(masteryInSpeed);
                     }
-                    else if (!AnimationOutPlayed && (MasteryPlayingTime * 1000) > masteryOutTime)
+                    else if (!AnimationOutPlayed && MasteryPlayingTime > masteryOutTime)
                     {
-                        AnimationDirection outDirection = CustomAchievementEnabled ? AchievementAnimationOut : AnimationDirection.UP;
+                        AnimationDirection outDirection = GetMasteryOutDirection();
 
                         AlertsWindow.SetMasteryOut(masteryOutSpeed, outDirection);
                         AnimationOutPlayed = true;
@@ -260,6 +260,26 @@ namespace Retro_Achievement_Tracker.Controllers
                 }
                 await Task.Delay(10);
             }
+        }
+
+        private AnimationDirection GetMasteryOutDirection()
+        {
+            return CustomMasteryEnabled ? MasteryAnimationOut : AnimationDirection.UP;
+        }
+
+        private AnimationDirection GetMasteryInDirection()
+        {
+            return CustomMasteryEnabled ? MasteryAnimationIn : AnimationDirection.STATIC;
+        }
+
+        private AnimationDirection GetAchievementOutDirection()
+        {
+            return CustomAchievementEnabled ? AchievementAnimationOut : AnimationDirection.UP;
+        }
+
+        private AnimationDirection GetAchievementInDirection()
+        {
+            return CustomAchievementEnabled ? AchievementAnimationIn : AnimationDirection.STATIC;
         }
 
         private void StartNewTimer()
@@ -417,7 +437,6 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 AlertsWindow.DisableAchievementEdit();
                 IsEditingAchievement = false;
-                IsPlaying = false;
             }
         }
         public void EnableMasteryEdit()
