@@ -119,6 +119,9 @@ namespace Retro_Achievement_Tracker.Models
             {
                 int max = Math.Min(5, gameInfo.Achievements.Count);
 
+                gameInfo.Achievements.Sort();
+                gameInfo.Achievements.Reverse();
+
                 for (int i = 0; i < max; i++)
                 {
                     if (gameInfo.Achievements[i].DateEarned.HasValue)
