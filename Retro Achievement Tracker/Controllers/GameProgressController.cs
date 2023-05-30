@@ -179,9 +179,9 @@ namespace Retro_Achievement_Tracker.Controllers
             {
                 if (gamePointsPossible == "0")
                 {
-                    return "0.00%";
+                    return 0.ToString("0.00");
                 }
-                return (float.Parse(gameTruePointsPossible) / float.Parse(gamePointsPossible)).ToString("0.00") + "%";
+                return (float.Parse(gameTruePointsPossible) / float.Parse(gamePointsPossible)).ToString("0.00");
             }
         }
         public string WindowBackgroundColor

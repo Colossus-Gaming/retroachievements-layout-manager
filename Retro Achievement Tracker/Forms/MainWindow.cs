@@ -12,6 +12,7 @@ using System.Xml;
 using System.Threading.Tasks;
 using FontFamily = System.Drawing.FontFamily;
 using File = System.IO.File;
+using System.Globalization;
 
 namespace Retro_Achievement_Tracker
 {
@@ -942,7 +943,7 @@ namespace Retro_Achievement_Tracker
                         AlertsController.Instance.CustomAchievementY = Convert.ToInt32(numericUpDown.Value);
                         break;
                     case "alertsCustomAchievementScaleNumericUpDown":
-                        AlertsController.Instance.CustomAchievementScale = Convert.ToInt32(numericUpDown.Value);
+                        AlertsController.Instance.CustomAchievementScale = Convert.ToInt32(numericUpDown.Value, CultureInfo.CurrentCulture);
                         break;
                     case "alertsCustomAchievementInNumericUpDown":
                         AlertsController.Instance.CustomAchievementInTime = Convert.ToInt32(numericUpDown.Value);
@@ -963,7 +964,7 @@ namespace Retro_Achievement_Tracker
                         AlertsController.Instance.CustomMasteryY = Convert.ToInt32(numericUpDown.Value);
                         break;
                     case "alertsCustomMasteryScaleNumericUpDown":
-                        AlertsController.Instance.CustomMasteryScale = Convert.ToInt32(numericUpDown.Value);
+                        AlertsController.Instance.CustomMasteryScale = Convert.ToInt32(numericUpDown.Value, CultureInfo.CurrentCulture);
                         break;
                     case "alertsCustomMasteryInNumericUpDown":
                         AlertsController.Instance.CustomMasteryInTime = Convert.ToInt32(numericUpDown.Value);

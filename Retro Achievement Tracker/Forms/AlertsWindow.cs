@@ -5,6 +5,7 @@ using Retro_Achievement_Tracker.Models;
 using Retro_Achievement_Tracker.Properties;
 using System;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -68,11 +69,11 @@ namespace Retro_Achievement_Tracker.Forms
             }
             else if (content.StartsWith("setAchievementPlayingTime"))
             {
-                AlertsController.Instance.AchievementPlayingTime = float.Parse(content.Replace("setAchievementPlayingTime", "")) * 1000;
+                AlertsController.Instance.AchievementPlayingTime = float.Parse(content.Replace("setAchievementPlayingTime", ""), CultureInfo.CurrentCulture) * 1000;
             }
             else if (content.StartsWith("setMasteryPlayingTime"))
             {
-                AlertsController.Instance.MasteryPlayingTime = float.Parse(content.Replace("setMasteryPlayingTime", "")) * 1000;
+                AlertsController.Instance.MasteryPlayingTime = float.Parse(content.Replace("setMasteryPlayingTime", ""), CultureInfo.CurrentCulture) * 1000;
             }
         }
         protected override void OnClosed(EventArgs e)

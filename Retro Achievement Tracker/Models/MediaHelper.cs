@@ -2,6 +2,7 @@
 using MediaToolkit.Model;
 using System;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 
 namespace Retro_Achievement_Tracker.Models
@@ -39,7 +40,7 @@ namespace Retro_Achievement_Tracker.Models
                 {
                     engine.GetMetadata(inputFile);
                 }
-                return Convert.ToInt32(inputFile.Metadata.Duration.TotalMilliseconds);
+                return Convert.ToInt32(inputFile.Metadata.Duration.TotalMilliseconds, CultureInfo.CurrentCulture);
             }
             return 0;
         }

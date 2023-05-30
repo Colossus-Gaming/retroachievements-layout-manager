@@ -6,6 +6,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -400,14 +401,14 @@ namespace Retro_Achievement_Tracker.Controllers
             AlertsWindow.SetAchievementVideo(CustomAchievementEnabled ? "https://appassets.customachievement/" + new FileInfo(CustomAchievementFile).Name : "https://appassets.video/achievement-notification.webm");
             AlertsWindow.SetAchievementLeft(CustomAchievementEnabled ? CustomAchievementX : -25);
             AlertsWindow.SetAchievementTop(CustomAchievementEnabled ? CustomAchievementY : 5);
-            AlertsWindow.SetAchievementWidth(CustomAchievementEnabled ? Convert.ToInt32(CustomAchievementScale * MediaHelper.GetVideoWidth(CustomAchievementFile)) : 1028);
+            AlertsWindow.SetAchievementWidth(CustomAchievementEnabled ? Convert.ToInt32(CustomAchievementScale * MediaHelper.GetVideoWidth(CustomAchievementFile), CultureInfo.CurrentCulture) : 1028);
         }
         public void SetMasterySettings()
         {
             AlertsWindow.SetMasteryVideo(CustomMasteryEnabled ? "https://appassets.custommastery/" + new FileInfo(CustomMasteryFile).Name : "https://appassets.video/mastery-notification.webm");
             AlertsWindow.SetMasteryLeft(CustomMasteryEnabled ? CustomMasteryX : -25);
             AlertsWindow.SetMasteryTop(CustomMasteryEnabled ? CustomMasteryY : 5);
-            AlertsWindow.SetMasteryWidth(CustomMasteryEnabled ? Convert.ToInt32(CustomMasteryScale * MediaHelper.GetVideoWidth(CustomMasteryFile)) : 1028);
+            AlertsWindow.SetMasteryWidth(CustomMasteryEnabled ? Convert.ToInt32(CustomMasteryScale * MediaHelper.GetVideoWidth(CustomMasteryFile), CultureInfo.CurrentCulture) : 1028);
         }
         public void SendAchievementNotification(Achievement achievement)
         {
