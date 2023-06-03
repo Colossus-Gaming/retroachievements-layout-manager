@@ -231,7 +231,7 @@
     <Compile Include="Models\GameInfo.cs" />
     <Compile Include="Models\GameInfoConverter.cs" />
     <Compile Include="Models\NotificationRequest.cs" />
-    <Compile Include="Models\StreamLabelManager.cs" />
+    <Compile Include="Controllers\StreamLabelController.cs" />
     <Compile Include="Models\UserRankAndScore.cs" />
     <Compile Include="Models\UserRankAndScoreConverter.cs" />
     <Compile Include="Models\UserSummaryConverter.cs" />

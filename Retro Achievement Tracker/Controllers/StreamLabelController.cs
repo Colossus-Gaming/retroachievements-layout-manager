@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
@@ -9,19 +10,19 @@ using System.Threading.Tasks;
 
 namespace Retro_Achievement_Tracker.Models
 {
-    public sealed class StreamLabelManager
+    public sealed class StreamLabelController
     {
-        private static readonly StreamLabelManager instance = new StreamLabelManager();
+        private static readonly StreamLabelController instance = new StreamLabelController();
         private Stopwatch StreamLabelsStopwatch;
         private Task StreamLabelsTask;
         private readonly ConcurrentQueue<Tuple<Task, bool>> StreamLabelsRequests;
-        private StreamLabelManager()
+        private StreamLabelController()
         {
             StreamLabelsRequests = new ConcurrentQueue<Tuple<Task, bool>>();
             StreamLabelsStopwatch = new Stopwatch();
             StreamLabelsTask = Task.Factory.StartNew(() => { });
         }
-        public static StreamLabelManager Instance
+        public static StreamLabelController Instance
         {
             get
             {
@@ -86,9 +87,9 @@ namespace Retro_Achievement_Tracker.Models
         {
             WriteGameInfoStreamLabels(gameInfo);
         }
-        public void EnqueueRecentUnlocks(GameInfo gameInfo)
+        public void EnqueueRecentUnlocks(List<Achievement> achievements)
         {
-            WriteLastFiveStreamLabels(gameInfo);
+            WriteLastFiveStreamLabels(achievements);
         }
         private void WriteFocusStreamLabels(Achievement currentlyViewingAchievement)
         {
@@ -114,23 +115,23 @@ namespace Retro_Achievement_Tracker.Models
             File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/focus/data.json", "{}");
         }
 
-        private void WriteLastFiveStreamLabels(GameInfo gameInfo)
+        private void WriteLastFiveStreamLabels(List<Achievement> achievements)
         {
-            if (gameInfo != null && gameInfo.Achievements != null && gameInfo.Achievements.Count > 0)
+            if (achievements != null && achievements.Count > 0)
             {
-                int max = Math.Min(5, gameInfo.Achievements.Count);
+                int max = Math.Min(5, achievements.Count);
 
-                gameInfo.Achievements.Sort();
-                gameInfo.Achievements.Reverse();
+                achievements.Sort();
+                achievements.Reverse();
 
                 for (int i = 0; i < max; i++)
                 {
-                    if (gameInfo.Achievements[i].DateEarned.HasValue)
+                    if (achievements[i].DateEarned.HasValue)
                     {
-                        File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-" + (i + 1) + "-title.txt", gameInfo.Achievements[i].Title);
-                        File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-" + (i + 1) + "-description.txt", gameInfo.Achievements[i].Description);
-                        File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-" + (i + 1) + "-points.txt", gameInfo.Achievements[i].Points.ToString());
-                        File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-" + (i + 1) + "-data.json", JsonConvert.SerializeObject(gameInfo));
+                        File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-" + (i + 1) + "-title.txt", achievements[i].Title);
+                        File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-" + (i + 1) + "-description.txt", achievements[i].Description);
+                        File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-" + (i + 1) + "-points.txt", achievements[i].Points.ToString());
+                        File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-" + (i + 1) + "-data.json", JsonConvert.SerializeObject(achievements[i]));
                     }
                     else
                     {

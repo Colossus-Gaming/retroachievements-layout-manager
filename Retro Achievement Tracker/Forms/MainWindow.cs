@@ -146,7 +146,7 @@ namespace Retro_Achievement_Tracker
 
             Settings.Default.Save();
 
-            StreamLabelManager.Instance.ClearAllStreamLabels();
+            StreamLabelController.Instance.ClearAllStreamLabels();
 
             FocusController.Instance.Close();
             UserInfoController.Instance.Close();
@@ -357,7 +357,7 @@ namespace Retro_Achievement_Tracker
                     .FindAll(unlockedAchievement => !OldUnlockedAchievements.Contains(unlockedAchievement))
                     .ToList();
 
-                    achievementNotificationList.ForEach((achievement) => StreamLabelManager.Instance.EnqueueAlert(achievement));
+                    achievementNotificationList.ForEach((achievement) => StreamLabelController.Instance.EnqueueAlert(achievement));
 
                     if (achievementNotificationList.Count > 0 && UnlockedAchievements.Count > MaxCheevoCount)
                     {
@@ -384,7 +384,7 @@ namespace Retro_Achievement_Tracker
                         if (AlertsController.Instance.MasteryAlertEnable && UnlockedAchievements.Count == GameInfoAndProgress.Achievements.Count && OldUnlockedAchievements.Count < GameInfoAndProgress.Achievements.Count)
                         {
                             AlertsController.Instance.EnqueueMasteryNotification(GameInfoAndProgress);
-                            StreamLabelManager.Instance.EnqueueAlert(GameInfoAndProgress);
+                            StreamLabelController.Instance.EnqueueAlert(GameInfoAndProgress);
                         }
 
                         needsUpdate = true;
@@ -400,6 +400,8 @@ namespace Retro_Achievement_Tracker
                     CurrentlyViewingIndex = -1;
 
                     UpdateLaunchBoxReferences();
+
+                    StreamLabelController.Instance.ClearAllStreamLabels();
 
                     triggeredUpdate = true;
                 }
@@ -417,8 +419,8 @@ namespace Retro_Achievement_Tracker
 
                     RelatedMediaController.Instance.SetAllSettings();
 
-                    StreamLabelManager.Instance.EnqueueRecentUnlocks(GameInfoAndProgress);
-                    StreamLabelManager.Instance.RunNotifications();
+                    StreamLabelController.Instance.EnqueueRecentUnlocks(UnlockedAchievements.ToList());
+                    StreamLabelController.Instance.RunNotifications();
                 }
 
                 OldUnlockedAchievements = UnlockedAchievements.ToList();
@@ -526,7 +528,7 @@ namespace Retro_Achievement_Tracker
                 {
                     FocusController.Instance.SetFocus(CurrentlyViewingAchievement);
 
-                    StreamLabelManager.Instance.EnqueueFocus(CurrentlyViewingAchievement);
+                    StreamLabelController.Instance.EnqueueFocus(CurrentlyViewingAchievement);
                 }
             }
             else if (LockedAchievements.Count == 0 && UnlockedAchievements.Count > 0)
@@ -534,11 +536,11 @@ namespace Retro_Achievement_Tracker
                 FocusController.Instance.SetFocus((Achievement)null);
                 FocusController.Instance.SetFocus(GameInfoAndProgress);
 
-                StreamLabelManager.Instance.ClearFocus();
+                StreamLabelController.Instance.ClearFocus();
             }
             else
             {
-                StreamLabelManager.Instance.ClearFocus();
+                StreamLabelController.Instance.ClearFocus();
             }
         }
         private void CreateFolders()
@@ -590,7 +592,7 @@ namespace Retro_Achievement_Tracker
             UserInfoController.Instance.SetTruePoints(UserSummary.TotalTruePoints.ToString());
             UserInfoController.Instance.SetRatio(UserSummary.RetroRatio);
 
-            StreamLabelManager.Instance.EnqueueUserInfo(UserSummary);
+            StreamLabelController.Instance.EnqueueUserInfo(UserSummary);
         }
         private void UpdateGameInfo()
         {
@@ -657,7 +659,7 @@ namespace Retro_Achievement_Tracker
             GameProgressController.Instance.SetCompleted(GameInfoAndProgress.Achievements == null ? 0.00f : GameInfoAndProgress.AchievementsEarned / (float)GameInfoAndProgress.Achievements.Count * 100f);
             GameProgressController.Instance.SetGameRatio();
 
-            StreamLabelManager.Instance.EnqueueGameInfo(GameInfoAndProgress);
+            StreamLabelController.Instance.EnqueueGameInfo(GameInfoAndProgress);
 
             RelatedMediaController.Instance.RABadgeIconURI = GameInfoAndProgress.BadgeUri;
             RelatedMediaController.Instance.RATitleScreenURI = GameInfoAndProgress.ImageTitle;
@@ -1098,7 +1100,7 @@ namespace Retro_Achievement_Tracker
                         Achievement achievement = (Achievement)unlockedAchievements[unlockedAchievements.Count - 1].Clone();
 
                         AlertsController.Instance.EnqueueAchievementNotifications(new List<Achievement>() { achievement });
-                        StreamLabelManager.Instance.EnqueueAlert(achievement);
+                        StreamLabelController.Instance.EnqueueAlert(achievement);
                     }
                     else
                     {
@@ -1111,21 +1113,21 @@ namespace Retro_Achievement_Tracker
                         };
 
                         AlertsController.Instance.EnqueueAchievementNotifications(new List<Achievement>() { achievement });
-                        StreamLabelManager.Instance.EnqueueAlert(achievement);
+                        StreamLabelController.Instance.EnqueueAlert(achievement);
                     }
                     break;
                 case "alertsPlayMasteryButton":
                     AlertsController.Instance.EnqueueMasteryNotification(GameInfoAndProgress);
-                    StreamLabelManager.Instance.EnqueueAlert(GameInfoAndProgress);
+                    StreamLabelController.Instance.EnqueueAlert(GameInfoAndProgress);
                     break;
             }
-            StreamLabelManager.Instance.RunNotifications();
+            StreamLabelController.Instance.RunNotifications();
         }
         private void SetFocusButton_Click(object sender, EventArgs e)
         {
             SetFocus();
 
-            StreamLabelManager.Instance.RunNotifications();
+            StreamLabelController.Instance.RunNotifications();
         }
         private void MoveFocusIndexPrev_Click(object sender, EventArgs e)
         {
