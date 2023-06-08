@@ -402,6 +402,7 @@ namespace Retro_Achievement_Tracker
                     UpdateLaunchBoxReferences();
 
                     StreamLabelController.Instance.ClearAllStreamLabels();
+                    RelatedMediaController.Instance.SetAllSettings();
 
                     triggeredUpdate = true;
                 }
@@ -416,8 +417,6 @@ namespace Retro_Achievement_Tracker
                     AchievementListController.Instance.UpdateAchievementList(UnlockedAchievements.ToList(), LockedAchievements.ToList(), !sameGame);
 
                     RecentUnlocksController.Instance.SetAchievements(UnlockedAchievements.ToList());
-
-                    RelatedMediaController.Instance.SetAllSettings();
 
                     StreamLabelController.Instance.EnqueueRecentUnlocks(UnlockedAchievements.ToList());
                     StreamLabelController.Instance.RunNotifications();

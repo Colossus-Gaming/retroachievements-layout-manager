@@ -8,6 +8,7 @@ namespace Retro_Achievement_Tracker.Controllers
     {
         private static readonly RelatedMediaController instance = new RelatedMediaController();
         private static RelatedMediaWindow RelatedMediaWindow;
+        private static string CurrentImageURI;
 
         public bool IsOpen;
 
@@ -111,17 +112,22 @@ namespace Retro_Achievement_Tracker.Controllers
                     break;
             }
 
-            RelatedMediaWindow.HideImage();
-
-            if (imageUri.Contains(".png") || imageUri.Contains(".jpg") || imageUri.Contains(".jpeg"))
+            if (CurrentImageURI == null || !CurrentImageURI.Equals(imageUri))
             {
-                await Task.Delay(500);
+                RelatedMediaWindow.HideImage();
 
-                RelatedMediaWindow.SetImage(imageUri);
+                if (imageUri.Contains(".png") || imageUri.Contains(".jpg") || imageUri.Contains(".jpeg"))
+                {
+                    await Task.Delay(500);
 
-                await Task.Delay(500);
+                    RelatedMediaWindow.SetImage(imageUri);
 
-                RelatedMediaWindow.ShowImage();
+                    await Task.Delay(500);
+
+                    RelatedMediaWindow.ShowImage();
+
+                    CurrentImageURI = imageUri;
+                }
             }
         }
         public string WindowBackgroundColor
