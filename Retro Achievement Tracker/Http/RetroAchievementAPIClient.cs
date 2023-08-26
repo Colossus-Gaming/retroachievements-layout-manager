@@ -44,6 +44,16 @@ namespace Retro_Achievement_Tracker
             }
             return JsonConvert.DeserializeObject<GameInfo>(await httpResponseMessage.Content.ReadAsStringAsync());
         }
+        public async Task<GameInfo> GetGameInfoExtended(long gameId)
+        {
+            HttpResponseMessage httpResponseMessage = await client.GetAsync(string.Format(Constants.RETRO_ACHIEVEMENTS_URL + Constants.RETRO_ACHIEVEMENTS_API_GET_GAME_EXTENDED, UserName, ApiKey, gameId));
+
+            if (!httpResponseMessage.IsSuccessStatusCode)
+            {
+                throw new Exception("RA backend responding with errors: " + httpResponseMessage.StatusCode);
+            }
+            return JsonConvert.DeserializeObject<GameInfo>(await httpResponseMessage.Content.ReadAsStringAsync());
+        }
         public async Task<List<GameInfo>> GetRecentlyPlayedGames()
         {
             HttpResponseMessage httpResponseMessage = await client.GetAsync(string.Format(Constants.RETRO_ACHIEVEMENTS_URL + Constants.RETRO_ACHIEVEMENTS_API_GET_RECENTLY_PLAYED, UserName, ApiKey, UserName));

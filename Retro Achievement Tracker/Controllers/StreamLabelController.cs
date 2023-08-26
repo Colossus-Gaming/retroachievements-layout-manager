@@ -87,6 +87,10 @@ namespace Retro_Achievement_Tracker.Models
         {
             WriteGameInfoStreamLabels(gameInfo);
         }
+        public void EnqueueGameProgress(GameInfo gameInfo)
+        {
+            WriteGameProgressStreamLabels(gameInfo);
+        }
         public void EnqueueRecentUnlocks(List<Achievement> achievements)
         {
             WriteLastFiveStreamLabels(achievements);
@@ -166,14 +170,20 @@ namespace Retro_Achievement_Tracker.Models
                 File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/genre.txt", gameInfo.Genre);
                 File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/released.txt", gameInfo.Released);
 
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/data.json", JsonConvert.SerializeObject(gameInfo));
+            }
+        }
+        private void WriteGameProgressStreamLabels(GameInfo gameInfo)
+        {
+            if (gameInfo != null)
+            {
                 File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/ratio.txt", gameInfo.GameTruePointsPossible == 0 ? "0" : (Convert.ToDecimal(gameInfo.GameTruePointsPossible) / Convert.ToDecimal(gameInfo.GamePointsPossible)).ToString("0.00"));
                 File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/points.txt", gameInfo.GamePointsPossible == 0 ? "0 / 0" : gameInfo.GamePointsEarned.ToString() + " / " + gameInfo.GamePointsPossible.ToString());
                 File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/true-points.txt", gameInfo.GameTruePointsPossible == 0 ? "0 / 0" : gameInfo.GameTruePointsEarned.ToString() + " / " + gameInfo.GameTruePointsPossible.ToString());
                 File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/achievements.txt", gameInfo.AchievementsEarned + " / " + (gameInfo.Achievements == null ? 0 : gameInfo.Achievements.Count));
-                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/completed.txt", (gameInfo.Achievements == null || gameInfo.Achievements.Count == 0 ? 0 : 
-                    (Convert.ToDecimal(gameInfo.Achievements.Count(achievement => achievement.DateEarned.HasValue), CultureInfo.CurrentCulture) / Convert.ToDecimal(gameInfo.Achievements == null ? 0 : 
+                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/completed.txt", (gameInfo.Achievements == null || gameInfo.Achievements.Count == 0 ? 0 :
+                    (Convert.ToDecimal(gameInfo.Achievements.Count(achievement => achievement.DateEarned.HasValue), CultureInfo.CurrentCulture) / Convert.ToDecimal(gameInfo.Achievements == null ? 0 :
                     gameInfo.Achievements.Count, CultureInfo.CurrentCulture) * 100)).ToString("0.00") + " %");
-                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/data.json", JsonConvert.SerializeObject(gameInfo));
             }
         }
         private void WriteAlertsStreamLabels(Achievement achievement)

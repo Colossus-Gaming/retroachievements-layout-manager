@@ -188,6 +188,7 @@ namespace Retro_Achievement_Tracker.Models
         public string Genre { get; set; }
         public string Released { get; set; }
         public string ConsoleName { get; set; }
+        public readonly List<Claim> Claims = new List<Claim>();
         public List<Achievement> Achievements { get; set; }
         public int AchievementsEarned
         {
@@ -276,5 +277,13 @@ namespace Retro_Achievement_Tracker.Models
             }
             return other.LastPlayed.Value.CompareTo(LastPlayed.Value);
         }
+    }
+    public class Claim
+    {
+        public string User { get; set; }
+        public int SetType { get; set; }
+        public int ClaimType { get; set; }
+        public string Created { get; set; }
+        public string Expiration { get; set; }
     }
 }

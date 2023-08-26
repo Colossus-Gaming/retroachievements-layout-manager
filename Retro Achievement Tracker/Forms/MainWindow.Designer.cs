@@ -599,6 +599,9 @@ namespace Retro_Achievement_Tracker
             this.cheevosListTabPage = new System.Windows.Forms.TabPage();
             this.relatedMediaTabPage = new System.Windows.Forms.TabPage();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.manualSearchLabel = new System.Windows.Forms.Label();
+            this.manualSearchTextBox = new System.Windows.Forms.TextBox();
+            this.manualSearchButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.userProfilePictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.focusAchievementPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gameInfoPictureBox)).BeginInit();
@@ -7892,9 +7895,9 @@ namespace Retro_Achievement_Tracker
             // mainTabControl
             // 
             this.mainTabControl.Controls.Add(this.focusTabPage);
+            this.mainTabControl.Controls.Add(this.gameInfoTabPage);
             this.mainTabControl.Controls.Add(this.alertsTabPage2);
             this.mainTabControl.Controls.Add(this.userInfoTabPage);
-            this.mainTabControl.Controls.Add(this.gameInfoTabPage);
             this.mainTabControl.Controls.Add(this.gameProgressTabPage);
             this.mainTabControl.Controls.Add(this.recentCheevosTabPage);
             this.mainTabControl.Controls.Add(this.cheevosListTabPage);
@@ -7910,7 +7913,10 @@ namespace Retro_Achievement_Tracker
             // focusTabPage
             // 
             this.focusTabPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
+            this.focusTabPage.Controls.Add(this.manualSearchLabel);
+            this.focusTabPage.Controls.Add(this.manualSearchTextBox);
             this.focusTabPage.Controls.Add(this.panel64);
+            this.focusTabPage.Controls.Add(this.manualSearchButton);
             this.focusTabPage.Controls.Add(this.panel63);
             this.focusTabPage.Controls.Add(this.panel51);
             this.focusTabPage.Location = new System.Drawing.Point(4, 22);
@@ -8041,6 +8047,47 @@ namespace Retro_Achievement_Tracker
             this.relatedMediaTabPage.Size = new System.Drawing.Size(769, 372);
             this.relatedMediaTabPage.TabIndex = 7;
             this.relatedMediaTabPage.Text = "Related Media";
+            // 
+            // manualSearchLabel
+            // 
+            this.manualSearchLabel.AutoSize = true;
+            this.manualSearchLabel.BackColor = System.Drawing.Color.Transparent;
+            this.manualSearchLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.manualSearchLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
+            this.manualSearchLabel.Location = new System.Drawing.Point(526, 346);
+            this.manualSearchLabel.Name = "manualSearchLabel";
+            this.manualSearchLabel.Size = new System.Drawing.Size(61, 16);
+            this.manualSearchLabel.TabIndex = 32;
+            this.manualSearchLabel.Text = "Game Id";
+            // 
+            // manualSearchTextBox
+            // 
+            this.manualSearchTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
+            this.manualSearchTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.manualSearchTextBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.manualSearchTextBox.ForeColor = System.Drawing.Color.White;
+            this.manualSearchTextBox.Location = new System.Drawing.Point(593, 342);
+            this.manualSearchTextBox.Name = "manualSearchTextBox";
+            this.manualSearchTextBox.Size = new System.Drawing.Size(93, 23);
+            this.manualSearchTextBox.TabIndex = 30;
+            this.manualSearchTextBox.WordWrap = false;
+            this.manualSearchTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ManualSearchTextBox_KeyPress);
+            // 
+            // manualSearchButton
+            // 
+            this.manualSearchButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
+            this.manualSearchButton.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.manualSearchButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.manualSearchButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.manualSearchButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
+            this.manualSearchButton.Location = new System.Drawing.Point(689, 339);
+            this.manualSearchButton.Margin = new System.Windows.Forms.Padding(0);
+            this.manualSearchButton.Name = "manualSearchButton";
+            this.manualSearchButton.Size = new System.Drawing.Size(75, 27);
+            this.manualSearchButton.TabIndex = 31;
+            this.manualSearchButton.Text = "Search";
+            this.manualSearchButton.UseVisualStyleBackColor = false;
+            this.manualSearchButton.Click += new System.EventHandler(this.ManualSearchButton_Click);
             // 
             // MainWindow
             // 
@@ -8353,6 +8400,7 @@ namespace Retro_Achievement_Tracker
             ((System.ComponentModel.ISupportInitialize)(this.relatedMediaLBLinePictureBox)).EndInit();
             this.mainTabControl.ResumeLayout(false);
             this.focusTabPage.ResumeLayout(false);
+            this.focusTabPage.PerformLayout();
             this.alertsTabPage2.ResumeLayout(false);
             this.alertTabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -8938,6 +8986,9 @@ namespace Retro_Achievement_Tracker
         private Label gameProgressPoints2Label;
         private Label gameProgressTruePoints2Label;
         private Button checkForUpdatesButton;
+        private Label manualSearchLabel;
+        private TextBox manualSearchTextBox;
+        private Button manualSearchButton;
     }
 }
 

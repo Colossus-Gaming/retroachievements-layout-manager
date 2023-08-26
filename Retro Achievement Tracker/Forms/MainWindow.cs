@@ -22,6 +22,7 @@ namespace Retro_Achievement_Tracker
         private bool IsChanging;
         private bool IsBooting;
         private bool IsStarting;
+        private bool InManualMode;
 
         private int CurrentlyViewingIndex;
         private int UserAndGameTimerCounter;
@@ -331,8 +332,19 @@ namespace Retro_Achievement_Tracker
                     StopButton_Click(null, null);
 
                     MessageBox.Show("The Retro Achievements web API is not responding successfully. This will prevent the tracker from getting information from the site. It could also mean that the site is having issues and you may not be able to unlock achievments at this time. Sorry for the inconvenience.", "Errors from Retro Achievements", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    EnableManualMode();
                 }
             }
+        }
+
+        private void EnableManualMode()
+        {
+            InManualMode = true;
+
+            manualSearchButton.Show();
+            manualSearchTextBox.Show();
+            manualSearchLabel.Show();
         }
 
         private bool UpdateGameProgress(bool sameGame)
@@ -602,49 +614,6 @@ namespace Retro_Achievement_Tracker
             gameInfoGenreLabel.Text = GameInfoAndProgress.Genre;
             gameInfoReleasedLabel.Text = GameInfoAndProgress.Released;
 
-            int percentageCompleted = (int)float.Parse(GameInfoAndProgress.PercentComplete);
-
-            gameProgressAchievements1Label.Text = GameInfoAndProgress.AchievementsPossible.ToString();
-            gameProgressPoints1Label.Text = GameInfoAndProgress.GamePointsPossible.ToString();
-            gameProgressTruePoints1Label.Text = "(" + GameInfoAndProgress.GameTruePointsPossible.ToString() + ")";
-
-            gameProgressPercentCompletePictureBox.Size = new Size((int)(1.82 * percentageCompleted), 2);
-
-            gameProgressCompletedLabel.Text = percentageCompleted + "% complete";
-
-            if (0 == percentageCompleted)
-            {
-                gameProgressMasteryPictureBox.Hide();
-
-                gameProgressHaveEarnedLabel.Text = "You have not earned any achievements for this game.";
-
-                gameProgressAchievements2Label.Hide();
-                gameProgressHardcoreWorthLabel.Hide();
-                gameProgressPoints2Label.Hide();
-                gameProgressTruePoints2Label.Hide();
-                gameProgressPointsTextLabel.Hide();
-            }
-            else
-            {
-                if (percentageCompleted == 100)
-                {
-                    gameProgressMasteryPictureBox.Show();
-                    gameProgressCompletedLabel.Text = "Mastered";
-                }
-
-                gameProgressHaveEarnedLabel.Text = "You have earned";
-
-                gameProgressAchievements2Label.Show();
-                gameProgressHardcoreWorthLabel.Show();
-                gameProgressPoints2Label.Show();
-                gameProgressTruePoints2Label.Show();
-                gameProgressPointsTextLabel.Show();
-
-                gameProgressAchievements2Label.Text = GameInfoAndProgress.AchievementsEarned.ToString();
-                gameProgressPoints2Label.Text = GameInfoAndProgress.GamePointsEarned.ToString();
-                gameProgressTruePoints2Label.Text = "(" + GameInfoAndProgress.GameTruePointsEarned.ToString() + ")";
-            }
-
             GameInfoController.Instance.SetTitleValue(GameInfoAndProgress.Title);
             GameInfoController.Instance.SetDeveloperValue(GameInfoAndProgress.Developer);
             GameInfoController.Instance.SetPublisherValue(GameInfoAndProgress.Publisher);
@@ -652,13 +621,61 @@ namespace Retro_Achievement_Tracker
             GameInfoController.Instance.SetConsoleValue(GameInfoAndProgress.ConsoleName);
             GameInfoController.Instance.SetReleaseDateValue(GameInfoAndProgress.Released);
 
-            GameProgressController.Instance.SetGameAchievements(GameInfoAndProgress.AchievementsEarned.ToString(), GameInfoAndProgress.Achievements == null ? "0" : GameInfoAndProgress.Achievements.Count.ToString());
-            GameProgressController.Instance.SetGamePoints(GameInfoAndProgress.GamePointsEarned.ToString(), GameInfoAndProgress.GamePointsPossible.ToString());
-            GameProgressController.Instance.SetGameTruePoints(GameInfoAndProgress.GameTruePointsEarned.ToString(), GameInfoAndProgress.GameTruePointsPossible.ToString());
-            GameProgressController.Instance.SetCompleted(GameInfoAndProgress.Achievements == null ? 0.00f : GameInfoAndProgress.AchievementsEarned / (float)GameInfoAndProgress.Achievements.Count * 100f);
-            GameProgressController.Instance.SetGameRatio();
-
             StreamLabelController.Instance.EnqueueGameInfo(GameInfoAndProgress);
+
+            if (!InManualMode)
+            {
+                int percentageCompleted = (int)float.Parse(GameInfoAndProgress.PercentComplete);
+
+                gameProgressAchievements1Label.Text = GameInfoAndProgress.AchievementsPossible.ToString();
+                gameProgressPoints1Label.Text = GameInfoAndProgress.GamePointsPossible.ToString();
+                gameProgressTruePoints1Label.Text = "(" + GameInfoAndProgress.GameTruePointsPossible.ToString() + ")";
+
+                gameProgressPercentCompletePictureBox.Size = new Size((int)(1.82 * percentageCompleted), 2);
+
+                gameProgressCompletedLabel.Text = percentageCompleted + "% complete";
+
+                if (0 == percentageCompleted)
+                {
+                    gameProgressMasteryPictureBox.Hide();
+
+                    gameProgressHaveEarnedLabel.Text = "You have not earned any achievements for this game.";
+
+                    gameProgressAchievements2Label.Hide();
+                    gameProgressHardcoreWorthLabel.Hide();
+                    gameProgressPoints2Label.Hide();
+                    gameProgressTruePoints2Label.Hide();
+                    gameProgressPointsTextLabel.Hide();
+                }
+                else
+                {
+                    if (percentageCompleted == 100)
+                    {
+                        gameProgressMasteryPictureBox.Show();
+                        gameProgressCompletedLabel.Text = "Mastered";
+                    }
+
+                    gameProgressHaveEarnedLabel.Text = "You have earned";
+
+                    gameProgressAchievements2Label.Show();
+                    gameProgressHardcoreWorthLabel.Show();
+                    gameProgressPoints2Label.Show();
+                    gameProgressTruePoints2Label.Show();
+                    gameProgressPointsTextLabel.Show();
+
+                    gameProgressAchievements2Label.Text = GameInfoAndProgress.AchievementsEarned.ToString();
+                    gameProgressPoints2Label.Text = GameInfoAndProgress.GamePointsEarned.ToString();
+                    gameProgressTruePoints2Label.Text = "(" + GameInfoAndProgress.GameTruePointsEarned.ToString() + ")";
+                }
+
+                GameProgressController.Instance.SetGameAchievements(GameInfoAndProgress.AchievementsEarned.ToString(), GameInfoAndProgress.Achievements == null ? "0" : GameInfoAndProgress.Achievements.Count.ToString());
+                GameProgressController.Instance.SetGamePoints(GameInfoAndProgress.GamePointsEarned.ToString(), GameInfoAndProgress.GamePointsPossible.ToString());
+                GameProgressController.Instance.SetGameTruePoints(GameInfoAndProgress.GameTruePointsEarned.ToString(), GameInfoAndProgress.GameTruePointsPossible.ToString());
+                GameProgressController.Instance.SetCompleted(GameInfoAndProgress.Achievements == null ? 0.00f : GameInfoAndProgress.AchievementsEarned / (float)GameInfoAndProgress.Achievements.Count * 100f);
+                GameProgressController.Instance.SetGameRatio();
+
+                StreamLabelController.Instance.EnqueueGameProgress(GameInfoAndProgress);
+            }
 
             RelatedMediaController.Instance.RABadgeIconURI = GameInfoAndProgress.BadgeUri;
             RelatedMediaController.Instance.RATitleScreenURI = GameInfoAndProgress.ImageTitle;
@@ -747,6 +764,29 @@ namespace Retro_Achievement_Tracker
         private void RequiredField_TextChanged(object sender, EventArgs e)
         {
             startButton.Enabled = CanStart();
+        }
+        private void ManualSearchTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+        private async void ManualSearchButton_Click(object sender, EventArgs e)
+        {
+            if (!ShouldRun && !UserAndGameUpdateTimer.Enabled && manualSearchTextBox.Text.Length > 0)
+            {
+                RetroAchievementsAPIClient = new RetroAchievementAPIClient(usernameTextBox.Text, apiKeyTextBox.Text);
+
+                GameInfoAndProgress = await RetroAchievementsAPIClient.GetGameInfoExtended(long.Parse(manualSearchTextBox.Text));
+
+                UpdateGameInfo();
+                UpdateCurrentlyViewingAchievement();
+
+                SetFocus();
+
+                UpdateLaunchBoxReferences();
+            }
         }
         private void CustomAlertsCheckBox_CheckedChanged(object sender, EventArgs eventArgs)
         {

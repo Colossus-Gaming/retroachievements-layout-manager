@@ -16,7 +16,6 @@
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            JObject item = JObject.Load(reader);
             GameInfo GameInfo = new GameInfo();
 
             if (existingValue != null)
@@ -24,95 +23,109 @@
                 GameInfo = (GameInfo)existingValue;
             }
 
-            JToken ID = item["ID"]; 
-            JToken GameID = item["GameID"];
-            JToken Title = item["Title"];
-            JToken ConsoleID = item["ConsoleID"];
-            JToken ImageIcon = item["ImageIcon"];
-            JToken ImageTitle = item["ImageTitle"];
-            JToken ImageIngame = item["ImageIngame"];
-            JToken ImageBoxArt = item["ImageBoxArt"];
-            JToken Publisher = item["Publisher"];
-            JToken Developer = item["Developer"];
-            JToken Genre = item["Genre"];
-            JToken Released = item["Released"];
-            JToken LastPlayed = item["LastPlayed"];
-            JToken Achievements = item["Achievements"];
-
-            if (Released != null)
+            if (reader.TokenType == JsonToken.StartObject)
             {
-                GameInfo.Released = Released.ToString();
-            }
+                JObject item = JObject.Load(reader);
 
-            if (Genre != null)
-            {
-                GameInfo.Genre = Genre.ToString();
-            }
+                JToken ID = item["ID"];
+                JToken GameID = item["GameID"];
+                JToken Title = item["Title"];
+                JToken ConsoleID = item["ConsoleID"];
+                JToken ImageIcon = item["ImageIcon"];
+                JToken ImageTitle = item["ImageTitle"];
+                JToken ImageIngame = item["ImageIngame"];
+                JToken ImageBoxArt = item["ImageBoxArt"];
+                JToken Publisher = item["Publisher"];
+                JToken Developer = item["Developer"];
+                JToken Genre = item["Genre"];
+                JToken Released = item["Released"];
+                JToken LastPlayed = item["LastPlayed"];
+                JToken Achievements = item["Achievements"];
 
-            if (Developer != null)
-            {
-                GameInfo.Developer = Developer.ToString();
-            }
-            if (Publisher != null)
-            {
-                GameInfo.Publisher = Publisher.ToString();
-            }
-
-            if (ImageBoxArt != null)
-            {
-                GameInfo.ImageBoxArt = Constants.RETRO_ACHIEVEMENTS_MEDIA_URL + ImageBoxArt.ToString();
-            }
-
-            if (ImageIngame != null)
-            {
-                GameInfo.ImageIngame = Constants.RETRO_ACHIEVEMENTS_MEDIA_URL + ImageIngame.ToString();
-            }
-
-            if (ImageTitle != null)
-            {
-                GameInfo.ImageTitle = Constants.RETRO_ACHIEVEMENTS_MEDIA_URL + ImageTitle.ToString();
-            }
-
-            if (ImageIcon != null)
-            {
-                GameInfo.BadgeUri = Constants.RETRO_ACHIEVEMENTS_MEDIA_URL + ImageIcon.ToString();
-            }
-
-            if (Title != null)
-            {
-                GameInfo.Title = Title.ToString();
-            }
-
-            if (ConsoleID != null)
-            {
-                GameInfo.ConsoleId = Convert.ToInt32(ConsoleID);
-            }
-
-            if (ID != null)
-            {
-                GameInfo.Id = Convert.ToInt32(ID);
-            }
-
-            if (GameID != null)
-            {
-                GameInfo.Id = Convert.ToInt32(GameID);
-            }
-
-            if (LastPlayed != null)
-            {
-                GameInfo.LastPlayed = DateTime.Parse(LastPlayed.ToString());
-            }
-
-            if (Achievements != null)
-            {
-                GameInfo.Achievements = new List<Achievement>();
-
-                foreach (JToken jobject in Achievements.Children<JToken>())
+                if (Released != null)
                 {
-                    foreach (JToken jobjectJr in jobject.Children<JToken>())
+                    GameInfo.Released = Released.ToString();
+                }
+
+                if (Genre != null)
+                {
+                    GameInfo.Genre = Genre.ToString();
+                }
+
+                if (Developer != null)
+                {
+                    GameInfo.Developer = Developer.ToString();
+                }
+                if (Publisher != null)
+                {
+                    GameInfo.Publisher = Publisher.ToString();
+                }
+
+                if (ImageBoxArt != null)
+                {
+                    GameInfo.ImageBoxArt = Constants.RETRO_ACHIEVEMENTS_MEDIA_URL + ImageBoxArt.ToString();
+                }
+
+                if (ImageIngame != null)
+                {
+                    GameInfo.ImageIngame = Constants.RETRO_ACHIEVEMENTS_MEDIA_URL + ImageIngame.ToString();
+                }
+
+                if (ImageTitle != null)
+                {
+                    GameInfo.ImageTitle = Constants.RETRO_ACHIEVEMENTS_MEDIA_URL + ImageTitle.ToString();
+                }
+
+                if (ImageIcon != null)
+                {
+                    GameInfo.BadgeUri = Constants.RETRO_ACHIEVEMENTS_MEDIA_URL + ImageIcon.ToString();
+                }
+
+                if (Title != null)
+                {
+                    GameInfo.Title = Title.ToString();
+                }
+
+                if (ConsoleID != null)
+                {
+                    GameInfo.ConsoleId = Convert.ToInt32(ConsoleID);
+                }
+
+                if (ID != null)
+                {
+                    GameInfo.Id = Convert.ToInt32(ID);
+                }
+
+                if (GameID != null)
+                {
+                    GameInfo.Id = Convert.ToInt32(GameID);
+                }
+
+                if (LastPlayed != null)
+                {
+                    GameInfo.LastPlayed = DateTime.Parse(LastPlayed.ToString());
+                }
+
+                if (Achievements != null)
+                {
+                    GameInfo.Achievements = new List<Achievement>();
+
+                    foreach (JToken jobject in Achievements.Children<JToken>())
                     {
-                        GameInfo.Achievements.Add(jobjectJr.ToObject<Achievement>());
+                        foreach (JToken jobjectJr in jobject.Children<JToken>())
+                        {
+                            GameInfo.Achievements.Add(jobjectJr.ToObject<Achievement>());
+                        }
                     }
+                }
+            }
+            else if (reader.TokenType == JsonToken.StartArray)
+            {
+                JArray item = JArray.Load(reader);
+
+                for (int i = 0; i < item.Count; i++)
+                {
+                    GameInfo.Claims.Add(item[i].ToObject<Claim>());
                 }
             }
 
