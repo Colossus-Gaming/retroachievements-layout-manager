@@ -707,5 +707,8 @@
     <Setting Name="check_for_update_version" Type="System.String" Scope="User">
       <Value Profile="(Default)">1.0.0.0</Value>
     </Setting>
+    <Setting Name="previously_played_game" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

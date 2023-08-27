@@ -38,7 +38,7 @@ namespace Retro_Achievement_Tracker
             this.userProfilePictureBox = new System.Windows.Forms.PictureBox();
             this.autoStartCheckbox = new System.Windows.Forms.CheckBox();
             this.stopButton = new System.Windows.Forms.Button();
-            this.timerStatusLabel = new System.Windows.Forms.Label();
+            this.autoPollingStatusLabel = new System.Windows.Forms.Label();
             this.userInfoAutoOpenWindowCheckbox = new System.Windows.Forms.CheckBox();
             this.userInfoOpenWindowButton = new System.Windows.Forms.Button();
             this.startButton = new System.Windows.Forms.Button();
@@ -49,7 +49,7 @@ namespace Retro_Achievement_Tracker
             this.focusAchievementButtonPrevious = new System.Windows.Forms.Button();
             this.focusAchievementButtonNext = new System.Windows.Forms.Button();
             this.gameInfoPictureBox = new System.Windows.Forms.PictureBox();
-            this.raConnectionStatusPictureBox = new System.Windows.Forms.PictureBox();
+            this.autoPollingStatusPictureBox = new System.Windows.Forms.PictureBox();
             this.alertsPlayAchievementButton = new System.Windows.Forms.Button();
             this.alertsSelectCustomAchievementFileButton = new System.Windows.Forms.Button();
             this.alertsCustomAchievementScaleNumericUpDown = new System.Windows.Forms.NumericUpDown();
@@ -97,6 +97,7 @@ namespace Retro_Achievement_Tracker
             this.label112 = new System.Windows.Forms.Label();
             this.pictureBox12 = new System.Windows.Forms.PictureBox();
             this.panel63 = new System.Windows.Forms.Panel();
+            this.unlockAchievementButton = new System.Windows.Forms.Button();
             this.label111 = new System.Windows.Forms.Label();
             this.pictureBox10 = new System.Windows.Forms.PictureBox();
             this.panel51 = new System.Windows.Forms.Panel();
@@ -552,7 +553,6 @@ namespace Retro_Achievement_Tracker
             this.checkForUpdatesButton = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel120 = new System.Windows.Forms.Panel();
             this.relatedMediaRAScreenshotRadioButton = new System.Windows.Forms.RadioButton();
             this.relatedMediaRABadgeIconRadioButton = new System.Windows.Forms.RadioButton();
@@ -598,14 +598,15 @@ namespace Retro_Achievement_Tracker
             this.recentCheevosTabPage = new System.Windows.Forms.TabPage();
             this.cheevosListTabPage = new System.Windows.Forms.TabPage();
             this.relatedMediaTabPage = new System.Windows.Forms.TabPage();
-            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.manualSearchLabel = new System.Windows.Forms.Label();
             this.manualSearchTextBox = new System.Windows.Forms.TextBox();
             this.manualSearchButton = new System.Windows.Forms.Button();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.panel8 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.userProfilePictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.focusAchievementPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gameInfoPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.raConnectionStatusPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.autoPollingStatusPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.alertsCustomAchievementScaleNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.alertsCustomAchievementXNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.alertsCustomAchievementYNumericUpDown)).BeginInit();
@@ -825,7 +826,6 @@ namespace Retro_Achievement_Tracker
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel120.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox19)).BeginInit();
             this.panel121.SuspendLayout();
@@ -847,6 +847,7 @@ namespace Retro_Achievement_Tracker
             this.recentCheevosTabPage.SuspendLayout();
             this.cheevosListTabPage.SuspendLayout();
             this.relatedMediaTabPage.SuspendLayout();
+            this.panel8.SuspendLayout();
             this.SuspendLayout();
             // 
             // apiKeyLabel
@@ -947,16 +948,16 @@ namespace Retro_Achievement_Tracker
             this.stopButton.UseVisualStyleBackColor = false;
             this.stopButton.Click += new System.EventHandler(this.StopButton_Click);
             // 
-            // timerStatusLabel
+            // autoPollingStatusLabel
             // 
-            this.timerStatusLabel.BackColor = System.Drawing.Color.Transparent;
-            this.timerStatusLabel.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.timerStatusLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.timerStatusLabel.Location = new System.Drawing.Point(12, 76);
-            this.timerStatusLabel.Name = "timerStatusLabel";
-            this.timerStatusLabel.Size = new System.Drawing.Size(323, 29);
-            this.timerStatusLabel.TabIndex = 10024;
-            this.timerStatusLabel.Text = "Offline";
+            this.autoPollingStatusLabel.BackColor = System.Drawing.Color.Transparent;
+            this.autoPollingStatusLabel.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.autoPollingStatusLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
+            this.autoPollingStatusLabel.Location = new System.Drawing.Point(38, 9);
+            this.autoPollingStatusLabel.Name = "autoPollingStatusLabel";
+            this.autoPollingStatusLabel.Size = new System.Drawing.Size(332, 28);
+            this.autoPollingStatusLabel.TabIndex = 10024;
+            this.autoPollingStatusLabel.Text = "Offline";
             // 
             // userInfoAutoOpenWindowCheckbox
             // 
@@ -1024,9 +1025,9 @@ namespace Retro_Achievement_Tracker
             this.focusAchievementTitleLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.focusAchievementTitleLabel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.focusAchievementTitleLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.focusAchievementTitleLabel.Location = new System.Drawing.Point(121, 40);
+            this.focusAchievementTitleLabel.Location = new System.Drawing.Point(121, 84);
             this.focusAchievementTitleLabel.Name = "focusAchievementTitleLabel";
-            this.focusAchievementTitleLabel.Size = new System.Drawing.Size(165, 112);
+            this.focusAchievementTitleLabel.Size = new System.Drawing.Size(165, 68);
             this.focusAchievementTitleLabel.TabIndex = 10027;
             this.focusAchievementTitleLabel.Click += new System.EventHandler(this.BrowserSensitiveControl_Click);
             // 
@@ -1038,7 +1039,7 @@ namespace Retro_Achievement_Tracker
             this.focusAchievementDescriptionLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
             this.focusAchievementDescriptionLabel.Location = new System.Drawing.Point(2, 155);
             this.focusAchievementDescriptionLabel.Name = "focusAchievementDescriptionLabel";
-            this.focusAchievementDescriptionLabel.Size = new System.Drawing.Size(284, 106);
+            this.focusAchievementDescriptionLabel.Size = new System.Drawing.Size(284, 102);
             this.focusAchievementDescriptionLabel.TabIndex = 10026;
             // 
             // focusSetButton
@@ -1099,16 +1100,16 @@ namespace Retro_Achievement_Tracker
             this.gameInfoPictureBox.TabStop = false;
             this.gameInfoPictureBox.Click += new System.EventHandler(this.BrowserSensitiveControl_Click);
             // 
-            // raConnectionStatusPictureBox
+            // autoPollingStatusPictureBox
             // 
-            this.raConnectionStatusPictureBox.BackColor = System.Drawing.Color.Transparent;
-            this.raConnectionStatusPictureBox.Image = global::Retro_Achievement_Tracker.Properties.Resources.red_button;
-            this.raConnectionStatusPictureBox.Location = new System.Drawing.Point(341, 76);
-            this.raConnectionStatusPictureBox.Name = "raConnectionStatusPictureBox";
-            this.raConnectionStatusPictureBox.Size = new System.Drawing.Size(28, 28);
-            this.raConnectionStatusPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.raConnectionStatusPictureBox.TabIndex = 10025;
-            this.raConnectionStatusPictureBox.TabStop = false;
+            this.autoPollingStatusPictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.autoPollingStatusPictureBox.Image = global::Retro_Achievement_Tracker.Properties.Resources.red_button;
+            this.autoPollingStatusPictureBox.Location = new System.Drawing.Point(4, 9);
+            this.autoPollingStatusPictureBox.Name = "autoPollingStatusPictureBox";
+            this.autoPollingStatusPictureBox.Size = new System.Drawing.Size(28, 28);
+            this.autoPollingStatusPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.autoPollingStatusPictureBox.TabIndex = 10025;
+            this.autoPollingStatusPictureBox.TabStop = false;
             // 
             // alertsPlayAchievementButton
             // 
@@ -1897,6 +1898,7 @@ namespace Retro_Achievement_Tracker
             // panel63
             // 
             this.panel63.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            this.panel63.Controls.Add(this.unlockAchievementButton);
             this.panel63.Controls.Add(this.label111);
             this.panel63.Controls.Add(this.pictureBox10);
             this.panel63.Controls.Add(this.focusAchievementPictureBox);
@@ -1909,6 +1911,21 @@ namespace Retro_Achievement_Tracker
             this.panel63.Name = "panel63";
             this.panel63.Size = new System.Drawing.Size(289, 293);
             this.panel63.TabIndex = 10081;
+            // 
+            // unlockAchievementButton
+            // 
+            this.unlockAchievementButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
+            this.unlockAchievementButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
+            this.unlockAchievementButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.unlockAchievementButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.unlockAchievementButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
+            this.unlockAchievementButton.Location = new System.Drawing.Point(211, 40);
+            this.unlockAchievementButton.Name = "unlockAchievementButton";
+            this.unlockAchievementButton.Size = new System.Drawing.Size(75, 27);
+            this.unlockAchievementButton.TabIndex = 10084;
+            this.unlockAchievementButton.Text = "Unlock";
+            this.unlockAchievementButton.UseVisualStyleBackColor = false;
+            this.unlockAchievementButton.Click += new System.EventHandler(this.UnlockAchievementButton_Click);
             // 
             // label111
             // 
@@ -1926,7 +1943,7 @@ namespace Retro_Achievement_Tracker
             this.pictureBox10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
             this.pictureBox10.Location = new System.Drawing.Point(2, 32);
             this.pictureBox10.Name = "pictureBox10";
-            this.pictureBox10.Size = new System.Drawing.Size(275, 2);
+            this.pictureBox10.Size = new System.Drawing.Size(280, 2);
             this.pictureBox10.TabIndex = 10083;
             this.pictureBox10.TabStop = false;
             // 
@@ -7420,7 +7437,7 @@ namespace Retro_Achievement_Tracker
             this.panel1.Controls.Add(this.startButton);
             this.panel1.Controls.Add(this.stopButton);
             this.panel1.Controls.Add(this.autoStartCheckbox);
-            this.panel1.Location = new System.Drawing.Point(376, 9);
+            this.panel1.Location = new System.Drawing.Point(376, 6);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(405, 96);
             this.panel1.TabIndex = 10031;
@@ -7461,17 +7478,6 @@ namespace Retro_Achievement_Tracker
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(397, 28);
             this.panel2.TabIndex = 27;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox1.Image = global::Retro_Achievement_Tracker.Properties.Resources.retro_achievements_banner;
-            this.pictureBox1.Location = new System.Drawing.Point(11, 9);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(357, 70);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 10032;
-            this.pictureBox1.TabStop = false;
             // 
             // panel120
             // 
@@ -7894,17 +7900,18 @@ namespace Retro_Achievement_Tracker
             // 
             // mainTabControl
             // 
+            this.mainTabControl.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
             this.mainTabControl.Controls.Add(this.focusTabPage);
-            this.mainTabControl.Controls.Add(this.gameInfoTabPage);
             this.mainTabControl.Controls.Add(this.alertsTabPage2);
             this.mainTabControl.Controls.Add(this.userInfoTabPage);
+            this.mainTabControl.Controls.Add(this.gameInfoTabPage);
             this.mainTabControl.Controls.Add(this.gameProgressTabPage);
             this.mainTabControl.Controls.Add(this.recentCheevosTabPage);
             this.mainTabControl.Controls.Add(this.cheevosListTabPage);
             this.mainTabControl.Controls.Add(this.relatedMediaTabPage);
             this.mainTabControl.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mainTabControl.HotTrack = true;
-            this.mainTabControl.Location = new System.Drawing.Point(4, 111);
+            this.mainTabControl.Location = new System.Drawing.Point(4, 108);
             this.mainTabControl.Name = "mainTabControl";
             this.mainTabControl.SelectedIndex = 0;
             this.mainTabControl.Size = new System.Drawing.Size(777, 398);
@@ -7913,15 +7920,12 @@ namespace Retro_Achievement_Tracker
             // focusTabPage
             // 
             this.focusTabPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
-            this.focusTabPage.Controls.Add(this.manualSearchLabel);
-            this.focusTabPage.Controls.Add(this.manualSearchTextBox);
             this.focusTabPage.Controls.Add(this.panel64);
-            this.focusTabPage.Controls.Add(this.manualSearchButton);
             this.focusTabPage.Controls.Add(this.panel63);
             this.focusTabPage.Controls.Add(this.panel51);
-            this.focusTabPage.Location = new System.Drawing.Point(4, 22);
+            this.focusTabPage.Location = new System.Drawing.Point(4, 25);
             this.focusTabPage.Name = "focusTabPage";
-            this.focusTabPage.Size = new System.Drawing.Size(769, 372);
+            this.focusTabPage.Size = new System.Drawing.Size(769, 369);
             this.focusTabPage.TabIndex = 0;
             this.focusTabPage.Text = "Focus";
             // 
@@ -7930,9 +7934,9 @@ namespace Retro_Achievement_Tracker
             this.alertsTabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.alertsTabPage2.Controls.Add(this.alertTabControl);
             this.alertsTabPage2.Controls.Add(this.panel65);
-            this.alertsTabPage2.Location = new System.Drawing.Point(4, 22);
+            this.alertsTabPage2.Location = new System.Drawing.Point(4, 25);
             this.alertsTabPage2.Name = "alertsTabPage2";
-            this.alertsTabPage2.Size = new System.Drawing.Size(769, 372);
+            this.alertsTabPage2.Size = new System.Drawing.Size(769, 369);
             this.alertsTabPage2.TabIndex = 1;
             this.alertsTabPage2.Text = "Alerts";
             // 
@@ -7984,9 +7988,9 @@ namespace Retro_Achievement_Tracker
             this.userInfoTabPage.Controls.Add(this.panel14);
             this.userInfoTabPage.Controls.Add(this.panel21);
             this.userInfoTabPage.Controls.Add(this.panel20);
-            this.userInfoTabPage.Location = new System.Drawing.Point(4, 22);
+            this.userInfoTabPage.Location = new System.Drawing.Point(4, 25);
             this.userInfoTabPage.Name = "userInfoTabPage";
-            this.userInfoTabPage.Size = new System.Drawing.Size(769, 372);
+            this.userInfoTabPage.Size = new System.Drawing.Size(769, 369);
             this.userInfoTabPage.TabIndex = 2;
             this.userInfoTabPage.Text = "User Info";
             // 
@@ -7996,9 +8000,9 @@ namespace Retro_Achievement_Tracker
             this.gameInfoTabPage.Controls.Add(this.panel50);
             this.gameInfoTabPage.Controls.Add(this.panel29);
             this.gameInfoTabPage.Controls.Add(this.panel35);
-            this.gameInfoTabPage.Location = new System.Drawing.Point(4, 22);
+            this.gameInfoTabPage.Location = new System.Drawing.Point(4, 25);
             this.gameInfoTabPage.Name = "gameInfoTabPage";
-            this.gameInfoTabPage.Size = new System.Drawing.Size(769, 372);
+            this.gameInfoTabPage.Size = new System.Drawing.Size(769, 369);
             this.gameInfoTabPage.TabIndex = 3;
             this.gameInfoTabPage.Text = "Game Info";
             // 
@@ -8008,9 +8012,9 @@ namespace Retro_Achievement_Tracker
             this.gameProgressTabPage.Controls.Add(this.panel28);
             this.gameProgressTabPage.Controls.Add(this.panel36);
             this.gameProgressTabPage.Controls.Add(this.panel15);
-            this.gameProgressTabPage.Location = new System.Drawing.Point(4, 22);
+            this.gameProgressTabPage.Location = new System.Drawing.Point(4, 25);
             this.gameProgressTabPage.Name = "gameProgressTabPage";
-            this.gameProgressTabPage.Size = new System.Drawing.Size(769, 372);
+            this.gameProgressTabPage.Size = new System.Drawing.Size(769, 369);
             this.gameProgressTabPage.TabIndex = 4;
             this.gameProgressTabPage.Text = "Progress";
             // 
@@ -8019,9 +8023,9 @@ namespace Retro_Achievement_Tracker
             this.recentCheevosTabPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.recentCheevosTabPage.Controls.Add(this.panel113);
             this.recentCheevosTabPage.Controls.Add(this.panel99);
-            this.recentCheevosTabPage.Location = new System.Drawing.Point(4, 22);
+            this.recentCheevosTabPage.Location = new System.Drawing.Point(4, 25);
             this.recentCheevosTabPage.Name = "recentCheevosTabPage";
-            this.recentCheevosTabPage.Size = new System.Drawing.Size(769, 372);
+            this.recentCheevosTabPage.Size = new System.Drawing.Size(769, 369);
             this.recentCheevosTabPage.TabIndex = 5;
             this.recentCheevosTabPage.Text = "Recent Unlocks";
             // 
@@ -8030,9 +8034,9 @@ namespace Retro_Achievement_Tracker
             this.cheevosListTabPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.cheevosListTabPage.Controls.Add(this.panel115);
             this.cheevosListTabPage.Controls.Add(this.panel111);
-            this.cheevosListTabPage.Location = new System.Drawing.Point(4, 22);
+            this.cheevosListTabPage.Location = new System.Drawing.Point(4, 25);
             this.cheevosListTabPage.Name = "cheevosListTabPage";
-            this.cheevosListTabPage.Size = new System.Drawing.Size(769, 372);
+            this.cheevosListTabPage.Size = new System.Drawing.Size(769, 369);
             this.cheevosListTabPage.TabIndex = 6;
             this.cheevosListTabPage.Text = "Achievement List";
             // 
@@ -8042,9 +8046,9 @@ namespace Retro_Achievement_Tracker
             this.relatedMediaTabPage.Controls.Add(this.panel124);
             this.relatedMediaTabPage.Controls.Add(this.panel120);
             this.relatedMediaTabPage.Controls.Add(this.panel121);
-            this.relatedMediaTabPage.Location = new System.Drawing.Point(4, 22);
+            this.relatedMediaTabPage.Location = new System.Drawing.Point(4, 25);
             this.relatedMediaTabPage.Name = "relatedMediaTabPage";
-            this.relatedMediaTabPage.Size = new System.Drawing.Size(769, 372);
+            this.relatedMediaTabPage.Size = new System.Drawing.Size(769, 369);
             this.relatedMediaTabPage.TabIndex = 7;
             this.relatedMediaTabPage.Text = "Related Media";
             // 
@@ -8054,7 +8058,7 @@ namespace Retro_Achievement_Tracker
             this.manualSearchLabel.BackColor = System.Drawing.Color.Transparent;
             this.manualSearchLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.manualSearchLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.manualSearchLabel.Location = new System.Drawing.Point(526, 346);
+            this.manualSearchLabel.Location = new System.Drawing.Point(3, 10);
             this.manualSearchLabel.Name = "manualSearchLabel";
             this.manualSearchLabel.Size = new System.Drawing.Size(61, 16);
             this.manualSearchLabel.TabIndex = 32;
@@ -8066,7 +8070,7 @@ namespace Retro_Achievement_Tracker
             this.manualSearchTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.manualSearchTextBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.manualSearchTextBox.ForeColor = System.Drawing.Color.White;
-            this.manualSearchTextBox.Location = new System.Drawing.Point(593, 342);
+            this.manualSearchTextBox.Location = new System.Drawing.Point(70, 6);
             this.manualSearchTextBox.Name = "manualSearchTextBox";
             this.manualSearchTextBox.Size = new System.Drawing.Size(93, 23);
             this.manualSearchTextBox.TabIndex = 30;
@@ -8080,7 +8084,7 @@ namespace Retro_Achievement_Tracker
             this.manualSearchButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.manualSearchButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.manualSearchButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
-            this.manualSearchButton.Location = new System.Drawing.Point(689, 339);
+            this.manualSearchButton.Location = new System.Drawing.Point(166, 3);
             this.manualSearchButton.Margin = new System.Windows.Forms.Padding(0);
             this.manualSearchButton.Name = "manualSearchButton";
             this.manualSearchButton.Size = new System.Drawing.Size(75, 27);
@@ -8089,16 +8093,27 @@ namespace Retro_Achievement_Tracker
             this.manualSearchButton.UseVisualStyleBackColor = false;
             this.manualSearchButton.Click += new System.EventHandler(this.ManualSearchButton_Click);
             // 
+            // panel8
+            // 
+            this.panel8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.panel8.Controls.Add(this.manualSearchLabel);
+            this.panel8.Controls.Add(this.manualSearchTextBox);
+            this.panel8.Controls.Add(this.manualSearchButton);
+            this.panel8.Location = new System.Drawing.Point(127, 68);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(243, 34);
+            this.panel8.TabIndex = 10037;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
-            this.ClientSize = new System.Drawing.Size(786, 514);
+            this.ClientSize = new System.Drawing.Size(786, 510);
+            this.Controls.Add(this.panel8);
             this.Controls.Add(this.mainTabControl);
-            this.Controls.Add(this.raConnectionStatusPictureBox);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.timerStatusLabel);
+            this.Controls.Add(this.autoPollingStatusPictureBox);
+            this.Controls.Add(this.autoPollingStatusLabel);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -8107,7 +8122,7 @@ namespace Retro_Achievement_Tracker
             ((System.ComponentModel.ISupportInitialize)(this.userProfilePictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.focusAchievementPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gameInfoPictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.raConnectionStatusPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.autoPollingStatusPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.alertsCustomAchievementScaleNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.alertsCustomAchievementXNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.alertsCustomAchievementYNumericUpDown)).EndInit();
@@ -8385,7 +8400,6 @@ namespace Retro_Achievement_Tracker
             this.panel3.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel120.ResumeLayout(false);
             this.panel120.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox19)).EndInit();
@@ -8400,7 +8414,6 @@ namespace Retro_Achievement_Tracker
             ((System.ComponentModel.ISupportInitialize)(this.relatedMediaLBLinePictureBox)).EndInit();
             this.mainTabControl.ResumeLayout(false);
             this.focusTabPage.ResumeLayout(false);
-            this.focusTabPage.PerformLayout();
             this.alertsTabPage2.ResumeLayout(false);
             this.alertTabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -8413,6 +8426,8 @@ namespace Retro_Achievement_Tracker
             this.recentCheevosTabPage.ResumeLayout(false);
             this.cheevosListTabPage.ResumeLayout(false);
             this.relatedMediaTabPage.ResumeLayout(false);
+            this.panel8.ResumeLayout(false);
+            this.panel8.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -8428,8 +8443,8 @@ namespace Retro_Achievement_Tracker
         private CheckBox autoStartCheckbox;
         private CheckBox userInfoAutoOpenWindowCheckbox;
         private Button userInfoOpenWindowButton;
-        private Label timerStatusLabel;
-        private PictureBox raConnectionStatusPictureBox;
+        private Label autoPollingStatusLabel;
+        private PictureBox autoPollingStatusPictureBox;
         private TextBox userInfoTruePointsTextBox;
         private TextBox userInfoPointsTextBox;
         private TextBox userInfoRatioTextBox;
@@ -8509,7 +8524,6 @@ namespace Retro_Achievement_Tracker
         private Panel panel1;
         private Panel panel2;
         private Panel panel3;
-        private PictureBox pictureBox1;
         private Label userInfoUsernameLabel;
         private PictureBox pictureBox2;
         private PictureBox pictureBox3;
@@ -8989,6 +9003,8 @@ namespace Retro_Achievement_Tracker
         private Label manualSearchLabel;
         private TextBox manualSearchTextBox;
         private Button manualSearchButton;
+        private Panel panel8;
+        private Button unlockAchievementButton;
     }
 }
 
