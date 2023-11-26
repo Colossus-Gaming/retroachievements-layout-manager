@@ -175,7 +175,6 @@
     <Compile Include="Controllers\GameInfoController.cs" />
     <Compile Include="Controllers\RecentUnlocksController.cs" />
     <Compile Include="Controllers\GameProgressController.cs" />
-    <Compile Include="Controllers\UserInfoController.cs" />
     <Compile Include="Forms\AchievementListWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -211,12 +210,6 @@
     </Compile>
     <Compile Include="Forms\GameInfoWindow.Designer.cs">
       <DependentUpon>GameInfoWindow.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\UserInfoWindow.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\UserInfoWindow.Designer.cs">
-      <DependentUpon>UserInfoWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FocusWindow.cs">
       <SubType>Form</SubType>
@@ -266,9 +259,6 @@
     <EmbeddedResource Include="Forms\RelatedMediaWindow.resx">
       <DependentUpon>RelatedMediaWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UserInfoWindow.resx">
-      <DependentUpon>UserInfoWindow.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
@@ -298,16 +288,16 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Autoupdater.NET.Official">
-      <Version>1.8.3</Version>
+      <Version>1.8.4</Version>
     </PackageReference>
     <PackageReference Include="HtmlAgilityPack">
-      <Version>1.11.48</Version>
+      <Version>1.11.54</Version>
     </PackageReference>
     <PackageReference Include="MediaToolkit">
       <Version>1.1.0.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Web.WebView2">
-      <Version>1.0.1823.32</Version>
+      <Version>1.0.2151.40</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.3</Version>
@@ -345,11 +335,8 @@
     </Content>
     <None Include="Resources\yellow-button.png" />
     <EmbeddedResource Include="Resources\focus-window.html" />
-    <None Include="Resources\green-button.png" />
-    <EmbeddedResource Include="Resources\user-info-window.html" />
     <EmbeddedResource Include="Resources\alerts-window.html" />
     <Content Include="Resources\image.ico" />
-    <None Include="Resources\red-button.png" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="WMPLib">

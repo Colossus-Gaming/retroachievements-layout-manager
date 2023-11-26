@@ -79,10 +79,6 @@ namespace Retro_Achievement_Tracker.Models
         {
             WriteAlertsStreamLabels(gameInfo);
         }
-        public void EnqueueUserInfo(UserSummary userSummary)
-        {
-            WriteUserInfoStreamLabels(userSummary);
-        }
         public void EnqueueGameInfo(GameInfo gameInfo)
         {
             WriteGameInfoStreamLabels(gameInfo);
@@ -145,18 +141,6 @@ namespace Retro_Achievement_Tracker.Models
                         File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/last-five/last-" + (i + 1) + "-data.json", "{}");
                     }
                 }
-            }
-        }
-
-        private void WriteUserInfoStreamLabels(UserSummary userSummary)
-        {
-            if (userSummary != null)
-            {
-                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/user-info/rank.txt", userSummary.Rank == 0 ? "No Rank" : userSummary.Rank.ToString());
-                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/user-info/ratio.txt", userSummary.RetroRatio);
-                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/user-info/points.txt", userSummary.TotalPoints.ToString());
-                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/user-info/true-points.txt", userSummary.TotalTruePoints.ToString());
-                File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/user-info/data.json", JsonConvert.SerializeObject(userSummary));
             }
         }
         private void WriteGameInfoStreamLabels(GameInfo gameInfo)
@@ -234,16 +218,6 @@ namespace Retro_Achievement_Tracker.Models
             File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/true-points.txt", string.Empty);
             File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/achievements.txt", string.Empty);
             File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/completed.txt", string.Empty);
-
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/game-info/data.json", "{}");
-
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/user-info/rank.txt", string.Empty);
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/user-info/awards.txt", string.Empty);
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/user-info/ratio.txt", string.Empty);
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/user-info/points.txt", string.Empty);
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/user-info/true-points.txt", string.Empty);
-
-            File.WriteAllText(@Directory.GetCurrentDirectory() + "/stream-labels/user-info/data.json", "{}");
 
             for (int i = 0; i < 5; i++)
             {

@@ -35,13 +35,6 @@ namespace Retro_Achievement_Tracker
             this.apiKeyTextBox = new System.Windows.Forms.TextBox();
             this.usernameLabel = new System.Windows.Forms.Label();
             this.usernameTextBox = new System.Windows.Forms.TextBox();
-            this.userProfilePictureBox = new System.Windows.Forms.PictureBox();
-            this.autoStartCheckbox = new System.Windows.Forms.CheckBox();
-            this.stopButton = new System.Windows.Forms.Button();
-            this.autoPollingStatusLabel = new System.Windows.Forms.Label();
-            this.userInfoAutoOpenWindowCheckbox = new System.Windows.Forms.CheckBox();
-            this.userInfoOpenWindowButton = new System.Windows.Forms.Button();
-            this.startButton = new System.Windows.Forms.Button();
             this.focusAchievementPictureBox = new System.Windows.Forms.PictureBox();
             this.focusAchievementTitleLabel = new System.Windows.Forms.Label();
             this.focusAchievementDescriptionLabel = new System.Windows.Forms.Label();
@@ -49,7 +42,6 @@ namespace Retro_Achievement_Tracker
             this.focusAchievementButtonPrevious = new System.Windows.Forms.Button();
             this.focusAchievementButtonNext = new System.Windows.Forms.Button();
             this.gameInfoPictureBox = new System.Windows.Forms.PictureBox();
-            this.autoPollingStatusPictureBox = new System.Windows.Forms.PictureBox();
             this.alertsPlayAchievementButton = new System.Windows.Forms.Button();
             this.alertsSelectCustomAchievementFileButton = new System.Windows.Forms.Button();
             this.alertsCustomAchievementScaleNumericUpDown = new System.Windows.Forms.NumericUpDown();
@@ -76,15 +68,6 @@ namespace Retro_Achievement_Tracker
             this.alertsCustomMasteryAnimationInComboBox = new System.Windows.Forms.ComboBox();
             this.alertsCustomMasteryInSpeedUpDown = new System.Windows.Forms.NumericUpDown();
             this.alertsCustomMasteryEnableCheckbox = new System.Windows.Forms.CheckBox();
-            this.userInfoTruePointsTextBox = new System.Windows.Forms.TextBox();
-            this.userInfoPointsTextBox = new System.Windows.Forms.TextBox();
-            this.userInfoRatioTextBox = new System.Windows.Forms.TextBox();
-            this.userInfoRankTextBox = new System.Windows.Forms.TextBox();
-            this.userInfoTruePointsCheckBox = new System.Windows.Forms.CheckBox();
-            this.userInfoRatioCheckBox = new System.Windows.Forms.CheckBox();
-            this.userInfoPointsCheckBox = new System.Windows.Forms.CheckBox();
-            this.userInfoDefaultButton = new System.Windows.Forms.Button();
-            this.userInfoRankCheckBox = new System.Windows.Forms.CheckBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.focusBehaviorGoToLastRadioButton = new System.Windows.Forms.RadioButton();
@@ -256,60 +239,6 @@ namespace Retro_Achievement_Tracker
             this.panel98 = new System.Windows.Forms.Panel();
             this.label143 = new System.Windows.Forms.Label();
             this.alertsMasteryEnableCheckbox = new System.Windows.Forms.CheckBox();
-            this.panel14 = new System.Windows.Forms.Panel();
-            this.userInfoUsernameLabel = new System.Windows.Forms.Label();
-            this.userInfoRankLabel = new System.Windows.Forms.Label();
-            this.userInfoPointsLabel = new System.Windows.Forms.Label();
-            this.label37 = new System.Windows.Forms.Label();
-            this.userInfoTruePointsLabel = new System.Windows.Forms.Label();
-            this.userInfoMottoLabel = new System.Windows.Forms.Label();
-            this.userInfoRatioLabel = new System.Windows.Forms.Label();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.panel21 = new System.Windows.Forms.Panel();
-            this.panel22 = new System.Windows.Forms.Panel();
-            this.label29 = new System.Windows.Forms.Label();
-            this.label32 = new System.Windows.Forms.Label();
-            this.label30 = new System.Windows.Forms.Label();
-            this.label28 = new System.Windows.Forms.Label();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.panel10 = new System.Windows.Forms.Panel();
-            this.label31 = new System.Windows.Forms.Label();
-            this.panel13 = new System.Windows.Forms.Panel();
-            this.label35 = new System.Windows.Forms.Label();
-            this.panel12 = new System.Windows.Forms.Panel();
-            this.label34 = new System.Windows.Forms.Label();
-            this.panel11 = new System.Windows.Forms.Panel();
-            this.label33 = new System.Windows.Forms.Label();
-            this.panel20 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.userInfoAdvancedCheckBox = new System.Windows.Forms.CheckBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.userInfoValuesPanel = new System.Windows.Forms.Panel();
-            this.label26 = new System.Windows.Forms.Label();
-            this.userInfoValuesFontColorPictureBox = new System.Windows.Forms.PictureBox();
-            this.userInfoValuesFontComboBox = new System.Windows.Forms.ComboBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.userInfoBackgroundColorPictureBox = new System.Windows.Forms.PictureBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.userInfoNamesLabel = new System.Windows.Forms.Label();
-            this.userInfoNamesFontColorPictureBox = new System.Windows.Forms.PictureBox();
-            this.userInfoNamesFontComboBox = new System.Windows.Forms.ComboBox();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.userInfoNamesFontOutlineNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.userInfoNamesOutlineCheckBox = new System.Windows.Forms.CheckBox();
-            this.userInfoNamesOutlineLabel = new System.Windows.Forms.Label();
-            this.userInfoNamesFontOutlineColorPictureBox = new System.Windows.Forms.PictureBox();
-            this.userInfoValuesOutlinePanel = new System.Windows.Forms.Panel();
-            this.label27 = new System.Windows.Forms.Label();
-            this.userInfoValuesFontOutlineColorPictureBox = new System.Windows.Forms.PictureBox();
-            this.userInfoValuesFontOutlineNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.userInfoValuesOutlineCheckBox = new System.Windows.Forms.CheckBox();
             this.panel50 = new System.Windows.Forms.Panel();
             this.panel119 = new System.Windows.Forms.Panel();
             this.gameInfoGenreLabel = new System.Windows.Forms.Label();
@@ -550,8 +479,11 @@ namespace Retro_Achievement_Tracker
             this.achievementListBackgroundColorPictureBox = new System.Windows.Forms.PictureBox();
             this.label156 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.manualSearchLabel = new System.Windows.Forms.Label();
             this.checkForUpdatesButton = new System.Windows.Forms.Button();
+            this.manualSearchTextBox = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.manualSearchButton = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel120 = new System.Windows.Forms.Panel();
             this.relatedMediaRAScreenshotRadioButton = new System.Windows.Forms.RadioButton();
@@ -592,21 +524,15 @@ namespace Retro_Achievement_Tracker
             this.alertTabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.userInfoTabPage = new System.Windows.Forms.TabPage();
             this.gameInfoTabPage = new System.Windows.Forms.TabPage();
             this.gameProgressTabPage = new System.Windows.Forms.TabPage();
             this.recentCheevosTabPage = new System.Windows.Forms.TabPage();
             this.cheevosListTabPage = new System.Windows.Forms.TabPage();
             this.relatedMediaTabPage = new System.Windows.Forms.TabPage();
-            this.manualSearchLabel = new System.Windows.Forms.Label();
-            this.manualSearchTextBox = new System.Windows.Forms.TextBox();
-            this.manualSearchButton = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.panel8 = new System.Windows.Forms.Panel();
-            ((System.ComponentModel.ISupportInitialize)(this.userProfilePictureBox)).BeginInit();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.focusAchievementPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gameInfoPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.autoPollingStatusPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.alertsCustomAchievementScaleNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.alertsCustomAchievementXNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.alertsCustomAchievementYNumericUpDown)).BeginInit();
@@ -704,30 +630,6 @@ namespace Retro_Achievement_Tracker
             this.panel96.SuspendLayout();
             this.panel97.SuspendLayout();
             this.panel98.SuspendLayout();
-            this.panel14.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            this.panel21.SuspendLayout();
-            this.panel22.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            this.panel10.SuspendLayout();
-            this.panel13.SuspendLayout();
-            this.panel12.SuspendLayout();
-            this.panel11.SuspendLayout();
-            this.panel20.SuspendLayout();
-            this.panel4.SuspendLayout();
-            this.userInfoValuesPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.userInfoValuesFontColorPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            this.panel5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.userInfoBackgroundColorPictureBox)).BeginInit();
-            this.panel6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.userInfoNamesFontColorPictureBox)).BeginInit();
-            this.panel7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.userInfoNamesFontOutlineNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.userInfoNamesFontOutlineColorPictureBox)).BeginInit();
-            this.userInfoValuesOutlinePanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.userInfoValuesFontOutlineColorPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.userInfoValuesFontOutlineNumericUpDown)).BeginInit();
             this.panel50.SuspendLayout();
             this.panel119.SuspendLayout();
             this.panel117.SuspendLayout();
@@ -841,13 +743,12 @@ namespace Retro_Achievement_Tracker
             this.alertTabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            this.userInfoTabPage.SuspendLayout();
             this.gameInfoTabPage.SuspendLayout();
             this.gameProgressTabPage.SuspendLayout();
             this.recentCheevosTabPage.SuspendLayout();
             this.cheevosListTabPage.SuspendLayout();
             this.relatedMediaTabPage.SuspendLayout();
-            this.panel8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // apiKeyLabel
@@ -874,7 +775,6 @@ namespace Retro_Achievement_Tracker
             this.apiKeyTextBox.Size = new System.Drawing.Size(286, 23);
             this.apiKeyTextBox.TabIndex = 1;
             this.apiKeyTextBox.WordWrap = false;
-            this.apiKeyTextBox.TextChanged += new System.EventHandler(this.RequiredField_TextChanged);
             // 
             // usernameLabel
             // 
@@ -899,111 +799,6 @@ namespace Retro_Achievement_Tracker
             this.usernameTextBox.Size = new System.Drawing.Size(286, 23);
             this.usernameTextBox.TabIndex = 0;
             this.usernameTextBox.WordWrap = false;
-            this.usernameTextBox.TextChanged += new System.EventHandler(this.RequiredField_TextChanged);
-            // 
-            // userProfilePictureBox
-            // 
-            this.userProfilePictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.userProfilePictureBox.BackColor = System.Drawing.Color.Transparent;
-            this.userProfilePictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.userProfilePictureBox.Location = new System.Drawing.Point(384, 40);
-            this.userProfilePictureBox.Name = "userProfilePictureBox";
-            this.userProfilePictureBox.Size = new System.Drawing.Size(64, 64);
-            this.userProfilePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.userProfilePictureBox.TabIndex = 20;
-            this.userProfilePictureBox.TabStop = false;
-            this.userProfilePictureBox.Click += new System.EventHandler(this.BrowserSensitiveControl_Click);
-            // 
-            // autoStartCheckbox
-            // 
-            this.autoStartCheckbox.AutoSize = true;
-            this.autoStartCheckbox.BackColor = System.Drawing.Color.Transparent;
-            this.autoStartCheckbox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.autoStartCheckbox.FlatAppearance.BorderSize = 0;
-            this.autoStartCheckbox.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(118)))), ((int)(((byte)(118)))), ((int)(((byte)(118)))));
-            this.autoStartCheckbox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.autoStartCheckbox.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.autoStartCheckbox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.autoStartCheckbox.Location = new System.Drawing.Point(156, 71);
-            this.autoStartCheckbox.Name = "autoStartCheckbox";
-            this.autoStartCheckbox.Size = new System.Drawing.Size(88, 18);
-            this.autoStartCheckbox.TabIndex = 2;
-            this.autoStartCheckbox.Text = "Auto-Start";
-            this.autoStartCheckbox.UseVisualStyleBackColor = false;
-            this.autoStartCheckbox.CheckedChanged += new System.EventHandler(this.FeatureEnablementCheckBox_CheckedChanged);
-            // 
-            // stopButton
-            // 
-            this.stopButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
-            this.stopButton.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.stopButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.stopButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.stopButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
-            this.stopButton.Location = new System.Drawing.Point(322, 63);
-            this.stopButton.Margin = new System.Windows.Forms.Padding(0);
-            this.stopButton.Name = "stopButton";
-            this.stopButton.Size = new System.Drawing.Size(75, 27);
-            this.stopButton.TabIndex = 4;
-            this.stopButton.Text = "Stop";
-            this.stopButton.UseVisualStyleBackColor = false;
-            this.stopButton.Click += new System.EventHandler(this.StopButton_Click);
-            // 
-            // autoPollingStatusLabel
-            // 
-            this.autoPollingStatusLabel.BackColor = System.Drawing.Color.Transparent;
-            this.autoPollingStatusLabel.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.autoPollingStatusLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.autoPollingStatusLabel.Location = new System.Drawing.Point(38, 9);
-            this.autoPollingStatusLabel.Name = "autoPollingStatusLabel";
-            this.autoPollingStatusLabel.Size = new System.Drawing.Size(332, 28);
-            this.autoPollingStatusLabel.TabIndex = 10024;
-            this.autoPollingStatusLabel.Text = "Offline";
-            // 
-            // userInfoAutoOpenWindowCheckbox
-            // 
-            this.userInfoAutoOpenWindowCheckbox.AutoSize = true;
-            this.userInfoAutoOpenWindowCheckbox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.userInfoAutoOpenWindowCheckbox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userInfoAutoOpenWindowCheckbox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.userInfoAutoOpenWindowCheckbox.Location = new System.Drawing.Point(252, 9);
-            this.userInfoAutoOpenWindowCheckbox.Name = "userInfoAutoOpenWindowCheckbox";
-            this.userInfoAutoOpenWindowCheckbox.Size = new System.Drawing.Size(98, 20);
-            this.userInfoAutoOpenWindowCheckbox.TabIndex = 10022;
-            this.userInfoAutoOpenWindowCheckbox.Text = "Auto-Open";
-            this.userInfoAutoOpenWindowCheckbox.UseVisualStyleBackColor = true;
-            this.userInfoAutoOpenWindowCheckbox.CheckedChanged += new System.EventHandler(this.FeatureEnablementCheckBox_CheckedChanged);
-            // 
-            // userInfoOpenWindowButton
-            // 
-            this.userInfoOpenWindowButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
-            this.userInfoOpenWindowButton.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.userInfoOpenWindowButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.userInfoOpenWindowButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userInfoOpenWindowButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
-            this.userInfoOpenWindowButton.Location = new System.Drawing.Point(382, 2);
-            this.userInfoOpenWindowButton.Margin = new System.Windows.Forms.Padding(0);
-            this.userInfoOpenWindowButton.Name = "userInfoOpenWindowButton";
-            this.userInfoOpenWindowButton.Size = new System.Drawing.Size(75, 27);
-            this.userInfoOpenWindowButton.TabIndex = 10021;
-            this.userInfoOpenWindowButton.Text = "Open";
-            this.userInfoOpenWindowButton.UseVisualStyleBackColor = false;
-            this.userInfoOpenWindowButton.Click += new System.EventHandler(this.ShowWindowButton_Click);
-            // 
-            // startButton
-            // 
-            this.startButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
-            this.startButton.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.startButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.startButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.startButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
-            this.startButton.Location = new System.Drawing.Point(247, 63);
-            this.startButton.Margin = new System.Windows.Forms.Padding(0);
-            this.startButton.Name = "startButton";
-            this.startButton.Size = new System.Drawing.Size(75, 27);
-            this.startButton.TabIndex = 3;
-            this.startButton.Text = "Start";
-            this.startButton.UseVisualStyleBackColor = false;
-            this.startButton.Click += new System.EventHandler(this.StartButton_Click);
             // 
             // focusAchievementPictureBox
             // 
@@ -1016,7 +811,6 @@ namespace Retro_Achievement_Tracker
             this.focusAchievementPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.focusAchievementPictureBox.TabIndex = 10030;
             this.focusAchievementPictureBox.TabStop = false;
-            this.focusAchievementPictureBox.Click += new System.EventHandler(this.BrowserSensitiveControl_Click);
             // 
             // focusAchievementTitleLabel
             // 
@@ -1029,7 +823,6 @@ namespace Retro_Achievement_Tracker
             this.focusAchievementTitleLabel.Name = "focusAchievementTitleLabel";
             this.focusAchievementTitleLabel.Size = new System.Drawing.Size(165, 68);
             this.focusAchievementTitleLabel.TabIndex = 10027;
-            this.focusAchievementTitleLabel.Click += new System.EventHandler(this.BrowserSensitiveControl_Click);
             // 
             // focusAchievementDescriptionLabel
             // 
@@ -1098,18 +891,6 @@ namespace Retro_Achievement_Tracker
             this.gameInfoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.gameInfoPictureBox.TabIndex = 10004;
             this.gameInfoPictureBox.TabStop = false;
-            this.gameInfoPictureBox.Click += new System.EventHandler(this.BrowserSensitiveControl_Click);
-            // 
-            // autoPollingStatusPictureBox
-            // 
-            this.autoPollingStatusPictureBox.BackColor = System.Drawing.Color.Transparent;
-            this.autoPollingStatusPictureBox.Image = global::Retro_Achievement_Tracker.Properties.Resources.red_button;
-            this.autoPollingStatusPictureBox.Location = new System.Drawing.Point(4, 9);
-            this.autoPollingStatusPictureBox.Name = "autoPollingStatusPictureBox";
-            this.autoPollingStatusPictureBox.Size = new System.Drawing.Size(28, 28);
-            this.autoPollingStatusPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.autoPollingStatusPictureBox.TabIndex = 10025;
-            this.autoPollingStatusPictureBox.TabStop = false;
             // 
             // alertsPlayAchievementButton
             // 
@@ -1640,130 +1421,6 @@ namespace Retro_Achievement_Tracker
             this.alertsCustomMasteryEnableCheckbox.Text = "Custom";
             this.alertsCustomMasteryEnableCheckbox.UseVisualStyleBackColor = true;
             this.alertsCustomMasteryEnableCheckbox.CheckedChanged += new System.EventHandler(this.CustomAlertsCheckBox_CheckedChanged);
-            // 
-            // userInfoTruePointsTextBox
-            // 
-            this.userInfoTruePointsTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
-            this.userInfoTruePointsTextBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userInfoTruePointsTextBox.ForeColor = System.Drawing.Color.White;
-            this.userInfoTruePointsTextBox.Location = new System.Drawing.Point(116, 0);
-            this.userInfoTruePointsTextBox.Name = "userInfoTruePointsTextBox";
-            this.userInfoTruePointsTextBox.Size = new System.Drawing.Size(99, 23);
-            this.userInfoTruePointsTextBox.TabIndex = 7;
-            this.userInfoTruePointsTextBox.Text = "True Points";
-            this.userInfoTruePointsTextBox.TextChanged += new System.EventHandler(this.OverrideTextBox_TextChanged);
-            // 
-            // userInfoPointsTextBox
-            // 
-            this.userInfoPointsTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
-            this.userInfoPointsTextBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userInfoPointsTextBox.ForeColor = System.Drawing.Color.White;
-            this.userInfoPointsTextBox.Location = new System.Drawing.Point(116, 0);
-            this.userInfoPointsTextBox.Name = "userInfoPointsTextBox";
-            this.userInfoPointsTextBox.Size = new System.Drawing.Size(99, 23);
-            this.userInfoPointsTextBox.TabIndex = 6;
-            this.userInfoPointsTextBox.Text = "Points";
-            this.userInfoPointsTextBox.TextChanged += new System.EventHandler(this.OverrideTextBox_TextChanged);
-            // 
-            // userInfoRatioTextBox
-            // 
-            this.userInfoRatioTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
-            this.userInfoRatioTextBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userInfoRatioTextBox.ForeColor = System.Drawing.Color.White;
-            this.userInfoRatioTextBox.Location = new System.Drawing.Point(116, 0);
-            this.userInfoRatioTextBox.Name = "userInfoRatioTextBox";
-            this.userInfoRatioTextBox.Size = new System.Drawing.Size(99, 23);
-            this.userInfoRatioTextBox.TabIndex = 5;
-            this.userInfoRatioTextBox.Text = "Retro Ratio";
-            this.userInfoRatioTextBox.TextChanged += new System.EventHandler(this.OverrideTextBox_TextChanged);
-            // 
-            // userInfoRankTextBox
-            // 
-            this.userInfoRankTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
-            this.userInfoRankTextBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userInfoRankTextBox.ForeColor = System.Drawing.Color.White;
-            this.userInfoRankTextBox.Location = new System.Drawing.Point(116, 0);
-            this.userInfoRankTextBox.Name = "userInfoRankTextBox";
-            this.userInfoRankTextBox.Size = new System.Drawing.Size(99, 23);
-            this.userInfoRankTextBox.TabIndex = 1;
-            this.userInfoRankTextBox.Text = "Rank";
-            this.userInfoRankTextBox.TextChanged += new System.EventHandler(this.OverrideTextBox_TextChanged);
-            // 
-            // userInfoTruePointsCheckBox
-            // 
-            this.userInfoTruePointsCheckBox.BackColor = System.Drawing.Color.Transparent;
-            this.userInfoTruePointsCheckBox.FlatAppearance.BorderSize = 0;
-            this.userInfoTruePointsCheckBox.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
-            this.userInfoTruePointsCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.userInfoTruePointsCheckBox.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userInfoTruePointsCheckBox.ForeColor = System.Drawing.Color.White;
-            this.userInfoTruePointsCheckBox.Location = new System.Drawing.Point(225, 5);
-            this.userInfoTruePointsCheckBox.Name = "userInfoTruePointsCheckBox";
-            this.userInfoTruePointsCheckBox.Size = new System.Drawing.Size(15, 14);
-            this.userInfoTruePointsCheckBox.TabIndex = 56;
-            this.userInfoTruePointsCheckBox.UseVisualStyleBackColor = true;
-            this.userInfoTruePointsCheckBox.CheckedChanged += new System.EventHandler(this.FeatureEnablementCheckBox_CheckedChanged);
-            // 
-            // userInfoRatioCheckBox
-            // 
-            this.userInfoRatioCheckBox.BackColor = System.Drawing.Color.Transparent;
-            this.userInfoRatioCheckBox.FlatAppearance.BorderSize = 0;
-            this.userInfoRatioCheckBox.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
-            this.userInfoRatioCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.userInfoRatioCheckBox.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userInfoRatioCheckBox.ForeColor = System.Drawing.Color.White;
-            this.userInfoRatioCheckBox.Location = new System.Drawing.Point(225, 5);
-            this.userInfoRatioCheckBox.Name = "userInfoRatioCheckBox";
-            this.userInfoRatioCheckBox.Size = new System.Drawing.Size(15, 14);
-            this.userInfoRatioCheckBox.TabIndex = 55;
-            this.userInfoRatioCheckBox.UseVisualStyleBackColor = true;
-            this.userInfoRatioCheckBox.CheckedChanged += new System.EventHandler(this.FeatureEnablementCheckBox_CheckedChanged);
-            // 
-            // userInfoPointsCheckBox
-            // 
-            this.userInfoPointsCheckBox.BackColor = System.Drawing.Color.Transparent;
-            this.userInfoPointsCheckBox.FlatAppearance.BorderSize = 0;
-            this.userInfoPointsCheckBox.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
-            this.userInfoPointsCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.userInfoPointsCheckBox.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userInfoPointsCheckBox.ForeColor = System.Drawing.Color.White;
-            this.userInfoPointsCheckBox.Location = new System.Drawing.Point(225, 5);
-            this.userInfoPointsCheckBox.Name = "userInfoPointsCheckBox";
-            this.userInfoPointsCheckBox.Size = new System.Drawing.Size(15, 14);
-            this.userInfoPointsCheckBox.TabIndex = 54;
-            this.userInfoPointsCheckBox.UseVisualStyleBackColor = true;
-            this.userInfoPointsCheckBox.CheckedChanged += new System.EventHandler(this.FeatureEnablementCheckBox_CheckedChanged);
-            // 
-            // userInfoDefaultButton
-            // 
-            this.userInfoDefaultButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
-            this.userInfoDefaultButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(68)))), ((int)(((byte)(68)))));
-            this.userInfoDefaultButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.userInfoDefaultButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userInfoDefaultButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(68)))), ((int)(((byte)(68)))));
-            this.userInfoDefaultButton.Location = new System.Drawing.Point(204, 2);
-            this.userInfoDefaultButton.Margin = new System.Windows.Forms.Padding(0);
-            this.userInfoDefaultButton.Name = "userInfoDefaultButton";
-            this.userInfoDefaultButton.Size = new System.Drawing.Size(75, 27);
-            this.userInfoDefaultButton.TabIndex = 39;
-            this.userInfoDefaultButton.Text = "Default";
-            this.userInfoDefaultButton.UseVisualStyleBackColor = false;
-            this.userInfoDefaultButton.Click += new System.EventHandler(this.DefaultButton_Click);
-            // 
-            // userInfoRankCheckBox
-            // 
-            this.userInfoRankCheckBox.BackColor = System.Drawing.Color.Transparent;
-            this.userInfoRankCheckBox.FlatAppearance.BorderSize = 0;
-            this.userInfoRankCheckBox.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
-            this.userInfoRankCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.userInfoRankCheckBox.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userInfoRankCheckBox.ForeColor = System.Drawing.Color.White;
-            this.userInfoRankCheckBox.Location = new System.Drawing.Point(225, 5);
-            this.userInfoRankCheckBox.Name = "userInfoRankCheckBox";
-            this.userInfoRankCheckBox.Size = new System.Drawing.Size(15, 14);
-            this.userInfoRankCheckBox.TabIndex = 52;
-            this.userInfoRankCheckBox.UseVisualStyleBackColor = true;
-            this.userInfoRankCheckBox.CheckedChanged += new System.EventHandler(this.FeatureEnablementCheckBox_CheckedChanged);
             // 
             // openFileDialog1
             // 
@@ -3861,666 +3518,6 @@ namespace Retro_Achievement_Tracker
             this.alertsMasteryEnableCheckbox.Text = "Enable";
             this.alertsMasteryEnableCheckbox.UseVisualStyleBackColor = true;
             this.alertsMasteryEnableCheckbox.CheckedChanged += new System.EventHandler(this.CustomAlertsCheckBox_CheckedChanged);
-            // 
-            // panel14
-            // 
-            this.panel14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.panel14.Controls.Add(this.userInfoUsernameLabel);
-            this.panel14.Controls.Add(this.userInfoRankLabel);
-            this.panel14.Controls.Add(this.userInfoPointsLabel);
-            this.panel14.Controls.Add(this.label37);
-            this.panel14.Controls.Add(this.userInfoTruePointsLabel);
-            this.panel14.Controls.Add(this.userProfilePictureBox);
-            this.panel14.Controls.Add(this.userInfoMottoLabel);
-            this.panel14.Controls.Add(this.userInfoRatioLabel);
-            this.panel14.Controls.Add(this.pictureBox2);
-            this.panel14.Location = new System.Drawing.Point(296, 184);
-            this.panel14.Name = "panel14";
-            this.panel14.Size = new System.Drawing.Size(468, 181);
-            this.panel14.TabIndex = 10079;
-            // 
-            // userInfoUsernameLabel
-            // 
-            this.userInfoUsernameLabel.BackColor = System.Drawing.Color.Transparent;
-            this.userInfoUsernameLabel.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userInfoUsernameLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.userInfoUsernameLabel.Location = new System.Drawing.Point(3, 3);
-            this.userInfoUsernameLabel.Name = "userInfoUsernameLabel";
-            this.userInfoUsernameLabel.Size = new System.Drawing.Size(459, 26);
-            this.userInfoUsernameLabel.TabIndex = 10058;
-            this.userInfoUsernameLabel.Text = "Username";
-            // 
-            // userInfoRankLabel
-            // 
-            this.userInfoRankLabel.BackColor = System.Drawing.Color.Transparent;
-            this.userInfoRankLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userInfoRankLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.userInfoRankLabel.Location = new System.Drawing.Point(6, 78);
-            this.userInfoRankLabel.Name = "userInfoRankLabel";
-            this.userInfoRankLabel.Size = new System.Drawing.Size(202, 16);
-            this.userInfoRankLabel.TabIndex = 10054;
-            this.userInfoRankLabel.Text = "Site Rank: 15000";
-            // 
-            // userInfoPointsLabel
-            // 
-            this.userInfoPointsLabel.BackColor = System.Drawing.Color.Transparent;
-            this.userInfoPointsLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userInfoPointsLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.userInfoPointsLabel.Location = new System.Drawing.Point(6, 62);
-            this.userInfoPointsLabel.Name = "userInfoPointsLabel";
-            this.userInfoPointsLabel.Size = new System.Drawing.Size(187, 16);
-            this.userInfoPointsLabel.TabIndex = 10055;
-            this.userInfoPointsLabel.Text = "Hardcore Points: 348897";
-            // 
-            // label37
-            // 
-            this.label37.BackColor = System.Drawing.Color.Transparent;
-            this.label37.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label37.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label37.Location = new System.Drawing.Point(6, 94);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(94, 16);
-            this.label37.TabIndex = 10075;
-            this.label37.Text = "Retro Ratio:";
-            // 
-            // userInfoTruePointsLabel
-            // 
-            this.userInfoTruePointsLabel.BackColor = System.Drawing.Color.Transparent;
-            this.userInfoTruePointsLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userInfoTruePointsLabel.ForeColor = System.Drawing.Color.White;
-            this.userInfoTruePointsLabel.Location = new System.Drawing.Point(194, 62);
-            this.userInfoTruePointsLabel.Name = "userInfoTruePointsLabel";
-            this.userInfoTruePointsLabel.Size = new System.Drawing.Size(85, 16);
-            this.userInfoTruePointsLabel.TabIndex = 10056;
-            this.userInfoTruePointsLabel.Text = "(10019920)";
-            // 
-            // userInfoMottoLabel
-            // 
-            this.userInfoMottoLabel.AutoSize = true;
-            this.userInfoMottoLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
-            this.userInfoMottoLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userInfoMottoLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.userInfoMottoLabel.Location = new System.Drawing.Point(6, 37);
-            this.userInfoMottoLabel.Margin = new System.Windows.Forms.Padding(3);
-            this.userInfoMottoLabel.Name = "userInfoMottoLabel";
-            this.userInfoMottoLabel.Padding = new System.Windows.Forms.Padding(3);
-            this.userInfoMottoLabel.Size = new System.Drawing.Size(158, 22);
-            this.userInfoMottoLabel.TabIndex = 10074;
-            this.userInfoMottoLabel.Text = "twitch.tv/RetroS3xual";
-            // 
-            // userInfoRatioLabel
-            // 
-            this.userInfoRatioLabel.BackColor = System.Drawing.Color.Transparent;
-            this.userInfoRatioLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userInfoRatioLabel.ForeColor = System.Drawing.Color.White;
-            this.userInfoRatioLabel.Location = new System.Drawing.Point(97, 94);
-            this.userInfoRatioLabel.Name = "userInfoRatioLabel";
-            this.userInfoRatioLabel.Size = new System.Drawing.Size(73, 16);
-            this.userInfoRatioLabel.TabIndex = 10057;
-            this.userInfoRatioLabel.Text = "3.62";
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.pictureBox2.Location = new System.Drawing.Point(2, 32);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(460, 2);
-            this.pictureBox2.TabIndex = 10059;
-            this.pictureBox2.TabStop = false;
-            // 
-            // panel21
-            // 
-            this.panel21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.panel21.Controls.Add(this.panel22);
-            this.panel21.Controls.Add(this.label28);
-            this.panel21.Controls.Add(this.userInfoDefaultButton);
-            this.panel21.Controls.Add(this.pictureBox4);
-            this.panel21.Controls.Add(this.panel10);
-            this.panel21.Controls.Add(this.panel13);
-            this.panel21.Controls.Add(this.panel12);
-            this.panel21.Controls.Add(this.panel11);
-            this.panel21.Location = new System.Drawing.Point(4, 3);
-            this.panel21.Name = "panel21";
-            this.panel21.Size = new System.Drawing.Size(287, 158);
-            this.panel21.TabIndex = 10078;
-            // 
-            // panel22
-            // 
-            this.panel22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.panel22.Controls.Add(this.label29);
-            this.panel22.Controls.Add(this.label32);
-            this.panel22.Controls.Add(this.label30);
-            this.panel22.Location = new System.Drawing.Point(2, 40);
-            this.panel22.Name = "panel22";
-            this.panel22.Size = new System.Drawing.Size(278, 23);
-            this.panel22.TabIndex = 10079;
-            // 
-            // label29
-            // 
-            this.label29.BackColor = System.Drawing.Color.Transparent;
-            this.label29.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label29.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label29.Location = new System.Drawing.Point(3, 3);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(50, 16);
-            this.label29.TabIndex = 10071;
-            this.label29.Text = "Field";
-            // 
-            // label32
-            // 
-            this.label32.BackColor = System.Drawing.Color.Transparent;
-            this.label32.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label32.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label32.Location = new System.Drawing.Point(113, 3);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(102, 16);
-            this.label32.TabIndex = 10073;
-            this.label32.Text = "Display Text";
-            // 
-            // label30
-            // 
-            this.label30.BackColor = System.Drawing.Color.Transparent;
-            this.label30.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label30.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label30.Location = new System.Drawing.Point(221, 3);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(61, 16);
-            this.label30.TabIndex = 10072;
-            this.label30.Text = "Enabled";
-            // 
-            // label28
-            // 
-            this.label28.BackColor = System.Drawing.Color.Transparent;
-            this.label28.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label28.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label28.Location = new System.Drawing.Point(3, 3);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(190, 26);
-            this.label28.TabIndex = 10069;
-            this.label28.Text = "Field Overrides";
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.pictureBox4.Location = new System.Drawing.Point(2, 32);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(275, 2);
-            this.pictureBox4.TabIndex = 10070;
-            this.pictureBox4.TabStop = false;
-            // 
-            // panel10
-            // 
-            this.panel10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
-            this.panel10.Controls.Add(this.label31);
-            this.panel10.Controls.Add(this.userInfoRankCheckBox);
-            this.panel10.Controls.Add(this.userInfoRankTextBox);
-            this.panel10.Location = new System.Drawing.Point(2, 62);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(278, 23);
-            this.panel10.TabIndex = 10061;
-            // 
-            // label31
-            // 
-            this.label31.BackColor = System.Drawing.Color.Transparent;
-            this.label31.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label31.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label31.Location = new System.Drawing.Point(3, 3);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(94, 16);
-            this.label31.TabIndex = 10066;
-            this.label31.Text = "Rank";
-            // 
-            // panel13
-            // 
-            this.panel13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.panel13.Controls.Add(this.label35);
-            this.panel13.Controls.Add(this.userInfoRatioCheckBox);
-            this.panel13.Controls.Add(this.userInfoRatioTextBox);
-            this.panel13.Location = new System.Drawing.Point(2, 128);
-            this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(278, 23);
-            this.panel13.TabIndex = 10061;
-            // 
-            // label35
-            // 
-            this.label35.BackColor = System.Drawing.Color.Transparent;
-            this.label35.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label35.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label35.Location = new System.Drawing.Point(3, 4);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(94, 16);
-            this.label35.TabIndex = 10069;
-            this.label35.Text = "Retro Ratio";
-            // 
-            // panel12
-            // 
-            this.panel12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
-            this.panel12.Controls.Add(this.label34);
-            this.panel12.Controls.Add(this.userInfoTruePointsTextBox);
-            this.panel12.Controls.Add(this.userInfoTruePointsCheckBox);
-            this.panel12.Location = new System.Drawing.Point(2, 106);
-            this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(278, 23);
-            this.panel12.TabIndex = 10061;
-            // 
-            // label34
-            // 
-            this.label34.BackColor = System.Drawing.Color.Transparent;
-            this.label34.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label34.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label34.Location = new System.Drawing.Point(3, 4);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(94, 16);
-            this.label34.TabIndex = 10068;
-            this.label34.Text = "True Points";
-            // 
-            // panel11
-            // 
-            this.panel11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.panel11.Controls.Add(this.label33);
-            this.panel11.Controls.Add(this.userInfoPointsTextBox);
-            this.panel11.Controls.Add(this.userInfoPointsCheckBox);
-            this.panel11.Location = new System.Drawing.Point(2, 84);
-            this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(278, 23);
-            this.panel11.TabIndex = 10061;
-            // 
-            // label33
-            // 
-            this.label33.BackColor = System.Drawing.Color.Transparent;
-            this.label33.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label33.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label33.Location = new System.Drawing.Point(3, 4);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(94, 16);
-            this.label33.TabIndex = 10067;
-            this.label33.Text = "Points";
-            // 
-            // panel20
-            // 
-            this.panel20.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.panel20.Controls.Add(this.label2);
-            this.panel20.Controls.Add(this.panel4);
-            this.panel20.Controls.Add(this.userInfoOpenWindowButton);
-            this.panel20.Controls.Add(this.userInfoValuesPanel);
-            this.panel20.Controls.Add(this.userInfoAutoOpenWindowCheckbox);
-            this.panel20.Controls.Add(this.pictureBox3);
-            this.panel20.Controls.Add(this.panel5);
-            this.panel20.Controls.Add(this.panel6);
-            this.panel20.Controls.Add(this.panel7);
-            this.panel20.Controls.Add(this.userInfoValuesOutlinePanel);
-            this.panel20.Location = new System.Drawing.Point(296, 3);
-            this.panel20.Name = "panel20";
-            this.panel20.Size = new System.Drawing.Size(468, 176);
-            this.panel20.TabIndex = 10077;
-            // 
-            // label2
-            // 
-            this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label2.Location = new System.Drawing.Point(3, 3);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(243, 26);
-            this.label2.TabIndex = 10062;
-            this.label2.Text = "Window/Font Settings";
-            // 
-            // panel4
-            // 
-            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.panel4.Controls.Add(this.userInfoAdvancedCheckBox);
-            this.panel4.Controls.Add(this.label4);
-            this.panel4.Controls.Add(this.label9);
-            this.panel4.Controls.Add(this.label25);
-            this.panel4.Controls.Add(this.label15);
-            this.panel4.Location = new System.Drawing.Point(2, 40);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(463, 23);
-            this.panel4.TabIndex = 10076;
-            // 
-            // userInfoAdvancedCheckBox
-            // 
-            this.userInfoAdvancedCheckBox.AutoSize = true;
-            this.userInfoAdvancedCheckBox.BackColor = System.Drawing.Color.Transparent;
-            this.userInfoAdvancedCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.userInfoAdvancedCheckBox.FlatAppearance.BorderSize = 0;
-            this.userInfoAdvancedCheckBox.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(118)))), ((int)(((byte)(118)))), ((int)(((byte)(118)))));
-            this.userInfoAdvancedCheckBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userInfoAdvancedCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.userInfoAdvancedCheckBox.Location = new System.Drawing.Point(5, 2);
-            this.userInfoAdvancedCheckBox.Name = "userInfoAdvancedCheckBox";
-            this.userInfoAdvancedCheckBox.Size = new System.Drawing.Size(91, 20);
-            this.userInfoAdvancedCheckBox.TabIndex = 10053;
-            this.userInfoAdvancedCheckBox.Text = "Advanced";
-            this.userInfoAdvancedCheckBox.UseVisualStyleBackColor = false;
-            this.userInfoAdvancedCheckBox.CheckedChanged += new System.EventHandler(this.AdvancedCheckBox_Click);
-            // 
-            // label4
-            // 
-            this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label4.Location = new System.Drawing.Point(150, 3);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(48, 16);
-            this.label4.TabIndex = 10065;
-            this.label4.Text = "Color";
-            // 
-            // label9
-            // 
-            this.label9.BackColor = System.Drawing.Color.Transparent;
-            this.label9.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label9.Location = new System.Drawing.Point(194, 3);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(50, 16);
-            this.label9.TabIndex = 10066;
-            this.label9.Text = "Font";
-            // 
-            // label25
-            // 
-            this.label25.BackColor = System.Drawing.Color.Transparent;
-            this.label25.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label25.Location = new System.Drawing.Point(349, 3);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(41, 16);
-            this.label25.TabIndex = 10068;
-            this.label25.Text = "Size";
-            // 
-            // label15
-            // 
-            this.label15.BackColor = System.Drawing.Color.Transparent;
-            this.label15.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label15.Location = new System.Drawing.Point(396, 3);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(59, 16);
-            this.label15.TabIndex = 10067;
-            this.label15.Text = "Enabled";
-            // 
-            // userInfoValuesPanel
-            // 
-            this.userInfoValuesPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
-            this.userInfoValuesPanel.Controls.Add(this.label26);
-            this.userInfoValuesPanel.Controls.Add(this.userInfoValuesFontColorPictureBox);
-            this.userInfoValuesPanel.Controls.Add(this.userInfoValuesFontComboBox);
-            this.userInfoValuesPanel.Location = new System.Drawing.Point(2, 106);
-            this.userInfoValuesPanel.Name = "userInfoValuesPanel";
-            this.userInfoValuesPanel.Size = new System.Drawing.Size(463, 23);
-            this.userInfoValuesPanel.TabIndex = 10061;
-            // 
-            // label26
-            // 
-            this.label26.BackColor = System.Drawing.Color.Transparent;
-            this.label26.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label26.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label26.Location = new System.Drawing.Point(3, 4);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(144, 16);
-            this.label26.TabIndex = 10066;
-            this.label26.Text = "Values";
-            // 
-            // userInfoValuesFontColorPictureBox
-            // 
-            this.userInfoValuesFontColorPictureBox.BackColor = System.Drawing.Color.White;
-            this.userInfoValuesFontColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.userInfoValuesFontColorPictureBox.Location = new System.Drawing.Point(153, 3);
-            this.userInfoValuesFontColorPictureBox.Name = "userInfoValuesFontColorPictureBox";
-            this.userInfoValuesFontColorPictureBox.Size = new System.Drawing.Size(16, 16);
-            this.userInfoValuesFontColorPictureBox.TabIndex = 45;
-            this.userInfoValuesFontColorPictureBox.TabStop = false;
-            this.userInfoValuesFontColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
-            // 
-            // userInfoValuesFontComboBox
-            // 
-            this.userInfoValuesFontComboBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
-            this.userInfoValuesFontComboBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userInfoValuesFontComboBox.ForeColor = System.Drawing.Color.White;
-            this.userInfoValuesFontComboBox.FormattingEnabled = true;
-            this.userInfoValuesFontComboBox.Location = new System.Drawing.Point(193, 2);
-            this.userInfoValuesFontComboBox.Name = "userInfoValuesFontComboBox";
-            this.userInfoValuesFontComboBox.Size = new System.Drawing.Size(202, 21);
-            this.userInfoValuesFontComboBox.TabIndex = 45;
-            this.userInfoValuesFontComboBox.SelectedIndexChanged += new System.EventHandler(this.FontFamilyComboBox_SelectedIndexChanged);
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.pictureBox3.Location = new System.Drawing.Point(2, 32);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(460, 2);
-            this.pictureBox3.TabIndex = 10063;
-            this.pictureBox3.TabStop = false;
-            // 
-            // panel5
-            // 
-            this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
-            this.panel5.Controls.Add(this.userInfoBackgroundColorPictureBox);
-            this.panel5.Controls.Add(this.label3);
-            this.panel5.Location = new System.Drawing.Point(2, 62);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(463, 23);
-            this.panel5.TabIndex = 10061;
-            // 
-            // userInfoBackgroundColorPictureBox
-            // 
-            this.userInfoBackgroundColorPictureBox.BackColor = System.Drawing.Color.White;
-            this.userInfoBackgroundColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.userInfoBackgroundColorPictureBox.Location = new System.Drawing.Point(153, 3);
-            this.userInfoBackgroundColorPictureBox.Name = "userInfoBackgroundColorPictureBox";
-            this.userInfoBackgroundColorPictureBox.Size = new System.Drawing.Size(16, 16);
-            this.userInfoBackgroundColorPictureBox.TabIndex = 42;
-            this.userInfoBackgroundColorPictureBox.TabStop = false;
-            this.userInfoBackgroundColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
-            // 
-            // label3
-            // 
-            this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label3.Location = new System.Drawing.Point(3, 3);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(144, 16);
-            this.label3.TabIndex = 10064;
-            this.label3.Text = "Window Background";
-            // 
-            // panel6
-            // 
-            this.panel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.panel6.Controls.Add(this.userInfoNamesLabel);
-            this.panel6.Controls.Add(this.userInfoNamesFontColorPictureBox);
-            this.panel6.Controls.Add(this.userInfoNamesFontComboBox);
-            this.panel6.Location = new System.Drawing.Point(2, 84);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(463, 23);
-            this.panel6.TabIndex = 10061;
-            // 
-            // userInfoNamesLabel
-            // 
-            this.userInfoNamesLabel.BackColor = System.Drawing.Color.Transparent;
-            this.userInfoNamesLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userInfoNamesLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.userInfoNamesLabel.Location = new System.Drawing.Point(3, 4);
-            this.userInfoNamesLabel.Name = "userInfoNamesLabel";
-            this.userInfoNamesLabel.Size = new System.Drawing.Size(144, 16);
-            this.userInfoNamesLabel.TabIndex = 10065;
-            this.userInfoNamesLabel.Text = "Names";
-            // 
-            // userInfoNamesFontColorPictureBox
-            // 
-            this.userInfoNamesFontColorPictureBox.BackColor = System.Drawing.Color.White;
-            this.userInfoNamesFontColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.userInfoNamesFontColorPictureBox.Location = new System.Drawing.Point(153, 4);
-            this.userInfoNamesFontColorPictureBox.Name = "userInfoNamesFontColorPictureBox";
-            this.userInfoNamesFontColorPictureBox.Size = new System.Drawing.Size(16, 16);
-            this.userInfoNamesFontColorPictureBox.TabIndex = 45;
-            this.userInfoNamesFontColorPictureBox.TabStop = false;
-            this.userInfoNamesFontColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
-            // 
-            // userInfoNamesFontComboBox
-            // 
-            this.userInfoNamesFontComboBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
-            this.userInfoNamesFontComboBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userInfoNamesFontComboBox.ForeColor = System.Drawing.Color.White;
-            this.userInfoNamesFontComboBox.FormattingEnabled = true;
-            this.userInfoNamesFontComboBox.Location = new System.Drawing.Point(193, 2);
-            this.userInfoNamesFontComboBox.Name = "userInfoNamesFontComboBox";
-            this.userInfoNamesFontComboBox.Size = new System.Drawing.Size(202, 21);
-            this.userInfoNamesFontComboBox.TabIndex = 45;
-            this.userInfoNamesFontComboBox.SelectedIndexChanged += new System.EventHandler(this.FontFamilyComboBox_SelectedIndexChanged);
-            // 
-            // panel7
-            // 
-            this.panel7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.panel7.Controls.Add(this.userInfoNamesFontOutlineNumericUpDown);
-            this.panel7.Controls.Add(this.userInfoNamesOutlineCheckBox);
-            this.panel7.Controls.Add(this.userInfoNamesOutlineLabel);
-            this.panel7.Controls.Add(this.userInfoNamesFontOutlineColorPictureBox);
-            this.panel7.Location = new System.Drawing.Point(2, 128);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(463, 23);
-            this.panel7.TabIndex = 10061;
-            // 
-            // userInfoNamesFontOutlineNumericUpDown
-            // 
-            this.userInfoNamesFontOutlineNumericUpDown.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(42)))), ((int)(((byte)(42)))));
-            this.userInfoNamesFontOutlineNumericUpDown.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.userInfoNamesFontOutlineNumericUpDown.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userInfoNamesFontOutlineNumericUpDown.ForeColor = System.Drawing.Color.White;
-            this.userInfoNamesFontOutlineNumericUpDown.Location = new System.Drawing.Point(352, 4);
-            this.userInfoNamesFontOutlineNumericUpDown.Maximum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.userInfoNamesFontOutlineNumericUpDown.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.userInfoNamesFontOutlineNumericUpDown.Name = "userInfoNamesFontOutlineNumericUpDown";
-            this.userInfoNamesFontOutlineNumericUpDown.Size = new System.Drawing.Size(43, 17);
-            this.userInfoNamesFontOutlineNumericUpDown.TabIndex = 45;
-            this.userInfoNamesFontOutlineNumericUpDown.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.userInfoNamesFontOutlineNumericUpDown.ValueChanged += new System.EventHandler(this.CustomNumericUpDown_ValueChanged);
-            // 
-            // userInfoNamesOutlineCheckBox
-            // 
-            this.userInfoNamesOutlineCheckBox.BackColor = System.Drawing.Color.Transparent;
-            this.userInfoNamesOutlineCheckBox.FlatAppearance.BorderSize = 0;
-            this.userInfoNamesOutlineCheckBox.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
-            this.userInfoNamesOutlineCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.userInfoNamesOutlineCheckBox.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userInfoNamesOutlineCheckBox.ForeColor = System.Drawing.Color.White;
-            this.userInfoNamesOutlineCheckBox.Location = new System.Drawing.Point(413, 5);
-            this.userInfoNamesOutlineCheckBox.Name = "userInfoNamesOutlineCheckBox";
-            this.userInfoNamesOutlineCheckBox.Size = new System.Drawing.Size(15, 14);
-            this.userInfoNamesOutlineCheckBox.TabIndex = 45;
-            this.userInfoNamesOutlineCheckBox.UseVisualStyleBackColor = true;
-            this.userInfoNamesOutlineCheckBox.CheckedChanged += new System.EventHandler(this.FeatureEnablementCheckBox_CheckedChanged);
-            // 
-            // userInfoNamesOutlineLabel
-            // 
-            this.userInfoNamesOutlineLabel.BackColor = System.Drawing.Color.Transparent;
-            this.userInfoNamesOutlineLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userInfoNamesOutlineLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.userInfoNamesOutlineLabel.Location = new System.Drawing.Point(3, 3);
-            this.userInfoNamesOutlineLabel.Name = "userInfoNamesOutlineLabel";
-            this.userInfoNamesOutlineLabel.Size = new System.Drawing.Size(144, 16);
-            this.userInfoNamesOutlineLabel.TabIndex = 10066;
-            this.userInfoNamesOutlineLabel.Text = "Names OutlineColor";
-            // 
-            // userInfoNamesFontOutlineColorPictureBox
-            // 
-            this.userInfoNamesFontOutlineColorPictureBox.BackColor = System.Drawing.Color.White;
-            this.userInfoNamesFontOutlineColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.userInfoNamesFontOutlineColorPictureBox.Location = new System.Drawing.Point(153, 3);
-            this.userInfoNamesFontOutlineColorPictureBox.Name = "userInfoNamesFontOutlineColorPictureBox";
-            this.userInfoNamesFontOutlineColorPictureBox.Size = new System.Drawing.Size(16, 16);
-            this.userInfoNamesFontOutlineColorPictureBox.TabIndex = 45;
-            this.userInfoNamesFontOutlineColorPictureBox.TabStop = false;
-            this.userInfoNamesFontOutlineColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
-            // 
-            // userInfoValuesOutlinePanel
-            // 
-            this.userInfoValuesOutlinePanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
-            this.userInfoValuesOutlinePanel.Controls.Add(this.label27);
-            this.userInfoValuesOutlinePanel.Controls.Add(this.userInfoValuesFontOutlineColorPictureBox);
-            this.userInfoValuesOutlinePanel.Controls.Add(this.userInfoValuesFontOutlineNumericUpDown);
-            this.userInfoValuesOutlinePanel.Controls.Add(this.userInfoValuesOutlineCheckBox);
-            this.userInfoValuesOutlinePanel.Location = new System.Drawing.Point(2, 150);
-            this.userInfoValuesOutlinePanel.Name = "userInfoValuesOutlinePanel";
-            this.userInfoValuesOutlinePanel.Size = new System.Drawing.Size(463, 23);
-            this.userInfoValuesOutlinePanel.TabIndex = 10067;
-            // 
-            // label27
-            // 
-            this.label27.BackColor = System.Drawing.Color.Transparent;
-            this.label27.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label27.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label27.Location = new System.Drawing.Point(3, 4);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(144, 16);
-            this.label27.TabIndex = 10066;
-            this.label27.Text = "Values OutlineColor";
-            // 
-            // userInfoValuesFontOutlineColorPictureBox
-            // 
-            this.userInfoValuesFontOutlineColorPictureBox.BackColor = System.Drawing.Color.White;
-            this.userInfoValuesFontOutlineColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.userInfoValuesFontOutlineColorPictureBox.Location = new System.Drawing.Point(153, 4);
-            this.userInfoValuesFontOutlineColorPictureBox.Name = "userInfoValuesFontOutlineColorPictureBox";
-            this.userInfoValuesFontOutlineColorPictureBox.Size = new System.Drawing.Size(16, 16);
-            this.userInfoValuesFontOutlineColorPictureBox.TabIndex = 45;
-            this.userInfoValuesFontOutlineColorPictureBox.TabStop = false;
-            this.userInfoValuesFontOutlineColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
-            // 
-            // userInfoValuesFontOutlineNumericUpDown
-            // 
-            this.userInfoValuesFontOutlineNumericUpDown.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(42)))), ((int)(((byte)(42)))));
-            this.userInfoValuesFontOutlineNumericUpDown.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.userInfoValuesFontOutlineNumericUpDown.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userInfoValuesFontOutlineNumericUpDown.ForeColor = System.Drawing.Color.White;
-            this.userInfoValuesFontOutlineNumericUpDown.Location = new System.Drawing.Point(352, 4);
-            this.userInfoValuesFontOutlineNumericUpDown.Maximum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.userInfoValuesFontOutlineNumericUpDown.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.userInfoValuesFontOutlineNumericUpDown.Name = "userInfoValuesFontOutlineNumericUpDown";
-            this.userInfoValuesFontOutlineNumericUpDown.Size = new System.Drawing.Size(43, 17);
-            this.userInfoValuesFontOutlineNumericUpDown.TabIndex = 45;
-            this.userInfoValuesFontOutlineNumericUpDown.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.userInfoValuesFontOutlineNumericUpDown.ValueChanged += new System.EventHandler(this.CustomNumericUpDown_ValueChanged);
-            // 
-            // userInfoValuesOutlineCheckBox
-            // 
-            this.userInfoValuesOutlineCheckBox.BackColor = System.Drawing.Color.Transparent;
-            this.userInfoValuesOutlineCheckBox.FlatAppearance.BorderSize = 0;
-            this.userInfoValuesOutlineCheckBox.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
-            this.userInfoValuesOutlineCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.userInfoValuesOutlineCheckBox.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userInfoValuesOutlineCheckBox.ForeColor = System.Drawing.Color.White;
-            this.userInfoValuesOutlineCheckBox.Location = new System.Drawing.Point(413, 6);
-            this.userInfoValuesOutlineCheckBox.Name = "userInfoValuesOutlineCheckBox";
-            this.userInfoValuesOutlineCheckBox.Size = new System.Drawing.Size(15, 14);
-            this.userInfoValuesOutlineCheckBox.TabIndex = 45;
-            this.userInfoValuesOutlineCheckBox.UseVisualStyleBackColor = true;
-            this.userInfoValuesOutlineCheckBox.CheckedChanged += new System.EventHandler(this.FeatureEnablementCheckBox_CheckedChanged);
             // 
             // panel50
             // 
@@ -7431,16 +6428,28 @@ namespace Retro_Achievement_Tracker
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.manualSearchLabel);
             this.panel1.Controls.Add(this.checkForUpdatesButton);
+            this.panel1.Controls.Add(this.manualSearchTextBox);
             this.panel1.Controls.Add(this.panel3);
+            this.panel1.Controls.Add(this.manualSearchButton);
             this.panel1.Controls.Add(this.panel2);
-            this.panel1.Controls.Add(this.startButton);
-            this.panel1.Controls.Add(this.stopButton);
-            this.panel1.Controls.Add(this.autoStartCheckbox);
             this.panel1.Location = new System.Drawing.Point(376, 6);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(405, 96);
             this.panel1.TabIndex = 10031;
+            // 
+            // manualSearchLabel
+            // 
+            this.manualSearchLabel.AutoSize = true;
+            this.manualSearchLabel.BackColor = System.Drawing.Color.Transparent;
+            this.manualSearchLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.manualSearchLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
+            this.manualSearchLabel.Location = new System.Drawing.Point(159, 68);
+            this.manualSearchLabel.Name = "manualSearchLabel";
+            this.manualSearchLabel.Size = new System.Drawing.Size(61, 16);
+            this.manualSearchLabel.TabIndex = 32;
+            this.manualSearchLabel.Text = "Game Id";
             // 
             // checkForUpdatesButton
             // 
@@ -7457,6 +6466,19 @@ namespace Retro_Achievement_Tracker
             this.checkForUpdatesButton.Text = "Check For Updates";
             this.checkForUpdatesButton.UseVisualStyleBackColor = false;
             // 
+            // manualSearchTextBox
+            // 
+            this.manualSearchTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
+            this.manualSearchTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.manualSearchTextBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.manualSearchTextBox.ForeColor = System.Drawing.Color.White;
+            this.manualSearchTextBox.Location = new System.Drawing.Point(226, 64);
+            this.manualSearchTextBox.Name = "manualSearchTextBox";
+            this.manualSearchTextBox.Size = new System.Drawing.Size(93, 23);
+            this.manualSearchTextBox.TabIndex = 30;
+            this.manualSearchTextBox.WordWrap = false;
+            this.manualSearchTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ManualSearchTextBox_KeyPress);
+            // 
             // panel3
             // 
             this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -7467,6 +6489,22 @@ namespace Retro_Achievement_Tracker
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(397, 28);
             this.panel3.TabIndex = 28;
+            // 
+            // manualSearchButton
+            // 
+            this.manualSearchButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
+            this.manualSearchButton.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.manualSearchButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.manualSearchButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.manualSearchButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
+            this.manualSearchButton.Location = new System.Drawing.Point(322, 61);
+            this.manualSearchButton.Margin = new System.Windows.Forms.Padding(0);
+            this.manualSearchButton.Name = "manualSearchButton";
+            this.manualSearchButton.Size = new System.Drawing.Size(75, 27);
+            this.manualSearchButton.TabIndex = 31;
+            this.manualSearchButton.Text = "Search";
+            this.manualSearchButton.UseVisualStyleBackColor = false;
+            this.manualSearchButton.Click += new System.EventHandler(this.ManualSearchButton_Click);
             // 
             // panel2
             // 
@@ -7903,7 +6941,6 @@ namespace Retro_Achievement_Tracker
             this.mainTabControl.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
             this.mainTabControl.Controls.Add(this.focusTabPage);
             this.mainTabControl.Controls.Add(this.alertsTabPage2);
-            this.mainTabControl.Controls.Add(this.userInfoTabPage);
             this.mainTabControl.Controls.Add(this.gameInfoTabPage);
             this.mainTabControl.Controls.Add(this.gameProgressTabPage);
             this.mainTabControl.Controls.Add(this.recentCheevosTabPage);
@@ -7982,18 +7019,6 @@ namespace Retro_Achievement_Tracker
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Mastery";
             // 
-            // userInfoTabPage
-            // 
-            this.userInfoTabPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
-            this.userInfoTabPage.Controls.Add(this.panel14);
-            this.userInfoTabPage.Controls.Add(this.panel21);
-            this.userInfoTabPage.Controls.Add(this.panel20);
-            this.userInfoTabPage.Location = new System.Drawing.Point(4, 25);
-            this.userInfoTabPage.Name = "userInfoTabPage";
-            this.userInfoTabPage.Size = new System.Drawing.Size(769, 369);
-            this.userInfoTabPage.TabIndex = 2;
-            this.userInfoTabPage.Text = "User Info";
-            // 
             // gameInfoTabPage
             // 
             this.gameInfoTabPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
@@ -8052,57 +7077,15 @@ namespace Retro_Achievement_Tracker
             this.relatedMediaTabPage.TabIndex = 7;
             this.relatedMediaTabPage.Text = "Related Media";
             // 
-            // manualSearchLabel
+            // pictureBox1
             // 
-            this.manualSearchLabel.AutoSize = true;
-            this.manualSearchLabel.BackColor = System.Drawing.Color.Transparent;
-            this.manualSearchLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.manualSearchLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.manualSearchLabel.Location = new System.Drawing.Point(3, 10);
-            this.manualSearchLabel.Name = "manualSearchLabel";
-            this.manualSearchLabel.Size = new System.Drawing.Size(61, 16);
-            this.manualSearchLabel.TabIndex = 32;
-            this.manualSearchLabel.Text = "Game Id";
-            // 
-            // manualSearchTextBox
-            // 
-            this.manualSearchTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
-            this.manualSearchTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.manualSearchTextBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.manualSearchTextBox.ForeColor = System.Drawing.Color.White;
-            this.manualSearchTextBox.Location = new System.Drawing.Point(70, 6);
-            this.manualSearchTextBox.Name = "manualSearchTextBox";
-            this.manualSearchTextBox.Size = new System.Drawing.Size(93, 23);
-            this.manualSearchTextBox.TabIndex = 30;
-            this.manualSearchTextBox.WordWrap = false;
-            this.manualSearchTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ManualSearchTextBox_KeyPress);
-            // 
-            // manualSearchButton
-            // 
-            this.manualSearchButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
-            this.manualSearchButton.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.manualSearchButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.manualSearchButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.manualSearchButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
-            this.manualSearchButton.Location = new System.Drawing.Point(166, 3);
-            this.manualSearchButton.Margin = new System.Windows.Forms.Padding(0);
-            this.manualSearchButton.Name = "manualSearchButton";
-            this.manualSearchButton.Size = new System.Drawing.Size(75, 27);
-            this.manualSearchButton.TabIndex = 31;
-            this.manualSearchButton.Text = "Search";
-            this.manualSearchButton.UseVisualStyleBackColor = false;
-            this.manualSearchButton.Click += new System.EventHandler(this.ManualSearchButton_Click);
-            // 
-            // panel8
-            // 
-            this.panel8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.panel8.Controls.Add(this.manualSearchLabel);
-            this.panel8.Controls.Add(this.manualSearchTextBox);
-            this.panel8.Controls.Add(this.manualSearchButton);
-            this.panel8.Location = new System.Drawing.Point(127, 68);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(243, 34);
-            this.panel8.TabIndex = 10037;
+            this.pictureBox1.Image = global::Retro_Achievement_Tracker.Properties.Resources.retro_achievements_banner;
+            this.pictureBox1.Location = new System.Drawing.Point(12, 15);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(361, 67);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 10034;
+            this.pictureBox1.TabStop = false;
             // 
             // MainWindow
             // 
@@ -8110,19 +7093,15 @@ namespace Retro_Achievement_Tracker
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.ClientSize = new System.Drawing.Size(786, 510);
-            this.Controls.Add(this.panel8);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.mainTabControl);
-            this.Controls.Add(this.autoPollingStatusPictureBox);
-            this.Controls.Add(this.autoPollingStatusLabel);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainWindow";
             this.Text = "Retro Achievements Tracker";
-            ((System.ComponentModel.ISupportInitialize)(this.userProfilePictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.focusAchievementPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gameInfoPictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.autoPollingStatusPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.alertsCustomAchievementScaleNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.alertsCustomAchievementXNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.alertsCustomAchievementYNumericUpDown)).EndInit();
@@ -8237,37 +7216,6 @@ namespace Retro_Achievement_Tracker
             this.panel96.ResumeLayout(false);
             this.panel97.ResumeLayout(false);
             this.panel98.ResumeLayout(false);
-            this.panel14.ResumeLayout(false);
-            this.panel14.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            this.panel21.ResumeLayout(false);
-            this.panel22.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            this.panel10.ResumeLayout(false);
-            this.panel10.PerformLayout();
-            this.panel13.ResumeLayout(false);
-            this.panel13.PerformLayout();
-            this.panel12.ResumeLayout(false);
-            this.panel12.PerformLayout();
-            this.panel11.ResumeLayout(false);
-            this.panel11.PerformLayout();
-            this.panel20.ResumeLayout(false);
-            this.panel20.PerformLayout();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
-            this.userInfoValuesPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.userInfoValuesFontColorPictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            this.panel5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.userInfoBackgroundColorPictureBox)).EndInit();
-            this.panel6.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.userInfoNamesFontColorPictureBox)).EndInit();
-            this.panel7.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.userInfoNamesFontOutlineNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.userInfoNamesFontOutlineColorPictureBox)).EndInit();
-            this.userInfoValuesOutlinePanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.userInfoValuesFontOutlineColorPictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.userInfoValuesFontOutlineNumericUpDown)).EndInit();
             this.panel50.ResumeLayout(false);
             this.panel119.ResumeLayout(false);
             this.panel117.ResumeLayout(false);
@@ -8420,14 +7368,12 @@ namespace Retro_Achievement_Tracker
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            this.userInfoTabPage.ResumeLayout(false);
             this.gameInfoTabPage.ResumeLayout(false);
             this.gameProgressTabPage.ResumeLayout(false);
             this.recentCheevosTabPage.ResumeLayout(false);
             this.cheevosListTabPage.ResumeLayout(false);
             this.relatedMediaTabPage.ResumeLayout(false);
-            this.panel8.ResumeLayout(false);
-            this.panel8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -8437,21 +7383,8 @@ namespace Retro_Achievement_Tracker
         private Label apiKeyLabel;
         private TextBox apiKeyTextBox;
         private TextBox usernameTextBox;
-        private PictureBox userProfilePictureBox;
-        private Button startButton;
-        private Button stopButton;
-        private CheckBox autoStartCheckbox;
-        private CheckBox userInfoAutoOpenWindowCheckbox;
-        private Button userInfoOpenWindowButton;
-        private Label autoPollingStatusLabel;
-        private PictureBox autoPollingStatusPictureBox;
-        private TextBox userInfoTruePointsTextBox;
-        private TextBox userInfoPointsTextBox;
-        private TextBox userInfoRatioTextBox;
-        private TextBox userInfoRankTextBox;
         private OpenFileDialog openFileDialog1;
         private ColorDialog colorDialog1;
-        private Button userInfoDefaultButton;
         private Button alertsPlayAchievementButton;
         private CheckBox alertsCustomAchievementEnableCheckbox;
         private Button alertsSelectCustomAchievementFileButton;
@@ -8472,10 +7405,6 @@ namespace Retro_Achievement_Tracker
         private CheckBox alertsCustomMasteryEnableCheckbox;
         private Button alertsSelectCustomMasteryFileButton;
         private Button alertsPlayMasteryButton;
-        private CheckBox userInfoTruePointsCheckBox;
-        private CheckBox userInfoRatioCheckBox;
-        private CheckBox userInfoPointsCheckBox;
-        private CheckBox userInfoRankCheckBox;
         private PictureBox gameInfoPictureBox;
         private Label recentAchievementsMaxListLabel;
         private NumericUpDown recentAchievementsMaxListNumericUpDown;
@@ -8495,23 +7424,7 @@ namespace Retro_Achievement_Tracker
         private NumericUpDown alertsCustomMasteryXNumericUpDown;
         private NumericUpDown alertsCustomMasteryOutNumericUpDown;
         private NumericUpDown alertsCustomMasteryInNumericUpDown;
-        private PictureBox userInfoBackgroundColorPictureBox;
-        private PictureBox userInfoNamesFontOutlineColorPictureBox;
-        private CheckBox userInfoNamesOutlineCheckBox;
-        private NumericUpDown userInfoNamesFontOutlineNumericUpDown;
-        private PictureBox userInfoNamesFontColorPictureBox;
-        private ComboBox userInfoNamesFontComboBox;
-        private PictureBox userInfoValuesFontOutlineColorPictureBox;
-        private CheckBox userInfoValuesOutlineCheckBox;
-        private NumericUpDown userInfoValuesFontOutlineNumericUpDown;
-        private PictureBox userInfoValuesFontColorPictureBox;
-        private ComboBox userInfoValuesFontComboBox;
         private CheckBox recentAchievementsAutoScrollCheckBox;
-        private CheckBox userInfoAdvancedCheckBox;
-        private Label userInfoRatioLabel;
-        private Label userInfoTruePointsLabel;
-        private Label userInfoPointsLabel;
-        private Label userInfoRankLabel;
         private Label gameProgressTruePoints1Label;
         private Label gameProgressPoints1Label;
         private Label gameProgressAchievements1Label;
@@ -8524,43 +7437,6 @@ namespace Retro_Achievement_Tracker
         private Panel panel1;
         private Panel panel2;
         private Panel panel3;
-        private Label userInfoUsernameLabel;
-        private PictureBox pictureBox2;
-        private PictureBox pictureBox3;
-        private Label label2;
-        private Panel panel6;
-        private Label userInfoNamesLabel;
-        private Label label4;
-        private Panel panel5;
-        private Label label3;
-        private Panel userInfoValuesOutlinePanel;
-        private Label label27;
-        private Panel userInfoValuesPanel;
-        private Label label26;
-        private Label label25;
-        private Label label15;
-        private Panel panel7;
-        private Label userInfoNamesOutlineLabel;
-        private Label label9;
-        private Label label32;
-        private Label label30;
-        private Label label29;
-        private Panel panel10;
-        private Label label31;
-        private PictureBox pictureBox4;
-        private Label label28;
-        private Panel panel12;
-        private Panel panel11;
-        private Label label33;
-        private Label label34;
-        private Panel panel13;
-        private Label label35;
-        private Label userInfoMottoLabel;
-        private Label label37;
-        private Panel panel4;
-        private Panel panel20;
-        private Panel panel21;
-        private Panel panel22;
         private Panel panel36;
         private Panel panel37;
         private Label label39;
@@ -8585,7 +7461,6 @@ namespace Retro_Achievement_Tracker
         private Label label77;
         private TextBox gameProgressPointsTextBox;
         private CheckBox gameProgressPointsCheckBox;
-        private Panel panel14;
         private Panel panel15;
         private Label label38;
         private Panel panel16;
@@ -8974,7 +7849,6 @@ namespace Retro_Achievement_Tracker
         private TabControl mainTabControl;
         private TabPage focusTabPage;
         private TabPage alertsTabPage2;
-        private TabPage userInfoTabPage;
         private TabPage gameInfoTabPage;
         private TabPage gameProgressTabPage;
         private TabPage recentCheevosTabPage;
@@ -9003,8 +7877,8 @@ namespace Retro_Achievement_Tracker
         private Label manualSearchLabel;
         private TextBox manualSearchTextBox;
         private Button manualSearchButton;
-        private Panel panel8;
         private Button unlockAchievementButton;
+        private PictureBox pictureBox1;
     }
 }
 

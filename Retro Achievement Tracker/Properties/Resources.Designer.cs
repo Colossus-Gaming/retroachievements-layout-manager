@@ -166,16 +166,6 @@ namespace Retro_Achievement_Tracker.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap green_button {
-            get {
-                object obj = ResourceManager.GetObject("green_button", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon image {
@@ -226,16 +216,6 @@ namespace Retro_Achievement_Tracker.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap red_button {
-            get {
-                object obj = ResourceManager.GetObject("red_button", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
         ///&lt;script&gt;
         ///    function setWindowBackgroundColor(color) {
@@ -267,28 +247,6 @@ namespace Retro_Achievement_Tracker.Properties {
             get {
                 object obj = ResourceManager.GetObject("retro_achievements_banner", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
-        ///&lt;html&gt;
-        ///&lt;head&gt;
-        ///    &lt;title&gt;&lt;/title&gt;
-        ///    &lt;meta charset=&quot;UTF-8&quot;&gt;
-        ///    &lt;script src=&quot;https://code.jquery.com/jquery-3.5.1.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
-        ///    &lt;script id=&quot;scripts&quot;&gt;
-        ///        /**
-        ///                     * textFit v2.3.1
-        ///                     * Previously known as jQuery.textFit
-        ///                     * 11/2014 by STRML (strml.github.com)
-        ///                     * MIT License
-        ///                     *
-        ///                     * To use: textFit(document.getElementById(&apos;target-div&apos;) [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string user_info_window {
-            get {
-                return ResourceManager.GetString("user_info_window", resourceCulture);
             }
         }
         
