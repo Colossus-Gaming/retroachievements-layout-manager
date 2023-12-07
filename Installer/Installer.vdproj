@@ -112,6 +112,12 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_935251B452739D941004045236FC0EFD"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_BDFF0201F73544788BFAD08A3DC79F0F"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -143,12 +149,6 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_29F3CB9E53D85EA772F3D84A179168BB"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_935251B452739D941004045236FC0EFD"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -505,7 +505,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Retro Achievement Tracker, Version=1.26.2.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Retro Achievement Tracker, Version=1.26.4.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_BDFF0201F73544788BFAD08A3DC79F0F"
@@ -716,15 +716,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:RA Layout Manager"
-        "ProductCode" = "8:{4E379BD9-9A47-4148-B357-82C7B48CAA87}"
-        "PackageCode" = "8:{A4C506C8-AC1F-43BC-95C9-20744F2AD46E}"
+        "ProductCode" = "8:{B3846718-2DD2-4248-A2ED-4EFC39F85930}"
+        "PackageCode" = "8:{CD754260-0D54-4AA9-9C54-74766060756F}"
         "UpgradeCode" = "8:{2AED59AC-3EBE-4936-A1A3-3282811ECB5E}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:FALSE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.119"
+        "ProductVersion" = "8:1.118"
         "Manufacturer" = "8:Colossus Gaming"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"

@@ -65,7 +65,7 @@ namespace Retro_Achievement_Tracker.Forms
             if (e.IsSuccess)
             {
                 RelatedMediaController.Instance.IsOpen = true;
-                RelatedMediaController.Instance.SetAllSettings();
+                RelatedMediaController.Instance.SetAllSettings(true);
             }
         }
     }

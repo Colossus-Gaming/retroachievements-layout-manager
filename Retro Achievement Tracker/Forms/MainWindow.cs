@@ -322,7 +322,7 @@ namespace Retro_Achievement_Tracker
 
                     UpdateActivePollingLabel("API_GetGameInfoAndUserProgress is down.");
 
-                    if(PreviouslyPlayedGameId != 0)
+                    if (PreviouslyPlayedGameId != 0)
                     {
                         ManualSearchButton_Click(null, null);
                     }
@@ -408,7 +408,7 @@ namespace Retro_Achievement_Tracker
                     UpdateLaunchBoxReferences();
 
                     StreamLabelController.Instance.ClearAllStreamLabels();
-                    RelatedMediaController.Instance.SetAllSettings();
+                    RelatedMediaController.Instance.SetAllSettings(false);
 
                     triggeredUpdate = true;
                 }
@@ -682,6 +682,8 @@ namespace Retro_Achievement_Tracker
             RelatedMediaController.Instance.RATitleScreenURI = GameInfoAndProgress.ImageTitle;
             RelatedMediaController.Instance.RAScreenshotURI = GameInfoAndProgress.ImageIngame;
             RelatedMediaController.Instance.RABoxArtURI = GameInfoAndProgress.ImageBoxArt;
+
+            RelatedMediaController.Instance.UpdateImage(false);
         }
         private void UpdateFocusButtons()
         {
@@ -730,6 +732,9 @@ namespace Retro_Achievement_Tracker
             alertsOpenWindowButton.Enabled = true;
             userInfoOpenWindowButton.Enabled = true;
             gameInfoOpenWindowButton.Enabled = true;
+            relatedMediaOpenWindowButton.Enabled = true;
+            achievementListOpenWindowButton.Enabled = true;
+            recentAchievementsOpenWindowButton.Enabled = true;
 
             StartTimer();
 
@@ -751,8 +756,9 @@ namespace Retro_Achievement_Tracker
             alertsOpenWindowButton.Enabled = canStart;
             userInfoOpenWindowButton.Enabled = canStart;
             gameInfoOpenWindowButton.Enabled = canStart;
-            recentAchievementsOpenWindowButton.Enabled = canStart;
+            relatedMediaOpenWindowButton.Enabled = canStart;
             achievementListOpenWindowButton.Enabled = canStart;
+            recentAchievementsOpenWindowButton.Enabled = canStart;
 
             apiKeyTextBox.Enabled = true;
             usernameTextBox.Enabled = true;
@@ -1280,6 +1286,7 @@ namespace Retro_Achievement_Tracker
                     break;
                 case "relatedMediaOpenWindowButton":
                     RelatedMediaController.Instance.Show();
+                    RelatedMediaController.Instance.SetAllSettings(true);
                     break;
             }
         }
@@ -2566,7 +2573,7 @@ namespace Retro_Achievement_Tracker
                     break;
             }
 
-            RelatedMediaController.Instance.SetAllSettings();
+            RelatedMediaController.Instance.SetAllSettings(false);
         }
         private void UpdateLaunchBoxIntegrationState()
         {
@@ -4107,9 +4114,10 @@ namespace Retro_Achievement_Tracker
             get
             {
                 return Settings.Default.previously_played_game;
-            }set
+            }
+            set
             {
-                Settings.Default.previously_played_game = (int) value;
+                Settings.Default.previously_played_game = (int)value;
             }
         }
     }
