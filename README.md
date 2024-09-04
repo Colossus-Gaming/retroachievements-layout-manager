@@ -1,6 +1,6 @@
 # Retro Achievements Tracker
 
-Tracker for hunting [Retro Achievements](https://retroachievements.org) and enchancing live-streaming layouts with Retro Achievement data about your profile and the game you're currently playing. Provides windows to provide notifications when achievements unlock as well as other values (rank, ratio, awards, etc.) change.
+Tracker for hunting **hardcore** [Retro Achievements](https://retroachievements.org) and enchancing live-streaming layouts with Retro Achievement data about your profile and the game you're currently playing. Provides windows to provide notifications when achievements unlock as well as other values (rank, ratio, awards, etc.) change.
 
 ## Main Window
 ![Default/Focus View](https://i.imgur.com/NT0q1ns.png)
