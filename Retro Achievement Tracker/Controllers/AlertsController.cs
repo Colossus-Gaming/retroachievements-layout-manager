@@ -48,14 +48,6 @@ namespace Retro_Achievement_Tracker.Controllers
             NotificationRequests = new ConcurrentQueue<NotificationRequest>();
 
             NotificationsStopwatch = new Stopwatch();
-
-            NotificationTimer = new Timer
-            {
-                Enabled = false
-            };
-
-            NotificationTimer.Tick += new EventHandler(CheckForNotifications);
-            NotificationTimer.Interval = 10;
         }
         public static AlertsController Instance
         {
@@ -189,17 +181,17 @@ namespace Retro_Achievement_Tracker.Controllers
             AchievementPlayingTime = 0;
             MasteryPlayingTime = 0;
 
-            int achievementInSpeed = GetAchievementInSpeed();
-            int achievementOutSpeed = GetAchievementOutSpeed();
+            int achievementInSpeed = AchievementInSpeed;
+            int achievementOutSpeed = AchievementOutSpeed;
 
-            int achievementInTime = GetAchievementInTime();
-            int achievementOutTime = GetAchievementOutTime();
+            int achievementInTime = AchievementInTime;
+            int achievementOutTime = AchievementOutTime;
 
-            int masteryInSpeed = GetMasteryInSpeed();
-            int masteryOutSpeed = GetMasteryOutSpeed();
+            int masteryInSpeed = MasteryInSpeed;
+            int masteryOutSpeed = MasteryOutSpeed;
 
-            int masteryInTime = GetMasteryInTime();
-            int masteryOutTime = GetMasteryOutTime();
+            int masteryInTime = MasteryInTime;
+            int masteryOutTime = MasteryOutTime;
 
             while (NotificationsStopwatch.IsRunning)
             {
@@ -221,7 +213,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 {
                     if (!AnimationInPlayed && AchievementPlayingTime > achievementInTime)
                     {
-                        AnimationDirection inDirection = GetAchievementInDirection();
+                        AnimationDirection inDirection = AchievementInDirection;
 
                         AlertsWindow.SetAchievementIn(achievementInSpeed, inDirection);
                         AnimationInPlayed = true;
@@ -230,7 +222,7 @@ namespace Retro_Achievement_Tracker.Controllers
                     }
                     else if (!AnimationOutPlayed && AchievementPlayingTime > achievementOutTime)
                     {
-                        AnimationDirection outDirection = GetAchievementOutDirection();
+                        AnimationDirection outDirection = AchievementOutDirection;
 
                         AlertsWindow.SetAchievementOut(achievementOutSpeed, outDirection);
                         AnimationOutPlayed = true;
@@ -242,7 +234,7 @@ namespace Retro_Achievement_Tracker.Controllers
                 {
                     if (!AnimationInPlayed && MasteryPlayingTime > masteryInTime)
                     {
-                        AnimationDirection inDirection = GetMasteryInDirection();
+                        AnimationDirection inDirection = MasteryInDirection;
 
                         AlertsWindow.SetMasteryIn(masteryInSpeed, inDirection);
                         AnimationInPlayed = true;
@@ -251,7 +243,7 @@ namespace Retro_Achievement_Tracker.Controllers
                     }
                     else if (!AnimationOutPlayed && MasteryPlayingTime > masteryOutTime)
                     {
-                        AnimationDirection outDirection = GetMasteryOutDirection();
+                        AnimationDirection outDirection = MasteryOutDirection;
 
                         AlertsWindow.SetMasteryOut(masteryOutSpeed, outDirection);
                         AnimationOutPlayed = true;
@@ -262,27 +254,6 @@ namespace Retro_Achievement_Tracker.Controllers
                 await Task.Delay(10);
             }
         }
-
-        private AnimationDirection GetMasteryOutDirection()
-        {
-            return CustomMasteryEnabled ? MasteryAnimationOut : AnimationDirection.UP;
-        }
-
-        private AnimationDirection GetMasteryInDirection()
-        {
-            return CustomMasteryEnabled ? MasteryAnimationIn : AnimationDirection.STATIC;
-        }
-
-        private AnimationDirection GetAchievementOutDirection()
-        {
-            return CustomAchievementEnabled ? AchievementAnimationOut : AnimationDirection.UP;
-        }
-
-        private AnimationDirection GetAchievementInDirection()
-        {
-            return CustomAchievementEnabled ? AchievementAnimationIn : AnimationDirection.STATIC;
-        }
-
         private void StartNewTimer()
         {
             NotificationTimer = new Timer
@@ -296,50 +267,7 @@ namespace Retro_Achievement_Tracker.Controllers
             NotificationTimer.Start();
         }
 
-        public void SetIsPlaying(bool isPlaying)
-        {
-            IsPlaying = isPlaying;
-        }
-
-        private int GetMasteryOutTime()
-        {
-            return CustomMasteryEnabled ? CustomMasteryOutTime : 5200;
-        }
-
-        private int GetMasteryInTime()
-        {
-            return CustomMasteryEnabled ? CustomMasteryInTime : 0;
-        }
-
-        private int GetMasteryOutSpeed()
-        {
-            return CustomMasteryEnabled ? CustomMasteryOutSpeed : 700;
-        }
-
-        private int GetMasteryInSpeed()
-        {
-            return CustomMasteryEnabled ? CustomMasteryInSpeed : 0;
-        }
-
-        private int GetAchievementOutTime()
-        {
-            return CustomAchievementEnabled ? CustomAchievementOutTime : 5200;
-        }
-
-        private int GetAchievementInTime()
-        {
-            return CustomAchievementEnabled ? CustomAchievementInTime : 0;
-        }
-
-        private int GetAchievementOutSpeed()
-        {
-            return CustomAchievementEnabled ? CustomAchievementOutSpeed : 700;
-        }
-
-        private int GetAchievementInSpeed()
-        {
-            return CustomAchievementEnabled ? CustomAchievementInSpeed : 0;
-        }
+        public void SetIsPlaying(bool isPlaying) => IsPlaying = isPlaying;
         public void SetAllSettings()
         {
             if (IsOpen)
@@ -457,15 +385,25 @@ namespace Retro_Achievement_Tracker.Controllers
                 IsPlaying = false;
             }
         }
+
         /**
          * Variables
          */
+        private AnimationDirection MasteryOutDirection => CustomMasteryEnabled ? MasteryAnimationOut : AnimationDirection.UP;
+        private AnimationDirection MasteryInDirection => CustomMasteryEnabled ? MasteryAnimationIn : AnimationDirection.STATIC;
+        private AnimationDirection AchievementOutDirection => CustomAchievementEnabled ? AchievementAnimationOut : AnimationDirection.UP;
+        private AnimationDirection AchievementInDirection => CustomAchievementEnabled ? AchievementAnimationIn : AnimationDirection.STATIC;
+        private int MasteryOutTime => CustomMasteryEnabled ? CustomMasteryOutTime : 5200;
+        private int MasteryInTime => CustomMasteryEnabled ? CustomMasteryInTime : 0;
+        private int MasteryOutSpeed => CustomMasteryEnabled ? CustomMasteryOutSpeed : 700;
+        private int MasteryInSpeed => CustomMasteryEnabled ? CustomMasteryInSpeed : 0;
+        private int AchievementOutTime => CustomAchievementEnabled ? CustomAchievementOutTime : 5200;
+        private int AchievementInTime => CustomAchievementEnabled ? CustomAchievementInTime : 0;
+        private int AchievementOutSpeed => CustomAchievementEnabled ? CustomAchievementOutSpeed : 700;
+        private int AchievementInSpeed => CustomAchievementEnabled ? CustomAchievementInSpeed : 0;
         public bool AchievementAlertEnable
         {
-            get
-            {
-                return Settings.Default.alerts_achievement_enable;
-            }
+            get => Settings.Default.alerts_achievement_enable;
             set
             {
                 Settings.Default.alerts_achievement_enable = value;
@@ -476,10 +414,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool MasteryAlertEnable
         {
-            get
-            {
-                return Settings.Default.alerts_mastery_enable;
-            }
+            get => Settings.Default.alerts_mastery_enable;
             set
             {
                 Settings.Default.alerts_mastery_enable = value;
@@ -490,10 +425,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool AdvancedSettingsEnabled
         {
-            get
-            {
-                return Settings.Default.alerts_advanced_options_enabled;
-            }
+            get => Settings.Default.alerts_advanced_options_enabled;
             set
             {
                 Settings.Default.alerts_advanced_options_enabled = value;
@@ -530,10 +462,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string SimpleFontColor
         {
-            get
-            {
-                return Settings.Default.notification_font_color_hex_code;
-            }
+            get => Settings.Default.notification_font_color_hex_code;
             set
             {
                 Settings.Default.notification_font_color_hex_code = value;
@@ -544,10 +473,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string SimpleFontOutlineColor
         {
-            get
-            {
-                return Settings.Default.notification_font_outline_color_hex;
-            }
+            get => Settings.Default.notification_font_outline_color_hex;
             set
             {
                 Settings.Default.notification_font_outline_color_hex = value;
@@ -558,10 +484,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public int SimpleFontOutlineSize
         {
-            get
-            {
-                return Settings.Default.notification_font_outline_size;
-            }
+            get => Settings.Default.notification_font_outline_size;
             set
             {
                 Settings.Default.notification_font_outline_size = value;
@@ -572,10 +495,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool SimpleFontOutlineEnabled
         {
-            get
-            {
-                return Settings.Default.notification_font_outline_enabled;
-            }
+            get => Settings.Default.notification_font_outline_enabled;
             set
             {
                 Settings.Default.notification_font_outline_enabled = value;
@@ -663,10 +583,7 @@ namespace Retro_Achievement_Tracker.Controllers
 
         public string TitleColor
         {
-            get
-            {
-                return Settings.Default.alerts_title_color;
-            }
+            get => Settings.Default.alerts_title_color;
             set
             {
                 Settings.Default.alerts_title_color = value;
@@ -677,10 +594,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string DescriptionColor
         {
-            get
-            {
-                return Settings.Default.alerts_description_color;
-            }
+            get => Settings.Default.alerts_description_color;
             set
             {
                 Settings.Default.alerts_description_color = value;
@@ -691,10 +605,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string PointsColor
         {
-            get
-            {
-                return Settings.Default.alerts_points_color;
-            }
+            get => Settings.Default.alerts_points_color;
             set
             {
                 Settings.Default.alerts_points_color = value;
@@ -705,10 +616,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string LineColor
         {
-            get
-            {
-                return Settings.Default.alerts_line_color;
-            }
+            get => Settings.Default.alerts_line_color;
             set
             {
                 Settings.Default.alerts_line_color = value;
@@ -719,10 +627,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool TitleOutlineEnabled
         {
-            get
-            {
-                return Settings.Default.alerts_title_outline_enabled;
-            }
+            get => Settings.Default.alerts_title_outline_enabled;
             set
             {
                 Settings.Default.alerts_title_outline_enabled = value;
@@ -733,10 +638,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool DescriptionOutlineEnabled
         {
-            get
-            {
-                return Settings.Default.alerts_description_outline_enabled;
-            }
+            get => Settings.Default.alerts_description_outline_enabled;
             set
             {
                 Settings.Default.alerts_description_outline_enabled = value;
@@ -747,10 +649,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool PointsOutlineEnabled
         {
-            get
-            {
-                return Settings.Default.alerts_points_outline_enabled;
-            }
+            get => Settings.Default.alerts_points_outline_enabled;
             set
             {
                 Settings.Default.alerts_points_outline_enabled = value;
@@ -761,10 +660,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool LineOutlineEnabled
         {
-            get
-            {
-                return Settings.Default.alerts_line_outline_enabled;
-            }
+            get => Settings.Default.alerts_line_outline_enabled;
             set
             {
                 Settings.Default.alerts_line_outline_enabled = value;
@@ -775,10 +671,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string TitleOutlineColor
         {
-            get
-            {
-                return Settings.Default.alerts_title_outline_color;
-            }
+            get => Settings.Default.alerts_title_outline_color;
             set
             {
                 Settings.Default.alerts_title_outline_color = value;
@@ -789,10 +682,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string DescriptionOutlineColor
         {
-            get
-            {
-                return Settings.Default.alerts_description_outline_color;
-            }
+            get => Settings.Default.alerts_description_outline_color;
             set
             {
                 Settings.Default.alerts_description_outline_color = value;
@@ -803,10 +693,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string PointsOutlineColor
         {
-            get
-            {
-                return Settings.Default.alerts_points_outline_color;
-            }
+            get => Settings.Default.alerts_points_outline_color;
             set
             {
                 Settings.Default.alerts_points_outline_color = value;
@@ -817,10 +704,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string LineOutlineColor
         {
-            get
-            {
-                return Settings.Default.alerts_line_outline_color;
-            }
+            get => Settings.Default.alerts_line_outline_color;
             set
             {
                 Settings.Default.alerts_line_outline_color = value;
@@ -831,10 +715,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public int TitleOutlineSize
         {
-            get
-            {
-                return Settings.Default.alerts_title_outline_size;
-            }
+            get => Settings.Default.alerts_title_outline_size;
             set
             {
                 Settings.Default.alerts_title_outline_size = value;
@@ -845,10 +726,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public int DescriptionOutlineSize
         {
-            get
-            {
-                return Settings.Default.alerts_description_outline_size;
-            }
+            get => Settings.Default.alerts_description_outline_size;
             set
             {
                 Settings.Default.alerts_description_outline_size = value;
@@ -859,10 +737,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public int PointsOutlineSize
         {
-            get
-            {
-                return Settings.Default.alerts_points_outline_size;
-            }
+            get => Settings.Default.alerts_points_outline_size;
             set
             {
                 Settings.Default.alerts_points_outline_size = value;
@@ -873,10 +748,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public int LineOutlineSize
         {
-            get
-            {
-                return Settings.Default.alerts_line_outline_size;
-            }
+            get => Settings.Default.alerts_line_outline_size;
             set
             {
                 Settings.Default.alerts_line_outline_size = value;
@@ -887,10 +759,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool BorderEnabled
         {
-            get
-            {
-                return Settings.Default.notifications_border_enable;
-            }
+            get => Settings.Default.notifications_border_enable;
             set
             {
                 Settings.Default.notifications_border_enable = value;
@@ -901,10 +770,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string BorderBackgroundColor
         {
-            get
-            {
-                return Settings.Default.notifications_background_color;
-            }
+            get => Settings.Default.notifications_background_color;
             set
             {
                 Settings.Default.notifications_background_color = value;
@@ -915,10 +781,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string WindowBackgroundColor
         {
-            get
-            {
-                return Settings.Default.alerts_window_background_color;
-            }
+            get => Settings.Default.alerts_window_background_color;
             set
             {
                 Settings.Default.alerts_window_background_color = value;
@@ -929,10 +792,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool CustomAchievementEnabled
         {
-            get
-            {
-                return Settings.Default.notification_custom_achievement_enable;
-            }
+            get => Settings.Default.notification_custom_achievement_enable;
             set
             {
                 Settings.Default.notification_custom_achievement_enable = value;
@@ -948,10 +808,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool CustomMasteryEnabled
         {
-            get
-            {
-                return Settings.Default.notification_custom_mastery_enable;
-            }
+            get => Settings.Default.notification_custom_mastery_enable;
             set
             {
                 Settings.Default.notification_custom_mastery_enable = value;
@@ -968,10 +825,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public int CustomAchievementX
         {
-            get
-            {
-                return Settings.Default.notification_custom_achievement_x;
-            }
+            get => Settings.Default.notification_custom_achievement_x;
             set
             {
                 Settings.Default.notification_custom_achievement_x = value;
@@ -982,10 +836,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public int CustomAchievementY
         {
-            get
-            {
-                return Settings.Default.notification_custom_achievement_y;
-            }
+            get => Settings.Default.notification_custom_achievement_y;
             set
             {
                 Settings.Default.notification_custom_achievement_y = value;
@@ -996,10 +847,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public int CustomMasteryX
         {
-            get
-            {
-                return Settings.Default.notification_custom_mastery_x;
-            }
+            get => Settings.Default.notification_custom_mastery_x;
             set
             {
                 Settings.Default.notification_custom_mastery_x = value;
@@ -1010,10 +858,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public int CustomMasteryY
         {
-            get
-            {
-                return Settings.Default.notification_custom_mastery_y;
-            }
+            get => Settings.Default.notification_custom_mastery_y;
             set
             {
                 Settings.Default.notification_custom_mastery_y = value;
@@ -1024,10 +869,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public decimal CustomAchievementScale
         {
-            get
-            {
-                return Settings.Default.notification_custom_achievement_scale;
-            }
+            get => Settings.Default.notification_custom_achievement_scale;
             set
             {
                 Settings.Default.notification_custom_achievement_scale = value;
@@ -1038,10 +880,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public decimal CustomMasteryScale
         {
-            get
-            {
-                return Settings.Default.notification_custom_mastery_scale;
-            }
+            get => Settings.Default.notification_custom_mastery_scale;
             set
             {
                 Settings.Default.notification_custom_mastery_scale = value;
@@ -1052,10 +891,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public int CustomAchievementInTime
         {
-            get
-            {
-                return Settings.Default.notification_custom_achievement_fade_in;
-            }
+            get => Settings.Default.notification_custom_achievement_fade_in;
             set
             {
                 Settings.Default.notification_custom_achievement_fade_in = value;
@@ -1066,10 +902,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public int CustomAchievementOutTime
         {
-            get
-            {
-                return Settings.Default.notification_custom_achievement_fade_out;
-            }
+            get => Settings.Default.notification_custom_achievement_fade_out;
             set
             {
                 Settings.Default.notification_custom_achievement_fade_out = value;
@@ -1080,10 +913,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public int CustomMasteryInTime
         {
-            get
-            {
-                return Settings.Default.notification_custom_mastery_fade_in;
-            }
+            get => Settings.Default.notification_custom_mastery_fade_in;
             set
             {
                 Settings.Default.notification_custom_mastery_fade_in = value;
@@ -1094,10 +924,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public int CustomMasteryOutTime
         {
-            get
-            {
-                return Settings.Default.notification_custom_mastery_fade_out;
-            }
+            get => Settings.Default.notification_custom_mastery_fade_out;
             set
             {
                 Settings.Default.notification_custom_mastery_fade_out = value;
@@ -1108,10 +935,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public int CustomAchievementInSpeed
         {
-            get
-            {
-                return Settings.Default.alerts_custom_achievement_in_speed;
-            }
+            get => Settings.Default.alerts_custom_achievement_in_speed;
             set
             {
                 Settings.Default.alerts_custom_achievement_in_speed = value;
@@ -1122,10 +946,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public int CustomAchievementOutSpeed
         {
-            get
-            {
-                return Settings.Default.alerts_custom_achievement_out_speed;
-            }
+            get => Settings.Default.alerts_custom_achievement_out_speed;
             set
             {
                 Settings.Default.alerts_custom_achievement_out_speed = value;
@@ -1136,10 +957,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public int CustomMasteryInSpeed
         {
-            get
-            {
-                return Settings.Default.alerts_custom_mastery_in_speed;
-            }
+            get => Settings.Default.alerts_custom_mastery_in_speed;
             set
             {
                 Settings.Default.alerts_custom_mastery_in_speed = value;
@@ -1150,10 +968,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public int CustomMasteryOutSpeed
         {
-            get
-            {
-                return Settings.Default.alerts_custom_mastery_out_speed;
-            }
+            get => Settings.Default.alerts_custom_mastery_out_speed;
             set
             {
                 Settings.Default.alerts_custom_mastery_out_speed = value;
@@ -1256,10 +1071,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string CustomAchievementFile
         {
-            get
-            {
-                return Settings.Default.notification_custom_achievement_file;
-            }
+            get => Settings.Default.notification_custom_achievement_file;
             set
             {
                 Settings.Default.notification_custom_achievement_file = value;
@@ -1270,10 +1082,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string CustomMasteryFile
         {
-            get
-            {
-                return Settings.Default.notification_custom_mastery_file;
-            }
+            get => Settings.Default.notification_custom_mastery_file;
             set
             {
                 Settings.Default.notification_custom_mastery_file = value;
@@ -1284,10 +1093,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool AutoLaunch
         {
-            get
-            {
-                return Settings.Default.auto_notifications;
-            }
+            get => Settings.Default.auto_notifications;
             set
             {
                 Settings.Default.auto_notifications = value;

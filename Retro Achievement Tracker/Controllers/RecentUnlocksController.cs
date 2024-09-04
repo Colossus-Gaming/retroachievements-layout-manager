@@ -149,10 +149,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public int MaxListSize
         {
-            get
-            {
-                return Settings.Default.recent_achievements_max_list_size;
-            }
+            get => Settings.Default.recent_achievements_max_list_size;
             set
             {
                 Settings.Default.recent_achievements_max_list_size = value;
@@ -161,10 +158,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool AutoScroll
         {
-            get
-            {
-                return Settings.Default.recent_achievements_auto_scroll;
-            }
+            get => Settings.Default.recent_achievements_auto_scroll;
             set
             {
                 Settings.Default.recent_achievements_auto_scroll = value;
@@ -182,10 +176,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool AdvancedSettingsEnabled
         {
-            get
-            {
-                return Settings.Default.last_five_advanced_options_enabled;
-            }
+            get => Settings.Default.last_five_advanced_options_enabled;
             set
             {
                 Settings.Default.last_five_advanced_options_enabled = value;
@@ -196,10 +187,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string WindowBackgroundColor
         {
-            get
-            {
-                return Settings.Default.last_five_window_background_color;
-            }
+            get => Settings.Default.last_five_window_background_color;
             set
             {
                 Settings.Default.last_five_window_background_color = value;
@@ -310,10 +298,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string TitleColor
         {
-            get
-            {
-                return Settings.Default.last_five_title_color;
-            }
+            get => Settings.Default.last_five_title_color;
             set
             {
                 Settings.Default.last_five_title_color = value;
@@ -324,10 +309,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string DateColor
         {
-            get
-            {
-                return Settings.Default.last_five_date_color;
-            }
+            get => Settings.Default.last_five_date_color;
             set
             {
                 Settings.Default.last_five_date_color = value;
@@ -338,10 +320,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string LineColor
         {
-            get
-            {
-                return Settings.Default.last_five_line_color;
-            }
+            get => Settings.Default.last_five_line_color;
             set
             {
                 Settings.Default.last_five_line_color = value;
@@ -352,10 +331,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string PointsColor
         {
-            get
-            {
-                return Settings.Default.last_five_points_color;
-            }
+            get => Settings.Default.last_five_points_color;
             set
             {
                 Settings.Default.last_five_points_color = value;
@@ -366,10 +342,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string TitleOutlineColor
         {
-            get
-            {
-                return Settings.Default.last_five_title_outline_color;
-            }
+            get => Settings.Default.last_five_title_outline_color;
             set
             {
                 Settings.Default.last_five_title_outline_color = value;
@@ -380,10 +353,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string DateOutlineColor
         {
-            get
-            {
-                return Settings.Default.last_five_date_outline_color;
-            }
+            get => Settings.Default.last_five_date_outline_color;
             set
             {
                 Settings.Default.last_five_date_outline_color = value;
@@ -394,10 +364,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string PointsOutlineColor
         {
-            get
-            {
-                return Settings.Default.last_five_points_outline_color;
-            }
+            get => Settings.Default.last_five_points_outline_color;
             set
             {
                 Settings.Default.last_five_points_outline_color = value;
@@ -408,10 +375,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string LineOutlineColor
         {
-            get
-            {
-                return Settings.Default.last_five_line_outline_color;
-            }
+            get => Settings.Default.last_five_line_outline_color;
             set
             {
                 Settings.Default.last_five_line_outline_color = value;
@@ -422,10 +386,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public int TitleOutlineSize
         {
-            get
-            {
-                return Settings.Default.last_five_title_outline_size;
-            }
+            get => Settings.Default.last_five_title_outline_size;
             set
             {
                 Settings.Default.last_five_title_outline_size = value;
@@ -436,10 +397,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public int DescriptionOutlineSize
         {
-            get
-            {
-                return Settings.Default.last_five_date_outline_size;
-            }
+            get => Settings.Default.last_five_date_outline_size;
             set
             {
                 Settings.Default.last_five_date_outline_size = value;
@@ -450,10 +408,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public int PointsOutlineSize
         {
-            get
-            {
-                return Settings.Default.last_five_points_outline_size;
-            }
+            get => Settings.Default.last_five_points_outline_size;
             set
             {
                 Settings.Default.last_five_points_outline_size = value;
@@ -464,10 +419,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public int LineOutlineSize
         {
-            get
-            {
-                return Settings.Default.last_five_line_outline_size;
-            }
+            get => Settings.Default.last_five_line_outline_size;
             set
             {
                 Settings.Default.last_five_line_outline_size = value;
@@ -478,10 +430,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string SimpleFontColor
         {
-            get
-            {
-                return Settings.Default.last_five_font_color_hex_code;
-            }
+            get => Settings.Default.last_five_font_color_hex_code;
             set
             {
                 Settings.Default.last_five_font_color_hex_code = value;
@@ -492,10 +441,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string SimpleFontOutlineColor
         {
-            get
-            {
-                return Settings.Default.last_five_font_outline_color_hex;
-            }
+            get => Settings.Default.last_five_font_outline_color_hex;
             set
             {
                 Settings.Default.last_five_font_outline_color_hex = value;
@@ -506,10 +452,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public int SimpleFontOutlineSize
         {
-            get
-            {
-                return Settings.Default.last_five_font_outline_size;
-            }
+            get => Settings.Default.last_five_font_outline_size;
             set
             {
                 Settings.Default.last_five_font_outline_size = value;
@@ -520,10 +463,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool SimpleFontOutlineEnabled
         {
-            get
-            {
-                return Settings.Default.last_five_font_outline_enabled;
-            }
+            get => Settings.Default.last_five_font_outline_enabled;
             set
             {
                 Settings.Default.last_five_font_outline_enabled = value;
@@ -534,10 +474,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool TitleOutlineEnabled
         {
-            get
-            {
-                return Settings.Default.last_five_title_outline_enabled;
-            }
+            get => Settings.Default.last_five_title_outline_enabled;
             set
             {
                 Settings.Default.last_five_title_outline_enabled = value;
@@ -548,10 +485,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool DescriptionOutlineEnabled
         {
-            get
-            {
-                return Settings.Default.last_five_date_outline_enabled;
-            }
+            get => Settings.Default.last_five_date_outline_enabled;
             set
             {
                 Settings.Default.last_five_date_outline_enabled = value;
@@ -562,10 +496,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool PointsOutlineEnabled
         {
-            get
-            {
-                return Settings.Default.last_five_points_outline_enabled;
-            }
+            get => Settings.Default.last_five_points_outline_enabled;
             set
             {
                 Settings.Default.last_five_points_outline_enabled = value;
@@ -576,10 +507,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool LineOutlineEnabled
         {
-            get
-            {
-                return Settings.Default.last_five_line_outline_enabled;
-            }
+            get => Settings.Default.last_five_line_outline_enabled;
             set
             {
                 Settings.Default.last_five_line_outline_enabled = value;
@@ -590,10 +518,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool BorderEnabled
         {
-            get
-            {
-                return Settings.Default.last_five_border_enable;
-            }
+            get => Settings.Default.last_five_border_enable;
             set
             {
                 Settings.Default.last_five_border_enable = value;
@@ -604,10 +529,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string BorderBackgroundColor
         {
-            get
-            {
-                return Settings.Default.last_five_background_color;
-            }
+            get => Settings.Default.last_five_background_color;
             set
             {
                 Settings.Default.last_five_background_color = value;
@@ -632,10 +554,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool AutoLaunch
         {
-            get
-            {
-                return Settings.Default.auto_last_five;
-            }
+            get => Settings.Default.auto_last_five;
             set
             {
                 Settings.Default.auto_last_five = value;

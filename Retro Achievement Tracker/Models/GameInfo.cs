@@ -13,7 +13,7 @@ namespace Retro_Achievement_Tracker.Models
         private long _consoleId;
         public long ConsoleId
         {
-            get { return _consoleId; }
+            get => _consoleId;
             set
             {
                 switch (value)

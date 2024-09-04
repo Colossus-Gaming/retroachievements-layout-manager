@@ -186,10 +186,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string WindowBackgroundColor
         {
-            get
-            {
-                return Settings.Default.game_stats_window_background_color;
-            }
+            get => Settings.Default.game_stats_window_background_color;
             set
             {
                 Settings.Default.game_stats_window_background_color = value;
@@ -200,10 +197,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool AdvancedSettingsEnabled
         {
-            get
-            {
-                return Settings.Default.game_stats_advanced_options_enabled;
-            }
+            get => Settings.Default.game_stats_advanced_options_enabled;
             set
             {
                 Settings.Default.game_stats_advanced_options_enabled = value;
@@ -239,10 +233,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string SimpleFontColor
         {
-            get
-            {
-                return Settings.Default.game_stats_font_color_hex_code;
-            }
+            get => Settings.Default.game_stats_font_color_hex_code;
             set
             {
                 Settings.Default.game_stats_font_color_hex_code = value;
@@ -253,10 +244,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string SimpleFontOutlineColor
         {
-            get
-            {
-                return Settings.Default.game_stats_font_outline_color_hex;
-            }
+            get => Settings.Default.game_stats_font_outline_color_hex;
             set
             {
                 Settings.Default.game_stats_font_outline_color_hex = value;
@@ -267,10 +255,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public int SimpleFontOutlineSize
         {
-            get
-            {
-                return Settings.Default.game_stats_font_outline_size;
-            }
+            get => Settings.Default.game_stats_font_outline_size;
             set
             {
                 Settings.Default.game_stats_font_outline_size = value;
@@ -281,10 +266,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool SimpleFontOutlineEnabled
         {
-            get
-            {
-                return Settings.Default.game_stats_font_outline_enabled;
-            }
+            get => Settings.Default.game_stats_font_outline_enabled;
             set
             {
                 Settings.Default.game_stats_font_outline_enabled = value;
@@ -347,10 +329,7 @@ namespace Retro_Achievement_Tracker.Controllers
 
         public string NameColor
         {
-            get
-            {
-                return Settings.Default.game_stats_name_color;
-            }
+            get => Settings.Default.game_stats_name_color;
             set
             {
                 Settings.Default.game_stats_name_color = value;
@@ -361,10 +340,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string ValueColor
         {
-            get
-            {
-                return Settings.Default.game_stats_value_color;
-            }
+            get => Settings.Default.game_stats_value_color;
             set
             {
                 Settings.Default.game_stats_value_color = value;
@@ -375,10 +351,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool NameOutlineEnabled
         {
-            get
-            {
-                return Settings.Default.game_stats_name_outline_enabled;
-            }
+            get => Settings.Default.game_stats_name_outline_enabled;
             set
             {
                 Settings.Default.game_stats_name_outline_enabled = value;
@@ -389,10 +362,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool ValueOutlineEnabled
         {
-            get
-            {
-                return Settings.Default.game_stats_value_outline_enabled;
-            }
+            get => Settings.Default.game_stats_value_outline_enabled;
             set
             {
                 Settings.Default.game_stats_value_outline_enabled = value;
@@ -403,10 +373,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string NameOutlineColor
         {
-            get
-            {
-                return Settings.Default.game_stats_name_outline_color;
-            }
+            get => Settings.Default.game_stats_name_outline_color;
             set
             {
                 Settings.Default.game_stats_name_outline_color = value;
@@ -417,10 +384,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string ValueOutlineColor
         {
-            get
-            {
-                return Settings.Default.game_stats_value_outline_color;
-            }
+            get => Settings.Default.game_stats_value_outline_color;
             set
             {
                 Settings.Default.game_stats_value_outline_color = value;
@@ -431,10 +395,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public int NameOutlineSize
         {
-            get
-            {
-                return Settings.Default.game_stats_name_outline_size;
-            }
+            get => Settings.Default.game_stats_name_outline_size;
             set
             {
                 Settings.Default.game_stats_name_outline_size = value;
@@ -445,10 +406,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public int ValueOutlineSize
         {
-            get
-            {
-                return Settings.Default.stats_value_outline_size;
-            }
+            get => Settings.Default.stats_value_outline_size;
             set
             {
                 Settings.Default.stats_value_outline_size = value;
@@ -459,10 +417,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string RatioName
         {
-            get
-            {
-                return Settings.Default.stats_game_ratio_name;
-            }
+            get => Settings.Default.stats_game_ratio_name;
             set
             {
                 Settings.Default.stats_game_ratio_name = value;
@@ -473,10 +428,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string PointsName
         {
-            get
-            {
-                return Settings.Default.stats_game_points_name;
-            }
+            get => Settings.Default.stats_game_points_name;
             set
             {
                 Settings.Default.stats_game_points_name = value;
@@ -487,10 +439,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string TruePointsName
         {
-            get
-            {
-                return Settings.Default.stats_game_true_points_name;
-            }
+            get => Settings.Default.stats_game_true_points_name;
             set
             {
                 Settings.Default.stats_game_true_points_name = value;
@@ -501,10 +450,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string AchievementsName
         {
-            get
-            {
-                return Settings.Default.stats_game_achievements_name;
-            }
+            get => Settings.Default.stats_game_achievements_name;
             set
             {
                 Settings.Default.stats_game_achievements_name = value;
@@ -515,10 +461,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string CompletedName
         {
-            get
-            {
-                return Settings.Default.stats_completed_name;
-            }
+            get => Settings.Default.stats_completed_name;
             set
             {
                 Settings.Default.stats_completed_name = value;
@@ -529,10 +472,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool RatioEnabled
         {
-            get
-            {
-                return Settings.Default.stats_game_ratio_enabled;
-            }
+            get => Settings.Default.stats_game_ratio_enabled;
             set
             {
                 Settings.Default.stats_game_ratio_enabled = value;
@@ -543,10 +483,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool PointsEnabled
         {
-            get
-            {
-                return Settings.Default.stats_game_points_enabled;
-            }
+            get => Settings.Default.stats_game_points_enabled;
             set
             {
                 Settings.Default.stats_game_points_enabled = value;
@@ -557,10 +494,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool TruePointsEnabled
         {
-            get
-            {
-                return Settings.Default.stats_game_true_points_enabled;
-            }
+            get => Settings.Default.stats_game_true_points_enabled;
             set
             {
                 Settings.Default.stats_game_true_points_enabled = value;
@@ -571,10 +505,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool AchievementsEnabled
         {
-            get
-            {
-                return Settings.Default.stats_game_achievements_enabled;
-            }
+            get => Settings.Default.stats_game_achievements_enabled;
             set
             {
                 Settings.Default.stats_game_achievements_enabled = value;
@@ -585,10 +516,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool CompletedEnabled
         {
-            get
-            {
-                return Settings.Default.stats_completed_enabled;
-            }
+            get => Settings.Default.stats_completed_enabled;
             set
             {
                 Settings.Default.stats_completed_enabled = value;
@@ -599,10 +527,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool AutoLaunch
         {
-            get
-            {
-                return Settings.Default.auto_game_stats;
-            }
+            get => Settings.Default.auto_game_stats;
             set
             {
                 Settings.Default.auto_game_stats = value;
@@ -611,10 +536,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string DividerCharacter
         {
-            get
-            {
-                return Settings.Default.game_stats_divider_character_selection;
-            }
+            get => Settings.Default.game_stats_divider_character_selection;
             set
             {
                 Settings.Default.game_stats_divider_character_selection = value;

@@ -251,10 +251,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool AutoScroll
         {
-            get
-            {
-                return Settings.Default.achievement_list_auto_scroll;
-            }
+            get => Settings.Default.achievement_list_auto_scroll;
             set
             {
                 Settings.Default.achievement_list_auto_scroll = value;
@@ -272,10 +269,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool AutoLaunch
         {
-            get
-            {
-                return Settings.Default.auto_achievement_list;
-            }
+            get => Settings.Default.auto_achievement_list;
             set
             {
                 Settings.Default.auto_achievement_list = value;
@@ -284,10 +278,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string WindowBackgroundColor
         {
-            get
-            {
-                return Settings.Default.achievement_list_window_background_color;
-            }
+            get => Settings.Default.achievement_list_window_background_color;
             set
             {
                 Settings.Default.achievement_list_window_background_color = value;

@@ -135,10 +135,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string WindowBackgroundColor
         {
-            get
-            {
-                return Settings.Default.related_media_window_background_color;
-            }
+            get => Settings.Default.related_media_window_background_color;
             set
             {
                 Settings.Default.related_media_window_background_color = value;
@@ -284,10 +281,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string LaunchBoxFilePath
         {
-            get
-            {
-                return Settings.Default.related_media_launchbox_filepath;
-            }
+            get => Settings.Default.related_media_launchbox_filepath;
             set
             {
                 Settings.Default.related_media_launchbox_filepath = value;
@@ -296,10 +290,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool AutoLaunch
         {
-            get
-            {
-                return Settings.Default.auto_related_media;
-            }
+            get => Settings.Default.auto_related_media;
             set
             {
                 Settings.Default.auto_related_media = value;

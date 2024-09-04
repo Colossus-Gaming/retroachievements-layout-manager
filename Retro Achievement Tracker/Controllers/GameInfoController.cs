@@ -171,10 +171,7 @@ namespace Retro_Achievement_Tracker.Controllers
          */
         public string WindowBackgroundColor
         {
-            get
-            {
-                return Settings.Default.game_info_window_background_color;
-            }
+            get => Settings.Default.game_info_window_background_color;
             set
             {
                 Settings.Default.game_info_window_background_color = value;
@@ -185,10 +182,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool AdvancedSettingsEnabled
         {
-            get
-            {
-                return Settings.Default.game_info_advanced_options_enabled;
-            }
+            get => Settings.Default.game_info_advanced_options_enabled;
             set
             {
                 Settings.Default.game_info_advanced_options_enabled = value;
@@ -199,10 +193,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string TitleName
         {
-            get
-            {
-                return Settings.Default.game_info_title_name;
-            }
+            get => Settings.Default.game_info_title_name;
             set
             {
                 Settings.Default.game_info_title_name = value;
@@ -213,10 +204,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string ConsoleName
         {
-            get
-            {
-                return Settings.Default.game_info_console_name;
-            }
+            get => Settings.Default.game_info_console_name;
             set
             {
                 Settings.Default.game_info_console_name = value;
@@ -227,10 +215,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string DeveloperName
         {
-            get
-            {
-                return Settings.Default.game_info_developer_name;
-            }
+            get => Settings.Default.game_info_developer_name;
             set
             {
                 Settings.Default.game_info_developer_name = value;
@@ -241,10 +226,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string PublisherName
         {
-            get
-            {
-                return Settings.Default.game_info_publisher_name;
-            }
+            get => Settings.Default.game_info_publisher_name;
             set
             {
                 Settings.Default.game_info_publisher_name = value;
@@ -255,10 +237,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string GenreName
         {
-            get
-            {
-                return Settings.Default.game_info_genre_name;
-            }
+            get => Settings.Default.game_info_genre_name;
             set
             {
                 Settings.Default.game_info_genre_name = value;
@@ -269,10 +248,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string ReleasedDateName
         {
-            get
-            {
-                return Settings.Default.game_info_release_date_name;
-            }
+            get => Settings.Default.game_info_release_date_name;
             set
             {
                 Settings.Default.game_info_release_date_name = value;
@@ -283,10 +259,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool TitleEnabled
         {
-            get
-            {
-                return Settings.Default.game_info_title_enabled;
-            }
+            get => Settings.Default.game_info_title_enabled;
             set
             {
                 Settings.Default.game_info_title_enabled = value;
@@ -297,10 +270,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool ConsoleEnabled
         {
-            get
-            {
-                return Settings.Default.game_info_console_enabled;
-            }
+            get => Settings.Default.game_info_console_enabled;
             set
             {
                 Settings.Default.game_info_console_enabled = value;
@@ -311,10 +281,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool DeveloperEnabled
         {
-            get
-            {
-                return Settings.Default.game_info_developer_enabled;
-            }
+            get => Settings.Default.game_info_developer_enabled;
             set
             {
                 Settings.Default.game_info_developer_enabled = value;
@@ -325,10 +292,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool PublisherEnabled
         {
-            get
-            {
-                return Settings.Default.game_info_publisher_enabled;
-            }
+            get => Settings.Default.game_info_publisher_enabled;
             set
             {
                 Settings.Default.game_info_publisher_enabled = value;
@@ -339,10 +303,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool GenreEnabled
         {
-            get
-            {
-                return Settings.Default.game_info_genre_enabled;
-            }
+            get => Settings.Default.game_info_genre_enabled;
             set
             {
                 Settings.Default.game_info_genre_enabled = value;
@@ -353,10 +314,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool ReleasedDateEnabled
         {
-            get
-            {
-                return Settings.Default.game_info_release_date_enabled;
-            }
+            get => Settings.Default.game_info_release_date_enabled;
             set
             {
                 Settings.Default.game_info_release_date_enabled = value;
@@ -392,10 +350,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string SimpleFontColor
         {
-            get
-            {
-                return Settings.Default.game_info_font_color_hex_code;
-            }
+            get => Settings.Default.game_info_font_color_hex_code;
             set
             {
                 Settings.Default.game_info_font_color_hex_code = value;
@@ -406,10 +361,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string SimpleFontOutlineColor
         {
-            get
-            {
-                return Settings.Default.game_info_font_outline_color_hex;
-            }
+            get => Settings.Default.game_info_font_outline_color_hex;
             set
             {
                 Settings.Default.game_info_font_outline_color_hex = value;
@@ -420,10 +372,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public int SimpleFontOutlineSize
         {
-            get
-            {
-                return Settings.Default.game_info_font_outline_size;
-            }
+            get => Settings.Default.game_info_font_outline_size;
             set
             {
                 Settings.Default.game_info_font_outline_size = value;
@@ -434,10 +383,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool SimpleFontOutlineEnabled
         {
-            get
-            {
-                return Settings.Default.game_info_font_outline_enabled;
-            }
+            get => Settings.Default.game_info_font_outline_enabled;
             set
             {
                 Settings.Default.game_info_font_outline_enabled = value;
@@ -499,10 +445,7 @@ namespace Retro_Achievement_Tracker.Controllers
 
         public string NameColor
         {
-            get
-            {
-                return Settings.Default.game_info_name_color;
-            }
+            get => Settings.Default.game_info_name_color;
             set
             {
                 Settings.Default.game_info_name_color = value;
@@ -513,10 +456,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string ValueColor
         {
-            get
-            {
-                return Settings.Default.game_info_value_color;
-            }
+            get => Settings.Default.game_info_value_color;
             set
             {
                 Settings.Default.game_info_value_color = value;
@@ -527,10 +467,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool NameOutlineEnabled
         {
-            get
-            {
-                return Settings.Default.game_info_name_outline_enabled;
-            }
+            get => Settings.Default.game_info_name_outline_enabled;
             set
             {
                 Settings.Default.game_info_name_outline_enabled = value;
@@ -541,10 +478,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool ValueOutlineEnabled
         {
-            get
-            {
-                return Settings.Default.game_info_value_outline_enabled;
-            }
+            get => Settings.Default.game_info_value_outline_enabled;
             set
             {
                 Settings.Default.game_info_value_outline_enabled = value;
@@ -555,10 +489,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string NameOutlineColor
         {
-            get
-            {
-                return Settings.Default.game_info_name_outline_color;
-            }
+            get => Settings.Default.game_info_name_outline_color;
             set
             {
                 Settings.Default.game_info_name_outline_color = value;
@@ -569,10 +500,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string ValueOutlineColor
         {
-            get
-            {
-                return Settings.Default.game_info_value_outline_color;
-            }
+            get => Settings.Default.game_info_value_outline_color;
             set
             {
                 Settings.Default.game_info_value_outline_color = value;
@@ -583,10 +511,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public int NameOutlineSize
         {
-            get
-            {
-                return Settings.Default.game_info_name_outline_size;
-            }
+            get => Settings.Default.game_info_name_outline_size;
             set
             {
                 Settings.Default.game_info_name_outline_size = value;
@@ -597,10 +522,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public int ValueOutlineSize
         {
-            get
-            {
-                return Settings.Default.game_info_value_outline_size;
-            }
+            get => Settings.Default.game_info_value_outline_size;
             set
             {
                 Settings.Default.game_info_value_outline_size = value;
@@ -611,10 +533,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool AutoLaunch
         {
-            get
-            {
-                return Settings.Default.auto_game_info;
-            }
+            get => Settings.Default.auto_game_info;
             set
             {
                 Settings.Default.auto_game_info = value;

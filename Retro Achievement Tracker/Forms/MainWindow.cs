@@ -9,7 +9,6 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using System.Xml;
-using System.Threading.Tasks;
 using FontFamily = System.Drawing.FontFamily;
 using File = System.IO.File;
 using System.Globalization;
@@ -173,14 +172,10 @@ namespace Retro_Achievement_Tracker
                         if (dialogResult.Equals(DialogResult.Yes))
                         {
                             if (AutoUpdater.DownloadUpdate(args))
-                            {
                                 Close();
-                            }
                         }
                         else
-                        {
                             Settings.Default.check_for_update_on_version = false;
-                        }
                     }
                     catch (Exception exception)
                     {
@@ -210,45 +205,25 @@ namespace Retro_Achievement_Tracker
                 if (IsBooting)
                 {
                     if (FocusController.Instance.AutoLaunch && !FocusController.Instance.IsOpen)
-                    {
                         FocusController.Instance.Show();
-                    }
                     else if (AlertsController.Instance.AutoLaunch && !AlertsController.Instance.IsOpen)
-                    {
                         AlertsController.Instance.Show();
-                    }
                     else if (UserInfoController.Instance.AutoLaunch && !UserInfoController.Instance.IsOpen)
-                    {
                         UserInfoController.Instance.Show();
-                    }
                     else if (GameInfoController.Instance.AutoLaunch && !GameInfoController.Instance.IsOpen)
-                    {
                         GameInfoController.Instance.Show();
-                    }
                     else if (GameProgressController.Instance.AutoLaunch && !GameProgressController.Instance.IsOpen)
-                    {
                         GameProgressController.Instance.Show();
-                    }
                     else if (RecentUnlocksController.Instance.AutoLaunch && !RecentUnlocksController.Instance.IsOpen)
-                    {
                         RecentUnlocksController.Instance.Show();
-                    }
                     else if (AchievementListController.Instance.AutoLaunch && !AchievementListController.Instance.IsOpen)
-                    {
                         AchievementListController.Instance.Show();
-                    }
                     else if (RelatedMediaController.Instance.AutoLaunch && !RelatedMediaController.Instance.IsOpen)
-                    {
                         RelatedMediaController.Instance.Show();
-                    }
                     else if (AlertsController.Instance.AutoLaunch && !AlertsController.Instance.IsOpen)
-                    {
                         AlertsController.Instance.Show();
-                    }
                     else
-                    {
                         IsBooting = false;
-                    }
                 }
             }
 
@@ -297,19 +272,13 @@ namespace Retro_Achievement_Tracker
                             }
 
                             if (GameInfoAndProgress == null)
-                            {
                                 ShouldRun = false;
-                            }
                         }
 
                         if (ShouldRun)
-                        {
                             StartTimer();
-                        }
                         else
-                        {
                             StopButton_Click(null, null);
-                        }
                     }
                 }
             }
@@ -323,19 +292,13 @@ namespace Retro_Achievement_Tracker
                     UpdateActivePollingLabel("API_GetGameInfoAndUserProgress is down.");
 
                     if (PreviouslyPlayedGameId != 0)
-                    {
                         ManualSearchButton_Click(null, null);
-                    }
                 }
 
                 if (ShouldRun)
-                {
                     StartTimer();
-                }
                 else
-                {
                     StopButton_Click(null, null);
-                }
             }
         }
 
@@ -348,14 +311,11 @@ namespace Retro_Achievement_Tracker
             {
                 PreviouslyPlayedGameId = GameInfoAndProgress.Id;
 
-                if (GameInfoAndProgress.Achievements != null)
-                {
-                    GameInfoAndProgress.Achievements.ForEach(achievement =>
+                GameInfoAndProgress.Achievements?.ForEach(achievement =>
                     {
                         achievement.GameId = (int)GameInfoAndProgress.Id;
                         achievement.GameTitle = GameInfoAndProgress.Title;
                     });
-                }
 
                 if (sameGame)
                 {
@@ -380,12 +340,8 @@ namespace Retro_Achievement_Tracker
                         }
 
                         if (achievementNotificationList.Contains(FocusController.Instance.CurrentlyFocusedAchievement) || achievementNotificationList.Contains(CurrentlyViewingAchievement))
-                        {
                             if (LockedAchievements.Count > 0)
-                            {
                                 FindNewFocus();
-                            }
-                        }
 
                         if (AlertsController.Instance.MasteryAlertEnable && UnlockedAchievements.Count == GameInfoAndProgress.Achievements.Count && OldUnlockedAchievements.Count < GameInfoAndProgress.Achievements.Count)
                         {
@@ -450,16 +406,12 @@ namespace Retro_Achievement_Tracker
                     break;
                 case RefocusBehaviorEnum.GO_TO_PREVIOUS:
                     while (currentIndex > 0 && !LockedAchievements.Contains(GameInfoAndProgress.Achievements[currentIndex]))
-                    {
                         currentIndex--;
-                    }
+
                     if (currentIndex == 0)
-                    {
                         while (currentIndex < GameInfoAndProgress.Achievements.Count - 1 && !LockedAchievements.Contains(GameInfoAndProgress.Achievements[currentIndex]))
-                        {
                             currentIndex++;
-                        }
-                    }
+
                     break;
                 case RefocusBehaviorEnum.GO_TO_NEXT:
                     while (currentIndex < GameInfoAndProgress.Achievements.Count - 1 && !LockedAchievements.Contains(GameInfoAndProgress.Achievements[currentIndex]))
@@ -800,49 +752,31 @@ namespace Retro_Achievement_Tracker
                 }
 
                 if (FocusController.Instance.AutoLaunch && !FocusController.Instance.IsOpen)
-                {
                     FocusController.Instance.Show();
-                }
 
                 if (AlertsController.Instance.AutoLaunch && !AlertsController.Instance.IsOpen)
-                {
                     AlertsController.Instance.Show();
-                }
 
                 if (UserInfoController.Instance.AutoLaunch && !UserInfoController.Instance.IsOpen)
-                {
                     UserInfoController.Instance.Show();
-                }
 
                 if (GameInfoController.Instance.AutoLaunch && !GameInfoController.Instance.IsOpen)
-                {
                     GameInfoController.Instance.Show();
-                }
 
                 if (GameProgressController.Instance.AutoLaunch && !GameProgressController.Instance.IsOpen)
-                {
                     GameProgressController.Instance.Show();
-                }
 
                 if (RecentUnlocksController.Instance.AutoLaunch && !RecentUnlocksController.Instance.IsOpen)
-                {
                     RecentUnlocksController.Instance.Show();
-                }
 
                 if (AchievementListController.Instance.AutoLaunch && !AchievementListController.Instance.IsOpen)
-                {
                     AchievementListController.Instance.Show();
-                }
 
                 if (RelatedMediaController.Instance.AutoLaunch && !RelatedMediaController.Instance.IsOpen)
-                {
                     RelatedMediaController.Instance.Show();
-                }
 
                 if (AlertsController.Instance.AutoLaunch && !AlertsController.Instance.IsOpen)
-                {
                     AlertsController.Instance.Show();
-                }
 
                 UpdateGameProgress(false);
             }
@@ -872,23 +806,15 @@ namespace Retro_Achievement_Tracker
                         break;
                     case "alertsCustomAchievementEnableCheckbox":
                         if (isChecked)
-                        {
                             if (!File.Exists(AlertsController.Instance.CustomAchievementFile))
-                            {
                                 SelectCustomAchievementFile();
-                            }
-                        }
 
                         AlertsController.Instance.CustomAchievementEnabled = isChecked;
                         break;
                     case "alertsCustomMasteryEnableCheckbox":
                         if (isChecked)
-                        {
                             if (!File.Exists(AlertsController.Instance.CustomMasteryFile))
-                            {
                                 SelectCustomMasteryFile();
-                            }
-                        }
 
                         AlertsController.Instance.CustomMasteryEnabled = isChecked;
                         break;
@@ -905,9 +831,7 @@ namespace Retro_Achievement_Tracker
                             });
                         }
                         else
-                        {
                             AlertsController.Instance.DisableAchievementEdit();
-                        }
                         break;
                     case "alertsMasteryEditOutlineCheckbox":
                         if (checkBox.Checked)
@@ -916,9 +840,7 @@ namespace Retro_Achievement_Tracker
                             AlertsController.Instance.SendMasteryNotification(GameInfoAndProgress);
                         }
                         else
-                        {
                             AlertsController.Instance.DisableMasteryEdit();
-                        }
                         break;
                 }
 
@@ -4089,36 +4011,18 @@ namespace Retro_Achievement_Tracker
         }
         private string Username
         {
-            get
-            {
-                return Settings.Default.ra_username;
-            }
-            set
-            {
-                Settings.Default.ra_username = value;
-            }
+            get => Settings.Default.ra_username;
+            set => Settings.Default.ra_username = value;
         }
         private string WebAPIKey
         {
-            get
-            {
-                return Settings.Default.ra_key;
-            }
-            set
-            {
-                Settings.Default.ra_key = value;
-            }
+            get => Settings.Default.ra_key;
+            set => Settings.Default.ra_key = value;
         }
         private long PreviouslyPlayedGameId
         {
-            get
-            {
-                return Settings.Default.previously_played_game;
-            }
-            set
-            {
-                Settings.Default.previously_played_game = (int)value;
-            }
+            get => Settings.Default.previously_played_game;
+            set => Settings.Default.previously_played_game = (int)value;
         }
     }
     public enum AnimationDirection

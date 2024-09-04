@@ -145,10 +145,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool AdvancedSettingsEnabled
         {
-            get
-            {
-                return Settings.Default.focus_advanced_options_enabled;
-            }
+            get => Settings.Default.focus_advanced_options_enabled;
             set
             {
                 Settings.Default.focus_advanced_options_enabled = value;
@@ -184,10 +181,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string SimpleFontColor
         {
-            get
-            {
-                return Settings.Default.focus_font_color_hex_code;
-            }
+            get => Settings.Default.focus_font_color_hex_code;
             set
             {
                 Settings.Default.focus_font_color_hex_code = value;
@@ -198,10 +192,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string SimpleFontOutlineColor
         {
-            get
-            {
-                return Settings.Default.focus_font_outline_color_hex;
-            }
+            get => Settings.Default.focus_font_outline_color_hex;
             set
             {
                 Settings.Default.focus_font_outline_color_hex = value;
@@ -212,10 +203,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public int SimpleFontOutlineSize
         {
-            get
-            {
-                return Settings.Default.focus_font_outline_size;
-            }
+            get => Settings.Default.focus_font_outline_size;
             set
             {
                 Settings.Default.focus_font_outline_size = value;
@@ -226,10 +214,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool SimpleFontOutlineEnabled
         {
-            get
-            {
-                return Settings.Default.focus_font_outline_enabled;
-            }
+            get => Settings.Default.focus_font_outline_enabled;
             set
             {
                 Settings.Default.focus_font_outline_enabled = value;
@@ -317,10 +302,7 @@ namespace Retro_Achievement_Tracker.Controllers
 
         public string TitleColor
         {
-            get
-            {
-                return Settings.Default.focus_title_color;
-            }
+            get => Settings.Default.focus_title_color;
             set
             {
                 Settings.Default.focus_title_color = value;
@@ -331,10 +313,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string DescriptionColor
         {
-            get
-            {
-                return Settings.Default.focus_description_color;
-            }
+            get => Settings.Default.focus_description_color;
             set
             {
                 Settings.Default.focus_description_color = value;
@@ -345,10 +324,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string PointsColor
         {
-            get
-            {
-                return Settings.Default.focus_points_color;
-            }
+            get => Settings.Default.focus_points_color;
             set
             {
                 Settings.Default.focus_points_color = value;
@@ -359,10 +335,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string LineColor
         {
-            get
-            {
-                return Settings.Default.focus_line_color;
-            }
+            get => Settings.Default.focus_line_color;
             set
             {
                 Settings.Default.focus_line_color = value;
@@ -373,10 +346,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool TitleOutlineEnabled
         {
-            get
-            {
-                return Settings.Default.focus_title_outline_enabled;
-            }
+            get => Settings.Default.focus_title_outline_enabled;
             set
             {
                 Settings.Default.focus_title_outline_enabled = value;
@@ -387,10 +357,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool DescriptionOutlineEnabled
         {
-            get
-            {
-                return Settings.Default.focus_description_outline_enabled;
-            }
+            get => Settings.Default.focus_description_outline_enabled;
             set
             {
                 Settings.Default.focus_description_outline_enabled = value;
@@ -401,10 +368,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool PointsOutlineEnabled
         {
-            get
-            {
-                return Settings.Default.focus_points_outline_enabled;
-            }
+            get => Settings.Default.focus_points_outline_enabled;
             set
             {
                 Settings.Default.focus_points_outline_enabled = value;
@@ -415,10 +379,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool LineOutlineEnabled
         {
-            get
-            {
-                return Settings.Default.focus_line_outline_enabled;
-            }
+            get => Settings.Default.focus_line_outline_enabled;
             set
             {
                 Settings.Default.focus_line_outline_enabled = value;
@@ -429,10 +390,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string TitleOutlineColor
         {
-            get
-            {
-                return Settings.Default.focus_title_outline_color;
-            }
+            get => Settings.Default.focus_title_outline_color;
             set
             {
                 Settings.Default.focus_title_outline_color = value;
@@ -443,10 +401,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string DescriptionOutlineColor
         {
-            get
-            {
-                return Settings.Default.focus_description_outline_color;
-            }
+            get => Settings.Default.focus_description_outline_color;
             set
             {
                 Settings.Default.focus_description_outline_color = value;
@@ -457,10 +412,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string PointsOutlineColor
         {
-            get
-            {
-                return Settings.Default.focus_points_outline_color;
-            }
+            get => Settings.Default.focus_points_outline_color;
             set
             {
                 Settings.Default.focus_points_outline_color = value;
@@ -471,10 +423,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string LineOutlineColor
         {
-            get
-            {
-                return Settings.Default.focus_line_outline_color;
-            }
+            get => Settings.Default.focus_line_outline_color;
             set
             {
                 Settings.Default.focus_line_outline_color = value;
@@ -485,10 +434,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public int TitleOutlineSize
         {
-            get
-            {
-                return Settings.Default.focus_title_outline_size;
-            }
+            get => Settings.Default.focus_title_outline_size;
             set
             {
                 Settings.Default.focus_title_outline_size = value;
@@ -499,10 +445,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public int DescriptionOutlineSize
         {
-            get
-            {
-                return Settings.Default.focus_description_outline_size;
-            }
+            get => Settings.Default.focus_description_outline_size;
             set
             {
                 Settings.Default.focus_description_outline_size = value;
@@ -513,10 +456,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public int PointsOutlineSize
         {
-            get
-            {
-                return Settings.Default.focus_points_outline_size;
-            }
+            get => Settings.Default.focus_points_outline_size;
             set
             {
                 Settings.Default.focus_points_outline_size = value;
@@ -527,10 +467,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public int LineOutlineSize
         {
-            get
-            {
-                return Settings.Default.focus_line_outline_size;
-            }
+            get => Settings.Default.focus_line_outline_size;
             set
             {
                 Settings.Default.focus_line_outline_size = value;
@@ -541,10 +478,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public bool BorderEnabled
         {
-            get
-            {
-                return Settings.Default.focus_border_enable;
-            }
+            get => Settings.Default.focus_border_enable;
             set
             {
                 Settings.Default.focus_border_enable = value;
@@ -555,10 +489,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string BorderBackgroundColor
         {
-            get
-            {
-                return Settings.Default.focus_background_color;
-            }
+            get => Settings.Default.focus_background_color;
             set
             {
                 Settings.Default.focus_background_color = value;
@@ -569,10 +500,7 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public string WindowBackgroundColor
         {
-            get
-            {
-                return Settings.Default.focus_window_background_color;
-            }
+            get => Settings.Default.focus_window_background_color;
             set
             {
                 Settings.Default.focus_window_background_color = value;
@@ -584,10 +512,7 @@ namespace Retro_Achievement_Tracker.Controllers
 
         public bool AutoLaunch
         {
-            get
-            {
-                return Settings.Default.auto_focus;
-            }
+            get => Settings.Default.auto_focus;
             set
             {
                 Settings.Default.auto_focus = value;
