@@ -79,6 +79,7 @@ namespace Retro_Achievement_Tracker.Forms
         }
         public void SetClientSize()
         {
+            webView21.ExecuteScriptAsync(string.Format("setWindowSize({0}, {1});", AchievementListController.Instance.WindowSizeX, AchievementListController.Instance.WindowSizeY));
             Invoke(new Action(() =>
             {
                 ClientSize = new Size(AchievementListController.Instance.WindowSizeX, AchievementListController.Instance.WindowSizeY);
