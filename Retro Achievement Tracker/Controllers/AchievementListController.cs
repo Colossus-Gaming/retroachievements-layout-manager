@@ -12,7 +12,13 @@ namespace Retro_Achievement_Tracker.Controllers
         private static readonly AchievementListController instance = new AchievementListController();
         private static AchievementListWindow AchievementListWindow;
 
-        private readonly int AchievementsPerRow = 11;
+        private int AchievementsPerRow
+        {
+            get
+            {
+                return WindowSizeX / 68;
+            }
+        }
 
         public bool IsOpen;
 
@@ -59,7 +65,11 @@ namespace Retro_Achievement_Tracker.Controllers
         public void UpdateAchievementList()
         {
             UpdateAchievementList(CurrentUnlockedAchievements, CurrentLockedAchievements, true);
+        }
 
+        private void UpdateAchievementPositions()
+        {
+            UpdateAchievementList(CurrentUnlockedAchievements, CurrentLockedAchievements, false);
         }
 
         public async void UpdateAchievementList(List<Achievement> unlockedAchievements, List<Achievement> lockedAchievements, bool newGame)
@@ -72,7 +82,6 @@ namespace Retro_Achievement_Tracker.Controllers
 
             if (newGame)
             {
-
                 List<Achievement> ToClearList = new List<Achievement>();
 
                 ToClearList.AddRange(CurrentUnlockedAchievements);
@@ -215,7 +224,7 @@ namespace Retro_Achievement_Tracker.Controllers
                     achievementRowIndex = 0;
                 }
 
-                if(yCoord <= 612)
+                if(yCoord <= WindowSizeY)
                 {
                     await Task.Delay(50);
                 }
@@ -235,7 +244,7 @@ namespace Retro_Achievement_Tracker.Controllers
                     achievementRowIndex = 0;
                 }
 
-                if (yCoord <= 612)
+                if (yCoord <= WindowSizeY)
                 {
                     await Task.Delay(50);
                 }
@@ -282,6 +291,29 @@ namespace Retro_Achievement_Tracker.Controllers
             set
             {
                 Settings.Default.achievement_list_window_background_color = value;
+                Settings.Default.Save();
+
+                SetAllSettings();
+            }
+        }
+        public int WindowSizeX
+        {
+            get => Settings.Default.achievement_list_window_size_x;
+            set
+            {
+                Settings.Default.achievement_list_window_size_x = value;
+                Settings.Default.Save();
+
+                SetAllSettings();
+                UpdateAchievementPositions();
+            }
+        }
+        public int WindowSizeY
+        {
+            get => Settings.Default.achievement_list_window_size_y;
+            set
+            {
+                Settings.Default.achievement_list_window_size_y = value;
                 Settings.Default.Save();
 
                 SetAllSettings();

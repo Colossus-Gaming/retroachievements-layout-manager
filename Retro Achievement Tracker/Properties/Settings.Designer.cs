@@ -2386,7 +2386,37 @@ namespace Retro_Achievement_Tracker.Properties {
                 this["achievement_list_window_background_color"] = value;
             }
         }
-        
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("748")]
+        public int achievement_list_window_size_x
+        {
+            get
+            {
+                return ((int)(this["achievement_list_window_size_x"]));
+            }
+            set
+            {
+                this["achievement_list_window_size_x"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("612")]
+        public int achievement_list_window_size_y
+        {
+            get
+            {
+                return ((int)(this["achievement_list_window_size_y"]));
+            }
+            set
+            {
+                this["achievement_list_window_size_y"] = value;
+            }
+        }
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
@@ -2650,7 +2680,7 @@ namespace Retro_Achievement_Tracker.Properties {
                 this["achievement_list_auto_scroll"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]

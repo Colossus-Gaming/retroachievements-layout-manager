@@ -117,6 +117,12 @@
             document.body.style.backgroundColor = color;
         }
 
+        function setWindowSize(x, y) {
+            $("#container").css("width", x);
+            $("#container").css("height", y);
+            $("#achievement-list").css("width", x);
+        }
+
         function setAchievementOutDelayed(id, timeOut) {
             setTimeout(function () { $("#achievement-" + id).animate({ top: document.getElementById("achievement-" + id).offsetTop + 1048 + "px" }, 800, 'easeInOutQuint'); }, timeOut);
         }
@@ -150,8 +156,6 @@
             left: 0px;
             overflow-x: hidden;
             overflow-y: visible;
-            width: 750px;
-            height: 612px;
             background-color: transparent;
         }
 
@@ -163,7 +167,6 @@
             position: absolute;
             top: 0px;
             left: 0px;
-            width: 750px;
             height: auto;
             overflow: visible;
         }
