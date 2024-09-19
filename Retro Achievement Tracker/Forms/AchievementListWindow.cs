@@ -44,7 +44,7 @@ namespace Retro_Achievement_Tracker.Forms
         }
         public void AddAchievement(Achievement achievement, int xCoord, int yCoord)
         {
-            webView21.ExecuteScriptAsync($"addAchievement({JsonConvert.SerializeObject(achievement)}, \"" + xCoord + "px\", \"" + (yCoord < 612 ? yCoord + 612 : yCoord) + "px\");");
+            webView21.ExecuteScriptAsync($"addAchievement({JsonConvert.SerializeObject(achievement)}, \"" + xCoord + "px\", \"" + (yCoord < AchievementListController.Instance.WindowSizeY ? yCoord + AchievementListController.Instance.WindowSizeY : yCoord) + "px\");");
         }
         public void UnlockAchievement(Achievement achievement)
         {
@@ -81,7 +81,7 @@ namespace Retro_Achievement_Tracker.Forms
         {
             Invoke(new Action(() =>
             {
-                ClientSize = new Size(748, 612);
+                ClientSize = new Size(AchievementListController.Instance.WindowSizeX, AchievementListController.Instance.WindowSizeY);
             }));
         }
 
