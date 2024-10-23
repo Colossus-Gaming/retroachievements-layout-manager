@@ -540,6 +540,10 @@ namespace Retro_Achievement_Tracker
             this.pictureBox18 = new System.Windows.Forms.PictureBox();
             this.achievementListAutoScrollCheckBox = new System.Windows.Forms.CheckBox();
             this.panel111 = new System.Windows.Forms.Panel();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.achievementListWindowSizeLabel = new System.Windows.Forms.Label();
+            this.achievementListWindowSizeXUpDown = new System.Windows.Forms.NumericUpDown();
+            this.achievementListWindowSizeYUpDown = new System.Windows.Forms.NumericUpDown();
             this.label150 = new System.Windows.Forms.Label();
             this.panel112 = new System.Windows.Forms.Panel();
             this.label151 = new System.Windows.Forms.Label();
@@ -819,6 +823,9 @@ namespace Retro_Achievement_Tracker
             this.panel115.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox18)).BeginInit();
             this.panel111.SuspendLayout();
+            this.panel9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.achievementListWindowSizeXUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.achievementListWindowSizeYUpDown)).BeginInit();
             this.panel112.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox16)).BeginInit();
             this.panel114.SuspendLayout();
@@ -856,9 +863,10 @@ namespace Retro_Achievement_Tracker
             this.apiKeyLabel.BackColor = System.Drawing.Color.Transparent;
             this.apiKeyLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.apiKeyLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.apiKeyLabel.Location = new System.Drawing.Point(13, 4);
+            this.apiKeyLabel.Location = new System.Drawing.Point(20, 6);
+            this.apiKeyLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.apiKeyLabel.Name = "apiKeyLabel";
-            this.apiKeyLabel.Size = new System.Drawing.Size(91, 16);
+            this.apiKeyLabel.Size = new System.Drawing.Size(140, 25);
             this.apiKeyLabel.TabIndex = 31;
             this.apiKeyLabel.Text = "Web API Key";
             // 
@@ -868,10 +876,11 @@ namespace Retro_Achievement_Tracker
             this.apiKeyTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.apiKeyTextBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.apiKeyTextBox.ForeColor = System.Drawing.Color.White;
-            this.apiKeyTextBox.Location = new System.Drawing.Point(108, 2);
+            this.apiKeyTextBox.Location = new System.Drawing.Point(162, 3);
+            this.apiKeyTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.apiKeyTextBox.Name = "apiKeyTextBox";
             this.apiKeyTextBox.PasswordChar = '*';
-            this.apiKeyTextBox.Size = new System.Drawing.Size(286, 23);
+            this.apiKeyTextBox.Size = new System.Drawing.Size(428, 31);
             this.apiKeyTextBox.TabIndex = 1;
             this.apiKeyTextBox.WordWrap = false;
             this.apiKeyTextBox.TextChanged += new System.EventHandler(this.RequiredField_TextChanged);
@@ -882,9 +891,10 @@ namespace Retro_Achievement_Tracker
             this.usernameLabel.BackColor = System.Drawing.Color.Transparent;
             this.usernameLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.usernameLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.usernameLabel.Location = new System.Drawing.Point(33, 5);
+            this.usernameLabel.Location = new System.Drawing.Point(50, 8);
+            this.usernameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.usernameLabel.Name = "usernameLabel";
-            this.usernameLabel.Size = new System.Drawing.Size(71, 16);
+            this.usernameLabel.Size = new System.Drawing.Size(114, 25);
             this.usernameLabel.TabIndex = 26;
             this.usernameLabel.Text = "Username";
             // 
@@ -894,9 +904,10 @@ namespace Retro_Achievement_Tracker
             this.usernameTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.usernameTextBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.usernameTextBox.ForeColor = System.Drawing.Color.White;
-            this.usernameTextBox.Location = new System.Drawing.Point(108, 3);
+            this.usernameTextBox.Location = new System.Drawing.Point(162, 5);
+            this.usernameTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.usernameTextBox.Name = "usernameTextBox";
-            this.usernameTextBox.Size = new System.Drawing.Size(286, 23);
+            this.usernameTextBox.Size = new System.Drawing.Size(428, 31);
             this.usernameTextBox.TabIndex = 0;
             this.usernameTextBox.WordWrap = false;
             this.usernameTextBox.TextChanged += new System.EventHandler(this.RequiredField_TextChanged);
@@ -906,9 +917,10 @@ namespace Retro_Achievement_Tracker
             this.userProfilePictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.userProfilePictureBox.BackColor = System.Drawing.Color.Transparent;
             this.userProfilePictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.userProfilePictureBox.Location = new System.Drawing.Point(384, 40);
+            this.userProfilePictureBox.Location = new System.Drawing.Point(576, 62);
+            this.userProfilePictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.userProfilePictureBox.Name = "userProfilePictureBox";
-            this.userProfilePictureBox.Size = new System.Drawing.Size(64, 64);
+            this.userProfilePictureBox.Size = new System.Drawing.Size(96, 98);
             this.userProfilePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.userProfilePictureBox.TabIndex = 20;
             this.userProfilePictureBox.TabStop = false;
@@ -924,9 +936,10 @@ namespace Retro_Achievement_Tracker
             this.autoStartCheckbox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.autoStartCheckbox.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.autoStartCheckbox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.autoStartCheckbox.Location = new System.Drawing.Point(156, 71);
+            this.autoStartCheckbox.Location = new System.Drawing.Point(234, 109);
+            this.autoStartCheckbox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.autoStartCheckbox.Name = "autoStartCheckbox";
-            this.autoStartCheckbox.Size = new System.Drawing.Size(88, 18);
+            this.autoStartCheckbox.Size = new System.Drawing.Size(125, 26);
             this.autoStartCheckbox.TabIndex = 2;
             this.autoStartCheckbox.Text = "Auto-Start";
             this.autoStartCheckbox.UseVisualStyleBackColor = false;
@@ -939,10 +952,10 @@ namespace Retro_Achievement_Tracker
             this.stopButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.stopButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.stopButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
-            this.stopButton.Location = new System.Drawing.Point(322, 63);
+            this.stopButton.Location = new System.Drawing.Point(483, 97);
             this.stopButton.Margin = new System.Windows.Forms.Padding(0);
             this.stopButton.Name = "stopButton";
-            this.stopButton.Size = new System.Drawing.Size(75, 27);
+            this.stopButton.Size = new System.Drawing.Size(112, 42);
             this.stopButton.TabIndex = 4;
             this.stopButton.Text = "Stop";
             this.stopButton.UseVisualStyleBackColor = false;
@@ -953,9 +966,10 @@ namespace Retro_Achievement_Tracker
             this.autoPollingStatusLabel.BackColor = System.Drawing.Color.Transparent;
             this.autoPollingStatusLabel.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.autoPollingStatusLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.autoPollingStatusLabel.Location = new System.Drawing.Point(38, 9);
+            this.autoPollingStatusLabel.Location = new System.Drawing.Point(57, 14);
+            this.autoPollingStatusLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.autoPollingStatusLabel.Name = "autoPollingStatusLabel";
-            this.autoPollingStatusLabel.Size = new System.Drawing.Size(332, 28);
+            this.autoPollingStatusLabel.Size = new System.Drawing.Size(498, 43);
             this.autoPollingStatusLabel.TabIndex = 10024;
             this.autoPollingStatusLabel.Text = "Offline";
             // 
@@ -965,9 +979,10 @@ namespace Retro_Achievement_Tracker
             this.userInfoAutoOpenWindowCheckbox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.userInfoAutoOpenWindowCheckbox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userInfoAutoOpenWindowCheckbox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.userInfoAutoOpenWindowCheckbox.Location = new System.Drawing.Point(252, 9);
+            this.userInfoAutoOpenWindowCheckbox.Location = new System.Drawing.Point(378, 14);
+            this.userInfoAutoOpenWindowCheckbox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.userInfoAutoOpenWindowCheckbox.Name = "userInfoAutoOpenWindowCheckbox";
-            this.userInfoAutoOpenWindowCheckbox.Size = new System.Drawing.Size(98, 20);
+            this.userInfoAutoOpenWindowCheckbox.Size = new System.Drawing.Size(147, 29);
             this.userInfoAutoOpenWindowCheckbox.TabIndex = 10022;
             this.userInfoAutoOpenWindowCheckbox.Text = "Auto-Open";
             this.userInfoAutoOpenWindowCheckbox.UseVisualStyleBackColor = true;
@@ -980,10 +995,10 @@ namespace Retro_Achievement_Tracker
             this.userInfoOpenWindowButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.userInfoOpenWindowButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userInfoOpenWindowButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
-            this.userInfoOpenWindowButton.Location = new System.Drawing.Point(382, 2);
+            this.userInfoOpenWindowButton.Location = new System.Drawing.Point(573, 3);
             this.userInfoOpenWindowButton.Margin = new System.Windows.Forms.Padding(0);
             this.userInfoOpenWindowButton.Name = "userInfoOpenWindowButton";
-            this.userInfoOpenWindowButton.Size = new System.Drawing.Size(75, 27);
+            this.userInfoOpenWindowButton.Size = new System.Drawing.Size(112, 42);
             this.userInfoOpenWindowButton.TabIndex = 10021;
             this.userInfoOpenWindowButton.Text = "Open";
             this.userInfoOpenWindowButton.UseVisualStyleBackColor = false;
@@ -996,10 +1011,10 @@ namespace Retro_Achievement_Tracker
             this.startButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.startButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.startButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
-            this.startButton.Location = new System.Drawing.Point(247, 63);
+            this.startButton.Location = new System.Drawing.Point(370, 97);
             this.startButton.Margin = new System.Windows.Forms.Padding(0);
             this.startButton.Name = "startButton";
-            this.startButton.Size = new System.Drawing.Size(75, 27);
+            this.startButton.Size = new System.Drawing.Size(112, 42);
             this.startButton.TabIndex = 3;
             this.startButton.Text = "Start";
             this.startButton.UseVisualStyleBackColor = false;
@@ -1010,9 +1025,10 @@ namespace Retro_Achievement_Tracker
             this.focusAchievementPictureBox.BackColor = System.Drawing.Color.Transparent;
             this.focusAchievementPictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
             this.focusAchievementPictureBox.InitialImage = null;
-            this.focusAchievementPictureBox.Location = new System.Drawing.Point(3, 40);
+            this.focusAchievementPictureBox.Location = new System.Drawing.Point(4, 62);
+            this.focusAchievementPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.focusAchievementPictureBox.Name = "focusAchievementPictureBox";
-            this.focusAchievementPictureBox.Size = new System.Drawing.Size(112, 112);
+            this.focusAchievementPictureBox.Size = new System.Drawing.Size(168, 172);
             this.focusAchievementPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.focusAchievementPictureBox.TabIndex = 10030;
             this.focusAchievementPictureBox.TabStop = false;
@@ -1025,9 +1041,10 @@ namespace Retro_Achievement_Tracker
             this.focusAchievementTitleLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.focusAchievementTitleLabel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.focusAchievementTitleLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.focusAchievementTitleLabel.Location = new System.Drawing.Point(121, 84);
+            this.focusAchievementTitleLabel.Location = new System.Drawing.Point(182, 129);
+            this.focusAchievementTitleLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.focusAchievementTitleLabel.Name = "focusAchievementTitleLabel";
-            this.focusAchievementTitleLabel.Size = new System.Drawing.Size(165, 68);
+            this.focusAchievementTitleLabel.Size = new System.Drawing.Size(246, 104);
             this.focusAchievementTitleLabel.TabIndex = 10027;
             this.focusAchievementTitleLabel.Click += new System.EventHandler(this.BrowserSensitiveControl_Click);
             // 
@@ -1037,9 +1054,10 @@ namespace Retro_Achievement_Tracker
             this.focusAchievementDescriptionLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.focusAchievementDescriptionLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.focusAchievementDescriptionLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.focusAchievementDescriptionLabel.Location = new System.Drawing.Point(2, 155);
+            this.focusAchievementDescriptionLabel.Location = new System.Drawing.Point(3, 238);
+            this.focusAchievementDescriptionLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.focusAchievementDescriptionLabel.Name = "focusAchievementDescriptionLabel";
-            this.focusAchievementDescriptionLabel.Size = new System.Drawing.Size(284, 102);
+            this.focusAchievementDescriptionLabel.Size = new System.Drawing.Size(425, 156);
             this.focusAchievementDescriptionLabel.TabIndex = 10026;
             // 
             // focusSetButton
@@ -1049,9 +1067,10 @@ namespace Retro_Achievement_Tracker
             this.focusSetButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.focusSetButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.focusSetButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
-            this.focusSetButton.Location = new System.Drawing.Point(211, 263);
+            this.focusSetButton.Location = new System.Drawing.Point(316, 405);
+            this.focusSetButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.focusSetButton.Name = "focusSetButton";
-            this.focusSetButton.Size = new System.Drawing.Size(75, 27);
+            this.focusSetButton.Size = new System.Drawing.Size(112, 42);
             this.focusSetButton.TabIndex = 10031;
             this.focusSetButton.Text = "Set";
             this.focusSetButton.UseVisualStyleBackColor = false;
@@ -1064,9 +1083,10 @@ namespace Retro_Achievement_Tracker
             this.focusAchievementButtonPrevious.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.focusAchievementButtonPrevious.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.focusAchievementButtonPrevious.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
-            this.focusAchievementButtonPrevious.Location = new System.Drawing.Point(4, 263);
+            this.focusAchievementButtonPrevious.Location = new System.Drawing.Point(6, 405);
+            this.focusAchievementButtonPrevious.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.focusAchievementButtonPrevious.Name = "focusAchievementButtonPrevious";
-            this.focusAchievementButtonPrevious.Size = new System.Drawing.Size(75, 27);
+            this.focusAchievementButtonPrevious.Size = new System.Drawing.Size(112, 42);
             this.focusAchievementButtonPrevious.TabIndex = 10028;
             this.focusAchievementButtonPrevious.Text = "<";
             this.focusAchievementButtonPrevious.UseVisualStyleBackColor = false;
@@ -1079,9 +1099,10 @@ namespace Retro_Achievement_Tracker
             this.focusAchievementButtonNext.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.focusAchievementButtonNext.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.focusAchievementButtonNext.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
-            this.focusAchievementButtonNext.Location = new System.Drawing.Point(85, 263);
+            this.focusAchievementButtonNext.Location = new System.Drawing.Point(128, 405);
+            this.focusAchievementButtonNext.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.focusAchievementButtonNext.Name = "focusAchievementButtonNext";
-            this.focusAchievementButtonNext.Size = new System.Drawing.Size(75, 27);
+            this.focusAchievementButtonNext.Size = new System.Drawing.Size(112, 42);
             this.focusAchievementButtonNext.TabIndex = 10029;
             this.focusAchievementButtonNext.Text = ">";
             this.focusAchievementButtonNext.UseVisualStyleBackColor = false;
@@ -1092,9 +1113,10 @@ namespace Retro_Achievement_Tracker
             this.gameInfoPictureBox.BackColor = System.Drawing.Color.Transparent;
             this.gameInfoPictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
             this.gameInfoPictureBox.InitialImage = null;
-            this.gameInfoPictureBox.Location = new System.Drawing.Point(8, 52);
+            this.gameInfoPictureBox.Location = new System.Drawing.Point(12, 80);
+            this.gameInfoPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameInfoPictureBox.Name = "gameInfoPictureBox";
-            this.gameInfoPictureBox.Size = new System.Drawing.Size(96, 96);
+            this.gameInfoPictureBox.Size = new System.Drawing.Size(144, 148);
             this.gameInfoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.gameInfoPictureBox.TabIndex = 10004;
             this.gameInfoPictureBox.TabStop = false;
@@ -1104,9 +1126,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.autoPollingStatusPictureBox.BackColor = System.Drawing.Color.Transparent;
             this.autoPollingStatusPictureBox.Image = global::Retro_Achievement_Tracker.Properties.Resources.red_button;
-            this.autoPollingStatusPictureBox.Location = new System.Drawing.Point(4, 9);
+            this.autoPollingStatusPictureBox.Location = new System.Drawing.Point(6, 14);
+            this.autoPollingStatusPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.autoPollingStatusPictureBox.Name = "autoPollingStatusPictureBox";
-            this.autoPollingStatusPictureBox.Size = new System.Drawing.Size(28, 28);
+            this.autoPollingStatusPictureBox.Size = new System.Drawing.Size(42, 43);
             this.autoPollingStatusPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.autoPollingStatusPictureBox.TabIndex = 10025;
             this.autoPollingStatusPictureBox.TabStop = false;
@@ -1118,9 +1141,10 @@ namespace Retro_Achievement_Tracker
             this.alertsPlayAchievementButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.alertsPlayAchievementButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.alertsPlayAchievementButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
-            this.alertsPlayAchievementButton.Location = new System.Drawing.Point(212, 3);
+            this.alertsPlayAchievementButton.Location = new System.Drawing.Point(318, 5);
+            this.alertsPlayAchievementButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsPlayAchievementButton.Name = "alertsPlayAchievementButton";
-            this.alertsPlayAchievementButton.Size = new System.Drawing.Size(65, 25);
+            this.alertsPlayAchievementButton.Size = new System.Drawing.Size(98, 38);
             this.alertsPlayAchievementButton.TabIndex = 2;
             this.alertsPlayAchievementButton.Text = "Play";
             this.alertsPlayAchievementButton.UseVisualStyleBackColor = false;
@@ -1133,9 +1157,10 @@ namespace Retro_Achievement_Tracker
             this.alertsSelectCustomAchievementFileButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.alertsSelectCustomAchievementFileButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.alertsSelectCustomAchievementFileButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
-            this.alertsSelectCustomAchievementFileButton.Location = new System.Drawing.Point(209, 266);
+            this.alertsSelectCustomAchievementFileButton.Location = new System.Drawing.Point(314, 409);
+            this.alertsSelectCustomAchievementFileButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsSelectCustomAchievementFileButton.Name = "alertsSelectCustomAchievementFileButton";
-            this.alertsSelectCustomAchievementFileButton.Size = new System.Drawing.Size(65, 25);
+            this.alertsSelectCustomAchievementFileButton.Size = new System.Drawing.Size(98, 38);
             this.alertsSelectCustomAchievementFileButton.TabIndex = 14;
             this.alertsSelectCustomAchievementFileButton.Text = "File";
             this.alertsSelectCustomAchievementFileButton.UseVisualStyleBackColor = false;
@@ -1153,7 +1178,8 @@ namespace Retro_Achievement_Tracker
             0,
             0,
             131072});
-            this.alertsCustomAchievementScaleNumericUpDown.Location = new System.Drawing.Point(168, 4);
+            this.alertsCustomAchievementScaleNumericUpDown.Location = new System.Drawing.Point(252, 6);
+            this.alertsCustomAchievementScaleNumericUpDown.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsCustomAchievementScaleNumericUpDown.Maximum = new decimal(new int[] {
             5,
             0,
@@ -1165,7 +1191,7 @@ namespace Retro_Achievement_Tracker
             0,
             131072});
             this.alertsCustomAchievementScaleNumericUpDown.Name = "alertsCustomAchievementScaleNumericUpDown";
-            this.alertsCustomAchievementScaleNumericUpDown.Size = new System.Drawing.Size(97, 17);
+            this.alertsCustomAchievementScaleNumericUpDown.Size = new System.Drawing.Size(146, 24);
             this.alertsCustomAchievementScaleNumericUpDown.TabIndex = 20;
             this.alertsCustomAchievementScaleNumericUpDown.Value = new decimal(new int[] {
             1,
@@ -1180,7 +1206,8 @@ namespace Retro_Achievement_Tracker
             this.alertsCustomAchievementXNumericUpDown.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.alertsCustomAchievementXNumericUpDown.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.alertsCustomAchievementXNumericUpDown.ForeColor = System.Drawing.Color.White;
-            this.alertsCustomAchievementXNumericUpDown.Location = new System.Drawing.Point(168, 4);
+            this.alertsCustomAchievementXNumericUpDown.Location = new System.Drawing.Point(252, 6);
+            this.alertsCustomAchievementXNumericUpDown.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsCustomAchievementXNumericUpDown.Maximum = new decimal(new int[] {
             2000,
             0,
@@ -1192,7 +1219,7 @@ namespace Retro_Achievement_Tracker
             0,
             -2147483648});
             this.alertsCustomAchievementXNumericUpDown.Name = "alertsCustomAchievementXNumericUpDown";
-            this.alertsCustomAchievementXNumericUpDown.Size = new System.Drawing.Size(97, 17);
+            this.alertsCustomAchievementXNumericUpDown.Size = new System.Drawing.Size(146, 24);
             this.alertsCustomAchievementXNumericUpDown.TabIndex = 15;
             this.alertsCustomAchievementXNumericUpDown.ValueChanged += new System.EventHandler(this.CustomNumericUpDown_ValueChanged);
             // 
@@ -1202,7 +1229,8 @@ namespace Retro_Achievement_Tracker
             this.alertsCustomAchievementYNumericUpDown.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.alertsCustomAchievementYNumericUpDown.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.alertsCustomAchievementYNumericUpDown.ForeColor = System.Drawing.Color.White;
-            this.alertsCustomAchievementYNumericUpDown.Location = new System.Drawing.Point(168, 4);
+            this.alertsCustomAchievementYNumericUpDown.Location = new System.Drawing.Point(252, 6);
+            this.alertsCustomAchievementYNumericUpDown.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsCustomAchievementYNumericUpDown.Maximum = new decimal(new int[] {
             2000,
             0,
@@ -1214,7 +1242,7 @@ namespace Retro_Achievement_Tracker
             0,
             -2147483648});
             this.alertsCustomAchievementYNumericUpDown.Name = "alertsCustomAchievementYNumericUpDown";
-            this.alertsCustomAchievementYNumericUpDown.Size = new System.Drawing.Size(97, 17);
+            this.alertsCustomAchievementYNumericUpDown.Size = new System.Drawing.Size(146, 24);
             this.alertsCustomAchievementYNumericUpDown.TabIndex = 16;
             this.alertsCustomAchievementYNumericUpDown.ValueChanged += new System.EventHandler(this.CustomNumericUpDown_ValueChanged);
             // 
@@ -1223,9 +1251,10 @@ namespace Retro_Achievement_Tracker
             this.alertsAchievementEditOutlineCheckbox.AutoSize = true;
             this.alertsAchievementEditOutlineCheckbox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.alertsAchievementEditOutlineCheckbox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.alertsAchievementEditOutlineCheckbox.Location = new System.Drawing.Point(8, 269);
+            this.alertsAchievementEditOutlineCheckbox.Location = new System.Drawing.Point(12, 414);
+            this.alertsAchievementEditOutlineCheckbox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsAchievementEditOutlineCheckbox.Name = "alertsAchievementEditOutlineCheckbox";
-            this.alertsAchievementEditOutlineCheckbox.Size = new System.Drawing.Size(91, 20);
+            this.alertsAchievementEditOutlineCheckbox.Size = new System.Drawing.Size(137, 29);
             this.alertsAchievementEditOutlineCheckbox.TabIndex = 47;
             this.alertsAchievementEditOutlineCheckbox.Text = "Edit Mode";
             this.alertsAchievementEditOutlineCheckbox.UseVisualStyleBackColor = true;
@@ -1237,7 +1266,8 @@ namespace Retro_Achievement_Tracker
             this.alertsCustomAchievementOutNumericUpDown.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.alertsCustomAchievementOutNumericUpDown.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.alertsCustomAchievementOutNumericUpDown.ForeColor = System.Drawing.Color.White;
-            this.alertsCustomAchievementOutNumericUpDown.Location = new System.Drawing.Point(168, 4);
+            this.alertsCustomAchievementOutNumericUpDown.Location = new System.Drawing.Point(252, 6);
+            this.alertsCustomAchievementOutNumericUpDown.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsCustomAchievementOutNumericUpDown.Maximum = new decimal(new int[] {
             100000,
             0,
@@ -1249,7 +1279,7 @@ namespace Retro_Achievement_Tracker
             0,
             0});
             this.alertsCustomAchievementOutNumericUpDown.Name = "alertsCustomAchievementOutNumericUpDown";
-            this.alertsCustomAchievementOutNumericUpDown.Size = new System.Drawing.Size(97, 17);
+            this.alertsCustomAchievementOutNumericUpDown.Size = new System.Drawing.Size(146, 24);
             this.alertsCustomAchievementOutNumericUpDown.TabIndex = 26;
             this.alertsCustomAchievementOutNumericUpDown.Value = new decimal(new int[] {
             300,
@@ -1264,9 +1294,10 @@ namespace Retro_Achievement_Tracker
             this.alertsCustomAchievementAnimationOutComboBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.alertsCustomAchievementAnimationOutComboBox.ForeColor = System.Drawing.Color.White;
             this.alertsCustomAchievementAnimationOutComboBox.FormattingEnabled = true;
-            this.alertsCustomAchievementAnimationOutComboBox.Location = new System.Drawing.Point(168, 1);
+            this.alertsCustomAchievementAnimationOutComboBox.Location = new System.Drawing.Point(252, 2);
+            this.alertsCustomAchievementAnimationOutComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsCustomAchievementAnimationOutComboBox.Name = "alertsCustomAchievementAnimationOutComboBox";
-            this.alertsCustomAchievementAnimationOutComboBox.Size = new System.Drawing.Size(97, 21);
+            this.alertsCustomAchievementAnimationOutComboBox.Size = new System.Drawing.Size(144, 28);
             this.alertsCustomAchievementAnimationOutComboBox.TabIndex = 39;
             this.alertsCustomAchievementAnimationOutComboBox.SelectedIndexChanged += new System.EventHandler(this.NotificationAnimationComboBox_SelectedIndexChanged);
             // 
@@ -1276,7 +1307,8 @@ namespace Retro_Achievement_Tracker
             this.alertsCustomAchievementOutSpeedUpDown.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.alertsCustomAchievementOutSpeedUpDown.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.alertsCustomAchievementOutSpeedUpDown.ForeColor = System.Drawing.Color.White;
-            this.alertsCustomAchievementOutSpeedUpDown.Location = new System.Drawing.Point(168, 4);
+            this.alertsCustomAchievementOutSpeedUpDown.Location = new System.Drawing.Point(252, 6);
+            this.alertsCustomAchievementOutSpeedUpDown.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsCustomAchievementOutSpeedUpDown.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -1288,7 +1320,7 @@ namespace Retro_Achievement_Tracker
             0,
             0});
             this.alertsCustomAchievementOutSpeedUpDown.Name = "alertsCustomAchievementOutSpeedUpDown";
-            this.alertsCustomAchievementOutSpeedUpDown.Size = new System.Drawing.Size(97, 17);
+            this.alertsCustomAchievementOutSpeedUpDown.Size = new System.Drawing.Size(146, 24);
             this.alertsCustomAchievementOutSpeedUpDown.TabIndex = 48;
             this.alertsCustomAchievementOutSpeedUpDown.Value = new decimal(new int[] {
             50,
@@ -1303,7 +1335,8 @@ namespace Retro_Achievement_Tracker
             this.alertsCustomAchievementInNumericUpDown.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.alertsCustomAchievementInNumericUpDown.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.alertsCustomAchievementInNumericUpDown.ForeColor = System.Drawing.Color.White;
-            this.alertsCustomAchievementInNumericUpDown.Location = new System.Drawing.Point(168, 4);
+            this.alertsCustomAchievementInNumericUpDown.Location = new System.Drawing.Point(252, 6);
+            this.alertsCustomAchievementInNumericUpDown.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsCustomAchievementInNumericUpDown.Maximum = new decimal(new int[] {
             100000,
             0,
@@ -1315,7 +1348,7 @@ namespace Retro_Achievement_Tracker
             0,
             0});
             this.alertsCustomAchievementInNumericUpDown.Name = "alertsCustomAchievementInNumericUpDown";
-            this.alertsCustomAchievementInNumericUpDown.Size = new System.Drawing.Size(97, 17);
+            this.alertsCustomAchievementInNumericUpDown.Size = new System.Drawing.Size(146, 24);
             this.alertsCustomAchievementInNumericUpDown.TabIndex = 26;
             this.alertsCustomAchievementInNumericUpDown.Value = new decimal(new int[] {
             300,
@@ -1330,9 +1363,10 @@ namespace Retro_Achievement_Tracker
             this.alertsCustomAchievementAnimationInComboBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.alertsCustomAchievementAnimationInComboBox.ForeColor = System.Drawing.Color.White;
             this.alertsCustomAchievementAnimationInComboBox.FormattingEnabled = true;
-            this.alertsCustomAchievementAnimationInComboBox.Location = new System.Drawing.Point(168, 1);
+            this.alertsCustomAchievementAnimationInComboBox.Location = new System.Drawing.Point(252, 2);
+            this.alertsCustomAchievementAnimationInComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsCustomAchievementAnimationInComboBox.Name = "alertsCustomAchievementAnimationInComboBox";
-            this.alertsCustomAchievementAnimationInComboBox.Size = new System.Drawing.Size(97, 21);
+            this.alertsCustomAchievementAnimationInComboBox.Size = new System.Drawing.Size(144, 28);
             this.alertsCustomAchievementAnimationInComboBox.TabIndex = 39;
             this.alertsCustomAchievementAnimationInComboBox.SelectedIndexChanged += new System.EventHandler(this.NotificationAnimationComboBox_SelectedIndexChanged);
             // 
@@ -1342,7 +1376,8 @@ namespace Retro_Achievement_Tracker
             this.alertsCustomAchievementInSpeedUpDown.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.alertsCustomAchievementInSpeedUpDown.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.alertsCustomAchievementInSpeedUpDown.ForeColor = System.Drawing.Color.White;
-            this.alertsCustomAchievementInSpeedUpDown.Location = new System.Drawing.Point(168, 4);
+            this.alertsCustomAchievementInSpeedUpDown.Location = new System.Drawing.Point(252, 6);
+            this.alertsCustomAchievementInSpeedUpDown.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsCustomAchievementInSpeedUpDown.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -1354,7 +1389,7 @@ namespace Retro_Achievement_Tracker
             0,
             0});
             this.alertsCustomAchievementInSpeedUpDown.Name = "alertsCustomAchievementInSpeedUpDown";
-            this.alertsCustomAchievementInSpeedUpDown.Size = new System.Drawing.Size(97, 17);
+            this.alertsCustomAchievementInSpeedUpDown.Size = new System.Drawing.Size(146, 24);
             this.alertsCustomAchievementInSpeedUpDown.TabIndex = 48;
             this.alertsCustomAchievementInSpeedUpDown.Value = new decimal(new int[] {
             50,
@@ -1368,9 +1403,10 @@ namespace Retro_Achievement_Tracker
             this.alertsCustomAchievementEnableCheckbox.AutoSize = true;
             this.alertsCustomAchievementEnableCheckbox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.alertsCustomAchievementEnableCheckbox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.alertsCustomAchievementEnableCheckbox.Location = new System.Drawing.Point(86, 6);
+            this.alertsCustomAchievementEnableCheckbox.Location = new System.Drawing.Point(129, 9);
+            this.alertsCustomAchievementEnableCheckbox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsCustomAchievementEnableCheckbox.Name = "alertsCustomAchievementEnableCheckbox";
-            this.alertsCustomAchievementEnableCheckbox.Size = new System.Drawing.Size(75, 20);
+            this.alertsCustomAchievementEnableCheckbox.Size = new System.Drawing.Size(114, 29);
             this.alertsCustomAchievementEnableCheckbox.TabIndex = 13;
             this.alertsCustomAchievementEnableCheckbox.Text = "Custom";
             this.alertsCustomAchievementEnableCheckbox.UseVisualStyleBackColor = true;
@@ -1383,9 +1419,10 @@ namespace Retro_Achievement_Tracker
             this.alertsPlayMasteryButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.alertsPlayMasteryButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.alertsPlayMasteryButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
-            this.alertsPlayMasteryButton.Location = new System.Drawing.Point(212, 3);
+            this.alertsPlayMasteryButton.Location = new System.Drawing.Point(318, 5);
+            this.alertsPlayMasteryButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsPlayMasteryButton.Name = "alertsPlayMasteryButton";
-            this.alertsPlayMasteryButton.Size = new System.Drawing.Size(65, 25);
+            this.alertsPlayMasteryButton.Size = new System.Drawing.Size(98, 38);
             this.alertsPlayMasteryButton.TabIndex = 2;
             this.alertsPlayMasteryButton.Text = "Play";
             this.alertsPlayMasteryButton.UseVisualStyleBackColor = false;
@@ -1398,9 +1435,10 @@ namespace Retro_Achievement_Tracker
             this.alertsSelectCustomMasteryFileButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.alertsSelectCustomMasteryFileButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.alertsSelectCustomMasteryFileButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
-            this.alertsSelectCustomMasteryFileButton.Location = new System.Drawing.Point(209, 266);
+            this.alertsSelectCustomMasteryFileButton.Location = new System.Drawing.Point(314, 409);
+            this.alertsSelectCustomMasteryFileButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsSelectCustomMasteryFileButton.Name = "alertsSelectCustomMasteryFileButton";
-            this.alertsSelectCustomMasteryFileButton.Size = new System.Drawing.Size(65, 25);
+            this.alertsSelectCustomMasteryFileButton.Size = new System.Drawing.Size(98, 38);
             this.alertsSelectCustomMasteryFileButton.TabIndex = 14;
             this.alertsSelectCustomMasteryFileButton.Text = "File";
             this.alertsSelectCustomMasteryFileButton.UseVisualStyleBackColor = false;
@@ -1418,7 +1456,8 @@ namespace Retro_Achievement_Tracker
             0,
             0,
             131072});
-            this.alertsCustomMasteryScaleNumericUpDown.Location = new System.Drawing.Point(168, 4);
+            this.alertsCustomMasteryScaleNumericUpDown.Location = new System.Drawing.Point(252, 6);
+            this.alertsCustomMasteryScaleNumericUpDown.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsCustomMasteryScaleNumericUpDown.Maximum = new decimal(new int[] {
             5,
             0,
@@ -1430,7 +1469,7 @@ namespace Retro_Achievement_Tracker
             0,
             131072});
             this.alertsCustomMasteryScaleNumericUpDown.Name = "alertsCustomMasteryScaleNumericUpDown";
-            this.alertsCustomMasteryScaleNumericUpDown.Size = new System.Drawing.Size(97, 17);
+            this.alertsCustomMasteryScaleNumericUpDown.Size = new System.Drawing.Size(146, 24);
             this.alertsCustomMasteryScaleNumericUpDown.TabIndex = 20;
             this.alertsCustomMasteryScaleNumericUpDown.Value = new decimal(new int[] {
             1,
@@ -1445,7 +1484,8 @@ namespace Retro_Achievement_Tracker
             this.alertsCustomMasteryXNumericUpDown.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.alertsCustomMasteryXNumericUpDown.Font = new System.Drawing.Font("Verdana", 8.25F);
             this.alertsCustomMasteryXNumericUpDown.ForeColor = System.Drawing.Color.White;
-            this.alertsCustomMasteryXNumericUpDown.Location = new System.Drawing.Point(168, 4);
+            this.alertsCustomMasteryXNumericUpDown.Location = new System.Drawing.Point(252, 6);
+            this.alertsCustomMasteryXNumericUpDown.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsCustomMasteryXNumericUpDown.Maximum = new decimal(new int[] {
             2000,
             0,
@@ -1457,7 +1497,7 @@ namespace Retro_Achievement_Tracker
             0,
             -2147483648});
             this.alertsCustomMasteryXNumericUpDown.Name = "alertsCustomMasteryXNumericUpDown";
-            this.alertsCustomMasteryXNumericUpDown.Size = new System.Drawing.Size(97, 17);
+            this.alertsCustomMasteryXNumericUpDown.Size = new System.Drawing.Size(146, 24);
             this.alertsCustomMasteryXNumericUpDown.TabIndex = 15;
             this.alertsCustomMasteryXNumericUpDown.ValueChanged += new System.EventHandler(this.CustomNumericUpDown_ValueChanged);
             // 
@@ -1467,7 +1507,8 @@ namespace Retro_Achievement_Tracker
             this.alertsCustomMasteryYNumericUpDown.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.alertsCustomMasteryYNumericUpDown.Font = new System.Drawing.Font("Verdana", 8.25F);
             this.alertsCustomMasteryYNumericUpDown.ForeColor = System.Drawing.Color.White;
-            this.alertsCustomMasteryYNumericUpDown.Location = new System.Drawing.Point(168, 4);
+            this.alertsCustomMasteryYNumericUpDown.Location = new System.Drawing.Point(252, 6);
+            this.alertsCustomMasteryYNumericUpDown.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsCustomMasteryYNumericUpDown.Maximum = new decimal(new int[] {
             2000,
             0,
@@ -1479,7 +1520,7 @@ namespace Retro_Achievement_Tracker
             0,
             -2147483648});
             this.alertsCustomMasteryYNumericUpDown.Name = "alertsCustomMasteryYNumericUpDown";
-            this.alertsCustomMasteryYNumericUpDown.Size = new System.Drawing.Size(97, 17);
+            this.alertsCustomMasteryYNumericUpDown.Size = new System.Drawing.Size(146, 24);
             this.alertsCustomMasteryYNumericUpDown.TabIndex = 16;
             this.alertsCustomMasteryYNumericUpDown.ValueChanged += new System.EventHandler(this.CustomNumericUpDown_ValueChanged);
             // 
@@ -1488,9 +1529,10 @@ namespace Retro_Achievement_Tracker
             this.alertsMasteryEditOutlineCheckbox.AutoSize = true;
             this.alertsMasteryEditOutlineCheckbox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.alertsMasteryEditOutlineCheckbox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.alertsMasteryEditOutlineCheckbox.Location = new System.Drawing.Point(8, 269);
+            this.alertsMasteryEditOutlineCheckbox.Location = new System.Drawing.Point(12, 414);
+            this.alertsMasteryEditOutlineCheckbox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsMasteryEditOutlineCheckbox.Name = "alertsMasteryEditOutlineCheckbox";
-            this.alertsMasteryEditOutlineCheckbox.Size = new System.Drawing.Size(91, 20);
+            this.alertsMasteryEditOutlineCheckbox.Size = new System.Drawing.Size(137, 29);
             this.alertsMasteryEditOutlineCheckbox.TabIndex = 47;
             this.alertsMasteryEditOutlineCheckbox.Text = "Edit Mode";
             this.alertsMasteryEditOutlineCheckbox.UseVisualStyleBackColor = true;
@@ -1502,7 +1544,8 @@ namespace Retro_Achievement_Tracker
             this.alertsCustomMasteryOutNumericUpDown.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.alertsCustomMasteryOutNumericUpDown.Font = new System.Drawing.Font("Verdana", 8.25F);
             this.alertsCustomMasteryOutNumericUpDown.ForeColor = System.Drawing.Color.White;
-            this.alertsCustomMasteryOutNumericUpDown.Location = new System.Drawing.Point(168, 4);
+            this.alertsCustomMasteryOutNumericUpDown.Location = new System.Drawing.Point(252, 6);
+            this.alertsCustomMasteryOutNumericUpDown.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsCustomMasteryOutNumericUpDown.Maximum = new decimal(new int[] {
             100000,
             0,
@@ -1514,7 +1557,7 @@ namespace Retro_Achievement_Tracker
             0,
             0});
             this.alertsCustomMasteryOutNumericUpDown.Name = "alertsCustomMasteryOutNumericUpDown";
-            this.alertsCustomMasteryOutNumericUpDown.Size = new System.Drawing.Size(97, 17);
+            this.alertsCustomMasteryOutNumericUpDown.Size = new System.Drawing.Size(146, 24);
             this.alertsCustomMasteryOutNumericUpDown.TabIndex = 26;
             this.alertsCustomMasteryOutNumericUpDown.Value = new decimal(new int[] {
             300,
@@ -1529,9 +1572,10 @@ namespace Retro_Achievement_Tracker
             this.alertsCustomMasteryAnimationOutComboBox.Font = new System.Drawing.Font("Verdana", 8.25F);
             this.alertsCustomMasteryAnimationOutComboBox.ForeColor = System.Drawing.Color.White;
             this.alertsCustomMasteryAnimationOutComboBox.FormattingEnabled = true;
-            this.alertsCustomMasteryAnimationOutComboBox.Location = new System.Drawing.Point(168, 1);
+            this.alertsCustomMasteryAnimationOutComboBox.Location = new System.Drawing.Point(252, 2);
+            this.alertsCustomMasteryAnimationOutComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsCustomMasteryAnimationOutComboBox.Name = "alertsCustomMasteryAnimationOutComboBox";
-            this.alertsCustomMasteryAnimationOutComboBox.Size = new System.Drawing.Size(97, 21);
+            this.alertsCustomMasteryAnimationOutComboBox.Size = new System.Drawing.Size(144, 28);
             this.alertsCustomMasteryAnimationOutComboBox.TabIndex = 39;
             this.alertsCustomMasteryAnimationOutComboBox.SelectedIndexChanged += new System.EventHandler(this.NotificationAnimationComboBox_SelectedIndexChanged);
             // 
@@ -1541,7 +1585,8 @@ namespace Retro_Achievement_Tracker
             this.alertsCustomMasteryOutSpeedUpDown.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.alertsCustomMasteryOutSpeedUpDown.Font = new System.Drawing.Font("Verdana", 8.25F);
             this.alertsCustomMasteryOutSpeedUpDown.ForeColor = System.Drawing.Color.White;
-            this.alertsCustomMasteryOutSpeedUpDown.Location = new System.Drawing.Point(168, 4);
+            this.alertsCustomMasteryOutSpeedUpDown.Location = new System.Drawing.Point(252, 6);
+            this.alertsCustomMasteryOutSpeedUpDown.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsCustomMasteryOutSpeedUpDown.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -1553,7 +1598,7 @@ namespace Retro_Achievement_Tracker
             0,
             0});
             this.alertsCustomMasteryOutSpeedUpDown.Name = "alertsCustomMasteryOutSpeedUpDown";
-            this.alertsCustomMasteryOutSpeedUpDown.Size = new System.Drawing.Size(97, 17);
+            this.alertsCustomMasteryOutSpeedUpDown.Size = new System.Drawing.Size(146, 24);
             this.alertsCustomMasteryOutSpeedUpDown.TabIndex = 48;
             this.alertsCustomMasteryOutSpeedUpDown.Value = new decimal(new int[] {
             50,
@@ -1568,7 +1613,8 @@ namespace Retro_Achievement_Tracker
             this.alertsCustomMasteryInNumericUpDown.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.alertsCustomMasteryInNumericUpDown.Font = new System.Drawing.Font("Verdana", 8.25F);
             this.alertsCustomMasteryInNumericUpDown.ForeColor = System.Drawing.Color.White;
-            this.alertsCustomMasteryInNumericUpDown.Location = new System.Drawing.Point(168, 4);
+            this.alertsCustomMasteryInNumericUpDown.Location = new System.Drawing.Point(252, 6);
+            this.alertsCustomMasteryInNumericUpDown.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsCustomMasteryInNumericUpDown.Maximum = new decimal(new int[] {
             100000,
             0,
@@ -1580,7 +1626,7 @@ namespace Retro_Achievement_Tracker
             0,
             0});
             this.alertsCustomMasteryInNumericUpDown.Name = "alertsCustomMasteryInNumericUpDown";
-            this.alertsCustomMasteryInNumericUpDown.Size = new System.Drawing.Size(97, 17);
+            this.alertsCustomMasteryInNumericUpDown.Size = new System.Drawing.Size(146, 24);
             this.alertsCustomMasteryInNumericUpDown.TabIndex = 26;
             this.alertsCustomMasteryInNumericUpDown.Value = new decimal(new int[] {
             300,
@@ -1595,9 +1641,10 @@ namespace Retro_Achievement_Tracker
             this.alertsCustomMasteryAnimationInComboBox.Font = new System.Drawing.Font("Verdana", 8.25F);
             this.alertsCustomMasteryAnimationInComboBox.ForeColor = System.Drawing.Color.White;
             this.alertsCustomMasteryAnimationInComboBox.FormattingEnabled = true;
-            this.alertsCustomMasteryAnimationInComboBox.Location = new System.Drawing.Point(168, 1);
+            this.alertsCustomMasteryAnimationInComboBox.Location = new System.Drawing.Point(252, 2);
+            this.alertsCustomMasteryAnimationInComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsCustomMasteryAnimationInComboBox.Name = "alertsCustomMasteryAnimationInComboBox";
-            this.alertsCustomMasteryAnimationInComboBox.Size = new System.Drawing.Size(97, 21);
+            this.alertsCustomMasteryAnimationInComboBox.Size = new System.Drawing.Size(144, 28);
             this.alertsCustomMasteryAnimationInComboBox.TabIndex = 39;
             this.alertsCustomMasteryAnimationInComboBox.SelectedIndexChanged += new System.EventHandler(this.NotificationAnimationComboBox_SelectedIndexChanged);
             // 
@@ -1607,7 +1654,8 @@ namespace Retro_Achievement_Tracker
             this.alertsCustomMasteryInSpeedUpDown.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.alertsCustomMasteryInSpeedUpDown.Font = new System.Drawing.Font("Verdana", 8.25F);
             this.alertsCustomMasteryInSpeedUpDown.ForeColor = System.Drawing.Color.White;
-            this.alertsCustomMasteryInSpeedUpDown.Location = new System.Drawing.Point(168, 4);
+            this.alertsCustomMasteryInSpeedUpDown.Location = new System.Drawing.Point(252, 6);
+            this.alertsCustomMasteryInSpeedUpDown.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsCustomMasteryInSpeedUpDown.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -1619,7 +1667,7 @@ namespace Retro_Achievement_Tracker
             0,
             0});
             this.alertsCustomMasteryInSpeedUpDown.Name = "alertsCustomMasteryInSpeedUpDown";
-            this.alertsCustomMasteryInSpeedUpDown.Size = new System.Drawing.Size(97, 17);
+            this.alertsCustomMasteryInSpeedUpDown.Size = new System.Drawing.Size(146, 24);
             this.alertsCustomMasteryInSpeedUpDown.TabIndex = 48;
             this.alertsCustomMasteryInSpeedUpDown.Value = new decimal(new int[] {
             50,
@@ -1633,9 +1681,10 @@ namespace Retro_Achievement_Tracker
             this.alertsCustomMasteryEnableCheckbox.AutoSize = true;
             this.alertsCustomMasteryEnableCheckbox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.alertsCustomMasteryEnableCheckbox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.alertsCustomMasteryEnableCheckbox.Location = new System.Drawing.Point(86, 6);
+            this.alertsCustomMasteryEnableCheckbox.Location = new System.Drawing.Point(129, 9);
+            this.alertsCustomMasteryEnableCheckbox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsCustomMasteryEnableCheckbox.Name = "alertsCustomMasteryEnableCheckbox";
-            this.alertsCustomMasteryEnableCheckbox.Size = new System.Drawing.Size(75, 20);
+            this.alertsCustomMasteryEnableCheckbox.Size = new System.Drawing.Size(114, 29);
             this.alertsCustomMasteryEnableCheckbox.TabIndex = 13;
             this.alertsCustomMasteryEnableCheckbox.Text = "Custom";
             this.alertsCustomMasteryEnableCheckbox.UseVisualStyleBackColor = true;
@@ -1646,9 +1695,10 @@ namespace Retro_Achievement_Tracker
             this.userInfoTruePointsTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.userInfoTruePointsTextBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userInfoTruePointsTextBox.ForeColor = System.Drawing.Color.White;
-            this.userInfoTruePointsTextBox.Location = new System.Drawing.Point(116, 0);
+            this.userInfoTruePointsTextBox.Location = new System.Drawing.Point(174, 0);
+            this.userInfoTruePointsTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.userInfoTruePointsTextBox.Name = "userInfoTruePointsTextBox";
-            this.userInfoTruePointsTextBox.Size = new System.Drawing.Size(99, 23);
+            this.userInfoTruePointsTextBox.Size = new System.Drawing.Size(146, 31);
             this.userInfoTruePointsTextBox.TabIndex = 7;
             this.userInfoTruePointsTextBox.Text = "True Points";
             this.userInfoTruePointsTextBox.TextChanged += new System.EventHandler(this.OverrideTextBox_TextChanged);
@@ -1658,9 +1708,10 @@ namespace Retro_Achievement_Tracker
             this.userInfoPointsTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.userInfoPointsTextBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userInfoPointsTextBox.ForeColor = System.Drawing.Color.White;
-            this.userInfoPointsTextBox.Location = new System.Drawing.Point(116, 0);
+            this.userInfoPointsTextBox.Location = new System.Drawing.Point(174, 0);
+            this.userInfoPointsTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.userInfoPointsTextBox.Name = "userInfoPointsTextBox";
-            this.userInfoPointsTextBox.Size = new System.Drawing.Size(99, 23);
+            this.userInfoPointsTextBox.Size = new System.Drawing.Size(146, 31);
             this.userInfoPointsTextBox.TabIndex = 6;
             this.userInfoPointsTextBox.Text = "Points";
             this.userInfoPointsTextBox.TextChanged += new System.EventHandler(this.OverrideTextBox_TextChanged);
@@ -1670,9 +1721,10 @@ namespace Retro_Achievement_Tracker
             this.userInfoRatioTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.userInfoRatioTextBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userInfoRatioTextBox.ForeColor = System.Drawing.Color.White;
-            this.userInfoRatioTextBox.Location = new System.Drawing.Point(116, 0);
+            this.userInfoRatioTextBox.Location = new System.Drawing.Point(174, 0);
+            this.userInfoRatioTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.userInfoRatioTextBox.Name = "userInfoRatioTextBox";
-            this.userInfoRatioTextBox.Size = new System.Drawing.Size(99, 23);
+            this.userInfoRatioTextBox.Size = new System.Drawing.Size(146, 31);
             this.userInfoRatioTextBox.TabIndex = 5;
             this.userInfoRatioTextBox.Text = "Retro Ratio";
             this.userInfoRatioTextBox.TextChanged += new System.EventHandler(this.OverrideTextBox_TextChanged);
@@ -1682,9 +1734,10 @@ namespace Retro_Achievement_Tracker
             this.userInfoRankTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.userInfoRankTextBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userInfoRankTextBox.ForeColor = System.Drawing.Color.White;
-            this.userInfoRankTextBox.Location = new System.Drawing.Point(116, 0);
+            this.userInfoRankTextBox.Location = new System.Drawing.Point(174, 0);
+            this.userInfoRankTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.userInfoRankTextBox.Name = "userInfoRankTextBox";
-            this.userInfoRankTextBox.Size = new System.Drawing.Size(99, 23);
+            this.userInfoRankTextBox.Size = new System.Drawing.Size(146, 31);
             this.userInfoRankTextBox.TabIndex = 1;
             this.userInfoRankTextBox.Text = "Rank";
             this.userInfoRankTextBox.TextChanged += new System.EventHandler(this.OverrideTextBox_TextChanged);
@@ -1697,9 +1750,10 @@ namespace Retro_Achievement_Tracker
             this.userInfoTruePointsCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.userInfoTruePointsCheckBox.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userInfoTruePointsCheckBox.ForeColor = System.Drawing.Color.White;
-            this.userInfoTruePointsCheckBox.Location = new System.Drawing.Point(225, 5);
+            this.userInfoTruePointsCheckBox.Location = new System.Drawing.Point(338, 8);
+            this.userInfoTruePointsCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.userInfoTruePointsCheckBox.Name = "userInfoTruePointsCheckBox";
-            this.userInfoTruePointsCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.userInfoTruePointsCheckBox.Size = new System.Drawing.Size(22, 22);
             this.userInfoTruePointsCheckBox.TabIndex = 56;
             this.userInfoTruePointsCheckBox.UseVisualStyleBackColor = true;
             this.userInfoTruePointsCheckBox.CheckedChanged += new System.EventHandler(this.FeatureEnablementCheckBox_CheckedChanged);
@@ -1712,9 +1766,10 @@ namespace Retro_Achievement_Tracker
             this.userInfoRatioCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.userInfoRatioCheckBox.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userInfoRatioCheckBox.ForeColor = System.Drawing.Color.White;
-            this.userInfoRatioCheckBox.Location = new System.Drawing.Point(225, 5);
+            this.userInfoRatioCheckBox.Location = new System.Drawing.Point(338, 8);
+            this.userInfoRatioCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.userInfoRatioCheckBox.Name = "userInfoRatioCheckBox";
-            this.userInfoRatioCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.userInfoRatioCheckBox.Size = new System.Drawing.Size(22, 22);
             this.userInfoRatioCheckBox.TabIndex = 55;
             this.userInfoRatioCheckBox.UseVisualStyleBackColor = true;
             this.userInfoRatioCheckBox.CheckedChanged += new System.EventHandler(this.FeatureEnablementCheckBox_CheckedChanged);
@@ -1727,9 +1782,10 @@ namespace Retro_Achievement_Tracker
             this.userInfoPointsCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.userInfoPointsCheckBox.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userInfoPointsCheckBox.ForeColor = System.Drawing.Color.White;
-            this.userInfoPointsCheckBox.Location = new System.Drawing.Point(225, 5);
+            this.userInfoPointsCheckBox.Location = new System.Drawing.Point(338, 8);
+            this.userInfoPointsCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.userInfoPointsCheckBox.Name = "userInfoPointsCheckBox";
-            this.userInfoPointsCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.userInfoPointsCheckBox.Size = new System.Drawing.Size(22, 22);
             this.userInfoPointsCheckBox.TabIndex = 54;
             this.userInfoPointsCheckBox.UseVisualStyleBackColor = true;
             this.userInfoPointsCheckBox.CheckedChanged += new System.EventHandler(this.FeatureEnablementCheckBox_CheckedChanged);
@@ -1741,10 +1797,10 @@ namespace Retro_Achievement_Tracker
             this.userInfoDefaultButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.userInfoDefaultButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userInfoDefaultButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(68)))), ((int)(((byte)(68)))));
-            this.userInfoDefaultButton.Location = new System.Drawing.Point(204, 2);
+            this.userInfoDefaultButton.Location = new System.Drawing.Point(306, 3);
             this.userInfoDefaultButton.Margin = new System.Windows.Forms.Padding(0);
             this.userInfoDefaultButton.Name = "userInfoDefaultButton";
-            this.userInfoDefaultButton.Size = new System.Drawing.Size(75, 27);
+            this.userInfoDefaultButton.Size = new System.Drawing.Size(112, 42);
             this.userInfoDefaultButton.TabIndex = 39;
             this.userInfoDefaultButton.Text = "Default";
             this.userInfoDefaultButton.UseVisualStyleBackColor = false;
@@ -1758,9 +1814,10 @@ namespace Retro_Achievement_Tracker
             this.userInfoRankCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.userInfoRankCheckBox.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userInfoRankCheckBox.ForeColor = System.Drawing.Color.White;
-            this.userInfoRankCheckBox.Location = new System.Drawing.Point(225, 5);
+            this.userInfoRankCheckBox.Location = new System.Drawing.Point(338, 8);
+            this.userInfoRankCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.userInfoRankCheckBox.Name = "userInfoRankCheckBox";
-            this.userInfoRankCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.userInfoRankCheckBox.Size = new System.Drawing.Size(22, 22);
             this.userInfoRankCheckBox.TabIndex = 52;
             this.userInfoRankCheckBox.UseVisualStyleBackColor = true;
             this.userInfoRankCheckBox.CheckedChanged += new System.EventHandler(this.FeatureEnablementCheckBox_CheckedChanged);
@@ -1774,9 +1831,10 @@ namespace Retro_Achievement_Tracker
             this.focusBehaviorGoToLastRadioButton.AutoSize = true;
             this.focusBehaviorGoToLastRadioButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.focusBehaviorGoToLastRadioButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.focusBehaviorGoToLastRadioButton.Location = new System.Drawing.Point(223, 40);
+            this.focusBehaviorGoToLastRadioButton.Location = new System.Drawing.Point(334, 62);
+            this.focusBehaviorGoToLastRadioButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.focusBehaviorGoToLastRadioButton.Name = "focusBehaviorGoToLastRadioButton";
-            this.focusBehaviorGoToLastRadioButton.Size = new System.Drawing.Size(53, 20);
+            this.focusBehaviorGoToLastRadioButton.Size = new System.Drawing.Size(78, 29);
             this.focusBehaviorGoToLastRadioButton.TabIndex = 3;
             this.focusBehaviorGoToLastRadioButton.Text = "Last";
             this.focusBehaviorGoToLastRadioButton.UseVisualStyleBackColor = true;
@@ -1787,9 +1845,10 @@ namespace Retro_Achievement_Tracker
             this.focusBehaviorGoToNextRadioButton.AutoSize = true;
             this.focusBehaviorGoToNextRadioButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.focusBehaviorGoToNextRadioButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.focusBehaviorGoToNextRadioButton.Location = new System.Drawing.Point(68, 40);
+            this.focusBehaviorGoToNextRadioButton.Location = new System.Drawing.Point(102, 62);
+            this.focusBehaviorGoToNextRadioButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.focusBehaviorGoToNextRadioButton.Name = "focusBehaviorGoToNextRadioButton";
-            this.focusBehaviorGoToNextRadioButton.Size = new System.Drawing.Size(55, 20);
+            this.focusBehaviorGoToNextRadioButton.Size = new System.Drawing.Size(84, 29);
             this.focusBehaviorGoToNextRadioButton.TabIndex = 2;
             this.focusBehaviorGoToNextRadioButton.Text = "Next";
             this.focusBehaviorGoToNextRadioButton.UseVisualStyleBackColor = true;
@@ -1800,9 +1859,10 @@ namespace Retro_Achievement_Tracker
             this.focusBehaviorGoToPreviousRadioButton.AutoSize = true;
             this.focusBehaviorGoToPreviousRadioButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.focusBehaviorGoToPreviousRadioButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.focusBehaviorGoToPreviousRadioButton.Location = new System.Drawing.Point(137, 40);
+            this.focusBehaviorGoToPreviousRadioButton.Location = new System.Drawing.Point(206, 62);
+            this.focusBehaviorGoToPreviousRadioButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.focusBehaviorGoToPreviousRadioButton.Name = "focusBehaviorGoToPreviousRadioButton";
-            this.focusBehaviorGoToPreviousRadioButton.Size = new System.Drawing.Size(80, 20);
+            this.focusBehaviorGoToPreviousRadioButton.Size = new System.Drawing.Size(123, 29);
             this.focusBehaviorGoToPreviousRadioButton.TabIndex = 1;
             this.focusBehaviorGoToPreviousRadioButton.Text = "Previous";
             this.focusBehaviorGoToPreviousRadioButton.UseVisualStyleBackColor = true;
@@ -1814,9 +1874,10 @@ namespace Retro_Achievement_Tracker
             this.focusBehaviorGoToFirstRadioButton.Checked = true;
             this.focusBehaviorGoToFirstRadioButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.focusBehaviorGoToFirstRadioButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.focusBehaviorGoToFirstRadioButton.Location = new System.Drawing.Point(8, 40);
+            this.focusBehaviorGoToFirstRadioButton.Location = new System.Drawing.Point(12, 62);
+            this.focusBehaviorGoToFirstRadioButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.focusBehaviorGoToFirstRadioButton.Name = "focusBehaviorGoToFirstRadioButton";
-            this.focusBehaviorGoToFirstRadioButton.Size = new System.Drawing.Size(54, 20);
+            this.focusBehaviorGoToFirstRadioButton.Size = new System.Drawing.Size(82, 29);
             this.focusBehaviorGoToFirstRadioButton.TabIndex = 0;
             this.focusBehaviorGoToFirstRadioButton.TabStop = true;
             this.focusBehaviorGoToFirstRadioButton.Text = "First";
@@ -1829,9 +1890,10 @@ namespace Retro_Achievement_Tracker
             this.recentAchievementsMaxListLabel.BackColor = System.Drawing.Color.Transparent;
             this.recentAchievementsMaxListLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.recentAchievementsMaxListLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.recentAchievementsMaxListLabel.Location = new System.Drawing.Point(127, 41);
+            this.recentAchievementsMaxListLabel.Location = new System.Drawing.Point(190, 63);
+            this.recentAchievementsMaxListLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.recentAchievementsMaxListLabel.Name = "recentAchievementsMaxListLabel";
-            this.recentAchievementsMaxListLabel.Size = new System.Drawing.Size(93, 16);
+            this.recentAchievementsMaxListLabel.Size = new System.Drawing.Size(145, 25);
             this.recentAchievementsMaxListLabel.TabIndex = 10015;
             this.recentAchievementsMaxListLabel.Text = "Max List Size";
             // 
@@ -1840,7 +1902,8 @@ namespace Retro_Achievement_Tracker
             this.recentAchievementsMaxListNumericUpDown.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(42)))), ((int)(((byte)(42)))));
             this.recentAchievementsMaxListNumericUpDown.Font = new System.Drawing.Font("Verdana", 8.25F);
             this.recentAchievementsMaxListNumericUpDown.ForeColor = System.Drawing.Color.White;
-            this.recentAchievementsMaxListNumericUpDown.Location = new System.Drawing.Point(226, 40);
+            this.recentAchievementsMaxListNumericUpDown.Location = new System.Drawing.Point(339, 62);
+            this.recentAchievementsMaxListNumericUpDown.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.recentAchievementsMaxListNumericUpDown.Maximum = new decimal(new int[] {
             20,
             0,
@@ -1852,7 +1915,7 @@ namespace Retro_Achievement_Tracker
             0,
             0});
             this.recentAchievementsMaxListNumericUpDown.Name = "recentAchievementsMaxListNumericUpDown";
-            this.recentAchievementsMaxListNumericUpDown.Size = new System.Drawing.Size(51, 21);
+            this.recentAchievementsMaxListNumericUpDown.Size = new System.Drawing.Size(76, 28);
             this.recentAchievementsMaxListNumericUpDown.TabIndex = 22;
             this.recentAchievementsMaxListNumericUpDown.Value = new decimal(new int[] {
             1,
@@ -1870,9 +1933,10 @@ namespace Retro_Achievement_Tracker
             this.panel64.Controls.Add(this.focusBehaviorGoToFirstRadioButton);
             this.panel64.Controls.Add(this.focusBehaviorGoToNextRadioButton);
             this.panel64.Controls.Add(this.focusBehaviorGoToPreviousRadioButton);
-            this.panel64.Location = new System.Drawing.Point(3, 302);
+            this.panel64.Location = new System.Drawing.Point(4, 465);
+            this.panel64.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel64.Name = "panel64";
-            this.panel64.Size = new System.Drawing.Size(289, 63);
+            this.panel64.Size = new System.Drawing.Size(434, 97);
             this.panel64.TabIndex = 10084;
             // 
             // label112
@@ -1880,18 +1944,20 @@ namespace Retro_Achievement_Tracker
             this.label112.BackColor = System.Drawing.Color.Transparent;
             this.label112.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label112.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label112.Location = new System.Drawing.Point(3, 3);
+            this.label112.Location = new System.Drawing.Point(4, 5);
+            this.label112.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label112.Name = "label112";
-            this.label112.Size = new System.Drawing.Size(273, 26);
+            this.label112.Size = new System.Drawing.Size(410, 40);
             this.label112.TabIndex = 10082;
             this.label112.Text = "Auto-Focus Rule";
             // 
             // pictureBox12
             // 
             this.pictureBox12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.pictureBox12.Location = new System.Drawing.Point(2, 32);
+            this.pictureBox12.Location = new System.Drawing.Point(3, 49);
+            this.pictureBox12.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox12.Name = "pictureBox12";
-            this.pictureBox12.Size = new System.Drawing.Size(275, 2);
+            this.pictureBox12.Size = new System.Drawing.Size(412, 3);
             this.pictureBox12.TabIndex = 10083;
             this.pictureBox12.TabStop = false;
             // 
@@ -1907,9 +1973,10 @@ namespace Retro_Achievement_Tracker
             this.panel63.Controls.Add(this.focusAchievementDescriptionLabel);
             this.panel63.Controls.Add(this.focusAchievementTitleLabel);
             this.panel63.Controls.Add(this.focusSetButton);
-            this.panel63.Location = new System.Drawing.Point(3, 3);
+            this.panel63.Location = new System.Drawing.Point(4, 5);
+            this.panel63.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel63.Name = "panel63";
-            this.panel63.Size = new System.Drawing.Size(289, 293);
+            this.panel63.Size = new System.Drawing.Size(434, 451);
             this.panel63.TabIndex = 10081;
             // 
             // unlockAchievementButton
@@ -1919,9 +1986,10 @@ namespace Retro_Achievement_Tracker
             this.unlockAchievementButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.unlockAchievementButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.unlockAchievementButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
-            this.unlockAchievementButton.Location = new System.Drawing.Point(211, 40);
+            this.unlockAchievementButton.Location = new System.Drawing.Point(316, 62);
+            this.unlockAchievementButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.unlockAchievementButton.Name = "unlockAchievementButton";
-            this.unlockAchievementButton.Size = new System.Drawing.Size(75, 27);
+            this.unlockAchievementButton.Size = new System.Drawing.Size(112, 42);
             this.unlockAchievementButton.TabIndex = 10084;
             this.unlockAchievementButton.Text = "Unlock";
             this.unlockAchievementButton.UseVisualStyleBackColor = false;
@@ -1932,18 +2000,20 @@ namespace Retro_Achievement_Tracker
             this.label111.BackColor = System.Drawing.Color.Transparent;
             this.label111.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label111.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label111.Location = new System.Drawing.Point(3, 3);
+            this.label111.Location = new System.Drawing.Point(4, 5);
+            this.label111.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label111.Name = "label111";
-            this.label111.Size = new System.Drawing.Size(273, 26);
+            this.label111.Size = new System.Drawing.Size(410, 40);
             this.label111.TabIndex = 10082;
             this.label111.Text = "Current Achievement";
             // 
             // pictureBox10
             // 
             this.pictureBox10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.pictureBox10.Location = new System.Drawing.Point(2, 32);
+            this.pictureBox10.Location = new System.Drawing.Point(3, 49);
+            this.pictureBox10.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox10.Name = "pictureBox10";
-            this.pictureBox10.Size = new System.Drawing.Size(280, 2);
+            this.pictureBox10.Size = new System.Drawing.Size(420, 3);
             this.pictureBox10.TabIndex = 10083;
             this.pictureBox10.TabStop = false;
             // 
@@ -1965,9 +2035,10 @@ namespace Retro_Achievement_Tracker
             this.panel51.Controls.Add(this.panel55);
             this.panel51.Controls.Add(this.focusPointsOutlinePanel);
             this.panel51.Controls.Add(this.focusLineOutlinePanel);
-            this.panel51.Location = new System.Drawing.Point(296, 3);
+            this.panel51.Location = new System.Drawing.Point(444, 5);
+            this.panel51.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel51.Name = "panel51";
-            this.panel51.Size = new System.Drawing.Size(468, 285);
+            this.panel51.Size = new System.Drawing.Size(702, 438);
             this.panel51.TabIndex = 10080;
             // 
             // focusLinePanel
@@ -1975,9 +2046,10 @@ namespace Retro_Achievement_Tracker
             this.focusLinePanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.focusLinePanel.Controls.Add(this.label106);
             this.focusLinePanel.Controls.Add(this.focusLineColorPictureBox);
-            this.focusLinePanel.Location = new System.Drawing.Point(2, 172);
+            this.focusLinePanel.Location = new System.Drawing.Point(3, 265);
+            this.focusLinePanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.focusLinePanel.Name = "focusLinePanel";
-            this.focusLinePanel.Size = new System.Drawing.Size(463, 23);
+            this.focusLinePanel.Size = new System.Drawing.Size(694, 35);
             this.focusLinePanel.TabIndex = 10068;
             // 
             // label106
@@ -1985,9 +2057,10 @@ namespace Retro_Achievement_Tracker
             this.label106.BackColor = System.Drawing.Color.Transparent;
             this.label106.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label106.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label106.Location = new System.Drawing.Point(3, 4);
+            this.label106.Location = new System.Drawing.Point(4, 6);
+            this.label106.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label106.Name = "label106";
-            this.label106.Size = new System.Drawing.Size(144, 16);
+            this.label106.Size = new System.Drawing.Size(216, 25);
             this.label106.TabIndex = 10066;
             this.label106.Text = "Line";
             // 
@@ -1995,9 +2068,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.focusLineColorPictureBox.BackColor = System.Drawing.Color.White;
             this.focusLineColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.focusLineColorPictureBox.Location = new System.Drawing.Point(153, 3);
+            this.focusLineColorPictureBox.Location = new System.Drawing.Point(230, 5);
+            this.focusLineColorPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.focusLineColorPictureBox.Name = "focusLineColorPictureBox";
-            this.focusLineColorPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.focusLineColorPictureBox.Size = new System.Drawing.Size(22, 22);
             this.focusLineColorPictureBox.TabIndex = 45;
             this.focusLineColorPictureBox.TabStop = false;
             this.focusLineColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
@@ -2007,9 +2081,10 @@ namespace Retro_Achievement_Tracker
             this.label96.BackColor = System.Drawing.Color.Transparent;
             this.label96.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label96.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label96.Location = new System.Drawing.Point(3, 3);
+            this.label96.Location = new System.Drawing.Point(4, 5);
+            this.label96.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label96.Name = "label96";
-            this.label96.Size = new System.Drawing.Size(243, 26);
+            this.label96.Size = new System.Drawing.Size(364, 40);
             this.label96.TabIndex = 10062;
             this.label96.Text = "Window/Font Settings";
             // 
@@ -2019,9 +2094,10 @@ namespace Retro_Achievement_Tracker
             this.panel59.Controls.Add(this.focusBorderCheckBox);
             this.panel59.Controls.Add(this.focusBorderColorPictureBox);
             this.panel59.Controls.Add(this.label107);
-            this.panel59.Location = new System.Drawing.Point(2, 84);
+            this.panel59.Location = new System.Drawing.Point(3, 129);
+            this.panel59.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel59.Name = "panel59";
-            this.panel59.Size = new System.Drawing.Size(463, 23);
+            this.panel59.Size = new System.Drawing.Size(694, 35);
             this.panel59.TabIndex = 10069;
             // 
             // focusBorderCheckBox
@@ -2029,9 +2105,10 @@ namespace Retro_Achievement_Tracker
             this.focusBorderCheckBox.AutoSize = true;
             this.focusBorderCheckBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.focusBorderCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.focusBorderCheckBox.Location = new System.Drawing.Point(413, 5);
+            this.focusBorderCheckBox.Location = new System.Drawing.Point(620, 8);
+            this.focusBorderCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.focusBorderCheckBox.Name = "focusBorderCheckBox";
-            this.focusBorderCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.focusBorderCheckBox.Size = new System.Drawing.Size(22, 21);
             this.focusBorderCheckBox.TabIndex = 10065;
             this.focusBorderCheckBox.UseVisualStyleBackColor = true;
             this.focusBorderCheckBox.CheckedChanged += new System.EventHandler(this.FeatureEnablementCheckBox_CheckedChanged);
@@ -2040,9 +2117,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.focusBorderColorPictureBox.BackColor = System.Drawing.Color.White;
             this.focusBorderColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.focusBorderColorPictureBox.Location = new System.Drawing.Point(153, 3);
+            this.focusBorderColorPictureBox.Location = new System.Drawing.Point(230, 5);
+            this.focusBorderColorPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.focusBorderColorPictureBox.Name = "focusBorderColorPictureBox";
-            this.focusBorderColorPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.focusBorderColorPictureBox.Size = new System.Drawing.Size(22, 22);
             this.focusBorderColorPictureBox.TabIndex = 42;
             this.focusBorderColorPictureBox.TabStop = false;
             this.focusBorderColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
@@ -2052,9 +2130,10 @@ namespace Retro_Achievement_Tracker
             this.label107.BackColor = System.Drawing.Color.Transparent;
             this.label107.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label107.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label107.Location = new System.Drawing.Point(3, 3);
+            this.label107.Location = new System.Drawing.Point(4, 5);
+            this.label107.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label107.Name = "label107";
-            this.label107.Size = new System.Drawing.Size(144, 16);
+            this.label107.Size = new System.Drawing.Size(216, 25);
             this.label107.TabIndex = 10064;
             this.label107.Text = "Border";
             // 
@@ -2064,9 +2143,10 @@ namespace Retro_Achievement_Tracker
             this.focusPointsPanel.Controls.Add(this.label108);
             this.focusPointsPanel.Controls.Add(this.focusPointsFontColorPictureBox);
             this.focusPointsPanel.Controls.Add(this.focusPointsFontComboBox);
-            this.focusPointsPanel.Location = new System.Drawing.Point(2, 150);
+            this.focusPointsPanel.Location = new System.Drawing.Point(3, 231);
+            this.focusPointsPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.focusPointsPanel.Name = "focusPointsPanel";
-            this.focusPointsPanel.Size = new System.Drawing.Size(463, 23);
+            this.focusPointsPanel.Size = new System.Drawing.Size(694, 35);
             this.focusPointsPanel.TabIndex = 10070;
             // 
             // label108
@@ -2074,9 +2154,10 @@ namespace Retro_Achievement_Tracker
             this.label108.BackColor = System.Drawing.Color.Transparent;
             this.label108.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label108.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label108.Location = new System.Drawing.Point(3, 4);
+            this.label108.Location = new System.Drawing.Point(4, 6);
+            this.label108.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label108.Name = "label108";
-            this.label108.Size = new System.Drawing.Size(144, 16);
+            this.label108.Size = new System.Drawing.Size(216, 25);
             this.label108.TabIndex = 10065;
             this.label108.Text = "Points";
             // 
@@ -2084,9 +2165,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.focusPointsFontColorPictureBox.BackColor = System.Drawing.Color.White;
             this.focusPointsFontColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.focusPointsFontColorPictureBox.Location = new System.Drawing.Point(153, 4);
+            this.focusPointsFontColorPictureBox.Location = new System.Drawing.Point(230, 6);
+            this.focusPointsFontColorPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.focusPointsFontColorPictureBox.Name = "focusPointsFontColorPictureBox";
-            this.focusPointsFontColorPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.focusPointsFontColorPictureBox.Size = new System.Drawing.Size(22, 22);
             this.focusPointsFontColorPictureBox.TabIndex = 45;
             this.focusPointsFontColorPictureBox.TabStop = false;
             this.focusPointsFontColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
@@ -2097,9 +2179,10 @@ namespace Retro_Achievement_Tracker
             this.focusPointsFontComboBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.focusPointsFontComboBox.ForeColor = System.Drawing.Color.White;
             this.focusPointsFontComboBox.FormattingEnabled = true;
-            this.focusPointsFontComboBox.Location = new System.Drawing.Point(193, 2);
+            this.focusPointsFontComboBox.Location = new System.Drawing.Point(290, 3);
+            this.focusPointsFontComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.focusPointsFontComboBox.Name = "focusPointsFontComboBox";
-            this.focusPointsFontComboBox.Size = new System.Drawing.Size(202, 21);
+            this.focusPointsFontComboBox.Size = new System.Drawing.Size(301, 28);
             this.focusPointsFontComboBox.TabIndex = 45;
             this.focusPointsFontComboBox.SelectedIndexChanged += new System.EventHandler(this.FontFamilyComboBox_SelectedIndexChanged);
             // 
@@ -2111,9 +2194,10 @@ namespace Retro_Achievement_Tracker
             this.panel52.Controls.Add(this.label98);
             this.panel52.Controls.Add(this.label99);
             this.panel52.Controls.Add(this.label100);
-            this.panel52.Location = new System.Drawing.Point(2, 40);
+            this.panel52.Location = new System.Drawing.Point(3, 62);
+            this.panel52.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel52.Name = "panel52";
-            this.panel52.Size = new System.Drawing.Size(463, 23);
+            this.panel52.Size = new System.Drawing.Size(694, 35);
             this.panel52.TabIndex = 10076;
             // 
             // focusAdvancedCheckBox
@@ -2123,9 +2207,10 @@ namespace Retro_Achievement_Tracker
             this.focusAdvancedCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.focusAdvancedCheckBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.focusAdvancedCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.focusAdvancedCheckBox.Location = new System.Drawing.Point(5, 2);
+            this.focusAdvancedCheckBox.Location = new System.Drawing.Point(8, 3);
+            this.focusAdvancedCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.focusAdvancedCheckBox.Name = "focusAdvancedCheckBox";
-            this.focusAdvancedCheckBox.Size = new System.Drawing.Size(91, 20);
+            this.focusAdvancedCheckBox.Size = new System.Drawing.Size(135, 29);
             this.focusAdvancedCheckBox.TabIndex = 10053;
             this.focusAdvancedCheckBox.Text = "Advanced";
             this.focusAdvancedCheckBox.UseVisualStyleBackColor = false;
@@ -2136,9 +2221,10 @@ namespace Retro_Achievement_Tracker
             this.label97.BackColor = System.Drawing.Color.Transparent;
             this.label97.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label97.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label97.Location = new System.Drawing.Point(150, 3);
+            this.label97.Location = new System.Drawing.Point(225, 5);
+            this.label97.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label97.Name = "label97";
-            this.label97.Size = new System.Drawing.Size(48, 16);
+            this.label97.Size = new System.Drawing.Size(72, 25);
             this.label97.TabIndex = 10065;
             this.label97.Text = "Color";
             // 
@@ -2147,9 +2233,10 @@ namespace Retro_Achievement_Tracker
             this.label98.BackColor = System.Drawing.Color.Transparent;
             this.label98.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label98.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label98.Location = new System.Drawing.Point(194, 3);
+            this.label98.Location = new System.Drawing.Point(291, 5);
+            this.label98.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label98.Name = "label98";
-            this.label98.Size = new System.Drawing.Size(50, 16);
+            this.label98.Size = new System.Drawing.Size(75, 25);
             this.label98.TabIndex = 10066;
             this.label98.Text = "Font";
             // 
@@ -2158,9 +2245,10 @@ namespace Retro_Achievement_Tracker
             this.label99.BackColor = System.Drawing.Color.Transparent;
             this.label99.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label99.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label99.Location = new System.Drawing.Point(349, 3);
+            this.label99.Location = new System.Drawing.Point(524, 5);
+            this.label99.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label99.Name = "label99";
-            this.label99.Size = new System.Drawing.Size(41, 16);
+            this.label99.Size = new System.Drawing.Size(62, 25);
             this.label99.TabIndex = 10068;
             this.label99.Text = "Size";
             // 
@@ -2169,9 +2257,10 @@ namespace Retro_Achievement_Tracker
             this.label100.BackColor = System.Drawing.Color.Transparent;
             this.label100.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label100.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label100.Location = new System.Drawing.Point(396, 3);
+            this.label100.Location = new System.Drawing.Point(594, 5);
+            this.label100.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label100.Name = "label100";
-            this.label100.Size = new System.Drawing.Size(59, 16);
+            this.label100.Size = new System.Drawing.Size(88, 25);
             this.label100.TabIndex = 10067;
             this.label100.Text = "Enabled";
             // 
@@ -2182,9 +2271,10 @@ namespace Retro_Achievement_Tracker
             this.panel61.Controls.Add(this.focusTitleOutlineCheckBox);
             this.panel61.Controls.Add(this.focusTitleOutlineLabel);
             this.panel61.Controls.Add(this.focusTitleFontOutlineColorPictureBox);
-            this.panel61.Location = new System.Drawing.Point(2, 194);
+            this.panel61.Location = new System.Drawing.Point(3, 298);
+            this.panel61.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel61.Name = "panel61";
-            this.panel61.Size = new System.Drawing.Size(463, 23);
+            this.panel61.Size = new System.Drawing.Size(694, 35);
             this.panel61.TabIndex = 10071;
             // 
             // focusTitleFontOutlineNumericUpDown
@@ -2193,7 +2283,8 @@ namespace Retro_Achievement_Tracker
             this.focusTitleFontOutlineNumericUpDown.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.focusTitleFontOutlineNumericUpDown.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.focusTitleFontOutlineNumericUpDown.ForeColor = System.Drawing.Color.White;
-            this.focusTitleFontOutlineNumericUpDown.Location = new System.Drawing.Point(352, 4);
+            this.focusTitleFontOutlineNumericUpDown.Location = new System.Drawing.Point(528, 6);
+            this.focusTitleFontOutlineNumericUpDown.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.focusTitleFontOutlineNumericUpDown.Maximum = new decimal(new int[] {
             5,
             0,
@@ -2205,7 +2296,7 @@ namespace Retro_Achievement_Tracker
             0,
             0});
             this.focusTitleFontOutlineNumericUpDown.Name = "focusTitleFontOutlineNumericUpDown";
-            this.focusTitleFontOutlineNumericUpDown.Size = new System.Drawing.Size(43, 17);
+            this.focusTitleFontOutlineNumericUpDown.Size = new System.Drawing.Size(64, 24);
             this.focusTitleFontOutlineNumericUpDown.TabIndex = 45;
             this.focusTitleFontOutlineNumericUpDown.Value = new decimal(new int[] {
             1,
@@ -2219,9 +2310,10 @@ namespace Retro_Achievement_Tracker
             this.focusTitleOutlineCheckBox.AutoSize = true;
             this.focusTitleOutlineCheckBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.focusTitleOutlineCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.focusTitleOutlineCheckBox.Location = new System.Drawing.Point(413, 5);
+            this.focusTitleOutlineCheckBox.Location = new System.Drawing.Point(620, 8);
+            this.focusTitleOutlineCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.focusTitleOutlineCheckBox.Name = "focusTitleOutlineCheckBox";
-            this.focusTitleOutlineCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.focusTitleOutlineCheckBox.Size = new System.Drawing.Size(22, 21);
             this.focusTitleOutlineCheckBox.TabIndex = 45;
             this.focusTitleOutlineCheckBox.UseVisualStyleBackColor = true;
             this.focusTitleOutlineCheckBox.CheckedChanged += new System.EventHandler(this.FeatureEnablementCheckBox_CheckedChanged);
@@ -2231,9 +2323,10 @@ namespace Retro_Achievement_Tracker
             this.focusTitleOutlineLabel.BackColor = System.Drawing.Color.Transparent;
             this.focusTitleOutlineLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.focusTitleOutlineLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.focusTitleOutlineLabel.Location = new System.Drawing.Point(3, 3);
+            this.focusTitleOutlineLabel.Location = new System.Drawing.Point(4, 5);
+            this.focusTitleOutlineLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.focusTitleOutlineLabel.Name = "focusTitleOutlineLabel";
-            this.focusTitleOutlineLabel.Size = new System.Drawing.Size(144, 16);
+            this.focusTitleOutlineLabel.Size = new System.Drawing.Size(216, 25);
             this.focusTitleOutlineLabel.TabIndex = 10066;
             this.focusTitleOutlineLabel.Text = "Title OutlineColor";
             // 
@@ -2241,9 +2334,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.focusTitleFontOutlineColorPictureBox.BackColor = System.Drawing.Color.White;
             this.focusTitleFontOutlineColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.focusTitleFontOutlineColorPictureBox.Location = new System.Drawing.Point(153, 3);
+            this.focusTitleFontOutlineColorPictureBox.Location = new System.Drawing.Point(230, 5);
+            this.focusTitleFontOutlineColorPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.focusTitleFontOutlineColorPictureBox.Name = "focusTitleFontOutlineColorPictureBox";
-            this.focusTitleFontOutlineColorPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.focusTitleFontOutlineColorPictureBox.Size = new System.Drawing.Size(22, 22);
             this.focusTitleFontOutlineColorPictureBox.TabIndex = 45;
             this.focusTitleFontOutlineColorPictureBox.TabStop = false;
             this.focusTitleFontOutlineColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
@@ -2255,10 +2349,10 @@ namespace Retro_Achievement_Tracker
             this.focusOpenWindowButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.focusOpenWindowButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.focusOpenWindowButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
-            this.focusOpenWindowButton.Location = new System.Drawing.Point(382, 2);
+            this.focusOpenWindowButton.Location = new System.Drawing.Point(573, 3);
             this.focusOpenWindowButton.Margin = new System.Windows.Forms.Padding(0);
             this.focusOpenWindowButton.Name = "focusOpenWindowButton";
-            this.focusOpenWindowButton.Size = new System.Drawing.Size(75, 27);
+            this.focusOpenWindowButton.Size = new System.Drawing.Size(112, 42);
             this.focusOpenWindowButton.TabIndex = 10021;
             this.focusOpenWindowButton.Text = "Open";
             this.focusOpenWindowButton.UseVisualStyleBackColor = false;
@@ -2271,9 +2365,10 @@ namespace Retro_Achievement_Tracker
             this.focusDescriptionOutlinePanel.Controls.Add(this.focusDescriptionFontOutlineColorPictureBox);
             this.focusDescriptionOutlinePanel.Controls.Add(this.focusDescriptionFontOutlineNumericUpDown);
             this.focusDescriptionOutlinePanel.Controls.Add(this.focusDescriptionOutlineCheckBox);
-            this.focusDescriptionOutlinePanel.Location = new System.Drawing.Point(2, 216);
+            this.focusDescriptionOutlinePanel.Location = new System.Drawing.Point(3, 332);
+            this.focusDescriptionOutlinePanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.focusDescriptionOutlinePanel.Name = "focusDescriptionOutlinePanel";
-            this.focusDescriptionOutlinePanel.Size = new System.Drawing.Size(463, 23);
+            this.focusDescriptionOutlinePanel.Size = new System.Drawing.Size(694, 35);
             this.focusDescriptionOutlinePanel.TabIndex = 10072;
             // 
             // label110
@@ -2281,9 +2376,10 @@ namespace Retro_Achievement_Tracker
             this.label110.BackColor = System.Drawing.Color.Transparent;
             this.label110.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label110.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label110.Location = new System.Drawing.Point(3, 4);
+            this.label110.Location = new System.Drawing.Point(4, 6);
+            this.label110.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label110.Name = "label110";
-            this.label110.Size = new System.Drawing.Size(144, 16);
+            this.label110.Size = new System.Drawing.Size(216, 25);
             this.label110.TabIndex = 10066;
             this.label110.Text = "Description OutlineColor";
             // 
@@ -2291,9 +2387,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.focusDescriptionFontOutlineColorPictureBox.BackColor = System.Drawing.Color.White;
             this.focusDescriptionFontOutlineColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.focusDescriptionFontOutlineColorPictureBox.Location = new System.Drawing.Point(153, 4);
+            this.focusDescriptionFontOutlineColorPictureBox.Location = new System.Drawing.Point(230, 6);
+            this.focusDescriptionFontOutlineColorPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.focusDescriptionFontOutlineColorPictureBox.Name = "focusDescriptionFontOutlineColorPictureBox";
-            this.focusDescriptionFontOutlineColorPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.focusDescriptionFontOutlineColorPictureBox.Size = new System.Drawing.Size(22, 22);
             this.focusDescriptionFontOutlineColorPictureBox.TabIndex = 45;
             this.focusDescriptionFontOutlineColorPictureBox.TabStop = false;
             this.focusDescriptionFontOutlineColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
@@ -2304,7 +2401,8 @@ namespace Retro_Achievement_Tracker
             this.focusDescriptionFontOutlineNumericUpDown.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.focusDescriptionFontOutlineNumericUpDown.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.focusDescriptionFontOutlineNumericUpDown.ForeColor = System.Drawing.Color.White;
-            this.focusDescriptionFontOutlineNumericUpDown.Location = new System.Drawing.Point(352, 4);
+            this.focusDescriptionFontOutlineNumericUpDown.Location = new System.Drawing.Point(528, 6);
+            this.focusDescriptionFontOutlineNumericUpDown.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.focusDescriptionFontOutlineNumericUpDown.Maximum = new decimal(new int[] {
             5,
             0,
@@ -2316,7 +2414,7 @@ namespace Retro_Achievement_Tracker
             0,
             0});
             this.focusDescriptionFontOutlineNumericUpDown.Name = "focusDescriptionFontOutlineNumericUpDown";
-            this.focusDescriptionFontOutlineNumericUpDown.Size = new System.Drawing.Size(43, 17);
+            this.focusDescriptionFontOutlineNumericUpDown.Size = new System.Drawing.Size(64, 24);
             this.focusDescriptionFontOutlineNumericUpDown.TabIndex = 45;
             this.focusDescriptionFontOutlineNumericUpDown.Value = new decimal(new int[] {
             1,
@@ -2330,9 +2428,10 @@ namespace Retro_Achievement_Tracker
             this.focusDescriptionOutlineCheckBox.AutoSize = true;
             this.focusDescriptionOutlineCheckBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.focusDescriptionOutlineCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.focusDescriptionOutlineCheckBox.Location = new System.Drawing.Point(413, 6);
+            this.focusDescriptionOutlineCheckBox.Location = new System.Drawing.Point(620, 9);
+            this.focusDescriptionOutlineCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.focusDescriptionOutlineCheckBox.Name = "focusDescriptionOutlineCheckBox";
-            this.focusDescriptionOutlineCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.focusDescriptionOutlineCheckBox.Size = new System.Drawing.Size(22, 21);
             this.focusDescriptionOutlineCheckBox.TabIndex = 45;
             this.focusDescriptionOutlineCheckBox.UseVisualStyleBackColor = true;
             this.focusDescriptionOutlineCheckBox.CheckedChanged += new System.EventHandler(this.FeatureEnablementCheckBox_CheckedChanged);
@@ -2343,9 +2442,10 @@ namespace Retro_Achievement_Tracker
             this.focusDescriptionPanel.Controls.Add(this.label101);
             this.focusDescriptionPanel.Controls.Add(this.focusDescriptionFontColorPictureBox);
             this.focusDescriptionPanel.Controls.Add(this.focusDescriptionFontComboBox);
-            this.focusDescriptionPanel.Location = new System.Drawing.Point(2, 128);
+            this.focusDescriptionPanel.Location = new System.Drawing.Point(3, 197);
+            this.focusDescriptionPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.focusDescriptionPanel.Name = "focusDescriptionPanel";
-            this.focusDescriptionPanel.Size = new System.Drawing.Size(463, 23);
+            this.focusDescriptionPanel.Size = new System.Drawing.Size(694, 35);
             this.focusDescriptionPanel.TabIndex = 10061;
             // 
             // label101
@@ -2353,9 +2453,10 @@ namespace Retro_Achievement_Tracker
             this.label101.BackColor = System.Drawing.Color.Transparent;
             this.label101.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label101.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label101.Location = new System.Drawing.Point(3, 4);
+            this.label101.Location = new System.Drawing.Point(4, 6);
+            this.label101.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label101.Name = "label101";
-            this.label101.Size = new System.Drawing.Size(144, 16);
+            this.label101.Size = new System.Drawing.Size(216, 25);
             this.label101.TabIndex = 10066;
             this.label101.Text = "Description";
             // 
@@ -2363,9 +2464,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.focusDescriptionFontColorPictureBox.BackColor = System.Drawing.Color.White;
             this.focusDescriptionFontColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.focusDescriptionFontColorPictureBox.Location = new System.Drawing.Point(153, 3);
+            this.focusDescriptionFontColorPictureBox.Location = new System.Drawing.Point(230, 5);
+            this.focusDescriptionFontColorPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.focusDescriptionFontColorPictureBox.Name = "focusDescriptionFontColorPictureBox";
-            this.focusDescriptionFontColorPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.focusDescriptionFontColorPictureBox.Size = new System.Drawing.Size(22, 22);
             this.focusDescriptionFontColorPictureBox.TabIndex = 45;
             this.focusDescriptionFontColorPictureBox.TabStop = false;
             this.focusDescriptionFontColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
@@ -2376,9 +2478,10 @@ namespace Retro_Achievement_Tracker
             this.focusDescriptionFontComboBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.focusDescriptionFontComboBox.ForeColor = System.Drawing.Color.White;
             this.focusDescriptionFontComboBox.FormattingEnabled = true;
-            this.focusDescriptionFontComboBox.Location = new System.Drawing.Point(193, 2);
+            this.focusDescriptionFontComboBox.Location = new System.Drawing.Point(290, 3);
+            this.focusDescriptionFontComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.focusDescriptionFontComboBox.Name = "focusDescriptionFontComboBox";
-            this.focusDescriptionFontComboBox.Size = new System.Drawing.Size(202, 21);
+            this.focusDescriptionFontComboBox.Size = new System.Drawing.Size(301, 28);
             this.focusDescriptionFontComboBox.TabIndex = 45;
             this.focusDescriptionFontComboBox.SelectedIndexChanged += new System.EventHandler(this.FontFamilyComboBox_SelectedIndexChanged);
             // 
@@ -2388,9 +2491,10 @@ namespace Retro_Achievement_Tracker
             this.focusAutoOpenWindowCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.focusAutoOpenWindowCheckBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.focusAutoOpenWindowCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.focusAutoOpenWindowCheckBox.Location = new System.Drawing.Point(252, 9);
+            this.focusAutoOpenWindowCheckBox.Location = new System.Drawing.Point(378, 14);
+            this.focusAutoOpenWindowCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.focusAutoOpenWindowCheckBox.Name = "focusAutoOpenWindowCheckBox";
-            this.focusAutoOpenWindowCheckBox.Size = new System.Drawing.Size(98, 20);
+            this.focusAutoOpenWindowCheckBox.Size = new System.Drawing.Size(147, 29);
             this.focusAutoOpenWindowCheckBox.TabIndex = 10022;
             this.focusAutoOpenWindowCheckBox.Text = "Auto-Open";
             this.focusAutoOpenWindowCheckBox.UseVisualStyleBackColor = true;
@@ -2399,9 +2503,10 @@ namespace Retro_Achievement_Tracker
             // pictureBox11
             // 
             this.pictureBox11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.pictureBox11.Location = new System.Drawing.Point(2, 32);
+            this.pictureBox11.Location = new System.Drawing.Point(3, 49);
+            this.pictureBox11.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox11.Name = "pictureBox11";
-            this.pictureBox11.Size = new System.Drawing.Size(460, 2);
+            this.pictureBox11.Size = new System.Drawing.Size(690, 3);
             this.pictureBox11.TabIndex = 10063;
             this.pictureBox11.TabStop = false;
             // 
@@ -2410,18 +2515,20 @@ namespace Retro_Achievement_Tracker
             this.panel54.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(26)))), ((int)(((byte)(26)))));
             this.panel54.Controls.Add(this.focusBackgroundColorPictureBox);
             this.panel54.Controls.Add(this.label102);
-            this.panel54.Location = new System.Drawing.Point(2, 62);
+            this.panel54.Location = new System.Drawing.Point(3, 95);
+            this.panel54.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel54.Name = "panel54";
-            this.panel54.Size = new System.Drawing.Size(463, 23);
+            this.panel54.Size = new System.Drawing.Size(694, 35);
             this.panel54.TabIndex = 10061;
             // 
             // focusBackgroundColorPictureBox
             // 
             this.focusBackgroundColorPictureBox.BackColor = System.Drawing.Color.White;
             this.focusBackgroundColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.focusBackgroundColorPictureBox.Location = new System.Drawing.Point(153, 3);
+            this.focusBackgroundColorPictureBox.Location = new System.Drawing.Point(230, 5);
+            this.focusBackgroundColorPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.focusBackgroundColorPictureBox.Name = "focusBackgroundColorPictureBox";
-            this.focusBackgroundColorPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.focusBackgroundColorPictureBox.Size = new System.Drawing.Size(22, 22);
             this.focusBackgroundColorPictureBox.TabIndex = 42;
             this.focusBackgroundColorPictureBox.TabStop = false;
             this.focusBackgroundColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
@@ -2431,9 +2538,10 @@ namespace Retro_Achievement_Tracker
             this.label102.BackColor = System.Drawing.Color.Transparent;
             this.label102.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label102.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label102.Location = new System.Drawing.Point(3, 3);
+            this.label102.Location = new System.Drawing.Point(4, 5);
+            this.label102.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label102.Name = "label102";
-            this.label102.Size = new System.Drawing.Size(144, 16);
+            this.label102.Size = new System.Drawing.Size(216, 25);
             this.label102.TabIndex = 10064;
             this.label102.Text = "Window Background";
             // 
@@ -2443,9 +2551,10 @@ namespace Retro_Achievement_Tracker
             this.panel55.Controls.Add(this.focusTitleLabel);
             this.panel55.Controls.Add(this.focusTitleFontColorPictureBox);
             this.panel55.Controls.Add(this.focusTitleFontComboBox);
-            this.panel55.Location = new System.Drawing.Point(2, 106);
+            this.panel55.Location = new System.Drawing.Point(3, 163);
+            this.panel55.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel55.Name = "panel55";
-            this.panel55.Size = new System.Drawing.Size(463, 23);
+            this.panel55.Size = new System.Drawing.Size(694, 35);
             this.panel55.TabIndex = 10061;
             // 
             // focusTitleLabel
@@ -2453,9 +2562,10 @@ namespace Retro_Achievement_Tracker
             this.focusTitleLabel.BackColor = System.Drawing.Color.Transparent;
             this.focusTitleLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.focusTitleLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.focusTitleLabel.Location = new System.Drawing.Point(3, 4);
+            this.focusTitleLabel.Location = new System.Drawing.Point(4, 6);
+            this.focusTitleLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.focusTitleLabel.Name = "focusTitleLabel";
-            this.focusTitleLabel.Size = new System.Drawing.Size(144, 16);
+            this.focusTitleLabel.Size = new System.Drawing.Size(216, 25);
             this.focusTitleLabel.TabIndex = 10065;
             this.focusTitleLabel.Text = "Title";
             // 
@@ -2463,9 +2573,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.focusTitleFontColorPictureBox.BackColor = System.Drawing.Color.White;
             this.focusTitleFontColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.focusTitleFontColorPictureBox.Location = new System.Drawing.Point(153, 4);
+            this.focusTitleFontColorPictureBox.Location = new System.Drawing.Point(230, 6);
+            this.focusTitleFontColorPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.focusTitleFontColorPictureBox.Name = "focusTitleFontColorPictureBox";
-            this.focusTitleFontColorPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.focusTitleFontColorPictureBox.Size = new System.Drawing.Size(22, 22);
             this.focusTitleFontColorPictureBox.TabIndex = 45;
             this.focusTitleFontColorPictureBox.TabStop = false;
             this.focusTitleFontColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
@@ -2476,9 +2587,10 @@ namespace Retro_Achievement_Tracker
             this.focusTitleFontComboBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.focusTitleFontComboBox.ForeColor = System.Drawing.Color.White;
             this.focusTitleFontComboBox.FormattingEnabled = true;
-            this.focusTitleFontComboBox.Location = new System.Drawing.Point(193, 2);
+            this.focusTitleFontComboBox.Location = new System.Drawing.Point(290, 3);
+            this.focusTitleFontComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.focusTitleFontComboBox.Name = "focusTitleFontComboBox";
-            this.focusTitleFontComboBox.Size = new System.Drawing.Size(202, 21);
+            this.focusTitleFontComboBox.Size = new System.Drawing.Size(301, 28);
             this.focusTitleFontComboBox.TabIndex = 45;
             this.focusTitleFontComboBox.SelectedIndexChanged += new System.EventHandler(this.FontFamilyComboBox_SelectedIndexChanged);
             // 
@@ -2489,9 +2601,10 @@ namespace Retro_Achievement_Tracker
             this.focusPointsOutlinePanel.Controls.Add(this.focusPointsOutlineCheckBox);
             this.focusPointsOutlinePanel.Controls.Add(this.label104);
             this.focusPointsOutlinePanel.Controls.Add(this.focusPointsFontOutlineColorPictureBox);
-            this.focusPointsOutlinePanel.Location = new System.Drawing.Point(2, 238);
+            this.focusPointsOutlinePanel.Location = new System.Drawing.Point(3, 366);
+            this.focusPointsOutlinePanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.focusPointsOutlinePanel.Name = "focusPointsOutlinePanel";
-            this.focusPointsOutlinePanel.Size = new System.Drawing.Size(463, 23);
+            this.focusPointsOutlinePanel.Size = new System.Drawing.Size(694, 35);
             this.focusPointsOutlinePanel.TabIndex = 10061;
             // 
             // focusPointsFontOutlineNumericUpDown
@@ -2500,7 +2613,8 @@ namespace Retro_Achievement_Tracker
             this.focusPointsFontOutlineNumericUpDown.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.focusPointsFontOutlineNumericUpDown.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.focusPointsFontOutlineNumericUpDown.ForeColor = System.Drawing.Color.White;
-            this.focusPointsFontOutlineNumericUpDown.Location = new System.Drawing.Point(352, 4);
+            this.focusPointsFontOutlineNumericUpDown.Location = new System.Drawing.Point(528, 6);
+            this.focusPointsFontOutlineNumericUpDown.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.focusPointsFontOutlineNumericUpDown.Maximum = new decimal(new int[] {
             5,
             0,
@@ -2512,7 +2626,7 @@ namespace Retro_Achievement_Tracker
             0,
             0});
             this.focusPointsFontOutlineNumericUpDown.Name = "focusPointsFontOutlineNumericUpDown";
-            this.focusPointsFontOutlineNumericUpDown.Size = new System.Drawing.Size(43, 17);
+            this.focusPointsFontOutlineNumericUpDown.Size = new System.Drawing.Size(64, 24);
             this.focusPointsFontOutlineNumericUpDown.TabIndex = 45;
             this.focusPointsFontOutlineNumericUpDown.Value = new decimal(new int[] {
             1,
@@ -2526,9 +2640,10 @@ namespace Retro_Achievement_Tracker
             this.focusPointsOutlineCheckBox.AutoSize = true;
             this.focusPointsOutlineCheckBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.focusPointsOutlineCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.focusPointsOutlineCheckBox.Location = new System.Drawing.Point(413, 5);
+            this.focusPointsOutlineCheckBox.Location = new System.Drawing.Point(620, 8);
+            this.focusPointsOutlineCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.focusPointsOutlineCheckBox.Name = "focusPointsOutlineCheckBox";
-            this.focusPointsOutlineCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.focusPointsOutlineCheckBox.Size = new System.Drawing.Size(22, 21);
             this.focusPointsOutlineCheckBox.TabIndex = 45;
             this.focusPointsOutlineCheckBox.UseVisualStyleBackColor = true;
             this.focusPointsOutlineCheckBox.CheckedChanged += new System.EventHandler(this.FeatureEnablementCheckBox_CheckedChanged);
@@ -2538,9 +2653,10 @@ namespace Retro_Achievement_Tracker
             this.label104.BackColor = System.Drawing.Color.Transparent;
             this.label104.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label104.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label104.Location = new System.Drawing.Point(3, 3);
+            this.label104.Location = new System.Drawing.Point(4, 5);
+            this.label104.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label104.Name = "label104";
-            this.label104.Size = new System.Drawing.Size(144, 16);
+            this.label104.Size = new System.Drawing.Size(216, 25);
             this.label104.TabIndex = 10066;
             this.label104.Text = "Points OutlineColor";
             // 
@@ -2548,9 +2664,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.focusPointsFontOutlineColorPictureBox.BackColor = System.Drawing.Color.White;
             this.focusPointsFontOutlineColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.focusPointsFontOutlineColorPictureBox.Location = new System.Drawing.Point(153, 3);
+            this.focusPointsFontOutlineColorPictureBox.Location = new System.Drawing.Point(230, 5);
+            this.focusPointsFontOutlineColorPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.focusPointsFontOutlineColorPictureBox.Name = "focusPointsFontOutlineColorPictureBox";
-            this.focusPointsFontOutlineColorPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.focusPointsFontOutlineColorPictureBox.Size = new System.Drawing.Size(22, 22);
             this.focusPointsFontOutlineColorPictureBox.TabIndex = 45;
             this.focusPointsFontOutlineColorPictureBox.TabStop = false;
             this.focusPointsFontOutlineColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
@@ -2562,9 +2679,10 @@ namespace Retro_Achievement_Tracker
             this.focusLineOutlinePanel.Controls.Add(this.focusLineOutlineColorPictureBox);
             this.focusLineOutlinePanel.Controls.Add(this.focusLineOutlineNumericUpDown);
             this.focusLineOutlinePanel.Controls.Add(this.focusLineOutlineCheckBox);
-            this.focusLineOutlinePanel.Location = new System.Drawing.Point(2, 260);
+            this.focusLineOutlinePanel.Location = new System.Drawing.Point(3, 400);
+            this.focusLineOutlinePanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.focusLineOutlinePanel.Name = "focusLineOutlinePanel";
-            this.focusLineOutlinePanel.Size = new System.Drawing.Size(463, 23);
+            this.focusLineOutlinePanel.Size = new System.Drawing.Size(694, 35);
             this.focusLineOutlinePanel.TabIndex = 10067;
             // 
             // label105
@@ -2572,9 +2690,10 @@ namespace Retro_Achievement_Tracker
             this.label105.BackColor = System.Drawing.Color.Transparent;
             this.label105.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label105.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label105.Location = new System.Drawing.Point(3, 4);
+            this.label105.Location = new System.Drawing.Point(4, 6);
+            this.label105.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label105.Name = "label105";
-            this.label105.Size = new System.Drawing.Size(144, 16);
+            this.label105.Size = new System.Drawing.Size(216, 25);
             this.label105.TabIndex = 10066;
             this.label105.Text = "Line OutlineColor";
             // 
@@ -2582,9 +2701,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.focusLineOutlineColorPictureBox.BackColor = System.Drawing.Color.White;
             this.focusLineOutlineColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.focusLineOutlineColorPictureBox.Location = new System.Drawing.Point(153, 4);
+            this.focusLineOutlineColorPictureBox.Location = new System.Drawing.Point(230, 6);
+            this.focusLineOutlineColorPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.focusLineOutlineColorPictureBox.Name = "focusLineOutlineColorPictureBox";
-            this.focusLineOutlineColorPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.focusLineOutlineColorPictureBox.Size = new System.Drawing.Size(22, 22);
             this.focusLineOutlineColorPictureBox.TabIndex = 45;
             this.focusLineOutlineColorPictureBox.TabStop = false;
             this.focusLineOutlineColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
@@ -2595,7 +2715,8 @@ namespace Retro_Achievement_Tracker
             this.focusLineOutlineNumericUpDown.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.focusLineOutlineNumericUpDown.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.focusLineOutlineNumericUpDown.ForeColor = System.Drawing.Color.White;
-            this.focusLineOutlineNumericUpDown.Location = new System.Drawing.Point(352, 4);
+            this.focusLineOutlineNumericUpDown.Location = new System.Drawing.Point(528, 6);
+            this.focusLineOutlineNumericUpDown.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.focusLineOutlineNumericUpDown.Maximum = new decimal(new int[] {
             5,
             0,
@@ -2607,7 +2728,7 @@ namespace Retro_Achievement_Tracker
             0,
             0});
             this.focusLineOutlineNumericUpDown.Name = "focusLineOutlineNumericUpDown";
-            this.focusLineOutlineNumericUpDown.Size = new System.Drawing.Size(43, 17);
+            this.focusLineOutlineNumericUpDown.Size = new System.Drawing.Size(64, 24);
             this.focusLineOutlineNumericUpDown.TabIndex = 45;
             this.focusLineOutlineNumericUpDown.Value = new decimal(new int[] {
             1,
@@ -2621,9 +2742,10 @@ namespace Retro_Achievement_Tracker
             this.focusLineOutlineCheckBox.AutoSize = true;
             this.focusLineOutlineCheckBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.focusLineOutlineCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.focusLineOutlineCheckBox.Location = new System.Drawing.Point(413, 6);
+            this.focusLineOutlineCheckBox.Location = new System.Drawing.Point(620, 9);
+            this.focusLineOutlineCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.focusLineOutlineCheckBox.Name = "focusLineOutlineCheckBox";
-            this.focusLineOutlineCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.focusLineOutlineCheckBox.Size = new System.Drawing.Size(22, 21);
             this.focusLineOutlineCheckBox.TabIndex = 45;
             this.focusLineOutlineCheckBox.UseVisualStyleBackColor = true;
             this.focusLineOutlineCheckBox.CheckedChanged += new System.EventHandler(this.FeatureEnablementCheckBox_CheckedChanged);
@@ -2646,9 +2768,10 @@ namespace Retro_Achievement_Tracker
             this.panel65.Controls.Add(this.panel74);
             this.panel65.Controls.Add(this.alertsPointsOutlinePanel);
             this.panel65.Controls.Add(this.alertsLineOutlinePanel);
-            this.panel65.Location = new System.Drawing.Point(296, 3);
+            this.panel65.Location = new System.Drawing.Point(444, 5);
+            this.panel65.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel65.Name = "panel65";
-            this.panel65.Size = new System.Drawing.Size(468, 285);
+            this.panel65.Size = new System.Drawing.Size(702, 438);
             this.panel65.TabIndex = 10081;
             // 
             // alertsLinePanel
@@ -2656,9 +2779,10 @@ namespace Retro_Achievement_Tracker
             this.alertsLinePanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.alertsLinePanel.Controls.Add(this.label113);
             this.alertsLinePanel.Controls.Add(this.alertsLineColorPictureBox);
-            this.alertsLinePanel.Location = new System.Drawing.Point(2, 172);
+            this.alertsLinePanel.Location = new System.Drawing.Point(3, 265);
+            this.alertsLinePanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsLinePanel.Name = "alertsLinePanel";
-            this.alertsLinePanel.Size = new System.Drawing.Size(463, 23);
+            this.alertsLinePanel.Size = new System.Drawing.Size(694, 35);
             this.alertsLinePanel.TabIndex = 10068;
             // 
             // label113
@@ -2666,9 +2790,10 @@ namespace Retro_Achievement_Tracker
             this.label113.BackColor = System.Drawing.Color.Transparent;
             this.label113.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label113.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label113.Location = new System.Drawing.Point(3, 4);
+            this.label113.Location = new System.Drawing.Point(4, 6);
+            this.label113.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label113.Name = "label113";
-            this.label113.Size = new System.Drawing.Size(144, 16);
+            this.label113.Size = new System.Drawing.Size(216, 25);
             this.label113.TabIndex = 10066;
             this.label113.Text = "Line";
             // 
@@ -2676,9 +2801,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.alertsLineColorPictureBox.BackColor = System.Drawing.Color.White;
             this.alertsLineColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.alertsLineColorPictureBox.Location = new System.Drawing.Point(153, 3);
+            this.alertsLineColorPictureBox.Location = new System.Drawing.Point(230, 5);
+            this.alertsLineColorPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsLineColorPictureBox.Name = "alertsLineColorPictureBox";
-            this.alertsLineColorPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.alertsLineColorPictureBox.Size = new System.Drawing.Size(22, 22);
             this.alertsLineColorPictureBox.TabIndex = 45;
             this.alertsLineColorPictureBox.TabStop = false;
             this.alertsLineColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
@@ -2688,9 +2814,10 @@ namespace Retro_Achievement_Tracker
             this.label114.BackColor = System.Drawing.Color.Transparent;
             this.label114.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label114.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label114.Location = new System.Drawing.Point(3, 3);
+            this.label114.Location = new System.Drawing.Point(4, 5);
+            this.label114.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label114.Name = "label114";
-            this.label114.Size = new System.Drawing.Size(243, 26);
+            this.label114.Size = new System.Drawing.Size(364, 40);
             this.label114.TabIndex = 10062;
             this.label114.Text = "Window/Font Settings";
             // 
@@ -2700,9 +2827,10 @@ namespace Retro_Achievement_Tracker
             this.panel67.Controls.Add(this.alertsBorderCheckBox);
             this.panel67.Controls.Add(this.alertsBorderColorPictureBox);
             this.panel67.Controls.Add(this.label115);
-            this.panel67.Location = new System.Drawing.Point(2, 84);
+            this.panel67.Location = new System.Drawing.Point(3, 129);
+            this.panel67.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel67.Name = "panel67";
-            this.panel67.Size = new System.Drawing.Size(463, 23);
+            this.panel67.Size = new System.Drawing.Size(694, 35);
             this.panel67.TabIndex = 10069;
             // 
             // alertsBorderCheckBox
@@ -2710,9 +2838,10 @@ namespace Retro_Achievement_Tracker
             this.alertsBorderCheckBox.AutoSize = true;
             this.alertsBorderCheckBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.alertsBorderCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.alertsBorderCheckBox.Location = new System.Drawing.Point(413, 5);
+            this.alertsBorderCheckBox.Location = new System.Drawing.Point(620, 8);
+            this.alertsBorderCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsBorderCheckBox.Name = "alertsBorderCheckBox";
-            this.alertsBorderCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.alertsBorderCheckBox.Size = new System.Drawing.Size(22, 21);
             this.alertsBorderCheckBox.TabIndex = 10065;
             this.alertsBorderCheckBox.UseVisualStyleBackColor = true;
             this.alertsBorderCheckBox.CheckedChanged += new System.EventHandler(this.FeatureEnablementCheckBox_CheckedChanged);
@@ -2721,9 +2850,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.alertsBorderColorPictureBox.BackColor = System.Drawing.Color.White;
             this.alertsBorderColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.alertsBorderColorPictureBox.Location = new System.Drawing.Point(153, 3);
+            this.alertsBorderColorPictureBox.Location = new System.Drawing.Point(230, 5);
+            this.alertsBorderColorPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsBorderColorPictureBox.Name = "alertsBorderColorPictureBox";
-            this.alertsBorderColorPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.alertsBorderColorPictureBox.Size = new System.Drawing.Size(22, 22);
             this.alertsBorderColorPictureBox.TabIndex = 42;
             this.alertsBorderColorPictureBox.TabStop = false;
             this.alertsBorderColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
@@ -2733,9 +2863,10 @@ namespace Retro_Achievement_Tracker
             this.label115.BackColor = System.Drawing.Color.Transparent;
             this.label115.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label115.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label115.Location = new System.Drawing.Point(3, 3);
+            this.label115.Location = new System.Drawing.Point(4, 5);
+            this.label115.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label115.Name = "label115";
-            this.label115.Size = new System.Drawing.Size(144, 16);
+            this.label115.Size = new System.Drawing.Size(216, 25);
             this.label115.TabIndex = 10064;
             this.label115.Text = "Border";
             // 
@@ -2745,9 +2876,10 @@ namespace Retro_Achievement_Tracker
             this.alertsPointsPanel.Controls.Add(this.label116);
             this.alertsPointsPanel.Controls.Add(this.alertsPointsFontColorPictureBox);
             this.alertsPointsPanel.Controls.Add(this.alertsPointsFontComboBox);
-            this.alertsPointsPanel.Location = new System.Drawing.Point(2, 150);
+            this.alertsPointsPanel.Location = new System.Drawing.Point(3, 231);
+            this.alertsPointsPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsPointsPanel.Name = "alertsPointsPanel";
-            this.alertsPointsPanel.Size = new System.Drawing.Size(463, 23);
+            this.alertsPointsPanel.Size = new System.Drawing.Size(694, 35);
             this.alertsPointsPanel.TabIndex = 10070;
             // 
             // label116
@@ -2755,9 +2887,10 @@ namespace Retro_Achievement_Tracker
             this.label116.BackColor = System.Drawing.Color.Transparent;
             this.label116.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label116.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label116.Location = new System.Drawing.Point(3, 4);
+            this.label116.Location = new System.Drawing.Point(4, 6);
+            this.label116.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label116.Name = "label116";
-            this.label116.Size = new System.Drawing.Size(144, 16);
+            this.label116.Size = new System.Drawing.Size(216, 25);
             this.label116.TabIndex = 10065;
             this.label116.Text = "Points";
             // 
@@ -2765,9 +2898,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.alertsPointsFontColorPictureBox.BackColor = System.Drawing.Color.White;
             this.alertsPointsFontColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.alertsPointsFontColorPictureBox.Location = new System.Drawing.Point(153, 4);
+            this.alertsPointsFontColorPictureBox.Location = new System.Drawing.Point(230, 6);
+            this.alertsPointsFontColorPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsPointsFontColorPictureBox.Name = "alertsPointsFontColorPictureBox";
-            this.alertsPointsFontColorPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.alertsPointsFontColorPictureBox.Size = new System.Drawing.Size(22, 22);
             this.alertsPointsFontColorPictureBox.TabIndex = 45;
             this.alertsPointsFontColorPictureBox.TabStop = false;
             this.alertsPointsFontColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
@@ -2779,9 +2913,10 @@ namespace Retro_Achievement_Tracker
             this.alertsPointsFontComboBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.alertsPointsFontComboBox.ForeColor = System.Drawing.Color.White;
             this.alertsPointsFontComboBox.FormattingEnabled = true;
-            this.alertsPointsFontComboBox.Location = new System.Drawing.Point(193, 2);
+            this.alertsPointsFontComboBox.Location = new System.Drawing.Point(290, 3);
+            this.alertsPointsFontComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsPointsFontComboBox.Name = "alertsPointsFontComboBox";
-            this.alertsPointsFontComboBox.Size = new System.Drawing.Size(202, 21);
+            this.alertsPointsFontComboBox.Size = new System.Drawing.Size(301, 28);
             this.alertsPointsFontComboBox.TabIndex = 45;
             this.alertsPointsFontComboBox.SelectedIndexChanged += new System.EventHandler(this.FontFamilyComboBox_SelectedIndexChanged);
             // 
@@ -2793,9 +2928,10 @@ namespace Retro_Achievement_Tracker
             this.panel69.Controls.Add(this.label118);
             this.panel69.Controls.Add(this.label119);
             this.panel69.Controls.Add(this.label120);
-            this.panel69.Location = new System.Drawing.Point(2, 40);
+            this.panel69.Location = new System.Drawing.Point(3, 62);
+            this.panel69.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel69.Name = "panel69";
-            this.panel69.Size = new System.Drawing.Size(463, 23);
+            this.panel69.Size = new System.Drawing.Size(694, 35);
             this.panel69.TabIndex = 10076;
             // 
             // alertsAdvancedCheckBox
@@ -2805,9 +2941,10 @@ namespace Retro_Achievement_Tracker
             this.alertsAdvancedCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.alertsAdvancedCheckBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.alertsAdvancedCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.alertsAdvancedCheckBox.Location = new System.Drawing.Point(5, 2);
+            this.alertsAdvancedCheckBox.Location = new System.Drawing.Point(8, 3);
+            this.alertsAdvancedCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsAdvancedCheckBox.Name = "alertsAdvancedCheckBox";
-            this.alertsAdvancedCheckBox.Size = new System.Drawing.Size(91, 20);
+            this.alertsAdvancedCheckBox.Size = new System.Drawing.Size(135, 29);
             this.alertsAdvancedCheckBox.TabIndex = 10053;
             this.alertsAdvancedCheckBox.Text = "Advanced";
             this.alertsAdvancedCheckBox.UseVisualStyleBackColor = false;
@@ -2818,9 +2955,10 @@ namespace Retro_Achievement_Tracker
             this.label117.BackColor = System.Drawing.Color.Transparent;
             this.label117.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label117.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label117.Location = new System.Drawing.Point(150, 3);
+            this.label117.Location = new System.Drawing.Point(225, 5);
+            this.label117.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label117.Name = "label117";
-            this.label117.Size = new System.Drawing.Size(48, 16);
+            this.label117.Size = new System.Drawing.Size(72, 25);
             this.label117.TabIndex = 10065;
             this.label117.Text = "Color";
             // 
@@ -2829,9 +2967,10 @@ namespace Retro_Achievement_Tracker
             this.label118.BackColor = System.Drawing.Color.Transparent;
             this.label118.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label118.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label118.Location = new System.Drawing.Point(194, 3);
+            this.label118.Location = new System.Drawing.Point(291, 5);
+            this.label118.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label118.Name = "label118";
-            this.label118.Size = new System.Drawing.Size(50, 16);
+            this.label118.Size = new System.Drawing.Size(75, 25);
             this.label118.TabIndex = 10066;
             this.label118.Text = "Font";
             // 
@@ -2840,9 +2979,10 @@ namespace Retro_Achievement_Tracker
             this.label119.BackColor = System.Drawing.Color.Transparent;
             this.label119.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label119.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label119.Location = new System.Drawing.Point(349, 3);
+            this.label119.Location = new System.Drawing.Point(524, 5);
+            this.label119.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label119.Name = "label119";
-            this.label119.Size = new System.Drawing.Size(41, 16);
+            this.label119.Size = new System.Drawing.Size(62, 25);
             this.label119.TabIndex = 10068;
             this.label119.Text = "Size";
             // 
@@ -2851,9 +2991,10 @@ namespace Retro_Achievement_Tracker
             this.label120.BackColor = System.Drawing.Color.Transparent;
             this.label120.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label120.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label120.Location = new System.Drawing.Point(396, 3);
+            this.label120.Location = new System.Drawing.Point(594, 5);
+            this.label120.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label120.Name = "label120";
-            this.label120.Size = new System.Drawing.Size(59, 16);
+            this.label120.Size = new System.Drawing.Size(88, 25);
             this.label120.TabIndex = 10067;
             this.label120.Text = "Enabled";
             // 
@@ -2864,9 +3005,10 @@ namespace Retro_Achievement_Tracker
             this.panel70.Controls.Add(this.alertsTitleOutlineCheckBox);
             this.panel70.Controls.Add(this.alertsTitleOutlineLabel);
             this.panel70.Controls.Add(this.alertsTitleFontOutlineColorPictureBox);
-            this.panel70.Location = new System.Drawing.Point(2, 194);
+            this.panel70.Location = new System.Drawing.Point(3, 298);
+            this.panel70.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel70.Name = "panel70";
-            this.panel70.Size = new System.Drawing.Size(463, 23);
+            this.panel70.Size = new System.Drawing.Size(694, 35);
             this.panel70.TabIndex = 10071;
             // 
             // alertsTitleFontOutlineNumericUpDown
@@ -2875,7 +3017,8 @@ namespace Retro_Achievement_Tracker
             this.alertsTitleFontOutlineNumericUpDown.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.alertsTitleFontOutlineNumericUpDown.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.alertsTitleFontOutlineNumericUpDown.ForeColor = System.Drawing.Color.White;
-            this.alertsTitleFontOutlineNumericUpDown.Location = new System.Drawing.Point(352, 4);
+            this.alertsTitleFontOutlineNumericUpDown.Location = new System.Drawing.Point(528, 6);
+            this.alertsTitleFontOutlineNumericUpDown.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsTitleFontOutlineNumericUpDown.Maximum = new decimal(new int[] {
             5,
             0,
@@ -2887,7 +3030,7 @@ namespace Retro_Achievement_Tracker
             0,
             0});
             this.alertsTitleFontOutlineNumericUpDown.Name = "alertsTitleFontOutlineNumericUpDown";
-            this.alertsTitleFontOutlineNumericUpDown.Size = new System.Drawing.Size(43, 17);
+            this.alertsTitleFontOutlineNumericUpDown.Size = new System.Drawing.Size(64, 24);
             this.alertsTitleFontOutlineNumericUpDown.TabIndex = 45;
             this.alertsTitleFontOutlineNumericUpDown.Value = new decimal(new int[] {
             1,
@@ -2901,9 +3044,10 @@ namespace Retro_Achievement_Tracker
             this.alertsTitleOutlineCheckBox.AutoSize = true;
             this.alertsTitleOutlineCheckBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.alertsTitleOutlineCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.alertsTitleOutlineCheckBox.Location = new System.Drawing.Point(413, 5);
+            this.alertsTitleOutlineCheckBox.Location = new System.Drawing.Point(620, 8);
+            this.alertsTitleOutlineCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsTitleOutlineCheckBox.Name = "alertsTitleOutlineCheckBox";
-            this.alertsTitleOutlineCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.alertsTitleOutlineCheckBox.Size = new System.Drawing.Size(22, 21);
             this.alertsTitleOutlineCheckBox.TabIndex = 45;
             this.alertsTitleOutlineCheckBox.UseVisualStyleBackColor = true;
             this.alertsTitleOutlineCheckBox.CheckedChanged += new System.EventHandler(this.FeatureEnablementCheckBox_CheckedChanged);
@@ -2913,9 +3057,10 @@ namespace Retro_Achievement_Tracker
             this.alertsTitleOutlineLabel.BackColor = System.Drawing.Color.Transparent;
             this.alertsTitleOutlineLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.alertsTitleOutlineLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.alertsTitleOutlineLabel.Location = new System.Drawing.Point(3, 3);
+            this.alertsTitleOutlineLabel.Location = new System.Drawing.Point(4, 5);
+            this.alertsTitleOutlineLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.alertsTitleOutlineLabel.Name = "alertsTitleOutlineLabel";
-            this.alertsTitleOutlineLabel.Size = new System.Drawing.Size(144, 16);
+            this.alertsTitleOutlineLabel.Size = new System.Drawing.Size(216, 25);
             this.alertsTitleOutlineLabel.TabIndex = 10066;
             this.alertsTitleOutlineLabel.Text = "Title OutlineColor";
             // 
@@ -2923,9 +3068,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.alertsTitleFontOutlineColorPictureBox.BackColor = System.Drawing.Color.White;
             this.alertsTitleFontOutlineColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.alertsTitleFontOutlineColorPictureBox.Location = new System.Drawing.Point(153, 3);
+            this.alertsTitleFontOutlineColorPictureBox.Location = new System.Drawing.Point(230, 5);
+            this.alertsTitleFontOutlineColorPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsTitleFontOutlineColorPictureBox.Name = "alertsTitleFontOutlineColorPictureBox";
-            this.alertsTitleFontOutlineColorPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.alertsTitleFontOutlineColorPictureBox.Size = new System.Drawing.Size(22, 22);
             this.alertsTitleFontOutlineColorPictureBox.TabIndex = 45;
             this.alertsTitleFontOutlineColorPictureBox.TabStop = false;
             this.alertsTitleFontOutlineColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
@@ -2937,10 +3083,10 @@ namespace Retro_Achievement_Tracker
             this.alertsOpenWindowButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.alertsOpenWindowButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.alertsOpenWindowButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
-            this.alertsOpenWindowButton.Location = new System.Drawing.Point(382, 2);
+            this.alertsOpenWindowButton.Location = new System.Drawing.Point(573, 3);
             this.alertsOpenWindowButton.Margin = new System.Windows.Forms.Padding(0);
             this.alertsOpenWindowButton.Name = "alertsOpenWindowButton";
-            this.alertsOpenWindowButton.Size = new System.Drawing.Size(75, 27);
+            this.alertsOpenWindowButton.Size = new System.Drawing.Size(112, 42);
             this.alertsOpenWindowButton.TabIndex = 10021;
             this.alertsOpenWindowButton.Text = "Open";
             this.alertsOpenWindowButton.UseVisualStyleBackColor = false;
@@ -2953,9 +3099,10 @@ namespace Retro_Achievement_Tracker
             this.alertsDescriptionOutlinePanel.Controls.Add(this.alertsDescriptionFontOutlineColorPictureBox);
             this.alertsDescriptionOutlinePanel.Controls.Add(this.alertsDescriptionFontOutlineNumericUpDown);
             this.alertsDescriptionOutlinePanel.Controls.Add(this.alertsDescriptionOutlineCheckBox);
-            this.alertsDescriptionOutlinePanel.Location = new System.Drawing.Point(2, 216);
+            this.alertsDescriptionOutlinePanel.Location = new System.Drawing.Point(3, 332);
+            this.alertsDescriptionOutlinePanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsDescriptionOutlinePanel.Name = "alertsDescriptionOutlinePanel";
-            this.alertsDescriptionOutlinePanel.Size = new System.Drawing.Size(463, 23);
+            this.alertsDescriptionOutlinePanel.Size = new System.Drawing.Size(694, 35);
             this.alertsDescriptionOutlinePanel.TabIndex = 10072;
             // 
             // label122
@@ -2963,9 +3110,10 @@ namespace Retro_Achievement_Tracker
             this.label122.BackColor = System.Drawing.Color.Transparent;
             this.label122.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label122.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label122.Location = new System.Drawing.Point(3, 4);
+            this.label122.Location = new System.Drawing.Point(4, 6);
+            this.label122.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label122.Name = "label122";
-            this.label122.Size = new System.Drawing.Size(144, 16);
+            this.label122.Size = new System.Drawing.Size(216, 25);
             this.label122.TabIndex = 10066;
             this.label122.Text = "Description OutlineColor";
             // 
@@ -2973,9 +3121,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.alertsDescriptionFontOutlineColorPictureBox.BackColor = System.Drawing.Color.White;
             this.alertsDescriptionFontOutlineColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.alertsDescriptionFontOutlineColorPictureBox.Location = new System.Drawing.Point(153, 4);
+            this.alertsDescriptionFontOutlineColorPictureBox.Location = new System.Drawing.Point(230, 6);
+            this.alertsDescriptionFontOutlineColorPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsDescriptionFontOutlineColorPictureBox.Name = "alertsDescriptionFontOutlineColorPictureBox";
-            this.alertsDescriptionFontOutlineColorPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.alertsDescriptionFontOutlineColorPictureBox.Size = new System.Drawing.Size(22, 22);
             this.alertsDescriptionFontOutlineColorPictureBox.TabIndex = 45;
             this.alertsDescriptionFontOutlineColorPictureBox.TabStop = false;
             this.alertsDescriptionFontOutlineColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
@@ -2986,7 +3135,8 @@ namespace Retro_Achievement_Tracker
             this.alertsDescriptionFontOutlineNumericUpDown.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.alertsDescriptionFontOutlineNumericUpDown.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.alertsDescriptionFontOutlineNumericUpDown.ForeColor = System.Drawing.Color.White;
-            this.alertsDescriptionFontOutlineNumericUpDown.Location = new System.Drawing.Point(352, 4);
+            this.alertsDescriptionFontOutlineNumericUpDown.Location = new System.Drawing.Point(528, 6);
+            this.alertsDescriptionFontOutlineNumericUpDown.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsDescriptionFontOutlineNumericUpDown.Maximum = new decimal(new int[] {
             5,
             0,
@@ -2998,7 +3148,7 @@ namespace Retro_Achievement_Tracker
             0,
             0});
             this.alertsDescriptionFontOutlineNumericUpDown.Name = "alertsDescriptionFontOutlineNumericUpDown";
-            this.alertsDescriptionFontOutlineNumericUpDown.Size = new System.Drawing.Size(43, 17);
+            this.alertsDescriptionFontOutlineNumericUpDown.Size = new System.Drawing.Size(64, 24);
             this.alertsDescriptionFontOutlineNumericUpDown.TabIndex = 45;
             this.alertsDescriptionFontOutlineNumericUpDown.Value = new decimal(new int[] {
             1,
@@ -3012,9 +3162,10 @@ namespace Retro_Achievement_Tracker
             this.alertsDescriptionOutlineCheckBox.AutoSize = true;
             this.alertsDescriptionOutlineCheckBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.alertsDescriptionOutlineCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.alertsDescriptionOutlineCheckBox.Location = new System.Drawing.Point(413, 6);
+            this.alertsDescriptionOutlineCheckBox.Location = new System.Drawing.Point(620, 9);
+            this.alertsDescriptionOutlineCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsDescriptionOutlineCheckBox.Name = "alertsDescriptionOutlineCheckBox";
-            this.alertsDescriptionOutlineCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.alertsDescriptionOutlineCheckBox.Size = new System.Drawing.Size(22, 21);
             this.alertsDescriptionOutlineCheckBox.TabIndex = 45;
             this.alertsDescriptionOutlineCheckBox.UseVisualStyleBackColor = true;
             this.alertsDescriptionOutlineCheckBox.CheckedChanged += new System.EventHandler(this.FeatureEnablementCheckBox_CheckedChanged);
@@ -3025,9 +3176,10 @@ namespace Retro_Achievement_Tracker
             this.alertsDescriptionPanel.Controls.Add(this.label123);
             this.alertsDescriptionPanel.Controls.Add(this.alertsDescriptionFontColorPictureBox);
             this.alertsDescriptionPanel.Controls.Add(this.alertsDescriptionFontComboBox);
-            this.alertsDescriptionPanel.Location = new System.Drawing.Point(2, 128);
+            this.alertsDescriptionPanel.Location = new System.Drawing.Point(3, 197);
+            this.alertsDescriptionPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsDescriptionPanel.Name = "alertsDescriptionPanel";
-            this.alertsDescriptionPanel.Size = new System.Drawing.Size(463, 23);
+            this.alertsDescriptionPanel.Size = new System.Drawing.Size(694, 35);
             this.alertsDescriptionPanel.TabIndex = 10061;
             // 
             // label123
@@ -3035,9 +3187,10 @@ namespace Retro_Achievement_Tracker
             this.label123.BackColor = System.Drawing.Color.Transparent;
             this.label123.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label123.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label123.Location = new System.Drawing.Point(3, 4);
+            this.label123.Location = new System.Drawing.Point(4, 6);
+            this.label123.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label123.Name = "label123";
-            this.label123.Size = new System.Drawing.Size(144, 16);
+            this.label123.Size = new System.Drawing.Size(216, 25);
             this.label123.TabIndex = 10066;
             this.label123.Text = "Description";
             // 
@@ -3045,9 +3198,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.alertsDescriptionFontColorPictureBox.BackColor = System.Drawing.Color.White;
             this.alertsDescriptionFontColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.alertsDescriptionFontColorPictureBox.Location = new System.Drawing.Point(153, 3);
+            this.alertsDescriptionFontColorPictureBox.Location = new System.Drawing.Point(230, 5);
+            this.alertsDescriptionFontColorPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsDescriptionFontColorPictureBox.Name = "alertsDescriptionFontColorPictureBox";
-            this.alertsDescriptionFontColorPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.alertsDescriptionFontColorPictureBox.Size = new System.Drawing.Size(22, 22);
             this.alertsDescriptionFontColorPictureBox.TabIndex = 45;
             this.alertsDescriptionFontColorPictureBox.TabStop = false;
             this.alertsDescriptionFontColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
@@ -3059,9 +3213,10 @@ namespace Retro_Achievement_Tracker
             this.alertsDescriptionFontComboBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.alertsDescriptionFontComboBox.ForeColor = System.Drawing.Color.White;
             this.alertsDescriptionFontComboBox.FormattingEnabled = true;
-            this.alertsDescriptionFontComboBox.Location = new System.Drawing.Point(193, 2);
+            this.alertsDescriptionFontComboBox.Location = new System.Drawing.Point(290, 3);
+            this.alertsDescriptionFontComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsDescriptionFontComboBox.Name = "alertsDescriptionFontComboBox";
-            this.alertsDescriptionFontComboBox.Size = new System.Drawing.Size(202, 21);
+            this.alertsDescriptionFontComboBox.Size = new System.Drawing.Size(301, 28);
             this.alertsDescriptionFontComboBox.TabIndex = 45;
             this.alertsDescriptionFontComboBox.SelectedIndexChanged += new System.EventHandler(this.FontFamilyComboBox_SelectedIndexChanged);
             // 
@@ -3071,9 +3226,10 @@ namespace Retro_Achievement_Tracker
             this.alertsAutoOpenWindowCheckbox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.alertsAutoOpenWindowCheckbox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.alertsAutoOpenWindowCheckbox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.alertsAutoOpenWindowCheckbox.Location = new System.Drawing.Point(252, 9);
+            this.alertsAutoOpenWindowCheckbox.Location = new System.Drawing.Point(378, 14);
+            this.alertsAutoOpenWindowCheckbox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsAutoOpenWindowCheckbox.Name = "alertsAutoOpenWindowCheckbox";
-            this.alertsAutoOpenWindowCheckbox.Size = new System.Drawing.Size(98, 20);
+            this.alertsAutoOpenWindowCheckbox.Size = new System.Drawing.Size(147, 29);
             this.alertsAutoOpenWindowCheckbox.TabIndex = 10022;
             this.alertsAutoOpenWindowCheckbox.Text = "Auto-Open";
             this.alertsAutoOpenWindowCheckbox.UseVisualStyleBackColor = true;
@@ -3082,9 +3238,10 @@ namespace Retro_Achievement_Tracker
             // pictureBox20
             // 
             this.pictureBox20.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.pictureBox20.Location = new System.Drawing.Point(2, 32);
+            this.pictureBox20.Location = new System.Drawing.Point(3, 49);
+            this.pictureBox20.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox20.Name = "pictureBox20";
-            this.pictureBox20.Size = new System.Drawing.Size(460, 2);
+            this.pictureBox20.Size = new System.Drawing.Size(690, 3);
             this.pictureBox20.TabIndex = 10063;
             this.pictureBox20.TabStop = false;
             // 
@@ -3093,18 +3250,20 @@ namespace Retro_Achievement_Tracker
             this.panel73.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.panel73.Controls.Add(this.alertsBackgroundColorPictureBox);
             this.panel73.Controls.Add(this.label124);
-            this.panel73.Location = new System.Drawing.Point(2, 62);
+            this.panel73.Location = new System.Drawing.Point(3, 95);
+            this.panel73.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel73.Name = "panel73";
-            this.panel73.Size = new System.Drawing.Size(463, 23);
+            this.panel73.Size = new System.Drawing.Size(694, 35);
             this.panel73.TabIndex = 10061;
             // 
             // alertsBackgroundColorPictureBox
             // 
             this.alertsBackgroundColorPictureBox.BackColor = System.Drawing.Color.White;
             this.alertsBackgroundColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.alertsBackgroundColorPictureBox.Location = new System.Drawing.Point(153, 3);
+            this.alertsBackgroundColorPictureBox.Location = new System.Drawing.Point(230, 5);
+            this.alertsBackgroundColorPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsBackgroundColorPictureBox.Name = "alertsBackgroundColorPictureBox";
-            this.alertsBackgroundColorPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.alertsBackgroundColorPictureBox.Size = new System.Drawing.Size(22, 22);
             this.alertsBackgroundColorPictureBox.TabIndex = 42;
             this.alertsBackgroundColorPictureBox.TabStop = false;
             this.alertsBackgroundColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
@@ -3114,9 +3273,10 @@ namespace Retro_Achievement_Tracker
             this.label124.BackColor = System.Drawing.Color.Transparent;
             this.label124.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label124.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label124.Location = new System.Drawing.Point(3, 3);
+            this.label124.Location = new System.Drawing.Point(4, 5);
+            this.label124.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label124.Name = "label124";
-            this.label124.Size = new System.Drawing.Size(144, 16);
+            this.label124.Size = new System.Drawing.Size(216, 25);
             this.label124.TabIndex = 10064;
             this.label124.Text = "Window Background";
             // 
@@ -3126,9 +3286,10 @@ namespace Retro_Achievement_Tracker
             this.panel74.Controls.Add(this.alertsTitleLabel);
             this.panel74.Controls.Add(this.alertsTitleFontColorPictureBox);
             this.panel74.Controls.Add(this.alertsTitleFontComboBox);
-            this.panel74.Location = new System.Drawing.Point(2, 106);
+            this.panel74.Location = new System.Drawing.Point(3, 163);
+            this.panel74.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel74.Name = "panel74";
-            this.panel74.Size = new System.Drawing.Size(463, 23);
+            this.panel74.Size = new System.Drawing.Size(694, 35);
             this.panel74.TabIndex = 10061;
             // 
             // alertsTitleLabel
@@ -3136,9 +3297,10 @@ namespace Retro_Achievement_Tracker
             this.alertsTitleLabel.BackColor = System.Drawing.Color.Transparent;
             this.alertsTitleLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.alertsTitleLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.alertsTitleLabel.Location = new System.Drawing.Point(3, 4);
+            this.alertsTitleLabel.Location = new System.Drawing.Point(4, 6);
+            this.alertsTitleLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.alertsTitleLabel.Name = "alertsTitleLabel";
-            this.alertsTitleLabel.Size = new System.Drawing.Size(144, 16);
+            this.alertsTitleLabel.Size = new System.Drawing.Size(216, 25);
             this.alertsTitleLabel.TabIndex = 10065;
             this.alertsTitleLabel.Text = "Title";
             // 
@@ -3146,9 +3308,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.alertsTitleFontColorPictureBox.BackColor = System.Drawing.Color.White;
             this.alertsTitleFontColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.alertsTitleFontColorPictureBox.Location = new System.Drawing.Point(153, 4);
+            this.alertsTitleFontColorPictureBox.Location = new System.Drawing.Point(230, 6);
+            this.alertsTitleFontColorPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsTitleFontColorPictureBox.Name = "alertsTitleFontColorPictureBox";
-            this.alertsTitleFontColorPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.alertsTitleFontColorPictureBox.Size = new System.Drawing.Size(22, 22);
             this.alertsTitleFontColorPictureBox.TabIndex = 45;
             this.alertsTitleFontColorPictureBox.TabStop = false;
             this.alertsTitleFontColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
@@ -3160,9 +3323,10 @@ namespace Retro_Achievement_Tracker
             this.alertsTitleFontComboBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.alertsTitleFontComboBox.ForeColor = System.Drawing.Color.White;
             this.alertsTitleFontComboBox.FormattingEnabled = true;
-            this.alertsTitleFontComboBox.Location = new System.Drawing.Point(193, 2);
+            this.alertsTitleFontComboBox.Location = new System.Drawing.Point(290, 3);
+            this.alertsTitleFontComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsTitleFontComboBox.Name = "alertsTitleFontComboBox";
-            this.alertsTitleFontComboBox.Size = new System.Drawing.Size(202, 21);
+            this.alertsTitleFontComboBox.Size = new System.Drawing.Size(301, 28);
             this.alertsTitleFontComboBox.TabIndex = 45;
             this.alertsTitleFontComboBox.SelectedIndexChanged += new System.EventHandler(this.FontFamilyComboBox_SelectedIndexChanged);
             // 
@@ -3173,9 +3337,10 @@ namespace Retro_Achievement_Tracker
             this.alertsPointsOutlinePanel.Controls.Add(this.alertsPointsOutlineCheckBox);
             this.alertsPointsOutlinePanel.Controls.Add(this.label126);
             this.alertsPointsOutlinePanel.Controls.Add(this.alertsPointsFontOutlineColorPictureBox);
-            this.alertsPointsOutlinePanel.Location = new System.Drawing.Point(2, 238);
+            this.alertsPointsOutlinePanel.Location = new System.Drawing.Point(3, 366);
+            this.alertsPointsOutlinePanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsPointsOutlinePanel.Name = "alertsPointsOutlinePanel";
-            this.alertsPointsOutlinePanel.Size = new System.Drawing.Size(463, 23);
+            this.alertsPointsOutlinePanel.Size = new System.Drawing.Size(694, 35);
             this.alertsPointsOutlinePanel.TabIndex = 10061;
             // 
             // alertsPointsFontOutlineNumericUpDown
@@ -3184,7 +3349,8 @@ namespace Retro_Achievement_Tracker
             this.alertsPointsFontOutlineNumericUpDown.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.alertsPointsFontOutlineNumericUpDown.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.alertsPointsFontOutlineNumericUpDown.ForeColor = System.Drawing.Color.White;
-            this.alertsPointsFontOutlineNumericUpDown.Location = new System.Drawing.Point(352, 4);
+            this.alertsPointsFontOutlineNumericUpDown.Location = new System.Drawing.Point(528, 6);
+            this.alertsPointsFontOutlineNumericUpDown.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsPointsFontOutlineNumericUpDown.Maximum = new decimal(new int[] {
             5,
             0,
@@ -3196,7 +3362,7 @@ namespace Retro_Achievement_Tracker
             0,
             0});
             this.alertsPointsFontOutlineNumericUpDown.Name = "alertsPointsFontOutlineNumericUpDown";
-            this.alertsPointsFontOutlineNumericUpDown.Size = new System.Drawing.Size(43, 17);
+            this.alertsPointsFontOutlineNumericUpDown.Size = new System.Drawing.Size(64, 24);
             this.alertsPointsFontOutlineNumericUpDown.TabIndex = 45;
             this.alertsPointsFontOutlineNumericUpDown.Value = new decimal(new int[] {
             1,
@@ -3210,9 +3376,10 @@ namespace Retro_Achievement_Tracker
             this.alertsPointsOutlineCheckBox.AutoSize = true;
             this.alertsPointsOutlineCheckBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.alertsPointsOutlineCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.alertsPointsOutlineCheckBox.Location = new System.Drawing.Point(413, 5);
+            this.alertsPointsOutlineCheckBox.Location = new System.Drawing.Point(620, 8);
+            this.alertsPointsOutlineCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsPointsOutlineCheckBox.Name = "alertsPointsOutlineCheckBox";
-            this.alertsPointsOutlineCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.alertsPointsOutlineCheckBox.Size = new System.Drawing.Size(22, 21);
             this.alertsPointsOutlineCheckBox.TabIndex = 45;
             this.alertsPointsOutlineCheckBox.UseVisualStyleBackColor = true;
             this.alertsPointsOutlineCheckBox.CheckedChanged += new System.EventHandler(this.FeatureEnablementCheckBox_CheckedChanged);
@@ -3222,9 +3389,10 @@ namespace Retro_Achievement_Tracker
             this.label126.BackColor = System.Drawing.Color.Transparent;
             this.label126.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label126.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label126.Location = new System.Drawing.Point(3, 3);
+            this.label126.Location = new System.Drawing.Point(4, 5);
+            this.label126.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label126.Name = "label126";
-            this.label126.Size = new System.Drawing.Size(144, 16);
+            this.label126.Size = new System.Drawing.Size(216, 25);
             this.label126.TabIndex = 10066;
             this.label126.Text = "Points OutlineColor";
             // 
@@ -3232,9 +3400,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.alertsPointsFontOutlineColorPictureBox.BackColor = System.Drawing.Color.White;
             this.alertsPointsFontOutlineColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.alertsPointsFontOutlineColorPictureBox.Location = new System.Drawing.Point(153, 3);
+            this.alertsPointsFontOutlineColorPictureBox.Location = new System.Drawing.Point(230, 5);
+            this.alertsPointsFontOutlineColorPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsPointsFontOutlineColorPictureBox.Name = "alertsPointsFontOutlineColorPictureBox";
-            this.alertsPointsFontOutlineColorPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.alertsPointsFontOutlineColorPictureBox.Size = new System.Drawing.Size(22, 22);
             this.alertsPointsFontOutlineColorPictureBox.TabIndex = 45;
             this.alertsPointsFontOutlineColorPictureBox.TabStop = false;
             this.alertsPointsFontOutlineColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
@@ -3246,9 +3415,10 @@ namespace Retro_Achievement_Tracker
             this.alertsLineOutlinePanel.Controls.Add(this.alertsLineOutlineColorPictureBox);
             this.alertsLineOutlinePanel.Controls.Add(this.alertsLineOutlineNumericUpDown);
             this.alertsLineOutlinePanel.Controls.Add(this.alertsLineOutlineCheckBox);
-            this.alertsLineOutlinePanel.Location = new System.Drawing.Point(2, 260);
+            this.alertsLineOutlinePanel.Location = new System.Drawing.Point(3, 400);
+            this.alertsLineOutlinePanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsLineOutlinePanel.Name = "alertsLineOutlinePanel";
-            this.alertsLineOutlinePanel.Size = new System.Drawing.Size(463, 23);
+            this.alertsLineOutlinePanel.Size = new System.Drawing.Size(694, 35);
             this.alertsLineOutlinePanel.TabIndex = 10067;
             // 
             // label127
@@ -3256,9 +3426,10 @@ namespace Retro_Achievement_Tracker
             this.label127.BackColor = System.Drawing.Color.Transparent;
             this.label127.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label127.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label127.Location = new System.Drawing.Point(3, 4);
+            this.label127.Location = new System.Drawing.Point(4, 6);
+            this.label127.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label127.Name = "label127";
-            this.label127.Size = new System.Drawing.Size(144, 16);
+            this.label127.Size = new System.Drawing.Size(216, 25);
             this.label127.TabIndex = 10066;
             this.label127.Text = "Line OutlineColor";
             // 
@@ -3266,9 +3437,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.alertsLineOutlineColorPictureBox.BackColor = System.Drawing.Color.White;
             this.alertsLineOutlineColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.alertsLineOutlineColorPictureBox.Location = new System.Drawing.Point(153, 4);
+            this.alertsLineOutlineColorPictureBox.Location = new System.Drawing.Point(230, 6);
+            this.alertsLineOutlineColorPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsLineOutlineColorPictureBox.Name = "alertsLineOutlineColorPictureBox";
-            this.alertsLineOutlineColorPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.alertsLineOutlineColorPictureBox.Size = new System.Drawing.Size(22, 22);
             this.alertsLineOutlineColorPictureBox.TabIndex = 45;
             this.alertsLineOutlineColorPictureBox.TabStop = false;
             this.alertsLineOutlineColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
@@ -3279,7 +3451,8 @@ namespace Retro_Achievement_Tracker
             this.alertsLineOutlineNumericUpDown.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.alertsLineOutlineNumericUpDown.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.alertsLineOutlineNumericUpDown.ForeColor = System.Drawing.Color.White;
-            this.alertsLineOutlineNumericUpDown.Location = new System.Drawing.Point(352, 4);
+            this.alertsLineOutlineNumericUpDown.Location = new System.Drawing.Point(528, 6);
+            this.alertsLineOutlineNumericUpDown.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsLineOutlineNumericUpDown.Maximum = new decimal(new int[] {
             5,
             0,
@@ -3291,7 +3464,7 @@ namespace Retro_Achievement_Tracker
             0,
             0});
             this.alertsLineOutlineNumericUpDown.Name = "alertsLineOutlineNumericUpDown";
-            this.alertsLineOutlineNumericUpDown.Size = new System.Drawing.Size(43, 17);
+            this.alertsLineOutlineNumericUpDown.Size = new System.Drawing.Size(64, 24);
             this.alertsLineOutlineNumericUpDown.TabIndex = 45;
             this.alertsLineOutlineNumericUpDown.Value = new decimal(new int[] {
             1,
@@ -3305,9 +3478,10 @@ namespace Retro_Achievement_Tracker
             this.alertsLineOutlineCheckBox.AutoSize = true;
             this.alertsLineOutlineCheckBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.alertsLineOutlineCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.alertsLineOutlineCheckBox.Location = new System.Drawing.Point(413, 6);
+            this.alertsLineOutlineCheckBox.Location = new System.Drawing.Point(620, 9);
+            this.alertsLineOutlineCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsLineOutlineCheckBox.Name = "alertsLineOutlineCheckBox";
-            this.alertsLineOutlineCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.alertsLineOutlineCheckBox.Size = new System.Drawing.Size(22, 21);
             this.alertsLineOutlineCheckBox.TabIndex = 45;
             this.alertsLineOutlineCheckBox.UseVisualStyleBackColor = true;
             this.alertsLineOutlineCheckBox.CheckedChanged += new System.EventHandler(this.FeatureEnablementCheckBox_CheckedChanged);
@@ -3328,9 +3502,10 @@ namespace Retro_Achievement_Tracker
             this.alertsCustomAchievementPanel.Controls.Add(this.panel80);
             this.alertsCustomAchievementPanel.Controls.Add(this.panel81);
             this.alertsCustomAchievementPanel.Controls.Add(this.panel82);
-            this.alertsCustomAchievementPanel.Location = new System.Drawing.Point(3, 32);
+            this.alertsCustomAchievementPanel.Location = new System.Drawing.Point(4, 49);
+            this.alertsCustomAchievementPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsCustomAchievementPanel.Name = "alertsCustomAchievementPanel";
-            this.alertsCustomAchievementPanel.Size = new System.Drawing.Size(278, 294);
+            this.alertsCustomAchievementPanel.Size = new System.Drawing.Size(417, 452);
             this.alertsCustomAchievementPanel.TabIndex = 10082;
             // 
             // panel85
@@ -3338,9 +3513,10 @@ namespace Retro_Achievement_Tracker
             this.panel85.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.panel85.Controls.Add(this.label136);
             this.panel85.Controls.Add(this.alertsCustomAchievementAnimationOutComboBox);
-            this.panel85.Location = new System.Drawing.Point(2, 238);
+            this.panel85.Location = new System.Drawing.Point(3, 366);
+            this.panel85.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel85.Name = "panel85";
-            this.panel85.Size = new System.Drawing.Size(272, 22);
+            this.panel85.Size = new System.Drawing.Size(408, 34);
             this.panel85.TabIndex = 10074;
             // 
             // label136
@@ -3348,9 +3524,10 @@ namespace Retro_Achievement_Tracker
             this.label136.BackColor = System.Drawing.Color.Transparent;
             this.label136.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label136.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label136.Location = new System.Drawing.Point(3, 4);
+            this.label136.Location = new System.Drawing.Point(4, 6);
+            this.label136.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label136.Name = "label136";
-            this.label136.Size = new System.Drawing.Size(159, 16);
+            this.label136.Size = new System.Drawing.Size(238, 25);
             this.label136.TabIndex = 10069;
             this.label136.Text = "Animate Out Direction";
             // 
@@ -3359,9 +3536,10 @@ namespace Retro_Achievement_Tracker
             this.panel84.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.panel84.Controls.Add(this.label135);
             this.panel84.Controls.Add(this.alertsCustomAchievementAnimationInComboBox);
-            this.panel84.Location = new System.Drawing.Point(2, 172);
+            this.panel84.Location = new System.Drawing.Point(3, 265);
+            this.panel84.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel84.Name = "panel84";
-            this.panel84.Size = new System.Drawing.Size(272, 22);
+            this.panel84.Size = new System.Drawing.Size(408, 34);
             this.panel84.TabIndex = 10071;
             // 
             // label135
@@ -3369,9 +3547,10 @@ namespace Retro_Achievement_Tracker
             this.label135.BackColor = System.Drawing.Color.Transparent;
             this.label135.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label135.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label135.Location = new System.Drawing.Point(3, 4);
+            this.label135.Location = new System.Drawing.Point(4, 6);
+            this.label135.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label135.Name = "label135";
-            this.label135.Size = new System.Drawing.Size(150, 16);
+            this.label135.Size = new System.Drawing.Size(225, 25);
             this.label135.TabIndex = 10069;
             this.label135.Text = "Animate In Direction";
             // 
@@ -3380,9 +3559,10 @@ namespace Retro_Achievement_Tracker
             this.panel86.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.panel86.Controls.Add(this.label137);
             this.panel86.Controls.Add(this.alertsCustomAchievementOutSpeedUpDown);
-            this.panel86.Location = new System.Drawing.Point(2, 216);
+            this.panel86.Location = new System.Drawing.Point(3, 332);
+            this.panel86.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel86.Name = "panel86";
-            this.panel86.Size = new System.Drawing.Size(272, 22);
+            this.panel86.Size = new System.Drawing.Size(408, 34);
             this.panel86.TabIndex = 10073;
             // 
             // label137
@@ -3390,9 +3570,10 @@ namespace Retro_Achievement_Tracker
             this.label137.BackColor = System.Drawing.Color.Transparent;
             this.label137.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label137.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label137.Location = new System.Drawing.Point(3, 4);
+            this.label137.Location = new System.Drawing.Point(4, 6);
+            this.label137.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label137.Name = "label137";
-            this.label137.Size = new System.Drawing.Size(150, 16);
+            this.label137.Size = new System.Drawing.Size(225, 25);
             this.label137.TabIndex = 10069;
             this.label137.Text = "Animate Out Duration";
             // 
@@ -3401,9 +3582,10 @@ namespace Retro_Achievement_Tracker
             this.panel83.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.panel83.Controls.Add(this.label129);
             this.panel83.Controls.Add(this.alertsCustomAchievementInSpeedUpDown);
-            this.panel83.Location = new System.Drawing.Point(2, 150);
+            this.panel83.Location = new System.Drawing.Point(3, 231);
+            this.panel83.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel83.Name = "panel83";
-            this.panel83.Size = new System.Drawing.Size(272, 22);
+            this.panel83.Size = new System.Drawing.Size(408, 34);
             this.panel83.TabIndex = 10070;
             // 
             // label129
@@ -3411,9 +3593,10 @@ namespace Retro_Achievement_Tracker
             this.label129.BackColor = System.Drawing.Color.Transparent;
             this.label129.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label129.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label129.Location = new System.Drawing.Point(3, 4);
+            this.label129.Location = new System.Drawing.Point(4, 6);
+            this.label129.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label129.Name = "label129";
-            this.label129.Size = new System.Drawing.Size(150, 16);
+            this.label129.Size = new System.Drawing.Size(225, 25);
             this.label129.TabIndex = 10069;
             this.label129.Text = "Animate In Duration";
             // 
@@ -3422,9 +3605,10 @@ namespace Retro_Achievement_Tracker
             this.panel87.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.panel87.Controls.Add(this.label138);
             this.panel87.Controls.Add(this.alertsCustomAchievementOutNumericUpDown);
-            this.panel87.Location = new System.Drawing.Point(2, 194);
+            this.panel87.Location = new System.Drawing.Point(3, 298);
+            this.panel87.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel87.Name = "panel87";
-            this.panel87.Size = new System.Drawing.Size(272, 23);
+            this.panel87.Size = new System.Drawing.Size(408, 35);
             this.panel87.TabIndex = 10072;
             // 
             // label138
@@ -3432,9 +3616,10 @@ namespace Retro_Achievement_Tracker
             this.label138.BackColor = System.Drawing.Color.Transparent;
             this.label138.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label138.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label138.Location = new System.Drawing.Point(3, 4);
+            this.label138.Location = new System.Drawing.Point(4, 6);
+            this.label138.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label138.Name = "label138";
-            this.label138.Size = new System.Drawing.Size(150, 16);
+            this.label138.Size = new System.Drawing.Size(225, 25);
             this.label138.TabIndex = 10069;
             this.label138.Text = "Animate Out Time";
             // 
@@ -3443,9 +3628,10 @@ namespace Retro_Achievement_Tracker
             this.panel78.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.panel78.Controls.Add(this.label42);
             this.panel78.Controls.Add(this.label128);
-            this.panel78.Location = new System.Drawing.Point(2, 40);
+            this.panel78.Location = new System.Drawing.Point(3, 62);
+            this.panel78.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel78.Name = "panel78";
-            this.panel78.Size = new System.Drawing.Size(272, 23);
+            this.panel78.Size = new System.Drawing.Size(408, 35);
             this.panel78.TabIndex = 10079;
             // 
             // label42
@@ -3453,9 +3639,10 @@ namespace Retro_Achievement_Tracker
             this.label42.BackColor = System.Drawing.Color.Transparent;
             this.label42.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label42.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label42.Location = new System.Drawing.Point(3, 3);
+            this.label42.Location = new System.Drawing.Point(4, 5);
+            this.label42.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(50, 16);
+            this.label42.Size = new System.Drawing.Size(75, 25);
             this.label42.TabIndex = 10071;
             this.label42.Text = "Field";
             // 
@@ -3464,9 +3651,10 @@ namespace Retro_Achievement_Tracker
             this.label128.BackColor = System.Drawing.Color.Transparent;
             this.label128.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label128.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label128.Location = new System.Drawing.Point(186, 3);
+            this.label128.Location = new System.Drawing.Point(279, 5);
+            this.label128.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label128.Name = "label128";
-            this.label128.Size = new System.Drawing.Size(58, 16);
+            this.label128.Size = new System.Drawing.Size(87, 25);
             this.label128.TabIndex = 10073;
             this.label128.Text = "Value";
             // 
@@ -3475,18 +3663,20 @@ namespace Retro_Achievement_Tracker
             this.label130.BackColor = System.Drawing.Color.Transparent;
             this.label130.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label130.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label130.Location = new System.Drawing.Point(3, 3);
+            this.label130.Location = new System.Drawing.Point(4, 5);
+            this.label130.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label130.Name = "label130";
-            this.label130.Size = new System.Drawing.Size(152, 26);
+            this.label130.Size = new System.Drawing.Size(228, 40);
             this.label130.TabIndex = 10069;
             this.label130.Text = "Achievement";
             // 
             // pictureBox13
             // 
             this.pictureBox13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.pictureBox13.Location = new System.Drawing.Point(2, 32);
+            this.pictureBox13.Location = new System.Drawing.Point(3, 49);
+            this.pictureBox13.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox13.Name = "pictureBox13";
-            this.pictureBox13.Size = new System.Drawing.Size(265, 2);
+            this.pictureBox13.Size = new System.Drawing.Size(398, 3);
             this.pictureBox13.TabIndex = 10070;
             this.pictureBox13.TabStop = false;
             // 
@@ -3495,9 +3685,10 @@ namespace Retro_Achievement_Tracker
             this.panel79.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.panel79.Controls.Add(this.label131);
             this.panel79.Controls.Add(this.alertsCustomAchievementXNumericUpDown);
-            this.panel79.Location = new System.Drawing.Point(2, 62);
+            this.panel79.Location = new System.Drawing.Point(3, 95);
+            this.panel79.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel79.Name = "panel79";
-            this.panel79.Size = new System.Drawing.Size(272, 23);
+            this.panel79.Size = new System.Drawing.Size(408, 35);
             this.panel79.TabIndex = 10061;
             // 
             // label131
@@ -3505,9 +3696,10 @@ namespace Retro_Achievement_Tracker
             this.label131.BackColor = System.Drawing.Color.Transparent;
             this.label131.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label131.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label131.Location = new System.Drawing.Point(3, 3);
+            this.label131.Location = new System.Drawing.Point(4, 5);
+            this.label131.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label131.Name = "label131";
-            this.label131.Size = new System.Drawing.Size(94, 16);
+            this.label131.Size = new System.Drawing.Size(141, 25);
             this.label131.TabIndex = 10066;
             this.label131.Text = "X position";
             // 
@@ -3516,9 +3708,10 @@ namespace Retro_Achievement_Tracker
             this.panel80.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.panel80.Controls.Add(this.label132);
             this.panel80.Controls.Add(this.alertsCustomAchievementInNumericUpDown);
-            this.panel80.Location = new System.Drawing.Point(2, 128);
+            this.panel80.Location = new System.Drawing.Point(3, 197);
+            this.panel80.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel80.Name = "panel80";
-            this.panel80.Size = new System.Drawing.Size(272, 23);
+            this.panel80.Size = new System.Drawing.Size(408, 35);
             this.panel80.TabIndex = 10061;
             // 
             // label132
@@ -3526,9 +3719,10 @@ namespace Retro_Achievement_Tracker
             this.label132.BackColor = System.Drawing.Color.Transparent;
             this.label132.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label132.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label132.Location = new System.Drawing.Point(3, 4);
+            this.label132.Location = new System.Drawing.Point(4, 6);
+            this.label132.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label132.Name = "label132";
-            this.label132.Size = new System.Drawing.Size(150, 16);
+            this.label132.Size = new System.Drawing.Size(225, 25);
             this.label132.TabIndex = 10069;
             this.label132.Text = "Animate In Time";
             // 
@@ -3537,9 +3731,10 @@ namespace Retro_Achievement_Tracker
             this.panel81.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.panel81.Controls.Add(this.label133);
             this.panel81.Controls.Add(this.alertsCustomAchievementScaleNumericUpDown);
-            this.panel81.Location = new System.Drawing.Point(2, 106);
+            this.panel81.Location = new System.Drawing.Point(3, 163);
+            this.panel81.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel81.Name = "panel81";
-            this.panel81.Size = new System.Drawing.Size(272, 23);
+            this.panel81.Size = new System.Drawing.Size(408, 35);
             this.panel81.TabIndex = 10061;
             // 
             // label133
@@ -3547,9 +3742,10 @@ namespace Retro_Achievement_Tracker
             this.label133.BackColor = System.Drawing.Color.Transparent;
             this.label133.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label133.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label133.Location = new System.Drawing.Point(3, 4);
+            this.label133.Location = new System.Drawing.Point(4, 6);
+            this.label133.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label133.Name = "label133";
-            this.label133.Size = new System.Drawing.Size(94, 16);
+            this.label133.Size = new System.Drawing.Size(141, 25);
             this.label133.TabIndex = 10068;
             this.label133.Text = "Scale";
             // 
@@ -3558,9 +3754,10 @@ namespace Retro_Achievement_Tracker
             this.panel82.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.panel82.Controls.Add(this.label134);
             this.panel82.Controls.Add(this.alertsCustomAchievementYNumericUpDown);
-            this.panel82.Location = new System.Drawing.Point(2, 84);
+            this.panel82.Location = new System.Drawing.Point(3, 129);
+            this.panel82.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel82.Name = "panel82";
-            this.panel82.Size = new System.Drawing.Size(272, 23);
+            this.panel82.Size = new System.Drawing.Size(408, 35);
             this.panel82.TabIndex = 10061;
             // 
             // label134
@@ -3568,9 +3765,10 @@ namespace Retro_Achievement_Tracker
             this.label134.BackColor = System.Drawing.Color.Transparent;
             this.label134.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label134.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label134.Location = new System.Drawing.Point(3, 4);
+            this.label134.Location = new System.Drawing.Point(4, 6);
+            this.label134.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label134.Name = "label134";
-            this.label134.Size = new System.Drawing.Size(94, 16);
+            this.label134.Size = new System.Drawing.Size(141, 25);
             this.label134.TabIndex = 10067;
             this.label134.Text = "Y position";
             // 
@@ -3579,9 +3777,10 @@ namespace Retro_Achievement_Tracker
             this.alertsAchievementEnableCheckbox.AutoSize = true;
             this.alertsAchievementEnableCheckbox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.alertsAchievementEnableCheckbox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.alertsAchievementEnableCheckbox.Location = new System.Drawing.Point(11, 6);
+            this.alertsAchievementEnableCheckbox.Location = new System.Drawing.Point(16, 9);
+            this.alertsAchievementEnableCheckbox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsAchievementEnableCheckbox.Name = "alertsAchievementEnableCheckbox";
-            this.alertsAchievementEnableCheckbox.Size = new System.Drawing.Size(69, 20);
+            this.alertsAchievementEnableCheckbox.Size = new System.Drawing.Size(106, 29);
             this.alertsAchievementEnableCheckbox.TabIndex = 54;
             this.alertsAchievementEnableCheckbox.Text = "Enable";
             this.alertsAchievementEnableCheckbox.UseVisualStyleBackColor = true;
@@ -3603,9 +3802,10 @@ namespace Retro_Achievement_Tracker
             this.alertsCustomMasteryPanel.Controls.Add(this.panel96);
             this.alertsCustomMasteryPanel.Controls.Add(this.panel97);
             this.alertsCustomMasteryPanel.Controls.Add(this.panel98);
-            this.alertsCustomMasteryPanel.Location = new System.Drawing.Point(3, 32);
+            this.alertsCustomMasteryPanel.Location = new System.Drawing.Point(4, 49);
+            this.alertsCustomMasteryPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsCustomMasteryPanel.Name = "alertsCustomMasteryPanel";
-            this.alertsCustomMasteryPanel.Size = new System.Drawing.Size(279, 294);
+            this.alertsCustomMasteryPanel.Size = new System.Drawing.Size(418, 452);
             this.alertsCustomMasteryPanel.TabIndex = 10083;
             // 
             // panel89
@@ -3613,9 +3813,10 @@ namespace Retro_Achievement_Tracker
             this.panel89.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.panel89.Controls.Add(this.label6);
             this.panel89.Controls.Add(this.alertsCustomMasteryAnimationOutComboBox);
-            this.panel89.Location = new System.Drawing.Point(2, 238);
+            this.panel89.Location = new System.Drawing.Point(3, 366);
+            this.panel89.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel89.Name = "panel89";
-            this.panel89.Size = new System.Drawing.Size(272, 23);
+            this.panel89.Size = new System.Drawing.Size(408, 35);
             this.panel89.TabIndex = 10074;
             // 
             // label6
@@ -3623,9 +3824,10 @@ namespace Retro_Achievement_Tracker
             this.label6.BackColor = System.Drawing.Color.Transparent;
             this.label6.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label6.Location = new System.Drawing.Point(3, 4);
+            this.label6.Location = new System.Drawing.Point(4, 6);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(159, 16);
+            this.label6.Size = new System.Drawing.Size(238, 25);
             this.label6.TabIndex = 10069;
             this.label6.Text = "Animate Out Direction";
             // 
@@ -3634,9 +3836,10 @@ namespace Retro_Achievement_Tracker
             this.panel90.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.panel90.Controls.Add(this.label7);
             this.panel90.Controls.Add(this.alertsCustomMasteryAnimationInComboBox);
-            this.panel90.Location = new System.Drawing.Point(2, 172);
+            this.panel90.Location = new System.Drawing.Point(3, 265);
+            this.panel90.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel90.Name = "panel90";
-            this.panel90.Size = new System.Drawing.Size(272, 23);
+            this.panel90.Size = new System.Drawing.Size(408, 35);
             this.panel90.TabIndex = 10071;
             // 
             // label7
@@ -3644,9 +3847,10 @@ namespace Retro_Achievement_Tracker
             this.label7.BackColor = System.Drawing.Color.Transparent;
             this.label7.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label7.Location = new System.Drawing.Point(3, 4);
+            this.label7.Location = new System.Drawing.Point(4, 6);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(150, 16);
+            this.label7.Size = new System.Drawing.Size(225, 25);
             this.label7.TabIndex = 10069;
             this.label7.Text = "Animate In Direction";
             // 
@@ -3655,9 +3859,10 @@ namespace Retro_Achievement_Tracker
             this.panel91.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.panel91.Controls.Add(this.label8);
             this.panel91.Controls.Add(this.alertsCustomMasteryOutSpeedUpDown);
-            this.panel91.Location = new System.Drawing.Point(2, 216);
+            this.panel91.Location = new System.Drawing.Point(3, 332);
+            this.panel91.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel91.Name = "panel91";
-            this.panel91.Size = new System.Drawing.Size(272, 23);
+            this.panel91.Size = new System.Drawing.Size(408, 35);
             this.panel91.TabIndex = 10073;
             // 
             // label8
@@ -3665,9 +3870,10 @@ namespace Retro_Achievement_Tracker
             this.label8.BackColor = System.Drawing.Color.Transparent;
             this.label8.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label8.Location = new System.Drawing.Point(3, 4);
+            this.label8.Location = new System.Drawing.Point(4, 6);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(150, 16);
+            this.label8.Size = new System.Drawing.Size(225, 25);
             this.label8.TabIndex = 10069;
             this.label8.Text = "Animate Out Duration";
             // 
@@ -3676,9 +3882,10 @@ namespace Retro_Achievement_Tracker
             this.panel92.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.panel92.Controls.Add(this.label11);
             this.panel92.Controls.Add(this.alertsCustomMasteryInSpeedUpDown);
-            this.panel92.Location = new System.Drawing.Point(2, 150);
+            this.panel92.Location = new System.Drawing.Point(3, 231);
+            this.panel92.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel92.Name = "panel92";
-            this.panel92.Size = new System.Drawing.Size(272, 23);
+            this.panel92.Size = new System.Drawing.Size(408, 35);
             this.panel92.TabIndex = 10070;
             // 
             // label11
@@ -3686,9 +3893,10 @@ namespace Retro_Achievement_Tracker
             this.label11.BackColor = System.Drawing.Color.Transparent;
             this.label11.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label11.Location = new System.Drawing.Point(3, 4);
+            this.label11.Location = new System.Drawing.Point(4, 6);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(150, 16);
+            this.label11.Size = new System.Drawing.Size(225, 25);
             this.label11.TabIndex = 10069;
             this.label11.Text = "Animate In Duration";
             // 
@@ -3697,9 +3905,10 @@ namespace Retro_Achievement_Tracker
             this.panel93.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.panel93.Controls.Add(this.label12);
             this.panel93.Controls.Add(this.alertsCustomMasteryOutNumericUpDown);
-            this.panel93.Location = new System.Drawing.Point(2, 194);
+            this.panel93.Location = new System.Drawing.Point(3, 298);
+            this.panel93.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel93.Name = "panel93";
-            this.panel93.Size = new System.Drawing.Size(272, 23);
+            this.panel93.Size = new System.Drawing.Size(408, 35);
             this.panel93.TabIndex = 10072;
             // 
             // label12
@@ -3707,9 +3916,10 @@ namespace Retro_Achievement_Tracker
             this.label12.BackColor = System.Drawing.Color.Transparent;
             this.label12.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label12.Location = new System.Drawing.Point(3, 4);
+            this.label12.Location = new System.Drawing.Point(4, 6);
+            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(150, 16);
+            this.label12.Size = new System.Drawing.Size(225, 25);
             this.label12.TabIndex = 10069;
             this.label12.Text = "Animate Out Time";
             // 
@@ -3718,9 +3928,10 @@ namespace Retro_Achievement_Tracker
             this.panel94.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.panel94.Controls.Add(this.label13);
             this.panel94.Controls.Add(this.label14);
-            this.panel94.Location = new System.Drawing.Point(2, 40);
+            this.panel94.Location = new System.Drawing.Point(3, 62);
+            this.panel94.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel94.Name = "panel94";
-            this.panel94.Size = new System.Drawing.Size(272, 23);
+            this.panel94.Size = new System.Drawing.Size(408, 35);
             this.panel94.TabIndex = 10079;
             // 
             // label13
@@ -3728,9 +3939,10 @@ namespace Retro_Achievement_Tracker
             this.label13.BackColor = System.Drawing.Color.Transparent;
             this.label13.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label13.Location = new System.Drawing.Point(3, 3);
+            this.label13.Location = new System.Drawing.Point(4, 5);
+            this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(50, 16);
+            this.label13.Size = new System.Drawing.Size(75, 25);
             this.label13.TabIndex = 10071;
             this.label13.Text = "Field";
             // 
@@ -3739,9 +3951,10 @@ namespace Retro_Achievement_Tracker
             this.label14.BackColor = System.Drawing.Color.Transparent;
             this.label14.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label14.Location = new System.Drawing.Point(186, 3);
+            this.label14.Location = new System.Drawing.Point(279, 5);
+            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(58, 16);
+            this.label14.Size = new System.Drawing.Size(87, 25);
             this.label14.TabIndex = 10073;
             this.label14.Text = "Value";
             // 
@@ -3750,18 +3963,20 @@ namespace Retro_Achievement_Tracker
             this.label139.BackColor = System.Drawing.Color.Transparent;
             this.label139.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label139.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label139.Location = new System.Drawing.Point(3, 3);
+            this.label139.Location = new System.Drawing.Point(4, 5);
+            this.label139.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label139.Name = "label139";
-            this.label139.Size = new System.Drawing.Size(152, 26);
+            this.label139.Size = new System.Drawing.Size(228, 40);
             this.label139.TabIndex = 10069;
             this.label139.Text = "Mastery";
             // 
             // pictureBox14
             // 
             this.pictureBox14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.pictureBox14.Location = new System.Drawing.Point(2, 32);
+            this.pictureBox14.Location = new System.Drawing.Point(3, 49);
+            this.pictureBox14.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox14.Name = "pictureBox14";
-            this.pictureBox14.Size = new System.Drawing.Size(265, 2);
+            this.pictureBox14.Size = new System.Drawing.Size(398, 3);
             this.pictureBox14.TabIndex = 10070;
             this.pictureBox14.TabStop = false;
             // 
@@ -3770,9 +3985,10 @@ namespace Retro_Achievement_Tracker
             this.panel95.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.panel95.Controls.Add(this.label140);
             this.panel95.Controls.Add(this.alertsCustomMasteryXNumericUpDown);
-            this.panel95.Location = new System.Drawing.Point(2, 62);
+            this.panel95.Location = new System.Drawing.Point(3, 95);
+            this.panel95.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel95.Name = "panel95";
-            this.panel95.Size = new System.Drawing.Size(272, 23);
+            this.panel95.Size = new System.Drawing.Size(408, 35);
             this.panel95.TabIndex = 10061;
             // 
             // label140
@@ -3780,9 +3996,10 @@ namespace Retro_Achievement_Tracker
             this.label140.BackColor = System.Drawing.Color.Transparent;
             this.label140.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label140.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label140.Location = new System.Drawing.Point(3, 3);
+            this.label140.Location = new System.Drawing.Point(4, 5);
+            this.label140.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label140.Name = "label140";
-            this.label140.Size = new System.Drawing.Size(94, 16);
+            this.label140.Size = new System.Drawing.Size(141, 25);
             this.label140.TabIndex = 10066;
             this.label140.Text = "X position";
             // 
@@ -3791,9 +4008,10 @@ namespace Retro_Achievement_Tracker
             this.panel96.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.panel96.Controls.Add(this.label141);
             this.panel96.Controls.Add(this.alertsCustomMasteryInNumericUpDown);
-            this.panel96.Location = new System.Drawing.Point(2, 128);
+            this.panel96.Location = new System.Drawing.Point(3, 197);
+            this.panel96.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel96.Name = "panel96";
-            this.panel96.Size = new System.Drawing.Size(272, 23);
+            this.panel96.Size = new System.Drawing.Size(408, 35);
             this.panel96.TabIndex = 10061;
             // 
             // label141
@@ -3801,9 +4019,10 @@ namespace Retro_Achievement_Tracker
             this.label141.BackColor = System.Drawing.Color.Transparent;
             this.label141.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label141.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label141.Location = new System.Drawing.Point(3, 4);
+            this.label141.Location = new System.Drawing.Point(4, 6);
+            this.label141.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label141.Name = "label141";
-            this.label141.Size = new System.Drawing.Size(150, 16);
+            this.label141.Size = new System.Drawing.Size(225, 25);
             this.label141.TabIndex = 10069;
             this.label141.Text = "Animate In Time";
             // 
@@ -3812,9 +4031,10 @@ namespace Retro_Achievement_Tracker
             this.panel97.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.panel97.Controls.Add(this.label142);
             this.panel97.Controls.Add(this.alertsCustomMasteryScaleNumericUpDown);
-            this.panel97.Location = new System.Drawing.Point(2, 106);
+            this.panel97.Location = new System.Drawing.Point(3, 163);
+            this.panel97.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel97.Name = "panel97";
-            this.panel97.Size = new System.Drawing.Size(272, 23);
+            this.panel97.Size = new System.Drawing.Size(408, 35);
             this.panel97.TabIndex = 10061;
             // 
             // label142
@@ -3822,9 +4042,10 @@ namespace Retro_Achievement_Tracker
             this.label142.BackColor = System.Drawing.Color.Transparent;
             this.label142.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label142.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label142.Location = new System.Drawing.Point(3, 4);
+            this.label142.Location = new System.Drawing.Point(4, 6);
+            this.label142.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label142.Name = "label142";
-            this.label142.Size = new System.Drawing.Size(94, 16);
+            this.label142.Size = new System.Drawing.Size(141, 25);
             this.label142.TabIndex = 10068;
             this.label142.Text = "Scale";
             // 
@@ -3833,9 +4054,10 @@ namespace Retro_Achievement_Tracker
             this.panel98.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.panel98.Controls.Add(this.label143);
             this.panel98.Controls.Add(this.alertsCustomMasteryYNumericUpDown);
-            this.panel98.Location = new System.Drawing.Point(2, 84);
+            this.panel98.Location = new System.Drawing.Point(3, 129);
+            this.panel98.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel98.Name = "panel98";
-            this.panel98.Size = new System.Drawing.Size(272, 23);
+            this.panel98.Size = new System.Drawing.Size(408, 35);
             this.panel98.TabIndex = 10061;
             // 
             // label143
@@ -3843,9 +4065,10 @@ namespace Retro_Achievement_Tracker
             this.label143.BackColor = System.Drawing.Color.Transparent;
             this.label143.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label143.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label143.Location = new System.Drawing.Point(3, 4);
+            this.label143.Location = new System.Drawing.Point(4, 6);
+            this.label143.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label143.Name = "label143";
-            this.label143.Size = new System.Drawing.Size(94, 16);
+            this.label143.Size = new System.Drawing.Size(141, 25);
             this.label143.TabIndex = 10067;
             this.label143.Text = "Y position";
             // 
@@ -3854,9 +4077,10 @@ namespace Retro_Achievement_Tracker
             this.alertsMasteryEnableCheckbox.AutoSize = true;
             this.alertsMasteryEnableCheckbox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.alertsMasteryEnableCheckbox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.alertsMasteryEnableCheckbox.Location = new System.Drawing.Point(11, 6);
+            this.alertsMasteryEnableCheckbox.Location = new System.Drawing.Point(16, 9);
+            this.alertsMasteryEnableCheckbox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsMasteryEnableCheckbox.Name = "alertsMasteryEnableCheckbox";
-            this.alertsMasteryEnableCheckbox.Size = new System.Drawing.Size(69, 20);
+            this.alertsMasteryEnableCheckbox.Size = new System.Drawing.Size(106, 29);
             this.alertsMasteryEnableCheckbox.TabIndex = 54;
             this.alertsMasteryEnableCheckbox.Text = "Enable";
             this.alertsMasteryEnableCheckbox.UseVisualStyleBackColor = true;
@@ -3874,9 +4098,10 @@ namespace Retro_Achievement_Tracker
             this.panel14.Controls.Add(this.userInfoMottoLabel);
             this.panel14.Controls.Add(this.userInfoRatioLabel);
             this.panel14.Controls.Add(this.pictureBox2);
-            this.panel14.Location = new System.Drawing.Point(296, 184);
+            this.panel14.Location = new System.Drawing.Point(444, 283);
+            this.panel14.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel14.Name = "panel14";
-            this.panel14.Size = new System.Drawing.Size(468, 181);
+            this.panel14.Size = new System.Drawing.Size(702, 278);
             this.panel14.TabIndex = 10079;
             // 
             // userInfoUsernameLabel
@@ -3884,9 +4109,10 @@ namespace Retro_Achievement_Tracker
             this.userInfoUsernameLabel.BackColor = System.Drawing.Color.Transparent;
             this.userInfoUsernameLabel.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userInfoUsernameLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.userInfoUsernameLabel.Location = new System.Drawing.Point(3, 3);
+            this.userInfoUsernameLabel.Location = new System.Drawing.Point(4, 5);
+            this.userInfoUsernameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.userInfoUsernameLabel.Name = "userInfoUsernameLabel";
-            this.userInfoUsernameLabel.Size = new System.Drawing.Size(459, 26);
+            this.userInfoUsernameLabel.Size = new System.Drawing.Size(688, 40);
             this.userInfoUsernameLabel.TabIndex = 10058;
             this.userInfoUsernameLabel.Text = "Username";
             // 
@@ -3895,9 +4121,10 @@ namespace Retro_Achievement_Tracker
             this.userInfoRankLabel.BackColor = System.Drawing.Color.Transparent;
             this.userInfoRankLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userInfoRankLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.userInfoRankLabel.Location = new System.Drawing.Point(6, 78);
+            this.userInfoRankLabel.Location = new System.Drawing.Point(9, 120);
+            this.userInfoRankLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.userInfoRankLabel.Name = "userInfoRankLabel";
-            this.userInfoRankLabel.Size = new System.Drawing.Size(202, 16);
+            this.userInfoRankLabel.Size = new System.Drawing.Size(303, 25);
             this.userInfoRankLabel.TabIndex = 10054;
             this.userInfoRankLabel.Text = "Site Rank: 15000";
             // 
@@ -3906,9 +4133,10 @@ namespace Retro_Achievement_Tracker
             this.userInfoPointsLabel.BackColor = System.Drawing.Color.Transparent;
             this.userInfoPointsLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userInfoPointsLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.userInfoPointsLabel.Location = new System.Drawing.Point(6, 62);
+            this.userInfoPointsLabel.Location = new System.Drawing.Point(9, 95);
+            this.userInfoPointsLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.userInfoPointsLabel.Name = "userInfoPointsLabel";
-            this.userInfoPointsLabel.Size = new System.Drawing.Size(187, 16);
+            this.userInfoPointsLabel.Size = new System.Drawing.Size(280, 25);
             this.userInfoPointsLabel.TabIndex = 10055;
             this.userInfoPointsLabel.Text = "Hardcore Points: 348897";
             // 
@@ -3917,9 +4145,10 @@ namespace Retro_Achievement_Tracker
             this.label37.BackColor = System.Drawing.Color.Transparent;
             this.label37.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label37.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label37.Location = new System.Drawing.Point(6, 94);
+            this.label37.Location = new System.Drawing.Point(9, 145);
+            this.label37.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(94, 16);
+            this.label37.Size = new System.Drawing.Size(141, 25);
             this.label37.TabIndex = 10075;
             this.label37.Text = "Retro Ratio:";
             // 
@@ -3928,9 +4157,10 @@ namespace Retro_Achievement_Tracker
             this.userInfoTruePointsLabel.BackColor = System.Drawing.Color.Transparent;
             this.userInfoTruePointsLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userInfoTruePointsLabel.ForeColor = System.Drawing.Color.White;
-            this.userInfoTruePointsLabel.Location = new System.Drawing.Point(194, 62);
+            this.userInfoTruePointsLabel.Location = new System.Drawing.Point(291, 95);
+            this.userInfoTruePointsLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.userInfoTruePointsLabel.Name = "userInfoTruePointsLabel";
-            this.userInfoTruePointsLabel.Size = new System.Drawing.Size(85, 16);
+            this.userInfoTruePointsLabel.Size = new System.Drawing.Size(128, 25);
             this.userInfoTruePointsLabel.TabIndex = 10056;
             this.userInfoTruePointsLabel.Text = "(10019920)";
             // 
@@ -3940,11 +4170,11 @@ namespace Retro_Achievement_Tracker
             this.userInfoMottoLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.userInfoMottoLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userInfoMottoLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.userInfoMottoLabel.Location = new System.Drawing.Point(6, 37);
-            this.userInfoMottoLabel.Margin = new System.Windows.Forms.Padding(3);
+            this.userInfoMottoLabel.Location = new System.Drawing.Point(9, 57);
+            this.userInfoMottoLabel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.userInfoMottoLabel.Name = "userInfoMottoLabel";
-            this.userInfoMottoLabel.Padding = new System.Windows.Forms.Padding(3);
-            this.userInfoMottoLabel.Size = new System.Drawing.Size(158, 22);
+            this.userInfoMottoLabel.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.userInfoMottoLabel.Size = new System.Drawing.Size(240, 35);
             this.userInfoMottoLabel.TabIndex = 10074;
             this.userInfoMottoLabel.Text = "twitch.tv/RetroS3xual";
             // 
@@ -3953,18 +4183,20 @@ namespace Retro_Achievement_Tracker
             this.userInfoRatioLabel.BackColor = System.Drawing.Color.Transparent;
             this.userInfoRatioLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userInfoRatioLabel.ForeColor = System.Drawing.Color.White;
-            this.userInfoRatioLabel.Location = new System.Drawing.Point(97, 94);
+            this.userInfoRatioLabel.Location = new System.Drawing.Point(146, 145);
+            this.userInfoRatioLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.userInfoRatioLabel.Name = "userInfoRatioLabel";
-            this.userInfoRatioLabel.Size = new System.Drawing.Size(73, 16);
+            this.userInfoRatioLabel.Size = new System.Drawing.Size(110, 25);
             this.userInfoRatioLabel.TabIndex = 10057;
             this.userInfoRatioLabel.Text = "3.62";
             // 
             // pictureBox2
             // 
             this.pictureBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.pictureBox2.Location = new System.Drawing.Point(2, 32);
+            this.pictureBox2.Location = new System.Drawing.Point(3, 49);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(460, 2);
+            this.pictureBox2.Size = new System.Drawing.Size(690, 3);
             this.pictureBox2.TabIndex = 10059;
             this.pictureBox2.TabStop = false;
             // 
@@ -3979,9 +4211,10 @@ namespace Retro_Achievement_Tracker
             this.panel21.Controls.Add(this.panel13);
             this.panel21.Controls.Add(this.panel12);
             this.panel21.Controls.Add(this.panel11);
-            this.panel21.Location = new System.Drawing.Point(4, 3);
+            this.panel21.Location = new System.Drawing.Point(6, 5);
+            this.panel21.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel21.Name = "panel21";
-            this.panel21.Size = new System.Drawing.Size(287, 158);
+            this.panel21.Size = new System.Drawing.Size(430, 243);
             this.panel21.TabIndex = 10078;
             // 
             // panel22
@@ -3990,9 +4223,10 @@ namespace Retro_Achievement_Tracker
             this.panel22.Controls.Add(this.label29);
             this.panel22.Controls.Add(this.label32);
             this.panel22.Controls.Add(this.label30);
-            this.panel22.Location = new System.Drawing.Point(2, 40);
+            this.panel22.Location = new System.Drawing.Point(3, 62);
+            this.panel22.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel22.Name = "panel22";
-            this.panel22.Size = new System.Drawing.Size(278, 23);
+            this.panel22.Size = new System.Drawing.Size(417, 35);
             this.panel22.TabIndex = 10079;
             // 
             // label29
@@ -4000,9 +4234,10 @@ namespace Retro_Achievement_Tracker
             this.label29.BackColor = System.Drawing.Color.Transparent;
             this.label29.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label29.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label29.Location = new System.Drawing.Point(3, 3);
+            this.label29.Location = new System.Drawing.Point(4, 5);
+            this.label29.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(50, 16);
+            this.label29.Size = new System.Drawing.Size(75, 25);
             this.label29.TabIndex = 10071;
             this.label29.Text = "Field";
             // 
@@ -4011,9 +4246,10 @@ namespace Retro_Achievement_Tracker
             this.label32.BackColor = System.Drawing.Color.Transparent;
             this.label32.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label32.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label32.Location = new System.Drawing.Point(113, 3);
+            this.label32.Location = new System.Drawing.Point(170, 5);
+            this.label32.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(102, 16);
+            this.label32.Size = new System.Drawing.Size(153, 25);
             this.label32.TabIndex = 10073;
             this.label32.Text = "Display Text";
             // 
@@ -4022,9 +4258,10 @@ namespace Retro_Achievement_Tracker
             this.label30.BackColor = System.Drawing.Color.Transparent;
             this.label30.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label30.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label30.Location = new System.Drawing.Point(221, 3);
+            this.label30.Location = new System.Drawing.Point(332, 5);
+            this.label30.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(61, 16);
+            this.label30.Size = new System.Drawing.Size(92, 25);
             this.label30.TabIndex = 10072;
             this.label30.Text = "Enabled";
             // 
@@ -4033,18 +4270,20 @@ namespace Retro_Achievement_Tracker
             this.label28.BackColor = System.Drawing.Color.Transparent;
             this.label28.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label28.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label28.Location = new System.Drawing.Point(3, 3);
+            this.label28.Location = new System.Drawing.Point(4, 5);
+            this.label28.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(190, 26);
+            this.label28.Size = new System.Drawing.Size(285, 40);
             this.label28.TabIndex = 10069;
             this.label28.Text = "Field Overrides";
             // 
             // pictureBox4
             // 
             this.pictureBox4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.pictureBox4.Location = new System.Drawing.Point(2, 32);
+            this.pictureBox4.Location = new System.Drawing.Point(3, 49);
+            this.pictureBox4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(275, 2);
+            this.pictureBox4.Size = new System.Drawing.Size(412, 3);
             this.pictureBox4.TabIndex = 10070;
             this.pictureBox4.TabStop = false;
             // 
@@ -4054,9 +4293,10 @@ namespace Retro_Achievement_Tracker
             this.panel10.Controls.Add(this.label31);
             this.panel10.Controls.Add(this.userInfoRankCheckBox);
             this.panel10.Controls.Add(this.userInfoRankTextBox);
-            this.panel10.Location = new System.Drawing.Point(2, 62);
+            this.panel10.Location = new System.Drawing.Point(3, 95);
+            this.panel10.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(278, 23);
+            this.panel10.Size = new System.Drawing.Size(417, 35);
             this.panel10.TabIndex = 10061;
             // 
             // label31
@@ -4064,9 +4304,10 @@ namespace Retro_Achievement_Tracker
             this.label31.BackColor = System.Drawing.Color.Transparent;
             this.label31.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label31.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label31.Location = new System.Drawing.Point(3, 3);
+            this.label31.Location = new System.Drawing.Point(4, 5);
+            this.label31.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(94, 16);
+            this.label31.Size = new System.Drawing.Size(141, 25);
             this.label31.TabIndex = 10066;
             this.label31.Text = "Rank";
             // 
@@ -4076,9 +4317,10 @@ namespace Retro_Achievement_Tracker
             this.panel13.Controls.Add(this.label35);
             this.panel13.Controls.Add(this.userInfoRatioCheckBox);
             this.panel13.Controls.Add(this.userInfoRatioTextBox);
-            this.panel13.Location = new System.Drawing.Point(2, 128);
+            this.panel13.Location = new System.Drawing.Point(3, 197);
+            this.panel13.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(278, 23);
+            this.panel13.Size = new System.Drawing.Size(417, 35);
             this.panel13.TabIndex = 10061;
             // 
             // label35
@@ -4086,9 +4328,10 @@ namespace Retro_Achievement_Tracker
             this.label35.BackColor = System.Drawing.Color.Transparent;
             this.label35.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label35.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label35.Location = new System.Drawing.Point(3, 4);
+            this.label35.Location = new System.Drawing.Point(4, 6);
+            this.label35.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(94, 16);
+            this.label35.Size = new System.Drawing.Size(141, 25);
             this.label35.TabIndex = 10069;
             this.label35.Text = "Retro Ratio";
             // 
@@ -4098,9 +4341,10 @@ namespace Retro_Achievement_Tracker
             this.panel12.Controls.Add(this.label34);
             this.panel12.Controls.Add(this.userInfoTruePointsTextBox);
             this.panel12.Controls.Add(this.userInfoTruePointsCheckBox);
-            this.panel12.Location = new System.Drawing.Point(2, 106);
+            this.panel12.Location = new System.Drawing.Point(3, 163);
+            this.panel12.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(278, 23);
+            this.panel12.Size = new System.Drawing.Size(417, 35);
             this.panel12.TabIndex = 10061;
             // 
             // label34
@@ -4108,9 +4352,10 @@ namespace Retro_Achievement_Tracker
             this.label34.BackColor = System.Drawing.Color.Transparent;
             this.label34.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label34.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label34.Location = new System.Drawing.Point(3, 4);
+            this.label34.Location = new System.Drawing.Point(4, 6);
+            this.label34.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(94, 16);
+            this.label34.Size = new System.Drawing.Size(141, 25);
             this.label34.TabIndex = 10068;
             this.label34.Text = "True Points";
             // 
@@ -4120,9 +4365,10 @@ namespace Retro_Achievement_Tracker
             this.panel11.Controls.Add(this.label33);
             this.panel11.Controls.Add(this.userInfoPointsTextBox);
             this.panel11.Controls.Add(this.userInfoPointsCheckBox);
-            this.panel11.Location = new System.Drawing.Point(2, 84);
+            this.panel11.Location = new System.Drawing.Point(3, 129);
+            this.panel11.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(278, 23);
+            this.panel11.Size = new System.Drawing.Size(417, 35);
             this.panel11.TabIndex = 10061;
             // 
             // label33
@@ -4130,9 +4376,10 @@ namespace Retro_Achievement_Tracker
             this.label33.BackColor = System.Drawing.Color.Transparent;
             this.label33.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label33.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label33.Location = new System.Drawing.Point(3, 4);
+            this.label33.Location = new System.Drawing.Point(4, 6);
+            this.label33.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(94, 16);
+            this.label33.Size = new System.Drawing.Size(141, 25);
             this.label33.TabIndex = 10067;
             this.label33.Text = "Points";
             // 
@@ -4149,9 +4396,10 @@ namespace Retro_Achievement_Tracker
             this.panel20.Controls.Add(this.panel6);
             this.panel20.Controls.Add(this.panel7);
             this.panel20.Controls.Add(this.userInfoValuesOutlinePanel);
-            this.panel20.Location = new System.Drawing.Point(296, 3);
+            this.panel20.Location = new System.Drawing.Point(444, 5);
+            this.panel20.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel20.Name = "panel20";
-            this.panel20.Size = new System.Drawing.Size(468, 176);
+            this.panel20.Size = new System.Drawing.Size(702, 271);
             this.panel20.TabIndex = 10077;
             // 
             // label2
@@ -4159,9 +4407,10 @@ namespace Retro_Achievement_Tracker
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label2.Location = new System.Drawing.Point(3, 3);
+            this.label2.Location = new System.Drawing.Point(4, 5);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(243, 26);
+            this.label2.Size = new System.Drawing.Size(364, 40);
             this.label2.TabIndex = 10062;
             this.label2.Text = "Window/Font Settings";
             // 
@@ -4173,9 +4422,10 @@ namespace Retro_Achievement_Tracker
             this.panel4.Controls.Add(this.label9);
             this.panel4.Controls.Add(this.label25);
             this.panel4.Controls.Add(this.label15);
-            this.panel4.Location = new System.Drawing.Point(2, 40);
+            this.panel4.Location = new System.Drawing.Point(3, 62);
+            this.panel4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(463, 23);
+            this.panel4.Size = new System.Drawing.Size(694, 35);
             this.panel4.TabIndex = 10076;
             // 
             // userInfoAdvancedCheckBox
@@ -4187,9 +4437,10 @@ namespace Retro_Achievement_Tracker
             this.userInfoAdvancedCheckBox.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(118)))), ((int)(((byte)(118)))), ((int)(((byte)(118)))));
             this.userInfoAdvancedCheckBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userInfoAdvancedCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.userInfoAdvancedCheckBox.Location = new System.Drawing.Point(5, 2);
+            this.userInfoAdvancedCheckBox.Location = new System.Drawing.Point(8, 3);
+            this.userInfoAdvancedCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.userInfoAdvancedCheckBox.Name = "userInfoAdvancedCheckBox";
-            this.userInfoAdvancedCheckBox.Size = new System.Drawing.Size(91, 20);
+            this.userInfoAdvancedCheckBox.Size = new System.Drawing.Size(135, 29);
             this.userInfoAdvancedCheckBox.TabIndex = 10053;
             this.userInfoAdvancedCheckBox.Text = "Advanced";
             this.userInfoAdvancedCheckBox.UseVisualStyleBackColor = false;
@@ -4200,9 +4451,10 @@ namespace Retro_Achievement_Tracker
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label4.Location = new System.Drawing.Point(150, 3);
+            this.label4.Location = new System.Drawing.Point(225, 5);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(48, 16);
+            this.label4.Size = new System.Drawing.Size(72, 25);
             this.label4.TabIndex = 10065;
             this.label4.Text = "Color";
             // 
@@ -4211,9 +4463,10 @@ namespace Retro_Achievement_Tracker
             this.label9.BackColor = System.Drawing.Color.Transparent;
             this.label9.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label9.Location = new System.Drawing.Point(194, 3);
+            this.label9.Location = new System.Drawing.Point(291, 5);
+            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(50, 16);
+            this.label9.Size = new System.Drawing.Size(75, 25);
             this.label9.TabIndex = 10066;
             this.label9.Text = "Font";
             // 
@@ -4222,9 +4475,10 @@ namespace Retro_Achievement_Tracker
             this.label25.BackColor = System.Drawing.Color.Transparent;
             this.label25.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label25.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label25.Location = new System.Drawing.Point(349, 3);
+            this.label25.Location = new System.Drawing.Point(524, 5);
+            this.label25.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(41, 16);
+            this.label25.Size = new System.Drawing.Size(62, 25);
             this.label25.TabIndex = 10068;
             this.label25.Text = "Size";
             // 
@@ -4233,9 +4487,10 @@ namespace Retro_Achievement_Tracker
             this.label15.BackColor = System.Drawing.Color.Transparent;
             this.label15.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label15.Location = new System.Drawing.Point(396, 3);
+            this.label15.Location = new System.Drawing.Point(594, 5);
+            this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(59, 16);
+            this.label15.Size = new System.Drawing.Size(88, 25);
             this.label15.TabIndex = 10067;
             this.label15.Text = "Enabled";
             // 
@@ -4245,9 +4500,10 @@ namespace Retro_Achievement_Tracker
             this.userInfoValuesPanel.Controls.Add(this.label26);
             this.userInfoValuesPanel.Controls.Add(this.userInfoValuesFontColorPictureBox);
             this.userInfoValuesPanel.Controls.Add(this.userInfoValuesFontComboBox);
-            this.userInfoValuesPanel.Location = new System.Drawing.Point(2, 106);
+            this.userInfoValuesPanel.Location = new System.Drawing.Point(3, 163);
+            this.userInfoValuesPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.userInfoValuesPanel.Name = "userInfoValuesPanel";
-            this.userInfoValuesPanel.Size = new System.Drawing.Size(463, 23);
+            this.userInfoValuesPanel.Size = new System.Drawing.Size(694, 35);
             this.userInfoValuesPanel.TabIndex = 10061;
             // 
             // label26
@@ -4255,9 +4511,10 @@ namespace Retro_Achievement_Tracker
             this.label26.BackColor = System.Drawing.Color.Transparent;
             this.label26.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label26.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label26.Location = new System.Drawing.Point(3, 4);
+            this.label26.Location = new System.Drawing.Point(4, 6);
+            this.label26.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(144, 16);
+            this.label26.Size = new System.Drawing.Size(216, 25);
             this.label26.TabIndex = 10066;
             this.label26.Text = "Values";
             // 
@@ -4265,9 +4522,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.userInfoValuesFontColorPictureBox.BackColor = System.Drawing.Color.White;
             this.userInfoValuesFontColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.userInfoValuesFontColorPictureBox.Location = new System.Drawing.Point(153, 3);
+            this.userInfoValuesFontColorPictureBox.Location = new System.Drawing.Point(230, 5);
+            this.userInfoValuesFontColorPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.userInfoValuesFontColorPictureBox.Name = "userInfoValuesFontColorPictureBox";
-            this.userInfoValuesFontColorPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.userInfoValuesFontColorPictureBox.Size = new System.Drawing.Size(22, 22);
             this.userInfoValuesFontColorPictureBox.TabIndex = 45;
             this.userInfoValuesFontColorPictureBox.TabStop = false;
             this.userInfoValuesFontColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
@@ -4278,18 +4536,20 @@ namespace Retro_Achievement_Tracker
             this.userInfoValuesFontComboBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userInfoValuesFontComboBox.ForeColor = System.Drawing.Color.White;
             this.userInfoValuesFontComboBox.FormattingEnabled = true;
-            this.userInfoValuesFontComboBox.Location = new System.Drawing.Point(193, 2);
+            this.userInfoValuesFontComboBox.Location = new System.Drawing.Point(290, 3);
+            this.userInfoValuesFontComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.userInfoValuesFontComboBox.Name = "userInfoValuesFontComboBox";
-            this.userInfoValuesFontComboBox.Size = new System.Drawing.Size(202, 21);
+            this.userInfoValuesFontComboBox.Size = new System.Drawing.Size(301, 28);
             this.userInfoValuesFontComboBox.TabIndex = 45;
             this.userInfoValuesFontComboBox.SelectedIndexChanged += new System.EventHandler(this.FontFamilyComboBox_SelectedIndexChanged);
             // 
             // pictureBox3
             // 
             this.pictureBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.pictureBox3.Location = new System.Drawing.Point(2, 32);
+            this.pictureBox3.Location = new System.Drawing.Point(3, 49);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(460, 2);
+            this.pictureBox3.Size = new System.Drawing.Size(690, 3);
             this.pictureBox3.TabIndex = 10063;
             this.pictureBox3.TabStop = false;
             // 
@@ -4298,18 +4558,20 @@ namespace Retro_Achievement_Tracker
             this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.panel5.Controls.Add(this.userInfoBackgroundColorPictureBox);
             this.panel5.Controls.Add(this.label3);
-            this.panel5.Location = new System.Drawing.Point(2, 62);
+            this.panel5.Location = new System.Drawing.Point(3, 95);
+            this.panel5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(463, 23);
+            this.panel5.Size = new System.Drawing.Size(694, 35);
             this.panel5.TabIndex = 10061;
             // 
             // userInfoBackgroundColorPictureBox
             // 
             this.userInfoBackgroundColorPictureBox.BackColor = System.Drawing.Color.White;
             this.userInfoBackgroundColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.userInfoBackgroundColorPictureBox.Location = new System.Drawing.Point(153, 3);
+            this.userInfoBackgroundColorPictureBox.Location = new System.Drawing.Point(230, 5);
+            this.userInfoBackgroundColorPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.userInfoBackgroundColorPictureBox.Name = "userInfoBackgroundColorPictureBox";
-            this.userInfoBackgroundColorPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.userInfoBackgroundColorPictureBox.Size = new System.Drawing.Size(22, 22);
             this.userInfoBackgroundColorPictureBox.TabIndex = 42;
             this.userInfoBackgroundColorPictureBox.TabStop = false;
             this.userInfoBackgroundColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
@@ -4319,9 +4581,10 @@ namespace Retro_Achievement_Tracker
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label3.Location = new System.Drawing.Point(3, 3);
+            this.label3.Location = new System.Drawing.Point(4, 5);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(144, 16);
+            this.label3.Size = new System.Drawing.Size(216, 25);
             this.label3.TabIndex = 10064;
             this.label3.Text = "Window Background";
             // 
@@ -4331,9 +4594,10 @@ namespace Retro_Achievement_Tracker
             this.panel6.Controls.Add(this.userInfoNamesLabel);
             this.panel6.Controls.Add(this.userInfoNamesFontColorPictureBox);
             this.panel6.Controls.Add(this.userInfoNamesFontComboBox);
-            this.panel6.Location = new System.Drawing.Point(2, 84);
+            this.panel6.Location = new System.Drawing.Point(3, 129);
+            this.panel6.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(463, 23);
+            this.panel6.Size = new System.Drawing.Size(694, 35);
             this.panel6.TabIndex = 10061;
             // 
             // userInfoNamesLabel
@@ -4341,9 +4605,10 @@ namespace Retro_Achievement_Tracker
             this.userInfoNamesLabel.BackColor = System.Drawing.Color.Transparent;
             this.userInfoNamesLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userInfoNamesLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.userInfoNamesLabel.Location = new System.Drawing.Point(3, 4);
+            this.userInfoNamesLabel.Location = new System.Drawing.Point(4, 6);
+            this.userInfoNamesLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.userInfoNamesLabel.Name = "userInfoNamesLabel";
-            this.userInfoNamesLabel.Size = new System.Drawing.Size(144, 16);
+            this.userInfoNamesLabel.Size = new System.Drawing.Size(216, 25);
             this.userInfoNamesLabel.TabIndex = 10065;
             this.userInfoNamesLabel.Text = "Names";
             // 
@@ -4351,9 +4616,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.userInfoNamesFontColorPictureBox.BackColor = System.Drawing.Color.White;
             this.userInfoNamesFontColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.userInfoNamesFontColorPictureBox.Location = new System.Drawing.Point(153, 4);
+            this.userInfoNamesFontColorPictureBox.Location = new System.Drawing.Point(230, 6);
+            this.userInfoNamesFontColorPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.userInfoNamesFontColorPictureBox.Name = "userInfoNamesFontColorPictureBox";
-            this.userInfoNamesFontColorPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.userInfoNamesFontColorPictureBox.Size = new System.Drawing.Size(22, 22);
             this.userInfoNamesFontColorPictureBox.TabIndex = 45;
             this.userInfoNamesFontColorPictureBox.TabStop = false;
             this.userInfoNamesFontColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
@@ -4364,9 +4630,10 @@ namespace Retro_Achievement_Tracker
             this.userInfoNamesFontComboBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userInfoNamesFontComboBox.ForeColor = System.Drawing.Color.White;
             this.userInfoNamesFontComboBox.FormattingEnabled = true;
-            this.userInfoNamesFontComboBox.Location = new System.Drawing.Point(193, 2);
+            this.userInfoNamesFontComboBox.Location = new System.Drawing.Point(290, 3);
+            this.userInfoNamesFontComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.userInfoNamesFontComboBox.Name = "userInfoNamesFontComboBox";
-            this.userInfoNamesFontComboBox.Size = new System.Drawing.Size(202, 21);
+            this.userInfoNamesFontComboBox.Size = new System.Drawing.Size(301, 28);
             this.userInfoNamesFontComboBox.TabIndex = 45;
             this.userInfoNamesFontComboBox.SelectedIndexChanged += new System.EventHandler(this.FontFamilyComboBox_SelectedIndexChanged);
             // 
@@ -4377,9 +4644,10 @@ namespace Retro_Achievement_Tracker
             this.panel7.Controls.Add(this.userInfoNamesOutlineCheckBox);
             this.panel7.Controls.Add(this.userInfoNamesOutlineLabel);
             this.panel7.Controls.Add(this.userInfoNamesFontOutlineColorPictureBox);
-            this.panel7.Location = new System.Drawing.Point(2, 128);
+            this.panel7.Location = new System.Drawing.Point(3, 197);
+            this.panel7.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(463, 23);
+            this.panel7.Size = new System.Drawing.Size(694, 35);
             this.panel7.TabIndex = 10061;
             // 
             // userInfoNamesFontOutlineNumericUpDown
@@ -4388,7 +4656,8 @@ namespace Retro_Achievement_Tracker
             this.userInfoNamesFontOutlineNumericUpDown.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.userInfoNamesFontOutlineNumericUpDown.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userInfoNamesFontOutlineNumericUpDown.ForeColor = System.Drawing.Color.White;
-            this.userInfoNamesFontOutlineNumericUpDown.Location = new System.Drawing.Point(352, 4);
+            this.userInfoNamesFontOutlineNumericUpDown.Location = new System.Drawing.Point(528, 6);
+            this.userInfoNamesFontOutlineNumericUpDown.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.userInfoNamesFontOutlineNumericUpDown.Maximum = new decimal(new int[] {
             5,
             0,
@@ -4400,7 +4669,7 @@ namespace Retro_Achievement_Tracker
             0,
             0});
             this.userInfoNamesFontOutlineNumericUpDown.Name = "userInfoNamesFontOutlineNumericUpDown";
-            this.userInfoNamesFontOutlineNumericUpDown.Size = new System.Drawing.Size(43, 17);
+            this.userInfoNamesFontOutlineNumericUpDown.Size = new System.Drawing.Size(64, 24);
             this.userInfoNamesFontOutlineNumericUpDown.TabIndex = 45;
             this.userInfoNamesFontOutlineNumericUpDown.Value = new decimal(new int[] {
             1,
@@ -4417,9 +4686,10 @@ namespace Retro_Achievement_Tracker
             this.userInfoNamesOutlineCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.userInfoNamesOutlineCheckBox.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userInfoNamesOutlineCheckBox.ForeColor = System.Drawing.Color.White;
-            this.userInfoNamesOutlineCheckBox.Location = new System.Drawing.Point(413, 5);
+            this.userInfoNamesOutlineCheckBox.Location = new System.Drawing.Point(620, 8);
+            this.userInfoNamesOutlineCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.userInfoNamesOutlineCheckBox.Name = "userInfoNamesOutlineCheckBox";
-            this.userInfoNamesOutlineCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.userInfoNamesOutlineCheckBox.Size = new System.Drawing.Size(22, 22);
             this.userInfoNamesOutlineCheckBox.TabIndex = 45;
             this.userInfoNamesOutlineCheckBox.UseVisualStyleBackColor = true;
             this.userInfoNamesOutlineCheckBox.CheckedChanged += new System.EventHandler(this.FeatureEnablementCheckBox_CheckedChanged);
@@ -4429,9 +4699,10 @@ namespace Retro_Achievement_Tracker
             this.userInfoNamesOutlineLabel.BackColor = System.Drawing.Color.Transparent;
             this.userInfoNamesOutlineLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userInfoNamesOutlineLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.userInfoNamesOutlineLabel.Location = new System.Drawing.Point(3, 3);
+            this.userInfoNamesOutlineLabel.Location = new System.Drawing.Point(4, 5);
+            this.userInfoNamesOutlineLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.userInfoNamesOutlineLabel.Name = "userInfoNamesOutlineLabel";
-            this.userInfoNamesOutlineLabel.Size = new System.Drawing.Size(144, 16);
+            this.userInfoNamesOutlineLabel.Size = new System.Drawing.Size(216, 25);
             this.userInfoNamesOutlineLabel.TabIndex = 10066;
             this.userInfoNamesOutlineLabel.Text = "Names OutlineColor";
             // 
@@ -4439,9 +4710,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.userInfoNamesFontOutlineColorPictureBox.BackColor = System.Drawing.Color.White;
             this.userInfoNamesFontOutlineColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.userInfoNamesFontOutlineColorPictureBox.Location = new System.Drawing.Point(153, 3);
+            this.userInfoNamesFontOutlineColorPictureBox.Location = new System.Drawing.Point(230, 5);
+            this.userInfoNamesFontOutlineColorPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.userInfoNamesFontOutlineColorPictureBox.Name = "userInfoNamesFontOutlineColorPictureBox";
-            this.userInfoNamesFontOutlineColorPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.userInfoNamesFontOutlineColorPictureBox.Size = new System.Drawing.Size(22, 22);
             this.userInfoNamesFontOutlineColorPictureBox.TabIndex = 45;
             this.userInfoNamesFontOutlineColorPictureBox.TabStop = false;
             this.userInfoNamesFontOutlineColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
@@ -4453,9 +4725,10 @@ namespace Retro_Achievement_Tracker
             this.userInfoValuesOutlinePanel.Controls.Add(this.userInfoValuesFontOutlineColorPictureBox);
             this.userInfoValuesOutlinePanel.Controls.Add(this.userInfoValuesFontOutlineNumericUpDown);
             this.userInfoValuesOutlinePanel.Controls.Add(this.userInfoValuesOutlineCheckBox);
-            this.userInfoValuesOutlinePanel.Location = new System.Drawing.Point(2, 150);
+            this.userInfoValuesOutlinePanel.Location = new System.Drawing.Point(3, 231);
+            this.userInfoValuesOutlinePanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.userInfoValuesOutlinePanel.Name = "userInfoValuesOutlinePanel";
-            this.userInfoValuesOutlinePanel.Size = new System.Drawing.Size(463, 23);
+            this.userInfoValuesOutlinePanel.Size = new System.Drawing.Size(694, 35);
             this.userInfoValuesOutlinePanel.TabIndex = 10067;
             // 
             // label27
@@ -4463,9 +4736,10 @@ namespace Retro_Achievement_Tracker
             this.label27.BackColor = System.Drawing.Color.Transparent;
             this.label27.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label27.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label27.Location = new System.Drawing.Point(3, 4);
+            this.label27.Location = new System.Drawing.Point(4, 6);
+            this.label27.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(144, 16);
+            this.label27.Size = new System.Drawing.Size(216, 25);
             this.label27.TabIndex = 10066;
             this.label27.Text = "Values OutlineColor";
             // 
@@ -4473,9 +4747,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.userInfoValuesFontOutlineColorPictureBox.BackColor = System.Drawing.Color.White;
             this.userInfoValuesFontOutlineColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.userInfoValuesFontOutlineColorPictureBox.Location = new System.Drawing.Point(153, 4);
+            this.userInfoValuesFontOutlineColorPictureBox.Location = new System.Drawing.Point(230, 6);
+            this.userInfoValuesFontOutlineColorPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.userInfoValuesFontOutlineColorPictureBox.Name = "userInfoValuesFontOutlineColorPictureBox";
-            this.userInfoValuesFontOutlineColorPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.userInfoValuesFontOutlineColorPictureBox.Size = new System.Drawing.Size(22, 22);
             this.userInfoValuesFontOutlineColorPictureBox.TabIndex = 45;
             this.userInfoValuesFontOutlineColorPictureBox.TabStop = false;
             this.userInfoValuesFontOutlineColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
@@ -4486,7 +4761,8 @@ namespace Retro_Achievement_Tracker
             this.userInfoValuesFontOutlineNumericUpDown.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.userInfoValuesFontOutlineNumericUpDown.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userInfoValuesFontOutlineNumericUpDown.ForeColor = System.Drawing.Color.White;
-            this.userInfoValuesFontOutlineNumericUpDown.Location = new System.Drawing.Point(352, 4);
+            this.userInfoValuesFontOutlineNumericUpDown.Location = new System.Drawing.Point(528, 6);
+            this.userInfoValuesFontOutlineNumericUpDown.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.userInfoValuesFontOutlineNumericUpDown.Maximum = new decimal(new int[] {
             5,
             0,
@@ -4498,7 +4774,7 @@ namespace Retro_Achievement_Tracker
             0,
             0});
             this.userInfoValuesFontOutlineNumericUpDown.Name = "userInfoValuesFontOutlineNumericUpDown";
-            this.userInfoValuesFontOutlineNumericUpDown.Size = new System.Drawing.Size(43, 17);
+            this.userInfoValuesFontOutlineNumericUpDown.Size = new System.Drawing.Size(64, 24);
             this.userInfoValuesFontOutlineNumericUpDown.TabIndex = 45;
             this.userInfoValuesFontOutlineNumericUpDown.Value = new decimal(new int[] {
             1,
@@ -4515,9 +4791,10 @@ namespace Retro_Achievement_Tracker
             this.userInfoValuesOutlineCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.userInfoValuesOutlineCheckBox.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userInfoValuesOutlineCheckBox.ForeColor = System.Drawing.Color.White;
-            this.userInfoValuesOutlineCheckBox.Location = new System.Drawing.Point(413, 6);
+            this.userInfoValuesOutlineCheckBox.Location = new System.Drawing.Point(620, 9);
+            this.userInfoValuesOutlineCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.userInfoValuesOutlineCheckBox.Name = "userInfoValuesOutlineCheckBox";
-            this.userInfoValuesOutlineCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.userInfoValuesOutlineCheckBox.Size = new System.Drawing.Size(22, 22);
             this.userInfoValuesOutlineCheckBox.TabIndex = 45;
             this.userInfoValuesOutlineCheckBox.UseVisualStyleBackColor = true;
             this.userInfoValuesOutlineCheckBox.CheckedChanged += new System.EventHandler(this.FeatureEnablementCheckBox_CheckedChanged);
@@ -4532,9 +4809,10 @@ namespace Retro_Achievement_Tracker
             this.panel50.Controls.Add(this.gameInfoTitleLabel);
             this.panel50.Controls.Add(this.pictureBox8);
             this.panel50.Controls.Add(this.gameInfoPictureBox);
-            this.panel50.Location = new System.Drawing.Point(296, 184);
+            this.panel50.Location = new System.Drawing.Point(444, 283);
+            this.panel50.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel50.Name = "panel50";
-            this.panel50.Size = new System.Drawing.Size(468, 181);
+            this.panel50.Size = new System.Drawing.Size(702, 278);
             this.panel50.TabIndex = 10081;
             // 
             // panel119
@@ -4543,9 +4821,10 @@ namespace Retro_Achievement_Tracker
             this.panel119.Controls.Add(this.gameInfoGenreLabel);
             this.panel119.Controls.Add(this.label62);
             this.panel119.Controls.Add(this.label36);
-            this.panel119.Location = new System.Drawing.Point(109, 102);
+            this.panel119.Location = new System.Drawing.Point(164, 157);
+            this.panel119.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel119.Name = "panel119";
-            this.panel119.Size = new System.Drawing.Size(348, 25);
+            this.panel119.Size = new System.Drawing.Size(522, 38);
             this.panel119.TabIndex = 10073;
             // 
             // gameInfoGenreLabel
@@ -4553,9 +4832,10 @@ namespace Retro_Achievement_Tracker
             this.gameInfoGenreLabel.BackColor = System.Drawing.Color.Transparent;
             this.gameInfoGenreLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameInfoGenreLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
-            this.gameInfoGenreLabel.Location = new System.Drawing.Point(103, 5);
+            this.gameInfoGenreLabel.Location = new System.Drawing.Point(154, 8);
+            this.gameInfoGenreLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.gameInfoGenreLabel.Name = "gameInfoGenreLabel";
-            this.gameInfoGenreLabel.Size = new System.Drawing.Size(242, 16);
+            this.gameInfoGenreLabel.Size = new System.Drawing.Size(363, 25);
             this.gameInfoGenreLabel.TabIndex = 10066;
             this.gameInfoGenreLabel.UseMnemonic = false;
             // 
@@ -4564,9 +4844,10 @@ namespace Retro_Achievement_Tracker
             this.label62.BackColor = System.Drawing.Color.Transparent;
             this.label62.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label62.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label62.Location = new System.Drawing.Point(3, 5);
+            this.label62.Location = new System.Drawing.Point(4, 8);
+            this.label62.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label62.Name = "label62";
-            this.label62.Size = new System.Drawing.Size(94, 16);
+            this.label62.Size = new System.Drawing.Size(141, 25);
             this.label62.TabIndex = 10070;
             this.label62.Text = "Genre";
             // 
@@ -4575,9 +4856,10 @@ namespace Retro_Achievement_Tracker
             this.label36.BackColor = System.Drawing.Color.Transparent;
             this.label36.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label36.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
-            this.label36.Location = new System.Drawing.Point(135, 3);
+            this.label36.Location = new System.Drawing.Point(202, 5);
+            this.label36.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(210, 16);
+            this.label36.Size = new System.Drawing.Size(315, 25);
             this.label36.TabIndex = 10066;
             this.label36.UseMnemonic = false;
             // 
@@ -4586,9 +4868,10 @@ namespace Retro_Achievement_Tracker
             this.panel117.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.panel117.Controls.Add(this.label89);
             this.panel117.Controls.Add(this.gameInfoReleasedLabel);
-            this.panel117.Location = new System.Drawing.Point(109, 127);
+            this.panel117.Location = new System.Drawing.Point(164, 195);
+            this.panel117.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel117.Name = "panel117";
-            this.panel117.Size = new System.Drawing.Size(348, 25);
+            this.panel117.Size = new System.Drawing.Size(522, 38);
             this.panel117.TabIndex = 10072;
             // 
             // label89
@@ -4596,9 +4879,10 @@ namespace Retro_Achievement_Tracker
             this.label89.BackColor = System.Drawing.Color.Transparent;
             this.label89.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label89.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label89.Location = new System.Drawing.Point(3, 5);
+            this.label89.Location = new System.Drawing.Point(4, 8);
+            this.label89.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label89.Name = "label89";
-            this.label89.Size = new System.Drawing.Size(94, 16);
+            this.label89.Size = new System.Drawing.Size(141, 25);
             this.label89.TabIndex = 10070;
             this.label89.Text = "Released";
             // 
@@ -4607,9 +4891,10 @@ namespace Retro_Achievement_Tracker
             this.gameInfoReleasedLabel.BackColor = System.Drawing.Color.Transparent;
             this.gameInfoReleasedLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameInfoReleasedLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.gameInfoReleasedLabel.Location = new System.Drawing.Point(103, 5);
+            this.gameInfoReleasedLabel.Location = new System.Drawing.Point(154, 8);
+            this.gameInfoReleasedLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.gameInfoReleasedLabel.Name = "gameInfoReleasedLabel";
-            this.gameInfoReleasedLabel.Size = new System.Drawing.Size(242, 16);
+            this.gameInfoReleasedLabel.Size = new System.Drawing.Size(363, 25);
             this.gameInfoReleasedLabel.TabIndex = 10067;
             this.gameInfoReleasedLabel.UseMnemonic = false;
             // 
@@ -4618,9 +4903,10 @@ namespace Retro_Achievement_Tracker
             this.panel118.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.panel118.Controls.Add(this.label61);
             this.panel118.Controls.Add(this.gameInfoPublisherLabel);
-            this.panel118.Location = new System.Drawing.Point(109, 77);
+            this.panel118.Location = new System.Drawing.Point(164, 118);
+            this.panel118.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel118.Name = "panel118";
-            this.panel118.Size = new System.Drawing.Size(348, 25);
+            this.panel118.Size = new System.Drawing.Size(522, 38);
             this.panel118.TabIndex = 10073;
             // 
             // label61
@@ -4628,9 +4914,10 @@ namespace Retro_Achievement_Tracker
             this.label61.BackColor = System.Drawing.Color.Transparent;
             this.label61.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label61.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label61.Location = new System.Drawing.Point(3, 6);
+            this.label61.Location = new System.Drawing.Point(4, 9);
+            this.label61.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label61.Name = "label61";
-            this.label61.Size = new System.Drawing.Size(94, 16);
+            this.label61.Size = new System.Drawing.Size(141, 25);
             this.label61.TabIndex = 10069;
             this.label61.Text = "Publisher";
             // 
@@ -4639,9 +4926,10 @@ namespace Retro_Achievement_Tracker
             this.gameInfoPublisherLabel.BackColor = System.Drawing.Color.Transparent;
             this.gameInfoPublisherLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameInfoPublisherLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
-            this.gameInfoPublisherLabel.Location = new System.Drawing.Point(103, 6);
+            this.gameInfoPublisherLabel.Location = new System.Drawing.Point(154, 9);
+            this.gameInfoPublisherLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.gameInfoPublisherLabel.Name = "gameInfoPublisherLabel";
-            this.gameInfoPublisherLabel.Size = new System.Drawing.Size(242, 16);
+            this.gameInfoPublisherLabel.Size = new System.Drawing.Size(363, 25);
             this.gameInfoPublisherLabel.TabIndex = 10064;
             this.gameInfoPublisherLabel.UseMnemonic = false;
             // 
@@ -4650,9 +4938,10 @@ namespace Retro_Achievement_Tracker
             this.panel116.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.panel116.Controls.Add(this.label57);
             this.panel116.Controls.Add(this.gameInfoDeveloperLabel);
-            this.panel116.Location = new System.Drawing.Point(109, 52);
+            this.panel116.Location = new System.Drawing.Point(164, 80);
+            this.panel116.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel116.Name = "panel116";
-            this.panel116.Size = new System.Drawing.Size(348, 25);
+            this.panel116.Size = new System.Drawing.Size(522, 38);
             this.panel116.TabIndex = 10071;
             // 
             // label57
@@ -4660,9 +4949,10 @@ namespace Retro_Achievement_Tracker
             this.label57.BackColor = System.Drawing.Color.Transparent;
             this.label57.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label57.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label57.Location = new System.Drawing.Point(3, 3);
+            this.label57.Location = new System.Drawing.Point(4, 5);
+            this.label57.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label57.Name = "label57";
-            this.label57.Size = new System.Drawing.Size(94, 16);
+            this.label57.Size = new System.Drawing.Size(141, 25);
             this.label57.TabIndex = 10070;
             this.label57.Text = "Developer";
             // 
@@ -4671,9 +4961,10 @@ namespace Retro_Achievement_Tracker
             this.gameInfoDeveloperLabel.BackColor = System.Drawing.Color.Transparent;
             this.gameInfoDeveloperLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameInfoDeveloperLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
-            this.gameInfoDeveloperLabel.Location = new System.Drawing.Point(103, 3);
+            this.gameInfoDeveloperLabel.Location = new System.Drawing.Point(154, 5);
+            this.gameInfoDeveloperLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.gameInfoDeveloperLabel.Name = "gameInfoDeveloperLabel";
-            this.gameInfoDeveloperLabel.Size = new System.Drawing.Size(242, 16);
+            this.gameInfoDeveloperLabel.Size = new System.Drawing.Size(363, 25);
             this.gameInfoDeveloperLabel.TabIndex = 10063;
             this.gameInfoDeveloperLabel.UseMnemonic = false;
             // 
@@ -4682,9 +4973,10 @@ namespace Retro_Achievement_Tracker
             this.gameInfoTitleLabel.BackColor = System.Drawing.Color.Transparent;
             this.gameInfoTitleLabel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameInfoTitleLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.gameInfoTitleLabel.Location = new System.Drawing.Point(3, 3);
+            this.gameInfoTitleLabel.Location = new System.Drawing.Point(4, 5);
+            this.gameInfoTitleLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.gameInfoTitleLabel.Name = "gameInfoTitleLabel";
-            this.gameInfoTitleLabel.Size = new System.Drawing.Size(459, 38);
+            this.gameInfoTitleLabel.Size = new System.Drawing.Size(688, 58);
             this.gameInfoTitleLabel.TabIndex = 10058;
             this.gameInfoTitleLabel.Text = "Game Info Title";
             this.gameInfoTitleLabel.UseMnemonic = false;
@@ -4692,9 +4984,10 @@ namespace Retro_Achievement_Tracker
             // pictureBox8
             // 
             this.pictureBox8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.pictureBox8.Location = new System.Drawing.Point(2, 44);
+            this.pictureBox8.Location = new System.Drawing.Point(3, 68);
+            this.pictureBox8.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox8.Name = "pictureBox8";
-            this.pictureBox8.Size = new System.Drawing.Size(460, 2);
+            this.pictureBox8.Size = new System.Drawing.Size(690, 3);
             this.pictureBox8.TabIndex = 10059;
             this.pictureBox8.TabStop = false;
             // 
@@ -4711,9 +5004,10 @@ namespace Retro_Achievement_Tracker
             this.panel29.Controls.Add(this.panel32);
             this.panel29.Controls.Add(this.panel33);
             this.panel29.Controls.Add(this.panel34);
-            this.panel29.Location = new System.Drawing.Point(4, 3);
+            this.panel29.Location = new System.Drawing.Point(6, 5);
+            this.panel29.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel29.Name = "panel29";
-            this.panel29.Size = new System.Drawing.Size(287, 201);
+            this.panel29.Size = new System.Drawing.Size(430, 309);
             this.panel29.TabIndex = 10080;
             // 
             // panel49
@@ -4722,9 +5016,10 @@ namespace Retro_Achievement_Tracker
             this.panel49.Controls.Add(this.label88);
             this.panel49.Controls.Add(this.gameInfoReleasedCheckBox);
             this.panel49.Controls.Add(this.gameInfoReleaseDateTextBox);
-            this.panel49.Location = new System.Drawing.Point(2, 172);
+            this.panel49.Location = new System.Drawing.Point(3, 265);
+            this.panel49.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel49.Name = "panel49";
-            this.panel49.Size = new System.Drawing.Size(278, 23);
+            this.panel49.Size = new System.Drawing.Size(417, 35);
             this.panel49.TabIndex = 10071;
             // 
             // label88
@@ -4732,9 +5027,10 @@ namespace Retro_Achievement_Tracker
             this.label88.BackColor = System.Drawing.Color.Transparent;
             this.label88.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label88.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label88.Location = new System.Drawing.Point(3, 4);
+            this.label88.Location = new System.Drawing.Point(4, 6);
+            this.label88.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label88.Name = "label88";
-            this.label88.Size = new System.Drawing.Size(94, 16);
+            this.label88.Size = new System.Drawing.Size(141, 25);
             this.label88.TabIndex = 10069;
             this.label88.Text = "Released";
             // 
@@ -4742,9 +5038,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.gameInfoReleasedCheckBox.AutoSize = true;
             this.gameInfoReleasedCheckBox.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameInfoReleasedCheckBox.Location = new System.Drawing.Point(225, 5);
+            this.gameInfoReleasedCheckBox.Location = new System.Drawing.Point(338, 8);
+            this.gameInfoReleasedCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameInfoReleasedCheckBox.Name = "gameInfoReleasedCheckBox";
-            this.gameInfoReleasedCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.gameInfoReleasedCheckBox.Size = new System.Drawing.Size(22, 21);
             this.gameInfoReleasedCheckBox.TabIndex = 55;
             this.gameInfoReleasedCheckBox.UseVisualStyleBackColor = true;
             this.gameInfoReleasedCheckBox.CheckedChanged += new System.EventHandler(this.FeatureEnablementCheckBox_CheckedChanged);
@@ -4754,9 +5051,10 @@ namespace Retro_Achievement_Tracker
             this.gameInfoReleaseDateTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.gameInfoReleaseDateTextBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameInfoReleaseDateTextBox.ForeColor = System.Drawing.Color.White;
-            this.gameInfoReleaseDateTextBox.Location = new System.Drawing.Point(116, 0);
+            this.gameInfoReleaseDateTextBox.Location = new System.Drawing.Point(174, 0);
+            this.gameInfoReleaseDateTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameInfoReleaseDateTextBox.Name = "gameInfoReleaseDateTextBox";
-            this.gameInfoReleaseDateTextBox.Size = new System.Drawing.Size(99, 23);
+            this.gameInfoReleaseDateTextBox.Size = new System.Drawing.Size(146, 31);
             this.gameInfoReleaseDateTextBox.TabIndex = 5;
             this.gameInfoReleaseDateTextBox.Text = "Released";
             this.gameInfoReleaseDateTextBox.TextChanged += new System.EventHandler(this.OverrideTextBox_TextChanged);
@@ -4767,9 +5065,10 @@ namespace Retro_Achievement_Tracker
             this.panel48.Controls.Add(this.label87);
             this.panel48.Controls.Add(this.gameInfoGenreCheckBox);
             this.panel48.Controls.Add(this.gameInfoGenreTextBox);
-            this.panel48.Location = new System.Drawing.Point(2, 150);
+            this.panel48.Location = new System.Drawing.Point(3, 231);
+            this.panel48.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel48.Name = "panel48";
-            this.panel48.Size = new System.Drawing.Size(278, 23);
+            this.panel48.Size = new System.Drawing.Size(417, 35);
             this.panel48.TabIndex = 10070;
             // 
             // label87
@@ -4777,9 +5076,10 @@ namespace Retro_Achievement_Tracker
             this.label87.BackColor = System.Drawing.Color.Transparent;
             this.label87.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label87.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label87.Location = new System.Drawing.Point(3, 4);
+            this.label87.Location = new System.Drawing.Point(4, 6);
+            this.label87.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label87.Name = "label87";
-            this.label87.Size = new System.Drawing.Size(94, 16);
+            this.label87.Size = new System.Drawing.Size(141, 25);
             this.label87.TabIndex = 10069;
             this.label87.Text = "Genre";
             // 
@@ -4787,9 +5087,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.gameInfoGenreCheckBox.AutoSize = true;
             this.gameInfoGenreCheckBox.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameInfoGenreCheckBox.Location = new System.Drawing.Point(225, 5);
+            this.gameInfoGenreCheckBox.Location = new System.Drawing.Point(338, 8);
+            this.gameInfoGenreCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameInfoGenreCheckBox.Name = "gameInfoGenreCheckBox";
-            this.gameInfoGenreCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.gameInfoGenreCheckBox.Size = new System.Drawing.Size(22, 21);
             this.gameInfoGenreCheckBox.TabIndex = 55;
             this.gameInfoGenreCheckBox.UseVisualStyleBackColor = true;
             this.gameInfoGenreCheckBox.CheckedChanged += new System.EventHandler(this.FeatureEnablementCheckBox_CheckedChanged);
@@ -4799,9 +5100,10 @@ namespace Retro_Achievement_Tracker
             this.gameInfoGenreTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.gameInfoGenreTextBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameInfoGenreTextBox.ForeColor = System.Drawing.Color.White;
-            this.gameInfoGenreTextBox.Location = new System.Drawing.Point(116, 0);
+            this.gameInfoGenreTextBox.Location = new System.Drawing.Point(174, 0);
+            this.gameInfoGenreTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameInfoGenreTextBox.Name = "gameInfoGenreTextBox";
-            this.gameInfoGenreTextBox.Size = new System.Drawing.Size(99, 23);
+            this.gameInfoGenreTextBox.Size = new System.Drawing.Size(146, 31);
             this.gameInfoGenreTextBox.TabIndex = 5;
             this.gameInfoGenreTextBox.Text = "Genre";
             this.gameInfoGenreTextBox.TextChanged += new System.EventHandler(this.OverrideTextBox_TextChanged);
@@ -4812,9 +5114,10 @@ namespace Retro_Achievement_Tracker
             this.panel30.Controls.Add(this.label63);
             this.panel30.Controls.Add(this.label64);
             this.panel30.Controls.Add(this.label65);
-            this.panel30.Location = new System.Drawing.Point(2, 40);
+            this.panel30.Location = new System.Drawing.Point(3, 62);
+            this.panel30.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel30.Name = "panel30";
-            this.panel30.Size = new System.Drawing.Size(278, 23);
+            this.panel30.Size = new System.Drawing.Size(417, 35);
             this.panel30.TabIndex = 10079;
             // 
             // label63
@@ -4822,9 +5125,10 @@ namespace Retro_Achievement_Tracker
             this.label63.BackColor = System.Drawing.Color.Transparent;
             this.label63.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label63.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label63.Location = new System.Drawing.Point(3, 3);
+            this.label63.Location = new System.Drawing.Point(4, 5);
+            this.label63.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label63.Name = "label63";
-            this.label63.Size = new System.Drawing.Size(50, 16);
+            this.label63.Size = new System.Drawing.Size(75, 25);
             this.label63.TabIndex = 10071;
             this.label63.Text = "Field";
             // 
@@ -4833,9 +5137,10 @@ namespace Retro_Achievement_Tracker
             this.label64.BackColor = System.Drawing.Color.Transparent;
             this.label64.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label64.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label64.Location = new System.Drawing.Point(113, 3);
+            this.label64.Location = new System.Drawing.Point(170, 5);
+            this.label64.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label64.Name = "label64";
-            this.label64.Size = new System.Drawing.Size(102, 16);
+            this.label64.Size = new System.Drawing.Size(153, 25);
             this.label64.TabIndex = 10073;
             this.label64.Text = "Display Text";
             // 
@@ -4844,9 +5149,10 @@ namespace Retro_Achievement_Tracker
             this.label65.BackColor = System.Drawing.Color.Transparent;
             this.label65.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label65.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label65.Location = new System.Drawing.Point(221, 3);
+            this.label65.Location = new System.Drawing.Point(332, 5);
+            this.label65.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label65.Name = "label65";
-            this.label65.Size = new System.Drawing.Size(61, 16);
+            this.label65.Size = new System.Drawing.Size(92, 25);
             this.label65.TabIndex = 10072;
             this.label65.Text = "Enabled";
             // 
@@ -4855,9 +5161,10 @@ namespace Retro_Achievement_Tracker
             this.label66.BackColor = System.Drawing.Color.Transparent;
             this.label66.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label66.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label66.Location = new System.Drawing.Point(3, 3);
+            this.label66.Location = new System.Drawing.Point(4, 5);
+            this.label66.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label66.Name = "label66";
-            this.label66.Size = new System.Drawing.Size(190, 26);
+            this.label66.Size = new System.Drawing.Size(285, 40);
             this.label66.TabIndex = 10069;
             this.label66.Text = "Field Overrides";
             // 
@@ -4868,10 +5175,10 @@ namespace Retro_Achievement_Tracker
             this.gameInfoDefaultButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.gameInfoDefaultButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameInfoDefaultButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(68)))), ((int)(((byte)(68)))));
-            this.gameInfoDefaultButton.Location = new System.Drawing.Point(204, 2);
+            this.gameInfoDefaultButton.Location = new System.Drawing.Point(306, 3);
             this.gameInfoDefaultButton.Margin = new System.Windows.Forms.Padding(0);
             this.gameInfoDefaultButton.Name = "gameInfoDefaultButton";
-            this.gameInfoDefaultButton.Size = new System.Drawing.Size(75, 27);
+            this.gameInfoDefaultButton.Size = new System.Drawing.Size(112, 42);
             this.gameInfoDefaultButton.TabIndex = 39;
             this.gameInfoDefaultButton.Text = "Default";
             this.gameInfoDefaultButton.UseVisualStyleBackColor = false;
@@ -4880,9 +5187,10 @@ namespace Retro_Achievement_Tracker
             // pictureBox7
             // 
             this.pictureBox7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.pictureBox7.Location = new System.Drawing.Point(2, 32);
+            this.pictureBox7.Location = new System.Drawing.Point(3, 49);
+            this.pictureBox7.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox7.Name = "pictureBox7";
-            this.pictureBox7.Size = new System.Drawing.Size(275, 2);
+            this.pictureBox7.Size = new System.Drawing.Size(412, 3);
             this.pictureBox7.TabIndex = 10070;
             this.pictureBox7.TabStop = false;
             // 
@@ -4892,9 +5200,10 @@ namespace Retro_Achievement_Tracker
             this.panel31.Controls.Add(this.label67);
             this.panel31.Controls.Add(this.gameInfoTitleCheckBox);
             this.panel31.Controls.Add(this.gameInfoTitleTextBox);
-            this.panel31.Location = new System.Drawing.Point(2, 62);
+            this.panel31.Location = new System.Drawing.Point(3, 95);
+            this.panel31.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel31.Name = "panel31";
-            this.panel31.Size = new System.Drawing.Size(278, 23);
+            this.panel31.Size = new System.Drawing.Size(417, 35);
             this.panel31.TabIndex = 10061;
             // 
             // label67
@@ -4902,9 +5211,10 @@ namespace Retro_Achievement_Tracker
             this.label67.BackColor = System.Drawing.Color.Transparent;
             this.label67.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label67.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label67.Location = new System.Drawing.Point(3, 3);
+            this.label67.Location = new System.Drawing.Point(4, 5);
+            this.label67.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label67.Name = "label67";
-            this.label67.Size = new System.Drawing.Size(94, 16);
+            this.label67.Size = new System.Drawing.Size(141, 25);
             this.label67.TabIndex = 10066;
             this.label67.Text = "Title";
             // 
@@ -4912,9 +5222,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.gameInfoTitleCheckBox.AutoSize = true;
             this.gameInfoTitleCheckBox.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameInfoTitleCheckBox.Location = new System.Drawing.Point(225, 5);
+            this.gameInfoTitleCheckBox.Location = new System.Drawing.Point(338, 8);
+            this.gameInfoTitleCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameInfoTitleCheckBox.Name = "gameInfoTitleCheckBox";
-            this.gameInfoTitleCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.gameInfoTitleCheckBox.Size = new System.Drawing.Size(22, 21);
             this.gameInfoTitleCheckBox.TabIndex = 52;
             this.gameInfoTitleCheckBox.UseVisualStyleBackColor = true;
             this.gameInfoTitleCheckBox.CheckedChanged += new System.EventHandler(this.FeatureEnablementCheckBox_CheckedChanged);
@@ -4924,9 +5235,10 @@ namespace Retro_Achievement_Tracker
             this.gameInfoTitleTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.gameInfoTitleTextBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameInfoTitleTextBox.ForeColor = System.Drawing.Color.White;
-            this.gameInfoTitleTextBox.Location = new System.Drawing.Point(116, 0);
+            this.gameInfoTitleTextBox.Location = new System.Drawing.Point(174, 0);
+            this.gameInfoTitleTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameInfoTitleTextBox.Name = "gameInfoTitleTextBox";
-            this.gameInfoTitleTextBox.Size = new System.Drawing.Size(99, 23);
+            this.gameInfoTitleTextBox.Size = new System.Drawing.Size(146, 31);
             this.gameInfoTitleTextBox.TabIndex = 1;
             this.gameInfoTitleTextBox.Text = "Title";
             this.gameInfoTitleTextBox.TextChanged += new System.EventHandler(this.OverrideTextBox_TextChanged);
@@ -4937,9 +5249,10 @@ namespace Retro_Achievement_Tracker
             this.panel32.Controls.Add(this.label68);
             this.panel32.Controls.Add(this.gameInfoConsoleCheckBox);
             this.panel32.Controls.Add(this.gameInfoConsoleTextBox);
-            this.panel32.Location = new System.Drawing.Point(2, 128);
+            this.panel32.Location = new System.Drawing.Point(3, 197);
+            this.panel32.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel32.Name = "panel32";
-            this.panel32.Size = new System.Drawing.Size(278, 23);
+            this.panel32.Size = new System.Drawing.Size(417, 35);
             this.panel32.TabIndex = 10061;
             // 
             // label68
@@ -4947,9 +5260,10 @@ namespace Retro_Achievement_Tracker
             this.label68.BackColor = System.Drawing.Color.Transparent;
             this.label68.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label68.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label68.Location = new System.Drawing.Point(3, 4);
+            this.label68.Location = new System.Drawing.Point(4, 6);
+            this.label68.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label68.Name = "label68";
-            this.label68.Size = new System.Drawing.Size(94, 16);
+            this.label68.Size = new System.Drawing.Size(141, 25);
             this.label68.TabIndex = 10069;
             this.label68.Text = "Console";
             // 
@@ -4957,9 +5271,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.gameInfoConsoleCheckBox.AutoSize = true;
             this.gameInfoConsoleCheckBox.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameInfoConsoleCheckBox.Location = new System.Drawing.Point(225, 5);
+            this.gameInfoConsoleCheckBox.Location = new System.Drawing.Point(338, 8);
+            this.gameInfoConsoleCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameInfoConsoleCheckBox.Name = "gameInfoConsoleCheckBox";
-            this.gameInfoConsoleCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.gameInfoConsoleCheckBox.Size = new System.Drawing.Size(22, 21);
             this.gameInfoConsoleCheckBox.TabIndex = 55;
             this.gameInfoConsoleCheckBox.UseVisualStyleBackColor = true;
             this.gameInfoConsoleCheckBox.CheckedChanged += new System.EventHandler(this.FeatureEnablementCheckBox_CheckedChanged);
@@ -4969,9 +5284,10 @@ namespace Retro_Achievement_Tracker
             this.gameInfoConsoleTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.gameInfoConsoleTextBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameInfoConsoleTextBox.ForeColor = System.Drawing.Color.White;
-            this.gameInfoConsoleTextBox.Location = new System.Drawing.Point(116, 0);
+            this.gameInfoConsoleTextBox.Location = new System.Drawing.Point(174, 0);
+            this.gameInfoConsoleTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameInfoConsoleTextBox.Name = "gameInfoConsoleTextBox";
-            this.gameInfoConsoleTextBox.Size = new System.Drawing.Size(99, 23);
+            this.gameInfoConsoleTextBox.Size = new System.Drawing.Size(146, 31);
             this.gameInfoConsoleTextBox.TabIndex = 5;
             this.gameInfoConsoleTextBox.Text = "Console";
             this.gameInfoConsoleTextBox.TextChanged += new System.EventHandler(this.OverrideTextBox_TextChanged);
@@ -4982,9 +5298,10 @@ namespace Retro_Achievement_Tracker
             this.panel33.Controls.Add(this.label69);
             this.panel33.Controls.Add(this.gameInfoPublisherTextBox);
             this.panel33.Controls.Add(this.gameInfoPublisherCheckBox);
-            this.panel33.Location = new System.Drawing.Point(2, 106);
+            this.panel33.Location = new System.Drawing.Point(3, 163);
+            this.panel33.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel33.Name = "panel33";
-            this.panel33.Size = new System.Drawing.Size(278, 23);
+            this.panel33.Size = new System.Drawing.Size(417, 35);
             this.panel33.TabIndex = 10061;
             // 
             // label69
@@ -4992,9 +5309,10 @@ namespace Retro_Achievement_Tracker
             this.label69.BackColor = System.Drawing.Color.Transparent;
             this.label69.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label69.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label69.Location = new System.Drawing.Point(3, 4);
+            this.label69.Location = new System.Drawing.Point(4, 6);
+            this.label69.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label69.Name = "label69";
-            this.label69.Size = new System.Drawing.Size(94, 16);
+            this.label69.Size = new System.Drawing.Size(141, 25);
             this.label69.TabIndex = 10068;
             this.label69.Text = "Publisher";
             // 
@@ -5003,9 +5321,10 @@ namespace Retro_Achievement_Tracker
             this.gameInfoPublisherTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.gameInfoPublisherTextBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameInfoPublisherTextBox.ForeColor = System.Drawing.Color.White;
-            this.gameInfoPublisherTextBox.Location = new System.Drawing.Point(116, 0);
+            this.gameInfoPublisherTextBox.Location = new System.Drawing.Point(174, 0);
+            this.gameInfoPublisherTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameInfoPublisherTextBox.Name = "gameInfoPublisherTextBox";
-            this.gameInfoPublisherTextBox.Size = new System.Drawing.Size(99, 23);
+            this.gameInfoPublisherTextBox.Size = new System.Drawing.Size(146, 31);
             this.gameInfoPublisherTextBox.TabIndex = 7;
             this.gameInfoPublisherTextBox.Text = "Publisher";
             this.gameInfoPublisherTextBox.TextChanged += new System.EventHandler(this.OverrideTextBox_TextChanged);
@@ -5014,9 +5333,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.gameInfoPublisherCheckBox.AutoSize = true;
             this.gameInfoPublisherCheckBox.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameInfoPublisherCheckBox.Location = new System.Drawing.Point(225, 5);
+            this.gameInfoPublisherCheckBox.Location = new System.Drawing.Point(338, 8);
+            this.gameInfoPublisherCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameInfoPublisherCheckBox.Name = "gameInfoPublisherCheckBox";
-            this.gameInfoPublisherCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.gameInfoPublisherCheckBox.Size = new System.Drawing.Size(22, 21);
             this.gameInfoPublisherCheckBox.TabIndex = 56;
             this.gameInfoPublisherCheckBox.UseVisualStyleBackColor = true;
             this.gameInfoPublisherCheckBox.CheckedChanged += new System.EventHandler(this.FeatureEnablementCheckBox_CheckedChanged);
@@ -5027,9 +5347,10 @@ namespace Retro_Achievement_Tracker
             this.panel34.Controls.Add(this.label70);
             this.panel34.Controls.Add(this.gameInfoDeveloperTextBox);
             this.panel34.Controls.Add(this.gameInfoDeveloperCheckBox);
-            this.panel34.Location = new System.Drawing.Point(2, 84);
+            this.panel34.Location = new System.Drawing.Point(3, 129);
+            this.panel34.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel34.Name = "panel34";
-            this.panel34.Size = new System.Drawing.Size(278, 23);
+            this.panel34.Size = new System.Drawing.Size(417, 35);
             this.panel34.TabIndex = 10061;
             // 
             // label70
@@ -5037,9 +5358,10 @@ namespace Retro_Achievement_Tracker
             this.label70.BackColor = System.Drawing.Color.Transparent;
             this.label70.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label70.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label70.Location = new System.Drawing.Point(3, 4);
+            this.label70.Location = new System.Drawing.Point(4, 6);
+            this.label70.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label70.Name = "label70";
-            this.label70.Size = new System.Drawing.Size(94, 16);
+            this.label70.Size = new System.Drawing.Size(141, 25);
             this.label70.TabIndex = 10067;
             this.label70.Text = "Developer";
             // 
@@ -5048,9 +5370,10 @@ namespace Retro_Achievement_Tracker
             this.gameInfoDeveloperTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.gameInfoDeveloperTextBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameInfoDeveloperTextBox.ForeColor = System.Drawing.Color.White;
-            this.gameInfoDeveloperTextBox.Location = new System.Drawing.Point(116, 0);
+            this.gameInfoDeveloperTextBox.Location = new System.Drawing.Point(174, 0);
+            this.gameInfoDeveloperTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameInfoDeveloperTextBox.Name = "gameInfoDeveloperTextBox";
-            this.gameInfoDeveloperTextBox.Size = new System.Drawing.Size(99, 23);
+            this.gameInfoDeveloperTextBox.Size = new System.Drawing.Size(146, 31);
             this.gameInfoDeveloperTextBox.TabIndex = 6;
             this.gameInfoDeveloperTextBox.Text = "Developer";
             this.gameInfoDeveloperTextBox.TextChanged += new System.EventHandler(this.OverrideTextBox_TextChanged);
@@ -5059,9 +5382,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.gameInfoDeveloperCheckBox.AutoSize = true;
             this.gameInfoDeveloperCheckBox.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameInfoDeveloperCheckBox.Location = new System.Drawing.Point(225, 5);
+            this.gameInfoDeveloperCheckBox.Location = new System.Drawing.Point(338, 8);
+            this.gameInfoDeveloperCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameInfoDeveloperCheckBox.Name = "gameInfoDeveloperCheckBox";
-            this.gameInfoDeveloperCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.gameInfoDeveloperCheckBox.Size = new System.Drawing.Size(22, 21);
             this.gameInfoDeveloperCheckBox.TabIndex = 54;
             this.gameInfoDeveloperCheckBox.UseVisualStyleBackColor = true;
             this.gameInfoDeveloperCheckBox.CheckedChanged += new System.EventHandler(this.FeatureEnablementCheckBox_CheckedChanged);
@@ -5079,9 +5403,10 @@ namespace Retro_Achievement_Tracker
             this.panel35.Controls.Add(this.panel45);
             this.panel35.Controls.Add(this.panel46);
             this.panel35.Controls.Add(this.gameInfoValuesOutlinePanel);
-            this.panel35.Location = new System.Drawing.Point(296, 3);
+            this.panel35.Location = new System.Drawing.Point(444, 5);
+            this.panel35.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel35.Name = "panel35";
-            this.panel35.Size = new System.Drawing.Size(468, 176);
+            this.panel35.Size = new System.Drawing.Size(702, 271);
             this.panel35.TabIndex = 10079;
             // 
             // label71
@@ -5089,9 +5414,10 @@ namespace Retro_Achievement_Tracker
             this.label71.BackColor = System.Drawing.Color.Transparent;
             this.label71.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label71.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label71.Location = new System.Drawing.Point(3, 3);
+            this.label71.Location = new System.Drawing.Point(4, 5);
+            this.label71.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label71.Name = "label71";
-            this.label71.Size = new System.Drawing.Size(243, 26);
+            this.label71.Size = new System.Drawing.Size(364, 40);
             this.label71.TabIndex = 10062;
             this.label71.Text = "Window/Font Settings";
             // 
@@ -5103,9 +5429,10 @@ namespace Retro_Achievement_Tracker
             this.panel42.Controls.Add(this.label79);
             this.panel42.Controls.Add(this.label80);
             this.panel42.Controls.Add(this.label81);
-            this.panel42.Location = new System.Drawing.Point(2, 40);
+            this.panel42.Location = new System.Drawing.Point(3, 62);
+            this.panel42.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel42.Name = "panel42";
-            this.panel42.Size = new System.Drawing.Size(463, 23);
+            this.panel42.Size = new System.Drawing.Size(694, 35);
             this.panel42.TabIndex = 10076;
             // 
             // gameInfoAdvancedCheckBox
@@ -5115,9 +5442,10 @@ namespace Retro_Achievement_Tracker
             this.gameInfoAdvancedCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.gameInfoAdvancedCheckBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameInfoAdvancedCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.gameInfoAdvancedCheckBox.Location = new System.Drawing.Point(5, 2);
+            this.gameInfoAdvancedCheckBox.Location = new System.Drawing.Point(8, 3);
+            this.gameInfoAdvancedCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameInfoAdvancedCheckBox.Name = "gameInfoAdvancedCheckBox";
-            this.gameInfoAdvancedCheckBox.Size = new System.Drawing.Size(91, 20);
+            this.gameInfoAdvancedCheckBox.Size = new System.Drawing.Size(135, 29);
             this.gameInfoAdvancedCheckBox.TabIndex = 10053;
             this.gameInfoAdvancedCheckBox.Text = "Advanced";
             this.gameInfoAdvancedCheckBox.UseVisualStyleBackColor = false;
@@ -5128,9 +5456,10 @@ namespace Retro_Achievement_Tracker
             this.label78.BackColor = System.Drawing.Color.Transparent;
             this.label78.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label78.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label78.Location = new System.Drawing.Point(150, 3);
+            this.label78.Location = new System.Drawing.Point(225, 5);
+            this.label78.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label78.Name = "label78";
-            this.label78.Size = new System.Drawing.Size(48, 16);
+            this.label78.Size = new System.Drawing.Size(72, 25);
             this.label78.TabIndex = 10065;
             this.label78.Text = "Color";
             // 
@@ -5139,9 +5468,10 @@ namespace Retro_Achievement_Tracker
             this.label79.BackColor = System.Drawing.Color.Transparent;
             this.label79.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label79.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label79.Location = new System.Drawing.Point(194, 3);
+            this.label79.Location = new System.Drawing.Point(291, 5);
+            this.label79.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label79.Name = "label79";
-            this.label79.Size = new System.Drawing.Size(50, 16);
+            this.label79.Size = new System.Drawing.Size(75, 25);
             this.label79.TabIndex = 10066;
             this.label79.Text = "Font";
             // 
@@ -5150,9 +5480,10 @@ namespace Retro_Achievement_Tracker
             this.label80.BackColor = System.Drawing.Color.Transparent;
             this.label80.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label80.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label80.Location = new System.Drawing.Point(349, 3);
+            this.label80.Location = new System.Drawing.Point(524, 5);
+            this.label80.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label80.Name = "label80";
-            this.label80.Size = new System.Drawing.Size(41, 16);
+            this.label80.Size = new System.Drawing.Size(62, 25);
             this.label80.TabIndex = 10068;
             this.label80.Text = "Size";
             // 
@@ -5161,9 +5492,10 @@ namespace Retro_Achievement_Tracker
             this.label81.BackColor = System.Drawing.Color.Transparent;
             this.label81.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label81.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label81.Location = new System.Drawing.Point(396, 3);
+            this.label81.Location = new System.Drawing.Point(594, 5);
+            this.label81.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label81.Name = "label81";
-            this.label81.Size = new System.Drawing.Size(59, 16);
+            this.label81.Size = new System.Drawing.Size(88, 25);
             this.label81.TabIndex = 10067;
             this.label81.Text = "Enabled";
             // 
@@ -5174,10 +5506,10 @@ namespace Retro_Achievement_Tracker
             this.gameInfoOpenWindowButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.gameInfoOpenWindowButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameInfoOpenWindowButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
-            this.gameInfoOpenWindowButton.Location = new System.Drawing.Point(382, 2);
+            this.gameInfoOpenWindowButton.Location = new System.Drawing.Point(573, 3);
             this.gameInfoOpenWindowButton.Margin = new System.Windows.Forms.Padding(0);
             this.gameInfoOpenWindowButton.Name = "gameInfoOpenWindowButton";
-            this.gameInfoOpenWindowButton.Size = new System.Drawing.Size(75, 27);
+            this.gameInfoOpenWindowButton.Size = new System.Drawing.Size(112, 42);
             this.gameInfoOpenWindowButton.TabIndex = 10021;
             this.gameInfoOpenWindowButton.Text = "Open";
             this.gameInfoOpenWindowButton.UseVisualStyleBackColor = false;
@@ -5189,9 +5521,10 @@ namespace Retro_Achievement_Tracker
             this.gameInfoValuesPanel.Controls.Add(this.label82);
             this.gameInfoValuesPanel.Controls.Add(this.gameInfoValuesFontColorPictureBox);
             this.gameInfoValuesPanel.Controls.Add(this.gameInfoValuesFontComboBox);
-            this.gameInfoValuesPanel.Location = new System.Drawing.Point(2, 106);
+            this.gameInfoValuesPanel.Location = new System.Drawing.Point(3, 163);
+            this.gameInfoValuesPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameInfoValuesPanel.Name = "gameInfoValuesPanel";
-            this.gameInfoValuesPanel.Size = new System.Drawing.Size(463, 23);
+            this.gameInfoValuesPanel.Size = new System.Drawing.Size(694, 35);
             this.gameInfoValuesPanel.TabIndex = 10061;
             // 
             // label82
@@ -5199,9 +5532,10 @@ namespace Retro_Achievement_Tracker
             this.label82.BackColor = System.Drawing.Color.Transparent;
             this.label82.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label82.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label82.Location = new System.Drawing.Point(3, 4);
+            this.label82.Location = new System.Drawing.Point(4, 6);
+            this.label82.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label82.Name = "label82";
-            this.label82.Size = new System.Drawing.Size(144, 16);
+            this.label82.Size = new System.Drawing.Size(216, 25);
             this.label82.TabIndex = 10066;
             this.label82.Text = "Values";
             // 
@@ -5209,9 +5543,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.gameInfoValuesFontColorPictureBox.BackColor = System.Drawing.Color.White;
             this.gameInfoValuesFontColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.gameInfoValuesFontColorPictureBox.Location = new System.Drawing.Point(153, 3);
+            this.gameInfoValuesFontColorPictureBox.Location = new System.Drawing.Point(230, 5);
+            this.gameInfoValuesFontColorPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameInfoValuesFontColorPictureBox.Name = "gameInfoValuesFontColorPictureBox";
-            this.gameInfoValuesFontColorPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.gameInfoValuesFontColorPictureBox.Size = new System.Drawing.Size(22, 22);
             this.gameInfoValuesFontColorPictureBox.TabIndex = 45;
             this.gameInfoValuesFontColorPictureBox.TabStop = false;
             this.gameInfoValuesFontColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
@@ -5222,9 +5557,10 @@ namespace Retro_Achievement_Tracker
             this.gameInfoValuesFontComboBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameInfoValuesFontComboBox.ForeColor = System.Drawing.Color.White;
             this.gameInfoValuesFontComboBox.FormattingEnabled = true;
-            this.gameInfoValuesFontComboBox.Location = new System.Drawing.Point(193, 2);
+            this.gameInfoValuesFontComboBox.Location = new System.Drawing.Point(290, 3);
+            this.gameInfoValuesFontComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameInfoValuesFontComboBox.Name = "gameInfoValuesFontComboBox";
-            this.gameInfoValuesFontComboBox.Size = new System.Drawing.Size(202, 21);
+            this.gameInfoValuesFontComboBox.Size = new System.Drawing.Size(301, 28);
             this.gameInfoValuesFontComboBox.TabIndex = 45;
             this.gameInfoValuesFontComboBox.SelectedIndexChanged += new System.EventHandler(this.FontFamilyComboBox_SelectedIndexChanged);
             // 
@@ -5234,9 +5570,10 @@ namespace Retro_Achievement_Tracker
             this.gameInfoAutoOpenWindowCheckbox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.gameInfoAutoOpenWindowCheckbox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameInfoAutoOpenWindowCheckbox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.gameInfoAutoOpenWindowCheckbox.Location = new System.Drawing.Point(252, 9);
+            this.gameInfoAutoOpenWindowCheckbox.Location = new System.Drawing.Point(378, 14);
+            this.gameInfoAutoOpenWindowCheckbox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameInfoAutoOpenWindowCheckbox.Name = "gameInfoAutoOpenWindowCheckbox";
-            this.gameInfoAutoOpenWindowCheckbox.Size = new System.Drawing.Size(98, 20);
+            this.gameInfoAutoOpenWindowCheckbox.Size = new System.Drawing.Size(147, 29);
             this.gameInfoAutoOpenWindowCheckbox.TabIndex = 10022;
             this.gameInfoAutoOpenWindowCheckbox.Text = "Auto-Open";
             this.gameInfoAutoOpenWindowCheckbox.UseVisualStyleBackColor = true;
@@ -5245,9 +5582,10 @@ namespace Retro_Achievement_Tracker
             // pictureBox9
             // 
             this.pictureBox9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.pictureBox9.Location = new System.Drawing.Point(2, 32);
+            this.pictureBox9.Location = new System.Drawing.Point(3, 49);
+            this.pictureBox9.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox9.Name = "pictureBox9";
-            this.pictureBox9.Size = new System.Drawing.Size(460, 2);
+            this.pictureBox9.Size = new System.Drawing.Size(690, 3);
             this.pictureBox9.TabIndex = 10063;
             this.pictureBox9.TabStop = false;
             // 
@@ -5256,18 +5594,20 @@ namespace Retro_Achievement_Tracker
             this.panel44.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.panel44.Controls.Add(this.gameInfoBackgroundColorPictureBox);
             this.panel44.Controls.Add(this.label83);
-            this.panel44.Location = new System.Drawing.Point(2, 62);
+            this.panel44.Location = new System.Drawing.Point(3, 95);
+            this.panel44.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel44.Name = "panel44";
-            this.panel44.Size = new System.Drawing.Size(463, 23);
+            this.panel44.Size = new System.Drawing.Size(694, 35);
             this.panel44.TabIndex = 10061;
             // 
             // gameInfoBackgroundColorPictureBox
             // 
             this.gameInfoBackgroundColorPictureBox.BackColor = System.Drawing.Color.White;
             this.gameInfoBackgroundColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.gameInfoBackgroundColorPictureBox.Location = new System.Drawing.Point(153, 3);
+            this.gameInfoBackgroundColorPictureBox.Location = new System.Drawing.Point(230, 5);
+            this.gameInfoBackgroundColorPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameInfoBackgroundColorPictureBox.Name = "gameInfoBackgroundColorPictureBox";
-            this.gameInfoBackgroundColorPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.gameInfoBackgroundColorPictureBox.Size = new System.Drawing.Size(22, 22);
             this.gameInfoBackgroundColorPictureBox.TabIndex = 42;
             this.gameInfoBackgroundColorPictureBox.TabStop = false;
             this.gameInfoBackgroundColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
@@ -5277,9 +5617,10 @@ namespace Retro_Achievement_Tracker
             this.label83.BackColor = System.Drawing.Color.Transparent;
             this.label83.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label83.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label83.Location = new System.Drawing.Point(3, 3);
+            this.label83.Location = new System.Drawing.Point(4, 5);
+            this.label83.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label83.Name = "label83";
-            this.label83.Size = new System.Drawing.Size(144, 16);
+            this.label83.Size = new System.Drawing.Size(216, 25);
             this.label83.TabIndex = 10064;
             this.label83.Text = "Window Background";
             // 
@@ -5289,9 +5630,10 @@ namespace Retro_Achievement_Tracker
             this.panel45.Controls.Add(this.gameInfoNamesLabel);
             this.panel45.Controls.Add(this.gameInfoNamesFontColorPictureBox);
             this.panel45.Controls.Add(this.gameInfoNamesFontComboBox);
-            this.panel45.Location = new System.Drawing.Point(2, 84);
+            this.panel45.Location = new System.Drawing.Point(3, 129);
+            this.panel45.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel45.Name = "panel45";
-            this.panel45.Size = new System.Drawing.Size(463, 23);
+            this.panel45.Size = new System.Drawing.Size(694, 35);
             this.panel45.TabIndex = 10061;
             // 
             // gameInfoNamesLabel
@@ -5299,9 +5641,10 @@ namespace Retro_Achievement_Tracker
             this.gameInfoNamesLabel.BackColor = System.Drawing.Color.Transparent;
             this.gameInfoNamesLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameInfoNamesLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.gameInfoNamesLabel.Location = new System.Drawing.Point(3, 4);
+            this.gameInfoNamesLabel.Location = new System.Drawing.Point(4, 6);
+            this.gameInfoNamesLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.gameInfoNamesLabel.Name = "gameInfoNamesLabel";
-            this.gameInfoNamesLabel.Size = new System.Drawing.Size(144, 16);
+            this.gameInfoNamesLabel.Size = new System.Drawing.Size(216, 25);
             this.gameInfoNamesLabel.TabIndex = 10065;
             this.gameInfoNamesLabel.Text = "Names";
             // 
@@ -5309,9 +5652,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.gameInfoNamesFontColorPictureBox.BackColor = System.Drawing.Color.White;
             this.gameInfoNamesFontColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.gameInfoNamesFontColorPictureBox.Location = new System.Drawing.Point(153, 4);
+            this.gameInfoNamesFontColorPictureBox.Location = new System.Drawing.Point(230, 6);
+            this.gameInfoNamesFontColorPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameInfoNamesFontColorPictureBox.Name = "gameInfoNamesFontColorPictureBox";
-            this.gameInfoNamesFontColorPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.gameInfoNamesFontColorPictureBox.Size = new System.Drawing.Size(22, 22);
             this.gameInfoNamesFontColorPictureBox.TabIndex = 45;
             this.gameInfoNamesFontColorPictureBox.TabStop = false;
             this.gameInfoNamesFontColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
@@ -5322,9 +5666,10 @@ namespace Retro_Achievement_Tracker
             this.gameInfoNamesFontComboBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameInfoNamesFontComboBox.ForeColor = System.Drawing.Color.White;
             this.gameInfoNamesFontComboBox.FormattingEnabled = true;
-            this.gameInfoNamesFontComboBox.Location = new System.Drawing.Point(193, 2);
+            this.gameInfoNamesFontComboBox.Location = new System.Drawing.Point(290, 3);
+            this.gameInfoNamesFontComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameInfoNamesFontComboBox.Name = "gameInfoNamesFontComboBox";
-            this.gameInfoNamesFontComboBox.Size = new System.Drawing.Size(202, 21);
+            this.gameInfoNamesFontComboBox.Size = new System.Drawing.Size(301, 28);
             this.gameInfoNamesFontComboBox.TabIndex = 45;
             this.gameInfoNamesFontComboBox.SelectedIndexChanged += new System.EventHandler(this.FontFamilyComboBox_SelectedIndexChanged);
             // 
@@ -5335,9 +5680,10 @@ namespace Retro_Achievement_Tracker
             this.panel46.Controls.Add(this.gameInfoNamesOutlineCheckBox);
             this.panel46.Controls.Add(this.gameInfoNamesOutlineLabel);
             this.panel46.Controls.Add(this.gameInfoNamesFontOutlineColorPictureBox);
-            this.panel46.Location = new System.Drawing.Point(2, 128);
+            this.panel46.Location = new System.Drawing.Point(3, 197);
+            this.panel46.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel46.Name = "panel46";
-            this.panel46.Size = new System.Drawing.Size(463, 23);
+            this.panel46.Size = new System.Drawing.Size(694, 35);
             this.panel46.TabIndex = 10061;
             // 
             // gameInfoNamesFontOutlineNumericUpDown
@@ -5346,7 +5692,8 @@ namespace Retro_Achievement_Tracker
             this.gameInfoNamesFontOutlineNumericUpDown.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.gameInfoNamesFontOutlineNumericUpDown.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameInfoNamesFontOutlineNumericUpDown.ForeColor = System.Drawing.Color.White;
-            this.gameInfoNamesFontOutlineNumericUpDown.Location = new System.Drawing.Point(352, 4);
+            this.gameInfoNamesFontOutlineNumericUpDown.Location = new System.Drawing.Point(528, 6);
+            this.gameInfoNamesFontOutlineNumericUpDown.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameInfoNamesFontOutlineNumericUpDown.Maximum = new decimal(new int[] {
             5,
             0,
@@ -5358,7 +5705,7 @@ namespace Retro_Achievement_Tracker
             0,
             0});
             this.gameInfoNamesFontOutlineNumericUpDown.Name = "gameInfoNamesFontOutlineNumericUpDown";
-            this.gameInfoNamesFontOutlineNumericUpDown.Size = new System.Drawing.Size(43, 17);
+            this.gameInfoNamesFontOutlineNumericUpDown.Size = new System.Drawing.Size(64, 24);
             this.gameInfoNamesFontOutlineNumericUpDown.TabIndex = 45;
             this.gameInfoNamesFontOutlineNumericUpDown.Value = new decimal(new int[] {
             1,
@@ -5372,9 +5719,10 @@ namespace Retro_Achievement_Tracker
             this.gameInfoNamesOutlineCheckBox.AutoSize = true;
             this.gameInfoNamesOutlineCheckBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameInfoNamesOutlineCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.gameInfoNamesOutlineCheckBox.Location = new System.Drawing.Point(413, 5);
+            this.gameInfoNamesOutlineCheckBox.Location = new System.Drawing.Point(620, 8);
+            this.gameInfoNamesOutlineCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameInfoNamesOutlineCheckBox.Name = "gameInfoNamesOutlineCheckBox";
-            this.gameInfoNamesOutlineCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.gameInfoNamesOutlineCheckBox.Size = new System.Drawing.Size(22, 21);
             this.gameInfoNamesOutlineCheckBox.TabIndex = 45;
             this.gameInfoNamesOutlineCheckBox.UseVisualStyleBackColor = true;
             this.gameInfoNamesOutlineCheckBox.CheckedChanged += new System.EventHandler(this.FeatureEnablementCheckBox_CheckedChanged);
@@ -5384,9 +5732,10 @@ namespace Retro_Achievement_Tracker
             this.gameInfoNamesOutlineLabel.BackColor = System.Drawing.Color.Transparent;
             this.gameInfoNamesOutlineLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameInfoNamesOutlineLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.gameInfoNamesOutlineLabel.Location = new System.Drawing.Point(3, 3);
+            this.gameInfoNamesOutlineLabel.Location = new System.Drawing.Point(4, 5);
+            this.gameInfoNamesOutlineLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.gameInfoNamesOutlineLabel.Name = "gameInfoNamesOutlineLabel";
-            this.gameInfoNamesOutlineLabel.Size = new System.Drawing.Size(144, 16);
+            this.gameInfoNamesOutlineLabel.Size = new System.Drawing.Size(216, 25);
             this.gameInfoNamesOutlineLabel.TabIndex = 10066;
             this.gameInfoNamesOutlineLabel.Text = "Names OutlineColor";
             // 
@@ -5394,9 +5743,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.gameInfoNamesFontOutlineColorPictureBox.BackColor = System.Drawing.Color.White;
             this.gameInfoNamesFontOutlineColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.gameInfoNamesFontOutlineColorPictureBox.Location = new System.Drawing.Point(153, 3);
+            this.gameInfoNamesFontOutlineColorPictureBox.Location = new System.Drawing.Point(230, 5);
+            this.gameInfoNamesFontOutlineColorPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameInfoNamesFontOutlineColorPictureBox.Name = "gameInfoNamesFontOutlineColorPictureBox";
-            this.gameInfoNamesFontOutlineColorPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.gameInfoNamesFontOutlineColorPictureBox.Size = new System.Drawing.Size(22, 22);
             this.gameInfoNamesFontOutlineColorPictureBox.TabIndex = 45;
             this.gameInfoNamesFontOutlineColorPictureBox.TabStop = false;
             this.gameInfoNamesFontOutlineColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
@@ -5408,9 +5758,10 @@ namespace Retro_Achievement_Tracker
             this.gameInfoValuesOutlinePanel.Controls.Add(this.gameInfoValuesFontOutlineColorPictureBox);
             this.gameInfoValuesOutlinePanel.Controls.Add(this.gameInfoValuesFontOutlineNumericUpDown);
             this.gameInfoValuesOutlinePanel.Controls.Add(this.gameInfoValuesOutlineCheckBox);
-            this.gameInfoValuesOutlinePanel.Location = new System.Drawing.Point(2, 150);
+            this.gameInfoValuesOutlinePanel.Location = new System.Drawing.Point(3, 231);
+            this.gameInfoValuesOutlinePanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameInfoValuesOutlinePanel.Name = "gameInfoValuesOutlinePanel";
-            this.gameInfoValuesOutlinePanel.Size = new System.Drawing.Size(463, 23);
+            this.gameInfoValuesOutlinePanel.Size = new System.Drawing.Size(694, 35);
             this.gameInfoValuesOutlinePanel.TabIndex = 10067;
             // 
             // label86
@@ -5418,9 +5769,10 @@ namespace Retro_Achievement_Tracker
             this.label86.BackColor = System.Drawing.Color.Transparent;
             this.label86.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label86.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label86.Location = new System.Drawing.Point(3, 4);
+            this.label86.Location = new System.Drawing.Point(4, 6);
+            this.label86.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label86.Name = "label86";
-            this.label86.Size = new System.Drawing.Size(144, 16);
+            this.label86.Size = new System.Drawing.Size(216, 25);
             this.label86.TabIndex = 10066;
             this.label86.Text = "Values OutlineColor";
             // 
@@ -5428,9 +5780,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.gameInfoValuesFontOutlineColorPictureBox.BackColor = System.Drawing.Color.White;
             this.gameInfoValuesFontOutlineColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.gameInfoValuesFontOutlineColorPictureBox.Location = new System.Drawing.Point(153, 4);
+            this.gameInfoValuesFontOutlineColorPictureBox.Location = new System.Drawing.Point(230, 6);
+            this.gameInfoValuesFontOutlineColorPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameInfoValuesFontOutlineColorPictureBox.Name = "gameInfoValuesFontOutlineColorPictureBox";
-            this.gameInfoValuesFontOutlineColorPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.gameInfoValuesFontOutlineColorPictureBox.Size = new System.Drawing.Size(22, 22);
             this.gameInfoValuesFontOutlineColorPictureBox.TabIndex = 45;
             this.gameInfoValuesFontOutlineColorPictureBox.TabStop = false;
             this.gameInfoValuesFontOutlineColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
@@ -5441,7 +5794,8 @@ namespace Retro_Achievement_Tracker
             this.gameInfoValuesFontOutlineNumericUpDown.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.gameInfoValuesFontOutlineNumericUpDown.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameInfoValuesFontOutlineNumericUpDown.ForeColor = System.Drawing.Color.White;
-            this.gameInfoValuesFontOutlineNumericUpDown.Location = new System.Drawing.Point(352, 4);
+            this.gameInfoValuesFontOutlineNumericUpDown.Location = new System.Drawing.Point(528, 6);
+            this.gameInfoValuesFontOutlineNumericUpDown.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameInfoValuesFontOutlineNumericUpDown.Maximum = new decimal(new int[] {
             5,
             0,
@@ -5453,7 +5807,7 @@ namespace Retro_Achievement_Tracker
             0,
             0});
             this.gameInfoValuesFontOutlineNumericUpDown.Name = "gameInfoValuesFontOutlineNumericUpDown";
-            this.gameInfoValuesFontOutlineNumericUpDown.Size = new System.Drawing.Size(43, 17);
+            this.gameInfoValuesFontOutlineNumericUpDown.Size = new System.Drawing.Size(64, 24);
             this.gameInfoValuesFontOutlineNumericUpDown.TabIndex = 45;
             this.gameInfoValuesFontOutlineNumericUpDown.Value = new decimal(new int[] {
             1,
@@ -5467,9 +5821,10 @@ namespace Retro_Achievement_Tracker
             this.gameInfoValuesOutlineCheckBox.AutoSize = true;
             this.gameInfoValuesOutlineCheckBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameInfoValuesOutlineCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.gameInfoValuesOutlineCheckBox.Location = new System.Drawing.Point(413, 6);
+            this.gameInfoValuesOutlineCheckBox.Location = new System.Drawing.Point(620, 9);
+            this.gameInfoValuesOutlineCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameInfoValuesOutlineCheckBox.Name = "gameInfoValuesOutlineCheckBox";
-            this.gameInfoValuesOutlineCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.gameInfoValuesOutlineCheckBox.Size = new System.Drawing.Size(22, 21);
             this.gameInfoValuesOutlineCheckBox.TabIndex = 45;
             this.gameInfoValuesOutlineCheckBox.UseVisualStyleBackColor = true;
             this.gameInfoValuesOutlineCheckBox.CheckedChanged += new System.EventHandler(this.FeatureEnablementCheckBox_CheckedChanged);
@@ -5495,9 +5850,10 @@ namespace Retro_Achievement_Tracker
             this.panel28.Controls.Add(this.gameProgressPoints1Label);
             this.panel28.Controls.Add(this.gameProgressCompletedLabel);
             this.panel28.Controls.Add(this.gameProgressTruePoints1Label);
-            this.panel28.Location = new System.Drawing.Point(296, 184);
+            this.panel28.Location = new System.Drawing.Point(444, 283);
+            this.panel28.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel28.Name = "panel28";
-            this.panel28.Size = new System.Drawing.Size(468, 181);
+            this.panel28.Size = new System.Drawing.Size(702, 278);
             this.panel28.TabIndex = 10082;
             // 
             // gameProgressPointsTextLabel
@@ -5506,9 +5862,10 @@ namespace Retro_Achievement_Tracker
             this.gameProgressPointsTextLabel.BackColor = System.Drawing.Color.Transparent;
             this.gameProgressPointsTextLabel.Font = new System.Drawing.Font("Verdana", 9.75F);
             this.gameProgressPointsTextLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.gameProgressPointsTextLabel.Location = new System.Drawing.Point(119, 82);
+            this.gameProgressPointsTextLabel.Location = new System.Drawing.Point(178, 126);
+            this.gameProgressPointsTextLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.gameProgressPointsTextLabel.Name = "gameProgressPointsTextLabel";
-            this.gameProgressPointsTextLabel.Size = new System.Drawing.Size(52, 16);
+            this.gameProgressPointsTextLabel.Size = new System.Drawing.Size(80, 25);
             this.gameProgressPointsTextLabel.TabIndex = 10074;
             this.gameProgressPointsTextLabel.Text = "points.";
             // 
@@ -5518,9 +5875,10 @@ namespace Retro_Achievement_Tracker
             this.gameProgressHardcoreWorthLabel.BackColor = System.Drawing.Color.Transparent;
             this.gameProgressHardcoreWorthLabel.Font = new System.Drawing.Font("Verdana", 9.75F);
             this.gameProgressHardcoreWorthLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.gameProgressHardcoreWorthLabel.Location = new System.Drawing.Point(154, 62);
+            this.gameProgressHardcoreWorthLabel.Location = new System.Drawing.Point(231, 95);
+            this.gameProgressHardcoreWorthLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.gameProgressHardcoreWorthLabel.Name = "gameProgressHardcoreWorthLabel";
-            this.gameProgressHardcoreWorthLabel.Size = new System.Drawing.Size(221, 16);
+            this.gameProgressHardcoreWorthLabel.Size = new System.Drawing.Size(345, 25);
             this.gameProgressHardcoreWorthLabel.TabIndex = 10073;
             this.gameProgressHardcoreWorthLabel.Text = "HARDCORE achievements, worth";
             // 
@@ -5529,9 +5887,10 @@ namespace Retro_Achievement_Tracker
             this.gameProgressPoints2Label.BackColor = System.Drawing.Color.Transparent;
             this.gameProgressPoints2Label.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameProgressPoints2Label.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.gameProgressPoints2Label.Location = new System.Drawing.Point(5, 82);
+            this.gameProgressPoints2Label.Location = new System.Drawing.Point(8, 126);
+            this.gameProgressPoints2Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.gameProgressPoints2Label.Name = "gameProgressPoints2Label";
-            this.gameProgressPoints2Label.Size = new System.Drawing.Size(55, 16);
+            this.gameProgressPoints2Label.Size = new System.Drawing.Size(82, 25);
             this.gameProgressPoints2Label.TabIndex = 10071;
             this.gameProgressPoints2Label.Text = "99999";
             this.gameProgressPoints2Label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5541,9 +5900,10 @@ namespace Retro_Achievement_Tracker
             this.gameProgressTruePoints2Label.BackColor = System.Drawing.Color.Transparent;
             this.gameProgressTruePoints2Label.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameProgressTruePoints2Label.ForeColor = System.Drawing.Color.White;
-            this.gameProgressTruePoints2Label.Location = new System.Drawing.Point(54, 82);
+            this.gameProgressTruePoints2Label.Location = new System.Drawing.Point(81, 126);
+            this.gameProgressTruePoints2Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.gameProgressTruePoints2Label.Name = "gameProgressTruePoints2Label";
-            this.gameProgressTruePoints2Label.Size = new System.Drawing.Size(72, 16);
+            this.gameProgressTruePoints2Label.Size = new System.Drawing.Size(108, 25);
             this.gameProgressTruePoints2Label.TabIndex = 10072;
             this.gameProgressTruePoints2Label.Text = "(999999)";
             this.gameProgressTruePoints2Label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5553,9 +5913,10 @@ namespace Retro_Achievement_Tracker
             this.gameProgressAchievements2Label.BackColor = System.Drawing.Color.Transparent;
             this.gameProgressAchievements2Label.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameProgressAchievements2Label.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.gameProgressAchievements2Label.Location = new System.Drawing.Point(120, 62);
+            this.gameProgressAchievements2Label.Location = new System.Drawing.Point(180, 95);
+            this.gameProgressAchievements2Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.gameProgressAchievements2Label.Name = "gameProgressAchievements2Label";
-            this.gameProgressAchievements2Label.Size = new System.Drawing.Size(35, 16);
+            this.gameProgressAchievements2Label.Size = new System.Drawing.Size(52, 25);
             this.gameProgressAchievements2Label.TabIndex = 10070;
             this.gameProgressAchievements2Label.Text = "999";
             this.gameProgressAchievements2Label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5566,27 +5927,30 @@ namespace Retro_Achievement_Tracker
             this.gameProgressHaveEarnedLabel.BackColor = System.Drawing.Color.Transparent;
             this.gameProgressHaveEarnedLabel.Font = new System.Drawing.Font("Verdana", 9.75F);
             this.gameProgressHaveEarnedLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.gameProgressHaveEarnedLabel.Location = new System.Drawing.Point(5, 62);
+            this.gameProgressHaveEarnedLabel.Location = new System.Drawing.Point(8, 95);
+            this.gameProgressHaveEarnedLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.gameProgressHaveEarnedLabel.Name = "gameProgressHaveEarnedLabel";
-            this.gameProgressHaveEarnedLabel.Size = new System.Drawing.Size(118, 16);
+            this.gameProgressHaveEarnedLabel.Size = new System.Drawing.Size(181, 25);
             this.gameProgressHaveEarnedLabel.TabIndex = 10069;
             this.gameProgressHaveEarnedLabel.Text = "You have earned";
             // 
             // gameProgressPercentCompletePictureBox
             // 
             this.gameProgressPercentCompletePictureBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
-            this.gameProgressPercentCompletePictureBox.Location = new System.Drawing.Point(254, 143);
+            this.gameProgressPercentCompletePictureBox.Location = new System.Drawing.Point(381, 220);
+            this.gameProgressPercentCompletePictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameProgressPercentCompletePictureBox.Name = "gameProgressPercentCompletePictureBox";
-            this.gameProgressPercentCompletePictureBox.Size = new System.Drawing.Size(182, 3);
+            this.gameProgressPercentCompletePictureBox.Size = new System.Drawing.Size(273, 5);
             this.gameProgressPercentCompletePictureBox.TabIndex = 10066;
             this.gameProgressPercentCompletePictureBox.TabStop = false;
             // 
             // gameProgressMasteryPictureBox
             // 
             this.gameProgressMasteryPictureBox.Image = global::Retro_Achievement_Tracker.Properties.Resources.mastered_icon;
-            this.gameProgressMasteryPictureBox.Location = new System.Drawing.Point(437, 135);
+            this.gameProgressMasteryPictureBox.Location = new System.Drawing.Point(656, 208);
+            this.gameProgressMasteryPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameProgressMasteryPictureBox.Name = "gameProgressMasteryPictureBox";
-            this.gameProgressMasteryPictureBox.Size = new System.Drawing.Size(20, 20);
+            this.gameProgressMasteryPictureBox.Size = new System.Drawing.Size(30, 31);
             this.gameProgressMasteryPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.gameProgressMasteryPictureBox.TabIndex = 10068;
             this.gameProgressMasteryPictureBox.TabStop = false;
@@ -5595,9 +5959,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.pictureBox21.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox21.Image = global::Retro_Achievement_Tracker.Properties.Resources.progression_meter;
-            this.pictureBox21.Location = new System.Drawing.Point(250, 130);
+            this.pictureBox21.Location = new System.Drawing.Point(375, 200);
+            this.pictureBox21.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox21.Name = "pictureBox21";
-            this.pictureBox21.Size = new System.Drawing.Size(211, 30);
+            this.pictureBox21.Size = new System.Drawing.Size(316, 46);
             this.pictureBox21.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox21.TabIndex = 10067;
             this.pictureBox21.TabStop = false;
@@ -5607,9 +5972,10 @@ namespace Retro_Achievement_Tracker
             this.label60.BackColor = System.Drawing.Color.Transparent;
             this.label60.Font = new System.Drawing.Font("Verdana", 9.75F);
             this.label60.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label60.Location = new System.Drawing.Point(367, 41);
+            this.label60.Location = new System.Drawing.Point(550, 63);
+            this.label60.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label60.Name = "label60";
-            this.label60.Size = new System.Drawing.Size(54, 16);
+            this.label60.Size = new System.Drawing.Size(81, 25);
             this.label60.TabIndex = 10065;
             this.label60.Text = "points.";
             // 
@@ -5619,9 +5985,10 @@ namespace Retro_Achievement_Tracker
             this.label59.BackColor = System.Drawing.Color.Transparent;
             this.label59.Font = new System.Drawing.Font("Verdana", 9.75F);
             this.label59.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label59.Location = new System.Drawing.Point(107, 41);
+            this.label59.Location = new System.Drawing.Point(160, 63);
+            this.label59.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label59.Name = "label59";
-            this.label59.Size = new System.Drawing.Size(141, 16);
+            this.label59.Size = new System.Drawing.Size(216, 25);
             this.label59.TabIndex = 10064;
             this.label59.Text = "achievements worth";
             // 
@@ -5631,9 +5998,10 @@ namespace Retro_Achievement_Tracker
             this.label58.BackColor = System.Drawing.Color.Transparent;
             this.label58.Font = new System.Drawing.Font("Verdana", 9.75F);
             this.label58.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label58.Location = new System.Drawing.Point(3, 41);
+            this.label58.Location = new System.Drawing.Point(4, 63);
+            this.label58.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label58.Name = "label58";
-            this.label58.Size = new System.Drawing.Size(71, 16);
+            this.label58.Size = new System.Drawing.Size(110, 25);
             this.label58.TabIndex = 10063;
             this.label58.Text = "There are";
             // 
@@ -5642,18 +6010,20 @@ namespace Retro_Achievement_Tracker
             this.label56.BackColor = System.Drawing.Color.Transparent;
             this.label56.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label56.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label56.Location = new System.Drawing.Point(3, 3);
+            this.label56.Location = new System.Drawing.Point(4, 5);
+            this.label56.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label56.Name = "label56";
-            this.label56.Size = new System.Drawing.Size(192, 26);
+            this.label56.Size = new System.Drawing.Size(288, 40);
             this.label56.TabIndex = 10058;
             this.label56.Text = "Achievements";
             // 
             // pictureBox5
             // 
             this.pictureBox5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.pictureBox5.Location = new System.Drawing.Point(2, 32);
+            this.pictureBox5.Location = new System.Drawing.Point(3, 49);
+            this.pictureBox5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(460, 2);
+            this.pictureBox5.Size = new System.Drawing.Size(690, 3);
             this.pictureBox5.TabIndex = 10059;
             this.pictureBox5.TabStop = false;
             // 
@@ -5662,9 +6032,10 @@ namespace Retro_Achievement_Tracker
             this.gameProgressAchievements1Label.BackColor = System.Drawing.Color.Transparent;
             this.gameProgressAchievements1Label.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameProgressAchievements1Label.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.gameProgressAchievements1Label.Location = new System.Drawing.Point(74, 41);
+            this.gameProgressAchievements1Label.Location = new System.Drawing.Point(111, 63);
+            this.gameProgressAchievements1Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.gameProgressAchievements1Label.Name = "gameProgressAchievements1Label";
-            this.gameProgressAchievements1Label.Size = new System.Drawing.Size(35, 16);
+            this.gameProgressAchievements1Label.Size = new System.Drawing.Size(52, 25);
             this.gameProgressAchievements1Label.TabIndex = 10058;
             this.gameProgressAchievements1Label.Text = "999";
             this.gameProgressAchievements1Label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5674,9 +6045,10 @@ namespace Retro_Achievement_Tracker
             this.gameProgressPoints1Label.BackColor = System.Drawing.Color.Transparent;
             this.gameProgressPoints1Label.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameProgressPoints1Label.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.gameProgressPoints1Label.Location = new System.Drawing.Point(249, 41);
+            this.gameProgressPoints1Label.Location = new System.Drawing.Point(374, 63);
+            this.gameProgressPoints1Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.gameProgressPoints1Label.Name = "gameProgressPoints1Label";
-            this.gameProgressPoints1Label.Size = new System.Drawing.Size(55, 16);
+            this.gameProgressPoints1Label.Size = new System.Drawing.Size(82, 25);
             this.gameProgressPoints1Label.TabIndex = 10059;
             this.gameProgressPoints1Label.Text = "99999";
             this.gameProgressPoints1Label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5686,9 +6058,10 @@ namespace Retro_Achievement_Tracker
             this.gameProgressCompletedLabel.BackColor = System.Drawing.Color.Transparent;
             this.gameProgressCompletedLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameProgressCompletedLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.gameProgressCompletedLabel.Location = new System.Drawing.Point(299, 159);
+            this.gameProgressCompletedLabel.Location = new System.Drawing.Point(448, 245);
+            this.gameProgressCompletedLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.gameProgressCompletedLabel.Name = "gameProgressCompletedLabel";
-            this.gameProgressCompletedLabel.Size = new System.Drawing.Size(112, 16);
+            this.gameProgressCompletedLabel.Size = new System.Drawing.Size(168, 25);
             this.gameProgressCompletedLabel.TabIndex = 10061;
             this.gameProgressCompletedLabel.Text = "0% Complete";
             // 
@@ -5697,9 +6070,10 @@ namespace Retro_Achievement_Tracker
             this.gameProgressTruePoints1Label.BackColor = System.Drawing.Color.Transparent;
             this.gameProgressTruePoints1Label.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameProgressTruePoints1Label.ForeColor = System.Drawing.Color.White;
-            this.gameProgressTruePoints1Label.Location = new System.Drawing.Point(299, 41);
+            this.gameProgressTruePoints1Label.Location = new System.Drawing.Point(448, 63);
+            this.gameProgressTruePoints1Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.gameProgressTruePoints1Label.Name = "gameProgressTruePoints1Label";
-            this.gameProgressTruePoints1Label.Size = new System.Drawing.Size(76, 16);
+            this.gameProgressTruePoints1Label.Size = new System.Drawing.Size(114, 25);
             this.gameProgressTruePoints1Label.TabIndex = 10060;
             this.gameProgressTruePoints1Label.Text = "(999999)";
             this.gameProgressTruePoints1Label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5717,9 +6091,10 @@ namespace Retro_Achievement_Tracker
             this.panel15.Controls.Add(this.panel19);
             this.panel15.Controls.Add(this.panel23);
             this.panel15.Controls.Add(this.gameProgressValuesOutlinePanel);
-            this.panel15.Location = new System.Drawing.Point(296, 3);
+            this.panel15.Location = new System.Drawing.Point(444, 5);
+            this.panel15.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel15.Name = "panel15";
-            this.panel15.Size = new System.Drawing.Size(468, 176);
+            this.panel15.Size = new System.Drawing.Size(702, 271);
             this.panel15.TabIndex = 10081;
             // 
             // label38
@@ -5727,9 +6102,10 @@ namespace Retro_Achievement_Tracker
             this.label38.BackColor = System.Drawing.Color.Transparent;
             this.label38.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label38.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label38.Location = new System.Drawing.Point(3, 3);
+            this.label38.Location = new System.Drawing.Point(4, 5);
+            this.label38.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(243, 26);
+            this.label38.Size = new System.Drawing.Size(364, 40);
             this.label38.TabIndex = 10062;
             this.label38.Text = "Window/Font Settings";
             // 
@@ -5741,9 +6117,10 @@ namespace Retro_Achievement_Tracker
             this.panel16.Controls.Add(this.label43);
             this.panel16.Controls.Add(this.label44);
             this.panel16.Controls.Add(this.label45);
-            this.panel16.Location = new System.Drawing.Point(2, 40);
+            this.panel16.Location = new System.Drawing.Point(3, 62);
+            this.panel16.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel16.Name = "panel16";
-            this.panel16.Size = new System.Drawing.Size(463, 23);
+            this.panel16.Size = new System.Drawing.Size(694, 35);
             this.panel16.TabIndex = 10076;
             // 
             // gameProgressAdvancedCheckBox
@@ -5753,9 +6130,10 @@ namespace Retro_Achievement_Tracker
             this.gameProgressAdvancedCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.gameProgressAdvancedCheckBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameProgressAdvancedCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.gameProgressAdvancedCheckBox.Location = new System.Drawing.Point(5, 2);
+            this.gameProgressAdvancedCheckBox.Location = new System.Drawing.Point(8, 3);
+            this.gameProgressAdvancedCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameProgressAdvancedCheckBox.Name = "gameProgressAdvancedCheckBox";
-            this.gameProgressAdvancedCheckBox.Size = new System.Drawing.Size(91, 20);
+            this.gameProgressAdvancedCheckBox.Size = new System.Drawing.Size(135, 29);
             this.gameProgressAdvancedCheckBox.TabIndex = 10053;
             this.gameProgressAdvancedCheckBox.Text = "Advanced";
             this.gameProgressAdvancedCheckBox.UseVisualStyleBackColor = false;
@@ -5766,9 +6144,10 @@ namespace Retro_Achievement_Tracker
             this.label41.BackColor = System.Drawing.Color.Transparent;
             this.label41.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label41.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label41.Location = new System.Drawing.Point(150, 3);
+            this.label41.Location = new System.Drawing.Point(225, 5);
+            this.label41.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(48, 16);
+            this.label41.Size = new System.Drawing.Size(72, 25);
             this.label41.TabIndex = 10065;
             this.label41.Text = "Color";
             // 
@@ -5777,9 +6156,10 @@ namespace Retro_Achievement_Tracker
             this.label43.BackColor = System.Drawing.Color.Transparent;
             this.label43.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label43.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label43.Location = new System.Drawing.Point(194, 3);
+            this.label43.Location = new System.Drawing.Point(291, 5);
+            this.label43.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(50, 16);
+            this.label43.Size = new System.Drawing.Size(75, 25);
             this.label43.TabIndex = 10066;
             this.label43.Text = "Font";
             // 
@@ -5788,9 +6168,10 @@ namespace Retro_Achievement_Tracker
             this.label44.BackColor = System.Drawing.Color.Transparent;
             this.label44.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label44.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label44.Location = new System.Drawing.Point(349, 3);
+            this.label44.Location = new System.Drawing.Point(524, 5);
+            this.label44.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(41, 16);
+            this.label44.Size = new System.Drawing.Size(62, 25);
             this.label44.TabIndex = 10068;
             this.label44.Text = "Size";
             // 
@@ -5799,9 +6180,10 @@ namespace Retro_Achievement_Tracker
             this.label45.BackColor = System.Drawing.Color.Transparent;
             this.label45.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label45.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label45.Location = new System.Drawing.Point(396, 3);
+            this.label45.Location = new System.Drawing.Point(594, 5);
+            this.label45.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(59, 16);
+            this.label45.Size = new System.Drawing.Size(88, 25);
             this.label45.TabIndex = 10067;
             this.label45.Text = "Enabled";
             // 
@@ -5812,10 +6194,10 @@ namespace Retro_Achievement_Tracker
             this.gameProgressOpenWindowButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.gameProgressOpenWindowButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameProgressOpenWindowButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
-            this.gameProgressOpenWindowButton.Location = new System.Drawing.Point(382, 2);
+            this.gameProgressOpenWindowButton.Location = new System.Drawing.Point(573, 3);
             this.gameProgressOpenWindowButton.Margin = new System.Windows.Forms.Padding(0);
             this.gameProgressOpenWindowButton.Name = "gameProgressOpenWindowButton";
-            this.gameProgressOpenWindowButton.Size = new System.Drawing.Size(75, 27);
+            this.gameProgressOpenWindowButton.Size = new System.Drawing.Size(112, 42);
             this.gameProgressOpenWindowButton.TabIndex = 10021;
             this.gameProgressOpenWindowButton.Text = "Open";
             this.gameProgressOpenWindowButton.UseVisualStyleBackColor = false;
@@ -5827,9 +6209,10 @@ namespace Retro_Achievement_Tracker
             this.gameProgressValuesPanel.Controls.Add(this.label46);
             this.gameProgressValuesPanel.Controls.Add(this.gameProgressValuesFontColorPictureBox);
             this.gameProgressValuesPanel.Controls.Add(this.gameProgressValuesFontComboBox);
-            this.gameProgressValuesPanel.Location = new System.Drawing.Point(2, 106);
+            this.gameProgressValuesPanel.Location = new System.Drawing.Point(3, 163);
+            this.gameProgressValuesPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameProgressValuesPanel.Name = "gameProgressValuesPanel";
-            this.gameProgressValuesPanel.Size = new System.Drawing.Size(463, 23);
+            this.gameProgressValuesPanel.Size = new System.Drawing.Size(694, 35);
             this.gameProgressValuesPanel.TabIndex = 10061;
             // 
             // label46
@@ -5837,9 +6220,10 @@ namespace Retro_Achievement_Tracker
             this.label46.BackColor = System.Drawing.Color.Transparent;
             this.label46.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label46.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label46.Location = new System.Drawing.Point(3, 4);
+            this.label46.Location = new System.Drawing.Point(4, 6);
+            this.label46.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(144, 16);
+            this.label46.Size = new System.Drawing.Size(216, 25);
             this.label46.TabIndex = 10066;
             this.label46.Text = "Values";
             // 
@@ -5847,9 +6231,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.gameProgressValuesFontColorPictureBox.BackColor = System.Drawing.Color.White;
             this.gameProgressValuesFontColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.gameProgressValuesFontColorPictureBox.Location = new System.Drawing.Point(153, 3);
+            this.gameProgressValuesFontColorPictureBox.Location = new System.Drawing.Point(230, 5);
+            this.gameProgressValuesFontColorPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameProgressValuesFontColorPictureBox.Name = "gameProgressValuesFontColorPictureBox";
-            this.gameProgressValuesFontColorPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.gameProgressValuesFontColorPictureBox.Size = new System.Drawing.Size(22, 22);
             this.gameProgressValuesFontColorPictureBox.TabIndex = 45;
             this.gameProgressValuesFontColorPictureBox.TabStop = false;
             this.gameProgressValuesFontColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
@@ -5860,9 +6245,10 @@ namespace Retro_Achievement_Tracker
             this.gameProgressValuesFontComboBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameProgressValuesFontComboBox.ForeColor = System.Drawing.Color.White;
             this.gameProgressValuesFontComboBox.FormattingEnabled = true;
-            this.gameProgressValuesFontComboBox.Location = new System.Drawing.Point(193, 2);
+            this.gameProgressValuesFontComboBox.Location = new System.Drawing.Point(290, 3);
+            this.gameProgressValuesFontComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameProgressValuesFontComboBox.Name = "gameProgressValuesFontComboBox";
-            this.gameProgressValuesFontComboBox.Size = new System.Drawing.Size(202, 21);
+            this.gameProgressValuesFontComboBox.Size = new System.Drawing.Size(301, 28);
             this.gameProgressValuesFontComboBox.TabIndex = 45;
             this.gameProgressValuesFontComboBox.SelectedIndexChanged += new System.EventHandler(this.FontFamilyComboBox_SelectedIndexChanged);
             // 
@@ -5872,9 +6258,10 @@ namespace Retro_Achievement_Tracker
             this.gameProgressAutoOpenWindowCheckbox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.gameProgressAutoOpenWindowCheckbox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameProgressAutoOpenWindowCheckbox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.gameProgressAutoOpenWindowCheckbox.Location = new System.Drawing.Point(252, 9);
+            this.gameProgressAutoOpenWindowCheckbox.Location = new System.Drawing.Point(378, 14);
+            this.gameProgressAutoOpenWindowCheckbox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameProgressAutoOpenWindowCheckbox.Name = "gameProgressAutoOpenWindowCheckbox";
-            this.gameProgressAutoOpenWindowCheckbox.Size = new System.Drawing.Size(98, 20);
+            this.gameProgressAutoOpenWindowCheckbox.Size = new System.Drawing.Size(147, 29);
             this.gameProgressAutoOpenWindowCheckbox.TabIndex = 10022;
             this.gameProgressAutoOpenWindowCheckbox.Text = "Auto-Open";
             this.gameProgressAutoOpenWindowCheckbox.UseVisualStyleBackColor = true;
@@ -5883,9 +6270,10 @@ namespace Retro_Achievement_Tracker
             // pictureBox6
             // 
             this.pictureBox6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.pictureBox6.Location = new System.Drawing.Point(2, 32);
+            this.pictureBox6.Location = new System.Drawing.Point(3, 49);
+            this.pictureBox6.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(460, 2);
+            this.pictureBox6.Size = new System.Drawing.Size(690, 3);
             this.pictureBox6.TabIndex = 10063;
             this.pictureBox6.TabStop = false;
             // 
@@ -5894,18 +6282,20 @@ namespace Retro_Achievement_Tracker
             this.panel18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.panel18.Controls.Add(this.gameProgressBackgroundColorPictureBox);
             this.panel18.Controls.Add(this.label47);
-            this.panel18.Location = new System.Drawing.Point(2, 62);
+            this.panel18.Location = new System.Drawing.Point(3, 95);
+            this.panel18.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel18.Name = "panel18";
-            this.panel18.Size = new System.Drawing.Size(463, 23);
+            this.panel18.Size = new System.Drawing.Size(694, 35);
             this.panel18.TabIndex = 10061;
             // 
             // gameProgressBackgroundColorPictureBox
             // 
             this.gameProgressBackgroundColorPictureBox.BackColor = System.Drawing.Color.White;
             this.gameProgressBackgroundColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.gameProgressBackgroundColorPictureBox.Location = new System.Drawing.Point(153, 3);
+            this.gameProgressBackgroundColorPictureBox.Location = new System.Drawing.Point(230, 5);
+            this.gameProgressBackgroundColorPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameProgressBackgroundColorPictureBox.Name = "gameProgressBackgroundColorPictureBox";
-            this.gameProgressBackgroundColorPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.gameProgressBackgroundColorPictureBox.Size = new System.Drawing.Size(22, 22);
             this.gameProgressBackgroundColorPictureBox.TabIndex = 42;
             this.gameProgressBackgroundColorPictureBox.TabStop = false;
             this.gameProgressBackgroundColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
@@ -5915,9 +6305,10 @@ namespace Retro_Achievement_Tracker
             this.label47.BackColor = System.Drawing.Color.Transparent;
             this.label47.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label47.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label47.Location = new System.Drawing.Point(3, 3);
+            this.label47.Location = new System.Drawing.Point(4, 5);
+            this.label47.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(144, 16);
+            this.label47.Size = new System.Drawing.Size(216, 25);
             this.label47.TabIndex = 10064;
             this.label47.Text = "Window Background";
             // 
@@ -5927,9 +6318,10 @@ namespace Retro_Achievement_Tracker
             this.panel19.Controls.Add(this.gameProgressNamesLabel);
             this.panel19.Controls.Add(this.gameProgressNamesFontColorPictureBox);
             this.panel19.Controls.Add(this.gameProgressNamesFontComboBox);
-            this.panel19.Location = new System.Drawing.Point(2, 84);
+            this.panel19.Location = new System.Drawing.Point(3, 129);
+            this.panel19.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel19.Name = "panel19";
-            this.panel19.Size = new System.Drawing.Size(463, 23);
+            this.panel19.Size = new System.Drawing.Size(694, 35);
             this.panel19.TabIndex = 10061;
             // 
             // gameProgressNamesLabel
@@ -5937,9 +6329,10 @@ namespace Retro_Achievement_Tracker
             this.gameProgressNamesLabel.BackColor = System.Drawing.Color.Transparent;
             this.gameProgressNamesLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameProgressNamesLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.gameProgressNamesLabel.Location = new System.Drawing.Point(3, 4);
+            this.gameProgressNamesLabel.Location = new System.Drawing.Point(4, 6);
+            this.gameProgressNamesLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.gameProgressNamesLabel.Name = "gameProgressNamesLabel";
-            this.gameProgressNamesLabel.Size = new System.Drawing.Size(144, 16);
+            this.gameProgressNamesLabel.Size = new System.Drawing.Size(216, 25);
             this.gameProgressNamesLabel.TabIndex = 10065;
             this.gameProgressNamesLabel.Text = "Names";
             // 
@@ -5947,9 +6340,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.gameProgressNamesFontColorPictureBox.BackColor = System.Drawing.Color.White;
             this.gameProgressNamesFontColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.gameProgressNamesFontColorPictureBox.Location = new System.Drawing.Point(153, 4);
+            this.gameProgressNamesFontColorPictureBox.Location = new System.Drawing.Point(230, 6);
+            this.gameProgressNamesFontColorPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameProgressNamesFontColorPictureBox.Name = "gameProgressNamesFontColorPictureBox";
-            this.gameProgressNamesFontColorPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.gameProgressNamesFontColorPictureBox.Size = new System.Drawing.Size(22, 22);
             this.gameProgressNamesFontColorPictureBox.TabIndex = 45;
             this.gameProgressNamesFontColorPictureBox.TabStop = false;
             this.gameProgressNamesFontColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
@@ -5960,9 +6354,10 @@ namespace Retro_Achievement_Tracker
             this.gameProgressNamesFontComboBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameProgressNamesFontComboBox.ForeColor = System.Drawing.Color.White;
             this.gameProgressNamesFontComboBox.FormattingEnabled = true;
-            this.gameProgressNamesFontComboBox.Location = new System.Drawing.Point(193, 2);
+            this.gameProgressNamesFontComboBox.Location = new System.Drawing.Point(290, 3);
+            this.gameProgressNamesFontComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameProgressNamesFontComboBox.Name = "gameProgressNamesFontComboBox";
-            this.gameProgressNamesFontComboBox.Size = new System.Drawing.Size(202, 21);
+            this.gameProgressNamesFontComboBox.Size = new System.Drawing.Size(301, 28);
             this.gameProgressNamesFontComboBox.TabIndex = 45;
             this.gameProgressNamesFontComboBox.SelectedIndexChanged += new System.EventHandler(this.FontFamilyComboBox_SelectedIndexChanged);
             // 
@@ -5973,9 +6368,10 @@ namespace Retro_Achievement_Tracker
             this.panel23.Controls.Add(this.gameProgressNamesOutlineCheckBox);
             this.panel23.Controls.Add(this.gameProgressNamesOutlineLabel);
             this.panel23.Controls.Add(this.gameProgressNamesFontOutlineColorPictureBox);
-            this.panel23.Location = new System.Drawing.Point(2, 128);
+            this.panel23.Location = new System.Drawing.Point(3, 197);
+            this.panel23.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel23.Name = "panel23";
-            this.panel23.Size = new System.Drawing.Size(463, 23);
+            this.panel23.Size = new System.Drawing.Size(694, 35);
             this.panel23.TabIndex = 10061;
             // 
             // gameProgressNamesFontOutlineNumericUpDown
@@ -5984,7 +6380,8 @@ namespace Retro_Achievement_Tracker
             this.gameProgressNamesFontOutlineNumericUpDown.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.gameProgressNamesFontOutlineNumericUpDown.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameProgressNamesFontOutlineNumericUpDown.ForeColor = System.Drawing.Color.White;
-            this.gameProgressNamesFontOutlineNumericUpDown.Location = new System.Drawing.Point(352, 4);
+            this.gameProgressNamesFontOutlineNumericUpDown.Location = new System.Drawing.Point(528, 6);
+            this.gameProgressNamesFontOutlineNumericUpDown.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameProgressNamesFontOutlineNumericUpDown.Maximum = new decimal(new int[] {
             5,
             0,
@@ -5996,7 +6393,7 @@ namespace Retro_Achievement_Tracker
             0,
             0});
             this.gameProgressNamesFontOutlineNumericUpDown.Name = "gameProgressNamesFontOutlineNumericUpDown";
-            this.gameProgressNamesFontOutlineNumericUpDown.Size = new System.Drawing.Size(43, 17);
+            this.gameProgressNamesFontOutlineNumericUpDown.Size = new System.Drawing.Size(64, 24);
             this.gameProgressNamesFontOutlineNumericUpDown.TabIndex = 45;
             this.gameProgressNamesFontOutlineNumericUpDown.Value = new decimal(new int[] {
             1,
@@ -6010,9 +6407,10 @@ namespace Retro_Achievement_Tracker
             this.gameProgressNamesOutlineCheckBox.AutoSize = true;
             this.gameProgressNamesOutlineCheckBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameProgressNamesOutlineCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.gameProgressNamesOutlineCheckBox.Location = new System.Drawing.Point(413, 5);
+            this.gameProgressNamesOutlineCheckBox.Location = new System.Drawing.Point(620, 8);
+            this.gameProgressNamesOutlineCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameProgressNamesOutlineCheckBox.Name = "gameProgressNamesOutlineCheckBox";
-            this.gameProgressNamesOutlineCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.gameProgressNamesOutlineCheckBox.Size = new System.Drawing.Size(22, 21);
             this.gameProgressNamesOutlineCheckBox.TabIndex = 45;
             this.gameProgressNamesOutlineCheckBox.UseVisualStyleBackColor = true;
             this.gameProgressNamesOutlineCheckBox.CheckedChanged += new System.EventHandler(this.FeatureEnablementCheckBox_CheckedChanged);
@@ -6022,9 +6420,10 @@ namespace Retro_Achievement_Tracker
             this.gameProgressNamesOutlineLabel.BackColor = System.Drawing.Color.Transparent;
             this.gameProgressNamesOutlineLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameProgressNamesOutlineLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.gameProgressNamesOutlineLabel.Location = new System.Drawing.Point(3, 3);
+            this.gameProgressNamesOutlineLabel.Location = new System.Drawing.Point(4, 5);
+            this.gameProgressNamesOutlineLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.gameProgressNamesOutlineLabel.Name = "gameProgressNamesOutlineLabel";
-            this.gameProgressNamesOutlineLabel.Size = new System.Drawing.Size(144, 16);
+            this.gameProgressNamesOutlineLabel.Size = new System.Drawing.Size(216, 25);
             this.gameProgressNamesOutlineLabel.TabIndex = 10066;
             this.gameProgressNamesOutlineLabel.Text = "Names OutlineColor";
             // 
@@ -6032,9 +6431,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.gameProgressNamesFontOutlineColorPictureBox.BackColor = System.Drawing.Color.White;
             this.gameProgressNamesFontOutlineColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.gameProgressNamesFontOutlineColorPictureBox.Location = new System.Drawing.Point(153, 3);
+            this.gameProgressNamesFontOutlineColorPictureBox.Location = new System.Drawing.Point(230, 5);
+            this.gameProgressNamesFontOutlineColorPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameProgressNamesFontOutlineColorPictureBox.Name = "gameProgressNamesFontOutlineColorPictureBox";
-            this.gameProgressNamesFontOutlineColorPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.gameProgressNamesFontOutlineColorPictureBox.Size = new System.Drawing.Size(22, 22);
             this.gameProgressNamesFontOutlineColorPictureBox.TabIndex = 45;
             this.gameProgressNamesFontOutlineColorPictureBox.TabStop = false;
             this.gameProgressNamesFontOutlineColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
@@ -6046,9 +6446,10 @@ namespace Retro_Achievement_Tracker
             this.gameProgressValuesOutlinePanel.Controls.Add(this.gameProgressValuesFontOutlineColorPictureBox);
             this.gameProgressValuesOutlinePanel.Controls.Add(this.gameProgressValuesFontOutlineNumericUpDown);
             this.gameProgressValuesOutlinePanel.Controls.Add(this.gameProgressValuesOutlineCheckBox);
-            this.gameProgressValuesOutlinePanel.Location = new System.Drawing.Point(2, 150);
+            this.gameProgressValuesOutlinePanel.Location = new System.Drawing.Point(3, 231);
+            this.gameProgressValuesOutlinePanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameProgressValuesOutlinePanel.Name = "gameProgressValuesOutlinePanel";
-            this.gameProgressValuesOutlinePanel.Size = new System.Drawing.Size(463, 23);
+            this.gameProgressValuesOutlinePanel.Size = new System.Drawing.Size(694, 35);
             this.gameProgressValuesOutlinePanel.TabIndex = 10067;
             // 
             // label50
@@ -6056,9 +6457,10 @@ namespace Retro_Achievement_Tracker
             this.label50.BackColor = System.Drawing.Color.Transparent;
             this.label50.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label50.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label50.Location = new System.Drawing.Point(3, 4);
+            this.label50.Location = new System.Drawing.Point(4, 6);
+            this.label50.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(144, 16);
+            this.label50.Size = new System.Drawing.Size(216, 25);
             this.label50.TabIndex = 10066;
             this.label50.Text = "Values OutlineColor";
             // 
@@ -6066,9 +6468,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.gameProgressValuesFontOutlineColorPictureBox.BackColor = System.Drawing.Color.White;
             this.gameProgressValuesFontOutlineColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.gameProgressValuesFontOutlineColorPictureBox.Location = new System.Drawing.Point(153, 4);
+            this.gameProgressValuesFontOutlineColorPictureBox.Location = new System.Drawing.Point(230, 6);
+            this.gameProgressValuesFontOutlineColorPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameProgressValuesFontOutlineColorPictureBox.Name = "gameProgressValuesFontOutlineColorPictureBox";
-            this.gameProgressValuesFontOutlineColorPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.gameProgressValuesFontOutlineColorPictureBox.Size = new System.Drawing.Size(22, 22);
             this.gameProgressValuesFontOutlineColorPictureBox.TabIndex = 45;
             this.gameProgressValuesFontOutlineColorPictureBox.TabStop = false;
             this.gameProgressValuesFontOutlineColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
@@ -6079,7 +6482,8 @@ namespace Retro_Achievement_Tracker
             this.gameProgressValuesFontOutlineNumericUpDown.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.gameProgressValuesFontOutlineNumericUpDown.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameProgressValuesFontOutlineNumericUpDown.ForeColor = System.Drawing.Color.White;
-            this.gameProgressValuesFontOutlineNumericUpDown.Location = new System.Drawing.Point(352, 4);
+            this.gameProgressValuesFontOutlineNumericUpDown.Location = new System.Drawing.Point(528, 6);
+            this.gameProgressValuesFontOutlineNumericUpDown.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameProgressValuesFontOutlineNumericUpDown.Maximum = new decimal(new int[] {
             5,
             0,
@@ -6091,7 +6495,7 @@ namespace Retro_Achievement_Tracker
             0,
             0});
             this.gameProgressValuesFontOutlineNumericUpDown.Name = "gameProgressValuesFontOutlineNumericUpDown";
-            this.gameProgressValuesFontOutlineNumericUpDown.Size = new System.Drawing.Size(43, 17);
+            this.gameProgressValuesFontOutlineNumericUpDown.Size = new System.Drawing.Size(64, 24);
             this.gameProgressValuesFontOutlineNumericUpDown.TabIndex = 45;
             this.gameProgressValuesFontOutlineNumericUpDown.Value = new decimal(new int[] {
             1,
@@ -6105,9 +6509,10 @@ namespace Retro_Achievement_Tracker
             this.gameProgressValuesOutlineCheckBox.AutoSize = true;
             this.gameProgressValuesOutlineCheckBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameProgressValuesOutlineCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.gameProgressValuesOutlineCheckBox.Location = new System.Drawing.Point(413, 6);
+            this.gameProgressValuesOutlineCheckBox.Location = new System.Drawing.Point(620, 9);
+            this.gameProgressValuesOutlineCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameProgressValuesOutlineCheckBox.Name = "gameProgressValuesOutlineCheckBox";
-            this.gameProgressValuesOutlineCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.gameProgressValuesOutlineCheckBox.Size = new System.Drawing.Size(22, 21);
             this.gameProgressValuesOutlineCheckBox.TabIndex = 45;
             this.gameProgressValuesOutlineCheckBox.UseVisualStyleBackColor = true;
             this.gameProgressValuesOutlineCheckBox.CheckedChanged += new System.EventHandler(this.FeatureEnablementCheckBox_CheckedChanged);
@@ -6126,9 +6531,10 @@ namespace Retro_Achievement_Tracker
             this.panel36.Controls.Add(this.panel39);
             this.panel36.Controls.Add(this.panel40);
             this.panel36.Controls.Add(this.panel41);
-            this.panel36.Location = new System.Drawing.Point(4, 3);
+            this.panel36.Location = new System.Drawing.Point(6, 5);
+            this.panel36.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel36.Name = "panel36";
-            this.panel36.Size = new System.Drawing.Size(287, 222);
+            this.panel36.Size = new System.Drawing.Size(430, 342);
             this.panel36.TabIndex = 10080;
             // 
             // panel27
@@ -6141,9 +6547,10 @@ namespace Retro_Achievement_Tracker
             this.panel27.Controls.Add(this.label53);
             this.panel27.Controls.Add(this.gameProgressRadioButtonBackslash);
             this.panel27.Controls.Add(this.label51);
-            this.panel27.Location = new System.Drawing.Point(2, 194);
+            this.panel27.Location = new System.Drawing.Point(3, 298);
+            this.panel27.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel27.Name = "panel27";
-            this.panel27.Size = new System.Drawing.Size(278, 23);
+            this.panel27.Size = new System.Drawing.Size(417, 35);
             this.panel27.TabIndex = 10073;
             // 
             // label55
@@ -6151,9 +6558,10 @@ namespace Retro_Achievement_Tracker
             this.label55.BackColor = System.Drawing.Color.Transparent;
             this.label55.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label55.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label55.Location = new System.Drawing.Point(231, 4);
+            this.label55.Location = new System.Drawing.Point(346, 6);
+            this.label55.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label55.Name = "label55";
-            this.label55.Size = new System.Drawing.Size(15, 16);
+            this.label55.Size = new System.Drawing.Size(22, 25);
             this.label55.TabIndex = 10074;
             this.label55.Text = ".";
             // 
@@ -6161,9 +6569,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.gameProgressRadioButtonPeriod.AutoSize = true;
             this.gameProgressRadioButtonPeriod.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameProgressRadioButtonPeriod.Location = new System.Drawing.Point(213, 5);
+            this.gameProgressRadioButtonPeriod.Location = new System.Drawing.Point(320, 8);
+            this.gameProgressRadioButtonPeriod.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameProgressRadioButtonPeriod.Name = "gameProgressRadioButtonPeriod";
-            this.gameProgressRadioButtonPeriod.Size = new System.Drawing.Size(14, 13);
+            this.gameProgressRadioButtonPeriod.Size = new System.Drawing.Size(21, 20);
             this.gameProgressRadioButtonPeriod.TabIndex = 10073;
             this.gameProgressRadioButtonPeriod.UseVisualStyleBackColor = true;
             this.gameProgressRadioButtonPeriod.CheckedChanged += new System.EventHandler(this.DividerCharacter_RadioButtonClicked);
@@ -6173,9 +6582,10 @@ namespace Retro_Achievement_Tracker
             this.label54.BackColor = System.Drawing.Color.Transparent;
             this.label54.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label54.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label54.Location = new System.Drawing.Point(176, 4);
+            this.label54.Location = new System.Drawing.Point(264, 6);
+            this.label54.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label54.Name = "label54";
-            this.label54.Size = new System.Drawing.Size(15, 16);
+            this.label54.Size = new System.Drawing.Size(22, 25);
             this.label54.TabIndex = 10072;
             this.label54.Text = ":";
             // 
@@ -6183,9 +6593,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.gameProgressRadioButtonColon.AutoSize = true;
             this.gameProgressRadioButtonColon.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameProgressRadioButtonColon.Location = new System.Drawing.Point(158, 5);
+            this.gameProgressRadioButtonColon.Location = new System.Drawing.Point(237, 8);
+            this.gameProgressRadioButtonColon.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameProgressRadioButtonColon.Name = "gameProgressRadioButtonColon";
-            this.gameProgressRadioButtonColon.Size = new System.Drawing.Size(14, 13);
+            this.gameProgressRadioButtonColon.Size = new System.Drawing.Size(21, 20);
             this.gameProgressRadioButtonColon.TabIndex = 10071;
             this.gameProgressRadioButtonColon.UseVisualStyleBackColor = true;
             this.gameProgressRadioButtonColon.CheckedChanged += new System.EventHandler(this.DividerCharacter_RadioButtonClicked);
@@ -6195,9 +6606,10 @@ namespace Retro_Achievement_Tracker
             this.label53.BackColor = System.Drawing.Color.Transparent;
             this.label53.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label53.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label53.Location = new System.Drawing.Point(118, 4);
+            this.label53.Location = new System.Drawing.Point(177, 6);
+            this.label53.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label53.Name = "label53";
-            this.label53.Size = new System.Drawing.Size(15, 16);
+            this.label53.Size = new System.Drawing.Size(22, 25);
             this.label53.TabIndex = 10070;
             this.label53.Text = "/";
             // 
@@ -6205,9 +6617,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.gameProgressRadioButtonBackslash.AutoSize = true;
             this.gameProgressRadioButtonBackslash.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameProgressRadioButtonBackslash.Location = new System.Drawing.Point(100, 5);
+            this.gameProgressRadioButtonBackslash.Location = new System.Drawing.Point(150, 8);
+            this.gameProgressRadioButtonBackslash.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameProgressRadioButtonBackslash.Name = "gameProgressRadioButtonBackslash";
-            this.gameProgressRadioButtonBackslash.Size = new System.Drawing.Size(14, 13);
+            this.gameProgressRadioButtonBackslash.Size = new System.Drawing.Size(21, 20);
             this.gameProgressRadioButtonBackslash.TabIndex = 10067;
             this.gameProgressRadioButtonBackslash.UseVisualStyleBackColor = true;
             this.gameProgressRadioButtonBackslash.CheckedChanged += new System.EventHandler(this.DividerCharacter_RadioButtonClicked);
@@ -6217,18 +6630,20 @@ namespace Retro_Achievement_Tracker
             this.label51.BackColor = System.Drawing.Color.Transparent;
             this.label51.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label51.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label51.Location = new System.Drawing.Point(3, 4);
+            this.label51.Location = new System.Drawing.Point(4, 6);
+            this.label51.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label51.Name = "label51";
-            this.label51.Size = new System.Drawing.Size(94, 16);
+            this.label51.Size = new System.Drawing.Size(141, 25);
             this.label51.TabIndex = 10069;
             this.label51.Text = "Separator";
             // 
             // panel25
             // 
             this.panel25.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.panel25.Location = new System.Drawing.Point(2, 172);
+            this.panel25.Location = new System.Drawing.Point(3, 265);
+            this.panel25.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel25.Name = "panel25";
-            this.panel25.Size = new System.Drawing.Size(278, 23);
+            this.panel25.Size = new System.Drawing.Size(417, 35);
             this.panel25.TabIndex = 10072;
             // 
             // panel37
@@ -6237,9 +6652,10 @@ namespace Retro_Achievement_Tracker
             this.panel37.Controls.Add(this.label39);
             this.panel37.Controls.Add(this.label40);
             this.panel37.Controls.Add(this.label72);
-            this.panel37.Location = new System.Drawing.Point(2, 40);
+            this.panel37.Location = new System.Drawing.Point(3, 62);
+            this.panel37.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel37.Name = "panel37";
-            this.panel37.Size = new System.Drawing.Size(278, 23);
+            this.panel37.Size = new System.Drawing.Size(417, 35);
             this.panel37.TabIndex = 10079;
             // 
             // label39
@@ -6247,9 +6663,10 @@ namespace Retro_Achievement_Tracker
             this.label39.BackColor = System.Drawing.Color.Transparent;
             this.label39.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label39.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label39.Location = new System.Drawing.Point(3, 3);
+            this.label39.Location = new System.Drawing.Point(4, 5);
+            this.label39.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(50, 16);
+            this.label39.Size = new System.Drawing.Size(75, 25);
             this.label39.TabIndex = 10071;
             this.label39.Text = "Field";
             // 
@@ -6258,9 +6675,10 @@ namespace Retro_Achievement_Tracker
             this.label40.BackColor = System.Drawing.Color.Transparent;
             this.label40.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label40.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label40.Location = new System.Drawing.Point(113, 3);
+            this.label40.Location = new System.Drawing.Point(170, 5);
+            this.label40.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(102, 16);
+            this.label40.Size = new System.Drawing.Size(153, 25);
             this.label40.TabIndex = 10073;
             this.label40.Text = "Display Text";
             // 
@@ -6269,9 +6687,10 @@ namespace Retro_Achievement_Tracker
             this.label72.BackColor = System.Drawing.Color.Transparent;
             this.label72.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label72.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label72.Location = new System.Drawing.Point(221, 3);
+            this.label72.Location = new System.Drawing.Point(332, 5);
+            this.label72.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label72.Name = "label72";
-            this.label72.Size = new System.Drawing.Size(61, 16);
+            this.label72.Size = new System.Drawing.Size(92, 25);
             this.label72.TabIndex = 10072;
             this.label72.Text = "Enabled";
             // 
@@ -6281,9 +6700,10 @@ namespace Retro_Achievement_Tracker
             this.panel26.Controls.Add(this.label52);
             this.panel26.Controls.Add(this.gameProgressCompletedTextBox);
             this.panel26.Controls.Add(this.gameProgressCompletedCheckBox);
-            this.panel26.Location = new System.Drawing.Point(2, 150);
+            this.panel26.Location = new System.Drawing.Point(3, 231);
+            this.panel26.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel26.Name = "panel26";
-            this.panel26.Size = new System.Drawing.Size(278, 23);
+            this.panel26.Size = new System.Drawing.Size(417, 35);
             this.panel26.TabIndex = 10071;
             // 
             // label52
@@ -6291,9 +6711,10 @@ namespace Retro_Achievement_Tracker
             this.label52.BackColor = System.Drawing.Color.Transparent;
             this.label52.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label52.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label52.Location = new System.Drawing.Point(3, 4);
+            this.label52.Location = new System.Drawing.Point(4, 6);
+            this.label52.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label52.Name = "label52";
-            this.label52.Size = new System.Drawing.Size(94, 16);
+            this.label52.Size = new System.Drawing.Size(141, 25);
             this.label52.TabIndex = 10068;
             this.label52.Text = "Completed";
             // 
@@ -6302,9 +6723,10 @@ namespace Retro_Achievement_Tracker
             this.gameProgressCompletedTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.gameProgressCompletedTextBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameProgressCompletedTextBox.ForeColor = System.Drawing.Color.White;
-            this.gameProgressCompletedTextBox.Location = new System.Drawing.Point(116, 0);
+            this.gameProgressCompletedTextBox.Location = new System.Drawing.Point(174, 0);
+            this.gameProgressCompletedTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameProgressCompletedTextBox.Name = "gameProgressCompletedTextBox";
-            this.gameProgressCompletedTextBox.Size = new System.Drawing.Size(99, 23);
+            this.gameProgressCompletedTextBox.Size = new System.Drawing.Size(146, 31);
             this.gameProgressCompletedTextBox.TabIndex = 7;
             this.gameProgressCompletedTextBox.Text = "Completed";
             this.gameProgressCompletedTextBox.TextChanged += new System.EventHandler(this.OverrideTextBox_TextChanged);
@@ -6313,9 +6735,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.gameProgressCompletedCheckBox.AutoSize = true;
             this.gameProgressCompletedCheckBox.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameProgressCompletedCheckBox.Location = new System.Drawing.Point(225, 5);
+            this.gameProgressCompletedCheckBox.Location = new System.Drawing.Point(338, 8);
+            this.gameProgressCompletedCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameProgressCompletedCheckBox.Name = "gameProgressCompletedCheckBox";
-            this.gameProgressCompletedCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.gameProgressCompletedCheckBox.Size = new System.Drawing.Size(22, 21);
             this.gameProgressCompletedCheckBox.TabIndex = 56;
             this.gameProgressCompletedCheckBox.UseVisualStyleBackColor = true;
             this.gameProgressCompletedCheckBox.CheckedChanged += new System.EventHandler(this.FeatureEnablementCheckBox_CheckedChanged);
@@ -6325,9 +6748,10 @@ namespace Retro_Achievement_Tracker
             this.label73.BackColor = System.Drawing.Color.Transparent;
             this.label73.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label73.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label73.Location = new System.Drawing.Point(3, 3);
+            this.label73.Location = new System.Drawing.Point(4, 5);
+            this.label73.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label73.Name = "label73";
-            this.label73.Size = new System.Drawing.Size(190, 26);
+            this.label73.Size = new System.Drawing.Size(285, 40);
             this.label73.TabIndex = 10069;
             this.label73.Text = "Field Overrides";
             // 
@@ -6338,10 +6762,10 @@ namespace Retro_Achievement_Tracker
             this.gameProgressDefaultButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.gameProgressDefaultButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameProgressDefaultButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(68)))), ((int)(((byte)(68)))));
-            this.gameProgressDefaultButton.Location = new System.Drawing.Point(204, 2);
+            this.gameProgressDefaultButton.Location = new System.Drawing.Point(306, 3);
             this.gameProgressDefaultButton.Margin = new System.Windows.Forms.Padding(0);
             this.gameProgressDefaultButton.Name = "gameProgressDefaultButton";
-            this.gameProgressDefaultButton.Size = new System.Drawing.Size(75, 27);
+            this.gameProgressDefaultButton.Size = new System.Drawing.Size(112, 42);
             this.gameProgressDefaultButton.TabIndex = 39;
             this.gameProgressDefaultButton.Text = "Default";
             this.gameProgressDefaultButton.UseVisualStyleBackColor = false;
@@ -6350,9 +6774,10 @@ namespace Retro_Achievement_Tracker
             // pictureBox17
             // 
             this.pictureBox17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.pictureBox17.Location = new System.Drawing.Point(2, 32);
+            this.pictureBox17.Location = new System.Drawing.Point(3, 49);
+            this.pictureBox17.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox17.Name = "pictureBox17";
-            this.pictureBox17.Size = new System.Drawing.Size(275, 2);
+            this.pictureBox17.Size = new System.Drawing.Size(412, 3);
             this.pictureBox17.TabIndex = 10070;
             this.pictureBox17.TabStop = false;
             // 
@@ -6362,9 +6787,10 @@ namespace Retro_Achievement_Tracker
             this.panel38.Controls.Add(this.label74);
             this.panel38.Controls.Add(this.gameProgressAchievementsCheckBox);
             this.panel38.Controls.Add(this.gameProgressAchievementsTextBox);
-            this.panel38.Location = new System.Drawing.Point(2, 62);
+            this.panel38.Location = new System.Drawing.Point(3, 95);
+            this.panel38.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel38.Name = "panel38";
-            this.panel38.Size = new System.Drawing.Size(278, 23);
+            this.panel38.Size = new System.Drawing.Size(417, 35);
             this.panel38.TabIndex = 10061;
             // 
             // label74
@@ -6372,9 +6798,10 @@ namespace Retro_Achievement_Tracker
             this.label74.BackColor = System.Drawing.Color.Transparent;
             this.label74.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label74.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label74.Location = new System.Drawing.Point(3, 3);
+            this.label74.Location = new System.Drawing.Point(4, 5);
+            this.label74.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label74.Name = "label74";
-            this.label74.Size = new System.Drawing.Size(112, 16);
+            this.label74.Size = new System.Drawing.Size(168, 25);
             this.label74.TabIndex = 10066;
             this.label74.Text = "Achievements";
             // 
@@ -6382,9 +6809,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.gameProgressAchievementsCheckBox.AutoSize = true;
             this.gameProgressAchievementsCheckBox.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameProgressAchievementsCheckBox.Location = new System.Drawing.Point(225, 5);
+            this.gameProgressAchievementsCheckBox.Location = new System.Drawing.Point(338, 8);
+            this.gameProgressAchievementsCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameProgressAchievementsCheckBox.Name = "gameProgressAchievementsCheckBox";
-            this.gameProgressAchievementsCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.gameProgressAchievementsCheckBox.Size = new System.Drawing.Size(22, 21);
             this.gameProgressAchievementsCheckBox.TabIndex = 52;
             this.gameProgressAchievementsCheckBox.UseVisualStyleBackColor = true;
             this.gameProgressAchievementsCheckBox.CheckedChanged += new System.EventHandler(this.FeatureEnablementCheckBox_CheckedChanged);
@@ -6394,9 +6822,10 @@ namespace Retro_Achievement_Tracker
             this.gameProgressAchievementsTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.gameProgressAchievementsTextBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameProgressAchievementsTextBox.ForeColor = System.Drawing.Color.White;
-            this.gameProgressAchievementsTextBox.Location = new System.Drawing.Point(116, 0);
+            this.gameProgressAchievementsTextBox.Location = new System.Drawing.Point(174, 0);
+            this.gameProgressAchievementsTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameProgressAchievementsTextBox.Name = "gameProgressAchievementsTextBox";
-            this.gameProgressAchievementsTextBox.Size = new System.Drawing.Size(99, 23);
+            this.gameProgressAchievementsTextBox.Size = new System.Drawing.Size(146, 31);
             this.gameProgressAchievementsTextBox.TabIndex = 1;
             this.gameProgressAchievementsTextBox.Text = "Achievements";
             this.gameProgressAchievementsTextBox.TextChanged += new System.EventHandler(this.OverrideTextBox_TextChanged);
@@ -6407,9 +6836,10 @@ namespace Retro_Achievement_Tracker
             this.panel39.Controls.Add(this.label75);
             this.panel39.Controls.Add(this.gameProgressRatioCheckBox);
             this.panel39.Controls.Add(this.gameProgressRatioTextBox);
-            this.panel39.Location = new System.Drawing.Point(2, 128);
+            this.panel39.Location = new System.Drawing.Point(3, 197);
+            this.panel39.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel39.Name = "panel39";
-            this.panel39.Size = new System.Drawing.Size(278, 23);
+            this.panel39.Size = new System.Drawing.Size(417, 35);
             this.panel39.TabIndex = 10061;
             // 
             // label75
@@ -6417,9 +6847,10 @@ namespace Retro_Achievement_Tracker
             this.label75.BackColor = System.Drawing.Color.Transparent;
             this.label75.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label75.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label75.Location = new System.Drawing.Point(3, 4);
+            this.label75.Location = new System.Drawing.Point(4, 6);
+            this.label75.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label75.Name = "label75";
-            this.label75.Size = new System.Drawing.Size(94, 16);
+            this.label75.Size = new System.Drawing.Size(141, 25);
             this.label75.TabIndex = 10069;
             this.label75.Text = "Retro Ratio";
             // 
@@ -6427,9 +6858,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.gameProgressRatioCheckBox.AutoSize = true;
             this.gameProgressRatioCheckBox.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameProgressRatioCheckBox.Location = new System.Drawing.Point(225, 5);
+            this.gameProgressRatioCheckBox.Location = new System.Drawing.Point(338, 8);
+            this.gameProgressRatioCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameProgressRatioCheckBox.Name = "gameProgressRatioCheckBox";
-            this.gameProgressRatioCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.gameProgressRatioCheckBox.Size = new System.Drawing.Size(22, 21);
             this.gameProgressRatioCheckBox.TabIndex = 55;
             this.gameProgressRatioCheckBox.UseVisualStyleBackColor = true;
             this.gameProgressRatioCheckBox.CheckedChanged += new System.EventHandler(this.FeatureEnablementCheckBox_CheckedChanged);
@@ -6439,9 +6871,10 @@ namespace Retro_Achievement_Tracker
             this.gameProgressRatioTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.gameProgressRatioTextBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameProgressRatioTextBox.ForeColor = System.Drawing.Color.White;
-            this.gameProgressRatioTextBox.Location = new System.Drawing.Point(116, 0);
+            this.gameProgressRatioTextBox.Location = new System.Drawing.Point(174, 0);
+            this.gameProgressRatioTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameProgressRatioTextBox.Name = "gameProgressRatioTextBox";
-            this.gameProgressRatioTextBox.Size = new System.Drawing.Size(99, 23);
+            this.gameProgressRatioTextBox.Size = new System.Drawing.Size(146, 31);
             this.gameProgressRatioTextBox.TabIndex = 5;
             this.gameProgressRatioTextBox.Text = "Retro Ratio";
             this.gameProgressRatioTextBox.TextChanged += new System.EventHandler(this.OverrideTextBox_TextChanged);
@@ -6452,9 +6885,10 @@ namespace Retro_Achievement_Tracker
             this.panel40.Controls.Add(this.label76);
             this.panel40.Controls.Add(this.gameProgressTruePointsTextBox);
             this.panel40.Controls.Add(this.gameProgressTruePointsCheckBox);
-            this.panel40.Location = new System.Drawing.Point(2, 106);
+            this.panel40.Location = new System.Drawing.Point(3, 163);
+            this.panel40.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel40.Name = "panel40";
-            this.panel40.Size = new System.Drawing.Size(278, 23);
+            this.panel40.Size = new System.Drawing.Size(417, 35);
             this.panel40.TabIndex = 10061;
             // 
             // label76
@@ -6462,9 +6896,10 @@ namespace Retro_Achievement_Tracker
             this.label76.BackColor = System.Drawing.Color.Transparent;
             this.label76.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label76.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label76.Location = new System.Drawing.Point(3, 4);
+            this.label76.Location = new System.Drawing.Point(4, 6);
+            this.label76.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label76.Name = "label76";
-            this.label76.Size = new System.Drawing.Size(94, 16);
+            this.label76.Size = new System.Drawing.Size(141, 25);
             this.label76.TabIndex = 10068;
             this.label76.Text = "True Points";
             // 
@@ -6473,9 +6908,10 @@ namespace Retro_Achievement_Tracker
             this.gameProgressTruePointsTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.gameProgressTruePointsTextBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameProgressTruePointsTextBox.ForeColor = System.Drawing.Color.White;
-            this.gameProgressTruePointsTextBox.Location = new System.Drawing.Point(116, 0);
+            this.gameProgressTruePointsTextBox.Location = new System.Drawing.Point(174, 0);
+            this.gameProgressTruePointsTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameProgressTruePointsTextBox.Name = "gameProgressTruePointsTextBox";
-            this.gameProgressTruePointsTextBox.Size = new System.Drawing.Size(99, 23);
+            this.gameProgressTruePointsTextBox.Size = new System.Drawing.Size(146, 31);
             this.gameProgressTruePointsTextBox.TabIndex = 7;
             this.gameProgressTruePointsTextBox.Text = "True Points";
             this.gameProgressTruePointsTextBox.TextChanged += new System.EventHandler(this.OverrideTextBox_TextChanged);
@@ -6484,9 +6920,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.gameProgressTruePointsCheckBox.AutoSize = true;
             this.gameProgressTruePointsCheckBox.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameProgressTruePointsCheckBox.Location = new System.Drawing.Point(225, 5);
+            this.gameProgressTruePointsCheckBox.Location = new System.Drawing.Point(338, 8);
+            this.gameProgressTruePointsCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameProgressTruePointsCheckBox.Name = "gameProgressTruePointsCheckBox";
-            this.gameProgressTruePointsCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.gameProgressTruePointsCheckBox.Size = new System.Drawing.Size(22, 21);
             this.gameProgressTruePointsCheckBox.TabIndex = 56;
             this.gameProgressTruePointsCheckBox.UseVisualStyleBackColor = true;
             this.gameProgressTruePointsCheckBox.CheckedChanged += new System.EventHandler(this.FeatureEnablementCheckBox_CheckedChanged);
@@ -6497,9 +6934,10 @@ namespace Retro_Achievement_Tracker
             this.panel41.Controls.Add(this.label77);
             this.panel41.Controls.Add(this.gameProgressPointsTextBox);
             this.panel41.Controls.Add(this.gameProgressPointsCheckBox);
-            this.panel41.Location = new System.Drawing.Point(2, 84);
+            this.panel41.Location = new System.Drawing.Point(3, 129);
+            this.panel41.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel41.Name = "panel41";
-            this.panel41.Size = new System.Drawing.Size(278, 23);
+            this.panel41.Size = new System.Drawing.Size(417, 35);
             this.panel41.TabIndex = 10061;
             // 
             // label77
@@ -6507,9 +6945,10 @@ namespace Retro_Achievement_Tracker
             this.label77.BackColor = System.Drawing.Color.Transparent;
             this.label77.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label77.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label77.Location = new System.Drawing.Point(3, 4);
+            this.label77.Location = new System.Drawing.Point(4, 6);
+            this.label77.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label77.Name = "label77";
-            this.label77.Size = new System.Drawing.Size(94, 16);
+            this.label77.Size = new System.Drawing.Size(141, 25);
             this.label77.TabIndex = 10067;
             this.label77.Text = "Points";
             // 
@@ -6518,9 +6957,10 @@ namespace Retro_Achievement_Tracker
             this.gameProgressPointsTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.gameProgressPointsTextBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameProgressPointsTextBox.ForeColor = System.Drawing.Color.White;
-            this.gameProgressPointsTextBox.Location = new System.Drawing.Point(116, 0);
+            this.gameProgressPointsTextBox.Location = new System.Drawing.Point(174, 0);
+            this.gameProgressPointsTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameProgressPointsTextBox.Name = "gameProgressPointsTextBox";
-            this.gameProgressPointsTextBox.Size = new System.Drawing.Size(99, 23);
+            this.gameProgressPointsTextBox.Size = new System.Drawing.Size(146, 31);
             this.gameProgressPointsTextBox.TabIndex = 6;
             this.gameProgressPointsTextBox.Text = "Points";
             this.gameProgressPointsTextBox.TextChanged += new System.EventHandler(this.OverrideTextBox_TextChanged);
@@ -6529,9 +6969,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.gameProgressPointsCheckBox.AutoSize = true;
             this.gameProgressPointsCheckBox.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameProgressPointsCheckBox.Location = new System.Drawing.Point(225, 5);
+            this.gameProgressPointsCheckBox.Location = new System.Drawing.Point(338, 8);
+            this.gameProgressPointsCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameProgressPointsCheckBox.Name = "gameProgressPointsCheckBox";
-            this.gameProgressPointsCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.gameProgressPointsCheckBox.Size = new System.Drawing.Size(22, 21);
             this.gameProgressPointsCheckBox.TabIndex = 54;
             this.gameProgressPointsCheckBox.UseVisualStyleBackColor = true;
             this.gameProgressPointsCheckBox.CheckedChanged += new System.EventHandler(this.FeatureEnablementCheckBox_CheckedChanged);
@@ -6544,9 +6985,10 @@ namespace Retro_Achievement_Tracker
             this.panel113.Controls.Add(this.recentAchievementsMaxListNumericUpDown);
             this.panel113.Controls.Add(this.recentAchievementsMaxListLabel);
             this.panel113.Controls.Add(this.recentAchievementsAutoScrollCheckBox);
-            this.panel113.Location = new System.Drawing.Point(4, 3);
+            this.panel113.Location = new System.Drawing.Point(6, 5);
+            this.panel113.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel113.Name = "panel113";
-            this.panel113.Size = new System.Drawing.Size(289, 64);
+            this.panel113.Size = new System.Drawing.Size(434, 98);
             this.panel113.TabIndex = 10083;
             // 
             // label155
@@ -6554,18 +6996,20 @@ namespace Retro_Achievement_Tracker
             this.label155.BackColor = System.Drawing.Color.Transparent;
             this.label155.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label155.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label155.Location = new System.Drawing.Point(3, 3);
+            this.label155.Location = new System.Drawing.Point(4, 5);
+            this.label155.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label155.Name = "label155";
-            this.label155.Size = new System.Drawing.Size(190, 26);
+            this.label155.Size = new System.Drawing.Size(285, 40);
             this.label155.TabIndex = 10069;
             this.label155.Text = "List Settings";
             // 
             // pictureBox15
             // 
             this.pictureBox15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.pictureBox15.Location = new System.Drawing.Point(2, 32);
+            this.pictureBox15.Location = new System.Drawing.Point(3, 49);
+            this.pictureBox15.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox15.Name = "pictureBox15";
-            this.pictureBox15.Size = new System.Drawing.Size(275, 2);
+            this.pictureBox15.Size = new System.Drawing.Size(412, 3);
             this.pictureBox15.TabIndex = 10070;
             this.pictureBox15.TabStop = false;
             // 
@@ -6576,9 +7020,10 @@ namespace Retro_Achievement_Tracker
             this.recentAchievementsAutoScrollCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.recentAchievementsAutoScrollCheckBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.recentAchievementsAutoScrollCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.recentAchievementsAutoScrollCheckBox.Location = new System.Drawing.Point(3, 39);
+            this.recentAchievementsAutoScrollCheckBox.Location = new System.Drawing.Point(4, 60);
+            this.recentAchievementsAutoScrollCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.recentAchievementsAutoScrollCheckBox.Name = "recentAchievementsAutoScrollCheckBox";
-            this.recentAchievementsAutoScrollCheckBox.Size = new System.Drawing.Size(98, 20);
+            this.recentAchievementsAutoScrollCheckBox.Size = new System.Drawing.Size(147, 29);
             this.recentAchievementsAutoScrollCheckBox.TabIndex = 10055;
             this.recentAchievementsAutoScrollCheckBox.Text = "Auto-scroll";
             this.recentAchievementsAutoScrollCheckBox.UseVisualStyleBackColor = false;
@@ -6602,9 +7047,10 @@ namespace Retro_Achievement_Tracker
             this.panel99.Controls.Add(this.panel108);
             this.panel99.Controls.Add(this.recentAchievementsPointsOutlinePanel);
             this.panel99.Controls.Add(this.recentAchievementsLineOutlinePanel);
-            this.panel99.Location = new System.Drawing.Point(296, 3);
+            this.panel99.Location = new System.Drawing.Point(444, 5);
+            this.panel99.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel99.Name = "panel99";
-            this.panel99.Size = new System.Drawing.Size(468, 285);
+            this.panel99.Size = new System.Drawing.Size(702, 438);
             this.panel99.TabIndex = 10082;
             // 
             // recentAchievementsLinePanel
@@ -6612,9 +7058,10 @@ namespace Retro_Achievement_Tracker
             this.recentAchievementsLinePanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.recentAchievementsLinePanel.Controls.Add(this.label16);
             this.recentAchievementsLinePanel.Controls.Add(this.recentAchievementsLineColorPictureBox);
-            this.recentAchievementsLinePanel.Location = new System.Drawing.Point(2, 172);
+            this.recentAchievementsLinePanel.Location = new System.Drawing.Point(3, 265);
+            this.recentAchievementsLinePanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.recentAchievementsLinePanel.Name = "recentAchievementsLinePanel";
-            this.recentAchievementsLinePanel.Size = new System.Drawing.Size(463, 23);
+            this.recentAchievementsLinePanel.Size = new System.Drawing.Size(694, 35);
             this.recentAchievementsLinePanel.TabIndex = 10068;
             // 
             // label16
@@ -6622,9 +7069,10 @@ namespace Retro_Achievement_Tracker
             this.label16.BackColor = System.Drawing.Color.Transparent;
             this.label16.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label16.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label16.Location = new System.Drawing.Point(3, 4);
+            this.label16.Location = new System.Drawing.Point(4, 6);
+            this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(144, 16);
+            this.label16.Size = new System.Drawing.Size(216, 25);
             this.label16.TabIndex = 10066;
             this.label16.Text = "Line";
             // 
@@ -6632,9 +7080,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.recentAchievementsLineColorPictureBox.BackColor = System.Drawing.Color.White;
             this.recentAchievementsLineColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.recentAchievementsLineColorPictureBox.Location = new System.Drawing.Point(153, 3);
+            this.recentAchievementsLineColorPictureBox.Location = new System.Drawing.Point(230, 5);
+            this.recentAchievementsLineColorPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.recentAchievementsLineColorPictureBox.Name = "recentAchievementsLineColorPictureBox";
-            this.recentAchievementsLineColorPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.recentAchievementsLineColorPictureBox.Size = new System.Drawing.Size(22, 22);
             this.recentAchievementsLineColorPictureBox.TabIndex = 45;
             this.recentAchievementsLineColorPictureBox.TabStop = false;
             this.recentAchievementsLineColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
@@ -6644,9 +7093,10 @@ namespace Retro_Achievement_Tracker
             this.label17.BackColor = System.Drawing.Color.Transparent;
             this.label17.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label17.Location = new System.Drawing.Point(3, 3);
+            this.label17.Location = new System.Drawing.Point(4, 5);
+            this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(243, 26);
+            this.label17.Size = new System.Drawing.Size(364, 40);
             this.label17.TabIndex = 10062;
             this.label17.Text = "Window/Font Settings";
             // 
@@ -6656,9 +7106,10 @@ namespace Retro_Achievement_Tracker
             this.panel101.Controls.Add(this.recentAchievementsBorderCheckBox);
             this.panel101.Controls.Add(this.recentAchievementsBorderColorPictureBox);
             this.panel101.Controls.Add(this.label18);
-            this.panel101.Location = new System.Drawing.Point(2, 84);
+            this.panel101.Location = new System.Drawing.Point(3, 129);
+            this.panel101.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel101.Name = "panel101";
-            this.panel101.Size = new System.Drawing.Size(463, 23);
+            this.panel101.Size = new System.Drawing.Size(694, 35);
             this.panel101.TabIndex = 10069;
             // 
             // recentAchievementsBorderCheckBox
@@ -6666,9 +7117,10 @@ namespace Retro_Achievement_Tracker
             this.recentAchievementsBorderCheckBox.AutoSize = true;
             this.recentAchievementsBorderCheckBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.recentAchievementsBorderCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.recentAchievementsBorderCheckBox.Location = new System.Drawing.Point(413, 5);
+            this.recentAchievementsBorderCheckBox.Location = new System.Drawing.Point(620, 8);
+            this.recentAchievementsBorderCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.recentAchievementsBorderCheckBox.Name = "recentAchievementsBorderCheckBox";
-            this.recentAchievementsBorderCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.recentAchievementsBorderCheckBox.Size = new System.Drawing.Size(22, 21);
             this.recentAchievementsBorderCheckBox.TabIndex = 10065;
             this.recentAchievementsBorderCheckBox.UseVisualStyleBackColor = true;
             this.recentAchievementsBorderCheckBox.CheckedChanged += new System.EventHandler(this.FeatureEnablementCheckBox_CheckedChanged);
@@ -6677,9 +7129,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.recentAchievementsBorderColorPictureBox.BackColor = System.Drawing.Color.White;
             this.recentAchievementsBorderColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.recentAchievementsBorderColorPictureBox.Location = new System.Drawing.Point(153, 3);
+            this.recentAchievementsBorderColorPictureBox.Location = new System.Drawing.Point(230, 5);
+            this.recentAchievementsBorderColorPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.recentAchievementsBorderColorPictureBox.Name = "recentAchievementsBorderColorPictureBox";
-            this.recentAchievementsBorderColorPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.recentAchievementsBorderColorPictureBox.Size = new System.Drawing.Size(22, 22);
             this.recentAchievementsBorderColorPictureBox.TabIndex = 42;
             this.recentAchievementsBorderColorPictureBox.TabStop = false;
             this.recentAchievementsBorderColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
@@ -6689,9 +7142,10 @@ namespace Retro_Achievement_Tracker
             this.label18.BackColor = System.Drawing.Color.Transparent;
             this.label18.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label18.Location = new System.Drawing.Point(3, 3);
+            this.label18.Location = new System.Drawing.Point(4, 5);
+            this.label18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(144, 16);
+            this.label18.Size = new System.Drawing.Size(216, 25);
             this.label18.TabIndex = 10064;
             this.label18.Text = "Border";
             // 
@@ -6701,9 +7155,10 @@ namespace Retro_Achievement_Tracker
             this.recentAchievementsPointsPanel.Controls.Add(this.label19);
             this.recentAchievementsPointsPanel.Controls.Add(this.recentAchievementsPointsFontColorPictureBox);
             this.recentAchievementsPointsPanel.Controls.Add(this.recentAchievementsPointsFontComboBox);
-            this.recentAchievementsPointsPanel.Location = new System.Drawing.Point(2, 150);
+            this.recentAchievementsPointsPanel.Location = new System.Drawing.Point(3, 231);
+            this.recentAchievementsPointsPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.recentAchievementsPointsPanel.Name = "recentAchievementsPointsPanel";
-            this.recentAchievementsPointsPanel.Size = new System.Drawing.Size(463, 23);
+            this.recentAchievementsPointsPanel.Size = new System.Drawing.Size(694, 35);
             this.recentAchievementsPointsPanel.TabIndex = 10070;
             // 
             // label19
@@ -6711,9 +7166,10 @@ namespace Retro_Achievement_Tracker
             this.label19.BackColor = System.Drawing.Color.Transparent;
             this.label19.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label19.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label19.Location = new System.Drawing.Point(3, 4);
+            this.label19.Location = new System.Drawing.Point(4, 6);
+            this.label19.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(144, 16);
+            this.label19.Size = new System.Drawing.Size(216, 25);
             this.label19.TabIndex = 10065;
             this.label19.Text = "Points";
             // 
@@ -6721,9 +7177,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.recentAchievementsPointsFontColorPictureBox.BackColor = System.Drawing.Color.White;
             this.recentAchievementsPointsFontColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.recentAchievementsPointsFontColorPictureBox.Location = new System.Drawing.Point(153, 4);
+            this.recentAchievementsPointsFontColorPictureBox.Location = new System.Drawing.Point(230, 6);
+            this.recentAchievementsPointsFontColorPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.recentAchievementsPointsFontColorPictureBox.Name = "recentAchievementsPointsFontColorPictureBox";
-            this.recentAchievementsPointsFontColorPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.recentAchievementsPointsFontColorPictureBox.Size = new System.Drawing.Size(22, 22);
             this.recentAchievementsPointsFontColorPictureBox.TabIndex = 45;
             this.recentAchievementsPointsFontColorPictureBox.TabStop = false;
             this.recentAchievementsPointsFontColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
@@ -6734,9 +7191,10 @@ namespace Retro_Achievement_Tracker
             this.recentAchievementsPointsFontComboBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.recentAchievementsPointsFontComboBox.ForeColor = System.Drawing.Color.White;
             this.recentAchievementsPointsFontComboBox.FormattingEnabled = true;
-            this.recentAchievementsPointsFontComboBox.Location = new System.Drawing.Point(193, 2);
+            this.recentAchievementsPointsFontComboBox.Location = new System.Drawing.Point(290, 3);
+            this.recentAchievementsPointsFontComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.recentAchievementsPointsFontComboBox.Name = "recentAchievementsPointsFontComboBox";
-            this.recentAchievementsPointsFontComboBox.Size = new System.Drawing.Size(202, 21);
+            this.recentAchievementsPointsFontComboBox.Size = new System.Drawing.Size(301, 28);
             this.recentAchievementsPointsFontComboBox.TabIndex = 45;
             this.recentAchievementsPointsFontComboBox.SelectedIndexChanged += new System.EventHandler(this.FontFamilyComboBox_SelectedIndexChanged);
             // 
@@ -6748,9 +7206,10 @@ namespace Retro_Achievement_Tracker
             this.panel103.Controls.Add(this.label21);
             this.panel103.Controls.Add(this.label22);
             this.panel103.Controls.Add(this.label23);
-            this.panel103.Location = new System.Drawing.Point(2, 40);
+            this.panel103.Location = new System.Drawing.Point(3, 62);
+            this.panel103.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel103.Name = "panel103";
-            this.panel103.Size = new System.Drawing.Size(463, 23);
+            this.panel103.Size = new System.Drawing.Size(694, 35);
             this.panel103.TabIndex = 10076;
             // 
             // recentAchievementsAdvancedCheckBox
@@ -6760,9 +7219,10 @@ namespace Retro_Achievement_Tracker
             this.recentAchievementsAdvancedCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.recentAchievementsAdvancedCheckBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.recentAchievementsAdvancedCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.recentAchievementsAdvancedCheckBox.Location = new System.Drawing.Point(5, 2);
+            this.recentAchievementsAdvancedCheckBox.Location = new System.Drawing.Point(8, 3);
+            this.recentAchievementsAdvancedCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.recentAchievementsAdvancedCheckBox.Name = "recentAchievementsAdvancedCheckBox";
-            this.recentAchievementsAdvancedCheckBox.Size = new System.Drawing.Size(91, 20);
+            this.recentAchievementsAdvancedCheckBox.Size = new System.Drawing.Size(135, 29);
             this.recentAchievementsAdvancedCheckBox.TabIndex = 10053;
             this.recentAchievementsAdvancedCheckBox.Text = "Advanced";
             this.recentAchievementsAdvancedCheckBox.UseVisualStyleBackColor = false;
@@ -6773,9 +7233,10 @@ namespace Retro_Achievement_Tracker
             this.label20.BackColor = System.Drawing.Color.Transparent;
             this.label20.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label20.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label20.Location = new System.Drawing.Point(150, 3);
+            this.label20.Location = new System.Drawing.Point(225, 5);
+            this.label20.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(48, 16);
+            this.label20.Size = new System.Drawing.Size(72, 25);
             this.label20.TabIndex = 10065;
             this.label20.Text = "Color";
             // 
@@ -6784,9 +7245,10 @@ namespace Retro_Achievement_Tracker
             this.label21.BackColor = System.Drawing.Color.Transparent;
             this.label21.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label21.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label21.Location = new System.Drawing.Point(194, 3);
+            this.label21.Location = new System.Drawing.Point(291, 5);
+            this.label21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(50, 16);
+            this.label21.Size = new System.Drawing.Size(75, 25);
             this.label21.TabIndex = 10066;
             this.label21.Text = "Font";
             // 
@@ -6795,9 +7257,10 @@ namespace Retro_Achievement_Tracker
             this.label22.BackColor = System.Drawing.Color.Transparent;
             this.label22.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label22.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label22.Location = new System.Drawing.Point(349, 3);
+            this.label22.Location = new System.Drawing.Point(524, 5);
+            this.label22.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(41, 16);
+            this.label22.Size = new System.Drawing.Size(62, 25);
             this.label22.TabIndex = 10068;
             this.label22.Text = "Size";
             // 
@@ -6806,9 +7269,10 @@ namespace Retro_Achievement_Tracker
             this.label23.BackColor = System.Drawing.Color.Transparent;
             this.label23.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label23.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label23.Location = new System.Drawing.Point(396, 3);
+            this.label23.Location = new System.Drawing.Point(594, 5);
+            this.label23.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(59, 16);
+            this.label23.Size = new System.Drawing.Size(88, 25);
             this.label23.TabIndex = 10067;
             this.label23.Text = "Enabled";
             // 
@@ -6819,9 +7283,10 @@ namespace Retro_Achievement_Tracker
             this.panel104.Controls.Add(this.recentAchievementsTitleFontOutlineCheckBox);
             this.panel104.Controls.Add(this.recentAchievementsTitleOutlineLabel);
             this.panel104.Controls.Add(this.recentAchievementsTitleFontOutlineColorPictureBox);
-            this.panel104.Location = new System.Drawing.Point(2, 194);
+            this.panel104.Location = new System.Drawing.Point(3, 298);
+            this.panel104.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel104.Name = "panel104";
-            this.panel104.Size = new System.Drawing.Size(463, 23);
+            this.panel104.Size = new System.Drawing.Size(694, 35);
             this.panel104.TabIndex = 10071;
             // 
             // recentAchievementsTitleFontOutlineNumericUpDown
@@ -6830,7 +7295,8 @@ namespace Retro_Achievement_Tracker
             this.recentAchievementsTitleFontOutlineNumericUpDown.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.recentAchievementsTitleFontOutlineNumericUpDown.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.recentAchievementsTitleFontOutlineNumericUpDown.ForeColor = System.Drawing.Color.White;
-            this.recentAchievementsTitleFontOutlineNumericUpDown.Location = new System.Drawing.Point(352, 4);
+            this.recentAchievementsTitleFontOutlineNumericUpDown.Location = new System.Drawing.Point(528, 6);
+            this.recentAchievementsTitleFontOutlineNumericUpDown.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.recentAchievementsTitleFontOutlineNumericUpDown.Maximum = new decimal(new int[] {
             5,
             0,
@@ -6842,7 +7308,7 @@ namespace Retro_Achievement_Tracker
             0,
             0});
             this.recentAchievementsTitleFontOutlineNumericUpDown.Name = "recentAchievementsTitleFontOutlineNumericUpDown";
-            this.recentAchievementsTitleFontOutlineNumericUpDown.Size = new System.Drawing.Size(43, 17);
+            this.recentAchievementsTitleFontOutlineNumericUpDown.Size = new System.Drawing.Size(64, 24);
             this.recentAchievementsTitleFontOutlineNumericUpDown.TabIndex = 45;
             this.recentAchievementsTitleFontOutlineNumericUpDown.Value = new decimal(new int[] {
             1,
@@ -6856,9 +7322,10 @@ namespace Retro_Achievement_Tracker
             this.recentAchievementsTitleFontOutlineCheckBox.AutoSize = true;
             this.recentAchievementsTitleFontOutlineCheckBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.recentAchievementsTitleFontOutlineCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.recentAchievementsTitleFontOutlineCheckBox.Location = new System.Drawing.Point(413, 5);
+            this.recentAchievementsTitleFontOutlineCheckBox.Location = new System.Drawing.Point(620, 8);
+            this.recentAchievementsTitleFontOutlineCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.recentAchievementsTitleFontOutlineCheckBox.Name = "recentAchievementsTitleFontOutlineCheckBox";
-            this.recentAchievementsTitleFontOutlineCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.recentAchievementsTitleFontOutlineCheckBox.Size = new System.Drawing.Size(22, 21);
             this.recentAchievementsTitleFontOutlineCheckBox.TabIndex = 45;
             this.recentAchievementsTitleFontOutlineCheckBox.UseVisualStyleBackColor = true;
             this.recentAchievementsTitleFontOutlineCheckBox.CheckedChanged += new System.EventHandler(this.FeatureEnablementCheckBox_CheckedChanged);
@@ -6868,9 +7335,10 @@ namespace Retro_Achievement_Tracker
             this.recentAchievementsTitleOutlineLabel.BackColor = System.Drawing.Color.Transparent;
             this.recentAchievementsTitleOutlineLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.recentAchievementsTitleOutlineLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.recentAchievementsTitleOutlineLabel.Location = new System.Drawing.Point(3, 3);
+            this.recentAchievementsTitleOutlineLabel.Location = new System.Drawing.Point(4, 5);
+            this.recentAchievementsTitleOutlineLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.recentAchievementsTitleOutlineLabel.Name = "recentAchievementsTitleOutlineLabel";
-            this.recentAchievementsTitleOutlineLabel.Size = new System.Drawing.Size(144, 16);
+            this.recentAchievementsTitleOutlineLabel.Size = new System.Drawing.Size(216, 25);
             this.recentAchievementsTitleOutlineLabel.TabIndex = 10066;
             this.recentAchievementsTitleOutlineLabel.Text = "Title OutlineColor";
             // 
@@ -6878,9 +7346,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.recentAchievementsTitleFontOutlineColorPictureBox.BackColor = System.Drawing.Color.White;
             this.recentAchievementsTitleFontOutlineColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.recentAchievementsTitleFontOutlineColorPictureBox.Location = new System.Drawing.Point(153, 3);
+            this.recentAchievementsTitleFontOutlineColorPictureBox.Location = new System.Drawing.Point(230, 5);
+            this.recentAchievementsTitleFontOutlineColorPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.recentAchievementsTitleFontOutlineColorPictureBox.Name = "recentAchievementsTitleFontOutlineColorPictureBox";
-            this.recentAchievementsTitleFontOutlineColorPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.recentAchievementsTitleFontOutlineColorPictureBox.Size = new System.Drawing.Size(22, 22);
             this.recentAchievementsTitleFontOutlineColorPictureBox.TabIndex = 45;
             this.recentAchievementsTitleFontOutlineColorPictureBox.TabStop = false;
             this.recentAchievementsTitleFontOutlineColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
@@ -6892,10 +7361,10 @@ namespace Retro_Achievement_Tracker
             this.recentAchievementsOpenWindowButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.recentAchievementsOpenWindowButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.recentAchievementsOpenWindowButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
-            this.recentAchievementsOpenWindowButton.Location = new System.Drawing.Point(382, 2);
+            this.recentAchievementsOpenWindowButton.Location = new System.Drawing.Point(573, 3);
             this.recentAchievementsOpenWindowButton.Margin = new System.Windows.Forms.Padding(0);
             this.recentAchievementsOpenWindowButton.Name = "recentAchievementsOpenWindowButton";
-            this.recentAchievementsOpenWindowButton.Size = new System.Drawing.Size(75, 27);
+            this.recentAchievementsOpenWindowButton.Size = new System.Drawing.Size(112, 42);
             this.recentAchievementsOpenWindowButton.TabIndex = 10021;
             this.recentAchievementsOpenWindowButton.Text = "Open";
             this.recentAchievementsOpenWindowButton.UseVisualStyleBackColor = false;
@@ -6908,9 +7377,10 @@ namespace Retro_Achievement_Tracker
             this.recentAchievementsDescriptionOutlinePanel.Controls.Add(this.recentAchievementsDateFontOutlineColorPictureBox);
             this.recentAchievementsDescriptionOutlinePanel.Controls.Add(this.recentAchievementsDescriptionFontOutlineNumericUpDown);
             this.recentAchievementsDescriptionOutlinePanel.Controls.Add(this.recentAchievementsDateFontOutlineCheckBox);
-            this.recentAchievementsDescriptionOutlinePanel.Location = new System.Drawing.Point(2, 216);
+            this.recentAchievementsDescriptionOutlinePanel.Location = new System.Drawing.Point(3, 332);
+            this.recentAchievementsDescriptionOutlinePanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.recentAchievementsDescriptionOutlinePanel.Name = "recentAchievementsDescriptionOutlinePanel";
-            this.recentAchievementsDescriptionOutlinePanel.Size = new System.Drawing.Size(463, 23);
+            this.recentAchievementsDescriptionOutlinePanel.Size = new System.Drawing.Size(694, 35);
             this.recentAchievementsDescriptionOutlinePanel.TabIndex = 10072;
             // 
             // label144
@@ -6918,9 +7388,10 @@ namespace Retro_Achievement_Tracker
             this.label144.BackColor = System.Drawing.Color.Transparent;
             this.label144.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label144.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label144.Location = new System.Drawing.Point(3, 4);
+            this.label144.Location = new System.Drawing.Point(4, 6);
+            this.label144.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label144.Name = "label144";
-            this.label144.Size = new System.Drawing.Size(144, 16);
+            this.label144.Size = new System.Drawing.Size(216, 25);
             this.label144.TabIndex = 10066;
             this.label144.Text = "Date OutlineColor";
             // 
@@ -6928,9 +7399,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.recentAchievementsDateFontOutlineColorPictureBox.BackColor = System.Drawing.Color.White;
             this.recentAchievementsDateFontOutlineColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.recentAchievementsDateFontOutlineColorPictureBox.Location = new System.Drawing.Point(153, 4);
+            this.recentAchievementsDateFontOutlineColorPictureBox.Location = new System.Drawing.Point(230, 6);
+            this.recentAchievementsDateFontOutlineColorPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.recentAchievementsDateFontOutlineColorPictureBox.Name = "recentAchievementsDateFontOutlineColorPictureBox";
-            this.recentAchievementsDateFontOutlineColorPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.recentAchievementsDateFontOutlineColorPictureBox.Size = new System.Drawing.Size(22, 22);
             this.recentAchievementsDateFontOutlineColorPictureBox.TabIndex = 45;
             this.recentAchievementsDateFontOutlineColorPictureBox.TabStop = false;
             this.recentAchievementsDateFontOutlineColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
@@ -6941,7 +7413,8 @@ namespace Retro_Achievement_Tracker
             this.recentAchievementsDescriptionFontOutlineNumericUpDown.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.recentAchievementsDescriptionFontOutlineNumericUpDown.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.recentAchievementsDescriptionFontOutlineNumericUpDown.ForeColor = System.Drawing.Color.White;
-            this.recentAchievementsDescriptionFontOutlineNumericUpDown.Location = new System.Drawing.Point(352, 4);
+            this.recentAchievementsDescriptionFontOutlineNumericUpDown.Location = new System.Drawing.Point(528, 6);
+            this.recentAchievementsDescriptionFontOutlineNumericUpDown.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.recentAchievementsDescriptionFontOutlineNumericUpDown.Maximum = new decimal(new int[] {
             5,
             0,
@@ -6953,7 +7426,7 @@ namespace Retro_Achievement_Tracker
             0,
             0});
             this.recentAchievementsDescriptionFontOutlineNumericUpDown.Name = "recentAchievementsDescriptionFontOutlineNumericUpDown";
-            this.recentAchievementsDescriptionFontOutlineNumericUpDown.Size = new System.Drawing.Size(43, 17);
+            this.recentAchievementsDescriptionFontOutlineNumericUpDown.Size = new System.Drawing.Size(64, 24);
             this.recentAchievementsDescriptionFontOutlineNumericUpDown.TabIndex = 45;
             this.recentAchievementsDescriptionFontOutlineNumericUpDown.Value = new decimal(new int[] {
             1,
@@ -6967,9 +7440,10 @@ namespace Retro_Achievement_Tracker
             this.recentAchievementsDateFontOutlineCheckBox.AutoSize = true;
             this.recentAchievementsDateFontOutlineCheckBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.recentAchievementsDateFontOutlineCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.recentAchievementsDateFontOutlineCheckBox.Location = new System.Drawing.Point(413, 6);
+            this.recentAchievementsDateFontOutlineCheckBox.Location = new System.Drawing.Point(620, 9);
+            this.recentAchievementsDateFontOutlineCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.recentAchievementsDateFontOutlineCheckBox.Name = "recentAchievementsDateFontOutlineCheckBox";
-            this.recentAchievementsDateFontOutlineCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.recentAchievementsDateFontOutlineCheckBox.Size = new System.Drawing.Size(22, 21);
             this.recentAchievementsDateFontOutlineCheckBox.TabIndex = 45;
             this.recentAchievementsDateFontOutlineCheckBox.UseVisualStyleBackColor = true;
             this.recentAchievementsDateFontOutlineCheckBox.CheckedChanged += new System.EventHandler(this.FeatureEnablementCheckBox_CheckedChanged);
@@ -6980,9 +7454,10 @@ namespace Retro_Achievement_Tracker
             this.recentAchievementsDescriptionPanel.Controls.Add(this.label145);
             this.recentAchievementsDescriptionPanel.Controls.Add(this.recentAchievementsDateFontColorPictureBox);
             this.recentAchievementsDescriptionPanel.Controls.Add(this.recentAchievementsDescriptionFontComboBox);
-            this.recentAchievementsDescriptionPanel.Location = new System.Drawing.Point(2, 128);
+            this.recentAchievementsDescriptionPanel.Location = new System.Drawing.Point(3, 197);
+            this.recentAchievementsDescriptionPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.recentAchievementsDescriptionPanel.Name = "recentAchievementsDescriptionPanel";
-            this.recentAchievementsDescriptionPanel.Size = new System.Drawing.Size(463, 23);
+            this.recentAchievementsDescriptionPanel.Size = new System.Drawing.Size(694, 35);
             this.recentAchievementsDescriptionPanel.TabIndex = 10061;
             // 
             // label145
@@ -6990,9 +7465,10 @@ namespace Retro_Achievement_Tracker
             this.label145.BackColor = System.Drawing.Color.Transparent;
             this.label145.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label145.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label145.Location = new System.Drawing.Point(3, 4);
+            this.label145.Location = new System.Drawing.Point(4, 6);
+            this.label145.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label145.Name = "label145";
-            this.label145.Size = new System.Drawing.Size(144, 16);
+            this.label145.Size = new System.Drawing.Size(216, 25);
             this.label145.TabIndex = 10066;
             this.label145.Text = "Date";
             // 
@@ -7000,9 +7476,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.recentAchievementsDateFontColorPictureBox.BackColor = System.Drawing.Color.White;
             this.recentAchievementsDateFontColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.recentAchievementsDateFontColorPictureBox.Location = new System.Drawing.Point(153, 3);
+            this.recentAchievementsDateFontColorPictureBox.Location = new System.Drawing.Point(230, 5);
+            this.recentAchievementsDateFontColorPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.recentAchievementsDateFontColorPictureBox.Name = "recentAchievementsDateFontColorPictureBox";
-            this.recentAchievementsDateFontColorPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.recentAchievementsDateFontColorPictureBox.Size = new System.Drawing.Size(22, 22);
             this.recentAchievementsDateFontColorPictureBox.TabIndex = 45;
             this.recentAchievementsDateFontColorPictureBox.TabStop = false;
             this.recentAchievementsDateFontColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
@@ -7013,9 +7490,10 @@ namespace Retro_Achievement_Tracker
             this.recentAchievementsDescriptionFontComboBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.recentAchievementsDescriptionFontComboBox.ForeColor = System.Drawing.Color.White;
             this.recentAchievementsDescriptionFontComboBox.FormattingEnabled = true;
-            this.recentAchievementsDescriptionFontComboBox.Location = new System.Drawing.Point(193, 2);
+            this.recentAchievementsDescriptionFontComboBox.Location = new System.Drawing.Point(290, 3);
+            this.recentAchievementsDescriptionFontComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.recentAchievementsDescriptionFontComboBox.Name = "recentAchievementsDescriptionFontComboBox";
-            this.recentAchievementsDescriptionFontComboBox.Size = new System.Drawing.Size(202, 21);
+            this.recentAchievementsDescriptionFontComboBox.Size = new System.Drawing.Size(301, 28);
             this.recentAchievementsDescriptionFontComboBox.TabIndex = 45;
             this.recentAchievementsDescriptionFontComboBox.SelectedIndexChanged += new System.EventHandler(this.FontFamilyComboBox_SelectedIndexChanged);
             // 
@@ -7025,9 +7503,10 @@ namespace Retro_Achievement_Tracker
             this.recentAchievementsAutoOpenWindowCheckbox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.recentAchievementsAutoOpenWindowCheckbox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.recentAchievementsAutoOpenWindowCheckbox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.recentAchievementsAutoOpenWindowCheckbox.Location = new System.Drawing.Point(252, 9);
+            this.recentAchievementsAutoOpenWindowCheckbox.Location = new System.Drawing.Point(378, 14);
+            this.recentAchievementsAutoOpenWindowCheckbox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.recentAchievementsAutoOpenWindowCheckbox.Name = "recentAchievementsAutoOpenWindowCheckbox";
-            this.recentAchievementsAutoOpenWindowCheckbox.Size = new System.Drawing.Size(98, 20);
+            this.recentAchievementsAutoOpenWindowCheckbox.Size = new System.Drawing.Size(147, 29);
             this.recentAchievementsAutoOpenWindowCheckbox.TabIndex = 10022;
             this.recentAchievementsAutoOpenWindowCheckbox.Text = "Auto-Open";
             this.recentAchievementsAutoOpenWindowCheckbox.UseVisualStyleBackColor = true;
@@ -7036,9 +7515,10 @@ namespace Retro_Achievement_Tracker
             // pictureBox23
             // 
             this.pictureBox23.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.pictureBox23.Location = new System.Drawing.Point(2, 32);
+            this.pictureBox23.Location = new System.Drawing.Point(3, 49);
+            this.pictureBox23.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox23.Name = "pictureBox23";
-            this.pictureBox23.Size = new System.Drawing.Size(460, 2);
+            this.pictureBox23.Size = new System.Drawing.Size(690, 3);
             this.pictureBox23.TabIndex = 10063;
             this.pictureBox23.TabStop = false;
             // 
@@ -7047,18 +7527,20 @@ namespace Retro_Achievement_Tracker
             this.panel107.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.panel107.Controls.Add(this.recentAchievementsBackgroundColorPictureBox);
             this.panel107.Controls.Add(this.label146);
-            this.panel107.Location = new System.Drawing.Point(2, 62);
+            this.panel107.Location = new System.Drawing.Point(3, 95);
+            this.panel107.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel107.Name = "panel107";
-            this.panel107.Size = new System.Drawing.Size(463, 23);
+            this.panel107.Size = new System.Drawing.Size(694, 35);
             this.panel107.TabIndex = 10061;
             // 
             // recentAchievementsBackgroundColorPictureBox
             // 
             this.recentAchievementsBackgroundColorPictureBox.BackColor = System.Drawing.Color.White;
             this.recentAchievementsBackgroundColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.recentAchievementsBackgroundColorPictureBox.Location = new System.Drawing.Point(153, 3);
+            this.recentAchievementsBackgroundColorPictureBox.Location = new System.Drawing.Point(230, 5);
+            this.recentAchievementsBackgroundColorPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.recentAchievementsBackgroundColorPictureBox.Name = "recentAchievementsBackgroundColorPictureBox";
-            this.recentAchievementsBackgroundColorPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.recentAchievementsBackgroundColorPictureBox.Size = new System.Drawing.Size(22, 22);
             this.recentAchievementsBackgroundColorPictureBox.TabIndex = 42;
             this.recentAchievementsBackgroundColorPictureBox.TabStop = false;
             this.recentAchievementsBackgroundColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
@@ -7068,9 +7550,10 @@ namespace Retro_Achievement_Tracker
             this.label146.BackColor = System.Drawing.Color.Transparent;
             this.label146.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label146.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label146.Location = new System.Drawing.Point(3, 3);
+            this.label146.Location = new System.Drawing.Point(4, 5);
+            this.label146.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label146.Name = "label146";
-            this.label146.Size = new System.Drawing.Size(144, 16);
+            this.label146.Size = new System.Drawing.Size(216, 25);
             this.label146.TabIndex = 10064;
             this.label146.Text = "Window Background";
             // 
@@ -7080,9 +7563,10 @@ namespace Retro_Achievement_Tracker
             this.panel108.Controls.Add(this.recentAchievementsTitleLabel);
             this.panel108.Controls.Add(this.recentAchievementsTitleFontColorPictureBox);
             this.panel108.Controls.Add(this.recentAchievementsTitleFontComboBox);
-            this.panel108.Location = new System.Drawing.Point(2, 106);
+            this.panel108.Location = new System.Drawing.Point(3, 163);
+            this.panel108.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel108.Name = "panel108";
-            this.panel108.Size = new System.Drawing.Size(463, 23);
+            this.panel108.Size = new System.Drawing.Size(694, 35);
             this.panel108.TabIndex = 10061;
             // 
             // recentAchievementsTitleLabel
@@ -7090,9 +7574,10 @@ namespace Retro_Achievement_Tracker
             this.recentAchievementsTitleLabel.BackColor = System.Drawing.Color.Transparent;
             this.recentAchievementsTitleLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.recentAchievementsTitleLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.recentAchievementsTitleLabel.Location = new System.Drawing.Point(3, 4);
+            this.recentAchievementsTitleLabel.Location = new System.Drawing.Point(4, 6);
+            this.recentAchievementsTitleLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.recentAchievementsTitleLabel.Name = "recentAchievementsTitleLabel";
-            this.recentAchievementsTitleLabel.Size = new System.Drawing.Size(144, 16);
+            this.recentAchievementsTitleLabel.Size = new System.Drawing.Size(216, 25);
             this.recentAchievementsTitleLabel.TabIndex = 10065;
             this.recentAchievementsTitleLabel.Text = "Title";
             // 
@@ -7100,9 +7585,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.recentAchievementsTitleFontColorPictureBox.BackColor = System.Drawing.Color.White;
             this.recentAchievementsTitleFontColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.recentAchievementsTitleFontColorPictureBox.Location = new System.Drawing.Point(153, 4);
+            this.recentAchievementsTitleFontColorPictureBox.Location = new System.Drawing.Point(230, 6);
+            this.recentAchievementsTitleFontColorPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.recentAchievementsTitleFontColorPictureBox.Name = "recentAchievementsTitleFontColorPictureBox";
-            this.recentAchievementsTitleFontColorPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.recentAchievementsTitleFontColorPictureBox.Size = new System.Drawing.Size(22, 22);
             this.recentAchievementsTitleFontColorPictureBox.TabIndex = 45;
             this.recentAchievementsTitleFontColorPictureBox.TabStop = false;
             this.recentAchievementsTitleFontColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
@@ -7113,9 +7599,10 @@ namespace Retro_Achievement_Tracker
             this.recentAchievementsTitleFontComboBox.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.recentAchievementsTitleFontComboBox.ForeColor = System.Drawing.Color.White;
             this.recentAchievementsTitleFontComboBox.FormattingEnabled = true;
-            this.recentAchievementsTitleFontComboBox.Location = new System.Drawing.Point(193, 2);
+            this.recentAchievementsTitleFontComboBox.Location = new System.Drawing.Point(290, 3);
+            this.recentAchievementsTitleFontComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.recentAchievementsTitleFontComboBox.Name = "recentAchievementsTitleFontComboBox";
-            this.recentAchievementsTitleFontComboBox.Size = new System.Drawing.Size(202, 21);
+            this.recentAchievementsTitleFontComboBox.Size = new System.Drawing.Size(301, 28);
             this.recentAchievementsTitleFontComboBox.TabIndex = 45;
             this.recentAchievementsTitleFontComboBox.SelectedIndexChanged += new System.EventHandler(this.FontFamilyComboBox_SelectedIndexChanged);
             // 
@@ -7126,9 +7613,10 @@ namespace Retro_Achievement_Tracker
             this.recentAchievementsPointsOutlinePanel.Controls.Add(this.recentAchievementsPointsFontOutlineCheckBox);
             this.recentAchievementsPointsOutlinePanel.Controls.Add(this.label148);
             this.recentAchievementsPointsOutlinePanel.Controls.Add(this.recentAchievementsPointsFontOutlineColorPictureBox);
-            this.recentAchievementsPointsOutlinePanel.Location = new System.Drawing.Point(2, 238);
+            this.recentAchievementsPointsOutlinePanel.Location = new System.Drawing.Point(3, 366);
+            this.recentAchievementsPointsOutlinePanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.recentAchievementsPointsOutlinePanel.Name = "recentAchievementsPointsOutlinePanel";
-            this.recentAchievementsPointsOutlinePanel.Size = new System.Drawing.Size(463, 23);
+            this.recentAchievementsPointsOutlinePanel.Size = new System.Drawing.Size(694, 35);
             this.recentAchievementsPointsOutlinePanel.TabIndex = 10061;
             // 
             // recentAchievementsPointsFontOutlineNumericUpDown
@@ -7137,7 +7625,8 @@ namespace Retro_Achievement_Tracker
             this.recentAchievementsPointsFontOutlineNumericUpDown.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.recentAchievementsPointsFontOutlineNumericUpDown.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.recentAchievementsPointsFontOutlineNumericUpDown.ForeColor = System.Drawing.Color.White;
-            this.recentAchievementsPointsFontOutlineNumericUpDown.Location = new System.Drawing.Point(352, 4);
+            this.recentAchievementsPointsFontOutlineNumericUpDown.Location = new System.Drawing.Point(528, 6);
+            this.recentAchievementsPointsFontOutlineNumericUpDown.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.recentAchievementsPointsFontOutlineNumericUpDown.Maximum = new decimal(new int[] {
             5,
             0,
@@ -7149,7 +7638,7 @@ namespace Retro_Achievement_Tracker
             0,
             0});
             this.recentAchievementsPointsFontOutlineNumericUpDown.Name = "recentAchievementsPointsFontOutlineNumericUpDown";
-            this.recentAchievementsPointsFontOutlineNumericUpDown.Size = new System.Drawing.Size(43, 17);
+            this.recentAchievementsPointsFontOutlineNumericUpDown.Size = new System.Drawing.Size(64, 24);
             this.recentAchievementsPointsFontOutlineNumericUpDown.TabIndex = 45;
             this.recentAchievementsPointsFontOutlineNumericUpDown.Value = new decimal(new int[] {
             1,
@@ -7163,9 +7652,10 @@ namespace Retro_Achievement_Tracker
             this.recentAchievementsPointsFontOutlineCheckBox.AutoSize = true;
             this.recentAchievementsPointsFontOutlineCheckBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.recentAchievementsPointsFontOutlineCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.recentAchievementsPointsFontOutlineCheckBox.Location = new System.Drawing.Point(413, 5);
+            this.recentAchievementsPointsFontOutlineCheckBox.Location = new System.Drawing.Point(620, 8);
+            this.recentAchievementsPointsFontOutlineCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.recentAchievementsPointsFontOutlineCheckBox.Name = "recentAchievementsPointsFontOutlineCheckBox";
-            this.recentAchievementsPointsFontOutlineCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.recentAchievementsPointsFontOutlineCheckBox.Size = new System.Drawing.Size(22, 21);
             this.recentAchievementsPointsFontOutlineCheckBox.TabIndex = 45;
             this.recentAchievementsPointsFontOutlineCheckBox.UseVisualStyleBackColor = true;
             this.recentAchievementsPointsFontOutlineCheckBox.CheckedChanged += new System.EventHandler(this.FeatureEnablementCheckBox_CheckedChanged);
@@ -7175,9 +7665,10 @@ namespace Retro_Achievement_Tracker
             this.label148.BackColor = System.Drawing.Color.Transparent;
             this.label148.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label148.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label148.Location = new System.Drawing.Point(3, 3);
+            this.label148.Location = new System.Drawing.Point(4, 5);
+            this.label148.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label148.Name = "label148";
-            this.label148.Size = new System.Drawing.Size(144, 16);
+            this.label148.Size = new System.Drawing.Size(216, 25);
             this.label148.TabIndex = 10066;
             this.label148.Text = "Points OutlineColor";
             // 
@@ -7185,9 +7676,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.recentAchievementsPointsFontOutlineColorPictureBox.BackColor = System.Drawing.Color.White;
             this.recentAchievementsPointsFontOutlineColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.recentAchievementsPointsFontOutlineColorPictureBox.Location = new System.Drawing.Point(153, 3);
+            this.recentAchievementsPointsFontOutlineColorPictureBox.Location = new System.Drawing.Point(230, 5);
+            this.recentAchievementsPointsFontOutlineColorPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.recentAchievementsPointsFontOutlineColorPictureBox.Name = "recentAchievementsPointsFontOutlineColorPictureBox";
-            this.recentAchievementsPointsFontOutlineColorPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.recentAchievementsPointsFontOutlineColorPictureBox.Size = new System.Drawing.Size(22, 22);
             this.recentAchievementsPointsFontOutlineColorPictureBox.TabIndex = 45;
             this.recentAchievementsPointsFontOutlineColorPictureBox.TabStop = false;
             this.recentAchievementsPointsFontOutlineColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
@@ -7199,9 +7691,10 @@ namespace Retro_Achievement_Tracker
             this.recentAchievementsLineOutlinePanel.Controls.Add(this.recentAchievementsLineOutlineColorPictureBox);
             this.recentAchievementsLineOutlinePanel.Controls.Add(this.recentAchievementsLineOutlineNumericUpDown);
             this.recentAchievementsLineOutlinePanel.Controls.Add(this.recentAchievementsLineOutlineCheckBox);
-            this.recentAchievementsLineOutlinePanel.Location = new System.Drawing.Point(2, 260);
+            this.recentAchievementsLineOutlinePanel.Location = new System.Drawing.Point(3, 400);
+            this.recentAchievementsLineOutlinePanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.recentAchievementsLineOutlinePanel.Name = "recentAchievementsLineOutlinePanel";
-            this.recentAchievementsLineOutlinePanel.Size = new System.Drawing.Size(463, 23);
+            this.recentAchievementsLineOutlinePanel.Size = new System.Drawing.Size(694, 35);
             this.recentAchievementsLineOutlinePanel.TabIndex = 10067;
             // 
             // label149
@@ -7209,9 +7702,10 @@ namespace Retro_Achievement_Tracker
             this.label149.BackColor = System.Drawing.Color.Transparent;
             this.label149.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label149.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label149.Location = new System.Drawing.Point(3, 4);
+            this.label149.Location = new System.Drawing.Point(4, 6);
+            this.label149.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label149.Name = "label149";
-            this.label149.Size = new System.Drawing.Size(144, 16);
+            this.label149.Size = new System.Drawing.Size(216, 25);
             this.label149.TabIndex = 10066;
             this.label149.Text = "Line OutlineColor";
             // 
@@ -7219,9 +7713,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.recentAchievementsLineOutlineColorPictureBox.BackColor = System.Drawing.Color.White;
             this.recentAchievementsLineOutlineColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.recentAchievementsLineOutlineColorPictureBox.Location = new System.Drawing.Point(153, 4);
+            this.recentAchievementsLineOutlineColorPictureBox.Location = new System.Drawing.Point(230, 6);
+            this.recentAchievementsLineOutlineColorPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.recentAchievementsLineOutlineColorPictureBox.Name = "recentAchievementsLineOutlineColorPictureBox";
-            this.recentAchievementsLineOutlineColorPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.recentAchievementsLineOutlineColorPictureBox.Size = new System.Drawing.Size(22, 22);
             this.recentAchievementsLineOutlineColorPictureBox.TabIndex = 45;
             this.recentAchievementsLineOutlineColorPictureBox.TabStop = false;
             this.recentAchievementsLineOutlineColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
@@ -7232,7 +7727,8 @@ namespace Retro_Achievement_Tracker
             this.recentAchievementsLineOutlineNumericUpDown.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.recentAchievementsLineOutlineNumericUpDown.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.recentAchievementsLineOutlineNumericUpDown.ForeColor = System.Drawing.Color.White;
-            this.recentAchievementsLineOutlineNumericUpDown.Location = new System.Drawing.Point(352, 4);
+            this.recentAchievementsLineOutlineNumericUpDown.Location = new System.Drawing.Point(528, 6);
+            this.recentAchievementsLineOutlineNumericUpDown.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.recentAchievementsLineOutlineNumericUpDown.Maximum = new decimal(new int[] {
             5,
             0,
@@ -7244,7 +7740,7 @@ namespace Retro_Achievement_Tracker
             0,
             0});
             this.recentAchievementsLineOutlineNumericUpDown.Name = "recentAchievementsLineOutlineNumericUpDown";
-            this.recentAchievementsLineOutlineNumericUpDown.Size = new System.Drawing.Size(43, 17);
+            this.recentAchievementsLineOutlineNumericUpDown.Size = new System.Drawing.Size(64, 24);
             this.recentAchievementsLineOutlineNumericUpDown.TabIndex = 45;
             this.recentAchievementsLineOutlineNumericUpDown.Value = new decimal(new int[] {
             1,
@@ -7258,9 +7754,10 @@ namespace Retro_Achievement_Tracker
             this.recentAchievementsLineOutlineCheckBox.AutoSize = true;
             this.recentAchievementsLineOutlineCheckBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.recentAchievementsLineOutlineCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.recentAchievementsLineOutlineCheckBox.Location = new System.Drawing.Point(413, 6);
+            this.recentAchievementsLineOutlineCheckBox.Location = new System.Drawing.Point(620, 9);
+            this.recentAchievementsLineOutlineCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.recentAchievementsLineOutlineCheckBox.Name = "recentAchievementsLineOutlineCheckBox";
-            this.recentAchievementsLineOutlineCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.recentAchievementsLineOutlineCheckBox.Size = new System.Drawing.Size(22, 21);
             this.recentAchievementsLineOutlineCheckBox.TabIndex = 45;
             this.recentAchievementsLineOutlineCheckBox.UseVisualStyleBackColor = true;
             this.recentAchievementsLineOutlineCheckBox.CheckedChanged += new System.EventHandler(this.FeatureEnablementCheckBox_CheckedChanged);
@@ -7271,9 +7768,10 @@ namespace Retro_Achievement_Tracker
             this.panel115.Controls.Add(this.label152);
             this.panel115.Controls.Add(this.pictureBox18);
             this.panel115.Controls.Add(this.achievementListAutoScrollCheckBox);
-            this.panel115.Location = new System.Drawing.Point(4, 3);
+            this.panel115.Location = new System.Drawing.Point(6, 5);
+            this.panel115.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel115.Name = "panel115";
-            this.panel115.Size = new System.Drawing.Size(289, 64);
+            this.panel115.Size = new System.Drawing.Size(434, 97);
             this.panel115.TabIndex = 10084;
             // 
             // label152
@@ -7281,18 +7779,20 @@ namespace Retro_Achievement_Tracker
             this.label152.BackColor = System.Drawing.Color.Transparent;
             this.label152.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label152.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label152.Location = new System.Drawing.Point(3, 3);
+            this.label152.Location = new System.Drawing.Point(4, 5);
+            this.label152.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label152.Name = "label152";
-            this.label152.Size = new System.Drawing.Size(190, 26);
+            this.label152.Size = new System.Drawing.Size(285, 40);
             this.label152.TabIndex = 10069;
             this.label152.Text = "List Settings";
             // 
             // pictureBox18
             // 
             this.pictureBox18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.pictureBox18.Location = new System.Drawing.Point(2, 32);
+            this.pictureBox18.Location = new System.Drawing.Point(3, 49);
+            this.pictureBox18.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox18.Name = "pictureBox18";
-            this.pictureBox18.Size = new System.Drawing.Size(275, 2);
+            this.pictureBox18.Size = new System.Drawing.Size(412, 3);
             this.pictureBox18.TabIndex = 10070;
             this.pictureBox18.TabStop = false;
             // 
@@ -7303,9 +7803,10 @@ namespace Retro_Achievement_Tracker
             this.achievementListAutoScrollCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.achievementListAutoScrollCheckBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.achievementListAutoScrollCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.achievementListAutoScrollCheckBox.Location = new System.Drawing.Point(3, 39);
+            this.achievementListAutoScrollCheckBox.Location = new System.Drawing.Point(4, 60);
+            this.achievementListAutoScrollCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.achievementListAutoScrollCheckBox.Name = "achievementListAutoScrollCheckBox";
-            this.achievementListAutoScrollCheckBox.Size = new System.Drawing.Size(98, 20);
+            this.achievementListAutoScrollCheckBox.Size = new System.Drawing.Size(147, 29);
             this.achievementListAutoScrollCheckBox.TabIndex = 10055;
             this.achievementListAutoScrollCheckBox.Text = "Auto-scroll";
             this.achievementListAutoScrollCheckBox.UseVisualStyleBackColor = false;
@@ -7314,25 +7815,107 @@ namespace Retro_Achievement_Tracker
             // panel111
             // 
             this.panel111.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            this.panel111.Controls.Add(this.panel9);
             this.panel111.Controls.Add(this.label150);
             this.panel111.Controls.Add(this.panel112);
             this.panel111.Controls.Add(this.achievementListOpenWindowButton);
             this.panel111.Controls.Add(this.achievementListAutoOpenWindowCheckbox);
             this.panel111.Controls.Add(this.pictureBox16);
             this.panel111.Controls.Add(this.panel114);
-            this.panel111.Location = new System.Drawing.Point(296, 3);
+            this.panel111.Location = new System.Drawing.Point(444, 5);
+            this.panel111.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel111.Name = "panel111";
-            this.panel111.Size = new System.Drawing.Size(468, 87);
+            this.panel111.Size = new System.Drawing.Size(702, 176);
             this.panel111.TabIndex = 10082;
+            // 
+            // panel9
+            // 
+            this.panel9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
+            this.panel9.Controls.Add(this.achievementListWindowSizeLabel);
+            this.panel9.Controls.Add(this.achievementListWindowSizeXUpDown);
+            this.panel9.Controls.Add(this.achievementListWindowSizeYUpDown);
+            this.panel9.Location = new System.Drawing.Point(4, 133);
+            this.panel9.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(693, 36);
+            this.panel9.TabIndex = 10065;
+            // 
+            // achievementListWindowSizeLabel
+            // 
+            this.achievementListWindowSizeLabel.AutoSize = true;
+            this.achievementListWindowSizeLabel.Font = new System.Drawing.Font("Verdana", 9.75F);
+            this.achievementListWindowSizeLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
+            this.achievementListWindowSizeLabel.Location = new System.Drawing.Point(3, 4);
+            this.achievementListWindowSizeLabel.Name = "achievementListWindowSizeLabel";
+            this.achievementListWindowSizeLabel.Size = new System.Drawing.Size(141, 25);
+            this.achievementListWindowSizeLabel.TabIndex = 10088;
+            this.achievementListWindowSizeLabel.Text = "Window Size";
+            // 
+            // achievementListWindowSizeXUpDown
+            // 
+            this.achievementListWindowSizeXUpDown.Increment = new decimal(new int[] {
+            68,
+            0,
+            0,
+            0});
+            this.achievementListWindowSizeXUpDown.Location = new System.Drawing.Point(230, 4);
+            this.achievementListWindowSizeXUpDown.Maximum = new decimal(new int[] {
+            1700,
+            0,
+            0,
+            0});
+            this.achievementListWindowSizeXUpDown.Minimum = new decimal(new int[] {
+            340,
+            0,
+            0,
+            0});
+            this.achievementListWindowSizeXUpDown.Name = "achievementListWindowSizeXUpDown";
+            this.achievementListWindowSizeXUpDown.Size = new System.Drawing.Size(120, 28);
+            this.achievementListWindowSizeXUpDown.TabIndex = 3;
+            this.achievementListWindowSizeXUpDown.Value = new decimal(new int[] {
+            748,
+            0,
+            0,
+            0});
+            this.achievementListWindowSizeXUpDown.ValueChanged += new System.EventHandler(this.CustomNumericUpDown_ValueChanged);
+            // 
+            // achievementListWindowSizeYUpDown
+            // 
+            this.achievementListWindowSizeYUpDown.Increment = new decimal(new int[] {
+            68,
+            0,
+            0,
+            0});
+            this.achievementListWindowSizeYUpDown.Location = new System.Drawing.Point(352, 4);
+            this.achievementListWindowSizeYUpDown.Maximum = new decimal(new int[] {
+            1700,
+            0,
+            0,
+            0});
+            this.achievementListWindowSizeYUpDown.Minimum = new decimal(new int[] {
+            340,
+            0,
+            0,
+            0});
+            this.achievementListWindowSizeYUpDown.Name = "achievementListWindowSizeYUpDown";
+            this.achievementListWindowSizeYUpDown.Size = new System.Drawing.Size(120, 28);
+            this.achievementListWindowSizeYUpDown.TabIndex = 1;
+            this.achievementListWindowSizeYUpDown.Value = new decimal(new int[] {
+            612,
+            0,
+            0,
+            0});
+            this.achievementListWindowSizeYUpDown.ValueChanged += new System.EventHandler(this.CustomNumericUpDown_ValueChanged);
             // 
             // label150
             // 
             this.label150.BackColor = System.Drawing.Color.Transparent;
             this.label150.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label150.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label150.Location = new System.Drawing.Point(3, 3);
+            this.label150.Location = new System.Drawing.Point(4, 5);
+            this.label150.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label150.Name = "label150";
-            this.label150.Size = new System.Drawing.Size(243, 26);
+            this.label150.Size = new System.Drawing.Size(364, 40);
             this.label150.TabIndex = 10062;
             this.label150.Text = "Window/Font Settings";
             // 
@@ -7340,9 +7923,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.panel112.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(36)))), ((int)(((byte)(36)))));
             this.panel112.Controls.Add(this.label151);
-            this.panel112.Location = new System.Drawing.Point(2, 40);
+            this.panel112.Location = new System.Drawing.Point(3, 62);
+            this.panel112.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel112.Name = "panel112";
-            this.panel112.Size = new System.Drawing.Size(463, 23);
+            this.panel112.Size = new System.Drawing.Size(694, 35);
             this.panel112.TabIndex = 10076;
             // 
             // label151
@@ -7350,9 +7934,10 @@ namespace Retro_Achievement_Tracker
             this.label151.BackColor = System.Drawing.Color.Transparent;
             this.label151.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label151.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label151.Location = new System.Drawing.Point(150, 3);
+            this.label151.Location = new System.Drawing.Point(225, 5);
+            this.label151.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label151.Name = "label151";
-            this.label151.Size = new System.Drawing.Size(48, 16);
+            this.label151.Size = new System.Drawing.Size(72, 25);
             this.label151.TabIndex = 10065;
             this.label151.Text = "Color";
             // 
@@ -7363,10 +7948,10 @@ namespace Retro_Achievement_Tracker
             this.achievementListOpenWindowButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.achievementListOpenWindowButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.achievementListOpenWindowButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
-            this.achievementListOpenWindowButton.Location = new System.Drawing.Point(382, 2);
+            this.achievementListOpenWindowButton.Location = new System.Drawing.Point(573, 3);
             this.achievementListOpenWindowButton.Margin = new System.Windows.Forms.Padding(0);
             this.achievementListOpenWindowButton.Name = "achievementListOpenWindowButton";
-            this.achievementListOpenWindowButton.Size = new System.Drawing.Size(75, 27);
+            this.achievementListOpenWindowButton.Size = new System.Drawing.Size(112, 42);
             this.achievementListOpenWindowButton.TabIndex = 10021;
             this.achievementListOpenWindowButton.Text = "Open";
             this.achievementListOpenWindowButton.UseVisualStyleBackColor = false;
@@ -7378,9 +7963,10 @@ namespace Retro_Achievement_Tracker
             this.achievementListAutoOpenWindowCheckbox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.achievementListAutoOpenWindowCheckbox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.achievementListAutoOpenWindowCheckbox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.achievementListAutoOpenWindowCheckbox.Location = new System.Drawing.Point(252, 9);
+            this.achievementListAutoOpenWindowCheckbox.Location = new System.Drawing.Point(378, 14);
+            this.achievementListAutoOpenWindowCheckbox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.achievementListAutoOpenWindowCheckbox.Name = "achievementListAutoOpenWindowCheckbox";
-            this.achievementListAutoOpenWindowCheckbox.Size = new System.Drawing.Size(98, 20);
+            this.achievementListAutoOpenWindowCheckbox.Size = new System.Drawing.Size(147, 29);
             this.achievementListAutoOpenWindowCheckbox.TabIndex = 10022;
             this.achievementListAutoOpenWindowCheckbox.Text = "Auto-Open";
             this.achievementListAutoOpenWindowCheckbox.UseVisualStyleBackColor = true;
@@ -7389,9 +7975,10 @@ namespace Retro_Achievement_Tracker
             // pictureBox16
             // 
             this.pictureBox16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.pictureBox16.Location = new System.Drawing.Point(2, 32);
+            this.pictureBox16.Location = new System.Drawing.Point(3, 49);
+            this.pictureBox16.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox16.Name = "pictureBox16";
-            this.pictureBox16.Size = new System.Drawing.Size(460, 2);
+            this.pictureBox16.Size = new System.Drawing.Size(690, 3);
             this.pictureBox16.TabIndex = 10063;
             this.pictureBox16.TabStop = false;
             // 
@@ -7400,18 +7987,20 @@ namespace Retro_Achievement_Tracker
             this.panel114.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.panel114.Controls.Add(this.achievementListBackgroundColorPictureBox);
             this.panel114.Controls.Add(this.label156);
-            this.panel114.Location = new System.Drawing.Point(2, 62);
+            this.panel114.Location = new System.Drawing.Point(3, 95);
+            this.panel114.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel114.Name = "panel114";
-            this.panel114.Size = new System.Drawing.Size(463, 23);
+            this.panel114.Size = new System.Drawing.Size(694, 35);
             this.panel114.TabIndex = 10061;
             // 
             // achievementListBackgroundColorPictureBox
             // 
             this.achievementListBackgroundColorPictureBox.BackColor = System.Drawing.Color.White;
             this.achievementListBackgroundColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.achievementListBackgroundColorPictureBox.Location = new System.Drawing.Point(153, 3);
+            this.achievementListBackgroundColorPictureBox.Location = new System.Drawing.Point(230, 5);
+            this.achievementListBackgroundColorPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.achievementListBackgroundColorPictureBox.Name = "achievementListBackgroundColorPictureBox";
-            this.achievementListBackgroundColorPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.achievementListBackgroundColorPictureBox.Size = new System.Drawing.Size(22, 22);
             this.achievementListBackgroundColorPictureBox.TabIndex = 42;
             this.achievementListBackgroundColorPictureBox.TabStop = false;
             this.achievementListBackgroundColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
@@ -7421,9 +8010,10 @@ namespace Retro_Achievement_Tracker
             this.label156.BackColor = System.Drawing.Color.Transparent;
             this.label156.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label156.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label156.Location = new System.Drawing.Point(3, 3);
+            this.label156.Location = new System.Drawing.Point(4, 5);
+            this.label156.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label156.Name = "label156";
-            this.label156.Size = new System.Drawing.Size(144, 16);
+            this.label156.Size = new System.Drawing.Size(216, 25);
             this.label156.TabIndex = 10064;
             this.label156.Text = "Window Background";
             // 
@@ -7437,9 +8027,10 @@ namespace Retro_Achievement_Tracker
             this.panel1.Controls.Add(this.startButton);
             this.panel1.Controls.Add(this.stopButton);
             this.panel1.Controls.Add(this.autoStartCheckbox);
-            this.panel1.Location = new System.Drawing.Point(376, 6);
+            this.panel1.Location = new System.Drawing.Point(564, 9);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(405, 96);
+            this.panel1.Size = new System.Drawing.Size(606, 147);
             this.panel1.TabIndex = 10031;
             // 
             // checkForUpdatesButton
@@ -7449,10 +8040,10 @@ namespace Retro_Achievement_Tracker
             this.checkForUpdatesButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.checkForUpdatesButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkForUpdatesButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
-            this.checkForUpdatesButton.Location = new System.Drawing.Point(3, 62);
+            this.checkForUpdatesButton.Location = new System.Drawing.Point(4, 95);
             this.checkForUpdatesButton.Margin = new System.Windows.Forms.Padding(0);
             this.checkForUpdatesButton.Name = "checkForUpdatesButton";
-            this.checkForUpdatesButton.Size = new System.Drawing.Size(150, 27);
+            this.checkForUpdatesButton.Size = new System.Drawing.Size(225, 42);
             this.checkForUpdatesButton.TabIndex = 29;
             this.checkForUpdatesButton.Text = "Check For Updates";
             this.checkForUpdatesButton.UseVisualStyleBackColor = false;
@@ -7463,9 +8054,10 @@ namespace Retro_Achievement_Tracker
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
             this.panel3.Controls.Add(this.apiKeyLabel);
             this.panel3.Controls.Add(this.apiKeyTextBox);
-            this.panel3.Location = new System.Drawing.Point(3, 30);
+            this.panel3.Location = new System.Drawing.Point(4, 46);
+            this.panel3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(397, 28);
+            this.panel3.Size = new System.Drawing.Size(596, 43);
             this.panel3.TabIndex = 28;
             // 
             // panel2
@@ -7474,9 +8066,10 @@ namespace Retro_Achievement_Tracker
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
             this.panel2.Controls.Add(this.usernameLabel);
             this.panel2.Controls.Add(this.usernameTextBox);
-            this.panel2.Location = new System.Drawing.Point(3, 3);
+            this.panel2.Location = new System.Drawing.Point(4, 5);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(397, 28);
+            this.panel2.Size = new System.Drawing.Size(596, 43);
             this.panel2.TabIndex = 27;
             // 
             // panel120
@@ -7488,9 +8081,10 @@ namespace Retro_Achievement_Tracker
             this.panel120.Controls.Add(this.relatedMediaRATitleScreenRadioButton);
             this.panel120.Controls.Add(this.pictureBox19);
             this.panel120.Controls.Add(this.label1);
-            this.panel120.Location = new System.Drawing.Point(4, 3);
+            this.panel120.Location = new System.Drawing.Point(6, 5);
+            this.panel120.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel120.Name = "panel120";
-            this.panel120.Size = new System.Drawing.Size(289, 147);
+            this.panel120.Size = new System.Drawing.Size(434, 226);
             this.panel120.TabIndex = 0;
             // 
             // relatedMediaRAScreenshotRadioButton
@@ -7498,9 +8092,10 @@ namespace Retro_Achievement_Tracker
             this.relatedMediaRAScreenshotRadioButton.AutoSize = true;
             this.relatedMediaRAScreenshotRadioButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.relatedMediaRAScreenshotRadioButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.relatedMediaRAScreenshotRadioButton.Location = new System.Drawing.Point(8, 118);
+            this.relatedMediaRAScreenshotRadioButton.Location = new System.Drawing.Point(12, 182);
+            this.relatedMediaRAScreenshotRadioButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.relatedMediaRAScreenshotRadioButton.Name = "relatedMediaRAScreenshotRadioButton";
-            this.relatedMediaRAScreenshotRadioButton.Size = new System.Drawing.Size(100, 20);
+            this.relatedMediaRAScreenshotRadioButton.Size = new System.Drawing.Size(150, 29);
             this.relatedMediaRAScreenshotRadioButton.TabIndex = 10075;
             this.relatedMediaRAScreenshotRadioButton.Text = "Screenshot";
             this.relatedMediaRAScreenshotRadioButton.UseVisualStyleBackColor = true;
@@ -7512,9 +8107,10 @@ namespace Retro_Achievement_Tracker
             this.relatedMediaRABadgeIconRadioButton.Checked = true;
             this.relatedMediaRABadgeIconRadioButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.relatedMediaRABadgeIconRadioButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.relatedMediaRABadgeIconRadioButton.Location = new System.Drawing.Point(8, 40);
+            this.relatedMediaRABadgeIconRadioButton.Location = new System.Drawing.Point(12, 62);
+            this.relatedMediaRABadgeIconRadioButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.relatedMediaRABadgeIconRadioButton.Name = "relatedMediaRABadgeIconRadioButton";
-            this.relatedMediaRABadgeIconRadioButton.Size = new System.Drawing.Size(99, 20);
+            this.relatedMediaRABadgeIconRadioButton.Size = new System.Drawing.Size(149, 29);
             this.relatedMediaRABadgeIconRadioButton.TabIndex = 10072;
             this.relatedMediaRABadgeIconRadioButton.TabStop = true;
             this.relatedMediaRABadgeIconRadioButton.Text = "Badge Icon";
@@ -7526,9 +8122,10 @@ namespace Retro_Achievement_Tracker
             this.relatedMediaRABoxArtRadioButton.AutoSize = true;
             this.relatedMediaRABoxArtRadioButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.relatedMediaRABoxArtRadioButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.relatedMediaRABoxArtRadioButton.Location = new System.Drawing.Point(8, 66);
+            this.relatedMediaRABoxArtRadioButton.Location = new System.Drawing.Point(12, 102);
+            this.relatedMediaRABoxArtRadioButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.relatedMediaRABoxArtRadioButton.Name = "relatedMediaRABoxArtRadioButton";
-            this.relatedMediaRABoxArtRadioButton.Size = new System.Drawing.Size(73, 20);
+            this.relatedMediaRABoxArtRadioButton.Size = new System.Drawing.Size(113, 29);
             this.relatedMediaRABoxArtRadioButton.TabIndex = 10074;
             this.relatedMediaRABoxArtRadioButton.Text = "Box Art";
             this.relatedMediaRABoxArtRadioButton.UseVisualStyleBackColor = true;
@@ -7539,9 +8136,10 @@ namespace Retro_Achievement_Tracker
             this.relatedMediaRATitleScreenRadioButton.AutoSize = true;
             this.relatedMediaRATitleScreenRadioButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.relatedMediaRATitleScreenRadioButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.relatedMediaRATitleScreenRadioButton.Location = new System.Drawing.Point(8, 92);
+            this.relatedMediaRATitleScreenRadioButton.Location = new System.Drawing.Point(12, 142);
+            this.relatedMediaRATitleScreenRadioButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.relatedMediaRATitleScreenRadioButton.Name = "relatedMediaRATitleScreenRadioButton";
-            this.relatedMediaRATitleScreenRadioButton.Size = new System.Drawing.Size(105, 20);
+            this.relatedMediaRATitleScreenRadioButton.Size = new System.Drawing.Size(158, 29);
             this.relatedMediaRATitleScreenRadioButton.TabIndex = 10073;
             this.relatedMediaRATitleScreenRadioButton.Text = "Title Screen";
             this.relatedMediaRATitleScreenRadioButton.UseVisualStyleBackColor = true;
@@ -7550,9 +8148,10 @@ namespace Retro_Achievement_Tracker
             // pictureBox19
             // 
             this.pictureBox19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.pictureBox19.Location = new System.Drawing.Point(2, 32);
+            this.pictureBox19.Location = new System.Drawing.Point(3, 49);
+            this.pictureBox19.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox19.Name = "pictureBox19";
-            this.pictureBox19.Size = new System.Drawing.Size(275, 2);
+            this.pictureBox19.Size = new System.Drawing.Size(412, 3);
             this.pictureBox19.TabIndex = 10071;
             this.pictureBox19.TabStop = false;
             // 
@@ -7561,9 +8160,10 @@ namespace Retro_Achievement_Tracker
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label1.Location = new System.Drawing.Point(3, 3);
+            this.label1.Location = new System.Drawing.Point(4, 5);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(274, 26);
+            this.label1.Size = new System.Drawing.Size(411, 40);
             this.label1.TabIndex = 10063;
             this.label1.Text = "RetroAchievements.org";
             // 
@@ -7576,9 +8176,10 @@ namespace Retro_Achievement_Tracker
             this.panel121.Controls.Add(this.relatedMediaAutoOpenWindowCheckbox);
             this.panel121.Controls.Add(this.pictureBox22);
             this.panel121.Controls.Add(this.panel123);
-            this.panel121.Location = new System.Drawing.Point(296, 3);
+            this.panel121.Location = new System.Drawing.Point(444, 5);
+            this.panel121.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel121.Name = "panel121";
-            this.panel121.Size = new System.Drawing.Size(468, 87);
+            this.panel121.Size = new System.Drawing.Size(702, 134);
             this.panel121.TabIndex = 10083;
             // 
             // label90
@@ -7586,9 +8187,10 @@ namespace Retro_Achievement_Tracker
             this.label90.BackColor = System.Drawing.Color.Transparent;
             this.label90.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label90.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label90.Location = new System.Drawing.Point(3, 3);
+            this.label90.Location = new System.Drawing.Point(4, 5);
+            this.label90.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label90.Name = "label90";
-            this.label90.Size = new System.Drawing.Size(243, 26);
+            this.label90.Size = new System.Drawing.Size(364, 40);
             this.label90.TabIndex = 10062;
             this.label90.Text = "Window/Font Settings";
             // 
@@ -7596,9 +8198,10 @@ namespace Retro_Achievement_Tracker
             // 
             this.panel122.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(36)))), ((int)(((byte)(36)))));
             this.panel122.Controls.Add(this.label91);
-            this.panel122.Location = new System.Drawing.Point(2, 40);
+            this.panel122.Location = new System.Drawing.Point(3, 62);
+            this.panel122.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel122.Name = "panel122";
-            this.panel122.Size = new System.Drawing.Size(463, 23);
+            this.panel122.Size = new System.Drawing.Size(694, 35);
             this.panel122.TabIndex = 10076;
             // 
             // label91
@@ -7606,9 +8209,10 @@ namespace Retro_Achievement_Tracker
             this.label91.BackColor = System.Drawing.Color.Transparent;
             this.label91.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label91.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.label91.Location = new System.Drawing.Point(150, 3);
+            this.label91.Location = new System.Drawing.Point(225, 5);
+            this.label91.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label91.Name = "label91";
-            this.label91.Size = new System.Drawing.Size(48, 16);
+            this.label91.Size = new System.Drawing.Size(72, 25);
             this.label91.TabIndex = 10065;
             this.label91.Text = "Color";
             // 
@@ -7619,10 +8223,10 @@ namespace Retro_Achievement_Tracker
             this.relatedMediaOpenWindowButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.relatedMediaOpenWindowButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.relatedMediaOpenWindowButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
-            this.relatedMediaOpenWindowButton.Location = new System.Drawing.Point(382, 2);
+            this.relatedMediaOpenWindowButton.Location = new System.Drawing.Point(573, 3);
             this.relatedMediaOpenWindowButton.Margin = new System.Windows.Forms.Padding(0);
             this.relatedMediaOpenWindowButton.Name = "relatedMediaOpenWindowButton";
-            this.relatedMediaOpenWindowButton.Size = new System.Drawing.Size(75, 27);
+            this.relatedMediaOpenWindowButton.Size = new System.Drawing.Size(112, 42);
             this.relatedMediaOpenWindowButton.TabIndex = 10021;
             this.relatedMediaOpenWindowButton.Text = "Open";
             this.relatedMediaOpenWindowButton.UseVisualStyleBackColor = false;
@@ -7634,9 +8238,10 @@ namespace Retro_Achievement_Tracker
             this.relatedMediaAutoOpenWindowCheckbox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.relatedMediaAutoOpenWindowCheckbox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.relatedMediaAutoOpenWindowCheckbox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.relatedMediaAutoOpenWindowCheckbox.Location = new System.Drawing.Point(252, 9);
+            this.relatedMediaAutoOpenWindowCheckbox.Location = new System.Drawing.Point(378, 14);
+            this.relatedMediaAutoOpenWindowCheckbox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.relatedMediaAutoOpenWindowCheckbox.Name = "relatedMediaAutoOpenWindowCheckbox";
-            this.relatedMediaAutoOpenWindowCheckbox.Size = new System.Drawing.Size(98, 20);
+            this.relatedMediaAutoOpenWindowCheckbox.Size = new System.Drawing.Size(147, 29);
             this.relatedMediaAutoOpenWindowCheckbox.TabIndex = 10022;
             this.relatedMediaAutoOpenWindowCheckbox.Text = "Auto-Open";
             this.relatedMediaAutoOpenWindowCheckbox.UseVisualStyleBackColor = true;
@@ -7645,9 +8250,10 @@ namespace Retro_Achievement_Tracker
             // pictureBox22
             // 
             this.pictureBox22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.pictureBox22.Location = new System.Drawing.Point(2, 32);
+            this.pictureBox22.Location = new System.Drawing.Point(3, 49);
+            this.pictureBox22.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox22.Name = "pictureBox22";
-            this.pictureBox22.Size = new System.Drawing.Size(460, 2);
+            this.pictureBox22.Size = new System.Drawing.Size(690, 3);
             this.pictureBox22.TabIndex = 10063;
             this.pictureBox22.TabStop = false;
             // 
@@ -7656,18 +8262,20 @@ namespace Retro_Achievement_Tracker
             this.panel123.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.panel123.Controls.Add(this.relatedMediaBackgroundColorPictureBox);
             this.panel123.Controls.Add(this.label92);
-            this.panel123.Location = new System.Drawing.Point(2, 62);
+            this.panel123.Location = new System.Drawing.Point(3, 95);
+            this.panel123.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel123.Name = "panel123";
-            this.panel123.Size = new System.Drawing.Size(463, 23);
+            this.panel123.Size = new System.Drawing.Size(694, 35);
             this.panel123.TabIndex = 10061;
             // 
             // relatedMediaBackgroundColorPictureBox
             // 
             this.relatedMediaBackgroundColorPictureBox.BackColor = System.Drawing.Color.White;
             this.relatedMediaBackgroundColorPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.relatedMediaBackgroundColorPictureBox.Location = new System.Drawing.Point(153, 3);
+            this.relatedMediaBackgroundColorPictureBox.Location = new System.Drawing.Point(230, 5);
+            this.relatedMediaBackgroundColorPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.relatedMediaBackgroundColorPictureBox.Name = "relatedMediaBackgroundColorPictureBox";
-            this.relatedMediaBackgroundColorPictureBox.Size = new System.Drawing.Size(16, 16);
+            this.relatedMediaBackgroundColorPictureBox.Size = new System.Drawing.Size(22, 22);
             this.relatedMediaBackgroundColorPictureBox.TabIndex = 42;
             this.relatedMediaBackgroundColorPictureBox.TabStop = false;
             this.relatedMediaBackgroundColorPictureBox.Click += new System.EventHandler(this.FontColorPictureBox_Click);
@@ -7677,9 +8285,10 @@ namespace Retro_Achievement_Tracker
             this.label92.BackColor = System.Drawing.Color.Transparent;
             this.label92.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label92.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.label92.Location = new System.Drawing.Point(3, 3);
+            this.label92.Location = new System.Drawing.Point(4, 5);
+            this.label92.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label92.Name = "label92";
-            this.label92.Size = new System.Drawing.Size(144, 16);
+            this.label92.Size = new System.Drawing.Size(216, 25);
             this.label92.TabIndex = 10064;
             this.label92.Text = "Window Background";
             // 
@@ -7701,9 +8310,10 @@ namespace Retro_Achievement_Tracker
             this.panel124.Controls.Add(this.relatedMediaLBBox3DRadioButton);
             this.panel124.Controls.Add(this.relatedMediaLBLinePictureBox);
             this.panel124.Controls.Add(this.relatedMediaLBLabel);
-            this.panel124.Location = new System.Drawing.Point(5, 156);
+            this.panel124.Location = new System.Drawing.Point(8, 240);
+            this.panel124.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel124.Name = "panel124";
-            this.panel124.Size = new System.Drawing.Size(289, 209);
+            this.panel124.Size = new System.Drawing.Size(434, 322);
             this.panel124.TabIndex = 10076;
             // 
             // relatedMediaLBCartFrontRadioButton
@@ -7711,9 +8321,10 @@ namespace Retro_Achievement_Tracker
             this.relatedMediaLBCartFrontRadioButton.AutoSize = true;
             this.relatedMediaLBCartFrontRadioButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.relatedMediaLBCartFrontRadioButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.relatedMediaLBCartFrontRadioButton.Location = new System.Drawing.Point(173, 144);
+            this.relatedMediaLBCartFrontRadioButton.Location = new System.Drawing.Point(260, 222);
+            this.relatedMediaLBCartFrontRadioButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.relatedMediaLBCartFrontRadioButton.Name = "relatedMediaLBCartFrontRadioButton";
-            this.relatedMediaLBCartFrontRadioButton.Size = new System.Drawing.Size(105, 20);
+            this.relatedMediaLBCartFrontRadioButton.Size = new System.Drawing.Size(157, 29);
             this.relatedMediaLBCartFrontRadioButton.TabIndex = 10084;
             this.relatedMediaLBCartFrontRadioButton.Text = "Cart - Front";
             this.relatedMediaLBCartFrontRadioButton.UseVisualStyleBackColor = true;
@@ -7724,9 +8335,10 @@ namespace Retro_Achievement_Tracker
             this.relatedMediaLBCartBackRadioButton.AutoSize = true;
             this.relatedMediaLBCartBackRadioButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.relatedMediaLBCartBackRadioButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.relatedMediaLBCartBackRadioButton.Location = new System.Drawing.Point(173, 170);
+            this.relatedMediaLBCartBackRadioButton.Location = new System.Drawing.Point(260, 262);
+            this.relatedMediaLBCartBackRadioButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.relatedMediaLBCartBackRadioButton.Name = "relatedMediaLBCartBackRadioButton";
-            this.relatedMediaLBCartBackRadioButton.Size = new System.Drawing.Size(101, 20);
+            this.relatedMediaLBCartBackRadioButton.Size = new System.Drawing.Size(151, 29);
             this.relatedMediaLBCartBackRadioButton.TabIndex = 10085;
             this.relatedMediaLBCartBackRadioButton.Text = "Cart - Back";
             this.relatedMediaLBCartBackRadioButton.UseVisualStyleBackColor = true;
@@ -7737,9 +8349,10 @@ namespace Retro_Achievement_Tracker
             this.relatedMediaLBBoxBackReconRadioButton.AutoSize = true;
             this.relatedMediaLBBoxBackReconRadioButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.relatedMediaLBBoxBackReconRadioButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.relatedMediaLBBoxBackReconRadioButton.Location = new System.Drawing.Point(7, 144);
+            this.relatedMediaLBBoxBackReconRadioButton.Location = new System.Drawing.Point(10, 222);
+            this.relatedMediaLBBoxBackReconRadioButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.relatedMediaLBBoxBackReconRadioButton.Name = "relatedMediaLBBoxBackReconRadioButton";
-            this.relatedMediaLBBoxBackReconRadioButton.Size = new System.Drawing.Size(153, 20);
+            this.relatedMediaLBBoxBackReconRadioButton.Size = new System.Drawing.Size(232, 29);
             this.relatedMediaLBBoxBackReconRadioButton.TabIndex = 10082;
             this.relatedMediaLBBoxBackReconRadioButton.Text = "Box - Back (Recon)";
             this.relatedMediaLBBoxBackReconRadioButton.UseVisualStyleBackColor = true;
@@ -7750,9 +8363,10 @@ namespace Retro_Achievement_Tracker
             this.relatedMediaLBBoxFullRadioButton.AutoSize = true;
             this.relatedMediaLBBoxFullRadioButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.relatedMediaLBBoxFullRadioButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.relatedMediaLBBoxFullRadioButton.Location = new System.Drawing.Point(7, 170);
+            this.relatedMediaLBBoxFullRadioButton.Location = new System.Drawing.Point(10, 262);
+            this.relatedMediaLBBoxFullRadioButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.relatedMediaLBBoxFullRadioButton.Name = "relatedMediaLBBoxFullRadioButton";
-            this.relatedMediaLBBoxFullRadioButton.Size = new System.Drawing.Size(87, 20);
+            this.relatedMediaLBBoxFullRadioButton.Size = new System.Drawing.Size(135, 29);
             this.relatedMediaLBBoxFullRadioButton.TabIndex = 10083;
             this.relatedMediaLBBoxFullRadioButton.Text = "Box - Full";
             this.relatedMediaLBBoxFullRadioButton.UseVisualStyleBackColor = true;
@@ -7763,9 +8377,10 @@ namespace Retro_Achievement_Tracker
             this.relatedMediaLBBoxSpineRadioButton.AutoSize = true;
             this.relatedMediaLBBoxSpineRadioButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.relatedMediaLBBoxSpineRadioButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.relatedMediaLBBoxSpineRadioButton.Location = new System.Drawing.Point(173, 40);
+            this.relatedMediaLBBoxSpineRadioButton.Location = new System.Drawing.Point(260, 62);
+            this.relatedMediaLBBoxSpineRadioButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.relatedMediaLBBoxSpineRadioButton.Name = "relatedMediaLBBoxSpineRadioButton";
-            this.relatedMediaLBBoxSpineRadioButton.Size = new System.Drawing.Size(101, 20);
+            this.relatedMediaLBBoxSpineRadioButton.Size = new System.Drawing.Size(155, 29);
             this.relatedMediaLBBoxSpineRadioButton.TabIndex = 10081;
             this.relatedMediaLBBoxSpineRadioButton.Text = "Box - Spine";
             this.relatedMediaLBBoxSpineRadioButton.UseVisualStyleBackColor = true;
@@ -7776,9 +8391,10 @@ namespace Retro_Achievement_Tracker
             this.relatedMediaLBClearLogoRadioButton.AutoSize = true;
             this.relatedMediaLBClearLogoRadioButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.relatedMediaLBClearLogoRadioButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.relatedMediaLBClearLogoRadioButton.Location = new System.Drawing.Point(173, 118);
+            this.relatedMediaLBClearLogoRadioButton.Location = new System.Drawing.Point(260, 182);
+            this.relatedMediaLBClearLogoRadioButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.relatedMediaLBClearLogoRadioButton.Name = "relatedMediaLBClearLogoRadioButton";
-            this.relatedMediaLBClearLogoRadioButton.Size = new System.Drawing.Size(94, 20);
+            this.relatedMediaLBClearLogoRadioButton.Size = new System.Drawing.Size(144, 29);
             this.relatedMediaLBClearLogoRadioButton.TabIndex = 10078;
             this.relatedMediaLBClearLogoRadioButton.Text = "Clear Logo";
             this.relatedMediaLBClearLogoRadioButton.UseVisualStyleBackColor = true;
@@ -7789,9 +8405,10 @@ namespace Retro_Achievement_Tracker
             this.relatedMediaLBBannerRadioButton.AutoSize = true;
             this.relatedMediaLBBannerRadioButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.relatedMediaLBBannerRadioButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.relatedMediaLBBannerRadioButton.Location = new System.Drawing.Point(173, 66);
+            this.relatedMediaLBBannerRadioButton.Location = new System.Drawing.Point(260, 102);
+            this.relatedMediaLBBannerRadioButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.relatedMediaLBBannerRadioButton.Name = "relatedMediaLBBannerRadioButton";
-            this.relatedMediaLBBannerRadioButton.Size = new System.Drawing.Size(70, 20);
+            this.relatedMediaLBBannerRadioButton.Size = new System.Drawing.Size(110, 29);
             this.relatedMediaLBBannerRadioButton.TabIndex = 10080;
             this.relatedMediaLBBannerRadioButton.Text = "Banner";
             this.relatedMediaLBBannerRadioButton.UseVisualStyleBackColor = true;
@@ -7802,9 +8419,10 @@ namespace Retro_Achievement_Tracker
             this.relatedMediaLBTitleScreenRadioButton.AutoSize = true;
             this.relatedMediaLBTitleScreenRadioButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.relatedMediaLBTitleScreenRadioButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.relatedMediaLBTitleScreenRadioButton.Location = new System.Drawing.Point(173, 92);
+            this.relatedMediaLBTitleScreenRadioButton.Location = new System.Drawing.Point(260, 142);
+            this.relatedMediaLBTitleScreenRadioButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.relatedMediaLBTitleScreenRadioButton.Name = "relatedMediaLBTitleScreenRadioButton";
-            this.relatedMediaLBTitleScreenRadioButton.Size = new System.Drawing.Size(105, 20);
+            this.relatedMediaLBTitleScreenRadioButton.Size = new System.Drawing.Size(158, 29);
             this.relatedMediaLBTitleScreenRadioButton.TabIndex = 10079;
             this.relatedMediaLBTitleScreenRadioButton.Text = "Title Screen";
             this.relatedMediaLBTitleScreenRadioButton.UseVisualStyleBackColor = true;
@@ -7817,10 +8435,10 @@ namespace Retro_Achievement_Tracker
             this.relatedMediaSetLaunchBoxPathButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.relatedMediaSetLaunchBoxPathButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.relatedMediaSetLaunchBoxPathButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
-            this.relatedMediaSetLaunchBoxPathButton.Location = new System.Drawing.Point(202, 3);
+            this.relatedMediaSetLaunchBoxPathButton.Location = new System.Drawing.Point(303, 5);
             this.relatedMediaSetLaunchBoxPathButton.Margin = new System.Windows.Forms.Padding(0);
             this.relatedMediaSetLaunchBoxPathButton.Name = "relatedMediaSetLaunchBoxPathButton";
-            this.relatedMediaSetLaunchBoxPathButton.Size = new System.Drawing.Size(75, 27);
+            this.relatedMediaSetLaunchBoxPathButton.Size = new System.Drawing.Size(112, 42);
             this.relatedMediaSetLaunchBoxPathButton.TabIndex = 10077;
             this.relatedMediaSetLaunchBoxPathButton.Text = "Set...";
             this.relatedMediaSetLaunchBoxPathButton.UseVisualStyleBackColor = false;
@@ -7831,9 +8449,10 @@ namespace Retro_Achievement_Tracker
             this.relatedMediaLBBoxFrontReconRadioButton.AutoSize = true;
             this.relatedMediaLBBoxFrontReconRadioButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.relatedMediaLBBoxFrontReconRadioButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.relatedMediaLBBoxFrontReconRadioButton.Location = new System.Drawing.Point(7, 118);
+            this.relatedMediaLBBoxFrontReconRadioButton.Location = new System.Drawing.Point(10, 182);
+            this.relatedMediaLBBoxFrontReconRadioButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.relatedMediaLBBoxFrontReconRadioButton.Name = "relatedMediaLBBoxFrontReconRadioButton";
-            this.relatedMediaLBBoxFrontReconRadioButton.Size = new System.Drawing.Size(157, 20);
+            this.relatedMediaLBBoxFrontReconRadioButton.Size = new System.Drawing.Size(238, 29);
             this.relatedMediaLBBoxFrontReconRadioButton.TabIndex = 10075;
             this.relatedMediaLBBoxFrontReconRadioButton.Text = "Box - Front (Recon)";
             this.relatedMediaLBBoxFrontReconRadioButton.UseVisualStyleBackColor = true;
@@ -7844,9 +8463,10 @@ namespace Retro_Achievement_Tracker
             this.relatedMediaLBBoxFrontRadioButton.AutoSize = true;
             this.relatedMediaLBBoxFrontRadioButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.relatedMediaLBBoxFrontRadioButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.relatedMediaLBBoxFrontRadioButton.Location = new System.Drawing.Point(7, 40);
+            this.relatedMediaLBBoxFrontRadioButton.Location = new System.Drawing.Point(10, 62);
+            this.relatedMediaLBBoxFrontRadioButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.relatedMediaLBBoxFrontRadioButton.Name = "relatedMediaLBBoxFrontRadioButton";
-            this.relatedMediaLBBoxFrontRadioButton.Size = new System.Drawing.Size(100, 20);
+            this.relatedMediaLBBoxFrontRadioButton.Size = new System.Drawing.Size(152, 29);
             this.relatedMediaLBBoxFrontRadioButton.TabIndex = 10072;
             this.relatedMediaLBBoxFrontRadioButton.Text = "Box - Front";
             this.relatedMediaLBBoxFrontRadioButton.UseVisualStyleBackColor = true;
@@ -7857,9 +8477,10 @@ namespace Retro_Achievement_Tracker
             this.relatedMediaLBBoxBackRadioButton.AutoSize = true;
             this.relatedMediaLBBoxBackRadioButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.relatedMediaLBBoxBackRadioButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.relatedMediaLBBoxBackRadioButton.Location = new System.Drawing.Point(7, 66);
+            this.relatedMediaLBBoxBackRadioButton.Location = new System.Drawing.Point(10, 102);
+            this.relatedMediaLBBoxBackRadioButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.relatedMediaLBBoxBackRadioButton.Name = "relatedMediaLBBoxBackRadioButton";
-            this.relatedMediaLBBoxBackRadioButton.Size = new System.Drawing.Size(96, 20);
+            this.relatedMediaLBBoxBackRadioButton.Size = new System.Drawing.Size(146, 29);
             this.relatedMediaLBBoxBackRadioButton.TabIndex = 10074;
             this.relatedMediaLBBoxBackRadioButton.Text = "Box - Back";
             this.relatedMediaLBBoxBackRadioButton.UseVisualStyleBackColor = true;
@@ -7870,9 +8491,10 @@ namespace Retro_Achievement_Tracker
             this.relatedMediaLBBox3DRadioButton.AutoSize = true;
             this.relatedMediaLBBox3DRadioButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.relatedMediaLBBox3DRadioButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.relatedMediaLBBox3DRadioButton.Location = new System.Drawing.Point(7, 92);
+            this.relatedMediaLBBox3DRadioButton.Location = new System.Drawing.Point(10, 142);
+            this.relatedMediaLBBox3DRadioButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.relatedMediaLBBox3DRadioButton.Name = "relatedMediaLBBox3DRadioButton";
-            this.relatedMediaLBBox3DRadioButton.Size = new System.Drawing.Size(82, 20);
+            this.relatedMediaLBBox3DRadioButton.Size = new System.Drawing.Size(126, 29);
             this.relatedMediaLBBox3DRadioButton.TabIndex = 10073;
             this.relatedMediaLBBox3DRadioButton.Text = "Box - 3D";
             this.relatedMediaLBBox3DRadioButton.UseVisualStyleBackColor = true;
@@ -7881,9 +8503,10 @@ namespace Retro_Achievement_Tracker
             // relatedMediaLBLinePictureBox
             // 
             this.relatedMediaLBLinePictureBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.relatedMediaLBLinePictureBox.Location = new System.Drawing.Point(2, 32);
+            this.relatedMediaLBLinePictureBox.Location = new System.Drawing.Point(3, 49);
+            this.relatedMediaLBLinePictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.relatedMediaLBLinePictureBox.Name = "relatedMediaLBLinePictureBox";
-            this.relatedMediaLBLinePictureBox.Size = new System.Drawing.Size(275, 2);
+            this.relatedMediaLBLinePictureBox.Size = new System.Drawing.Size(412, 3);
             this.relatedMediaLBLinePictureBox.TabIndex = 10071;
             this.relatedMediaLBLinePictureBox.TabStop = false;
             // 
@@ -7892,9 +8515,10 @@ namespace Retro_Achievement_Tracker
             this.relatedMediaLBLabel.BackColor = System.Drawing.Color.Transparent;
             this.relatedMediaLBLabel.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.relatedMediaLBLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.relatedMediaLBLabel.Location = new System.Drawing.Point(3, 3);
+            this.relatedMediaLBLabel.Location = new System.Drawing.Point(4, 5);
+            this.relatedMediaLBLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.relatedMediaLBLabel.Name = "relatedMediaLBLabel";
-            this.relatedMediaLBLabel.Size = new System.Drawing.Size(196, 26);
+            this.relatedMediaLBLabel.Size = new System.Drawing.Size(294, 40);
             this.relatedMediaLBLabel.TabIndex = 10063;
             this.relatedMediaLBLabel.Text = "LaunchBox";
             // 
@@ -7911,10 +8535,11 @@ namespace Retro_Achievement_Tracker
             this.mainTabControl.Controls.Add(this.relatedMediaTabPage);
             this.mainTabControl.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mainTabControl.HotTrack = true;
-            this.mainTabControl.Location = new System.Drawing.Point(4, 108);
+            this.mainTabControl.Location = new System.Drawing.Point(6, 166);
+            this.mainTabControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.mainTabControl.Name = "mainTabControl";
             this.mainTabControl.SelectedIndex = 0;
-            this.mainTabControl.Size = new System.Drawing.Size(777, 398);
+            this.mainTabControl.Size = new System.Drawing.Size(1166, 612);
             this.mainTabControl.TabIndex = 10033;
             // 
             // focusTabPage
@@ -7923,9 +8548,10 @@ namespace Retro_Achievement_Tracker
             this.focusTabPage.Controls.Add(this.panel64);
             this.focusTabPage.Controls.Add(this.panel63);
             this.focusTabPage.Controls.Add(this.panel51);
-            this.focusTabPage.Location = new System.Drawing.Point(4, 25);
+            this.focusTabPage.Location = new System.Drawing.Point(4, 32);
+            this.focusTabPage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.focusTabPage.Name = "focusTabPage";
-            this.focusTabPage.Size = new System.Drawing.Size(769, 369);
+            this.focusTabPage.Size = new System.Drawing.Size(1158, 576);
             this.focusTabPage.TabIndex = 0;
             this.focusTabPage.Text = "Focus";
             // 
@@ -7934,9 +8560,10 @@ namespace Retro_Achievement_Tracker
             this.alertsTabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.alertsTabPage2.Controls.Add(this.alertTabControl);
             this.alertsTabPage2.Controls.Add(this.panel65);
-            this.alertsTabPage2.Location = new System.Drawing.Point(4, 25);
+            this.alertsTabPage2.Location = new System.Drawing.Point(4, 32);
+            this.alertsTabPage2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertsTabPage2.Name = "alertsTabPage2";
-            this.alertsTabPage2.Size = new System.Drawing.Size(769, 369);
+            this.alertsTabPage2.Size = new System.Drawing.Size(1158, 576);
             this.alertsTabPage2.TabIndex = 1;
             this.alertsTabPage2.Text = "Alerts";
             // 
@@ -7947,10 +8574,11 @@ namespace Retro_Achievement_Tracker
             this.alertTabControl.Controls.Add(this.tabPage2);
             this.alertTabControl.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.alertTabControl.HotTrack = true;
-            this.alertTabControl.Location = new System.Drawing.Point(3, 3);
+            this.alertTabControl.Location = new System.Drawing.Point(4, 5);
+            this.alertTabControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.alertTabControl.Name = "alertTabControl";
             this.alertTabControl.SelectedIndex = 0;
-            this.alertTabControl.Size = new System.Drawing.Size(292, 362);
+            this.alertTabControl.Size = new System.Drawing.Size(438, 557);
             this.alertTabControl.TabIndex = 10082;
             // 
             // tabPage1
@@ -7962,9 +8590,10 @@ namespace Retro_Achievement_Tracker
             this.tabPage1.Controls.Add(this.alertsCustomAchievementEnableCheckbox);
             this.tabPage1.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.tabPage1.Location = new System.Drawing.Point(4, 4);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(284, 336);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tabPage1.Size = new System.Drawing.Size(430, 524);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Achievement";
             // 
@@ -7976,9 +8605,10 @@ namespace Retro_Achievement_Tracker
             this.tabPage2.Controls.Add(this.alertsPlayMasteryButton);
             this.tabPage2.Controls.Add(this.alertsCustomMasteryEnableCheckbox);
             this.tabPage2.Location = new System.Drawing.Point(4, 4);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(284, 336);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tabPage2.Size = new System.Drawing.Size(430, 524);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Mastery";
             // 
@@ -7988,9 +8618,10 @@ namespace Retro_Achievement_Tracker
             this.userInfoTabPage.Controls.Add(this.panel14);
             this.userInfoTabPage.Controls.Add(this.panel21);
             this.userInfoTabPage.Controls.Add(this.panel20);
-            this.userInfoTabPage.Location = new System.Drawing.Point(4, 25);
+            this.userInfoTabPage.Location = new System.Drawing.Point(4, 32);
+            this.userInfoTabPage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.userInfoTabPage.Name = "userInfoTabPage";
-            this.userInfoTabPage.Size = new System.Drawing.Size(769, 369);
+            this.userInfoTabPage.Size = new System.Drawing.Size(1158, 576);
             this.userInfoTabPage.TabIndex = 2;
             this.userInfoTabPage.Text = "User Info";
             // 
@@ -8000,9 +8631,10 @@ namespace Retro_Achievement_Tracker
             this.gameInfoTabPage.Controls.Add(this.panel50);
             this.gameInfoTabPage.Controls.Add(this.panel29);
             this.gameInfoTabPage.Controls.Add(this.panel35);
-            this.gameInfoTabPage.Location = new System.Drawing.Point(4, 25);
+            this.gameInfoTabPage.Location = new System.Drawing.Point(4, 32);
+            this.gameInfoTabPage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameInfoTabPage.Name = "gameInfoTabPage";
-            this.gameInfoTabPage.Size = new System.Drawing.Size(769, 369);
+            this.gameInfoTabPage.Size = new System.Drawing.Size(1158, 576);
             this.gameInfoTabPage.TabIndex = 3;
             this.gameInfoTabPage.Text = "Game Info";
             // 
@@ -8012,9 +8644,10 @@ namespace Retro_Achievement_Tracker
             this.gameProgressTabPage.Controls.Add(this.panel28);
             this.gameProgressTabPage.Controls.Add(this.panel36);
             this.gameProgressTabPage.Controls.Add(this.panel15);
-            this.gameProgressTabPage.Location = new System.Drawing.Point(4, 25);
+            this.gameProgressTabPage.Location = new System.Drawing.Point(4, 32);
+            this.gameProgressTabPage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gameProgressTabPage.Name = "gameProgressTabPage";
-            this.gameProgressTabPage.Size = new System.Drawing.Size(769, 369);
+            this.gameProgressTabPage.Size = new System.Drawing.Size(1158, 576);
             this.gameProgressTabPage.TabIndex = 4;
             this.gameProgressTabPage.Text = "Progress";
             // 
@@ -8023,20 +8656,22 @@ namespace Retro_Achievement_Tracker
             this.recentCheevosTabPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
             this.recentCheevosTabPage.Controls.Add(this.panel113);
             this.recentCheevosTabPage.Controls.Add(this.panel99);
-            this.recentCheevosTabPage.Location = new System.Drawing.Point(4, 25);
+            this.recentCheevosTabPage.Location = new System.Drawing.Point(4, 32);
+            this.recentCheevosTabPage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.recentCheevosTabPage.Name = "recentCheevosTabPage";
-            this.recentCheevosTabPage.Size = new System.Drawing.Size(769, 369);
+            this.recentCheevosTabPage.Size = new System.Drawing.Size(1158, 576);
             this.recentCheevosTabPage.TabIndex = 5;
             this.recentCheevosTabPage.Text = "Recent Unlocks";
             // 
             // cheevosListTabPage
             // 
             this.cheevosListTabPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
-            this.cheevosListTabPage.Controls.Add(this.panel115);
             this.cheevosListTabPage.Controls.Add(this.panel111);
-            this.cheevosListTabPage.Location = new System.Drawing.Point(4, 25);
+            this.cheevosListTabPage.Controls.Add(this.panel115);
+            this.cheevosListTabPage.Location = new System.Drawing.Point(4, 32);
+            this.cheevosListTabPage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cheevosListTabPage.Name = "cheevosListTabPage";
-            this.cheevosListTabPage.Size = new System.Drawing.Size(769, 369);
+            this.cheevosListTabPage.Size = new System.Drawing.Size(1158, 576);
             this.cheevosListTabPage.TabIndex = 6;
             this.cheevosListTabPage.Text = "Achievement List";
             // 
@@ -8046,9 +8681,10 @@ namespace Retro_Achievement_Tracker
             this.relatedMediaTabPage.Controls.Add(this.panel124);
             this.relatedMediaTabPage.Controls.Add(this.panel120);
             this.relatedMediaTabPage.Controls.Add(this.panel121);
-            this.relatedMediaTabPage.Location = new System.Drawing.Point(4, 25);
+            this.relatedMediaTabPage.Location = new System.Drawing.Point(4, 32);
+            this.relatedMediaTabPage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.relatedMediaTabPage.Name = "relatedMediaTabPage";
-            this.relatedMediaTabPage.Size = new System.Drawing.Size(769, 369);
+            this.relatedMediaTabPage.Size = new System.Drawing.Size(1158, 576);
             this.relatedMediaTabPage.TabIndex = 7;
             this.relatedMediaTabPage.Text = "Related Media";
             // 
@@ -8058,9 +8694,10 @@ namespace Retro_Achievement_Tracker
             this.manualSearchLabel.BackColor = System.Drawing.Color.Transparent;
             this.manualSearchLabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.manualSearchLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(151)))), ((int)(((byte)(250)))));
-            this.manualSearchLabel.Location = new System.Drawing.Point(3, 10);
+            this.manualSearchLabel.Location = new System.Drawing.Point(4, 15);
+            this.manualSearchLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.manualSearchLabel.Name = "manualSearchLabel";
-            this.manualSearchLabel.Size = new System.Drawing.Size(61, 16);
+            this.manualSearchLabel.Size = new System.Drawing.Size(98, 25);
             this.manualSearchLabel.TabIndex = 32;
             this.manualSearchLabel.Text = "Game Id";
             // 
@@ -8070,9 +8707,10 @@ namespace Retro_Achievement_Tracker
             this.manualSearchTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.manualSearchTextBox.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.manualSearchTextBox.ForeColor = System.Drawing.Color.White;
-            this.manualSearchTextBox.Location = new System.Drawing.Point(70, 6);
+            this.manualSearchTextBox.Location = new System.Drawing.Point(105, 9);
+            this.manualSearchTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.manualSearchTextBox.Name = "manualSearchTextBox";
-            this.manualSearchTextBox.Size = new System.Drawing.Size(93, 23);
+            this.manualSearchTextBox.Size = new System.Drawing.Size(138, 31);
             this.manualSearchTextBox.TabIndex = 30;
             this.manualSearchTextBox.WordWrap = false;
             this.manualSearchTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ManualSearchTextBox_KeyPress);
@@ -8084,10 +8722,10 @@ namespace Retro_Achievement_Tracker
             this.manualSearchButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.manualSearchButton.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.manualSearchButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
-            this.manualSearchButton.Location = new System.Drawing.Point(166, 3);
+            this.manualSearchButton.Location = new System.Drawing.Point(249, 5);
             this.manualSearchButton.Margin = new System.Windows.Forms.Padding(0);
             this.manualSearchButton.Name = "manualSearchButton";
-            this.manualSearchButton.Size = new System.Drawing.Size(75, 27);
+            this.manualSearchButton.Size = new System.Drawing.Size(112, 42);
             this.manualSearchButton.TabIndex = 31;
             this.manualSearchButton.Text = "Search";
             this.manualSearchButton.UseVisualStyleBackColor = false;
@@ -8099,17 +8737,18 @@ namespace Retro_Achievement_Tracker
             this.panel8.Controls.Add(this.manualSearchLabel);
             this.panel8.Controls.Add(this.manualSearchTextBox);
             this.panel8.Controls.Add(this.manualSearchButton);
-            this.panel8.Location = new System.Drawing.Point(127, 68);
+            this.panel8.Location = new System.Drawing.Point(190, 105);
+            this.panel8.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(243, 34);
+            this.panel8.Size = new System.Drawing.Size(364, 52);
             this.panel8.TabIndex = 10037;
             // 
             // MainWindow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(22)))));
-            this.ClientSize = new System.Drawing.Size(786, 510);
+            this.ClientSize = new System.Drawing.Size(1179, 785);
             this.Controls.Add(this.panel8);
             this.Controls.Add(this.mainTabControl);
             this.Controls.Add(this.autoPollingStatusPictureBox);
@@ -8117,6 +8756,7 @@ namespace Retro_Achievement_Tracker
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "MainWindow";
             this.Text = "Retro Achievements Tracker";
             ((System.ComponentModel.ISupportInitialize)(this.userProfilePictureBox)).EndInit();
@@ -8390,6 +9030,10 @@ namespace Retro_Achievement_Tracker
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox18)).EndInit();
             this.panel111.ResumeLayout(false);
             this.panel111.PerformLayout();
+            this.panel9.ResumeLayout(false);
+            this.panel9.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.achievementListWindowSizeXUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.achievementListWindowSizeYUpDown)).EndInit();
             this.panel112.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox16)).EndInit();
             this.panel114.ResumeLayout(false);
@@ -9005,6 +9649,10 @@ namespace Retro_Achievement_Tracker
         private Button manualSearchButton;
         private Panel panel8;
         private Button unlockAchievementButton;
+        private Panel panel9;
+        private NumericUpDown achievementListWindowSizeXUpDown;
+        private NumericUpDown achievementListWindowSizeYUpDown;
+        private Label achievementListWindowSizeLabel;
     }
 }
 

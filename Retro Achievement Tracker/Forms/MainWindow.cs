@@ -1068,6 +1068,12 @@ namespace Retro_Achievement_Tracker
                         RecentUnlocksController.Instance.MaxListSize = Convert.ToInt32(numericUpDown.Value);
                         RecentUnlocksController.Instance.SetAchievements(UnlockedAchievements.ToList());
                         break;
+                    case "achievementListWindowSizeXUpDown":
+                        AchievementListController.Instance.WindowSizeX = Convert.ToInt32(numericUpDown.Value);
+                        break;
+                    case "achievementListWindowSizeYUpDown":
+                        AchievementListController.Instance.WindowSizeY = Convert.ToInt32(numericUpDown.Value);
+                        break;
                 }
 
                 IsChanging = false;
@@ -3653,6 +3659,12 @@ namespace Retro_Achievement_Tracker
             recentAchievementsBackgroundColorPictureBox.BackColor = ColorTranslator.FromHtml(RecentUnlocksController.Instance.WindowBackgroundColor);
             achievementListBackgroundColorPictureBox.BackColor = ColorTranslator.FromHtml(AchievementListController.Instance.WindowBackgroundColor);
             relatedMediaBackgroundColorPictureBox.BackColor = ColorTranslator.FromHtml(RelatedMediaController.Instance.WindowBackgroundColor);
+
+            /*
+             * Window Static Sizes
+             */
+            achievementListWindowSizeXUpDown.Value = AchievementListController.Instance.WindowSizeX;
+            achievementListWindowSizeYUpDown.Value = AchievementListController.Instance.WindowSizeY;
 
             /*
              * Border Background Color
