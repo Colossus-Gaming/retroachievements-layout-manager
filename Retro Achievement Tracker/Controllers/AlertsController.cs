@@ -326,17 +326,23 @@ namespace Retro_Achievement_Tracker.Controllers
         }
         public void SetAchievementSettings()
         {
-            AlertsWindow.SetAchievementVideo(CustomAchievementEnabled ? "https://appassets.customachievement/" + new FileInfo(CustomAchievementFile).Name : "https://appassets.video/achievement-notification.webm");
-            AlertsWindow.SetAchievementLeft(CustomAchievementEnabled ? CustomAchievementX : -25);
-            AlertsWindow.SetAchievementTop(CustomAchievementEnabled ? CustomAchievementY : 5);
-            AlertsWindow.SetAchievementWidth(CustomAchievementEnabled ? Convert.ToInt32(CustomAchievementScale * MediaHelper.GetVideoWidth(CustomAchievementFile), CultureInfo.CurrentCulture) : 1028);
+            // Check if the selected file is valid
+            bool useDefault = !CustomAchievementEnabled || !File.Exists(CustomAchievementFile);
+
+            AlertsWindow.SetAchievementVideo(!useDefault ? "https://appassets.customachievement/" + new FileInfo(CustomAchievementFile).Name : "https://appassets.video/achievement-notification.webm");
+            AlertsWindow.SetAchievementLeft(!useDefault ? CustomAchievementX : -25);
+            AlertsWindow.SetAchievementTop(!useDefault ? CustomAchievementY : 5);
+            AlertsWindow.SetAchievementWidth(!useDefault ? Convert.ToInt32(CustomAchievementScale * MediaHelper.GetVideoWidth(CustomAchievementFile), CultureInfo.CurrentCulture) : 1028);
         }
         public void SetMasterySettings()
         {
-            AlertsWindow.SetMasteryVideo(CustomMasteryEnabled ? "https://appassets.custommastery/" + new FileInfo(CustomMasteryFile).Name : "https://appassets.video/mastery-notification.webm");
-            AlertsWindow.SetMasteryLeft(CustomMasteryEnabled ? CustomMasteryX : -25);
-            AlertsWindow.SetMasteryTop(CustomMasteryEnabled ? CustomMasteryY : 5);
-            AlertsWindow.SetMasteryWidth(CustomMasteryEnabled ? Convert.ToInt32(CustomMasteryScale * MediaHelper.GetVideoWidth(CustomMasteryFile), CultureInfo.CurrentCulture) : 1028);
+            // Check if the selected file is valid
+            bool useDefault = !CustomMasteryEnabled || !File.Exists(CustomMasteryFile);
+
+            AlertsWindow.SetMasteryVideo(!useDefault ? "https://appassets.custommastery/" + new FileInfo(CustomMasteryFile).Name : "https://appassets.video/mastery-notification.webm");
+            AlertsWindow.SetMasteryLeft(!useDefault ? CustomMasteryX : -25);
+            AlertsWindow.SetMasteryTop(!useDefault ? CustomMasteryY : 5);
+            AlertsWindow.SetMasteryWidth(!useDefault ? Convert.ToInt32(CustomMasteryScale * MediaHelper.GetVideoWidth(CustomMasteryFile), CultureInfo.CurrentCulture) : 1028);
         }
         public void SendAchievementNotification(Achievement achievement)
         {

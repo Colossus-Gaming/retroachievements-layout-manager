@@ -3,9 +3,11 @@
 Tracker for hunting [Retro Achievements](https://retroachievements.org) and enchancing live-streaming layouts with Retro Achievement data about your profile and the game you're currently playing. Provides pre-rendered and animated windows to provide notifications when achievements unlock and other values (rank, ratio, awards, etc.) change.
 
 ## Control Window
+
 ![Default View](https://i.imgur.com/NDmt0ps.png)
 
 The main window to control the Tracker.
+
 - `Auto-Start` Will automatically start the tracking update timer when the app is started.
 - `Username` Your Retro Achievements username.
 - `API Key` The API key found on your [Retro Achievements Settings](https://retroachievements.org/controlpanel.php) page.
@@ -20,6 +22,7 @@ The main window to control the Tracker.
 - `Custom` Opens the customization panel for the associated window.
 
 ## Focus Window
+
 Window for focusing on a particular achievement.
 
 `Focus Window`
@@ -37,10 +40,13 @@ Window for focusing on a particular achievement.
 - Font customization allows for changing `Font Family`, `Font Color`, `Font Outline`, `Font Outline Color`, and `Font Outline Size`.
 
 ## Alerts Window
-Window for showing animated alerts when a tracker timer update detects new achievement unlocks. Also includes a Mastery alert when all achievements are unlocked on an update. The custom video is played over the 
 
-`Alerts Window Prompt` 
-#### Chromium requires a user interact with a page before video elements will play. The video type should be `.webm` extention for best usage.
+Window for showing animated alerts when a tracker timer update detects new achievement unlocks. Also includes a Mastery alert when all achievements are unlocked on an update. The custom video is played over the
+
+`Alerts Window Prompt`
+
+### Chromium requires a user interact with a page before video elements will play. The video type should be `.webm` extention for best usage
+
 ![Alerts Window](https://i.imgur.com/eZGSB8m.png)
 
 `Alerts Window Achievement Pop`
@@ -66,6 +72,7 @@ Window for showing animated alerts when a tracker timer update detects new achie
 - `In & Out Animation` Controls the time marks, animation speed, and animation direction that the achievement/mastery will move into and out of the screen respectively from the start of the alert.
 
 ## Recent Achievements Window
+
 Window for displaying the most recent achievements in your current game.
 
 `Recent Achievements Window`
@@ -85,6 +92,7 @@ Window for displaying the most recent achievements in your current game.
 - Font customization allows for changing `Font Family`, `Font Color`, `Font Outline`, `Font Outline Color`, and `Font Outline Size`.
 
 ## Achievement List Window
+
 Window for displaying the achievement list of your current game as it appears on the Retro Achievements user profiles. Hovering over an achievement will give a similar tooltip.
 
 `Achievement List Window`
@@ -99,6 +107,7 @@ Window for displaying the achievement list of your current game as it appears on
 - `Auto-Scroll` Enabled/Disable auto-scrolling when the list has more than 99 achievements in it.
 
 ## User Info Window
+
 Window for displaying user information such as rank and total points earned.
 
 `User Info Window`
@@ -117,6 +126,7 @@ Window for displaying user information such as rank and total points earned.
 - `Label Text` Allows the user to override label names or disable them completely.
 
 ## Game Info Window
+
 Window for displaying game information such as the developer, genre, and release date.
 
 `Game Info Window`
@@ -135,6 +145,7 @@ Window for displaying game information such as the developer, genre, and release
 - `Label Text` Allows the user to override label names or disable them completely.
 
 ## Game Stats Window
+
 Window for displaying game stats as it pertains to your progress. This includes the number of achievements or points you've earned for that game.
 
 `Game Stats Window`
@@ -153,6 +164,7 @@ Window for displaying game stats as it pertains to your progress. This includes 
 - `Label Text` Allows the user to override label names or disable them completely.
 
 ## Browser/RSS Feed
+
 Built-In browser and RSS feed reader. The browser can be opened manually by clicking the `Open` button or by clicking on a browser-sensitive icon.
 
 `Built-In Browser`
@@ -163,22 +175,25 @@ Built-In browser and RSS feed reader. The browser can be opened manually by clic
 
 ![RSS Feed News Preview](https://i.imgur.com/sge3drR.png)
 
-# Browser-Sensitive Icons
+## Browser-Sensitive Icons
+
 - Profile pic: navigates to user's profile page on Retro Achievements.
 - Game icon: navigates to the game's page on Retro Achievements.
 - Focus icon: navigates to the achievement's page on Retro Achievements.
 - RSS Feed `NEWS` renders a preview of content. All other types go directy to the activity on Retro Achievements.
 
 ## Text Files
-Text files are generated in the `stream-labels` folder. There are individual files for most values and a `data.json` file is generated with top-level information from the Retro Achievements API.
 
+Text files are generated in the `stream-labels` folder. There are individual files for most values and a `data.json` file is generated with top-level information from the Retro Achievements API.
 
 `Text File Generation`
 
 ![Retro Achievements Site](https://i.imgur.com/paXp1BX.png)
 
 ### data.json File Examples
+
 `alerts`
+
 ```javascript
 {
    "id":1929,
@@ -193,7 +208,9 @@ Text files are generated in the `stream-labels` folder. There are individual fil
    "displayOrder":43
 }
 ```
+
 `focus`
+
 ```javascript
 {
    "id":1929,
@@ -208,7 +225,9 @@ Text files are generated in the `stream-labels` folder. There are individual fil
    "displayOrder":43
 }
 ```
+
 `game-info`
+
 ```javascript
 {
    "id":236,
@@ -232,7 +251,9 @@ Text files are generated in the `stream-labels` folder. There are individual fil
    "percentComplete":"94.23"
 }
 ```
+
 `last-five`
+
 ```javascript
 {
    "id":1929,
@@ -247,7 +268,9 @@ Text files are generated in the `stream-labels` folder. There are individual fil
    "displayOrder":43
 }
 ```
+
 `user-info`
+
 ```javascript
 {
    "lastGameID":236,

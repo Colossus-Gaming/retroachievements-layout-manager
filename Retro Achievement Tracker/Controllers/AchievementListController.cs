@@ -58,8 +58,11 @@ namespace Retro_Achievement_Tracker.Controllers
 
         public void SetAllSettings()
         {
-            AchievementListWindow.SetWindowBackgroundColor(WindowBackgroundColor);
-            AchievementListWindow.SetClientSize();
+            if (IsOpen)
+            {
+                AchievementListWindow.SetWindowBackgroundColor(WindowBackgroundColor);
+                AchievementListWindow.SetClientSize();
+            }
         }
 
         public void UpdateAchievementList()

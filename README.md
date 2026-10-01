@@ -3,9 +3,11 @@
 Tracker for hunting **hardcore** [Retro Achievements](https://retroachievements.org) and enchancing live-streaming layouts with Retro Achievement data about your profile and the game you're currently playing. Provides windows to provide notifications when achievements unlock as well as other values (rank, ratio, awards, etc.) change.
 
 ## Main Window
+
 ![Default/Focus View](https://i.imgur.com/NT0q1ns.png)
 
 The main window to control the Tracker.
+
 - `Auto-Start` Will automatically start the tracking update timer when the app is started.
 - `Username` Your Retro Achievements username.
 - `Web API Key` The API key found on your [Retro Achievements Settings](https://retroachievements.org/controlpanel.php) page.
@@ -13,6 +15,7 @@ The main window to control the Tracker.
 - `Stop` Stop the tracking update timer.
 
 ## Focus Window
+
 Window for focusing on a particular achievement.
 
 `Focus Window`
@@ -27,10 +30,13 @@ Window for focusing on a particular achievement.
 - Font customization allows for changing `Font Family`, `Font Color`, `Font Outline`, `Font Outline Color`, and `Font Outline Size`.
 
 ## Alerts Window
-Window for showing animated alerts when a tracker timer update detects new achievement unlocks. Also includes a Mastery alert when all achievements are unlocked on an update. The custom video is played over the 
 
-`Alerts Window` 
-#### Chromium requires a user interact with a page before video elements will play. The video type should be `.webm` extention for best usage.
+Window for showing animated alerts when a tracker timer update detects new achievement unlocks. Also includes a Mastery alert when all achievements are unlocked on an update. The custom video is played over the
+
+`Alerts Window`
+
+### Chromium requires a user interact with a page before video elements will play. The video type should be `.webm` extention for best usage
+
 ![Alerts Window](https://i.imgur.com/gcdeyWL.png)
 
 `Alerts Window Achievement Pop`
@@ -58,6 +64,7 @@ Window for showing animated alerts when a tracker timer update detects new achie
 - `Animate Out Direction` The direction the achievement should animate out. If set to STATIC, AnimateOutDuration has no effect.
 
 ## Recent Unlocks Window
+
 Window for displaying the most recent achievements in your current game.
 
 `Recent Unlocks Window`
@@ -76,6 +83,7 @@ Window for displaying the most recent achievements in your current game.
 - Font customization allows for changing `Font Family`, `Font Color`, `Font Outline`, `Font Outline Color`, and `Font Outline Size`.
 
 ## Achievement List Window
+
 Window for displaying the achievement list of your current game as it appears on the Retro Achievements user profiles. Hovering over an achievement will give a similar tooltip.
 
 `Achievement List Window`
@@ -90,6 +98,7 @@ Window for displaying the achievement list of your current game as it appears on
 - `Auto-Scroll` Enabled/Disable auto-scrolling when the list has more than 99 achievements in it.
 
 ## User Info Window
+
 Window for displaying user information such as rank and total points earned.
 
 `User Info Window`
@@ -106,6 +115,7 @@ Window for displaying user information such as rank and total points earned.
 - `Display Text` Allows the user to override label names or disable them completely.
 
 ## Game Info Window
+
 Window for displaying game information such as the developer, genre, and release date.
 
 `Game Info Window`
@@ -122,6 +132,7 @@ Window for displaying game information such as the developer, genre, and release
 - `Display Text` Allows the user to override label names or disable them completely.
 
 ## Game Progress Window
+
 Window for displaying game stats as it pertains to your progress. This includes the number of achievements or points you've earned for that game.
 
 `Game Progress Window`
@@ -137,12 +148,14 @@ Window for displaying game stats as it pertains to your progress. This includes 
 - Font customization allows for changing `Font Family`, `Font Color`, `Font Outline`, `Font Outline Color`, and `Font Outline Size`.
 - `Display Text` Allows the user to override label names or disable them completely.
 
-# Browser-Sensitive Icons
+## Browser-Sensitive Icons
+
 - Profile pic: navigates to user's profile page on Retro Achievements.
 - Game icon: navigates to the game's page on Retro Achievements.
 - Focus icon: navigates to the achievement's page on Retro Achievements.
 
 ## Text Files
+
 Text files are generated in the `stream-labels` folder. There are individual files for most values and a `data.json` file is generated with top-level information from the Retro Achievements API.
 
 `Text File Generation`
@@ -150,7 +163,9 @@ Text files are generated in the `stream-labels` folder. There are individual fil
 ![Generated Text Files](https://i.imgur.com/paXp1BX.png)
 
 ### data.json File Examples
+
 `alerts`
+
 ```javascript
 {
    "id":1929,
@@ -165,7 +180,9 @@ Text files are generated in the `stream-labels` folder. There are individual fil
    "displayOrder":43
 }
 ```
+
 `focus`
+
 ```javascript
 {
    "id":1929,
@@ -180,7 +197,9 @@ Text files are generated in the `stream-labels` folder. There are individual fil
    "displayOrder":43
 }
 ```
+
 `game-info`
+
 ```javascript
 {
    "id":236,
@@ -204,7 +223,9 @@ Text files are generated in the `stream-labels` folder. There are individual fil
    "percentComplete":"94.23"
 }
 ```
+
 `last-five`
+
 ```javascript
 {
    "id":1929,
@@ -219,7 +240,9 @@ Text files are generated in the `stream-labels` folder. There are individual fil
    "displayOrder":43
 }
 ```
+
 `user-info`
+
 ```javascript
 {
    "lastGameID":236,

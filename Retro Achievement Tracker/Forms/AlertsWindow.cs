@@ -47,13 +47,24 @@ namespace Retro_Achievement_Tracker.Forms
         }
         public void SetCustomAchievementDirectorMapping()
         {
-            webView21.CoreWebView2.SetVirtualHostNameToFolderMapping("appassets.customachievement", new FileInfo(AlertsController.Instance.CustomAchievementFile).Directory.FullName, CoreWebView2HostResourceAccessKind.DenyCors); 
-            webView21.NavigateToString(Resources.alerts_window);
+            // Check if the selected file is valid
+            string  file = AlertsController.Instance.CustomAchievementFile;
+            if (File.Exists(file))
+            {
+                webView21.CoreWebView2.SetVirtualHostNameToFolderMapping("appassets.customachievement", new FileInfo(file).Directory.FullName, CoreWebView2HostResourceAccessKind.DenyCors);
+                webView21.NavigateToString(Resources.alerts_window);
+            }
         }
         public void SetCustomMasteryDirectorMapping()
         {
-            webView21.CoreWebView2.SetVirtualHostNameToFolderMapping("appassets.custommastery", new FileInfo(AlertsController.Instance.CustomMasteryFile).Directory.FullName, CoreWebView2HostResourceAccessKind.DenyCors);
-            webView21.NavigateToString(Resources.alerts_window);
+            
+            // Check if the selected file is valid
+            string  file = AlertsController.Instance.CustomMasteryFile;
+            if (File.Exists(file))
+            {
+                webView21.CoreWebView2.SetVirtualHostNameToFolderMapping("appassets.custommastery", new FileInfo(file).Directory.FullName, CoreWebView2HostResourceAccessKind.DenyCors);
+                webView21.NavigateToString(Resources.alerts_window);
+            }
         }
         private void MessageReceived(object sender, CoreWebView2WebMessageReceivedEventArgs args)
         {
